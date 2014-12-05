@@ -1,0 +1,6 @@
+# -*- drop function *-*
+# name: drop fn
+# key: dfn
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+drop function ${1:/*FuncName*/};$0

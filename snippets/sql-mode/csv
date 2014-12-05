@@ -1,0 +1,10 @@
+# -*- csv from vertical list -*-
+# name: csv
+# key: csv
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @csv nvarchar(max) = '';
+	select @csv = @csv + ${2:/*Col(s)*/} + ', ' 
+    ${1:/*from SomeTable*/}
+set @csv = substring(@csv, 0, LEN(@csv)) --trim trailing comma
+$0

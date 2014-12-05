@@ -1,0 +1,7 @@
+# -*- insert with query *-*
+# name: insert w/query
+# key: inss
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+insert into dbo.${1:InsTab} (${2:/*cols*/})
+    ${3:/*query*/}$0

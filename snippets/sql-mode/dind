@@ -1,0 +1,6 @@
+# -*- drop index -*-
+# name: dind
+# key: dind
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+drop index IX_$1_${2:Col} on ${1:Tab};$0

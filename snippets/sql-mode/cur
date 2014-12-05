@@ -1,0 +1,19 @@
+# -*- cursor. Assumes 1 fetch variable, since I don't understand snippets enough to
+#     have it fill up properly on multiple variables.
+#     NOTE: consider a set-based operation instead of a cursor *-*
+# name: cursor
+# key: cur
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @${1:fetchVar} ${2:type};
+declare ${3:cur} cursor for
+    ${4:/*query*/}
+open cur
+fetch next from $3 into @$1
+while @@fetch_status = 0
+begin
+    ${5:/*body*/}$0
+    fetch next from $3 into @$1
+end
+close $3
+deallocate $3

@@ -1,0 +1,12 @@
+# -*- foreign key and index. -*-
+# name: fki
+# key: fki
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*FKtab*/} with check add constraint FK_$1_$3
+    foreign key(${2:/*FKcol*/}) references ${3:/*UKtab*/}(${4:/*UKcol*/});
+GO
+alter table $1 check constraint FK_$1_$3;
+GO
+create index IX_$1_$2 on $1($2);
+GO$0

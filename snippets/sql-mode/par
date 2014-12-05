@@ -1,0 +1,12 @@
+# -*- just to remember partition syntax *-*
+# name: partition
+# key: par
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+with Par as
+(
+    select t.a, t.b, t.c,
+    ROW_NUMBER() over (partition by t.ParByField order by t.Test) as rn
+    from SomeTable t
+)
+select * from Par where rn=1;

@@ -1,0 +1,6 @@
+# -*- check constraint -*-
+# name: ck
+# key: ck
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*Tab*/} add constraint CH_$1_${3:/*descr*/} check (${2:/*Conditions*/});$0

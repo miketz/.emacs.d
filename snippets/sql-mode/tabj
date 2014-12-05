@@ -1,0 +1,30 @@
+# -*- junction table for many-to-many mapping. A sequential ID is used becuase
+# sometimes the juntion is more than a mere implementaiton detail of a
+# many-to-many. It may be an entity in its own right with extra fields and
+# other tables referencing it via FK. Double unique keys are created for both
+# directions of the mapping so you're covered no matter which field is used
+# in a join. -*-
+# name: tabj
+# key: tabj
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+create table dbo.${1:/*Tab*/} (
+    ID bigint identity(1,1) not null,
+    ${2:ID_1} ${3:bigint} not null,
+    ${4:ID_2} ${5:bigint} not null,
+
+    CONSTRAINT PK_$1 primary key clustered (ID asc)
+);
+GO
+alter table $1 add constraint UK_$1_$2_$4 unique ($2, $4);
+alter table $1 add constraint UK_$1_$4_$2 unique ($4, $2);
+alter table $1 with check add constraint FK_$1_$2
+    foreign key($2) references ${6:/*Tab1*/}(${7:/*ID_1*/});
+GO
+alter table $1 check constraint FK_$1_$2;
+GO
+alter table $1 with check add constraint FK_$1_$4
+    foreign key($4) references ${8:/*Tab2*/}(${9:/*ID_2*/});
+GO
+alter table $1 check constraint FK_$1_$4;
+GO$0

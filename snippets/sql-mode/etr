@@ -1,0 +1,9 @@
+# -*- exists? then delete trigger *-*
+# name: exists? dtr
+# key: etr
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+if exists(select null from dbo.sysobjects where name='${1:ObjName}' and OBJECTPROPERTY(id, 'IsTrigger') = 1)
+begin
+    drop trigger $1;
+end$0

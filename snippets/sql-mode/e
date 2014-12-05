@@ -1,0 +1,7 @@
+# -*- if exists *-*
+# name: if exists
+# key: e
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+if object_id('${1:ObjName}', '${2:TypeFlag}') is not null
+    ${3:/*HandleExistence*/};$0

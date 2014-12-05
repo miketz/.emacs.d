@@ -1,0 +1,9 @@
+# -*- else-if *-*
+# name: else-if
+# key: elif
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+else if(${1:0=0})
+begin
+    $0
+end

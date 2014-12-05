@@ -1,0 +1,9 @@
+# -*- test snippet -*-
+# name: This is a test
+# key: tst
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+$0The time is: `(format-time-string "%m-%d-%Y")`
+Buffer size: `(buffer-size)`
+It is a $1 time.
+Before $2 it ends $1.

@@ -1,0 +1,6 @@
+# -*- truncate table -*-
+# name: ttab
+# key: ttab
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+truncate table ${1:/*Tab*/};$0

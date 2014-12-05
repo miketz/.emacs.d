@@ -1,0 +1,6 @@
+# -*- add column, when inside a create-table statement. -*-
+# name: coll
+# key: coll
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+${1:/*Col*/} ${2:/*Type*/} not null,$0

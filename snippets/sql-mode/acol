@@ -1,0 +1,6 @@
+# -*- alter column -*-
+# name: alter col
+# key: acol
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*Tab*/} alter column ${2:/*Col*/} ${3:/*Type*/} not null default(${4:/*DefVal*/});$0

@@ -1,0 +1,6 @@
+# -*- drop view *-*
+# name: drop view
+# key: dvw
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+drop view ${1:/*ViewName*/};$0

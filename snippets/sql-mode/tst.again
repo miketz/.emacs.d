@@ -1,0 +1,8 @@
+# -*- comment -*-
+# name: a second test
+# key: tst
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+
+Sentance $1 begins ${2:here} but could end.
+$0

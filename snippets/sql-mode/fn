@@ -1,0 +1,20 @@
+# -*- function *-*
+# name: function
+# key: fn
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create function dbo.${1:/*FuncName*/} (
+    @${3:/*param1Name*/} ${4:/*type*/}
+)
+RETURNS ${2:/*ReturnType*/}
+as
+begin
+    $0
+    return /*val*/;
+end
+GO

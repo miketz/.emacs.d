@@ -1,0 +1,10 @@
+# -*- update with a join *-*
+# name: up w/join
+# key: ups
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+update $2 set
+    $2.foo = $5.bar
+from ${1:TargetTab} ${2:TargetAlias}
+${3:inner join} ${4:Tab} ${5:Alias} on $5.${6:ID} = $2.${7:ID}
+where ${8:0=1}$0

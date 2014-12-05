@@ -1,0 +1,7 @@
+# -*- drop stored proc *-*
+# name: drop sp
+# key: dsp
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+drop procedure ${1:/*ProcName*/};
+GO$0

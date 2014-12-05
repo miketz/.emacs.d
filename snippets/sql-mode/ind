@@ -1,0 +1,6 @@
+# -*- create index -*-
+# name: ind
+# key: ind
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+create index IX_$1_$2 on ${1:/*Tab*/}(${2:/*Col*/});$0

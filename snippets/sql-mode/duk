@@ -1,0 +1,6 @@
+# -*- drop unique key -*-
+# name: duk
+# key: duk
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*Tab*/} drop constraint UK_$1_${2};$0

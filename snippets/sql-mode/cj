@@ -1,0 +1,6 @@
+# -*- cross join *-*
+# name: cross join
+# key: cj
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+cross join ${1:Tab}$0

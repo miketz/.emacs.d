@@ -1,0 +1,8 @@
+# -*- select query. -*-
+# name: sel
+# key: sel
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+select $2.*
+from ${1:/*Tab*/} ${2:/*Alias*/}
+where ${3:0=0}$0

@@ -1,0 +1,10 @@
+# -*- view *-*
+# name: view
+# key: vw
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+create view dbo.${1:/*ViewName*/}
+as
+
+$0
+GO

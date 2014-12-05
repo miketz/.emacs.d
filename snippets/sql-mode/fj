@@ -1,0 +1,6 @@
+# -*- full outer join *-*
+# name: full outer join
+# key: fj
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+full outer join ${1:/*Tab_A*/} ${2:Alias_A} on $2.${3:key_A}=${4:Tab_B}.${5:key_B}

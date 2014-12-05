@@ -1,0 +1,9 @@
+# -*- trigger (experimental, doesn't work if on mulitple actions) *-*
+# name: experimental trigger
+# key: trr
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+create trigger tr_$1_$2 on dbo.${1:/*Tab*/} for ${2:/*insert, update, delete*/}
+as
+$0
+GO

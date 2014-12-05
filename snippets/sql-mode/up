@@ -1,0 +1,8 @@
+# -*- simple update *-*
+# name: update
+# key: up
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+update ${1:Tab} set
+${2:col}=@$2
+where ${3:0=1};$0

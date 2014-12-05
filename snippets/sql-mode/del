@@ -1,0 +1,6 @@
+# -*- simple delete *-*
+# name: delete
+# key: del
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+delete from ${1:Tab} where ${2:0=1};$0

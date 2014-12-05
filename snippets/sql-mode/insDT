@@ -1,0 +1,10 @@
+# -*- insert data from Source to Dest. It will skip records that already exist based on "SomeKey" -*-
+# name: insertDT
+# key: insDT
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+insert into ${1:Dest} (/*SomeKey, a, b, c*/)
+    select /*SomeKey, a, b, c*/
+    from ${2:Source} ${3:s}
+    left join $1 ${4:d} on $4.${5:SomeKey}=$3.${6:SomeKey}
+    where $4.$5 is null;$0

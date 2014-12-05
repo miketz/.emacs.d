@@ -1,0 +1,8 @@
+# -*- jus tot remember some syntax *-*
+# name: today
+# key: today
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @today datetime = getdate();
+declare @todayStart datetime = convert(datetime, DATEDIFF(DAY, 0, @today));
+declare @todayEnd datetime =  dateadd(second, 86399, @todayStart);

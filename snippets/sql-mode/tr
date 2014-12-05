@@ -1,0 +1,9 @@
+# -*- trigger *-*
+# name: trigger
+# key: tr
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+create trigger ${1:/*TrigName*/} on dbo.${2:/*Tab*/} for ${3:/*insert, update, delete*/}
+as
+$0
+GO

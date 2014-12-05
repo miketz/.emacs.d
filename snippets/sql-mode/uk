@@ -1,0 +1,6 @@
+# -*- unique key -*-
+# name: uk
+# key: uk
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*Tab*/} add constraint UK_$1_$2 unique (${2:/*Col*/});$0

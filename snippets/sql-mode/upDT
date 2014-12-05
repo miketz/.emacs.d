@@ -1,0 +1,9 @@
+# -*- update data from Source to Dest based on "SomeKey". To avoid redundant updates when data is the same add a "where" clause. *-*
+# name: updateDT
+# key: upDT
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+update $2 set
+    $2.${7:col_1} = $4.$7$0
+from ${1:Dest} ${2:d}
+inner join ${3:Source} ${4:s} on $4.${5:SomeKey} = $2.${6:SomeKey};

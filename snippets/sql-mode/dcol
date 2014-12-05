@@ -1,0 +1,6 @@
+# -*- drop column -*-
+# name: dcol
+# key: dcol
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*Tab*/} drop column ${2:/*Col*/};$0

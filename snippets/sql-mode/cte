@@ -1,0 +1,9 @@
+# -*- cte *-*
+# name: cte
+# key: cte
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+with ${1:CTE} as (
+    ${2:/*CTE query*/}
+)
+${3:/*query*/}$0

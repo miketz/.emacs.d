@@ -1,0 +1,21 @@
+# -*- delete the call to raiserror if you want to swallow the exception.
+#     NOTE: as of this writing, a finally block is not supported by SQL Server so
+#     you must duplicate any resource clean up *-*
+# name: try
+# key: try
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+BEGIN TRY
+    ${1:/*body*/}
+    /* free resources if applicable */
+END TRY
+BEGIN CATCH
+    ${2:/* handle, free resources, etc */}
+    declare @Number int = ERROR_NUMBER();
+    declare @Severity int = ERROR_SEVERITY();
+    declare @State int = ERROR_STATE();
+    declare @Procedure nvarchar(400) = ERROR_PROCEDURE();
+    declare @Message nvarchar(4000) = ERROR_MESSAGE();
+    ${3:/* log error */}
+    ${4:raiserror(@Message, @Severity, @State);}$0
+END CATCH

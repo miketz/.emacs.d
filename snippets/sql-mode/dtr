@@ -1,0 +1,6 @@
+# -*- drop trigger *-*
+# name: drop trigger
+# key: dtr
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+drop trigger ${1:/*Trig*/};$0

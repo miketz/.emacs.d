@@ -1,0 +1,6 @@
+# -*- drop table -*-
+# name: dtab
+# key: dtab
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+drop table ${1:/*Tab*/};$0

@@ -1,0 +1,12 @@
+# -*- pagination for sql server 2012+ *-*
+# name: page sql2012+
+# key: page2
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @PageNum int = ${1:1};
+declare @PageSize int = ${2:20};
+declare @RowStart int = @PageNum * @PageSize - @PageSize;
+select ${4:*}
+from ${3:/*Table*/}
+order by ${5:/*Fields*/}
+offset @RowStart rows fetch next @PageSize rows only;$0

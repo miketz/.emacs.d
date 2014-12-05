@@ -1,0 +1,11 @@
+# -*- while loop. NOTE: consider a set-based operation instead of a loop. *-*
+# name: while
+# key: wh
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @i int = 0;
+while @i < ${1:@upper}
+begin
+    $0
+    set @i=@i+1;
+end

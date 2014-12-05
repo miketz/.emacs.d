@@ -1,0 +1,13 @@
+# -*- pagination with CTE *-*
+# name: page cte
+# key: pagecte
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+with ${1:RowNumQuery} as (
+    select row_number() over (order by ${3:/*Fields*/}) RowNum,
+    ${4:*}
+    from ${2:/*Tab*/}
+)
+select ${5:*}
+from $1
+where RowNum between ${6:low} and ${7:high}$0

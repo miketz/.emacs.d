@@ -1,0 +1,17 @@
+# -*- stored proc -*-
+# name: sp
+# key: sp
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure dbo.${1:/*ProcName*/} (
+    @${2:/*param1Name*/} ${3:/*type*/},
+)
+as
+
+    $0
+GO

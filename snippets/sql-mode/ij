@@ -1,0 +1,6 @@
+# -*- inner join *-*
+# name: inner join
+# key: ij
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+inner join ${1:/*Tab_A*/} ${2:Alias_A} on $2.${3:key_A}=${4:Tab_B}.${5:key_B}

@@ -1,0 +1,9 @@
+# -*- else *-*
+# name: else
+# key: el
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+else
+begin
+    $0
+end

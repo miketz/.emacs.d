@@ -1,0 +1,6 @@
+# -*- drop foreign key -*-
+# name: dfk
+# key: dfk
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+alter table ${1:/*FKtab*/} drop FK_$1_${2:/*UKtab*/};$0

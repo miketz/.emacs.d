@@ -1,0 +1,12 @@
+# -*- pagination for sql server 2005-2008 *-*
+# name: page
+# key: page
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+select *
+from (
+    select row_number() over (order by ${2:/*Fields*/}) RowNum,
+    ${3:*}
+    from ${1:/*Table*/}
+    ) as RowNumQuery
+where RowNum between ${4:low} and ${5:high}$0

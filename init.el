@@ -725,7 +725,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;theme of the week and corresponding settings. This may change often.
 (progn
   (my/set-font :sym 'consolas
-               :height 115;'105 115 120 125
+               :height 115;'90 105 115 120 125
                :weight 'normal)
   
   (when (display-graphic-p)
@@ -921,6 +921,8 @@ This prevents overlapping themes; something I would rarely want."
 
             ;; (when (featurep 'js2-highlight-vars)
             ;;   (js2-highlight-vars-mode))
+
+            ;;(js2-imenu-extras-mode)
             ))
 
 
@@ -976,7 +978,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;               (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
 ;;               (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
 
-(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+(evil-leader/set-key "b" #'helm-buffers-list)
+;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
 ;;(global-set-key (kbd "C-x b")   #'helm-mini)
 ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
 (global-set-key (kbd "M-x") #'helm-M-x)
@@ -1250,7 +1253,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'c-mode-common-hook
           (lambda ()
             ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
-            (electric-pair-mode 1)))
+            (electric-pair-mode 1)
+            ;;(flycheck-mode 1)
+            ))
 
 (add-hook 'c-initialization-hook
           (lambda ()
@@ -1520,6 +1525,16 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; - https://github.com/Sarcasm/company-irony
 ;; - https://github.com/Sarcasm/ac-irony
 
+;;-------------------------------
+;; company-irony
+;;-------------------------------
+;; (eval-after-load 'company
+;;   '(add-to-list 'company-backends 'company-irony))
+
+;; (optional) adds CC special commands to `company-begin-commands' in order to
+;; trigger completion at interesting places, such as after scope operator
+;;     std::|
+;;(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
 ;;-------------------------------
 ;; Load projects
@@ -1901,6 +1916,12 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 (evil-leader/set-key "m" #'magit-status)
 
+
+;;-----------------------------------------------------------------------------
+;; ediff
+;;-----------------------------------------------------------------------------
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;;-----------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-----------------------------------------------------------------------------
@@ -2015,7 +2036,7 @@ Depends on evil mode."
 ;(show-paren-mode 0)
 
 (progn ;;tab handling
-  (setq-default indent-tabs-mode nil)
+  (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
   (setq-default tab-width 4)
   (setq-default indent-line-function 'insert-tab)
   )

@@ -22,6 +22,7 @@
 (setq my/packages
       '(evil
         evil-leader
+        evil-escape
         evil-matchit
         ;;evil-god-state
         ;;evil-surround
@@ -437,9 +438,100 @@ This prevents overlapping themes; something I would rarely want."
     (disable-theme theme)))
 (ad-activate 'load-theme)
 
+;;custom-enabled-themes
+;;custom-safe-themes
+;;custom-known-themes
+;;(custom-available-themes)
+(setq my/c-index 0)
+(defun my/cycle-theme ()
+  (interactive)
+  (let* ((themes (custom-available-themes))
+         (thm (nth my/c-index themes)))
+    (unwind-protect
+        (progn
+          (load-theme thm t))
+      (progn
+        (print thm)
+        (incf my/c-index)
+        (when (= my/c-index (length themes))
+          (setq my/c-index 0))))))
+
+
+;;programmatically call a fucntion as if a prefix arg C-u was used.
+;; (let ((current-prefix-arg '(4)))
+;;   (call-interactively #'next-line))
+
+(defun my/load-theme (theme &optional no-confirm no-enable)
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapcar 'symbol-name
+                                     (custom-available-themes))))
+    nil nil))
+
+  ;;disable any active themes
+  (dolist (theme custom-enabled-themes)
+    (disable-theme theme))
+  
+  (let ((no-confirm t)
+        (no-enable nil))
+    (unless (custom-theme-name-valid-p theme)
+      (error "Invalid theme name `%s'" theme))
+    ;; If THEME is already enabled, re-enable it after loading, even if
+    ;; NO-ENABLE is t.
+    (if no-enable
+        (setq no-enable (not (custom-theme-enabled-p theme))))
+    ;; If reloading, clear out the old theme settings.
+    (when (custom-theme-p theme)
+      (disable-theme theme)
+      (put theme 'theme-settings nil)
+      (put theme 'theme-feature nil)
+      (put theme 'theme-documentation nil))
+    (let ((fn (locate-file (concat (symbol-name theme) "-theme.el")
+                           (custom-theme--load-path)
+                           '("" "c")))
+          hash)
+      (unless fn
+        (error "Unable to find theme file for `%s'" theme))
+      (with-temp-buffer
+        (insert-file-contents fn)
+        (setq hash (secure-hash 'sha256 (current-buffer)))
+        ;; Check file safety with `custom-safe-themes', prompting the
+        ;; user if necessary.
+        (when (or no-confirm
+                  (eq custom-safe-themes t)
+                  (and (memq 'default custom-safe-themes)
+                       (equal (file-name-directory fn)
+                              (expand-file-name "themes/" data-directory)))
+                  (member hash custom-safe-themes)
+                  (custom-theme-load-confirm hash))
+          (let ((custom--inhibit-theme-enable t)
+                (buffer-file-name fn))    ;For load-history.
+            (eval-buffer))
+          ;; Optimization: if the theme changes the `default' face, put that
+          ;; entry first.  This avoids some `frame-set-background-mode' rigmarole
+          ;; by assigning the new background immediately.
+          (let* ((settings (get theme 'theme-settings))
+                 (tail settings)
+                 found)
+            (while (and tail (not found))
+              (and (eq (nth 0 (car tail)) 'theme-face)
+                   (eq (nth 1 (car tail)) 'default)
+                   (setq found (car tail)))
+              (setq tail (cdr tail)))
+            (if found
+                (put theme 'theme-settings (cons found (delq found settings)))))
+          ;; Finally, enable the theme.
+          (unless no-enable
+            (enable-theme theme))
+          t)))))
+
+(global-set-key (kbd "<f9>") #'my/load-theme)
+(global-set-key (kbd "<f10>") #'my/cycle-theme)
+
 (defun my/cursor-stuff-darkBg ()
   (interactive)
-  ;(my/cursor-stuff :color-emacs "cyan" :color-evil "#00DF00")
+  ;;(my/cursor-stuff :color-emacs "cyan" :color-evil "#00DF00")
   (my/cursor-stuff :color-emacs "cyan" :color-evil "spring green")
   )
 
@@ -829,7 +921,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; slime-company
 ;;---------------------------------------------
-; this is set in the slime section
+                                        ; this is set in the slime section
 
 ;;---------------------------------------------
 ;; Auto-complete
@@ -889,7 +981,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 (autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 (setq auto-mode-alist
-   (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
 
 ;;-------------------------
 ;; js2-hightlight-vars.el
@@ -900,7 +992,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; js2-mode
 ;;---------------------------------------------
-;(autoload 'js2-mode "js2" nil t)
+                                        ;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq-default js2-global-externs '("module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
                                    "clearTimeout" "setInterval" "clearInterval" "location" "__dirname"
@@ -1001,6 +1093,8 @@ This prevents overlapping themes; something I would rarely want."
 
 ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
+
+
 ;;----------------------------------
 ;; helm-company
 ;;----------------------------------
@@ -1010,27 +1104,31 @@ This prevents overlapping themes; something I would rarely want."
 ;;      (define-key company-active-map (kbd "C-SPC") 'helm-company)))
 
 ;;----------------------------------
+;; evil-escape
+;;----------------------------------
+(evil-escape-mode 1)
+;;----------------------------------
 ;; key-chord
 ;;----------------------------------
-(setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
-(setq key-chord-one-key-delay 0.4)
+;; (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+;; (setq key-chord-one-key-delay 0.4)
 
-;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
-(require 'key-chord)
-(key-chord-mode 1)
-;; Define a key chord for escape so I don't have to press Esc or C-[
-(let ((chord "fj"))
-  ;;NOTE: fj lags downward movement with "j" in visual mode.
-  ;;      If you hold down j it messes things up and the chord doesn't work.
-  (key-chord-define evil-insert-state-map chord #'evil-normal-state)
-  (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
-  ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
-  ;; (key-chord-define evil-operator-state-map chord func)
-  ;; (key-chord-define evil-motion-state-map chord func))
-  (key-chord-define helm-map chord #'helm-keyboard-quit))
+;; ;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
+;; (require 'key-chord)
+;; (key-chord-mode 1)
+;; ;; Define a key chord for escape so I don't have to press Esc or C-[
+;; (let ((chord "fj"))
+;;   ;;NOTE: fj lags downward movement with "j" in visual mode.
+;;   ;;      If you hold down j it messes things up and the chord doesn't work.
+;;   (key-chord-define evil-insert-state-map chord #'evil-normal-state)
+;;   (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+;;   ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
+;;   ;; (key-chord-define evil-operator-state-map chord func)
+;;   ;; (key-chord-define evil-motion-state-map chord func))
+;;   (key-chord-define helm-map chord #'helm-keyboard-quit))
 
-;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
-;(key-chord-define c++-mode-map ";;"  "\C-e;")
+;; ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
+;; ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
 
 ;;--------------------
 ;; helm-git-grep (makes emacs crash on windows)

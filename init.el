@@ -24,6 +24,7 @@
         evil-leader
         evil-escape
         evil-matchit
+        evil-snipe
         ;;evil-god-state
         ;;evil-surround
         key-chord
@@ -78,7 +79,10 @@
         powershell
         irony
         rtags
-        aggressive-indent))
+        aggressive-indent
+        helm-w32-launcher
+        ;;sx
+        ))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -329,6 +333,11 @@ Useful to check a boolean state and toggle the state in 1 go."
                              (slime-pprint-eval-last-expression)
                              (evil-normal-state))))
 
+;;----------------------------------
+;; evil-snipe
+;;----------------------------------
+;; (require 'evil-snipe)
+;; (global-evil-snipe-mode 1)
 
 ;;----------------------------------
 ;; evil-god-state
@@ -402,8 +411,8 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
 ;; cursor
 ;;----------------------------------
 (cl-defun my/cursor-stuff (&optional &key (color-emacs nil)
-                                          (color-evil nil)
-                                          (color-motion nil));(color-motion "red")
+                                     (color-evil nil)
+                                     (color-motion nil));(color-motion "red")
   (interactive)
   (let ((args-emacs '())
         (args-evil '())
@@ -525,6 +534,73 @@ This prevents overlapping themes; something I would rarely want."
           (unless no-enable
             (enable-theme theme))
           t)))))
+
+(defun color (theme &optional no-confirm no-enable)
+  "dupliate of `my/load-theme' to simulate :color in vim."
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapcar 'symbol-name
+                                     (custom-available-themes))))
+    nil nil))
+
+  ;;disable any active themes
+  (dolist (theme custom-enabled-themes)
+    (disable-theme theme))
+  
+  (let ((no-confirm t)
+        (no-enable nil))
+    (unless (custom-theme-name-valid-p theme)
+      (error "Invalid theme name `%s'" theme))
+    ;; If THEME is already enabled, re-enable it after loading, even if
+    ;; NO-ENABLE is t.
+    (if no-enable
+        (setq no-enable (not (custom-theme-enabled-p theme))))
+    ;; If reloading, clear out the old theme settings.
+    (when (custom-theme-p theme)
+      (disable-theme theme)
+      (put theme 'theme-settings nil)
+      (put theme 'theme-feature nil)
+      (put theme 'theme-documentation nil))
+    (let ((fn (locate-file (concat (symbol-name theme) "-theme.el")
+                           (custom-theme--load-path)
+                           '("" "c")))
+          hash)
+      (unless fn
+        (error "Unable to find theme file for `%s'" theme))
+      (with-temp-buffer
+        (insert-file-contents fn)
+        (setq hash (secure-hash 'sha256 (current-buffer)))
+        ;; Check file safety with `custom-safe-themes', prompting the
+        ;; user if necessary.
+        (when (or no-confirm
+                  (eq custom-safe-themes t)
+                  (and (memq 'default custom-safe-themes)
+                       (equal (file-name-directory fn)
+                              (expand-file-name "themes/" data-directory)))
+                  (member hash custom-safe-themes)
+                  (custom-theme-load-confirm hash))
+          (let ((custom--inhibit-theme-enable t)
+                (buffer-file-name fn))    ;For load-history.
+            (eval-buffer))
+          ;; Optimization: if the theme changes the `default' face, put that
+          ;; entry first.  This avoids some `frame-set-background-mode' rigmarole
+          ;; by assigning the new background immediately.
+          (let* ((settings (get theme 'theme-settings))
+                 (tail settings)
+                 found)
+            (while (and tail (not found))
+              (and (eq (nth 0 (car tail)) 'theme-face)
+                   (eq (nth 1 (car tail)) 'default)
+                   (setq found (car tail)))
+              (setq tail (cdr tail)))
+            (if found
+                (put theme 'theme-settings (cons found (delq found settings)))))
+          ;; Finally, enable the theme.
+          (unless no-enable
+            (enable-theme theme))
+          t)))))
+
 
 (global-set-key (kbd "<f9>") #'my/load-theme)
 (global-set-key (kbd "<f10>") #'my/cycle-theme)
@@ -678,11 +754,11 @@ This prevents overlapping themes; something I would rarely want."
 (defun color-gruvbox ()
   (interactive)
   (load-theme 'gruvbox t)
-  ;(my/set-font :weight 'normal)
+                                        ;(my/set-font :weight 'normal)
   (my/cursor-stuff-darkBg)
   (my/rainbow-parens-dark-bg)
   ;; (set-face-foreground 'font-lock-string-face "salmon")
-  ;(set-face-foreground 'font-lock-comment-face "#66A555")
+                                        ;(set-face-foreground 'font-lock-comment-face "#66A555")
   (custom-theme-set-faces
    'gruvbox
    `(font-lock-comment-face
@@ -748,11 +824,11 @@ This prevents overlapping themes; something I would rarely want."
   ;;default is the lack of themes, so disable any enabled themes.
   (dolist (thm custom-enabled-themes)
     (disable-theme thm))
-  ;(set-background-color "ivory2")
+                                        ;(set-background-color "ivory2")
   (my/cursor-stuff-lightBg)
-  ;(set-face-background hl-line-face "#EEFFEE")
+                                        ;(set-face-background hl-line-face "#EEFFEE")
   (my/rainbow-parens-light-bg)
-  ;(my/set-font :weight 'bold)
+                                        ;(my/set-font :weight 'bold)
 
   (custom-set-faces
    `(ace-jump-face-foreground
@@ -762,7 +838,28 @@ This prevents overlapping themes; something I would rarely want."
                       :weight bold
                       :inverse-video nil))))))
 
-
+(defun color-leuven ()
+  (interactive)
+  (load-theme 'leuven t)
+  (custom-theme-set-faces
+   'leuven
+   `(default ((t (:foreground "black" :background ,mayan-smoke))))
+   ;;`(default ((t (:foreground "black" :background ,"white"))))
+   `(mode-line ((t (:box (:line-width -1 :color "#1A2F54") :foreground "#85CEEB" :background "#335EA8"
+                         :style released-button))))
+   `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C") :foreground "#F0F0EF" :background "#9B9C97"
+                                  :style released-button))))
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "lemon chiffon"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background "#EEEEFF"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca"))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black")))))
+  )
 
 (defun color-dichromacy ()
   (interactive)
@@ -799,8 +896,8 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (setq cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
-                     "mint cream" "honeydew" "white smoke" "ghost white"
-                     "snow" "alice blue" "lavender"))
+                      "mint cream" "honeydew" "white smoke" "ghost white"
+                      "snow" "alice blue" "lavender"))
 (setq cycle-colors '( "old lace" "floral white" "snow" "ghost white" "white"))
 (setq cycle-index 0)
 (defun my/cycle-light-bg ()
@@ -818,10 +915,10 @@ This prevents overlapping themes; something I would rarely want."
 (progn
   (my/set-font :sym 'consolas
                :height 115;'90 105 115 120 125
-               :weight 'normal)
+               :weight 'bold)
   
   (when (display-graphic-p)
-    (color-zenburn))
+    (color-leuven))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
@@ -841,7 +938,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; Recursively byte-compile every .el file
 ;;---------------------------------------------
-;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+                                        ;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 
 
@@ -861,7 +958,7 @@ This prevents overlapping themes; something I would rarely want."
 (eval-after-load "slime"
   '(progn
      (slime-setup '(slime-fancy
-                    ;slime-company
+                    ;;slime-company
                     slime-banner
                     slime-indentation))
      (setq slime-complete-symbol*-fancy t)
@@ -999,6 +1096,7 @@ This prevents overlapping themes; something I would rarely want."
                                    "console" "JSON" "ActiveXObject"))
 (setq js2-highlight-level 3);;maximum highlighting
 
+
 (add-hook 'js2-mode-hook
           (lambda ()
             ;; replace ambiguous name "Javascript-IDE" with "js2"
@@ -1023,7 +1121,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;; ac-js2
 ;;--------------------
-(when t
+(when nil 
   (add-hook 'js2-mode-hook 'ac-js2-mode)
   (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
@@ -1085,7 +1183,7 @@ This prevents overlapping themes; something I would rarely want."
 (require 'helm-cmd-t)
 ;;(helm-adaptative-mode t)
 (require 'helm-swoop)
-(helm-mode 1) ;helm-selection everywhere like when using M-x
+;;(helm-mode 1) ;helm-selection everywhere like when using M-x
 
 ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
 ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1106,29 +1204,29 @@ This prevents overlapping themes; something I would rarely want."
 ;;----------------------------------
 ;; evil-escape
 ;;----------------------------------
-(evil-escape-mode 1)
+;;(evil-escape-mode 1)
 ;;----------------------------------
 ;; key-chord
 ;;----------------------------------
-;; (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
-;; (setq key-chord-one-key-delay 0.4)
+(setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+(setq key-chord-one-key-delay 0.4)
 
-;; ;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
-;; (require 'key-chord)
-;; (key-chord-mode 1)
-;; ;; Define a key chord for escape so I don't have to press Esc or C-[
-;; (let ((chord "fj"))
-;;   ;;NOTE: fj lags downward movement with "j" in visual mode.
-;;   ;;      If you hold down j it messes things up and the chord doesn't work.
-;;   (key-chord-define evil-insert-state-map chord #'evil-normal-state)
-;;   (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
-;;   ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
-;;   ;; (key-chord-define evil-operator-state-map chord func)
-;;   ;; (key-chord-define evil-motion-state-map chord func))
-;;   (key-chord-define helm-map chord #'helm-keyboard-quit))
+;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
+(require 'key-chord)
+(key-chord-mode 1)
+;; Define a key chord for escape so I don't have to press Esc or C-[
+(let ((chord "fj"))
+  ;;NOTE: fj lags downward movement with "j" in visual mode.
+  ;;      If you hold down j it messes things up and the chord doesn't work.
+  (key-chord-define evil-insert-state-map chord #'evil-normal-state)
+  (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+  ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
+  ;; (key-chord-define evil-operator-state-map chord func)
+  ;; (key-chord-define evil-motion-state-map chord func))
+  (key-chord-define helm-map chord #'helm-keyboard-quit))
 
-;; ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
-;; ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
+;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
+;;(key-chord-define c++-mode-map ";;"  "\C-e;")
 
 ;;--------------------
 ;; helm-git-grep (makes emacs crash on windows)

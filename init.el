@@ -248,8 +248,8 @@ Useful to check a boolean state and toggle the state in 1 go."
 
 ;; Map for Esc. The key-chord package causes lag when a key of the chord is pressed.
 ;; So using the the built-in control chords which are fast. Better than the awkward C-[ default.
-(evil-define-key 'insert global-map (kbd "C-n") 'evil-normal-state)
-(evil-define-key 'visual global-map (kbd "C-n") 'evil-exit-visual-state)
+;; (evil-define-key 'insert global-map (kbd "C-n") 'evil-normal-state)
+;; (evil-define-key 'visual global-map (kbd "C-n") 'evil-exit-visual-state)
 
 
 ;; When in visual mode: press $ to go to the end of the line minus the newline char.
@@ -2018,13 +2018,13 @@ Depends on evil mode."
 
 (defun my/eshell-clear-line ()
   (interactive)
-  ;(message "") ;delete multiple lines of junk in the mini buffer.
+  ;;(message "") ;delete multiple lines of junk in the mini buffer.
   (eshell-bol)
   (evil-delete-line)
-  ;(message "") ;delete multiple lines of junk in the mini buffer.
+  ;;(message "") ;delete multiple lines of junk in the mini buffer.
   )
 
-;set up custome keybindings when the mode loads.
+;;set up custome keybindings when the mode loads.
 (add-hook 'eshell-mode-hook
           (lambda ()
             ;;Use the same keybinding to clear eshell as the SLIME repl
@@ -2052,7 +2052,7 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;; eww web-browser
 ;;-----------------------------------------------------------------------------
-;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
+;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
 
 (when my/run-sys-specific
   (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
@@ -2135,6 +2135,10 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-----------------------------------------------------------------------------
+(when my/run-sys-specific
+  (setq browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+        browse-url-browser-function 'browse-url-generic))
+
 ;; (defun my/insert-img ()
 ;;   (interactive)
 ;;   (let ((i 0))

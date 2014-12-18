@@ -336,8 +336,14 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;----------------------------------
 ;; evil-snipe
 ;;----------------------------------
-;; (require 'evil-snipe)
-;; (global-evil-snipe-mode 1)
+(setq evil-snipe-enable-highlight nil)
+(setq evil-snipe-enable-incremental-highlight nil)
+(setq evil-snipe-scope 'visible)
+(setq evil-snipe-repeat-scope 'visible)
+
+(require 'evil-snipe)
+(global-evil-snipe-mode 1)
+
 
 ;;----------------------------------
 ;; evil-god-state
@@ -915,10 +921,10 @@ This prevents overlapping themes; something I would rarely want."
 (progn
   (my/set-font :sym 'consolas
                :height 115;'90 105 115 120 125
-               :weight 'bold)
+               :weight 'normal)
   
   (when (display-graphic-p)
-    (color-leuven))
+    (color-zenburn))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
@@ -1183,7 +1189,7 @@ This prevents overlapping themes; something I would rarely want."
 (require 'helm-cmd-t)
 ;;(helm-adaptative-mode t)
 (require 'helm-swoop)
-;;(helm-mode 1) ;helm-selection everywhere like when using M-x
+(helm-mode 1) ;helm-selection everywhere like when using M-x
 
 ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
 ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1336,9 +1342,11 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; helm-swoop
 ;;--------------------
-;(global-set-key (kbd "C-c C-h s") 'helm-swoop)
-(define-key evil-normal-state-map (kbd "s") 'helm-swoop)
-(evil-leader/set-key "s" 'helm-multi-swoop-all)
+;;(define-key evil-normal-state-map (kbd "s") 'helm-swoop)
+(global-set-key (kbd "C-c s") 'helm-swoop)
+(global-set-key (kbd "C-c C-s") 'helm-swoop)
+;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
+
 ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
 (setq helm-swoop-pre-input-function
       (lambda () nil))
@@ -2117,6 +2125,12 @@ Depends on evil mode."
 ;; ediff
 ;;-----------------------------------------------------------------------------
 (setq ediff-split-window-function 'split-window-horizontally)
+
+;;-----------------------------------------------------------------------------
+;; helm-w32-launcher
+;;-----------------------------------------------------------------------------
+(when my/run-sys-specific
+  (global-set-key (kbd "C-c w") 'helm-w32-launcher))
 
 ;;-----------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

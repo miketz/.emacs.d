@@ -873,6 +873,7 @@ This prevents overlapping themes; something I would rarely want."
                          :style released-button))))
    `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C") :foreground "#F0F0EF" :background "#9B9C97"
                                   :style released-button))))
+   '(js2-function-call ((t :foreground "blue")))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))

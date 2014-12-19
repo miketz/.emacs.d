@@ -82,6 +82,7 @@
         aggressive-indent
         helm-w32-launcher
         ;;sx
+        leerzeichen
         ))
 
 (require 'package)
@@ -487,7 +488,7 @@ This prevents overlapping themes; something I would rarely want."
   ;;disable any active themes
   (dolist (theme custom-enabled-themes)
     (disable-theme theme))
-  
+
   (let ((no-confirm t)
         (no-enable nil))
     (unless (custom-theme-name-valid-p theme)
@@ -650,6 +651,23 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "black" :background "red"))))))
 
+(defun color-grandshell ()
+  "Grandshell with a few mode-specific additoins."
+  (interactive)
+  (load-theme 'grandshell t)
+
+  (custom-theme-set-faces
+   'grandshell
+   ;;This isn't a js2 error face. But externals tend to be an error since js2 doesn't find the them.
+   '(js2-external-variable ((t :underline (:color "red" :style wave)
+                               :background "black")))
+   '(js2-error ((t :underline (:color "red" :style wave)
+                   :background "dark red")))
+   '(js2-function-call ((t :foreground "violet"))) ;;making same as font-lock-function-name-face
+   '(js2-warning ((t :underline (:color "yellow" :style wave)
+                     :background "navy blue")))
+   ))
+
 (defun color-zenburn ()
   "Loads the zenburn theme created by Bozhidar Batsov. Makes a few extra mods too"
   (interactive)
@@ -684,7 +702,7 @@ This prevents overlapping themes; something I would rarely want."
    '(js2-function-call ((t :foreground "#93E0E3"))) ;;making same as font-lock-function-name-face
    '(js2-warning ((t :underline (:color "yellow" :style wave)
                      :background "navy blue")))
-   
+
    ;;'(js2-private-member ((t :foreground "green")))
    ;;'(js2-function-param ((t :foreground "green")))
    ;;'(js2-instance-member ((t :foreground "green")))
@@ -921,10 +939,10 @@ This prevents overlapping themes; something I would rarely want."
 (progn
   (my/set-font :sym 'consolas
                :height 115;'90 105 115 120 125
-               :weight 'normal)
-  
+               :weight 'bold)
+
   (when (display-graphic-p)
-    (color-zenburn))
+    (color-leuven))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
@@ -1123,11 +1141,10 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-
 ;;--------------------
 ;; ac-js2
 ;;--------------------
-(when nil 
+(when nil
   (add-hook 'js2-mode-hook 'ac-js2-mode)
   (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
@@ -1382,9 +1399,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; (require 'sublimity-scroll)
 ;;map is annoying;;(require 'sublimity-map)
 
-;(setq sublimity-scroll-drift-length 1) ;(sublimity-scroll-weight 4)
+;;(setq sublimity-scroll-drift-length 1) ;(sublimity-scroll-weight 4)
 
-;(sublimity-global-mode)
+;;(sublimity-global-mode)
 
 
 ;;---------------------
@@ -1427,19 +1444,19 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; cc-mode
 ;;--------------------
-    ;; (assoc "cc-mode" c-style-alist)
-    ;; (assoc "user" c-style-alist)
-    ;; (assoc "c#" c-style-alist)
-    ;; (assoc "gnu" c-style-alist)
-    ;; (assoc "k&r" c-style-alist)
-    ;; (assoc "bsd" c-style-alist)
-    ;; (assoc "stroustrup" c-style-alist)
-    ;; (assoc "whitesmith" c-style-alist)
-    ;; (assoc "ellemtel" c-style-alist)
-    ;; (assoc "linux" c-style-alist)
-    ;; (assoc "python" c-style-alist)
-    ;; (assoc "java" c-style-alist)
-    ;; (assoc "awk" c-style-alist)
+;; (assoc "cc-mode" c-style-alist)
+;; (assoc "user" c-style-alist)
+;; (assoc "c#" c-style-alist)
+;; (assoc "gnu" c-style-alist)
+;; (assoc "k&r" c-style-alist)
+;; (assoc "bsd" c-style-alist)
+;; (assoc "stroustrup" c-style-alist)
+;; (assoc "whitesmith" c-style-alist)
+;; (assoc "ellemtel" c-style-alist)
+;; (assoc "linux" c-style-alist)
+;; (assoc "python" c-style-alist)
+;; (assoc "java" c-style-alist)
+;; (assoc "awk" c-style-alist)
 
 (setq c-default-style '((java-mode . "java")
                         (awk-mode . "awk")
@@ -1491,7 +1508,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;---------------------
 ;; dired-details
 ;;---------------------
-;allows collapsing the file details with "(" and ")" in emacs <= 24.3
+;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
 (require 'dired-details)
 (dired-details-install)
 
@@ -2133,6 +2150,14 @@ Depends on evil mode."
   (global-set-key (kbd "C-c w") 'helm-w32-launcher))
 
 ;;-----------------------------------------------------------------------------
+;; leerzeichen. Displays symbols for tab, space, and newline.
+;;-----------------------------------------------------------------------------
+(require 'leerzeichen)
+;;(leerzeichen-mode)
+(custom-set-faces
+ '(leerzeichen ((t (:foreground "#A8A800")))))
+
+;;-----------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-----------------------------------------------------------------------------
 (when my/run-sys-specific
@@ -2262,7 +2287,7 @@ Depends on evil mode."
           'comint-watch-for-password-prompt)
 
 ;;show trailing whitespace
-(setq show-trailing-whitespace t)   
+(setq-default show-trailing-whitespace t)   
 ;(setq-default show-trailing-whitespace t)   
 
 ;;******** whitespace-mode *******

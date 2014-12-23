@@ -2325,11 +2325,11 @@ Depends on evil mode."
 ;; (setq-default indicate-buffer-boundaries '((up . nil) (down . nil)
 ;;                                            (top . left) (bottom . left)))
 
-;(setq tool-bar-mode nil)
+;;(setq tool-bar-mode nil)
 (setq-default transient-mark-mode t)  ;show selected regions
-                                        ;(setq-default visible-bell t)
+;;(setq-default visible-bell t)
 (setq ring-bell-function 'ignore)
-;(show-paren-mode 0)
+;;(show-paren-mode 0)
 
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.

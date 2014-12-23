@@ -83,6 +83,8 @@
         helm-w32-launcher
         ;;sx
         leerzeichen
+        sql-indent
+        darkroom
         ))
 
 (require 'package)
@@ -715,7 +717,10 @@ This prevents overlapping themes; something I would rarely want."
                       :underline t)))
    ;; '(num3-face-odd '((t)))
    ;; '(num3-face-even '((t :underline t)))
-
+   '(leerzeichen ((t (:foreground "yellow4";"#A8A800"
+                                  :background "black";"#D4D4C8"
+                                  :italic nil
+                                  :bold nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
@@ -874,6 +879,12 @@ This prevents overlapping themes; something I would rarely want."
    `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C") :foreground "#F0F0EF" :background "#9B9C97"
                                   :style released-button))))
    '(js2-function-call ((t :foreground "blue")))
+   '(leerzeichen ((t (:foreground "black";"#A8A800"
+                                  :background "white";"#D4D4C8"
+                                  :italic nil
+                                  :bold nil
+                                  ;;:box t
+                                  ))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))
@@ -940,10 +951,10 @@ This prevents overlapping themes; something I would rarely want."
 (progn
   (my/set-font :sym 'consolas
                :height 115;'90 105 115 120 125
-               :weight 'bold)
+               :weight 'normal)
 
   (when (display-graphic-p)
-    (color-leuven))
+    (color-zenburn))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
@@ -1095,6 +1106,13 @@ This prevents overlapping themes; something I would rarely want."
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (setq org-startup-indented t)
 (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
+
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
 (when my/run-sys-specific
   (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
 
@@ -1138,6 +1156,7 @@ This prevents overlapping themes; something I would rarely want."
             ;;   (js2-highlight-vars-mode))
 
             ;;(js2-imenu-extras-mode)
+            (electric-pair-mode 1)
             ))
 
 
@@ -1994,6 +2013,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'js2-mode-hook 'skewer-mode)
 (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'html-mode-hook 'skewer-html-mode)
+;;(add-hook 'web-mode-hook 'skewer-html-mode)
 
 (defun my/skewer-repl-clear-buffer ()
   "Deletes the contents of the skewer-reple buffer.
@@ -2014,7 +2034,19 @@ Depends on evil mode."
    (setq show-trailing-whitespace nil)
    (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)))
 
-
+;;(require 'simple-httpd)
+;; (defun my/skewer-html ()
+;;   "Wire up the html file you're editing with skewer.
+;; Current it does not work."
+;;   (interactive)
+;;   ;;(skewer-html-mode)
+;;   ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
+;;   (setq httpd-root (my/current-folder-path))
+;;   (httpd-start)
+;;   ;; (browse-url-of-file (concat "http://localhost:8080/"
+;;   ;;                             (file-name-nondirectory buffer-file-name)))
+;;   (run-skewer)
+;;   )
 ;;-----------------------------------------------------------------------------
 ;; eshell
 ;;-----------------------------------------------------------------------------
@@ -2156,11 +2188,35 @@ Depends on evil mode."
 (require 'leerzeichen)
 ;;(leerzeichen-mode)
 (custom-set-faces
- '(leerzeichen ((t (:foreground "#A8A800")))))
+ '(leerzeichen ((t (:foreground "black";"#A8A800"
+                                :background "white";"#D4D4C8"
+                                :italic nil
+                                :bold nil
+                                ;;:box t
+                                )))))
+
+;;-----------------------------------------------------------------------------
+;; sql-indent
+;;-----------------------------------------------------------------------------
+;; (eval-after-load "sql"
+;;   '(load-library "sql-indent"))
+
+;;-----------------------------------------------------------------------------
+;; darkroom
+;;-----------------------------------------------------------------------------
+(require 'darkroom)
+(setq darkroom-margins 0.15)
+(setq darkroom-fringes-outside-margins nil) ;;nil keeps margins close to the centered text.
 
 ;;-----------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-----------------------------------------------------------------------------
+(progn ;;window navigation.
+  (global-set-key (kbd "M-h") #'evil-window-left)
+  (global-set-key (kbd "M-j") #'evil-window-down)
+  (global-set-key (kbd "M-k") #'evil-window-up)
+  (global-set-key (kbd "M-l") #'evil-window-right))
+
 (when my/run-sys-specific
   (setq browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         browse-url-browser-function 'browse-url-generic))
@@ -2271,7 +2327,7 @@ Depends on evil mode."
 
 ;(setq tool-bar-mode nil)
 (setq-default transient-mark-mode t)  ;show selected regions
-;(setq-default visible-bell t)
+                                        ;(setq-default visible-bell t)
 (setq ring-bell-function 'ignore)
 ;(show-paren-mode 0)
 

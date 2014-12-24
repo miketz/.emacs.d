@@ -29,8 +29,8 @@
 ;; flags used for conditional execution
 ;;----------------------------------
 ;; (display-graphic-p)
-;; my/curr-computer
 ;; system-type
+;; my/curr-computer
 ;; my/run-sys-specific ;;deprecated in favor of my/curr-computer
 
 ;; Keeping track of the various computers I use emacs on.
@@ -401,35 +401,35 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;----------------------------------
 ;; font
 ;;----------------------------------
-;;; configure default settings for fonts.
-;;;***SYS SPECIFIC***
-(setq my/default-font 'consolas
-      my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
-                      (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
-                      (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
-                      (fixedsys "FixedSys" 120 normal)))
+(when (eq my/curr-computer 'work-laptop)
+  ;; configure default settings for fonts.
+  (setq my/default-font 'consolas
+        my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
+                        (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
+                        (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
+                        (fixedsys "FixedSys" 120 normal)))
 
-(cl-defun my/set-font (&optional &key
-                                 (sym nil) (height nil) (weight nil) (resize-window nil))
-  "Sets the font.
+  (cl-defun my/set-font (&optional &key
+                                   (sym nil) (height nil) (weight nil) (resize-window nil))
+    "Sets the font.
 If sym is not specified it uses the configured default set in `my/default-font'.
 If height or weight are not specified then it uses the configured defaults in `my/good-fonts'.
 Resize-window = t will adjust the window so the modeline fits on screen, etc."
-  (unless sym (setq sym my/default-font))
-  (let ((the-font (assoc sym my/good-fonts)))
-    (unless height (setq height (third the-font)))
-    (unless weight (setq weight (fourth the-font)))
-    (let ((font-str (second the-font)))
-      (custom-set-faces
-       `(default ((t (:family ,font-str
-                              :foundry "outline"
-                              :slant normal
-                              :weight ,weight
-                              :height ,height
-                              :width normal)))))))
-  (when resize-window
-    (my/w32-run 'restore-curr-frame)
-    (my/w32-run 'max)))
+    (unless sym (setq sym my/default-font))
+    (let ((the-font (assoc sym my/good-fonts)))
+      (unless height (setq height (third the-font)))
+      (unless weight (setq weight (fourth the-font)))
+      (let ((font-str (second the-font)))
+        (custom-set-faces
+         `(default ((t (:family ,font-str
+                                :foundry "outline"
+                                :slant normal
+                                :weight ,weight
+                                :height ,height
+                                :width normal)))))))
+    (when resize-window
+      (my/w32-run 'restore-curr-frame)
+      (my/w32-run 'max))))
 
 
 ;; (defun my/set-font-size ()
@@ -1702,9 +1702,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (setq omnisharp-auto-complete-want-documentation nil)
 
 (when (eq my/curr-computer 'work-laptop)
-  (setq omnisharp--curl-executable-path "C:\\Users\\mtz\\programs\\curl-7.37.0-win64\\bin\\curl.exe") ;***SYS SPECIFIC***
-  (setq omnisharp-server-executable-path "C:\\Users\\mtz\\programs\\OmniSharpServer\\OmniSharp\\bin\\Debug\\OmniSharp.exe");***SYS SPECIFIC***
-  (setq omnisharp--windows-curl-tmp-file-path "C:\\Users\\mtz\\omnisharp-curl-tmp.cs")) ;windows doesn't like the C:\ root folder ;***SYS SPECIFIC***
+  (setq omnisharp--curl-executable-path "C:\\Users\\mtz\\programs\\curl-7.37.0-win64\\bin\\curl.exe")
+  (setq omnisharp-server-executable-path "C:\\Users\\mtz\\programs\\OmniSharpServer\\OmniSharp\\bin\\Debug\\OmniSharp.exe")
+  (setq omnisharp--windows-curl-tmp-file-path "C:\\Users\\mtz\\omnisharp-curl-tmp.cs")) ;windows doesn't like the C:\ root folder
 (setq omnisharp-host "http://localhost:2000/");(setq omnisharp-host "http://localhost:2000/")
 ;(setq omnisharp-curl "curl.exe")
 ;`(:command ,omnisharp--curl-executable-path)
@@ -1820,126 +1820,127 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;-------------------------------
 ;; Load projects
 ;;-------------------------------
-(defun proj-ecp ();***SYS SPECIFIC***
-  (interactive)
-  (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
-         (sln (concat root "Safety.sln"))
-         (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
+(when (eq my/curr-computer 'work-laptop)
+  (defun proj-ecp ()
+    (interactive)
+    (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
+           (sln (concat root "Safety.sln"))
+           (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
+      ;; helm-cmd-t stuff
+      (add-to-list 'helm-cmd-t-find-prunes "obj")
+      (add-to-list 'helm-cmd-t-find-prunes "bin")
+      (add-to-list 'helm-cmd-t-find-prunes ".svn")
+      (add-to-list 'helm-cmd-t-find-prunes "packages")
+      (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
+      (add-to-list 'helm-cmd-t-find-prunes "TestResults")
+      (setq dir_ecp (helm-cmd-t-get-create-source-dir root))
+      (evil-leader/set-key "h" (lambda ()
+                                 (interactive)
+                                 (helm :sources '(helm-source-buffers-list
+                                                  dir_ecp)
+                                       :buffer "*ECP Project*")))
+      ;;(dired root)
+      (find-file-existing defaultFile)
+      ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
+      (my/start-omnisharp-server sln)
+
+      ;;TODO: build ctags or etags.
+      ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cs")
+      ))
+
+  (defun proj-safetyweb ()
+    (interactive)
+    (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
+           (sln (concat root "Safety.sln")))
+      ;; helm-cmd-t stuff
+      (add-to-list 'helm-cmd-t-find-prunes "obj")
+      (add-to-list 'helm-cmd-t-find-prunes "bin")
+      (add-to-list 'helm-cmd-t-find-prunes ".svn")
+      (add-to-list 'helm-cmd-t-find-prunes "packages")
+      (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
+      (add-to-list 'helm-cmd-t-find-prunes "TestResults")
+      (setq dir_ecp (helm-cmd-t-get-create-source-dir root))
+      (evil-leader/set-key "h" (lambda ()
+                                 (interactive)
+                                 (helm :sources '(helm-source-buffers-list
+                                                  dir_ecp)
+                                       :buffer "*Saftey Web Project*")))
+      (dired root)
+      ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
+      ;;(my/start-omnisharp-server sln)
+      ))
+
+  (defun proj-trighist ()
+    (interactive)
+    (let* ((root "C:\\Users\\mtz\\proj\\HistoryImp\\dev\\code\\v3_GeneralHistory\\HistoryTriggerGen\\")
+           (sln (concat root "HistoryTriggerGen.sln")))
+      ;; helm-cmd-t stuff
+      (add-to-list 'helm-cmd-t-find-prunes "obj")
+      (add-to-list 'helm-cmd-t-find-prunes "bin")
+      (add-to-list 'helm-cmd-t-find-prunes ".svn")
+      (add-to-list 'helm-cmd-t-find-prunes ".git")
+      (add-to-list 'helm-cmd-t-find-prunes "packages")
+      (setq dir_triggerhist (helm-cmd-t-get-create-source-dir root))
+      (evil-leader/set-key "h" (lambda ()
+                                 (interactive)
+                                 (helm :sources '(helm-source-buffers-list
+                                                  dir_triggerhist)
+                                       :buffer "*ECP Project*")))
+      (dired root)
+      ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
+      ;;(my/start-omnisharp-server sln)
+      ))
+
+  (defun proj-emacs ()
+    (interactive)
+    (let* ((emacs-root "C:\\Users\\mtz\\scratch\\emacs\\"))
+      ;; helm-cmd-t stuff
+      (add-to-list 'helm-cmd-t-find-prunes ".git")
+      (setq dir_emacs (helm-cmd-t-get-create-source-dir emacs-root))
+      (evil-leader/set-key "h" (lambda ()
+                                 (interactive)
+                                 (helm :sources '(helm-source-buffers-list
+                                                  dir_emacs)
+                                       :buffer "*Emacs Project*")))
+      (dired emacs-root)))
+
+  (defun proj-cl ()
+    (interactive)
     ;; helm-cmd-t stuff
-    (add-to-list 'helm-cmd-t-find-prunes "obj")
-    (add-to-list 'helm-cmd-t-find-prunes "bin")
-    (add-to-list 'helm-cmd-t-find-prunes ".svn")
-    (add-to-list 'helm-cmd-t-find-prunes "packages")
-    (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
-    (add-to-list 'helm-cmd-t-find-prunes "TestResults")
-    (setq dir_ecp (helm-cmd-t-get-create-source-dir root))
+    (setq root_dir_cl (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\lisp"))
     (evil-leader/set-key "h" (lambda ()
                                (interactive)
                                (helm :sources '(helm-source-buffers-list
-                                                dir_ecp)
-                                     :buffer "*ECP Project*")))
-    ;;(dired root)
-    (find-file-existing defaultFile)
-    ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-    (my/start-omnisharp-server sln)
-
-    ;;TODO: build ctags or etags.
-    ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cs")
-    ))
-
-(defun proj-safetyweb ();***SYS SPECIFIC***
-  (interactive)
-  (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
-         (sln (concat root "Safety.sln")))
-    ;; helm-cmd-t stuff
-    (add-to-list 'helm-cmd-t-find-prunes "obj")
-    (add-to-list 'helm-cmd-t-find-prunes "bin")
-    (add-to-list 'helm-cmd-t-find-prunes ".svn")
-    (add-to-list 'helm-cmd-t-find-prunes "packages")
-    (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
-    (add-to-list 'helm-cmd-t-find-prunes "TestResults")
-    (setq dir_ecp (helm-cmd-t-get-create-source-dir root))
-    (evil-leader/set-key "h" (lambda ()
-                               (interactive)
-                               (helm :sources '(helm-source-buffers-list
-                                                dir_ecp)
-                                     :buffer "*Saftey Web Project*")))
-    (dired root)
-    ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-    ;;(my/start-omnisharp-server sln)
-    ))
-
-(defun proj-trighist ();***SYS SPECIFIC***
-  (interactive)
-  (let* ((root "C:\\Users\\mtz\\proj\\HistoryImp\\dev\\code\\v3_GeneralHistory\\HistoryTriggerGen\\")
-         (sln (concat root "HistoryTriggerGen.sln")))
-    ;; helm-cmd-t stuff
-    (add-to-list 'helm-cmd-t-find-prunes "obj")
-    (add-to-list 'helm-cmd-t-find-prunes "bin")
-    (add-to-list 'helm-cmd-t-find-prunes ".svn")
-    (add-to-list 'helm-cmd-t-find-prunes ".git")
-    (add-to-list 'helm-cmd-t-find-prunes "packages")
-    (setq dir_triggerhist (helm-cmd-t-get-create-source-dir root))
-    (evil-leader/set-key "h" (lambda ()
-                               (interactive)
-                               (helm :sources '(helm-source-buffers-list
-                                                dir_triggerhist)
-                                     :buffer "*ECP Project*")))
-    (dired root)
-    ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-    ;;(my/start-omnisharp-server sln)
-    ))
-
-(defun proj-emacs ();***SYS SPECIFIC***
-  (interactive)
-  (let* ((emacs-root "C:\\Users\\mtz\\scratch\\emacs\\"))
-    ;; helm-cmd-t stuff
-    (add-to-list 'helm-cmd-t-find-prunes ".git")
-    (setq dir_emacs (helm-cmd-t-get-create-source-dir emacs-root))
-    (evil-leader/set-key "h" (lambda ()
-                               (interactive)
-                               (helm :sources '(helm-source-buffers-list
-                                                dir_emacs)
-                                     :buffer "*Emacs Project*")))
-    (dired emacs-root)))
-
-(defun proj-cl ();***SYS SPECIFIC***
-  (interactive)
-  ;; helm-cmd-t stuff
-  (setq root_dir_cl (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\lisp"))
-  (evil-leader/set-key "h" (lambda ()
-                             (interactive)
-                             (helm :sources '(helm-source-buffers-list
-                                              root_dir_cl)
-                                   :buffer "*Lisp Project*")))
-  ;;load project
-  (find-file-existing "C:\\Users\\mtz\\scratch\\lisp\\test.lisp")
+                                                root_dir_cl)
+                                     :buffer "*Lisp Project*")))
+    ;;load project
+    (find-file-existing "C:\\Users\\mtz\\scratch\\lisp\\test.lisp")
                                         ;(dired "C:\\Users\\mtz\\scratch\\lisp")
-  (slime))
+    (slime))
 
-(defun proj-imgtag () ;***SYS SPECIFIC***
-  (interactive)
-  (let* ((root "C:\\Users\\mtz\\scratch\\ImgDragAndDrop\\")
-         (html (concat root "test.html"))
-         (css (concat root "test.css"))
-         (js (concat root "test.js")))
-    (find-file-existing css) (split-window)
-    (find-file-existing js) (split-window)
-    (find-file-existing html)
-    (evil-window-move-far-left)
-    (shrink-window-horizontally 35)))
+  (defun proj-imgtag ()
+    (interactive)
+    (let* ((root "C:\\Users\\mtz\\scratch\\ImgDragAndDrop\\")
+           (html (concat root "test.html"))
+           (css (concat root "test.css"))
+           (js (concat root "test.js")))
+      (find-file-existing css) (split-window)
+      (find-file-existing js) (split-window)
+      (find-file-existing html)
+      (evil-window-move-far-left)
+      (shrink-window-horizontally 35)))
 
-(defun proj-cpp ();***SYS SPECIFIC***
-  (interactive)
-  (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))
-  (evil-leader/set-key "h" (lambda ()
-                             (interactive)
-                             (helm :sources '(helm-source-buffers-list
-                                              root_dir_cpp)
-                                   :buffer "*Cpp Project*")))
-  (dired "C:\\Users\\mtz\\scratch\\cpp")
+  (defun proj-cpp ()
+    (interactive)
+    (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))
+    (evil-leader/set-key "h" (lambda ()
+                               (interactive)
+                               (helm :sources '(helm-source-buffers-list
+                                                root_dir_cpp)
+                                     :buffer "*Cpp Project*")))
+    (dired "C:\\Users\\mtz\\scratch\\cpp")
                                         ;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
-  )
+    ))
 
 ;;; quick load of the .emacs (or init.el) file.
 (evil-leader/set-key "`" (lambda ()
@@ -1947,13 +1948,13 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                            (find-file-existing "~/.emacs.d/init.el")))
 
 (when (eq my/curr-computer 'work-laptop)
-  ;;quick load of c:\users\mtz ;***SYS SPECIFIC***
+  ;;quick load of c:\users\mtz
   (evil-leader/set-key "1" (lambda ()
                              (interactive)
                              (dired "C:\\Users\\mtz"))))
 
 (when (eq my/curr-computer 'work-laptop)
-  ;;quick load of c:\users\mtz\proj\ecp\dev\db ;***SYS SPECIFIC***
+  ;;quick load of c:\users\mtz\proj\ecp\dev\db
   (evil-leader/set-key "2" (lambda ()
                              (interactive)
                              (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db"))))

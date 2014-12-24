@@ -24,10 +24,27 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; Set nil to avoid running things with system specific paths, etc.
-;; TODO: use a flag for Windows/Linux/Mac instead of a boolean.
-;; TODO: use a flag for a specific machine. windows1, windows2, linuxA, linuxB
-(setq my/run-sys-specific t)
+
+;;----------------------------------
+;; flags used for conditional execution
+;;----------------------------------
+;; (display-graphic-p)
+;; my/curr-computer
+;; system-type
+;; my/run-sys-specific ;;deprecated in favor of my/curr-computer
+
+;; Keeping track of the various computers I use emacs on.
+(setq my/computers '(work-laptop
+                     raspberry-pi
+                     utilite
+                     old-sony-vaio
+                     a-tower
+                     a-laptop-old
+                     a-laptop-faster
+                     leyna-laptop))
+;; currently used computer. (manually set)
+;; Used to conditionally set computer specific options, and paths.
+(setq my/curr-computer 'work-laptop)
 
 ;; TODO: look into a way to use auto-complete for some modes and company for others.
 
@@ -1028,8 +1045,7 @@ This prevents overlapping themes; something I would rarely want."
      ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
      (setq slime-header-line-p nil)))
 
-(when my/run-sys-specific
-  ;;***SYS SPECIFIC***
+(when (eq my/curr-computer 'work-laptop)
   (setq slime-default-lisp 'ccl
         slime-lisp-implementations
         '((ccl ("C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64"))
@@ -1042,8 +1058,8 @@ This prevents overlapping themes; something I would rarely want."
             ;;there's always a trailing space at repl prompt. Don't highlight it. 
             (setq show-trailing-whitespace nil)))
 
-(when my/run-sys-specific
-  ;;use local hyperspec ;***SYS SPECIFIC***
+(when (eq my/curr-computer 'work-laptop)
+  ;; use local hyperspec
   (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
 
 
@@ -1137,7 +1153,7 @@ This prevents overlapping themes; something I would rarely want."
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
 
 ;;---------------------------------------------
@@ -1685,7 +1701,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; downside that documentation is impossible to fetch.
 (setq omnisharp-auto-complete-want-documentation nil)
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   (setq omnisharp--curl-executable-path "C:\\Users\\mtz\\programs\\curl-7.37.0-win64\\bin\\curl.exe") ;***SYS SPECIFIC***
   (setq omnisharp-server-executable-path "C:\\Users\\mtz\\programs\\OmniSharpServer\\OmniSharp\\bin\\Debug\\OmniSharp.exe");***SYS SPECIFIC***
   (setq omnisharp--windows-curl-tmp-file-path "C:\\Users\\mtz\\omnisharp-curl-tmp.cs")) ;windows doesn't like the C:\ root folder ;***SYS SPECIFIC***
@@ -1755,8 +1771,8 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; clang-format
 ;;--------------------
-(when my/run-sys-specific
-  (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el") ;***SYS SPECIFIC***
+(when (eq my/curr-computer 'work-laptop)
+  (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el")
   ;;(global-set-key [C-M-tab] 'clang-format-region)
   (global-set-key (kbd "C-c f") 'clang-format-region)
   (global-set-key (kbd "C-c b") 'clang-format-buffer))
@@ -1777,7 +1793,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
     'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my/irony-mode-hook)
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   ;;directory to libclang.dll
   (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin")
   )
@@ -1930,19 +1946,19 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                            (interactive)
                            (find-file-existing "~/.emacs.d/init.el")))
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz ;***SYS SPECIFIC***
   (evil-leader/set-key "1" (lambda ()
                              (interactive)
                              (dired "C:\\Users\\mtz"))))
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz\proj\ecp\dev\db ;***SYS SPECIFIC***
   (evil-leader/set-key "2" (lambda ()
                              (interactive)
                              (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db"))))
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   ;;quick load of TFS \Main\SqlScripts
   (evil-leader/set-key "3" (lambda ()
                              (interactive)
@@ -2128,7 +2144,7 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
 
 (add-hook 'eww-mode-hook
@@ -2201,9 +2217,9 @@ Depends on evil mode."
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;;-----------------------------------------------------------------------------
-;; helm-w32-launcher
+;; helm-w32-launcher. Microsoft Windows only?
 ;;-----------------------------------------------------------------------------
-(when my/run-sys-specific
+(when (eq system-type 'windows-nt)
   (global-set-key (kbd "C-c w") 'helm-w32-launcher))
 
 ;;-----------------------------------------------------------------------------
@@ -2241,7 +2257,7 @@ Depends on evil mode."
   (global-set-key (kbd "M-k") #'evil-window-up)
   (global-set-key (kbd "M-l") #'evil-window-right))
 
-(when my/run-sys-specific
+(when (eq my/curr-computer 'work-laptop)
   (setq browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         browse-url-browser-function 'browse-url-generic))
 

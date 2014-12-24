@@ -1,0 +1,17 @@
+# -*- Webservice call from javascript to server. Using XmlHttpRequest. -*-
+# name: ws
+# key: ws
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+var webServ = '/${1:Area}/${2:Controller}/${3:Action}';
+var data = "?${4:var1}=" + ${5:value1} +
+           "&${6:var2}=" + ${7:value2};
+var req = new XMLHttpRequest();
+req.open("POST", webServ + data, true); //request.open("GET", webServ + data, true);
+req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+req.onreadystatechange = function () {
+    if (req.readyState == 4) {
+        $0
+    }
+};
+req.send(data); //request.send(null);

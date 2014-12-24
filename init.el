@@ -9,8 +9,8 @@
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
 ;; Set nil to avoid running things with system specific paths, etc.
-;; Useful when setting up emacs on a new box and you don't want it to error out trying
-;; to run a program that doesn't exist.
+;; TODO: use a flag for Windows/Linux/Mac instead of a boolean.
+;; TODO: use a flag for a specific machine. windows1, windows2, linuxA, linuxB
 (setq my/run-sys-specific t)
 
 ;; TODO: look into a way to use auto-complete for some modes and company for others.
@@ -556,7 +556,7 @@ This prevents overlapping themes; something I would rarely want."
   ;;disable any active themes
   (dolist (theme custom-enabled-themes)
     (disable-theme theme))
-  
+
   (let ((no-confirm t)
         (no-enable nil))
     (unless (custom-theme-name-valid-p theme)
@@ -668,6 +668,14 @@ This prevents overlapping themes; something I would rarely want."
    '(js2-function-call ((t :foreground "violet"))) ;;making same as font-lock-function-name-face
    '(js2-warning ((t :underline (:color "yellow" :style wave)
                      :background "navy blue")))
+   `(mode-line ((t (:foreground  "#eee"
+                                 :background  "#331133"
+                                 :box (:line-width -1 :style released-button))))) ;; colors copied from grandshell-theme.el
+   `(mode-line-inactive ((t (:foreground  "#643"
+                                          :background  "#110011"
+                                          :weight light
+                                          :box (:line-width -1 :style released-button)
+                                          :inherit (mode-line ))))) ;;colors copied from grandshell-theme.el
    ))
 
 (defun color-zenburn ()
@@ -2431,16 +2439,7 @@ edge cases not covered by buffer killing."
 ;; (defun rollCheck (val)
 ;;   (>= val (roll)))
 
-;; (setq msgDb '("May the shwartz be with you."
-;;               "Bededbudat."
-;;               "If you can dodge a wrench, you can dodge a ball."
-;;               "If you can dodge a car, you can dodge a ball."
-;;               "Do you even lisp?"
-;;               "Mentose, the fresh maker."
-;;               "Did you use the search function?"
-;;               "No, I don't animate."
-;;               "All of your bases belong to us."
-;;               "You're too school to be cool."))
+;; (setq msgDb '("hi"))
 
 ;; (setq msgIndex 0)
 

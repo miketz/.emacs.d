@@ -455,7 +455,7 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
     (setq evil-replace-state-cursor (cons 'hbar args-evil))
     ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
     ;;give special color I know when it is not full-evil bindings.
-    (setq evil-motion-state-cursor (cons 'hbar args-evil-motion))))
+    (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
 
 (my/cursor-stuff) ;set the default cursor style. colors not specified yet.
 

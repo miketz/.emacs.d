@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : exception
+# --
+{ name: '${1:exName }',
+  message: '$0' };

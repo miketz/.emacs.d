@@ -2283,9 +2283,15 @@ Depends on evil mode."
   (global-set-key (kbd "M-k") #'evil-window-up)
   (global-set-key (kbd "M-l") #'evil-window-right))
 
-(when (eq my/curr-computer 'work-laptop)
+(cond
+ ((eq my/curr-computer 'work-laptop)
   (setq browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         browse-url-browser-function 'browse-url-generic))
+
+ ((eq my/curr-computer 'raspberry-pi)
+  (setq browse-url-generic-program "surf"
+        browse-url-browser-function 'browse-url-generic)))
+
 
 ;; (defun my/insert-img ()
 ;;   (interactive)

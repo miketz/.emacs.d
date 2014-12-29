@@ -2226,6 +2226,7 @@ Depends on evil mode."
 (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 (add-hook 'css-mode-hook #'aggressive-indent-mode)
 (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'js2-mode-hook #'aggressive-indent-mode)
 
 ;;(global-aggressive-indent-mode 1)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)

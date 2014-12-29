@@ -449,6 +449,26 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
 ;;     (my/set-font :weight weight
 ;;                  :resize-window t)))
 
+(when (eq my/curr-computer 'raspberry-pi)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ansi-color-faces-vector
+     [default default default italic underline success warning error])
+   '(ansi-color-names-vector
+     ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
+   '(font-use-system-font t)
+   '(tool-bar-mode nil))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:family "Fixed" :foundry "Misc" :slant normal :weight normal :height 150 :width normal)))))
+  )
+
 ;;----------------------------------
 ;; cursor
 ;;----------------------------------
@@ -990,9 +1010,10 @@ This prevents overlapping themes; something I would rarely want."
 
 ;;theme of the week and corresponding settings. This may change often.
 (progn
-  (my/set-font :sym 'consolas
-               :height 115;'90 105 115 120 125
-               :weight 'normal)
+  (when (eq my/curr-computer 'work-laptop)
+    (my/set-font :sym 'consolas
+		 :height 115;'90 105 115 120 125
+		 :weight 'normal))
 
   (when (display-graphic-p)
     (color-zenburn))
@@ -1255,7 +1276,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
 ;;(global-set-key (kbd "C-x b")   #'helm-mini)
 ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-(global-set-key (kbd "M-x") #'helm-M-x)
+(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+  (global-set-key (kbd "M-x") #'helm-M-x))
 ;; (global-set-key (kbd "C-x C-f") #'helm-find-files)
 ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
 ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
@@ -1638,7 +1660,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------------
 ;; smartparens
 ;;--------------------------
-(require 'smartparens-config)
+;;(require 'smartparens-config)
 
 ;;--------------------------
 ;; Omnisharp

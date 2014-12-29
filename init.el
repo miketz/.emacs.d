@@ -100,6 +100,7 @@
         color-theme-sanityinc-tomorrow
         ;;sublimity
         nyan-mode
+        nyan-prompt
         ;;powerline
         dired-details
         web-mode

@@ -2582,6 +2582,16 @@ edge cases not covered by buffer killing."
 
 ;;    (t (+ hour 12))))
 
+;; (defun to12 (hour)
+;;   (cond
+;;    ((= hour 0)
+;;     '(12 . "AM"))
+;;    ((and (> hour 0) (< hour 12))
+;;     `(,hour . "AM"))
+;;    ((= hour 12)
+;;     '(12 . "PM"))
+;;    (t `(,(- hour 12) . "PM"))))
+
 ;; (progn ;;test it
 ;;   (assert (= 0 (to24 12 "AM")))
 ;;   (assert (= 1 (to24 1 "AM")))

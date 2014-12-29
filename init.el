@@ -1288,7 +1288,10 @@ This prevents overlapping themes; something I would rarely want."
 (require 'helm-cmd-t)
 ;;(helm-adaptative-mode t)
 (require 'helm-swoop)
-(helm-mode 1) ;helm-selection everywhere like when using M-x
+
+(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+  (helm-mode 1) ;helm-selection everywhere like when using M-x
+  )
 
 ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
 ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)

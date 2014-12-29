@@ -2079,7 +2079,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'js2-mode-hook 'skewer-mode)
 (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'html-mode-hook 'skewer-html-mode)
-;;(add-hook 'web-mode-hook 'skewer-html-mode)
+(add-hook 'web-mode-hook 'skewer-html-mode)
 
 (defun my/skewer-repl-clear-buffer ()
   "Deletes the contents of the skewer-reple buffer.
@@ -2100,19 +2100,19 @@ Depends on evil mode."
    (setq show-trailing-whitespace nil)
    (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)))
 
-;;(require 'simple-httpd)
-;; (defun my/skewer-html ()
-;;   "Wire up the html file you're editing with skewer.
-;; Current it does not work."
-;;   (interactive)
-;;   ;;(skewer-html-mode)
-;;   ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
-;;   (setq httpd-root (my/current-folder-path))
-;;   (httpd-start)
-;;   ;; (browse-url-of-file (concat "http://localhost:8080/"
-;;   ;;                             (file-name-nondirectory buffer-file-name)))
-;;   (run-skewer)
-;;   )
+(require 'simple-httpd)
+(defun my/skewer-html ()
+  "Wire up the html file you're editing with skewer."
+  (interactive)
+  ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
+  ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
+  (setq httpd-root (my/current-folder-path))
+  (httpd-start)
+  (browse-url-of-file (concat "http://localhost:8080/"
+                              (file-name-nondirectory buffer-file-name)))
+  (run-skewer)
+  (message "put this in the <head>: <script src=\"http://localhost:8080/skewer\"></script> --- switch to tab http://localhost:8080/FileOrRouteName, then start evaling html"))
+
 ;;-----------------------------------------------------------------------------
 ;; eshell
 ;;-----------------------------------------------------------------------------

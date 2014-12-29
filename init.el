@@ -2370,7 +2370,8 @@ Depends on evil mode."
 ;;show lambdas with the greek symbol
 (when (and (>= emacs-major-version 24)
            (>= emacs-minor-version 4))
-  (global-prettify-symbols-mode 1))
+  (unless (eq my/curr-computer 'raspberry-pi)
+    (global-prettify-symbols-mode 1)))
 
 ;;indent keyword args properly. Use common lisp-style for (if) indendation too?
 ;(setq lisp-indent-function 'common-lisp-indent-function)

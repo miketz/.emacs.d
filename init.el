@@ -86,7 +86,7 @@
         clippy
         yasnippet
         rainbow-delimiters
-        rainbow-mode
+        ;;rainbow-mode
         expand-region
         ;;multiple-cursors
         omnisharp

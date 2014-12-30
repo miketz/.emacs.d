@@ -62,6 +62,7 @@
         ;;evil-surround
         key-chord
         slime
+        ;;sly
         paredit
         ;;smartparens
         redshank
@@ -996,7 +997,8 @@ This prevents overlapping themes; something I would rarely want."
 (setq cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
                       "mint cream" "honeydew" "white smoke" "ghost white"
                       "snow" "alice blue" "lavender"))
-(setq cycle-colors '( "old lace" "floral white" "snow" "ghost white" "white"))
+(setq cycle-colors `( "old lace" "floral white" "snow" "ghost white" "white"
+                      "#F3F1DE"  "#F3F2EA" ,mayan-smoke))
 (setq cycle-index 0)
 (defun my/cycle-light-bg ()
   (interactive)
@@ -1013,8 +1015,8 @@ This prevents overlapping themes; something I would rarely want."
 (progn
   (when (eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
-		 :height 115;'90 105 115 120 125
-		 :weight 'normal))
+                 :height 115;'90 105 115 120 125
+                 :weight 'normal))
 
   (when (display-graphic-p)
     (color-zenburn))
@@ -1047,7 +1049,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; (setq my/use-sly nil)
 
 ;; (when my/use-sly
-;;   (setq inferior-lisp-program "C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64"))
+;;   (when (eq my/curr-computer 'work-laptop)
+;;     (setq inferior-lisp-program "C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64")))
 
 ;;---------------------------------------------
 ;; SLIME
@@ -1602,22 +1605,22 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; rainbow-delimiters
 ;;--------------------------------------------------------------------
 (require 'rainbow-delimiters)
-(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'slime-repl-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'ielm-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook 'rainbow-delimiters-mode)
-(add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'sql-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'sly-mrepl-mode-hook (lambda () (rainbow-delimiters-mode-turn-on)))
-;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-;(global-rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
+(add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
+;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;;(global-rainbow-delimiters-mode)
 
 ;;--------------------------------------------------------------------
 ;; rainbow-mode
 ;;--------------------------------------------------------------------
-;(rainbow-mode)
+;;(rainbow-mode)
 
 ;;--------------------------------------------------------------------
 ;; Expand-region

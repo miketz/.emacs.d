@@ -1,0 +1,12 @@
+# -*- try/catch/finally -*-
+# name: try/catch/finally
+# key: try
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+try {
+    $0
+} catch(e) {
+    console.log(e);
+} finally {
+    /* clean up */;
+}

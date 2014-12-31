@@ -1089,6 +1089,9 @@ This prevents overlapping themes; something I would rarely want."
             ;;there's always a trailing space at repl prompt. Don't highlight it. 
             (setq show-trailing-whitespace nil)))
 
+;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+(evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+
 (when (eq my/curr-computer 'work-laptop)
   ;; use local hyperspec
   (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
@@ -1199,6 +1202,26 @@ This prevents overlapping themes; something I would rarely want."
 ;;-------------------------
 ;; (add-to-list 'load-path "~/.emacs.d/notElpa/")
 ;; (require 'js2-highlight-vars)
+
+;;-------------------------
+;; align-let.el
+;;-------------------------
+;;(load "~/.emacs.d/notElpa/align-let.el")
+(add-to-list 'load-path "~/.emacs.d/notElpa/")
+(autoload 'align-let "align-let" nil t)
+
+(let ((key (kbd "C-c C-a")))
+  (define-key lisp-mode-map key #'align-let)
+  (define-key emacs-lisp-mode-map key #'align-let))
+
+;; (let ((abadf 333)
+;;       (x     222)
+;;       (yy    44)))
+
+;; (setq aaaaaaaaaaaaa 2
+;;       b             3
+;;       cc            433
+;;       d             "hello there")
 
 ;;---------------------------------------------
 ;; js2-mode
@@ -1619,7 +1642,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
 (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
+;;(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)
 
@@ -1655,7 +1678,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
+;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
 (add-hook 'sql-mode-hook #'enable-paredit-mode)
 ;; Stop SLIME's REPL from grabbing DEL,
 ;; which is annoying when backspacing over a '('
@@ -2236,7 +2259,7 @@ Depends on evil mode."
 (add-hook 'css-mode-hook #'aggressive-indent-mode)
 (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
 (add-hook 'js2-mode-hook #'aggressive-indent-mode)
-
+(add-hook 'slime-repl-mode-hook #'aggressive-indent-mode)
 ;;(global-aggressive-indent-mode 1)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)

@@ -403,7 +403,8 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;----------------------------------
 ;; font
 ;;----------------------------------
-(when (eq my/curr-computer 'work-laptop)
+(when (or (eq my/curr-computer 'work-laptop)
+          (eq my/curr-computer 'a-laptop-faster))
   ;; configure default settings for fonts.
   (setq my/default-font 'consolas
         my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
@@ -1013,10 +1014,15 @@ This prevents overlapping themes; something I would rarely want."
 
 ;;theme of the week and corresponding settings. This may change often.
 (progn
-  (when (eq my/curr-computer 'work-laptop)
+  (cond
+   ((eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
                  :height 115;'90 105 115 120 125
                  :weight 'normal))
+   ((eq my/curr-computer 'a-laptop-faster)
+    (my/set-font :sym 'consolas
+                 :height 90
+                 :weight 'normal)))
 
   (when (display-graphic-p)
     (color-zenburn))

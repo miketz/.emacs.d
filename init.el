@@ -24,6 +24,76 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
+;;--------------------------------------------------------------------
+;; Helper functions and macros
+;;--------------------------------------------------------------------
+(defmacro not-m (bool)
+  "Similar to the not function. But...
+It must operate on a variable (not a value)
+It mutates `bool' to the opposite value.
+Useful to check a boolean state and toggle the state in 1 go."
+  `(setq ,bool (not ,bool)))
+
+(defmacro my/letify-alist (alist &rest body)
+  ;; destructuring macro found by inspecting Bozhidar Batsov's zenburn color theme.
+  ;; example usage:
+  ;; (my/letify-alist ((red . "#FF0000")
+  ;;                   (green . "#00FF00")
+  ;;                   (blue . "#0000FF"))
+  ;;   (print red)
+  ;;   (print green)
+  ;;   (print blue))
+  "Converts the keys of an alist to variables."
+  (declare (indent defun))
+  `(let (,@(mapcar (lambda (cell)
+                     (list (car cell) (cdr cell)))
+                   alist)) ;TODO make alist work for a variable passed in.
+     ,@body))
+
+
+(defun my/alst-get-keys (lst)
+  (mapcar 'car lst))
+(defun my/alst-get-values (lst)
+  (mapcar 'cdr lst))
+
+(defun my/alst-print-keys (lst)
+  (mapc #'(lambda (key)
+            (insert (symbol-name key)) ;key must be a symbol
+            (insert "\n"))
+        (my/alst-get-keys lst)))
+
+(defun my/getAtIndex (i lst)
+  (cond
+   ((null lst) nil)
+   ((= i 0) (car lst))
+   (t (my/getAtIndex (- i 1) (cdr lst)))))
+
+(defun my/str-ends-with-p (string suffix)
+  "Return t if STRING ends with SUFFIX."
+  (and (string-match (rx-to-string `(: ,suffix eos) t)
+                     string)
+       t))
+
+(defun my/str-starts-with-p (string prefix)
+  "Return t if STRING starts with prefix."
+  (and (string-match (rx-to-string `(: bos ,prefix) t)
+                     string)
+       t))
+
+(defun my/str-replace (what with in)
+  (replace-regexp-in-string (regexp-quote what) with in))
+
+(defun my/get-string-from-file (filePath)
+  "Return filePath's file content."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+
+(defun my/read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
 
 ;;----------------------------------
 ;; flags used for conditional execution
@@ -31,10 +101,10 @@
 ;; (display-graphic-p)
 ;; system-type
 ;; my/curr-computer
-;; my/run-sys-specific ;;deprecated in favor of my/curr-computer
 
 ;; Keeping track of the various computers I use emacs on.
-(setq my/computers '(work-laptop
+(setq my/computers '(unknown ;if my-curr-computer.txt does not exist to identify the machine.
+                     work-laptop
                      raspberry-pi
                      utilite
                      old-sony-vaio
@@ -44,7 +114,13 @@
                      leyna-laptop))
 ;; currently used computer. (manually set)
 ;; Used to conditionally set computer specific options, and paths.
-(setq my/curr-computer 'work-laptop)
+;; NOTE: When setting up emacs on a new computer create file ~/.emacs.d/my-curr-computer.txt
+;; Then type the name of the symbol (see `my/computers') in the text file.
+;; The file should contain 1 line and no whitespace. The text will be converted to a symbol.
+(let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
+  (if (file-exists-p curr-comp-file)
+      (setq my/curr-computer (intern (my/get-string-from-file curr-comp-file)))
+    (setq my/curr-computer 'unknown)))
 
 ;; TODO: look into a way to use auto-complete for some modes and company for others.
 
@@ -159,65 +235,6 @@
                          (package-installed-p x)))
                   (mapcar 'car package-archive-contents))))
 
-
-;;--------------------------------------------------------------------
-;; Helper functions and macros
-;;--------------------------------------------------------------------
-(defmacro not-m (bool)
-  "Similar to the not function. But...
-It must operate on a variable (not a value)
-It mutates `bool' to the opposite value.
-Useful to check a boolean state and toggle the state in 1 go."
-  `(setq ,bool (not ,bool)))
-
-(defmacro my/letify-alist (alist &rest body)
-  ;; destructuring macro found by inspecting Bozhidar Batsov's zenburn color theme.
-  ;; example usage:
-  ;; (my/letify-alist ((red . "#FF0000")
-  ;;                   (green . "#00FF00")
-  ;;                   (blue . "#0000FF"))
-  ;;   (print red)
-  ;;   (print green)
-  ;;   (print blue))
-  "Converts the keys of an alist to variables."
-  (declare (indent defun))
-  `(let (,@(mapcar (lambda (cell)
-                     (list (car cell) (cdr cell)))
-                   alist)) ;TODO make alist work for a variable passed in.
-     ,@body))
-
-
-(defun my/alst-get-keys (lst)
-  (mapcar 'car lst))
-(defun my/alst-get-values (lst)
-  (mapcar 'cdr lst))
-
-(defun my/alst-print-keys (lst)
- (mapc #'(lambda (key)
-             (insert (symbol-name key)) ;key must be a symbol
-             (insert "\n"))
-         (my/alst-get-keys lst)))
-
-(defun my/getAtIndex (i lst)
-  (cond
-   ((null lst) nil)
-   ((= i 0) (car lst))
-   (t (my/getAtIndex (- i 1) (cdr lst)))))
-
-(defun my/str-ends-with-p (string suffix)
-  "Return t if STRING ends with SUFFIX."
-  (and (string-match (rx-to-string `(: ,suffix eos) t)
-                     string)
-       t))
-
-(defun my/str-starts-with-p (string prefix)
-  "Return t if STRING starts with prefix."
-  (and (string-match (rx-to-string `(: bos ,prefix) t)
-                     string)
-       t))
-
-(defun my/str-replace (what with in)
-  (replace-regexp-in-string (regexp-quote what) with in))
 
 ;;--------------------------------------------------------------------
 ;; w32-send-sys codes. Operating system commands.

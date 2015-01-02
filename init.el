@@ -1212,7 +1212,8 @@ This prevents overlapping themes; something I would rarely want."
 
 (let ((key (kbd "C-c C-a")))
   (define-key lisp-mode-map key #'align-let)
-  (define-key emacs-lisp-mode-map key #'align-let))
+  (define-key emacs-lisp-mode-map key #'align-let)
+  (define-key lisp-interaction-mode-map key #'align-let))
 
 ;; (let ((abadf 333)
 ;;       (x     222)
@@ -2287,13 +2288,13 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 (require 'leerzeichen)
 ;;(leerzeichen-mode)
-(custom-set-faces
- '(leerzeichen ((t (:foreground "black";"#A8A800"
-                                :background "white";"#D4D4C8"
-                                :italic nil
-                                :bold nil
-                                ;;:box t
-                                )))))
+;; (custom-set-faces
+;;  '(leerzeichen ((t (:foreground "black";"#A8A800"
+;;                                 :background "white";"#D4D4C8"
+;;                                 :italic nil
+;;                                 :bold nil
+;;                                 ;;:box t
+;;                                 )))))
 
 ;;-----------------------------------------------------------------------------
 ;; sql-indent

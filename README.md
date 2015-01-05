@@ -21,3 +21,11 @@ Get latest changes from github:
 Push local changes up to github:
 
     git push origin master
+
+Revert changes to modified files.
+
+    git reset --hard
+
+Remove all untracked files and directories.
+
+    git clean -fd

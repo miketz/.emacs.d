@@ -2531,6 +2531,11 @@ edge cases not covered by buffer killing."
 
 (evil-leader/set-key "0" 'square-one)
 
+
+(when (eq system-type 'gnu/linux) ;`server-start' doesn't seemt to work on MS-windows?
+  (server-start))
+
+
 ;; (defun eval-prev ()
 ;;   "Evaluates the previous Sexp and inserts at point.
 ;; Searches backward to the last ) to find the prev."

@@ -101,6 +101,51 @@ Useful to check a boolean state and toggle the state in 1 go."
     (insert-file-contents filePath)
     (split-string (buffer-string) "\n" t)))
 
+(progn ;;functions to redraw a list as 2-d
+  (defun my/get-longest-sym (lst)
+    "returns length of the longest symbol name"
+    (apply #'max
+           (mapcar #'length
+                   (mapcar #'symbol-name
+                           lst))))
+
+  (defun my/get-1d-index (lst-len rows cols r c)
+    (/ lst-len rows)
+    )
+
+
+  (defun my/render-lst (lst cols)
+    "draws a 1 d list of symbols in a 2d format with N cols.
+TODO: adjust so only 1 space is between the closest part of the columns. Took the easy
+way out using a big length that works everywhere.
+TODO: draw top->bottom instead of left-> right."
+    (let* ((len     (length lst))
+           (rows    (+ (floor (/ len cols))
+                       (if (> (mod len cols) 0) 1 0)))
+           (longest (my/get-longest lst))
+           (r       0))
+      (insert "(")
+      (while (< r rows)
+        (let ((c 0))
+          (while (< c cols)
+            (let ((index-1d (+ (* r cols)
+                               c)))
+              ;;draw col
+              (when (< index-1d len) ;don't fill in nil on the last row.
+                (let* ((val (symbol-name (nth index-1d lst)))
+                       (rem (- longest (length val)))
+                       (i   0))
+                  (insert val)
+                  (when (and (< c (- cols 1))
+                             (< index-1d (- len 1))) ;prevent trailing white space
+                    (while (< i (+ rem 1))
+                      (insert " ")
+                      (incf i)))))
+              (incf c))))
+        (when (< r (- rows 1)) ;prevent trailing \n
+          (insert "\n"))
+        (incf r))
+      (insert ")"))))
 ;;----------------------------------
 ;; flags used for conditional execution
 ;;----------------------------------

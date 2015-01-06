@@ -109,10 +109,39 @@ Useful to check a boolean state and toggle the state in 1 go."
                    (mapcar #'symbol-name
                            lst))))
 
-  (defun my/get-1d-index (lst-len rows cols r c)
-    (/ lst-len rows)
-    )
+  (defun my/index-1d (c r cols)
+    "returns a 1-D index"
+    (+ (* r cols)
+       c))
 
+  (defun my/index-column (i cols)
+    "returns the column the 1-D index falls under for N cols"
+    (let* ((r (floor (/ i cols)))
+           (c (- i (* r cols))))
+      c))
+
+  (defun my/get-columns (lst cols)
+    "returns a list-of-lists. A list for each column from the 1-D lst.
+'((a d j) (b e h) (c f q) (n n))"
+    (let ((len            (length lst))
+          (lst-of-columns nil) ;the goal
+          (c              0))
+      (while (< c cols)
+        (let ((column nil)
+              (i      0))
+          (while (< i len)
+            (when (= c (my/index-column i cols)) ;;when at an an item falling in column c
+              (setq column (append column (list (nth i lst)))))
+            (incf i))
+          (setq lst-of-columns (cons column lst-of-columns)))
+        (incf c))
+      (reverse lst-of-columns)))
+
+  (defun my/get-longest-forEachCol (lst cols)
+    "gets the longest length for each column. '(l l l l l)"
+    (mapcar #'(lambda (column)
+                (my/get-longest-sym column))
+            (my/get-columns lst cols)))
 
   (defun my/render-lst (lst cols)
     "draws a 1 d list of symbols in a 2d format with N cols.

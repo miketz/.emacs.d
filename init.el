@@ -276,6 +276,7 @@ TODO: draw top->bottom instead of left-> right."
         leerzeichen
         sql-indent
         darkroom
+        vim-empty-lines-mode
         ))
 
 (require 'package)
@@ -2409,6 +2410,11 @@ Depends on evil mode."
 (require 'darkroom)
 (setq darkroom-margins 0.15)
 (setq darkroom-fringes-outside-margins nil) ;;nil keeps margins close to the centered text.
+
+;;-----------------------------------------------------------------------------
+;; vim-empty-lines-mode
+;;-----------------------------------------------------------------------------
+;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
 
 ;;-----------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

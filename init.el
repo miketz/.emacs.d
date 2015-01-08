@@ -109,13 +109,19 @@ Useful to check a boolean state and toggle the state in 1 go."
                    (mapcar #'symbol-name
                            lst))))
 
-  (defun my/index-1d (c r cols)
-    "returns a 1-D index"
-    (+ (* r cols)
-       c))
+  ;; (defun my/index-1d (c r cols)
+  ;;   "returns a 1-D index"
+  ;;   (+ (* r cols)
+  ;;      c))
 
-  (defun my/index-column (i cols)
-    "returns the column the 1-D index falls under for N cols"
+  (defun my/index-column (i cols) ;;BUG!!!! it's returning the index-row (assuming veritcal drawing)
+    "returns the column the 1-D index falls under for N cols (and vertical layout)"
+    (let* ((r (floor (/ i cols)))
+           (c (- i (* r cols))))
+      c))
+
+  (defun my/index-row (i cols)
+    "returns the row the 1-D index falls under for N cols (and vertical layout)"
     (let* ((r (floor (/ i cols)))
            (c (- i (* r cols))))
       c))
@@ -136,6 +142,28 @@ Useful to check a boolean state and toggle the state in 1 go."
           (setq lst-of-columns (cons column lst-of-columns)))
         (incf c))
       (reverse lst-of-columns)))
+
+  (defun my/get-rows (lst cols)
+    "returns a list-of-lists. A list for each row from the 1-D lst.
+Assums a vertically stacked list.
+(my/get-rows '(a b c d e f g) 3)
+=>
+((a d g)
+ (b e)
+ (c f))"
+  (let ((len            (length lst))
+        (lst-of-rows nil) ;the goal
+        (c              0))
+    (while (< c cols)
+      (let ((row nil)
+            (i      0))
+        (while (< i len)
+          (when (= c (my/index-column i cols)) ;;when at an an item falling in column c
+            (setq row (append row (list (nth i lst)))))
+          (incf i))
+        (setq lst-of-rows (cons row lst-of-rows)))
+      (incf c))
+    (reverse lst-of-rows)))
 
   (defun my/get-longest-forEachCol (lst cols)
     "gets the longest length for each column. '(l l l l l)"

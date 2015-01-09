@@ -1208,8 +1208,7 @@ This prevents overlapping themes; something I would rarely want."
                                        (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
   (when (eq my/curr-computer 'utilite)
     (setq slime-default-lisp 'ccl
-          slime-lisp-implementations '((ccl ("armcl"))
-                                       (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
+          slime-lisp-implementations '((ccl ("armcl")))))
 
   ;; (when (eq my/curr-computer 'a-laptop-faster)
   ;;   (setq slime-default-lisp 'sbcl

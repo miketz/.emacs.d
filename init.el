@@ -102,29 +102,29 @@ Useful to check a boolean state and toggle the state in 1 go."
     (split-string (buffer-string) "\n" t)))
 
 (progn ;;functions to redraw a list as 2-d
-  (defun my/get-longest-sym (lst)
+
+  (defun my/get-longest-sym (lst) ;PASS
     "returns length of the longest symbol name"
     (apply #'max
            (mapcar #'length
                    (mapcar #'symbol-name
                            lst))))
 
-  ;; (defun my/index-1d (c r cols)
-  ;;   "returns a 1-D index"
-  ;;   (+ (* r cols)
-  ;;      c))
+  (defun my/index-1d (r c cols) ;PASS
+    "returns a 1-D index"
+    (+ (* r cols)
+       c))
 
-  (defun my/index-column (i cols) ;;BUG!!!! it's returning the index-row (assuming veritcal drawing)
+  (defun my/index-column (i cols) ;PASS
     "returns the column the 1-D index falls under for N cols (and vertical layout)"
-    (let* ((r (floor (/ i cols)))
-           (c (- i (* r cols))))
-      c))
+    (floor (/ i cols)))
 
-  (defun my/index-row (i cols)
+  (defun my/index-row (i cols) ;PASS
     "returns the row the 1-D index falls under for N cols (and vertical layout)"
-    (let* ((r (floor (/ i cols)))
-           (c (- i (* r cols))))
-      c))
+    (let* ((c (floor (/ i cols)))
+           (r (- i (* c cols))))
+      r))
+
 
   (defun my/get-columns (lst cols) ;;BUG!!! this should be called my/get-rows !!!
     "returns a list-of-lists. A list for each column from the 1-D lst.
@@ -143,7 +143,7 @@ Useful to check a boolean state and toggle the state in 1 go."
         (incf c))
       (reverse lst-of-columns)))
 
-  (defun my/get-rows (lst cols)
+  (defun my/get-rows (lst cols) ;;TEST
     "returns a list-of-lists. A list for each row from the 1-D lst.
 Assums a vertically stacked list.
 (my/get-rows '(a b c d e f g) 3)
@@ -165,44 +165,69 @@ Assums a vertically stacked list.
       (incf c))
     (reverse lst-of-rows)))
 
-  (defun my/get-longest-forEachCol (lst cols)
+  (defun my/get-longest-forEachCol (lst cols) ;;TEST
     "gets the longest length for each column. '(l l l l l)"
     (mapcar #'(lambda (column)
                 (my/get-longest-sym column))
             (my/get-columns lst cols)))
 
-  (defun my/render-lst (lst cols)
-    "draws a 1 d list of symbols in a 2d format with N cols.
+(defun render-lst2 (lst num-cols) ;;IMPLEMENT
+  (let* ((num-cols            (* 1.0 num-cols)) ;; make decimal for easier to read math (no * -1.0)
+         (len                 (length lst))
+         (num-rows            (ceiling (/ len num-cols))) ;not used, but nice to see the formula.
+         (one-D-indexes       (let ((i 0)
+                                    (s nil))
+                                (dolist (x lst)
+                                  (setq s (cons i s))
+                                  (incf i))
+                                (reverse s)))
+         (drawing-col-indexes (cl-mapcar (lambda (i)
+                                           (floor (/ i num-cols)))
+                                         one-D-indexes))
+         (drawing-row-indexes (cl-mapcar (lambda (i c)
+                                           (floor(- i (* c num-cols))))
+                                         one-D-indexes
+                                         drawing-col-indexes))
+         (longest-per-col ()))
+    (insert "(")
+    (let (i 0)
+      (dolist (x lst)
+        (let ())
+        (incf i)))
+    (insert ")")))
+
+(defun my/render-lst (lst cols) ;;DEPRECATE OR REDO
+  "draws a 1 d list of symbols in a 2d format with N cols.
 TODO: adjust so only 1 space is between the closest part of the columns. Took the easy
 way out using a big length that works everywhere.
 TODO: draw top->bottom instead of left-> right."
-    (let* ((len     (length lst))
-           (rows    (+ (floor (/ len cols))
-                       (if (> (mod len cols) 0) 1 0)))
-           (longest (my/get-longest lst))
-           (r       0))
-      (insert "(")
-      (while (< r rows)
-        (let ((c 0))
-          (while (< c cols)
-            (let ((index-1d (+ (* r cols)
-                               c)))
-              ;;draw col
-              (when (< index-1d len) ;don't fill in nil on the last row.
-                (let* ((val (symbol-name (nth index-1d lst)))
-                       (rem (- longest (length val)))
-                       (i   0))
-                  (insert val)
-                  (when (and (< c (- cols 1))
-                             (< index-1d (- len 1))) ;prevent trailing white space
-                    (while (< i (+ rem 1))
-                      (insert " ")
-                      (incf i)))))
-              (incf c))))
-        (when (< r (- rows 1)) ;prevent trailing \n
-          (insert "\n"))
-        (incf r))
-      (insert ")"))))
+  (let* ((len     (length lst))
+         (rows    (+ (floor (/ len cols))
+                     (if (> (mod len cols) 0) 1 0)))
+         (longest (my/get-longest lst))
+         (r       0))
+    (insert "(")
+    (while (< r rows)
+      (let ((c 0))
+        (while (< c cols)
+          (let ((index-1d (+ (* r cols)
+                             c)))
+            ;;draw col
+            (when (< index-1d len) ;don't fill in nil on the last row.
+              (let* ((val (symbol-name (nth index-1d lst)))
+                     (rem (- longest (length val)))
+                     (i   0))
+                (insert val)
+                (when (and (< c (- cols 1))
+                           (< index-1d (- len 1))) ;prevent trailing white space
+                  (while (< i (+ rem 1))
+                    (insert " ")
+                    (incf i)))))
+            (incf c))))
+      (when (< r (- rows 1)) ;prevent trailing \n
+        (insert "\n"))
+      (incf r))
+    (insert ")"))))
 ;;----------------------------------
 ;; flags used for conditional execution
 ;;----------------------------------

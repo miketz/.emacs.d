@@ -533,8 +533,7 @@ TODO: draw top->bottom instead of left-> right."
 ;;----------------------------------
 ;; font
 ;;----------------------------------
-(when (or (eq my/curr-computer 'work-laptop)
-          (eq my/curr-computer 'a-laptop-faster))
+(when (eq my/curr-computer 'work-laptop)
   ;; configure default settings for fonts.
   (setq my/default-font 'consolas
         my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
@@ -1148,10 +1147,6 @@ This prevents overlapping themes; something I would rarely want."
    ((eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
                  :height 115;'90 105 115 120 125
-                 :weight 'normal))
-   ((eq my/curr-computer 'a-laptop-faster)
-    (my/set-font :sym 'consolas
-                 :height 90
                  :weight 'normal)))
 
   (when (display-graphic-p)
@@ -1175,7 +1170,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; Recursively byte-compile every .el file
 ;;---------------------------------------------
-                                        ;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 
 
@@ -1214,7 +1209,12 @@ This prevents overlapping themes; something I would rarely want."
   (when (eq my/curr-computer 'utilite)
     (setq slime-default-lisp 'ccl
           slime-lisp-implementations '((ccl ("armcl"))
-                                       (clisp ("~/path/to/clisp-2.49/clisp" "-modern"))))))
+                                       (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
+
+  ;; (when (eq my/curr-computer 'a-laptop-faster)
+  ;;   (setq slime-default-lisp 'sbcl
+  ;;         slime-lisp-implementations '((sbcl ("sbcl")))))
+  )
 
 (add-hook 'slime-repl-mode-hook
           (lambda ()

@@ -2685,7 +2685,8 @@ edge cases not covered by buffer killing."
 (evil-leader/set-key "0" 'square-one)
 
 
-(when (eq system-type 'gnu/linux) ;`server-start' doesn't seemt to work on MS-windows?
+(when (and nil ;don't start server for now.
+           (eq system-type 'gnu/linux)) ;`server-start' doesn't seemt to work on MS-windows?
   (server-start))
 
 

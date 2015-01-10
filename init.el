@@ -1235,9 +1235,9 @@ This prevents overlapping themes; something I would rarely want."
     (setq slime-default-lisp 'ccl
           slime-lisp-implementations '((ccl ("armcl")))))
 
-  ;; (when (eq my/curr-computer 'a-laptop-faster)
-  ;;   (setq slime-default-lisp 'sbcl
-  ;;         slime-lisp-implementations '((sbcl ("sbcl")))))
+  (when (eq my/curr-computer 'a-laptop-faster)
+    (setq slime-default-lisp 'sbcl
+          slime-lisp-implementations '((sbcl ("/usr/bin/sbcl")))))
   )
 
 (add-hook 'slime-repl-mode-hook
@@ -1331,6 +1331,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (eval-after-load "auto-complete"
 ;;     '(add-to-list 'ac-modes 'slime-repl-mode))
 ;;   )
+
+;;--------------------------------------------------
+;; turn on lisp-mode when editing file .stumpwmrc
+;;--------------------------------------------------
+(add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
 ;;---------------------------------------------
 ;; Org mode

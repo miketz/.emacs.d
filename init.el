@@ -625,14 +625,6 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
    ;; If there is more than one, they won't work right.
    '(default ((t (:family "Fixed" :foundry "Misc" :slant normal :weight normal :height 150 :width normal))))))
 
-(when (eq my/curr-computer 'a-laptop-faster)
-  (custom-set-faces
-   '(default ((t (:family "Inconsolata"
-                          :foundry "unknown"
-                          :slant normal
-                          :weight normal
-                          :height 128
-                          :width normal))))))
 
 ;;----------------------------------
 ;; cursor
@@ -1180,10 +1172,21 @@ This prevents overlapping themes; something I would rarely want."
    ((eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
                  :height 115;'90 105 115 120 125
-                 :weight 'normal)))
+                 :weight 'normal)
+    (when (display-graphic-p)
+      (color-zenburn)))
 
-  (when (display-graphic-p)
-    (color-zenburn))
+   ((eq my/curr-computer 'a-laptop-faster)
+    (custom-set-faces
+     '(default ((t (:family "Inconsolata"
+                            :foundry "unknown"
+                            :slant normal
+                            :weight normal
+                            :height 128
+                            :width normal)))))
+    (when (display-graphic-p)
+      (color-monokai))))
+
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
@@ -1229,7 +1232,7 @@ This prevents overlapping themes; something I would rarely want."
                     slime-indentation))
      (setq slime-complete-symbol*-fancy t)
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-                                        ;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
+     ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
      (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition);override evil's binding of M-. when using slime
      ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
      (setq slime-header-line-p nil)))
@@ -1246,13 +1249,22 @@ This prevents overlapping themes; something I would rarely want."
   (when (eq my/curr-computer 'a-laptop-faster)
     (setq slime-default-lisp 'sbcl
           slime-lisp-implementations '((sbcl ("/usr/bin/sbcl")))))
-  )
+
+  ;; when on a computer with SLIME set up
+  (when (or (eq my/curr-computer 'work-laptop)
+            (eq my/curr-computer 'utilite)
+            (eq my/curr-computer 'a-laptop-faster))
+    ;; connect lisp buffers to SLIME automatically.
+    (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought woudl need to be hooked on lisp-mode-hook???
+              (lambda ()
+                (unless (slime-connected-p)
+                  (save-excursion (slime)))))))
 
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             ;;turn off line numbers in the repl
             (linum-mode 0)
-            ;;there's always a trailing space at repl prompt. Don't highlight it. 
+            ;;there's always a trailing space at repl prompt. Don't highlight it.
             (setq show-trailing-whitespace nil)))
 
 ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)

@@ -1055,6 +1055,7 @@ This prevents overlapping themes; something I would rarely want."
    ;;                    :background "#222222"
    ;;                    :box (:line-width -1 :style pressed-button)))))
 
+
    ;; '(js2-error
    ;;   ((t (:foreground "red"
    ;;                    :underline t))))

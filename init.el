@@ -1183,7 +1183,7 @@ This prevents overlapping themes; something I would rarely want."
                             :foundry "unknown"
                             :slant normal
                             :weight normal
-                            :height 128
+                            :height 155
                             :width normal)))))
     (when (display-graphic-p)
       (color-monokai))))
@@ -2510,6 +2510,11 @@ Depends on evil mode."
   (global-set-key (kbd "M-j") #'evil-window-down)
   (global-set-key (kbd "M-k") #'evil-window-up)
   (global-set-key (kbd "M-l") #'evil-window-right))
+
+;; cycle the buffers really fast
+(global-set-key (kbd "M-n") #'next-buffer)
+(global-set-key (kbd "M-p") #'previous-buffer)
+
 
 (cond
  ((eq my/curr-computer 'work-laptop)

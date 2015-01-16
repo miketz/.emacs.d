@@ -491,24 +491,26 @@ TODO: draw top->bottom instead of left-> right."
 ;;evalate lisp expression. Insert result on a new line.
 ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
 
-;; (evil-leader/set-key "e" (lambda ()
-;;                            (interactive)
-;;                            (save-excursion ;don't move the point
-;;                             (evil-append 1)
-;;                             (default-indent-new-line)
-;;                             (eval-last-sexp t) ;t to insert result in buffer.
-;;                             (evil-normal-state))))
-
 (defun my/eval-last-sexp ()
   (interactive)
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
 
-
-(evil-leader/set-key "e" (lambda ()
-                           (interactive)
-                                        ;(clippy-say (my/eval-last-sexp))
-                           (pos-tip-show (my/eval-last-sexp))))
+(if (display-graphic-p)
+    (progn
+      (require 'pos-tip)
+      (evil-leader/set-key "e" (lambda ()
+                                 (interactive)
+                                 ;;(clippy-say (my/eval-last-sexp))
+                                 (pos-tip-show (my/eval-last-sexp)))))
+  (progn
+    (evil-leader/set-key "e" (lambda ()
+                               (interactive)
+                               (save-excursion ;don't move the point
+                                 (evil-append 1)
+                                 (default-indent-new-line)
+                                 (eval-last-sexp t) ;t to insert result in buffer.
+                                 (evil-normal-state))))))
 
 
 (evil-leader/set-key "r" (lambda ()

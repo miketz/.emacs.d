@@ -8,8 +8,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+if object_id('$1', 'P') is not null
+    drop procedure $1;
+GO
 create procedure dbo.${1:/*ProcName*/} (
-    @${2:/*param1Name*/} ${3:/*type*/},
+    @${2:/*param1Name*/} ${3:/*type*/}
 )
 as
 

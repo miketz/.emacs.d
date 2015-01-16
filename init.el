@@ -1823,6 +1823,13 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (require 'dired-details)
 (dired-details-install)
 
+
+
+;;--------------------------------------------------------------------
+;; sql-mode
+;;--------------------------------------------------------------------
+(add-hook 'sql-mode-hook #'electric-pair-mode)
+
 ;;--------------------------------------------------------------------
 ;; rainbow-delimiters
 ;;--------------------------------------------------------------------
@@ -1872,7 +1879,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'sql-mode-hook #'enable-paredit-mode)
+;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 ;; Stop SLIME's REPL from grabbing DEL,
 ;; which is annoying when backspacing over a '('
 (defun override-slime-repl-bindings-with-paredit ()

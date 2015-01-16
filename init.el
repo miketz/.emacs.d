@@ -375,35 +375,36 @@ TODO: draw top->bottom instead of left-> right."
 
 
 ;;--------------------------------------------------------------------
-;; w32-send-sys codes. Operating system commands.
+;; w32-send-sys codes. Operating system commands. MS Windows only.
 ;;--------------------------------------------------------------------
-(setq my/w32-actions
-      '((resize . 61440)
-        (move . 61456)
-        (min . 61472)
-        (max . 61488)
-        (next-window . 61504)
-        (prev-window . 61520)
-        (close-window . 61536)
-        (vert-scroll . 61552)
-        (horizontal-scroll . 61568)
-        (mouse-menu . 61584)
-        (activate-menubar . 61696)
-        (arrange . 61712)
-        (restore-curr-frame . 61728)
-        (simulate-start-btn . 61744)
-        (screen-saver . 61760)
-        (hotkey . 61776)))
-(defun my/w32-get-code (action)
-  "Get the numeric code from the action symbol."
-  (cdr (assoc action my/w32-actions)))
-(defun my/w32-get-action (code)
-  "Get the action symbol from the numeric code."
-  (car (cl-rassoc code my/w32-actions)))
-(defun my/w32-run (action)
-  "Executes a w32 action."
-  (let ((code (my/w32-get-code action)))
-    (w32-send-sys-command code)))
+(when (eq system-type 'windows-nt)
+  (setq my/w32-actions
+        '((resize . 61440)
+          (move . 61456)
+          (min . 61472)
+          (max . 61488)
+          (next-window . 61504)
+          (prev-window . 61520)
+          (close-window . 61536)
+          (vert-scroll . 61552)
+          (horizontal-scroll . 61568)
+          (mouse-menu . 61584)
+          (activate-menubar . 61696)
+          (arrange . 61712)
+          (restore-curr-frame . 61728)
+          (simulate-start-btn . 61744)
+          (screen-saver . 61760)
+          (hotkey . 61776)))
+  (defun my/w32-get-code (action)
+    "Get the numeric code from the action symbol."
+    (cdr (assoc action my/w32-actions)))
+  (defun my/w32-get-action (code)
+    "Get the action symbol from the numeric code."
+    (car (cl-rassoc code my/w32-actions)))
+  (defun my/w32-run (action)
+    "Executes a w32 action."
+    (let ((code (my/w32-get-code action)))
+      (w32-send-sys-command code))))
 ;;--------------------------------------------------------------------
 ;; Evil mode
 ;;--------------------------------------------------------------------
@@ -416,8 +417,7 @@ TODO: draw top->bottom instead of left-> right."
   (setq evil-motion-state-message nil)
   (setq evil-normal-state-message nil)
   (setq evil-operator-state-message nil)
-  (setq evil-replace-state-message nil)
-  )
+  (setq evil-replace-state-message nil))
 
 
 
@@ -479,12 +479,14 @@ TODO: draw top->bottom instead of left-> right."
 ;;                            (enlarge-window 10)))
 
 (setq isFrameMax-my nil) ;goes out of sync if you manually enlarge the window. Just hit <Leader>f a 2cd time to re-sync.
-(evil-leader/set-key "f" (lambda ()
-                           (interactive)
-                           (let ((action (if (not-m isFrameMax-my)
-                                             'max
-                                           'restore-curr-frame)))
-                             (my/w32-run action))))
+
+(when (eq system-type 'windows-nt) ;TODO: look into equivalent resizing for non-Windows machines.
+  (evil-leader/set-key "f" (lambda ()
+                             (interactive)
+                             (let ((action (if (not-m isFrameMax-my)
+                                               'max
+                                             'restore-curr-frame)))
+                               (my/w32-run action)))))
 
 ;;evalate lisp expression. Insert result on a new line.
 ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
@@ -949,9 +951,7 @@ This prevents overlapping themes; something I would rarely want."
    ;;'(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1"))))
    '(rainbow-delimiters-depth-8-face ((t (:foreground "yellow" :background "black"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))
-
-   ))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
 (defun color-github ()
   (interactive)
@@ -995,8 +995,7 @@ This prevents overlapping themes; something I would rarely want."
    `(mode-line-inactive
      ((t (:foreground "dark gray"
                       :background  "#090202";"#051515"
-                      :box (:line-width -1 :style pressed-button)))))
-   ))
+                      :box (:line-width -1 :style pressed-button)))))))
 
 (defun color-gruvbox ()
   (interactive)
@@ -1113,8 +1112,7 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52"))))
    '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca"))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black")))))
-  )
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black"))))))
 
 (defun color-dichromacy ()
   (interactive)
@@ -1256,7 +1254,7 @@ This prevents overlapping themes; something I would rarely want."
             (eq my/curr-computer 'utilite)
             (eq my/curr-computer 'a-laptop-faster))
     ;; connect lisp buffers to SLIME automatically.
-    (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought woudl need to be hooked on lisp-mode-hook???
+    (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
               (lambda ()
                 (unless (slime-connected-p)
                   (save-excursion (slime)))))))
@@ -1437,8 +1435,6 @@ This prevents overlapping themes; something I would rarely want."
             ;;(js2-imenu-extras-mode)
             (electric-pair-mode 1)
             ))
-
-
 
 ;;--------------------
 ;; ac-js2
@@ -1659,6 +1655,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
             (setq default-directory dir))))))
 
 (evil-leader/set-key "g" 'my/vc-git-grep)
+
 ;;--------------------
 ;; helm-swoop
 ;;--------------------
@@ -2162,7 +2159,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                                      :buffer "*Lisp Project*")))
     ;;load project
     (find-file-existing "C:\\Users\\mtz\\scratch\\lisp\\test.lisp")
-                                        ;(dired "C:\\Users\\mtz\\scratch\\lisp")
+    ;;(dired "C:\\Users\\mtz\\scratch\\lisp")
     (slime))
 
   (defun proj-imgtag ()
@@ -2186,7 +2183,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                                                 root_dir_cpp)
                                      :buffer "*Cpp Project*")))
     (dired "C:\\Users\\mtz\\scratch\\cpp")
-                                        ;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
+    ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
     ))
 
 ;;; quick load of the .emacs (or init.el) file.
@@ -2385,7 +2382,7 @@ Depends on evil mode."
 ;;       )
 ;; (setq highlight-tail-posterior-type t) ;(setq highlight-tail-posterior-type 'const)
 ;; (highlight-tail-mode)
-;; ;(highlight-tail-reload)
+;; ;;(highlight-tail-reload)
 
 ;;-----------------------------------------------------------------------------
 ;; eww web-browser
@@ -2641,8 +2638,7 @@ Depends on evil mode."
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
   (setq-default tab-width 4)
-  (setq-default indent-line-function 'insert-tab)
-  )
+  (setq-default indent-line-function 'insert-tab))
 
 (setq make-backup-files nil backup-inhibited t) ;No annoying backup files
 (setq auto-save-default nil) ;No annoying auto-save files
@@ -2652,7 +2648,6 @@ Depends on evil mode."
 
 ;;show trailing whitespace
 (setq-default show-trailing-whitespace t)   
-;(setq-default show-trailing-whitespace t)   
 
 ;;******** whitespace-mode *******
 ;; (require 'whitespace)

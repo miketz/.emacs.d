@@ -479,7 +479,7 @@ TODO: draw top->bottom instead of left-> right."
 ;;                            (interactive)
 ;;                            (enlarge-window 10)))
 
-(setq isFrameMax-my nil) ;goes out of sync if you manually enlarge the window. Just hit <Leader>f a 2cd time to re-sync.
+(setq isFrameMax-my nil) ;can get out of sync. Hit <Leader>f a 2cd time to re-sync.
 
 (when (eq system-type 'windows-nt) ;TODO: look into equivalent resizing for non-Windows machines.
   (evil-leader/set-key "f" (lambda ()
@@ -628,7 +628,8 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(default ((t (:family "Fixed" :foundry "Misc" :slant normal :weight normal :height 150 :width normal))))))
+   '(default ((t (:family "Fixed" :foundry "Misc"
+                          :slant normal :weight normal :height 150 :width normal))))))
 
 
 ;;----------------------------------
@@ -883,14 +884,16 @@ This prevents overlapping themes; something I would rarely want."
    '(js2-function-call ((t :foreground "violet"))) ;;making same as font-lock-function-name-face
    '(js2-warning ((t :underline (:color "yellow" :style wave)
                      :background "navy blue")))
+   ;; colors copied from grandshell-theme.el
    `(mode-line ((t (:foreground  "#eee"
                                  :background  "#331133"
-                                 :box (:line-width -1 :style released-button))))) ;; colors copied from grandshell-theme.el
+                                 :box (:line-width -1 :style released-button))))) 
+   ;;colors copied from grandshell-theme.el
    `(mode-line-inactive ((t (:foreground  "#643"
                                           :background  "#110011"
                                           :weight light
                                           :box (:line-width -1 :style released-button)
-                                          :inherit (mode-line ))))) ;;colors copied from grandshell-theme.el
+                                          :inherit (mode-line )))))
    ))
 
 (defun color-zenburn ()
@@ -962,7 +965,10 @@ This prevents overlapping themes; something I would rarely want."
   (set-background-color "white")
   (custom-theme-set-faces
    'github
-   `(mode-line ((t (:background "grey75" :foreground "black" :box (:line-width -1 :style released-button) :height 1.0))))
+   `(mode-line ((t (:background "grey75"
+                                :foreground "black"
+                                :box (:line-width -1 :style released-button)
+                                :height 1.0))))
    `(ace-jump-face-foreground
      ((t (:foreground "yellow"
                       :background "black"
@@ -1095,9 +1101,11 @@ This prevents overlapping themes; something I would rarely want."
    'leuven
    `(default ((t (:foreground "black" :background ,mayan-smoke))))
    ;;`(default ((t (:foreground "black" :background ,"white"))))
-   `(mode-line ((t (:box (:line-width -1 :color "#1A2F54") :foreground "#85CEEB" :background "#335EA8"
+   `(mode-line ((t (:box (:line-width -1 :color "#1A2F54")
+                         :foreground "#85CEEB" :background "#335EA8"
                          :style released-button))))
-   `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C") :foreground "#F0F0EF" :background "#9B9C97"
+   `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C")
+                                  :foreground "#F0F0EF" :background "#9B9C97"
                                   :style released-button))))
    '(js2-function-call ((t :foreground "blue")))
    '(leerzeichen ((t (:foreground "black";"#A8A800"
@@ -2515,6 +2523,9 @@ Depends on evil mode."
 (add-hook 'prog-mode-hook #'(lambda ()
                               (fci-mode 1)))
 
+;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
+;;TODO: it doesn't seem to be working!
+(setq whitespace-style '(face trailing))   
 
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
@@ -2622,7 +2633,7 @@ Depends on evil mode."
     (global-prettify-symbols-mode 1)))
 
 ;;indent keyword args properly. Use common lisp-style for (if) indendation too?
-;(setq lisp-indent-function 'common-lisp-indent-function)
+;;(setq lisp-indent-function 'common-lisp-indent-function)
 
 (setq inhibit-startup-message t)
 ;;(setq initial-scratch-message ";; Scratch buffer ;;\n\n\n\n")
@@ -2663,7 +2674,7 @@ Depends on evil mode."
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
 
-;;show trailing whitespace
+;;show trailing whitespace.
 (setq-default show-trailing-whitespace t)   
 
 ;;******** whitespace-mode *******

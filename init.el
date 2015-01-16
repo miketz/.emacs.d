@@ -330,7 +330,8 @@ TODO: draw top->bottom instead of left-> right."
         sql-indent
         darkroom
         ;;vim-empty-lines-mode
-        ))
+        fill-column-indicator))
+
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
 
@@ -2501,9 +2502,23 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
 
-;;-----------------------------------------------------------------------------
+;;-------------------------------------------------------------------------------
+;; fill-column-indicator
+;;-------------------------------------------------------------------------------
+(require 'fill-column-indicator)
+(setq fci-rule-column 101)
+(setq fci-rule-width 1)
+(progn
+  (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
+  (setq fci-rule-use-dashes t))
+(setq fci-rule-color "#555555")
+(add-hook 'prog-mode-hook #'(lambda ()
+                              (fci-mode 1)))
+
+
+;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
-;;-----------------------------------------------------------------------------
+;;-------------------------------------------------------------------------------
 (progn ;;window navigation.
   (global-set-key (kbd "M-h") #'evil-window-left)
   (global-set-key (kbd "M-j") #'evil-window-down)
@@ -2656,7 +2671,7 @@ Depends on evil mode."
 ;; (setq whitespace-line-column 104)
 ;; (setq whitespace-style '(face lines-tail))
 ;; (global-whitespace-mode nil)
-;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ;;disable annoying newline emacs automatically adds to the end of a file when saving.
 (setq require-final-newline nil)

@@ -2513,19 +2513,19 @@ Depends on evil mode."
 ;;-------------------------------------------------------------------------------
 ;; fill-column-indicator
 ;;-------------------------------------------------------------------------------
-(require 'fill-column-indicator)
-(setq fci-rule-column 101)
-(setq fci-rule-width 1)
-(progn
-  (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
-  (setq fci-rule-use-dashes t))
-(setq fci-rule-color "#555555")
-(add-hook 'prog-mode-hook #'(lambda ()
-                              (fci-mode 1)))
+;; (require 'fill-column-indicator)
+;; (setq fci-rule-column 101)
+;; (setq fci-rule-width 1)
+;; (progn
+;;   (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
+;;   (setq fci-rule-use-dashes t))
+;; (setq fci-rule-color "#555555")
+;; (add-hook 'prog-mode-hook #'(lambda ()
+;;                               (fci-mode 1)))
 
-;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
-;;TODO: it doesn't seem to be working!
-(setq whitespace-style '(face trailing))   
+;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
+;; ;;TODO: it doesn't seem to be working!
+;; (setq whitespace-style '(face trailing))   
 
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

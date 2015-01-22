@@ -1237,7 +1237,7 @@ This prevents overlapping themes; something I would rarely want."
 (eval-after-load "slime"
   '(progn
      (slime-setup '(slime-fancy
-                    ;;slime-company
+                    slime-company
                     slime-banner
                     slime-indentation))
      (setq slime-complete-symbol*-fancy t)
@@ -1316,7 +1316,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; slime-company
 ;;---------------------------------------------
-                                        ; this is set in the slime section
+;; this is set in the slime section
 
 ;;---------------------------------------------
 ;; Auto-complete

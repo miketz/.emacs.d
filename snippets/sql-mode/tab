@@ -3,10 +3,13 @@
 # key: tab
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-create table dbo.${1:/*Tab*/} (
-    ID bigint identity(1,1) not null,
-    $2$0
+if object_id('dbo.$1', 'U') is null
+begin
+    create table dbo.${1:/*Tab*/} (
+        ID bigint identity(1,1) not null,
+        $2$0
 
-    CONSTRAINT PK_$1 primary key clustered (ID asc)
-);
+        CONSTRAINT PK_$1 primary key clustered (ID asc)
+    );
+end
 GO

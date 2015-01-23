@@ -330,7 +330,8 @@ TODO: draw top->bottom instead of left-> right."
         sql-indent
         darkroom
         ;;vim-empty-lines-mode
-        ))
+        fill-column-indicator))
+
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
 
@@ -375,35 +376,36 @@ TODO: draw top->bottom instead of left-> right."
 
 
 ;;--------------------------------------------------------------------
-;; w32-send-sys codes. Operating system commands.
+;; w32-send-sys codes. Operating system commands. MS Windows only.
 ;;--------------------------------------------------------------------
-(setq my/w32-actions
-      '((resize . 61440)
-        (move . 61456)
-        (min . 61472)
-        (max . 61488)
-        (next-window . 61504)
-        (prev-window . 61520)
-        (close-window . 61536)
-        (vert-scroll . 61552)
-        (horizontal-scroll . 61568)
-        (mouse-menu . 61584)
-        (activate-menubar . 61696)
-        (arrange . 61712)
-        (restore-curr-frame . 61728)
-        (simulate-start-btn . 61744)
-        (screen-saver . 61760)
-        (hotkey . 61776)))
-(defun my/w32-get-code (action)
-  "Get the numeric code from the action symbol."
-  (cdr (assoc action my/w32-actions)))
-(defun my/w32-get-action (code)
-  "Get the action symbol from the numeric code."
-  (car (cl-rassoc code my/w32-actions)))
-(defun my/w32-run (action)
-  "Executes a w32 action."
-  (let ((code (my/w32-get-code action)))
-    (w32-send-sys-command code)))
+(when (eq system-type 'windows-nt)
+  (setq my/w32-actions
+        '((resize . 61440)
+          (move . 61456)
+          (min . 61472)
+          (max . 61488)
+          (next-window . 61504)
+          (prev-window . 61520)
+          (close-window . 61536)
+          (vert-scroll . 61552)
+          (horizontal-scroll . 61568)
+          (mouse-menu . 61584)
+          (activate-menubar . 61696)
+          (arrange . 61712)
+          (restore-curr-frame . 61728)
+          (simulate-start-btn . 61744)
+          (screen-saver . 61760)
+          (hotkey . 61776)))
+  (defun my/w32-get-code (action)
+    "Get the numeric code from the action symbol."
+    (cdr (assoc action my/w32-actions)))
+  (defun my/w32-get-action (code)
+    "Get the action symbol from the numeric code."
+    (car (cl-rassoc code my/w32-actions)))
+  (defun my/w32-run (action)
+    "Executes a w32 action."
+    (let ((code (my/w32-get-code action)))
+      (w32-send-sys-command code))))
 ;;--------------------------------------------------------------------
 ;; Evil mode
 ;;--------------------------------------------------------------------
@@ -416,8 +418,7 @@ TODO: draw top->bottom instead of left-> right."
   (setq evil-motion-state-message nil)
   (setq evil-normal-state-message nil)
   (setq evil-operator-state-message nil)
-  (setq evil-replace-state-message nil)
-  )
+  (setq evil-replace-state-message nil))
 
 
 
@@ -478,35 +479,39 @@ TODO: draw top->bottom instead of left-> right."
 ;;                            (interactive)
 ;;                            (enlarge-window 10)))
 
-(setq isFrameMax-my nil) ;goes out of sync if you manually enlarge the window. Just hit <Leader>f a 2cd time to re-sync.
-(evil-leader/set-key "f" (lambda ()
-                           (interactive)
-                           (let ((action (if (not-m isFrameMax-my)
-                                             'max
-                                           'restore-curr-frame)))
-                             (my/w32-run action))))
+(setq isFrameMax-my nil) ;can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+
+(when (eq system-type 'windows-nt) ;TODO: look into equivalent resizing for non-Windows machines.
+  (evil-leader/set-key "f" (lambda ()
+                             (interactive)
+                             (let ((action (if (not-m isFrameMax-my)
+                                               'max
+                                             'restore-curr-frame)))
+                               (my/w32-run action)))))
 
 ;;evalate lisp expression. Insert result on a new line.
 ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
-
-;; (evil-leader/set-key "e" (lambda ()
-;;                            (interactive)
-;;                            (save-excursion ;don't move the point
-;;                             (evil-append 1)
-;;                             (default-indent-new-line)
-;;                             (eval-last-sexp t) ;t to insert result in buffer.
-;;                             (evil-normal-state))))
 
 (defun my/eval-last-sexp ()
   (interactive)
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
 
-
-(evil-leader/set-key "e" (lambda ()
-                           (interactive)
-                                        ;(clippy-say (my/eval-last-sexp))
-                           (pos-tip-show (my/eval-last-sexp))))
+(if (display-graphic-p)
+    (progn
+      (require 'pos-tip)
+      (evil-leader/set-key "e" (lambda ()
+                                 (interactive)
+                                 ;;(clippy-say (my/eval-last-sexp))
+                                 (pos-tip-show (my/eval-last-sexp)))))
+  (progn
+    (evil-leader/set-key "e" (lambda ()
+                               (interactive)
+                               (save-excursion ;don't move the point
+                                 (evil-append 1)
+                                 (default-indent-new-line)
+                                 (eval-last-sexp t) ;t to insert result in buffer.
+                                 (evil-normal-state))))))
 
 
 (evil-leader/set-key "r" (lambda ()
@@ -623,7 +628,8 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(default ((t (:family "Fixed" :foundry "Misc" :slant normal :weight normal :height 150 :width normal))))))
+   '(default ((t (:family "Fixed" :foundry "Misc"
+                          :slant normal :weight normal :height 150 :width normal))))))
 
 
 ;;----------------------------------
@@ -878,14 +884,16 @@ This prevents overlapping themes; something I would rarely want."
    '(js2-function-call ((t :foreground "violet"))) ;;making same as font-lock-function-name-face
    '(js2-warning ((t :underline (:color "yellow" :style wave)
                      :background "navy blue")))
+   ;; colors copied from grandshell-theme.el
    `(mode-line ((t (:foreground  "#eee"
                                  :background  "#331133"
-                                 :box (:line-width -1 :style released-button))))) ;; colors copied from grandshell-theme.el
+                                 :box (:line-width -1 :style released-button))))) 
+   ;;colors copied from grandshell-theme.el
    `(mode-line-inactive ((t (:foreground  "#643"
                                           :background  "#110011"
                                           :weight light
                                           :box (:line-width -1 :style released-button)
-                                          :inherit (mode-line ))))) ;;colors copied from grandshell-theme.el
+                                          :inherit (mode-line )))))
    ))
 
 (defun color-zenburn ()
@@ -949,9 +957,7 @@ This prevents overlapping themes; something I would rarely want."
    ;;'(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1"))))
    '(rainbow-delimiters-depth-8-face ((t (:foreground "yellow" :background "black"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))
-
-   ))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
 (defun color-github ()
   (interactive)
@@ -959,7 +965,10 @@ This prevents overlapping themes; something I would rarely want."
   (set-background-color "white")
   (custom-theme-set-faces
    'github
-   `(mode-line ((t (:background "grey75" :foreground "black" :box (:line-width -1 :style released-button) :height 1.0))))
+   `(mode-line ((t (:background "grey75"
+                                :foreground "black"
+                                :box (:line-width -1 :style released-button)
+                                :height 1.0))))
    `(ace-jump-face-foreground
      ((t (:foreground "yellow"
                       :background "black"
@@ -995,8 +1004,7 @@ This prevents overlapping themes; something I would rarely want."
    `(mode-line-inactive
      ((t (:foreground "dark gray"
                       :background  "#090202";"#051515"
-                      :box (:line-width -1 :style pressed-button)))))
-   ))
+                      :box (:line-width -1 :style pressed-button)))))))
 
 (defun color-gruvbox ()
   (interactive)
@@ -1093,9 +1101,11 @@ This prevents overlapping themes; something I would rarely want."
    'leuven
    `(default ((t (:foreground "black" :background ,mayan-smoke))))
    ;;`(default ((t (:foreground "black" :background ,"white"))))
-   `(mode-line ((t (:box (:line-width -1 :color "#1A2F54") :foreground "#85CEEB" :background "#335EA8"
+   `(mode-line ((t (:box (:line-width -1 :color "#1A2F54")
+                         :foreground "#85CEEB" :background "#335EA8"
                          :style released-button))))
-   `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C") :foreground "#F0F0EF" :background "#9B9C97"
+   `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C")
+                                  :foreground "#F0F0EF" :background "#9B9C97"
                                   :style released-button))))
    '(js2-function-call ((t :foreground "blue")))
    '(leerzeichen ((t (:foreground "black";"#A8A800"
@@ -1113,8 +1123,7 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52"))))
    '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca"))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black")))))
-  )
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black"))))))
 
 (defun color-dichromacy ()
   (interactive)
@@ -1228,7 +1237,7 @@ This prevents overlapping themes; something I would rarely want."
 (eval-after-load "slime"
   '(progn
      (slime-setup '(slime-fancy
-                    ;;slime-company
+                    slime-company
                     slime-banner
                     slime-indentation))
      (setq slime-complete-symbol*-fancy t)
@@ -1256,7 +1265,7 @@ This prevents overlapping themes; something I would rarely want."
             (eq my/curr-computer 'utilite)
             (eq my/curr-computer 'a-laptop-faster))
     ;; connect lisp buffers to SLIME automatically.
-    (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought woudl need to be hooked on lisp-mode-hook???
+    (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
               (lambda ()
                 (unless (slime-connected-p)
                   (save-excursion (slime)))))))
@@ -1307,7 +1316,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; slime-company
 ;;---------------------------------------------
-                                        ; this is set in the slime section
+;; this is set in the slime section
 
 ;;---------------------------------------------
 ;; Auto-complete
@@ -1437,8 +1446,6 @@ This prevents overlapping themes; something I would rarely want."
             ;;(js2-imenu-extras-mode)
             (electric-pair-mode 1)
             ))
-
-
 
 ;;--------------------
 ;; ac-js2
@@ -1659,6 +1666,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
             (setq default-directory dir))))))
 
 (evil-leader/set-key "g" 'my/vc-git-grep)
+
 ;;--------------------
 ;; helm-swoop
 ;;--------------------
@@ -1815,6 +1823,13 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (require 'dired-details)
 (dired-details-install)
 
+
+
+;;--------------------------------------------------------------------
+;; sql-mode
+;;--------------------------------------------------------------------
+(add-hook 'sql-mode-hook #'electric-pair-mode)
+
 ;;--------------------------------------------------------------------
 ;; rainbow-delimiters
 ;;--------------------------------------------------------------------
@@ -1864,7 +1879,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'sql-mode-hook #'enable-paredit-mode)
+;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 ;; Stop SLIME's REPL from grabbing DEL,
 ;; which is annoying when backspacing over a '('
 (defun override-slime-repl-bindings-with-paredit ()
@@ -2162,7 +2177,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                                      :buffer "*Lisp Project*")))
     ;;load project
     (find-file-existing "C:\\Users\\mtz\\scratch\\lisp\\test.lisp")
-                                        ;(dired "C:\\Users\\mtz\\scratch\\lisp")
+    ;;(dired "C:\\Users\\mtz\\scratch\\lisp")
     (slime))
 
   (defun proj-imgtag ()
@@ -2186,7 +2201,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                                                 root_dir_cpp)
                                      :buffer "*Cpp Project*")))
     (dired "C:\\Users\\mtz\\scratch\\cpp")
-                                        ;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
+    ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
     ))
 
 ;;; quick load of the .emacs (or init.el) file.
@@ -2385,7 +2400,7 @@ Depends on evil mode."
 ;;       )
 ;; (setq highlight-tail-posterior-type t) ;(setq highlight-tail-posterior-type 'const)
 ;; (highlight-tail-mode)
-;; ;(highlight-tail-reload)
+;; ;;(highlight-tail-reload)
 
 ;;-----------------------------------------------------------------------------
 ;; eww web-browser
@@ -2502,9 +2517,26 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
 
-;;-----------------------------------------------------------------------------
+;;-------------------------------------------------------------------------------
+;; fill-column-indicator
+;;-------------------------------------------------------------------------------
+;; (require 'fill-column-indicator)
+;; (setq fci-rule-column 101)
+;; (setq fci-rule-width 1)
+;; (progn
+;;   (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
+;;   (setq fci-rule-use-dashes t))
+;; (setq fci-rule-color "#555555")
+;; (add-hook 'prog-mode-hook #'(lambda ()
+;;                               (fci-mode 1)))
+
+;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
+;; ;;TODO: it doesn't seem to be working!
+;; (setq whitespace-style '(face trailing))   
+
+;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
-;;-----------------------------------------------------------------------------
+;;-------------------------------------------------------------------------------
 (progn ;;window navigation.
   (global-set-key (kbd "M-h") #'evil-window-left)
   (global-set-key (kbd "M-j") #'evil-window-down)
@@ -2518,7 +2550,8 @@ Depends on evil mode."
 
 (cond
  ((eq my/curr-computer 'work-laptop)
-  (setq browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+  (setq browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
+        ;;browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         browse-url-browser-function 'browse-url-generic))
 
  ((eq my/curr-computer 'a-laptop-faster)
@@ -2612,7 +2645,7 @@ Depends on evil mode."
     (global-prettify-symbols-mode 1)))
 
 ;;indent keyword args properly. Use common lisp-style for (if) indendation too?
-;(setq lisp-indent-function 'common-lisp-indent-function)
+;;(setq lisp-indent-function 'common-lisp-indent-function)
 
 (setq inhibit-startup-message t)
 ;;(setq initial-scratch-message ";; Scratch buffer ;;\n\n\n\n")
@@ -2645,8 +2678,7 @@ Depends on evil mode."
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
   (setq-default tab-width 4)
-  (setq-default indent-line-function 'insert-tab)
-  )
+  (setq-default indent-line-function 'insert-tab))
 
 (setq make-backup-files nil backup-inhibited t) ;No annoying backup files
 (setq auto-save-default nil) ;No annoying auto-save files
@@ -2654,16 +2686,15 @@ Depends on evil mode."
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
 
-;;show trailing whitespace
+;;show trailing whitespace.
 (setq-default show-trailing-whitespace t)   
-;(setq-default show-trailing-whitespace t)   
 
 ;;******** whitespace-mode *******
 ;; (require 'whitespace)
 ;; (setq whitespace-line-column 104)
 ;; (setq whitespace-style '(face lines-tail))
 ;; (global-whitespace-mode nil)
-;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ;;disable annoying newline emacs automatically adds to the end of a file when saving.
 (setq require-final-newline nil)

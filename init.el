@@ -1768,6 +1768,28 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
 (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
 
+(defun my/yas-handle-param (param-str
+                            sep-char
+                            fn-deco
+                            fn-fix-first
+                            fn-fix-last)
+  "Does something special for each paramter in a snippet."
+  (let* ((split (split-string param-str sep-char))
+         (decorated (mapcar fn-deco split)))
+    (setcar decorated (funcall fn-fix-first (car decorated)))
+    (setf (nthcdr (- (length decorated) 1) decorated)
+          (cons (funcall fn-fix-last (car (last decorated)) ) nil))
+    (apply #'concat decorated)))
+;; (my/yas-handle-param "first, middle1, middle2, last"
+;;                      ","
+;;                      #'(lambda (x)
+;;                          (upcase (concat "'" x "' - ")))
+;;                      #'(lambda (f)
+;;                          (downcase f))
+;;                      #'(lambda (l)
+;;                          (concat l "|")))
+;; "'first' - ' MIDDLE1' - ' MIDDLE2' - ' LAST' - |"
+
 
 ;;--------------------
 ;; cc-mode

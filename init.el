@@ -33,6 +33,22 @@
 ;;--------------------------------------------------------------------
 ;; Helper functions and macros
 ;;--------------------------------------------------------------------
+(defun s-trim-left (s)
+  "Remove whitespace at the beginning of S."
+  (if (string-match "\\`[ \t\n\r]+" s)
+      (replace-match "" t t s)
+    s))
+
+(defun s-trim-right (s)
+  "Remove whitespace at the end of S."
+  (if (string-match "[ \t\n\r]+\\'" s)
+      (replace-match "" t t s)
+    s))
+
+(defun s-trim (s)
+  "Remove whitespace at the beginning and end of S."
+  (s-trim-left (s-trim-right s)))
+
 (defmacro not-m (bool)
   "Similar to the not function. But...
 It must operate on a variable (not a value)

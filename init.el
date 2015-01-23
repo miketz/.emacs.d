@@ -2521,6 +2521,10 @@ Depends on evil mode."
   (setq browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         browse-url-browser-function 'browse-url-generic))
 
+ ((eq my/curr-computer 'a-laptop-faster)
+  (setq browse-url-generic-program "conkeror"
+        browse-url-browser-function 'browse-url-generic))
+
  ((or (eq my/curr-computer 'raspberry-pi)
       (eq my/curr-computer 'utilite))
   (setq browse-url-generic-program "surf"

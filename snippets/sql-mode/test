@@ -1,9 +1,9 @@
-# -*- simple insert *-*
-# name: insert
-# key: ins
+# -*- testing snippet -*-
+# name: test
+# key: test
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-insert into ${1:Tab}(${2:col1})
+insert into ${1:Tab}(${2:cols})
 values(${2:$(let* ((split (split-string yas-text ","))
        (decorated (mapcar (lambda (s)
                             (concat " @" (s-trim s) ","))

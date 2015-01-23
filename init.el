@@ -1752,6 +1752,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
 (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
 
+
 ;;--------------------
 ;; cc-mode
 ;;--------------------
@@ -1829,6 +1830,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; sql-mode
 ;;--------------------------------------------------------------------
 (add-hook 'sql-mode-hook #'electric-pair-mode)
+(add-hook #'sql-mode-hook #'(lambda () (yas-minor-mode)))
 
 ;;--------------------------------------------------------------------
 ;; rainbow-delimiters

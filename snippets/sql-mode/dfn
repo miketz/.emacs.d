@@ -3,4 +3,5 @@
 # key: dfn
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-drop function ${1:/*FuncName*/};$0
+if object_id('dbo.$1', 'FN') is not null
+    drop function dbo.${1:/*FuncName*/};$0

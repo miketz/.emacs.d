@@ -3,4 +3,7 @@
 # key: dcol
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-alter table ${1:/*Tab*/} drop column ${2:/*Col*/};$0
+if exists(select top 1 null from sys.columns where Name = N'$2' and Object_ID = Object_ID(N'dbo.$1'))
+begin
+    alter table ${1:/*Tab*/} drop column ${2:/*Col*/};$0
+end

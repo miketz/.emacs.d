@@ -3,14 +3,3 @@
 # key: test
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-insert into ${1:Tab}(${2:cols})
-values(${2:$(let* ((split (split-string yas-text ","))
-       (decorated (mapcar (lambda (s)
-                            (concat " @" (s-trim s) ","))
-                          split)))
-  (setcar decorated (s-trim (car decorated)))
-  (let* ((lastStr (car (last decorated)))
-         (lastStrFixed (substring lastStr 0 (- (length lastStr) 1))))
-    (setf (nthcdr (- (length decorated) 1) decorated) (cons lastStrFixed nil)))
-  (apply #'concat decorated))});
-$0

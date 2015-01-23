@@ -3,7 +3,11 @@
 # key: vw
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-create view dbo.${1:/*ViewName*/}
+if object_id('dbo.$1', 'V') is null
+	exec sp_executesql N'create view dbo.$1 as select null [col]';
+GO
+
+alter view dbo.${1:/*ViewName*/}
 as
 
 $0

@@ -1,0 +1,11 @@
+# -*- global settings to put at the top of a master script. -*-
+# name: settings
+# key: settings
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+SET XACT_ABORT ON
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO

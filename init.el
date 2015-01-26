@@ -2576,6 +2576,16 @@ Depends on evil mode."
 ;; (setq whitespace-style '(face trailing))   
 
 ;;-------------------------------------------------------------------------------
+;; flycheck
+;;-------------------------------------------------------------------------------
+(add-hook 'flycheck-mode-hook
+          (lambda ()
+            (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+            (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
+            ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+            ))
+
+;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-------------------------------------------------------------------------------
 (progn ;;window navigation.

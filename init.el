@@ -1,28 +1,34 @@
-;; NOTES:
-;; Windows: registry entry for "open with" option:
-;;          Computer\HKEY_CLASSES_ROOT\Applications\runemacs.exe\shell\open\command
+;;; package --- Summary
+;;; Commentary:
+;;; My emacs config.
 
-;;----------------------------------
-;; Git incantations:
-;;----------------------------------
-;; Create a new github repo from an existing local repo:
-;;     git remote add origin https://github.com/miketz/.emacs.d.git
-;;     git push -u origin master
-;;
-;; Download from github to a new computer:
-;;     git clone https://github.com/miketz/.emacs.d.git
-;;
-;; Get latest changes from github:
-;;     git pull origin master
-;;
-;; Push local changes up to github:
-;;     git push origin master
-;;
-;; Revert changes to modified files.
-;;     git reset --hard
+;;; NOTES:
+;;; Windows: registry entry for "open with" option:
+;;;          Computer\HKEY_CLASSES_ROOT\Applications\runemacs.exe\shell\open\command
 
-;; Remove all untracked files and directories.
-;;     git clean -fd
+;;;----------------------------------
+;;; Git incantations:
+;;;----------------------------------
+;;; Create a new github repo from an existing local repo:
+;;;     git remote add origin https://github.com/miketz/.emacs.d.git
+;;;     git push -u origin master
+;;;
+;;; Download from github to a new computer:
+;;;     git clone https://github.com/miketz/.emacs.d.git
+;;;
+;;; Get latest changes from github:
+;;;     git pull origin master
+;;;
+;;; Push local changes up to github:
+;;;     git push origin master
+;;;
+;;; Revert changes to modified files.
+;;;     git reset --hard
+
+;;; Remove all untracked files and directories.
+;;;     git clean -fd
+
+;;; Code:
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))

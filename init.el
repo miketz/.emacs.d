@@ -2583,9 +2583,9 @@ Depends on evil mode."
   (global-set-key (kbd "M-k") #'evil-window-up)
   (global-set-key (kbd "M-l") #'evil-window-right))
 
-;; cycle the buffers really fast
-(global-set-key (kbd "M-n") #'next-buffer)
-(global-set-key (kbd "M-p") #'previous-buffer)
+;; cycle the buffers really fast. Not doing this anymore since these are error handling shortcuts in some modes.
+;; (global-set-key (kbd "M-n") #'next-buffer)
+;; (global-set-key (kbd "M-p") #'previous-buffer)
 
 
 (cond

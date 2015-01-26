@@ -346,7 +346,8 @@ TODO: draw top->bottom instead of left-> right."
         sql-indent
         darkroom
         ;;vim-empty-lines-mode
-        fill-column-indicator))
+        fill-column-indicator
+        flycheck))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))

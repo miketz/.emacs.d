@@ -56,9 +56,9 @@
   (s-trim-left (s-trim-right s)))
 
 (defmacro not-m (bool)
-  "Similar to the not function. But...
+  "Similar to the not function.  But...
 It must operate on a variable (not a value)
-It mutates `bool' to the opposite value.
+It mutates BOOL to the opposite value.
 Useful to check a boolean state and toggle the state in 1 go."
   `(setq ,bool (not ,bool)))
 
@@ -71,7 +71,7 @@ Useful to check a boolean state and toggle the state in 1 go."
   ;;   (print red)
   ;;   (print green)
   ;;   (print blue))
-  "Converts the keys of an alist to variables."
+  "Convert the keys of ALIST to variables."
   (declare (indent defun))
   `(let (,@(mapcar (lambda (cell)
                      (list (car cell) (cdr cell)))
@@ -219,7 +219,7 @@ Assums a vertically stacked list.
     (insert ")")))
 
 (defun my/render-lst (lst cols) ;;DEPRECATE OR REDO
-  "draws a 1 d list of symbols in a 2d format with N cols.
+  "Draws a 1 d list of symbols in a 2d format with N cols.
 TODO: adjust so only 1 space is between the closest part of the columns. Took the easy
 way out using a big length that works everywhere.
 TODO: draw top->bottom instead of left-> right."
@@ -386,9 +386,9 @@ TODO: draw top->bottom instead of left-> right."
     (package-install pkg)))
 
 (defun package-list-unaccounted-packages ()
-  "Like `package-list-packages', but shows only the packages that
-  are installed and are not in `my/packages'.  Useful for
-  cleaning out unwanted packages."
+  "Like `package-list-packages', but show only the packages that
+are installed and are not in `my/packages'.  Useful for
+cleaning out unwanted packages."
   (interactive)
   (package-show-package-list
    (remove-if-not (lambda (x)
@@ -910,7 +910,7 @@ This prevents overlapping themes; something I would rarely want."
    ;; colors copied from grandshell-theme.el
    `(mode-line ((t (:foreground  "#eee"
                                  :background  "#331133"
-                                 :box (:line-width -1 :style released-button))))) 
+                                 :box (:line-width -1 :style released-button)))))
    ;;colors copied from grandshell-theme.el
    `(mode-line-inactive ((t (:foreground  "#643"
                                           :background  "#110011"
@@ -920,7 +920,7 @@ This prevents overlapping themes; something I would rarely want."
    ))
 
 (defun color-zenburn ()
-  "Loads the zenburn theme created by Bozhidar Batsov. Makes a few extra mods too"
+  "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
   (load-theme 'zenburn t)
   (my/cursor-stuff-darkBg) ;;TODO: move into `custom-set-faces'
@@ -1055,7 +1055,7 @@ This prevents overlapping themes; something I would rarely want."
                       :box (:line-width -1 :style pressed-button)))))))
 
 (defun color-monokai ()
-  "Loads the monokai theme with several adjustments."
+  "Load the monokai theme with several adjustments."
   (interactive)
   (load-theme 'monokai t)
   (custom-theme-set-faces
@@ -2956,3 +2956,5 @@ edge cases not covered by buffer killing."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;sqlcmd -S 127.0.0.1,42000\OSHE
 ;;sqlcmd -S 127.0.0.1,42000\OSHE -q "SELECT 'hello';"
+
+;;; init.el ends here

@@ -11,11 +11,11 @@
 if object_id('dbo.$1', 'U') is null
 begin
     create table dbo.${1:/*Tab*/} (
-        ID bigint identity(1,1) not null,
+        id bigint identity(1,1) not null,
         ${2:ID_1} ${3:bigint} not null,
         ${4:ID_2} ${5:bigint} not null,
 
-        CONSTRAINT PK_$1 primary key clustered (ID asc)
+        CONSTRAINT PK_$1 primary key clustered (id asc)
     );
     alter table $1 add constraint UK_$1_$2_$4 unique ($2, $4);
     alter table $1 add constraint UK_$1_$4_$2 unique ($4, $2);
@@ -26,4 +26,4 @@ begin
         foreign key($4) references ${8:/*Tab2*/}(${9:/*ID_2*/});
     alter table $1 check constraint FK_$1_$4;
 end
-GO$0
+$0

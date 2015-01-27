@@ -1,0 +1,11 @@
+# -*- update description for the whole table. -*-
+# name: adoctab
+# key: adoctab
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+if exists (select top 1 null from sys.extended_properties where [major_id] = object_id('dbo.$1') and [name] = N'MS_Description' and [minor_id] = 0)
+begin
+    exec sys.sp_updateextendedproperty @name = N'MS_Description', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'TABLE',
+    @level1name = N'${1:Table}',--do not use dbo here
+    @value = N'$0';
+end

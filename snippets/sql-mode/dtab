@@ -3,4 +3,5 @@
 # key: dtab
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-drop table ${1:/*Tab*/};$0
+if object_id('dbo.$1', 'U') is not null
+    drop table dbo.${1:/*Tab*/};$0

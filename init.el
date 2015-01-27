@@ -1284,7 +1284,14 @@ This prevents overlapping themes; something I would rarely want."
      ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
      (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition);override evil's binding of M-. when using slime
      ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
-     (setq slime-header-line-p nil)))
+     (setq slime-header-line-p nil)
+
+     (require 's)
+     (setq slime-words-of-encouragement (let ((words '())) ;;hidden
+                                          (dolist (w slime-words-of-encouragement)
+                                            (when (s-contains? "REPL" w)
+                                              (setq words (cons w words))))
+                                          words))))
 
 (progn
   (when (eq my/curr-computer 'work-laptop)

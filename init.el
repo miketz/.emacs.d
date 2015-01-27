@@ -1314,7 +1314,9 @@ This prevents overlapping themes; something I would rarely want."
             ;;turn off line numbers in the repl
             (linum-mode 0)
             ;;there's always a trailing space at repl prompt. Don't highlight it.
-            (setq show-trailing-whitespace nil)))
+            (setq show-trailing-whitespace nil)
+            ;;aggressive-indent moves SLIME's comments in the REPL. Turn it off.
+            (aggressive-indent-mode 0)))
 
 ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
 (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
@@ -2526,7 +2528,7 @@ Depends on evil mode."
 (add-hook 'css-mode-hook #'aggressive-indent-mode)
 (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
 (add-hook 'js2-mode-hook #'aggressive-indent-mode)
-(add-hook 'slime-repl-mode-hook #'aggressive-indent-mode)
+;;(add-hook 'slime-repl-mode-hook #'aggressive-indent-mode)
 ;;(global-aggressive-indent-mode 1)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)

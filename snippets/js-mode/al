@@ -1,4 +1,6 @@
-# -*- mode: snippet -*-
-#name : alert
+# -*- alert -*-
+# name: al
+# key: al
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 alert($0);

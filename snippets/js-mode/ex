@@ -1,5 +1,7 @@
-# -*- mode: snippet -*-
-#name : exception
+# -*- exception -*-
+# name: ex
+# key: ex
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 { name: '${1:exName }',
   message: '$0' };

@@ -1,5 +1,7 @@
-# -*- mode: snippet -*-
-#name : else
+# -*- else -*-
+# name: el
+# key: el
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 else {
   $0

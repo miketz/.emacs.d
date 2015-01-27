@@ -1,5 +1,7 @@
-# -*- mode: snippet -*-
-#name : comment (/* ... */)
+# -*- comment -*-
+# name: com
+# key: com
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 /*
  * $0

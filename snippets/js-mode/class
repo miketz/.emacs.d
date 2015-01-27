@@ -1,5 +1,7 @@
-# -*- mode: snippet -*-
-#name : Class
+# -*- new class -*-
+# name: class
+# key: class
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 var ${1:name} = new Class({
   initialize: function($2) {

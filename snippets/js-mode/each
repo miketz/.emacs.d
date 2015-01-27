@@ -1,5 +1,7 @@
-# -*- mode: snippet -*-
-#name : each
+# -*- each -*-
+# name: each
+# key: each
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 ${1:collection}.each(function($2) {
   $0

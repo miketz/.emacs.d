@@ -1,5 +1,7 @@
-# -*- mode: snippet -*-
-#name : anonymous function with ;
+# -*- anonymous function with ; -*-
+# name: ff
+# key: ff
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 function($1) {
   $0

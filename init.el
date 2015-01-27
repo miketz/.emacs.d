@@ -1488,6 +1488,8 @@ This prevents overlapping themes; something I would rarely want."
             (electric-pair-mode 1)
             ))
 
+(add-hook 'js2-mode-hook #'(lambda () (yas-minor-mode)))
+
 ;;--------------------
 ;; ac-js2
 ;;--------------------

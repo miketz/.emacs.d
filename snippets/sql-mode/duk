@@ -3,4 +3,5 @@
 # key: duk
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-alter table ${1:/*Tab*/} drop constraint UK_$1_${2};$0
+if object_id('dbo.UK_$1_$2', 'UQ') is not null
+    alter table dbo.${1:Tab} drop constraint UK_$1_${2:Col};$0

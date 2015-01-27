@@ -25,6 +25,4 @@ alter table MyTable check constraint MyConstraint
 
 
 disable trigger TrigName on Tab;
-GO
 enable trigger TrigName on Tab;
-GO

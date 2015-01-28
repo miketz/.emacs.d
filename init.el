@@ -547,7 +547,9 @@ cleaning out unwanted packages."
 (evil-leader/set-key "r" (lambda ()
                            (interactive)
                            (save-excursion
+                             (evil-append 1)
                              (let ((string (slime-last-expression)))
+                               (evil-normal-state)
                                (slime-eval-async
                                    `(swank:eval-and-grab-output ,string)
                                  (lambda (result)

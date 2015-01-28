@@ -1286,12 +1286,13 @@ This prevents overlapping themes; something I would rarely want."
      ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
      (setq slime-header-line-p nil)
 
-     (require 's)
-     (setq slime-words-of-encouragement (let ((words '())) ;;hidden
-                                          (dolist (w slime-words-of-encouragement)
-                                            (when (s-contains? "REPL" w)
-                                              (setq words (cons w words))))
-                                          words))))
+     ;; (require 's)
+     ;; (setq slime-words-of-encouragement (let ((words '())) ;;hidden
+     ;;                                      (dolist (w slime-words-of-encouragement)
+     ;;                                        (when (s-contains? "REPL" w)
+     ;;                                          (setq words (cons w words))))
+     ;;                                      words))
+     ))
 
 (progn
   (when (eq my/curr-computer 'work-laptop)
@@ -2386,7 +2387,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;-----------------------------------------------------------------------------
 ;; skewer-mode
 ;;-----------------------------------------------------------------------------
-;(skewer-setup)
+;;(skewer-setup)
 (add-hook 'js2-mode-hook 'skewer-mode)
 (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'html-mode-hook 'skewer-html-mode)
@@ -2621,6 +2622,9 @@ Depends on evil mode."
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-------------------------------------------------------------------------------
+(define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
+
+
 (progn ;;window navigation.
   (global-set-key (kbd "M-h") #'evil-window-left)
   (global-set-key (kbd "M-j") #'evil-window-down)

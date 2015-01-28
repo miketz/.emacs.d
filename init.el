@@ -537,13 +537,25 @@ cleaning out unwanted packages."
                                  (evil-normal-state))))))
 
 
+;; (evil-leader/set-key "r" (lambda ()
+;;                            (interactive)
+;;                            (save-excursion ;don't move the point
+;;                              (evil-append 1)
+;;                              (slime-eval-last-expression) ;t to insert result in buffer.
+;;                              (evil-normal-state))))
+
 (evil-leader/set-key "r" (lambda ()
                            (interactive)
-                           (save-excursion ;don't move the point
-                             (evil-append 1)
-                             (slime-eval-last-expression) ;t to insert result in buffer.
-                             (evil-normal-state))))
-
+                           (save-excursion
+                             (let ((string (slime-last-expression)))
+                               (slime-eval-async
+                                   `(swank:eval-and-grab-output ,string)
+                                 (lambda (result)
+                                   (cl-destructuring-bind (output value) result
+                                     (pos-tip-show value)
+                                     ;;(push-mark)
+                                     ;;(insert output value)
+                                     )))))))
 
 
 (evil-leader/set-key "a" 'slime-eval-print-last-expression)
@@ -1220,10 +1232,10 @@ This prevents overlapping themes; something I would rarely want."
   (cond
    ((eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
-                 :height 115;'90 105 115 120 125
-                 :weight 'normal)
+                 :height 140;'90 105 115 120 125
+                 :weight 'bold)
     (when (display-graphic-p)
-      (color-zenburn)))
+      (color-leuven)))
 
    ((eq my/curr-computer 'a-laptop-faster)
     (custom-set-faces

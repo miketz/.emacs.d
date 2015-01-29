@@ -3,4 +3,5 @@
 # key: dtr
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-drop trigger ${1:/*Trig*/};$0
+if object_id('dbo.$1', 'TR') is not null
+    drop trigger dbo.${1:/*Trig*/};$0

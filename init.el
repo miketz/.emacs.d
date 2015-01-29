@@ -551,13 +551,13 @@ cleaning out unwanted packages."
                              (let ((string (slime-last-expression)))
                                (evil-normal-state)
                                (slime-eval-async
-                                   `(swank:eval-and-grab-output ,string)
-                                 (lambda (result)
-                                   (cl-destructuring-bind (output value) result
-                                     (pos-tip-show value)
-                                     ;;(push-mark)
-                                     ;;(insert output value)
-                                     )))))))
+                                `(swank:eval-and-grab-output ,string)
+                                (lambda (result)
+                                  (cl-destructuring-bind (output value) result
+                                    (pos-tip-show value)
+                                    ;;(push-mark)
+                                    ;;(insert output value)
+                                    )))))))
 
 
 (evil-leader/set-key "a" 'slime-eval-print-last-expression)
@@ -1234,10 +1234,10 @@ This prevents overlapping themes; something I would rarely want."
   (cond
    ((eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
-                 :height 140;'90 105 115 120 125
-                 :weight 'bold)
+                 :height 115;'90 105 115 120 125
+                 :weight 'normal)
     (when (display-graphic-p)
-      (color-leuven)))
+      (color-zenburn)))
 
    ((eq my/curr-computer 'a-laptop-faster)
     (custom-set-faces

@@ -2636,7 +2636,9 @@ Depends on evil mode."
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-------------------------------------------------------------------------------
-(define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
+(progn ;;use the default emacs scroll bingding for C-v
+  (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
+  (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))
 
 
 (progn ;;window navigation.

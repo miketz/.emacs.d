@@ -5,7 +5,7 @@
 # --
 if object_id('dbo.$1', 'P') is null
     exec('create procedure dbo.$1 as select 0');
-
+GO
 alter procedure dbo.${1:/*ProcName*/} (
     @${2:/*param1Name*/} ${3:/*type*/}
 )

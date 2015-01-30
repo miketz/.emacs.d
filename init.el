@@ -112,18 +112,22 @@ Useful to check a boolean state and toggle the state in 1 go."
   (replace-regexp-in-string (regexp-quote what) with in))
 
 (defun my/get-string-from-file (filePath)
-  "Return filePath's file content."
+  "Return FILEPATH's file content."
   (with-temp-buffer
     (insert-file-contents filePath)
     (buffer-string)))
 
 (defun my/read-lines (filePath)
-  "Return a list of lines of a file at filePath."
+  "Return a list of lines of a file at FILEPATH."
   (with-temp-buffer
     (insert-file-contents filePath)
     (split-string (buffer-string) "\n" t)))
 
-(progn ;;functions to redraw a list as 2-d
+;;--------------------------------------------------------------------
+;; helper functions to draw a list in N columns. 2-d diplay from a
+;; 1-d list.
+;;--------------------------------------------------------------------
+(when nil ;these are special-use functions. Don't bother creating them unless i need them
 
   (defun my/get-longest-sym (lst) ;PASS
     "returns length of the longest symbol name"
@@ -132,124 +136,82 @@ Useful to check a boolean state and toggle the state in 1 go."
                    (mapcar #'symbol-name
                            lst))))
 
-  (defun my/index-1d (r c cols) ;PASS
-    "returns a 1-D index"
-    (+ (* r cols)
-       c))
+  (defun my/index-1d (r c num-cols) ;PASS, but not used.
+    "returns a 1-D index. Using the 2d indexs r and c. And the number of columns (and vertical layout)."
+    (+ (* c num-cols)
+       r))
 
-  (defun my/index-column (i cols) ;PASS
+  (defun my/index-column (i num-cols) ;PASS, but not used.
     "returns the column the 1-D index falls under for N cols (and vertical layout)"
-    (floor (/ i cols)))
+    (floor (/ i num-cols)))
 
-  (defun my/index-row (i cols) ;PASS
+  (defun my/index-row (i num-cols) ;PASS, but not used.
     "returns the row the 1-D index falls under for N cols (and vertical layout)"
-    (let* ((c (floor (/ i cols)))
-           (r (- i (* c cols))))
+    (let* ((c (floor (/ i num-cols)))
+           (r (- i (* c num-cols))))
       r))
 
-
-  (defun my/get-columns (lst cols) ;;BUG!!! this should be called my/get-rows !!!
+  (defun my/get-columns (lst num-cols) ;PASS
     "returns a list-of-lists. A list for each column from the 1-D lst.
-'((a d j) (b e h) (c f q) (n n))"
+    Assums a vertically stacked display of the list.
+    (my/get-columns '(a b c d e f g) 3)
+    =>
+    ((a b c) (d e f) (g))"
+    ;;STRANGE: for some reason if I align docstring to the left without whjite space it
+    ;;         messes up paredit's ability to match parens in the code following this
+    ;;         fucntion.
     (let ((len            (length lst))
           (lst-of-columns nil) ;the goal
+          (num-rows (+ (floor (/ len num-cols))
+                       (if (> (mod len num-cols) 0) 1 0)))
+          (i 0)
           (c              0))
-      (while (< c cols)
+      (while (< c num-cols)
         (let ((column nil)
-              (i      0))
-          (while (< i len)
-            (when (= c (my/index-column i cols)) ;;when at an an item falling in column c
-              (setq column (append column (list (nth i lst)))))
+              (r 0))
+          (dotimes (r num-rows)
+            (let ((val (nth i lst)))
+              (when (not (null val)) ;the last column mayh have empty slots to be skipped
+                (setq column (append column (list val)))))
             (incf i))
           (setq lst-of-columns (cons column lst-of-columns)))
         (incf c))
       (reverse lst-of-columns)))
 
-  (defun my/get-rows (lst cols) ;;TEST
-    "returns a list-of-lists. A list for each row from the 1-D lst.
-Assums a vertically stacked list.
-(my/get-rows '(a b c d e f g) 3)
-=>
-((a d g)
- (b e)
- (c f))"
-  (let ((len            (length lst))
-        (lst-of-rows nil) ;the goal
-        (c              0))
-    (while (< c cols)
-      (let ((row nil)
-            (i      0))
-        (while (< i len)
-          (when (= c (my/index-column i cols)) ;;when at an an item falling in column c
-            (setq row (append row (list (nth i lst)))))
-          (incf i))
-        (setq lst-of-rows (cons row lst-of-rows)))
-      (incf c))
-    (reverse lst-of-rows)))
-
-  (defun my/get-longest-forEachCol (lst cols) ;;TEST
-    "gets the longest length for each column. '(l l l l l)"
+  (defun my/get-longest-forEachCol (lst num-cols) ;;PASS
+    "Gets the longest length for each column in LST, assuming NUM-COLS.
+'(lenCol1 lenCol2... lenColN)."
     (mapcar #'(lambda (column)
                 (my/get-longest-sym column))
-            (my/get-columns lst cols)))
+            (my/get-columns lst num-cols)))
 
-(defun render-lst2 (lst num-cols) ;;IMPLEMENT
-  (let* ((num-cols            (* 1.0 num-cols)) ;; make decimal for easier to read math (no * -1.0)
-         (len                 (length lst))
-         (num-rows            (ceiling (/ len num-cols))) ;not used, but nice to see the formula.
-         (one-D-indexes       (let ((i 0)
-                                    (s nil))
-                                (dolist (x lst)
-                                  (setq s (cons i s))
-                                  (incf i))
-                                (reverse s)))
-         (drawing-col-indexes (cl-mapcar (lambda (i)
-                                           (floor (/ i num-cols)))
-                                         one-D-indexes))
-         (drawing-row-indexes (cl-mapcar (lambda (i c)
-                                           (floor(- i (* c num-cols))))
-                                         one-D-indexes
-                                         drawing-col-indexes))
-         (longest-per-col ()))
-    (insert "(")
-    (let (i 0)
-      (dolist (x lst)
-        (let ())
-        (incf i)))
-    (insert ")")))
+  (defun my/render-list (lst num-cols)
+    (let* ((data (mapcar #'symbol-name lst))
+           (len (length data))
+           (num-rows (+ (floor (/ len num-cols))
+                        (if (> (mod len num-cols) 0) 1 0)))
+           (col-lengths (my/get-longest-forEachCol data num-cols))
+           (columns (my/get-columns data num-cols)))
+      (insert "(:i ") ; add junk item to circumvent elisp indentation rules.
+      (dotimes (r num-rows)
+        (dotimes (c num-cols)
+          (let* ((col (nth c columns))
+                 (val (nth r col))
+                 (curr-col-len (nth c col-lengths))
+                 (pad-size (- curr-col-len (length val)))
+                 (is-last-col (= c (- num-cols 1))))
+            (when (not (null val))
+              (insert val)
+              (unless is-last-col
+                (dotimes (p pad-size) (insert " "))
+                (insert " "))))
+          )
+        (unless (= r (- num-rows 1)) ;unless last row
+          (insert "\n")))
+      (insert ")")))
 
-(defun my/render-lst (lst cols) ;;DEPRECATE OR REDO
-  "Draws a 1 d list of symbols in a 2d format with N cols.
-TODO: adjust so only 1 space is between the closest part of the columns. Took the easy
-way out using a big length that works everywhere.
-TODO: draw top->bottom instead of left-> right."
-  (let* ((len     (length lst))
-         (rows    (+ (floor (/ len cols))
-                     (if (> (mod len cols) 0) 1 0)))
-         (longest (my/get-longest lst))
-         (r       0))
-    (insert "(")
-    (while (< r rows)
-      (let ((c 0))
-        (while (< c cols)
-          (let ((index-1d (+ (* r cols)
-                             c)))
-            ;;draw col
-            (when (< index-1d len) ;don't fill in nil on the last row.
-              (let* ((val (symbol-name (nth index-1d lst)))
-                     (rem (- longest (length val)))
-                     (i   0))
-                (insert val)
-                (when (and (< c (- cols 1))
-                           (< index-1d (- len 1))) ;prevent trailing white space
-                  (while (< i (+ rem 1))
-                    (insert " ")
-                    (incf i)))))
-            (incf c))))
-      (when (< r (- rows 1)) ;prevent trailing \n
-        (insert "\n"))
-      (incf r))
-    (insert ")"))))
+  );end when, render list functions
+
 ;;----------------------------------
 ;; flags used for conditional execution
 ;;----------------------------------
@@ -1234,7 +1196,7 @@ This prevents overlapping themes; something I would rarely want."
   (cond
    ((eq my/curr-computer 'work-laptop)
     (my/set-font :sym 'consolas
-                 :height 115;'90 105 115 120 125
+                 :height 120;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
       (color-zenburn)))

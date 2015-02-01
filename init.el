@@ -562,7 +562,8 @@ cleaning out unwanted packages."
 ;;----------------------------------
 ;; font
 ;;----------------------------------
-(when (eq my/curr-computer 'work-laptop)
+(when (or (eq my/curr-computer 'work-laptop)
+          (eq my/curr-computer 'leyna-laptop))
   ;; configure default settings for fonts.
   (setq my/default-font 'consolas
         my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
@@ -1194,7 +1195,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;theme of the week and corresponding settings. This may change often.
 (progn
   (cond
-   ((eq my/curr-computer 'work-laptop)
+   ((or (eq my/curr-computer 'work-laptop)
+        (eq my/curr-computer 'leyna-laptop))
     (my/set-font :sym 'consolas
                  :height 120;'90 105 115 120 125
                  :weight 'normal)

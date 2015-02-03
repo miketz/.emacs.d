@@ -5,5 +5,5 @@
 # --
 if not exists(select top 1 null from sys.columns where Name = N'$2' and Object_ID = Object_ID(N'dbo.$1'))
 begin
-    alter table ${1:/*Tab*/} add ${2:/*Col*/} ${3:/*Type*/} not null default(${4:/*DefVal*/});$0
+    alter table dbo.${1:/*Tab*/} add ${2:/*Col*/} ${3:/*Type*/} not null default(${4:/*DefVal*/});$0
 end

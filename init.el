@@ -2756,6 +2756,13 @@ Depends on evil mode."
 
 ;;show trailing whitespace.
 (setq-default show-trailing-whitespace t)   
+(defun my/toggle-show-trailing-whitespace ()
+  (interactive)
+  (if show-trailing-whitespace
+      (setq show-trailing-whitespace nil)
+    (setq show-trailing-whitespace t)))
+(global-set-key (kbd "C-c t") #'my/toggle-show-trailing-whitespace)
+
 
 ;;******** whitespace-mode *******
 ;; (require 'whitespace)

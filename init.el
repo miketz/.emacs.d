@@ -2618,9 +2618,13 @@ Depends on evil mode."
   ("o" text-scale-decrease "out" :color blue))
 
 (defhydra hydra-leader (evil-normal-state-map "\\")
-  "commands"
-  ("f" forward-char)
-  ("b" backward-char))
+  "cmd"
+  ("h" backward-char)
+  ("j" next-line)
+  ("k" previous-line)
+  ("l" forward-char)
+  ("x" eval-defun "evalD")
+  ("e" eval-last-sexp "eval"))
 
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

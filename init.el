@@ -2760,7 +2760,10 @@ Depends on evil mode."
   (interactive)
   (if show-trailing-whitespace
       (setq show-trailing-whitespace nil)
-    (setq show-trailing-whitespace t)))
+    (setq show-trailing-whitespace t))
+  ;;visual state makes the dipslay refresh.
+  (evil-visual-char)
+  (evil-exit-visual-state))
 (global-set-key (kbd "C-c t") #'my/toggle-show-trailing-whitespace)
 
 

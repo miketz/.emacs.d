@@ -315,7 +315,8 @@ Useful to check a boolean state and toggle the state in 1 go."
         darkroom
         ;;vim-empty-lines-mode
         fill-column-indicator
-        flycheck))
+        flycheck
+        hydra))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -335,14 +336,14 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;         ("melpa" . "http://melpa.milkbox.net/packages/")
 ;;         ("marmalade" . "http://marmalade-repo.org/packages/")))
 
-; activate all the packages (in particular autoloads)
+;; activate all the packages (in particular autoloads)
 (package-initialize)
 
-; fetch the list of packages available
+;; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 
-; install the missing packages
+;; install the missing packages
 (dolist (pkg my/packages)
   (unless (package-installed-p pkg)
     (package-install pkg)))
@@ -358,6 +359,7 @@ cleaning out unwanted packages."
                          (not (package-built-in-p x))
                          (package-installed-p x)))
                   (mapcar 'car package-archive-contents))))
+
 
 
 ;;--------------------------------------------------------------------
@@ -923,6 +925,10 @@ This prevents overlapping themes; something I would rarely want."
    ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
    ;;`(default ((t (:foreground "#CFC5A9" :background "#35352B"))))
    ;;`(default ((t (:foreground "#CCCCBC" :background "#35352B"))))
+   '(hydra-face-red
+     ((t (:foreground "green" :bold t))))
+   '(hydra-face-blue
+     ((t (:foreground "yellow" :bold t))))
    `(font-lock-comment-face
      ((t (:foreground "#8FB28F" :slant italic))))
    `(ace-jump-face-foreground
@@ -1883,6 +1889,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 (add-hook 'sql-mode-hook #'electric-pair-mode)
 (add-hook #'sql-mode-hook #'(lambda () (yas-minor-mode)))
 
+
 ;;--------------------------------------------------------------------
 ;; rainbow-delimiters
 ;;--------------------------------------------------------------------
@@ -2598,6 +2605,24 @@ Depends on evil mode."
             ))
 
 ;;-------------------------------------------------------------------------------
+;; hydra
+;;-------------------------------------------------------------------------------
+(setq hydra-is-helpful t)
+
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ;; The property name ":color" is misleading.
+  ;; :color blue makes hydra-mode exit after execution, like evil-leader.
+  ;; :color red stays in mode.
+  ("i" text-scale-increase "in" :color red)
+  ("o" text-scale-decrease "out" :color blue))
+
+(defhydra hydra-leader (evil-normal-state-map "\\")
+  "commands"
+  ("f" forward-char)
+  ("b" backward-char))
+
+;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-------------------------------------------------------------------------------
 (progn ;;use the default emacs scroll bingding for C-v
@@ -2758,13 +2783,12 @@ Depends on evil mode."
 (setq-default show-trailing-whitespace t)   
 (defun my/toggle-show-trailing-whitespace ()
   (interactive)
-  (if show-trailing-whitespace
-      (setq show-trailing-whitespace nil)
-    (setq show-trailing-whitespace t))
+  (not-m show-trailing-whitespace)
   ;;visual state makes the dipslay refresh.
   (evil-visual-char)
   (evil-exit-visual-state))
 (global-set-key (kbd "C-c t") #'my/toggle-show-trailing-whitespace)
+(global-set-key (kbd "C-c C-t") #'my/toggle-show-trailing-whitespace)
 
 
 ;;******** whitespace-mode *******

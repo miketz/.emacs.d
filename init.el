@@ -129,12 +129,16 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;--------------------------------------------------------------------
 (when nil ;these are special-use functions. Don't bother creating them unless i need them
 
-  (defun my/get-longest-sym (lst) ;PASS
-    "returns length of the longest symbol name"
+  (defun my/get-longest-str (lst)
+    "returns length of the longest str"
     (apply #'max
            (mapcar #'length
-                   (mapcar #'symbol-name
-                           lst))))
+                   lst)))
+
+  (defun my/get-longest-sym (lst) ;PASS
+    "returns length of the longest symbol name"
+    (my/get-longest-str (mapcar #'symbol-name
+                                lst)))
 
   (defun my/index-1d (r c num-cols) ;PASS, but not used.
     "returns a 1-D index. Using the 2d indexs r and c. And the number of columns (and vertical layout)."
@@ -182,10 +186,10 @@ Useful to check a boolean state and toggle the state in 1 go."
     "Gets the longest length for each column in LST, assuming NUM-COLS.
 '(lenCol1 lenCol2... lenColN)."
     (mapcar #'(lambda (column)
-                (my/get-longest-sym column))
+                (my/get-longest-str column))
             (my/get-columns lst num-cols)))
 
-  (defun my/render-list (lst num-cols)
+  (defun my/render-list (lst num-cols min-col-spaces)
     (let* ((data (mapcar #'symbol-name lst))
            (len (length data))
            (num-rows (+ (floor (/ len num-cols))
@@ -203,8 +207,8 @@ Useful to check a boolean state and toggle the state in 1 go."
             (when (not (null val))
               (insert val)
               (unless is-last-col
-                (dotimes (p pad-size) (insert " "))
-                (insert " "))))
+                (dotimes (s min-col-spaces) (insert " "))
+                (dotimes (p pad-size) (insert " ")))))
           )
         (unless (= r (- num-rows 1)) ;unless last row
           (insert "\n")))

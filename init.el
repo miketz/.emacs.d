@@ -2615,97 +2615,148 @@ Depends on evil mode."
 ;;-------------------------------------------------------------------------------
 (setq hydra-is-helpful t)
 
-(defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
-  ;; The property name ":color" is misleading.
-  ;; :color blue makes hydra-mode exit after execution, like evil-leader.
-  ;; :color red stays in mode.
-  ("i" text-scale-increase "in" :color red)
-  ("o" text-scale-decrease "out" :color blue))
+;; (defhydra hydra-zoom (global-map "<f2>")
+;;   "zoom"
+;;   ;; The property name ":color" is misleading.
+;;   ;; :color blue makes hydra-mode exit after execution, like evil-leader.
+;;   ;; :color red stays in mode.
+;;   ("i" text-scale-increase "in" :color red)
+;;   ("o" text-scale-decrease "out" :color blue))
 
-(defhydra hydra-leader (evil-normal-state-map "\\")
-  "cmd"
-  ("h" backward-char)
-  ("j" next-line)
-  ("k" previous-line)
-  ("l" forward-char)
-  ("x" eval-defun "evalD")
-  ("e" eval-last-sexp "eval"))
+;; (defhydra hydra-leader (evil-normal-state-map "\\")
+;;   "cmd"
+;;   ("h" backward-char)
+;;   ("j" next-line)
+;;   ("k" previous-line)
+;;   ("l" forward-char)
+;;   ("x" eval-defun "evalD")
+;;   ("e" eval-last-sexp "eval"))
 
-(global-set-key
- (kbd "C-M-o")
- (defhydra hydra-window ;;()
-   (
-    ;; :pre
-    ;; (set-cursor-color "purple")
-    ;; :post
-    ;; (set-cursor-color "green")
-    :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
-           )
-   "window"
-   ("h" windmove-left)
-   ("j" windmove-down)
-   ("k" windmove-up)
-   ("l" windmove-right)
-   ("e" evil-window-split)
-   ("E" evil-window-vsplit)
-   ("S" (lambda ()
-          (interactive)
-          (split-window-right)
-          (windmove-right))
-    "vert")
-   ("s" (lambda ()
-          (interactive)
-          (split-window-below)
-          (windmove-down))
-    "horz")
-   ("d" (lambda ()
-          (interactive)
-          (delete-window))
-    "del")
-   ("<" (lambda ()
-          (interactive)
-          (shrink-window-horizontally 15)))
-   (">" (lambda ()
-          (interactive)
-          (enlarge-window-horizontally 15)))
-   ("H" (lambda ()
-          (interactive)
-          (shrink-window 10)))
-   ("L" (lambda ()
-          (interactive)
-          (enlarge-window 10)))
-   ("o" other-window)
-   ("n" next-buffer)
-   ("p" previous-buffer)
-   ("b" balance-windows)
-   ("K" kill-this-buffer)
-   ("x" maximize-window "max")
-   ("," delete-other-windows "one")
-   ("q" nil "cancel") ;nil for function is an automatic blue head.
-   ))
+;; (global-set-key
+;;  (kbd "C-M-o")
+;;  (defhydra hydra-window ;;()
+;;    (
+;;     ;; :pre
+;;     ;; (set-cursor-color "purple")
+;;     ;; :post
+;;     ;; (set-cursor-color "green")
+;;     :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
+;;            )
+;;    "window"
+;;    ("h" windmove-left)
+;;    ("j" windmove-down)
+;;    ("k" windmove-up)
+;;    ("l" windmove-right)
+;;    ("H" (lambda ()
+;;           (interactive)
+;;           (enlarge-window-horizontally 15)))
+;;    ("J" (lambda ()
+;;           (interactive)
+;;           (shrink-window 10)))
+;;    ("K" (lambda ()
+;;           (interactive)
+;;           (enlarge-window 10)))
+;;    ("L" (lambda ()
+;;           (interactive)
+;;           (shrink-window-horizontally 15)))
+;;    ("e" evil-window-split) ;keeps sizes balanced as it splits like in Vim.
+;;    ("E" evil-window-vsplit);keeps sizes balanced as it splits like in Vim.
+;;    ("S" (lambda ()
+;;           (interactive)
+;;           (split-window-right)
+;;           (windmove-right))
+;;     "vert")
+;;    ("s" (lambda ()
+;;           (interactive)
+;;           (split-window-below)
+;;           (windmove-down))
+;;     "horz")
+;;    ("d" (lambda ()
+;;           (interactive)
+;;           (delete-window))
+;;     "del")
+;;    ("o" other-window)
+;;    ("n" next-buffer)
+;;    ("p" previous-buffer)
+;;    ("b" balance-windows)
+;;    ;;("K" kill-this-buffer)
+;;    ("x" maximize-window "max")
+;;    ("," delete-other-windows "one")
+;;    ("q" nil "cancel") ;nil for function is an automatic blue head.
+;;    ))
 
-(defhydra helm-like-unite ()
-  "vim movement"
-  ("?" helm-help "help")
-  ("<escape>" keyboard-escape-quit "exit")
-  ("<SPC>" helm-toggle-visible-mark "mark")
-  ("a" helm-toggle-all-marks "(un)mark all")
-  ;; not sure if there's a better way to do this
-  ("/" (lambda ()
+(defhydra hydra-window ;;()
+  (
+   ;; :pre
+   ;; (set-cursor-color "purple")
+   ;; :post
+   ;; (set-cursor-color "green")
+   :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
+          )
+  "window"
+  ("h" windmove-left)
+  ("j" windmove-down)
+  ("k" windmove-up)
+  ("l" windmove-right)
+  ("H" (lambda ()
          (interactive)
-         (execute-kbd-macro [?\C-s]))
-   "search")
-  ("v" helm-execute-persistent-action)
-  ("g" helm-beginning-of-buffer "top")
-  ("G" helm-end-of-buffer "bottom")
-  ("j" helm-next-line "down")
-  ("k" helm-previous-line "up")
-  ("q" helm-keyboard-quit) ;exit helm in 1 step
-  ("i" nil "cancel"))
+         (enlarge-window-horizontally 15)))
+  ("J" (lambda ()
+         (interactive)
+         (shrink-window 10)))
+  ("K" (lambda ()
+         (interactive)
+         (enlarge-window 10)))
+  ("L" (lambda ()
+         (interactive)
+         (shrink-window-horizontally 15)))
+  ("e" evil-window-split) ;keeps sizes balanced as it splits like in Vim.
+  ("E" evil-window-vsplit);keeps sizes balanced as it splits like in Vim.
+  ("S" (lambda ()
+         (interactive)
+         (split-window-right)
+         (windmove-right))
+   "vert")
+  ("s" (lambda ()
+         (interactive)
+         (split-window-below)
+         (windmove-down))
+   "horz")
+  ("d" (lambda ()
+         (interactive)
+         (delete-window))
+   "del")
+  ("o" other-window)
+  ("n" next-buffer)
+  ("p" previous-buffer)
+  ("b" balance-windows)
+  ;;("K" kill-this-buffer)
+  ("x" maximize-window "max")
+  ("," delete-other-windows "one")
+  ("C-g" nil)
+  ("q" nil "quit") ;nil for function is an automatic blue head.
+  )
+(define-key evil-normal-state-map (kbd "\\") 'hydra-window/body)
 
-;; bind a hydra
-(define-key helm-map (kbd "<escape>") 'helm-like-unite/body)
+;; (defhydra helm-like-unite ()
+;;   "vim movement"
+;;   ("?" helm-help "help")
+;;   ("<escape>" keyboard-escape-quit "exit")
+;;   ("<SPC>" helm-toggle-visible-mark "mark")
+;;   ("a" helm-toggle-all-marks "(un)mark all")
+;;   ;; not sure if there's a better way to do this
+;;   ("/" (lambda ()
+;;          (interactive)
+;;          (execute-kbd-macro [?\C-s]))
+;;    "search")
+;;   ("v" helm-execute-persistent-action)
+;;   ("g" helm-beginning-of-buffer "top")
+;;   ("G" helm-end-of-buffer "bottom")
+;;   ("j" helm-next-line "down")
+;;   ("k" helm-previous-line "up")
+;;   ("q" helm-keyboard-quit) ;exit helm in 1 step
+;;   ("i" nil "cancel"))
+;; (define-key helm-map (kbd "<escape>") 'helm-like-unite/body)
 
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

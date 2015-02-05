@@ -932,7 +932,9 @@ This prevents overlapping themes; something I would rarely want."
    '(hydra-face-red
      ((t (:foreground "green" :bold t))))
    '(hydra-face-blue
-     ((t (:foreground "yellow" :bold t))))
+     ((t (:foreground "cyan" :bold t))))
+   '(hydra-face-amaranth
+     ((t (:foreground "green" :bold t))))
    `(font-lock-comment-face
      ((t (:foreground "#8FB28F" :slant italic))))
    `(ace-jump-face-foreground
@@ -2632,7 +2634,14 @@ Depends on evil mode."
 
 (global-set-key
  (kbd "C-M-o")
- (defhydra hydra-window ()
+ (defhydra hydra-window ;;()
+   (
+    ;; :pre
+    ;; (set-cursor-color "purple")
+    ;; :post
+    ;; (set-cursor-color "green")
+    :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
+           )
    "window"
    ("h" windmove-left)
    ("j" windmove-down)
@@ -2672,8 +2681,9 @@ Depends on evil mode."
    ("b" balance-windows)
    ("K" kill-this-buffer)
    ("x" maximize-window "max")
-   ("," delete-other-windows "one" :color blue)
-   ("q" nil "cancel")))
+   ("," delete-other-windows "one")
+   ("q" nil "cancel") ;nil for function is an automatic blue head.
+   ))
 
 (defhydra helm-like-unite ()
   "vim movement"

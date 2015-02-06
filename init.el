@@ -2686,13 +2686,14 @@ Depends on evil mode."
 ;;    ))
 
 (defhydra hydra-window ;;()
-  (
-   ;; :pre
-   ;; (set-cursor-color "purple")
-   ;; :post
-   ;; (set-cursor-color "green")
-   :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
-          )
+    (;; :pre ;;executes before each head.
+     ;; (progn (message "executed pre")
+     ;;        (my/cycle-light-bg))
+     ;; :post ;;executes on exit from body, not exit from a head.
+     ;; (progn (message "executed post")
+     ;;        (my/cycle-light-bg))
+     :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
+            )
   "window"
   ("h" windmove-left)
   ("j" windmove-down)

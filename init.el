@@ -945,7 +945,10 @@ This prevents overlapping themes; something I would rarely want."
    ;;highlight so i can see the slime function parameters highlight.
    '(highlight ((t (:foreground "spring green"
                                 :background "black"))))
-   '(region ((t :background "black")))
+
+   `(region
+     ((t (:background "#69685E"))));"#49483E"
+   ;; '(region ((t :background "black")))
    '(isearch ((t :background "black"
                  :foreground "yellow"
                  :bold nil

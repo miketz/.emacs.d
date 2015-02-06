@@ -2545,6 +2545,8 @@ Depends on evil mode."
 ;; ediff
 ;;-----------------------------------------------------------------------------
 (setq ediff-split-window-function 'split-window-horizontally)
+;; don't use the popup window
+(setq ediff-window-setup-function 'ediff-setup-windows-plain);'ediff-setup-windows-multiframe
 
 ;;-----------------------------------------------------------------------------
 ;; helm-w32-launcher. Microsoft Windows only?

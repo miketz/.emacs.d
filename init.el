@@ -2753,7 +2753,9 @@ Depends on evil mode."
   )
 (define-key evil-normal-state-map (kbd "\\") 'hydra-window/body)
 (define-key evil-motion-state-map (kbd "\\") 'hydra-window/body)
-(define-key magit-mode-map (kbd "\\") 'hydra-window/body)
+(eval-after-load "magit"
+  '(progn
+     (define-key magit-mode-map (kbd "\\") 'hydra-window/body)))
 ;;(evil-define-key 'emacs magit-mode-map (kbd "\\") 'hydra-window/body)
 
 ;; (defhydra helm-like-unite ()

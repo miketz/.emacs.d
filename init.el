@@ -2773,6 +2773,12 @@ Depends on evil mode."
 ;; (define-key helm-map (kbd "<escape>") 'helm-like-unite/body)
 
 ;;-------------------------------------------------------------------------------
+;; erc
+;;-------------------------------------------------------------------------------
+(add-hook 'erc-mode-hook #'(lambda ()
+                             (setq show-trailing-whitespace nil)))
+
+;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;-------------------------------------------------------------------------------
 (progn ;;use the default emacs scroll bingding for C-v

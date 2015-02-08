@@ -2748,6 +2748,7 @@ Depends on evil mode."
   ("x" maximize-window "max")
   ;;("," delete-other-windows "one")
   ("C-g" nil)
+  ("\\" nil)
   ("q" nil "quit") ;nil for function is an automatic blue head.
   )
 (define-key evil-normal-state-map (kbd "\\") 'hydra-window/body)

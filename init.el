@@ -2942,7 +2942,9 @@ Depends on evil mode."
           'comint-watch-for-password-prompt)
 
 ;;show trailing whitespace.
-(setq-default show-trailing-whitespace t)   
+(add-hook 'prog-mode-hook #'(lambda ()
+                              (setq-default show-trailing-whitespace t)))
+
 (defun my/toggle-show-trailing-whitespace ()
   (interactive)
   (not-m show-trailing-whitespace)

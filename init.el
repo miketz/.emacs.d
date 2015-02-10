@@ -2746,7 +2746,7 @@ Depends on evil mode."
   ("b" balance-windows)
   ;;("K" kill-this-buffer)
   ("x" maximize-window "max")
-  ;;("," delete-other-windows "one")
+  ("X" delete-other-windows "only")
   ("C-g" nil)
   ("\\" nil)
   ("q" nil "quit") ;nil for function is an automatic blue head.

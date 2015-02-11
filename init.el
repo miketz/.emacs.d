@@ -2943,7 +2943,7 @@ Depends on evil mode."
 
 ;;show trailing whitespace.
 (add-hook 'prog-mode-hook #'(lambda ()
-                              (setq-default show-trailing-whitespace t)))
+                              (setq show-trailing-whitespace t)))
 
 (defun my/toggle-show-trailing-whitespace ()
   (interactive)

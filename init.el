@@ -2710,7 +2710,10 @@ Depends on evil mode."
   ;; ("b" paredit-backward)
   ("\\" nil)
   ("q" nil))
-(key-chord-define evil-normal-state-map "c," #'hydra-paredit/body)
+(add-hook 'paredit-mode-hook
+          (lambda ()
+            (define-key paredit-mode-map (kbd "C-c p") #'hydra-paredit/body)))
+;;(key-chord-define evil-normal-state-map "c," #'hydra-paredit/body)
 
 
 (defhydra hydra-window ;;()

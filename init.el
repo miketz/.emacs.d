@@ -1048,11 +1048,11 @@ This prevents overlapping themes; something I would rarely want."
 (defun color-gruvbox ()
   (interactive)
   (load-theme 'gruvbox t)
-                                        ;(my/set-font :weight 'normal)
+  ;;(my/set-font :weight 'normal)
   (my/cursor-stuff-darkBg)
   (my/rainbow-parens-dark-bg)
   ;; (set-face-foreground 'font-lock-string-face "salmon")
-                                        ;(set-face-foreground 'font-lock-comment-face "#66A555")
+  ;;(set-face-foreground 'font-lock-comment-face "#66A555")
   (custom-theme-set-faces
    'gruvbox
    `(font-lock-comment-face

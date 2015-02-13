@@ -1223,7 +1223,7 @@ This prevents overlapping themes; something I would rarely want."
    ((or (eq my/curr-computer 'work-laptop)
         (eq my/curr-computer 'leyna-laptop))
     (my/set-font :sym 'consolas
-                 :height 120;'90 105 115 120 125
+                 :height 125;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
       (color-zenburn)))
@@ -1236,7 +1236,7 @@ This prevents overlapping themes; something I would rarely want."
                             :weight normal
                             :height 155
                             :width normal)))))
-    (when (display-graphic-p)
+    (when (display-graphic-p) ;this doens't return true for emacs daemon!
       (color-monokai))))
 
 

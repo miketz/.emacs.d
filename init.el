@@ -930,13 +930,13 @@ This prevents overlapping themes; something I would rarely want."
    ;;`(default ((t (:foreground "#CFC5A9" :background "#35352B"))))
    ;;`(default ((t (:foreground "#CCCCBC" :background "#35352B"))))
 
-   `(mode-line
-     ((t (:foreground "#8FB28F"
-                      :background "#032203"
-                      ;;:underline "dark yellow"
-                      ;;:overline "green"
-                      :box (:line-width -1 :style released-button)))
-      (t :inverse-video t)))
+   ;; `(mode-line
+   ;;   ((t (:foreground "#8FB28F"
+   ;;                    :background "#032203"
+   ;;                    ;;:underline "dark yellow"
+   ;;                    ;;:overline "green"
+   ;;                    :box (:line-width -1 :style released-button)))
+   ;;    (t :inverse-video t)))
    '(hydra-face-red
      ((t (:foreground "green" :bold t))))
    '(hydra-face-blue

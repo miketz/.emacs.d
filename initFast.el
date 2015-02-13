@@ -4,7 +4,7 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; (load-theme 'github t)
+(load-theme 'deeper-blue t)
 ;; (set-background-color "white")
 
 ;(load-theme 'leuven)
@@ -18,7 +18,7 @@
                         :foundry "outline"
                         :slant normal
                         :weight normal
-                        :height 115
+                        :height 120
                         :width normal)))))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

@@ -320,7 +320,8 @@ Useful to check a boolean state and toggle the state in 1 go."
         ;;vim-empty-lines-mode
         fill-column-indicator
         flycheck
-        hydra))
+        hydra
+        linum-relative))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -2809,6 +2810,15 @@ Depends on evil mode."
 ;;-------------------------------------------------------------------------------
 (add-hook 'erc-mode-hook #'(lambda ()
                              (setq show-trailing-whitespace nil)))
+;;-------------------------------------------------------------------------------
+;; linum-relative
+;;-------------------------------------------------------------------------------
+;; (when nil ;disable for now. Makes the screen blink when line # changes.
+;;   (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
+;;   (setq linum-relative-current-symbol "0")
+;;   (require 'linum-relative);linum-mode's behavior is changed by the linum-relative package.
+;;   ;;(linum-relative-toggle) ;;toggle between realtive and straight.
+;;   )
 
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
@@ -2893,7 +2903,7 @@ Depends on evil mode."
   (insert (now)))
 
 
-(global-linum-mode 0) ;show/hide line numbers in margin
+;;(global-linum-mode 0) ;show/hide line numbers in margin
 
 (setq-default column-number-mode nil) ;show/hide column # in mode line.
 (setq-default line-number-mode t) ;show/hide line # in mode line. Use fn what-line

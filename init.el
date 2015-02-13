@@ -1472,7 +1472,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
                                         ;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq-default js2-global-externs '("module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
+(setq-default js2-global-externs '("$" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
                                    "clearTimeout" "setInterval" "clearInterval" "location" "__dirname"
                                    "console" "JSON" "ActiveXObject"))
 (setq js2-highlight-level 3);;maximum highlighting

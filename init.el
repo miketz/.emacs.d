@@ -320,7 +320,8 @@ Useful to check a boolean state and toggle the state in 1 go."
         ;;vim-empty-lines-mode
         fill-column-indicator
         flycheck
-        hydra))
+        hydra
+        linum-relative))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -930,6 +931,7 @@ This prevents overlapping themes; something I would rarely want."
    ;;`(default ((t (:foreground "#CFC5A9" :background "#35352B"))))
    ;;`(default ((t (:foreground "#CCCCBC" :background "#35352B"))))
 
+   ;;'(cursor ((t (:foreground "blue" :background "red"))))
    ;; `(mode-line
    ;;   ((t (:foreground "#8FB28F"
    ;;                    :background "#032203"
@@ -1221,7 +1223,7 @@ This prevents overlapping themes; something I would rarely want."
    ((or (eq my/curr-computer 'work-laptop)
         (eq my/curr-computer 'leyna-laptop))
     (my/set-font :sym 'consolas
-                 :height 120;'90 105 115 120 125
+                 :height 125;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
       (color-zenburn)))
@@ -1234,7 +1236,7 @@ This prevents overlapping themes; something I would rarely want."
                             :weight normal
                             :height 155
                             :width normal)))))
-    (when (display-graphic-p)
+    (when (display-graphic-p) ;this doens't return true for emacs daemon!
       (color-monokai))))
 
 
@@ -1472,7 +1474,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
                                         ;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq-default js2-global-externs '("module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
+(setq-default js2-global-externs '("$" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
                                    "clearTimeout" "setInterval" "clearInterval" "location" "__dirname"
                                    "console" "JSON" "ActiveXObject"))
 (setq js2-highlight-level 3);;maximum highlighting
@@ -2809,6 +2811,15 @@ Depends on evil mode."
 ;;-------------------------------------------------------------------------------
 (add-hook 'erc-mode-hook #'(lambda ()
                              (setq show-trailing-whitespace nil)))
+;;-------------------------------------------------------------------------------
+;; linum-relative
+;;-------------------------------------------------------------------------------
+;; (when nil ;disable for now. Makes the screen blink when line # changes.
+;;   (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
+;;   (setq linum-relative-current-symbol "0")
+;;   (require 'linum-relative);linum-mode's behavior is changed by the linum-relative package.
+;;   ;;(linum-relative-toggle) ;;toggle between realtive and straight.
+;;   )
 
 ;;-------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
@@ -2893,7 +2904,7 @@ Depends on evil mode."
   (insert (now)))
 
 
-(global-linum-mode 0) ;show/hide line numbers in margin
+;;(global-linum-mode 0) ;show/hide line numbers in margin
 
 (setq-default column-number-mode nil) ;show/hide column # in mode line.
 (setq-default line-number-mode t) ;show/hide line # in mode line. Use fn what-line

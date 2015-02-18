@@ -2580,15 +2580,15 @@ Depends on evil mode."
 ;;                                 ;;:box t
 ;;                                 )))))
 
-;;-----------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; sql-indent
-;;-----------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; (eval-after-load "sql"
 ;;   '(load-library "sql-indent"))
 
-;;-----------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; darkroom
-;;-----------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 (require 'darkroom)
 (setq darkroom-margins 0.15)
 (setq darkroom-fringes-outside-margins nil) ;;nil keeps margins close to the centered text.
@@ -2598,26 +2598,32 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
 
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; fill-column-indicator
-;;-------------------------------------------------------------------------------
-;; (require 'fill-column-indicator)
-;; (setq fci-rule-column 101)
-;; (setq fci-rule-width 1)
-;; (progn
-;;   (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
-;;   (setq fci-rule-use-dashes t))
-;; (setq fci-rule-color "#555555")
-;; (add-hook 'prog-mode-hook #'(lambda ()
-;;                               (fci-mode 1)))
+;;------------------------------------------------------------------------------
+(require 'fill-column-indicator)
+(setq fci-rule-column 80)
+(setq fci-rule-width 1)
+(progn
+  (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
+  (setq fci-rule-use-dashes t))
+(setq fci-rule-color "#484848") ;;tailored for zenburn ATM.
+(add-hook 'prog-mode-hook #'(lambda ()
+                              (fci-mode 1)))
+
+(defun my/fci-refresh ()
+  (interactive)
+  (fci-mode 0)
+  (fci-mode 1))
 
 ;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
 ;; ;;TODO: it doesn't seem to be working!
+;; ;;TODID: used "white-space-mode" instead of `show-trailing-whitespace'.
 ;; (setq whitespace-style '(face trailing))   
 
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; flycheck
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 (add-hook 'flycheck-mode-hook
           (lambda ()
             (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
@@ -2625,9 +2631,9 @@ Depends on evil mode."
             ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
             ))
 
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; hydra
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 (setq hydra-is-helpful t)
 
 ;; (defhydra hydra-zoom (global-map "<f2>")
@@ -2979,24 +2985,25 @@ Depends on evil mode."
           'comint-watch-for-password-prompt)
 
 ;;show trailing whitespace.
-(add-hook 'prog-mode-hook #'(lambda ()
-                              (setq show-trailing-whitespace t)))
+;; (add-hook 'prog-mode-hook #'(lambda ()
+;;                               (setq show-trailing-whitespace t)))
 
-(defun my/toggle-show-trailing-whitespace ()
-  (interactive)
-  (not-m show-trailing-whitespace)
-  ;;visual state makes the dipslay refresh.
-  (evil-visual-char)
-  (evil-exit-visual-state))
-(global-set-key (kbd "C-c t") #'my/toggle-show-trailing-whitespace)
-(global-set-key (kbd "C-c C-t") #'my/toggle-show-trailing-whitespace)
+;; (defun my/toggle-show-trailing-whitespace ()
+;;   (interactive)
+;;   (not-m show-trailing-whitespace)
+;;   ;;visual state makes the dipslay refresh.
+;;   (evil-visual-char)
+;;   (evil-exit-visual-state))
+;; (global-set-key (kbd "C-c t") #'my/toggle-show-trailing-whitespace)
+;; (global-set-key (kbd "C-c C-t") #'my/toggle-show-trailing-whitespace)
 
 
 ;;******** whitespace-mode *******
-;; (require 'whitespace)
-;; (setq whitespace-line-column 104)
-;; (setq whitespace-style '(face lines-tail))
-;; (global-whitespace-mode nil)
+(require 'whitespace)
+(setq-default whitespace-line-column 80)
+;;(setq whitespace-style '(face lines-tail))
+(setq-default whitespace-style '(face trailing))
+(global-whitespace-mode 1)
 ;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ;;disable annoying newline emacs automatically adds to the end of a file when saving.

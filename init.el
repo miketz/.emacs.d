@@ -2648,6 +2648,9 @@ Depends on evil mode."
 ;; hydra
 ;;------------------------------------------------------------------------------
 (setq hydra-is-helpful t)
+;; don't use window for hints. It seems to lock things up.
+;; And window switcher mode really gets messed up.
+(setq hydra-lv nil)
 
 ;; (defhydra hydra-zoom (global-map "<f2>")
 ;;   "zoom"
@@ -2738,14 +2741,14 @@ Depends on evil mode."
 
 
 (defhydra hydra-window ;;()
-    (;; :pre ;;executes before each head.
-     ;; (progn (message "executed pre")
-     ;;        (my/cycle-light-bg))
-     ;; :post ;;executes on exit from body, not exit from a head.
-     ;; (progn (message "executed post")
-     ;;        (my/cycle-light-bg))
-     :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
-            )
+  (;; :pre ;;executes before each head.
+   ;; (progn (message "executed pre")
+   ;;        (my/cycle-light-bg))
+   ;; :post ;;executes on exit from body, not exit from a head.
+   ;; (progn (message "executed post")
+   ;;        (my/cycle-light-bg))
+   :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
+          )
   "window"
   ("h" windmove-left)
   ("j" windmove-down)
@@ -2794,7 +2797,7 @@ Depends on evil mode."
   ;;("K" kill-this-buffer)
   ("x" maximize-window "max")
   ("X" delete-other-windows "only")
-  ("C-g" nil)
+  ("C-g" nil nil)
   ("\\" nil)
   ("q" nil "quit") ;nil for function is an automatic blue head.
   )

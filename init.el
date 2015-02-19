@@ -1363,7 +1363,22 @@ This prevents overlapping themes; something I would rarely want."
   (define-key company-active-map (kbd "<tab>") 'company-complete) ;expands till -. Completes after that.
   (setq company-idle-delay nil) ;disable automatic completion
   (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
-  )
+
+  (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
+    ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
+    (defvar-local company-fci-mode-on-p nil)
+
+    (defun company-turn-off-fci (&rest ignore)
+      (when (boundp 'fci-mode)
+        (setq company-fci-mode-on-p fci-mode)
+        (when fci-mode (fci-mode -1))))
+
+    (defun company-maybe-turn-on-fci (&rest ignore)
+      (when company-fci-mode-on-p (fci-mode 1)))
+
+    (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+    (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+    (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
 
 ;;---------------------------------------------
 ;; slime-company
@@ -2164,10 +2179,10 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; (eval-after-load 'company
 ;;   '(add-to-list 'company-backends 'company-irony))
 
-;; (optional) adds CC special commands to `company-begin-commands' in order to
-;; trigger completion at interesting places, such as after scope operator
-;;     std::|
-;;(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+;; ;; (optional) adds CC special commands to `company-begin-commands' in order to
+;; ;; trigger completion at interesting places, such as after scope operator
+;; ;;     std::|
+;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
 ;;-------------------------------
 ;; Load projects

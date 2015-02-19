@@ -4,20 +4,20 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-(load-theme 'deeper-blue t)
+;;(load-theme 'deeper-blue t)
 ;; (set-background-color "white")
 
-;(load-theme 'leuven)
-;(setq-default cursor-type 'box)
-;(set-background-color "ivory2")
-;(set-cursor-color "blue")
+;;(load-theme 'leuven)
+;;(setq-default cursor-type 'box)
+;;(set-background-color "ivory2")
+;;(set-cursor-color "blue")
 
 
 (custom-set-faces
  `(default ((t (:family "Consolas"
                         :foundry "outline"
                         :slant normal
-                        :weight normal
+                        :weight bold
                         :height 120
                         :width normal)))))
 

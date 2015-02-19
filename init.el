@@ -1121,11 +1121,11 @@ This prevents overlapping themes; something I would rarely want."
   ;;default is the lack of themes, so disable any enabled themes.
   (dolist (thm custom-enabled-themes)
     (disable-theme thm))
-                                        ;(set-background-color "ivory2")
+  ;;(set-background-color "ivory2")
   (my/cursor-stuff-lightBg)
-                                        ;(set-face-background hl-line-face "#EEFFEE")
+  ;;(set-face-background hl-line-face "#EEFFEE")
   (my/rainbow-parens-light-bg)
-                                        ;(my/set-font :weight 'bold)
+  ;;(my/set-font :weight 'bold)
 
   (custom-set-faces
    `(ace-jump-face-foreground
@@ -2858,14 +2858,14 @@ Depends on evil mode."
   (define-key evil-normal-state-map (kbd "\\") #'my/choose-hydra)
   (define-key evil-motion-state-map (kbd "\\") #'my/choose-hydra))
 
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; erc
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 (add-hook 'erc-mode-hook #'(lambda ()
                              (setq show-trailing-whitespace nil)))
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; linum-relative
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; (when nil ;disable for now. Makes the screen blink when line # changes.
 ;;   (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
 ;;   (setq linum-relative-current-symbol "0")
@@ -2873,9 +2873,9 @@ Depends on evil mode."
 ;;   ;;(linum-relative-toggle) ;;toggle between realtive and straight.
 ;;   )
 
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
-;;-------------------------------------------------------------------------------
+;;------------------------------------------------------------------------------
 (progn ;;use the default emacs scroll bingding for C-v
   (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
   (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))

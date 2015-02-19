@@ -2352,7 +2352,8 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;-----------------------------------------------------------------------------
 ;; web-mode
 ;;-----------------------------------------------------------------------------
-(require 'web-mode)
+;;(require 'web-mode)
+(autoload 'web-mode "web-mode" "web mode" t)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
@@ -2367,7 +2368,8 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;-----------------------------------------------------------------------------
 ;; vimrc-mode
 ;;-----------------------------------------------------------------------------
-(require 'vimrc-mode)
+;;(require 'vimrc-mode)
+(autoload 'vimrc-mode "vimrc-mode" "vimrc mode" t)
 (add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
 
 ;;-----------------------------------------------------------------------------
@@ -2600,9 +2602,9 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; darkroom
 ;;------------------------------------------------------------------------------
-(require 'darkroom)
-(setq darkroom-margins 0.15)
-(setq darkroom-fringes-outside-margins nil) ;;nil keeps margins close to the centered text.
+;; (require 'darkroom)
+;; (setq darkroom-margins 0.15)
+;; (setq darkroom-fringes-outside-margins nil) ;;nil keeps margins close to the centered text.
 
 ;;-----------------------------------------------------------------------------
 ;; vim-empty-lines-mode

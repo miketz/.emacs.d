@@ -3003,7 +3003,10 @@ Depends on evil mode."
 (setq-default whitespace-line-column 80)
 ;;(setq whitespace-style '(face lines-tail))
 (setq-default whitespace-style '(face trailing))
-(global-whitespace-mode 1)
+(add-hook 'prog-mode-hook #'(lambda ()
+                              (whitespace-mode 1)))
+;;(global-whitespace-mode 1)
+
 ;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ;;disable annoying newline emacs automatically adds to the end of a file when saving.

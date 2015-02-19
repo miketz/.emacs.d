@@ -1944,9 +1944,10 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; Expand-region
 ;; https://github.com/magnars/expand-region.el
 ;;--------------------------------------------------------------------
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
-(global-set-key (kbd "C--") 'er/contract-region)
+;;(require 'expand-region)
+(autoload 'expand-region "expand-region" "expand region" t)
+(global-set-key (kbd "C-=") #'er/expand-region)
+(global-set-key (kbd "C--") #'er/contract-region)
 
 ;;--------------------------------------------------------------------
 ;; mulitple-cursors

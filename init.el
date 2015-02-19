@@ -1887,6 +1887,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; Dired
 ;;------------------
 (setq-default dired-isearch-filenames t) ;search file names only in Dired.
+(add-hook 'dired-mode-hook #'(lambda () (dired-hide-details-mode 1)))
+
+
 ;;(define-key dired-mode-map "c" 'find-file) ;create file
 
 ;; ;; disable the disable status of function `dired-find-alternate-file'
@@ -1903,9 +1906,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;---------------------
 ;; dired-details
 ;;---------------------
-;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
-(require 'dired-details)
-(dired-details-install)
+;; ;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
+;; (require 'dired-details)
+;; (dired-details-install)
 
 
 

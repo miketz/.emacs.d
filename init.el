@@ -300,7 +300,7 @@ Useful to check a boolean state and toggle the state in 1 go."
         nyan-mode
         nyan-prompt
         ;;powerline
-        dired-details
+        ;;dired-details ;default feature in emacs 24.4+
         web-mode
         htmlize
         magit

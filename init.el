@@ -1472,7 +1472,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; js2-mode
 ;;---------------------------------------------
-                                        ;(autoload 'js2-mode "js2" nil t)
+;;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq-default js2-global-externs '("$" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
                                    "clearTimeout" "setInterval" "clearInterval" "location" "__dirname"
@@ -1793,31 +1793,38 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; Ido mode
 ;;--------------------
-;(require 'ido)
-;(ido-mode t)
+;;(require 'ido)
+;;(ido-mode t)
 
 
 ;;--------------------
 ;; Yasnippet
 ;;--------------------
-;(add-to-list 'load-path "~/.emacs.d/yasnippet")
-(require 'yasnippet)
-(yas-global-mode 0)
-(yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
-(setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
+;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
 
-(defun my/yas-handle-param (param-str
-                            sep-char
-                            fn-deco
-                            fn-fix-first
-                            fn-fix-last)
-  "Does something special for each paramter in a snippet."
-  (let* ((split (split-string param-str sep-char))
-         (decorated (mapcar fn-deco split)))
-    (setcar decorated (funcall fn-fix-first (car decorated)))
-    (setf (nthcdr (- (length decorated) 1) decorated)
-          (cons (funcall fn-fix-last (car (last decorated)) ) nil))
-    (apply #'concat decorated)))
+;;(require 'yasnippet)
+;;(yas-global-mode 0)
+(autoload 'yasnippet "yasnippet" "yasnippet mode" t)
+
+(eval-after-load "yasnippet"
+  '(progn
+     (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
+     (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
+     (defun my/yas-handle-param (param-str
+                                 sep-char
+                                 fn-deco
+                                 fn-fix-first
+                                 fn-fix-last)
+       "Does something special for each paramter in a snippet."
+       (let* ((split (split-string param-str sep-char))
+              (decorated (mapcar fn-deco split)))
+         (setcar decorated (funcall fn-fix-first (car decorated)))
+         (setf (nthcdr (- (length decorated) 1) decorated)
+               (cons (funcall fn-fix-last (car (last decorated)) ) nil))
+         (apply #'concat decorated)))
+     ))
+
+
 ;; (my/yas-handle-param "first, middle1, middle2, last"
 ;;                      ","
 ;;                      #'(lambda (x)

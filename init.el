@@ -2620,7 +2620,7 @@ Depends on evil mode."
 (progn
   (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
   (setq fci-rule-use-dashes t))
-(setq fci-rule-color "#484848") ;;tailored for zenburn ATM.
+(setq fci-rule-color "#555555") ;;tailored for zenburn ATM.
 (add-hook 'prog-mode-hook #'(lambda ()
                               (fci-mode 1)))
 
@@ -2735,8 +2735,8 @@ Depends on evil mode."
 
   ("j" evil-scroll-line-down)
   ("k" evil-scroll-line-up)
-  ("h" evil-scroll-left)
-  ("l" evil-scroll-right)
+  ("h" evil-scroll-column-left 10)
+  ("l" evil-scroll-column-right 10)
 
   ("C-g" nil nil)
   ("q" nil))
@@ -2848,9 +2848,10 @@ Depends on evil mode."
 
 
 (progn ;;spawn hydras from a single binding. A hydra of hydras.
-  (setq *my-hydras* (list #'hydra-easyscroll/body
-                          #'hydra-window/body
-                          #'hydra-paredit/body))
+  (setq *my-hydras* (mapcar #'symbol-name
+                            (list #'hydra-easyscroll/body
+                                  #'hydra-window/body
+                                  #'hydra-paredit/body)))
   (defun my/choose-hydra ()
     (interactive)
     (funcall (intern (completing-read "pick one: " *my-hydras*))))

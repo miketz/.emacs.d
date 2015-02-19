@@ -2722,6 +2722,24 @@ Depends on evil mode."
 ;;    ("q" nil "cancel") ;nil for function is an automatic blue head.
 ;;    ))
 
+;; horizontal scroll test 3333-=--------------------------------------------------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCcccccccccccccccccccccccccccccccccccccDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+;;easy 1 key scrolling
+(defhydra hydra-easyscroll (:color amaranth)
+  "scroll"
+  ("v" scroll-up-command)
+  ("M-v" scroll-down-command)
+  ("f" scroll-right)
+  ("b" scroll-left)
+  ("," beginning-of-buffer)
+  ("." end-of-buffer)
+
+  ("j" evil-scroll-line-down)
+  ("k" evil-scroll-line-up)
+  ("h" evil-scroll-left)
+  ("l" evil-scroll-right)
+
+  ("C-g" nil nil)
+  ("q" nil))
 
 ;; avoid moving hand to arrow keys for barf/slurp
 (defhydra hydra-paredit ()
@@ -2801,11 +2819,11 @@ Depends on evil mode."
   ("\\" nil)
   ("q" nil "quit") ;nil for function is an automatic blue head.
   )
-(define-key evil-normal-state-map (kbd "\\") 'hydra-window/body)
-(define-key evil-motion-state-map (kbd "\\") 'hydra-window/body)
-(eval-after-load "magit"
-  '(progn
-     (define-key magit-mode-map (kbd "\\") 'hydra-window/body)))
+;; (define-key evil-normal-state-map (kbd "\\") 'hydra-window/body)
+;; (define-key evil-motion-state-map (kbd "\\") 'hydra-window/body)
+;; (eval-after-load "magit"
+;;   '(progn
+;;      (define-key magit-mode-map (kbd "\\") 'hydra-window/body)))
 ;;(evil-define-key 'emacs magit-mode-map (kbd "\\") 'hydra-window/body)
 
 ;; (defhydra helm-like-unite ()
@@ -2827,6 +2845,17 @@ Depends on evil mode."
 ;;   ("q" helm-keyboard-quit) ;exit helm in 1 step
 ;;   ("i" nil "cancel"))
 ;; (define-key helm-map (kbd "<escape>") 'helm-like-unite/body)
+
+
+(progn ;;spawn hydras from a single binding. A hydra of hydras.
+  (setq *my-hydras* (list #'hydra-easyscroll/body
+                          #'hydra-window/body
+                          #'hydra-paredit/body))
+  (defun my/choose-hydra ()
+    (interactive)
+    (funcall (intern (completing-read "pick one: " *my-hydras*))))
+  (define-key evil-normal-state-map (kbd "\\") #'my/choose-hydra)
+  (define-key evil-motion-state-map (kbd "\\") #'my/choose-hydra))
 
 ;;-------------------------------------------------------------------------------
 ;; erc

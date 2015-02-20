@@ -4,7 +4,7 @@
 
 ;;; NOTES:
 ;;; Windows: registry entry for "open with" option:
-;;;          Computer\HKEY_CLASSES_ROOT\Applications\runemacs.exe\shell\open\command
+;;;   Computer\HKEY_CLASSES_ROOT\Applications\runemacs.exe\shell\open\command
 
 ;;;----------------------------------
 ;;; Git incantations:
@@ -63,7 +63,8 @@ Useful to check a boolean state and toggle the state in 1 go."
   `(setq ,bool (not ,bool)))
 
 (defmacro my/letify-alist (alist &rest body)
-  ;; destructuring macro found by inspecting Bozhidar Batsov's zenburn color theme.
+  ;; destructuring macro found by inspecting Bozhidar Batsov's zenburn color
+  ;; theme.
   ;; example usage:
   ;; (my/letify-alist ((red . "#FF0000")
   ;;                   (green . "#00FF00")
@@ -127,7 +128,7 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;; helper functions to draw a list in N columns. 2-d diplay from a
 ;; 1-d list.
 ;;--------------------------------------------------------------------
-(when nil ;these are special-use functions. Don't bother creating them unless i need them
+(when nil ;these are special-use functions. Don't create them.
 
   (defun my/get-longest-str (lst)
     "returns length of the longest str"
@@ -141,12 +142,14 @@ Useful to check a boolean state and toggle the state in 1 go."
                                 lst)))
 
   (defun my/index-1d (r c num-cols) ;PASS, but not used.
-    "returns a 1-D index. Using the 2d indexs r and c. And the number of columns (and vertical layout)."
+    "returns a 1-D index. Using the 2d indexs r and c.
+And the number of columns (and vertical layout)."
     (+ (* c num-cols)
        r))
 
   (defun my/index-column (i num-cols) ;PASS, but not used.
-    "returns the column the 1-D index falls under for N cols (and vertical layout)"
+    "returns the column the 1-D index falls under for N cols
+(and vertical layout)"
     (floor (/ i num-cols)))
 
   (defun my/index-row (i num-cols) ;PASS, but not used.
@@ -157,13 +160,13 @@ Useful to check a boolean state and toggle the state in 1 go."
 
   (defun my/get-columns (lst num-cols) ;PASS
     "returns a list-of-lists. A list for each column from the 1-D lst.
-    Assums a vertically stacked display of the list.
-    (my/get-columns '(a b c d e f g) 3)
-    =>
-    ((a b c) (d e f) (g))"
-    ;;STRANGE: for some reason if I align docstring to the left without whjite space it
-    ;;         messes up paredit's ability to match parens in the code following this
-    ;;         fucntion.
+Assums a vertically stacked display of the list.
+(my/get-columns '(a b c d e f g) 3)
+=>
+((a b c) (d e f) (g))"
+    ;;STRANGE: for some reason if I align docstring to the left without white
+    ;;space it messes up paredit's ability to match parens in the code
+    ;;following this fucntion.
     (let ((len            (length lst))
           (lst-of-columns nil) ;the goal
           (num-rows (+ (floor (/ len num-cols))
@@ -175,7 +178,7 @@ Useful to check a boolean state and toggle the state in 1 go."
               (r 0))
           (dotimes (r num-rows)
             (let ((val (nth i lst)))
-              (when (not (null val)) ;the last column mayh have empty slots to be skipped
+              (when (not (null val));last col may have empty slots to be skipped
                 (setq column (append column (list val)))))
             (incf i))
           (setq lst-of-columns (cons column lst-of-columns)))
@@ -224,26 +227,30 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;; my/curr-computer
 
 ;; Keeping track of the various computers I use emacs on.
-(setq my/computers '(unknown ;if my-curr-computer.txt does not exist to identify the machine.
-                     work-laptop
-                     raspberry-pi
-                     utilite
-                     old-sony-vaio
-                     a-tower
-                     a-laptop-old
-                     a-laptop-faster
-                     leyna-laptop))
+(setq my/computers
+      '(unknown ;if my-curr-computer.txt does not exist
+        work-laptop
+        raspberry-pi
+        utilite
+        old-sony-vaio
+        a-tower
+        a-laptop-old
+        a-laptop-faster
+        leyna-laptop))
 ;; currently used computer. (manually set)
 ;; Used to conditionally set computer specific options, and paths.
-;; NOTE: When setting up emacs on a new computer create file ~/.emacs.d/my-curr-computer.txt
+;; NOTE: When setting up emacs on a new computer create file
+;; ~/.emacs.d/my-curr-computer.txt
 ;; Then type the name of the symbol (see `my/computers') in the text file.
-;; The file should contain 1 line and no whitespace. The text will be converted to a symbol.
+;; The file should contain 1 line and no whitespace. The text will be converted
+;; to a symbol.
 (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
   (if (file-exists-p curr-comp-file)
       (setq my/curr-computer (intern (my/get-string-from-file curr-comp-file)))
     (setq my/curr-computer 'unknown)))
 
-;; TODO: look into a way to use auto-complete for some modes and company for others.
+;; TODO: look into a way to use auto-complete for some modes and company for
+;;       others.
 
 (require 'cl)
 ;;----------------------------------
@@ -278,7 +285,7 @@ Useful to check a boolean state and toggle the state in 1 go."
         helm-cmd-t
         helm-swoop
         ;;helm-git-grep ;search text of files.
-        ;;helm-ls-git ;search for files. Similar to helm-cmd-t but taps into a local git repo.
+        ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
         icicles
         ;;projectile
         clippy
@@ -313,7 +320,7 @@ Useful to check a boolean state and toggle the state in 1 go."
         rtags
         aggressive-indent
         helm-w32-launcher
-        ;;sx
+        sx
         leerzeichen
         sql-indent
         darkroom
@@ -329,7 +336,8 @@ Useful to check a boolean state and toggle the state in 1 go."
 
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;; (cl-mapc 'add-to-list
 ;;          '(package-archives package-archives)
 ;;          '(("melpa" . "http://melpa.milkbox.net/packages/")
@@ -426,21 +434,28 @@ cleaning out unwanted packages."
 
 
 ;; Make j/k movement keys go up/down accross wrapped lines.
-(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>")
+  'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>")
+  'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>")
+  'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>")
+  'evil-previous-visual-line)
 ;;(setq-default evil-cross-lines t) ;; Make horizontal movement cross lines
 
-;; Map for Esc. The key-chord package causes lag when a key of the chord is pressed.
-;; So using the the built-in control chords which are fast. Better than the awkward C-[ default.
+;; Map for Esc.
+;; The key-chord package causes lag when a key of the chord is pressed.
+;; So using the the built-in control chords which are fast. Better than the
+;; awkward C-[ default.
 ;; (evil-define-key 'insert global-map (kbd "C-n") 'evil-normal-state)
 ;; (evil-define-key 'visual global-map (kbd "C-n") 'evil-exit-visual-state)
 
 
-;; When in visual mode: press $ to go to the end of the line minus the newline char.
+;; For visual mode: press $ to go to the end of the line minus the newline char.
 (defadvice evil-end-of-line (after do-not-highlight-newline)
-  "When in visual mode: press $ to go to the end of the line minus the newline char."
+  "For visual mode: press $ to go to the end of the line minus the newline
+char."
   (when (evil-visual-state-p)
     (evil-backward-char)))
 (ad-activate 'evil-end-of-line)
@@ -471,9 +486,10 @@ cleaning out unwanted packages."
 ;;                            (interactive)
 ;;                            (enlarge-window 10)))
 
-(setq isFrameMax-my nil) ;can get out of sync. Hit <Leader>f a 2cd time to re-sync.
-
-(when (eq system-type 'windows-nt) ;TODO: look into equivalent resizing for non-Windows machines.
+;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+(setq isFrameMax-my nil)
+;;TODO: look into equivalent resizing for non-Windows machines.
+(when (eq system-type 'windows-nt)
   (evil-leader/set-key "f" (lambda ()
                              (interactive)
                              (let ((action (if (not-m isFrameMax-my)
@@ -497,21 +513,22 @@ cleaning out unwanted packages."
                                  ;;(clippy-say (my/eval-last-sexp))
                                  (pos-tip-show (my/eval-last-sexp)))))
   (progn
-    (evil-leader/set-key "e" (lambda ()
-                               (interactive)
-                               (save-excursion ;don't move the point
-                                 (evil-append 1)
-                                 (default-indent-new-line)
-                                 (eval-last-sexp t) ;t to insert result in buffer.
-                                 (evil-normal-state))))))
+    (evil-leader/set-key "e"
+      (lambda ()
+        (interactive)
+        (save-excursion
+          (evil-append 1)
+          (default-indent-new-line)
+          (eval-last-sexp t) ; t to insert result in buffer.
+          (evil-normal-state))))))
 
-
-;; (evil-leader/set-key "r" (lambda ()
-;;                            (interactive)
-;;                            (save-excursion ;don't move the point
-;;                              (evil-append 1)
-;;                              (slime-eval-last-expression) ;t to insert result in buffer.
-;;                              (evil-normal-state))))
+;; (evil-leader/set-key "r"
+;;   (lambda ()
+;;     (interactive)
+;;     (save-excursion
+;;       (evil-append 1)
+;;       (slime-eval-last-expression) ; t to insert result in buffer.
+;;       (evil-normal-state))))
 
 (evil-leader/set-key "r" (lambda ()
                            (interactive)

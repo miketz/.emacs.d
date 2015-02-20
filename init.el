@@ -2991,7 +2991,8 @@ Depends on evil mode."
 ;;(global-linum-mode 0) ;show/hide line numbers in margin
 
 (setq-default column-number-mode nil) ;show/hide column # in mode line.
-(setq-default line-number-mode t) ;show/hide line # in mode line. Use fn what-line
+;;show/hide line # in mode line. Use fn what-line
+(setq-default line-number-mode t)
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)
@@ -3005,7 +3006,8 @@ Depends on evil mode."
 
 
 (progn ;; show time in mode line
-  ;; disable process average display. Not sure why this is mixed in with time display.
+  ;; disable process average display. Not sure why this is mixed in with time
+  ;; display.
   (setq display-time-default-load-average nil)
   (setq display-time-load-average nil)
   (setq display-time-load-average-threshold nil)
@@ -3085,9 +3087,10 @@ Depends on evil mode."
                               (whitespace-mode 1)))
 ;;(global-whitespace-mode 1)
 
-;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaa
 
-;;disable annoying newline emacs automatically adds to the end of a file when saving.
+;; disable annoying newline emacs automatically adds to the end of a file when
+;; saving.
 (setq require-final-newline nil)
 (setq mode-require-final-newline nil)
 
@@ -3098,9 +3101,11 @@ Depends on evil mode."
 ;;   (evil-backward-word-begin))
 ;; ;(define-key evil-normal-state-map "s" 'sneak-forward)
 
-;;; increase/decrease font size
-;; (global-set-key (kbd "M-=") '(lambda () (interactive) (text-scale-increase 1)))
-;; (global-set-key (kbd "M--") '(lambda () (interactive) (text-scale-decrease 1)))
+;;;; increase/decrease font size
+;; (global-set-key (kbd "M-=")
+;;                 '(lambda () (interactive) (text-scale-increase 1)))
+;; (global-set-key (kbd "M--")
+;;                 '(lambda () (interactive) (text-scale-decrease 1)))
 
 
 (setq my/keep-buffers '("*scratch*" "*Messages*" "*Compile-Log*" "*Minibuf-1*"
@@ -3114,7 +3119,8 @@ Emacs tends to crash when some of the basic buffers are absent.
 I'm not certain which absences cause the crash.
 
 It seems killing buffers gives cleanup of other things for free!
-ie closing running processes (slime/swank, omnisharp, etc) and helm-cmd-t caches.
+ie closing running processes (slime/swank, omnisharp, etc) and helm-cmd-t
+caches.
 TODO: look into an explicit way to clean up non-buffer things in case there are
 edge cases not covered by buffer killing."
   (interactive)
@@ -3130,7 +3136,8 @@ edge cases not covered by buffer killing."
 
 
 (when (and nil ;don't start server for now.
-           (eq system-type 'gnu/linux)) ;`server-start' doesn't seemt to work on MS-windows?
+           ;;`server-start' doesn't seemt to work on MS-windows?
+           (eq system-type 'gnu/linux))
   (server-start))
 
 
@@ -3174,7 +3181,7 @@ edge cases not covered by buffer killing."
 
 ;; (setq msgIndex 0)
 
-;; (defun msg ()  ;;Use random once database is large enough to rarely get a dupe.
+;; (defun msg ();Use random once database is large enough to rarely get a dupe.
 ;;   "Display a message."
 ;;   (interactive)
 ;;   (let* ((max (- (length msgDb) 1))
@@ -3202,9 +3209,10 @@ edge cases not covered by buffer killing."
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (defun my/type-tutor ()
 ;;   (interactive)
-;;   (my/type-tutor-defaults (list "`" "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "-" "=" ;top row
-;;                                 "~" "!" "@" "#" "$" "%" "^" "&" "*" "(" ")" "_" "+" ;Shift top row
-;;                                 "[" "]" "{" "}")))
+;;   (my/type-tutor-defaults
+;;    (list "`" "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "-" "=" ;top row
+;;          "~" "!" "@" "#" "$" "%" "^" "&" "*" "(" ")" "_" "+" ;Shift top row
+;;          "[" "]" "{" "}")))
 
 ;; (defun my/type-tutor-defaults (char-lst)
 ;;   (let ((lines 7)

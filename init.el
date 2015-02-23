@@ -557,13 +557,13 @@ char."
 ;;----------------------------------
 ;; evil-snipe
 ;;----------------------------------
-(setq evil-snipe-enable-highlight nil)
-(setq evil-snipe-enable-incremental-highlight nil)
-(setq evil-snipe-scope 'visible)
-(setq evil-snipe-repeat-scope 'visible)
+;; (setq evil-snipe-enable-highlight nil)
+;; (setq evil-snipe-enable-incremental-highlight nil)
+;; (setq evil-snipe-scope 'visible)
+;; (setq evil-snipe-repeat-scope 'visible)
 
-(require 'evil-snipe)
-(global-evil-snipe-mode 1)
+;; (require 'evil-snipe)
+;; (global-evil-snipe-mode 1)
 
 
 ;;----------------------------------
@@ -1760,9 +1760,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; helm-swoop
 ;;--------------------
-;;(define-key evil-normal-state-map (kbd "s") 'helm-swoop)
-(global-set-key (kbd "C-c s") 'helm-swoop)
-(global-set-key (kbd "C-c C-s") 'helm-swoop)
+(define-key evil-normal-state-map (kbd "s") 'helm-swoop)
+;; (global-set-key (kbd "C-c s") 'helm-swoop)
+;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
 ;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
 
 ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.

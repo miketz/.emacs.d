@@ -2369,11 +2369,11 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;-----------------------------------------------------------------------------
 ;; Projectile
 ;;-----------------------------------------------------------------------------
-;(require 'projectile)
-;(projectile-global-mode)
-;(setq projectile-indexing-method 'native)
-;(setq projectile-enable-caching t)
-;(define-key projectile-mode-map (kbd "C-x C-b") 'projectile-ibuffer)
+;; (require 'projectile)
+;; (projectile-global-mode)
+;; (setq projectile-indexing-method 'native)
+;; (setq projectile-enable-caching t)
+;; (define-key projectile-mode-map (kbd "C-x C-b") 'projectile-ibuffer)
 
 ;;--------------------
 ;; icicles

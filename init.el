@@ -2963,13 +2963,13 @@ Depends on evil mode."
 ;;   (add-to-list 'default-frame-alist alpha-lst))
 
 
-;;Insertion of Dates.
 (defun insert-date-string ()
-  "Insert a nicely formated date string."
+  "Insert a date string. Everything you need to know about the date and time."
   (interactive)
-  (insert (format-time-string "%m-%d-%Y")))
-;; C-c i calls insert-date-string
-(global-set-key (kbd "C-c i") 'insert-date-string)
+  (insert
+   (format-time-string
+    "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N")))
+(global-set-key (kbd "C-c i") #'insert-date-string)
 
 ;; Only browse interesting buffers. Not *scratch*, *messages*, etc.
 ;;(global-set-key "\C-x\C-b" 'bs-show)

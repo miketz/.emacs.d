@@ -2150,7 +2150,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; ace-jump-zap
 ;;--------------------
-(global-set-key (kbd "M-z") 'ace-jump-zap-to-char)
+;; (global-set-key (kbd "M-z") 'ace-jump-zap-to-char)
 
 ;;--------------------
 ;; clang-format

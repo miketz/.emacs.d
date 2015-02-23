@@ -1,0 +1,10 @@
+# -*- create table from a select query. Just a syntax reminder. -*-
+# name: tabsel
+# key: tabsel
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+select col1, col2, col3
+into _Blah
+from
+ ( select 'a' col1,'b' col2,'c' col3
+   union all select 'q','r','s' ) tab

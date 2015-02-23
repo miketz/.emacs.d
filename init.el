@@ -2159,11 +2159,12 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; clang-format
 ;;--------------------
-(when (eq my/curr-computer 'work-laptop)
-  (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el")
-  ;;(global-set-key [C-M-tab] 'clang-format-region)
-  (global-set-key (kbd "C-c f") 'clang-format-region)
-  (global-set-key (kbd "C-c b") 'clang-format-buffer))
+;; rarely use `clang-format', so commenting it out for now.
+;; (when (eq my/curr-computer 'work-laptop)
+;;   (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el")
+;;   ;;(global-set-key [C-M-tab] 'clang-format-region)
+;;   (global-set-key (kbd "C-c f") 'clang-format-region)
+;;   (global-set-key (kbd "C-c b") 'clang-format-buffer))
 
 ;;--------------------
 ;; irony

@@ -2164,23 +2164,23 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; irony
 ;;--------------------
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
+(when (eq my/curr-computer 'work-laptop) ;TODO: set up on more machines.
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'objc-mode-hook 'irony-mode)
 
-;; replace the `completion-at-point' and `complete-symbol' bindings in
-;; irony-mode's buffers by irony-mode's asynchronous function
-(defun my/irony-mode-hook ()
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
-(add-hook 'irony-mode-hook 'my/irony-mode-hook)
+  ;; replace the `completion-at-point' and `complete-symbol' bindings in
+  ;; irony-mode's buffers by irony-mode's asynchronous function
+  (defun my/irony-mode-hook ()
+    (define-key irony-mode-map [remap completion-at-point]
+      'irony-completion-at-point-async)
+    (define-key irony-mode-map [remap complete-symbol]
+      'irony-completion-at-point-async))
+  (add-hook 'irony-mode-hook 'my/irony-mode-hook)
 
-(when (eq my/curr-computer 'work-laptop)
-  ;;directory to libclang.dll
-  (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin")
-  )
+  (when (eq my/curr-computer 'work-laptop)
+    ;;directory to libclang.dll
+    (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin")))
 
 ;; Only needed on Windows
 (when (eq system-type 'windows-nt)

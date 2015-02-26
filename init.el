@@ -328,7 +328,8 @@ Assums a vertically stacked display of the list.
         fill-column-indicator
         flycheck
         hydra
-        linum-relative))
+        linum-relative
+        guide-key))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -2918,7 +2919,7 @@ Depends on evil mode."
 (guide-key-mode 1)
 
 (setq guide-key/recursive-key-sequence-flag t)
-(setq guide-key/popup-window-position 'bottom)
+;;(setq guide-key/popup-window-position 'bottom)
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

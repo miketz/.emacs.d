@@ -2921,6 +2921,34 @@ Depends on evil mode."
 ;; (setq guide-key/recursive-key-sequence-flag t)
 ;; ;;(setq guide-key/popup-window-position 'bottom)
 
+
+;;------------------------------------------------------------------------------
+;; bookmarks
+;;------------------------------------------------------------------------------
+;; (setq my-bookmarks
+;;       '((google "www.google.com" (search email maps))
+;;         (yahoo "www.yahoo.com" (search email news video))
+;;         (msdn "www.msdn.com" (prog c-sharp visual-studio))))
+
+;; (defun my-member-of (vals lst)
+;;   (let ((has-a-tag-p nil))
+;;     (cl-block check
+;;       (dolist (v vals)
+;;         (when (member v lst)
+;;           (setq has-a-tag-p t)
+;;           (return-from check))))
+;;     has-a-tag-p))
+
+
+;; (defun my-search-bookmarks (bookmarks tags)
+;;   (cond
+;;    ((null bookmarks) nil)
+;;    ((my-member-of tags (third (first bookmarks)))
+;;     (cons (first bookmarks)
+;;           (my-search-bookmarks (rest bookmarks) tags)))
+;;    (t (my-search-bookmarks (rest bookmarks) tags))))
+
+
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------

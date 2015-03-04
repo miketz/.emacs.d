@@ -2948,6 +2948,8 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
+(put 'narrow-to-region 'disabled nil)
+
 (progn ;;use the default emacs scroll bingding for C-v
   (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
   (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))

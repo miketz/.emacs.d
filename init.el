@@ -1384,7 +1384,7 @@ This prevents overlapping themes; something I would rarely want."
   (setq company-idle-delay nil) ;disable automatic completion
   (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 
-  (setq company-tooltip-limit 20)
+  (setq company-tooltip-limit 20) ;popup more suggestions.
 
   (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
     ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.

@@ -317,6 +317,8 @@ Assums a vertically stacked display of the list.
         num3-mode
         powershell
         irony
+        company-irony
+        flycheck-irony
         rtags
         aggressive-indent
         helm-w32-launcher
@@ -1382,6 +1384,8 @@ This prevents overlapping themes; something I would rarely want."
   (setq company-idle-delay nil) ;disable automatic completion
   (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 
+  (setq company-tooltip-limit 20)
+
   (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
     ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
     (defvar-local company-fci-mode-on-p nil)
@@ -1397,6 +1401,7 @@ This prevents overlapping themes; something I would rarely want."
     (add-hook 'company-completion-started-hook 'company-turn-off-fci)
     (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
     (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
+
 
 ;;---------------------------------------------
 ;; slime-company

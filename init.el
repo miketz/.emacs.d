@@ -2948,6 +2948,26 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
+(defmacro C-u (&rest args)
+  (let ((prefix (list 4)))
+    (while (cdr args)
+      (cond
+       ((eq (car args) 'C-u)
+        (setf (car prefix) (* 4 (car prefix))))
+       ((eq (car args) 'M-x)
+        ;; ignore
+        t)
+       (t
+        (error "Unknown arg %S" (car args))))
+      (setq args (cdr args)))
+    (unless (functionp (car args))
+      (error "%S is not a function" (car args)))
+    `(lambda ()
+       (interactive)
+       (let ((current-prefix-arg ',prefix))
+         (call-interactively ',(car args))))))
+;;(global-set-key (kbd "<f12>") (C-u M-x org-refile))
+
 (put 'narrow-to-region 'disabled nil)
 
 (progn ;;use the default emacs scroll bingding for C-v

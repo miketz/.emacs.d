@@ -317,6 +317,8 @@ Assums a vertically stacked display of the list.
         num3-mode
         powershell
         irony
+        company-irony
+        flycheck-irony
         rtags
         aggressive-indent
         helm-w32-launcher
@@ -1389,6 +1391,8 @@ This prevents overlapping themes; something I would rarely want."
   (setq company-idle-delay nil) ;disable automatic completion
   (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 
+  (setq company-tooltip-limit 20) ;popup more suggestions.
+
   (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
     ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
     (defvar-local company-fci-mode-on-p nil)
@@ -1404,6 +1408,7 @@ This prevents overlapping themes; something I would rarely want."
     (add-hook 'company-completion-started-hook 'company-turn-off-fci)
     (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
     (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
+
 
 ;;---------------------------------------------
 ;; slime-company
@@ -2214,37 +2219,38 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; Load projects
 ;;-------------------------------
 (when (eq my/curr-computer 'work-laptop)
-  (defun proj-ecp ()
-    (interactive)
-    (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
-           (sln (concat root "Safety.sln"))
-           (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
-      ;; helm-cmd-t stuff
-      (add-to-list 'helm-cmd-t-find-prunes "obj")
-      (add-to-list 'helm-cmd-t-find-prunes "bin")
-      (add-to-list 'helm-cmd-t-find-prunes ".svn")
-      (add-to-list 'helm-cmd-t-find-prunes "packages")
-      (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
-      (add-to-list 'helm-cmd-t-find-prunes "TestResults")
-      (setq dir_ecp (helm-cmd-t-get-create-source-dir root))
-      (evil-leader/set-key "h" (lambda ()
-                                 (interactive)
-                                 (helm :sources '(helm-source-buffers-list
-                                                  dir_ecp)
-                                       :buffer "*ECP Project*")))
-      ;;(dired root)
-      (find-file-existing defaultFile)
-      ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-      (my/start-omnisharp-server sln)
+  ;; (defun proj-ecp ()
+  ;;   (interactive)
+  ;;   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
+  ;;          (sln (concat root "Safety.sln"))
+  ;;          (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
+  ;;     ;; helm-cmd-t stuff
+  ;;     (add-to-list 'helm-cmd-t-find-prunes "obj")
+  ;;     (add-to-list 'helm-cmd-t-find-prunes "bin")
+  ;;     (add-to-list 'helm-cmd-t-find-prunes ".svn")
+  ;;     (add-to-list 'helm-cmd-t-find-prunes "packages")
+  ;;     (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
+  ;;     (add-to-list 'helm-cmd-t-find-prunes "TestResults")
+  ;;     (setq dir_ecp (helm-cmd-t-get-create-source-dir root))
+  ;;     (evil-leader/set-key "h" (lambda ()
+  ;;                                (interactive)
+  ;;                                (helm :sources '(helm-source-buffers-list
+  ;;                                                 dir_ecp)
+  ;;                                      :buffer "*ECP Project*")))
+  ;;     ;;(dired root)
+  ;;     (find-file-existing defaultFile)
+  ;;     ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
+  ;;     (my/start-omnisharp-server sln)
 
-      ;;TODO: build ctags or etags.
-      ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cs")
-      ))
+  ;;     ;;TODO: build ctags or etags.
+  ;;     ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cs")
+  ;;     ))
 
   (defun proj-safetyweb ()
     (interactive)
     (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
-           (sln (concat root "Safety.sln")))
+           (sln (concat root "Safety.sln"))
+           (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
       ;; helm-cmd-t stuff
       (add-to-list 'helm-cmd-t-find-prunes "obj")
       (add-to-list 'helm-cmd-t-find-prunes "bin")

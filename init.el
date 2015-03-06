@@ -1132,8 +1132,9 @@ This prevents overlapping themes; something I would rarely want."
    '(highlight ((t (:foreground "spring green"
                                 :background "black"))))))
 
-
-(setq mayan-smoke "#F4F4E8")
+;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
+(setq mayan-smoke "#F4F4E8"
+      charcoal "#35352B")
 
 ;;; loads the default emacs theme. Makes a few mods too.
 (defun color-default ()

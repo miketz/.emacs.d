@@ -1248,12 +1248,19 @@ This prevents overlapping themes; something I would rarely want."
 
    ((eq my/curr-computer 'a-laptop-faster)
     (custom-set-faces
-     '(default ((t (:family "Inconsolata"
-                            :foundry "unknown"
+     '(default ((t (:family "Source Code Pro"
+                            :foundry "adobe"
                             :slant normal
-                            :weight normal
-                            :height 155
-                            :width normal)))))
+                            :weight semi-bold
+                            :height 120
+                            :width normal))))
+     ;; '(default ((t (:family "Inconsolata"
+     ;;                        :foundry "unknown"
+     ;;                        :slant normal
+     ;;                        :weight normal
+     ;;                        :height 155
+     ;;                        :width normal))))
+     )
     (when (display-graphic-p) ;this doens't return true for emacs daemon!
       (color-monokai))))
 

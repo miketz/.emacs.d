@@ -302,6 +302,7 @@ Assums a vertically stacked display of the list.
         badger-theme
         monokai-theme
         tronesque-theme
+        gandalf-theme
         color-theme-sanityinc-tomorrow
         ;;sublimity
         nyan-mode
@@ -1155,6 +1156,22 @@ This prevents overlapping themes; something I would rarely want."
                       :slant normal
                       :weight bold
                       :inverse-video nil))))))
+
+(defun color-gandalf ()
+  (interactive)
+  (load-theme 'gandalf t)
+  (custom-theme-set-faces
+   'gandalf
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "lemon chiffon"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background "#EEEEFF"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca"))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black"))))))
 
 (defun color-leuven ()
   (interactive)
@@ -2962,6 +2979,14 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
+(defun what-face (pos)
+  "Prints the face at point."
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+
 (defmacro C-u (&rest args)
   (let ((prefix (list 4)))
     (while (cdr args)

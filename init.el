@@ -2165,6 +2165,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; Ace jump mode
 ;;--------------------
 ;;(add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
+
+;; your eye is already focused on the jump point so no need to gray background.
+(setq ace-jump-mode-gray-background nil)
 (autoload
   'ace-jump-mode
   "ace-jump-mode"

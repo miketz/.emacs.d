@@ -1162,6 +1162,25 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'gandalf t)
   (custom-theme-set-faces
    'gandalf
+   `(fringe
+     ((t (:foreground "black"
+                      :background "gray"))))
+
+   `(ace-jump-face-foreground
+     ((t (:foreground "black"
+                      :background "yellow"
+                      :slant normal
+                      :weight normal
+                      :inverse-video nil))))
+   `(mode-line
+     ((t (:foreground "#00AF00";"#A08F10"
+                      :background "#150505"
+                      :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   `(mode-line-inactive
+     ((t (:foreground "dark gray"
+                      :background "#051515"
+                      :box (:line-width -1 :style released-button)))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))

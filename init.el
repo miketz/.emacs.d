@@ -1162,6 +1162,8 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'gandalf t)
   (custom-theme-set-faces
    'gandalf
+   `(region
+     ((t (:background "goldenrod"))))
    `(fringe
      ((t (:foreground "black"
                       :background "gray"))))
@@ -1371,8 +1373,9 @@ This prevents overlapping themes; something I would rarely want."
           slime-lisp-implementations '((ccl ("armcl")))))
 
   (when (eq my/curr-computer 'a-laptop-faster)
-    (setq slime-default-lisp 'sbcl
-          slime-lisp-implementations '((sbcl ("/usr/bin/sbcl")))))
+    (setq slime-default-lisp 'ccl
+          slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))
+                                       (sbcl ("/usr/bin/sbcl")))))
 
   ;; when on a computer with SLIME set up
   (when (or (eq my/curr-computer 'work-laptop)

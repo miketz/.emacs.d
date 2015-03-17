@@ -332,7 +332,8 @@ Assums a vertically stacked display of the list.
         flycheck
         hydra
         linum-relative
-        guide-key))
+        guide-key
+        unkillable-scratch))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -2973,6 +2974,11 @@ Depends on evil mode."
 ;; (setq guide-key/recursive-key-sequence-flag t)
 ;; ;;(setq guide-key/popup-window-position 'bottom)
 
+
+;;------------------------------------------------------------------------------
+;; unkillable-scratch
+;;------------------------------------------------------------------------------
+(unkillable-scratch 1)
 
 ;;------------------------------------------------------------------------------
 ;; bookmarks

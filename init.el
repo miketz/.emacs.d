@@ -1654,6 +1654,20 @@ This prevents overlapping themes; something I would rarely want."
 ;;(helm-adaptative-mode t)
 (require 'helm-swoop)
 
+(progn ;;from tuhdo. Customizing helm window size/display.
+  (setq helm-display-header-line nil) ;save 1 line for rarely used header.
+  (set-face-attribute 'helm-source-header nil :height 1.0);don't make source seperators bigger than needed
+  (progn
+    ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
+    ;;helm window size as you type.
+    (helm-autoresize-mode 1)
+    ;;disable the dynamic size adjustmentt.
+    (setq helm-autoresize-max-height 30)
+    (setq helm-autoresize-min-height 30))
+  ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
+  ;;lots of split windows, keep the popup at the current window.
+  (setq helm-split-window-in-side-p t))
+
 (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
   (helm-mode 1) ;helm-selection everywhere like when using M-x
   )

@@ -1116,15 +1116,15 @@ This prevents overlapping themes; something I would rarely want."
                       :slant normal
                       :weight normal
                       :inverse-video nil))))
-   ;; `(mode-line
-   ;;   ((t (:foreground "#00cf5f" ;"#00ff7f"
-   ;;                    :background "#101010"
-   ;;                    :box (:line-width -1 :style released-button)))
-   ;;    (t :inverse-video t)))
-   ;; `(mode-line-inactive
-   ;;   ((t (:foreground "#777777"
-   ;;                    :background "#222222"
-   ;;                    :box (:line-width -1 :style pressed-button)))))
+   `(mode-line
+     ((t (:foreground "#00cf5f" ;"#00ff7f"
+                      :background "#101010"
+                      :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   `(mode-line-inactive
+     ((t (:foreground "#777777"
+                      :background "#222222"
+                      :box (:line-width -1 :style released-button)))))
 
 
    ;; '(js2-error

@@ -1832,7 +1832,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
 ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
 (setq helm-swoop-pre-input-function
-      (lambda () nil))
+      (lambda () ""))
 
 ;; Change keybinds to whatever you like :)
 ;; (global-set-key (kbd "M-i") 'helm-swoop)

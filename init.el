@@ -3045,6 +3045,8 @@ Depends on evil mode."
 
 
 (defmacro C-u (&rest args)
+  "Makes it easier to programmatically call a function with C-u prefix.
+Gotten from #emacs on freenode."
   (let ((prefix (list 4)))
     (while (cdr args)
       (cond

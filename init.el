@@ -1116,15 +1116,15 @@ This prevents overlapping themes; something I would rarely want."
                       :slant normal
                       :weight normal
                       :inverse-video nil))))
-   ;; `(mode-line
-   ;;   ((t (:foreground "#00cf5f" ;"#00ff7f"
-   ;;                    :background "#101010"
-   ;;                    :box (:line-width -1 :style released-button)))
-   ;;    (t :inverse-video t)))
-   ;; `(mode-line-inactive
-   ;;   ((t (:foreground "#777777"
-   ;;                    :background "#222222"
-   ;;                    :box (:line-width -1 :style pressed-button)))))
+   `(mode-line
+     ((t (:foreground "#00cf5f" ;"#00ff7f"
+                      :background "#101010"
+                      :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   `(mode-line-inactive
+     ((t (:foreground "#777777"
+                      :background "#222222"
+                      :box (:line-width -1 :style released-button)))))
 
 
    ;; '(js2-error
@@ -1132,7 +1132,18 @@ This prevents overlapping themes; something I would rarely want."
    ;;                    :underline t))))
    ;;highlight so i can see the slime function parameters highlight.
    '(highlight ((t (:foreground "spring green"
-                                :background "black"))))))
+                                :background "black"))))
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "plum"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "lawn green"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "orange"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "white"))))
+   ;;'(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "yellow" :background "black"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
 (setq mayan-smoke "#F4F4E8"

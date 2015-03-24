@@ -575,12 +575,14 @@ char."
 ;;----------------------------------
 ;; evil-god-state
 ;;----------------------------------
-;;(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
-;;(evil-leader/set-key "," 'evil-execute-in-god-state)
-;;(global-set-key (kbd "C-c i") 'insert-date-string)
+;; (evil-define-key 'normal global-map (kbd "\\") 'evil-execute-in-god-state)
+;; (evil-define-key 'motion global-map (kbd "\\") 'evil-execute-in-god-state)
+;; (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
+;; ;;(evil-leader/set-key "," 'evil-execute-in-god-state)
+;; ;;(global-set-key (kbd "C-c i") 'insert-date-string)
 
-;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
-;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
+;; ;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
+;; ;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
 
 ;;----------------------------------
 ;; evil-surround
@@ -3006,6 +3008,7 @@ Depends on evil mode."
 ;; unkillable-scratch
 ;;------------------------------------------------------------------------------
 (unkillable-scratch 1)
+
 
 ;;------------------------------------------------------------------------------
 ;; bookmarks

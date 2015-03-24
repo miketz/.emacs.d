@@ -262,7 +262,7 @@ Assums a vertically stacked display of the list.
         evil-escape
         evil-matchit
         evil-snipe
-        ;;evil-god-state
+        evil-god-state
         ;;evil-surround
         key-chord
         slime
@@ -1730,6 +1730,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
 ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
 
+
+
 ;;--------------------
 ;; helm-git-grep (makes emacs crash on windows)
 ;;--------------------
@@ -1742,6 +1744,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; (require 'helm-git-grep)
 ;; (define-key helm-git-grep-mode-map (kbd "C-u") 'helm-toggle-suspend-update)
 ;; (evil-leader/set-key "g" 'helm-git-grep)
+
 
 ;;--------------------
 ;; vc-git-grep. This is better for ms-windows since it can't handle helm-git-grep's many processes.

@@ -333,7 +333,8 @@ Assums a vertically stacked display of the list.
         hydra
         linum-relative
         guide-key
-        unkillable-scratch))
+        unkillable-scratch
+        speed-type))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))

@@ -1448,21 +1448,22 @@ This prevents overlapping themes; something I would rarely want."
 
   (setq company-tooltip-limit 20) ;popup more suggestions.
 
-  (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
-    ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
-    (defvar-local company-fci-mode-on-p nil)
+  (when nil ;;not using fill-column-indicator anymore.
+    (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
+      ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
+      (defvar-local company-fci-mode-on-p nil)
 
-    (defun company-turn-off-fci (&rest ignore)
-      (when (boundp 'fci-mode)
-        (setq company-fci-mode-on-p fci-mode)
-        (when fci-mode (fci-mode -1))))
+      (defun company-turn-off-fci (&rest ignore)
+        (when (boundp 'fci-mode)
+          (setq company-fci-mode-on-p fci-mode)
+          (when fci-mode (fci-mode -1))))
 
-    (defun company-maybe-turn-on-fci (&rest ignore)
-      (when company-fci-mode-on-p (fci-mode 1)))
+      (defun company-maybe-turn-on-fci (&rest ignore)
+        (when company-fci-mode-on-p (fci-mode 1)))
 
-    (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-    (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-    (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
+      (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+      (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+      (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))))
 
 
 ;;---------------------------------------------
@@ -2737,20 +2738,20 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; fill-column-indicator
 ;;------------------------------------------------------------------------------
-(require 'fill-column-indicator)
-(setq fci-rule-column 80)
-(setq fci-rule-width 1)
-(progn
-  (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
-  (setq fci-rule-use-dashes t))
-(setq fci-rule-color "#555555") ;;tailored for zenburn ATM.
-(add-hook 'prog-mode-hook #'(lambda ()
-                              (fci-mode 1)))
+;; (require 'fill-column-indicator)
+;; (setq fci-rule-column 80)
+;; (setq fci-rule-width 1)
+;; (progn
+;;   (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
+;;   (setq fci-rule-use-dashes t))
+;; (setq fci-rule-color "#555555") ;;tailored for zenburn ATM.
+;; (add-hook 'prog-mode-hook #'(lambda ()
+;;                               (fci-mode 1)))
 
-(defun my/fci-refresh ()
-  (interactive)
-  (fci-mode 0)
-  (fci-mode 1))
+;; (defun my/fci-refresh ()
+;;   (interactive)
+;;   (fci-mode 0)
+;;   (fci-mode 1))
 
 ;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
 ;; ;;TODO: it doesn't seem to be working!

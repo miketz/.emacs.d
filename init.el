@@ -334,7 +334,8 @@ Assums a vertically stacked display of the list.
         linum-relative
         guide-key
         unkillable-scratch
-        speed-type))
+        speed-type
+        bug-hunter))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))

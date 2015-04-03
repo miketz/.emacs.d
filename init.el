@@ -877,6 +877,10 @@ This prevents overlapping themes; something I would rarely want."
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)
   (custom-set-faces
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
@@ -1014,6 +1018,10 @@ This prevents overlapping themes; something I would rarely want."
                                   :background "black";"#D4D4C8"
                                   :italic nil
                                   :bold nil))))
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))

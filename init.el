@@ -681,7 +681,7 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
     ;;bar hollow box hbar
     (setq-default cursor-type (cons 'bar args-emacs))
     (setq evil-emacs-state-cursor (cons 'bar args-emacs))
-    (setq evil-normal-state-cursor (cons 'box args-evil))
+    (setq evil-normal-state-cursor (cons 'hollow args-evil))
     (setq evil-insert-state-cursor (cons 'bar args-evil))
     (setq evil-visual-state-cursor (cons 'hollow args-evil))
     (setq evil-operator-state-cursor (cons 'hollow args-evil))

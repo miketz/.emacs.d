@@ -1739,7 +1739,8 @@ This prevents overlapping themes; something I would rarely want."
   ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
   ;; (key-chord-define evil-operator-state-map chord func)
   ;; (key-chord-define evil-motion-state-map chord func))
-  (key-chord-define helm-map chord #'helm-keyboard-quit))
+  (key-chord-define helm-map chord #'helm-keyboard-quit)
+  (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body))
 
 ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
 ;;(key-chord-define c++-mode-map ";;"  "\C-e;")

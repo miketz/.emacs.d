@@ -1186,6 +1186,10 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'gandalf t)
   (custom-theme-set-faces
    'gandalf
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    `(region
      ((t (:background "goldenrod"))))
    `(fringe

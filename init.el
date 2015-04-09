@@ -336,7 +336,8 @@ Assums a vertically stacked display of the list.
         unkillable-scratch
         speed-type
         bug-hunter
-        swiper))
+        swiper
+        color-identifiers-mode))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -2087,13 +2088,13 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; mulitple-cursors
 ;; https://github.com/magnars/multiple-cursors.el
 ;;--------------------------------------------------------------------
-;(require 'multiple-cursors)
-;(global-set-key (kbd "C--") 'mc/edit-lines)
+;;(require 'multiple-cursors)
+;;(global-set-key (kbd "C--") 'mc/edit-lines)
 
 ;;--------------------------------------------------------------------
 ;; Paredit
 ;;--------------------------------------------------------------------
-;(add-to-list 'load-path "~/.emacs.d/paredit")
+;;(add-to-list 'load-path "~/.emacs.d/paredit")
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -3061,6 +3062,24 @@ Depends on evil mode."
 ;; swiper
 ;;------------------------------------------------------------------------------
 (global-set-key (kbd "C-s") #'swiper)
+
+;;------------------------------------------------------------------------------
+;; color-identifiers-mode
+;;------------------------------------------------------------------------------
+;; (when nil ;sample to test variable colors
+;;   (let ((a 0) (b 1) (c 2)
+;;         (d 2) (e 4) (f 4) (g 4))
+;;     (+ a b c d e f g)))
+
+(define-key emacs-lisp-mode-map (kbd "C-c r") #'color-identifiers:refresh)
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (color-identifiers-mode 1)))
+
+;; (when nil ;insert text of the supported modes into the buffer.
+;;   (dolist (m color-identifiers:modes-alist)
+;;     (insert (format "%s" m))
+;;     (insert "\n")))
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

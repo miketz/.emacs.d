@@ -335,7 +335,8 @@ Assums a vertically stacked display of the list.
         guide-key
         unkillable-scratch
         speed-type
-        bug-hunter))
+        bug-hunter
+        swiper))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -3056,6 +3057,10 @@ Depends on evil mode."
 ;;           (my-search-bookmarks (rest bookmarks) tags)))
 ;;    (t (my-search-bookmarks (rest bookmarks) tags))))
 
+;;------------------------------------------------------------------------------
+;; swiper
+;;------------------------------------------------------------------------------
+(global-set-key (kbd "C-s") #'swiper)
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

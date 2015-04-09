@@ -3071,10 +3071,8 @@ Depends on evil mode."
 ;;         (d 2) (e 4) (f 4) (g 4))
 ;;     (+ a b c d e f g)))
 
-(define-key emacs-lisp-mode-map (kbd "C-c r") #'color-identifiers:refresh)
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (color-identifiers-mode 1)))
+;; (define-key lisp-mode-shared-map (kbd "C-c r") #'color-identifiers:refresh)
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (color-identifiers-mode 1)))
 
 ;; (when nil ;insert text of the supported modes into the buffer.
 ;;   (dolist (m color-identifiers:modes-alist)

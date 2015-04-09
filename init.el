@@ -3090,7 +3090,6 @@ Gotten from #emacs on freenode."
          (call-interactively ',(car args))))))
 ;;(global-set-key (kbd "<f12>") (C-u M-x org-refile))
 
-(put 'narrow-to-region 'disabled nil)
 
 (progn ;;use the default emacs scroll bingding for C-v
   (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
@@ -3323,6 +3322,16 @@ edge cases not covered by buffer killing."
            ;;`server-start' doesn't seemt to work on MS-windows?
            (eq system-type 'gnu/linux))
   (server-start))
+
+;;--------------------------------------------------------------------
+;; Turn on disabled functions
+;;--------------------------------------------------------------------
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'erase-buffer 'disabled nil)
+(put 'scroll-left 'disabled nil)
+;;(put 'dired-find-alternate-file 'disabled nil)
 
 
 ;; (defun eval-prev ()

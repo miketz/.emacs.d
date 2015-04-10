@@ -1810,12 +1810,33 @@ This prevents overlapping themes; something I would rarely want."
             " --ignore-case -n "
             git-pat)))
 
+(defun my/git-grep-make-cmd2 (input)
+  ;;git --no-pager grep --no-index --ignore-case -n -e "preview" --and -e "print" -- *.cs
+  (interactive)
+  (let ((patterns (split-string input " "))
+        (git-pat ""))
+    (setq git-pat (my/git-grep-make-param (first patterns)))
+    (dolist (p (rest patterns))
+      (setq git-pat (concat git-pat " --and " (my/git-grep-make-param p))))
+                                        ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
+    (let ((in-gitrepo   (my/is-in-gitrepo))
+          (search-all-p current-prefix-arg));if they typed C-u then search all
+      (concat "git --no-pager grep "
+              (when (not in-gitrepo) "--no-index ")
+              (cond
+               ;;NOTE: git grep options for using .gitignore (or not) require different
+               ;;combos of options (or no option at all if default) depending on whether you're in a git repo or not.
+               ((and in-gitrepo search-all-p) "--untracked --no-exclude-standard ")
+               ;;--exclude-standard so it honors the .gitignore file when not in a git repo.
+               ((and (not in-gitrepo) (not search-all-p)) "--exclude-standard "))
+              " --ignore-case -n "
+              git-pat))))
+
 ;; (defun my/git-grep ()
 ;;   (interactive)
 ;;   (let* ((input (read-string "search: "))
 ;;          (results (shell-command-to-string (my/git-grep-make-cmd input))))
 ;;     (insert results)))
-
 
 
 (defun my/vc-git-grep (regexp &optional files dir)
@@ -1842,7 +1863,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
               (setq command nil))
         (setq dir (file-name-as-directory (expand-file-name dir)))
         (setq command
-              (concat (my/git-grep-make-cmd regexp) " -- " files)
+              (concat (my/git-grep-make-cmd2 regexp) " -- " files)
               ;; (grep-expand-template "git --no-pager grep -n -e <R> -- <F>"
               ;;                       regexp files)
               )

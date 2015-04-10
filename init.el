@@ -39,6 +39,12 @@
 ;;--------------------------------------------------------------------
 ;; Helper functions and macros
 ;;--------------------------------------------------------------------
+(cl-defmacro let1 (var-val-pair &body body)
+  "Syntax sugar macro. Let 1 variable without double nesting the var list (())
+Ex: (let1 (x 4) (print x))"
+  `(let (,var-val-pair)
+     ,@body))
+
 (defun s-trim-left (s)
   "Remove whitespace at the beginning of S."
   (if (string-match "\\`[ \t\n\r]+" s)

@@ -39,6 +39,7 @@
 ;;--------------------------------------------------------------------
 ;; Helper functions and macros
 ;;--------------------------------------------------------------------
+(require 'cl)
 (cl-defmacro let1 (var-val-pair &body body)
   "Syntax sugar macro. Let 1 variable without double nesting the var list (())
 Ex: (let1 (x 4) (print x))"
@@ -258,7 +259,7 @@ Assums a vertically stacked display of the list.
 ;; TODO: look into a way to use auto-complete for some modes and company for
 ;;       others.
 
-(require 'cl)
+
 ;;----------------------------------
 ;; Packages
 ;;----------------------------------

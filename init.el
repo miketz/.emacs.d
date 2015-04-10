@@ -1895,7 +1895,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; (setq helm-swoop-split-direction 'split-window-vertically)
 
 ;; If nil, you can slightly boost invoke speed in exchange for text color
-(setq helm-swoop-speed-or-color nil)
+(setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
 
 
 

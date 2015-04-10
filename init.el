@@ -2485,6 +2485,11 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                              (interactive)
                              (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\DbScripts"))))
 
+(when (eq my/curr-computer 'work-laptop)
+  ;;quick load of c:\users\mtz\TODO\TODO.org
+  (evil-leader/set-key "t" (lambda ()
+                             (interactive)
+                             (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org"))))
 
 ;;-----------------------------------------------------------------------------
 ;; VC version control

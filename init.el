@@ -1324,6 +1324,10 @@ This prevents overlapping themes; something I would rarely want."
     (when (display-graphic-p)
       (color-zenburn)))
 
+   ((eq my/curr-computer 'raspberry-pi)
+    (when (display-graphic-p)
+      (color-zenburn)))
+
    ((eq my/curr-computer 'a-laptop-faster)
     (custom-set-faces
      '(default ((t (:family "Source Code Pro"

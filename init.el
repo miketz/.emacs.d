@@ -1344,7 +1344,7 @@ This prevents overlapping themes; something I would rarely want."
      ;;                        :width normal))))
      )
     (when (display-graphic-p) ;this doens't return true for emacs daemon!
-      (color-monokai))))
+      (color-zenburn))))
 
 
   ;; (let ((a 92)) ;92

@@ -2741,6 +2741,7 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;; magit
 ;;-----------------------------------------------------------------------------
+(setq magit-last-seen-setup-instructions "1.4.0") ;prevent warning message.
 (evil-leader/set-key "m" #'magit-status)
 
 

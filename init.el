@@ -1825,7 +1825,7 @@ This prevents overlapping themes; something I would rarely want."
                                         ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
     (let ((in-gitrepo   (my/is-in-gitrepo))
           (search-all-p current-prefix-arg));if they typed C-u then search all
-      (concat "git --no-pager grep "
+      (concat "git --no-pager grep --extended-regexp "
               (when (not in-gitrepo) "--no-index ")
               (cond
                ;;NOTE: git grep options for using .gitignore (or not) require different

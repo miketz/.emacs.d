@@ -9,8 +9,8 @@
  `(default ((t (:family "Consolas"
                         :foundry "outline"
                         :slant normal
-                        :weight bold
-                        :height 120
+                        :weight normal
+                        :height 125
                         :width normal)))))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -18,7 +18,8 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "\n\n\n\n\n")
 
-;;(blink-cursor-mode 0)
+(setq-default cursor-type '(bar . 2))
+(blink-cursor-mode 0)
 ;;(hl-line-mode 0)
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
@@ -50,9 +51,15 @@
 (package-initialize)
 
 (setq my-packages
-      '(god-mode))
+      '(god-mode
+        paredit))
 ;;----------------------------------------------------------------
 ;; god-mode
 ;;----------------------------------------------------------------
 (require 'god-mode)
 (global-set-key (kbd "<escape>") 'god-local-mode)
+
+;;------------------------------------------------------------------------------
+;; swiper
+;;------------------------------------------------------------------------------
+(global-set-key (kbd "C-s") #'swiper)

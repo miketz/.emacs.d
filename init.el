@@ -704,6 +704,8 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
 ;;------------------------------------------------------
 ;; Color theme stuff.
 ;;------------------------------------------------------
+(setq custom-theme-directory "~/.emacs.d/notElpa/themes/")
+
 ;;TODO: implement a way to undo color settings made outside the theme definition.
 ;;      use custom-theme-set-faces to set the colors/styles so they are rolled back
 ;;      when switching/disabling themes.

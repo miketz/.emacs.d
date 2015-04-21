@@ -4,7 +4,7 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 var ${1:name} = new Class({
-  initialize: function($2) {
-    $0
-  }
+    initialize: function($2) {
+        $0
+    }
 });

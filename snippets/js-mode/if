@@ -4,5 +4,5 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 if (${1:condition}) {
-  $0
+    $0
 }

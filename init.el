@@ -1624,9 +1624,11 @@ This prevents overlapping themes; something I would rarely want."
 
             ;;(js2-imenu-extras-mode)
             (electric-pair-mode 1)
+            (yas-minor-mode 1)
             ))
 
-(add-hook 'js2-mode-hook #'(lambda () (yas-minor-mode)))
+;;(add-hook 'js2-mode-hook #'(lambda () (yas-minor-mode 1)))
+;;(add-hook 'js2-init-hook #'(lambda () (yas-minor-mode 1)))
 
 ;;--------------------
 ;; ac-js2
@@ -2083,7 +2085,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;; sql-mode
 ;;--------------------------------------------------------------------
 (add-hook 'sql-mode-hook #'electric-pair-mode)
-(add-hook #'sql-mode-hook #'(lambda () (yas-minor-mode)))
+(add-hook #'sql-mode-hook #'(lambda () (yas-minor-mode 1)))
 
 
 ;;--------------------------------------------------------------------

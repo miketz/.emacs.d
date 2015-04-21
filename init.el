@@ -34,7 +34,16 @@
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
+;;(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
+
+;;for compatibility with < 24.4 emacs, define `with-eval-after-load'
+(unless (fboundp 'with-eval-after-load)
+  (defmacro with-eval-after-load (file &rest body)
+    "Execute BODY after FILE is loaded.
+FILE is normally a feature name, but it can also be a file name,
+in case that file does not provide any feature."
+    (declare (indent 1) (debug t))
+    `(eval-after-load ,file (lambda () ,@body))))
 
 ;;--------------------------------------------------------------------
 ;; Helper functions and macros
@@ -1384,67 +1393,66 @@ This prevents overlapping themes; something I would rarely want."
 ;; SLIME
 ;;---------------------------------------------
 (require 'slime-autoloads)
+(with-eval-after-load "slime"
+  (slime-setup '(slime-fancy
+                 slime-company
+                 slime-banner
+                 slime-indentation))
+  (setq slime-complete-symbol*-fancy t)
+  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+  ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
+  (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition);override evil's binding of M-. when using slime
+  ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
+  (setq slime-header-line-p nil)
+  ;; (require 's)
+  ;; (setq slime-words-of-encouragement (let ((words '())) ;;hidden
+  ;;                                      (dolist (w slime-words-of-encouragement)
+  ;;                                        (when (s-contains? "REPL" w)
+  ;;                                          (setq words (cons w words))))
+  ;;                                      words))
 
-(eval-after-load "slime"
-  '(progn
-     (slime-setup '(slime-fancy
-                    slime-company
-                    slime-banner
-                    slime-indentation))
-     (setq slime-complete-symbol*-fancy t)
-     (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-     ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
-     (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition);override evil's binding of M-. when using slime
-     ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
-     (setq slime-header-line-p nil)
+  (progn
+    (when (eq my/curr-computer 'work-laptop)
+      (setq slime-default-lisp 'ccl
+            slime-lisp-implementations '((ccl ("C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64"))
+                                         (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
+    (when (eq my/curr-computer 'utilite)
+      (setq slime-default-lisp 'ccl
+            slime-lisp-implementations '((ccl ("armcl")))))
 
-     ;; (require 's)
-     ;; (setq slime-words-of-encouragement (let ((words '())) ;;hidden
-     ;;                                      (dolist (w slime-words-of-encouragement)
-     ;;                                        (when (s-contains? "REPL" w)
-     ;;                                          (setq words (cons w words))))
-     ;;                                      words))
-     ))
+    (when (eq my/curr-computer 'a-laptop-faster)
+      (setq slime-default-lisp 'ccl
+            slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))
+                                         (sbcl ("/usr/bin/sbcl")))))
 
-(progn
+    ;; when on a computer with SLIME set up
+    (when (or (eq my/curr-computer 'work-laptop)
+              (eq my/curr-computer 'utilite)
+              (eq my/curr-computer 'a-laptop-faster))
+      ;; connect lisp buffers to SLIME automatically.
+      (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
+                (lambda ()
+                  (unless (slime-connected-p)
+                    (save-excursion (slime)))))))
+
+  (add-hook 'slime-repl-mode-hook
+            (lambda ()
+              ;;turn off line numbers in the repl
+              (linum-mode 0)
+              ;;there's always a trailing space at repl prompt. Don't highlight it.
+              (setq show-trailing-whitespace nil)
+              ;;aggressive-indent moves SLIME's comments in the REPL. Turn it off.
+              (aggressive-indent-mode 0)))
+
+  ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+  (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+
   (when (eq my/curr-computer 'work-laptop)
-    (setq slime-default-lisp 'ccl
-          slime-lisp-implementations '((ccl ("C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64"))
-                                       (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
-  (when (eq my/curr-computer 'utilite)
-    (setq slime-default-lisp 'ccl
-          slime-lisp-implementations '((ccl ("armcl")))))
+    ;; use local hyperspec
+    (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
+  )
 
-  (when (eq my/curr-computer 'a-laptop-faster)
-    (setq slime-default-lisp 'ccl
-          slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))
-                                       (sbcl ("/usr/bin/sbcl")))))
 
-  ;; when on a computer with SLIME set up
-  (when (or (eq my/curr-computer 'work-laptop)
-            (eq my/curr-computer 'utilite)
-            (eq my/curr-computer 'a-laptop-faster))
-    ;; connect lisp buffers to SLIME automatically.
-    (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
-              (lambda ()
-                (unless (slime-connected-p)
-                  (save-excursion (slime)))))))
-
-(add-hook 'slime-repl-mode-hook
-          (lambda ()
-            ;;turn off line numbers in the repl
-            (linum-mode 0)
-            ;;there's always a trailing space at repl prompt. Don't highlight it.
-            (setq show-trailing-whitespace nil)
-            ;;aggressive-indent moves SLIME's comments in the REPL. Turn it off.
-            (aggressive-indent-mode 0)))
-
-;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
-(evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
-
-(when (eq my/curr-computer 'work-laptop)
-  ;; use local hyperspec
-  (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
 
 
 ;;---------------------------------------------
@@ -1977,24 +1985,21 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;(yas-global-mode 0)
 (autoload 'yasnippet "yasnippet" "yasnippet mode" t)
 
-(eval-after-load "yasnippet"
-  '(progn
-     (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
-     (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
-     (defun my/yas-handle-param (param-str
-                                 sep-char
-                                 fn-deco
-                                 fn-fix-first
-                                 fn-fix-last)
-       "Does something special for each paramter in a snippet."
-       (let* ((split (split-string param-str sep-char))
-              (decorated (mapcar fn-deco split)))
-         (setcar decorated (funcall fn-fix-first (car decorated)))
-         (setf (nthcdr (- (length decorated) 1) decorated)
-               (cons (funcall fn-fix-last (car (last decorated)) ) nil))
-         (apply #'concat decorated)))
-     ))
-
+(with-eval-after-load "yasnippet"
+  (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
+  (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
+  (defun my/yas-handle-param (param-str
+                              sep-char
+                              fn-deco
+                              fn-fix-first
+                              fn-fix-last)
+    "Does something special for each paramter in a snippet."
+    (let* ((split (split-string param-str sep-char))
+           (decorated (mapcar fn-deco split)))
+      (setcar decorated (funcall fn-fix-first (car decorated)))
+      (setf (nthcdr (- (length decorated) 1) decorated)
+            (cons (funcall fn-fix-last (car (last decorated)) ) nil))
+      (apply #'concat decorated))))
 
 ;; (my/yas-handle-param "first, middle1, middle2, last"
 ;;                      ","
@@ -2234,8 +2239,8 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
   (let ((i-am-using-omnisharp nil))
     (when i-am-using-omnisharp
-      (eval-after-load 'company
-        '(add-to-list 'company-backends 'company-omnisharp))))
+      (with-eval-after-load 'company
+        (add-to-list 'company-backends 'company-omnisharp))))
 
   (setq omnisharp-company-do-template-completion nil) ;tab completion of paramters. acts weird
   (setq omnisharp-company-ignore-case t)
@@ -2508,10 +2513,9 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;   (add-to-list 'vc-directory-exclusion-list "obj"))
 ;; (ad-activate 'vc-dir)
 
-(eval-after-load "vc"
-  '(progn
-     (add-to-list 'vc-directory-exclusion-list "bin")
-     (add-to-list 'vc-directory-exclusion-list "obj")))
+(with-eval-after-load "vc"
+  (add-to-list 'vc-directory-exclusion-list "bin")
+  (add-to-list 'vc-directory-exclusion-list "obj"))
 
 ;; (add-hook 'vc-- (lambda () (linum-mode 0)))
 

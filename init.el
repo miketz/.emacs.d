@@ -2773,7 +2773,7 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;; leerzeichen. Displays symbols for tab, space, and newline.
 ;;-----------------------------------------------------------------------------
-(require 'leerzeichen)
+(autoload 'leerzeichen-mode "leerzeichen" nil t)
 ;;(leerzeichen-mode)
 ;; (custom-set-faces
 ;;  '(leerzeichen ((t (:foreground "black";"#A8A800"

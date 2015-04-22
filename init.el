@@ -530,9 +530,10 @@ char."
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
 
+(autoload 'pos-tip-show "pos-tip" nil t)
 (if (display-graphic-p)
     (progn
-      (require 'pos-tip)
+      ;;(require 'pos-tip)
       (evil-leader/set-key "e" (lambda ()
                                  (interactive)
                                  ;;(clippy-say (my/eval-last-sexp))

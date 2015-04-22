@@ -1665,30 +1665,64 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(setq helm-ff-transformer-show-only-basename nil
-      ;;helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
-      ;;helm-yank-symbol-first                 t
-      ;;helm-move-to-line-cycle-in-source      t
-      helm-buffers-fuzzy-matching            t
-      ;;helm-ff-auto-update-initial-value      t
-      )
+(autoload 'helm "helm" nil t)
+(autoload 'helm-config "helm-config" nil t)
+(autoload 'helm-cmd-t "helm-cmd-t" nil t)
 
-(setq helm-ff-lynx-style-map nil
-      helm-input-idle-delay 0.1
-      helm-idle-delay 0.1)
+(with-eval-after-load "helm"
+  (setq helm-ff-transformer-show-only-basename nil
+        ;;helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
+        ;;helm-yank-symbol-first                 t
+        ;;helm-move-to-line-cycle-in-source      t
+        helm-buffers-fuzzy-matching            t
+        ;;helm-ff-auto-update-initial-value      t
+        )
 
-;; (autoload 'helm-descbinds      "helm-descbinds" t)
-;; (autoload 'helm-eshell-history "helm-eshell"    t)
-;; (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
+  (setq helm-ff-lynx-style-map nil
+        helm-input-idle-delay 0.1
+        helm-idle-delay 0.1)
 
-;; (global-set-key (kbd "C-h a")    #'helm-apropos)
-;; (global-set-key (kbd "C-h i")    #'helm-info-emacs)
-;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
+  ;; (autoload 'helm-descbinds      "helm-descbinds" t)
+  ;; (autoload 'helm-eshell-history "helm-eshell"    t)
+  ;; (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
 
-;; (add-hook 'eshell-mode-hook
-;;           #'(lambda ()
-;;               (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
-;;               (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
+  ;; (global-set-key (kbd "C-h a")    #'helm-apropos)
+  ;; (global-set-key (kbd "C-h i")    #'helm-info-emacs)
+  ;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
+
+  ;; (add-hook 'eshell-mode-hook
+  ;;           #'(lambda ()
+  ;;               (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
+  ;;               (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
+
+
+  ;;(helm-adaptative-mode t)
+
+  (progn ;;from tuhdo. Customizing helm window size/display.
+    (setq helm-display-header-line nil) ;save 1 line for rarely used header.
+    (set-face-attribute 'helm-source-header nil :height 1.0);don't make source seperators bigger than needed
+    ;; (progn
+    ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
+    ;;   ;;helm window size as you type.
+    ;;   (helm-autoresize-mode 1)
+    ;;   ;;disable the dynamic size adjustment.
+    ;;   (setq helm-autoresize-max-height 35)
+    ;;   (setq helm-autoresize-min-height 35))
+    ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
+    ;; ;;lots of split windows, keep the popup at the current window.
+    ;; (setq helm-split-window-in-side-p t)
+    )
+
+  (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+    (helm-mode 1) ;helm-selection everywhere like when using M-x
+    )
+
+  ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
+  ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
+  ;;(define-key helm-map (kbd "M-o") #'helm-previous-source)
+
+  ;;(global-set-key (kbd "M-s s")   #'helm-ag)
+  );end helm eval-after-load
 
 (evil-leader/set-key "b" #'helm-buffers-list)
 ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
@@ -1700,37 +1734,6 @@ This prevents overlapping themes; something I would rarely want."
 ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
 ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
 (global-set-key (kbd "M-y") #'helm-show-kill-ring)
-
-
-(require 'helm-config)
-(require 'helm-cmd-t)
-;;(helm-adaptative-mode t)
-(require 'helm-swoop)
-
-(progn ;;from tuhdo. Customizing helm window size/display.
-  (setq helm-display-header-line nil) ;save 1 line for rarely used header.
-  (set-face-attribute 'helm-source-header nil :height 1.0);don't make source seperators bigger than needed
-  ;; (progn
-  ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
-  ;;   ;;helm window size as you type.
-  ;;   (helm-autoresize-mode 1)
-  ;;   ;;disable the dynamic size adjustment.
-  ;;   (setq helm-autoresize-max-height 35)
-  ;;   (setq helm-autoresize-min-height 35))
-  ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
-  ;; ;;lots of split windows, keep the popup at the current window.
-  ;; (setq helm-split-window-in-side-p t)
-  )
-
-(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-  (helm-mode 1) ;helm-selection everywhere like when using M-x
-  )
-
-;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
-;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
-;;(define-key helm-map (kbd "M-o") #'helm-previous-source)
-
-;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
 
 
@@ -1764,7 +1767,7 @@ This prevents overlapping themes; something I would rarely want."
   ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
   ;; (key-chord-define evil-operator-state-map chord func)
   ;; (key-chord-define evil-motion-state-map chord func))
-  (key-chord-define helm-map chord #'helm-keyboard-quit)
+  ;;Temporarily commenting while figure out eval-after-load for helm (key-chord-define helm-map chord #'helm-keyboard-quit)
   (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body))
 
 ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
@@ -1903,38 +1906,39 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 ;;--------------------
 ;; helm-swoop
 ;;--------------------
+(autoload 'helm-swoop "helm-swoop" nil t)
+(with-eval-after-load "helm-swoop"
+  ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
+  (setq helm-swoop-pre-input-function
+        (lambda () ""))
+
+  ;; Change keybinds to whatever you like :)
+  ;; (global-set-key (kbd "M-i") 'helm-swoop)
+  ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+  ;; (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
+  ;; (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
+
+  ;; When doing isearch, hand the word over to helm-swoop
+  ;; (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+  ;; (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+
+  ;; Save buffer when helm-multi-swoop-edit complete
+  ;; (setq helm-multi-swoop-edit-save t)
+
+  ;; If this value is t, split window inside the current window
+  ;; (setq helm-swoop-split-with-multiple-windows nil)
+
+  ;; Split direction. 'split-window-vertically or 'split-window-horizontally
+  ;; (setq helm-swoop-split-direction 'split-window-vertically)
+
+  ;; If nil, you can slightly boost invoke speed in exchange for text color
+  (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
+  )
+
 (define-key evil-normal-state-map (kbd "s") 'helm-swoop)
 ;; (global-set-key (kbd "C-c s") 'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
 ;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
-
-;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
-(setq helm-swoop-pre-input-function
-      (lambda () ""))
-
-;; Change keybinds to whatever you like :)
-;; (global-set-key (kbd "M-i") 'helm-swoop)
-;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-;; (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
-;; (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
-
-;; When doing isearch, hand the word over to helm-swoop
-;; (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
-;; (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
-
-;; Save buffer when helm-multi-swoop-edit complete
-;; (setq helm-multi-swoop-edit-save t)
-
-;; If this value is t, split window inside the current window
-;; (setq helm-swoop-split-with-multiple-windows nil)
-
-;; Split direction. 'split-window-vertically or 'split-window-horizontally
-;; (setq helm-swoop-split-direction 'split-window-vertically)
-
-;; If nil, you can slightly boost invoke speed in exchange for text color
-(setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
-
-
 
 ;;---------------------
 ;; sublimity

@@ -1668,7 +1668,6 @@ This prevents overlapping themes; something I would rarely want."
 
 (autoload 'helm "helm" nil t)
 (autoload 'helm-config "helm-config" nil t)
-(autoload 'helm-cmd-t "helm-cmd-t" nil t)
 
 (with-eval-after-load "helm"
   (setq helm-ff-transformer-show-only-basename nil
@@ -2387,6 +2386,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
   (defun proj-safetyweb ()
     (interactive)
+    (require 'helm-cmd-t)
     (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
            (sln (concat root "Safety.sln"))
            (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
@@ -2410,6 +2410,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
   (defun proj-trighist ()
     (interactive)
+    (require 'helm-cmd-t)
     (let* ((root "C:\\Users\\mtz\\proj\\HistoryImp\\dev\\code\\v3_GeneralHistory\\HistoryTriggerGen\\")
            (sln (concat root "HistoryTriggerGen.sln")))
       ;; helm-cmd-t stuff
@@ -2431,6 +2432,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
   (defun proj-emacs ()
     (interactive)
+    (require 'helm-cmd-t)
     (let* ((emacs-root "C:\\Users\\mtz\\scratch\\emacs\\"))
       ;; helm-cmd-t stuff
       (add-to-list 'helm-cmd-t-find-prunes ".git")
@@ -2444,6 +2446,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
   (defun proj-cl ()
     (interactive)
+    (require 'helm-cmd-t)
     ;; helm-cmd-t stuff
     (setq root_dir_cl (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\lisp"))
     (evil-leader/set-key "h" (lambda ()
@@ -2470,6 +2473,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
   (defun proj-cpp ()
     (interactive)
+    (require 'helm-cmd-t)
     (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))
     (evil-leader/set-key "h" (lambda ()
                                (interactive)

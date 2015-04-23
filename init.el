@@ -272,6 +272,8 @@ Assums a vertically stacked display of the list.
 ;;----------------------------------
 ;; Packages
 ;;----------------------------------
+(add-to-list 'load-path "~/.emacs.d/notElpa/") ;stores elisp files that are not "packages".
+
 (setq my/packages
       '(evil
         evil-leader
@@ -1585,14 +1587,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;-------------------------
 ;; js2-hightlight-vars.el
 ;;-------------------------
-;; (add-to-list 'load-path "~/.emacs.d/notElpa/")
 ;; (require 'js2-highlight-vars)
 
-;;-------------------------
-;; align-let.el
-;;-------------------------
-;;(load "~/.emacs.d/notElpa/align-let.el")
-(add-to-list 'load-path "~/.emacs.d/notElpa/")
+;;------------------------------------
+;; align-let.el in ~/.emacs.d/notElpa
+;;------------------------------------
 (autoload 'align-let "align-let" nil t)
 
 (let ((key (kbd "C-c C-a")))
@@ -1646,11 +1645,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;; ac-js2
 ;;--------------------
-(when nil
-  (add-hook 'js2-mode-hook 'ac-js2-mode)
-  (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
-  ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
-  )
+;; (when nil
+;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
+;;   (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
+;;   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
+;;   )
 
 ;; ;;--------------------
 ;; ;; nxml
@@ -1661,7 +1660,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;; imenu
 ;;--------------------
-(evil-leader/set-key "i" 'helm-imenu)
+(evil-leader/set-key "i" #'helm-imenu)
 
 ;;--------------------
 ;; Helm
@@ -2287,11 +2286,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
 
 ;; your eye is already focused on the jump point so no need to gray background.
 (setq ace-jump-mode-gray-background nil)
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
+(autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
 ;;--------------------

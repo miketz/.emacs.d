@@ -3196,6 +3196,28 @@ Depends on evil mode."
 ;;     (switch-to-buffer buf)))
 
 ;;------------------------------------------------------------------------------
+;; Focus javascript
+;;------------------------------------------------------------------------------
+(defun my/js2-mode-on-region (start end)
+  (interactive "r")
+  (deactivate-mark)
+  (narrow-to-region start end)
+  (js2-mode))
+
+(defun my/focus-javascript ()
+  (interactive)
+  ;; highlight the region inside the <script></script> tags.
+  (search-backward "<script")
+  (next-line)
+  (evil-visual-line)
+  (search-forward "</script")
+  (previous-line)
+  ;; turn on js2-mode for this region. (and narrow)
+  (call-interactively #'my/js2-mode-on-region))
+
+(global-set-key (kbd "C-c j") #'my/focus-javascript)
+
+;;------------------------------------------------------------------------------
 ;; svg-mode-line-themes
 ;;------------------------------------------------------------------------------
 ;; (require 'svg-mode-line-themes);from melpa

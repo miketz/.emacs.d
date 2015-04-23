@@ -353,7 +353,9 @@ Assums a vertically stacked display of the list.
         speed-type
         bug-hunter
         swiper
-        color-identifiers-mode))
+        color-identifiers-mode
+        ;;svg-mode-line-themes
+        ))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -3198,7 +3200,12 @@ Depends on evil mode."
 ;;       (narrow-to-region start end))
 ;;     (switch-to-buffer buf)))
 
-
+;;------------------------------------------------------------------------------
+;; svg-mode-line-themes
+;;------------------------------------------------------------------------------
+;; (require 'svg-mode-line-themes);from melpa
+;; ;; not from melpa. Example modeline using svg-mode-line-themes
+;; (require 'ocodo-svg-mode-line)
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

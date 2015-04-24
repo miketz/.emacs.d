@@ -3201,6 +3201,7 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; delay execution of this code until `web-mode' is turned on.
 (with-eval-after-load "web-mode"
+  ;;needed to bind a key for `js2-mode-map'
   (require 'js2-mode)
 
   (defun my/js2-mode-on-region (start end)
@@ -3210,7 +3211,7 @@ Depends on evil mode."
     (narrow-to-region start end)
     (js2-mode))
 
-  (cl-defun my/focus-javascript ()
+  (cl-defun my/focus-javascript () ;using `cl-defun' to allow `return-from'
     "Automatcially narrow between <script> tags, then turn on js2-mode."
     (interactive)
     (let ((start-tag-name "<script")

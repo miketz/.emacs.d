@@ -275,7 +275,7 @@ Assums a vertically stacked display of the list.
 (add-to-list 'load-path "~/.emacs.d/notElpa/") ;stores elisp files that are not "packages".
 
 (setq my/packages
-      '(evil
+      `(evil
         evil-leader
         evil-escape
         evil-matchit
@@ -356,7 +356,8 @@ Assums a vertically stacked display of the list.
         bug-hunter
         swiper
         color-identifiers-mode
-        ;;svg-mode-line-themes
+        ,(when (eq system-type 'gnu/linux)
+           'svg-mode-line-themes)
         ))
 
 (when (eq my/curr-computer 'work-laptop)
@@ -3220,9 +3221,21 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; svg-mode-line-themes
 ;;------------------------------------------------------------------------------
-;; (require 'svg-mode-line-themes);from melpa
-;; ;; not from melpa. Example modeline using svg-mode-line-themes
-;; (require 'ocodo-svg-mode-line)
+(when (eq system-type 'gnu/linux)
+  (require 'svg-mode-line-themes);from melpa
+  ;;fix fonts?
+  (let (( theme-archetype (cdr (assoc 'archetype smt/themes)))
+        ( row-archetype (cdr (assoc 'archetype smt/rows))))
+    (setf (getf theme-archetype :style)
+          (list :font-family "Source Code Pro"
+                :font-size "40pt"))
+    (setf (getf row-archetype :baseline) 12))
+
+  ;; not from melpa. Example modeline using svg-mode-line-themes
+  (require 'ocodo-svg-mode-line)
+  ;;(require 'ocodo-slim-svg-mode-line)
+  )
+
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

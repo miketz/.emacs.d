@@ -52,6 +52,7 @@ in case that file does not provide any feature."
 (cl-defmacro let1 (var-val-pair &body body)
   "Syntax sugar macro. Let 1 variable without double nesting the var list (())
 Ex: (let1 (x 4) (print x))"
+  (declare (indent 1)) ;;indent it like a normal let.
   `(let (,var-val-pair)
      ,@body))
 

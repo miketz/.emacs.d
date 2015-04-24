@@ -3205,18 +3205,60 @@ Depends on evil mode."
   (narrow-to-region start end)
   (js2-mode))
 
-(defun my/focus-javascript ()
+(when nil
+  (defun my/focus-javascript-old ()
+    (interactive)
+    ;; highlight the region inside the <script></script> tags.
+    (search-backward "<script")
+    (next-line)
+    (evil-visual-line)
+    (search-forward "</script")
+    (previous-line)
+    ;; turn on js2-mode for this region. (and narrow)
+    (call-interactively #'my/js2-mode-on-region)))
+
+(defun my/find-text (txt)
+  "Searches backwards, then forwards for `txt'. Returns nil if not found."
+  (let ((loc nil))
+    (setq loc (search-backward txt nil t))
+    (when (null loc)
+      (setq loc (search-forward txt nil t)))
+    loc))
+
+(cl-defun my/focus-javascript ()
   (interactive)
-  ;; highlight the region inside the <script></script> tags.
-  (search-backward "<script")
-  (next-line)
-  (evil-visual-line)
-  (search-forward "</script")
-  (previous-line)
-  ;; turn on js2-mode for this region. (and narrow)
-  (call-interactively #'my/js2-mode-on-region))
+  (let ((start-tag-name "<script")
+        (end-tag-name   "</script")
+        (start          nil)
+        (end            nil))
+    ;;find start tag
+    (setq start (my/find-text start-tag-name))
+    (when (null start)
+      (message "start tag not found")
+      (return-from my/focus-javascript nil))
+    ;;start is found, move cursor down a line, start highlighitng
+    (next-line)
+    (move-beginning-of-line nil)
+    (evil-visual-line)
+    ;;jump to end tag
+    (setq end (my/find-text end-tag-name))
+    (when (null end)
+      (message "end tag not found")
+      (return-from my/focus-javascript nil))
+    ;;end tag is found. now move cursor up one line
+    (previous-line)
+    (move-end-of-line nil)
+    ;; turn on js2-mode for this region. (and narrow)
+    (call-interactively #'my/js2-mode-on-region)))
+
+(defun my/unfocus-javascript ()
+  (interactive)
+  (widen)
+  (web-mode))
+
 
 (global-set-key (kbd "C-c j") #'my/focus-javascript)
+(global-set-key (kbd "C-c u") #'my/unfocus-javascript)
 
 ;;------------------------------------------------------------------------------
 ;; svg-mode-line-themes

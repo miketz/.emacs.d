@@ -356,8 +356,7 @@ Assums a vertically stacked display of the list.
         bug-hunter
         swiper
         color-identifiers-mode
-        ,(when (eq system-type 'gnu/linux)
-           'svg-mode-line-themes)
+        svg-mode-line-themes ;only works on gnu/linux
         ))
 
 (when (eq my/curr-computer 'work-laptop)

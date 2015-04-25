@@ -3261,20 +3261,21 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; svg-mode-line-themes
 ;;------------------------------------------------------------------------------
-(when (eq system-type 'gnu/linux)
-  (require 'svg-mode-line-themes);from melpa
-  ;;fix fonts?
-  (let (( theme-archetype (cdr (assoc 'archetype smt/themes)))
-        ( row-archetype (cdr (assoc 'archetype smt/rows))))
-    (setf (getf theme-archetype :style)
-          (list :font-family "Source Code Pro"
-                :font-size "40pt"))
-    (setf (getf row-archetype :baseline) 12))
+;; (when nil ;;don't use for now
+;;   (when (eq system-type 'gnu/linux)
+;;     (require 'svg-mode-line-themes)      ;from melpa
+;;     ;;fix fonts?
+;;     (let (( theme-archetype (cdr (assoc 'archetype smt/themes)))
+;;           ( row-archetype (cdr (assoc 'archetype smt/rows))))
+;;       (setf (getf theme-archetype :style)
+;;             (list :font-family "Source Code Pro"
+;;                   :font-size "40pt"))
+;;       (setf (getf row-archetype :baseline) 12))
 
-  ;; not from melpa. Example modeline using svg-mode-line-themes
-  (require 'ocodo-svg-mode-line)
-  ;;(require 'ocodo-slim-svg-mode-line)
-  )
+;;     ;; not from melpa. Example modeline using svg-mode-line-themes
+;;     (require 'ocodo-svg-mode-line)
+;;     ;;(require 'ocodo-slim-svg-mode-line)
+;;     ))
 
 
 ;;------------------------------------------------------------------------------

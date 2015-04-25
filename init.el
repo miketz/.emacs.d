@@ -3230,7 +3230,7 @@ Depends on evil mode."
       ;;start is found, move cursor down a line, start highlighitng
       (next-line)
       (move-beginning-of-line nil)
-      (evil-visual-line)
+      (set-mark-command nil) ;(evil-visual-line)
       ;; jump to end tag. always search forward
       (setq end (search-forward end-tag-name nil t))
       (when (null end)

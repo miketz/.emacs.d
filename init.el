@@ -1614,34 +1614,36 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq-default js2-global-externs '("$" "module" "require" "buster" "sinon" "assert" "refute" "setTimeout"
-                                   "clearTimeout" "setInterval" "clearInterval" "location" "__dirname"
-                                   "console" "JSON" "ActiveXObject"))
-(setq js2-highlight-level 3);;maximum highlighting
 
+(with-eval-after-load "js2-mode"
+  (setq-default js2-global-externs
+                '("$" "module" "require" "buster" "sinon" "assert" "refute"
+                  "setTimeout" "clearTimeout" "setInterval" "clearInterval"
+                  "location" "__dirname" "console" "JSON" "ActiveXObject"))
+  (setq js2-highlight-level 3);;maximum highlighting
 
-(add-hook 'js2-mode-hook
-          (lambda ()
-            ;; replace ambiguous name "Javascript-IDE" with "js2"
-            (setq mode-name "js2")
-            (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
-            (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
-                                                                (interactive)
-                                                                (js2-next-error -1)))
-            ;; (setq-default js2-global-externs "jQuery $")
-            ;; (setq-default js2-indent-on-enter-key t)
-            ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
+  (add-hook 'js2-mode-hook
+            (lambda ()
+              ;; replace ambiguous name "Javascript-IDE" with "js2"
+              (setq mode-name "js2")
+              (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
+              (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
+                                                                  (interactive)
+                                                                  (js2-next-error -1)))
+              ;; (setq-default js2-global-externs "jQuery $")
+              ;; (setq-default js2-indent-on-enter-key t)
+              ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
 
-            ;; (when (featurep 'js2-highlight-vars)
-            ;;   (js2-highlight-vars-mode))
+              ;; (when (featurep 'js2-highlight-vars)
+              ;;   (js2-highlight-vars-mode))
 
-            ;;(js2-imenu-extras-mode)
-            (electric-pair-mode 1)
-            (yas-minor-mode 1)
-            ))
-
-;;(add-hook 'js2-mode-hook #'(lambda () (yas-minor-mode 1)))
-;;(add-hook 'js2-init-hook #'(lambda () (yas-minor-mode 1)))
+              ;;(js2-imenu-extras-mode)
+              (electric-pair-mode 1)
+              (yas-minor-mode 1)
+              ))
+  ;;(add-hook 'js2-mode-hook #'(lambda () (yas-minor-mode 1)))
+  ;;(add-hook 'js2-init-hook #'(lambda () (yas-minor-mode 1)))
+  )
 
 ;;--------------------
 ;; ac-js2

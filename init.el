@@ -3203,7 +3203,8 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; delay execution of this code until `web-mode' is turned on.
 (with-eval-after-load "web-mode"
-  ;;needed to bind a key for `js2-mode-map'
+  ;;needed to bind a key for `js2-mode-map'.
+  ;;(require 'cl) is also needed but occurs higher up in this file.
   (require 'js2-mode)
 
   (defun my/js2-mode-on-region (start end)

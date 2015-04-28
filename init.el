@@ -2049,6 +2049,7 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
+
 ;; Stop SLIME's REPL from grabbing DEL,
 ;; which is annoying when backspacing over a '('
 (defun override-slime-repl-bindings-with-paredit ()
@@ -2499,37 +2500,39 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'html-mode-hook 'skewer-html-mode)
 (add-hook 'web-mode-hook 'skewer-html-mode)
 
-(defun my/skewer-repl-clear-buffer ()
-  "Deletes the contents of the skewer-reple buffer.
+(with-eval-after-load "skewer-mode"
+  (defun my/skewer-repl-clear-buffer ()
+    "Deletes the contents of the skewer-reple buffer.
 Depends on evil mode."
-  (interactive)
-  (evil-goto-line) ;bottom
-  (evil-previous-visual-line) ;up 1
-  (evil-end-of-line)
-  (delete-region 1 (+ (point) 2))
-  (evil-end-of-line))
+    (interactive)
+    (evil-goto-line) ;bottom
+    (evil-previous-visual-line) ;up 1
+    (evil-end-of-line)
+    (delete-region 1 (+ (point) 2))
+    (evil-end-of-line))
 
-(add-hook
- 'skewer-repl-mode-hook
- (lambda ()
-   ;;turn off line numbers in the repl
-   (linum-mode 0)
-   ;;there's always a trailing space at repl prompt. Don't highlight it. 
-   (setq show-trailing-whitespace nil)
-   (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)))
+  (add-hook
+   'skewer-repl-mode-hook
+   (lambda ()
+     ;;turn off line numbers in the repl
+     (linum-mode 0)
+     ;;there's always a trailing space at repl prompt. Don't highlight it. 
+     (setq show-trailing-whitespace nil)
+     (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)))
 
-;;(require 'simple-httpd)
-;; (defun my/skewer-html ()
-;;   "Wire up the html file you're editing with skewer."
-;;   (interactive)
-;;   ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
-;;   ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
-;;   (setq httpd-root (my/current-folder-path))
-;;   (httpd-start)
-;;   (browse-url-of-file (concat "http://localhost:8080/"
-;;                               (file-name-nondirectory buffer-file-name)))
-;;   (run-skewer)
-;;   (message "put this in the <head>: <script src=\"http://localhost:8080/skewer\"></script> --- switch to tab http://localhost:8080/FileOrRouteName, then start evaling html"))
+  ;;(require 'simple-httpd)
+  ;; (defun my/skewer-html ()
+  ;;   "Wire up the html file you're editing with skewer."
+  ;;   (interactive)
+  ;;   ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
+  ;;   ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
+  ;;   (setq httpd-root (my/current-folder-path))
+  ;;   (httpd-start)
+  ;;   (browse-url-of-file (concat "http://localhost:8080/"
+  ;;                               (file-name-nondirectory buffer-file-name)))
+  ;;   (run-skewer)
+  ;;   (message "put this in the <head>: <script src=\"http://localhost:8080/skewer\"></script> --- switch to tab http://localhost:8080/FileOrRouteName, then start evaling html"))
+  )
 
 ;;-----------------------------------------------------------------------------
 ;; eshell

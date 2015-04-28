@@ -3480,19 +3480,9 @@ edge cases not covered by buffer killing."
 ;;     (message "you said: %s" txt)))
 
 ;; ;---------------------------------------------------
-;; ; stuff
+;; ; rand
 ;; ;---------------------------------------------------
-;; (random t) ;seed random with time
-
-;; (defun rand (min max) ;TODO: use a custom implementation for speed.
-;;   (+ min
-;;      (random (+ 1
-;;                 (- max min)))))
-;; (defun roll ()
-;;   (rand 1 1000))
-
-;; (defun rollCheck (val)
-;;   (>= val (roll)))
+(autoload 'rand "my-rand" nil t)
 
 ;; (setq msgDb '("hi"))
 
@@ -3524,36 +3514,8 @@ edge cases not covered by buffer killing."
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ;; touch typing
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (defun my/type-tutor ()
-;;   (interactive)
-;;   (my/type-tutor-defaults
-;;    (list "`" "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "-" "=" ;top row
-;;          "~" "!" "@" "#" "$" "%" "^" "&" "*" "(" ")" "_" "+" ;Shift top row
-;;          "[" "]" "{" "}")))
-
-;; (defun my/type-tutor-defaults (char-lst)
-;;   (let ((lines 7)
-;;         (groups-per-line 7)
-;;         (group-size 9))
-;;     (my/type-tutor-insert-buffer char-lst lines groups-per-line group-size)))
-
-;; (defun my/type-tutor-insert-buffer (chars lines groups-per-line group-size)
-;;   (save-excursion
-;;     (let ((chars-len (- (length chars) 1))
-;;           (l 0))
-;;       (while (< l lines)
-;;         (let ((gpl 0))
-;;           (while (< gpl groups-per-line)
-;;             (let ((gs 0))
-;;               (while (< gs group-size)
-;;                 (insert (my/getAtIndex (rand 0 chars-len)
-;;                                        chars))
-;;                 (incf gs)))
-;;             (insert " ")
-;;             (incf gpl)))
-;;         (insert "\n\n\n")
-;;         (incf l))))
-;;   (next-line))
+;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
+(autoload 'my/type-tutor "my-type-tutor" nil t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hour format conversion. 12 -> 24

@@ -2592,17 +2592,18 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
 
-(when (eq my/curr-computer 'work-laptop)
-  (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
+(with-eval-after-load "eww"
+  (when (eq my/curr-computer 'work-laptop)
+    (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
 
-(add-hook 'eww-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace nil)
-            (define-key eww-mode-map (kbd "C-c h") 'eww-back-url)
-            (define-key eww-mode-map (kbd "C-c l") 'eww-forward-url)
-            (define-key eww-mode-map (kbd "C-c r") 'eww-reload)
-            (define-key eww-mode-map (kbd "C-c g") 'eww)
-            (define-key eww-mode-map (kbd "<tab>") 'shr-next-link)))
+  (add-hook 'eww-mode-hook
+            (lambda ()
+              (setq show-trailing-whitespace nil)
+              (define-key eww-mode-map (kbd "C-c h") 'eww-back-url)
+              (define-key eww-mode-map (kbd "C-c l") 'eww-forward-url)
+              (define-key eww-mode-map (kbd "C-c r") 'eww-reload)
+              (define-key eww-mode-map (kbd "C-c g") 'eww)
+              (define-key eww-mode-map (kbd "<tab>") 'shr-next-link))))
 
 
 ;;-----------------------------------------------------------------------------

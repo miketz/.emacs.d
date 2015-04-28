@@ -1669,76 +1669,78 @@ This prevents overlapping themes; something I would rarely want."
 ;; Helm
 ;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
+(when nil ;turning off helm while I try ivy.
+  (autoload 'helm "helm" nil t)
+  (autoload 'helm-config "helm-config" nil t)
 
-(autoload 'helm "helm" nil t)
-(autoload 'helm-config "helm-config" nil t)
+  (with-eval-after-load "helm"
+    (setq helm-ff-transformer-show-only-basename nil
+          ;;helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
+          ;;helm-yank-symbol-first                 t
+          ;;helm-move-to-line-cycle-in-source      t
+          helm-buffers-fuzzy-matching            t
+          ;;helm-ff-auto-update-initial-value      t
+          )
 
-(with-eval-after-load "helm"
-  (setq helm-ff-transformer-show-only-basename nil
-        ;;helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
-        ;;helm-yank-symbol-first                 t
-        ;;helm-move-to-line-cycle-in-source      t
-        helm-buffers-fuzzy-matching            t
-        ;;helm-ff-auto-update-initial-value      t
-        )
+    (setq helm-ff-lynx-style-map nil
+          helm-input-idle-delay 0.1
+          helm-idle-delay 0.1)
 
-  (setq helm-ff-lynx-style-map nil
-        helm-input-idle-delay 0.1
-        helm-idle-delay 0.1)
+    ;; (autoload 'helm-descbinds      "helm-descbinds" t)
+    ;; (autoload 'helm-eshell-history "helm-eshell"    t)
+    ;; (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
 
-  ;; (autoload 'helm-descbinds      "helm-descbinds" t)
-  ;; (autoload 'helm-eshell-history "helm-eshell"    t)
-  ;; (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
+    ;; (global-set-key (kbd "C-h a")    #'helm-apropos)
+    ;; (global-set-key (kbd "C-h i")    #'helm-info-emacs)
+    ;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
 
-  ;; (global-set-key (kbd "C-h a")    #'helm-apropos)
-  ;; (global-set-key (kbd "C-h i")    #'helm-info-emacs)
-  ;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
-
-  ;; (add-hook 'eshell-mode-hook
-  ;;           #'(lambda ()
-  ;;               (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
-  ;;               (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
+    ;; (add-hook 'eshell-mode-hook
+    ;;           #'(lambda ()
+    ;;               (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
+    ;;               (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
 
 
-  ;;(helm-adaptative-mode t)
+    ;;(helm-adaptative-mode t)
 
-  (progn ;;from tuhdo. Customizing helm window size/display.
-    (setq helm-display-header-line nil) ;save 1 line for rarely used header.
-    (set-face-attribute 'helm-source-header nil :height 1.0);don't make source seperators bigger than needed
-    ;; (progn
-    ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
-    ;;   ;;helm window size as you type.
-    ;;   (helm-autoresize-mode 1)
-    ;;   ;;disable the dynamic size adjustment.
-    ;;   (setq helm-autoresize-max-height 35)
-    ;;   (setq helm-autoresize-min-height 35))
-    ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
-    ;; ;;lots of split windows, keep the popup at the current window.
-    ;; (setq helm-split-window-in-side-p t)
-    )
+    (progn ;;from tuhdo. Customizing helm window size/display.
+      (setq helm-display-header-line nil) ;save 1 line for rarely used header.
+      (set-face-attribute 'helm-source-header nil :height 1.0);don't make source seperators bigger than needed
+      ;; (progn
+      ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
+      ;;   ;;helm window size as you type.
+      ;;   (helm-autoresize-mode 1)
+      ;;   ;;disable the dynamic size adjustment.
+      ;;   (setq helm-autoresize-max-height 35)
+      ;;   (setq helm-autoresize-min-height 35))
+      ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
+      ;; ;;lots of split windows, keep the popup at the current window.
+      ;; (setq helm-split-window-in-side-p t)
+      )
 
-  (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-    (helm-mode 1) ;helm-selection everywhere like when using M-x
-    )
+    (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+      (helm-mode 1) ;helm-selection everywhere like when using M-x
+      )
 
-  ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
-  ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
-  ;;(define-key helm-map (kbd "M-o") #'helm-previous-source)
+    ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
+    ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
+    ;;(define-key helm-map (kbd "M-o") #'helm-previous-source)
 
-  ;;(global-set-key (kbd "M-s s")   #'helm-ag)
-  );end helm eval-after-load
+    ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
-(evil-leader/set-key "b" #'helm-buffers-list)
-;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
-;;(global-set-key (kbd "C-x b")   #'helm-mini)
-;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-  (global-set-key (kbd "M-x") #'helm-M-x))
-;; (global-set-key (kbd "C-x C-f") #'helm-find-files)
-;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
-;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-(global-set-key (kbd "M-y") #'helm-show-kill-ring)
+    (progn ;moving these key binds into eval-after-load as an experiement.
+      (evil-leader/set-key "b" #'helm-buffers-list)
+      ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+      ;;(global-set-key (kbd "C-x b")   #'helm-mini)
+      ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+      (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+        (global-set-key (kbd "M-x") #'helm-M-x))
+      ;; (global-set-key (kbd "C-x C-f") #'helm-find-files)
+      ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
+      ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
+      (global-set-key (kbd "M-y") #'helm-show-kill-ring))
 
+    );end helm eval-after-load
+  )
 
 
 ;;----------------------------------
@@ -3017,6 +3019,7 @@ Depends on evil mode."
 ;; swiper
 ;;------------------------------------------------------------------------------
 (global-set-key (kbd "C-s") #'swiper)
+(ivy-mode) ;ivy is bundled with swiper???
 
 ;;------------------------------------------------------------------------------
 ;; color-identifiers-mode

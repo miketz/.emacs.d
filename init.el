@@ -3187,6 +3187,8 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
+(evil-leader/set-key "b" #'ibuffer)
+
 (defun what-face (pos)
   "Prints the face at point."
   (interactive "d")

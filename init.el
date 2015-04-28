@@ -274,7 +274,7 @@ Assums a vertically stacked display of the list.
 ;; Packages
 ;;----------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/") ;stores elisp files that are not "packages".
-(add-to-list 'load-path "~/.emacs.d/notElpa/mine/") ;stores elisp files that are not "packages".
+(add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
 (setq my/packages

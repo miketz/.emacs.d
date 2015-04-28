@@ -2537,39 +2537,40 @@ Depends on evil mode."
 ;;-----------------------------------------------------------------------------
 ;; eshell
 ;;-----------------------------------------------------------------------------
-(defun my/eshell-clear-buffer ()
-  "Deletes the contents of eshell buffer, except the last prompt"
-  (interactive)
-  (save-excursion
-    (goto-char eshell-last-output-end)
-    (let ((lines (count-lines 1 (point)))
-          (inhibit-read-only t))
-      (beginning-of-line)
-      (let ((pos (point)))
-        (if (bobp)
-            (if (interactive-p)
-                (error "Buffer too short to truncate"))
-          (delete-region (point-min) (point))
-          (if (interactive-p)
-              (message "Buffer cleared")))))))
+;; (with-eval-after-load "eshell-mode"
+;;   (defun my/eshell-clear-buffer ()
+;;     "Deletes the contents of eshell buffer, except the last prompt"
+;;     (interactive)
+;;     (save-excursion
+;;       (goto-char eshell-last-output-end)
+;;       (let ((lines (count-lines 1 (point)))
+;;             (inhibit-read-only t))
+;;         (beginning-of-line)
+;;         (let ((pos (point)))
+;;           (if (bobp)
+;;               (if (interactive-p)
+;;                   (error "Buffer too short to truncate"))
+;;             (delete-region (point-min) (point))
+;;             (if (interactive-p)
+;;                 (message "Buffer cleared")))))))
 
-(defun my/eshell-clear-line ()
-  (interactive)
-  ;;(message "") ;delete multiple lines of junk in the mini buffer.
-  (eshell-bol)
-  (evil-delete-line)
-  ;;(message "") ;delete multiple lines of junk in the mini buffer.
-  )
+;;   (defun my/eshell-clear-line ()
+;;     (interactive)
+;;     ;;(message "") ;delete multiple lines of junk in the mini buffer.
+;;     (eshell-bol)
+;;     (evil-delete-line)
+;;     ;;(message "") ;delete multiple lines of junk in the mini buffer.
+;;     )
 
-;;set up custome keybindings when the mode loads.
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            ;;Use the same keybinding to clear eshell as the SLIME repl
-            (define-key eshell-mode-map (kbd "C-c M-o") 'my/eshell-clear-buffer)
-            ;;make evil's dd compatible with the read-only prompt of hte current line.
-            ;;(define-key evil-normal-state-map (kbd "<remap> <evil-delete-whole-line>") 'my/eshell-clear-line)
-            ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my/eshell-clear-line)
-            ))
+;;   ;;set up custome keybindings when the mode loads.
+;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set in the hook. Eval-after-load doesn't work.
+;;             (lambda ()
+;;               ;;Use the same keybinding to clear eshell as the SLIME repl
+;;               (define-key eshell-mode-map (kbd "C-c M-o") 'my/eshell-clear-buffer)
+;;               ;;make evil's dd compatible with the read-only prompt of hte current line.
+;;               ;;(define-key evil-normal-state-map (kbd "<remap> <evil-delete-whole-line>") 'my/eshell-clear-line)
+;;               ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my/eshell-clear-line)
+;;               )))
 
 ;;-----------------------------------------------------------------------------
 ;; highlight-tail

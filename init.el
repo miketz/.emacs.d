@@ -1,6 +1,6 @@
-;;; package --- Summary
+;;; init.el --- My emacs config.
+
 ;;; Commentary:
-;;; My emacs config.
 
 ;;; NOTES:
 ;;; Windows: registry entry for "open with" option:

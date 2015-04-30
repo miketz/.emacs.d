@@ -1630,10 +1630,35 @@ This prevents overlapping themes; something I would rarely want."
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 (with-eval-after-load "js2-mode"
-  (setq-default js2-global-externs
-                '("$" "module" "require" "buster" "sinon" "assert" "refute"
-                  "setTimeout" "clearTimeout" "setInterval" "clearInterval"
-                  "location" "__dirname" "console" "JSON" "ActiveXObject"))
+  (setq-default
+   js2-global-externs
+   '("$" "module" "require" "buster" "sinon" "assert" "refute"
+     "__dirname" "console" "JSON" "ActiveXObject" "jQuery"
+     ;; most copied from the auto-complete dict folder.
+     "Anchor" "Area" "Array" "Boolean" "Button" "Checkbox" "Date"
+     "Document" "Element" "FileUpload" "Form" "Frame" "Function"
+     "Hidden" "History" "Image" "Infinity" "JavaArray" "JavaClass"
+     "JavaObject" "JavaPackage" "Link" "Location" "Math" "MimeType"
+     "NaN" "Navigator" "Number" "Object" "Option" "Packages"
+     "Password" "Plugin" "Radio" "RegExp" "Reset" "Select" "String"
+     "Submit" "Text" "Textarea" "Window" "alert" "arguments" "assign"
+     "blur" "break" "callee" "caller" "captureEvents" "case"
+     "clearInterval" "clearTimeout" "close" "closed" "comment"
+     "confirm" "constructor" "continue" "default" "defaultStatus"
+     "delete" "do" "document" "else" "escape" "eval" "export" "find"
+     "focus" "for" "frames" "function" "getClass" "history" "home"
+     "if" "import" "in" "innerHeight" "innerWidth" "isFinite" "isNan"
+     "java" "label" "length" "location" "locationbar" "menubar"
+     "moveBy" "moveTo" "name" "navigate" "navigator" "netscape" "new"
+     "onBlur" "onError" "onFocus" "onLoad" "onUnload" "open" "opener"
+     "outerHeight" "outerWidth" "pageXoffset" "pageYoffset" "parent"
+     "parseFloat" "parseInt" "personalbar" "print" "prompt"
+     "prototype" "ref" "releaseEvents" "resizeBy" "resizeTo" "return"
+     "routeEvent" "scroll" "scrollBy" "scrollTo" "scrollbars" "self"
+     "setInterval" "setTimeout" "status" "statusbar" "stop" "sun"
+     "switch" "taint" "this" "toString" "toolbar" "top" "typeof"
+     "unescape" "untaint" "unwatch" "valueOf" "var" "void" "watch"
+     "while" "window" "with" ))
   (setq js2-highlight-level 3);;maximum highlighting
 
   (add-hook 'js2-mode-hook

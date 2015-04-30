@@ -1221,6 +1221,19 @@ This prevents overlapping themes; something I would rarely want."
                       :weight bold
                       :inverse-video nil))))))
 
+(defun color-default-transparent ()
+  (dolist (thm custom-enabled-themes)
+    (disable-theme thm))
+  (my/set-font :sym 'consolas
+               :weight 'bold
+               :height 125
+               :resize-window t)
+  (set-background-color mayan-smoke)
+  (let ((a 80))
+    (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
+  (my/cursor-stuff-lightBg)
+  (my/rainbow-parens-light-bg2))
+
 (defun color-gandalf ()
   (interactive)
   (load-theme 'gandalf t)

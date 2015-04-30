@@ -147,6 +147,20 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;--------------------------------------------------------------------
 (when nil ;these are special-use functions. Don't create them.
 
+  (defun display-lists (lst1 lst2)
+    "displays 2 lists (of strings) veritcally, side-by-side"
+    (let ((long1 (apply #'max
+                        (mapcar #'length
+                                lst1))))
+      (dotimes (i (length lst1))
+        (let ((val1 (nth i lst1))
+              (val2 (nth i lst2)))
+          (insert val1) (insert " ")
+          (dotimes (p (- long1 (length val1)))
+            (insert " "))
+          (insert val2)
+          (insert "\n")))))
+
   (defun my/get-longest-str (lst)
     "returns length of the longest str"
     (apply #'max

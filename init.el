@@ -3070,7 +3070,7 @@ Depends on evil mode."
 ;; swiper
 ;;------------------------------------------------------------------------------
 (global-set-key (kbd "C-s") #'swiper)
-(ivy-mode) ;ivy is bundled with swiper???
+;;(ivy-mode) ;ivy is bundled with swiper???
 
 ;;------------------------------------------------------------------------------
 ;; color-identifiers-mode

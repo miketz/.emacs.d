@@ -2773,12 +2773,11 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; flycheck
 ;;------------------------------------------------------------------------------
-(add-hook 'flycheck-mode-hook
-          (lambda ()
-            (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
-            (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
-            ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
-            ))
+(with-eval-after-load "flycheck"
+  (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+  (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error))
+
+;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
 
 ;;------------------------------------------------------------------------------
 ;; hydra

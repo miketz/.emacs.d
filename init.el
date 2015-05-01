@@ -1152,6 +1152,9 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'monokai t)
   (custom-theme-set-faces
    'monokai
+   ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
+   `(default ((t (:background ,charcoal))))
+
    `(compilation-info
      ((t (:foreground "DarkOrange2"))))
    `(cursor

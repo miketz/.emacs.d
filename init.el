@@ -1225,12 +1225,20 @@ This prevents overlapping themes; something I would rarely want."
                       :inverse-video nil))))))
 
 (defun color-default-transparent ()
+  (interactive)
   (dolist (thm custom-enabled-themes)
     (disable-theme thm))
+
+  (let ((cur '(box "blue")))
+    (setq evil-normal-state-cursor cur)
+    (setq evil-visual-state-cursor cur)
+    (setq evil-operator-state-cursor cur))
+
   (my/set-font :sym 'consolas
                :weight 'bold
                :height 125
                :resize-window t)
+
   (set-background-color mayan-smoke)
   (let ((a 80))
     (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))

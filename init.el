@@ -374,7 +374,7 @@ Assums a vertically stacked display of the list.
         swiper
         color-identifiers-mode
         svg-mode-line-themes ;only works on gnu/linux
-        ))
+        smex))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -1941,8 +1941,16 @@ This prevents overlapping themes; something I would rarely want."
 ;; Ido mode
 ;;--------------------
 ;;(require 'ido)
-;;(ido-mode t)
+(setq ido-everywhere t)
+(ido-mode t)
 
+;;----------------------
+;; smex. (built on ido)
+;;----------------------
+;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+;;                   ; when Smex is auto-initialized on its first run.
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
 ;;--------------------
 ;; Yasnippet
@@ -3255,7 +3263,8 @@ Depends on evil mode."
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 
-(evil-leader/set-key "b" #'ibuffer)
+;;(evil-leader/set-key "b" #'ibuffer)
+(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)
   "Prints the face at point."

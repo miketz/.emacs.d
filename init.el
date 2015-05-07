@@ -454,6 +454,11 @@ cleaning out unwanted packages."
     "Executes a w32 action."
     (let ((code (my/w32-get-code action)))
       (w32-send-sys-command code))))
+
+
+
+
+
 ;;--------------------------------------------------------------------
 ;; Evil mode
 ;;--------------------------------------------------------------------
@@ -607,6 +612,31 @@ char."
                              (evil-append 1)
                              (slime-pprint-eval-last-expression)
                              (evil-normal-state))))
+
+;;----------------------------------
+;; key-chord
+;;----------------------------------
+(setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+(setq key-chord-one-key-delay 0.4)
+
+;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
+(require 'key-chord)
+(key-chord-mode 1)
+;; Define a key chord for escape so I don't have to press Esc or C-[
+(let ((chord "fj"))
+  ;;NOTE: fj lags downward movement with "j" in visual mode.
+  ;;      If you hold down j it messes things up and the chord doesn't work.
+  (key-chord-define evil-insert-state-map chord #'evil-normal-state)
+  (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+  ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
+  ;; (key-chord-define evil-operator-state-map chord func)
+  ;; (key-chord-define evil-motion-state-map chord func))
+  ;;moved into `eval-after-load' for helm so helm-map is defined (key-chord-define helm-map chord #'helm-keyboard-quit)
+  (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body))
+
+;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
+;;(key-chord-define c++-mode-map ";;"  "\C-e;")
+
 
 ;;----------------------------------
 ;; evil-snipe
@@ -1752,7 +1782,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; Helm
 ;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
-(when nil ;turning off helm while I try ivy.
+
+(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+
   (autoload 'helm "helm" nil t)
   (autoload 'helm-config "helm-config" nil t)
 
@@ -1800,9 +1832,7 @@ This prevents overlapping themes; something I would rarely want."
       ;; (setq helm-split-window-in-side-p t)
       )
 
-    (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-      (helm-mode 1) ;helm-selection everywhere like when using M-x
-      )
+    (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to inrease start up time a bit.
 
     ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
     ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1810,20 +1840,21 @@ This prevents overlapping themes; something I would rarely want."
 
     ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
-    (progn ;moving these key binds into eval-after-load as an experiement.
-      (evil-leader/set-key "b" #'helm-buffers-list)
-      ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
-      ;;(global-set-key (kbd "C-x b")   #'helm-mini)
-      ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-      (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-        (global-set-key (kbd "M-x") #'helm-M-x))
-      ;; (global-set-key (kbd "C-x C-f") #'helm-find-files)
-      ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
-      ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-      (global-set-key (kbd "M-y") #'helm-show-kill-ring))
-
+    (key-chord-define helm-map "fj" #'helm-keyboard-quit);must be in eval-after-load so `helm-map' is defined
     );end helm eval-after-load
-  )
+
+  (progn ;;functions in key maps are auto-loaded.
+    (evil-leader/set-key "b" #'helm-buffers-list)
+    ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+    ;;(global-set-key (kbd "C-x b")   #'helm-mini)
+    ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+    (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+      (global-set-key (kbd "M-x") #'helm-M-x))
+    (global-set-key (kbd "C-x C-f") #'helm-find-files)
+    ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
+    ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
+    (global-set-key (kbd "M-y") #'helm-show-kill-ring)))
+
 
 
 ;;----------------------------------
@@ -1838,29 +1869,6 @@ This prevents overlapping themes; something I would rarely want."
 ;; evil-escape
 ;;----------------------------------
 ;;(evil-escape-mode 1)
-;;----------------------------------
-;; key-chord
-;;----------------------------------
-(setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
-(setq key-chord-one-key-delay 0.4)
-
-;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
-(require 'key-chord)
-(key-chord-mode 1)
-;; Define a key chord for escape so I don't have to press Esc or C-[
-(let ((chord "fj"))
-  ;;NOTE: fj lags downward movement with "j" in visual mode.
-  ;;      If you hold down j it messes things up and the chord doesn't work.
-  (key-chord-define evil-insert-state-map chord #'evil-normal-state)
-  (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
-  ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
-  ;; (key-chord-define evil-operator-state-map chord func)
-  ;; (key-chord-define evil-motion-state-map chord func))
-  ;;Temporarily commenting while figure out eval-after-load for helm (key-chord-define helm-map chord #'helm-keyboard-quit)
-  (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body))
-
-;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
-;;(key-chord-define c++-mode-map ";;"  "\C-e;")
 
 
 
@@ -3286,7 +3294,7 @@ Depends on evil mode."
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 
-(evil-leader/set-key "b" #'ibuffer)
+;;(evil-leader/set-key "b" #'ibuffer)
 ;;(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)

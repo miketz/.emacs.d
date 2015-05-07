@@ -3264,7 +3264,7 @@ Depends on evil mode."
 (prefer-coding-system 'utf-8)
 
 ;;(evil-leader/set-key "b" #'ibuffer)
-(evil-leader/set-key "b" #'ido-switch-buffer)
+;;(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)
   "Prints the face at point."

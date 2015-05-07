@@ -3331,9 +3331,9 @@ Gotten from #emacs on freenode."
 
 (cond
  ((eq my/curr-computer 'work-laptop)
-  (setq browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
-        ;;browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-        browse-url-browser-function 'browse-url-generic))
+  (setq ;;browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
+   browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+   browse-url-browser-function 'browse-url-generic))
 
  ((eq my/curr-computer 'a-laptop-faster)
   (setq browse-url-generic-program "conkeror"

@@ -267,7 +267,8 @@ Assums a vertically stacked display of the list.
         a-tower
         a-laptop-old
         a-laptop-faster
-        leyna-laptop))
+        leyna-laptop
+        hp-tower-2010))
 ;; currently used computer. (manually set)
 ;; Used to conditionally set computer specific options, and paths.
 ;; NOTE: When setting up emacs on a new computer create file

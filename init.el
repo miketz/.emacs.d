@@ -492,6 +492,11 @@ cleaning out unwanted packages."
   'evil-previous-visual-line)
 ;;(setq-default evil-cross-lines t) ;; Make horizontal movement cross lines
 
+
+;; make C-k kill to the end of hte line in insert mode.
+(define-key evil-insert-state-map (kbd "C-k") #'kill-line)
+
+
 ;; Map for Esc.
 ;; The key-chord package causes lag when a key of the chord is pressed.
 ;; So using the the built-in control chords which are fast. Better than the

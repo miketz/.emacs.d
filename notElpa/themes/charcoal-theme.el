@@ -1,6 +1,9 @@
 ;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors.
 
-;;; Credits: Using wenburn-theme.el from Bozhidar Batsov as a base.
+;;; Credits: Using zenburn-theme.el from Bozhidar Batsov as a base.
+
+;;; Commentary:
+;;; Keywords should appear "raised" or "3D" against the bg.
 
 ;;; Code:
 
@@ -12,13 +15,13 @@
 
 
 (defvar charcoal-colors-alist
-  '(("charcoal-fg+1"     . "#FFFFEF")
+  '(("charcoal-bg"       . "#35352B")
     ("charcoal-fg"       . "#DCDCCC")
+    ("charcoal-fg+1"     . "#FFFFEF")
     ("charcoal-fg-1"     . "#656555")
     ("charcoal-bg-2"     . "#000000")
     ("charcoal-bg-1"     . "#2B2B2B")
     ("charcoal-bg-05"    . "#383838")
-    ("charcoal-bg"       . "#35352B")
     ("charcoal-bg+05"    . "#494949")
     ("charcoal-bg+1"     . "#4F4F4F")
     ("charcoal-bg+2"     . "#5F5F5F")
@@ -54,16 +57,16 @@ Each element has the form (NAME . HEX).
 `+N' suffixes indicate a color is lighter.
 `-N' suffixes indicate a color is darker.")
 
-;; for dynamic re=evaluation while in dev. Also keeps a "bakcup" of the original zenburn colors
+;; for dynamic re=evaluation while in dev. Also keeps a "bakcup" of the original charcoal colors
 ;; ready to go. Delete this `setq' when finished.
 (setq charcoal-colors-alist
-      '(("charcoal-fg+1"     . "#FFFFEF")
+      '(("charcoal-bg"       . "#35352B")
         ("charcoal-fg"       . "#DCDCCC")
+        ("charcoal-fg+1"     . "#FFFFEF")
         ("charcoal-fg-1"     . "#656555")
         ("charcoal-bg-2"     . "#000000")
         ("charcoal-bg-1"     . "#2B2B2B")
         ("charcoal-bg-05"    . "#383838")
-        ("charcoal-bg"       . "#35352B")
         ("charcoal-bg+05"    . "#494949")
         ("charcoal-bg+1"     . "#4F4F4F")
         ("charcoal-bg+2"     . "#5F5F5F")

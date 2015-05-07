@@ -309,6 +309,7 @@ Assums a vertically stacked display of the list.
         auto-complete
         ac-slime
         company
+        company-web
         slime-company
         ace-jump-mode
         ace-window
@@ -1546,6 +1547,19 @@ This prevents overlapping themes; something I would rarely want."
       (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
       (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))))
 
+;;---------------------------------------------
+;; company-web
+;;---------------------------------------------
+(add-to-list 'company-backends 'company-web-html)
+(add-to-list 'company-backends 'company-web-jade)
+(add-to-list 'company-backends 'company-web-slim)
+
+(add-hook 'web-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '(company-web-html company-files))))
+(with-eval-after-load "web-mode"
+  (define-key web-mode-map (kbd "C-SPC") 'company-web-html))
 
 ;;---------------------------------------------
 ;; slime-company

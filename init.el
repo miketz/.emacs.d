@@ -3276,6 +3276,8 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
+(global-set-key (kbd "M-/") #'hippie-expand)
+
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 

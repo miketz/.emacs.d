@@ -809,6 +809,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; (let ((current-prefix-arg '(4)))
 ;;   (call-interactively #'next-line))
 
+
+
 (defun my/load-theme (theme &optional no-confirm no-enable)
   (interactive
    (list
@@ -1848,7 +1850,7 @@ This prevents overlapping themes; something I would rarely want."
       ;; (setq helm-split-window-in-side-p t)
       )
 
-    ;;(helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to inrease start up time a bit.
+    ;;(helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
 
     ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
     ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1857,6 +1859,9 @@ This prevents overlapping themes; something I would rarely want."
     ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
     (key-chord-define helm-map "fj" #'helm-keyboard-quit);must be in eval-after-load so `helm-map' is defined
+
+
+
     );end helm eval-after-load
 
   (progn ;;functions in key maps are auto-loaded.
@@ -1871,9 +1876,13 @@ This prevents overlapping themes; something I would rarely want."
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
     (global-set-key (kbd "M-y") #'helm-show-kill-ring))
 
-  (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to inrease start up time a bit.
-  )
+  (helm-mode 1) ;helm-selection everywhere like when using M-x. putting in eval-after-load to decrease start up time a bit.
 
+
+  ;; list of functions helm should ignore and allow default completion.
+  ;; NOTE: this breaks if put in eval-after-load. Strange, but ti works if
+  ;; i just bput it after the call to (helm-mode 1)
+  (add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil)))
 
 
 ;;----------------------------------

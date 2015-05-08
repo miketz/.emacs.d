@@ -376,7 +376,8 @@ Assums a vertically stacked display of the list.
         swiper
         color-identifiers-mode
         svg-mode-line-themes ;only works on gnu/linux
-        smex))
+        smex
+        grandshell-theme))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))

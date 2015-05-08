@@ -268,7 +268,7 @@ Assums a vertically stacked display of the list.
         a-laptop-old
         a-laptop-faster
         leyna-laptop
-        hp-tower-2010))
+        hp-tower-2009))
 ;; currently used computer. (manually set)
 ;; Used to conditionally set computer specific options, and paths.
 ;; NOTE: When setting up emacs on a new computer create file
@@ -1419,6 +1419,12 @@ This prevents overlapping themes; something I would rarely want."
 
    ((eq my/curr-computer 'raspberry-pi)
     (when (display-graphic-p)
+      (color-zenburn)))
+
+   ((eq my/curr-computer 'hp-tower-2009)
+    (when (display-graphic-p)
+      (custom-set-faces
+       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal)))))
       (color-zenburn)))
 
    ((eq my/curr-computer 'a-laptop-faster)

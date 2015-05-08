@@ -1,0 +1,8 @@
+# -*- using -*-
+# name: us
+# key: us
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+using(var ${1:x} = ${2:GetResource}) {
+    $0
+}

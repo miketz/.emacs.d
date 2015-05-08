@@ -48,7 +48,9 @@ in case that file does not provide any feature."
 ;;--------------------------------------------------------------------
 ;; Helper functions and macros
 ;;--------------------------------------------------------------------
+;; eval-when-compile used to prevent flycheck `cl' warning, but only works for macros?
 (require 'cl)
+
 (cl-defmacro let1 (var-val-pair &body body)
   "Syntax sugar macro. Let 1 variable without double nesting the var list (())
 Ex: (let1 (x 4) (print x))"
@@ -1680,6 +1682,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 (setq auto-mode-alist
       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+
+
+;; `electric-pair-mode' is in `c-mode-common-hook' already.
+;; (add-hook 'csharp-mode-hook #'electric-pair-mode)
+
+(add-hook #'csharp-mode-hook #'(lambda () (yas-minor-mode 1)))
+
 
 ;;-------------------------
 ;; js2-hightlight-vars.el

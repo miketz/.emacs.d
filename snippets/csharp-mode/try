@@ -1,0 +1,14 @@
+# -*- try -*-
+# name: try
+# key: try
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+try {
+    $0
+}
+catch(Exception ex) {
+    //log
+}
+finally {
+    //clean up
+}

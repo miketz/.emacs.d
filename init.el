@@ -377,7 +377,8 @@ Assums a vertically stacked display of the list.
         color-identifiers-mode
         svg-mode-line-themes ;only works on gnu/linux
         smex
-        grandshell-theme))
+        grandshell-theme
+        avy))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -2289,15 +2290,28 @@ This prevents overlapping themes; something I would rarely want."
 ;;(powerline-default-theme)
 ;;(powerline-center-theme)
 
+
+;;--------------------
+;; Avy
+;;--------------------
+(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; already the default?
+
+(let ((overlay-type 'at)) ;options (pre at post).
+  (setq avy-goto-char-style overlay-type
+        avy-goto-word-style overlay-type))
+
+(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
+
+
 ;;--------------------
 ;; Ace jump mode
 ;;--------------------
 ;;(add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
 
-;; your eye is already focused on the jump point so no need to gray background.
-(setq ace-jump-mode-gray-background nil)
-(autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
-(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+;; ;; your eye is already focused on the jump point so no need to gray background.
+;; (setq ace-jump-mode-gray-background nil)
+;; (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
+;; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
 ;;--------------------
 ;; ace-window

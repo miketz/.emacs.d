@@ -2170,6 +2170,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
+
 ;; Stop SLIME's REPL from grabbing DEL,
 ;; which is annoying when backspacing over a '('
 (defun override-slime-repl-bindings-with-paredit ()
@@ -2634,6 +2635,7 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'web-mode-hook 'skewer-html-mode)
 
 (with-eval-after-load "skewer-mode"
+  (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)
   (defun my/skewer-repl-clear-buffer ()
     "Deletes the contents of the skewer-reple buffer.
 Depends on evil mode."
@@ -2650,8 +2652,7 @@ Depends on evil mode."
      ;;turn off line numbers in the repl
      (linum-mode 0)
      ;;there's always a trailing space at repl prompt. Don't highlight it. 
-     (setq show-trailing-whitespace nil)
-     (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)))
+     (setq show-trailing-whitespace nil)))
 
   ;;(require 'simple-httpd)
   ;; (defun my/skewer-html ()
@@ -2729,14 +2730,16 @@ Depends on evil mode."
   (when (eq my/curr-computer 'work-laptop)
     (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
 
+  (define-key eww-mode-map (kbd "C-c h") 'eww-back-url)
+  (define-key eww-mode-map (kbd "C-c l") 'eww-forward-url)
+  (define-key eww-mode-map (kbd "C-c r") 'eww-reload)
+  (define-key eww-mode-map (kbd "C-c g") 'eww)
+  (define-key eww-mode-map (kbd "<tab>") 'shr-next-link)
+
   (add-hook 'eww-mode-hook
             (lambda ()
               (setq show-trailing-whitespace nil)
-              (define-key eww-mode-map (kbd "C-c h") 'eww-back-url)
-              (define-key eww-mode-map (kbd "C-c l") 'eww-forward-url)
-              (define-key eww-mode-map (kbd "C-c r") 'eww-reload)
-              (define-key eww-mode-map (kbd "C-c g") 'eww)
-              (define-key eww-mode-map (kbd "<tab>") 'shr-next-link))))
+              )))
 
 
 ;;-----------------------------------------------------------------------------
@@ -2980,9 +2983,6 @@ Depends on evil mode."
   ;; ("b" paredit-backward)
   ("\\" nil)
   ("q" nil))
-(add-hook 'paredit-mode-hook
-          (lambda ()
-            (define-key paredit-mode-map (kbd "C-c p") #'hydra-paredit/body)))
 ;;(key-chord-define evil-normal-state-map "c," #'hydra-paredit/body)
 
 

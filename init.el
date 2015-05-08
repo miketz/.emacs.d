@@ -1752,14 +1752,17 @@ This prevents overlapping themes; something I would rarely want."
      "while" "window" "with" ))
   (setq js2-highlight-level 3);;maximum highlighting
 
+  ;;js2 steals M-j keybinding by default. Reclaim it.
+  (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
+  (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
+  (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
+                                                      (interactive)
+                                                      (js2-next-error -1)))
+
   (add-hook 'js2-mode-hook
             (lambda ()
               ;; replace ambiguous name "Javascript-IDE" with "js2"
               (setq mode-name "js2")
-              (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
-              (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
-                                                                  (interactive)
-                                                                  (js2-next-error -1)))
               ;; (setq-default js2-global-externs "jQuery $")
               ;; (setq-default js2-indent-on-enter-key t)
               ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
@@ -1769,11 +1772,7 @@ This prevents overlapping themes; something I would rarely want."
 
               ;;(js2-imenu-extras-mode)
               (electric-pair-mode 1)
-              (yas-minor-mode 1)
-              ))
-  ;;(add-hook 'js2-mode-hook #'(lambda () (yas-minor-mode 1)))
-  ;;(add-hook 'js2-init-hook #'(lambda () (yas-minor-mode 1)))
-  )
+              (yas-minor-mode 1))))
 
 ;;--------------------
 ;; ac-js2

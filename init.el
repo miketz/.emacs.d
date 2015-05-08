@@ -1839,7 +1839,7 @@ This prevents overlapping themes; something I would rarely want."
       ;; (setq helm-split-window-in-side-p t)
       )
 
-    (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to inrease start up time a bit.
+    ;;(helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to inrease start up time a bit.
 
     ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
     ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1860,7 +1860,10 @@ This prevents overlapping themes; something I would rarely want."
     (global-set-key (kbd "C-x C-f") #'helm-find-files)
     ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-    (global-set-key (kbd "M-y") #'helm-show-kill-ring)))
+    (global-set-key (kbd "M-y") #'helm-show-kill-ring))
+
+  (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to inrease start up time a bit.
+  )
 
 
 

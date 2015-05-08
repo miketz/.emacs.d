@@ -3311,8 +3311,29 @@ Depends on evil mode."
 
 
 ;;------------------------------------------------------------------------------
+;; window-search.  Limit isearch to the visilbe buffer.
+;;------------------------------------------------------------------------------
+(defun window-search (fn)
+  "Interactive search, limited to the visible portion of the buffer."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (window-start) (window-end))
+    (funcall fn)))
+(defun window-search-forward ()
+  (interactive)
+  (window-search #'isearch-forward))
+(defun window-search-backward ()
+  (interactive)
+  (window-search #'isearch-backward))
+
+(global-set-key (kbd "C-c s") #'window-search-forward)
+(global-set-key (kbd "C-c r") #'window-search-backward)
+
+;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
+
+
 (global-set-key (kbd "M-/") #'hippie-expand)
 
 ;; prevents warnings where you must select endcoding (like in `list-packages')

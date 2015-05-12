@@ -1254,9 +1254,20 @@ This prevents overlapping themes; something I would rarely want."
   (dolist (thm custom-enabled-themes)
     (disable-theme thm))
   ;;(set-background-color "ivory2")
+
   (my/cursor-stuff-lightBg)
+  (let ((cur '(box "blue")))
+    (setq evil-normal-state-cursor cur)
+    (setq evil-visual-state-cursor '(hollow "blue"))
+    (setq evil-operator-state-cursor cur))
+
+  (my/set-font :sym 'consolas
+               :weight 'bold
+               :height 125
+               :resize-window t)
+
   ;;(set-face-background hl-line-face "#EEFFEE")
-  (my/rainbow-parens-light-bg)
+  (my/rainbow-parens-light-bg2)
   ;;(my/set-font :weight 'bold)
 
   (custom-set-faces
@@ -1274,7 +1285,7 @@ This prevents overlapping themes; something I would rarely want."
 
   (let ((cur '(box "blue")))
     (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor cur)
+    (setq evil-visual-state-cursor '(hollow "blue"))
     (setq evil-operator-state-cursor cur))
 
   (my/set-font :sym 'consolas

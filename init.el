@@ -3412,6 +3412,10 @@ Gotten from #emacs on freenode."
    browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
    browse-url-browser-function 'browse-url-generic))
 
+ ((eq my/curr-computer 'hp-tower-2009)
+  (setq browse-url-generic-program "conkeror"
+        browse-url-browser-function 'browse-url-generic))
+
  ((eq my/curr-computer 'a-laptop-faster)
   (setq browse-url-generic-program "conkeror"
         browse-url-browser-function 'browse-url-generic))

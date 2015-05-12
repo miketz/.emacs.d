@@ -330,7 +330,7 @@ Assums a vertically stacked display of the list.
         clippy
         yasnippet
         rainbow-delimiters
-        ;;rainbow-mode
+        rainbow-mode
         expand-region
         ;;multiple-cursors
         ;;omnisharp

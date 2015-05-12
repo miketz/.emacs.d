@@ -2535,15 +2535,25 @@ This prevents overlapping themes; something I would rarely want."
     ))
 
 ;;; quick load of the .emacs (or init.el) file.
-(evil-leader/set-key "`" (lambda ()
-                           (interactive)
-                           (find-file-existing "~/.emacs.d/init.el")))
+(defun my/load-init ()
+  (interactive)
+  (find-file-existing "~/.emacs.d/init.el"))
+
+(evil-leader/set-key "`" #'my/load-init)
+;; the above key is hard to type on a 60% poker so making an alternative.
+(evil-leader/set-key "8" #'my/load-init)
 
 (when (eq my/curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz
   (evil-leader/set-key "1" (lambda ()
                              (interactive)
                              (dired "C:\\Users\\mtz"))))
+
+(when (eq system-type 'gnu/linux)
+  (evil-leader/set-key "1" (lambda ()
+                             (interactive)
+                             (dired "~"))))
+
 
 (when (eq my/curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz\proj\ecp\dev\db

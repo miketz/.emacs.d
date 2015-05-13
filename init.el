@@ -312,6 +312,7 @@ Assums a vertically stacked display of the list.
         ac-slime
         company
         company-web
+        ;;company-quickhelp
         slime-company
         ace-jump-mode
         ace-window
@@ -1624,6 +1625,13 @@ This prevents overlapping themes; something I would rarely want."
                  '(company-web-html company-files))))
 (with-eval-after-load "web-mode"
   (define-key web-mode-map (kbd "C-SPC") 'company-web-html))
+
+
+;;---------------------------------------------
+;; company-quickhelp. not using messes up keybinds
+;;---------------------------------------------
+;; (setq company-quickhelp-idle-delay 0.5)
+;; (company-quickhelp-mode 1)
 
 ;;---------------------------------------------
 ;; slime-company

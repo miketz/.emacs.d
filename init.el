@@ -386,10 +386,11 @@ Assums a vertically stacked display of the list.
   (add-to-list 'my/packages 'omnisharp))
 
 
-
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             ;;'("melpa" . "http://melpa.milkbox.net/packages/")
+             '("melpa" . "http://melpa.org/packages/")
+             t)
 ;; (cl-mapc 'add-to-list
 ;;          '(package-archives package-archives)
 ;;          '(("melpa" . "http://melpa.milkbox.net/packages/")

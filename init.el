@@ -951,7 +951,7 @@ This prevents overlapping themes; something I would rarely want."
  (kbd "<f9>")
  #'(lambda ()
      (interactive)
-     ;;nil for no candidate limit. I want to scroll through all the candidates.
+     ;;nil for no candidate limit. I want to scroll through all the themes.
      (let ((helm-candidate-number-limit nil))
        (call-interactively #'my/load-theme))))
 
@@ -1943,10 +1943,14 @@ This prevents overlapping themes; something I would rarely want."
 ;; helm-flycheck
 ;;----------------------------------
 (with-eval-after-load "flycheck"
+  (defun my/helm-flycheck ()
+    (interactive)
+    ;;nil for no candidate limit. I want to scroll through all the warnings.
+    (let ((helm-candidate-number-limit nil))
+      (call-interactively #'helm-flycheck)))
   ;;TODO set up keybinding for `helm-flycheck'
   ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
   )
-
 ;;----------------------------------
 ;; helm-company
 ;;----------------------------------

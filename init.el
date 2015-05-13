@@ -946,7 +946,17 @@ This prevents overlapping themes; something I would rarely want."
           t)))))
 
 
-(global-set-key (kbd "<f9>") #'my/load-theme)
+;;(global-set-key (kbd "<f9>") #'my/load-theme)
+(global-set-key
+ (kbd "<f9>")
+ #'(lambda ()
+     (interactive)
+     ;;nil for no candidate limit. I want to scroll through all the candidates.
+     (let ((helm-candidate-number-limit nil))
+       (call-interactively #'my/load-theme))))
+
+
+
 (global-set-key (kbd "<f10>") #'my/cycle-theme)
 
 (defun my/cursor-stuff-darkBg ()
@@ -1920,7 +1930,8 @@ This prevents overlapping themes; something I would rarely want."
   ;; list of functions helm should ignore and allow default completion.
   ;; NOTE: this breaks if put in eval-after-load. Strange, but ti works if
   ;; i just bput it after the call to (helm-mode 1)
-  (add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil)))
+  ;;(add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil))
+  )
 
 ;;----------------------------------
 ;; helm-flycheck

@@ -380,7 +380,8 @@ Assums a vertically stacked display of the list.
         svg-mode-line-themes ;only works on gnu/linux
         smex
         grandshell-theme
-        avy))
+        avy
+        helm-flycheck))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -1900,6 +1901,13 @@ This prevents overlapping themes; something I would rarely want."
   ;; i just bput it after the call to (helm-mode 1)
   (add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil)))
 
+;;----------------------------------
+;; helm-flycheck
+;;----------------------------------
+(with-eval-after-load "flycheck"
+  ;;TODO set up keybinding for `helm-flycheck'
+  ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
+  )
 
 ;;----------------------------------
 ;; helm-company

@@ -1524,6 +1524,10 @@ This prevents overlapping themes; something I would rarely want."
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("armcl")))))
 
+    (when (eq my/curr-computer 'hp-tower-2009)
+      (setq slime-default-lisp 'ccl
+            slime-lisp-implementations '((ccl ("~/software/ccl/lx86cl64")))))
+
     (when (eq my/curr-computer 'a-laptop-faster)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))

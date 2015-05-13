@@ -1581,36 +1581,38 @@ This prevents overlapping themes; something I would rarely want."
 ;; company
 ;;---------------------------------------------
 ;;company mode is breaking emacs 24.3. Works OK in 24.4
-(when t ;; (and (>= emacs-major-version 24)
-  ;;      (>= emacs-minor-version 4))
-  (require 'company)
-  (add-hook 'after-init-hook 'global-company-mode) ;all buffers
-  (define-key company-mode-map (kbd "C-SPC") 'company-complete) ;C-Space like Visual Studio
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
-  (define-key company-active-map (kbd "<tab>") 'company-complete) ;expands till -. Completes after that.
-  (setq company-idle-delay nil) ;disable automatic completion
-  (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode) ;all buffers
+(define-key company-mode-map (kbd "C-SPC") 'company-complete) ;C-Space like Visual Studio
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
+(define-key company-active-map (kbd "<tab>") 'company-complete) ;expands till -. Completes after that.
+(define-key company-active-map (kbd "C-v") #'company-next-page) ;would be default, but my other keymap killed this
+(define-key company-active-map (kbd "M-v") #'company-previous-page) ;default, but set just in case.
+(setq company-idle-delay nil) ;disable automatic completion
+(setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 
-  (setq company-tooltip-limit 20) ;popup more suggestions.
+;;(setq company-tooltip-minimum-width 60) ;avoids changing width as visislbe candidates change.
 
-  (when nil ;;not using fill-column-indicator anymore.
-    (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
-      ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
-      (defvar-local company-fci-mode-on-p nil)
+(setq company-tooltip-limit 20) ;popup more suggestions.
 
-      (defun company-turn-off-fci (&rest ignore)
-        (when (boundp 'fci-mode)
-          (setq company-fci-mode-on-p fci-mode)
-          (when fci-mode (fci-mode -1))))
+(when nil ;;not using fill-column-indicator anymore.
+  (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
+    ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
+    (defvar-local company-fci-mode-on-p nil)
 
-      (defun company-maybe-turn-on-fci (&rest ignore)
-        (when company-fci-mode-on-p (fci-mode 1)))
+    (defun company-turn-off-fci (&rest ignore)
+      (when (boundp 'fci-mode)
+        (setq company-fci-mode-on-p fci-mode)
+        (when fci-mode (fci-mode -1))))
 
-      (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-      (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-      (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))))
+    (defun company-maybe-turn-on-fci (&rest ignore)
+      (when company-fci-mode-on-p (fci-mode 1)))
+
+    (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+    (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+    (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
 
 ;;---------------------------------------------
 ;; company-web

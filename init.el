@@ -1611,11 +1611,17 @@ This prevents overlapping themes; something I would rarely want."
       (let ((company-selection-wrap-around nil))
         (company-set-selection company-candidates-length))))
 
+;;(setq company-tooltip-minimum-width 60) ;avoids changing width as visislbe candidates change.
+;; (add-hook 'company-completion-started-hook
+;;           #'(lambda ()
+;;               (interactive)
+;;               (setq company-tooltip-minimum-width
+;;                     (apply #'max
+;;                            (mapcar #'length
+;;                                    company-candidates)))))
+
 (setq company-idle-delay nil) ;disable automatic completion
 (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
-
-;;(setq company-tooltip-minimum-width 60) ;avoids changing width as visislbe candidates change.
-
 (setq company-tooltip-limit 20) ;popup more suggestions.
 
 (when nil ;;not using fill-column-indicator anymore.

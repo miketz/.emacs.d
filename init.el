@@ -1590,6 +1590,17 @@ This prevents overlapping themes; something I would rarely want."
 (define-key company-active-map (kbd "<tab>") 'company-complete) ;expands till -. Completes after that.
 (define-key company-active-map (kbd "C-v") #'company-next-page) ;would be default, but my other keymap killed this
 (define-key company-active-map (kbd "M-v") #'company-previous-page) ;default, but set just in case.
+(define-key company-active-map (kbd "M-<") ;go to first candidate
+  #'(lambda ()
+      (interactive)
+      (let ((company-selection-wrap-around nil))
+        (company-set-selection 0))))
+(define-key company-active-map (kbd "M->") ;go to last candidate
+  #'(lambda ()
+      (interactive)
+      (let ((company-selection-wrap-around nil))
+        (company-set-selection company-candidates-length))))
+
 (setq company-idle-delay nil) ;disable automatic completion
 (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 

@@ -1940,18 +1940,6 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 ;;----------------------------------
-;; helm-flycheck
-;;----------------------------------
-(with-eval-after-load "flycheck"
-  (defun my/helm-flycheck ()
-    (interactive)
-    ;;nil for no candidate limit. I want to scroll through all the warnings.
-    (let ((helm-candidate-number-limit nil))
-      (call-interactively #'helm-flycheck)))
-  ;;TODO set up keybinding for `helm-flycheck'
-  ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
-  )
-;;----------------------------------
 ;; helm-company
 ;;----------------------------------
 ;; (eval-after-load 'company
@@ -2956,9 +2944,21 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 (with-eval-after-load "flycheck"
   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
-  (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error))
+  (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
+  ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
 
-;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+  ;;----------------------------------
+  ;; helm-flycheck
+  ;;----------------------------------
+  (defun my/helm-flycheck ()
+    (interactive)
+    ;;nil for no candidate limit. I want to scroll through all the warnings.
+    (let ((helm-candidate-number-limit nil))
+      (call-interactively #'helm-flycheck)))
+  ;;(evil-define-key 'normal flycheck-mode-map (kbd "C-c f") #'my/helm-flycheck)
+  (define-key flycheck-mode-map (kbd "C-c f") #'my/helm-flycheck)
+  ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
+  )
 
 ;;------------------------------------------------------------------------------
 ;; hydra

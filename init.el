@@ -2425,7 +2425,13 @@ This prevents overlapping themes; something I would rarely want."
 
   (when (eq my/curr-computer 'work-laptop)
     ;;directory to libclang.dll
-    (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin")))
+    (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin"))
+
+
+  (irony-cdb-autosetup-compile-options)
+  )
+
+
 
 ;; Only needed on Windows
 (when (eq system-type 'windows-nt)

@@ -1291,26 +1291,26 @@ This prevents overlapping themes; something I would rarely want."
                       :weight bold
                       :inverse-video nil))))))
 
-(defun color-default-transparent ()
+(defun color-default-fancy ()
   (interactive)
-  (dolist (thm custom-enabled-themes)
-    (disable-theme thm))
-
-  (let ((cur '(box "blue")))
-    (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor '(hollow "blue"))
-    (setq evil-operator-state-cursor cur))
-
-  (my/set-font :sym 'consolas
-               :weight 'bold
-               :height 125
-               :resize-window t)
+  (color-default)
 
   (set-background-color mayan-smoke)
-  (let ((a 80))
+
+  (let ((a 85))
     (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
-  (my/cursor-stuff-lightBg)
-  (my/rainbow-parens-light-bg2))
+
+  (progn
+    (require 'highlight-tail)
+    (setq highlight-tail-colors '(("lawn green" . 0)
+                                  ("yellow" . 40)))
+    (setq highlight-tail-steps 20 ;80
+          highlight-tail-timer 0.04;0.04
+          )
+    (setq highlight-tail-posterior-type t) ;(setq highlight-tail-posterior-type 'const)
+    (highlight-tail-mode)
+    ;;(highlight-tail-reload)
+    ))
 
 (defun color-gandalf ()
   (interactive)

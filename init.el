@@ -3243,7 +3243,7 @@ Depends on evil mode."
 ;; ;; allow out of order matching.
 ;; (setq ivy-re-builders-alist
 ;;       '((t . ivy--regex-ignore-order)))
-;; (global-set-key (kbd "C-s") #'swiper)
+(global-set-key (kbd "C-s") #'swiper)
 ;; ;;(ivy-mode) ;ivy is bundled with swiper???
 
 ;;------------------------------------------------------------------------------

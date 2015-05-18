@@ -1920,19 +1920,19 @@ This prevents overlapping themes; something I would rarely want."
 
     );end helm eval-after-load
 
-  (progn ;;functions in key maps are auto-loaded.
-    (evil-leader/set-key "b" #'helm-buffers-list)
-    ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
-    ;;(global-set-key (kbd "C-x b")   #'helm-mini)
-    ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-    (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-      (global-set-key (kbd "M-x") #'helm-M-x))
-    (global-set-key (kbd "C-x C-f") #'helm-find-files)
-    ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
-    ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-    (global-set-key (kbd "M-y") #'helm-show-kill-ring))
+  ;; (progn ;;functions in key maps are auto-loaded.
+  ;;   (evil-leader/set-key "b" #'helm-buffers-list)
+  ;;   ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+  ;;   ;;(global-set-key (kbd "C-x b")   #'helm-mini)
+  ;;   ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+  ;;   (unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+  ;;     (global-set-key (kbd "M-x") #'helm-M-x))
+  ;;   (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  ;;   ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
+  ;;   ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
+  ;;   (global-set-key (kbd "M-y") #'helm-show-kill-ring))
 
-  (helm-mode 1) ;helm-selection everywhere like when using M-x. putting in eval-after-load to decrease start up time a bit.
+  ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting in eval-after-load to decrease start up time a bit.
 
 
   ;; list of functions helm should ignore and allow default completion.
@@ -3243,10 +3243,10 @@ Depends on evil mode."
 ;; swiper
 ;;------------------------------------------------------------------------------
 ;; ;; allow out of order matching.
-;; (setq ivy-re-builders-alist
-;;       '((t . ivy--regex-ignore-order)))
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-ignore-order)))
 (global-set-key (kbd "C-s") #'swiper)
-;; ;;(ivy-mode) ;ivy is bundled with swiper???
+(ivy-mode) ;ivy is bundled with swiper???
 
 ;;------------------------------------------------------------------------------
 ;; color-identifiers-mode
@@ -3445,7 +3445,7 @@ Depends on evil mode."
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 
-;;(evil-leader/set-key "b" #'ibuffer)
+(evil-leader/set-key "b" #'ibuffer)
 ;;(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)

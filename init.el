@@ -382,7 +382,8 @@ Assums a vertically stacked display of the list.
         smex
         grandshell-theme
         avy
-        helm-flycheck))
+        helm-flycheck
+        lispy))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -3428,6 +3429,11 @@ Depends on evil mode."
 
 (global-set-key (kbd "C-c s") #'window-search-forward)
 (global-set-key (kbd "C-c r") #'window-search-backward)
+
+;;------------------------------------------------------------------------------
+;; lispy
+;;------------------------------------------------------------------------------
+
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

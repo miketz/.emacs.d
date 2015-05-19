@@ -3605,7 +3605,7 @@ Gotten from #emacs on freenode."
 (setq initial-scratch-message "\n\n\n\n\n")
 
 (blink-cursor-mode 0)
-(hl-line-mode 0)
+(hl-line-mode 1)
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
 

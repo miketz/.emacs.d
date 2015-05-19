@@ -2509,6 +2509,17 @@ This prevents overlapping themes; something I would rarely want."
       ;;(my/start-omnisharp-server sln)
       ))
 
+  (defun proj-db-safety ()
+    (interactive)
+    (require 'helm-cmd-t)
+    (let ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\DbScripts"))
+      (setq root-cmd-t (helm-cmd-t-get-create-source-dir root))
+      (evil-leader/set-key "h" (lambda ()
+                                 (interactive)
+                                 (helm :sources '(root-cmd-t)
+                                       :buffer "*OSHE DB Scripts*")))
+      (dired root)))
+
   (defun proj-trighist ()
     (interactive)
     (require 'helm-cmd-t)

@@ -2369,18 +2369,16 @@ This prevents overlapping themes; something I would rarely want."
 ;; Avy
 ;;--------------------
 ;; (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; already the default?
-
-;; (let ((overlay-type 'at)) ;options (pre at post).
-;;   (setq avy-goto-char-style overlay-type
-;;         avy-goto-word-style overlay-type))
-
+;; (setq avy-style 'at) ;options (pre at at-full post)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
-
+;; (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
+;; (setq avy-all-windows t) ;allow jumps between windows.
+;; (setq avy-case-fold-search t) ;case insenstive
 
 ;;--------------------
 ;; Ace jump mode
 ;;--------------------
-;;(add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
+;; (add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
 
 ;; your eye is already focused on the jump point so no need to gray background.
 (setq ace-jump-mode-gray-background nil)

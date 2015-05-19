@@ -1148,6 +1148,11 @@ This prevents overlapping themes; something I would rarely want."
                       :slant normal
                       :weight bold
                       :inverse-video nil))))
+
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    ;; '(js2-external-variable ((t :underline (:color "red" :style wave)
    ;;                             :background "black")))
    ;; '(js2-error ((t :underline (:color "red" :style wave)
@@ -1166,6 +1171,10 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'badger t)
   (custom-theme-set-faces
    'badger
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    `(font-lock-comment-face
      ((t (:foreground "dark cyan" :slant italic))))
    '(region ((t :background "#7F073F")))
@@ -1189,6 +1198,10 @@ This prevents overlapping themes; something I would rarely want."
   ;;(set-face-foreground 'font-lock-comment-face "#66A555")
   (custom-theme-set-faces
    'gruvbox
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    `(font-lock-comment-face
      ((t (:foreground "#66A555"))))
    `(fringe
@@ -1246,6 +1259,10 @@ This prevents overlapping themes; something I would rarely want."
    ;;highlight so i can see the slime function parameters highlight.
    '(highlight ((t (:foreground "spring green"
                                 :background "black"))))
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
@@ -1286,6 +1303,10 @@ This prevents overlapping themes; something I would rarely want."
   ;;(my/set-font :weight 'bold)
 
   (custom-set-faces
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    `(ace-jump-face-foreground
      ((t (:foreground "black"
                       :background "cyan"
@@ -1344,6 +1365,11 @@ This prevents overlapping themes; something I would rarely want."
      ((t (:foreground "#505050"
                       :background "#e3e3e3"
                       :box (:line-width -1 :style released-button)))))
+
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))
@@ -1375,6 +1401,10 @@ This prevents overlapping themes; something I would rarely want."
                                   :bold nil
                                   ;;:box t
                                   ))))
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))
@@ -1403,6 +1433,10 @@ This prevents overlapping themes; something I would rarely want."
      ((t (:foreground "#666666"
                       :background "#EEEEEE"
                       :box (:line-width -1 :style released-button)))))
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))

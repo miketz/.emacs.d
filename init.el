@@ -383,7 +383,8 @@ Assums a vertically stacked display of the list.
         grandshell-theme
         avy
         helm-flycheck
-        lispy))
+        lispy
+        helm-descbinds))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -3442,6 +3443,21 @@ Depends on evil mode."
 ;; lispy
 ;;------------------------------------------------------------------------------
 
+;;------------------------------------------------------------------------------
+;; helm-descbinds
+;;------------------------------------------------------------------------------
+(helm-descbinds-mode)
+;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
+;; `C-h b', `C-x C-h' these run `helm-descbinds'.
+;;
+;; In the Helm buffer, you can select key-binds with helm interface.
+;;
+;;  - When type RET, selected candidate command is executed.
+;;
+;;  - When type TAB, You can "Execute", "Describe Function" or "Find
+;;    Function" by the menu.
+;;
+;;  - When type C-z, selected command is described without quiting.
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

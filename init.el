@@ -3445,7 +3445,8 @@ Depends on evil mode."
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 
-(evil-leader/set-key "b" #'ibuffer)
+(evil-leader/set-key "b" #'ivy-switch-buffer)
+;;(evil-leader/set-key "b" #'ibuffer)
 ;;(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)

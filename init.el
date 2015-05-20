@@ -641,7 +641,8 @@ char."
   ;; (key-chord-define evil-operator-state-map chord func)
   ;; (key-chord-define evil-motion-state-map chord func))
   ;;moved into `eval-after-load' for helm so helm-map is defined (key-chord-define helm-map chord #'helm-keyboard-quit)
-  (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body))
+  (when nil ;;trying lispy
+    (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
 ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
 ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
@@ -2266,31 +2267,33 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------------------------------------------------------
 ;; Paredit
 ;;--------------------------------------------------------------------
-;;(add-to-list 'load-path "~/.emacs.d/paredit")
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
-;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
+(when nil ;;trying lispy
+  ;;(add-to-list 'load-path "~/.emacs.d/paredit")
+  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+  (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+  ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
+  ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
 
-;; Stop SLIME's REPL from grabbing DEL,
-;; which is annoying when backspacing over a '('
-(defun override-slime-repl-bindings-with-paredit ()
-  (define-key slime-repl-mode-map
-    (read-kbd-macro paredit-backward-delete-key) nil))
-(add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
+  ;; Stop SLIME's REPL from grabbing DEL,
+  ;; which is annoying when backspacing over a '('
+  (defun override-slime-repl-bindings-with-paredit ()
+    (define-key slime-repl-mode-map
+      (read-kbd-macro paredit-backward-delete-key) nil))
+  (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
 
-;; ;;key maps
-;; (global-set-key (kbd "C-9") 'paredit-backward-slurp-sexp)
-;; (global-set-key (kbd "C-0") 'paredit-forward-slurp-sexp)
-;; (global-set-key (kbd "C-M-9") 'paredit-backward-barf-sexp)
-;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
+  ;; ;;key maps
+  ;; (global-set-key (kbd "C-9") 'paredit-backward-slurp-sexp)
+  ;; (global-set-key (kbd "C-0") 'paredit-forward-slurp-sexp)
+  ;; (global-set-key (kbd "C-M-9") 'paredit-backward-barf-sexp)
+  ;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
+  )
 
 ;;--------------------------
 ;; smartparens
@@ -3118,16 +3121,17 @@ Depends on evil mode."
   ("q" nil))
 
 ;; avoid moving hand to arrow keys for barf/slurp
-(defhydra hydra-paredit ()
-  "paredit"
-  ("h" paredit-forward-barf-sexp)
-  ("l" paredit-forward-slurp-sexp)
-  ("H" paredit-backward-slurp-sexp)
-  ("L" paredit-backward-barf-sexp)
-  ;; ("f" paredit-forward)
-  ;; ("b" paredit-backward)
-  ("\\" nil)
-  ("q" nil))
+(when nil ;trying paredit
+  (defhydra hydra-paredit ()
+    "paredit"
+    ("h" paredit-forward-barf-sexp)
+    ("l" paredit-forward-slurp-sexp)
+    ("H" paredit-backward-slurp-sexp)
+    ("L" paredit-backward-barf-sexp)
+    ;; ("f" paredit-forward)
+    ;; ("b" paredit-backward)
+    ("\\" nil)
+    ("q" nil)))
 ;;(key-chord-define evil-normal-state-map "c," #'hydra-paredit/body)
 
 
@@ -3224,7 +3228,8 @@ Depends on evil mode."
   (setq *my-hydras* (mapcar #'symbol-name
                             (list #'hydra-easyscroll/body
                                   #'hydra-window/body
-                                  #'hydra-paredit/body)))
+                                  ;;trying paredit #'hydra-paredit/body
+                                  )))
   (defun my/choose-hydra ()
     (interactive)
     (funcall (intern (completing-read "pick one: " *my-hydras*))))
@@ -3485,9 +3490,20 @@ Depends on evil mode."
 ;;------------------------------------------------------------------------------
 ;; lispy
 ;;------------------------------------------------------------------------------
+(add-hook 'emacs-lisp-mode-hook       #'lispy-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'lispy-mode)
+(add-hook 'ielm-mode-hook             #'lispy-mode)
+(add-hook 'lisp-mode-hook             #'lispy-mode)
+(add-hook 'lisp-interaction-mode-hook #'lispy-mode)
+(add-hook 'scheme-mode-hook           #'lispy-mode)
+(add-hook 'slime-repl-mode-hook #'lispy-mode)
+
 (with-eval-after-load "lispy"
-  (lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
-  ) 
+  ;;(lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
+  (lispy-set-key-theme '(special paredit c-digits))
+
+  ;; don't evaluate/insert on C-j. Use the plain way like paredit.
+  (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain))
 
 ;;------------------------------------------------------------------------------
 ;; helm-descbinds

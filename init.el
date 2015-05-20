@@ -2184,9 +2184,16 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------
 ;; Dired
 ;;------------------
-(setq-default dired-isearch-filenames t) ;search file names only in Dired.
-(add-hook 'dired-mode-hook #'(lambda () (dired-hide-details-mode 1)))
-
+(with-eval-after-load "dired"
+  (setq-default dired-isearch-filenames t) ;search file names only in Dired.
+  (add-hook 'dired-mode-hook #'(lambda () (dired-hide-details-mode 1)))
+  ;; vimify the keybinds.
+  (define-key dired-mode-map (kbd "j") #'dired-next-line)
+  (define-key dired-mode-map (kbd "k") #'dired-previous-line)
+  (define-key dired-mode-map (kbd "n") #'evil-search-next)
+  (define-key dired-mode-map (kbd "N") #'evil-search-previous)
+  ;;TODO: bind #'dired-man which was bound to "N". Or maybe just invoke with M-x
+  )
 
 ;;(define-key dired-mode-map "c" 'find-file) ;create file
 

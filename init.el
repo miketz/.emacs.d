@@ -3669,9 +3669,12 @@ Gotten from #emacs on freenode."
 (setq inhibit-startup-message t)
 ;;(setq initial-scratch-message ";; Scratch buffer ;;\n\n\n\n")
 (setq initial-scratch-message "\n\n\n\n\n")
+;;(setq initial-buffer-choice (lambda () ))
+;;(setq initial-major-mode #'fundamental-mode) ;;for faster startup.
+
 
 (blink-cursor-mode 0)
-(hl-line-mode 1)
+;;(hl-line-mode 1)
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
 

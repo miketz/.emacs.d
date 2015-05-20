@@ -1593,6 +1593,8 @@ This prevents overlapping themes; something I would rarely want."
                   (unless (slime-connected-p)
                     (save-excursion (slime)))))))
 
+  (add-hook 'slime-mode-hook #'lispy-mode)
+  (add-hook 'slime-repl-mode-hook #'lispy-mode)
   (add-hook 'slime-repl-mode-hook
             (lambda ()
               ;;turn off line numbers in the repl

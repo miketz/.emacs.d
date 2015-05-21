@@ -3503,7 +3503,9 @@ Depends on evil mode."
   (lispy-set-key-theme '(special paredit c-digits))
 
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
-  (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain))
+  (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
+  ;; fn `kill-line' was bound to evil-insert C-k earlier. Override it for lispy.
+  (evil-define-key 'insert lispy-mode-map (kbd "C-k") #'lispy-kill))
 
 ;;------------------------------------------------------------------------------
 ;; helm-descbinds

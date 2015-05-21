@@ -3506,6 +3506,22 @@ Depends on evil mode."
   ;;(lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
   (lispy-set-key-theme '(special paredit c-digits))
 
+  ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
+  ;; whether that's acheieved via a barf of slurp.
+  ;; TODO: make it handle number inputs (instead of defaulting to 1).
+  (defun my/lispy-go-left-barf-or-slurp ()
+    (interactive)
+    (if (lispy-left-p)
+        (lispy-slurp 1)
+      (lispy-barf 1)))
+  (defun my/lispy-go-right-barf-or-slurp ()
+    (interactive)
+    (if (lispy-left-p)
+        (lispy-barf 1)
+      (lispy-slurp 1)))
+  (define-key lispy-mode-map (kbd "<") #'my/lispy-go-left-barf-or-slurp)
+  (define-key lispy-mode-map (kbd ">") #'my/lispy-go-right-barf-or-slurp)
+
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
   ;; fn `kill-line' was bound to evil-insert C-k earlier. Override it for lispy.

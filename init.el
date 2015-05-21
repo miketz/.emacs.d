@@ -2783,16 +2783,16 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'web-mode-hook 'skewer-html-mode)
 
 (with-eval-after-load "skewer-mode"
-  (define-key skewer-repl-mode-map (kbd "C-c M-o") 'my/skewer-repl-clear-buffer)
-  (defun my/skewer-repl-clear-buffer ()
-    "Deletes the contents of the skewer-reple buffer.
-Depends on evil mode."
-    (interactive)
-    (evil-goto-line) ;bottom
-    (evil-previous-visual-line) ;up 1
-    (evil-end-of-line)
-    (delete-region 1 (+ (point) 2))
-    (evil-end-of-line))
+;;   (defun my/skewer-repl-clear-buffer ()
+;;     "Deletes the contents of the skewer-reple buffer.
+;; Depends on evil mode."
+;;     (interactive)
+;;     (evil-goto-line) ;bottom
+;;     (evil-previous-visual-line) ;up 1
+;;     (evil-end-of-line)
+;;     (delete-region 1 (+ (point) 2))
+;;     (evil-end-of-line))
+;;   (define-key skewer-repl-mode-map (kbd "C-c M-o") #'my/skewer-repl-clear-buffer)
 
   (add-hook
    'skewer-repl-mode-hook

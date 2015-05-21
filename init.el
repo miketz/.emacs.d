@@ -3515,7 +3515,7 @@ Depends on evil mode."
   (lispy-set-key-theme '(special paredit c-digits))
 
   ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
-  ;; whether that's acheieved via a barf of slurp.
+  ;; whether that's acheieved via a barf or slurp.
   ;; TODO: make it handle number inputs (instead of defaulting to 1).
   (defun my/lispy-go-left-barf-or-slurp ()
     (interactive)

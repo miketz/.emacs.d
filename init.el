@@ -1111,8 +1111,12 @@ This prevents overlapping themes; something I would rarely want."
                       :foreground "cyan"
                       :bold nil
                       :underline t)))
-   ;; '(num3-face-odd '((t)))
-   ;; '(num3-face-even '((t :underline t)))
+   ;; '(num3-face-odd ((t)))
+   ;; '(num3-face-even ((t (:underline t :background "black"))))
+   `(num3-face-even
+     ((t (:underline nil
+                     :background "#99988E"
+                     :foreground "black"))))
    '(leerzeichen ((t (:foreground "yellow4";"#A8A800"
                                   :background "black";"#D4D4C8"
                                   :italic nil

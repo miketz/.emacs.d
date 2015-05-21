@@ -54,7 +54,8 @@
       '(god-mode
         paredit
         zenburn-theme
-        ace-jump-mode))
+        ace-jump-mode
+        lispy))
 
 ;;----------------------------------------------------------------
 ;; theme
@@ -83,3 +84,20 @@
   t)
 
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;;------------------------------------------------------------------------------
+;; lispy
+;;------------------------------------------------------------------------------
+(add-hook 'emacs-lisp-mode-hook       #'lispy-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'lispy-mode)
+(add-hook 'ielm-mode-hook             #'lispy-mode)
+(add-hook 'lisp-mode-hook             #'lispy-mode)
+(add-hook 'lisp-interaction-mode-hook #'lispy-mode)
+(add-hook 'scheme-mode-hook           #'lispy-mode)
+(add-hook 'slime-repl-mode-hook #'lispy-mode)
+
+(with-eval-after-load "lispy"
+  ;;(lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
+  (lispy-set-key-theme '(special paredit c-digits))
+  ;; don't evaluate/insert on C-j. Use the plain way like paredit.
+  (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain))

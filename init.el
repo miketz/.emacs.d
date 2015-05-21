@@ -58,6 +58,14 @@ Ex: (let1 (x 4) (print x))"
   `(let (,var-val-pair)
      ,@body))
 
+(cl-defmacro l (var val &body body)
+  "Syntax sugar macro. Let 1 variable without double nesting the var list (())
+Ex: (l x 4
+      (print x))"
+  (declare (indent 2)) ;;indent it like a normal let.
+  `(let ((,var ,val))
+     ,@body))
+
 (defun s-trim-left (s)
   "Remove whitespace at the beginning of S."
   (if (string-match "\\`[ \t\n\r]+" s)

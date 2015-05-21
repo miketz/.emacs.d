@@ -1123,8 +1123,11 @@ This prevents overlapping themes; something I would rarely want."
    ;; '(num3-face-even ((t (:underline t :background "black"))))
    `(num3-face-even
      ((t (:underline nil
-                     :background "#99988E"
-                     :foreground "black"))))
+                     ;; :background "#99988E"
+                     ;; :foreground "black"
+                     :background "black"
+                     :foreground "yellow green"
+                     :bold nil))))
    '(leerzeichen ((t (:foreground "yellow4";"#A8A800"
                                   :background "black";"#D4D4C8"
                                   :italic nil

@@ -2436,7 +2436,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; Avy
 ;;--------------------
 ;; (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; already the default?
-(setq avy-style 'at) ;options (pre at at-full post)
+(setq avy-style 'at-full) ;options (pre at at-full post)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
 ;; (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
 ;; (setq avy-all-windows t) ;allow jumps between windows.

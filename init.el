@@ -1916,7 +1916,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+(unless (or (eq my/curr-computer 'leyna-laptop)
+            (eq my/curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
 
   (autoload 'helm "helm" nil t)
   (autoload 'helm-config "helm-config" nil t)
@@ -1998,6 +1999,9 @@ This prevents overlapping themes; something I would rarely want."
   ;; i just bput it after the call to (helm-mode 1)
   ;;(add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil))
   )
+(when (or (eq my/curr-computer 'leyna-laptop)
+          (eq my/curr-computer 'raspberry-pi))
+  (evil-leader/set-key "b" #'ibuffer))
 
 ;;----------------------------------
 ;; helm-company

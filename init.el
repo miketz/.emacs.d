@@ -2930,12 +2930,14 @@ This prevents overlapping themes; something I would rarely want."
 ;;"C:\Program Files (x86)\Java\jre7\bin\java" -cp clojure-1.6.0.jar clojure.main
 
 ;;-----------------------------------------------------------------------------
-;; aggressive-indent
+;; aggressive-indent. Turning off for now since lispy makes it easy to keep
+;; things indented and aggressive-ident causes a noticeable lag when barfing/
+;; slurping in larger, deeply nested expressions.
 ;;-----------------------------------------------------------------------------
-(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-;;(add-hook 'css-mode-hook #'aggressive-indent-mode)
-(add-hook 'lisp-mode-hook #'aggressive-indent-mode)
-;;(add-hook 'js2-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'css-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'js2-mode-hook #'aggressive-indent-mode)
 
 ;;(add-hook 'slime-repl-mode-hook #'aggressive-indent-mode)
 ;;(global-aggressive-indent-mode 1)

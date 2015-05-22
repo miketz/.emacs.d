@@ -386,13 +386,14 @@ Assums a vertically stacked display of the list.
         bug-hunter
         swiper
         color-identifiers-mode
-        svg-mode-line-themes ;only works on gnu/linux
+        svg-mode-line-themes ;; only works on gnu/linux
         smex
         grandshell-theme
         avy
         helm-flycheck
         lispy
-        helm-descbinds))
+        helm-descbinds
+        worf))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -1786,6 +1787,11 @@ This prevents overlapping themes; something I would rarely want."
 
 (when (eq my/curr-computer 'work-laptop)
   (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
+
+;;-----------------------------------------
+;; worf. key shortcuts for org-mode
+;;-----------------------------------------
+
 
 ;;---------------------------------------------
 ;; csharp-mode
@@ -3555,6 +3561,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;    Function" by the menu.
 ;;
 ;;  - When type C-z, selected command is described without quiting.
+
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

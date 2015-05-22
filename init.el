@@ -352,6 +352,7 @@ Assums a vertically stacked display of the list.
         tronesque-theme
         gandalf-theme
         color-theme-sanityinc-tomorrow
+        grandshell-theme
         ;;sublimity
         nyan-mode
         nyan-prompt
@@ -388,7 +389,6 @@ Assums a vertically stacked display of the list.
         color-identifiers-mode
         svg-mode-line-themes ;; only works on gnu/linux
         smex
-        grandshell-theme
         avy
         helm-flycheck
         lispy

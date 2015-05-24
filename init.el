@@ -314,6 +314,7 @@ Assums a vertically stacked display of the list.
         slime
         ;;sly
         paredit
+        ;;paxedit
         ;;smartparens
         redshank
         auto-complete

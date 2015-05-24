@@ -353,6 +353,7 @@ Assums a vertically stacked display of the list.
         tronesque-theme
         gandalf-theme
         color-theme-sanityinc-tomorrow
+        grandshell-theme
         ;;sublimity
         nyan-mode
         nyan-prompt
@@ -387,13 +388,13 @@ Assums a vertically stacked display of the list.
         bug-hunter
         swiper
         color-identifiers-mode
-        svg-mode-line-themes ;only works on gnu/linux
+        svg-mode-line-themes ;; only works on gnu/linux
         smex
-        grandshell-theme
         avy
         helm-flycheck
         lispy
-        helm-descbinds))
+        helm-descbinds
+        worf))
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -1494,7 +1495,7 @@ This prevents overlapping themes; something I would rarely want."
    ((or (eq my/curr-computer 'work-laptop)
         (eq my/curr-computer 'leyna-laptop))
     (my/set-font :sym 'consolas
-                 :height 125;'90 105 115 120 125
+                 :height 115;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
       (color-zenburn)))
@@ -1788,6 +1789,11 @@ This prevents overlapping themes; something I would rarely want."
 (when (eq my/curr-computer 'work-laptop)
   (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
 
+;;-----------------------------------------
+;; worf. key shortcuts for org-mode
+;;-----------------------------------------
+
+
 ;;---------------------------------------------
 ;; csharp-mode
 ;;---------------------------------------------
@@ -1911,7 +1917,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(unless (eq my/curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+(unless (or (eq my/curr-computer 'leyna-laptop)
+            (eq my/curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
 
   (autoload 'helm "helm" nil t)
   (autoload 'helm-config "helm-config" nil t)
@@ -1993,6 +2000,9 @@ This prevents overlapping themes; something I would rarely want."
   ;; i just bput it after the call to (helm-mode 1)
   ;;(add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil))
   )
+(when (or (eq my/curr-computer 'leyna-laptop)
+          (eq my/curr-computer 'raspberry-pi))
+  (evil-leader/set-key "b" #'ibuffer))
 
 ;;----------------------------------
 ;; helm-company
@@ -2431,11 +2441,14 @@ This prevents overlapping themes; something I would rarely want."
 ;; Avy
 ;;--------------------
 ;; (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; already the default?
-;; (setq avy-style 'at) ;options (pre at at-full post)
+(setq avy-style 'at-full) ;options (pre at at-full post)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
 ;; (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
 ;; (setq avy-all-windows t) ;allow jumps between windows.
 ;; (setq avy-case-fold-search t) ;case insenstive
+
+(global-set-key (kbd "M-g g") 'avy-goto-line)
+(global-set-key (kbd "M-g M-g") 'avy-goto-line)
 
 ;;--------------------
 ;; Ace jump mode
@@ -2931,12 +2944,14 @@ This prevents overlapping themes; something I would rarely want."
 ;;"C:\Program Files (x86)\Java\jre7\bin\java" -cp clojure-1.6.0.jar clojure.main
 
 ;;-----------------------------------------------------------------------------
-;; aggressive-indent
+;; aggressive-indent. Turning off for now since lispy makes it easy to keep
+;; things indented and aggressive-ident causes a noticeable lag when barfing/
+;; slurping in larger, deeply nested expressions.
 ;;-----------------------------------------------------------------------------
-(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-;;(add-hook 'css-mode-hook #'aggressive-indent-mode)
-(add-hook 'lisp-mode-hook #'aggressive-indent-mode)
-;;(add-hook 'js2-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'css-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'js2-mode-hook #'aggressive-indent-mode)
 
 ;;(add-hook 'slime-repl-mode-hook #'aggressive-indent-mode)
 ;;(global-aggressive-indent-mode 1)
@@ -3554,6 +3569,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;    Function" by the menu.
 ;;
 ;;  - When type C-z, selected command is described without quiting.
+
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

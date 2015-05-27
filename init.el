@@ -2463,25 +2463,35 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 (global-set-key (kbd "M-g g") 'avy-goto-line)
 (global-set-key (kbd "M-g M-g") 'avy-goto-line)
+;; (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
 
 (with-eval-after-load "avy"
-  ;; (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ; already the default?
+  ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.
+  (setq avy-keys (nconc (loop for i from ?a to ?z collect i)
+                        (loop for i from ?A to ?Z collect i)))
   (setq avy-style 'at-full) ;; options (pre at at-full post)
-  ;; (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
-  ;; (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
-  ;; (setq avy-all-windows t) ;allow jumps between windows.
-  ;; (setq avy-case-fold-search t) ;case insenstive
-  )
+  (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
+  (setq avy-all-windows t) ;allow jumps between windows.
+  (setq avy-case-fold-search t) ;case insenstive
+
+  (defun my/avy-goto-line ()
+    (interactive)
+    ;; use the default keys for line jumps
+    (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+      (avy-goto-line)))
+  (global-set-key (kbd "M-g g") #'my/avy-goto-line)
+  (global-set-key (kbd "M-g M-g") #'my/avy-goto-line))
 
 ;;--------------------
 ;; Ace jump mode
 ;;--------------------
-;; (add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
+;; ;; (add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
 
-;; your eye is already focused on the jump point so no need to gray background.
-(setq ace-jump-mode-gray-background nil)
-(autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
-(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+;; ;; your eye is already focused on the jump point so no need to gray background.
+;; (setq ace-jump-mode-gray-background nil)
+;; (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
+;; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
 ;;--------------------
 ;; ace-window

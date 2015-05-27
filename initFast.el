@@ -1,4 +1,4 @@
-;; Turn off mouse interface early in startup to avoid momentary display
+;; turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -18,7 +18,7 @@
                         :foundry "outline"
                         :slant normal
                         :weight bold
-                        :height 120
+                        :height 115
                         :width normal)))))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

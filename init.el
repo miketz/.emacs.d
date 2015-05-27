@@ -3365,6 +3365,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 ;; swiper
 ;;------------------------------------------------------------------------------
+;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
 ;; ;; allow out of order matching.
 (setq ivy-re-builders-alist
       '((t . ivy--regex-ignore-order)))

@@ -3711,13 +3711,13 @@ Gotten from #emacs on freenode."
 ;;   (add-to-list 'default-frame-alist alpha-lst))
 
 
-(defun insert-date-string ()
+(defun my/insert-date-string ()
   "Insert a date string. Everything you need to know about the date and time."
   (interactive)
   (insert
    (format-time-string
     "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N")))
-(global-set-key (kbd "C-c i") #'insert-date-string)
+(global-set-key (kbd "C-c i") #'my/insert-date-string)
 
 ;; Only browse interesting buffers. Not *scratch*, *messages*, etc.
 ;;(global-set-key "\C-x\C-b" 'bs-show)

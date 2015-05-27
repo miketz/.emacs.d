@@ -1091,6 +1091,27 @@ This prevents overlapping themes; something I would rarely want."
                       :slant normal
                       :weight normal
                       :inverse-video nil))))
+   `(avy-lead-face-0 ;; the first overlay char
+     ((t (:foreground "spring green"
+                      :slant normal
+                      :weight normal
+                      :inverse-video nil))))
+   `(avy-lead-face-1 ;; for matched chars, but currently not used???? matches disapear at the moment.
+     ((t (:foreground "green"
+                      :slant normal
+                      :weight normal
+                      :inverse-video nil))))
+   `(avy-lead-face ;;for the chars after the first?
+     ((t (:foreground "spring green"
+                      :slant normal
+                      :weight normal
+                      :inverse-video nil))))
+   ;; `(avy-background-face
+   ;;   ((t (:foreground "white"
+   ;;                    :slant normal
+   ;;                    :weight normal
+   ;;                    :inverse-video nil))))
+
    ;;highlight so i can see the slime function parameters highlight.
    '(highlight ((t (:foreground "spring green"
                                 :background "black"))))

@@ -1594,6 +1594,8 @@ This prevents overlapping themes; something I would rarely want."
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
   ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
   (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition);override evil's binding of M-. when using slime
+  (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") 'slime-edit-definition)
+
   ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)
   ;; (require 's)

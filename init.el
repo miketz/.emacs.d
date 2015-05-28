@@ -3592,8 +3592,10 @@ This prevents overlapping themes; something I would rarely want."
     (if (lispy-left-p)
         (lispy-barf 1)
       (lispy-slurp 1)))
-  (define-key lispy-mode-map (kbd "<") #'my/lispy-go-left-barf-or-slurp)
-  (define-key lispy-mode-map (kbd ">") #'my/lispy-go-right-barf-or-slurp)
+
+  ;; special means the cursor is at a paren (and in evil-insert).
+  (lispy-define-key lispy-mode-map-special (kbd "<") #'my/lispy-go-left-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special (kbd ">") #'my/lispy-go-right-barf-or-slurp)
 
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)

@@ -3626,17 +3626,30 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 (with-eval-after-load "info"
   ;; rebind keys for vim friendliness.
-  ;; orginial bindings
+  ;; orginial bindings. TODO: bind them to something else. Or just use M-x
   '((n Info-next)
     (p Info-prev)
-    (f Info-follow-reference))
+    (f Info-follow-reference)
+    (H describe-mode)
+    (L Info-history)
+    (w Info-copy-current-node-name)
+    (e end-of-buffer)
+    (b beginning-of-buffer)
+    (g Info-goto-node))
   ;; 3 ways to unbind keys:
   ;; global-unset-key
   ;; local-unset-key
   ;; (define-key KEYMAP KEY nil)
   (define-key Info-mode-map (kbd "n") #'evil-search-next)
   (define-key Info-mode-map (kbd "p") nil)
-  (define-key Info-mode-map (kbd "f") #'evil-find-char))
+  (define-key Info-mode-map (kbd "f") #'evil-find-char)
+  (define-key Info-mode-map (kbd "H") #'evil-window-top)
+  (define-key Info-mode-map (kbd "L") #'evil-window-bottom)
+  (define-key Info-mode-map (kbd "w") #'evil-forward-word-begin)
+  (define-key Info-mode-map (kbd "e") #'evil-forward-word-end)
+  (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
+  (define-key Info-mode-map (kbd "g") #'evil-goto-first-line) ;TODO: figure out how ot bind gg for top.
+  )
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

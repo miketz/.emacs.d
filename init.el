@@ -268,17 +268,19 @@ Assums a vertically stacked display of the list.
 ;; my/curr-computer
 
 ;; Keeping track of the various computers I use emacs on.
-(setq my/computers
-      '(unknown ;if my-curr-computer.txt does not exist
-        work-laptop
-        raspberry-pi
-        utilite
-        old-sony-vaio
-        a-tower
-        a-laptop-old
-        a-laptop-faster
-        leyna-laptop
-        hp-tower-2009))
+(defvar my/computers
+  '(unknown        ; if my-curr-computer.txt does not exist
+    work-laptop
+    raspberry-pi
+    utilite
+    old-sony-vaio
+    a-tower
+    a-laptop-old
+    a-laptop-faster
+    leyna-laptop
+    hp-tower-2009)
+  "The computers I use Emacs on.  Specific configurations may be made for some computers.")
+
 ;; currently used computer. (manually set)
 ;; Used to conditionally set computer specific options, and paths.
 ;; NOTE: When setting up emacs on a new computer create file
@@ -286,10 +288,17 @@ Assums a vertically stacked display of the list.
 ;; Then type the name of the symbol (see `my/computers') in the text file.
 ;; The file should contain 1 line and no whitespace. The text will be converted
 ;; to a symbol.
-(let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
-  (if (file-exists-p curr-comp-file)
-      (setq my/curr-computer (intern (my/get-string-from-file curr-comp-file)))
-    (setq my/curr-computer 'unknown)))
+(defconst my/curr-computer
+  (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
+    (if (file-exists-p curr-comp-file)
+        (intern (my/get-string-from-file curr-comp-file))
+      'unknown))
+  "The computer running this Emacs.  Identified by a flag file.  Specific configs may be made based on the computer.")
+
+;; (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
+;;   (if (file-exists-p curr-comp-file)
+;;       (setq my/curr-computer (intern (my/get-string-from-file curr-comp-file)))
+;;     (setq my/curr-computer 'unknown)))
 
 ;; TODO: look into a way to use auto-complete for some modes and company for
 ;;       others.
@@ -302,99 +311,101 @@ Assums a vertically stacked display of the list.
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
-(setq my/packages
-      `(evil
-        evil-leader
-        evil-escape
-        evil-matchit
-        evil-snipe
-        evil-god-state
-        ;;evil-surround
-        key-chord
-        slime
-        ;;sly
-        paredit
-        ;;paxedit
-        ;;smartparens
-        redshank
-        auto-complete
-        ac-slime
-        company
-        company-web
-        ;;company-quickhelp
-        slime-company
-        ace-jump-mode
-        ace-window
-        ace-jump-zap
-        csharp-mode
-        js2-mode
-        skewer-mode
-        ac-js2
-        helm
-        helm-cmd-t
-        helm-swoop
-        ;;helm-git-grep ;search text of files.
-        ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
-        icicles
-        ;;projectile
-        clippy
-        yasnippet
-        rainbow-delimiters
-        rainbow-mode
-        expand-region
-        ;;multiple-cursors
-        ;;omnisharp
-        zenburn-theme
-        hc-zenburn-theme
-        niflheim-theme
-        gruvbox-theme
-        badger-theme
-        monokai-theme
-        tronesque-theme
-        gandalf-theme
-        color-theme-sanityinc-tomorrow
-        grandshell-theme
-        ;;sublimity
-        nyan-mode
-        nyan-prompt
-        ;;powerline
-        ;;dired-details ;default feature in emacs 24.4+
-        web-mode
-        htmlize
-        magit
-        vimrc-mode
-        sicp
-        neotree
-        num3-mode
-        powershell
-        irony
-        company-irony
-        flycheck-irony
-        rtags
-        aggressive-indent
-        helm-w32-launcher
-        sx
-        leerzeichen
-        sql-indent
-        darkroom
-        ;;vim-empty-lines-mode
-        fill-column-indicator
-        flycheck
-        hydra
-        linum-relative
-        guide-key
-        unkillable-scratch
-        speed-type
-        bug-hunter
-        swiper
-        color-identifiers-mode
-        svg-mode-line-themes ;; only works on gnu/linux
-        smex
-        avy
-        helm-flycheck
-        lispy
-        helm-descbinds
-        worf))
+;; TODO: specify if it should use elpa or melpa version of a package.
+(defvar my/packages
+  `(evil
+    evil-leader
+    evil-escape
+    evil-matchit
+    evil-snipe
+    evil-god-state
+    ;;evil-surround
+    key-chord
+    slime
+    ;;sly
+    paredit
+    ;;paxedit
+    ;;smartparens
+    redshank
+    auto-complete
+    ac-slime
+    company
+    company-web
+    ;;company-quickhelp
+    slime-company
+    ace-jump-mode
+    ace-window
+    ace-jump-zap
+    csharp-mode
+    js2-mode
+    skewer-mode
+    ac-js2
+    helm
+    helm-cmd-t
+    helm-swoop
+    ;;helm-git-grep ;search text of files.
+    ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
+    icicles
+    ;;projectile
+    clippy
+    yasnippet
+    rainbow-delimiters
+    rainbow-mode
+    expand-region
+    ;;multiple-cursors
+    ;;omnisharp
+    zenburn-theme
+    hc-zenburn-theme
+    niflheim-theme
+    gruvbox-theme
+    badger-theme
+    monokai-theme
+    tronesque-theme
+    gandalf-theme
+    color-theme-sanityinc-tomorrow
+    grandshell-theme
+    ;;sublimity
+    nyan-mode
+    nyan-prompt
+    ;;powerline
+    ;;dired-details ;default feature in emacs 24.4+
+    web-mode
+    htmlize
+    magit
+    vimrc-mode
+    sicp
+    neotree
+    num3-mode
+    powershell
+    irony
+    company-irony
+    flycheck-irony
+    rtags
+    aggressive-indent
+    helm-w32-launcher
+    sx
+    leerzeichen
+    sql-indent
+    darkroom
+    ;;vim-empty-lines-mode
+    fill-column-indicator
+    flycheck
+    hydra
+    linum-relative
+    guide-key
+    unkillable-scratch
+    speed-type
+    bug-hunter
+    swiper
+    color-identifiers-mode
+    svg-mode-line-themes ;; only works on gnu/linux
+    smex
+    avy
+    helm-flycheck
+    lispy
+    helm-descbinds
+    worf)
+  "Packages I use from elpa/melpa.")
 
 (when (eq my/curr-computer 'work-laptop)
   (add-to-list 'my/packages 'omnisharp))
@@ -429,9 +440,9 @@ Assums a vertically stacked display of the list.
     (package-install pkg)))
 
 (defun package-list-unaccounted-packages ()
-  "Like `package-list-packages', but show only the packages that
-are installed and are not in `my/packages'.  Useful for
-cleaning out unwanted packages."
+  "Display unaccounted packages.
+Like `package-list-packages', but only show packages that are installed and not
+in `my/packages'.  Useful for cleaning out unwanted packages."
   (interactive)
   (package-show-package-list
    (remove-if-not (lambda (x)
@@ -446,23 +457,23 @@ cleaning out unwanted packages."
 ;; w32-send-sys codes. Operating system commands. MS Windows only.
 ;;--------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
-  (setq my/w32-actions
-        '((resize . 61440)
-          (move . 61456)
-          (min . 61472)
-          (max . 61488)
-          (next-window . 61504)
-          (prev-window . 61520)
-          (close-window . 61536)
-          (vert-scroll . 61552)
-          (horizontal-scroll . 61568)
-          (mouse-menu . 61584)
-          (activate-menubar . 61696)
-          (arrange . 61712)
-          (restore-curr-frame . 61728)
-          (simulate-start-btn . 61744)
-          (screen-saver . 61760)
-          (hotkey . 61776)))
+  (defvar my/w32-actions
+    '((resize . 61440)
+      (move . 61456)
+      (min . 61472)
+      (max . 61488)
+      (next-window . 61504)
+      (prev-window . 61520)
+      (close-window . 61536)
+      (vert-scroll . 61552)
+      (horizontal-scroll . 61568)
+      (mouse-menu . 61584)
+      (activate-menubar . 61696)
+      (arrange . 61712)
+      (restore-curr-frame . 61728)
+      (simulate-start-btn . 61744)
+      (screen-saver . 61760)
+      (hotkey . 61776)))
   (defun my/w32-get-code (action)
     "Get the numeric code from the action symbol."
     (cdr (assoc action my/w32-actions)))
@@ -564,7 +575,7 @@ char."
 ;;                            (enlarge-window 10)))
 
 ;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
-(setq isFrameMax-my nil)
+(defvar isFrameMax-my nil)
 ;;TODO: look into equivalent resizing for non-Windows machines.
 (when (eq system-type 'windows-nt)
   (evil-leader/set-key "f" (lambda ()
@@ -695,11 +706,11 @@ char."
 (when (or (eq my/curr-computer 'work-laptop)
           (eq my/curr-computer 'leyna-laptop))
   ;; configure default settings for fonts.
-  (setq my/default-font 'consolas
-        my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
-                        (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
-                        (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
-                        (fixedsys "FixedSys" 120 normal)))
+  (defvar my/default-font 'consolas)
+  (defvar my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
+                          (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
+                          (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
+                          (fixedsys "FixedSys" 120 normal)))
 
   (cl-defun my/set-font (&optional &key
                                    (sym nil) (height nil) (weight nil) (resize-window nil))
@@ -806,7 +817,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;custom-safe-themes
 ;;custom-known-themes
 ;;(custom-available-themes)
-(setq my/c-index 0)
+(defvar my/c-index 0)
 (defun my/cycle-theme ()
   (interactive)
   (let* ((themes (custom-available-themes))
@@ -893,7 +904,7 @@ This prevents overlapping themes; something I would rarely want."
           t)))))
 
 (defun color (theme &optional no-confirm no-enable)
-  "dupliate of `my/load-theme' to simulate :color in vim."
+  "Dupliate of `my/load-theme' to simulate :color in vim."
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
@@ -1263,7 +1274,7 @@ This prevents overlapping themes; something I would rarely want."
   (custom-theme-set-faces
    'monokai
    ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
-   `(default ((t (:background ,charcoal))))
+   `(default ((t (:background ,my/charcoal))))
 
    `(compilation-info
      ((t (:foreground "DarkOrange2"))))
@@ -1315,8 +1326,8 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
-(setq mayan-smoke "#F4F4E8"
-      charcoal "#35352B")
+(defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
+(defvar my/charcoal "#35352B" "Expirimental dark background color.")
 
 ;;; loads the default emacs theme. Makes a few mods too.
 (defun color-default ()
@@ -1494,12 +1505,12 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 
-(setq cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
-                      "mint cream" "honeydew" "white smoke" "ghost white"
-                      "snow" "alice blue" "lavender"))
-(setq cycle-colors `( "old lace" "floral white" "snow" "ghost white" "white"
-                      "#F3F1DE"  "#F3F2EA" ,mayan-smoke))
-(setq cycle-index 0)
+(defvar cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
+                        "mint cream" "honeydew" "white smoke" "ghost white"
+                        "snow" "alice blue" "lavender"))
+(defvar cycle-colors `("old lace" "floral white" "snow" "ghost white" "white"
+                       "#F3F1DE" "#F3F2EA" ,mayan-smoke))
+(defvar cycle-index 0)
 (defun my/cycle-light-bg ()
   (interactive)
   (if (= cycle-index (1- (length cycle-colors)))
@@ -3292,11 +3303,11 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (progn ;;spawn hydras from a single binding. A hydra of hydras.
-  (setq *my-hydras* (mapcar #'symbol-name
-                            (list #'hydra-easyscroll/body
-                                  #'hydra-window/body
-                                  ;;trying paredit #'hydra-paredit/body
-                                  )))
+  (defvar *my-hydras* (mapcar #'symbol-name
+                              (list #'hydra-easyscroll/body
+                                    #'hydra-window/body
+                                    ;;trying paredit #'hydra-paredit/body
+                                    )))
   (defun my/choose-hydra ()
     (interactive)
     (funcall (intern (completing-read "pick one: " *my-hydras*))))
@@ -3756,7 +3767,7 @@ Gotten from #emacs on freenode."
 
 
 (defun my/insert-date-string ()
-  "Insert a date string. Everything you need to know about the date and time."
+  "Insert a date string.  Everything you need to know about the date and time."
   (interactive)
   (insert
    (format-time-string
@@ -3903,9 +3914,12 @@ Gotten from #emacs on freenode."
 ;;                 '(lambda () (interactive) (text-scale-decrease 1)))
 
 
-(setq my/keep-buffers '("*scratch*" "*Messages*" "*Compile-Log*" "*Minibuf-1*"
-                        "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
-                        "*Echo Area 1*" "*helm mini*"))
+(defvar my/keep-buffers
+  '("*scratch*" "*Messages*" "*Compile-Log*" "*Minibuf-1*"
+    "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
+    "*Echo Area 1*" "*helm mini*")
+  "Buffers to keep alive, even when wiping all buffers.")
+
 (defun square-one ()
   "Switch to the scratch buffer, then delete all other buffers.
 

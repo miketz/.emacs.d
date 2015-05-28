@@ -3485,9 +3485,14 @@ This prevents overlapping themes; something I would rarely want."
       (when (null start)
         (message "start tag not found")
         (return-from my/focus-javascript nil))
-      ;;start is found, move cursor down a line, start highlighitng
-      (next-line)
-      (move-beginning-of-line nil)
+      ;;start is found, move to the closing bracket >
+      (let ((end-of-start (search-forward ">" nil t)))
+        (when (null end-of-start)
+          (message "start tag not found")
+          (return-from my/focus-javascript nil)))
+      ;; start highlighitng
+      ;; (next-line)
+      ;; (move-beginning-of-line nil)
       (set-mark-command nil) ;(evil-visual-line)
       ;; jump to end tag. always search forward
       (setq end (search-forward end-tag-name nil t))
@@ -3495,9 +3500,13 @@ This prevents overlapping themes; something I would rarely want."
         (deactivate-mark)
         (message "end tag not found")
         (return-from my/focus-javascript nil))
-      ;;end tag is found. now move cursor up one line
-      (previous-line)
-      (move-end-of-line nil)
+      (let ((start-of-end (search-backward "<" nil t)))
+        (when (null start-of-end)
+          (message "end tag not found")
+          (return-from my/focus-javascript nil)))
+      ;;end tag is found. 
+      ;; (previous-line)
+      ;; (move-end-of-line nil)
       ;; turn on js2-mode for this region. (and narrow)
       (call-interactively #'my/js2-mode-on-region)))
 

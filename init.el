@@ -3608,6 +3608,24 @@ This prevents overlapping themes; something I would rarely want."
 ;;  - When type C-z, selected command is described without quiting.
 
 
+
+;;------------------------------------------------------------------------------
+;; Info-mode
+;;------------------------------------------------------------------------------
+(with-eval-after-load "info"
+  ;; rebind keys for vim friendliness.
+  ;; orginial bindings
+  '((n Info-next)
+    (p Info-prev)
+    (f Info-follow-reference))
+  ;; 3 ways to unbind keys:
+  ;; global-unset-key
+  ;; local-unset-key
+  ;; (define-key KEYMAP KEY nil)
+  (define-key Info-mode-map (kbd "n") #'evil-search-next)
+  (define-key Info-mode-map (kbd "p") nil)
+  (define-key Info-mode-map (kbd "f") #'evil-find-char))
+
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------

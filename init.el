@@ -3472,43 +3472,44 @@ This prevents overlapping themes; something I would rarely want."
   (cl-defun my/focus-javascript () ;using `cl-defun' to allow `return-from'
     "Automatcially narrow between <script> tags, then turn on js2-mode."
     (interactive)
-    (let ((start-tag-name "<script")
-          (end-tag-name   "</script")
-          (start          nil)
-          (end            nil))
-      ;; Find start tag. Search backwards first to give priority to tag pairs
-      ;; the cursor is currently inside.
-      (setq start (search-backward start-tag-name nil t))
-      (when (null start)
-        ;; if start tag not found backwards, then try forwards.
-        (setq start (search-forward start-tag-name nil t)))
-      (when (null start)
-        (message "start tag not found")
-        (return-from my/focus-javascript nil))
-      ;;start is found, move to the closing bracket >
-      (let ((end-of-start (search-forward ">" nil t)))
-        (when (null end-of-start)
+    (save-excursion ;; don't allow tag searches to mess with cursor position.
+      (let ((start-tag-name "<script")
+            (end-tag-name   "</script")
+            (start          nil)
+            (end            nil))
+        ;; Find start tag. Search backwards first to give priority to tag pairs
+        ;; the cursor is currently inside.
+        (setq start (search-backward start-tag-name nil t))
+        (when (null start)
+          ;; if start tag not found backwards, then try forwards.
+          (setq start (search-forward start-tag-name nil t)))
+        (when (null start)
           (message "start tag not found")
-          (return-from my/focus-javascript nil)))
-      ;; start highlighitng
-      ;; (next-line)
-      ;; (move-beginning-of-line nil)
-      (set-mark-command nil) ;(evil-visual-line)
-      ;; jump to end tag. always search forward
-      (setq end (search-forward end-tag-name nil t))
-      (when (null end)
-        (deactivate-mark)
-        (message "end tag not found")
-        (return-from my/focus-javascript nil))
-      (let ((start-of-end (search-backward "<" nil t)))
-        (when (null start-of-end)
+          (return-from my/focus-javascript nil))
+        ;;start is found, move to the closing bracket >
+        (let ((end-of-start (search-forward ">" nil t)))
+          (when (null end-of-start)
+            (message "start tag not found")
+            (return-from my/focus-javascript nil)))
+        ;; start highlighitng
+        ;; (next-line)
+        ;; (move-beginning-of-line nil)
+        (set-mark-command nil)           ;(evil-visual-line)
+        ;; jump to end tag. always search forward
+        (setq end (search-forward end-tag-name nil t))
+        (when (null end)
+          (deactivate-mark)
           (message "end tag not found")
-          (return-from my/focus-javascript nil)))
-      ;;end tag is found. 
-      ;; (previous-line)
-      ;; (move-end-of-line nil)
-      ;; turn on js2-mode for this region. (and narrow)
-      (call-interactively #'my/js2-mode-on-region)))
+          (return-from my/focus-javascript nil))
+        (let ((start-of-end (search-backward "<" nil t)))
+          (when (null start-of-end)
+            (message "end tag not found")
+            (return-from my/focus-javascript nil)))
+        ;;end tag is found.
+        ;; (previous-line)
+        ;; (move-end-of-line nil)
+        ;; turn on js2-mode for this region. (and narrow)
+        (call-interactively #'my/js2-mode-on-region))))
 
   (defun my/unfocus-javascript ()
     "Undo the effects of `my/focus-javascript'."

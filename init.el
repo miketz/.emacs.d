@@ -2004,7 +2004,7 @@ This prevents overlapping themes; something I would rarely want."
       ;; (setq helm-split-window-in-side-p t)
       )
 
-    ;;(helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
+    ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
 
     ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
     ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -2014,7 +2014,24 @@ This prevents overlapping themes; something I would rarely want."
 
     (key-chord-define helm-map "fj" #'helm-keyboard-quit);must be in eval-after-load so `helm-map' is defined
 
+    (progn
+      ;;------------------------------------------------------------------------------
+      ;; helm-descbinds
+      ;;------------------------------------------------------------------------------
+      (helm-descbinds-mode)
 
+      ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
+      ;; `C-h b', `C-x C-h' these run `helm-descbinds'.
+      ;;
+      ;; In the Helm buffer, you can select key-binds with helm interface.
+      ;;
+      ;;  - When type RET, selected candidate command is executed.
+      ;;
+      ;;  - When type TAB, You can "Execute", "Describe Function" or "Find
+      ;;    Function" by the menu.
+      ;;
+      ;;  - When type C-z, selected command is described without quiting.
+      )
 
     );end helm eval-after-load
 
@@ -3601,21 +3618,6 @@ This prevents overlapping themes; something I would rarely want."
   ;; fn `kill-line' was bound to evil-insert C-k earlier. Override it for lispy.
   (evil-define-key 'insert lispy-mode-map (kbd "C-k") #'lispy-kill))
 
-;;------------------------------------------------------------------------------
-;; helm-descbinds
-;;------------------------------------------------------------------------------
-(helm-descbinds-mode)
-;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
-;; `C-h b', `C-x C-h' these run `helm-descbinds'.
-;;
-;; In the Helm buffer, you can select key-binds with helm interface.
-;;
-;;  - When type RET, selected candidate command is executed.
-;;
-;;  - When type TAB, You can "Execute", "Describe Function" or "Find
-;;    Function" by the menu.
-;;
-;;  - When type C-z, selected command is described without quiting.
 
 
 

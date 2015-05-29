@@ -1528,10 +1528,32 @@ This prevents overlapping themes; something I would rarely want."
    ((or (eq my/curr-computer 'work-laptop)
         (eq my/curr-computer 'leyna-laptop))
     (my/set-font :sym 'consolas
-                 :height 115;'90 105 115 120 125
+                 :height 115            ;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
-      (color-zenburn)))
+      (color-zenburn))
+
+    (progn ;; keybinds for fontsize. TODO: make it general for all computers.
+      (defvar my/font-size 125)
+      (defun my/inc-font-size (bigger-p)
+        (interactive)
+        (custom-set-faces
+         `(default ((t (:family "Consolas"
+                                :foundry "outline"
+                                :slant normal
+                                :weight normal
+                                :height ,(incf my/font-size (if bigger-p 5 -5))
+                                :width normal)))))
+        (my/w32-run 'restore-curr-frame)
+        (my/w32-run 'max)
+        (message (int-to-string my/font-size)))
+
+      (global-set-key (kbd "M-=") (lambda ()
+                                    (interactive)
+                                    (my/inc-font-size t)))
+      (global-set-key (kbd "M--") (lambda ()
+                                    (interactive)
+                                    (my/inc-font-size nil)))))
 
    ((eq my/curr-computer 'raspberry-pi)
     (when (display-graphic-p)

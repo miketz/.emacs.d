@@ -1813,17 +1813,18 @@ This prevents overlapping themes; something I would rarely want."
 ;; Org mode
 ;;---------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(setq org-startup-indented t)
-(setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
+(with-eval-after-load "org"
+  (setq org-startup-indented t)
+  (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
 
-(defun org-summary-todo (n-done n-not-done)
-  "Switch entry to DONE when all subentries are done, to TODO otherwise."
-  (let (org-log-done org-log-states)   ; turn off logging
-    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  (defun org-summary-todo (n-done n-not-done)
+    "Switch entry to DONE when all subentries are done, to TODO otherwise."
+    (let (org-log-done org-log-states)  ; turn off logging
+      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-(when (eq my/curr-computer 'work-laptop)
-  (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
+  (when (eq my/curr-computer 'work-laptop)
+    (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org"))))
 
 ;;-----------------------------------------
 ;; worf. key shortcuts for org-mode

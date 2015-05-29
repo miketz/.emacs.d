@@ -404,7 +404,8 @@ Assums a vertically stacked display of the list.
     helm-flycheck
     lispy
     helm-descbinds
-    worf)
+    worf
+    elisp-slime-nav)
   "Packages I use from elpa/melpa.")
 
 (when (eq my/curr-computer 'work-laptop)
@@ -3672,6 +3673,14 @@ This prevents overlapping themes; something I would rarely want."
   (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
   (define-key Info-mode-map (kbd "g") #'evil-goto-first-line) ;TODO: figure out how ot bind gg for top.
   )
+
+;;------------------------------------------------------------------------------
+;; elisp-slime-nav.
+;;------------------------------------------------------------------------------
+(dolist (hook '(emacs-lisp-mode-hook
+                ielm-mode-hook))
+  (add-hook hook 'turn-on-elisp-slime-nav-mode))
+;; TODO: keybinds
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

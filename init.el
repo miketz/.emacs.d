@@ -3049,8 +3049,11 @@ This prevents overlapping themes; something I would rarely want."
 ;; darkroom
 ;;------------------------------------------------------------------------------
 ;; (require 'darkroom)
-;; (setq darkroom-margins 0.15)
-;; (setq darkroom-fringes-outside-margins nil) ;;nil keeps margins close to the centered text.
+(autoload 'darkroom-mode "darkroom" "yasnippet mode" t)
+(with-eval-after-load "darkroom"
+  (setq darkroom-margins 0.15)
+  ;;nil keeps margins close to the centered text.
+  (setq darkroom-fringes-outside-margins nil))
 
 ;;-----------------------------------------------------------------------------
 ;; vim-empty-lines-mode

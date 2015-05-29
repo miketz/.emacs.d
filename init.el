@@ -574,10 +574,10 @@ char."
 ;;                            (interactive)
 ;;                            (enlarge-window 10)))
 
-;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
-(defvar isFrameMax-my nil)
 ;;TODO: look into equivalent resizing for non-Windows machines.
 (when (eq system-type 'windows-nt)
+  ;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+  (defvar isFrameMax-my nil)
   (evil-leader/set-key "f" (lambda ()
                              (interactive)
                              (let ((action (if (not-m isFrameMax-my)

@@ -2936,9 +2936,7 @@ This prevents overlapping themes; something I would rarely want."
 
   (add-hook 'eww-mode-hook
             (lambda ()
-              (setq show-trailing-whitespace nil)
-              )))
-
+              (setq show-trailing-whitespace nil))))
 
 ;;-----------------------------------------------------------------------------
 ;; cedet

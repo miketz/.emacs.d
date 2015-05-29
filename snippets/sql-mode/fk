@@ -3,10 +3,7 @@
 # key: fk
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if not exists(select * from information_schema.referential_constraints where constraint_name='FK_$1_$3')
-begin
-    alter table ${1:/*FKtab*/} with check add constraint FK_$1_$3
-        foreign key(${2:/*FKcol*/}) references ${3:/*UKtab*/}(${4:/*UKcol*/});
-    alter table $1 check constraint FK_$1_$3;
-end
+alter table ${1:/*FKtab*/} with check add constraint FK_$1_$3
+    foreign key(${2:/*FKcol*/}) references ${3:/*UKtab*/}(${4:/*UKcol*/});
+alter table $1 check constraint FK_$1_$3;
 $0

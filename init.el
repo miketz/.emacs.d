@@ -2367,92 +2367,76 @@ This prevents overlapping themes; something I would rarely want."
 ;; Omnisharp
 ;;--------------------------
 (when (eq my/curr-computer 'work-laptop)
-  ;; Example evil-mode config
 
-  ;; (evil-define-key 'insert omnisharp-mode-map
-  ;;   (kbd "C-SPC") 'omnisharp-auto-complete);C-Space like Visual Studio
-  ;;(define-key omnisharp-mode-map (kbd "C-SPC") 'omnisharp-auto-complete) ;C-Space like Visual Studio
+  (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
 
-  (when (eq my/curr-computer 'work-laptop)
+  (with-eval-after-load "omnisharp"
+    ;; Example evil-mode config
+
+    ;; (evil-define-key 'insert omnisharp-mode-map
+    ;;   (kbd "C-SPC") 'omnisharp-auto-complete);C-Space like Visual Studio
+    ;;(define-key omnisharp-mode-map (kbd "C-SPC") 'omnisharp-auto-complete) ;C-Space like Visual Studio
+
     (evil-define-key 'normal omnisharp-mode-map
       (kbd "g u") 'omnisharp-find-usages)
-
     (evil-define-key 'normal omnisharp-mode-map
       (kbd "g o") 'omnisharp-go-to-definition)
-
     (evil-define-key 'normal omnisharp-mode-map
       (kbd "g i") 'omnisharp-find-implementations)
-
     (evil-define-key 'normal omnisharp-mode-map
       (kbd "g r") 'omnisharp-run-code-action-refactoring)
-
     (evil-define-key 'normal omnisharp-mode-map
       (kbd "g f") 'omnisharp-fix-code-issue-at-point)
-
     (evil-define-key 'normal omnisharp-mode-map
-      (kbd "g R") 'omnisharp-rename))
+      (kbd "g R") 'omnisharp-rename)
 
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ", i") 'omnisharp-current-type-information)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ", i") 'omnisharp-current-type-information)
+    ;; (evil-define-key 'insert omnisharp-mode-map
+    ;;   (kbd ".") 'omnisharp-add-dot-and-auto-complete)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ", n t") 'omnisharp-navigate-to-current-file-member)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ", n s") 'omnisharp-navigate-to-solution-member)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ", n f") 'omnisharp-navigate-to-solution-file-then-file-member)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ", n F") 'omnisharp-navigate-to-solution-file)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ", n r") 'omnisharp-navigate-to-region)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd "<f12>") 'omnisharp-show-last-auto-complete-result)
+    ;; (evil-define-key 'insert omnisharp-mode-map
+    ;;   (kbd "<f12>") 'omnisharp-show-last-auto-complete-result)
+    ;; (evil-define-key 'normal omnisharp-mode-map
+    ;;   (kbd ",.") 'omnisharp-show-overloads-at-point)
 
-  ;; (evil-define-key 'insert omnisharp-mode-map
-  ;;   (kbd ".") 'omnisharp-add-dot-and-auto-complete)
+    ;; Speed up auto-complete on mono drastically. This comes with the
+    ;; downside that documentation is impossible to fetch.
+    (setq omnisharp-auto-complete-want-documentation nil)
 
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ", n t") 'omnisharp-navigate-to-current-file-member)
-
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ", n s") 'omnisharp-navigate-to-solution-member)
-
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ", n f") 'omnisharp-navigate-to-solution-file-then-file-member)
-
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ", n F") 'omnisharp-navigate-to-solution-file)
-
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ", n r") 'omnisharp-navigate-to-region)
-
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd "<f12>") 'omnisharp-show-last-auto-complete-result)
-
-  ;; (evil-define-key 'insert omnisharp-mode-map
-  ;;   (kbd "<f12>") 'omnisharp-show-last-auto-complete-result)
-
-  ;; (evil-define-key 'normal omnisharp-mode-map
-  ;;   (kbd ",.") 'omnisharp-show-overloads-at-point)
-
-  ;; Speed up auto-complete on mono drastically. This comes with the
-  ;; downside that documentation is impossible to fetch.
-
-  (setq omnisharp-auto-complete-want-documentation nil)
-
-  (setq omnisharp--curl-executable-path "C:\\Users\\mtz\\programs\\curl-7.37.0-win64\\bin\\curl.exe")
-  (setq omnisharp-server-executable-path "C:\\Users\\mtz\\programs\\OmniSharpServer\\OmniSharp\\bin\\Debug\\OmniSharp.exe")
-  (setq omnisharp--windows-curl-tmp-file-path "C:\\Users\\mtz\\omnisharp-curl-tmp.cs") ;windows doesn't like the C:\ root folder
-  (setq omnisharp-host "http://localhost:2000/");(setq omnisharp-host "http://localhost:2000/")
+    (setq omnisharp--curl-executable-path "C:\\Users\\mtz\\programs\\curl-7.37.0-win64\\bin\\curl.exe")
+    (setq omnisharp-server-executable-path "C:\\Users\\mtz\\programs\\OmniSharpServer\\OmniSharp\\bin\\Debug\\OmniSharp.exe")
+    (setq omnisharp--windows-curl-tmp-file-path "C:\\Users\\mtz\\omnisharp-curl-tmp.cs") ;windows doesn't like the C:\ root folder
+    (setq omnisharp-host "http://localhost:2000/") ;(setq omnisharp-host "http://localhost:2000/")
                                         ;(setq omnisharp-curl "curl.exe")
                                         ;`(:command ,omnisharp--curl-executable-path)
 
-  (add-hook 'csharp-mode-hook 'omnisharp-mode)
+    (let ((i-am-using-omnisharp t))
+      (when i-am-using-omnisharp
+        (with-eval-after-load 'company
+          (add-to-list 'company-backends 'company-omnisharp))))
 
-  (let ((i-am-using-omnisharp nil))
-    (when i-am-using-omnisharp
-      (with-eval-after-load 'company
-        (add-to-list 'company-backends 'company-omnisharp))))
+    (setq omnisharp-company-do-template-completion nil) ;tab completion of paramters. acts weird
+    (setq omnisharp-company-ignore-case t)
 
-  (setq omnisharp-company-do-template-completion nil) ;tab completion of paramters. acts weird
-  (setq omnisharp-company-ignore-case t)
-
-
-
-  (defun my/start-omnisharp-server (sln)
-    "Starts omnisharp server with the correct cmd line string."
-    (interactive)
-    (start-process-shell-command
-     "Omni-Server"
-     (get-buffer-create "*Omni-Server*")
-     (concat omnisharp-server-executable-path " -p 2000 -s " sln))))
+    (defun my/start-omnisharp-server (sln)
+      "Starts omnisharp server with the correct cmd line string."
+      (interactive)
+      (start-process-shell-command
+       "Omni-Server"
+       (get-buffer-create "*Omni-Server*")
+       (concat omnisharp-server-executable-path " -p 2000 -s " sln)))))
 
 
 ;;--------------------

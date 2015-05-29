@@ -3675,12 +3675,18 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 ;;------------------------------------------------------------------------------
-;; elisp-slime-nav.
+;; elisp-slime-nav TODO: look into lisy's navigation. Maybe remove this section.
 ;;------------------------------------------------------------------------------
 (dolist (hook '(emacs-lisp-mode-hook
                 ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
-;; TODO: keybinds
+
+(with-eval-after-load "elisp-slime-nav"
+  ;; evil-mode stole the keybinds! take them back.
+  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
+  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") 'pop-tag-mark)
+  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") 'elisp-slime-nav-describe-elisp-thing-at-point)
+  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point))
 
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom

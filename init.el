@@ -304,6 +304,15 @@ Assums a vertically stacked display of the list.
 ;;       others.
 
 
+
+
+;;----------------------------------
+;; globals
+;;----------------------------------
+(defvar my/tab-width 4
+  "Number of spaces for a tab.
+Also how many columns to render for a 'real' tab.")
+
 ;;----------------------------------
 ;; Packages
 ;;----------------------------------
@@ -2264,7 +2273,7 @@ This prevents overlapping themes; something I would rarely want."
                         (awk-mode . "awk")
                         (other . "linux")))
 ;;(setq-default c-default-style "java")
-(setq-default c-basic-offset 4) ;tab width
+(setq-default c-basic-offset my/tab-width) ;tab width
 (setq-default c-electric-flag t)
 
 ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
@@ -2329,14 +2338,32 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------------------------------------------------------
 ;; sql-mode
 ;;--------------------------------------------------------------------
-(add-hook 'sql-mode-hook #'electric-pair-mode)
-(add-hook #'sql-mode-hook #'(lambda () (yas-minor-mode 1)))
+(with-eval-after-load "sql"
+  (add-hook 'sql-mode-hook #'electric-pair-mode)
+  (add-hook #'sql-mode-hook (lambda () (yas-minor-mode 1)))
+
+  ;; ;;experiment to handle annoying indents.
+  ;; (when nil
+  ;;   (defun my/delete-region (start end)
+  ;;     (interactive "r")
+  ;;     (delete-region)
+  ;;     (deactivate-mark))
+  ;;   ;; augment the backspace to handle the annoying indentation sql-mode gives.
+  ;;   (evil-define-key 'insert sql-mode-map (kbd "<backspace>")
+  ;;     (lambda ()
+  ;;       (interactive)
+  ;;       (set-mark-command nil)
+  ;;       (evil-backward-word-begin)
+  ;;       (evil-forward-word-end)
+  ;;       (evil-forward-char)
+  ;;       (call-interactively #'my/delete-region))))
+  )
 
 
 ;;--------------------------------------------------------------------
 ;; rainbow-delimiters
 ;;--------------------------------------------------------------------
-(require 'rainbow-delimiters)
+;; (require 'rainbow-delimiters)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
@@ -3927,7 +3954,7 @@ Gotten from #emacs on freenode."
 
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
-  (setq-default tab-width 4)
+  (setq-default tab-width my/tab-width)
   (setq-default indent-line-function 'insert-tab))
 
 (setq make-backup-files nil) ;No annoying backup files

@@ -414,7 +414,8 @@ Also how many columns to render for a 'real' tab.")
     lispy
     helm-descbinds
     worf
-    elisp-slime-nav)
+    elisp-slime-nav
+    electric-spacing)
   "Packages I use from elpa/melpa.")
 
 (when (eq my/curr-computer 'work-laptop)
@@ -2287,7 +2288,7 @@ This prevents overlapping themes; something I would rarely want."
             ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
             (electric-pair-mode 1)
             ;;(flycheck-mode 1)
-            ))
+            (electric-spacing-mode 1)))
 
 (add-hook 'c-initialization-hook
           (lambda ()
@@ -3755,6 +3756,14 @@ This prevents overlapping themes; something I would rarely want."
   (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
   (setq minibuffer-auto-raise t)
   (setq minibuffer-exit-hook '(lambda () (lower-frame))))
+
+;;------------------------------------------------------------------------------
+;; electric-spacing
+;;------------------------------------------------------------------------------
+;; originally called smart-operator-mode.
+;; `electric-spacing-mode' is autoloaded.
+
+
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------

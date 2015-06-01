@@ -3890,7 +3890,8 @@ Gotten from #emacs on freenode."
   (setq-default tab-width 4)
   (setq-default indent-line-function 'insert-tab))
 
-(setq make-backup-files nil backup-inhibited t) ;No annoying backup files
+(setq make-backup-files nil) ;No annoying backup files
+(setq-default backup-inhibited t)
 (setq auto-save-default nil) ;No annoying auto-save files
 ;; Don't echo passwords when dealing with interactive programs
 (add-hook 'comint-output-filter-functions

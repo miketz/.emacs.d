@@ -2231,7 +2231,18 @@ This prevents overlapping themes; something I would rarely want."
 (autoload 'yasnippet "yasnippet" "yasnippet mode" t)
 
 (with-eval-after-load "yasnippet"
-  (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
+  ;; so custom snippets are not overwritten when updating from melpa.
+  ;; (yas-load-directory "~/.emacs.d/snippets")
+
+  ;; yas-installed-snippets-dir
+  ;; so custom snippets are not overwritten when updating from melpa.
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+  ;; (setq yas-snippet-dirs
+  ;;     `("~/.emacs.d/snippets"                 ;; personal snippets
+  ;;       ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+  ;;       ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+  ;;       ,yas-installed-snippets-dir              ;; the default collection
+  ;;       ))
   (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
   (defun my-yas-handle-param (param-str
                               sep-char
@@ -2289,14 +2300,18 @@ This prevents overlapping themes; something I would rarely want."
 
 (add-hook 'c-mode-common-hook
           (lambda ()
+            (yas-minor-mode 1)
             ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
             (electric-pair-mode 1)
             ;;(flycheck-mode 1)
             (electric-spacing-mode 1)))
 
+
 (add-hook 'c-initialization-hook
           (lambda ()
             ;;TODO: fill this up
+            ;; hook that runs 1 time.
+            ;; equivalent to using eval-after-load.
             ))
 
 ;; (defun my-make-CR-do-indent ()

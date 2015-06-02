@@ -1100,6 +1100,10 @@ This prevents overlapping themes; something I would rarely want."
    ;;                    ;;:overline "green"
    ;;                    :box (:line-width -1 :style released-button)))
    ;;    (t :inverse-video t)))
+
+   ;; '(hl-line
+   ;;   ((t (:background "black"))))
+
    '(hydra-face-red
      ((t (:foreground "green" :bold t))))
    '(hydra-face-blue
@@ -3968,11 +3972,13 @@ Gotten from #emacs on freenode."
 
 (blink-cursor-mode 0)
 
-(with-eval-after-load "hl-line"
-  (setq hl-line-sticky-flag nil)
-  (setq global-hl-line-sticky-flag nil))
-(global-hl-line-mode 1)
-;; (hl-line-mode 1) ; highlight the current line
+(progn ;; hightlight current line stuff
+  (with-eval-after-load "hl-line"
+    (setq hl-line-sticky-flag nil)
+    (setq global-hl-line-sticky-flag nil))
+  ;; (global-hl-line-mode 1)
+  ;; (hl-line-mode 1) ; highlight the current line
+  )
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
 

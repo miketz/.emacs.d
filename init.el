@@ -2541,10 +2541,10 @@ This prevents overlapping themes; something I would rarely want."
   ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.
   (setq avy-keys (nconc (loop for i from ?a to ?z collect i)
                         (loop for i from ?A to ?Z collect i)))
-  (setq avy-style 'at-full) ;; options (pre at at-full post)
+  (setq avy-style 'at-full) ;;options (pre at at-full post)
   (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
-  (setq avy-all-windows t) ;allow jumps between windows.
-  (setq avy-case-fold-search t) ;case insenstive
+  (setq avy-all-windows t)  ;allow jumps between windows.
+  (setq avy-case-fold-search t)         ;case insenstive
 
   (defun my-avy-goto-line ()
     (interactive)
@@ -2552,7 +2552,19 @@ This prevents overlapping themes; something I would rarely want."
     (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
       (avy-goto-line)))
   (global-set-key (kbd "M-g g") #'my-avy-goto-line)
-  (global-set-key (kbd "M-g M-g") #'my-avy-goto-line))
+  (global-set-key (kbd "M-g M-g") #'my-avy-goto-line)
+
+  (defun my-avy-goto-char-3 (char1 char2 char3 &optional arg)
+    "Copied `avy-goto-char-2' but reading 3 chars. Feels like too many."
+    (interactive (list (read-char "char 1: ")
+                       (read-char "char 2: ")
+                       (read-char "char 3: ")
+                       current-prefix-arg))
+    (avy--with-avy-keys avy-goto-char-3
+      (avy--generic-jump
+       (regexp-quote (string char1 char2 char3))
+       arg
+       avy-style))))
 
 ;;--------------------
 ;; Ace jump mode

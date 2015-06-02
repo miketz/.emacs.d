@@ -3127,7 +3127,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; darkroom
 ;;------------------------------------------------------------------------------
 ;; (require 'darkroom)
-(autoload 'darkroom-mode "darkroom" "yasnippet mode" t)
+(autoload 'darkroom-mode "darkroom" "darkroom-mode" t)
 (with-eval-after-load "darkroom"
   (setq darkroom-margins 0.15)
   ;;nil keeps margins close to the centered text.

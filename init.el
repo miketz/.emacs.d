@@ -304,6 +304,15 @@ Assums a vertically stacked display of the list.
 ;;       others.
 
 
+
+
+;;----------------------------------
+;; globals
+;;----------------------------------
+(defvar my/tab-width 4
+  "Number of spaces for a tab.
+Also how many columns to render for a 'real' tab.")
+
 ;;----------------------------------
 ;; Packages
 ;;----------------------------------
@@ -405,7 +414,8 @@ Assums a vertically stacked display of the list.
     lispy
     helm-descbinds
     worf
-    elisp-slime-nav)
+    elisp-slime-nav
+    electric-spacing)
   "Packages I use from elpa/melpa.")
 
 (when (eq my/curr-computer 'work-laptop)
@@ -1847,7 +1857,10 @@ This prevents overlapping themes; something I would rarely want."
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
   (when (eq my/curr-computer 'work-laptop)
-    (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org"))))
+    (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
+
+  ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
+  (define-key org-mode-map (kbd "M-h") 'evil-window-left))
 
 ;;-----------------------------------------
 ;; worf. key shortcuts for org-mode
@@ -2261,7 +2274,7 @@ This prevents overlapping themes; something I would rarely want."
                         (awk-mode . "awk")
                         (other . "linux")))
 ;;(setq-default c-default-style "java")
-(setq-default c-basic-offset 4) ;tab width
+(setq-default c-basic-offset my/tab-width) ;tab width
 (setq-default c-electric-flag t)
 
 ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
@@ -2275,7 +2288,7 @@ This prevents overlapping themes; something I would rarely want."
             ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
             (electric-pair-mode 1)
             ;;(flycheck-mode 1)
-            ))
+            (electric-spacing-mode 1)))
 
 (add-hook 'c-initialization-hook
           (lambda ()
@@ -2326,14 +2339,32 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------------------------------------------------------
 ;; sql-mode
 ;;--------------------------------------------------------------------
-(add-hook 'sql-mode-hook #'electric-pair-mode)
-(add-hook #'sql-mode-hook #'(lambda () (yas-minor-mode 1)))
+(with-eval-after-load "sql"
+  (add-hook 'sql-mode-hook #'electric-pair-mode)
+  (add-hook #'sql-mode-hook (lambda () (yas-minor-mode 1)))
+
+  ;; ;;experiment to handle annoying indents.
+  ;; (when nil
+  ;;   (defun my/delete-region (start end)
+  ;;     (interactive "r")
+  ;;     (delete-region)
+  ;;     (deactivate-mark))
+  ;;   ;; augment the backspace to handle the annoying indentation sql-mode gives.
+  ;;   (evil-define-key 'insert sql-mode-map (kbd "<backspace>")
+  ;;     (lambda ()
+  ;;       (interactive)
+  ;;       (set-mark-command nil)
+  ;;       (evil-backward-word-begin)
+  ;;       (evil-forward-word-end)
+  ;;       (evil-forward-char)
+  ;;       (call-interactively #'my/delete-region))))
+  )
 
 
 ;;--------------------------------------------------------------------
 ;; rainbow-delimiters
 ;;--------------------------------------------------------------------
-(require 'rainbow-delimiters)
+;; (require 'rainbow-delimiters)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
@@ -3690,6 +3721,51 @@ This prevents overlapping themes; something I would rarely want."
   (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point))
 
 ;;------------------------------------------------------------------------------
+;; maximumize screen real-estate
+;;------------------------------------------------------------------------------
+(defvar my/backup-mode-line-format nil
+  "Backs up the modeline state so it can later be restored after nilling it out.")
+(defvar my/backup-fringe-mode 0
+  "Backs up the modeline state so it can later be restored after nilling it out.")
+
+(defun my/real-estate-max ()
+  (interactive)
+  ;; backup modeline, but only if needed so we don't mess up a good backup.
+  (when (null my/backup-mode-line-format)
+    (setq my/backup-mode-line-format mode-line-format))
+  ;; disable mode-line for vertical real-estate
+  (setq mode-line-format nil)
+  ;; disabel fringe for horizontal real-estate.
+  (set-fringe-mode 0))
+
+(defun my/real-estate-restore ()
+  (interactive)
+  ;; restore mode line from backup, but only if there is a good backup.
+  (when (not (null my/backup-mode-line-format))
+    (setq mode-line-format my/backup-mode-line-format))
+  (set-fringe-mode nil)  ;; nil means the default fringe width. TODO: use a backup value.
+  )
+
+(when nil ; docs on fringe.
+  (set-fringe-mode 0)         ; width 0
+  (set-fringe-mode nil)       ; with default
+  (set-fringe-mode '(10 . 30)); custom right/left width
+  )
+(when nil ;; experimental. moves minibuffer into separate frame, but messes up stuff.
+  ;; found on http://stackoverflow.com/questions/5079466/hide-emacs-echo-area-during-inactivity
+  (setq initial-frame-alist (append '((minibuffer . nil)) initial-frame-alist))
+  (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
+  (setq minibuffer-auto-raise t)
+  (setq minibuffer-exit-hook '(lambda () (lower-frame))))
+
+;;------------------------------------------------------------------------------
+;; electric-spacing
+;;------------------------------------------------------------------------------
+;; originally called smart-operator-mode.
+;; `electric-spacing-mode' is autoloaded.
+
+
+;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
 
@@ -3888,10 +3964,11 @@ Gotten from #emacs on freenode."
 
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
-  (setq-default tab-width 4)
+  (setq-default tab-width my/tab-width)
   (setq-default indent-line-function 'insert-tab))
 
-(setq make-backup-files nil backup-inhibited t) ;No annoying backup files
+(setq make-backup-files nil) ;No annoying backup files
+(setq-default backup-inhibited t)
 (setq auto-save-default nil) ;No annoying auto-save files
 ;; Don't echo passwords when dealing with interactive programs
 (add-hook 'comint-output-filter-functions

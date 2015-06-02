@@ -3860,7 +3860,8 @@ Gotten from #emacs on freenode."
 ;; not recenter. I had an issue with value 1 where if i held down
 ;; j to scroll, it would perioditcally recenter.
 (setq scroll-conservatively 100)
-
+;; maintain cursor location when scrolling
+(setq scroll-preserve-screen-position t)
 
 (progn ;;window navigation.
   (global-set-key (kbd "M-h") #'evil-window-left)

@@ -3967,7 +3967,7 @@ Gotten from #emacs on freenode."
 
 
 (blink-cursor-mode 0)
-;;(hl-line-mode 1)
+(hl-line-mode 1) ; highlight the current line
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
 

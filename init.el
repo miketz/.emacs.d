@@ -3378,8 +3378,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 ;; erc
 ;;------------------------------------------------------------------------------
-(add-hook 'erc-mode-hook #'(lambda ()
-                             (setq show-trailing-whitespace nil)))
+(with-eval-after-load "erc"
+ (add-hook 'erc-mode-hook (lambda ()
+                            (setq show-trailing-whitespace nil))))
+
 ;;------------------------------------------------------------------------------
 ;; linum-relative
 ;;------------------------------------------------------------------------------

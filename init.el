@@ -3119,20 +3119,22 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 ;; fill-column-indicator
 ;;------------------------------------------------------------------------------
-(require 'fill-column-indicator)
-(setq fci-rule-column 80)
-(setq fci-rule-width 1)
-(progn
-  (setq fci-dash-pattern 0.5) ;length of the dash 0 to 1
-  (setq fci-rule-use-dashes t))
-(setq fci-rule-color "#555555") ;;tailored for zenburn ATM.
+;; (require 'fill-column-indicator)
 (add-hook 'prog-mode-hook #'(lambda ()
-                              (fci-mode 1)))
+                              (fci-mode 1))) ; fci-mode is autloaded.
 
-(defun my/fci-refresh ()
-  (interactive)
-  (fci-mode 0)
-  (fci-mode 1))
+(with-eval-after-load "fill-column-indicator"
+  (setq fci-rule-column 80)
+  (setq fci-rule-width 1)
+  (progn
+    (setq fci-dash-pattern 0.5)   ;length of the dash 0 to 1
+    (setq fci-rule-use-dashes t))
+  (setq fci-rule-color "#555555") ;tailored for zenburn ATM.
+
+  (defun my/fci-refresh ()
+    (interactive)
+    (fci-mode 0)
+    (fci-mode 1)))
 
 ;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
 ;; ;;TODO: it doesn't seem to be working!

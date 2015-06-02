@@ -3831,9 +3831,10 @@ Gotten from #emacs on freenode."
   (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))
 
 ;; scroll like vim when moving 1 line off screen with j/k.
-;; a value of 1 will vertically center the point if you jump more than 1
-;; line off screen, for example using swiper.
-(setq scroll-conservatively 1)
+;; has some wierd rules about recentering, but 100 is supposed to
+;; not recenter. I had an issue with value 1 where if i held down
+;; j to scroll, it would perioditcally recenter.
+(setq scroll-conservatively 100)
 
 
 (progn ;;window navigation.

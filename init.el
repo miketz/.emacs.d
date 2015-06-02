@@ -3818,6 +3818,11 @@ Gotten from #emacs on freenode."
   (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
   (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))
 
+;; scroll like vim when moving 1 line off screen with j/k.
+;; a value of 1 will vertically center the point if you jump more than 1
+;; line off screen, for example using swiper.
+(setq scroll-conservatively 1)
+
 
 (progn ;;window navigation.
   (global-set-key (kbd "M-h") #'evil-window-left)

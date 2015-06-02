@@ -2341,7 +2341,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------------------------------------------------------
 (with-eval-after-load "sql"
   (add-hook 'sql-mode-hook #'electric-pair-mode)
-  (add-hook #'sql-mode-hook (lambda () (yas-minor-mode 1)))
+  (add-hook #'sql-mode-hook
+            (lambda ()
+              (yas-minor-mode 1)
+              ;;electric-indent doesn't work very well with T-sql.
+              ;;use C-j for newline and indent.
+              (when (fboundp 'electric-indent-mode)
+                (electric-indent-mode -1))))
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil

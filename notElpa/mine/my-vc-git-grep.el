@@ -1,48 +1,48 @@
 (require 'vc-git)
 
-(defun my/is-in-gitrepo ()
+(defun my-is-in-gitrepo ()
   "Returns t if the current directory is in a git repo."
   (interactive)
   (string= "true\n" ;there seems to be a newline char so include it
            (shell-command-to-string "git rev-parse --is-inside-work-tree")))
 
-(defun my/git-grep-make-param (pat)
+(defun my-git-grep-make-param (pat)
   "Make git-grep work with helm patters of ^, !, $"
   (let ((val (concat " -e \"" pat "\"")))
     (cond
-     ((my/str-starts-with-p pat "!")
+     ((my-str-starts-with-p pat "!")
       (concat " --not -e \"" (substring pat 1 (length pat)) "\""))
-     ((my/str-starts-with-p pat "^")
+     ((my-str-starts-with-p pat "^")
       val);we get helm-style "start with" ^ implemented for free in the default git-grep regex.
                                         ;TODO: make it work when there is leading whitspace on the line.
-     ((my/str-ends-with-p pat "$")
+     ((my-str-ends-with-p pat "$")
       val);TODO: implement helm-style "ends with" $.
      (t val))))
 
-(defun my/git-grep-make-cmd (input)
+(defun my-git-grep-make-cmd (input)
   ;;git --no-pager grep --no-index --ignore-case -n -e "preview" --and -e "print" -- *.cs
   (interactive)
   (let ((patterns (split-string input " "))
         (git-pat ""))
-    (setq git-pat (my/git-grep-make-param (first patterns)))
+    (setq git-pat (my-git-grep-make-param (first patterns)))
     (dolist (p (rest patterns))
-      (setq git-pat (concat git-pat " --and " (my/git-grep-make-param p))))
+      (setq git-pat (concat git-pat " --and " (my-git-grep-make-param p))))
                                         ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
     (concat "git --no-pager grep "
-            (unless (my/is-in-gitrepo) "--no-index --exclude-standard");--exclude-standard so it honors the .gitignore file when not in a git repo.
+            (unless (my-is-in-gitrepo) "--no-index --exclude-standard");--exclude-standard so it honors the .gitignore file when not in a git repo.
             " --ignore-case -n "
             git-pat)))
 
-(defun my/git-grep-make-cmd2 (input)
+(defun my-git-grep-make-cmd2 (input)
   ;;git --no-pager grep --no-index --ignore-case -n -e "preview" --and -e "print" -- *.cs
   (interactive)
   (let ((patterns (split-string input " "))
         (git-pat ""))
-    (setq git-pat (my/git-grep-make-param (first patterns)))
+    (setq git-pat (my-git-grep-make-param (first patterns)))
     (dolist (p (rest patterns))
-      (setq git-pat (concat git-pat " --and " (my/git-grep-make-param p))))
+      (setq git-pat (concat git-pat " --and " (my-git-grep-make-param p))))
                                         ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
-    (let ((in-gitrepo   (my/is-in-gitrepo))
+    (let ((in-gitrepo   (my-is-in-gitrepo))
           (search-all-p current-prefix-arg));if they typed C-u then search all
       (concat "git --no-pager grep --extended-regexp "
               (when (not in-gitrepo) "--no-index ")
@@ -55,14 +55,14 @@
               " --ignore-case -n "
               git-pat))))
 
-;; (defun my/git-grep ()
+;; (defun my-git-grep ()
 ;;   (interactive)
 ;;   (let* ((input (read-string "search: "))
-;;          (results (shell-command-to-string (my/git-grep-make-cmd input))))
+;;          (results (shell-command-to-string (my-git-grep-make-cmd input))))
 ;;     (insert results)))
 
 
-(defun my/vc-git-grep (regexp &optional files dir)
+(defun my-vc-git-grep (regexp &optional files dir)
   "Same as the normal vc-git-grep except I split the search string on spaces and pass
 each value as a separate parameter to git grep. Making it work like helm filtering."
   (interactive
@@ -86,7 +86,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
               (setq command nil))
         (setq dir (file-name-as-directory (expand-file-name dir)))
         (setq command
-              (concat (my/git-grep-make-cmd2 regexp) " -- " files)
+              (concat (my-git-grep-make-cmd2 regexp) " -- " files)
               ;; (grep-expand-template "git --no-pager grep -n -e <R> -- <F>"
               ;;                       regexp files)
               )

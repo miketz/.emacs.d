@@ -89,11 +89,11 @@ It mutates BOOL to the opposite value.
 Useful to check a boolean state and toggle the state in 1 go."
   `(setq ,bool (not ,bool)))
 
-(defmacro my/letify-alist (alist &rest body)
+(defmacro my-letify-alist (alist &rest body)
   ;; destructuring macro found by inspecting Bozhidar Batsov's zenburn color
   ;; theme.
   ;; example usage:
-  ;; (my/letify-alist ((red . "#FF0000")
+  ;; (my-letify-alist ((red . "#FF0000")
   ;;                   (green . "#00FF00")
   ;;                   (blue . "#0000FF"))
   ;;   (print red)
@@ -107,45 +107,45 @@ Useful to check a boolean state and toggle the state in 1 go."
      ,@body))
 
 
-(defun my/alst-get-keys (lst)
+(defun my-alst-get-keys (lst)
   (mapcar 'car lst))
-(defun my/alst-get-values (lst)
+(defun my-alst-get-values (lst)
   (mapcar 'cdr lst))
 
-(defun my/alst-print-keys (lst)
+(defun my-alst-print-keys (lst)
   (mapc #'(lambda (key)
             (insert (symbol-name key)) ;key must be a symbol
             (insert "\n"))
-        (my/alst-get-keys lst)))
+        (my-alst-get-keys lst)))
 
-(defun my/getAtIndex (i lst)
+(defun my-getAtIndex (i lst)
   (cond
    ((null lst) nil)
    ((= i 0) (car lst))
-   (t (my/getAtIndex (- i 1) (cdr lst)))))
+   (t (my-getAtIndex (- i 1) (cdr lst)))))
 
-(defun my/str-ends-with-p (string suffix)
+(defun my-str-ends-with-p (string suffix)
   "Return t if STRING ends with SUFFIX."
   (and (string-match (rx-to-string `(: ,suffix eos) t)
                      string)
        t))
 
-(defun my/str-starts-with-p (string prefix)
+(defun my-str-starts-with-p (string prefix)
   "Return t if STRING starts with prefix."
   (and (string-match (rx-to-string `(: bos ,prefix) t)
                      string)
        t))
 
-(defun my/str-replace (what with in)
+(defun my-str-replace (what with in)
   (replace-regexp-in-string (regexp-quote what) with in))
 
-(defun my/get-string-from-file (filePath)
+(defun my-get-string-from-file (filePath)
   "Return FILEPATH's file content."
   (with-temp-buffer
     (insert-file-contents filePath)
     (buffer-string)))
 
-(defun my/read-lines (filePath)
+(defun my-read-lines (filePath)
   "Return a list of lines of a file at FILEPATH."
   (with-temp-buffer
     (insert-file-contents filePath)
@@ -171,38 +171,38 @@ Useful to check a boolean state and toggle the state in 1 go."
           (insert val2)
           (insert "\n")))))
 
-  (defun my/get-longest-str (lst)
+  (defun my-get-longest-str (lst)
     "returns length of the longest str"
     (apply #'max
            (mapcar #'length
                    lst)))
 
-  (defun my/get-longest-sym (lst) ;PASS
+  (defun my-get-longest-sym (lst) ;PASS
     "returns length of the longest symbol name"
-    (my/get-longest-str (mapcar #'symbol-name
+    (my-get-longest-str (mapcar #'symbol-name
                                 lst)))
 
-  (defun my/index-1d (r c num-cols) ;PASS, but not used.
+  (defun my-index-1d (r c num-cols) ;PASS, but not used.
     "returns a 1-D index. Using the 2d indexs r and c.
 And the number of columns (and vertical layout)."
     (+ (* c num-cols)
        r))
 
-  (defun my/index-column (i num-cols) ;PASS, but not used.
+  (defun my-index-column (i num-cols) ;PASS, but not used.
     "returns the column the 1-D index falls under for N cols
 (and vertical layout)"
     (floor (/ i num-cols)))
 
-  (defun my/index-row (i num-cols) ;PASS, but not used.
+  (defun my-index-row (i num-cols) ;PASS, but not used.
     "returns the row the 1-D index falls under for N cols (and vertical layout)"
     (let* ((c (floor (/ i num-cols)))
            (r (- i (* c num-cols))))
       r))
 
-  (defun my/get-columns (lst num-cols) ;PASS
+  (defun my-get-columns (lst num-cols) ;PASS
     "returns a list-of-lists. A list for each column from the 1-D lst.
 Assums a vertically stacked display of the list.
-(my/get-columns '(a b c d e f g) 3)
+(my-get-columns '(a b c d e f g) 3)
 =>
 ((a b c) (d e f) (g))"
     ;;STRANGE: for some reason if I align docstring to the left without white
@@ -226,20 +226,20 @@ Assums a vertically stacked display of the list.
         (incf c))
       (reverse lst-of-columns)))
 
-  (defun my/get-longest-forEachCol (lst num-cols) ;;PASS
+  (defun my-get-longest-forEachCol (lst num-cols) ;;PASS
     "Gets the longest length for each column in LST, assuming NUM-COLS.
 '(lenCol1 lenCol2... lenColN)."
     (mapcar #'(lambda (column)
-                (my/get-longest-str column))
-            (my/get-columns lst num-cols)))
+                (my-get-longest-str column))
+            (my-get-columns lst num-cols)))
 
-  (defun my/render-list (lst num-cols min-col-spaces)
+  (defun my-render-list (lst num-cols min-col-spaces)
     (let* ((data (mapcar #'symbol-name lst))
            (len (length data))
            (num-rows (+ (floor (/ len num-cols))
                         (if (> (mod len num-cols) 0) 1 0)))
-           (col-lengths (my/get-longest-forEachCol data num-cols))
-           (columns (my/get-columns data num-cols)))
+           (col-lengths (my-get-longest-forEachCol data num-cols))
+           (columns (my-get-columns data num-cols)))
       (insert "(:i ") ; add junk item to circumvent elisp indentation rules.
       (dotimes (r num-rows)
         (dotimes (c num-cols)
@@ -265,10 +265,10 @@ Assums a vertically stacked display of the list.
 ;;----------------------------------
 ;; (display-graphic-p)
 ;; system-type
-;; my/curr-computer
+;; my-curr-computer
 
 ;; Keeping track of the various computers I use emacs on.
-(defvar my/computers
+(defvar my-computers
   '(unknown        ; if my-curr-computer.txt does not exist
     work-laptop
     raspberry-pi
@@ -285,20 +285,20 @@ Assums a vertically stacked display of the list.
 ;; Used to conditionally set computer specific options, and paths.
 ;; NOTE: When setting up emacs on a new computer create file
 ;; ~/.emacs.d/my-curr-computer.txt
-;; Then type the name of the symbol (see `my/computers') in the text file.
+;; Then type the name of the symbol (see `my-computers') in the text file.
 ;; The file should contain 1 line and no whitespace. The text will be converted
 ;; to a symbol.
-(defconst my/curr-computer
+(defconst my-curr-computer
   (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
     (if (file-exists-p curr-comp-file)
-        (intern (my/get-string-from-file curr-comp-file))
+        (intern (my-get-string-from-file curr-comp-file))
       'unknown))
   "The computer running this Emacs.  Identified by a flag file.  Specific configs may be made based on the computer.")
 
 ;; (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
 ;;   (if (file-exists-p curr-comp-file)
-;;       (setq my/curr-computer (intern (my/get-string-from-file curr-comp-file)))
-;;     (setq my/curr-computer 'unknown)))
+;;       (setq my-curr-computer (intern (my-get-string-from-file curr-comp-file)))
+;;     (setq my-curr-computer 'unknown)))
 
 ;; TODO: look into a way to use auto-complete for some modes and company for
 ;;       others.
@@ -309,7 +309,7 @@ Assums a vertically stacked display of the list.
 ;;----------------------------------
 ;; globals
 ;;----------------------------------
-(defvar my/tab-width 4
+(defvar my-tab-width 4
   "Number of spaces for a tab.
 Also how many columns to render for a 'real' tab.")
 
@@ -321,7 +321,7 @@ Also how many columns to render for a 'real' tab.")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
 ;; TODO: specify if it should use elpa or melpa version of a package.
-(defvar my/packages
+(defvar my-packages
   `(evil
     evil-leader
     evil-escape
@@ -418,8 +418,8 @@ Also how many columns to render for a 'real' tab.")
     electric-spacing)
   "Packages I use from elpa/melpa.")
 
-(when (eq my/curr-computer 'work-laptop)
-  (add-to-list 'my/packages 'omnisharp))
+(when (eq my-curr-computer 'work-laptop)
+  (add-to-list 'my-packages 'omnisharp))
 
 
 (require 'package)
@@ -446,18 +446,18 @@ Also how many columns to render for a 'real' tab.")
   (package-refresh-contents))
 
 ;; install the missing packages
-(dolist (pkg my/packages)
+(dolist (pkg my-packages)
   (unless (package-installed-p pkg)
     (package-install pkg)))
 
 (defun package-list-unaccounted-packages ()
   "Display unaccounted packages.
 Like `package-list-packages', but only show packages that are installed and not
-in `my/packages'.  Useful for cleaning out unwanted packages."
+in `my-packages'.  Useful for cleaning out unwanted packages."
   (interactive)
   (package-show-package-list
    (remove-if-not (lambda (x)
-                    (and (not (memq x my/packages))
+                    (and (not (memq x my-packages))
                          (not (package-built-in-p x))
                          (package-installed-p x)))
                   (mapcar 'car package-archive-contents))))
@@ -468,7 +468,7 @@ in `my/packages'.  Useful for cleaning out unwanted packages."
 ;; w32-send-sys codes. Operating system commands. MS Windows only.
 ;;--------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
-  (defvar my/w32-actions
+  (defvar my-w32-actions
     '((resize . 61440)
       (move . 61456)
       (min . 61472)
@@ -485,15 +485,15 @@ in `my/packages'.  Useful for cleaning out unwanted packages."
       (simulate-start-btn . 61744)
       (screen-saver . 61760)
       (hotkey . 61776)))
-  (defun my/w32-get-code (action)
+  (defun my-w32-get-code (action)
     "Get the numeric code from the action symbol."
-    (cdr (assoc action my/w32-actions)))
-  (defun my/w32-get-action (code)
+    (cdr (assoc action my-w32-actions)))
+  (defun my-w32-get-action (code)
     "Get the action symbol from the numeric code."
-    (car (cl-rassoc code my/w32-actions)))
-  (defun my/w32-run (action)
+    (car (cl-rassoc code my-w32-actions)))
+  (defun my-w32-run (action)
     "Executes a w32 action."
-    (let ((code (my/w32-get-code action)))
+    (let ((code (my-w32-get-code action)))
       (w32-send-sys-command code))))
 
 
@@ -594,12 +594,12 @@ char."
                              (let ((action (if (not-m isFrameMax-my)
                                                'max
                                              'restore-curr-frame)))
-                               (my/w32-run action)))))
+                               (my-w32-run action)))))
 
 ;;evalate lisp expression. Insert result on a new line.
 ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
 
-(defun my/eval-last-sexp ()
+(defun my-eval-last-sexp ()
   (interactive)
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
@@ -610,8 +610,8 @@ char."
       ;;(require 'pos-tip)
       (evil-leader/set-key "e" (lambda ()
                                  (interactive)
-                                 ;;(clippy-say (my/eval-last-sexp))
-                                 (pos-tip-show (my/eval-last-sexp)))))
+                                 ;;(clippy-say (my-eval-last-sexp))
+                                 (pos-tip-show (my-eval-last-sexp)))))
   (progn
     (evil-leader/set-key "e"
       (lambda ()
@@ -714,23 +714,23 @@ char."
 ;;----------------------------------
 ;; font
 ;;----------------------------------
-(when (or (eq my/curr-computer 'work-laptop)
-          (eq my/curr-computer 'leyna-laptop))
+(when (or (eq my-curr-computer 'work-laptop)
+          (eq my-curr-computer 'leyna-laptop))
   ;; configure default settings for fonts.
-  (defvar my/default-font 'consolas)
-  (defvar my/good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
+  (defvar my-default-font 'consolas)
+  (defvar my-good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
                           (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
                           (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
                           (fixedsys "FixedSys" 120 normal)))
 
-  (cl-defun my/set-font (&optional &key
+  (cl-defun my-set-font (&optional &key
                                    (sym nil) (height nil) (weight nil) (resize-window nil))
     "Sets the font.
-If sym is not specified it uses the configured default set in `my/default-font'.
-If height or weight are not specified then it uses the configured defaults in `my/good-fonts'.
+If sym is not specified it uses the configured default set in `my-default-font'.
+If height or weight are not specified then it uses the configured defaults in `my-good-fonts'.
 Resize-window = t will adjust the window so the modeline fits on screen, etc."
-    (unless sym (setq sym my/default-font))
-    (let ((the-font (assoc sym my/good-fonts)))
+    (unless sym (setq sym my-default-font))
+    (let ((the-font (assoc sym my-good-fonts)))
       (unless height (setq height (third the-font)))
       (unless weight (setq weight (fourth the-font)))
       (let ((font-str (second the-font)))
@@ -742,28 +742,28 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
                                 :height ,height
                                 :width normal)))))))
     (when resize-window
-      (my/w32-run 'restore-curr-frame)
-      (my/w32-run 'max))))
+      (my-w32-run 'restore-curr-frame)
+      (my-w32-run 'max))))
 
 
-;; (defun my/set-font-size ()
-;;   "Interactive layer over my/set-font. Takes the font size as user input."
+;; (defun my-set-font-size ()
+;;   "Interactive layer over my-set-font. Takes the font size as user input."
 ;;   (interactive)
 ;;   (let ((size (string-to-number (read-string "font-size: "
 ;;                                              nil
-;;                                              'my/history))))
-;;     (my/set-font :height size
+;;                                              'my-history))))
+;;     (my-set-font :height size
 ;;                  :resize-window t)))
-;; (defun my/set-font-weight ()
-;;   "Interactive layer over my/set-font."
+;; (defun my-set-font-weight ()
+;;   "Interactive layer over my-set-font."
 ;;   (interactive)
 ;;   (let ((weight (intern (read-string "font-weight: "
 ;;                                              nil
-;;                                              'my/history))))
-;;     (my/set-font :weight weight
+;;                                              'my-history))))
+;;     (my-set-font :weight weight
 ;;                  :resize-window t)))
 
-(when (eq my/curr-computer 'raspberry-pi)
+(when (eq my-curr-computer 'raspberry-pi)
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
@@ -787,7 +787,7 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
 ;;----------------------------------
 ;; cursor
 ;;----------------------------------
-(cl-defun my/cursor-stuff (&optional &key (color-emacs nil)
+(cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
                                      (color-evil nil)
                                      (color-motion nil));(color-motion "red")
   (interactive)
@@ -809,7 +809,7 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
     ;;give special color I know when it is not full-evil bindings.
     (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
 
-(my/cursor-stuff) ;set the default cursor style. colors not specified yet.
+(my-cursor-stuff) ;set the default cursor style. colors not specified yet.
 
 ;;------------------------------------------------------
 ;; Color theme stuff.
@@ -828,19 +828,19 @@ This prevents overlapping themes; something I would rarely want."
 ;;custom-safe-themes
 ;;custom-known-themes
 ;;(custom-available-themes)
-(defvar my/c-index 0)
-(defun my/cycle-theme ()
+(defvar my-c-index 0)
+(defun my-cycle-theme ()
   (interactive)
   (let* ((themes (custom-available-themes))
-         (thm (nth my/c-index themes)))
+         (thm (nth my-c-index themes)))
     (unwind-protect
         (progn
           (load-theme thm t))
       (progn
         (print thm)
-        (incf my/c-index)
-        (when (= my/c-index (length themes))
-          (setq my/c-index 0))))))
+        (incf my-c-index)
+        (when (= my-c-index (length themes))
+          (setq my-c-index 0))))))
 
 
 ;;programmatically call a fucntion as if a prefix arg C-u was used.
@@ -849,7 +849,7 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-(defun my/load-theme (theme &optional no-confirm no-enable)
+(defun my-load-theme (theme &optional no-confirm no-enable)
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
@@ -915,7 +915,7 @@ This prevents overlapping themes; something I would rarely want."
           t)))))
 
 (defun color (theme &optional no-confirm no-enable)
-  "Dupliate of `my/load-theme' to simulate :color in vim."
+  "Dupliate of `my-load-theme' to simulate :color in vim."
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
@@ -981,30 +981,30 @@ This prevents overlapping themes; something I would rarely want."
           t)))))
 
 
-;;(global-set-key (kbd "<f9>") #'my/load-theme)
+;;(global-set-key (kbd "<f9>") #'my-load-theme)
 (global-set-key
  (kbd "<f9>")
  #'(lambda ()
      (interactive)
      ;;nil for no candidate limit. I want to scroll through all the themes.
      (let ((helm-candidate-number-limit nil))
-       (call-interactively #'my/load-theme))))
+       (call-interactively #'my-load-theme))))
 
 
 
-(global-set-key (kbd "<f10>") #'my/cycle-theme)
+(global-set-key (kbd "<f10>") #'my-cycle-theme)
 
-(defun my/cursor-stuff-darkBg ()
+(defun my-cursor-stuff-darkBg ()
   (interactive)
-  ;;(my/cursor-stuff :color-emacs "cyan" :color-evil "#00DF00")
-  (my/cursor-stuff :color-emacs "cyan" :color-evil "spring green")
+  ;;(my-cursor-stuff :color-emacs "cyan" :color-evil "#00DF00")
+  (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green")
   )
 
-(defun my/cursor-stuff-lightBg ()
+(defun my-cursor-stuff-lightBg ()
   (interactive)
-  (my/cursor-stuff :color-emacs "black" :color-evil "blue"))
+  (my-cursor-stuff :color-emacs "black" :color-evil "blue"))
 
-(defun my/rainbow-parens-dark-bg ()
+(defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)
   (custom-set-faces
@@ -1023,7 +1023,7 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
-(defun my/rainbow-parens-light-bg ()
+(defun my-rainbow-parens-light-bg ()
   (interactive)
   (custom-set-faces
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
@@ -1037,7 +1037,7 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "black" :background "red"))))))
 
-(defun my/rainbow-parens-light-bg2 ()
+(defun my-rainbow-parens-light-bg2 ()
   "Colored parens with highlighting."
   (interactive)
   (custom-set-faces
@@ -1084,7 +1084,7 @@ This prevents overlapping themes; something I would rarely want."
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
   (load-theme 'zenburn t)
-  (my/cursor-stuff-darkBg) ;;TODO: move into `custom-set-faces'
+  (my-cursor-stuff-darkBg) ;;TODO: move into `custom-set-faces'
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
    'zenburn
@@ -1252,9 +1252,9 @@ This prevents overlapping themes; something I would rarely want."
 (defun color-gruvbox ()
   (interactive)
   (load-theme 'gruvbox t)
-  ;;(my/set-font :weight 'normal)
-  (my/cursor-stuff-darkBg)
-  (my/rainbow-parens-dark-bg)
+  ;;(my-set-font :weight 'normal)
+  (my-cursor-stuff-darkBg)
+  (my-rainbow-parens-dark-bg)
   ;; (set-face-foreground 'font-lock-string-face "salmon")
   ;;(set-face-foreground 'font-lock-comment-face "#66A555")
   (custom-theme-set-faces
@@ -1285,7 +1285,7 @@ This prevents overlapping themes; something I would rarely want."
   (custom-theme-set-faces
    'monokai
    ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
-   `(default ((t (:background ,my/charcoal))))
+   `(default ((t (:background ,my-charcoal))))
 
    `(compilation-info
      ((t (:foreground "DarkOrange2"))))
@@ -1338,7 +1338,7 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
 (defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
-(defvar my/charcoal "#35352B" "Expirimental dark background color.")
+(defvar my-charcoal "#35352B" "Expirimental dark background color.")
 
 ;;; loads the default emacs theme. Makes a few mods too.
 (defun color-default ()
@@ -1348,20 +1348,20 @@ This prevents overlapping themes; something I would rarely want."
     (disable-theme thm))
   ;;(set-background-color "ivory2")
 
-  (my/cursor-stuff-lightBg)
+  (my-cursor-stuff-lightBg)
   (let ((cur '(box "blue")))
     (setq evil-normal-state-cursor cur)
     (setq evil-visual-state-cursor '(hollow "blue"))
     (setq evil-operator-state-cursor cur))
 
-  (my/set-font :sym 'consolas
+  (my-set-font :sym 'consolas
                :weight 'bold
                :height 125
                :resize-window t)
 
   ;;(set-face-background hl-line-face "#EEFFEE")
-  (my/rainbow-parens-light-bg2)
-  ;;(my/set-font :weight 'bold)
+  (my-rainbow-parens-light-bg2)
+  ;;(my-set-font :weight 'bold)
 
   (custom-set-faces
    `(show-paren-match ((t (:slant italic
@@ -1481,7 +1481,7 @@ This prevents overlapping themes; something I would rarely want."
 (defun color-dichromacy ()
   (interactive)
   (load-theme 'dichromacy t)
-  (my/cursor-stuff :color-emacs "red" :color-evil "blue")
+  (my-cursor-stuff :color-emacs "red" :color-evil "blue")
   (custom-theme-set-faces
    'dichromacy
    ;;`(default ((t (:foreground "black" :background ,mayan-smoke))))
@@ -1510,7 +1510,7 @@ This prevents overlapping themes; something I would rarely want."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black")))))
 
-  ;; (my/set-font :weight 'bold
+  ;; (my-set-font :weight 'bold
   ;;              :height 140)
   ;;(set-background-color "floral white")
   )
@@ -1522,61 +1522,61 @@ This prevents overlapping themes; something I would rarely want."
 (defvar cycle-colors `("old lace" "floral white" "snow" "ghost white" "white"
                        "#F3F1DE" "#F3F2EA" ,mayan-smoke))
 (defvar cycle-index 0)
-(defun my/cycle-light-bg ()
+(defun my-cycle-light-bg ()
   (interactive)
   (if (= cycle-index (1- (length cycle-colors)))
       (setq cycle-index 0)
     (setq cycle-index (1+ cycle-index)))
-  (let ((bg (my/getAtIndex cycle-index cycle-colors)))
-    (set-background-color (my/getAtIndex cycle-index cycle-colors))
+  (let ((bg (my-getAtIndex cycle-index cycle-colors)))
+    (set-background-color (my-getAtIndex cycle-index cycle-colors))
     (message bg)))
 
-(global-set-key (kbd "<f12>") 'my/cycle-light-bg)
+(global-set-key (kbd "<f12>") 'my-cycle-light-bg)
 
 ;;theme of the week and corresponding settings. This may change often.
 (progn
   (cond
-   ((or (eq my/curr-computer 'work-laptop)
-        (eq my/curr-computer 'leyna-laptop))
-    (my/set-font :sym 'consolas
+   ((or (eq my-curr-computer 'work-laptop)
+        (eq my-curr-computer 'leyna-laptop))
+    (my-set-font :sym 'consolas
                  :height 115            ;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
       (color-zenburn))
 
     (progn ;; keybinds for fontsize. TODO: make it general for all computers.
-      (defvar my/font-size 125)
-      (defun my/inc-font-size (bigger-p)
+      (defvar my-font-size 125)
+      (defun my-inc-font-size (bigger-p)
         (interactive)
         (custom-set-faces
          `(default ((t (:family "Consolas"
                                 :foundry "outline"
                                 :slant normal
                                 :weight normal
-                                :height ,(incf my/font-size (if bigger-p 5 -5))
+                                :height ,(incf my-font-size (if bigger-p 5 -5))
                                 :width normal)))))
-        (my/w32-run 'restore-curr-frame)
-        (my/w32-run 'max)
-        (message (int-to-string my/font-size)))
+        (my-w32-run 'restore-curr-frame)
+        (my-w32-run 'max)
+        (message (int-to-string my-font-size)))
 
       (global-set-key (kbd "M-=") (lambda ()
                                     (interactive)
-                                    (my/inc-font-size t)))
+                                    (my-inc-font-size t)))
       (global-set-key (kbd "M--") (lambda ()
                                     (interactive)
-                                    (my/inc-font-size nil)))))
+                                    (my-inc-font-size nil)))))
 
-   ((eq my/curr-computer 'raspberry-pi)
+   ((eq my-curr-computer 'raspberry-pi)
     (when (display-graphic-p)
       (color-zenburn)))
 
-   ((eq my/curr-computer 'hp-tower-2009)
+   ((eq my-curr-computer 'hp-tower-2009)
     (when (display-graphic-p)
       (custom-set-faces
        '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal)))))
       (color-zenburn)))
 
-   ((eq my/curr-computer 'a-laptop-faster)
+   ((eq my-curr-computer 'a-laptop-faster)
     (custom-set-faces
      '(default ((t (:family "Source Code Pro"
                             :foundry "adobe"
@@ -1620,10 +1620,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;---------------------------------------------
 ;; sly
 ;;---------------------------------------------
-;; (setq my/use-sly nil)
+;; (setq my-use-sly nil)
 
-;; (when my/use-sly
-;;   (when (eq my/curr-computer 'work-laptop)
+;; (when my-use-sly
+;;   (when (eq my-curr-computer 'work-laptop)
 ;;     (setq inferior-lisp-program "C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64")))
 
 ;;---------------------------------------------
@@ -1651,28 +1651,28 @@ This prevents overlapping themes; something I would rarely want."
   ;;                                      words))
 
   (progn
-    (when (eq my/curr-computer 'work-laptop)
+    (when (eq my-curr-computer 'work-laptop)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64"))
                                          (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
-    (when (eq my/curr-computer 'utilite)
+    (when (eq my-curr-computer 'utilite)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("armcl")))))
 
-    (when (eq my/curr-computer 'hp-tower-2009)
+    (when (eq my-curr-computer 'hp-tower-2009)
       (setq slime-default-lisp 'sbcl
             slime-lisp-implementations '((ccl ("~/software/ccl/lx86cl64"))
                                          (sbcl ("/usr/bin/sbcl")))))
 
-    (when (eq my/curr-computer 'a-laptop-faster)
+    (when (eq my-curr-computer 'a-laptop-faster)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))
                                          (sbcl ("/usr/bin/sbcl")))))
 
     ;; when on a computer with SLIME set up
-    (when (or (eq my/curr-computer 'work-laptop)
-              (eq my/curr-computer 'utilite)
-              (eq my/curr-computer 'a-laptop-faster))
+    (when (or (eq my-curr-computer 'work-laptop)
+              (eq my-curr-computer 'utilite)
+              (eq my-curr-computer 'a-laptop-faster))
       ;; connect lisp buffers to SLIME automatically.
       (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
                 (lambda ()
@@ -1693,7 +1693,7 @@ This prevents overlapping themes; something I would rarely want."
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
   (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
 
-  (when (eq my/curr-computer 'work-laptop)
+  (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec
     (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
   )
@@ -1856,7 +1856,7 @@ This prevents overlapping themes; something I would rarely want."
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-  (when (eq my/curr-computer 'work-laptop)
+  (when (eq my-curr-computer 'work-laptop)
     (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
@@ -1990,8 +1990,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(unless (or (eq my/curr-computer 'leyna-laptop)
-            (eq my/curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
+(unless (or (eq my-curr-computer 'leyna-laptop)
+            (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
 
   (autoload 'helm "helm" nil t)
   (autoload 'helm-config "helm-config" nil t)
@@ -2088,10 +2088,10 @@ This prevents overlapping themes; something I would rarely want."
   ;; list of functions helm should ignore and allow default completion.
   ;; NOTE: this breaks if put in eval-after-load. Strange, but ti works if
   ;; i just bput it after the call to (helm-mode 1)
-  ;;(add-to-list 'helm-completing-read-handlers-alist '(my/load-theme . nil))
+  ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
   )
-(when (or (eq my/curr-computer 'leyna-laptop)
-          (eq my/curr-computer 'raspberry-pi))
+(when (or (eq my-curr-computer 'leyna-laptop)
+          (eq my-curr-computer 'raspberry-pi))
   (evil-leader/set-key "b" #'ibuffer))
 
 ;;----------------------------------
@@ -2112,7 +2112,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;; helm-git-grep (makes emacs crash on windows)
 ;;--------------------
-;; (when my/run-sys-specific
+;; (when my-run-sys-specific
 ;;   (defadvice helm-git-grep (after turn-off-activeupdate)
 ;;     "Turn off active update in MS-windows. It can't handle grep processes spawning on each keystroke."
 ;;     (helm-toggle-suspend-update))
@@ -2129,8 +2129,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; select the top folder, etc instead of searching in real-time for each key press.
 ;;--------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
-(autoload 'my/vc-git-grep "my-vc-git-grep" nil t)
-(evil-leader/set-key "g" #'my/vc-git-grep)
+(autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
+(evil-leader/set-key "g" #'my-vc-git-grep)
 
 ;;--------------------
 ;; helm-swoop
@@ -2229,7 +2229,7 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "yasnippet"
   (yas-load-directory "~/.emacs.d/snippets") ;so custom snippets are not overwritten when updating from melpa.
   (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
-  (defun my/yas-handle-param (param-str
+  (defun my-yas-handle-param (param-str
                               sep-char
                               fn-deco
                               fn-fix-first
@@ -2242,7 +2242,7 @@ This prevents overlapping themes; something I would rarely want."
             (cons (funcall fn-fix-last (car (last decorated)) ) nil))
       (apply #'concat decorated))))
 
-;; (my/yas-handle-param "first, middle1, middle2, last"
+;; (my-yas-handle-param "first, middle1, middle2, last"
 ;;                      ","
 ;;                      #'(lambda (x)
 ;;                          (upcase (concat "'" x "' - ")))
@@ -2274,7 +2274,7 @@ This prevents overlapping themes; something I would rarely want."
                         (awk-mode . "awk")
                         (other . "linux")))
 ;;(setq-default c-default-style "java")
-(setq-default c-basic-offset my/tab-width) ;tab width
+(setq-default c-basic-offset my-tab-width) ;tab width
 (setq-default c-electric-flag t)
 
 ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
@@ -2295,9 +2295,9 @@ This prevents overlapping themes; something I would rarely want."
             ;;TODO: fill this up
             ))
 
-;; (defun my/make-CR-do-indent ()
+;; (defun my-make-CR-do-indent ()
 ;;   (define-key c-mode-base-map "\C-m" 'c-context-line-break))
-;; (add-hook 'c-initialization-hook 'my/make-CR-do-indent)
+;; (add-hook 'c-initialization-hook 'my-make-CR-do-indent)
 
 
 ;;------------------
@@ -2345,7 +2345,7 @@ This prevents overlapping themes; something I would rarely want."
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil
-  ;;   (defun my/delete-region (start end)
+  ;;   (defun my-delete-region (start end)
   ;;     (interactive "r")
   ;;     (delete-region)
   ;;     (deactivate-mark))
@@ -2357,7 +2357,7 @@ This prevents overlapping themes; something I would rarely want."
   ;;       (evil-backward-word-begin)
   ;;       (evil-forward-word-end)
   ;;       (evil-forward-char)
-  ;;       (call-interactively #'my/delete-region))))
+  ;;       (call-interactively #'my-delete-region))))
   )
 
 
@@ -2437,7 +2437,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------------
 ;; Omnisharp
 ;;--------------------------
-(when (eq my/curr-computer 'work-laptop)
+(when (eq my-curr-computer 'work-laptop)
 
   (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
 
@@ -2501,7 +2501,7 @@ This prevents overlapping themes; something I would rarely want."
     (setq omnisharp-company-do-template-completion nil) ;tab completion of paramters. acts weird
     (setq omnisharp-company-ignore-case t)
 
-    (defun my/start-omnisharp-server (sln)
+    (defun my-start-omnisharp-server (sln)
       "Starts omnisharp server with the correct cmd line string."
       (interactive)
       (start-process-shell-command
@@ -2546,13 +2546,13 @@ This prevents overlapping themes; something I would rarely want."
   (setq avy-all-windows t) ;allow jumps between windows.
   (setq avy-case-fold-search t) ;case insenstive
 
-  (defun my/avy-goto-line ()
+  (defun my-avy-goto-line ()
     (interactive)
     ;; use the default keys for line jumps
     (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
       (avy-goto-line)))
-  (global-set-key (kbd "M-g g") #'my/avy-goto-line)
-  (global-set-key (kbd "M-g M-g") #'my/avy-goto-line))
+  (global-set-key (kbd "M-g g") #'my-avy-goto-line)
+  (global-set-key (kbd "M-g M-g") #'my-avy-goto-line))
 
 ;;--------------------
 ;; Ace jump mode
@@ -2579,7 +2579,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; clang-format
 ;;--------------------
 ;; rarely use `clang-format', so commenting it out for now.
-;; (when (eq my/curr-computer 'work-laptop)
+;; (when (eq my-curr-computer 'work-laptop)
 ;;   (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el")
 ;;   ;;(global-set-key [C-M-tab] 'clang-format-region)
 ;;   (global-set-key (kbd "C-c f") 'clang-format-region)
@@ -2588,23 +2588,23 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;; irony
 ;;--------------------
-(when (or (eq my/curr-computer 'work-laptop)
-          (eq my/curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
+(when (or (eq my-curr-computer 'work-laptop)
+          (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'objc-mode-hook 'irony-mode)
 
   ;; replace the `completion-at-point' and `complete-symbol' bindings in
   ;; irony-mode's buffers by irony-mode's asynchronous function
-  (defun my/irony-mode-hook ()
+  (defun my-irony-mode-hook ()
     (define-key irony-mode-map [remap completion-at-point]
       'irony-completion-at-point-async)
     (define-key irony-mode-map [remap complete-symbol]
       'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my/irony-mode-hook)
+  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-  (when (eq my/curr-computer 'work-laptop)
+  (when (eq my-curr-computer 'work-laptop)
     ;;directory to libclang.dll
     (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin"))
 
@@ -2635,7 +2635,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;-------------------------------
 ;; Load projects
 ;;-------------------------------
-(when (eq my/curr-computer 'work-laptop)
+(when (eq my-curr-computer 'work-laptop)
   ;; (defun proj-ecp ()
   ;;   (interactive)
   ;;   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
@@ -2657,7 +2657,7 @@ This prevents overlapping themes; something I would rarely want."
   ;;     ;;(dired root)
   ;;     (find-file-existing defaultFile)
   ;;     ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-  ;;     (my/start-omnisharp-server sln)
+  ;;     (my-start-omnisharp-server sln)
 
   ;;     ;;TODO: build ctags or etags.
   ;;     ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cs")
@@ -2684,7 +2684,7 @@ This prevents overlapping themes; something I would rarely want."
                                        :buffer "*Saftey Web Project*")))
       (dired root)
       ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-      ;;(my/start-omnisharp-server sln)
+      ;;(my-start-omnisharp-server sln)
       ))
 
   (defun proj-db-safety ()
@@ -2717,7 +2717,7 @@ This prevents overlapping themes; something I would rarely want."
                                        :buffer "*ECP Project*")))
       (dired root)
       ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
-      ;;(my/start-omnisharp-server sln)
+      ;;(my-start-omnisharp-server sln)
       ))
 
   (defun proj-emacs ()
@@ -2775,15 +2775,15 @@ This prevents overlapping themes; something I would rarely want."
     ))
 
 ;;; quick load of the .emacs (or init.el) file.
-(defun my/load-init ()
+(defun my-load-init ()
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
-(evil-leader/set-key "`" #'my/load-init)
+(evil-leader/set-key "`" #'my-load-init)
 ;; the above key is hard to type on a 60% poker so making an alternative.
-(evil-leader/set-key "8" #'my/load-init)
+(evil-leader/set-key "8" #'my-load-init)
 
-(when (eq my/curr-computer 'work-laptop)
+(when (eq my-curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz
   (evil-leader/set-key "1" (lambda ()
                              (interactive)
@@ -2795,19 +2795,19 @@ This prevents overlapping themes; something I would rarely want."
                              (dired "~"))))
 
 
-(when (eq my/curr-computer 'work-laptop)
+(when (eq my-curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz\proj\ecp\dev\db
   (evil-leader/set-key "2" (lambda ()
                              (interactive)
                              (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db"))))
 
-(when (eq my/curr-computer 'work-laptop)
+(when (eq my-curr-computer 'work-laptop)
   ;;quick load of TFS \Main\SqlScripts
   (evil-leader/set-key "3" (lambda ()
                              (interactive)
                              (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\DbScripts"))))
 
-(when (eq my/curr-computer 'work-laptop)
+(when (eq my-curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz\TODO\TODO.org
   (evil-leader/set-key "t" (lambda ()
                              (interactive)
@@ -2869,21 +2869,21 @@ This prevents overlapping themes; something I would rarely want."
 ;;-----------------------------------------------------------------------------
 ;; Make dired appear in a side window
 ;;-----------------------------------------------------------------------------
-(defun my/current-file-path ()
+(defun my-current-file-path ()
   "Returns the full file path of the current buffer as a string"
   (interactive)
   (or load-file-name
       buffer-file-name))
 
-(defun my/current-folder-path ()
+(defun my-current-folder-path ()
   "Returns the folder path of the current buffer as a string"
   (interactive)
-  (file-name-directory (my/current-file-path)))
+  (file-name-directory (my-current-file-path)))
 
-(defun my/folder-nav ()
+(defun my-folder-nav ()
   "Opens a dired buffer. Dired does all the actual work. This just handles the visual aspects like window placement and size."
   (interactive)
-  (dired-other-window (my/current-folder-path))
+  (dired-other-window (my-current-folder-path))
   (evil-window-move-far-left)
   ;;I can't find a function to set the exact window size, so collapsing the buffer then enlarging to the size I want.
   (let ((bigNumToCollapse 500)
@@ -2892,7 +2892,7 @@ This prevents overlapping themes; something I would rarely want."
     (enlarge-window-horizontally (- width
                                     (window-total-width)))))
 ;;bind to key
-(global-set-key (kbd "<f8>") 'my/folder-nav)
+(global-set-key (kbd "<f8>") 'my-folder-nav)
 
 
 ;;-----------------------------------------------------------------------------
@@ -2905,7 +2905,7 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'web-mode-hook 'skewer-html-mode)
 
 (with-eval-after-load "skewer-mode"
-;;   (defun my/skewer-repl-clear-buffer ()
+;;   (defun my-skewer-repl-clear-buffer ()
 ;;     "Deletes the contents of the skewer-reple buffer.
 ;; Depends on evil mode."
 ;;     (interactive)
@@ -2914,7 +2914,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;     (evil-end-of-line)
 ;;     (delete-region 1 (+ (point) 2))
 ;;     (evil-end-of-line))
-;;   (define-key skewer-repl-mode-map (kbd "C-c M-o") #'my/skewer-repl-clear-buffer)
+;;   (define-key skewer-repl-mode-map (kbd "C-c M-o") #'my-skewer-repl-clear-buffer)
 
   (add-hook
    'skewer-repl-mode-hook
@@ -2925,12 +2925,12 @@ This prevents overlapping themes; something I would rarely want."
      (setq show-trailing-whitespace nil)))
 
   ;;(require 'simple-httpd)
-  ;; (defun my/skewer-html ()
+  ;; (defun my-skewer-html ()
   ;;   "Wire up the html file you're editing with skewer."
   ;;   (interactive)
   ;;   ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
   ;;   ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
-  ;;   (setq httpd-root (my/current-folder-path))
+  ;;   (setq httpd-root (my-current-folder-path))
   ;;   (httpd-start)
   ;;   (browse-url-of-file (concat "http://localhost:8080/"
   ;;                               (file-name-nondirectory buffer-file-name)))
@@ -2942,7 +2942,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; eshell
 ;;-----------------------------------------------------------------------------
 ;; (with-eval-after-load "eshell-mode"
-;;   (defun my/eshell-clear-buffer ()
+;;   (defun my-eshell-clear-buffer ()
 ;;     "Deletes the contents of eshell buffer, except the last prompt"
 ;;     (interactive)
 ;;     (save-excursion
@@ -2958,7 +2958,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;             (if (interactive-p)
 ;;                 (message "Buffer cleared")))))))
 
-;;   (defun my/eshell-clear-line ()
+;;   (defun my-eshell-clear-line ()
 ;;     (interactive)
 ;;     ;;(message "") ;delete multiple lines of junk in the mini buffer.
 ;;     (eshell-bol)
@@ -2970,10 +2970,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set in the hook. Eval-after-load doesn't work.
 ;;             (lambda ()
 ;;               ;;Use the same keybinding to clear eshell as the SLIME repl
-;;               (define-key eshell-mode-map (kbd "C-c M-o") 'my/eshell-clear-buffer)
+;;               (define-key eshell-mode-map (kbd "C-c M-o") 'my-eshell-clear-buffer)
 ;;               ;;make evil's dd compatible with the read-only prompt of hte current line.
-;;               ;;(define-key evil-normal-state-map (kbd "<remap> <evil-delete-whole-line>") 'my/eshell-clear-line)
-;;               ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my/eshell-clear-line)
+;;               ;;(define-key evil-normal-state-map (kbd "<remap> <evil-delete-whole-line>") 'my-eshell-clear-line)
+;;               ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my-eshell-clear-line)
 ;;               )))
 
 ;;-----------------------------------------------------------------------------
@@ -2997,7 +2997,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
 
 (with-eval-after-load "eww"
-  (when (eq my/curr-computer 'work-laptop)
+  (when (eq my-curr-computer 'work-laptop)
     (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
 
   (define-key eww-mode-map (kbd "C-c h") 'eww-back-url)
@@ -3131,7 +3131,7 @@ This prevents overlapping themes; something I would rarely want."
     (setq fci-rule-use-dashes t))
   (setq fci-rule-color "#555555") ;tailored for zenburn ATM.
 
-  (defun my/fci-refresh ()
+  (defun my-fci-refresh ()
     (interactive)
     (fci-mode 0)
     (fci-mode 1)))
@@ -3152,13 +3152,13 @@ This prevents overlapping themes; something I would rarely want."
   ;;----------------------------------
   ;; helm-flycheck
   ;;----------------------------------
-  (defun my/helm-flycheck ()
+  (defun my-helm-flycheck ()
     (interactive)
     ;;nil for no candidate limit. I want to scroll through all the warnings.
     (let ((helm-candidate-number-limit nil))
       (call-interactively #'helm-flycheck)))
-  ;;(evil-define-key 'normal flycheck-mode-map (kbd "C-c f") #'my/helm-flycheck)
-  (define-key flycheck-mode-map (kbd "C-c f") #'my/helm-flycheck)
+  ;;(evil-define-key 'normal flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
+  (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
   ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
   )
 
@@ -3277,10 +3277,10 @@ This prevents overlapping themes; something I would rarely want."
 (defhydra hydra-window ;;()
   (;; :pre ;;executes before each head.
    ;; (progn (message "executed pre")
-   ;;        (my/cycle-light-bg))
+   ;;        (my-cycle-light-bg))
    ;; :post ;;executes on exit from body, not exit from a head.
    ;; (progn (message "executed post")
-   ;;        (my/cycle-light-bg))
+   ;;        (my-cycle-light-bg))
    :color amaranth ;keep the hydra active when a unbound key is accidentally pressed.
           )
   "window"
@@ -3369,11 +3369,11 @@ This prevents overlapping themes; something I would rarely want."
                                     #'hydra-window/body
                                     ;;trying paredit #'hydra-paredit/body
                                     )))
-  (defun my/choose-hydra ()
+  (defun my-choose-hydra ()
     (interactive)
     (funcall (intern (completing-read "pick one: " *my-hydras*))))
-  (define-key evil-normal-state-map (kbd "\\") #'my/choose-hydra)
-  (define-key evil-motion-state-map (kbd "\\") #'my/choose-hydra))
+  (define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
+  (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra))
 
 ;;------------------------------------------------------------------------------
 ;; erc
@@ -3468,7 +3468,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; Integrate narrow-to-region with indirect buffers. To allow multiple
 ;; major modes operatiing on 1 file.
 ;;------------------------------------------------------------------------------
-(defun my/narrow-to-region-indirect (start end)
+(defun my-narrow-to-region-indirect (start end)
   "Restrict editing in this buffer to the current region, indirectly."
   (interactive "r")
   (deactivate-mark)
@@ -3536,14 +3536,14 @@ This prevents overlapping themes; something I would rarely want."
   ;;(require 'cl) is also needed but occurs higher up in this file.
   (require 'js2-mode)
 
-  (defun my/js2-mode-on-region (start end)
+  (defun my-js2-mode-on-region (start end)
     "Narrow on the active region, then turn on js2-mode."
     (interactive "r")
     (deactivate-mark)
     (narrow-to-region start end)
     (js2-mode))
 
-  (cl-defun my/focus-javascript () ;using `cl-defun' to allow `return-from'
+  (cl-defun my-focus-javascript () ;using `cl-defun' to allow `return-from'
     "Automatcially narrow between <script> tags, then turn on js2-mode."
     (interactive)
     (save-excursion ;; don't allow tag searches to mess with cursor position.
@@ -3559,12 +3559,12 @@ This prevents overlapping themes; something I would rarely want."
           (setq start (search-forward start-tag-name nil t)))
         (when (null start)
           (message "start tag not found")
-          (return-from my/focus-javascript nil))
+          (return-from my-focus-javascript nil))
         ;;start is found, move to the closing bracket >
         (let ((end-of-start (search-forward ">" nil t)))
           (when (null end-of-start)
             (message "start tag not found")
-            (return-from my/focus-javascript nil)))
+            (return-from my-focus-javascript nil)))
         ;; start highlighitng
         ;; (next-line)
         ;; (move-beginning-of-line nil)
@@ -3574,29 +3574,29 @@ This prevents overlapping themes; something I would rarely want."
         (when (null end)
           (deactivate-mark)
           (message "end tag not found")
-          (return-from my/focus-javascript nil))
+          (return-from my-focus-javascript nil))
         (let ((start-of-end (search-backward "<" nil t)))
           (when (null start-of-end)
             (message "end tag not found")
-            (return-from my/focus-javascript nil)))
+            (return-from my-focus-javascript nil)))
         ;;end tag is found.
         ;; (previous-line)
         ;; (move-end-of-line nil)
         ;; turn on js2-mode for this region. (and narrow)
-        (call-interactively #'my/js2-mode-on-region))))
+        (call-interactively #'my-js2-mode-on-region))))
 
-  (defun my/unfocus-javascript ()
-    "Undo the effects of `my/focus-javascript'."
+  (defun my-unfocus-javascript ()
+    "Undo the effects of `my-focus-javascript'."
     (interactive)
     (widen)
     (web-mode))
 
   ;; key bindings
-  (define-key web-mode-map (kbd "C-c j") #'my/focus-javascript)
+  (define-key web-mode-map (kbd "C-c j") #'my-focus-javascript)
   ;; TODO: Use a different technique for this keybind. If we didn't enter
-  ;; `js2-mode' from `web-mode' then we don't want `my/unfocus-javascript' to
+  ;; `js2-mode' from `web-mode' then we don't want `my-unfocus-javascript' to
   ;; turn on web-mode.
-  (define-key js2-mode-map (kbd "C-c u") #'my/unfocus-javascript))
+  (define-key js2-mode-map (kbd "C-c u") #'my-unfocus-javascript))
 
 
 
@@ -3657,20 +3657,20 @@ This prevents overlapping themes; something I would rarely want."
   ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
   ;; whether that's acheieved via a barf or slurp.
   ;; TODO: make it handle number inputs (instead of defaulting to 1).
-  (defun my/lispy-go-left-barf-or-slurp ()
+  (defun my-lispy-go-left-barf-or-slurp ()
     (interactive)
     (if (lispy-left-p)
         (lispy-slurp 1)
       (lispy-barf 1)))
-  (defun my/lispy-go-right-barf-or-slurp ()
+  (defun my-lispy-go-right-barf-or-slurp ()
     (interactive)
     (if (lispy-left-p)
         (lispy-barf 1)
       (lispy-slurp 1)))
 
   ;; special means the cursor is at a paren (and in evil-insert).
-  (lispy-define-key lispy-mode-map-special (kbd "<") #'my/lispy-go-left-barf-or-slurp)
-  (lispy-define-key lispy-mode-map-special (kbd ">") #'my/lispy-go-right-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special (kbd "<") #'my-lispy-go-left-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special (kbd ">") #'my-lispy-go-right-barf-or-slurp)
 
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
@@ -3727,26 +3727,26 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 ;; maximumize screen real-estate
 ;;------------------------------------------------------------------------------
-(defvar my/backup-mode-line-format nil
+(defvar my-backup-mode-line-format nil
   "Backs up the modeline state so it can later be restored after nilling it out.")
-(defvar my/backup-fringe-mode 0
+(defvar my-backup-fringe-mode 0
   "Backs up the modeline state so it can later be restored after nilling it out.")
 
-(defun my/real-estate-max ()
+(defun my-real-estate-max ()
   (interactive)
   ;; backup modeline, but only if needed so we don't mess up a good backup.
-  (when (null my/backup-mode-line-format)
-    (setq my/backup-mode-line-format mode-line-format))
+  (when (null my-backup-mode-line-format)
+    (setq my-backup-mode-line-format mode-line-format))
   ;; disable mode-line for vertical real-estate
   (setq mode-line-format nil)
   ;; disabel fringe for horizontal real-estate.
   (set-fringe-mode 0))
 
-(defun my/real-estate-restore ()
+(defun my-real-estate-restore ()
   (interactive)
   ;; restore mode line from backup, but only if there is a good backup.
-  (when (not (null my/backup-mode-line-format))
-    (setq mode-line-format my/backup-mode-line-format))
+  (when (not (null my-backup-mode-line-format))
+    (setq mode-line-format my-backup-mode-line-format))
   (set-fringe-mode nil)  ;; nil means the default fringe width. TODO: use a backup value.
   )
 
@@ -3836,26 +3836,26 @@ Gotten from #emacs on freenode."
 
 
 (cond
- ((eq my/curr-computer 'work-laptop)
+ ((eq my-curr-computer 'work-laptop)
   (setq ;;browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
    browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
    browse-url-browser-function 'browse-url-generic))
 
- ((eq my/curr-computer 'hp-tower-2009)
+ ((eq my-curr-computer 'hp-tower-2009)
   (setq browse-url-generic-program "conkeror"
         browse-url-browser-function 'browse-url-generic))
 
- ((eq my/curr-computer 'a-laptop-faster)
+ ((eq my-curr-computer 'a-laptop-faster)
   (setq browse-url-generic-program "conkeror"
         browse-url-browser-function 'browse-url-generic))
 
- ((or (eq my/curr-computer 'raspberry-pi)
-      (eq my/curr-computer 'utilite))
+ ((or (eq my-curr-computer 'raspberry-pi)
+      (eq my-curr-computer 'utilite))
   (setq browse-url-generic-program "surf"
         browse-url-browser-function 'browse-url-generic)))
 
 
-;; (defun my/insert-img ()
+;; (defun my-insert-img ()
 ;;   (interactive)
 ;;   (let ((i 0))
 ;;     (while (< i 10)
@@ -3878,13 +3878,13 @@ Gotten from #emacs on freenode."
 ;;   (add-to-list 'default-frame-alist alpha-lst))
 
 
-(defun my/insert-date-string ()
+(defun my-insert-date-string ()
   "Insert a date string.  Everything you need to know about the date and time."
   (interactive)
   (insert
    (format-time-string
     "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N")))
-(global-set-key (kbd "C-c i") #'my/insert-date-string)
+(global-set-key (kbd "C-c i") #'my-insert-date-string)
 
 ;; Only browse interesting buffers. Not *scratch*, *messages*, etc.
 ;;(global-set-key "\C-x\C-b" 'bs-show)
@@ -3934,7 +3934,7 @@ Gotten from #emacs on freenode."
 ;;show lambdas with the greek symbol
 (when (and (>= emacs-major-version 24)
            (>= emacs-minor-version 4))
-  (unless (eq my/curr-computer 'raspberry-pi)
+  (unless (eq my-curr-computer 'raspberry-pi)
     (global-prettify-symbols-mode 1)))
 
 ;;indent keyword args properly. Use common lisp-style for (if) indendation too?
@@ -3973,7 +3973,7 @@ Gotten from #emacs on freenode."
 
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
-  (setq-default tab-width my/tab-width)
+  (setq-default tab-width my-tab-width)
   (setq-default indent-line-function 'insert-tab))
 
 (setq make-backup-files nil) ;No annoying backup files
@@ -3987,14 +3987,14 @@ Gotten from #emacs on freenode."
 ;; (add-hook 'prog-mode-hook #'(lambda ()
 ;;                               (setq show-trailing-whitespace t)))
 
-;; (defun my/toggle-show-trailing-whitespace ()
+;; (defun my-toggle-show-trailing-whitespace ()
 ;;   (interactive)
 ;;   (not-m show-trailing-whitespace)
 ;;   ;;visual state makes the dipslay refresh.
 ;;   (evil-visual-char)
 ;;   (evil-exit-visual-state))
-;; (global-set-key (kbd "C-c t") #'my/toggle-show-trailing-whitespace)
-;; (global-set-key (kbd "C-c C-t") #'my/toggle-show-trailing-whitespace)
+;; (global-set-key (kbd "C-c t") #'my-toggle-show-trailing-whitespace)
+;; (global-set-key (kbd "C-c C-t") #'my-toggle-show-trailing-whitespace)
 
 
 ;;******** whitespace-mode *******
@@ -4027,7 +4027,7 @@ Gotten from #emacs on freenode."
 ;;                 '(lambda () (interactive) (text-scale-decrease 1)))
 
 
-(defvar my/keep-buffers
+(defvar my-keep-buffers
   '("*scratch*" "*Messages*" "*Compile-Log*" "*Minibuf-1*"
     "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
     "*Echo Area 1*" "*helm mini*")
@@ -4036,7 +4036,7 @@ Gotten from #emacs on freenode."
 (defun square-one ()
   "Switch to the scratch buffer, then delete all other buffers.
 
-NOTE: `my/keep-buffers' contains buffers to keep alive.
+NOTE: `my-keep-buffers' contains buffers to keep alive.
 Emacs tends to crash when some of the basic buffers are absent.
 I'm not certain which absences cause the crash.
 
@@ -4051,7 +4051,7 @@ edge cases not covered by buffer killing."
   ;;cl-set-difference does not work on strings.
   ;;so use a set of buffer pointers, not buffer names
   (let ((to-kill (cl-set-difference (buffer-list)
-                                    (mapcar 'get-buffer my/keep-buffers))))
+                                    (mapcar 'get-buffer my-keep-buffers))))
     (mapc 'kill-buffer to-kill)))
 
 (evil-leader/set-key "0" 'square-one)
@@ -4091,7 +4091,7 @@ edge cases not covered by buffer killing."
 ;;   (interactive)
 ;;   (let ((txt (read-string "type something: "
 ;;                           nil
-;;                           'my/history)))
+;;                           'my-history)))
 ;;     (message "you said: %s" txt)))
 
 ;; ;---------------------------------------------------
@@ -4107,7 +4107,7 @@ edge cases not covered by buffer killing."
 ;;   "Display a message."
 ;;   (interactive)
 ;;   (let* ((max (- (length msgDb) 1))
-;;          (msg (my/getAtIndex msgIndex msgDb)))
+;;          (msg (my-getAtIndex msgIndex msgDb)))
 ;;     (setq msgIndex (+ 1 msgIndex))
 ;;     (when (> msgIndex max)
 ;;       (setq msgIndex 0))
@@ -4118,7 +4118,7 @@ edge cases not covered by buffer killing."
 ;; ;;   (interactive)
 ;; ;;   (let* ((max (- (length msgDb) 1))
 ;; ;;          (i (rand 0 max))
-;; ;;          (msg (my/getAtIndex i msgDb)))
+;; ;;          (msg (my-getAtIndex i msgDb)))
 ;; ;;     ;(message msg)
 ;; ;;     (clippy-say msg)
 ;; ;;     ;(clippy-say (yow))
@@ -4130,7 +4130,7 @@ edge cases not covered by buffer killing."
 ;; ;; touch typing
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
-(autoload 'my/type-tutor "my-type-tutor" nil t)
+(autoload 'my-type-tutor "my-type-tutor" nil t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hour format conversion. 12 -> 24

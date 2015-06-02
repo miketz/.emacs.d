@@ -116,7 +116,7 @@ KEY-BIND-UNFOCUS => to leave the realm and set appropriate modes."
              (setq start (search-forward start-tag-name nil t)))
            (when (null start)
              (message "start tag not found")
-             (return-from my/focus-javascript nil))
+             (return-from my-focus-javascript nil))
            ;;start is found, move cursor down a line, start highlighitng
            (next-line)
            (move-beginning-of-line nil)
@@ -126,7 +126,7 @@ KEY-BIND-UNFOCUS => to leave the realm and set appropriate modes."
            (when (null end)
              (deactivate-mark)
              (message "end tag not found")
-             (return-from my/focus-javascript nil))
+             (return-from my-focus-javascript nil))
            ;;end tag is found. now move cursor up one line
            (previous-line)
            (move-end-of-line nil)
@@ -143,7 +143,7 @@ KEY-BIND-UNFOCUS => to leave the realm and set appropriate modes."
        ;; key bindings
        (define-key ,base-mode-map ,key-bind-focus #',fn-focus-name)
        ;; TODO: Use a different technique for this keybind. If we didn't enter
-       ;; `js2-mode' from `web-mode' then we don't want `my/unfocus-javascript'
+       ;; `js2-mode' from `web-mode' then we don't want `my-unfocus-javascript'
        ;; to turn on web-mode.
        (define-key ,focus-mode-map ,key-bind-unfocus #',fn-unfocus-name)
 

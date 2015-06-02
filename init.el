@@ -1739,7 +1739,7 @@ This prevents overlapping themes; something I would rarely want."
 (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 (setq company-tooltip-limit 20) ;popup more suggestions.
 
-(when nil ;;not using fill-column-indicator anymore.
+(when t
   (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
     ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
     (defvar-local company-fci-mode-on-p nil)
@@ -2557,7 +2557,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 ;; irony
 ;;--------------------
-(when (eq my/curr-computer 'work-laptop) ;TODO: set up on more machines.
+(when (or (eq my/curr-computer 'work-laptop)
+          (eq my/curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'objc-mode-hook 'irony-mode)
@@ -2570,13 +2571,13 @@ This prevents overlapping themes; something I would rarely want."
     (define-key irony-mode-map [remap complete-symbol]
       'irony-completion-at-point-async))
   (add-hook 'irony-mode-hook 'my/irony-mode-hook)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
   (when (eq my/curr-computer 'work-laptop)
     ;;directory to libclang.dll
     (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin"))
 
-
-  (irony-cdb-autosetup-compile-options)
+  ;; (irony-cdb-autosetup-compile-options) ;should be in the hook
   )
 
 

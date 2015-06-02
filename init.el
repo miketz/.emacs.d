@@ -1556,7 +1556,7 @@ This prevents overlapping themes; something I would rarely want."
          `(default ((t (:family "Consolas"
                                 :foundry "outline"
                                 :slant normal
-                                :weight normal
+                                ;; :weight normal
                                 :height ,(incf my-font-size (if bigger-p 5 -5))
                                 :width normal)))))
         (my-w32-run 'restore-curr-frame)

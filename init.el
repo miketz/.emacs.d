@@ -1539,7 +1539,7 @@ This prevents overlapping themes; something I would rarely want."
    ((or (eq my-curr-computer 'work-laptop)
         (eq my-curr-computer 'leyna-laptop))
     (my-set-font :sym 'consolas
-                 :height 115            ;'90 105 115 120 125
+                 :height 125            ;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
       (color-zenburn))

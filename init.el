@@ -3924,9 +3924,9 @@ Gotten from #emacs on freenode."
 
 ;;(global-linum-mode 0) ;show/hide line numbers in margin
 
-(setq-default column-number-mode nil) ;show/hide column # in mode line.
+(setq-default column-number-mode 1) ;show/hide column # in mode line.
 ;;show/hide line # in mode line. Use fn what-line
-(setq-default line-number-mode t)
+(setq-default line-number-mode 1)
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)

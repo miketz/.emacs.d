@@ -1749,7 +1749,7 @@ This prevents overlapping themes; something I would rarely want."
 (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
 (setq company-tooltip-limit 20) ;popup more suggestions.
 
-(when t
+(when nil
   (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
     ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
     (defvar-local company-fci-mode-on-p nil)
@@ -3120,8 +3120,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; fill-column-indicator
 ;;------------------------------------------------------------------------------
 ;; (require 'fill-column-indicator)
-(add-hook 'prog-mode-hook #'(lambda ()
-                              (fci-mode 1))) ; fci-mode is autloaded.
+;; (add-hook 'prog-mode-hook #'(lambda ()
+;;                               (fci-mode 1))) ; fci-mode is autloaded.
 
 (with-eval-after-load "fill-column-indicator"
   (setq fci-rule-column 80)

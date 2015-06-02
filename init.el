@@ -2350,8 +2350,8 @@ This prevents overlapping themes; something I would rarely want."
               (yas-minor-mode 1)
               ;;electric-indent doesn't work very well with T-sql.
               ;;use C-j for newline and indent.
-              (when (fboundp 'electric-indent-mode)
-                (electric-indent-mode -1))))
+              (when (fboundp 'electric-indent-local-mode)
+                (electric-indent-local-mode -1))))
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil

@@ -99,7 +99,8 @@ Useful to check a boolean state and toggle the state in 1 go."
   ;;   (print red)
   ;;   (print green)
   ;;   (print blue))
-  "Convert the keys of ALIST to variables."
+  "Convert the keys of ALIST to variables.
+BODY is the core code that will use the variables."
   (declare (indent defun))
   `(let (,@(mapcar (lambda (cell)
                      (list (car cell) (cdr cell)))

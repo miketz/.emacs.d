@@ -2232,11 +2232,8 @@ This prevents overlapping themes; something I would rarely want."
 
 (with-eval-after-load "yasnippet"
   ;; so custom snippets are not overwritten when updating from melpa.
-  ;; (yas-load-directory "~/.emacs.d/snippets")
+  (yas-load-directory "~/.emacs.d/snippets")
 
-  ;; yas-installed-snippets-dir
-  ;; so custom snippets are not overwritten when updating from melpa.
-  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   ;; (setq yas-snippet-dirs
   ;;     `("~/.emacs.d/snippets"                 ;; personal snippets
   ;;       ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection

@@ -415,7 +415,8 @@ Also how many columns to render for a 'real' tab.")
     helm-descbinds
     worf
     elisp-slime-nav
-    electric-spacing)
+    electric-spacing
+    w3)
   "Packages I use from elpa/melpa.")
 
 (when (eq my-curr-computer 'work-laptop)

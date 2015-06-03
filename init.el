@@ -3688,6 +3688,10 @@ This prevents overlapping themes; something I would rarely want."
   ;;(lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
   (lispy-set-key-theme '(special paredit c-digits))
 
+  (setq lispy-avy-style-char 'pre)
+  (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char
+  (setq lispy-avy-style-symbol 'at-full)
+
   ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
   ;; whether that's acheieved via a barf or slurp.
   ;; TODO: make it handle number inputs (instead of defaulting to 1).

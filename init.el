@@ -3425,12 +3425,15 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 ;; linum-relative
 ;;------------------------------------------------------------------------------
-;; (when nil ;disable for now. Makes the screen blink when line # changes.
-;;   (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
-;;   (setq linum-relative-current-symbol "0")
-;;   (require 'linum-relative);linum-mode's behavior is changed by the linum-relative package.
-;;   ;;(linum-relative-toggle) ;;toggle between realtive and straight.
-;;   )
+;; (require 'linum-relative) ;linum-mode's behavior is changed by the linum-relative package.
+(autoload 'linum-relative-toggle "linum-relative" "linum-relative" t)
+
+;; don't turn on by default. Makes the screen blink when line # changes.
+;;(linum-relative-toggle) ;;toggle between realtive and straight.
+(with-eval-after-load "linum-relative"
+  (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
+  (setq linum-relative-current-symbol "0"))
+
 
 ;;------------------------------------------------------------------------------
 ;; guide-key

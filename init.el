@@ -2372,7 +2372,10 @@ This prevents overlapping themes; something I would rarely want."
               ;;electric-indent doesn't work very well with T-sql.
               ;;use C-j for newline and indent.
               (when (fboundp 'electric-indent-local-mode)
-                (electric-indent-local-mode -1))))
+                (electric-indent-local-mode -1))
+
+              ;; turn off indent when you press "o" in evil. Buffer local
+              (setq evil-auto-indent nil)))
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil

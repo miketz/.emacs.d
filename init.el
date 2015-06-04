@@ -3445,12 +3445,15 @@ This prevents overlapping themes; something I would rarely want."
 ;; guide-key
 ;;------------------------------------------------------------------------------
 ;; (require 'guide-key)
-;; (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
-(setq guide-key/idle-delay 1.0);default
-(setq guide-key/guide-key-sequence '("C-x" "C-c"))
-(setq guide-key/recursive-key-sequence-flag t)
-;;(setq guide-key/popup-window-position 'bottom)
-(guide-key-mode 1)
+
+(with-eval-after-load "guide-key"
+  ;; (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
+  (setq guide-key/idle-delay 1.0)       ;default
+  (setq guide-key/guide-key-sequence '("C-x" "C-c"))
+  (setq guide-key/recursive-key-sequence-flag t)
+  ;;(setq guide-key/popup-window-position 'bottom)
+  )
+;; (guide-key-mode 1)
 
 
 

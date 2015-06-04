@@ -3534,6 +3534,18 @@ This prevents overlapping themes; something I would rarely want."
     (dotimes (i 2)
       (font-lock-mode))))
 
+(defun my-narrow-to-region (start end)
+  (interactive "r")
+  (deactivate-mark)
+  (let ((mode (intern (completing-read
+                       "Mode: "
+                       (mapcar (lambda (e)
+                                 (list (symbol-name e)))
+                               (apropos-internal "-mode$" 'commandp))
+                       nil t))))
+    (narrow-to-region start end)
+    (funcall mode)))
+
 ;; (defvar indirect-mode-name nil
 ;;   "Mode to set for indirect buffers.")
 ;; (make-variable-buffer-local 'indirect-mode-name)

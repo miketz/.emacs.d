@@ -114,9 +114,9 @@ BODY is the core code that will use the variables."
   (mapcar 'cdr lst))
 
 (defun my-alst-print-keys (lst)
-  (mapc #'(lambda (key)
-            (insert (symbol-name key)) ;key must be a symbol
-            (insert "\n"))
+  (mapc (lambda (key)
+          (insert (symbol-name key))    ;key must be a symbol
+          (insert "\n"))
         (my-alst-get-keys lst)))
 
 (defun my-getAtIndex (i lst)
@@ -230,8 +230,8 @@ Assums a vertically stacked display of the list.
   (defun my-get-longest-forEachCol (lst num-cols) ;;PASS
     "Gets the longest length for each column in LST, assuming NUM-COLS.
 '(lenCol1 lenCol2... lenColN)."
-    (mapcar #'(lambda (column)
-                (my-get-longest-str column))
+    (mapcar (lambda (column)
+              (my-get-longest-str column))
             (my-get-columns lst num-cols)))
 
   (defun my-render-list (lst num-cols min-col-spaces)
@@ -987,11 +987,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;(global-set-key (kbd "<f9>") #'my-load-theme)
 (global-set-key
  (kbd "<f9>")
- #'(lambda ()
-     (interactive)
-     ;;nil for no candidate limit. I want to scroll through all the themes.
-     (let ((helm-candidate-number-limit nil))
-       (call-interactively #'my-load-theme))))
+ (lambda ()
+   (interactive)
+   ;;nil for no candidate limit. I want to scroll through all the themes.
+   (let ((helm-candidate-number-limit nil))
+     (call-interactively #'my-load-theme))))
 
 
 
@@ -1733,24 +1733,24 @@ This prevents overlapping themes; something I would rarely want."
 (define-key company-active-map (kbd "C-v") #'company-next-page) ;would be default, but my other keymap killed this
 (define-key company-active-map (kbd "M-v") #'company-previous-page) ;default, but set just in case.
 (define-key company-active-map (kbd "M-<") ;go to first candidate
-  #'(lambda ()
-      (interactive)
-      (let ((company-selection-wrap-around nil))
-        (company-set-selection 0))))
+  (lambda ()
+    (interactive)
+    (let ((company-selection-wrap-around nil))
+      (company-set-selection 0))))
 (define-key company-active-map (kbd "M->") ;go to last candidate
-  #'(lambda ()
-      (interactive)
-      (let ((company-selection-wrap-around nil))
-        (company-set-selection company-candidates-length))))
+  (lambda ()
+    (interactive)
+    (let ((company-selection-wrap-around nil))
+      (company-set-selection company-candidates-length))))
 
 ;;(setq company-tooltip-minimum-width 60) ;avoids changing width as visislbe candidates change.
 ;; (add-hook 'company-completion-started-hook
-;;           #'(lambda ()
-;;               (interactive)
-;;               (setq company-tooltip-minimum-width
-;;                     (apply #'max
-;;                            (mapcar #'length
-;;                                    company-candidates)))))
+;;           (lambda ()
+;;             (interactive)
+;;             (setq company-tooltip-minimum-width
+;;                   (apply #'max
+;;                          (mapcar #'length
+;;                                  company-candidates)))))
 
 (setq company-idle-delay nil) ;disable automatic completion
 (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
@@ -1885,7 +1885,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; `electric-pair-mode' is in `c-mode-common-hook' already.
 ;; (add-hook 'csharp-mode-hook #'electric-pair-mode)
 
-(add-hook #'csharp-mode-hook #'(lambda () (yas-minor-mode 1)))
+(add-hook #'csharp-mode-hook (lambda () (yas-minor-mode 1)))
 
 
 ;;-------------------------
@@ -2025,9 +2025,9 @@ This prevents overlapping themes; something I would rarely want."
     ;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
 
     ;; (add-hook 'eshell-mode-hook
-    ;;           #'(lambda ()
-    ;;               (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
-    ;;               (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
+    ;; (lambda ()
+    ;;   (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
+    ;;   (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
 
 
     ;;(helm-adaptative-mode t)
@@ -2261,12 +2261,12 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; (my-yas-handle-param "first, middle1, middle2, last"
 ;;                      ","
-;;                      #'(lambda (x)
-;;                          (upcase (concat "'" x "' - ")))
-;;                      #'(lambda (f)
-;;                          (downcase f))
-;;                      #'(lambda (l)
-;;                          (concat l "|")))
+;;                      (lambda (x)
+;;                        (upcase (concat "'" x "' - ")))
+;;                      (lambda (f)
+;;                        (downcase f))
+;;                      (lambda (l)
+;;                        (concat l "|")))
 ;; "'first' - ' MIDDLE1' - ' MIDDLE2' - ' LAST' - |"
 
 
@@ -2326,7 +2326,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------
 (with-eval-after-load "dired"
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
-  (add-hook 'dired-mode-hook #'(lambda () (dired-hide-details-mode 1)))
+  (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
   ;; vimify the keybinds.
   (define-key dired-mode-map (kbd "j") #'dired-next-line)
   (define-key dired-mode-map (kbd "k") #'dired-previous-line)
@@ -3173,8 +3173,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; fill-column-indicator
 ;;------------------------------------------------------------------------------
 ;; (require 'fill-column-indicator)
-;; (add-hook 'prog-mode-hook #'(lambda ()
-;;                               (fci-mode 1))) ; fci-mode is autloaded.
+;; (add-hook 'prog-mode-hook (lambda ()
+;;                             (fci-mode 1))) ; fci-mode is autloaded.
 
 (with-eval-after-load "fill-column-indicator"
   (setq fci-rule-column 80)
@@ -4068,8 +4068,8 @@ Gotten from #emacs on freenode."
           'comint-watch-for-password-prompt)
 
 ;;show trailing whitespace.
-;; (add-hook 'prog-mode-hook #'(lambda ()
-;;                               (setq show-trailing-whitespace t)))
+;; (add-hook 'prog-mode-hook (lambda ()
+;;                             (setq show-trailing-whitespace t)))
 
 ;; (defun my-toggle-show-trailing-whitespace ()
 ;;   (interactive)
@@ -4086,8 +4086,8 @@ Gotten from #emacs on freenode."
 (setq-default whitespace-line-column 80)
 ;;(setq whitespace-style '(face lines-tail))
 (setq-default whitespace-style '(face trailing))
-(add-hook 'prog-mode-hook #'(lambda ()
-                              (whitespace-mode 1)))
+(add-hook 'prog-mode-hook (lambda ()
+                            (whitespace-mode 1)))
 ;;(global-whitespace-mode 1)
 
 ;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaa

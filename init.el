@@ -2573,13 +2573,13 @@ This prevents overlapping themes; something I would rarely want."
   (setq avy-all-windows t)  ;allow jumps between windows.
   (setq avy-case-fold-search t)         ;case insenstive
 
-  (defun my-avy-goto-line ()
-    (interactive)
-    ;; use the default keys for line jumps
-    (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
-      (avy-goto-line)))
-  (global-set-key (kbd "M-g g") #'my-avy-goto-line)
-  (global-set-key (kbd "M-g M-g") #'my-avy-goto-line)
+  ;; (defun my-avy-goto-line ()
+  ;;   (interactive)
+  ;;   ;; use the default keys for line jumps
+  ;;   (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+  ;;     (avy-goto-line)))
+  ;; (global-set-key (kbd "M-g g") #'my-avy-goto-line)
+  ;; (global-set-key (kbd "M-g M-g") #'my-avy-goto-line)
 
   (defun my-avy-goto-char-3 (char1 char2 char3 &optional arg)
     "Copied `avy-goto-char-2' but reading 3 chars. Feels like too many."

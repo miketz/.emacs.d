@@ -2171,7 +2171,9 @@ This prevents overlapping themes; something I would rarely want."
   (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
   )
 
-(define-key evil-normal-state-map (kbd "s") 'helm-swoop)
+;; invoke with M-x for now. binding avy to the "s" key
+;; (define-key evil-normal-state-map (kbd "s") 'helm-swoop)
+
 ;; (global-set-key (kbd "C-c s") 'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
 ;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
@@ -2559,7 +2561,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;--------------------
 (global-set-key (kbd "M-g g") 'avy-goto-line)
 (global-set-key (kbd "M-g M-g") 'avy-goto-line)
-;; (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
 (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
 
 (with-eval-after-load "avy"

@@ -2087,7 +2087,8 @@ This prevents overlapping themes; something I would rarely want."
     (global-set-key (kbd "C-x C-f") #'helm-find-files)
     ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-    (global-set-key (kbd "M-y") #'helm-show-kill-ring))
+    (global-set-key (kbd "M-y") #'helm-show-kill-ring)
+    (global-set-key (kbd "M-/") #'helm-dabbrev))
 
   (helm-mode 1) ;helm-selection everywhere like when using M-x.
 
@@ -2099,7 +2100,10 @@ This prevents overlapping themes; something I would rarely want."
   )
 (when (or (eq my-curr-computer 'leyna-laptop)
           (eq my-curr-computer 'raspberry-pi))
-  (evil-leader/set-key "b" #'ibuffer))
+  (evil-leader/set-key "b" #'ibuffer)
+  (global-set-key (kbd "M-/") #'hippie-expand))
+
+
 
 ;;----------------------------------
 ;; helm-company
@@ -3847,9 +3851,6 @@ This prevents overlapping themes; something I would rarely want."
 ;;------------------------------------------------------------------------------
 ;; Misc options. Keep this at the bottom
 ;;------------------------------------------------------------------------------
-
-
-(global-set-key (kbd "M-/") #'hippie-expand)
 
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)

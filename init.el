@@ -3706,13 +3706,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;;------------------------------------------------------------------------------
 ;;; window-search.  Limit isearch to the visilbe buffer.
 ;;;------------------------------------------------------------------------------
-(defun window-search ()
+(defun my-window-search ()
   "Interactive search, limited to the visible portion of the buffer."
   (interactive)
   (save-restriction        ;automatically calls widen when block ends.
     (narrow-to-region (window-start) (window-end))
     (isearch-forward)))
-;; (defun window-search (fn)
+;; (defun my-window-search (fn)
 ;;   "Interactive search, limited to the visible portion of the buffer."
 ;;   (interactive)
 ;;   (save-restriction
@@ -3720,13 +3720,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;     (call-interactively fn)))
 ;; (defun window-search-forward ()
 ;;   (interactive)
-;;   (window-search #'isearch-forward))
+;;   (my-window-search #'isearch-forward))
 ;; (defun window-search-backward ()
 ;;   (interactive)
-;;   (window-search #'isearch-backward))
+;;   (my-window-search #'isearch-backward))
 
-(global-set-key (kbd "C-c s") #'window-search)
-(global-set-key (kbd "C-c C-s") #'window-search)
+(global-set-key (kbd "C-c s") #'my-window-search)
+(global-set-key (kbd "C-c C-s") #'my-window-search)
 ;; (global-set-key (kbd "C-c r") #'window-search-backward)
 
 ;;;------------------------------------------------------------------------------

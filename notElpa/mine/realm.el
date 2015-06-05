@@ -1,5 +1,5 @@
+;;; -*- lexical-binding: t; -*-
 ;;; realm.el --- Focus between tags then turn on a mode.
-;; -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;;

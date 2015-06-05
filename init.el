@@ -312,7 +312,7 @@ Assums a vertically stacked display of the list.
 ;;;----------------------------------
 (defvar my-tab-width 4
   "Number of spaces for a tab.
-Also how many columns to render for a 'real' tab.")
+Also how many columns to show for a 'real' tab.")
 
 ;;;----------------------------------
 ;; Packages

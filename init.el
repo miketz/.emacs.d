@@ -2090,7 +2090,7 @@ This prevents overlapping themes; something I would rarely want."
     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
     ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
     ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
-    (global-set-key (kbd "M-/") #'hippie-expand)
+    ;; (global-set-key (kbd "M-/") #'hippie-expand)
     ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
     )
 
@@ -2105,7 +2105,8 @@ This prevents overlapping themes; something I would rarely want."
 (when (or (eq my-curr-computer 'leyna-laptop)
           (eq my-curr-computer 'raspberry-pi))
   (evil-leader/set-key "b" #'ibuffer)
-  (global-set-key (kbd "M-/") #'hippie-expand))
+  ;; (global-set-key (kbd "M-/") #'hippie-expand)
+  )
 
 
 

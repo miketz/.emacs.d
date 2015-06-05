@@ -4187,9 +4187,9 @@ edge cases not covered by buffer killing."
 ;;                           'my-history)))
 ;;     (message "you said: %s" txt)))
 
-;; ;---------------------------------------------------
-;; ; rand
-;; ;---------------------------------------------------
+;;;---------------------------------------------------
+;;; rand
+;;;---------------------------------------------------
 (autoload 'rand "my-rand" nil t)
 
 ;; (setq msgDb '("hi"))
@@ -4219,9 +4219,9 @@ edge cases not covered by buffer killing."
 
 ;; (evil-leader/set-key "m" 'msg)
 
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; touch typing
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; touch typing
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
 (autoload 'my-type-tutor "my-type-tutor" nil t)
 
@@ -4281,7 +4281,7 @@ edge cases not covered by buffer killing."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; interact with Microsoft SQL Server
+;;; interact with Microsoft SQL Server
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;sqlcmd -S 127.0.0.1,42000\OSHE
 ;;sqlcmd -S 127.0.0.1,42000\OSHE -q "SELECT 'hello';"

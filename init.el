@@ -45,9 +45,9 @@ in case that file does not provide any feature."
     (declare (indent 1) (debug t))
     `(eval-after-load ,file (lambda () ,@body))))
 
-;;--------------------------------------------------------------------
-;; Helper functions and macros
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; Helper functions and macros
+;;;--------------------------------------------------------------------
 ;; eval-when-compile used to prevent flycheck `cl' warning, but only works for macros?
 (require 'cl)
 
@@ -152,10 +152,10 @@ BODY is the core code that will use the variables."
     (insert-file-contents filePath)
     (split-string (buffer-string) "\n" t)))
 
-;;--------------------------------------------------------------------
-;; helper functions to draw a list in N columns. 2-d diplay from a
-;; 1-d list.
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; helper functions to draw a list in N columns. 2-d diplay from a
+;;; 1-d list.
+;;;--------------------------------------------------------------------
 (when nil ;these are special-use functions. Don't create them.
 
   (defun display-lists (lst1 lst2)
@@ -261,9 +261,9 @@ Assums a vertically stacked display of the list.
 
   );end when, render list functions
 
-;;----------------------------------
-;; flags used for conditional execution
-;;----------------------------------
+;;;----------------------------------
+;;; flags used for conditional execution
+;;;----------------------------------
 ;; (display-graphic-p)
 ;; system-type
 ;; my-curr-computer
@@ -307,16 +307,16 @@ Assums a vertically stacked display of the list.
 
 
 
-;;----------------------------------
-;; globals
-;;----------------------------------
+;;;----------------------------------
+;;; globals
+;;;----------------------------------
 (defvar my-tab-width 4
   "Number of spaces for a tab.
 Also how many columns to render for a 'real' tab.")
 
-;;----------------------------------
+;;;----------------------------------
 ;; Packages
-;;----------------------------------
+;;;----------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/") ;stores elisp files that are not "packages".
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
@@ -467,9 +467,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 
 
-;;--------------------------------------------------------------------
-;; w32-send-sys codes. Operating system commands. MS Windows only.
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; w32-send-sys codes. Operating system commands. MS Windows only.
+;;;--------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
   (defvar my-w32-actions
     '((resize . 61440)
@@ -503,9 +503,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 
 
-;;--------------------------------------------------------------------
-;; Evil mode
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; Evil mode
+;;;--------------------------------------------------------------------
 (progn
   ;;prevent minibuffer spam when switching modes.
   ;;Cursor style/color is sufficient to determine mode.
@@ -657,9 +657,9 @@ char."
                              (slime-pprint-eval-last-expression)
                              (evil-normal-state))))
 
-;;----------------------------------
-;; key-chord
-;;----------------------------------
+;;;----------------------------------
+;;; key-chord
+;;;----------------------------------
 (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
 (setq key-chord-one-key-delay 0.4)
 
@@ -683,9 +683,9 @@ char."
 ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
 
 
-;;----------------------------------
-;; evil-snipe
-;;----------------------------------
+;;;----------------------------------
+;;; evil-snipe
+;;;----------------------------------
 ;; (setq evil-snipe-enable-highlight nil)
 ;; (setq evil-snipe-enable-incremental-highlight nil)
 ;; (setq evil-snipe-scope 'visible)
@@ -695,9 +695,9 @@ char."
 ;; (global-evil-snipe-mode 1)
 
 
-;;----------------------------------
-;; evil-god-state
-;;----------------------------------
+;;;----------------------------------
+;;; evil-god-state
+;;;----------------------------------
 ;; (evil-define-key 'normal global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'motion global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
@@ -707,16 +707,16 @@ char."
 ;; ;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
 ;; ;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
 
-;;----------------------------------
-;; evil-surround
-;;----------------------------------
+;;;----------------------------------
+;;; evil-surround
+;;;----------------------------------
 ;; (require 'evil-surround)
 ;; (global-evil-surround-mode 1)
 
 
-;;----------------------------------
-;; font
-;;----------------------------------
+;;;----------------------------------
+;;; font
+;;;----------------------------------
 (when (or (eq my-curr-computer 'work-laptop)
           (eq my-curr-computer 'leyna-laptop))
   ;; configure default settings for fonts.
@@ -787,9 +787,9 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
                           :slant normal :weight normal :height 150 :width normal))))))
 
 
-;;----------------------------------
-;; cursor
-;;----------------------------------
+;;;----------------------------------
+;;; cursor
+;;;----------------------------------
 (cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
                                      (color-evil nil)
                                      (color-motion nil));(color-motion "red")
@@ -814,9 +814,9 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
 
 (my-cursor-stuff) ;set the default cursor style. colors not specified yet.
 
-;;------------------------------------------------------
-;; Color theme stuff.
-;;------------------------------------------------------
+;;;------------------------------------------------------
+;;; Color theme stuff.
+;;;------------------------------------------------------
 ;;TODO: implement a way to undo color settings made outside the theme definition.
 ;;      use custom-theme-set-faces to set the colors/styles so they are rolled back
 ;;      when switching/disabling themes.
@@ -1617,25 +1617,25 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 
-;;---------------------------------------------
-;; Recursively byte-compile every .el file
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; Recursively byte-compile every .el file
+;;;---------------------------------------------
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 
 
-;;---------------------------------------------
-;; sly
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; sly
+;;;---------------------------------------------
 ;; (setq my-use-sly nil)
 
 ;; (when my-use-sly
 ;;   (when (eq my-curr-computer 'work-laptop)
 ;;     (setq inferior-lisp-program "C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64")))
 
-;;---------------------------------------------
-;; SLIME
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; SLIME
+;;;---------------------------------------------
 (require 'slime-autoloads)
 (with-eval-after-load "slime"
   (slime-setup '(slime-fancy
@@ -1708,9 +1708,9 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;---------------------------------------------
-;; redshank
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; redshank
+;;;---------------------------------------------
 ;; (require 'redshank-loader)
 ;; (eval-after-load "redshank-loader"
 ;;   `(redshank-setup '(lisp-mode-hook
@@ -1719,9 +1719,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; ;;     '(progn ...redefine keys, etc....))
 
 
-;;---------------------------------------------
-;; company
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; company
+;;;---------------------------------------------
 ;;company mode is breaking emacs 24.3. Works OK in 24.4
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode) ;all buffers
@@ -1773,9 +1773,9 @@ This prevents overlapping themes; something I would rarely want."
     (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
     (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)))
 
-;;---------------------------------------------
-;; company-web
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; company-web
+;;;---------------------------------------------
 (with-eval-after-load "web-mode"
   (add-to-list 'company-backends 'company-web-html)
   (add-to-list 'company-backends 'company-web-jade)
@@ -1789,20 +1789,20 @@ This prevents overlapping themes; something I would rarely want."
   (define-key web-mode-map (kbd "C-SPC") 'company-web-html))
 
 
-;;---------------------------------------------
-;; company-quickhelp. not using messes up keybinds
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; company-quickhelp. not using messes up keybinds
+;;;---------------------------------------------
 ;; (setq company-quickhelp-idle-delay 0.5)
 ;; (company-quickhelp-mode 1)
 
-;;---------------------------------------------
-;; slime-company
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; slime-company
+;;;---------------------------------------------
 ;; this is set in the slime section
 
-;;---------------------------------------------
-;; Auto-complete
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; Auto-complete
+;;;---------------------------------------------
 ;; ;;use auto-complete in emacs 24.3 and below
 ;; (when t
 ;;   ;; (and (<= emacs-major-version 24)
@@ -1827,9 +1827,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;   ;;(set-face-background 'ac-selection-face "steelblue")
 ;;   )
 
-;; ;;------------------------------------------------
-;; ;; ac-slime. integrates auto-complete with slime.
-;; ;;------------------------------------------------
+;; ;;;------------------------------------------------
+;; ;;; ac-slime. integrates auto-complete with slime.
+;; ;;;------------------------------------------------
 ;; (when t
 ;;   (require 'ac-slime)
 ;;   ;;(add-hook 'slime-mode-hook 'set-up-slime-ac)
@@ -1844,14 +1844,14 @@ This prevents overlapping themes; something I would rarely want."
 ;;     '(add-to-list 'ac-modes 'slime-repl-mode))
 ;;   )
 
-;;--------------------------------------------------
-;; turn on lisp-mode when editing file .stumpwmrc
-;;--------------------------------------------------
+;;;--------------------------------------------------
+;;; turn on lisp-mode when editing file .stumpwmrc
+;;;--------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
-;;---------------------------------------------
-;; Org mode
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; Org mode
+;;;---------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (with-eval-after-load "org"
   (setq org-startup-indented t)
@@ -1869,14 +1869,14 @@ This prevents overlapping themes; something I would rarely want."
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (define-key org-mode-map (kbd "M-h") 'evil-window-left))
 
-;;-----------------------------------------
-;; worf. key shortcuts for org-mode
-;;-----------------------------------------
+;;;-----------------------------------------
+;;; worf. key shortcuts for org-mode
+;;;-----------------------------------------
 
 
-;;---------------------------------------------
-;; csharp-mode
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; csharp-mode
+;;;---------------------------------------------
 ;;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 (setq auto-mode-alist
       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
@@ -1888,14 +1888,14 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook #'csharp-mode-hook (lambda () (yas-minor-mode 1)))
 
 
-;;-------------------------
-;; js2-hightlight-vars.el
-;;-------------------------
+;;;-------------------------
+;;; js2-hightlight-vars.el
+;;;-------------------------
 ;; (require 'js2-highlight-vars)
 
-;;------------------------------------
-;; align-let.el in ~/.emacs.d/notElpa
-;;------------------------------------
+;;;------------------------------------
+;;; align-let.el in ~/.emacs.d/notElpa
+;;;------------------------------------
 (autoload 'align-let "align-let" nil t)
 
 (let ((key (kbd "C-c C-a")))
@@ -1912,9 +1912,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;       cc            433
 ;;       d             "hello there")
 
-;;---------------------------------------------
-;; js2-mode
-;;---------------------------------------------
+;;;---------------------------------------------
+;;; js2-mode
+;;;---------------------------------------------
 ;;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
@@ -1972,29 +1972,29 @@ This prevents overlapping themes; something I would rarely want."
               (electric-pair-mode 1)
               (yas-minor-mode 1))))
 
-;;--------------------
-;; ac-js2
-;;--------------------
+;;;--------------------
+;;; ac-js2
+;;;--------------------
 ;; (when nil
 ;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
 ;;   (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
 ;;   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
 ;;   )
 
-;; ;;--------------------
-;; ;; nxml
-;; ;;--------------------
+;; ;;;--------------------
+;; ;;; nxml
+;; ;;;--------------------
 ;; (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
 
 
-;;--------------------
-;; imenu
-;;--------------------
+;;;--------------------
+;;; imenu
+;;;--------------------
 (evil-leader/set-key "i" #'helm-imenu)
 
-;;--------------------
-;; Helm
-;;--------------------
+;;;--------------------
+;;; Helm
+;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
 (unless (or (eq my-curr-computer 'leyna-laptop)
@@ -2058,9 +2058,9 @@ This prevents overlapping themes; something I would rarely want."
     (key-chord-define helm-map "fj" #'helm-keyboard-quit);must be in eval-after-load so `helm-map' is defined
 
     (progn
-      ;;------------------------------------------------------------------------------
-      ;; helm-descbinds
-      ;;------------------------------------------------------------------------------
+      ;;;------------------------------------------------------------------------------
+      ;;; helm-descbinds
+      ;;;------------------------------------------------------------------------------
       (helm-descbinds-mode)
 
       ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
@@ -2109,24 +2109,24 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;----------------------------------
-;; helm-company
-;;----------------------------------
+;;;----------------------------------
+;;; helm-company
+;;;----------------------------------
 ;; (eval-after-load 'company
 ;;   '(progn
 ;;      (define-key company-mode-map (kbd "C-SPC") 'helm-company)
 ;;      (define-key company-active-map (kbd "C-SPC") 'helm-company)))
 
-;;----------------------------------
-;; evil-escape
-;;----------------------------------
+;;;----------------------------------
+;;; evil-escape
+;;;----------------------------------
 ;;(evil-escape-mode 1)
 
 
 
-;;--------------------
-;; helm-git-grep (makes emacs crash on windows)
-;;--------------------
+;;;--------------------
+;;; helm-git-grep (makes emacs crash on windows)
+;;;--------------------
 ;; (when my-run-sys-specific
 ;;   (defadvice helm-git-grep (after turn-off-activeupdate)
 ;;     "Turn off active update in MS-windows. It can't handle grep processes spawning on each keystroke."
@@ -2138,18 +2138,18 @@ This prevents overlapping themes; something I would rarely want."
 ;; (evil-leader/set-key "g" 'helm-git-grep)
 
 
-;;--------------------
-;; vc-git-grep. This is better for ms-windows since it can't handle helm-git-grep's many processes.
-;; Also grepping is a pretty heavy weight opperation so I prefer to set up the search inputs first,
-;; select the top folder, etc instead of searching in real-time for each key press.
-;;--------------------
+;;;--------------------
+;;; vc-git-grep. This is better for ms-windows since it can't handle helm-git-grep's many processes.
+;;; Also grepping is a pretty heavy weight opperation so I prefer to set up the search inputs first,
+;;; select the top folder, etc instead of searching in real-time for each key press.
+;;;--------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
 (evil-leader/set-key "g" #'my-vc-git-grep)
 
-;;--------------------
-;; helm-swoop
-;;--------------------
+;;;--------------------
+;;; helm-swoop
+;;;--------------------
 (autoload 'helm-swoop "helm-swoop" nil t)
 (with-eval-after-load "helm-swoop"
   ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
@@ -2186,9 +2186,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
 ;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
 
-;;---------------------
-;; sublimity
-;;---------------------
+;;;---------------------
+;;; sublimity
+;;;---------------------
 ;; (require 'sublimity)
 ;; (require 'sublimity-scroll)
 ;;map is annoying;;(require 'sublimity-map)
@@ -2198,9 +2198,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;(sublimity-global-mode)
 
 
-;;---------------------
-;; Clippy. pop-up help
-;;---------------------
+;;;---------------------
+;;; Clippy. pop-up help
+;;;---------------------
 (evil-leader/set-key "c" 'clippy-describe-function)
 (evil-leader/set-key "v" 'clippy-describe-variable)
 ;; (evil-leader/set-key "n"
@@ -2219,24 +2219,24 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;--------------------
-;; Ido mode
-;;--------------------
+;;;--------------------
+;;; Ido mode
+;;;--------------------
 ;; ;;(require 'ido)
 ;; (setq ido-everywhere t)
 ;; (ido-mode t)
 
-;;----------------------
-;; smex. (built on ido)
-;;----------------------
+;;;----------------------
+;;; smex. (built on ido)
+;;;----------------------
 ;; ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
 ;; ;;                   ; when Smex is auto-initialized on its first run.
 ;; (global-set-key (kbd "M-x") 'smex)
 ;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
-;;--------------------
-;; Yasnippet
-;;--------------------
+;;;--------------------
+;;; Yasnippet
+;;;--------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
 
 ;;(require 'yasnippet)
@@ -2278,9 +2278,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; "'first' - ' MIDDLE1' - ' MIDDLE2' - ' LAST' - |"
 
 
-;;--------------------
-;; cc-mode
-;;--------------------
+;;;--------------------
+;;; cc-mode
+;;;--------------------
 ;; (assoc "cc-mode" c-style-alist)
 ;; (assoc "user" c-style-alist)
 ;; (assoc "c#" c-style-alist)
@@ -2329,9 +2329,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; (add-hook 'c-initialization-hook 'my-make-CR-do-indent)
 
 
-;;------------------
-;; Dired
-;;------------------
+;;;------------------
+;;; Dired
+;;;------------------
 (with-eval-after-load "dired"
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
@@ -2356,18 +2356,18 @@ This prevents overlapping themes; something I would rarely want."
 ;;       (interactive)
 ;;       (find-alternate-file "..")))) ;; was dired-up-directory
 
-;;---------------------
-;; dired-details
-;;---------------------
+;;;---------------------
+;;; dired-details
+;;;---------------------
 ;; ;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
 ;; (require 'dired-details)
 ;; (dired-details-install)
 
 
 
-;;--------------------------------------------------------------------
-;; sql-mode
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; sql-mode
+;;;--------------------------------------------------------------------
 (with-eval-after-load "sql"
   (add-hook 'sql-mode-hook #'electric-pair-mode)
   (add-hook #'sql-mode-hook
@@ -2399,9 +2399,9 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 
-;;--------------------------------------------------------------------
-;; rainbow-delimiters
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; rainbow-delimiters
+;;;--------------------------------------------------------------------
 ;; (require 'rainbow-delimiters)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
@@ -2415,30 +2415,30 @@ This prevents overlapping themes; something I would rarely want."
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)
 
-;;--------------------------------------------------------------------
-;; rainbow-mode
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; rainbow-mode
+;;;--------------------------------------------------------------------
 ;;(rainbow-mode)
 
-;;--------------------------------------------------------------------
-;; Expand-region
-;; https://github.com/magnars/expand-region.el
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; Expand-region
+;;; https://github.com/magnars/expand-region.el
+;;;--------------------------------------------------------------------
 ;;(require 'expand-region)
 (autoload 'expand-region "expand-region" "expand region" t)
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C--") #'er/contract-region)
 
-;;--------------------------------------------------------------------
-;; mulitple-cursors
-;; https://github.com/magnars/multiple-cursors.el
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; mulitple-cursors
+;;; https://github.com/magnars/multiple-cursors.el
+;;;--------------------------------------------------------------------
 ;;(require 'multiple-cursors)
 ;;(global-set-key (kbd "C--") 'mc/edit-lines)
 
-;;--------------------------------------------------------------------
-;; Paredit
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; Paredit
+;;;--------------------------------------------------------------------
 (when nil ;;trying lispy
   ;;(add-to-list 'load-path "~/.emacs.d/paredit")
   (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -2467,14 +2467,14 @@ This prevents overlapping themes; something I would rarely want."
   ;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
   )
 
-;;--------------------------
-;; smartparens
-;;--------------------------
+;;;--------------------------
+;;; smartparens
+;;;--------------------------
 ;;(require 'smartparens-config)
 
-;;--------------------------
-;; Omnisharp
-;;--------------------------
+;;;--------------------------
+;;; Omnisharp
+;;;--------------------------
 (when (eq my-curr-computer 'work-laptop)
 
   (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
@@ -2548,28 +2548,28 @@ This prevents overlapping themes; something I would rarely want."
        (concat omnisharp-server-executable-path " -p 2000 -s " sln)))))
 
 
-;;--------------------
-;; nyan-mode
-;;--------------------
+;;;--------------------
+;;; nyan-mode
+;;;--------------------
 ;;(nyan-mode)
 ;;(setq nyan-wavy-trail nil)
 ;;(nyan-start-animation)
 
-;;--------------------
-;; nyan-prompt
-;;--------------------
+;;;--------------------
+;;; nyan-prompt
+;;;--------------------
 ;;(add-hook 'eshell-load-hook 'nyan-prompt-enable)
 
-;;--------------------
-;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1, even when all code is commented out. Deleting the elpa folder for now.
-;;--------------------
+;;;--------------------
+;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1, even when all code is commented out. Deleting the elpa folder for now.
+;;;--------------------
 ;;(powerline-default-theme)
 ;;(powerline-center-theme)
 
 
-;;--------------------
-;; Avy
-;;--------------------
+;;;--------------------
+;;; Avy
+;;;--------------------
 (global-set-key (kbd "M-g g") 'avy-goto-line)
 (global-set-key (kbd "M-g M-g") 'avy-goto-line)
 (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
@@ -2606,9 +2606,9 @@ This prevents overlapping themes; something I would rarely want."
        arg
        avy-style))))
 
-;;--------------------
-;; Ace jump mode
-;;--------------------
+;;;--------------------
+;;; Ace jump mode
+;;;--------------------
 ;; ;; (add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
 
 ;; ;; your eye is already focused on the jump point so no need to gray background.
@@ -2616,20 +2616,20 @@ This prevents overlapping themes; something I would rarely want."
 ;; (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
-;;--------------------
-;; ace-window
-;;--------------------
+;;;--------------------
+;;; ace-window
+;;;--------------------
 (global-set-key (kbd "M-w") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
 
-;;--------------------
-;; ace-jump-zap
-;;--------------------
+;;;--------------------
+;;; ace-jump-zap
+;;;--------------------
 ;; (global-set-key (kbd "M-z") 'ace-jump-zap-to-char)
 
-;;--------------------
-;; clang-format
-;;--------------------
+;;;--------------------
+;;; clang-format
+;;;--------------------
 ;; rarely use `clang-format', so commenting it out for now.
 ;; (when (eq my-curr-computer 'work-laptop)
 ;;   (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el")
@@ -2637,9 +2637,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (global-set-key (kbd "C-c f") 'clang-format-region)
 ;;   (global-set-key (kbd "C-c b") 'clang-format-buffer))
 
-;;--------------------
-;; irony
-;;--------------------
+;;;--------------------
+;;; irony
+;;;--------------------
 (when (or (eq my-curr-computer 'work-laptop)
           (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -2673,9 +2673,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; - https://github.com/Sarcasm/company-irony
 ;; - https://github.com/Sarcasm/ac-irony
 
-;;-------------------------------
-;; company-irony
-;;-------------------------------
+;;;-------------------------------
+;;; company-irony
+;;;-------------------------------
 ;; (eval-after-load 'company
 ;;   '(add-to-list 'company-backends 'company-irony))
 
@@ -2684,9 +2684,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; ;;     std::|
 ;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
-;;-------------------------------
-;; Load projects
-;;-------------------------------
+;;;-------------------------------
+;;; Load projects
+;;;-------------------------------
 (when (eq my-curr-computer 'work-laptop)
   ;; (defun proj-ecp ()
   ;;   (interactive)
@@ -2865,9 +2865,9 @@ This prevents overlapping themes; something I would rarely want."
                              (interactive)
                              (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org"))))
 
-;;-----------------------------------------------------------------------------
-;; VC version control
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; VC version control
+;;;-----------------------------------------------------------------------------
 ;; (defadvice vc-dir (before ensure-excluded-dirs)
 ;;   "add to the excluded dir list. It's not working if I add in init.el"
 ;;   (add-to-list 'vc-directory-exclusion-list "bin")
@@ -2880,24 +2880,24 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; (add-hook 'vc-- (lambda () (linum-mode 0)))
 
-;;-----------------------------------------------------------------------------
-;; Projectile
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; Projectile
+;;;-----------------------------------------------------------------------------
 ;; (require 'projectile)
 ;; (projectile-global-mode)
 ;; (setq projectile-indexing-method 'native)
 ;; (setq projectile-enable-caching t)
 ;; (define-key projectile-mode-map (kbd "C-x C-b") 'projectile-ibuffer)
 
-;;--------------------
-;; icicles
-;;--------------------
+;;;--------------------
+;;; icicles
+;;;--------------------
 ;; (require 'icicles) ; Load this library.
 ;; (icicle-mode 1)    ; Turn on Icicle mode.
 
-;;-----------------------------------------------------------------------------
-;; web-mode
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; web-mode
+;;;-----------------------------------------------------------------------------
 ;;(require 'web-mode)
 (autoload 'web-mode "web-mode" "web mode" t)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -2911,16 +2911,16 @@ This prevents overlapping themes; something I would rarely want."
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
 
 
-;;-----------------------------------------------------------------------------
-;; vimrc-mode
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; vimrc-mode
+;;;-----------------------------------------------------------------------------
 ;;(require 'vimrc-mode)
 (autoload 'vimrc-mode "vimrc-mode" "vimrc mode" t)
 (add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
 
-;;-----------------------------------------------------------------------------
-;; Make dired appear in a side window
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; Make dired appear in a side window
+;;;-----------------------------------------------------------------------------
 (defun my-current-file-path ()
   "Returns the full file path of the current buffer as a string"
   (interactive)
@@ -2947,9 +2947,9 @@ This prevents overlapping themes; something I would rarely want."
 (global-set-key (kbd "<f8>") 'my-folder-nav)
 
 
-;;-----------------------------------------------------------------------------
-;; skewer-mode
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; skewer-mode
+;;;-----------------------------------------------------------------------------
 ;;(skewer-setup)
 (add-hook 'js2-mode-hook 'skewer-mode)
 (add-hook 'css-mode-hook 'skewer-css-mode)
@@ -2990,9 +2990,9 @@ This prevents overlapping themes; something I would rarely want."
   ;;   (message "put this in the <head>: <script src=\"http://localhost:8080/skewer\"></script> --- switch to tab http://localhost:8080/FileOrRouteName, then start evaling html"))
   )
 
-;;-----------------------------------------------------------------------------
-;; eshell
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; eshell
+;;;-----------------------------------------------------------------------------
 ;; (with-eval-after-load "eshell-mode"
 ;;   (defun my-eshell-clear-buffer ()
 ;;     "Deletes the contents of eshell buffer, except the last prompt"
@@ -3028,9 +3028,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;               ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my-eshell-clear-line)
 ;;               )))
 
-;;-----------------------------------------------------------------------------
-;; highlight-tail
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; highlight-tail
+;;;-----------------------------------------------------------------------------
 ;; (require 'highlight-tail)
 ;; (setq highlight-tail-colors '(("green yellow" . 0)
 ;;                               ("lemon chiffon". 40)))
@@ -3043,9 +3043,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; (highlight-tail-mode)
 ;; ;;(highlight-tail-reload)
 
-;;-----------------------------------------------------------------------------
-;; eww web-browser
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; eww web-browser
+;;;-----------------------------------------------------------------------------
 ;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
 
 (with-eval-after-load "eww"
@@ -3062,14 +3062,14 @@ This prevents overlapping themes; something I would rarely want."
             (lambda ()
               (setq show-trailing-whitespace nil))))
 
-;;-----------------------------------------------------------------------------
-;; w3
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; w3
+;;;-----------------------------------------------------------------------------
 ;; (with-eval-after-load "w3")
 
-;;-----------------------------------------------------------------------------
-;; cedet
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; cedet
+;;;-----------------------------------------------------------------------------
 ;; (progn
 ;;   (global-ede-mode 1)
 ;;   (semantic-load-enable-code-helpers))
@@ -3098,16 +3098,16 @@ This prevents overlapping themes; something I would rarely want."
 
 ;;   (provide 'setup-cedet))
 
-;;-----------------------------------------------------------------------------
-;; cider
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; cider
+;;;-----------------------------------------------------------------------------
 ;;"C:\Program Files (x86)\Java\jre7\bin\java" -cp clojure-1.6.0.jar clojure.main
 
-;;-----------------------------------------------------------------------------
-;; aggressive-indent. Turning off for now since lispy makes it easy to keep
-;; things indented and aggressive-ident causes a noticeable lag when barfing/
-;; slurping in larger, deeply nested expressions.
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; aggressive-indent. Turning off for now since lispy makes it easy to keep
+;;; things indented and aggressive-ident causes a noticeable lag when barfing/
+;;; slurping in larger, deeply nested expressions.
+;;;-----------------------------------------------------------------------------
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'css-mode-hook #'aggressive-indent-mode)
@@ -3119,9 +3119,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
 
 
-;;-----------------------------------------------------------------------------
-;; magit
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; magit
+;;;-----------------------------------------------------------------------------
 ;; prevent warning message.
 ;; Doesn't work when set in eval-after-load ???
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -3133,22 +3133,22 @@ This prevents overlapping themes; something I would rarely want."
 
 (evil-leader/set-key "m" #'magit-status) ; autoloaded
 
-;;-----------------------------------------------------------------------------
-;; ediff
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ediff
+;;;-----------------------------------------------------------------------------
 (setq ediff-split-window-function 'split-window-horizontally)
 ;; don't use the popup window
 (setq ediff-window-setup-function 'ediff-setup-windows-plain);'ediff-setup-windows-multiframe
 
-;;-----------------------------------------------------------------------------
-;; helm-w32-launcher. Microsoft Windows only?
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; helm-w32-launcher. Microsoft Windows only?
+;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
   (global-set-key (kbd "C-c w") 'helm-w32-launcher))
 
-;;-----------------------------------------------------------------------------
-;; leerzeichen. Displays symbols for tab, space, and newline.
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; leerzeichen. Displays symbols for tab, space, and newline.
+;;;-----------------------------------------------------------------------------
 (autoload 'leerzeichen-mode "leerzeichen" nil t)
 ;;(leerzeichen-mode)
 ;; (custom-set-faces
@@ -3159,15 +3159,15 @@ This prevents overlapping themes; something I would rarely want."
 ;;                                 ;;:box t
 ;;                                 )))))
 
-;;------------------------------------------------------------------------------
-;; sql-indent
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; sql-indent
+;;;------------------------------------------------------------------------------
 ;; (eval-after-load "sql"
 ;;   '(load-library "sql-indent"))
 
-;;------------------------------------------------------------------------------
-;; darkroom
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; darkroom
+;;;------------------------------------------------------------------------------
 ;; (require 'darkroom)
 (autoload 'darkroom-mode "darkroom" "darkroom-mode" t)
 (with-eval-after-load "darkroom"
@@ -3175,14 +3175,14 @@ This prevents overlapping themes; something I would rarely want."
   ;;nil keeps margins close to the centered text.
   (setq darkroom-fringes-outside-margins nil))
 
-;;-----------------------------------------------------------------------------
-;; vim-empty-lines-mode
-;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; vim-empty-lines-mode
+;;;-----------------------------------------------------------------------------
 ;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
 
-;;------------------------------------------------------------------------------
-;; fill-column-indicator
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; fill-column-indicator
+;;;------------------------------------------------------------------------------
 ;; (require 'fill-column-indicator)
 ;; (add-hook 'prog-mode-hook (lambda ()
 ;;                             (fci-mode 1))) ; fci-mode is autloaded.
@@ -3205,17 +3205,17 @@ This prevents overlapping themes; something I would rarely want."
 ;; ;;TODID: used "white-space-mode" instead of `show-trailing-whitespace'.
 ;; (setq whitespace-style '(face trailing))   
 
-;;------------------------------------------------------------------------------
-;; flycheck
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; flycheck
+;;;------------------------------------------------------------------------------
 (with-eval-after-load "flycheck"
   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
   ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
 
-  ;;----------------------------------
-  ;; helm-flycheck
-  ;;----------------------------------
+  ;;;----------------------------------
+  ;;; helm-flycheck
+  ;;;----------------------------------
   (defun my-helm-flycheck ()
     (interactive)
     ;;nil for no candidate limit. I want to scroll through all the warnings.
@@ -3226,9 +3226,9 @@ This prevents overlapping themes; something I would rarely want."
   ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
   )
 
-;;------------------------------------------------------------------------------
-;; hydra
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; hydra
+;;;------------------------------------------------------------------------------
 (setq hydra-is-helpful t)
 ;; don't use window for hints. It seems to lock things up.
 ;; And window switcher mode really gets messed up.
@@ -3439,16 +3439,16 @@ This prevents overlapping themes; something I would rarely want."
   (define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
   (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra))
 
-;;------------------------------------------------------------------------------
-;; erc
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; erc
+;;;------------------------------------------------------------------------------
 (with-eval-after-load "erc"
  (add-hook 'erc-mode-hook (lambda ()
                             (setq show-trailing-whitespace nil))))
 
-;;------------------------------------------------------------------------------
-;; linum-relative
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; linum-relative
+;;;------------------------------------------------------------------------------
 ;; (require 'linum-relative) ;linum-mode's behavior is changed by the linum-relative package.
 (autoload 'linum-relative-toggle "linum-relative" "linum-relative" t)
 
@@ -3459,9 +3459,9 @@ This prevents overlapping themes; something I would rarely want."
   (setq linum-relative-current-symbol "0"))
 
 
-;;------------------------------------------------------------------------------
-;; guide-key
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; guide-key
+;;;------------------------------------------------------------------------------
 ;; (require 'guide-key)
 
 (with-eval-after-load "guide-key"
@@ -3475,15 +3475,15 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;------------------------------------------------------------------------------
-;; unkillable-scratch
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; unkillable-scratch
+;;;------------------------------------------------------------------------------
 (unkillable-scratch 1)
 
 
-;;------------------------------------------------------------------------------
-;; bookmarks
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; bookmarks
+;;;------------------------------------------------------------------------------
 ;; (setq my-bookmarks
 ;;       '((google "www.google.com" (search email maps))
 ;;         (yahoo "www.yahoo.com" (search email news video))
@@ -3507,9 +3507,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;           (my-search-bookmarks (rest bookmarks) tags)))
 ;;    (t (my-search-bookmarks (rest bookmarks) tags))))
 
-;;------------------------------------------------------------------------------
-;; swiper
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; swiper
+;;;------------------------------------------------------------------------------
 ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
 ;; ;; allow out of order matching.
 (setq ivy-re-builders-alist
@@ -3517,9 +3517,9 @@ This prevents overlapping themes; something I would rarely want."
 (global-set-key (kbd "C-s") #'swiper)
 ;;(ivy-mode) ;ivy is bundled with swiper???
 
-;;------------------------------------------------------------------------------
-;; color-identifiers-mode
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; color-identifiers-mode
+;;;------------------------------------------------------------------------------
 ;; (when nil ;sample to test variable colors
 ;;   (let ((a 0) (b 1) (c 2)
 ;;         (d 2) (e 4) (f 4) (g 4))
@@ -3534,10 +3534,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;     (insert "\n")))
 
 
-;;------------------------------------------------------------------------------
-;; Integrate narrow-to-region with indirect buffers. To allow multiple
-;; major modes operatiing on 1 file.
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; Integrate narrow-to-region with indirect buffers. To allow multiple
+;;; major modes operatiing on 1 file.
+;;;------------------------------------------------------------------------------
 (defun my-narrow-to-region-indirect (start end)
   "Restrict editing in this buffer to the current region, indirectly."
   (interactive "r")
@@ -3609,9 +3609,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;       (narrow-to-region start end))
 ;;     (switch-to-buffer buf)))
 
-;;------------------------------------------------------------------------------
-;; Focus javascript
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; Focus javascript
+;;;------------------------------------------------------------------------------
 ;; delay execution of this code until `web-mode' is turned on.
 (with-eval-after-load "web-mode"
   ;;needed to bind a key for `js2-mode-map'.
@@ -3682,9 +3682,9 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;------------------------------------------------------------------------------
-;; svg-mode-line-themes
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; svg-mode-line-themes
+;;;------------------------------------------------------------------------------
 ;; (when nil ;;don't use for now
 ;;   (when (eq system-type 'gnu/linux)
 ;;     (require 'svg-mode-line-themes)      ;from melpa
@@ -3702,9 +3702,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;     ))
 
 
-;;------------------------------------------------------------------------------
-;; window-search.  Limit isearch to the visilbe buffer.
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; window-search.  Limit isearch to the visilbe buffer.
+;;;------------------------------------------------------------------------------
 (defun window-search (fn)
   "Interactive search, limited to the visible portion of the buffer."
   (interactive)
@@ -3721,9 +3721,9 @@ This prevents overlapping themes; something I would rarely want."
 (global-set-key (kbd "C-c s") #'window-search-forward)
 (global-set-key (kbd "C-c r") #'window-search-backward)
 
-;;------------------------------------------------------------------------------
-;; lispy
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; lispy
+;;;------------------------------------------------------------------------------
 (add-hook 'emacs-lisp-mode-hook       #'lispy-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'lispy-mode)
 (add-hook 'ielm-mode-hook             #'lispy-mode)
@@ -3766,9 +3766,9 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;------------------------------------------------------------------------------
-;; Info-mode
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; Info-mode
+;;;------------------------------------------------------------------------------
 (with-eval-after-load "info"
   ;; rebind keys for vim friendliness.
   ;; orginial bindings. TODO: bind them to something else. Or just use M-x
@@ -3796,9 +3796,9 @@ This prevents overlapping themes; something I would rarely want."
   (define-key Info-mode-map (kbd "g") #'evil-goto-first-line) ;TODO: figure out how ot bind gg for top.
   )
 
-;;------------------------------------------------------------------------------
-;; elisp-slime-nav TODO: look into lisy's navigation. Maybe remove this section.
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; elisp-slime-nav TODO: look into lisy's navigation. Maybe remove this section.
+;;;------------------------------------------------------------------------------
 (dolist (hook '(emacs-lisp-mode-hook
                 ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
@@ -3810,9 +3810,9 @@ This prevents overlapping themes; something I would rarely want."
   (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") 'elisp-slime-nav-describe-elisp-thing-at-point)
   (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point))
 
-;;------------------------------------------------------------------------------
-;; maximumize screen real-estate
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; maximumize screen real-estate
+;;;------------------------------------------------------------------------------
 (defvar my-backup-mode-line-format nil
   "Backs up the modeline state so it can later be restored after nilling it out.")
 (defvar my-backup-fringe-mode 0
@@ -3848,16 +3848,16 @@ This prevents overlapping themes; something I would rarely want."
   (setq minibuffer-auto-raise t)
   (setq minibuffer-exit-hook '(lambda () (lower-frame))))
 
-;;------------------------------------------------------------------------------
-;; electric-spacing
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; electric-spacing
+;;;------------------------------------------------------------------------------
 ;; originally called smart-operator-mode.
 ;; `electric-spacing-mode' is autoloaded.
 
 
-;;------------------------------------------------------------------------------
-;; Misc options. Keep this at the bottom
-;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; Misc options. Keep this at the bottom
+;;;------------------------------------------------------------------------------
 
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
@@ -4154,9 +4154,9 @@ edge cases not covered by buffer killing."
            (eq system-type 'gnu/linux))
   (server-start))
 
-;;--------------------------------------------------------------------
-;; Turn on disabled functions
-;;--------------------------------------------------------------------
+;;;--------------------------------------------------------------------
+;;; Turn on disabled functions
+;;;--------------------------------------------------------------------
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)

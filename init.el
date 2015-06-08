@@ -4069,7 +4069,11 @@ Gotten from #emacs on freenode."
 (setq-default transient-mark-mode t)  ;show selected regions
 ;;(setq-default visible-bell t)
 (setq ring-bell-function 'ignore)
-(show-paren-mode 1)
+
+(progn ;; paren match highlight
+  (setq show-paren-delay 0)
+  (show-paren-mode 1))
+
 
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.

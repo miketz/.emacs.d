@@ -418,7 +418,8 @@ Also how many columns to show for a 'real' tab.")
     elisp-slime-nav
     electric-spacing
     w3
-    w3m)
+    w3m
+    flymake-jslint)
   "Packages I use from elpa/melpa.")
 
 (when (eq my-curr-computer 'work-laptop)
@@ -1980,12 +1981,23 @@ This prevents overlapping themes; something I would rarely want."
                                                       (interactive)
                                                       (js2-next-error -1)))
 
-  (defhydra hydra-js2-flycheck ()
-    "js2 flycheck"
-    ("n" flycheck-next-error)
-    ("p" flycheck-previous-error)
+  ;; (defhydra hydra-js2-flycheck ()
+  ;;   "js2 flycheck"
+  ;;   ("n" flycheck-next-error)
+  ;;   ("p" flycheck-previous-error)
+  ;;   ("q" nil))
+  ;; (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'hydra-js2-flycheck/body)
+
+  (defhydra my-hydra-js2-flymake (:color amaranth)
+    "jslint:flymake: "
+    ("n" flymake-goto-next-error)
+    ("p" flymake-goto-prev-error)
+    ("v" flymake-popup-current-error-menu)
+    ("C-g" nil nil)
     ("q" nil))
-  (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'hydra-js2-flycheck/body)
+  (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'my-hydra-js2-flymake/body)
+
+  (evil-define-key 'normal js2-mode-map (kbd "C-c h") #'my-hydra-hs/body)
 
   (add-hook 'js2-mode-hook
             (lambda ()
@@ -2003,12 +2015,21 @@ This prevents overlapping themes; something I would rarely want."
               (yas-minor-mode 1)
               (rainbow-delimiters-mode-enable)
               (electric-spacing-mode 1)
-              ;; use jslint for M-x compile
-              (set (make-local-variable 'compile-command)
-                   (concat "jslint " (shell-quote-argument (buffer-file-name))))
+              ;; use jslint, but only if editing a file on disk
+              (when buffer-file-name
+                ;; wireup M-x compile
+                (set (make-local-variable 'compile-command)
+                     (concat "jslint " (shell-quote-argument buffer-file-name)))
+                ;; and turn on flymake-jslint. (only works on saved files)
+                (flymake-jslint-load))
+              ;; regex so M-x complile can parse jslint output.
+              ;; (set (make-local-variable 'compilation-error-regexp-alist)
+              ;;      '(("^[ \t]*\\([A-Za-z.0-9_: \\-]+\\)(\\([0-9]+\\)[,]\\( *[0-9]+\\))\\( Microsoft JScript runtime error\\| JSLINT\\): \\(.+\\)$" 1 2 3)))
               ;; show a greek lambda for function
               (setq prettify-symbols-alist
-                    '(("function" . 955))))))
+                    '(("function" . 955)))
+              ;; collapse/show sections of code
+              (hs-minor-mode 1))))
 
 ;;;--------------------
 ;;; ac-js2
@@ -3362,6 +3383,21 @@ This prevents overlapping themes; something I would rarely want."
   ("C-g" nil nil)
   ("q" nil))
 
+
+(defhydra my-hydra-hs (:color amaranth)
+  "hyrda for hs-minor-mode"
+  ("f" hs-hide-block)
+  ("j" hs-show-block)
+
+  ("d" hs-hide-level)
+  ("k" hs-show-block)
+
+  ("s" hs-hide-all)
+  ("l" hs-show-all)
+
+  ("C-g" nil nil)
+  ("q" nil))
+
 ;; avoid moving hand to arrow keys for barf/slurp
 (when nil ;trying paredit
   (defhydra hydra-paredit ()
@@ -3900,6 +3936,12 @@ This prevents overlapping themes; something I would rarely want."
 ;; originally called smart-operator-mode.
 ;; `electric-spacing-mode' is autoloaded.
 
+;;;------------------------------------------------------------------------------
+;;; flymake-jslint
+;;;------------------------------------------------------------------------------
+(with-eval-after-load "flymake-jslint"
+  (setq flymake-jslint-command "jslint")
+  (setq flymake-jslint-args nil))
 
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

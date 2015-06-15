@@ -1966,11 +1966,12 @@ This prevents overlapping themes; something I would rarely want."
      "setInterval" "setTimeout" "status" "statusbar" "stop" "sun"
      "switch" "taint" "this" "toString" "toolbar" "top" "typeof"
      "unescape" "untaint" "unwatch" "valueOf" "var" "void" "watch"
-     "while" "window" "with" ))
+     "while" "window" "with"))
   (setq js2-highlight-level 3) ;;maximum highlighting
 
   (setq js2-bounce-indent-p nil) ;; set t to have tab toggle indents
   (setq js2-basic-offset 4) ;; default is 4, but set explicilty anyway.
+
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
@@ -2001,7 +2002,13 @@ This prevents overlapping themes; something I would rarely want."
               (electric-pair-mode 1)
               (yas-minor-mode 1)
               (rainbow-delimiters-mode-enable)
-              (electric-spacing-mode 1))))
+              (electric-spacing-mode 1)
+              ;; use jslint for M-x compile
+              (set (make-local-variable 'compile-command)
+                   (concat "jslint " (shell-quote-argument (buffer-file-name))))
+              ;; show a greek lambda for function
+              (setq prettify-symbols-alist
+                    '(("function" . 955))))))
 
 ;;;--------------------
 ;;; ac-js2

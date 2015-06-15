@@ -1957,6 +1957,13 @@ This prevents overlapping themes; something I would rarely want."
                                                       (interactive)
                                                       (js2-next-error -1)))
 
+  (defhydra hydra-js2-flycheck ()
+    "js2 flycheck"
+    ("n" flycheck-next-error)
+    ("p" flycheck-previous-error)
+    ("q" nil))
+  (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'hydra-js2-flycheck/body)
+
   (add-hook 'js2-mode-hook
             (lambda ()
               ;; replace ambiguous name "Javascript-IDE" with "js2"

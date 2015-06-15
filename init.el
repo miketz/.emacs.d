@@ -1996,7 +1996,9 @@ This prevents overlapping themes; something I would rarely want."
 
               ;;(js2-imenu-extras-mode)
               (electric-pair-mode 1)
-              (yas-minor-mode 1))))
+              (yas-minor-mode 1)
+              (rainbow-delimiters-mode-enable)
+              (electric-spacing-mode 1))))
 
 ;;;--------------------
 ;;; ac-js2

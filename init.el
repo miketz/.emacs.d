@@ -1967,7 +1967,10 @@ This prevents overlapping themes; something I would rarely want."
      "switch" "taint" "this" "toString" "toolbar" "top" "typeof"
      "unescape" "untaint" "unwatch" "valueOf" "var" "void" "watch"
      "while" "window" "with" ))
-  (setq js2-highlight-level 3);;maximum highlighting
+  (setq js2-highlight-level 3) ;;maximum highlighting
+
+  (setq js2-bounce-indent-p nil) ;; set t to have tab toggle indents
+  (setq js2-basic-offset 4) ;; default is 4, but set explicilty anyway.
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (define-key js2-mode-map (kbd "M-j") #'evil-window-down)

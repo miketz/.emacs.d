@@ -4091,7 +4091,6 @@ Gotten from #emacs on freenode."
 ;; (setq-default indicate-buffer-boundaries '((up . nil) (down . nil)
 ;;                                            (top . left) (bottom . left)))
 
-;;(setq tool-bar-mode nil)
 (setq-default transient-mark-mode t)  ;show selected regions
 ;;(setq-default visible-bell t)
 (setq ring-bell-function 'ignore)

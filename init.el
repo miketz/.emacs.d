@@ -2015,8 +2015,11 @@ This prevents overlapping themes; something I would rarely want."
               (yas-minor-mode 1)
               (rainbow-delimiters-mode-enable)
               (electric-spacing-mode 1)
-              ;; use jslint, but only if editing a file on disk
-              (when buffer-file-name
+              ;; use jslint, but only if editing a .js file on disk.
+              ;; TODO: use with in-memory buffer, or narrowed region of html file.
+              ;; TODO: use flycheck instead of flymake
+              (when (and buffer-file-name
+                         (my-str-ends-with-p buffer-file-name ".js"))
                 ;; wireup M-x compile
                 (set (make-local-variable 'compile-command)
                      (concat "jslint " (shell-quote-argument buffer-file-name)))
@@ -2026,8 +2029,7 @@ This prevents overlapping themes; something I would rarely want."
               ;; (set (make-local-variable 'compilation-error-regexp-alist)
               ;;      '(("^[ \t]*\\([A-Za-z.0-9_: \\-]+\\)(\\([0-9]+\\)[,]\\( *[0-9]+\\))\\( Microsoft JScript runtime error\\| JSLINT\\): \\(.+\\)$" 1 2 3)))
               ;; show a greek lambda for function
-              (setq prettify-symbols-alist
-                    '(("function" . 955)))
+              (setq prettify-symbols-alist '(("function" . 955)))
               ;; collapse/show sections of code
               (hs-minor-mode 1))))
 

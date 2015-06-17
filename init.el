@@ -356,7 +356,7 @@ Also how many columns to show for a 'real' tab.")
     helm-swoop
     ;;helm-git-grep ;search text of files.
     ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
-    icicles
+    ;;icicles
     ;;projectile
     clippy
     yasnippet

@@ -833,6 +833,11 @@ This prevents overlapping themes; something I would rarely want."
     (disable-theme theme)))
 (ad-activate 'load-theme)
 
+
+;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
+(defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
+(defvar my-charcoal "#35352B" "Expirimental dark background color.")
+
 ;;custom-enabled-themes
 ;;custom-safe-themes
 ;;custom-known-themes
@@ -1372,9 +1377,6 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
-;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
-(defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
-(defvar my-charcoal "#35352B" "Expirimental dark background color.")
 
 ;;; loads the default emacs theme. Makes a few mods too.
 (defun color-default ()

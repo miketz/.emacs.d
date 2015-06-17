@@ -350,6 +350,7 @@ Also how many columns to show for a 'real' tab.")
     js2-mode
     skewer-mode
     ac-js2
+    web-beautify
     helm
     helm-cmd-t
     helm-swoop
@@ -2036,6 +2037,58 @@ This prevents overlapping themes; something I would rarely want."
               (setq prettify-symbols-alist '(("function" . 955)))
               ;; collapse/show sections of code
               (hs-minor-mode 1))))
+
+;;;--------------------------------------
+;;; web-beautify
+;;;--------------------------------------
+;; Depends on external programs: nodejs, js-beatify
+;; So only use on computers with the depedencies set up.
+(when (eq my-curr-computer 'work-laptop)
+  ;; (with-eval-after-load "web-beautify"
+  ;;   (add-to-list 'web-beautify-args "3")
+  ;;   (add-to-list 'web-beautify-args "-m")
+  ;;   )
+  (with-eval-after-load "js2-mode"
+    (define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+  (with-eval-after-load "js"
+    (define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+
+  (with-eval-after-load "json-mode"
+    (define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+
+  ;; (with-eval-after-load "sgml-mode"
+  ;;   (define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+
+  ;; (with-eval-after-load "css-mode"
+  ;;   (define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+  )
+;; put the following JSON text into a .jsbeautifyrc file to control formatting
+;; of external program js-beatify.
+;; program
+;; {
+;;     "indent_size": 4,
+;;     "indent_char": " ",
+;;     "eol": "\n",
+;;     "indent_level": 0,
+;;     "indent_with_tabs": false,
+;;     "preserve_newlines": true,
+;;     "max_preserve_newlines": 4,
+;;     "jslint_happy": true,
+;;     "space_after_anon_function": false,
+;;     "brace_style": "collapse",
+;;     "keep_array_indentation": false,
+;;     "keep_function_indentation": false,
+;;     "space_before_conditional": true,
+;;     "break_chained_methods": false,
+;;     "eval_code": false,
+;;     "unescape_strings": false,
+;;     "wrap_line_length": 0,
+;;     "wrap_attributes": "auto",
+;;     "wrap_attributes_indent_size": 4,
+;;     "end_with_newline": false,
+;;     "good-stuff" : true
+;; }
 
 ;;;--------------------
 ;;; ac-js2

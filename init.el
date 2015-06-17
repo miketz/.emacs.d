@@ -110,16 +110,20 @@ BODY is the core code that will use the variables."
 
 (defun my-alst-get-keys (lst)
   (mapcar 'car lst))
+
 (defun my-alst-get-values (lst)
+  "Return the values from LST."
   (mapcar 'cdr lst))
 
 (defun my-alst-print-keys (lst)
+  "Insert the keys of an a-list LST into the buffer."
   (mapc (lambda (key)
           (insert (symbol-name key))    ;key must be a symbol
           (insert "\n"))
         (my-alst-get-keys lst)))
 
 (defun my-getAtIndex (i lst)
+  "Return the element at I from LST."
   (cond
    ((null lst) nil)
    ((= i 0) (car lst))
@@ -132,12 +136,13 @@ BODY is the core code that will use the variables."
        t))
 
 (defun my-str-starts-with-p (string prefix)
-  "Return t if STRING starts with prefix."
+  "Return t if STRING begins with PREFIX."
   (and (string-match (rx-to-string `(: bos ,prefix) t)
                      string)
        t))
 
 (defun my-str-replace (what with in)
+  "Replace WHAT WITH IN."
   (replace-regexp-in-string (regexp-quote what) with in))
 
 (defun my-get-string-from-file (filePath)
@@ -558,8 +563,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 ;; For visual mode: press $ to go to the end of the line minus the newline char.
 (defadvice evil-end-of-line (after do-not-highlight-newline)
-  "For visual mode: press $ to go to the end of the line minus the newline
-char."
+  "When in visual mode, press $ to go to the end of the line minus the newline char."
   (when (evil-visual-state-p)
     (evil-backward-char)))
 (ad-activate 'evil-end-of-line)
@@ -855,6 +859,9 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (defun my-load-theme (theme &optional no-confirm no-enable)
+  "A duplicate of `load-theme'.
+With a mod to not ask for permission to change color.
+See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
@@ -899,7 +906,7 @@ This prevents overlapping themes; something I would rarely want."
                   (member hash custom-safe-themes)
                   (custom-theme-load-confirm hash))
           (let ((custom--inhibit-theme-enable t)
-                (buffer-file-name fn))    ;For load-history.
+                (buffer-file-name fn))  ;For load-history.
             (eval-buffer))
           ;; Optimization: if the theme changes the `default' face, put that
           ;; entry first.  This avoids some `frame-set-background-mode' rigmarole
@@ -920,7 +927,8 @@ This prevents overlapping themes; something I would rarely want."
           t)))))
 
 (defun color (theme &optional no-confirm no-enable)
-  "Dupliate of `my-load-theme' to simulate :color in vim."
+  "Duplicate of `my-load-theme' to simulate :color in vim.
+See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (interactive
    (list
     (intern (completing-read "Load custom theme: "
@@ -965,7 +973,7 @@ This prevents overlapping themes; something I would rarely want."
                   (member hash custom-safe-themes)
                   (custom-theme-load-confirm hash))
           (let ((custom--inhibit-theme-enable t)
-                (buffer-file-name fn))    ;For load-history.
+                (buffer-file-name fn))  ;For load-history.
             (eval-buffer))
           ;; Optimization: if the theme changes the `default' face, put that
           ;; entry first.  This avoids some `frame-set-background-mode' rigmarole
@@ -3041,18 +3049,18 @@ This prevents overlapping themes; something I would rarely want."
 ;;; Make dired appear in a side window
 ;;;-----------------------------------------------------------------------------
 (defun my-current-file-path ()
-  "Returns the full file path of the current buffer as a string"
+  "Return the full file path of the current buffer as a string."
   (interactive)
   (or load-file-name
       buffer-file-name))
 
 (defun my-current-folder-path ()
-  "Returns the folder path of the current buffer as a string"
+  "Return the folder path of the current buffer as a string."
   (interactive)
   (file-name-directory (my-current-file-path)))
 
 (defun my-folder-nav ()
-  "Opens a dired buffer. Dired does all the actual work. This just handles the visual aspects like window placement and size."
+  "Opens a dired buffer.  Dired does all the actual work.  This just handles the visual aspects like window placement and size."
   (interactive)
   (dired-other-window (my-current-folder-path))
   (evil-window-move-far-left)
@@ -3673,7 +3681,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;; major modes operatiing on 1 file.
 ;;;------------------------------------------------------------------------------
 (defun my-narrow-to-region-indirect (start end)
-  "Restrict editing in this buffer to the current region, indirectly."
+  "Restrict editing in this buffer to the current region, indirectly.
+Region defined by START and END is automaticallyl detected by (interactive \"r\")."
   (interactive "r")
   (deactivate-mark)
   (let ((buf-clone (clone-indirect-buffer nil nil))
@@ -4014,7 +4023,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)
-  "Prints the face at point."
+  "Prints the face at point.  POS = point???"
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))
@@ -4022,8 +4031,9 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (defmacro C-u (&rest args)
-  "Makes it easier to programmatically call a function with C-u prefix.
-Gotten from #emacs on freenode."
+  "Make it easier to programmatically call a function with `C-u' prefix.
+Gotten from #Emacs on freenode.
+ARGS here to satisfy flycheck."
   (let ((prefix (list 4)))
     (while (cdr args)
       (cond

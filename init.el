@@ -2010,6 +2010,10 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 
   (evil-define-key 'normal js2-mode-map (kbd "C-c h") #'my-hydra-hs/body)
 
+  ;; Add parsing of jslint output in compilation mode
+  ;; (add-to-list 'compilation-error-regexp-alist-alist '(jslint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), " 1 2 3))
+  ;; (add-to-list 'compilation-error-regexp-alist 'jslint)
+
   (add-hook 'js2-mode-hook
             (lambda ()
               ;; replace ambiguous name "Javascript-IDE" with "js2"
@@ -2033,7 +2037,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                          (my-str-ends-with-p buffer-file-name ".js"))
                 ;; wireup M-x compile
                 (set (make-local-variable 'compile-command)
-                     (concat "jslint " (shell-quote-argument buffer-file-name)))
+                     (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
                 ;; and turn on flymake-jslint. (only works on saved files)
                 (flymake-jslint-load)
                 ;; bind M-n, M-p to use flymake functions istead of js2 functions

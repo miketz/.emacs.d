@@ -2162,7 +2162,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 
     (progn ;;from tuhdo. Customizing helm window size/display.
       (setq helm-display-header-line nil) ;save 1 line for rarely used header.
-      (set-face-attribute 'helm-source-header nil :height 1.0);don't make source seperators bigger than needed
+      (set-face-attribute 'helm-source-header nil :height 1.0) ;don't make source seperators bigger than needed
       ;; (progn
       ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
       ;;   ;;helm window size as you type.
@@ -2175,6 +2175,22 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
       ;; (setq helm-split-window-in-side-p t)
       )
 
+
+    ;; (progn ;;Trick from tuhdo. Move helm input to top of helm buffer, hide in echo area.
+    ;;   (setq helm-echo-input-in-header-line t)
+    ;;   (setq helm-split-window-in-side-p t) ;;optoinally put helm buffer inside current buffer.
+
+    ;;   (defun helm-hide-minibuffer-maybe ()
+    ;;     (when (with-helm-buffer helm-echo-input-in-header-line)
+    ;;       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+    ;;         (overlay-put ov 'window (selected-window))
+    ;;         (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
+    ;;                                 `(:background ,bg-color :foreground ,bg-color)))
+    ;;         (setq-local cursor-type nil))))
+
+    ;;   (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe))
+
+
     ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
 
     ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
@@ -2183,12 +2199,12 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 
     ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
-    (key-chord-define helm-map "fj" #'helm-keyboard-quit);must be in eval-after-load so `helm-map' is defined
+    (key-chord-define helm-map "fj" #'helm-keyboard-quit) ;must be in eval-after-load so `helm-map' is defined
 
     (progn
-      ;;;------------------------------------------------------------------------------
-      ;;; helm-descbinds
-      ;;;------------------------------------------------------------------------------
+;;;------------------------------------------------------------------------------
+;;; helm-descbinds
+;;;------------------------------------------------------------------------------
       (helm-descbinds-mode)
 
       ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
@@ -2204,7 +2220,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
       ;;  - When type C-z, selected command is described without quiting.
       )
 
-    );end helm eval-after-load
+    )                                   ;end helm eval-after-load
 
   (progn ;;functions in key maps are auto-loaded.
     (evil-leader/set-key "b" #'helm-buffers-list)

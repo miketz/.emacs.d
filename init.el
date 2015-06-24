@@ -1141,6 +1141,12 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    ;; '(hl-line
    ;;   ((t (:background "black"))))
 
+   '(aw-leading-char-face               ; ace-window character.
+     ((t (:foreground "spring green"
+                      :background "black"
+                      :height 400       ; big font
+                      ))))
+
    '(hydra-face-red
      ((t (:foreground "green" :bold t))))
    '(hydra-face-blue
@@ -2770,7 +2776,10 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;; ace-window
 ;;;--------------------
 (global-set-key (kbd "M-w") 'ace-window)
-(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
+(with-eval-after-load "ace-window"
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
+  (setq aw-background nil) ;; don't dim the background
+  )
 
 ;;;--------------------
 ;;; ace-jump-zap

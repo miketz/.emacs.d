@@ -425,7 +425,8 @@ Also how many columns to show for a 'real' tab.")
     electric-spacing
     w3
     w3m
-    flymake-jslint)
+    flymake-jslint
+    nlinum)
   "Packages I use from elpa/melpa.")
 
 (when (eq my-curr-computer 'work-laptop)
@@ -4042,6 +4043,12 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (with-eval-after-load "flymake-jslint"
   (setq flymake-jslint-command "jslint")
   (setq flymake-jslint-args nil))
+
+;;;------------------------------------------------------------------------------
+;;; nlinum
+;;;------------------------------------------------------------------------------
+;; (with-eval-after-load "nlinum"
+;;   )
 
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

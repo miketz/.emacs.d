@@ -2038,12 +2038,13 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                 ;; wireup M-x compile
                 (set (make-local-variable 'compile-command)
                      (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
-                ;; and turn on flymake-jslint. (only works on saved files)
-                (flymake-jslint-load)
-                ;; bind M-n, M-p to use flymake functions istead of js2 functions
-                (evil-define-key 'normal js2-mode-map (kbd "M-n") #'flymake-goto-next-error)
-                (evil-define-key 'normal js2-mode-map (kbd "M-p") #'flymake-goto-prev-error)
-                (evil-define-key 'normal js2-mode-map (kbd "C-c m") #'flymake-popup-current-error-menu))
+                ;; ;; and turn on flymake-jslint. (only works on saved files)
+                ;; (flymake-jslint-load)
+                ;; ;; bind M-n, M-p to use flymake functions istead of js2 functions
+                ;; (evil-define-key 'normal js2-mode-map (kbd "M-n") #'flymake-goto-next-error)
+                ;; (evil-define-key 'normal js2-mode-map (kbd "M-p") #'flymake-goto-prev-error)
+                ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m") #'flymake-popup-current-error-menu)
+                )
               ;; regex so M-x complile can parse jslint output.
               ;; (set (make-local-variable 'compilation-error-regexp-alist)
               ;;      '(("^[ \t]*\\([A-Za-z.0-9_: \\-]+\\)(\\([0-9]+\\)[,]\\( *[0-9]+\\))\\( Microsoft JScript runtime error\\| JSLINT\\): \\(.+\\)$" 1 2 3)))

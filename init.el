@@ -1618,7 +1618,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    ((eq my-curr-computer 'hp-tower-2009)
     (when (display-graphic-p)
       (custom-set-faces
-       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal)))))
+       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 125 :width normal)))))
       (color-zenburn)))
 
    ((eq my-curr-computer 'a-laptop-faster)

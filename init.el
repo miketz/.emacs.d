@@ -756,6 +756,39 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
       (my-w32-run 'max))))
 
 
+(progn ;; inc/dec font size
+
+  (defvar my-curr=font-size nil
+    "Starts out unknown")
+
+  (defun my-change-font-size (bigger-p)
+    (interactive)
+    (let* ((curr-size (if my-curr=font-size ;; use cached value if it's set
+                          my-curr=font-size
+                        (face-attribute 'default :height (selected-frame))))
+           (step (if bigger-p 1 -1)) ;; TODO: calculate "threshold" step increment.
+           (new-size (+ curr-size step)))
+
+      (custom-set-faces
+       `(default
+          ((t (:height ,new-size)))))
+
+      ;; must cache the new value becuase :height does not acutally inc until a threshold is breached.
+      (setq my-curr=font-size new-size)
+
+      (when (fboundp 'my-w32-run) ;; TODO: make it work on non-Windows machines.
+        (my-w32-run 'restore-curr-frame)
+        (my-w32-run 'max))
+
+      (message (int-to-string new-size))))
+
+  (global-set-key (kbd "M-=") (lambda ()
+                                (interactive)
+                                (my-change-font-size t)))
+  (global-set-key (kbd "M--") (lambda ()
+                                (interactive)
+                                (my-change-font-size nil))))
+
 ;; (defun my-set-font-size ()
 ;;   "Interactive layer over my-set-font. Takes the font size as user input."
 ;;   (interactive)
@@ -1587,29 +1620,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                  :height 125            ;'90 105 115 120 125
                  :weight 'normal)
     (when (display-graphic-p)
-      (color-zenburn))
-
-    (progn ;; keybinds for fontsize. TODO: make it general for all computers.
-      (defvar my-font-size 125)
-      (defun my-inc-font-size (bigger-p)
-        (interactive)
-        (custom-set-faces
-         `(default ((t (:family "Consolas"
-                                :foundry "outline"
-                                :slant normal
-                                ;; :weight normal
-                                :height ,(incf my-font-size (if bigger-p 5 -5))
-                                :width normal)))))
-        (my-w32-run 'restore-curr-frame)
-        (my-w32-run 'max)
-        (message (int-to-string my-font-size)))
-
-      (global-set-key (kbd "M-=") (lambda ()
-                                    (interactive)
-                                    (my-inc-font-size t)))
-      (global-set-key (kbd "M--") (lambda ()
-                                    (interactive)
-                                    (my-inc-font-size nil)))))
+      (color-zenburn)))
 
    ((eq my-curr-computer 'raspberry-pi)
     (when (display-graphic-p)

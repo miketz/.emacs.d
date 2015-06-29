@@ -2878,7 +2878,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (defun proj-safetyweb ()
     (interactive)
     (require 'helm-cmd-t)
-    (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\Source\\")
+    (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\Source\\")
            (sln (concat root "Safety.sln"))
            (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
       ;; helm-cmd-t stuff
@@ -2902,7 +2902,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (defun proj-db-safety ()
     (interactive)
     (require 'helm-cmd-t)
-    (let ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\DbScripts"))
+    (let ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts"))
       (setq root-cmd-t (helm-cmd-t-get-create-source-dir root))
       (evil-leader/set-key "h" (lambda ()
                                  (interactive)
@@ -3017,7 +3017,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   ;;quick load of TFS \Main\SqlScripts
   (evil-leader/set-key "3" (lambda ()
                              (interactive)
-                             (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\Main\\DbScripts"))))
+                             (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts"))))
 
 (when (eq my-curr-computer 'work-laptop)
   ;;quick load of c:\users\mtz\TODO\TODO.org

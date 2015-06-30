@@ -2608,7 +2608,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;--------------------------------------------------------------------
 ;;; Paredit
 ;;;--------------------------------------------------------------------
-(when nil ;;trying lispy
+(when t ;;trying lispy
   ;;(add-to-list 'load-path "~/.emacs.d/paredit")
   (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
   (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
@@ -3928,8 +3928,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (add-hook 'slime-repl-mode-hook #'lispy-mode)
 
 (with-eval-after-load "lispy"
-  ;;(lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
-  (lispy-set-key-theme '(special paredit c-digits))
+  (lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
+  ;; (lispy-set-key-theme '(special paredit c-digits))
 
   (setq lispy-avy-style-char 'pre)
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char

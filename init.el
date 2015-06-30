@@ -1367,7 +1367,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (custom-theme-set-faces
    'monokai
    ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
-   `(default ((t (:background ,my-charcoal))))
+   ;; `(default ((t (:background ,my-charcoal))))
 
    `(compilation-info
      ((t (:foreground "DarkOrange2"))))

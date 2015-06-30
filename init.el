@@ -330,10 +330,10 @@ Also how many columns to show for a 'real' tab.")
 (defvar my-packages
   `(evil
     evil-leader
-    evil-escape
-    evil-matchit
-    evil-snipe
-    evil-god-state
+    ;;evil-escape
+    ;;evil-matchit
+    ;;evil-snipe
+    ;;evil-god-state
     ;;evil-surround
     key-chord
     slime
@@ -341,20 +341,20 @@ Also how many columns to show for a 'real' tab.")
     paredit
     ;;paxedit
     ;;smartparens
-    redshank
-    auto-complete
-    ac-slime
+    ;;redshank
+    ;;auto-complete
+    ;;ac-slime
     company
     company-web
     ;;company-quickhelp
     slime-company
-    ace-jump-mode
+    ;;ace-jump-mode
     ace-window
-    ace-jump-zap
+    ;;ace-jump-zap
     csharp-mode
     js2-mode
     skewer-mode
-    ac-js2
+    ;;ac-js2
     web-beautify
     helm
     helm-cmd-t
@@ -428,6 +428,7 @@ Also how many columns to show for a 'real' tab.")
     flymake-jslint
     nlinum)
   "Packages I use from elpa/melpa.")
+
 
 (when (eq my-curr-computer 'work-laptop)
   (add-to-list 'my-packages 'omnisharp))

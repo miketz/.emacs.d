@@ -1433,10 +1433,17 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
     (setq evil-visual-state-cursor '(hollow "blue"))
     (setq evil-operator-state-cursor cur))
 
-  (my-set-font :sym 'consolas
-               :weight 'bold
-               :height 125
-               :resize-window t)
+  ;; (my-set-font :sym 'consolas
+  ;;              :weight 'bold
+  ;;              :height 125
+  ;;              :resize-window t)
+  (progn ; use bold font.
+    (custom-set-faces
+     '(default ((t (:weight bold)))))
+    ;; refresh screen.
+    (when (fboundp 'my-w32-run) ; TODO: make it work on non-Windows machines.
+      (my-w32-run 'restore-curr-frame)
+      (my-w32-run 'max)))
 
   ;;(set-face-background hl-line-face "#EEFFEE")
   (my-rainbow-parens-light-bg2)

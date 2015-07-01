@@ -3979,6 +3979,26 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char
   (setq lispy-avy-style-symbol 'at-full)
 
+  ;; re-implementing `lispy-eval-and-insert' to always save excursion
+  ;; whether it's on the left or right.
+  (defun lispy-eval-and-insert (&optional arg)
+  "Eval last sexp and insert the result.
+
+When ARG isn't nil, try to pretty print the sexp."
+  (interactive "P")
+  (let ((lispy-do-pprint arg))
+    (cl-labels
+        ((doit ()
+           (unless (or (lispy-right-p) (region-active-p))
+             (lispy-forward 1))
+           (let ((str (lispy--eval (lispy--string-dwim))))
+             (newline-and-indent)
+             (insert str)
+             (when (lispy-right-p)
+               (lispy-alt-multiline t)))))
+      (save-excursion
+        (doit)))))
+
   ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
   ;; whether that's acheieved via a barf or slurp.
   ;; TODO: make it handle number inputs (instead of defaulting to 1).

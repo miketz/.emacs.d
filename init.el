@@ -3503,6 +3503,42 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   ("q" nil))
 
 
+(defhydra my-hydra-font (:color amaranth)
+  "hyrda for changing font size/style"
+  ("j" (lambda ()
+         (interactive)
+         (my-change-font-size t)))
+  ("k" (lambda ()
+         (interactive)
+         (my-change-font-size nil)))
+  ("b" (lambda ()
+         (interactive)
+         (custom-set-faces
+          '(default ((t (:weight bold)))))
+         ;; refresh screen.
+         (when (fboundp 'my-w32-run) ; TODO: make it work on non-Windows machines.
+           (my-w32-run 'restore-curr-frame)
+           (my-w32-run 'max))))
+  ("n" (lambda ()
+         (interactive)
+         (custom-set-faces
+          '(default ((t (:weight normal)))))
+         ;; refresh screen.
+         (when (fboundp 'my-w32-run) ; TODO: make it work on non-Windows machines.
+           (my-w32-run 'restore-curr-frame)
+           (my-w32-run 'max))))
+  ("i" (lambda ()
+         (interactive)
+         (custom-set-faces
+          '(default ((t (:slant italic)))))))
+  ("u" (lambda ()
+         (interactive)
+         (custom-set-faces
+          '(default ((t (:slant normal)))))))
+
+  ("C-g" nil nil)
+  ("q" nil))
+
 (defhydra my-hydra-hs (:color amaranth)
   "hyrda for hs-minor-mode"
   ("f" hs-hide-block)
@@ -3625,6 +3661,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (defvar *my-hydras* (mapcar #'symbol-name
                               (list #'hydra-easyscroll/body
                                     #'hydra-window/body
+                                    #'my-hydra-font/body
                                     ;;trying paredit #'hydra-paredit/body
                                     )))
   (defun my-choose-hydra ()

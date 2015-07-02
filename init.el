@@ -576,12 +576,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
 
 ;;;--------------------------------------------------------------------
-;;; Evil mode
+;;; evil
 ;;;--------------------------------------------------------------------
 
 ;; keeping evil turned off by default now.
 ;; Enable evil explicitly for certain modes or file types.
-(add-hook 'prog-mode-hook #'evil-local-mode)
+;; (add-hook 'prog-mode-hook #'evil-local-mode)
+
+(evil-mode 1) ;enable globally
 
 (with-eval-after-load "evil"
   (progn
@@ -595,9 +597,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (setq evil-operator-state-message nil)
     (setq evil-replace-state-message nil))
 
-
-
-  ;; (setq evil-default-cursor t)
+  (setq evil-default-cursor t)
 
   ;;(add-to-list 'load-path "~/.emacs.d/evil") ; only without ELPA/el-get
   ;; (require 'evil)

@@ -3301,11 +3301,10 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;-----------------------------------------------------------------------------
 ;;; magit
 ;;;-----------------------------------------------------------------------------
-;; prevent warning message.
-;; Doesn't work when set in eval-after-load ???
-(setq magit-last-seen-setup-instructions "1.4.0")
-
 (with-eval-after-load "magit"
+  ;; prevent warning message.
+  ;; Doesn't work when set in eval-after-load ???
+  (setq magit-last-seen-setup-instructions "1.4.0")
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (define-key magit-mode-map (kbd "M-h") #'evil-window-left))

@@ -570,9 +570,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (evil-backward-char)))
 (ad-activate 'evil-end-of-line)
 
-(defun copy-to-end-of-line ()
-  (interactive)
-  (evil-yank (point) (point-at-eol)))
 
 ;;leader keys
 (evil-leader/set-leader ",")

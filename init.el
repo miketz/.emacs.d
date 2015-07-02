@@ -513,158 +513,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 
 
-
-
-;;;--------------------------------------------------------------------
-;;; Evil mode
-;;;--------------------------------------------------------------------
-(progn
-  ;;prevent minibuffer spam when switching modes.
-  ;;Cursor style/color is sufficient to determine mode.
-  (setq evil-insert-state-message nil)
-  (setq evil-emacs-state-message nil)
-  (setq evil-visual-state-message nil)
-  (setq evil-motion-state-message nil)
-  (setq evil-normal-state-message nil)
-  (setq evil-operator-state-message nil)
-  (setq evil-replace-state-message nil))
-
-
-
-(setq evil-default-cursor t)
-
-;;(add-to-list 'load-path "~/.emacs.d/evil") ; only without ELPA/el-get
-(require 'evil)
-(require 'evil-leader)
-(global-evil-leader-mode)
-(evil-mode 1)
-
-;;(define-key <keymap> key 'function)
-
-
-;; Make j/k movement keys go up/down accross wrapped lines.
-(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>")
-  'evil-next-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>")
-  'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>")
-  'evil-previous-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>")
-  'evil-previous-visual-line)
-;;(setq-default evil-cross-lines t) ;; Make horizontal movement cross lines
-
-
-;; make C-k kill to the end of hte line in insert mode.
-(define-key evil-insert-state-map (kbd "C-k") #'kill-line)
-
-
-;; Map for Esc.
-;; The key-chord package causes lag when a key of the chord is pressed.
-;; So using the the built-in control chords which are fast. Better than the
-;; awkward C-[ default.
-;; (evil-define-key 'insert global-map (kbd "C-n") 'evil-normal-state)
-;; (evil-define-key 'visual global-map (kbd "C-n") 'evil-exit-visual-state)
-
-
-;; For visual mode: press $ to go to the end of the line minus the newline char.
-(defadvice evil-end-of-line (after do-not-highlight-newline)
-  "When in visual mode, press $ to go to the end of the line minus the newline char."
-  (when (evil-visual-state-p)
-    (evil-backward-char)))
-(ad-activate 'evil-end-of-line)
-
-
-;;leader keys
-(evil-leader/set-leader ",")
-(evil-leader/set-key "w" 'other-window)
-(evil-leader/set-key "q" 'balance-windows)
-(evil-leader/set-key "x" 'maximize-window)
-(evil-leader/set-key "," 'delete-other-windows)
-(evil-leader/set-key "d" 'delete-window)
-(evil-leader/set-key "k" 'kill-this-buffer)
-
-(evil-leader/set-key "<" (lambda () ;shrink window a little
-                           (interactive)
-                           (shrink-window-horizontally 15)))
-(evil-leader/set-key ">" (lambda () ;widen window a little
-                           (interactive)
-                           (enlarge-window-horizontally 15)))
-;; (evil-leader/set-key "j" (lambda ()
-;;                            (interactive)
-;;                            (shrink-window 10)))
-;; (evil-leader/set-key "k" (lambda ()
-;;                            (interactive)
-;;                            (enlarge-window 10)))
-
-;;TODO: look into equivalent resizing for non-Windows machines.
-(when (eq system-type 'windows-nt)
-  ;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
-  (defvar isFrameMax-my nil)
-  (evil-leader/set-key "f" (lambda ()
-                             (interactive)
-                             (let ((action (if (not-m isFrameMax-my)
-                                               'max
-                                             'restore-curr-frame)))
-                               (my-w32-run action)))))
-
-;;evalate lisp expression. Insert result on a new line.
-;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
-
-(defun my-eval-last-sexp ()
-  (interactive)
-  (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
-    (prin1-to-string val)))
-
-(autoload 'pos-tip-show "pos-tip" nil t)
-(if (display-graphic-p)
-    (progn
-      ;;(require 'pos-tip)
-      (evil-leader/set-key "e" (lambda ()
-                                 (interactive)
-                                 ;;(clippy-say (my-eval-last-sexp))
-                                 (pos-tip-show (my-eval-last-sexp)))))
-  (progn
-    (evil-leader/set-key "e"
-      (lambda ()
-        (interactive)
-        (save-excursion
-          (evil-append 1)
-          (default-indent-new-line)
-          (eval-last-sexp t) ; t to insert result in buffer.
-          (evil-normal-state))))))
-
-;; (evil-leader/set-key "r"
-;;   (lambda ()
-;;     (interactive)
-;;     (save-excursion
-;;       (evil-append 1)
-;;       (slime-eval-last-expression) ; t to insert result in buffer.
-;;       (evil-normal-state))))
-
-(evil-leader/set-key "r" (lambda ()
-                           (interactive)
-                           (save-excursion
-                             (evil-append 1)
-                             (let ((string (slime-last-expression)))
-                               (evil-normal-state)
-                               (slime-eval-async
-                                `(swank:eval-and-grab-output ,string)
-                                (lambda (result)
-                                  (cl-destructuring-bind (output value) result
-                                    (pos-tip-show value)
-                                    ;;(push-mark)
-                                    ;;(insert output value)
-                                    )))))))
-
-
-(evil-leader/set-key "a" 'slime-eval-print-last-expression)
-(evil-leader/set-key "p" (lambda ()
-                           (interactive)
-                           (save-excursion ;don't move the point
-                             (evil-append 1)
-                             (slime-pprint-eval-last-expression)
-                             (evil-normal-state))))
-
 ;;;----------------------------------
 ;;; key-chord
 ;;;----------------------------------
@@ -678,8 +526,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (let ((chord "fj"))
   ;;NOTE: fj lags downward movement with "j" in visual mode.
   ;;      If you hold down j it messes things up and the chord doesn't work.
-  (key-chord-define evil-insert-state-map chord #'evil-normal-state)
-  (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+
+  ;;moved into `eval-after-load' for evil so key mpas are defined.
+  ;; (key-chord-define evil-insert-state-map chord #'evil-normal-state)
+  ;; (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+
   ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
   ;; (key-chord-define evil-operator-state-map chord func)
   ;; (key-chord-define evil-motion-state-map chord func))
@@ -689,6 +540,202 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
 ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
+
+
+
+;;;----------------------------------
+;;; cursor
+;;;----------------------------------
+(setq-default cursor-type '(bar . 2))
+(custom-set-faces
+ '(cursor ((t (:background "cyan")))))
+
+(cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
+                                     (color-evil nil)
+                                     (color-motion nil));(color-motion "red")
+  (interactive)
+  (let ((args-emacs '())
+        (args-evil '())
+        (args-evil-motion '())) ;use same color throughout evil-mode, except for "motion" state.
+    (when color-emacs (setq args-emacs (cons color-emacs args-emacs)))
+    (when color-evil (setq args-evil (cons color-evil args-evil)))
+    (when color-motion (setq args-evil-motion (cons color-motion args-evil-motion)))
+    ;;bar hollow box hbar
+    ;; (setq-default cursor-type (cons 'bar args-emacs))
+    (setq evil-emacs-state-cursor (cons 'bar args-emacs))
+    (setq evil-normal-state-cursor (cons 'hollow args-evil))
+    (setq evil-insert-state-cursor (cons 'bar args-evil))
+    (setq evil-visual-state-cursor (cons 'hollow args-evil))
+    (setq evil-operator-state-cursor (cons 'hollow args-evil))
+    (setq evil-replace-state-cursor (cons 'hbar args-evil))
+    ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
+    ;;give special color I know when it is not full-evil bindings.
+    (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
+
+(when my-graphic-p
+  (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
+
+;;;--------------------------------------------------------------------
+;;; Evil mode
+;;;--------------------------------------------------------------------
+
+;; keeping evil turned off by default now.
+;; Enable evil explicitly for certain modes or file types.
+(add-hook 'prog-mode-hook #'evil-local-mode)
+
+(with-eval-after-load "evil"
+  (progn
+    ;;prevent minibuffer spam when switching modes.
+    ;;Cursor style/color is sufficient to determine mode.
+    (setq evil-insert-state-message nil)
+    (setq evil-emacs-state-message nil)
+    (setq evil-visual-state-message nil)
+    (setq evil-motion-state-message nil)
+    (setq evil-normal-state-message nil)
+    (setq evil-operator-state-message nil)
+    (setq evil-replace-state-message nil))
+
+
+
+  ;; (setq evil-default-cursor t)
+
+  ;;(add-to-list 'load-path "~/.emacs.d/evil") ; only without ELPA/el-get
+  ;; (require 'evil)
+  (require 'evil-leader)
+  (global-evil-leader-mode)
+  ;; (evil-mode 1)
+
+
+  ;;(define-key <keymap> key 'function)
+
+
+  ;; Make j/k movement keys go up/down accross wrapped lines.
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>")
+    'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>")
+    'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>")
+    'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>")
+    'evil-previous-visual-line)
+  ;;(setq-default evil-cross-lines t) ;; Make horizontal movement cross lines
+
+
+  ;; make C-k kill to the end of hte line in insert mode.
+  (define-key evil-insert-state-map (kbd "C-k") #'kill-line)
+
+
+  ;; Map for Esc.
+  ;; The key-chord package causes lag when a key of the chord is pressed.
+  ;; So using the the built-in control chords which are fast. Better than the
+  ;; awkward C-[ default.
+  ;; (evil-define-key 'insert global-map (kbd "C-n") 'evil-normal-state)
+  ;; (evil-define-key 'visual global-map (kbd "C-n") 'evil-exit-visual-state)
+
+
+  ;; For visual mode: press $ to go to the end of the line minus the newline char.
+  (defadvice evil-end-of-line (after do-not-highlight-newline)
+    "When in visual mode, press $ to go to the end of the line minus the newline char."
+    (when (evil-visual-state-p)
+      (evil-backward-char)))
+  (ad-activate 'evil-end-of-line)
+
+
+  ;;leader keys
+  (evil-leader/set-leader ",")
+  (evil-leader/set-key "w" 'other-window)
+  (evil-leader/set-key "q" 'balance-windows)
+  (evil-leader/set-key "x" 'maximize-window)
+  (evil-leader/set-key "," 'delete-other-windows)
+  (evil-leader/set-key "d" 'delete-window)
+  (evil-leader/set-key "k" 'kill-this-buffer)
+
+  (evil-leader/set-key "<" (lambda ()   ;shrink window a little
+                             (interactive)
+                             (shrink-window-horizontally 15)))
+  (evil-leader/set-key ">" (lambda ()   ;widen window a little
+                             (interactive)
+                             (enlarge-window-horizontally 15)))
+  ;; (evil-leader/set-key "j" (lambda ()
+  ;;                            (interactive)
+  ;;                            (shrink-window 10)))
+  ;; (evil-leader/set-key "k" (lambda ()
+  ;;                            (interactive)
+  ;;                            (enlarge-window 10)))
+
+  ;;TODO: look into equivalent resizing for non-Windows machines.
+  (when (eq system-type 'windows-nt)
+    ;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+    (defvar isFrameMax-my nil)
+    (evil-leader/set-key "f" (lambda ()
+                               (interactive)
+                               (let ((action (if (not-m isFrameMax-my)
+                                                 'max
+                                               'restore-curr-frame)))
+                                 (my-w32-run action)))))
+
+  ;;evalate lisp expression. Insert result on a new line.
+  ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
+
+  (defun my-eval-last-sexp ()
+    (interactive)
+    (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
+      (prin1-to-string val)))
+
+  (autoload 'pos-tip-show "pos-tip" nil t)
+  (if my-graphic-p
+      (progn
+        ;;(require 'pos-tip)
+        (evil-leader/set-key "e" (lambda ()
+                                   (interactive)
+                                   ;;(clippy-say (my-eval-last-sexp))
+                                   (pos-tip-show (my-eval-last-sexp)))))
+    (progn
+      (evil-leader/set-key "e"
+        (lambda ()
+          (interactive)
+          (save-excursion
+            (evil-append 1)
+            (default-indent-new-line)
+            (eval-last-sexp t)         ; t to insert result in buffer.
+            (evil-normal-state))))))
+
+  ;; (evil-leader/set-key "r"
+  ;;   (lambda ()
+  ;;     (interactive)
+  ;;     (save-excursion
+  ;;       (evil-append 1)
+  ;;       (slime-eval-last-expression) ; t to insert result in buffer.
+  ;;       (evil-normal-state))))
+
+  (evil-leader/set-key "r" (lambda ()
+                             (interactive)
+                             (save-excursion
+                               (evil-append 1)
+                               (let ((string (slime-last-expression)))
+                                 (evil-normal-state)
+                                 (slime-eval-async
+                                  `(swank:eval-and-grab-output ,string)
+                                  (lambda (result)
+                                    (cl-destructuring-bind (output value) result
+                                      (pos-tip-show value)
+                                      ;;(push-mark)
+                                      ;;(insert output value)
+                                      )))))))
+
+
+  (evil-leader/set-key "a" 'slime-eval-print-last-expression)
+  (evil-leader/set-key "p" (lambda ()
+                             (interactive)
+                             (save-excursion ;don't move the point
+                               (evil-append 1)
+                               (slime-pprint-eval-last-expression)
+                               (evil-normal-state))))
+
+  (key-chord-define evil-insert-state-map "fj" #'evil-normal-state) ;must be in eval-after-load so key map is defined.
+  (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state) ;must be in eval-after-load so key map is defined.
+  )
+
 
 
 ;;;----------------------------------
@@ -828,32 +875,6 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
                           :slant normal :weight normal :height 150 :width normal))))))
 
 
-;;;----------------------------------
-;;; cursor
-;;;----------------------------------
-(cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
-                                     (color-evil nil)
-                                     (color-motion nil));(color-motion "red")
-  (interactive)
-  (let ((args-emacs '())
-        (args-evil '())
-        (args-evil-motion '())) ;use same color throughout evil-mode, except for "motion" state.
-    (when color-emacs (setq args-emacs (cons color-emacs args-emacs)))
-    (when color-evil (setq args-evil (cons color-evil args-evil)))
-    (when color-motion (setq args-evil-motion (cons color-motion args-evil-motion)))
-    ;;bar hollow box hbar
-    (setq-default cursor-type (cons 'bar args-emacs))
-    (setq evil-emacs-state-cursor (cons 'bar args-emacs))
-    (setq evil-normal-state-cursor (cons 'hollow args-evil))
-    (setq evil-insert-state-cursor (cons 'bar args-evil))
-    (setq evil-visual-state-cursor (cons 'hollow args-evil))
-    (setq evil-operator-state-cursor (cons 'hollow args-evil))
-    (setq evil-replace-state-cursor (cons 'hbar args-evil))
-    ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
-    ;;give special color I know when it is not full-evil bindings.
-    (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
-
-(my-cursor-stuff) ;set the default cursor style. colors not specified yet.
 
 ;;;------------------------------------------------------
 ;;; Color theme stuff.
@@ -1157,6 +1178,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (interactive)
   (load-theme 'zenburn t)
   (my-cursor-stuff-darkBg) ;;TODO: move into `custom-set-faces'
+
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
    'zenburn
@@ -1181,7 +1203,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                       :background "black"
                       :height 400       ; big font
                       ))))
-
+   '(cursor ((t (:background "cyan"))))
    '(hydra-face-red
      ((t (:foreground "green" :bold t))))
    '(hydra-face-blue

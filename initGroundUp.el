@@ -18,8 +18,8 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "\n\n\n\n\n")
 
-(setq-default cursor-type '(bar . 2))
-(blink-cursor-mode 0)
+;; (setq-default cursor-type '(bar . 2))
+;; (blink-cursor-mode 0)
 ;;(hl-line-mode 0)
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
@@ -61,6 +61,7 @@
 ;; theme
 ;;----------------------------------------------------------------
 (load-theme 'zenburn t)
+
 
 ;;----------------------------------------------------------------
 ;; god-mode

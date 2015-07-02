@@ -2178,11 +2178,41 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
+(defvar my-use-helm-p t
+  "Whether i'm using helm at the momnet or not.")
+(defvar my-load-helm-on-init-p t
+  "Whether to load helm during start up, or postpone till first attempted use.")
+
 (unless (or (eq my-curr-computer 'leyna-laptop)
-            (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
+            (eq my-curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
+            (not my-use-helm-p))
 
   (autoload 'helm "helm" nil t)
   (autoload 'helm-config "helm-config" nil t)
+
+
+  (progn ;;functions in key maps are auto-loaded.
+    (evil-leader/set-key "b" #'helm-buffers-list)
+    ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+    ;;(global-set-key (kbd "C-x b")   #'helm-mini)
+    ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+    (global-set-key (kbd "M-x") #'helm-M-x)
+    (global-set-key (kbd "C-x C-f") #'helm-find-files)
+    ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
+    ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
+    (global-set-key (kbd "M-y") #'helm-show-kill-ring)
+    ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
+    ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
+    ;; (global-set-key (kbd "M-/") #'hippie-expand)
+    ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
+    )
+
+  (when my-load-helm-on-init-p
+    (helm-mode 1)) ;helm-selection everywhere like when using M-x.
+  ;; list of functions helm should ignore and allow default completion.
+  ;; NOTE: this breaks if put in eval-after-load. Strange, but it works if
+  ;; I just put it after the call to (helm-mode 1)
+  ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
 
   (with-eval-after-load "helm"
     (setq helm-ff-transformer-show-only-basename nil
@@ -2272,35 +2302,12 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
       ;;
       ;;  - When type C-z, selected command is described without quiting.
       )
-
-    )                                   ;end helm eval-after-load
-
-  (progn ;;functions in key maps are auto-loaded.
-    (evil-leader/set-key "b" #'helm-buffers-list)
-    ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
-    ;;(global-set-key (kbd "C-x b")   #'helm-mini)
-    ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-    (global-set-key (kbd "M-x") #'helm-M-x)
-    (global-set-key (kbd "C-x C-f") #'helm-find-files)
-    ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
-    ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-    (global-set-key (kbd "M-y") #'helm-show-kill-ring)
-    ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
-    ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
-    ;; (global-set-key (kbd "M-/") #'hippie-expand)
-    ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
-    )
-
-  (helm-mode 1) ;helm-selection everywhere like when using M-x.
-
-
-  ;; list of functions helm should ignore and allow default completion.
-  ;; NOTE: this breaks if put in eval-after-load. Strange, but ti works if
-  ;; i just bput it after the call to (helm-mode 1)
-  ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
+    ) ;;end helm eval-after-load
   )
+
 (when (or (eq my-curr-computer 'leyna-laptop)
-          (eq my-curr-computer 'raspberry-pi))
+          (eq my-curr-computer 'raspberry-pi)
+          (not my-use-helm-p))
   (evil-leader/set-key "b" #'ibuffer)
   ;; (global-set-key (kbd "M-/") #'hippie-expand)
   )

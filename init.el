@@ -1407,14 +1407,19 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                       :slant normal
                       :weight normal
                       :inverse-video nil))))
+
+   ;; s-mode-line-bg "#3E3D31"
+   ;; s-mode-line-fg "#F8F8F2"
    `(mode-line
-     ((t (:foreground "#00cf5f" ;"#00ff7f"
-                      :background "#101010"
+     ((t (:foreground "#F8F8F2"
+                      :background "#3E3D31"
                       :box (:line-width -1 :style released-button)))
       (t :inverse-video t)))
+   ;; s-mode-line-inactive-fg "#75715E"
+   ;; s-mode-line-inactive-bg "#272822"
    `(mode-line-inactive
-     ((t (:foreground "#777777"
-                      :background "#222222"
+     ((t (:foreground "#75715E"
+                      :background "#272822"
                       :box (:line-width -1 :style released-button)))))
 
 

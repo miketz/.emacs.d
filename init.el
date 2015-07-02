@@ -319,6 +319,9 @@ Assums a vertically stacked display of the list.
   "Number of spaces for a tab.
 Also how many columns to show for a 'real' tab.")
 
+(defvar my-graphic-p (display-graphic-p)
+  "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")
+
 ;;;----------------------------------
 ;; Packages
 ;;;----------------------------------
@@ -1624,15 +1627,15 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
     (my-set-font :sym 'consolas
                  :height 125            ;'90 105 115 120 125
                  :weight 'normal)
-    (when (display-graphic-p)
+    (when my-graphic-p
       (color-zenburn)))
 
    ((eq my-curr-computer 'raspberry-pi)
-    (when (display-graphic-p)
+    (when my-graphic-p
       (color-zenburn)))
 
    ((eq my-curr-computer 'hp-tower-2009)
-    (when (display-graphic-p)
+    (when my-graphic-p
       (custom-set-faces
        '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 125 :width normal)))))
       (color-zenburn)))
@@ -1652,7 +1655,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
      ;;                        :height 155
      ;;                        :width normal))))
      )
-    (when (display-graphic-p) ;this doens't return true for emacs daemon!
+    (when my-graphic-p ;this doens't return true for emacs daemon!
       (color-zenburn))))
 
 
@@ -4267,7 +4270,7 @@ ARGS here to satisfy flycheck."
 (setq mode-line-modes nil)
 ;;(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
 
-(when (display-graphic-p)
+(when my-graphic-p
   ;;Don't waste mode line space displaying Evil-states.
   ;;Cursor style/color is sufficient to determine mode.
   ;;but if in a terminal without cursor styles then allow it to exist.

@@ -54,7 +54,7 @@
       '(god-mode
         paredit
         zenburn-theme
-        ace-jump-mode
+        avy
         lispy))
 
 ;;----------------------------------------------------------------
@@ -74,16 +74,6 @@
 ;; swiper from melpa is broken atm.
 ;;(global-set-key (kbd "C-s") #'swiper)
 
-;;------------------------------------------------------------------------------
-;; ace-jump-mode
-;;------------------------------------------------------------------------------
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
-
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;;------------------------------------------------------------------------------
 ;; lispy

@@ -383,6 +383,7 @@ Also how many columns to show for a 'real' tab.")
     gandalf-theme
     color-theme-sanityinc-tomorrow
     grandshell-theme
+    tommyh-theme
     ;;sublimity
     nyan-mode
     nyan-prompt
@@ -1173,6 +1174,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                                           :inherit (mode-line )))))
    ))
 
+
 (defun color-zenburn ()
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
@@ -1296,6 +1298,10 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    '(rainbow-delimiters-depth-8-face ((t (:foreground "yellow" :background "black"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
+
+
+
+
 
 (defun color-github ()
   (interactive)
@@ -1445,6 +1451,15 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
+(defun color-tommyh ()
+  (interactive)
+  (load-theme 'tommyh t)
+  (custom-theme-set-faces
+   'tommyh
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background "yellow"))))))
 
 ;;; loads the default emacs theme. Makes a few mods too.
 (defun color-default ()
@@ -1664,7 +1679,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p
       (custom-set-faces
-       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 125 :width normal)))))
+       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
       (color-zenburn)))
 
    ((eq my-curr-computer 'a-laptop-faster)

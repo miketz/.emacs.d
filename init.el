@@ -4194,6 +4194,14 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; (with-eval-after-load "nlinum"
 ;;   )
 
+
+;;;------------------------------------------------------------------------------
+;;; sx
+;;;------------------------------------------------------------------------------
+;; TODO: make "around" advice on the sx functions to let-bind `helm-candidate-number-limit' to nil
+;; (let ((helm-candidate-number-limit nil))
+;;   (call-interactively #'sx-tab-newest))
+
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------

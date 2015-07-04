@@ -4200,9 +4200,14 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 ;;; sx
 ;;;------------------------------------------------------------------------------
-;; TODO: make "around" advice on the sx functions to let-bind `helm-candidate-number-limit' to nil
-;; (let ((helm-candidate-number-limit nil))
-;;   (call-interactively #'sx-tab-newest))
+(with-eval-after-load "sx-tab"
+  ;; TODO: this is not removing the 100 max limit. make it work.
+  ;; using 'around' advice on `sx-tab-newest'
+  (defadvice sx-tab-newest (around no-helm-limit)
+    ;; temporarily remove the helm candiate limit. (via dynamic binding).
+    (let ((helm-candidate-number-limit nil))
+      ad-do-it))
+  (ad-activate 'sx-tab-newest))
 
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

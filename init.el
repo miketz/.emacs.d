@@ -3811,12 +3811,12 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;------------------------------------------------------------------------------
 ;;; swiper
 ;;;------------------------------------------------------------------------------
-;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
-;; ;; allow out of order matching.
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-ignore-order)))
-(global-set-key (kbd "C-s") #'swiper)
-;;(ivy-mode) ;ivy is bundled with swiper???
+;; ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
+;; ;; ;; allow out of order matching.
+;; (setq ivy-re-builders-alist
+;;       '((t . ivy--regex-ignore-order)))
+;; (global-set-key (kbd "C-s") #'swiper)
+;; ;;(ivy-mode) ;ivy is bundled with swiper???
 
 ;;;------------------------------------------------------------------------------
 ;;; color-identifiers-mode

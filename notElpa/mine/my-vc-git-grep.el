@@ -29,20 +29,6 @@
     (dolist (p (rest patterns))
       (setq git-pat (concat git-pat " --and " (my-git-grep-make-param p))))
                                         ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
-    (concat "git --no-pager grep "
-            (unless (my-is-in-gitrepo) "--no-index --exclude-standard");--exclude-standard so it honors the .gitignore file when not in a git repo.
-            " --ignore-case -n "
-            git-pat)))
-
-(defun my-git-grep-make-cmd2 (input)
-  ;;git --no-pager grep --no-index --ignore-case -n -e "preview" --and -e "print" -- *.cs
-  (interactive)
-  (let ((patterns (split-string input " "))
-        (git-pat ""))
-    (setq git-pat (my-git-grep-make-param (first patterns)))
-    (dolist (p (rest patterns))
-      (setq git-pat (concat git-pat " --and " (my-git-grep-make-param p))))
-                                        ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
     (let ((in-gitrepo   (my-is-in-gitrepo))
           (search-all-p current-prefix-arg));if they typed C-u then search all
       (concat "git --no-pager grep --extended-regexp "
@@ -87,7 +73,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
               (setq command nil))
         (setq dir (file-name-as-directory (expand-file-name dir)))
         (setq command
-              (concat (my-git-grep-make-cmd2 regexp) " -- " files)
+              (concat (my-git-grep-make-cmd regexp) " -- " files)
               ;; (grep-expand-template "git --no-pager grep -n -e <R> -- <F>"
               ;;                       regexp files)
               )

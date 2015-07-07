@@ -411,7 +411,7 @@ Also how many columns to show for a 'real' tab.")
     fill-column-indicator
     flycheck
     hydra
-    linum-relative
+    ;;linum-relative
     guide-key
     unkillable-scratch
     speed-type
@@ -3765,14 +3765,14 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;------------------------------------------------------------------------------
 ;;; linum-relative
 ;;;------------------------------------------------------------------------------
-;; (require 'linum-relative) ;linum-mode's behavior is changed by the linum-relative package.
-(autoload 'linum-relative-toggle "linum-relative" "linum-relative" t)
+;; ;; (require 'linum-relative) ;linum-mode's behavior is changed by the linum-relative package.
+;; (autoload 'linum-relative-toggle "linum-relative" "linum-relative" t)
 
-;; don't turn on by default. Makes the screen blink when line # changes.
-;;(linum-relative-toggle) ;;toggle between realtive and straight.
-(with-eval-after-load "linum-relative"
-  (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
-  (setq linum-relative-current-symbol "0"))
+;; ;; don't turn on by default. Makes the screen blink when line # changes.
+;; ;;(linum-relative-toggle) ;;toggle between realtive and straight.
+;; (with-eval-after-load "linum-relative"
+;;   (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
+;;   (setq linum-relative-current-symbol "0"))
 
 
 ;;;------------------------------------------------------------------------------

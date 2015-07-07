@@ -1,4 +1,5 @@
 (require 'vc-git)
+(require 'grep)
 
 (defun my-is-in-gitrepo ()
   "Returns t if the current directory is in a git repo."
@@ -78,7 +79,7 @@ each value as a separate parameter to git grep. Making it work like helm filteri
                 (dir (read-directory-name "In directory: "
                                           nil default-directory t)))
            (list regexp files dir))))))
-  (require 'grep)
+  ;; (require 'grep) ;moving to top of file
   (when (and (stringp regexp) (> (length regexp) 0))
     (let ((command regexp))
       (if (null files)

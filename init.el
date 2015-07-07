@@ -4020,30 +4020,11 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 
 
 ;;;------------------------------------------------------------------------------
-;;; window-search.  Limit isearch to the visilbe buffer.
+;;; my-window-search.  Limit isearch to the visible buffer.
 ;;;------------------------------------------------------------------------------
-(defun my-window-search ()
-  "Interactive search, limited to the visible portion of the buffer."
-  (interactive)
-  (save-restriction        ;automatically calls widen when block ends.
-    (narrow-to-region (window-start) (window-end))
-    (isearch-forward)))
-;; (defun my-window-search (fn)
-;;   "Interactive search, limited to the visible portion of the buffer."
-;;   (interactive)
-;;   (save-restriction
-;;     (narrow-to-region (window-start) (window-end))
-;;     (call-interactively fn)))
-;; (defun window-search-forward ()
-;;   (interactive)
-;;   (my-window-search #'isearch-forward))
-;; (defun window-search-backward ()
-;;   (interactive)
-;;   (my-window-search #'isearch-backward))
-
+(autoload #'my-window-search "my-window-search" nil t)
 (global-set-key (kbd "C-c s") #'my-window-search)
 (global-set-key (kbd "C-c C-s") #'my-window-search)
-;; (global-set-key (kbd "C-c r") #'window-search-backward)
 
 ;;;------------------------------------------------------------------------------
 ;;; lispy
@@ -4155,7 +4136,7 @@ When ARG isn't nil, try to pretty print the sexp."
   (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point))
 
 ;;;------------------------------------------------------------------------------
-;;; maximumize screen real-estate
+;;; maximumize screen real-estate. TODO: complete this.
 ;;;------------------------------------------------------------------------------
 (defvar my-backup-mode-line-format nil
   "Backs up the modeline state so it can later be restored after nilling it out.")

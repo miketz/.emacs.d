@@ -4247,27 +4247,27 @@ When ARG isn't nil, try to pretty print the sexp."
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
 
-(defmacro C-u (&rest args)
-  "Make it easier to programmatically call a function with `C-u' prefix.
-Gotten from #Emacs on freenode.
-ARGS here to satisfy flycheck."
-  (let ((prefix (list 4)))
-    (while (cdr args)
-      (cond
-       ((eq (car args) 'C-u)
-        (setf (car prefix) (* 4 (car prefix))))
-       ((eq (car args) 'M-x)
-        ;; ignore
-        t)
-       (t
-        (error "Unknown arg %S" (car args))))
-      (setq args (cdr args)))
-    (unless (functionp (car args))
-      (error "%S is not a function" (car args)))
-    `(lambda ()
-       (interactive)
-       (let ((current-prefix-arg ',prefix))
-         (call-interactively ',(car args))))))
+;; (defmacro C-u (&rest args)
+;;   "Make it easier to programmatically call a function with `C-u' prefix.
+;; Gotten from #Emacs on freenode.
+;; ARGS here to satisfy flycheck."
+;;   (let ((prefix (list 4)))
+;;     (while (cdr args)
+;;       (cond
+;;        ((eq (car args) 'C-u)
+;;         (setf (car prefix) (* 4 (car prefix))))
+;;        ((eq (car args) 'M-x)
+;;         ;; ignore
+;;         t)
+;;        (t
+;;         (error "Unknown arg %S" (car args))))
+;;       (setq args (cdr args)))
+;;     (unless (functionp (car args))
+;;       (error "%S is not a function" (car args)))
+;;     `(lambda ()
+;;        (interactive)
+;;        (let ((current-prefix-arg ',prefix))
+;;          (call-interactively ',(car args))))))
 ;;(global-set-key (kbd "<f12>") (C-u M-x org-refile))
 
 

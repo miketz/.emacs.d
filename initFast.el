@@ -7,18 +7,21 @@
 ;;(load-theme 'deeper-blue t)
 ;; (set-background-color "white")
 
-;;(load-theme 'leuven)
-;;(setq-default cursor-type 'box)
-;;(set-background-color "ivory2")
-;;(set-cursor-color "blue")
+;;;----------------------------------
+;;; cursor
+;;;----------------------------------
+(setq-default cursor-type '(bar . 2))
+(custom-set-faces
+ '(cursor ((t (:background "cyan")))))
 
+(load-theme 'wombat)
 
 (custom-set-faces
  `(default ((t (:family "Consolas"
                         :foundry "outline"
                         :slant normal
-                        :weight bold
-                        :height 115
+                        :weight normal
+                        :height 125
                         :width normal)))))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -26,7 +29,7 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "\n\n\n\n\n")
 
-;(blink-cursor-mode 0)
+(blink-cursor-mode 0)
 ;(hl-line-mode 0)
 
 (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.

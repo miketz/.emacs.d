@@ -1464,6 +1464,8 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (custom-theme-set-faces
    'tommyh
 
+   '(my-tilde-face
+     ((t (:foreground "black"))))
    '(fringe
      ((t (:foreground "black"
                       :background "#74a6bd"))))

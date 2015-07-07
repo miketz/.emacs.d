@@ -2958,7 +2958,35 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
     (autoload #'proj-emacs file nil t)
     (autoload #'proj-cl file nil t)
     (autoload #'proj-imgtag file nil t)
-    (autoload #'proj-cpp file nil t)))
+    (autoload #'proj-cpp file nil t))
+
+
+  ;;quick load of c:\users\mtz
+  (evil-leader/set-key "1" (lambda ()
+                             (interactive)
+                             (dired "C:\\Users\\mtz")))
+
+  ;;quick load of c:\users\mtz\proj\ecp\dev\db
+  (evil-leader/set-key "2" (lambda ()
+                             (interactive)
+                             (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db")))
+
+  ;;quick load of TFS \Main\SqlScripts
+  (evil-leader/set-key "3" (lambda ()
+                             (interactive)
+                             (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts")))
+
+  ;;quick load of c:\users\mtz\TODO\TODO.org
+  (evil-leader/set-key "t" (lambda ()
+                             (interactive)
+                             (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org"))))
+
+
+(when (eq system-type 'gnu/linux)
+  (evil-leader/set-key "1" (lambda ()
+                             (interactive)
+                             (dired "~"))))
+
 
 ;;; quick load of the .emacs (or init.el) file.
 (defun my-load-init ()
@@ -2969,35 +2997,6 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;; the above key is hard to type on a 60% poker so making an alternative.
 (evil-leader/set-key "8" #'my-load-init)
 
-(when (eq my-curr-computer 'work-laptop)
-  ;;quick load of c:\users\mtz
-  (evil-leader/set-key "1" (lambda ()
-                             (interactive)
-                             (dired "C:\\Users\\mtz"))))
-
-(when (eq system-type 'gnu/linux)
-  (evil-leader/set-key "1" (lambda ()
-                             (interactive)
-                             (dired "~"))))
-
-
-(when (eq my-curr-computer 'work-laptop)
-  ;;quick load of c:\users\mtz\proj\ecp\dev\db
-  (evil-leader/set-key "2" (lambda ()
-                             (interactive)
-                             (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db"))))
-
-(when (eq my-curr-computer 'work-laptop)
-  ;;quick load of TFS \Main\SqlScripts
-  (evil-leader/set-key "3" (lambda ()
-                             (interactive)
-                             (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts"))))
-
-(when (eq my-curr-computer 'work-laptop)
-  ;;quick load of c:\users\mtz\TODO\TODO.org
-  (evil-leader/set-key "t" (lambda ()
-                             (interactive)
-                             (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org"))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; VC version control

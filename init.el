@@ -2580,16 +2580,27 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;------------------
 ;;; Dired
 ;;;------------------
-(with-eval-after-load "dired"
+(with-eval-after-load "dired" ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
   ;; vimify the keybinds.
   (define-key dired-mode-map (kbd "j") #'dired-next-line)
   (define-key dired-mode-map (kbd "k") #'dired-previous-line)
+  (define-key dired-mode-map (kbd "w") #'evil-forward-word-begin)
+  (define-key dired-mode-map (kbd "e") #'evil-forward-word-end)
   (define-key dired-mode-map (kbd "n") #'evil-search-next)
   (define-key dired-mode-map (kbd "N") #'evil-search-previous)
-  ;;TODO: bind #'dired-man which was bound to "N". Or maybe just invoke with M-x
-  )
+  (define-key dired-mode-map (kbd "H") #'evil-window-top)
+  (define-key dired-mode-map (kbd "M") #'evil-window-middle)
+  (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
+
+  ;; re-bind the default bindings we clobbered.
+  (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
+  (define-key dired-mode-map (kbd "C-c e") #'dired-find-file)
+  (define-key dired-mode-map (kbd "C-c N") #'dired-man)
+  (define-key dired-mode-map (kbd "C-c H") #'dired-do-hardlink)
+  (define-key dired-mode-map (kbd "C-c M") #'dired-do-chmod)
+  (define-key dired-mode-map (kbd "C-c L") #'dired-do-load))
 
 ;;(define-key dired-mode-map "c" 'find-file) ;create file
 

@@ -2698,33 +2698,33 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;--------------------------------------------------------------------
 ;;; Paredit
 ;;;--------------------------------------------------------------------
-(when t ;;trying lispy
-  ;;(add-to-list 'load-path "~/.emacs.d/paredit")
-  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-  (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-  ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
-  ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
+;;(add-to-list 'load-path "~/.emacs.d/paredit")
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
+;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
 
+(with-eval-after-load "paredit"
   ;; Stop SLIME's REPL from grabbing DEL,
   ;; which is annoying when backspacing over a '('
   (defun override-slime-repl-bindings-with-paredit ()
     (define-key slime-repl-mode-map
       (read-kbd-macro paredit-backward-delete-key) nil))
-  (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
+  (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit))
 
-  ;; ;;key maps
-  ;; (global-set-key (kbd "C-9") 'paredit-backward-slurp-sexp)
-  ;; (global-set-key (kbd "C-0") 'paredit-forward-slurp-sexp)
-  ;; (global-set-key (kbd "C-M-9") 'paredit-backward-barf-sexp)
-  ;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
-  )
+;; ;;key maps
+;; (global-set-key (kbd "C-9") 'paredit-backward-slurp-sexp)
+;; (global-set-key (kbd "C-0") 'paredit-forward-slurp-sexp)
+;; (global-set-key (kbd "C-M-9") 'paredit-backward-barf-sexp)
+;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
+
 
 ;;;--------------------------
 ;;; smartparens

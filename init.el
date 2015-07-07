@@ -1199,6 +1199,8 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 
    ;; '(hl-line
    ;;   ((t (:background "black"))))
+   '(my-tilde-face
+     ((t (:foreground "dark gray"))))
 
    '(aw-leading-char-face               ; ace-window character.
      ((t (:foreground "spring green"

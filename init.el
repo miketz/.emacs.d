@@ -4262,7 +4262,7 @@ ARGS here to satisfy flycheck."
 ;; j to scroll, it would perioditcally recenter.
 (setq scroll-conservatively 100)
 ;; maintain cursor location when scrolling
-(setq scroll-preserve-screen-position t)
+(setq scroll-preserve-screen-position nil)
 
 (progn ;;window navigation.
   (global-set-key (kbd "M-h") #'evil-window-left)

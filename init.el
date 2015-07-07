@@ -4402,24 +4402,20 @@ ARGS here to satisfy flycheck."
 (setq-default line-spacing nil)
 
 
-;;use tilde's as the fringe graphic for empty lines. Like Vim.
+;; use tilde's as the fringe graphic for empty lines. Like Vim.
 (progn
   (define-fringe-bitmap 'tilde [0 0 0 113 219 142 0 0] nil nil 'center)
   (setcdr (assq 'empty-line fringe-indicator-alist) 'tilde)
 
-  ;; (defface my-tilde-face
-  ;;   '((((class color) (min-colors 88) (background light))
-  ;;      :background "white" :foreground "black")
-  ;;     (((class color) (min-colors 88) (background dark))
-  ;;      :background "green" :foreground "red"))
-  ;;   "Vim tilde in the fringe."
-  ;;   :group 'basic-faces)
+  (defface my-tilde-face
+    '((((background light) (class color))
+       :foreground "black")
+      (((background dark) (class color))
+       :foreground "dark gray"))
+    "Face for Vim tildes ~ in the fringe."
+    :group 'basic-faces)
 
-  ;; (set-fringe-bitmap-face 'tilde 'my-tilde-face)
-
-  ;; TODO: get the custom tilde face above to work.
-  (set-fringe-bitmap-face 'tilde 'font-lock-comment-face)
-  )
+  (set-fringe-bitmap-face 'tilde 'my-tilde-face))
 
 (setq-default indicate-empty-lines t) ;Like vim's tildes
 ;; (setq-default indicate-buffer-boundaries '((up . nil) (down . nil)

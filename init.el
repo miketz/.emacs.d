@@ -3392,7 +3392,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
-  ;; use emacs bindings (not evil). the new v2 magit seems to use evil for some buffers.
+  ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
   (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
 
 (evil-leader/set-key "m" #'magit-status) ; autoloaded

@@ -4227,6 +4227,10 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------
+(when (and nil ;don't start server for now.
+           ;;`server-start' doesn't seemt to work on MS-windows?
+           (eq system-type 'gnu/linux))
+  (server-start))
 
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
@@ -4501,40 +4505,14 @@ ARGS here to satisfy flycheck."
 ;;                 '(lambda () (interactive) (text-scale-decrease 1)))
 
 
-(defvar my-keep-buffers
-  '("*scratch*" "*Messages*" "*Compile-Log*" "*Minibuf-1*"
-    "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
-    "*Echo Area 1*" "*helm mini*")
-  "Buffers to keep alive, even when wiping all buffers.")
 
-(defun square-one ()
-  "Switch to the scratch buffer, then delete all other buffers.
-
-NOTE: `my-keep-buffers' contains buffers to keep alive.
-Emacs tends to crash when some of the basic buffers are absent.
-I'm not certain which absences cause the crash.
-
-It seems killing buffers gives cleanup of other things for free!
-ie closing running processes (slime/swank, omnisharp, etc) and helm-cmd-t
-caches.
-TODO: look into an explicit way to clean up non-buffer things in case there are
-edge cases not covered by buffer killing."
-  (interactive)
-  (switch-to-buffer "*scratch*")
-  (delete-other-windows)
-  ;;cl-set-difference does not work on strings.
-  ;;so use a set of buffer pointers, not buffer names
-  (let ((to-kill (cl-set-difference (buffer-list)
-                                    (mapcar 'get-buffer my-keep-buffers))))
-    (mapc 'kill-buffer to-kill)))
-
-(evil-leader/set-key "0" 'square-one)
+;;;--------------------------------------------------------------------
+;;; my-square-one
+;;;--------------------------------------------------------------------
+(autoload #'my-square-one "my-square-one" nil t)
+(evil-leader/set-key "0" #'my-square-one)
 
 
-(when (and nil ;don't start server for now.
-           ;;`server-start' doesn't seemt to work on MS-windows?
-           (eq system-type 'gnu/linux))
-  (server-start))
 
 ;;;--------------------------------------------------------------------
 ;;; Turn on disabled functions

@@ -3105,9 +3105,11 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;-----------------------------------------------------------------------------
 ;;; ediff
 ;;;-----------------------------------------------------------------------------
-(setq ediff-split-window-function 'split-window-horizontally)
-;; don't use the popup window
-(setq ediff-window-setup-function 'ediff-setup-windows-plain);'ediff-setup-windows-multiframe
+(with-eval-after-load "ediff"
+  (setq ediff-split-window-function 'split-window-horizontally)
+  ;; don't use the popup window
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain) ;'ediff-setup-windows-multiframe
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; helm-w32-launcher. Microsoft Windows only?

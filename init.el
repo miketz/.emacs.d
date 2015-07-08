@@ -245,8 +245,8 @@ Also how many columns to show for a 'real' tab.")
     worf
     elisp-slime-nav
     electric-spacing
-    w3
-    w3m
+    ;;w3
+    ;;w3m
     flymake-jslint
     nlinum)
   "Packages I use from elpa/melpa.")

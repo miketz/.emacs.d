@@ -136,7 +136,7 @@ Also how many columns to show for a 'real' tab.")
   "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")
 
 ;;;----------------------------------
-;; Packages
+;;; Packages
 ;;;----------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/") ;stores elisp files that are not "packages".
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")

@@ -2888,30 +2888,10 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;-----------------------------------------------------------------------------
 ;;; Make dired appear in a side window
 ;;;-----------------------------------------------------------------------------
-(defun my-current-file-path ()
-  "Return the full file path of the current buffer as a string."
-  (interactive)
-  (or load-file-name
-      buffer-file-name))
-
-(defun my-current-folder-path ()
-  "Return the folder path of the current buffer as a string."
-  (interactive)
-  (file-name-directory (my-current-file-path)))
-
-(defun my-folder-nav ()
-  "Opens a dired buffer.  Dired does all the actual work.  This just handles the visual aspects like window placement and size."
-  (interactive)
-  (dired-other-window (my-current-folder-path))
-  (evil-window-move-far-left)
-  ;;I can't find a function to set the exact window size, so collapsing the buffer then enlarging to the size I want.
-  (let ((bigNumToCollapse 500)
-        (width 65))
-    (shrink-window-horizontally bigNumToCollapse)
-    (enlarge-window-horizontally (- width
-                                    (window-total-width)))))
-;;bind to key
-(global-set-key (kbd "<f8>") 'my-folder-nav)
+(autoload #'my-current-file-path "my-folder-nav" nil t)
+(autoload #'my-current-folder-path "my-folder-nav" nil t)
+(autoload #'my-folder-nav "my-folder-nav" nil t)
+(global-set-key (kbd "<f8>") #'my-folder-nav)
 
 
 ;;;-----------------------------------------------------------------------------

@@ -582,7 +582,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;; (evil-define-key 'motion global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 ;; ;;(evil-leader/set-key "," 'evil-execute-in-god-state)
-;; ;;(global-set-key (kbd "C-c i") 'insert-date-string)
+;; ;;(global-set-key (kbd "C-c i") 'my-insert-date-string)
 
 ;; ;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
 ;; ;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
@@ -3910,6 +3910,14 @@ When ARG isn't nil, try to pretty print the sexp."
       ad-do-it))
   (ad-activate 'sx-tab-newest))
 
+
+
+;;;------------------------------------------------------------------------------
+;;; my-date-stuff.el
+;;;------------------------------------------------------------------------------
+(autoload #'my-insert-date-string "my-date-stuff" nil t)
+(global-set-key (kbd "C-c i") #'my-insert-date-string)
+
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------
@@ -4023,29 +4031,14 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;   (add-to-list 'default-frame-alist alpha-lst))
 
 
-(defun my-insert-date-string ()
-  "Insert a date string.  Everything you need to know about the date and time."
-  (interactive)
-  (insert
-   (format-time-string
-    "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N")))
-(global-set-key (kbd "C-c i") #'my-insert-date-string)
 
 ;; Only browse interesting buffers. Not *scratch*, *messages*, etc.
 ;;(global-set-key "\C-x\C-b" 'bs-show)
 
+
 ;;ibuffer. the way C-x C-b should be.
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(defun now ()
-  (interactive)
-  (format-time-string "%b %a %m-%d-%Y %I:%M %p"))
-(defun now-minibuffer ()
-  (interactive)
-  (message (now)))
-(defun now-put-in-buffer ()
-  (interactive)
-  (insert (now)))
 
 
 ;;(global-linum-mode 0) ;show/hide line numbers in margin

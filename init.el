@@ -2518,7 +2518,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;; https://github.com/magnars/expand-region.el
 ;;;--------------------------------------------------------------------
 ;;(require 'expand-region)
-(autoload 'expand-region "expand-region" "expand region" t)
+;; (autoload 'expand-region "expand-region" "expand region" t)
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C--") #'er/contract-region)
 

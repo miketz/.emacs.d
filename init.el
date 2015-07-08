@@ -3837,14 +3837,17 @@ When ARG isn't nil, try to pretty print the sexp."
   (show-paren-mode 1))
 
 
-(progn ;;tab handling
+(progn ;; tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
   (setq-default tab-width my-tab-width)
   (setq-default indent-line-function 'insert-tab))
 
-(setq make-backup-files nil) ;No annoying backup files
-(setq-default backup-inhibited t)
-(setq auto-save-default nil) ;No annoying auto-save files
+(progn ;; for better or worse, prevent creation of tmp backup files
+  (setq make-backup-files nil)          ;No annoying backup files
+  (setq-default backup-inhibited t)
+  (setq auto-save-default nil)          ;No annoying auto-save files
+  )
+
 ;; Don't echo passwords when dealing with interactive programs
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)

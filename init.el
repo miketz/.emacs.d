@@ -270,14 +270,18 @@ Also how many columns to show for a 'real' tab.")
 ;; activate all the packages (in particular autoloads)
 (package-initialize)
 
-;; fetch the list of packages available
-(unless package-archive-contents
-  (package-refresh-contents))
 
-;; install the missing packages
-(dolist (pkg my-packages)
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
+(defun my-install-packages ()
+  "Call this function on a new emacs installation to install packages."
+  (interactive)
+  ;; fetch the list of packages available
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  ;; install the missing packages
+  (dolist (pkg my-packages)
+    (unless (package-installed-p pkg)
+      (package-install pkg))))
 
 (defun package-list-unaccounted-packages ()
   "Display unaccounted packages.

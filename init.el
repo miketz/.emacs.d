@@ -339,30 +339,34 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------
 ;;; key-chord
 ;;;----------------------------------
-(setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
-(setq key-chord-one-key-delay 0.4)
-
 ;; slows down movement when in visual mode and pressing "j" sine it is looking for the chord.
-(require 'key-chord)
-(key-chord-mode 1)
-;; Define a key chord for escape so I don't have to press Esc or C-[
-(let ((chord "fj"))
-  ;;NOTE: fj lags downward movement with "j" in visual mode.
-  ;;      If you hold down j it messes things up and the chord doesn't work.
+(key-chord-mode 1) ; autoloaded function
 
-  ;;moved into `eval-after-load' for evil so key mpas are defined.
-  ;; (key-chord-define evil-insert-state-map chord #'evil-normal-state)
-  ;; (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+(with-eval-after-load "key-chord"
+  (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+  (setq key-chord-one-key-delay 0.4)
 
-  ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
-  ;; (key-chord-define evil-operator-state-map chord func)
-  ;; (key-chord-define evil-motion-state-map chord func))
-  ;;moved into `eval-after-load' for helm so helm-map is defined (key-chord-define helm-map chord #'helm-keyboard-quit)
-  (when nil ;;trying lispy
-    (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+  ;; Define a key chord for escape so I don't have to press Esc or C-[
+  (let ((chord "fj"))
+    ;;NOTE: fj lags downward movement with "j" in visual mode.
+    ;;      If you hold down j it messes things up and the chord doesn't work.
 
-;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
-;;(key-chord-define c++-mode-map ";;"  "\C-e;")
+    ;;moved into `eval-after-load' for evil so key mpas are defined.
+    ;; (key-chord-define evil-insert-state-map chord #'evil-normal-state)
+    ;; (key-chord-define evil-visual-state-map chord #'evil-exit-visual-state)
+
+    ;; (key-chord-define evil-replace-state-map chord 'evil-normal-state)
+    ;; (key-chord-define evil-operator-state-map chord func)
+    ;; (key-chord-define evil-motion-state-map chord func))
+    ;;moved into `eval-after-load' for helm so helm-map is defined (key-chord-define helm-map chord #'helm-keyboard-quit)
+    (when nil ;;trying lispy
+      ;;TODO: make sure `hydra-paredit/body' still works after autoload changes.
+      (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+
+  ;;(key-chord-define evil-insert-state-map "fj" 'evil-normal-state)
+  ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
+  )
+
 
 
 

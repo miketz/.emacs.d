@@ -3093,6 +3093,8 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;; Doesn't work when set in eval-after-load ???
 ;; (setq magit-last-seen-setup-instructions "1.4.0")
 
+(evil-leader/set-key "m" #'magit-status) ; autoloaded
+
 (with-eval-after-load "magit"
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
@@ -3100,7 +3102,6 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
   (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
 
-(evil-leader/set-key "m" #'magit-status) ; autoloaded
 
 ;;;-----------------------------------------------------------------------------
 ;;; ediff

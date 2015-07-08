@@ -2306,6 +2306,16 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
+(with-eval-after-load "smex"
+  ;; insert a hypen - on space like in normal M-x
+  (defadvice smex (around space-inserts-hyphen activate compile)
+    (let ((ido-cannot-complete-command `(lambda ()
+                                          (interactive)
+                                          (if (string= " " (this-command-keys))
+                                              (insert ?-)
+                                            (funcall ,ido-cannot-complete-command)))))
+      ad-do-it)))
+
 ;;;--------------------
 ;;; Yasnippet
 ;;;--------------------

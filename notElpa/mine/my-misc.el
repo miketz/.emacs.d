@@ -54,11 +54,6 @@ BODY is the core code that will use the variables."
   "Remove whitespace at the beginning and end of S."
   (s-trim-left (s-trim-right s)))
 
-(defun my-str-starts-with-p (string prefix)
-  "Return t if STRING begins with PREFIX."
-  (and (string-match (rx-to-string `(: bos ,prefix) t)
-                     string)
-       t))
 
 (defun my-str-replace (what with in)
   "Replace WHAT WITH IN."

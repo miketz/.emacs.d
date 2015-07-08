@@ -66,12 +66,17 @@ Useful to check a boolean state and toggle the state in 1 go."
    ((= i 0) (car lst))
    (t (my-getAtIndex (- i 1) (cdr lst)))))
 
+(defun my-str-starts-with-p (string prefix)
+  "Return t if STRING begins with PREFIX."
+  (and (string-match (rx-to-string `(: bos ,prefix) t)
+                     string)
+       t))
+
 (defun my-str-ends-with-p (string suffix)
   "Return t if STRING ends with SUFFIX."
   (and (string-match (rx-to-string `(: ,suffix eos) t)
                      string)
        t))
-
 
 (defun my-get-string-from-file (filePath)
   "Return FILEPATH's file content."

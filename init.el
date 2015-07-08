@@ -2034,7 +2034,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(defvar my-use-helm-p t
+(defvar my-use-helm-p nil
   "Whether i'm using helm at the momnet or not.")
 (defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")

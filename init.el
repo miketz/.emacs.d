@@ -2797,15 +2797,15 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;; Load projects
 ;;;-------------------------------
 (when (eq my-curr-computer 'work-laptop)
-  (let ((file "my-proj-work-laptop" ))
-    (autoload #'proj-safetyweb file nil t)
-    (autoload #'proj-db-safety file nil t)
-    (autoload #'proj-trighist file nil t)
-    (autoload #'proj-safetyweb file nil t)
-    (autoload #'proj-emacs file nil t)
-    (autoload #'proj-cl file nil t)
-    (autoload #'proj-imgtag file nil t)
-    (autoload #'proj-cpp file nil t))
+  (let ((lisp-file "my-proj-work-laptop" ))
+    (autoload #'proj-safetyweb lisp-file nil t)
+    (autoload #'proj-db-safety lisp-file nil t)
+    (autoload #'proj-trighist lisp-file nil t)
+    (autoload #'proj-safetyweb lisp-file nil t)
+    (autoload #'proj-emacs lisp-file nil t)
+    (autoload #'proj-cl lisp-file nil t)
+    (autoload #'proj-imgtag lisp-file nil t)
+    (autoload #'proj-cpp lisp-file nil t))
 
 
   ;;quick load of c:\users\mtz

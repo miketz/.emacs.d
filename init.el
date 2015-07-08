@@ -2039,9 +2039,9 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 (defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")
 
-(unless (or (eq my-curr-computer 'leyna-laptop)
-            (eq my-curr-computer 'raspberry-pi) ;helm is a little slow on a raspberry pi.
-            (not my-use-helm-p))
+(when (and my-use-helm-p
+           (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
+           (not (eq my-curr-computer 'leyna-laptop)))
 
   (autoload 'helm "helm" nil t)
   (autoload 'helm-config "helm-config" nil t)

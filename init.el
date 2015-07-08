@@ -413,7 +413,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (setq evil-motion-state-message nil)
     (setq evil-normal-state-message nil)
     (setq evil-operator-state-message nil)
-    (setq evil-replace-state-message nil))
+    (setq evil-replace-state-message nil)
+
+    (when my-graphic-p
+      ;;Don't waste mode line space displaying Evil-states.
+      ;;Cursor style/color is sufficient to determine mode.
+      ;;but if in a terminal without cursor styles then allow it to exist.
+      (setq evil-mode-line-format nil)))
+
 
   (setq evil-default-cursor t)
 
@@ -4041,11 +4048,6 @@ When ARG isn't nil, try to pretty print the sexp."
 (setq mode-line-modes nil)
 ;;(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
 
-(when my-graphic-p
-  ;;Don't waste mode line space displaying Evil-states.
-  ;;Cursor style/color is sufficient to determine mode.
-  ;;but if in a terminal without cursor styles then allow it to exist.
-  (setq evil-mode-line-format nil))
 
 
 (progn ;; show time in mode line

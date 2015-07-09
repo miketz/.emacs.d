@@ -170,7 +170,7 @@ Also how many columns to show for a 'real' tab.")
     ;;company-quickhelp
     slime-company
     ;;ace-jump-mode
-    ace-window
+    ;;ace-window
     ;;ace-jump-zap
     csharp-mode
     js2-mode
@@ -2577,11 +2577,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;; ace-window
 ;;;--------------------
-(global-set-key (kbd "M-w") 'ace-window)
-(with-eval-after-load "ace-window"
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
-  (setq aw-background nil) ;; don't dim the background
-  )
+;; (global-set-key (kbd "M-w") 'ace-window)
+;; (with-eval-after-load "ace-window"
+;;   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
+;;   (setq aw-background nil) ;; don't dim the background
+;;   )
 
 ;;;--------------------
 ;;; ace-jump-zap

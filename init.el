@@ -1888,7 +1888,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(defvar my-use-helm-p t
+(defvar my-use-helm-p nil
   "Whether i'm using helm at the momnet or not.")
 (defvar my-load-helm-on-init-p nil
   "Whether to load helm during start up, or postpone till first attempted use.")
@@ -2131,7 +2131,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; ido-veritical-mode
 ;;; smex (built on ido)
 ;;;--------------------
-(defvar my-use-ido-p nil
+(defvar my-use-ido-p t
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p

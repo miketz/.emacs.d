@@ -1882,10 +1882,6 @@ This prevents overlapping themes; something I would rarely want."
 ;; (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
 
 
-;;;--------------------
-;;; imenu
-;;;--------------------
-(evil-leader/set-key "i" #'helm-imenu)
 
 ;;;--------------------
 ;;; Helm
@@ -1901,10 +1897,6 @@ This prevents overlapping themes; something I would rarely want."
            (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
            (not (eq my-curr-computer 'leyna-laptop)))
 
-  (autoload 'helm "helm" nil t)
-  (autoload 'helm-config "helm-config" nil t)
-
-
   (progn ;;functions in key maps are auto-loaded.
     (evil-leader/set-key "b" #'helm-buffers-list)
     ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
@@ -1915,6 +1907,7 @@ This prevents overlapping themes; something I would rarely want."
     ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
+    (evil-leader/set-key "i" #'helm-imenu)
     ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
     ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
     ;; (global-set-key (kbd "M-/") #'hippie-expand)
@@ -1927,78 +1920,78 @@ This prevents overlapping themes; something I would rarely want."
   ;; NOTE: this breaks if put in eval-after-load. Strange, but it works if
   ;; I just put it after the call to (helm-mode 1)
   ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
-
-  (with-eval-after-load "helm"
-    (setq helm-ff-transformer-show-only-basename nil
-          ;;helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
-          ;;helm-yank-symbol-first                 t
-          ;;helm-move-to-line-cycle-in-source      t
-          helm-buffers-fuzzy-matching            t
-          ;;helm-ff-auto-update-initial-value      t
-          )
-
-    (setq helm-ff-lynx-style-map nil
-          helm-input-idle-delay 0.1
-          helm-idle-delay 0.1)
-
-    ;; (autoload 'helm-descbinds      "helm-descbinds" t)
-    ;; (autoload 'helm-eshell-history "helm-eshell"    t)
-    ;; (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
-
-    ;; (global-set-key (kbd "C-h a")    #'helm-apropos)
-    ;; (global-set-key (kbd "C-h i")    #'helm-info-emacs)
-    ;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
-
-    ;; (add-hook 'eshell-mode-hook
-    ;; (lambda ()
-    ;;   (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
-    ;;   (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
-
-
-    ;;(helm-adaptative-mode t)
-
-    (progn ;;from tuhdo. Customizing helm window size/display.
-      (setq helm-display-header-line nil) ;save 1 line for rarely used header.
-      (set-face-attribute 'helm-source-header nil :height 1.0) ;don't make source seperators bigger than needed
-      ;; (progn
-      ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
-      ;;   ;;helm window size as you type.
-      ;;   (helm-autoresize-mode 1)
-      ;;   ;;disable the dynamic size adjustment.
-      ;;   (setq helm-autoresize-max-height 35)
-      ;;   (setq helm-autoresize-min-height 35))
-      ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
-      ;; ;;lots of split windows, keep the popup at the current window.
-      ;; (setq helm-split-window-in-side-p t)
-      )
-
-
-    ;; (progn ;;Trick from tuhdo. Move helm input to top of helm buffer, hide in echo area.
-    ;;   (setq helm-echo-input-in-header-line t)
-    ;;   (setq helm-split-window-in-side-p t) ;;optoinally put helm buffer inside current buffer.
-
-    ;;   (defun helm-hide-minibuffer-maybe ()
-    ;;     (when (with-helm-buffer helm-echo-input-in-header-line)
-    ;;       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-    ;;         (overlay-put ov 'window (selected-window))
-    ;;         (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
-    ;;                                 `(:background ,bg-color :foreground ,bg-color)))
-    ;;         (setq-local cursor-type nil))))
-
-    ;;   (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe))
-
-
-    ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
-
-    ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
-    ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
-    ;;(define-key helm-map (kbd "M-o") #'helm-previous-source)
-
-    ;;(global-set-key (kbd "M-s s")   #'helm-ag)
-
-    (key-chord-define helm-map "fj" #'helm-keyboard-quit) ;must be in eval-after-load so `helm-map' is defined
-    ) ;;end helm eval-after-load
   )
+
+(with-eval-after-load "helm"
+  (setq helm-ff-transformer-show-only-basename nil
+        ;;helm-adaptive-history-file             "~/.emacs.d/data/helm-history"
+        ;;helm-yank-symbol-first                 t
+        ;;helm-move-to-line-cycle-in-source      t
+        helm-buffers-fuzzy-matching t
+        ;;helm-ff-auto-update-initial-value      t
+        )
+
+  (setq helm-ff-lynx-style-map nil
+        helm-input-idle-delay 0.1
+        helm-idle-delay 0.1)
+
+  ;; (autoload 'helm-descbinds      "helm-descbinds" t)
+  ;; (autoload 'helm-eshell-history "helm-eshell"    t)
+  ;; (autoload 'helm-esh-pcomplete  "helm-eshell"    t)
+
+  ;; (global-set-key (kbd "C-h a")    #'helm-apropos)
+  ;; (global-set-key (kbd "C-h i")    #'helm-info-emacs)
+  ;; (global-set-key (kbd "C-h b")    #'helm-descbinds)
+
+  ;; (add-hook 'eshell-mode-hook
+  ;; (lambda ()
+  ;;   (define-key eshell-mode-map (kbd "<tab>") #'helm-esh-pcomplete)
+  ;;   (define-key eshell-mode-map (kbd "C-c C-l") #'helm-eshell-history)))
+
+
+  ;;(helm-adaptative-mode t)
+
+  (progn ;;from tuhdo. Customizing helm window size/display.
+    (setq helm-display-header-line nil) ;save 1 line for rarely used header.
+    (set-face-attribute 'helm-source-header nil :height 1.0) ;don't make source seperators bigger than needed
+    ;; (progn
+    ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
+    ;;   ;;helm window size as you type.
+    ;;   (helm-autoresize-mode 1)
+    ;;   ;;disable the dynamic size adjustment.
+    ;;   (setq helm-autoresize-max-height 35)
+    ;;   (setq helm-autoresize-min-height 35))
+    ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
+    ;; ;;lots of split windows, keep the popup at the current window.
+    ;; (setq helm-split-window-in-side-p t)
+    )
+
+
+  ;; (progn ;;Trick from tuhdo. Move helm input to top of helm buffer, hide in echo area.
+  ;;   (setq helm-echo-input-in-header-line t)
+  ;;   (setq helm-split-window-in-side-p t) ;;optoinally put helm buffer inside current buffer.
+
+  ;;   (defun helm-hide-minibuffer-maybe ()
+  ;;     (when (with-helm-buffer helm-echo-input-in-header-line)
+  ;;       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
+  ;;         (overlay-put ov 'window (selected-window))
+  ;;         (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
+  ;;                                 `(:background ,bg-color :foreground ,bg-color)))
+  ;;         (setq-local cursor-type nil))))
+
+  ;;   (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe))
+
+
+  ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
+
+  ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
+  ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
+  ;;(define-key helm-map (kbd "M-o") #'helm-previous-source)
+
+  ;;(global-set-key (kbd "M-s s")   #'helm-ag)
+
+  (key-chord-define helm-map "fj" #'helm-keyboard-quit) ;must be in eval-after-load so `helm-map' is defined
+  ) ;;end helm eval-after-load
 
 
 ;;;------------------------------------------------------------------------------
@@ -2063,7 +2056,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; (autoload 'helm-swoop "helm-swoop" nil t)
 
 ;; invoke with M-x for now. binding avy to the "s" key
-(define-key evil-normal-state-map (kbd "s") #'helm-swoop)
+(when my-use-helm-p
+ (define-key evil-normal-state-map (kbd "s") #'helm-swoop))
 
 ;; (global-set-key (kbd "C-c s") 'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
@@ -2094,7 +2088,8 @@ This prevents overlapping themes; something I would rarely want."
   ;; (setq helm-swoop-split-direction 'split-window-vertically)
 
   ;; If nil, you can slightly boost invoke speed in exchange for text color
-  (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
+  (setq helm-swoop-speed-or-color nil) ;use color. Worth the small delay.
+  ;; (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
   )
 
 
@@ -2140,38 +2135,34 @@ This prevents overlapping themes; something I would rarely want."
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p
+  (ido-mode t) ;;autoloaded function. turn on ido.
+  (evil-leader/set-key "b" #'ido-switch-buffer)
 
-  (ido-mode t) ;;autoloaded function.
-
-  (with-eval-after-load "ido"
-    (setq ido-everywhere t)
-    (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
-    )
-
-;;;--------------------
-;;; ido-vertical-mode
-;;;--------------------
-  (with-eval-after-load "ido-vertical-mode"
-    (setq ido-vertical-define-keys 'C-n-and-C-p-only)
-    (setq ido-vertical-show-count t))
-
-;;;----------------------
-;;; smex. (built on ido)
-;;;----------------------
   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
   ;;                   ; when Smex is auto-initialized on its first run.
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "C-c M-x") 'execute-extended-command) ; rebind the original M-x command
-  (with-eval-after-load "smex"
-    ;; insert a hypen - on space like in normal M-x
-    (defadvice smex (around space-inserts-hyphen activate compile)
-      (let ((ido-cannot-complete-command `(lambda ()
-                                            (interactive)
-                                            (if (string= " " (this-command-keys))
-                                                (insert ?-)
-                                              (funcall ,ido-cannot-complete-command)))))
-        ad-do-it))))
+  )
+
+(with-eval-after-load "ido"
+    (setq ido-everywhere t)
+    (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
+    )
+
+(with-eval-after-load "ido-vertical-mode"
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+  (setq ido-vertical-show-count t))
+
+(with-eval-after-load "smex"
+  ;; insert a hypen - on space like in normal M-x
+  (defadvice smex (around space-inserts-hyphen activate compile)
+    (let ((ido-cannot-complete-command `(lambda ()
+                                          (interactive)
+                                          (if (string= " " (this-command-keys))
+                                              (insert ?-)
+                                            (funcall ,ido-cannot-complete-command)))))
+      ad-do-it)))
 
 ;;;--------------------
 ;;; Yasnippet
@@ -3022,18 +3013,19 @@ This prevents overlapping themes; something I would rarely want."
   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
   ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
 
-  ;;;----------------------------------
-  ;;; helm-flycheck
-  ;;;----------------------------------
-  (defun my-helm-flycheck ()
-    (interactive)
-    ;;nil for no candidate limit. I want to scroll through all the warnings.
-    (let ((helm-candidate-number-limit nil))
-      (call-interactively #'helm-flycheck)))
-  ;;(evil-define-key 'normal flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
-  (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
-  ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
-  )
+;;;----------------------------------
+;;; helm-flycheck
+;;;----------------------------------
+  (when my-use-helm-p
+    (defun my-helm-flycheck ()
+      (interactive)
+      ;;nil for no candidate limit. I want to scroll through all the warnings.
+      (let ((helm-candidate-number-limit nil))
+        (call-interactively #'helm-flycheck)))
+    ;;(evil-define-key 'normal flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
+    (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
+    ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
+    ))
 
 ;;;------------------------------------------------------------------------------
 ;;; hydra
@@ -3487,9 +3479,6 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; prevents warnings where you must select endcoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 
-;;(evil-leader/set-key "b" #'ivy-switch-buffer)
-;;(evil-leader/set-key "b" #'ibuffer)
-;;(evil-leader/set-key "b" #'ido-switch-buffer)
 
 (defun what-face (pos)
   "Prints the face at point.  POS = point???"
@@ -3602,6 +3591,8 @@ When ARG isn't nil, try to pretty print the sexp."
   (evil-leader/set-key "b" #'ibuffer)
   ;; (evil-leader/set-key "b" #'ido-switch-buffer)
   ;; (global-set-key (kbd "M-/") #'hippie-expand)
+  ;; (evil-leader/set-key "b" #'ivy-switch-buffer)
+  ;; (evil-leader/set-key "b" #'ibuffer)
   )
 
 ;;ibuffer. the way C-x C-b should be.

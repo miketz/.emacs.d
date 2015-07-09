@@ -241,7 +241,7 @@ Also how many columns to show for a 'real' tab.")
     avy
     helm-flycheck
     lispy
-    helm-descbinds
+    ;;helm-descbinds
     worf
     elisp-slime-nav
     electric-spacing
@@ -1892,9 +1892,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(defvar my-use-helm-p nil
+(defvar my-use-helm-p t
   "Whether i'm using helm at the momnet or not.")
-(defvar my-load-helm-on-init-p t
+(defvar my-load-helm-on-init-p nil
   "Whether to load helm during start up, or postpone till first attempted use.")
 
 (when (and my-use-helm-p
@@ -1997,36 +1997,26 @@ This prevents overlapping themes; something I would rarely want."
     ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
     (key-chord-define helm-map "fj" #'helm-keyboard-quit) ;must be in eval-after-load so `helm-map' is defined
-
-    (progn
-;;;------------------------------------------------------------------------------
-;;; helm-descbinds
-;;;------------------------------------------------------------------------------
-      (helm-descbinds-mode)
-
-      ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
-      ;; `C-h b', `C-x C-h' these run `helm-descbinds'.
-      ;;
-      ;; In the Helm buffer, you can select key-binds with helm interface.
-      ;;
-      ;;  - When type RET, selected candidate command is executed.
-      ;;
-      ;;  - When type TAB, You can "Execute", "Describe Function" or "Find
-      ;;    Function" by the menu.
-      ;;
-      ;;  - When type C-z, selected command is described without quiting.
-      )
     ) ;;end helm eval-after-load
   )
 
-(when (or (eq my-curr-computer 'leyna-laptop)
-          (eq my-curr-computer 'raspberry-pi)
-          (not my-use-helm-p))
-  ;; (evil-leader/set-key "b" #'ibuffer)
-  (evil-leader/set-key "b" #'ido-switch-buffer)
-  ;; (global-set-key (kbd "M-/") #'hippie-expand)
-  )
 
+;;;------------------------------------------------------------------------------
+;;; helm-descbinds
+;;;------------------------------------------------------------------------------
+;; (helm-descbinds-mode)
+
+;; ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
+;; ;; `C-h b', `C-x C-h' these run `helm-descbinds'.
+;; ;;
+;; ;; In the Helm buffer, you can select key-binds with helm interface.
+;; ;;
+;; ;;  - When type RET, selected candidate command is executed.
+;; ;;
+;; ;;  - When type TAB, You can "Execute", "Describe Function" or "Find
+;; ;;    Function" by the menu.
+;; ;;
+;; ;;  - When type C-z, selected command is described without quiting.
 
 
 ;;;----------------------------------
@@ -2070,7 +2060,15 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;; helm-swoop
 ;;;--------------------
-(autoload 'helm-swoop "helm-swoop" nil t)
+;; (autoload 'helm-swoop "helm-swoop" nil t)
+
+;; invoke with M-x for now. binding avy to the "s" key
+(define-key evil-normal-state-map (kbd "s") #'helm-swoop)
+
+;; (global-set-key (kbd "C-c s") 'helm-swoop)
+;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
+;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
+
 (with-eval-after-load "helm-swoop"
   ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
   (setq helm-swoop-pre-input-function
@@ -2099,12 +2097,6 @@ This prevents overlapping themes; something I would rarely want."
   (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
   )
 
-;; invoke with M-x for now. binding avy to the "s" key
-;; (define-key evil-normal-state-map (kbd "s") 'helm-swoop)
-
-;; (global-set-key (kbd "C-c s") 'helm-swoop)
-;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
-;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
 
 ;;;---------------------
 ;;; sublimity
@@ -2144,7 +2136,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; ido-veritical-mode
 ;;; smex (built on ido)
 ;;;--------------------
-(defvar my-use-ido-p t
+(defvar my-use-ido-p nil
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p
@@ -2530,8 +2522,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 (global-set-key (kbd "M-g g") 'avy-goto-line)
 (global-set-key (kbd "M-g M-g") 'avy-goto-line)
-(define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
-(define-key evil-motion-state-map (kbd "s") 'avy-goto-char-2)
+;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
+;; (define-key evil-motion-state-map (kbd "s") 'avy-goto-char-2)
 (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
 (define-key evil-motion-state-map (kbd "SPC") 'avy-goto-word-1)
 
@@ -3601,6 +3593,16 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; Only browse interesting buffers. Not *scratch*, *messages*, etc.
 ;;(global-set-key "\C-x\C-b" 'bs-show)
 
+
+;; if we havn't bound leader-b to buffer switching yet, then default to ibuffer.
+(when (or (eq my-curr-computer 'leyna-laptop)
+          (eq my-curr-computer 'raspberry-pi)
+          (and (not my-use-helm-p)
+               (not my-use-ido-p)))
+  (evil-leader/set-key "b" #'ibuffer)
+  ;; (evil-leader/set-key "b" #'ido-switch-buffer)
+  ;; (global-set-key (kbd "M-/") #'hippie-expand)
+  )
 
 ;;ibuffer. the way C-x C-b should be.
 (global-set-key (kbd "C-x C-b") 'ibuffer)

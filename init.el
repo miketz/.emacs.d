@@ -879,8 +879,8 @@ This prevents overlapping themes; something I would rarely want."
    ;; '(hl-line
    ;;   ((t (:background "black"))))
 
-   '(minibuffer-prompt
-     ((t (:foreground "spring green"))))
+   ;; '(minibuffer-prompt
+   ;;   ((t (:foreground "spring green"))))
    '(my-tilde-face
      ((t (:foreground "dark gray"))))
 

@@ -751,9 +751,7 @@ This prevents overlapping themes; something I would rarely want."
 
 (defun my-cursor-stuff-darkBg ()
   (interactive)
-  ;;(my-cursor-stuff :color-emacs "cyan" :color-evil "#00DF00")
-  (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green")
-  )
+  (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green"))
 
 (defun my-cursor-stuff-lightBg ()
   (interactive)

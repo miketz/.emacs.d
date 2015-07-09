@@ -728,23 +728,6 @@ This prevents overlapping themes; something I would rarely want."
 (defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
 (defvar my-charcoal "#35352B" "Expirimental dark background color.")
 
-;;custom-enabled-themes
-;;custom-safe-themes
-;;custom-known-themes
-;;(custom-available-themes)
-(defvar my-c-index 0)
-(defun my-cycle-theme ()
-  (interactive)
-  (let* ((themes (custom-available-themes))
-         (thm (nth my-c-index themes)))
-    (unwind-protect
-        (progn
-          (load-theme thm t))
-      (progn
-        (print thm)
-        (incf my-c-index)
-        (when (= my-c-index (length themes))
-          (setq my-c-index 0))))))
 
 
 ;;programmatically call a fucntion as if a prefix arg C-u was used.
@@ -898,8 +881,23 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
    (let ((helm-candidate-number-limit nil))
      (call-interactively #'my-load-theme))))
 
-
-
+;;custom-enabled-themes
+;;custom-safe-themes
+;;custom-known-themes
+;;(custom-available-themes)
+(defvar my-c-index 0)
+(defun my-cycle-theme ()
+  (interactive)
+  (let* ((themes (custom-available-themes))
+         (thm (nth my-c-index themes)))
+    (unwind-protect
+        (progn
+          (load-theme thm t))
+      (progn
+        (print thm)
+        (incf my-c-index)
+        (when (= my-c-index (length themes))
+          (setq my-c-index 0))))))
 (global-set-key (kbd "<f10>") #'my-cycle-theme)
 
 (defun my-cursor-stuff-darkBg ()

@@ -152,3 +152,20 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
         (incf my-c-index)
         (when (= my-c-index (length themes))
           (setq my-c-index 0))))))
+
+
+
+;; (defvar cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
+;;                         "mint cream" "honeydew" "white smoke" "ghost white"
+;;                         "snow" "alice blue" "lavender"))
+(defvar cycle-colors `("old lace" "floral white" "snow" "ghost white" "white"
+                       "#F3F1DE" "#F3F2EA" ,mayan-smoke))
+(defvar cycle-index 0)
+(defun my-cycle-light-bg ()
+  (interactive)
+  (if (= cycle-index (1- (length cycle-colors)))
+      (setq cycle-index 0)
+    (setq cycle-index (1+ cycle-index)))
+  (let ((bg (my-getAtIndex cycle-index cycle-colors)))
+    (set-background-color (my-getAtIndex cycle-index cycle-colors))
+    (message bg)))

@@ -744,6 +744,7 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-load-theme "my-load-theme" nil t)
   (autoload #'color "my-load-theme" nil t) ;trying to duplciate vim's :color interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
+  (autoload #'my-cycle-light-bg "my-load-theme" nil t)
 
   (global-set-key (kbd "<f9>")
                   (lambda ()
@@ -751,7 +752,8 @@ This prevents overlapping themes; something I would rarely want."
                     ;;nil for no candidate limit. I want to scroll through all the themes.
                     (let ((helm-candidate-number-limit nil))
                       (call-interactively #'my-load-theme))))
-  (global-set-key (kbd "<f10>") #'my-cycle-theme))
+  (global-set-key (kbd "<f10>") #'my-cycle-theme)
+  (global-set-key (kbd "<f12>") 'my-cycle-light-bg))
 
 
 
@@ -1343,22 +1345,7 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 
-(defvar cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
-                        "mint cream" "honeydew" "white smoke" "ghost white"
-                        "snow" "alice blue" "lavender"))
-(defvar cycle-colors `("old lace" "floral white" "snow" "ghost white" "white"
-                       "#F3F1DE" "#F3F2EA" ,mayan-smoke))
-(defvar cycle-index 0)
-(defun my-cycle-light-bg ()
-  (interactive)
-  (if (= cycle-index (1- (length cycle-colors)))
-      (setq cycle-index 0)
-    (setq cycle-index (1+ cycle-index)))
-  (let ((bg (my-getAtIndex cycle-index cycle-colors)))
-    (set-background-color (my-getAtIndex cycle-index cycle-colors))
-    (message bg)))
 
-(global-set-key (kbd "<f12>") 'my-cycle-light-bg)
 
 ;;theme of the week and corresponding settings. This may change often.
 (progn

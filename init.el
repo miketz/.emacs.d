@@ -2135,7 +2135,9 @@ This prevents overlapping themes; something I would rarely want."
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p
+  (setq ido-everywhere t)
   (ido-mode t) ;;autoloaded function. turn on ido.
+
   (evil-leader/set-key "b" #'ido-switch-buffer)
 
   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
@@ -2146,7 +2148,6 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 (with-eval-after-load "ido"
-    (setq ido-everywhere t)
     (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
     )
 

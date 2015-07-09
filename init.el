@@ -248,7 +248,8 @@ Also how many columns to show for a 'real' tab.")
     ;;w3
     ;;w3m
     flymake-jslint
-    nlinum)
+    nlinum
+    ido-vertical-mode)
   "Packages I use from elpa/melpa.")
 
 
@@ -2021,7 +2022,8 @@ This prevents overlapping themes; something I would rarely want."
 (when (or (eq my-curr-computer 'leyna-laptop)
           (eq my-curr-computer 'raspberry-pi)
           (not my-use-helm-p))
-  (evil-leader/set-key "b" #'ibuffer)
+  ;; (evil-leader/set-key "b" #'ibuffer)
+  (evil-leader/set-key "b" #'ido-switch-buffer)
   ;; (global-set-key (kbd "M-/") #'hippie-expand)
   )
 
@@ -2140,9 +2142,19 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;; Ido mode
 ;;;--------------------
-;;(require 'ido)
-(setq ido-everywhere t)
-(ido-mode t)
+(ido-mode t) ;autoloaded function.
+
+(with-eval-after-load "ido"
+  (setq ido-everywhere t)
+  (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
+  )
+
+;;;--------------------
+;;; ido-vertical-mode
+;;;--------------------
+(with-eval-after-load "ido-vertical-mode"
+  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+  (setq ido-vertical-show-count t))
 
 ;;;----------------------
 ;;; smex. (built on ido)
@@ -2151,7 +2163,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;                   ; when Smex is auto-initialized on its first run.
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-
+(global-set-key (kbd "C-c M-x") 'execute-extended-command) ; rebind the original M-x command
 (with-eval-after-load "smex"
   ;; insert a hypen - on space like in normal M-x
   (defadvice smex (around space-inserts-hyphen activate compile)

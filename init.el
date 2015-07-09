@@ -2140,39 +2140,46 @@ This prevents overlapping themes; something I would rarely want."
 
 
 ;;;--------------------
-;;; Ido mode
+;;; ido
+;;; ido-veritical-mode
+;;; smex (built on ido)
 ;;;--------------------
-(ido-mode t) ;autoloaded function.
+(defvar my-use-ido-p t
+  "If I'm using ido at the moment.")
 
-(with-eval-after-load "ido"
-  (setq ido-everywhere t)
-  (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
-  )
+(when my-use-ido-p
+
+  (ido-mode t) ;;autoloaded function.
+
+  (with-eval-after-load "ido"
+    (setq ido-everywhere t)
+    (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
+    )
 
 ;;;--------------------
 ;;; ido-vertical-mode
 ;;;--------------------
-(with-eval-after-load "ido-vertical-mode"
-  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
-  (setq ido-vertical-show-count t))
+  (with-eval-after-load "ido-vertical-mode"
+    (setq ido-vertical-define-keys 'C-n-and-C-p-only)
+    (setq ido-vertical-show-count t))
 
 ;;;----------------------
 ;;; smex. (built on ido)
 ;;;----------------------
-;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-;;                   ; when Smex is auto-initialized on its first run.
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c M-x") 'execute-extended-command) ; rebind the original M-x command
-(with-eval-after-load "smex"
-  ;; insert a hypen - on space like in normal M-x
-  (defadvice smex (around space-inserts-hyphen activate compile)
-    (let ((ido-cannot-complete-command `(lambda ()
-                                          (interactive)
-                                          (if (string= " " (this-command-keys))
-                                              (insert ?-)
-                                            (funcall ,ido-cannot-complete-command)))))
-      ad-do-it)))
+  ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+  ;;                   ; when Smex is auto-initialized on its first run.
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  (global-set-key (kbd "C-c M-x") 'execute-extended-command) ; rebind the original M-x command
+  (with-eval-after-load "smex"
+    ;; insert a hypen - on space like in normal M-x
+    (defadvice smex (around space-inserts-hyphen activate compile)
+      (let ((ido-cannot-complete-command `(lambda ()
+                                            (interactive)
+                                            (if (string= " " (this-command-keys))
+                                                (insert ?-)
+                                              (funcall ,ido-cannot-complete-command)))))
+        ad-do-it))))
 
 ;;;--------------------
 ;;; Yasnippet

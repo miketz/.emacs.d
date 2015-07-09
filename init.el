@@ -367,9 +367,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
   )
 
-
-
-
 ;;;----------------------------------
 ;;; cursor
 ;;;----------------------------------
@@ -398,6 +395,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
     ;;give special color I know when it is not full-evil bindings.
     (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
+
+(defun my-cursor-stuff-darkBg ()
+  (interactive)
+  (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green"))
+
+(defun my-cursor-stuff-lightBg ()
+  (interactive)
+  (my-cursor-stuff :color-emacs "black" :color-evil "blue"))
 
 (when my-graphic-p
   (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
@@ -749,13 +754,6 @@ This prevents overlapping themes; something I would rarely want."
   (global-set-key (kbd "<f10>") #'my-cycle-theme))
 
 
-(defun my-cursor-stuff-darkBg ()
-  (interactive)
-  (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green"))
-
-(defun my-cursor-stuff-lightBg ()
-  (interactive)
-  (my-cursor-stuff :color-emacs "black" :color-evil "blue"))
 
 (defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."

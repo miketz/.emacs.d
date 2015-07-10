@@ -21,7 +21,7 @@
                         :foundry "outline"
                         :slant normal
                         :weight normal
-                        :height 125
+                        :height 140
                         :width normal)))))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

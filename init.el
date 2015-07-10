@@ -2135,7 +2135,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; flx-ido
 ;;; smex (built on ido)
 ;;;-----------------------------------------------------------
-(defvar my-use-ido-p t
+(defvar my-use-ido-p nil
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p

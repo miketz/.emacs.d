@@ -280,7 +280,7 @@ Also how many columns to show for a 'real' tab.")
 
 
 (defun my-install-packages ()
-  "Call this function on a new emacs installation to install packages."
+  "Call this function on a new Emacs installation to install packages."
   (interactive)
   ;; fetch the list of packages available
   (unless package-archive-contents

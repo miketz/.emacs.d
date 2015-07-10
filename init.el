@@ -3123,21 +3123,19 @@ This prevents overlapping themes; something I would rarely want."
 ;;    (t (my-search-bookmarks (rest bookmarks) tags))))
 
 ;;;------------------------------------------------------------------------------
-;;; swiper
+;;; swiper. ivy is bundled with swiper.
 ;;; ivy
 ;;;------------------------------------------------------------------------------
-(defvar my-use-swiper-p t
-  "If I'm binding C-s to `swiper' at the moment")
 (defvar my-use-ivy-p t
   "If I'm using ivy completion at the moment.")
 
-(when (or my-use-swiper-p
-          my-use-ivy-p)
-  (global-set-key (kbd "C-s") #'swiper))
-
 (when my-use-ivy-p
-  (ivy-mode) ;;ivy is bundled with swiper???
-  (evil-leader/set-key "b" #'ivy-switch-buffer))
+  (global-set-key (kbd "C-s") #'swiper)
+  (define-key evil-normal-state-map (kbd "s") #'swiper)
+  (evil-leader/set-key "b" #'ivy-switch-buffer)
+
+  (ivy-mode 1) ; turn on ivy completion
+  )
 
 (with-eval-after-load "ivy"
   ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.

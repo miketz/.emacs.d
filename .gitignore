@@ -27,3 +27,4 @@
 /flycheck_init.el
 /#init.el#
 *.elc
+/ido.last~

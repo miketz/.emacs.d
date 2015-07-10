@@ -249,7 +249,8 @@ Also how many columns to show for a 'real' tab.")
     ;;w3m
     flymake-jslint
     nlinum
-    ido-vertical-mode)
+    ido-vertical-mode
+    ido-ubiquitous)
   "Packages I use from elpa/melpa.")
 
 
@@ -2129,6 +2130,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;; ido
 ;;; ido-veritical-mode
+;;; ido-ubiquitous
 ;;; smex (built on ido)
 ;;;--------------------
 (defvar my-use-ido-p t
@@ -2148,8 +2150,9 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 (with-eval-after-load "ido"
-    (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
-    )
+  (ido-ubiquitous-mode 1)
+  (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
+  )
 
 (with-eval-after-load "ido-vertical-mode"
   (setq ido-vertical-define-keys 'C-n-and-C-p-only)

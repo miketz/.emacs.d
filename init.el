@@ -2152,8 +2152,8 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 (with-eval-after-load "ido"
-  (ido-ubiquitous-mode 1)
   (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
+  ;; (ido-ubiquitous-mode 1)
   ;; (flx-ido-mode 1)
   )
 

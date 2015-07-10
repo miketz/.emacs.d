@@ -3124,13 +3124,27 @@ This prevents overlapping themes; something I would rarely want."
 
 ;;;------------------------------------------------------------------------------
 ;;; swiper
+;;; ivy
 ;;;------------------------------------------------------------------------------
-;; ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
-;; ;; ;; allow out of order matching.
-;; (setq ivy-re-builders-alist
-;;       '((t . ivy--regex-ignore-order)))
-;; (global-set-key (kbd "C-s") #'swiper)
-;; ;;(ivy-mode) ;ivy is bundled with swiper???
+(defvar my-use-swiper-p t
+  "If I'm binding C-s to `swiper' at the moment")
+(defvar my-use-ivy-p t
+  "If I'm using ivy completion at the moment.")
+
+(when (or my-use-swiper-p
+          my-use-ivy-p)
+  (global-set-key (kbd "C-s") #'swiper))
+
+(when my-use-ivy-p
+  (ivy-mode) ;;ivy is bundled with swiper???
+  (evil-leader/set-key "b" #'ivy-switch-buffer))
+
+(with-eval-after-load "ivy"
+  ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
+  ;; ;; allow out of order matching.
+  (setq ivy-re-builders-alist
+        '((t . ivy--regex-ignore-order))))
+
 
 ;;;------------------------------------------------------------------------------
 ;;; color-identifiers-mode
@@ -3599,7 +3613,8 @@ When ARG isn't nil, try to pretty print the sexp."
 (when (or (eq my-curr-computer 'leyna-laptop)
           (eq my-curr-computer 'raspberry-pi)
           (and (not my-use-helm-p)
-               (not my-use-ido-p)))
+               (not my-use-ido-p)
+               (not my-use-ivy-p)))
   (evil-leader/set-key "b" #'ibuffer)
   ;; (evil-leader/set-key "b" #'ido-switch-buffer)
   ;; (global-set-key (kbd "M-/") #'hippie-expand)

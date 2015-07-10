@@ -38,7 +38,7 @@
 ;(global-linum-mode 0) ;show/hide line numbers
 ;(setq-default column-number-mode t)
 ;(setq-default line-number-mode t)
-(setq-default indicate-empty-lines t) ;Like vim's tildes
+;(setq-default indicate-empty-lines t) ;Like vim's tildes
 
 (setq-default transient-mark-mode t)  ;show selected regions
 (setq ring-bell-function 'ignore)

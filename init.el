@@ -2135,7 +2135,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; flx-ido
 ;;; smex (built on ido)
 ;;;-----------------------------------------------------------
-(defvar my-use-ido-p nil
+(defvar my-use-ido-p t
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p
@@ -3126,7 +3126,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; swiper. ivy is bundled with swiper.
 ;;; ivy
 ;;;------------------------------------------------------------------------------
-(defvar my-use-ivy-p t
+(defvar my-use-ivy-p nil
   "If I'm using ivy completion at the moment.")
 
 (when my-use-ivy-p

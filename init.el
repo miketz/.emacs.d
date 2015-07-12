@@ -2059,7 +2059,8 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; invoke with M-x for now. binding avy to the "s" key
 (when my-use-helm-p
- (define-key evil-normal-state-map (kbd "s") #'helm-swoop))
+  ;; helm needs to be initalized or else helm-swoop won't work. (it doens't `require' everything it needs)
+  (define-key evil-normal-state-map (kbd "s") #'helm-swoop))
 
 ;; (global-set-key (kbd "C-c s") 'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") 'helm-swoop)

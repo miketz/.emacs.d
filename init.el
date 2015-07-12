@@ -3059,8 +3059,30 @@ This prevents overlapping themes; something I would rarely want."
 ;;; erc
 ;;;------------------------------------------------------------------------------
 (with-eval-after-load "erc"
- (add-hook 'erc-mode-hook (lambda ()
-                            (setq show-trailing-whitespace nil))))
+  (progn
+    ;;from finster on irc #emacs. switch erc buffers
+    ;; TODO make it neutral to ido so i can use helm, swiper, default, etc.
+    (defvar x/chatbuffer-types '(erc-mode
+                                 circe-channel-mode
+                                 circe-query-mode))
+    (defun x/ido-chat-buffer ()
+      "Switch to erc/circe buffer, completed by ido."
+      (interactive)
+      (switch-to-buffer
+       (ido-completing-read "Channel:"
+                            (save-excursion
+                              (delq
+                               nil
+                               (mapcar (lambda (buf)
+                                         (when (buffer-live-p buf)
+                                           (with-current-buffer buf
+                                             (and (memq major-mode x/chatbuffer-types)
+                                                  (buffer-name buf)))))
+                                       (buffer-list)))))))
+    (define-key erc-mode-map (kbd "C-c b") #'x/ido-chat-buffer))
+
+  (add-hook 'erc-mode-hook (lambda ()
+                             (setq show-trailing-whitespace nil))))
 
 ;;;------------------------------------------------------------------------------
 ;;; linum-relative
@@ -3496,6 +3518,9 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------
+
+
+
 (when (and nil ;don't start server for now.
            ;;`server-start' doesn't seemt to work on MS-windows?
            (eq system-type 'gnu/linux))

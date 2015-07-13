@@ -388,7 +388,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (when color-evil (setq args-evil (cons color-evil args-evil)))
     (when color-motion (setq args-evil-motion (cons color-motion args-evil-motion)))
     ;;bar hollow box hbar
-    ;; (setq-default cursor-type (cons 'bar args-emacs))
+    ;; (setq-default cursor-type (cons 'bar args-emacs)) ;;commenting this allows vim command mode : to have a bar cursor.
     (setq evil-emacs-state-cursor (cons 'bar args-emacs))
     (setq evil-normal-state-cursor (cons 'hollow args-evil))
     (setq evil-insert-state-cursor (cons 'bar args-evil))

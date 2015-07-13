@@ -2140,6 +2140,9 @@ This prevents overlapping themes; something I would rarely want."
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p
+  ;;use swiper on "s" even when using ido.
+  (define-key evil-normal-state-map (kbd "s") #'swiper)
+
   (setq ido-everywhere t)
   (ido-mode t) ;;autoloaded function. turn on ido.
 

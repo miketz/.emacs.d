@@ -756,7 +756,7 @@ This prevents overlapping themes; something I would rarely want."
                     (let ((helm-candidate-number-limit nil))
                       (call-interactively #'my-load-theme))))
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
-  (global-set-key (kbd "<f12>") 'my-cycle-light-bg))
+  (global-set-key (kbd "<f12>") #'my-cycle-light-bg))
 
 
 

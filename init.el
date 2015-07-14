@@ -648,13 +648,13 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
 
 (progn ;; inc/dec font size
 
-  (defvar my-curr=font-size nil
+  (defvar my-curr-font-size nil
     "Starts out unknown")
 
   (defun my-change-font-size (bigger-p)
     (interactive)
-    (let* ((curr-size (if my-curr=font-size ;; use cached value if it's set
-                          my-curr=font-size
+    (let* ((curr-size (if my-curr-font-size ;; use cached value if it's set
+                          my-curr-font-size
                         (face-attribute 'default :height (selected-frame))))
            (step (if bigger-p 1 -1)) ;; TODO: calculate "threshold" step increment.
            (new-size (+ curr-size step)))
@@ -664,7 +664,7 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
           ((t (:height ,new-size)))))
 
       ;; must cache the new value becuase :height does not acutally inc until a threshold is breached.
-      (setq my-curr=font-size new-size)
+      (setq my-curr-font-size new-size)
 
       (when (fboundp 'my-w32-run) ;; TODO: make it work on non-Windows machines.
         (my-w32-run 'restore-curr-frame)

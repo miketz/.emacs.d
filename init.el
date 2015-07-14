@@ -1173,6 +1173,8 @@ This prevents overlapping themes; something I would rarely want."
   (setq js2-bounce-indent-p nil) ;; set t to have tab toggle indents
   (setq js2-basic-offset 4) ;; default is 4, but set explicilty anyway.
 
+  (setq js2-mode-show-strict-warnings t)
+
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
@@ -1205,6 +1207,7 @@ This prevents overlapping themes; something I would rarely want."
 
   (add-hook 'js2-mode-hook
             (lambda ()
+              (js2-highlight-unused-variables-mode t)
               ;; replace ambiguous name "Javascript-IDE" with "js2"
               (setq mode-name "js2")
               ;; (setq-default js2-global-externs "jQuery $")

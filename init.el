@@ -1860,7 +1860,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------------
 ;;; Omnisharp
 ;;;--------------------------
-(when (eq my-curr-computer 'work-laptop)
+(when (and nil ;; turn off omnisharp for the moment.
+           (eq my-curr-computer 'work-laptop))
 
   (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
 

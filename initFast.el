@@ -17,12 +17,14 @@
 (load-theme 'wombat)
 
 (custom-set-faces
- `(default ((t (:family "Consolas"
-                        :foundry "outline"
-                        :slant normal
-                        :weight normal
-                        :height 140
-                        :width normal)))))
+       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
+;; (custom-set-faces
+;;  `(default ((t (:family "Consolas"
+;;                         :foundry "outline"
+;;                         :slant normal
+;;                         :weight normal
+;;                         :height 140
+;;                         :width normal)))))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 

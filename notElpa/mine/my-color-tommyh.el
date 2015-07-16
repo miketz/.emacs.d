@@ -9,6 +9,8 @@
   (custom-theme-set-faces
    'tommyh
 
+   '(erc-timestamp-face
+     ((t (:foreground "#b8574e"))))
    '(my-tilde-face
      ((t (:foreground "black"))))
    '(fringe

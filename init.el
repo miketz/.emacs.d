@@ -873,6 +873,16 @@ This prevents overlapping themes; something I would rarely want."
   ;;                                          (setq words (cons w words))))
   ;;                                      words))
 
+
+  ;; redefine `slime-startup-message' to work how I want
+  (defun slime-startup-message ()
+    (when (zerop (buffer-size))
+      (let ((welcome (concat ";; "
+                             (nth 5 slime-words-of-encouragement))))
+        (if slime-startup-animation
+            (animate-string welcome 0 0)
+          (insert welcome)))))
+
   (progn
     (when (eq my-curr-computer 'work-laptop)
       (setq slime-default-lisp 'ccl

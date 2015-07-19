@@ -1,0 +1,11 @@
+# -*- IEFE -*-
+# name: ief
+# key: ief
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+(function (window, document) { // IEFE
+    'use strict';
+
+    $0
+
+}(window, document));

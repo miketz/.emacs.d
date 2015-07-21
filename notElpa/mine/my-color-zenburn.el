@@ -25,9 +25,11 @@
 
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
+
+   '(org-hide
+     ((t (:foreground "black"))))
    '(my-tilde-face
      ((t (:foreground "dark gray"))))
-
    '(aw-leading-char-face               ; ace-window character.
      ((t (:foreground "spring green"
                       :background "black"

@@ -2957,6 +2957,19 @@ When ARG isn't nil, try to pretty print the sexp."
 (autoload #'my-insert-date-string "my-date-stuff" nil t)
 (global-set-key (kbd "C-c i") #'my-insert-date-string)
 
+
+;;;------------------------------------------------------------------------------
+;;; universal vim escape. Without key-chord dependence
+;;;------------------------------------------------------------------------------
+;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
+;; the key, and then key doesn't exist by the time the file loads.
+(with-eval-after-load "evil"
+  (define-key evil-insert-state-map (kbd "C-;") #'evil-normal-state)
+  (define-key evil-visual-state-map (kbd "C-;") #'evil-exit-visual-state)
+  (define-key evil-normal-state-map (kbd "C-;") #'keyboard-quit))
+(with-eval-after-load "helm"
+  (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
+
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------

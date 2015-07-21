@@ -28,3 +28,4 @@
 /#init.el#
 *.elc
 /ido.last~
+/.#ido.last

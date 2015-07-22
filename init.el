@@ -370,6 +370,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;(key-chord-define c++-mode-map ";;"  "\C-e;")
   )
 
+(with-eval-after-load "helm"
+  (key-chord-define helm-map "fj" #'helm-keyboard-quit) ;must be in eval-after-load so `helm-map' is defined
+ )
+(with-eval-after-load "evil"
+  (key-chord-define evil-insert-state-map "fj" #'evil-normal-state) ;must be in eval-after-load so key map is defined.
+  (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state) ;must be in eval-after-load so key map is defined.
+ )
+
 ;;;----------------------------------
 ;;; cursor
 ;;;----------------------------------
@@ -574,8 +582,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
                                (slime-pprint-eval-last-expression)
                                (evil-normal-state))))
 
-  (key-chord-define evil-insert-state-map "fj" #'evil-normal-state) ;must be in eval-after-load so key map is defined.
-  (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state) ;must be in eval-after-load so key map is defined.
   )
 
 
@@ -1430,7 +1436,6 @@ This prevents overlapping themes; something I would rarely want."
 
   ;;(global-set-key (kbd "M-s s")   #'helm-ag)
 
-  (key-chord-define helm-map "fj" #'helm-keyboard-quit) ;must be in eval-after-load so `helm-map' is defined
   ) ;;end helm eval-after-load
 
 

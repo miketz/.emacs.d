@@ -27,7 +27,7 @@
    ;;   ((t (:foreground "spring green"))))
 
    '(org-hide
-     ((t (:foreground "black"))))
+     ((t (:foreground "#5F5F5F"))))
    '(my-tilde-face
      ((t (:foreground "dark gray"))))
    '(aw-leading-char-face               ; ace-window character.

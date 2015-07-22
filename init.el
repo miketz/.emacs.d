@@ -2080,6 +2080,7 @@ This prevents overlapping themes; something I would rarely want."
 (when (eq my-curr-computer 'work-laptop)
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'proj-safetyweb lisp-file nil t)
+    (autoload #'proj-rsims lisp-file nil t)
     (autoload #'proj-db-safety lisp-file nil t)
     (autoload #'proj-trighist lisp-file nil t)
     (autoload #'proj-safetyweb lisp-file nil t)
@@ -2087,7 +2088,6 @@ This prevents overlapping themes; something I would rarely want."
     (autoload #'proj-cl lisp-file nil t)
     (autoload #'proj-imgtag lisp-file nil t)
     (autoload #'proj-cpp lisp-file nil t))
-
 
   ;;quick load of c:\users\mtz
   (evil-leader/set-key "1" (lambda ()

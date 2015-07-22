@@ -27,6 +27,7 @@
 ;;     ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cs")
 ;;     ))
 
+
 (defun proj-safetyweb ()
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\Source\\")
@@ -49,6 +50,26 @@
     ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
     ;;(my-start-omnisharp-server sln)
     ))
+
+(defun proj-rsims ()
+  "Enable project features for the RSIMS website."
+  (interactive)
+  (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\RSIMS\\Main\\Source\\")
+         (sln (concat root "Rsims.sln")))
+    ;; helm-cmd-t stuff
+    (add-to-list 'helm-cmd-t-find-prunes "obj")
+    (add-to-list 'helm-cmd-t-find-prunes "bin")
+    (add-to-list 'helm-cmd-t-find-prunes ".svn")
+    (add-to-list 'helm-cmd-t-find-prunes "packages")
+    (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
+    (add-to-list 'helm-cmd-t-find-prunes "TestResults")
+    (setq my-dir-rsims (helm-cmd-t-get-create-source-dir root))
+    (evil-leader/set-key "h" (lambda ()
+                               (interactive)
+                               (helm :sources '(helm-source-buffers-list
+                                                my-dir-rsims)
+                                     :buffer "*RSIMS Web Project*")))
+    (dired root)))
 
 (defun proj-db-safety ()
   (interactive)

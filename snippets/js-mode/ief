@@ -3,7 +3,7 @@
 # key: ief
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-(function (window, document) { // IEFE
+(function (window, document) { // IIFE
     'use strict';
 
     $0

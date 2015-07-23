@@ -1308,12 +1308,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
 ;;   )
 
-;; ;;;--------------------
-;; ;;; nxml
-;; ;;;--------------------
-;; (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
-
+;;;--------------------
+;;; nxml
+;;;--------------------
 (with-eval-after-load "nxml-mode"
+  (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   ;; reclaim key M-h which nxml stole for`nxml-mark-paragraph'
   (define-key nxml-mode-map (kbd "M-h") #'evil-window-left))
 

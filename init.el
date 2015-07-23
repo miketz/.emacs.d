@@ -1313,6 +1313,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; ;;;--------------------
 ;; (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
 
+(with-eval-after-load "nxml-mode"
+  ;; reclaim key M-h which nxml stole for`nxml-mark-paragraph'
+  (define-key nxml-mode-map (kbd "M-h") #'evil-window-left))
 
 
 ;;;--------------------

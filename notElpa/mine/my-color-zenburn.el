@@ -26,6 +26,10 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   '(nxml-tag-delimiter
+     ((t (:foreground "#83D0FF" :weight bold))))
+   '(nxml-element-local-name
+     ((t (:foreground "#93E0E3" :weight bold))))
    '(org-hide
      ((t (:foreground "#5F5F5F"))))
    '(my-tilde-face

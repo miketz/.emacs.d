@@ -1118,12 +1118,15 @@ This prevents overlapping themes; something I would rarely want."
 ;;;------------------------------------
 ;;; align-let.el in ~/.emacs.d/notElpa
 ;;;------------------------------------
-(autoload 'align-let "align-let" nil t)
+;; (autoload 'align-let "align-let" nil t)
+;; (let ((key (kbd "C-c C-a")))
+;;   (define-key lisp-mode-map key #'align-let)
+;;   (define-key emacs-lisp-mode-map key #'align-let)
+;;   (define-key lisp-interaction-mode-map key #'align-let))
 
-(let ((key (kbd "C-c C-a")))
-  (define-key lisp-mode-map key #'align-let)
-  (define-key emacs-lisp-mode-map key #'align-let)
-  (define-key lisp-interaction-mode-map key #'align-let))
+(with-eval-after-load "lisp-mode"
+  (autoload 'align-let "align-let" nil t)
+  (define-key lisp-mode-shared-map (kbd "C-c C-a") #'align-let))
 
 ;; (let ((abadf 333)
 ;;       (x     222)

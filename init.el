@@ -1336,7 +1336,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(defvar my-use-helm-p nil
+(defvar my-use-helm-p t
   "Whether i'm using helm at the momnet or not.")
 (defvar my-load-helm-on-init-p nil
   "Whether to load helm during start up, or postpone till first attempted use.")
@@ -1581,7 +1581,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; flx-ido
 ;;; smex (built on ido)
 ;;;-----------------------------------------------------------
-(defvar my-use-ido-p t
+(defvar my-use-ido-p nil
   "If I'm using ido at the moment.")
 
 (when my-use-ido-p

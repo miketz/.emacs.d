@@ -1338,7 +1338,7 @@ This prevents overlapping themes; something I would rarely want."
 
 (defvar my-use-helm-p t
   "Whether i'm using helm at the momnet or not.")
-(defvar my-load-helm-on-init-p nil
+(defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")
 
 (when (and my-use-helm-p

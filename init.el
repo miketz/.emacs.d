@@ -133,9 +133,12 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;;;----------------------------------
 ;;; globals
 ;;;----------------------------------
-(defvar my-tab-width 4
-  "Number of spaces for a tab.
-Also how many columns to show for a 'real' tab.")
+(defvar my-indent-width 4
+  "An omni-variable serving 3 related purposes.
+Becuase I want them to have same value.
+-Preferred indenth width for C-like languages.
+-Number of spaces for a tab.
+-How many columns to show for a 'real' tab.")
 
 (defvar my-graphic-p (display-graphic-p)
   "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")
@@ -1176,10 +1179,10 @@ This prevents overlapping themes; something I would rarely want."
   (setq js2-highlight-level 3) ;;maximum highlighting
 
   (setq js2-bounce-indent-p nil) ;; set t to have tab toggle indents
-  (setq js2-basic-offset 4) ;; default is 4, but set explicilty anyway.
+  (setq js2-basic-offset my-indent-width) ;; default is 4, but set explicilty anyway.
 
   (setq js2-mode-show-strict-warnings t)
-
+  (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
@@ -1679,7 +1682,7 @@ This prevents overlapping themes; something I would rarely want."
                         (awk-mode . "awk")
                         (other . "linux")))
 ;;(setq-default c-default-style "java")
-(setq-default c-basic-offset my-tab-width) ;tab width
+(setq-default c-basic-offset my-indent-width) ;tab width
 (setq-default c-electric-flag t)
 
 ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
@@ -3186,7 +3189,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (progn ;; tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
-  (setq-default tab-width my-tab-width)
+  (setq-default tab-width my-indent-width)
   (setq-default indent-line-function 'insert-tab))
 
 (progn ;; for better or worse, prevent creation of tmp backup files

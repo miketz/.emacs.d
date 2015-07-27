@@ -1186,7 +1186,24 @@ This prevents overlapping themes; something I would rarely want."
   (setq js2-basic-offset my-indent-width) ;; default is 4, but set explicilty anyway.
 
   (setq js2-mode-show-strict-warnings t)
-  (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint. Doesn't work?
+
+  ;; (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint. Doesn't work?
+
+  ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
+  ;; add any symbols to a buffer-local var of acceptable global vars
+  ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
+  ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
+  ;; you can;t have a symbol called "someName:false"
+  (add-hook 'js2-post-parse-callbacks
+            (lambda ()
+              (when (> (buffer-size) 0)
+                (let ((btext (replace-regexp-in-string
+                              ": *true" " "
+                              (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
+                  (mapc (apply-partially 'add-to-list 'js2-additional-externs)
+                        (split-string
+                         (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
+                         " *, *" t))))))
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (define-key js2-mode-map (kbd "M-j") #'evil-window-down)

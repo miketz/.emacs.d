@@ -152,6 +152,16 @@
 ;;(key-chord-define evil-normal-state-map "c," #'hydra-paredit/body)
 
 
+;; ;; avoid moving hand to arrow keys for barf/slurp
+;; (defhydra hydra-smartparens ()
+;;   "smartparens"
+;;   ("<" sp-forward-barf-sexp)
+;;   (">" sp-forward-slurp-sexp)
+;;   ("," sp-backward-slurp-sexp)
+;;   ("." sp-backward-barf-sexp)
+;;   ("q" nil))
+
+
 (defhydra hydra-window ;;()
   (;; :pre ;;executes before each head.
    ;; (progn (message "executed pre")

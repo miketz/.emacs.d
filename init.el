@@ -367,6 +367,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
+;; (with-eval-after-load "smartparens"
+;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
+;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+
 ;;;----------------------------------
 ;;; cursor
 ;;;----------------------------------
@@ -1182,7 +1186,7 @@ This prevents overlapping themes; something I would rarely want."
   (setq js2-basic-offset my-indent-width) ;; default is 4, but set explicilty anyway.
 
   (setq js2-mode-show-strict-warnings t)
-  (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint
+  (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint. Doesn't work?
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
@@ -1226,7 +1230,11 @@ This prevents overlapping themes; something I would rarely want."
               ;;   (js2-highlight-vars-mode))
 
               ;;(js2-imenu-extras-mode)
+
               (electric-pair-mode 1)
+              ;; (smartparens-mode 1)
+
+
               (yas-minor-mode 1)
               (rainbow-delimiters-mode-enable)
               (electric-spacing-mode 1)
@@ -1865,6 +1873,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; smartparens
 ;;;--------------------------
 ;;(require 'smartparens-config)
+
 
 ;;;--------------------------
 ;;; Omnisharp
@@ -2968,6 +2977,8 @@ When ARG isn't nil, try to pretty print the sexp."
   (define-key evil-normal-state-map (kbd "C-;") #'keyboard-quit))
 (with-eval-after-load "helm"
   (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
+
+
 
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

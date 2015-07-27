@@ -136,7 +136,7 @@ Useful to check a boolean state and toggle the state in 1 go."
 (defvar my-indent-width 4
   "An omni-variable serving 3 related purposes.
 Becuase I want them to have same value.
--Preferred indenth width for C-like languages.
+-Preferred indent width for C-like languages.
 -Number of spaces for a tab.
 -How many columns to show for a 'real' tab.")
 

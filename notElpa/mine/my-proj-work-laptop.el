@@ -61,14 +61,30 @@
     (add-to-list 'helm-cmd-t-find-prunes "bin")
     (add-to-list 'helm-cmd-t-find-prunes ".svn")
     (add-to-list 'helm-cmd-t-find-prunes "packages")
-    (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
-    (add-to-list 'helm-cmd-t-find-prunes "TestResults")
     (setq my-dir-rsims (helm-cmd-t-get-create-source-dir root))
     (evil-leader/set-key "h" (lambda ()
                                (interactive)
                                (helm :sources '(helm-source-buffers-list
                                                 my-dir-rsims)
                                      :buffer "*RSIMS Web Project*")))
+    (dired root)))
+
+(defun proj-daily-diff ()
+  "Enable project features for the RSIMS website."
+  (interactive)
+  (let* ((root "C:\\Users\\mtz\\proj\\DD_DailyDiff\\")
+         (sln (concat root "DD_DailyDiff.sln")))
+    ;; helm-cmd-t stuff
+    (add-to-list 'helm-cmd-t-find-prunes "obj")
+    (add-to-list 'helm-cmd-t-find-prunes "bin")
+    (add-to-list 'helm-cmd-t-find-prunes ".svn")
+    (add-to-list 'helm-cmd-t-find-prunes "packages")
+    (setq my-dir-dd (helm-cmd-t-get-create-source-dir root))
+    (evil-leader/set-key "h" (lambda ()
+                               (interactive)
+                               (helm :sources '(helm-source-buffers-list
+                                                my-dir-dd)
+                                     :buffer "*Daily Diff*")))
     (dired root)))
 
 (defun proj-db-safety ()

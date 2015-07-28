@@ -2146,6 +2146,7 @@ This prevents overlapping themes; something I would rarely want."
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'proj-safetyweb lisp-file nil t)
     (autoload #'proj-rsims lisp-file nil t)
+    (autoload #'proj-daily-diff lisp-file nil t)
     (autoload #'proj-db-safety lisp-file nil t)
     (autoload #'proj-trighist lisp-file nil t)
     (autoload #'proj-safetyweb lisp-file nil t)

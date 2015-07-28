@@ -342,34 +342,42 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 
 
+(defvar my-use-evil-p t
+  "Whether i'm using evil at the moment or not.")
+
 ;;;----------------------------------
 ;;; key-chord
 ;;;----------------------------------
-;; ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
-;; ;;       since it is looking for the chord.
-;; (key-chord-mode 1) ; autoloaded function
+;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
+;;       since it is looking for the chord.
 
-;; (with-eval-after-load "key-chord"
-;;   (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
-;;   (setq key-chord-one-key-delay 0.4))
+(when my-use-evil-p
 
-;; (with-eval-after-load "helm"
-;;   ;; must be in eval-after-load so `helm-map' is defined
-;;   (key-chord-define helm-map "fj" #'helm-keyboard-quit))
+  (key-chord-mode 1)                    ; autoloaded function
 
-;; (with-eval-after-load "evil"
-;;   ;; must be in eval-after-load so key maps are defined.
-;;   (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
-;;   (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
+  (with-eval-after-load "key-chord"
+    (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+    (setq key-chord-one-key-delay 0.4))
 
-;; (with-eval-after-load "lisp-mode"
-;;   (when nil ;; trying lispy
-;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
-;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+  (with-eval-after-load "helm"
+    ;; must be in eval-after-load so `helm-map' is defined
+    (key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
-;; ;; (with-eval-after-load "smartparens"
-;; ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
-;; ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+  (with-eval-after-load "evil"
+    ;; must be in eval-after-load so key maps are defined.
+    (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
+    (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
+
+  (with-eval-after-load "lisp-mode"
+    (when nil ;; trying lispy
+      ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
+      (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+
+;; (with-eval-after-load "smartparens"
+;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
+;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+  )
+
 
 ;;;----------------------------------
 ;;; cursor
@@ -378,38 +386,40 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (custom-set-faces
  '(cursor ((t (:background "cyan")))))
 
-(cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
-                                     (color-evil nil)
-                                     (color-motion nil));(color-motion "red")
-  (interactive)
-  (let ((args-emacs '())
-        (args-evil '())
-        (args-evil-motion '())) ;use same color throughout evil-mode, except for "motion" state.
-    (when color-emacs (setq args-emacs (cons color-emacs args-emacs)))
-    (when color-evil (setq args-evil (cons color-evil args-evil)))
-    (when color-motion (setq args-evil-motion (cons color-motion args-evil-motion)))
-    ;;bar hollow box hbar
-    ;; (setq-default cursor-type (cons 'bar args-emacs)) ;;commenting this allows vim command mode : to have a bar cursor.
-    (setq evil-emacs-state-cursor (cons 'bar args-emacs))
-    (setq evil-normal-state-cursor (cons 'hollow args-evil))
-    (setq evil-insert-state-cursor (cons 'bar args-evil))
-    (setq evil-visual-state-cursor (cons 'hollow args-evil))
-    (setq evil-operator-state-cursor (cons 'hollow args-evil))
-    (setq evil-replace-state-cursor (cons 'hbar args-evil))
-    ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
-    ;;give special color I know when it is not full-evil bindings.
-    (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
+(when my-use-evil-p
+  (cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
+                                       (color-evil nil)
+                                       (color-motion nil)) ;(color-motion "red")
+    (interactive)
+    (let ((args-emacs '())
+          (args-evil '())
+          (args-evil-motion '())) ;use same color throughout evil-mode, except for "motion" state.
+      (when color-emacs (setq args-emacs (cons color-emacs args-emacs)))
+      (when color-evil (setq args-evil (cons color-evil args-evil)))
+      (when color-motion (setq args-evil-motion (cons color-motion args-evil-motion)))
+      ;;bar hollow box hbar
+      ;; (setq-default cursor-type (cons 'bar args-emacs)) ;;commenting this allows vim command mode : to have a bar cursor.
+      (setq evil-emacs-state-cursor (cons 'bar args-emacs))
+      (setq evil-normal-state-cursor (cons 'hollow args-evil))
+      (setq evil-insert-state-cursor (cons 'bar args-evil))
+      (setq evil-visual-state-cursor (cons 'hollow args-evil))
+      (setq evil-operator-state-cursor (cons 'hollow args-evil))
+      (setq evil-replace-state-cursor (cons 'hbar args-evil))
+      ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
+      ;;give special color I know when it is not full-evil bindings.
+      (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
 
-(defun my-cursor-stuff-darkBg ()
-  (interactive)
-  (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green"))
+  (defun my-cursor-stuff-darkBg ()
+    (interactive)
+    (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green"))
 
-(defun my-cursor-stuff-lightBg ()
-  (interactive)
-  (my-cursor-stuff :color-emacs "black" :color-evil "blue"))
+  (defun my-cursor-stuff-lightBg ()
+    (interactive)
+    (my-cursor-stuff :color-emacs "black" :color-evil "blue"))
 
-(when my-graphic-p
-  (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
+  (when my-graphic-p
+    (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
+  )
 
 ;;;--------------------------------------------------------------------
 ;;; evil
@@ -419,7 +429,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;; Enable evil explicitly for certain modes or file types.
 ;; (add-hook 'prog-mode-hook #'evil-local-mode)
 
-(evil-mode 1) ;enable globally
+
+(when my-use-evil-p
+  (evil-mode 1)) ;; enable globally
 
 (with-eval-after-load "evil"
   (progn
@@ -859,9 +871,11 @@ This prevents overlapping themes; something I would rarely want."
                  slime-indentation))
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-  ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
-  (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition);override evil's binding of M-. when using slime
-  (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") 'slime-edit-definition)
+
+  (when my-use-evil-p
+    ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
+    (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
+    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") 'slime-edit-definition))
 
   ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)
@@ -923,7 +937,8 @@ This prevents overlapping themes; something I would rarely want."
               (aggressive-indent-mode 0)))
 
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
-  (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+  (when my-use-evil-p
+   (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol))
 
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec
@@ -952,7 +967,8 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'after-init-hook 'global-company-mode) ;all buffers
 
 (with-eval-after-load "company"
-  (define-key company-mode-map (kbd "C-SPC") 'company-complete) ;C-Space like Visual Studio
+  (when my-use-evil-p
+    (define-key company-mode-map (kbd "C-SPC") 'company-complete)) ;C-Space like Visual Studio
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
@@ -1096,7 +1112,8 @@ This prevents overlapping themes; something I would rarely want."
     (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
-  (define-key org-mode-map (kbd "M-h") 'evil-window-left))
+  (when my-use-evil-p
+   (define-key org-mode-map (kbd "M-h") 'evil-window-left)))
 
 ;;;-----------------------------------------
 ;;; worf. key shortcuts for org-mode
@@ -1206,11 +1223,12 @@ This prevents overlapping themes; something I would rarely want."
   ;;                        " *, *" t))))))
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
-  (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
-  (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
-  (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
-                                                      (interactive)
-                                                      (js2-next-error -1)))
+  (when my-use-evil-p
+    (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
+    (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
+    (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
+                                                        (interactive)
+                                                        (js2-next-error -1))))
 
   ;; (defhydra hydra-js2-flycheck ()
   ;;   "js2 flycheck"
@@ -1226,7 +1244,8 @@ This prevents overlapping themes; something I would rarely want."
     ("v" flymake-popup-current-error-menu)
     ("C-g" nil nil)
     ("q" nil))
-  (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'my-hydra-js2-flymake/body)
+  (when my-use-evil-p
+   (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'my-hydra-js2-flymake/body))
 
   ;; (evil-define-key 'normal js2-mode-map (kbd "C-c h") #'my-hydra-hs/body)
 
@@ -1345,7 +1364,8 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "nxml-mode"
   (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   ;; reclaim key M-h which nxml stole for`nxml-mark-paragraph'
-  (define-key nxml-mode-map (kbd "M-h") #'evil-window-left))
+  (when my-use-evil-p
+   (define-key nxml-mode-map (kbd "M-h") #'evil-window-left)))
 
 
 ;;;--------------------
@@ -1363,7 +1383,9 @@ This prevents overlapping themes; something I would rarely want."
            (not (eq my-curr-computer 'leyna-laptop)))
 
   (progn ;;functions in key maps are auto-loaded.
-    (evil-leader/set-key "b" #'helm-buffers-list)
+    (when my-use-evil-p
+     (evil-leader/set-key "b" #'helm-buffers-list))
+    (global-set-key (kbd "C-x b") #'helm-buffers-list)
     ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
     ;;(global-set-key (kbd "C-x b")   #'helm-mini)
     ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
@@ -1372,7 +1394,8 @@ This prevents overlapping themes; something I would rarely want."
     ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
-    (evil-leader/set-key "i" #'helm-imenu)
+    (when my-use-evil-p
+     (evil-leader/set-key "i" #'helm-imenu))
     ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
     ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
     ;; (global-set-key (kbd "M-/") #'hippie-expand)
@@ -1512,7 +1535,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
-(evil-leader/set-key "g" #'my-vc-git-grep)
+(when my-use-evil-p
+ (evil-leader/set-key "g" #'my-vc-git-grep))
 
 ;;;--------------------
 ;;; helm-swoop
@@ -1522,7 +1546,8 @@ This prevents overlapping themes; something I would rarely want."
 ;; invoke with M-x for now. binding avy to the "s" key
 (when my-use-helm-p
   ;; helm needs to be initalized or else helm-swoop won't work. (it doens't `require' everything it needs)
-  (define-key evil-normal-state-map (kbd "s") #'helm-swoop))
+  (when my-use-evil-p
+   (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
 ;; (global-set-key (kbd "C-c s") 'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
@@ -1573,8 +1598,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;;---------------------
 ;;; Clippy. pop-up help
 ;;;---------------------
-(evil-leader/set-key "c" 'clippy-describe-function)
-(evil-leader/set-key "v" 'clippy-describe-variable)
+(when my-use-evil-p
+  (evil-leader/set-key "c" 'clippy-describe-function)
+  (evil-leader/set-key "v" 'clippy-describe-variable))
 ;; (evil-leader/set-key "n"
 ;;   (lambda ()
 ;;     (interactive)
@@ -1603,12 +1629,14 @@ This prevents overlapping themes; something I would rarely want."
 
 (when my-use-ido-p
   ;;use swiper on "s" even when using ido.
-  (define-key evil-normal-state-map (kbd "s") #'swiper)
+  (when my-use-evil-p
+   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
   (setq ido-everywhere t)
   (ido-mode t) ;;autoloaded function. turn on ido.
 
-  (evil-leader/set-key "b" #'ido-switch-buffer)
+  (when my-use-evil-p
+   (evil-leader/set-key "b" #'ido-switch-buffer))
 
   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
   ;;                   ; when Smex is auto-initialized on its first run.
@@ -1743,24 +1771,25 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "dired" ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
-  ;; vimify the keybinds.
-  (define-key dired-mode-map (kbd "j") #'dired-next-line)
-  (define-key dired-mode-map (kbd "k") #'dired-previous-line)
-  (define-key dired-mode-map (kbd "w") #'evil-forward-word-begin)
-  (define-key dired-mode-map (kbd "e") #'evil-forward-word-end)
-  (define-key dired-mode-map (kbd "n") #'evil-search-next)
-  (define-key dired-mode-map (kbd "N") #'evil-search-previous)
-  (define-key dired-mode-map (kbd "H") #'evil-window-top)
-  (define-key dired-mode-map (kbd "M") #'evil-window-middle)
-  (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
+  (when my-use-evil-p
+    ;; vimify the keybinds.
+    (define-key dired-mode-map (kbd "j") #'dired-next-line)
+    (define-key dired-mode-map (kbd "k") #'dired-previous-line)
+    (define-key dired-mode-map (kbd "w") #'evil-forward-word-begin)
+    (define-key dired-mode-map (kbd "e") #'evil-forward-word-end)
+    (define-key dired-mode-map (kbd "n") #'evil-search-next)
+    (define-key dired-mode-map (kbd "N") #'evil-search-previous)
+    (define-key dired-mode-map (kbd "H") #'evil-window-top)
+    (define-key dired-mode-map (kbd "M") #'evil-window-middle)
+    (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
 
-  ;; re-bind the default bindings we clobbered.
-  (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
-  (define-key dired-mode-map (kbd "C-c e") #'dired-find-file)
-  (define-key dired-mode-map (kbd "C-c N") #'dired-man)
-  (define-key dired-mode-map (kbd "C-c H") #'dired-do-hardlink)
-  (define-key dired-mode-map (kbd "C-c M") #'dired-do-chmod)
-  (define-key dired-mode-map (kbd "C-c L") #'dired-do-load))
+    ;; re-bind the default bindings we clobbered.
+    (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
+    (define-key dired-mode-map (kbd "C-c e") #'dired-find-file)
+    (define-key dired-mode-map (kbd "C-c N") #'dired-man)
+    (define-key dired-mode-map (kbd "C-c H") #'dired-do-hardlink)
+    (define-key dired-mode-map (kbd "C-c M") #'dired-do-chmod)
+    (define-key dired-mode-map (kbd "C-c L") #'dired-do-load)))
 
 ;;(define-key dired-mode-map "c" 'find-file) ;create file
 
@@ -1798,7 +1827,8 @@ This prevents overlapping themes; something I would rarely want."
                 (electric-indent-local-mode -1))
 
               ;; turn off indent when you press "o" in evil. Buffer local
-              (setq evil-auto-indent nil)))
+              (when my-use-evil-p
+               (setq evil-auto-indent nil))))
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil
@@ -1995,8 +2025,9 @@ This prevents overlapping themes; something I would rarely want."
 (global-set-key (kbd "M-g M-g") 'avy-goto-line)
 ;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
 ;; (define-key evil-motion-state-map (kbd "s") 'avy-goto-char-2)
-(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
-(define-key evil-motion-state-map (kbd "SPC") 'avy-goto-word-1)
+(when my-use-evil-p
+  (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
+  (define-key evil-motion-state-map (kbd "SPC") 'avy-goto-word-1))
 
 (with-eval-after-load "avy"
   ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.
@@ -2124,30 +2155,32 @@ This prevents overlapping themes; something I would rarely want."
     (autoload #'proj-cpp lisp-file nil t))
 
   ;;quick load of c:\users\mtz
-  (evil-leader/set-key "1" (lambda ()
-                             (interactive)
-                             (dired "C:\\Users\\mtz")))
+  (when my-use-evil-p
+    (evil-leader/set-key "1" (lambda ()
+                               (interactive)
+                               (dired "C:\\Users\\mtz")))
 
-  ;;quick load of c:\users\mtz\proj\ecp\dev\db
-  (evil-leader/set-key "2" (lambda ()
-                             (interactive)
-                             (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db")))
+    ;;quick load of c:\users\mtz\proj\ecp\dev\db
+    (evil-leader/set-key "2" (lambda ()
+                               (interactive)
+                               (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db")))
 
-  ;;quick load of TFS \Main\SqlScripts
-  (evil-leader/set-key "3" (lambda ()
-                             (interactive)
-                             (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts")))
+    ;;quick load of TFS \Main\SqlScripts
+    (evil-leader/set-key "3" (lambda ()
+                               (interactive)
+                               (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts")))
 
-  ;;quick load of c:\users\mtz\TODO\TODO.org
-  (evil-leader/set-key "t" (lambda ()
-                             (interactive)
-                             (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org"))))
+    ;;quick load of c:\users\mtz\TODO\TODO.org
+    (evil-leader/set-key "t" (lambda ()
+                               (interactive)
+                               (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org")))))
 
 
 (when (eq system-type 'gnu/linux)
-  (evil-leader/set-key "1" (lambda ()
-                             (interactive)
-                             (dired "~"))))
+  (when my-use-evil-p
+   (evil-leader/set-key "1" (lambda ()
+                              (interactive)
+                              (dired "~")))))
 
 
 ;;; quick load of the .emacs (or init.el) file.
@@ -2155,9 +2188,10 @@ This prevents overlapping themes; something I would rarely want."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
-(evil-leader/set-key "`" #'my-load-init)
-;; the above key is hard to type on a 60% poker so making an alternative.
-(evil-leader/set-key "8" #'my-load-init)
+(when my-use-evil-p
+  (evil-leader/set-key "`" #'my-load-init)
+  ;; the above key is hard to type on a 60% poker so making an alternative.
+  (evil-leader/set-key "8" #'my-load-init))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -2401,14 +2435,17 @@ This prevents overlapping themes; something I would rarely want."
 ;; Doesn't work when set in eval-after-load ???
 ;; (setq magit-last-seen-setup-instructions "1.4.0")
 
-(evil-leader/set-key "m" #'magit-status) ; autoloaded
+(when my-use-evil-p
+  (evil-leader/set-key "m" #'magit-status)) ; autoloaded
 
 (with-eval-after-load "magit"
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
-  (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
+  (when my-use-evil-p
+   (define-key magit-mode-map (kbd "M-h") #'evil-window-left))
   ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
-  (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
+  (when my-use-evil-p
+   (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs))))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -2511,8 +2548,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;; hydra
 ;;;------------------------------------------------------------------------------
 (autoload #'my-choose-hydra "my-hydras" nil t)
-(define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
-(define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra)
+(when my-use-evil-p
+  (define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
+  (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra))
 
 (with-eval-after-load "hydra"
   (setq hydra-is-helpful t)
@@ -2621,8 +2659,9 @@ This prevents overlapping themes; something I would rarely want."
 
 (when my-use-ivy-p
   (global-set-key (kbd "C-s") #'swiper)
-  (define-key evil-normal-state-map (kbd "s") #'swiper)
-  (evil-leader/set-key "b" #'ivy-switch-buffer)
+  (when my-use-evil-p
+    (define-key evil-normal-state-map (kbd "s") #'swiper)
+    (evil-leader/set-key "b" #'ivy-switch-buffer))
 
   (ivy-mode 1) ; turn on ivy completion
   )
@@ -2887,7 +2926,8 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
   ;; fn `kill-line' was bound to evil-insert C-k earlier. Override it for lispy.
-  (evil-define-key 'insert lispy-mode-map (kbd "C-k") #'lispy-kill))
+  (when my-use-evil-p
+    (evil-define-key 'insert lispy-mode-map (kbd "C-k") #'lispy-kill)))
 
 
 
@@ -2911,15 +2951,16 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; global-unset-key
   ;; local-unset-key
   ;; (define-key KEYMAP KEY nil)
-  (define-key Info-mode-map (kbd "n") #'evil-search-next)
-  (define-key Info-mode-map (kbd "p") nil)
-  (define-key Info-mode-map (kbd "f") #'evil-find-char)
-  (define-key Info-mode-map (kbd "H") #'evil-window-top)
-  (define-key Info-mode-map (kbd "L") #'evil-window-bottom)
-  (define-key Info-mode-map (kbd "w") #'evil-forward-word-begin)
-  (define-key Info-mode-map (kbd "e") #'evil-forward-word-end)
-  (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
-  (define-key Info-mode-map (kbd "g") #'evil-goto-first-line) ;TODO: figure out how to bind gg for top.
+  (when my-use-evil-p
+    (define-key Info-mode-map (kbd "n") #'evil-search-next)
+    (define-key Info-mode-map (kbd "p") nil)
+    (define-key Info-mode-map (kbd "f") #'evil-find-char)
+    (define-key Info-mode-map (kbd "H") #'evil-window-top)
+    (define-key Info-mode-map (kbd "L") #'evil-window-bottom)
+    (define-key Info-mode-map (kbd "w") #'evil-forward-word-begin)
+    (define-key Info-mode-map (kbd "e") #'evil-forward-word-end)
+    (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
+    (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)) ;TODO: figure out how to bind gg for top.
   )
 
 ;;;------------------------------------------------------------------------------
@@ -2931,10 +2972,11 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (with-eval-after-load "elisp-slime-nav"
   ;; evil-mode stole the keybinds! take them back.
-  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
-  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") 'pop-tag-mark)
-  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") 'elisp-slime-nav-describe-elisp-thing-at-point)
-  (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point))
+  (when my-use-evil-p
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") 'pop-tag-mark)
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") 'elisp-slime-nav-describe-elisp-thing-at-point)
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point)))
 
 ;;;------------------------------------------------------------------------------
 ;;; maximumize screen real-estate. TODO: complete this.
@@ -3049,8 +3091,9 @@ When ARG isn't nil, try to pretty print the sexp."
 
 
 (progn ;;use the default emacs scroll bingding for C-v
-  (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
-  (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))
+  (when my-use-evil-p
+    (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
+    (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command)))
 
 ;; scroll like vim when moving 1 line off screen with j/k.
 ;; has some wierd rules about recentering, but 100 is supposed to
@@ -3061,10 +3104,11 @@ When ARG isn't nil, try to pretty print the sexp."
 (setq scroll-preserve-screen-position nil)
 
 (progn ;;window navigation.
-  (global-set-key (kbd "M-h") #'evil-window-left)
-  (global-set-key (kbd "M-j") #'evil-window-down)
-  (global-set-key (kbd "M-k") #'evil-window-up)
-  (global-set-key (kbd "M-l") #'evil-window-right))
+  (when my-use-evil-p
+    (global-set-key (kbd "M-h") #'evil-window-left)
+    (global-set-key (kbd "M-j") #'evil-window-down)
+    (global-set-key (kbd "M-k") #'evil-window-up)
+    (global-set-key (kbd "M-l") #'evil-window-right)))
 
 ;; cycle the buffers really fast. Not doing this anymore since these are error handling shortcuts in some modes.
 ;; (global-set-key (kbd "M-n") #'next-buffer)
@@ -3125,7 +3169,8 @@ When ARG isn't nil, try to pretty print the sexp."
           (and (not my-use-helm-p)
                (not my-use-ido-p)
                (not my-use-ivy-p)))
-  (evil-leader/set-key "b" #'ibuffer)
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'ibuffer))
   ;; (evil-leader/set-key "b" #'ido-switch-buffer)
   ;; (global-set-key (kbd "M-/") #'hippie-expand)
   ;; (evil-leader/set-key "b" #'ivy-switch-buffer)
@@ -3283,7 +3328,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; my-square-one
 ;;;--------------------------------------------------------------------
 (autoload #'my-square-one "my-square-one" nil t)
-(evil-leader/set-key "0" #'my-square-one)
+(when my-use-evil-p
+  (evil-leader/set-key "0" #'my-square-one))
 
 
 

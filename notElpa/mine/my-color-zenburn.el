@@ -2,7 +2,8 @@
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
   (load-theme 'zenburn t)
-  (my-cursor-stuff-darkBg) ;;TODO: move into `custom-set-faces'
+  (when my-use-evil-p
+    (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces

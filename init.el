@@ -345,31 +345,31 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------
 ;;; key-chord
 ;;;----------------------------------
-;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
-;;       since it is looking for the chord.
-(key-chord-mode 1) ; autoloaded function
+;; ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
+;; ;;       since it is looking for the chord.
+;; (key-chord-mode 1) ; autoloaded function
 
-(with-eval-after-load "key-chord"
-  (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
-  (setq key-chord-one-key-delay 0.4))
+;; (with-eval-after-load "key-chord"
+;;   (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+;;   (setq key-chord-one-key-delay 0.4))
 
-(with-eval-after-load "helm"
-  ;; must be in eval-after-load so `helm-map' is defined
-  (key-chord-define helm-map "fj" #'helm-keyboard-quit))
+;; (with-eval-after-load "helm"
+;;   ;; must be in eval-after-load so `helm-map' is defined
+;;   (key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
-(with-eval-after-load "evil"
-  ;; must be in eval-after-load so key maps are defined.
-  (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
-  (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
+;; (with-eval-after-load "evil"
+;;   ;; must be in eval-after-load so key maps are defined.
+;;   (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
+;;   (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
 
-(with-eval-after-load "lisp-mode"
-  (when nil ;; trying lispy
-    ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
-    (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+;; (with-eval-after-load "lisp-mode"
+;;   (when nil ;; trying lispy
+;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
+;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
-;; (with-eval-after-load "smartparens"
-;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
-;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+;; ;; (with-eval-after-load "smartparens"
+;; ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
+;; ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
 
 ;;;----------------------------------
 ;;; cursor
@@ -2989,9 +2989,13 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
 ;; the key, and then key doesn't exist by the time the file loads.
 (with-eval-after-load "evil"
-  (define-key evil-insert-state-map (kbd "C-;") #'evil-normal-state)
-  (define-key evil-visual-state-map (kbd "C-;") #'evil-exit-visual-state)
-  (define-key evil-normal-state-map (kbd "C-;") #'keyboard-quit))
+  (let ((esc (kbd "C-;")))
+    (define-key evil-insert-state-map esc #'evil-normal-state)
+    (define-key evil-visual-state-map esc #'evil-exit-visual-state)
+    (define-key evil-normal-state-map esc #'evil-force-normal-state)
+    (define-key evil-ex-completion-map esc 'abort-recursive-edit)
+    (define-key evil-read-key-map esc #'keyboard-quit)
+    (define-key evil-replace-state-map esc 'evil-normal-state)))
 (with-eval-after-load "helm"
   (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
 

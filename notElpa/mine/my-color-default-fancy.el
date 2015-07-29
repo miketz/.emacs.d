@@ -1,6 +1,6 @@
 (defun my-color-default-fancy ()
   (interactive)
-  (color-default)
+  (my-color-default)
 
   (set-background-color mayan-smoke)
 

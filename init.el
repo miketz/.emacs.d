@@ -294,6 +294,8 @@ Becuase I want them to have same value.
     (unless (package-installed-p pkg)
       (package-install pkg))))
 
+(my-install-packages)
+
 (defun package-list-unaccounted-packages ()
   "Display unaccounted packages.
 Like `package-list-packages', but only show packages that are installed and not

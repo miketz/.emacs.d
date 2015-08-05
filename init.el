@@ -1863,6 +1863,7 @@ This prevents overlapping themes; something I would rarely want."
 (add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
 (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
 ;;(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)

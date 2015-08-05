@@ -790,6 +790,7 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-color-gandalf "my-color-gandalf" nil t)
 (autoload #'my-color-leuven "my-color-leuven" nil t)
 (autoload #'my-color-dichromacy "my-color-dichromacy" nil t)
+(autoload #'my-color-firebelly "my-color-firebelly" nil t)
 
 ;;theme of the week and corresponding settings. This may change often.
 (progn

@@ -1819,6 +1819,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; sql-mode
 ;;;--------------------------------------------------------------------
 (with-eval-after-load "sql"
+  (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
   (add-hook 'sql-mode-hook #'electric-pair-mode)
   (add-hook #'sql-mode-hook
             (lambda ()

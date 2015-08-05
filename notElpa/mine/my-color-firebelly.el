@@ -4,6 +4,11 @@
   (custom-theme-set-faces
    'firebelly
 
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
+
    '(my-tilde-face
      ((t (:foreground "#523030"))))
 

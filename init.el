@@ -1830,7 +1830,7 @@ This prevents overlapping themes; something I would rarely want."
 
               ;; turn off indent when you press "o" in evil. Buffer local
               (when my-use-evil-p
-               (setq evil-auto-indent nil))))
+                (setq evil-auto-indent nil))))
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil

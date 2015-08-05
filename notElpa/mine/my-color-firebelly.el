@@ -9,6 +9,8 @@
                                   :strike-through t
                                   :background nil))))
 
+   '(font-lock-variable-name-face
+     ((t (:foreground "#924040"))))
    '(my-tilde-face
      ((t (:foreground "#523030"))))
 

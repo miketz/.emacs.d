@@ -302,7 +302,7 @@ Installs packages in the list `my-packages'."
 Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
   (interactive)
   (save-window-excursion
-    (package-list-packages t)
+    (package-list-packages) ;; (package-list-packages t)
     (package-menu-mark-upgrades)
     (package-menu-execute t)))
 

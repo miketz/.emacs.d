@@ -283,7 +283,8 @@ Becuase I want them to have same value.
 
 
 (defun my-install-packages ()
-  "Call this function on a new Emacs installation to install packages."
+  "Call this function on a new Emacs installation to install packages.
+Installs packages in the list `my-packages'."
   (interactive)
   ;; fetch the list of packages available
   (unless package-archive-contents
@@ -295,6 +296,15 @@ Becuase I want them to have same value.
       (package-install pkg))))
 
 (my-install-packages)
+
+(defun my-upgrade-packages ()
+  "Upgrade installed packages.
+Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
+  (interactive)
+  (save-window-excursion
+    (package-list-packages t)
+    (package-menu-mark-upgrades)
+    (package-menu-execute t)))
 
 (defun package-list-unaccounted-packages ()
   "Display unaccounted packages.

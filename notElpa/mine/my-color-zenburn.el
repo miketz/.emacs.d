@@ -27,6 +27,8 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   '(slime-repl-inputed-output-face
+     ((t (:foreground "light sky blue"))))
    '(nxml-tag-delimiter
      ((t (:foreground "#83D0FF" :weight bold))))
    '(nxml-element-local-name

@@ -567,40 +567,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
             (eval-last-sexp t)         ; t to insert result in buffer.
             (evil-normal-state))))))
 
-  ;; (evil-leader/set-key "r"
-  ;;   (lambda ()
-  ;;     (interactive)
-  ;;     (save-excursion
-  ;;       (evil-append 1)
-  ;;       (slime-eval-last-expression) ; t to insert result in buffer.
-  ;;       (evil-normal-state))))
-
-  (evil-leader/set-key "r" (lambda ()
-                             (interactive)
-                             (save-excursion
-                               (evil-append 1)
-                               (let ((string (slime-last-expression)))
-                                 (evil-normal-state)
-                                 (slime-eval-async
-                                  `(swank:eval-and-grab-output ,string)
-                                  (lambda (result)
-                                    (cl-destructuring-bind (output value) result
-                                      (pos-tip-show value)
-                                      ;;(push-mark)
-                                      ;;(insert output value)
-                                      )))))))
-
-
   (evil-leader/set-key "a" 'slime-eval-print-last-expression)
   (evil-leader/set-key "p" (lambda ()
                              (interactive)
                              (save-excursion ;don't move the point
                                (evil-append 1)
                                (slime-pprint-eval-last-expression)
-                               (evil-normal-state))))
-
-  )
-
+                               (evil-normal-state)))))
 
 
 ;;;----------------------------------
@@ -951,7 +924,21 @@ This prevents overlapping themes; something I would rarely want."
 
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
   (when my-use-evil-p
-   (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol))
+    (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+    (evil-leader/set-key "r" (lambda ()
+                               (interactive)
+                               (save-excursion
+                                 (evil-append 1)
+                                 (let ((string (slime-last-expression)))
+                                   (evil-normal-state)
+                                   (slime-eval-async
+                                    `(swank:eval-and-grab-output ,string)
+                                    (lambda (result)
+                                      (cl-destructuring-bind (output value) result
+                                        (pos-tip-show value)
+                                        ;;(push-mark)
+                                        ;;(insert output value)
+                                        ))))))))
 
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec

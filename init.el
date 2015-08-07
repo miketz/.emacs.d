@@ -1751,7 +1751,8 @@ This prevents overlapping themes; something I would rarely want."
             ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
             (electric-pair-mode 1)
             ;;(flycheck-mode 1)
-            (electric-spacing-mode 1)))
+            ;; (electric-spacing-mode 1)
+            ))
 
 
 (add-hook 'c-initialization-hook

@@ -1649,7 +1649,16 @@ This prevents overlapping themes; something I would rarely want."
   (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
   (ido-ubiquitous-mode 1)
   ;; (flx-ido-mode 1)
-  )
+
+  ;; insert a hypen - on space like in normal M-x
+  (defadvice ido-switch-buffer (around space-inserts-hyphen activate compile)
+    (let ((ido-cannot-complete-command
+           `(lambda ()
+              (interactive)
+              (if (string= " " (this-command-keys))
+                  (insert ?-)
+                (funcall ,ido-cannot-complete-command)))))
+      ad-do-it)))
 
 (with-eval-after-load "flx-ido"
   ;; disable ido faces to see flx highlights.

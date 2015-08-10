@@ -49,8 +49,12 @@
      ((t (:foreground "cyan" :bold t))))
    '(hydra-face-amaranth
      ((t (:foreground "green" :bold t))))
+
    `(font-lock-comment-face
      ((t (:foreground "#8FB28F" :slant italic))))
+   `(font-lock-comment-delimiter-face
+     ((t (:foreground "#CFF2CF"))))
+
    `(ace-jump-face-foreground
      ((t (:foreground "spring green"
                       :slant normal

@@ -17,7 +17,7 @@
    `(font-lock-comment-face
      ((t (:foreground "RosyBrown4" :slant italic))))
    `(font-lock-comment-delimiter-face
-     ((t (:foreground "RosyBrown4"))))
+     ((t (:foreground "RosyBrown3"))))
 
    `(fringe
      ((t (:foreground "burlywood"

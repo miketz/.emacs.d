@@ -53,7 +53,7 @@
    `(font-lock-comment-face
      ((t (:foreground "#8FB28F" :slant italic))))
    `(font-lock-comment-delimiter-face
-     ((t (:foreground "#CFF2CF"))))
+     ((t (:foreground "darkolivegreen3"))))
 
    `(ace-jump-face-foreground
      ((t (:foreground "spring green"

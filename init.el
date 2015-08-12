@@ -1365,7 +1365,20 @@ This prevents overlapping themes; something I would rarely want."
   (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   (when my-use-evil-p
     ;; reclaim key M-h which nxml stole for`nxml-mark-paragraph'
-    (define-key nxml-mode-map (kbd "M-h") #'evil-window-left)))
+    (define-key nxml-mode-map (kbd "M-h") #'evil-window-left))
+
+  ;; TODO make a minor mode for elmah logs. Inherit from nxml-mode.
+  (defun my-elmah-format-xml ()
+    "Insert newlines at the escape codes in elmah's XML error message.
+To make it human readable."
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer) ;; go to beggining of buffer
+      (let ((pos 0))
+        (while (not (null pos))
+          (setq pos (search-forward "&#xD;&#xA;" nil t))
+          (when (not (null pos))
+            (newline)))))))
 
 ;;;--------------------
 ;;; Helm

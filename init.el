@@ -2468,10 +2468,9 @@ To make it human readable."
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (when my-use-evil-p
-   (define-key magit-mode-map (kbd "M-h") #'evil-window-left))
-  ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
-  (when my-use-evil-p
-   (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs))))
+    (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
+    ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
+    (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs))))
 
 
 ;;;-----------------------------------------------------------------------------

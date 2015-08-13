@@ -3085,6 +3085,12 @@ When ARG isn't nil, try to pretty print the sexp."
   (define-key process-menu-mode-map (kbd "C-k") 'my-delete-process-at-point))
 
 ;;;------------------------------------------------------------------------------
+;;; shell-script-mode. (alias for sh-mode)
+;;;------------------------------------------------------------------------------
+(add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
+
+
+;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------
 

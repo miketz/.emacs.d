@@ -3092,12 +3092,39 @@ When ARG isn't nil, try to pretty print the sexp."
 (add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
 
 
+
+;;;------------------------------------------------------------------------------
+;;; whitespace
+;;;------------------------------------------------------------------------------
+;;show trailing whitespace.
+;; (add-hook 'prog-mode-hook (lambda ()
+;;                             (setq show-trailing-whitespace t)))
+
+;; (defun my-toggle-show-trailing-whitespace ()
+;;   (interactive)
+;;   (not-m show-trailing-whitespace)
+;;   ;;visual state makes the dipslay refresh.
+;;   (evil-visual-char)
+;;   (evil-exit-visual-state))
+;; (global-set-key (kbd "C-c t") #'my-toggle-show-trailing-whitespace)
+;; (global-set-key (kbd "C-c C-t") #'my-toggle-show-trailing-whitespace)
+
+;;******** whitespace-mode *******
+;; (require 'whitespace)
+(with-eval-after-load "whitespace"
+  (setq-default whitespace-line-column 80)
+  ;;(setq whitespace-style '(face lines-tail))
+  (setq-default whitespace-style '(face trailing)))
+
+(with-eval-after-load "prog-mode"
+  (add-hook 'prog-mode-hook (lambda ()
+                              (whitespace-mode 1))))
+;;(global-whitespace-mode 1)
+
+
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;------------------------------------------------------------------------------
-
-
-
 (when (and nil ;don't start server for now.
            ;;`server-start' doesn't seemt to work on MS-windows?
            (eq system-type 'gnu/linux))
@@ -3328,30 +3355,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
 
-;;show trailing whitespace.
-;; (add-hook 'prog-mode-hook (lambda ()
-;;                             (setq show-trailing-whitespace t)))
 
-;; (defun my-toggle-show-trailing-whitespace ()
-;;   (interactive)
-;;   (not-m show-trailing-whitespace)
-;;   ;;visual state makes the dipslay refresh.
-;;   (evil-visual-char)
-;;   (evil-exit-visual-state))
-;; (global-set-key (kbd "C-c t") #'my-toggle-show-trailing-whitespace)
-;; (global-set-key (kbd "C-c C-t") #'my-toggle-show-trailing-whitespace)
-
-
-;;******** whitespace-mode *******
-(require 'whitespace)
-(setq-default whitespace-line-column 80)
-;;(setq whitespace-style '(face lines-tail))
-(setq-default whitespace-style '(face trailing))
-(add-hook 'prog-mode-hook (lambda ()
-                            (whitespace-mode 1)))
-;;(global-whitespace-mode 1)
-
-;;-------------------------------------------------------aaaaaaaaaaaaaaaaaaa
 
 ;; disable annoying newline emacs automatically adds to the end of a file when
 ;; saving.
@@ -3446,15 +3450,15 @@ When ARG isn't nil, try to pretty print the sexp."
 
 ;; (evil-leader/set-key "m" 'msg)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;---------------------------------------------------
 ;;; touch typing
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;---------------------------------------------------
 ;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
 (autoload 'my-type-tutor "my-type-tutor" nil t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; hour format conversion. 12 -> 24
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;---------------------------------------------------
+;;; hour format conversion. 12 -> 24
+;;;---------------------------------------------------
 ;; (defun to24 (hour amPm)
 ;;   (cond
 ;;    ((and (equal amPm "AM")

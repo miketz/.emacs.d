@@ -3056,6 +3056,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 ;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
 ;; the key, and then key doesn't exist by the time the file loads.
+;; TODO: rebind iedit-mode to another key. (it used C-; by default)
 (with-eval-after-load "evil"
   (let ((esc (kbd "C-;")))
     (define-key evil-insert-state-map esc #'evil-normal-state)

@@ -1739,53 +1739,54 @@ To make it human readable."
 ;;;--------------------
 ;;; cc-mode
 ;;;--------------------
-;; (assoc "cc-mode" c-style-alist)
-;; (assoc "user" c-style-alist)
-;; (assoc "c#" c-style-alist)
-;; (assoc "gnu" c-style-alist)
-;; (assoc "k&r" c-style-alist)
-;; (assoc "bsd" c-style-alist)
-;; (assoc "stroustrup" c-style-alist)
-;; (assoc "whitesmith" c-style-alist)
-;; (assoc "ellemtel" c-style-alist)
-;; (assoc "linux" c-style-alist)
-;; (assoc "python" c-style-alist)
-;; (assoc "java" c-style-alist)
-;; (assoc "awk" c-style-alist)
+(with-eval-after-load "cc-mode"
+  ;; (assoc "cc-mode" c-style-alist)
+  ;; (assoc "user" c-style-alist)
+  ;; (assoc "c#" c-style-alist)
+  ;; (assoc "gnu" c-style-alist)
+  ;; (assoc "k&r" c-style-alist)
+  ;; (assoc "bsd" c-style-alist)
+  ;; (assoc "stroustrup" c-style-alist)
+  ;; (assoc "whitesmith" c-style-alist)
+  ;; (assoc "ellemtel" c-style-alist)
+  ;; (assoc "linux" c-style-alist)
+  ;; (assoc "python" c-style-alist)
+  ;; (assoc "java" c-style-alist)
+  ;; (assoc "awk" c-style-alist)
+  (setq c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "linux")))
+  ;;(setq-default c-default-style "java")
+  (setq-default c-basic-offset my-indent-width) ;tab width
+  (setq-default c-electric-flag t)
 
-(setq c-default-style '((java-mode . "java")
-                        (awk-mode . "awk")
-                        (other . "linux")))
-;;(setq-default c-default-style "java")
-(setq-default c-basic-offset my-indent-width) ;tab width
-(setq-default c-electric-flag t)
+  ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
+  ;; And if you the functions fit on screen then it's just wasted modeline space.
+  ;; As an alternative use `beginning-of-defun' C-M-a to jump to the function name.
+  ;; Then `evil-jump-backward' C-o to jump back to where you were.
+  ;;(eval-after-load 'cc-mode 'which-function-mode)
 
-;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
-;; And if you the functions fit on screen then it's just wasted modeline space.
-;; As an alternative use `beginning-of-defun' C-M-a to jump to the function name.
-;; Then `evil-jump-backward' C-o to jump back to where you were.
-;;(eval-after-load 'cc-mode 'which-function-mode)
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (yas-minor-mode 1)
-            ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
-            (electric-pair-mode 1)
-            ;;(flycheck-mode 1)
-            ;; (electric-spacing-mode 1)
-            ))
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (yas-minor-mode 1)
+              ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
+              (electric-pair-mode 1)
+              ;;(flycheck-mode 1)
+              ;; (electric-spacing-mode 1)
+              ))
 
 
-(add-hook 'c-initialization-hook
-          (lambda ()
-            ;;TODO: fill this up
-            ;; hook that runs 1 time.
-            ;; equivalent to using eval-after-load.
-            ))
+  (add-hook 'c-initialization-hook
+            (lambda ()
+              ;;TODO: fill this up
+              ;; hook that runs 1 time.
+              ;; equivalent to using eval-after-load???
+              ))
 
-;; (defun my-make-CR-do-indent ()
-;;   (define-key c-mode-base-map "\C-m" 'c-context-line-break))
-;; (add-hook 'c-initialization-hook 'my-make-CR-do-indent)
+  ;; (defun my-make-CR-do-indent ()
+  ;;   (define-key c-mode-base-map "\C-m" 'c-context-line-break))
+  ;; (add-hook 'c-initialization-hook 'my-make-CR-do-indent)
+  )
 
 
 ;;;------------------

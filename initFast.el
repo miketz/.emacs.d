@@ -14,7 +14,7 @@
 (custom-set-faces
  '(cursor ((t (:background "cyan")))))
 
-(load-theme 'wombat)
+(load-theme 'deeper-blue)
 
 (if  (eq system-type 'windows-nt)
   (custom-set-faces

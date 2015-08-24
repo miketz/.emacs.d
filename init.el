@@ -3457,6 +3457,28 @@ When ARG isn't nil, try to pretty print the sexp."
 (autoload 'my-type-tutor "my-type-tutor" nil t)
 
 ;;;---------------------------------------------------
+;;; ms
+;;;---------------------------------------------------
+;; (defvar ms-width 30)
+;; (defvar ms-height 25)
+;; (defvar ms-map ())
+
+;; ;; u f O *
+
+;; (defun ms-init ()
+;;   (setq ms-map ()) ;; clear
+;;   (let ((times (* ms-width ms-height)))
+;;     (dotimes (i times)
+;;       (setq ms-map (cons 'u ms-map)))))
+
+
+;; (ms-init)
+
+;; (dolist (x ms-map)
+;;   (insert (symbol-name x))
+;;   (insert " "))
+
+;;;---------------------------------------------------
 ;;; hour format conversion. 12 -> 24
 ;;;---------------------------------------------------
 ;; (defun to24 (hour amPm)

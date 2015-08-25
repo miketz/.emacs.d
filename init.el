@@ -3471,9 +3471,19 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;     (dotimes (i times)
 ;;       (setq ms-map (cons 'u ms-map)))))
 
+;; (defun ms-get-index (r c)
+;;   (+ (* r ms-width) c))
 
+;; (defun ms-render-map (map)
+;;   (dotimes (r ms-height)
+;;     (dotimes (c ms-width)
+;;       (insert (symbol-name (nth (ms-get-index r c)
+;;                                 ms-map)))
+;;       (insert " "))
+;;     (insert "\n")))
+
+;; (ms-render-map ms-map)
 ;; (ms-init)
-
 ;; (dolist (x ms-map)
 ;;   (insert (symbol-name x))
 ;;   (insert " "))

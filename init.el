@@ -3543,9 +3543,9 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;   (assert (= 23 (to24 11 "PM"))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;------------------------------------
 ;;; interact with Microsoft SQL Server
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;------------------------------------
 ;;sqlcmd -S 127.0.0.1,42000\OSHE
 ;;sqlcmd -S 127.0.0.1,42000\OSHE -q "SELECT 'hello';"
 

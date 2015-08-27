@@ -943,9 +943,12 @@ This prevents overlapping themes; something I would rarely want."
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec
     (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
-  )
 
-
+  (defun my-view-hyperspec ()
+    (interactive)
+    (let ((browse-url-browser-function #'eww-browse-url))
+      (slime-documentation-lookup)))
+  (define-key slime-mode-map (kbd "C-c C-d h") #'my-view-hyperspec))
 
 
 ;;;---------------------------------------------

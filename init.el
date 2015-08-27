@@ -2401,7 +2401,12 @@ To make it human readable."
 ;;;-----------------------------------------------------------------------------
 ;;; w3
 ;;;-----------------------------------------------------------------------------
-;; (with-eval-after-load "w3")
+(with-eval-after-load "w3"
+  (defun my-w3-goto (url)
+    ;; "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/Body/m_w_slts.htm"
+    (let ((w3--args nil) ;; prevents errors when loading CL hyperspec pages on local disk
+          (w3-default-homepage url))
+      (w3))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; cedet

@@ -920,7 +920,8 @@ This prevents overlapping themes; something I would rarely want."
               ;;there's always a trailing space at repl prompt. Don't highlight it.
               (setq show-trailing-whitespace nil)
               ;;aggressive-indent moves SLIME's comments in the REPL. Turn it off.
-              (aggressive-indent-mode 0)))
+              (when (fboundp 'aggressive-indent-mode)
+                (aggressive-indent-mode 0))))
 
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
   (when my-use-evil-p

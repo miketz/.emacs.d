@@ -3065,9 +3065,11 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 ;;; universal vim escape. Without key-chord dependence
 ;;;------------------------------------------------------------------------------
-;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
-;; the key, and then key doesn't exist by the time the file loads.
 ;; TODO: rebind iedit-mode to another key. (it used C-; by default)
+(global-set-key (kbd "C-;") #'keyboard-escape-quit)
+;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
+;; the key, and then key doesn't exist by the time the file loads. Just
+;; duplicate the `kbd' for now
 (with-eval-after-load "evil"
   (let ((esc (kbd "C-;")))
     (define-key evil-insert-state-map esc #'evil-normal-state)
@@ -3078,7 +3080,6 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key evil-replace-state-map esc 'evil-normal-state)))
 (with-eval-after-load "helm"
   (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
-
 
 ;;;------------------------------------------------------------------------------
 ;;; list-processes

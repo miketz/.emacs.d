@@ -254,7 +254,8 @@ Becuase I want them to have same value.
     nlinum
     ido-vertical-mode
     ido-ubiquitous
-    flx-ido)
+    flx-ido
+    ov)
   "Packages I use from elpa/melpa.")
 
 
@@ -3135,6 +3136,11 @@ When ARG isn't nil, try to pretty print the sexp."
   (add-hook 'prog-mode-hook (lambda ()
                               (whitespace-mode 1))))
 ;;(global-whitespace-mode 1)
+
+;;;------------------------------------------------------------------------------
+;;; sallet. from fuco. saved to notElpa folder.
+;;;------------------------------------------------------------------------------
+(autoload #'sallet-buffer "sallet" nil t)
 
 
 ;;;------------------------------------------------------------------------------

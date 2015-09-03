@@ -3066,7 +3066,9 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 ;;; universal vim escape. Without key-chord dependence
 ;;;------------------------------------------------------------------------------
-;; TODO: rebind iedit-mode to another key. (it used C-; by default)
+;; rebind iedit-mode to another key. (it used C-; by default)
+(global-set-key (kbd "C-c ;") #'iedit-mode)
+
 (global-set-key (kbd "C-;") #'keyboard-escape-quit)
 ;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
 ;; the key, and then key doesn't exist by the time the file loads. Just

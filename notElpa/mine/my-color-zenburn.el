@@ -136,6 +136,7 @@
    '(rainbow-delimiters-depth-6-face ((t (:foreground "orange"))))
    '(rainbow-delimiters-depth-7-face ((t (:foreground "white"))))
    ;;'(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1"))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "yellow" :background "black"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "hot pink" :background "#2F2F2F"
+                                                      ))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))

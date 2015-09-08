@@ -3142,6 +3142,18 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;------------------------------------------------------------------------------
 (autoload #'sallet-buffer "sallet" nil t)
 
+;;;------------------------------------------------------------------------------
+;;; winner-mode
+;;;------------------------------------------------------------------------------
+(setq winner-dont-bind-my-keys t) ; doesn't work when set in eval-after-load.
+(winner-mode 1)
+(with-eval-after-load "winner"
+  ;; reducing size from 200. Just need to facilitate a few quick undos.
+  (setq winner-ring-size 40)
+  (define-key winner-mode-map (kbd "C-c u") #'winner-undo)
+  ;; NOTE: `winner-redo' only works if invoked immediatley after `winner-undo'.
+  ;; TODO: find a way to make this keybind exist temporarily after the an undo.
+  (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
 
 ;;;------------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

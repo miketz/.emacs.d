@@ -3152,7 +3152,7 @@ When ARG isn't nil, try to pretty print the sexp."
   (setq winner-ring-size 40)
   (define-key winner-mode-map (kbd "C-c u") #'winner-undo)
   ;; NOTE: `winner-redo' only works if invoked immediatley after `winner-undo'.
-  ;; TODO: find a way to make this keybind exist temporarily after the an undo.
+  ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
 
 ;;;------------------------------------------------------------------------------

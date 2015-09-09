@@ -2402,6 +2402,24 @@ To make it human readable."
   (define-key eww-mode-map (kbd "B") #'eww-back-url)
   (define-key eww-mode-map (kbd "F") #'eww-forward-url)
 
+  (progn ;; clearing the ^M
+    (defun my-clear-wierd-m ()
+      "Clear the weird ^M character that shows in some eww buffers."
+      (interactive
+       ;; (let ((args (query-replace-read-args "Replace" t)))
+       ;;   (setcdr (cdr args) nil) ; remove third value returned from query---args
+       ;;   args)
+       )
+      (save-excursion
+        (goto-char (point-min))
+        (while (re-search-forward "" nil t)
+          (replace-match ""))))
+
+    (defadvice eww-render (after ad-clear-wierd-m)
+      "Clear the weird ^M character that shows in some eww buffers."
+      (my-clear-wierd-m))
+    (ad-activate 'eww-render))
+
   (add-hook 'eww-mode-hook
             (lambda ()
               (setq show-trailing-whitespace nil))))

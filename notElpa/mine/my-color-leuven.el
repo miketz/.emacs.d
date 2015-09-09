@@ -1,6 +1,12 @@
 (defun my-color-leuven ()
   (interactive)
   (load-theme 'leuven t)
+  (my-cursor-stuff :color-emacs "maroon" :color-evil "blue")
+  (let ((cur '(box "blue")))
+    (setq evil-normal-state-cursor cur)
+    (setq evil-visual-state-cursor '(hollow "blue"))
+    (setq evil-operator-state-cursor cur))
+
   (custom-theme-set-faces
    'leuven
    ;; `(default ((t (:foreground "black" :background ,mayan-smoke))))
@@ -26,13 +32,13 @@
                                   :bold t
                                   :strike-through t
                                   :background nil))))
-   '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
-   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan"))))
-   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa"))))
-   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush"))))
-   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "lemon chiffon"))))
-   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background "#EEEEFF"))))
-   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52"))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3"))))
-   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca"))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black"))))))
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight bold))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :weight bold))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush" :weight bold))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "lemon chiffon" :weight bold))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background "#EEEEFF" :weight bold))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight bold))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :weight bold))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca" :weight bold))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))))

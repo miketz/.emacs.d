@@ -2184,7 +2184,8 @@ To make it human readable."
     (autoload #'proj-emacs lisp-file nil t)
     (autoload #'proj-cl lisp-file nil t)
     (autoload #'proj-imgtag lisp-file nil t)
-    (autoload #'proj-cpp lisp-file nil t))
+    (autoload #'proj-cpp lisp-file nil t)
+    (autoload #'proj-pcl lisp-file nil t))
 
   ;;quick load of c:\users\mtz
   (when my-use-evil-p

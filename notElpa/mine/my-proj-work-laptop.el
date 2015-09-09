@@ -157,6 +157,14 @@
     (evil-window-move-far-left)
     (shrink-window-horizontally 35)))
 
+(defun proj-pcl ()
+  (interactive)
+  (switch-to-buffer "pcl-test")
+  ;; (common-lisp-mode)
+  (split-window-horizontally)
+  (shrink-window-horizontally 24)
+  (eww-open-file "c:/users/mtz/downloads/tutorials/practicalcommonlisp_epub/html/index.html"))
+
 (defun proj-cpp ()
   (interactive)
   (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))

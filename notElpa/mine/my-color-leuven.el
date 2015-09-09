@@ -14,6 +14,8 @@
                                   :style released-button))))
    '(js2-function-call ((t :foreground "blue")))
    '(erc-timestamp-face ((t :foreground "purple" :weight bold)))
+   '(fringe
+     ((t (:foreground "#9B9B9B" :background "alice blue"))))
    '(leerzeichen ((t (:foreground "black";"#A8A800"
                                   :background "white";"#D4D4C8"
                                   :italic nil

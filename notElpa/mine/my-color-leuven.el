@@ -3,7 +3,8 @@
   (load-theme 'leuven t)
   (custom-theme-set-faces
    'leuven
-   `(default ((t (:foreground "black" :background ,mayan-smoke))))
+   ;; `(default ((t (:foreground "black" :background ,mayan-smoke))))
+   `(default ((t (:foreground "black"))))
    ;;`(default ((t (:foreground "black" :background ,"white"))))
    `(mode-line ((t (:box (:line-width -1 :color "#1A2F54")
                          :foreground "#85CEEB" :background "#335EA8"
@@ -12,6 +13,7 @@
                                   :foreground "#F0F0EF" :background "#9B9C97"
                                   :style released-button))))
    '(js2-function-call ((t :foreground "blue")))
+   '(erc-timestamp-face ((t :foreground "purple" :weight bold)))
    '(leerzeichen ((t (:foreground "black";"#A8A800"
                                   :background "white";"#D4D4C8"
                                   :italic nil

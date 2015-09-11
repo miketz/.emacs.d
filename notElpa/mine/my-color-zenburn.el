@@ -27,6 +27,10 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   ;; swiper/ivy faces
+   '(ivy-current-match
+     ((t (:background "black" :foreground "light sky blue"))))
+
    '(slime-repl-inputed-output-face
      ((t (:foreground "light sky blue"))))
    '(nxml-tag-delimiter

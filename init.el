@@ -177,6 +177,7 @@ Becuase I want them to have same value.
     ;;ace-jump-zap
     csharp-mode
     js2-mode
+    js2-highlight-vars
     skewer-mode
     ;;ac-js2
     web-beautify
@@ -3184,6 +3185,13 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; NOTE: `winner-redo' only works if invoked immediatley after `winner-undo'.
   ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
+
+;;;-----------------------------------------------------------------------------
+;;; js2-highlight-vars
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "js2-highlight-vars-autoloads"
+  (add-hook 'js2-mode-hook (lambda () (js2-highlight-vars-mode))))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

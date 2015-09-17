@@ -31,6 +31,9 @@
    '(ivy-current-match
      ((t (:background "black" :foreground "light sky blue"))))
 
+   '(js2-highlight-vars-face
+     ((t (:background "#69685E"))))
+
    '(slime-repl-inputed-output-face
      ((t (:foreground "light sky blue"))))
    '(nxml-tag-delimiter

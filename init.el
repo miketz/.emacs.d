@@ -1106,6 +1106,8 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "org"
   (setq org-startup-indented t)
   (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
+  ;; new keyword for tasks put on hold
+  (add-to-list 'org-todo-keywords '(sequence "HOLD") t)
 
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."

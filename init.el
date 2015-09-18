@@ -963,7 +963,9 @@ This prevents overlapping themes; something I would rarely want."
     (interactive)
     (let ((browse-url-browser-function #'eww-browse-url))
       (slime-documentation-lookup)))
-  (define-key slime-mode-map (kbd "C-c C-d h") #'my-view-hyperspec))
+  (define-key slime-mode-map (kbd "C-c C-d h") #'my-view-hyperspec)
+  (when my-use-ivy-p
+    (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl)))
 
 
 ;;;---------------------------------------------
@@ -3043,6 +3045,14 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
     (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)) ;TODO: figure out how to bind gg for top.
   )
+
+;;;-----------------------------------------------------------------------------
+;;; elisp
+;;;-----------------------------------------------------------------------------
+(when my-use-ivy-p
+  ;; two different modes (and maps) for elisp:
+  (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
+  (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav

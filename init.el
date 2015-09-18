@@ -2736,7 +2736,6 @@ To make it human readable."
 ;;; counsel -> provides extra features for completing some things.
 ;;;-----------------------------------------------------------------------------
 (when my-use-ivy-p
-  (global-set-key (kbd "C-s") #'swiper)
   (when my-use-evil-p
     (define-key evil-normal-state-map (kbd "s") #'swiper)
     (evil-leader/set-key "b" #'ivy-switch-buffer))

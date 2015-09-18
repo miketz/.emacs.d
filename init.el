@@ -1820,6 +1820,10 @@ To make it human readable."
     (define-key dired-mode-map (kbd "H") #'evil-window-top)
     (define-key dired-mode-map (kbd "M") #'evil-window-middle)
     (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
+    (let ((fn (if my-use-helm-p
+                  #'helm-swoop
+                #'swiper)))
+     (evil-define-key 'normal dired-mode-map (kbd "s") fn))
 
     ;; re-bind the default bindings we clobbered.
     (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
@@ -1827,7 +1831,8 @@ To make it human readable."
     (define-key dired-mode-map (kbd "C-c N") #'dired-man)
     (define-key dired-mode-map (kbd "C-c H") #'dired-do-hardlink)
     (define-key dired-mode-map (kbd "C-c M") #'dired-do-chmod)
-    (define-key dired-mode-map (kbd "C-c L") #'dired-do-load)))
+    (define-key dired-mode-map (kbd "C-c L") #'dired-do-load)
+    (define-key dired-mode-map (kbd "C-c s") #'dired-sort-toggle-or-edit)))
 
 ;;(define-key dired-mode-map "c" 'find-file) ;create file
 

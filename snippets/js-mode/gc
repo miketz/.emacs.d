@@ -1,0 +1,6 @@
+# -*- get eles by class name -*-
+# name: gc
+# key: gc
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+document.getElementsByClassName(${1:className})$0

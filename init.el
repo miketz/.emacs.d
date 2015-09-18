@@ -3145,6 +3145,8 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key evil-replace-state-map esc 'evil-normal-state)))
 (with-eval-after-load "helm"
   (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
+(with-eval-after-load "ivy"
+  (define-key ivy-mode-map (kbd "C-;") #'keyboard-escape-quit))
 
 ;;;-----------------------------------------------------------------------------
 ;;; list-processes

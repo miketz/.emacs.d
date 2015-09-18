@@ -143,6 +143,21 @@ Becuase I want them to have same value.
 (defvar my-graphic-p (display-graphic-p)
   "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")
 
+(defvar my-use-evil-p t
+  "Whether i'm using evil at the moment or not.")
+
+
+(defvar my-use-ivy-p t
+  "If I'm using ivy completion at the moment.")
+
+(defvar my-use-helm-p nil
+  "Whether i'm using helm at the momnet or not.")
+(defvar my-load-helm-on-init-p t
+  "Whether to load helm during start up, or postpone till first attempted use.")
+
+(defvar my-use-ido-p nil
+  "If I'm using ido at the moment.")
+
 ;;;----------------------------------
 ;;; Packages
 ;;;----------------------------------
@@ -239,6 +254,7 @@ Becuase I want them to have same value.
     speed-type
     bug-hunter
     swiper
+    counsel
     color-identifiers-mode
     svg-mode-line-themes ;; only works on gnu/linux
     smex
@@ -353,11 +369,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     "Executes a w32 action."
     (let ((code (my-w32-get-code action)))
       (w32-send-sys-command code))))
-
-
-
-(defvar my-use-evil-p t
-  "Whether i'm using evil at the moment or not.")
 
 ;;;----------------------------------
 ;;; key-chord
@@ -747,12 +758,13 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
 
-  (global-set-key (kbd "<f9>")
-                  (lambda ()
-                    (interactive)
-                    ;;nil for no candidate limit. I want to scroll through all the themes.
-                    (let ((helm-candidate-number-limit nil))
-                      (call-interactively #'my-load-theme))))
+  (unless my-use-ivy-p
+    (global-set-key (kbd "<f9>")
+                    (lambda ()
+                      (interactive)
+                      ;;nil for no candidate limit. I want to scroll through all the themes.
+                      (let ((helm-candidate-number-limit nil))
+                        (call-interactively #'my-load-theme)))))
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg))
 
@@ -1393,11 +1405,6 @@ To make it human readable."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(defvar my-use-helm-p nil
-  "Whether i'm using helm at the momnet or not.")
-(defvar my-load-helm-on-init-p t
-  "Whether to load helm during start up, or postpone till first attempted use.")
-
 (when (and my-use-helm-p
            (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
            (not (eq my-curr-computer 'leyna-laptop)))
@@ -1644,9 +1651,6 @@ To make it human readable."
 ;;; flx-ido
 ;;; smex (built on ido)
 ;;;-----------------------------------------------------------
-(defvar my-use-ido-p t
-  "If I'm using ido at the moment.")
-
 (when my-use-ido-p
   ;;use swiper on "s" even when using ido.
   (when my-use-evil-p
@@ -2722,15 +2726,17 @@ To make it human readable."
 ;;;-----------------------------------------------------------------------------
 ;;; swiper. ivy is bundled with swiper.
 ;;; ivy
+;;; counsel -> provides extra features for completing some things.
 ;;;-----------------------------------------------------------------------------
-(defvar my-use-ivy-p nil
-  "If I'm using ivy completion at the moment.")
-
 (when my-use-ivy-p
   (global-set-key (kbd "C-s") #'swiper)
   (when my-use-evil-p
     (define-key evil-normal-state-map (kbd "s") #'swiper)
     (evil-leader/set-key "b" #'ivy-switch-buffer))
+
+  (global-set-key (kbd "M-x") #'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") #'counsel-find-file)
+  (global-set-key (kbd "<f9>") #'counsel-load-theme)
 
   (ivy-mode 1) ; turn on ivy completion
   )
@@ -2739,7 +2745,13 @@ To make it human readable."
   ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
   ;; ;; allow out of order matching.
   (setq ivy-re-builders-alist
-        '((t . ivy--regex-ignore-order))))
+        '((t . ivy--regex-ignore-order)))
+  ;; use fancy highlights in the popup window
+  (setq ivy-display-style 'fancy))
+
+(with-eval-after-load "counsel"
+  ;; remove the default ^ prefix used by `counsel-M-x'
+  (set-alist 'ivy-initial-inputs-alist 'counsel-M-x ""))
 
 
 ;;;-----------------------------------------------------------------------------

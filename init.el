@@ -2434,6 +2434,7 @@ To make it human readable."
        ;;   (setcdr (cdr args) nil) ; remove third value returned from query---args
        ;;   args)
        )
+      ;; TODO clear in the header line too.
       (save-excursion
         (goto-char (point-min))
         (while (re-search-forward "" nil t)

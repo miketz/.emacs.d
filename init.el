@@ -146,7 +146,7 @@ Becuase I want them to have same value.
 (defvar my-use-evil-p t
   "Whether i'm using evil at the moment or not.")
 
-
+;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p my-graphic-p
   "If I'm using ivy completion at the moment.")
 
@@ -2761,8 +2761,9 @@ To make it human readable."
 
 (with-eval-after-load "counsel"
   ;; remove the default ^ prefix used by `counsel-M-x'
-  ;;TODO fix this(set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
-  )
+  (when (eq system-type 'windows-nt)
+    ;;TODO fix this for linux. a variable is not found?
+    (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")))
 
 
 ;;;-----------------------------------------------------------------------------

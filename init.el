@@ -789,6 +789,35 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-color-dichromacy "my-color-dichromacy" nil t)
 (autoload #'my-color-firebelly "my-color-firebelly" nil t)
 
+(when my-graphic-p ;; transparency stuff
+  ;; TODO: auto load the transparency stuff
+
+  ;; TODO: get this value on-the-fly rather than caching to avoid a
+  ;; transparency "jump" if alpha var gets out of sync.
+  (defvar my-curr-alpha 100
+    "Starts out 100")
+
+  ;; using `cl-defun' to allow `return-from'
+  (cl-defun my-change-alpha (solider-p)
+    (interactive)
+    ;; exit early if can't increase or decrease further
+    (when (or (and (= my-curr-alpha 100) solider-p)
+              (and (= my-curr-alpha 0) (not solider-p)))
+      (message (int-to-string my-curr-alpha))
+      (return-from my-change-alpha))
+
+    (let* ((step (if solider-p 1 -1)))
+      (incf my-curr-alpha step)
+      (set-frame-parameter (selected-frame) 'alpha `(,my-curr-alpha ,my-curr-alpha))
+      (message (int-to-string my-curr-alpha))))
+
+  (global-set-key (kbd "C-M-=") (lambda ()
+                                (interactive)
+                                (my-change-alpha t)))
+  (global-set-key (kbd "C-M--") (lambda ()
+                                (interactive)
+                                (my-change-alpha nil))))
+
 ;;theme of the week and corresponding settings. This may change often.
 (progn
   (cond

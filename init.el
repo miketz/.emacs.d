@@ -1252,6 +1252,7 @@ This prevents overlapping themes; something I would rarely want."
     (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
                                                         (interactive)
                                                         (js2-next-error -1))))
+  (define-key js2-mode-map (kbd "C-c e") #'js2-display-error-list)
 
   ;; (defhydra hydra-js2-flycheck ()
   ;;   "js2 flycheck"

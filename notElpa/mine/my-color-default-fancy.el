@@ -2,10 +2,12 @@
   (interactive)
   (my-color-default)
 
-  (set-background-color mayan-smoke)
+  (set-background-color "floral white")
 
-  (let ((a 85))
-    (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
+  (progn
+    (setq my-curr-alpha 80)
+    (let ((a my-curr-alpha))
+      (set-frame-parameter (selected-frame) 'alpha `(,a ,a))))
 
   ;; (progn
   ;;   (require 'highlight-tail)

@@ -17,8 +17,16 @@
   ;;              :height 125
   ;;              :resize-window t)
   (progn ; use bold font.
-    (custom-set-faces
-     '(default ((t (:weight bold)))))
+    ;; (custom-set-faces
+    ;;  '(default ((t (:weight bold)))))
+
+    ;; `set-face-attribute' is better than `custom-set-faces'.
+    ;; it doesn't wipe out all the attributes.
+    (mapc (lambda (face)
+            (set-face-attribute face
+                                nil ;; all frames
+                                :weight 'bold))
+          (face-list))
     ;; refresh screen.
     (when (fboundp 'my-w32-run) ; TODO: make it work on non-Windows machines.
       (my-w32-run 'restore-curr-frame)

@@ -3686,4 +3686,17 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;sqlcmd -S 127.0.0.1,42000\OSHE
 ;;sqlcmd -S 127.0.0.1,42000\OSHE -q "SELECT 'hello';"
 
+;;;------------------------------------
+;;; remove all bold face attributes
+;;;------------------------------------
+;; (defun my-remove-bold ()
+;;   "Remove all bold face attributes."
+;;   (interactive)
+;;   (mapc
+;;    (lambda (face)
+;;      (set-face-attribute face
+;;                          nil ;; all frames
+;;                          :weight 'normal))
+;;    (face-list)))
+
 ;;; init.el ends here

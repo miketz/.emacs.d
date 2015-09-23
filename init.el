@@ -272,7 +272,8 @@ Becuase I want them to have same value.
     ido-vertical-mode
     ido-ubiquitous
     flx-ido
-    ov)
+    ov
+    highlight-tail)
   "Packages I use from elpa/melpa.")
 
 

@@ -54,7 +54,7 @@
   "Colored parens with highlighting."
   (interactive)
   (custom-set-faces
-   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :bold t))))
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold t))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold t))))
    '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush" :bold t))))

@@ -28,16 +28,23 @@
   (interactive)
   (bufftodo-add (current-buffer)))
 
-(define-ibuffer-filter
-    todo-only
-    "Filters ibuffer results to only show buffers in `bufftodo-lst'."
-  (member buf bufftodo-lst))
+(defvar bufftodo-filter
+  (define-ibuffer-filter
+      todo-only
+      "Filters ibuffer results to only show buffers in `bufftodo-lst'."
+    (:description "todo"
+                  :reader bufftodo-lst)
+    (member buf bufftodo-lst))
+  "Filters ibuffer to only the todo buffers.")
 
 (defun bufftodo-view ()
   (interactive)
-  (ibuffer t "TODO buffers" nil nil nil bufftodo-lst))
+  (ibuffer t              ; open in new window
+           "TODO buffers" ; ibuffer name
+           bufftodo-lst))  ; quallifiers
 
 (bufftodo-add-selected-buff)
 (bufftodo-clear-all)
+(bufftodo-view)
 bufftodo-lst
 

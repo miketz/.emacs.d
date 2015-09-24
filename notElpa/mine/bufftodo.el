@@ -1,5 +1,5 @@
 (defvar bufftodo-lst '()
-  "The todo list of buffers")
+  "The list of todo buffers.")
 
 (defun bufftodo-clear-all ()
   "Clear buffers from the todo list."
@@ -28,23 +28,29 @@
   (interactive)
   (bufftodo-add (current-buffer)))
 
-(defvar bufftodo-filter
-  (define-ibuffer-filter
-      todo-only
-      "Filters ibuffer results to only show buffers in `bufftodo-lst'."
-    (:description "todo"
-                  :reader bufftodo-lst)
-    (member buf bufftodo-lst))
-  "Filters ibuffer to only the todo buffers.")
+(require 'ibuf-ext)
+;; create a filter for `ibuffer' for members of `bufftodo-lst'
+(define-ibuffer-filter ;; creates a new fn `ibuffer-filter-by-todo-only'
+    todo-only
+    "Filters ibuffer results to memebers of `bufftodo-lst'."
+  (:description "todo" :reader bufftodo-lst)
+  ;; buf variable is introduced in the macro.
+  (member buf bufftodo-lst))
+
 
 (defun bufftodo-view ()
+  "Dispaly the members of `bufftodo-lst' with `ibuffer'."
   (interactive)
-  (ibuffer t              ; open in new window
-           "TODO buffers" ; ibuffer name
-           bufftodo-lst))  ; quallifiers
+  (let ((ibuffer-filtering-alist '((todo-only "todo"
+                                              (lambda (buf qualifier)
+                                                (member buf bufftodo-lst))))))
+    (ibuffer t "TODO buffers" ibuffer-filtering-alist)))
 
-(bufftodo-add-selected-buff)
-(bufftodo-clear-all)
-(bufftodo-view)
-bufftodo-lst
-
+(when nil ;; ad-hoc interactive testing
+  (bufftodo-add-current-buff)
+  (bufftodo-add-selected-buff)
+  (bufftodo-clear-all)
+  (bufftodo-view)
+  bufftodo-lst
+  (ibuffer-filter-by-predicate
+   (member buf bufftodo-lst)))

@@ -62,7 +62,9 @@ So we don't need to worry about adding functionality to ibuffer to keep this lis
     "Filters ibuffer results to memebers of `bufftodo-lst'."
   (:description "todo" :reader bufftodo-lst)
   ;; buf variable is introduced in the macro.
-  (member buf bufftodo-lst))
+  (memq buf bufftodo-lst)
+  ;(member buf bufftodo-lst)
+  )
 
 
 ;;;###autoload

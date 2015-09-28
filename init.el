@@ -147,7 +147,8 @@ Becuase I want them to have same value.
   "Whether i'm using evil at the moment or not.")
 
 ;;TODO: make ivy pop-up it's window on the linux tty.
-(defvar my-use-ivy-p my-graphic-p
+(defvar my-use-ivy-p (or (not (eq system-type 'gnu/linux)) ; swiper/ivy is having an issue on terminal linux, so use ido there.
+                         my-graphic-p)
   "If I'm using ivy completion at the moment.")
 
 (defvar my-use-helm-p nil
@@ -155,8 +156,14 @@ Becuase I want them to have same value.
 (defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")
 
-(defvar my-use-ido-p (not my-graphic-p)
+(defvar my-use-ido-p (and (eq system-type 'gnu/linux) ; swiper/ivy is having an issue on terminal linux, so use ido there.
+                          (not my-graphic-p))
   "If I'm using ido at the moment.")
+
+(defvar my-swoop-fn (if my-use-helm-p
+                        #'helm-swoop
+                      #'swiper)
+  "Function for searching with an overview.")
 
 ;;;----------------------------------
 ;;; Packages
@@ -1852,10 +1859,7 @@ To make it human readable."
     (define-key dired-mode-map (kbd "H") #'evil-window-top)
     (define-key dired-mode-map (kbd "M") #'evil-window-middle)
     (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
-    (let ((fn (if my-use-helm-p
-                  #'helm-swoop
-                #'swiper)))
-     (evil-define-key 'normal dired-mode-map (kbd "s") fn))
+    (evil-define-key 'normal dired-mode-map (kbd "s") my-swoop-fn)
 
     ;; re-bind the default bindings we clobbered.
     (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
@@ -3088,12 +3092,16 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "e") #'evil-forward-word-end)
     (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
     (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)
-    (let ((fn (if my-use-helm-p
-                  #'helm-swoop
-                #'swiper)))
-      (define-key Info-mode-map (kbd "s") fn)))
+    (define-key Info-mode-map (kbd "s") my-swoop-fn))
   ;;TODO: figure out how to bind gg for top.
   )
+
+;;;-----------------------------------------------------------------------------
+;;; help mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "help-mode"
+  (when my-use-evil-p
+    (define-key help-mode-map (kbd "s") my-swoop-fn)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp

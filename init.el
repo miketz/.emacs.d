@@ -3072,7 +3072,8 @@ When ARG isn't nil, try to pretty print the sexp."
     (w Info-copy-current-node-name)
     (e end-of-buffer)
     (b beginning-of-buffer)
-    (g Info-goto-node))
+    (g Info-goto-node)
+    (s Info-search))
   ;; 3 ways to unbind keys:
   ;; global-unset-key
   ;; local-unset-key
@@ -3086,7 +3087,12 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "w") #'evil-forward-word-begin)
     (define-key Info-mode-map (kbd "e") #'evil-forward-word-end)
     (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
-    (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)) ;TODO: figure out how to bind gg for top.
+    (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)
+    (let ((fn (if my-use-helm-p
+                  #'helm-swoop
+                #'swiper)))
+      (define-key Info-mode-map (kbd "s") fn)))
+  ;;TODO: figure out how to bind gg for top.
   )
 
 ;;;-----------------------------------------------------------------------------

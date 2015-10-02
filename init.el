@@ -2667,8 +2667,9 @@ To make it human readable."
 ;;;-----------------------------------------------------------------------------
 (autoload #'my-choose-hydra "my-hydras" nil t)
 (when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
-  (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra))
+  ;; (define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
+  ;; (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra)
+  )
 
 (with-eval-after-load "hydra"
   (setq hydra-is-helpful t)
@@ -3281,7 +3282,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (autoload #'bufftodo-ui "bufftodo" nil t)
 
 (when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "C-\\") #'bufftodo-ui))
+  (define-key evil-normal-state-map (kbd "\\") #'bufftodo-ui))
 
 (with-eval-after-load 'bufftodo
   (setq bufftodo-open-new-window-p t))

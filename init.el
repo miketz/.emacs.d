@@ -3277,20 +3277,13 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; bufftodo. ~/.emacs.d/notElpa/mine/bufftodo.el
 ;;;-----------------------------------------------------------------------------
-;; (autoload #'bufftodo-view "bufftodo" nil t)
-;; (autoload #'bufftodo-add-current-buff "bufftodo" nil t)
-;; (autoload #'bufftodo-add-selected-buff "bufftodo" nil t)
-;; (autoload #'bufftodo-clear-all "bufftodo" nil t)
-;; (autoload #'bufftodo-remove-selected-buff "bufftodo" nil t)
+(autoload #'bufftodo-ui "bufftodo" nil t)
 
-;; (global-set-key (kbd "C-c C-b v") #'bufftodo-view)
-;; (global-set-key (kbd "C-c C-b c") #'bufftodo-add-current-buff)
-;; (global-set-key (kbd "C-c C-b a") #'bufftodo-add-selected-buff)
-;; (global-set-key (kbd "C-c C-b w") #'bufftodo-clear-all) ; w -> "wipe"
-;; (global-set-key (kbd "C-c C-b e") #'bufftodo-remove-selected-buff)
+(when my-use-evil-p
+  (define-key evil-normal-state-map (kbd "C-\\") #'bufftodo-ui))
 
-;; (with-eval-after-load 'bufftodo
-;;   (setq bufftodo-open-new-window-p t))
+(with-eval-after-load 'bufftodo
+  (setq bufftodo-open-new-window-p t))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

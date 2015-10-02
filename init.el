@@ -3285,7 +3285,7 @@ When ARG isn't nil, try to pretty print the sexp."
   (define-key evil-normal-state-map (kbd "\\") #'bufftodo-ui))
 
 (with-eval-after-load 'bufftodo
-  (setq bufftodo-open-new-window-p t))
+  (setq bufftodo-open-new-window-p nil))
 
 ;;;-----------------------------------------------------------------------------
 ;;; function-args

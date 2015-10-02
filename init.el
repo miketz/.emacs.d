@@ -280,7 +280,8 @@ Becuase I want them to have same value.
     ido-ubiquitous
     flx-ido
     ov
-    highlight-tail)
+    highlight-tail
+    function-args)
   "Packages I use from elpa/melpa.")
 
 
@@ -3284,6 +3285,11 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (with-eval-after-load 'bufftodo
   (setq bufftodo-open-new-window-p t))
+
+;;;-----------------------------------------------------------------------------
+;;; function-args
+;;;-----------------------------------------------------------------------------
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

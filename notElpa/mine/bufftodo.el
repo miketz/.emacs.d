@@ -78,6 +78,30 @@ So we don't need to worry about adding functionality to ibuffer to keep this lis
              "TODO buffers"
              ibuffer-filtering-alist)))
 
+
+(defvar bufftodo-ui-fn-lst '() ;; TODO: populate here once I can make it fill on load.
+  "An a-lst of bufftodo functions and their user friendly \"completing read\" names.
+These functions are exposed as the user interface.
+Put in this list to access them from a single keybind for `bufftodo-ui'.")
+
+;;;###autoload
+(defun bufftodo-ui ()
+  "The user central user interface of bufftodo."
+  (interactive)
+  ;; lst doesn't seem to load at startup, so load it here for now.
+  ;; TODO: delete this dynamic check/fill
+  (when (null bufftodo-ui-fn-lst)
+    (setq bufftodo-ui-fn-lst '(("view" . #'bufftodo-view)
+                               ("add current buff" . #'bufftodo-add-current-buff)
+                               ("add buff" . #'bufftodo-add-selected-buff)
+                               ("clear all" . #'bufftodo-clear-all)
+                               ("remove buff" . #'bufftodo-remove-selected-buff))))
+  ;; need to use nth 2 instead of cdr. assoc returns the #' as a separate item.
+  (funcall (nth 2 (assoc (completing-read "pick one: "
+                                          (mapcar #'car
+                                                  bufftodo-ui-fn-lst))
+                         bufftodo-ui-fn-lst))))
+
 (when nil
   ;; keybinds. the "user interface"
   (global-set-key (kbd "C-c v") #'bufftodo-view)
@@ -87,6 +111,7 @@ So we don't need to worry about adding functionality to ibuffer to keep this lis
   (global-set-key (kbd "C-c e") #'bufftodo-remove-selected-buff))
 
 (when nil ;; ad-hoc interactive testing
+  (bufftodo-ui)
   (bufftodo-add-current-buff)
   (bufftodo-add-selected-buff)
   (bufftodo-remove-selected-buff)

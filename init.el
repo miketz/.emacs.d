@@ -2800,8 +2800,9 @@ To make it human readable."
 
 (with-eval-after-load "counsel"
   ;; remove the default ^ prefix used by `counsel-M-x'
-  (when (eq system-type 'windows-nt)
-    ;;TODO fix this for linux. a variable is not found?
+  (when (and (eq system-type 'windows-nt)
+             (not (eq my-curr-computer 'leyna-laptop)))
+    ;;TODO fix this for linux and leyna-laptop. set-alist is not found?
     (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")))
 
 

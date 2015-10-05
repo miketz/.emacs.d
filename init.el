@@ -778,6 +778,23 @@ This prevents overlapping themes; something I would rarely want."
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg))
 
+(defun my-load-theme-make-bold-like-zenburn (theme)
+  (interactive)
+  (let ((zen-bold-faces '())
+        (frame (selected-frame)))
+    ;; TODO: figure out a way to do this without actually turning on zenburn
+    ;; TODO: handle :bold and the different kinds of :weight that are bold
+    ;; TODO: also turn off bold on some faces to be like zenburn.
+    (load-theme 'zenburn t)
+    (dolist (f (face-list))
+      (when (eq (face-attribute f :weight frame)
+                'bold)
+        (add-to-list 'zen-bold-faces f)))
+    ;; load theme and use zenburn's bolding.
+    (load-theme theme t)
+    (dolist (f zen-bold-faces)
+      (set-face-attribute f nil :weight 'bold))))
+
 
 (autoload #'my-rainbow-parens-dark-bg "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-dark-bg-bold "my-bg-specific-colors" nil t)

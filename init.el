@@ -305,8 +305,9 @@ Becuase I want them to have same value.
 ;;         ("melpa" . "http://melpa.milkbox.net/packages/")
 ;;         ("marmalade" . "http://marmalade-repo.org/packages/")))
 
-;; activate all the packages (in particular autoloads)
-(package-initialize)
+
+;; (setq package-enable-at-startup nil)
+(package-initialize) ;; activate all the packages (in particular autoloads)
 
 
 (defun my-install-packages ()

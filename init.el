@@ -833,10 +833,10 @@ This prevents overlapping themes; something I would rarely want."
    ((or (eq my-curr-computer 'work-laptop)
         (eq my-curr-computer 'leyna-laptop)
         (eq my-curr-computer 'a-laptop-old))
-    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (my-set-font :sym 'consolas
-    ;;              :height 125            ;'90 105 115 120 125
-    ;;              :weight 'normal)
+    ;; (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    (my-set-font :sym 'consolas
+                 :height 125            ;'90 105 115 120 125
+                 :weight 'normal)
     (when my-graphic-p
       (my-color-zenburn)))
 
@@ -3117,10 +3117,10 @@ When ARG isn't nil, try to pretty print the sexp."
   (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
 
 
-(with-eval-after-load "lisp-mode"
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (push '("lambda" . ?f) prettify-symbols-alist))))
+;; (with-eval-after-load "lisp-mode"
+;;   (add-hook 'emacs-lisp-mode-hook
+;;             (lambda ()
+;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav

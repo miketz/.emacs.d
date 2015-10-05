@@ -3108,12 +3108,18 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key help-mode-map (kbd "s") my-swoop-fn)))
 
 ;;;-----------------------------------------------------------------------------
-;;; elisp
+;;; elisp emacs lisp
 ;;;-----------------------------------------------------------------------------
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:
   (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
   (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
+
+
+(with-eval-after-load "lisp-mode"
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (push '("lambda" . ?f) prettify-symbols-alist))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav

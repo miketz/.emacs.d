@@ -1734,11 +1734,14 @@ To make it human readable."
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "C-c M-x") 'execute-extended-command) ; rebind the original M-x command
-  )
+
+  ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
+  ;; other modes load ido, inadvertently turning on ido-ubiquitous even
+  ;; when i'm not using ido.
+  (ido-ubiquitous-mode 1))
 
 (with-eval-after-load "ido"
   (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
-  (ido-ubiquitous-mode 1)
   ;; (flx-ido-mode 1)
 
   ;; insert a hypen - on space like in normal M-x

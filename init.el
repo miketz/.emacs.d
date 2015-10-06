@@ -2832,7 +2832,18 @@ To make it human readable."
   (when (and (eq system-type 'windows-nt)
              (not (eq my-curr-computer 'leyna-laptop)))
     ;;TODO fix this for linux and leyna-laptop. set-alist is not found?
-    (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")))
+    (set-alist 'ivy-initial-inputs-alist 'counsel-M-x ""))
+
+  ;; redefine `counsel--load-theme-action' to not require confirmation
+  (defun counsel--load-theme-action (x)
+    "Disable current themes and load theme X."
+    (condition-case nil
+        (progn
+          (mapc #'disable-theme custom-enabled-themes)
+          (load-theme (intern x) t)
+          (when (fboundp 'powerline-reset)
+            (powerline-reset)))
+      (error "Problem loading theme %s" x))))
 
 
 ;;;-----------------------------------------------------------------------------

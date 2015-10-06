@@ -1741,8 +1741,9 @@ To make it human readable."
   (ido-ubiquitous-mode 1))
 
 (with-eval-after-load "ido"
-  (ido-vertical-mode 1) ;3rd party extension to ido. Display vertically like swiper.
-  ;; (flx-ido-mode 1)
+  ;; 3rd party extension to ido. Display vertically like swiper.
+  (ido-vertical-mode 1) ;; invokes with-eval-after-load "ido-vertical-mode"
+  ;; (flx-ido-mode 1) ;; invokes (with-eval-after-load "flx-ido")
 
   ;; insert a hypen - on space like in normal M-x
   (defadvice ido-switch-buffer (around space-inserts-hyphen activate compile)

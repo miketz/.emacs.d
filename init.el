@@ -781,7 +781,9 @@ This prevents overlapping themes; something I would rarely want."
 (defun my-load-theme-make-bold-like-zenburn (&optional theme)
   (interactive)
   (let ((zen-bold-faces '())
-        (frame (selected-frame)))
+        (frame (selected-frame))
+        ;; show more themes since I'm browsing in addition to selecting
+        (ivy-height 25))
     (when (null theme)
       (setq theme (intern (completing-read "theme: "
                                            (mapcar 'symbol-name

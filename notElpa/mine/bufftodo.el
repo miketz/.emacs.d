@@ -104,7 +104,9 @@ Keyboard-Friendly names are used in `completing-read' by function
 ;;;###autoload
 (defun bufftodo-ui ()
   "The user central user interface of bufftodo.
-Allows access to all the ui functions through 1 central access function."
+Allows access to all the ui functions through 1 central access function.
+This function is optional; The core ui functions can be accessed directly
+instead."
   (interactive)
   ;; need to use nth 2 instead of cdr. assoc returns the #' as a separate item.
   (funcall (nth 2 (assoc (completing-read "pick one: "

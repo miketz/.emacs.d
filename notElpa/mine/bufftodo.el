@@ -19,7 +19,6 @@
   :group 'convenience
   :prefix "bufftodo-")
 
-
 (defvar bufftodo-lst '()
   "The list of todo buffers.
 NOTE:
@@ -31,7 +30,6 @@ list in sync.")
   "If t open `ibuffer' in a new window."
   :type 'boolean
   :group 'bufftodo)
-
 
 ;;;###autoload
 (defun bufftodo-clear-all ()
@@ -81,7 +79,6 @@ list in sync.")
   ;; buf variable is introduced in the macro.
   (memq buf bufftodo-lst))
 
-
 ;;;###autoload
 (defun bufftodo-view ()
   "Dispaly the members of `bufftodo-lst' with `ibuffer'."
@@ -92,7 +89,6 @@ list in sync.")
     (ibuffer bufftodo-open-new-window-p
              "TODO buffers"
              ibuffer-filtering-alist)))
-
 
 (defvar bufftodo-ui-fn-lst
   '((            "view" . #'bufftodo-view)

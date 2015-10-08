@@ -6,8 +6,7 @@
 ;; a plain list of buffers.
 ;;
 ;; The list of buffers is viewed with `ibuffer', exluding bufers not in the
-;; list. If a buffer is deleted via `ibuffer', it is automatically removed from
-;; the list.
+;; list.
 ;;
 ;; Created as an expiriment after reading the post:
 ;; https://www.reddit.com/r/emacs/comments/3lvly2/multifile_editing_workflow/

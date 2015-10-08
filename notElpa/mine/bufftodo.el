@@ -5,9 +5,9 @@
 ;; Defines several functions to maintain a "TODO list" of buffers. It's just
 ;; a plain list of buffers.
 ;;
-;; Allows the list of buffers to be viewed with `ibuffer', exluding bufers not
-;; in the list. If a buffer is deleted via `ibuffer', it is automatically
-;; removed from the list.
+;; The list of buffers is viewed with `ibuffer', exluding bufers not in the
+;; list. If a buffer is deleted via `ibuffer', it is automatically removed from
+;; the list.
 ;;
 ;; Created as an expiriment after reading the post:
 ;; https://www.reddit.com/r/emacs/comments/3lvly2/multifile_editing_workflow/
@@ -46,7 +46,7 @@ list in sync.")
   (add-to-list 'bufftodo-lst buff nil #'eq))
 
 (defun bufftodo--read (lst)
-  "Return a manually selected buffer from the LST of inputs."
+  "Return a manually selected buffer from the LST."
   (get-buffer
    (completing-read "Buf: "
                     (mapcar (lambda (b)
@@ -94,23 +94,22 @@ list in sync.")
              ibuffer-filtering-alist)))
 
 
-(defvar bufftodo-ui-fn-lst '() ;;TODO: populate here once I can make it work.
-  "An a-list of functions and their user friendly name for \"completing read\".
+(defvar bufftodo-ui-fn-lst
+  '((            "view" . #'bufftodo-view)
+    ("add current buff" . #'bufftodo-add-current-buff)
+    (        "add buff" . #'bufftodo-add-selected-buff)
+    (       "clear all" . #'bufftodo-clear-all)
+    (     "remove buff" . #'bufftodo-remove-selected-buff))
+  "An a-list of functions and their keyboard-friendly name.
 These functions make up the user interface of bufftodo.
-This list to access the ui functoins from a single keybind for `bufftodo-ui'.")
+Keyboard-Friendly names are used in `completing-read' by function
+`bufftodo-ui'.")
 
 ;;;###autoload
 (defun bufftodo-ui ()
-  "The user central user interface of bufftodo."
+  "The user central user interface of bufftodo.
+Allows access to all the ui functions through 1 central access function."
   (interactive)
-  ;; lst doesn't seem to load at startup, so load it here for now.
-  ;; TODO: delete this dynamic check/fill
-  (when (null bufftodo-ui-fn-lst)
-    (setq bufftodo-ui-fn-lst '(("view" . #'bufftodo-view)
-                               ("add current buff" . #'bufftodo-add-current-buff)
-                               ("add buff" . #'bufftodo-add-selected-buff)
-                               ("clear all" . #'bufftodo-clear-all)
-                               ("remove buff" . #'bufftodo-remove-selected-buff))))
   ;; need to use nth 2 instead of cdr. assoc returns the #' as a separate item.
   (funcall (nth 2 (assoc (completing-read "pick one: "
                                           (mapcar #'car

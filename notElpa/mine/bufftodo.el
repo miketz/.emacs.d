@@ -1,3 +1,19 @@
+;;; bufftodo.el --- A list of buffers. -*- lexical-binding: t -*-
+
+;;; Commentary:
+;;
+;; Defines several functions to maintain a "TODO list" of buffers. It's just
+;; a plain list of buffers.
+;;
+;; Allows the list of buffers to be viewed with `ibuffer', exluding bufers not
+;; in the list. If a buffer is deleted via `ibuffer', it is automatically
+;; removed from the list.
+;;
+;; Created as an expiriment after reading the post:
+;; https://www.reddit.com/r/emacs/comments/3lvly2/multifile_editing_workflow/
+
+;;; Code:
+
 (defgroup bufftodo ()
   "Add/remove buffers from a todo list."
   :group 'convenience
@@ -7,8 +23,9 @@
 (defvar bufftodo-lst '()
   "The list of todo buffers.
 NOTE:
-`ibuffer' apperas to automatically modify this list if we delete a buffer.
-So we don't need to worry about adding functionality to ibuffer to keep this list in sync.")
+`ibuffer' appears to automatically modify this list if we delete a buffer.
+So we don't need to worry about adding functionality to ibuffer to keep this
+list in sync.")
 
 (defcustom bufftodo-open-new-window-p nil
   "If t open `ibuffer' in a new window."
@@ -24,12 +41,12 @@ So we don't need to worry about adding functionality to ibuffer to keep this lis
 
 ;;;###autoload
 (defun bufftodo-add (buff)
-  "Add a buffer to the todo list."
+  "Add BUFF to the todo list."
   (interactive)
   (add-to-list 'bufftodo-lst buff nil #'eq))
 
 (defun bufftodo--read (lst)
-  "Return a manually selected buffer"
+  "Return a manually selected buffer from the LST of inputs."
   (get-buffer
    (completing-read "Buf: "
                     (mapcar (lambda (b)
@@ -62,9 +79,7 @@ So we don't need to worry about adding functionality to ibuffer to keep this lis
     "Filters ibuffer results to memebers of `bufftodo-lst'."
   (:description "todo" :reader bufftodo-lst)
   ;; buf variable is introduced in the macro.
-  (memq buf bufftodo-lst)
-  ;(member buf bufftodo-lst)
-  )
+  (memq buf bufftodo-lst))
 
 
 ;;;###autoload
@@ -79,10 +94,10 @@ So we don't need to worry about adding functionality to ibuffer to keep this lis
              ibuffer-filtering-alist)))
 
 
-(defvar bufftodo-ui-fn-lst '() ;; TODO: populate here once I can make it fill on load.
-  "An a-lst of bufftodo functions and their user friendly \"completing read\" names.
-These functions are exposed as the user interface.
-Put in this list to access them from a single keybind for `bufftodo-ui'.")
+(defvar bufftodo-ui-fn-lst '() ;;TODO: populate here once I can make it work.
+  "An a-list of functions and their user friendly name for \"completing read\".
+These functions make up the user interface of bufftodo.
+This list to access the ui functoins from a single keybind for `bufftodo-ui'.")
 
 ;;;###autoload
 (defun bufftodo-ui ()
@@ -103,14 +118,7 @@ Put in this list to access them from a single keybind for `bufftodo-ui'.")
                          bufftodo-ui-fn-lst))))
 
 (when nil
-  ;; keybinds. the "user interface"
-  (global-set-key (kbd "C-c v") #'bufftodo-view)
-  (global-set-key (kbd "C-c c") #'bufftodo-add-current-buff)
-  (global-set-key (kbd "C-c a") #'bufftodo-add-selected-buff)
-  (global-set-key (kbd "C-c w") #'bufftodo-clear-all) ; w -> "wipe"
-  (global-set-key (kbd "C-c e") #'bufftodo-remove-selected-buff))
-
-(when nil ;; ad-hoc interactive testing
+  ;; ad-hoc interactive testing with C-x C-e
   (bufftodo-ui)
   (bufftodo-add-current-buff)
   (bufftodo-add-selected-buff)

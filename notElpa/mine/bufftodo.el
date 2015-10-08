@@ -61,6 +61,7 @@ list in sync.")
   "Manually select buffer in `bufftodo-lst', then remove it."
   (interactive)
   ;; TODO: fix bugs when buffers are killed, but still in the list.
+  ;;       cache invalidation bug.
   (setq bufftodo-lst (delq (bufftodo--read bufftodo-lst) bufftodo-lst)))
 
 ;;;###autoload

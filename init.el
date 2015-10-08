@@ -2814,7 +2814,12 @@ To make it human readable."
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)
     ;; TODO: disable warning like i did for the other f9 binding for colors
-    (global-set-key (kbd "<f9>") #'counsel-load-theme)
+    (global-set-key (kbd "<f9>")
+                    (lambda ()
+                      (interactive)
+                      ;; make ivy window taller for viewing themes.
+                      (let ((ivy-height 25))
+                        (call-interactively #'counsel-load-theme))))
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function))
 

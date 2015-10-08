@@ -31,14 +31,7 @@ list in sync.")
   :type 'boolean
   :group 'bufftodo)
 
-;;;###autoload
-(defun bufftodo-clear-all ()
-  "Clear buffers from the todo list."
-  (interactive)
-  (setq bufftodo-lst '()))
-
-;;;###autoload
-(defun bufftodo-add (buff)
+(defun bufftodo--add (buff)
   "Add BUFF to the todo list."
   (interactive)
   (add-to-list 'bufftodo-lst buff nil #'eq))
@@ -53,31 +46,38 @@ list in sync.")
                     nil t)))
 
 ;;;###autoload
+(defun bufftodo-clear-all ()
+  "Clear buffers from the todo list."
+  (interactive)
+  (setq bufftodo-lst '()))
+
+;;;###autoload
 (defun bufftodo-add-selected-buff ()
   "Add a manually selected buffer to the todo list."
   (interactive)
-  (bufftodo-add (bufftodo--read (buffer-list))))
+  (bufftodo--add (bufftodo--read (buffer-list))))
 
 ;;;###autoload
 (defun bufftodo-remove-selected-buff ()
   "Manually select buffer in `bufftodo-lst', then remove it."
   (interactive)
+  ;; TODO: fix bugs when buffers are killed, but still in the list.
   (setq bufftodo-lst (delq (bufftodo--read bufftodo-lst) bufftodo-lst)))
 
 ;;;###autoload
 (defun bufftodo-add-current-buff ()
   "Add the current buffer to the todo list."
   (interactive)
-  (bufftodo-add (current-buffer)))
+  (bufftodo--add (current-buffer)))
 
 (require 'ibuf-ext)
 ;; create a filter for `ibuffer' for members of `bufftodo-lst'
 (define-ibuffer-filter ;; creates a new fn `ibuffer-filter-by-todo-only'
     todo-only
     "Filters ibuffer results to memebers of `bufftodo-lst'."
-  (:description "todo" :reader bufftodo-lst)
+  (:description "todo" :reader bufftodo-lst) ;; :reader is `qualifier' below.
   ;; buf variable is introduced in the macro.
-  (memq buf bufftodo-lst))
+  (memq buf qualifier))
 
 ;;;###autoload
 (defun bufftodo-view ()

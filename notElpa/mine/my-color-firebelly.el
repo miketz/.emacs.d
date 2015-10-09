@@ -9,6 +9,10 @@
                                   :strike-through t
                                   :background nil))))
 
+   ;; swiper/ivy faces TODO: fix more ivy/swiper faces.
+   '(ivy-current-match
+     ((t (:background "black" :foreground "light sky blue"))))
+
    '(font-lock-variable-name-face
      ((t (:foreground "#924040"))))
    '(my-tilde-face

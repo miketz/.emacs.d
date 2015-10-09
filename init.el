@@ -1892,7 +1892,7 @@ To make it human readable."
     (define-key dired-mode-map (kbd "M") #'evil-window-middle)
     (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
     (evil-define-key 'normal dired-mode-map (kbd "s") my-swoop-fn)
-    (define-key dired-mode-map (kbd "SPC") 'avy-goto-word-1)
+    (define-key dired-mode-map (kbd "SPC") #'avy-goto-word-1)
 
     ;; re-bind the default bindings we clobbered.
     (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)

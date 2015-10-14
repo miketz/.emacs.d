@@ -118,7 +118,8 @@ Useful to check a boolean state and toggle the state in 1 go."
     (if (file-exists-p curr-comp-file)
         (intern (my-get-string-from-file curr-comp-file))
       'unknown))
-  "The computer running this Emacs.  Identified by a flag file.  Specific configs may be made based on the computer.")
+  "The computer running this Emacs.  Identified by a flag file.
+Specific configs may be made based on the computer.")
 
 ;; (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
 ;;   (if (file-exists-p curr-comp-file)

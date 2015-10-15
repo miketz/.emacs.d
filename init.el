@@ -1901,6 +1901,7 @@ To make it human readable."
     (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
     (evil-define-key 'normal dired-mode-map (kbd "s") my-swoop-fn)
     (define-key dired-mode-map (kbd "SPC") #'avy-goto-word-1)
+    (define-key dired-mode-map (kbd "G") #'evil-goto-line)
 
     ;; re-bind the default bindings we clobbered.
     (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
@@ -1910,7 +1911,8 @@ To make it human readable."
     (define-key dired-mode-map (kbd "C-c M") #'dired-do-chmod)
     (define-key dired-mode-map (kbd "C-c L") #'dired-do-load)
     (define-key dired-mode-map (kbd "C-c s") #'dired-sort-toggle-or-edit)
-    (define-key dired-mode-map (kbd "C-c SPC") #'dired-next-line)))
+    (define-key dired-mode-map (kbd "C-c SPC") #'dired-next-line)
+    (define-key dired-mode-map (kbd "C-c G") #'dired-do-chgrp)))
 
 ;;(define-key dired-mode-map "c" 'find-file) ;create file
 

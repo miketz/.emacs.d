@@ -1,6 +1,6 @@
 (defun my-color-firebelly ()
   (interactive)
-  (load-theme 'firebelly t)
+  (my-load-theme-make-bold-like-zenburn 'firebelly) ;;(load-theme 'firebelly t)
   (custom-theme-set-faces
    'firebelly
 
@@ -9,6 +9,8 @@
                                   :strike-through t
                                   :background nil))))
 
+   '(sldb-section-face
+     ((t (:foreground "light sky blue"))))
    ;; swiper/ivy faces TODO: fix more ivy/swiper faces.
    '(ivy-current-match
      ((t (:background "black" :foreground "light sky blue"))))

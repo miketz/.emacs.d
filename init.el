@@ -3320,7 +3320,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;(global-whitespace-mode 1)
 
 ;;;-----------------------------------------------------------------------------
-;;; sallet. from fuco. saved to notElpa folder.
+;;; sallet. from fuco. saved to notElpa folder as a git submodule.
 ;;;-----------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/sallet")
 (autoload #'sallet-buffer "sallet" nil t)

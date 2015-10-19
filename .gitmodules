@@ -1,0 +1,3 @@
+[submodule "notElpa/sallet"]
+	path = notElpa/sallet
+	url = https://github.com/tetracat/sallet

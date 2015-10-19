@@ -3322,6 +3322,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; sallet. from fuco. saved to notElpa folder.
 ;;;-----------------------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/notElpa/sallet")
 (autoload #'sallet-buffer "sallet" nil t)
 
 ;;;-----------------------------------------------------------------------------

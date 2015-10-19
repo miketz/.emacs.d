@@ -4,11 +4,11 @@
   (custom-theme-set-faces
    'firebelly
 
+   `(org-level-2 ((t (:foreground "gray"))))
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
                                   :background nil))))
-
    '(sldb-section-face
      ((t (:foreground "light sky blue"))))
    ;; swiper/ivy faces TODO: fix more ivy/swiper faces.

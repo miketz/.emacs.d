@@ -3052,6 +3052,12 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;     ;;(require 'ocodo-slim-svg-mode-line)
 ;;     ))
 
+;;;-----------------------------------------------------------------------------
+;;; isearch
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "isearch"
+  ;; start highlighting a little faster than the default 0.25
+  (setq lazy-highlight-initial-delay 0.2))
 
 ;;;-----------------------------------------------------------------------------
 ;;; my-window-search.  Limit isearch to the visible buffer.

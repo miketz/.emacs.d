@@ -61,11 +61,10 @@
 (defun bufftodo-remove-selected-buff ()
   "Manually select buffer in `bufftodo-lst', then remove it."
   (interactive)
-  ;; TODO: fix bugs when buffers are killed, but still in the list.
-  ;;       cache invalidation bug.
-  ;;       maybe fixed now? now troubleshoot why completing-read isn't working here.
   (bufftodo--clean-deleted-buffs)
-  (setq bufftodo-lst (delq (bufftodo--read bufftodo-lst) bufftodo-lst)))
+  (if (= 0 (length bufftodo-lst))
+      (message "TODO list is empty.")
+    (setq bufftodo-lst (delq (bufftodo--read bufftodo-lst) bufftodo-lst))))
 
 ;;;###autoload
 (defun bufftodo-add-current-buff ()

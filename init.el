@@ -830,6 +830,7 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-color-leuven "my-color-leuven" nil t)
 (autoload #'my-color-dichromacy "my-color-dichromacy" nil t)
 (autoload #'my-color-firebelly "my-color-firebelly" nil t)
+(autoload #'my-color-molokai "my-color-molokai" nil t)
 
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff

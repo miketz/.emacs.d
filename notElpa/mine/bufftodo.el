@@ -5,7 +5,7 @@
 ;; Defines several functions to maintain a "TODO list" of buffers. It's just
 ;; a plain list of buffers.
 ;;
-;; The list of buffers is viewed with `ibuffer', exluding bufers not in the
+;; The list of buffers is viewed with `ibuffer', exluding buffers not in the
 ;; list.
 ;;
 ;; Created as an expiriment after reading the post:
@@ -19,11 +19,7 @@
   :prefix "bufftodo-")
 
 (defvar bufftodo-lst '()
-  "The list of todo buffers.
-NOTE:
-`ibuffer' appears to automatically modify this list if we delete a buffer.
-So we don't need to worry about adding functionality to ibuffer to keep this
-list in sync.")
+  "The list of todo buffers.")
 
 (defcustom bufftodo-open-new-window-p nil
   "If t open `ibuffer' in a new window."
@@ -31,7 +27,7 @@ list in sync.")
   :group 'bufftodo)
 
 (defun bufftodo--add (buff)
-  "Add BUFF to the todo list."
+  "Add BUFF to `bufftodo-lst'."
   (interactive)
   (add-to-list 'bufftodo-lst buff nil #'eq))
 
@@ -44,15 +40,20 @@ list in sync.")
                             lst)
                     nil t)))
 
+(require 'cl-lib)
+(defun bufftodo--clean-deleted-buffs ()
+  "Remove buffers which no longer exist from `bufftodo-lst'."
+  (setq bufftodo-lst (cl-delete-if-not #'buffer-live-p bufftodo-lst)))
+
 ;;;###autoload
 (defun bufftodo-clear-all ()
-  "Clear buffers from the todo list."
+  "Clear all buffers from `bufftodo-lst'."
   (interactive)
   (setq bufftodo-lst '()))
 
 ;;;###autoload
 (defun bufftodo-add-selected-buff ()
-  "Add a manually selected buffer to the todo list."
+  "Add a manually selected buffer to `bufftodo-lst'."
   (interactive)
   (bufftodo--add (bufftodo--read (buffer-list))))
 
@@ -62,6 +63,8 @@ list in sync.")
   (interactive)
   ;; TODO: fix bugs when buffers are killed, but still in the list.
   ;;       cache invalidation bug.
+  ;;       maybe fixed now? now troubleshoot why completing-read isn't working here.
+  (bufftodo--clean-deleted-buffs)
   (setq bufftodo-lst (delq (bufftodo--read bufftodo-lst) bufftodo-lst)))
 
 ;;;###autoload
@@ -83,6 +86,7 @@ list in sync.")
 (defun bufftodo-view ()
   "Dispaly the members of `bufftodo-lst' with `ibuffer'."
   (interactive)
+  (bufftodo--clean-deleted-buffs)
   (let ((ibuffer-filtering-alist '((todo-only "todo"
                                               (lambda (buf qualifier)
                                                 (member buf bufftodo-lst))))))
@@ -122,6 +126,8 @@ instead."
   (bufftodo-remove-selected-buff)
   (bufftodo-clear-all)
   (bufftodo-view)
+  (bufftodo--clean-deleted-buffs)
+  (bufftodo--read bufftodo-lst)
   bufftodo-lst
   ;; (ibuffer-filter-by-predicate
   ;;  (member buf bufftodo-lst))

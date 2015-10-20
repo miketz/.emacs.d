@@ -2201,17 +2201,19 @@ To make it human readable."
 
 (when my-use-evil-p
   (with-eval-after-load "info"
-    (evil-define-key 'normal Info-mode-map (kbd "o") 'ace-link-info))
+    (define-key Info-mode-map (kbd "o") #'ace-link-info))
   (with-eval-after-load "compile"
-    (evil-define-key 'normal compilation-mode-map (kbd "o") 'ace-link-compilation))
+    (define-key compilation-mode-map (kbd "o") #'ace-link-compilation))
   (with-eval-after-load "help-mode"
-    (evil-define-key 'normal help-mode-map (kbd "o") 'ace-link-help))
+    (define-key help-mode-map (kbd "o") #'ace-link-help))
   (with-eval-after-load "woman"
-    (evil-define-key 'normal woman-mode-map (kbd "o") 'ace-link-woman))
+    ;; TODO: test this binding
+    (define-key woman-mode-map (kbd "o") #'ace-link-woman))
   (with-eval-after-load "eww"
     (evil-define-key 'normal eww-link-keymap (kbd "o") 'ace-link-eww)
     (evil-define-key 'normal eww-mode-map (kbd "o") 'ace-link-eww))
   (with-eval-after-load 'cus-edit
+    ;; TODO: test this binding
     (evil-define-key 'normal custom-mode-map (kbd "o") 'ace-link-custom)))
 
 ;;;--------------------

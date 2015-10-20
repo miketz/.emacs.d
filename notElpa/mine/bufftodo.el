@@ -118,7 +118,8 @@ instead."
                          bufftodo-ui-fn-lst))))
 
 (when nil
-  ;; ad-hoc interactive testing with C-x C-e
+  ;; Ad-hoc interactive testing with C-x C-e
+  bufftodo-lst
   (bufftodo-ui)
   (bufftodo-add-current-buff)
   (bufftodo-add-selected-buff)
@@ -126,10 +127,38 @@ instead."
   (bufftodo-clear-all)
   (bufftodo-view)
   (bufftodo--clean-deleted-buffs)
-  (bufftodo--read bufftodo-lst)
-  bufftodo-lst
-  ;; (ibuffer-filter-by-predicate
-  ;;  (member buf bufftodo-lst))
+  (bufftodo--read bufftodo-lst))
+
+(when nil
+  ;; Unit tests.
+  ;; TODO: add more tests
+  ;; TODO: use a unit test library.
+  (progn
+    (progn
+      ;; test `bufftodo--add'
+      (setq bufftodo-lst '()) ;; wipe the list
+      (assert (= 0 (length bufftodo-lst)))
+      (bufftodo--add (get-buffer "*scratch*")) ;; bread
+      (assert (= 1 (length bufftodo-lst))))
+
+    (progn
+      ;; test `bufftodo-clear-all'
+      (setq bufftodo-lst '()) ;; wipe the list
+      (assert (= 0 (length bufftodo-lst)))
+      (bufftodo--add (get-buffer "*scratch*"))
+      (assert (= 1 (length bufftodo-lst)))
+      (bufftodo-clear-all) ;; bread
+      (assert (= 0 (length bufftodo-lst))))
+
+    (progn
+      ;; test `bufftodo-add-current-buff'
+      (setq bufftodo-lst '()) ;; wipe the list
+      (assert (= 0 (length bufftodo-lst)))
+      (bufftodo-add-current-buff) ;; bread
+      (assert (eq (current-buffer)
+                  (nth 0 bufftodo-lst))))
+
+    "all tests passed") ;; <-- C-x C-e here to run tests.
   )
 
 (provide 'bufftodo)

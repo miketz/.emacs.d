@@ -2195,10 +2195,24 @@ To make it human readable."
 ;;;--------------------
 ;;; ace-link
 ;;;--------------------
-;; TODO: set up bindings for all modes so it works with evil mode
 (when (or (eq my-ui-type 'emacs)
           (eq my-ui-type 'cua))
   (ace-link-setup-default))
+
+(when my-use-evil-p
+  (with-eval-after-load "info"
+    (evil-define-key 'normal Info-mode-map (kbd "o") 'ace-link-info))
+  (with-eval-after-load "compile"
+    (evil-define-key 'normal compilation-mode-map (kbd "o") 'ace-link-compilation))
+  (with-eval-after-load "help-mode"
+    (evil-define-key 'normal help-mode-map (kbd "o") 'ace-link-help))
+  (with-eval-after-load "woman"
+    (evil-define-key 'normal woman-mode-map (kbd "o") 'ace-link-woman))
+  (with-eval-after-load "eww"
+    (evil-define-key 'normal eww-link-keymap (kbd "o") 'ace-link-eww)
+    (evil-define-key 'normal eww-mode-map (kbd "o") 'ace-link-eww))
+  (with-eval-after-load 'cus-edit
+    (evil-define-key 'normal custom-mode-map (kbd "o") 'ace-link-custom)))
 
 ;;;--------------------
 ;;; Ace jump mode

@@ -2191,6 +2191,15 @@ To make it human readable."
        arg
        avy-style))))
 
+
+;;;--------------------
+;;; ace-link
+;;;--------------------
+;; TODO: set up bindings for all modes so it works with evil mode
+(when (or (eq my-ui-type 'emacs)
+          (eq my-ui-type 'cua))
+  (ace-link-setup-default))
+
 ;;;--------------------
 ;;; Ace jump mode
 ;;;--------------------
@@ -2500,6 +2509,7 @@ To make it human readable."
   (define-key eww-mode-map (kbd "C-c l") #'eww-forward-url)
   (define-key eww-mode-map (kbd "C-c r") #'eww-reload)
   (define-key eww-mode-map (kbd "C-c g") #'eww)
+  (define-key eww-mode-map (kbd "C-c o") #'ace-link-eww)
   (define-key eww-mode-map (kbd "<tab>") #'shr-next-link)
   ;; conkeror bindings. TODO: doesn't seem to work when in evil mode, fix it.
   (define-key eww-mode-map (kbd "B") #'eww-back-url)

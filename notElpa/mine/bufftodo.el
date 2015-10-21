@@ -55,6 +55,9 @@
 (defun bufftodo-add-selected-buff ()
   "Add a manually selected buffer to `bufftodo-lst'."
   (interactive)
+  ;; TODO: filter boring buffers out of `buffer-list' results
+  ;;       possibley look at `my-square-one' which just filters by explicit names.
+  ;;       but better to have a more general filter. Look into how helm, ivy, ect filter.
   (bufftodo--add (bufftodo--read (buffer-list))))
 
 ;;;###autoload

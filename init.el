@@ -2232,7 +2232,11 @@ To make it human readable."
 ;;;--------------------
 ;;; ace-window
 ;;;--------------------
-(global-set-key (kbd "M-w") 'ace-window)
+(unless (eq my-ui-type 'emacs)
+  ;; this is the emacs "copy" keybind, so only don't steal it when using emacs
+  ;; bindings.
+  (global-set-key (kbd "M-w") 'ace-window))
+
 (with-eval-after-load "ace-window"
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
   (setq aw-background nil) ;; don't dim the background

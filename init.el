@@ -2198,6 +2198,8 @@ To make it human readable."
 ;;;--------------------
 (when (or (eq my-ui-type 'emacs)
           (eq my-ui-type 'cua))
+  ;; TODO: put this in the eval-after-loads. This line slows start up by
+  ;; forcing a load of file `ace-link'
   (ace-link-setup-default))
 
 (when my-use-evil-p

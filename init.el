@@ -3374,8 +3374,10 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; js2-highlight-vars
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "js2-highlight-vars-autoloads"
-  (add-hook 'js2-mode-hook (lambda () (js2-highlight-vars-mode))))
+;; commenting out for now. It overwrites the modeline constantly making it
+;; hard to read js2 error messages in the mode line.
+;; (with-eval-after-load "js2-highlight-vars-autoloads"
+;;   (add-hook 'js2-mode-hook (lambda () (js2-highlight-vars-mode))))
 
 
 ;;;-----------------------------------------------------------------------------

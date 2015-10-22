@@ -2849,6 +2849,10 @@ To make it human readable."
     (define-key evil-normal-state-map (kbd "s") #'swiper)
     (evil-leader/set-key "b" #'ivy-switch-buffer))
 
+  (when (eq my-ui-type 'emacs)
+    (global-set-key (kbd "C-c C-s") #'swiper)
+    (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
+
   (progn ;; counsel completion augmentation
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)
@@ -3091,7 +3095,9 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;;-----------------------------------------------------------------------------
 (autoload #'my-window-search "my-window-search" nil t)
 (global-set-key (kbd "C-c s") #'my-window-search)
-(global-set-key (kbd "C-c C-s") #'my-window-search)
+
+;; using this binding for swiper when `my-ui-type' is 'emacs
+;; (global-set-key (kbd "C-c C-s") #'my-window-search)
 
 ;;;-----------------------------------------------------------------------------
 ;;; lispy

@@ -146,7 +146,7 @@ Becuase I want them to have same value.
 
 ;; TODO: look into a way to limit the values to evil, emacs, and cua. Like an enum. defcustom?
 ;; TODO: support cua.
-(defvar my-ui-type 'evil
+(defvar my-ui-type 'emacs
   "The user interface type I'm currently using.
 Choices: evil, emacs, cua")
 

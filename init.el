@@ -2033,7 +2033,13 @@ To make it human readable."
   (defun override-slime-repl-bindings-with-paredit ()
     (define-key slime-repl-mode-map
       (read-kbd-macro paredit-backward-delete-key) nil))
-  (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit))
+  (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
+
+  (when (eq my-ui-type 'emacs)
+    ;; reclaim the M-r binding to move cursor to middle, high, low
+    (define-key paredit-mode-map (kbd "M-r") #'move-to-window-line-top-bottom)
+    ;; rebind paredits raise function
+    (define-key paredit-mode-map (kbd "C-c M-r") #'paredit-raise-sexp)))
 
 ;; ;;key maps
 ;; (global-set-key (kbd "C-9") 'paredit-backward-slurp-sexp)

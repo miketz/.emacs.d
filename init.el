@@ -3401,13 +3401,13 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; bufftodo. ~/.emacs.d/notElpa/mine/bufftodo.el
 ;;;-----------------------------------------------------------------------------
-(autoload #'bufftodo-ui "bufftodo" nil t)
+;; (autoload #'bufftodo-ui "bufftodo" nil t)
 
-(when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "\\") #'bufftodo-ui))
+;; (when my-use-evil-p
+;;   (define-key evil-normal-state-map (kbd "\\") #'bufftodo-ui))
 
-(with-eval-after-load 'bufftodo
-  (setq bufftodo-open-new-window-p nil))
+;; (with-eval-after-load 'bufftodo
+;;   (setq bufftodo-open-new-window-p nil))
 
 ;;;-----------------------------------------------------------------------------
 ;;; function-args

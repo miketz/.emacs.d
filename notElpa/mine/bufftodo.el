@@ -13,6 +13,9 @@
 
 ;;; Code:
 
+(require 'cl-lib)
+(require 'ibuf-ext) ; to set up an ibuffer filter
+
 (defgroup bufftodo ()
   "Add/remove buffers from a todo list."
   :group 'convenience
@@ -40,7 +43,6 @@
                             lst)
                     nil t)))
 
-(require 'cl-lib)
 (defun bufftodo--clean-deleted-buffs ()
   "Remove buffers which no longer exist from `bufftodo-lst'."
   (setq bufftodo-lst (cl-delete-if-not #'buffer-live-p bufftodo-lst)))
@@ -51,14 +53,25 @@
   (interactive)
   (setq bufftodo-lst '()))
 
+(defun bufftodo--boring-buffer-p (buff)
+  "True if the buffer is a 'boring' buffer."
+  (let* ((earmuff "*")
+         (earmuff-sp (concat " " earmuff))
+         (name (buffer-name buff)))
+    (and (not (string-equal "*scratch*" name))
+         (or (string-prefix-p earmuff name)
+             (string-prefix-p earmuff-sp name))
+         (string-suffix-p earmuff name))))
+
 ;;;###autoload
 (defun bufftodo-add-selected-buff ()
   "Add a manually selected buffer to `bufftodo-lst'."
   (interactive)
-  ;; TODO: filter boring buffers out of `buffer-list' results
-  ;;       possibley look at `my-square-one' which just filters by explicit names.
-  ;;       but better to have a more general filter. Look into how helm, ivy, ect filter.
-  (bufftodo--add (bufftodo--read (buffer-list))))
+  (bufftodo--add
+   (bufftodo--read
+    ;; exclude boring buffers
+    ;; TODO: filter boring buffers using the same technique `ibuffer' uses.
+    (cl-delete-if #'bufftodo--boring-buffer-p (buffer-list)))))
 
 ;;;###autoload
 (defun bufftodo-remove-selected-buff ()
@@ -75,7 +88,6 @@
   (interactive)
   (bufftodo--add (current-buffer)))
 
-(require 'ibuf-ext)
 ;; create a filter for `ibuffer' for members of `bufftodo-lst'
 (define-ibuffer-filter ;; creates a new fn `ibuffer-filter-by-todo-only'
     todo-only
@@ -84,6 +96,8 @@
   ;; buf variable is introduced in the macro.
   (memq buf qualifier))
 
+;; TODO: look into a way to sync `ibuffer' as buffers are removed, added, or
+;;       deleted form `bufftodo-lst'.
 ;;;###autoload
 (defun bufftodo-view ()
   "Dispaly the members of `bufftodo-lst' with `ibuffer'."

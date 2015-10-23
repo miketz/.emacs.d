@@ -37,6 +37,9 @@
                       :background "#272822"
                       :box (:line-width -1 :style released-button)))))
 
+   ;; the buffer name
+   '(mode-line-buffer-id ((t (:foreground nil :weight semi-bold))))
+
    `(avy-lead-face-0 ;; the first overlay char
      ((t (:foreground "spring green"
                       :slant normal

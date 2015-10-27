@@ -3248,12 +3248,19 @@ When ARG isn't nil, try to pretty print the sexp."
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 
 (with-eval-after-load "elisp-slime-nav"
+
+  (defun my-elisp-slime-nav-colored ()
+    (interactive)
+    (call-interactively #'elisp-slime-nav-describe-elisp-thing-at-point)
+    (with-current-buffer (help-buffer)
+      (rainbow-delimiters-mode)))
+
   ;; evil-mode stole the keybinds! take them back.
   (when my-use-evil-p
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") 'elisp-slime-nav-find-elisp-thing-at-point)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") 'pop-tag-mark)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") 'elisp-slime-nav-describe-elisp-thing-at-point)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") 'elisp-slime-nav-describe-elisp-thing-at-point)))
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") #'elisp-slime-nav-find-elisp-thing-at-point)
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") #'pop-tag-mark)
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") #'my-elisp-slime-nav-colored)
+    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") #'my-elisp-slime-nav-colored)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; maximumize screen real-estate. TODO: complete this.

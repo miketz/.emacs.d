@@ -54,7 +54,7 @@
   (setq bufftodo-lst '()))
 
 (defun bufftodo--boring-buffer-p (buff)
-  "True if the buffer is a 'boring' buffer."
+  "True if BUFF is a 'boring' buffer."
   (let* ((earmuff "*")
          (earmuff-sp (concat " " earmuff))
          (name (buffer-name buff)))

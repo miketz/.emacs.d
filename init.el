@@ -3340,7 +3340,7 @@ When ARG isn't nil, try to pretty print the sexp."
             (t
              (error "no process at point!")))))
 
-  (define-key process-menu-mode-map (kbd "C-k") 'my-delete-process-at-point))
+  (define-key process-menu-mode-map (kbd "C-k") #'my-delete-process-at-point))
 
 ;;;-----------------------------------------------------------------------------
 ;;; shell-script-mode. (alias for sh-mode)

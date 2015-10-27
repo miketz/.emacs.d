@@ -144,29 +144,36 @@ Becuase I want them to have same value.
 (defvar my-graphic-p (display-graphic-p)
   "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")
 
+
 ;; TODO: look into a way to limit the values to evil, emacs, and cua. Like an enum. defcustom?
 ;; TODO: support cua.
 (defvar my-ui-type 'evil
   "The user interface type I'm currently using.
-Choices: evil, emacs, cua")
+Choices: evil emacs cua")
 
 (defvar my-use-evil-p (eq my-ui-type 'evil)
   "Whether i'm using evil at the moment or not.
 Just a conveinience var to use over checking `my-ui-type' everywhere.")
 
-;;TODO: make ivy pop-up it's window on the linux tty.
-(defvar my-use-ivy-p (or (not (eq system-type 'gnu/linux)) ; swiper/ivy is having an issue on terminal linux, so use ido there.
-                         my-graphic-p)
-  "If I'm using ivy completion at the moment.")
 
-(defvar my-use-helm-p nil
-  "Whether i'm using helm at the momnet or not.")
+(defvar my-narrow-type 'ivy
+  "The package I'm currenlty using for narrowing completions.
+Choices: ivy ido helm")
+
+;;TODO: make ivy pop-up it's window on the linux tty.
+(defvar my-use-ivy-p (eq my-narrow-type 'ivy)
+  "If I'm using ivy completion at the moment.
+Just a convienience to avoid checks against `my-narrow-type'.")
+
+(defvar my-use-helm-p (eq my-narrow-type 'helm)
+  "Whether i'm using helm at the momnet or not.
+Just a convienience to avoid checks against `my-narrow-type'.")
 (defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")
 
-(defvar my-use-ido-p (and (eq system-type 'gnu/linux) ; swiper/ivy is having an issue on terminal linux, so use ido there.
-                          (not my-graphic-p))
-  "If I'm using ido at the moment.")
+(defvar my-use-ido-p (eq my-narrow-type 'ido)
+  "If I'm using ido at the moment.
+Just a convienience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (if my-use-helm-p
                         #'helm-swoop

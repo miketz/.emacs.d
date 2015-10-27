@@ -153,7 +153,7 @@ Choices: evil emacs cua")
 
 (defvar my-use-evil-p (eq my-ui-type 'evil)
   "Whether i'm using evil at the moment or not.
-Just a conveinience var to use over checking `my-ui-type' everywhere.")
+Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
 (defvar my-narrow-type 'ivy
@@ -163,17 +163,17 @@ Choices: ivy ido helm")
 ;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
   "If I'm using ivy completion at the moment.
-Just a convienience to avoid checks against `my-narrow-type'.")
+Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-use-helm-p (eq my-narrow-type 'helm)
   "Whether i'm using helm at the momnet or not.
-Just a convienience to avoid checks against `my-narrow-type'.")
+Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")
 
 (defvar my-use-ido-p (eq my-narrow-type 'ido)
   "If I'm using ido at the moment.
-Just a convienience to avoid checks against `my-narrow-type'.")
+Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (if my-use-helm-p
                         #'helm-swoop

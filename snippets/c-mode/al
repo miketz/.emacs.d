@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: al
+# key: al
+# --
+${1:type} *${2:var} = malloc(sizeof($1));$0

@@ -2885,10 +2885,13 @@ To make it human readable."
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function))
 
-  (ivy-mode 1) ; turn on ivy completion
   )
 
 (with-eval-after-load "ivy"
+  ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
+  ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)
+  (ivy-mode 1)
+
   ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
   ;; ;; allow out of order matching.
   (setq ivy-re-builders-alist

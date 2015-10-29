@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- add column, when inside a create-table statement. -*-
 # name: coll
 # key: coll

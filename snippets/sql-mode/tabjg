@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- junction table for many-to-many mapping. A sequential ID is used becuase
 # sometimes the juntion is more than a mere implementaiton detail of a
 # many-to-many. It may be an entity in its own right with extra fields and

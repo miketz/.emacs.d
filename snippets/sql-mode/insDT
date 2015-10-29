@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- insert data from Source to Dest. It will skip records that already exist based on "SomeKey" -*-
 # name: insertDT
 # key: insDT

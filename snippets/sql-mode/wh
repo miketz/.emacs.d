@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- while loop. NOTE: consider a set-based operation instead of a loop. *-*
 # name: while
 # key: wh

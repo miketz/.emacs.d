@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- update data from Source to Dest based on "SomeKey". To avoid redundant updates when data is the same add a "where" clause. *-*
 # name: updateDT
 # key: upDT

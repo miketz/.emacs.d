@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- create table from a select query. Just a syntax reminder. -*-
 # name: tabsel
 # key: tabsel

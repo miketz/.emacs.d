@@ -1,3 +1,4 @@
+# -*- mode: snippet -*-
 # -*- Webservice call from javascript to server. Using XmlHttpRequest. -*-
 # name: ws
 # key: ws

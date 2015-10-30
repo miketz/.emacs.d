@@ -27,6 +27,19 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   '(sr-highlight-path-face
+     ((t (:background "black" :foreground "light sky blue"
+                      :bold t
+                      :height 120))))
+   '(sr-active-path-face
+     ((t (:background "black" :foreground "light sky blue"
+                      :bold t
+                      :height 120))))
+   '(sr-passive-path-face
+     ((t (:background "black" :foreground "gray"
+                      :bold t
+                      :height 120))))
+
    ;; swiper/ivy faces
    '(ivy-current-match
      ((t (:background "black" :foreground "light sky blue"))))

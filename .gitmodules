@@ -1,3 +1,6 @@
 [submodule "notElpa/sallet"]
 	path = notElpa/sallet
 	url = https://github.com/tetracat/sallet
+[submodule "notElpa/sunrise-commander"]
+	path = notElpa/sunrise-commander
+	url = git://github.com/escherdragon/sunrise-commander.git

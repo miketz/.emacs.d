@@ -3394,6 +3394,12 @@ When ARG isn't nil, try to pretty print the sexp."
 (autoload #'sallet-buffer "sallet" nil t)
 
 ;;;-----------------------------------------------------------------------------
+;;; sunrise-commander. saved to notElpa folder as a git submodule.
+;;;-----------------------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/notElpa/sunrise-commander")
+(autoload #'sunrise-cd "sunrise-commander" nil t)
+
+;;;-----------------------------------------------------------------------------
 ;;; winner-mode
 ;;;-----------------------------------------------------------------------------
 (setq winner-dont-bind-my-keys t) ; doesn't work when set in eval-after-load.

@@ -3082,7 +3082,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   ;; TODO: Use a different technique for this keybind. If we didn't enter
   ;; `js2-mode' from `web-mode' then we don't want `my-unfocus-javascript' to
   ;; turn on web-mode.
-  (define-key js2-mode-map (kbd "C-c u") #'my-unfocus-javascript))
+  (define-key js2-mode-map (kbd "C-c C-c j") #'my-unfocus-javascript))
 
 
 

@@ -1872,6 +1872,10 @@ To make it human readable."
               (yas-minor-mode 1)
               ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
               (electric-pair-mode 1)
+
+              ;; highlight escapes in the printf format string.
+              (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
+
               ;;(flycheck-mode 1)
               ;; (electric-spacing-mode 1)
               ))

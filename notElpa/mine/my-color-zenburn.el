@@ -27,6 +27,11 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   ;; override the hi-yellow face for printf escapes.
+   '(hi-yellow
+     ((t (:foreground "hotpink"
+                      :weight bold))))
+
    '(sr-highlight-path-face
      ((t (:background "black" :foreground "light sky blue"
                       :bold t

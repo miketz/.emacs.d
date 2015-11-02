@@ -413,8 +413,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     ;; must be in eval-after-load so `helm-map' is defined
     (key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
-  (with-eval-after-load "ivy"
-    (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
+  ;; (with-eval-after-load "ivy"
+  ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
 
   (with-eval-after-load "evil"
     ;; must be in eval-after-load so key maps are defined.

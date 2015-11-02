@@ -4,6 +4,11 @@
   (custom-theme-set-faces
    'firebelly
 
+   ;; override the hi-yellow face for printf escapes.
+   '(hi-yellow
+     ((t (:foreground "hotpink"
+                      :weight bold))))
+
    `(org-level-2 ((t (:foreground "gray"))))
    `(show-paren-match ((t (:slant italic
                                   :bold t

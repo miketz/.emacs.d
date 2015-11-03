@@ -2908,7 +2908,24 @@ To make it human readable."
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   ;; use fancy highlights in the popup window
-  (setq ivy-display-style 'fancy))
+  (setq ivy-display-style 'fancy)
+
+
+  (progn
+    ;; fix off-by-1 bug where it scrolled 1 too far
+    ;; TODO: test more, research more, submit a patch upstream
+
+    (defun ivy-scroll-up-command ()
+      "Scroll the candidates upward by the minibuffer height."
+      (interactive)
+      (ivy-set-index (min (1- (+ ivy--index ivy-height)) ;; fix: added 1-
+                          (1- ivy--length))))
+
+    (defun ivy-scroll-down-command ()
+      "Scroll the candidates downward by the minibuffer height."
+      (interactive)
+      (ivy-set-index (max (1+ (- ivy--index ivy-height)) ;; fix: added 1+
+                          0)))))
 
 (with-eval-after-load "counsel"
   ;; remove the default ^ prefix used by `counsel-M-x'

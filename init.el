@@ -439,6 +439,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (custom-set-faces
  '(cursor ((t (:background "cyan")))))
 (setq x-stretch-cursor t) ;; strech box cursor around a tab \t
+(setq-default cursor-in-non-selected-windows nil)
+(blink-cursor-mode 0)
 
 (when my-use-evil-p
   (cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
@@ -3651,7 +3653,6 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; (setq initial-major-mode #'fundamental-mode) ;;for faster startup.
 
 
-(blink-cursor-mode 0)
 
 (progn ;; hightlight current line stuff
   (with-eval-after-load "hl-line"

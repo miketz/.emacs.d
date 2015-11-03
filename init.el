@@ -1880,6 +1880,7 @@ To make it human readable."
               (electric-pair-mode 1)
 
               ;; highlight escapes in the printf format string.
+              ;; TODO: highlight placeholders %d differently than escapes \n
               (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
 
               ;;(flycheck-mode 1)

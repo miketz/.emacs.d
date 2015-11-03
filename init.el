@@ -438,6 +438,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (setq-default cursor-type '(bar . 2))
 (custom-set-faces
  '(cursor ((t (:background "cyan")))))
+(setq x-stretch-cursor t) ;; strech box cursor around a tab \t
 
 (when my-use-evil-p
   (cl-defun my-cursor-stuff (&optional &key (color-emacs nil)

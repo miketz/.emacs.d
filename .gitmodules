@@ -4,3 +4,6 @@
 [submodule "notElpa/sunrise-commander"]
 	path = notElpa/sunrise-commander
 	url = git://github.com/escherdragon/sunrise-commander.git
+[submodule "notElpa/swiper"]
+	path = notElpa/swiper
+	url = https://github.com/miketz/swiper

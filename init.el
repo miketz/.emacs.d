@@ -2179,13 +2179,13 @@ To make it human readable."
 ;;;--------------------
 ;;; Avy
 ;;;--------------------
-(global-set-key (kbd "M-g g") 'avy-goto-line)
-(global-set-key (kbd "M-g M-g") 'avy-goto-line)
+(global-set-key (kbd "M-g g") #'avy-goto-line)
+(global-set-key (kbd "M-g M-g") #'avy-goto-line)
 ;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
 ;; (define-key evil-motion-state-map (kbd "s") 'avy-goto-char-2)
 (when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
-  (define-key evil-motion-state-map (kbd "SPC") 'avy-goto-word-1))
+  (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
+  (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1))
 
 (with-eval-after-load "avy"
   ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.

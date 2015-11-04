@@ -24,7 +24,7 @@
 ;;;
 ;;; Revert changes to modified files.
 ;;;     git reset --hard
-
+;;;
 ;;; Remove all untracked files and directories.
 ;;;     git clean -fd
 

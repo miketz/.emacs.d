@@ -1700,18 +1700,15 @@ To make it human readable."
   ;; (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
   )
 
-
 ;;;---------------------
 ;;; sublimity
 ;;;---------------------
-;; (require 'sublimity)
-;; (require 'sublimity-scroll)
-;;map is annoying;;(require 'sublimity-map)
-
-;;(setq sublimity-scroll-drift-length 1) ;(sublimity-scroll-weight 4)
-
-;;(sublimity-global-mode)
-
+;; (with-eval-after-load "sublimity"
+;;   (setq sublimity-scroll-drift-length 4)
+;;   (setq sublimity-scroll-weight 8)
+;;   (require 'sublimity-scroll)
+;;   ;; map is annoying;; (require 'sublimity-map)
+;;   )
 
 ;;;---------------------
 ;;; Clippy. pop-up help

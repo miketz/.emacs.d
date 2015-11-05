@@ -28,6 +28,37 @@
 ;;; Remove all untracked files and directories.
 ;;;     git clean -fd
 
+;;;----------------------------------
+;;; Git workflow with submodule:
+;;;----------------------------------
+;;; With ~/.emamcs.d/notElpa/swiper as an example
+;;;
+;;; Fork on github
+;;;
+;;; Create a submodule from fork
+;;;     cd ~/.emamcs.d/notElpa
+;;;     git submodule add https://github.com/miketz/swiper
+;;;
+;;; Make changes
+;;; Push to fork
+;;;     cd ~/.emamcs.d/notElpa/swiper
+;;;     git push origin master
+;;; Make pull request on github
+;;;
+;;; Download from upstream -> local. Then push local -> fork
+;;;     cd ~/.emamcs.d/notElpa/swiper
+;;;     git remote add upstream https://github.com/abo-abo/swiper
+;;;     git fetch upstream
+;;;     # then: (like "git pull" which is fetch + merge)
+;;;     git merge upstream/master master
+;;;
+;;;     # or, better, replay your local work on top of the fetched branch
+;;;     # like a "git pull --rebase"
+;;;     git rebase upstream/master
+;;;
+;;;     # push changes to remote fork
+;;;     git push origin master
+
 ;;; Code:
 
 ;; Turn off mouse interface early in startup to avoid momentary display

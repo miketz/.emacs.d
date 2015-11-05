@@ -585,12 +585,12 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   ;;leader keys
   (evil-leader/set-leader ",")
-  ;; (evil-leader/set-key "w" 'other-window)
-  (evil-leader/set-key "q" 'balance-windows)
-  (evil-leader/set-key "x" 'maximize-window)
-  (evil-leader/set-key "," 'delete-other-windows)
-  (evil-leader/set-key "d" 'delete-window)
-  (evil-leader/set-key "k" 'kill-this-buffer)
+  ;; (evil-leader/set-key "w" #'other-window)
+  (evil-leader/set-key "q" #'balance-windows)
+  (evil-leader/set-key "x" #'maximize-window)
+  (evil-leader/set-key "," #'delete-other-windows)
+  (evil-leader/set-key "d" #'delete-window)
+  (evil-leader/set-key "k" #'kill-this-buffer)
 
   (evil-leader/set-key "<" (lambda ()   ;shrink window a little
                              (interactive)

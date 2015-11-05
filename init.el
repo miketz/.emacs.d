@@ -585,7 +585,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   ;;leader keys
   (evil-leader/set-leader ",")
-  (evil-leader/set-key "w" 'other-window)
+  ;; (evil-leader/set-key "w" 'other-window)
   (evil-leader/set-key "q" 'balance-windows)
   (evil-leader/set-key "x" 'maximize-window)
   (evil-leader/set-key "," 'delete-other-windows)
@@ -2922,9 +2922,8 @@ To make it human readable."
                       (let ((ivy-height 25))
                         (call-interactively #'counsel-load-theme))))
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
-    (global-set-key (kbd "C-h f") #'counsel-describe-function))
-
-  )
+    (global-set-key (kbd "C-h f") #'counsel-describe-function)
+    (evil-leader/set-key "w" #'counsel-yank-pop)))
 
 (with-eval-after-load "ivy"
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind

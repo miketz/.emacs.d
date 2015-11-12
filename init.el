@@ -432,7 +432,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
 ;;       since it is looking for the chord.
 
-(when my-use-evil-p
+(when nil ;;my-use-evil-p
 
   (key-chord-mode 1)                    ; autoloaded function
 

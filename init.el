@@ -1240,8 +1240,23 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "org"
   (setq org-startup-indented t)
   (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
-  ;; new keyword for tasks put on hold
-  (add-to-list 'org-todo-keywords '(sequence "HOLD") t)
+
+  (progn ;;HOLD keyword stuff
+    ;; new keyword for tasks put on hold
+    (add-to-list 'org-todo-keywords '(sequence "HOLD") t)
+
+    ;; (defface org-hold ;; font-lock-warning-face
+    ;;   '((t (:foreground "powder blue" :weight bold)))
+    ;;   "Face for HOLD keywords."
+    ;;   :group 'org-faces)
+
+    ;; icy color to make HOLD items look frozen.
+    (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue" :weight bold)))))
+
+
+  (defface swiper-match-face-1
+    '((t (:inherit isearch-lazy-highlight-face)))
+    "The background face for `swiper' matches.")
 
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."

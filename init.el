@@ -1082,7 +1082,10 @@ This prevents overlapping themes; something I would rarely want."
     (interactive)
     (let ((browse-url-browser-function #'eww-browse-url))
       (slime-documentation-lookup)))
-  (define-key slime-mode-map (kbd "C-c C-d h") #'my-view-hyperspec)
+  (let ((key (kbd "C-c C-d h")))
+    (define-key slime-mode-map key #'my-view-hyperspec)
+    (define-key slime-repl-mode-map key #'my-view-hyperspec)
+    (define-key slime-macroexpansion-minor-mode-map key #'my-view-hyperspec))
   (when my-use-ivy-p
     (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl)))
 

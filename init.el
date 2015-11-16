@@ -1912,6 +1912,7 @@ To make it human readable."
   ;;(setq-default c-default-style "java")
   (setq-default c-basic-offset my-indent-width) ;tab width
   (setq-default c-electric-flag t)
+  (setq-default c-electric-pound-behavior '(alignleft))
 
   ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
   ;; And if you the functions fit on screen then it's just wasted modeline space.

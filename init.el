@@ -976,7 +976,7 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; (when my-use-sly
 ;;   (when (eq my-curr-computer 'work-laptop)
-;;     (setq inferior-lisp-program "C:\\Users\\mtz\\programs\\ccl-1.10-windowsx86\\ccl\\wx86cl64")))
+;;     (setq inferior-lisp-program "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
 
 ;;;---------------------------------------------
 ;;; SLIME
@@ -1268,7 +1268,7 @@ This prevents overlapping themes; something I would rarely want."
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
   (when (eq my-curr-computer 'work-laptop)
-    (setq org-agenda-files '("C:\\Users\\mtz\\TODO.org")))
+    (setq org-agenda-files '("C:/Users/mtz/TODO.org")))
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (when my-use-evil-p
@@ -2180,9 +2180,9 @@ To make it human readable."
     ;; downside that documentation is impossible to fetch.
     (setq omnisharp-auto-complete-want-documentation nil)
 
-    (setq omnisharp--curl-executable-path "C:\\Users\\mtz\\programs\\curl-7.37.0-win64\\bin\\curl.exe")
-    (setq omnisharp-server-executable-path "C:\\Users\\mtz\\programs\\OmniSharpServer\\OmniSharp\\bin\\Debug\\OmniSharp.exe")
-    (setq omnisharp--windows-curl-tmp-file-path "C:\\Users\\mtz\\omnisharp-curl-tmp.cs") ;windows doesn't like the C:\ root folder
+    (setq omnisharp--curl-executable-path "C:/Users/mtz/programs/curl-7.37.0-win64/bin/curl.exe")
+    (setq omnisharp-server-executable-path "C:/Users/mtz/programs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
+    (setq omnisharp--windows-curl-tmp-file-path "C:/Users/mtz/omnisharp-curl-tmp.cs") ;windows doesn't like the C:\ root folder
     (setq omnisharp-host "http://localhost:2000/") ;(setq omnisharp-host "http://localhost:2000/")
                                         ;(setq omnisharp-curl "curl.exe")
                                         ;`(:command ,omnisharp--curl-executable-path)
@@ -2323,7 +2323,7 @@ To make it human readable."
 ;;;--------------------
 ;; rarely use `clang-format', so commenting it out for now.
 ;; (when (eq my-curr-computer 'work-laptop)
-;;   (load "C:\\Users\\mtz\\programs\\LLVM\\share\\clang\\clang-format.el")
+;;   (load "C:/Users/mtz/programs/LLVM/share/clang/clang-format.el")
 ;;   ;;(global-set-key [C-M-tab] 'clang-format-region)
 ;;   (global-set-key (kbd "C-c f") 'clang-format-region)
 ;;   (global-set-key (kbd "C-c b") 'clang-format-buffer))
@@ -2396,22 +2396,22 @@ To make it human readable."
   (when my-use-evil-p
     (evil-leader/set-key "1" (lambda ()
                                (interactive)
-                               (dired "C:\\Users\\mtz")))
+                               (dired "C:/Users/mtz")))
 
     ;;quick load of c:\users\mtz\proj\ecp\dev\db
     (evil-leader/set-key "2" (lambda ()
                                (interactive)
-                               (dired "c:\\users\\mtz\\proj\\ecp\\dev\\db")))
+                               (dired "c:/users/mtz/proj/ecp/dev/db")))
 
     ;;quick load of TFS \Main\SqlScripts
     (evil-leader/set-key "3" (lambda ()
                                (interactive)
-                               (dired "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts")))
+                               (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
 
     ;;quick load of c:\users\mtz\TODO\TODO.org
     (evil-leader/set-key "t" (lambda ()
                                (interactive)
-                               (find-file-existing "C:\\Users\\mtz\\TODO\\TODO.org")))))
+                               (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
 
 
 (when (eq system-type 'gnu/linux)
@@ -2528,7 +2528,7 @@ To make it human readable."
   ;;   "Wire up the html file you're editing with skewer."
   ;;   (interactive)
   ;;   ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
-  ;;   ;;(setq httpd-root "c:\\users\\mtz\\scratch\\testwebsite")
+  ;;   ;;(setq httpd-root "c:/users/mtz/scratch/testwebsite")
   ;;   (setq httpd-root (my-current-folder-path))
   ;;   (httpd-start)
   ;;   (browse-url-of-file (concat "http://localhost:8080/"
@@ -2597,7 +2597,7 @@ To make it human readable."
 
 (with-eval-after-load "eww"
   (when (eq my-curr-computer 'work-laptop)
-    (setq eww-download-directory "C:\\Users\\mtz\\Downloads"))
+    (setq eww-download-directory "C:/Users/mtz/Downloads"))
 
   (define-key eww-mode-map (kbd "C-c h") #'eww-back-url)
   (define-key eww-mode-map (kbd "C-c l") #'eww-forward-url)

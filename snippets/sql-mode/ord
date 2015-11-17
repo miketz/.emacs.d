@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# -*- conditionally order by different columns *-*
+# name: ord
+# key: ord
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+order by
+    case @flag
+    when 1 then col1
+    when 2 then col2 end

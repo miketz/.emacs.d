@@ -7,6 +7,9 @@
    ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
    ;; `(default ((t (:background ,my-charcoal))))
 
+   `(region
+     ((t (:background "#69685E"))))
+
    `(erc-notice-face
      ((t (:foreground "dark gray"))))
    `(compilation-info

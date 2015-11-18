@@ -274,6 +274,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     color-theme-sanityinc-tomorrow
     grandshell-theme
     tommyh-theme
+    majapahit-theme
     ;;sublimity
     nyan-mode
     nyan-prompt

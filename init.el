@@ -3722,7 +3722,7 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; (hl-line-mode 1) ; highlight the current line
   )
 
-(global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
+;; (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
 
 (setq-default line-spacing nil)
 

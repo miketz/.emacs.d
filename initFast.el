@@ -36,7 +36,7 @@
 (blink-cursor-mode 0)
 ;(hl-line-mode 0)
 
-(global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
+;(global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
 
 (setq-default line-spacing 0)
 ;(global-linum-mode 0) ;show/hide line numbers

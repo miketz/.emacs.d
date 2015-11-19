@@ -324,6 +324,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     flymake-jslint
     nlinum
     ido-vertical-mode
+    ido-grid-mode
     ido-ubiquitous
     flx-ido
     ov
@@ -1813,8 +1814,16 @@ To make it human readable."
   (ido-ubiquitous-mode 1))
 
 (with-eval-after-load "ido"
-  ;; 3rd party extension to ido. Display vertically like swiper.
-  (ido-vertical-mode 1) ;; invokes with-eval-after-load "ido-vertical-mode"
+  (let ((my-ido-display 'grid)) ;; Choices: grid vertical nil
+    (cond ((eq my-ido-display 'vertical)
+           ;; 3rd party extension to ido. Display vertically like swiper.
+           ;; invokes with-eval-after-load "ido-vertical-mode"
+           (ido-vertical-mode 1))
+          ((eq my-ido-display 'grid)
+           ;; TODO: prevent grid mode from messing up the "space-as-dash" advice.
+           ;; TODO: make Tab behave the same for smex, general completion, etc.
+           (ido-grid-mode))))
+
   ;; (flx-ido-mode 1) ;; invokes (with-eval-after-load "flx-ido")
 
   ;; insert a hypen - on space like in normal M-x

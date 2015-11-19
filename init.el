@@ -3194,7 +3194,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 
 (with-eval-after-load "lispy"
   ;; (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
-  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
+  (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
 
   (setq lispy-avy-style-char 'pre)
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char

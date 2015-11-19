@@ -3304,7 +3304,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav
-;;; TODO: look into lisy's navigation. Maybe remove this section.
+;;; TODO: look into lispy's navigation. Maybe remove this section.
 ;;;-----------------------------------------------------------------------------
 (dolist (hook '(emacs-lisp-mode-hook
                 ielm-mode-hook))

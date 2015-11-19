@@ -453,10 +453,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
     (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
 
-  (with-eval-after-load "lisp-mode"
-    (when nil ;; trying lispy
-      ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
-      (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+  ;; (with-eval-after-load "lisp-mode"
+  ;;   (when nil ;; trying lispy
+  ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
+  ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
 ;; (with-eval-after-load "smartparens"
 ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
@@ -2081,17 +2081,17 @@ To make it human readable."
 ;;;--------------------------------------------------------------------
 ;;; Paredit
 ;;;--------------------------------------------------------------------
-;;(add-to-list 'load-path "~/.emacs.d/paredit")
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
-;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
+;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
+;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+;; (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+;; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+;; (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+;; ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
+;; ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
 
 (with-eval-after-load "paredit"
@@ -3193,8 +3193,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (add-hook 'slime-repl-mode-hook #'lispy-mode)
 
 (with-eval-after-load "lispy"
-  (lispy-set-key-theme '(special)) ;helps when using paredit with lispy.
-  ;; (lispy-set-key-theme '(special paredit c-digits))
+  ;; (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
+  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
 
   (setq lispy-avy-style-char 'pre)
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char
@@ -3203,22 +3203,22 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   ;; re-implementing `lispy-eval-and-insert' to always save excursion
   ;; whether it's on the left or right.
   (defun lispy-eval-and-insert (&optional arg)
-  "Eval last sexp and insert the result.
+    "Eval last sexp and insert the result.
 
 When ARG isn't nil, try to pretty print the sexp."
-  (interactive "P")
-  (let ((lispy-do-pprint arg))
-    (cl-labels
-        ((doit ()
-           (unless (or (lispy-right-p) (region-active-p))
-             (lispy-forward 1))
-           (let ((str (lispy--eval (lispy--string-dwim))))
-             (newline-and-indent)
-             (insert str)
-             (when (lispy-right-p)
-               (lispy-alt-multiline t)))))
-      (save-excursion
-        (doit)))))
+    (interactive "P")
+    (let ((lispy-do-pprint arg))
+      (cl-labels
+          ((doit ()
+                 (unless (or (lispy-right-p) (region-active-p))
+                   (lispy-forward 1))
+                 (let ((str (lispy--eval (lispy--string-dwim))))
+                   (newline-and-indent)
+                   (insert str)
+                   (when (lispy-right-p)
+                     (lispy-alt-multiline t)))))
+        (save-excursion
+          (doit)))))
 
   ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
   ;; whether that's acheieved via a barf or slurp.

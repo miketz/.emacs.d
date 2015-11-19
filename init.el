@@ -2967,8 +2967,9 @@ To make it human readable."
     (set-alist 'ivy-initial-inputs-alist 'counsel-M-x ""))
 
   ;; redefine `counsel--load-theme-action' to not require confirmation
-  ;; TODO: find an alternative to redefine so I don't have to manually sync
-  ;;       with latest version of the sync on package updates.
+  ;; TODO: find an alternative to redefine so I don't have to manually
+  ;;       merge with the latest version of `counsel--load-theme-action'
+  ;;       on package updates.
   (defun counsel--load-theme-action (x)
     "Disable current themes and load theme X."
     (condition-case nil

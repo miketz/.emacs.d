@@ -1022,6 +1022,7 @@ This prevents overlapping themes; something I would rarely want."
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64"))
                                          (sbcl ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
+                                         (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
                                          (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
     (when (eq my-curr-computer 'utilite)
       (setq slime-default-lisp 'ccl

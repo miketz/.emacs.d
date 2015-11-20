@@ -4,5 +4,5 @@
 # key: dfn
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if object_id('dbo.$1', 'FN') is not null
+if exists (select * from sys.objects where object_id = OBJECT_ID(N'[dbo].[$1]') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
     drop function dbo.${1:/*FuncName*/};$0

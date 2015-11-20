@@ -30,31 +30,13 @@
    '(ivy-current-match
      ((t (:background "black" :foreground "light sky blue"))))
 
-   '(js2-highlight-vars-face
-     ((t (:background "#69685E"))))
-
-   '(slime-repl-inputed-output-face
-     ((t (:foreground "light sky blue"))))
-
-   '(org-hide
-     ((t (:foreground "#5F5F5F"))))
-   '(my-tilde-face
-     ((t (:foreground "dark gray"))))
    '(aw-leading-char-face               ; ace-window character.
      ((t (:foreground "spring green"
                       :background "black"
                       :height 400       ; big font
                       ))))
    '(cursor ((t (:background "cyan"))))
-   '(hydra-face-red
-     ((t (:foreground "green" :bold t))))
-   '(hydra-face-blue
-     ((t (:foreground "cyan" :bold t))))
-   '(hydra-face-amaranth
-     ((t (:foreground "green" :bold t))))
 
-   `(font-lock-comment-face
-     ((t (:foreground "#8FB28F" :slant italic))))
    `(font-lock-comment-delimiter-face
      ((t (:foreground "darkolivegreen3"))))
 

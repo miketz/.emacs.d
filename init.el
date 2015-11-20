@@ -3273,7 +3273,8 @@ When ARG isn't nil, try to pretty print the sexp."
     (e end-of-buffer)
     (b beginning-of-buffer)
     (g Info-goto-node)
-    (s Info-search))
+    (s Info-search)
+    (SPC Info-scroll-up))
   ;; 3 ways to unbind keys:
   ;; global-unset-key
   ;; local-unset-key
@@ -3288,7 +3289,9 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "e") #'evil-forward-word-end)
     (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
     (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)
-    (define-key Info-mode-map (kbd "s") my-swoop-fn))
+    (define-key Info-mode-map (kbd "s") my-swoop-fn)
+    ;; TODO find out why the SPC is being over-written with the default
+    (evil-define-key 'normal Info-mode-map (kbd "SPC") 'avy-goto-word-1))
   ;;TODO: figure out how to bind gg for top.
   )
 

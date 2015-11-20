@@ -555,13 +555,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   ;; Make j/k movement keys go up/down accross wrapped lines.
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>")
-    'evil-next-visual-line)
+    #'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>")
-    'evil-next-visual-line)
+    #'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>")
-    'evil-previous-visual-line)
+    #'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>")
-    'evil-previous-visual-line)
+    #'evil-previous-visual-line)
   ;;(setq-default evil-cross-lines t) ;; Make horizontal movement cross lines
 
 
@@ -573,8 +573,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;; The key-chord package causes lag when a key of the chord is pressed.
   ;; So using the the built-in control chords which are fast. Better than the
   ;; awkward C-[ default.
-  ;; (evil-define-key 'insert global-map (kbd "C-n") 'evil-normal-state)
-  ;; (evil-define-key 'visual global-map (kbd "C-n") 'evil-exit-visual-state)
+  ;; (evil-define-key 'insert global-map (kbd "C-n") #'evil-normal-state)
+  ;; (evil-define-key 'visual global-map (kbd "C-n") #'evil-exit-visual-state)
 
 
   ;; For visual mode: press $ to go to the end of the line minus the newline char.
@@ -594,10 +594,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (evil-leader/set-key "d" #'delete-window)
   (evil-leader/set-key "k" #'kill-this-buffer)
 
-  (evil-leader/set-key "<" (lambda ()   ;shrink window a little
+  (evil-leader/set-key "<" (lambda ()        ;shrink window a little
                              (interactive)
                              (shrink-window-horizontally 15)))
-  (evil-leader/set-key ">" (lambda ()   ;widen window a little
+  (evil-leader/set-key ">" (lambda ()        ;widen window a little
                              (interactive)
                              (enlarge-window-horizontally 15)))
   ;; (evil-leader/set-key "j" (lambda ()
@@ -614,8 +614,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (evil-leader/set-key "f" (lambda ()
                                (interactive)
                                (let ((action (if (not-m isFrameMax-my)
-                                                 'max
-                                               'restore-curr-frame)))
+                                                 #'max
+                                               #'restore-curr-frame)))
                                  (my-w32-run action)))))
 
   ;;evalate lisp expression. Insert result on a new line.
@@ -644,13 +644,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
             (eval-last-sexp t)         ; t to insert result in buffer.
             (evil-normal-state))))))
 
-  (evil-leader/set-key "a" 'slime-eval-print-last-expression)
-  (evil-leader/set-key "p" (lambda ()
-                             (interactive)
-                             (save-excursion ;don't move the point
-                               (evil-append 1)
-                               (slime-pprint-eval-last-expression)
-                               (evil-normal-state)))))
+  ;; (evil-leader/set-key "a" 'slime-eval-print-last-expression)
+  ;; (evil-leader/set-key "p" (lambda ()
+  ;;                            (interactive)
+  ;;                            (save-excursion ;don't move the point
+  ;;                              (evil-append 1)
+  ;;                              (slime-pprint-eval-last-expression)
+  ;;                              (evil-normal-state))))
+  )
 
 
 ;;;----------------------------------
@@ -995,8 +996,8 @@ This prevents overlapping themes; something I would rarely want."
 
   (when my-use-evil-p
     ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") 'slime-edit-definition))
+    (evil-define-key 'normal slime-mode-map (kbd "M-.") #'slime-edit-definition) ;override evil's binding of M-. when using slime
+    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") #'slime-edit-definition))
 
   ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)
@@ -1114,11 +1115,11 @@ This prevents overlapping themes; something I would rarely want."
 
 (with-eval-after-load "company"
   (when my-use-evil-p
-    (define-key company-mode-map (kbd "C-SPC") 'company-complete)) ;C-Space like Visual Studio
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "\C-d") 'company-show-doc-buffer)
-  (define-key company-active-map (kbd "<tab>") 'company-complete) ;expands till -. Completes after that.
+    (define-key company-mode-map (kbd "C-SPC") #'company-complete)) ;C-Space like Visual Studio
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous)
+  (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)
+  (define-key company-active-map (kbd "<tab>") #'company-complete) ;expands till -. Completes after that.
   (define-key company-active-map (kbd "C-v") #'company-next-page) ;would be default, but my other keymap killed this
   (define-key company-active-map (kbd "M-v") #'company-previous-page) ;default, but set just in case.
   (define-key company-active-map (kbd "M-<") ;go to first candidate
@@ -1158,9 +1159,9 @@ This prevents overlapping themes; something I would rarely want."
       (defun company-maybe-turn-on-fci (&rest ignore)
         (when company-fci-mode-on-p (fci-mode 1)))
 
-      (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-      (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-      (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))))
+      (add-hook 'company-completion-started-hook #'company-turn-off-fci)
+      (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
+      (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci))))
 
 
 
@@ -1177,7 +1178,7 @@ This prevents overlapping themes; something I would rarely want."
               (set (make-local-variable 'company-backends)
                    '(company-web-html company-files))))
 
-  (define-key web-mode-map (kbd "C-SPC") 'company-web-html))
+  (define-key web-mode-map (kbd "C-SPC") #'company-web-html))
 
 
 ;;;---------------------------------------------
@@ -1276,7 +1277,7 @@ This prevents overlapping themes; something I would rarely want."
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (when my-use-evil-p
-   (define-key org-mode-map (kbd "M-h") 'evil-window-left)))
+   (define-key org-mode-map (kbd "M-h") #'evil-window-left)))
 
 ;;;-----------------------------------------
 ;;; worf. key shortcuts for org-mode
@@ -1388,7 +1389,7 @@ This prevents overlapping themes; something I would rarely want."
   ;;js2 steals M-j keybinding by default. Reclaim it.
   (when my-use-evil-p
     (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
-    (evil-define-key 'normal js2-mode-map (kbd "M-n") 'js2-next-error)
+    (evil-define-key 'normal js2-mode-map (kbd "M-n") #'js2-next-error)
     (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
                                                         (interactive)
                                                         (js2-next-error -1))))
@@ -1472,19 +1473,19 @@ This prevents overlapping themes; something I would rarely want."
   ;;   (add-to-list 'web-beautify-args "-m")
   ;;   )
   (with-eval-after-load "js2-mode"
-    (define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+    (define-key js2-mode-map (kbd "C-c b") #'web-beautify-js))
   ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
   (with-eval-after-load "js"
-    (define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+    (define-key js-mode-map (kbd "C-c b") #'web-beautify-js))
 
   (with-eval-after-load "json-mode"
-    (define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+    (define-key json-mode-map (kbd "C-c b") #'web-beautify-js))
 
   ;; (with-eval-after-load "sgml-mode"
-  ;;   (define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+  ;;   (define-key html-mode-map (kbd "C-c b") #'web-beautify-html))
 
   ;; (with-eval-after-load "css-mode"
-  ;;   (define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+  ;;   (define-key css-mode-map (kbd "C-c b") #'web-beautify-css))
   )
 ;; put the following JSON text into a .jsbeautifyrc file to control formatting
 ;; of external program js-beatify.
@@ -1675,8 +1676,8 @@ To make it human readable."
 ;;;----------------------------------
 ;; (eval-after-load 'company
 ;;   '(progn
-;;      (define-key company-mode-map (kbd "C-SPC") 'helm-company)
-;;      (define-key company-active-map (kbd "C-SPC") 'helm-company)))
+;;      (define-key company-mode-map (kbd "C-SPC") #'helm-company)
+;;      (define-key company-active-map (kbd "C-SPC") #'helm-company)))
 
 ;;;----------------------------------
 ;;; evil-escape
@@ -1695,8 +1696,8 @@ To make it human readable."
 ;;   (ad-activate 'helm-git-grep))
 
 ;; (require 'helm-git-grep)
-;; (define-key helm-git-grep-mode-map (kbd "C-u") 'helm-toggle-suspend-update)
-;; (evil-leader/set-key "g" 'helm-git-grep)
+;; (define-key helm-git-grep-mode-map (kbd "C-u") #'helm-toggle-suspend-update)
+;; (evil-leader/set-key "g" #'helm-git-grep)
 
 
 ;;;--------------------
@@ -1720,9 +1721,9 @@ To make it human readable."
   (when my-use-evil-p
    (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
-;; (global-set-key (kbd "C-c s") 'helm-swoop)
-;; (global-set-key (kbd "C-c C-s") 'helm-swoop)
-;;(evil-leader/set-key "s" 'helm-multi-swoop-all)
+;; (global-set-key (kbd "C-c s") #'helm-swoop)
+;; (global-set-key (kbd "C-c C-s") #'helm-swoop)
+;;(evil-leader/set-key "s" #'helm-multi-swoop-all)
 
 (with-eval-after-load "helm-swoop"
   ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
@@ -1730,14 +1731,14 @@ To make it human readable."
         (lambda () ""))
 
   ;; Change keybinds to whatever you like :)
-  ;; (global-set-key (kbd "M-i") 'helm-swoop)
-  ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-  ;; (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
-  ;; (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
+  ;; (global-set-key (kbd "M-i") #'helm-swoop)
+  ;; (global-set-key (kbd "M-I") #'helm-swoop-back-to-last-point)
+  ;; (global-set-key (kbd "C-c M-i") #'helm-multi-swoop)
+  ;; (global-set-key (kbd "C-x M-i") #'helm-multi-swoop-all)
 
   ;; When doing isearch, hand the word over to helm-swoop
-  ;; (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
-  ;; (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+  ;; (define-key isearch-mode-map (kbd "M-i") #'helm-swoop-from-isearch)
+  ;; (define-key helm-swoop-map (kbd "M-i") #'helm-multi-swoop-all-from-helm-swoop)
 
   ;; Save buffer when helm-multi-swoop-edit complete
   ;; (setq helm-multi-swoop-edit-save t)
@@ -1767,8 +1768,8 @@ To make it human readable."
 ;;; Clippy. pop-up help
 ;;;---------------------
 (when my-use-evil-p
-  (evil-leader/set-key "c" 'clippy-describe-function)
-  (evil-leader/set-key "v" 'clippy-describe-variable))
+  (evil-leader/set-key "c" #'clippy-describe-function)
+  (evil-leader/set-key "v" #'clippy-describe-variable))
 ;; (evil-leader/set-key "n"
 ;;   (lambda ()
 ;;     (interactive)
@@ -1805,9 +1806,9 @@ To make it human readable."
 
   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
   ;;                   ; when Smex is auto-initialized on its first run.
-  (global-set-key (kbd "M-x") 'smex)
-  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-  (global-set-key (kbd "C-c M-x") 'execute-extended-command) ; rebind the original M-x command
+  (global-set-key (kbd "M-x") #'smex)
+  (global-set-key (kbd "M-X") #'smex-major-mode-commands)
+  (global-set-key (kbd "C-c M-x") #'execute-extended-command) ; rebind the original M-x command
 
   ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
   ;; other modes load ido, inadvertently turning on ido-ubiquitous even
@@ -2153,17 +2154,17 @@ To make it human readable."
       ;;(define-key omnisharp-mode-map (kbd "C-SPC") 'omnisharp-auto-complete) ;C-Space like Visual Studio
 
       (evil-define-key 'normal omnisharp-mode-map
-        (kbd "g u") 'omnisharp-find-usages)
+        (kbd "g u") #'omnisharp-find-usages)
       (evil-define-key 'normal omnisharp-mode-map
-        (kbd "g o") 'omnisharp-go-to-definition)
+        (kbd "g o") #'omnisharp-go-to-definition)
       (evil-define-key 'normal omnisharp-mode-map
-        (kbd "g i") 'omnisharp-find-implementations)
+        (kbd "g i") #'omnisharp-find-implementations)
       (evil-define-key 'normal omnisharp-mode-map
-        (kbd "g r") 'omnisharp-run-code-action-refactoring)
+        (kbd "g r") #'omnisharp-run-code-action-refactoring)
       (evil-define-key 'normal omnisharp-mode-map
-        (kbd "g f") 'omnisharp-fix-code-issue-at-point)
+        (kbd "g f") #'omnisharp-fix-code-issue-at-point)
       (evil-define-key 'normal omnisharp-mode-map
-        (kbd "g R") 'omnisharp-rename)
+        (kbd "g R") #'omnisharp-rename)
 
       ;; (evil-define-key 'normal omnisharp-mode-map
       ;;   (kbd ", i") 'omnisharp-current-type-information)
@@ -2240,8 +2241,8 @@ To make it human readable."
 ;;;--------------------
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 (global-set-key (kbd "M-g M-g") #'avy-goto-line)
-;; (define-key evil-normal-state-map (kbd "s") 'avy-goto-char-2) ;like vim sneak.
-;; (define-key evil-motion-state-map (kbd "s") 'avy-goto-char-2)
+;; (define-key evil-normal-state-map (kbd "s") #'avy-goto-char-2) ;like vim sneak.
+;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
 (when my-use-evil-p
   (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
   (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1))
@@ -2296,11 +2297,11 @@ To make it human readable."
     ;; TODO: test this binding
     (define-key woman-mode-map (kbd "o") #'ace-link-woman))
   (with-eval-after-load "eww"
-    (evil-define-key 'normal eww-link-keymap (kbd "o") 'ace-link-eww)
-    (evil-define-key 'normal eww-mode-map (kbd "o") 'ace-link-eww))
+    (evil-define-key 'normal eww-link-keymap (kbd "o") #'ace-link-eww)
+    (evil-define-key 'normal eww-mode-map (kbd "o") #'ace-link-eww))
   (with-eval-after-load 'cus-edit
     ;; TODO: test this binding
-    (evil-define-key 'normal custom-mode-map (kbd "o") 'ace-link-custom)))
+    (evil-define-key 'normal custom-mode-map (kbd "o") #'ace-link-custom)))
 
 ;;;--------------------
 ;;; Ace jump mode
@@ -2318,7 +2319,7 @@ To make it human readable."
 (unless (eq my-ui-type 'emacs)
   ;; this is the emacs "copy" keybind, so only don't steal it when using emacs
   ;; bindings.
-  (global-set-key (kbd "M-w") 'ace-window))
+  (global-set-key (kbd "M-w") #'ace-window))
 
 (with-eval-after-load "ace-window"
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
@@ -2328,7 +2329,7 @@ To make it human readable."
 ;;;--------------------
 ;;; ace-jump-zap
 ;;;--------------------
-;; (global-set-key (kbd "M-z") 'ace-jump-zap-to-char)
+;; (global-set-key (kbd "M-z") #'ace-jump-zap-to-char)
 
 ;;;--------------------
 ;;; clang-format
@@ -2729,16 +2730,16 @@ To make it human readable."
 ;;; ediff
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "ediff"
-  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq ediff-split-window-function #'split-window-horizontally)
   ;; don't use the popup window
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain) ;'ediff-setup-windows-multiframe
+  (setq ediff-window-setup-function #'ediff-setup-windows-plain) ;'ediff-setup-windows-multiframe
   )
 
 ;;;-----------------------------------------------------------------------------
 ;;; helm-w32-launcher. Microsoft Windows only?
 ;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
-  (global-set-key (kbd "C-c w") 'helm-w32-launcher))
+  (global-set-key (kbd "C-c w") #'helm-w32-launcher))
 
 ;;;-----------------------------------------------------------------------------
 ;;; leerzeichen. Displays symbols for tab, space, and newline.
@@ -3022,7 +3023,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
                             "Mode: "
                             (mapcar (lambda (e)
                                       (list (symbol-name e)))
-                                    (apropos-internal "-mode$" 'commandp))
+                                    (apropos-internal "-mode$" #'commandp))
                             nil t))))
     (with-current-buffer buf-clone
       (narrow-to-region start end)
@@ -3039,7 +3040,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
                        "Mode: "
                        (mapcar (lambda (e)
                                  (list (symbol-name e)))
-                               (apropos-internal "-mode$" 'commandp))
+                               (apropos-internal "-mode$" #'commandp))
                        nil t))))
     (narrow-to-region start end)
     (funcall mode)))
@@ -3291,7 +3292,7 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)
     (define-key Info-mode-map (kbd "s") my-swoop-fn)
     ;; TODO find out why the SPC is being over-written with the default
-    (evil-define-key 'normal Info-mode-map (kbd "SPC") 'avy-goto-word-1))
+    (evil-define-key 'normal Info-mode-map (kbd "SPC") #'avy-goto-word-1))
   ;;TODO: figure out how to bind gg for top.
   )
 
@@ -3401,9 +3402,9 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key evil-insert-state-map esc #'evil-normal-state)
     (define-key evil-visual-state-map esc #'evil-exit-visual-state)
     (define-key evil-normal-state-map esc #'evil-force-normal-state)
-    (define-key evil-ex-completion-map esc 'abort-recursive-edit)
+    (define-key evil-ex-completion-map esc #'abort-recursive-edit)
     (define-key evil-read-key-map esc #'keyboard-quit)
-    (define-key evil-replace-state-map esc 'evil-normal-state)))
+    (define-key evil-replace-state-map esc #'evil-normal-state)))
 (with-eval-after-load "helm"
   (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
 (with-eval-after-load "ivy"
@@ -3615,20 +3616,20 @@ When ARG isn't nil, try to pretty print the sexp."
  ((eq my-curr-computer 'work-laptop)
   (setq ;;browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
    browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-   browse-url-browser-function 'browse-url-generic))
+   browse-url-browser-function #'browse-url-generic))
 
  ((eq my-curr-computer 'hp-tower-2009)
   (setq browse-url-generic-program "conkeror"
-        browse-url-browser-function 'browse-url-generic))
+        browse-url-browser-function #'browse-url-generic))
 
  ((eq my-curr-computer 'a-laptop-faster)
   (setq browse-url-generic-program "conkeror"
-        browse-url-browser-function 'browse-url-generic))
+        browse-url-browser-function #'browse-url-generic))
 
  ((or (eq my-curr-computer 'raspberry-pi)
       (eq my-curr-computer 'utilite))
   (setq browse-url-generic-program "surf"
-        browse-url-browser-function 'browse-url-generic)))
+        browse-url-browser-function #'browse-url-generic)))
 
 
 ;; (defun my-insert-img ()
@@ -3674,7 +3675,7 @@ When ARG isn't nil, try to pretty print the sexp."
   )
 
 ;;ibuffer. the way C-x C-b should be.
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "C-x C-b") #'ibuffer)
 
 
 
@@ -3762,7 +3763,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (progn ;; tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.
   (setq-default tab-width my-indent-width)
-  (setq-default indent-line-function 'insert-tab))
+  (setq-default indent-line-function #'insert-tab))
 
 (progn ;; for better or worse, prevent creation of tmp backup files
   (setq make-backup-files nil)          ;No annoying backup files

@@ -1942,7 +1942,7 @@ To make it human readable."
 
               ;; highlight escapes in the printf format string.
               ;; TODO: highlight placeholders %d differently than escapes \n
-              (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
+              ;; (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
 
               ;; set to 1 so comments on the same line are kept close to the code by default.
               (setq comment-column 1)   ; buffer local

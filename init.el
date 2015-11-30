@@ -329,7 +329,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     flx-ido
     ov
     highlight-tail
-    function-args)
+    function-args
+    highlight-indent-guides)
   "Packages I use from elpa/melpa.")
 
 
@@ -3553,9 +3554,16 @@ When ARG isn't nil, try to pretty print the sexp."
 
 
 ;;;-----------------------------------------------------------------------------
+;;; highlight-indent-guides
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "highlight-indent-guides"
+  (set-face-background 'highlight-indent-guides-odd-face "black")
+  (set-face-background 'highlight-indent-guides-even-face "navy blue"))
+
+;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
-(when (and nil ;don't start server for now.
+(when (and nil   ;don't start server for now.
            ;;`server-start' doesn't seemt to work on MS-windows?
            (eq system-type 'gnu/linux))
   (server-start))

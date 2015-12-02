@@ -165,6 +165,14 @@
   (shrink-window-horizontally 24)
   (eww-open-file "c:/users/mtz/downloads/tutorials/practicalcommonlisp_epub/html/index.html"))
 
+(defun proj-tcpl ()
+  (interactive)
+  (find-file-existing "c:/users/mtz/scratch/test5/test.c")
+  (split-window-horizontally)
+  (shrink-window-horizontally 24)
+  (other-window 1)
+  (eshell))
+
 (defun proj-cpp ()
   (interactive)
   (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))

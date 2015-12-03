@@ -1928,6 +1928,32 @@ To make it human readable."
   (setq-default c-electric-flag t)
   (setq-default c-electric-pound-behavior '(alignleft))
 
+  (defun my-linux-tabs-toggle ()
+    "Choose a tabbing style.
+The variables set are buffer local.
+Call with a C-u prefix to modify the buffer via `tabify' or `untabify'
+and indent."
+    (interactive)
+    (let ((mutate-buffer-p (equal current-prefix-arg '(4)))
+          (tab-style (intern (completing-read "tabbing style: "
+                                              '("mine" "linux")))))
+      (cond ((eq tab-style 'mine)
+             (setq c-basic-offset 4)
+             (setq tab-width 4)
+             (setq indent-tabs-mode nil)
+             (when mutate-buffer-p
+               (mark-whole-buffer)
+               (call-interactively #'untabify)))
+            ((eq tab-style 'linux)
+             (setq c-basic-offset 8)
+             (setq tab-width 8)
+             (setq indent-tabs-mode t)
+             (when mutate-buffer-p
+               (mark-whole-buffer)
+               (call-interactively #'tabify))))
+      (when mutate-buffer-p
+        (indent-region (point-min) (point-max)))))
+
   ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
   ;; And if you the functions fit on screen then it's just wasted modeline space.
   ;; As an alternative use `beginning-of-defun' C-M-a to jump to the function name.

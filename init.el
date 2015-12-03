@@ -3635,7 +3635,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (cond
  ((eq my-curr-computer 'work-laptop)
   (setq ;;browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
-   browse-url-generic-program "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+   browse-url-generic-program "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
    browse-url-browser-function #'browse-url-generic))
 
  ((eq my-curr-computer 'hp-tower-2009)

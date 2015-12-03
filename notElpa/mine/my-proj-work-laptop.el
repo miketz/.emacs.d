@@ -147,6 +147,7 @@
 
 (defun proj-imgtag ()
   (interactive)
+  (delete-other-windows)
   (let* ((root "C:\\Users\\mtz\\scratch\\ImgDragAndDrop\\")
          (html (concat root "test.html"))
          (css (concat root "test.css"))
@@ -159,6 +160,7 @@
 
 (defun proj-pcl ()
   (interactive)
+  (delete-other-windows)
   (switch-to-buffer "pcl-test")
   ;; (common-lisp-mode)
   (split-window-horizontally)
@@ -167,6 +169,7 @@
 
 (defun proj-tcpl ()
   (interactive)
+  (delete-other-windows)
   (find-file-existing "c:/users/mtz/scratch/test5/test.c")
   (split-window-horizontally)
   (shrink-window-horizontally 24)

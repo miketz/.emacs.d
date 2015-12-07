@@ -1146,23 +1146,7 @@ This prevents overlapping themes; something I would rarely want."
   (setq company-idle-delay nil)         ;disable automatic completion
   (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
   (setq company-tooltip-limit 20)        ;popup more suggestions.
-
-  (when nil
-    (progn ;work-around issue where `fill-column-indicator' moves suggestion box.
-      ;;TODO: handle for auto-complete too. It's on emacs.stackexchange.
-      (defvar-local company-fci-mode-on-p nil)
-
-      (defun company-turn-off-fci (&rest ignore)
-        (when (boundp 'fci-mode)
-          (setq company-fci-mode-on-p fci-mode)
-          (when fci-mode (fci-mode -1))))
-
-      (defun company-maybe-turn-on-fci (&rest ignore)
-        (when company-fci-mode-on-p (fci-mode 1)))
-
-      (add-hook 'company-completion-started-hook #'company-turn-off-fci)
-      (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
-      (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci))))
+  )
 
 
 
@@ -2819,14 +2803,31 @@ and indent."
   (setq fci-rule-column 80)
   (setq fci-rule-width 1)
   (progn
-    (setq fci-dash-pattern 0.5)   ;length of the dash 0 to 1
+    (setq fci-dash-pattern 0.5)   ;; length of the dash 0 to 1
     (setq fci-rule-use-dashes t))
-  (setq fci-rule-color "#555555") ;tailored for zenburn ATM.
+  (setq fci-rule-color "#555555") ;; tailored for zenburn ATM.
 
   (defun my-fci-refresh ()
     (interactive)
     (fci-mode 0)
-    (fci-mode 1)))
+    (fci-mode 1))
+
+  (progn ;work-around issue where `fill-column-indicator' moves company
+    ;; suggestion box.
+    ;; TODO: handle for auto-complete too. It's on emacs.stackexchange.
+    (defvar-local company-fci-mode-on-p nil)
+
+    (defun company-turn-off-fci (&rest ignore)
+      (when (boundp 'fci-mode)
+        (setq company-fci-mode-on-p fci-mode)
+        (when fci-mode (fci-mode -1))))
+
+    (defun company-maybe-turn-on-fci (&rest ignore)
+      (when company-fci-mode-on-p (fci-mode 1)))
+
+    (add-hook 'company-completion-started-hook #'company-turn-off-fci)
+    (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
+    (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci)))
 
 ;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
 ;; ;;TODO: it doesn't seem to be working!

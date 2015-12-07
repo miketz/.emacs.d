@@ -1959,9 +1959,8 @@ and indent."
 
               (flycheck-mode 1)
 
-              (fci-mode)
+              ;; (fci-mode)
 
-              ;;(flycheck-mode 1)
               ;; (electric-spacing-mode 1)
               ))
 

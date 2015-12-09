@@ -168,9 +168,9 @@ Specific configs may be made based on the computer.")
 (defvar my-indent-width 4
   "An omni-variable serving 3 related purposes.
 Becuase I want them to have same value.
--Preferred indent width for C-like languages.
+-Preferred indent width for C-like languages. `c-basic-offset' `js2-basic-offset'
 -Number of spaces for a tab.
--How many columns to show for a 'real' tab.")
+-How many columns to show for a 'real' tab. `tab-width'")
 
 (defvar my-graphic-p (display-graphic-p)
   "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")

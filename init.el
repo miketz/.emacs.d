@@ -141,7 +141,7 @@ Useful to check a boolean state and toggle the state in 1 go."
 
 ;; Keeping track of the various computers I use emacs on.
 (defvar my-computers
-  '(unknown        ; if my-curr-computer.txt does not exist
+  '(unknown ;; if my-curr-computer.txt does not exist
     work-laptop
     raspberry-pi
     utilite
@@ -150,7 +150,8 @@ Useful to check a boolean state and toggle the state in 1 go."
     a-laptop-old
     a-laptop-faster
     leyna-laptop
-    hp-tower-2009)
+    hp-tower-2009
+    wild-dog)
   "The computers I use Emacs on.  Specific configurations may be made for some computers.")
 
 ;; currently used computer. (manually set)

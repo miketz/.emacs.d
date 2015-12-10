@@ -346,7 +346,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     ov
     highlight-tail
     function-args
-    highlight-indent-guides)
+    highlight-indent-guides
+    ace-link)
   "Packages I use from elpa/melpa.")
 
 

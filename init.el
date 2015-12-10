@@ -61,6 +61,22 @@
 
 ;;; Code:
 
+(progn ;; JUMPrestore
+  ;; tricks to improve startup time.
+  ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+  ;; TODO: verify exactly how much these help.
+
+  (setq gc-cons-threshold-backup gc-cons-threshold)
+  (setq gc-cons-threshold 100000000)
+
+  (setq file-name-handler-alist-backup file-name-handler-alist)
+  (setq file-name-handler-alist nil)
+
+  ;; restore original values at end of init.el.
+  ;; sort of like my own dynamic binding. I dont' want to wrap the entire
+  ;; config in a giant let.
+  )
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -4030,5 +4046,11 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;                          nil ;; all frames
 ;;                          :weight 'normal))
 ;;    (face-list)))
+
+
+(progn ;; JUMPrestore. restore values is set earlier for startup time.
+  (setq file-name-handler-alist file-name-handler-alist-backup)
+  (setq gc-cons-threshold gc-cons-threshold-backup))
+
 
 ;;; init.el ends here

@@ -288,7 +288,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     monokai-theme
     tronesque-theme
     gandalf-theme
-    color-theme-sanityinc-tomorrow
+    ;;color-theme-sanityinc-tomorrow
     grandshell-theme
     tommyh-theme
     majapahit-theme
@@ -302,7 +302,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     magit
     vimrc-mode
     sicp
-    neotree
+    ;;neotree
     num3-mode
     powershell
     irony
@@ -313,7 +313,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     helm-w32-launcher
     sx
     leerzeichen
-    sql-indent
+    ;;sql-indent
     darkroom
     ;;vim-empty-lines-mode
     fill-column-indicator

@@ -1981,6 +1981,10 @@ and indent."
               ;; (electric-spacing-mode 1)
               ))
 
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (highlight-indent-guides-mode 1)))
+
 
   (add-hook 'c-initialization-hook
             (lambda ()

@@ -281,7 +281,6 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     ;;multiple-cursors
     ;;omnisharp
     zenburn-theme
-    hc-zenburn-theme
     niflheim-theme
     gruvbox-theme
     badger-theme

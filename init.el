@@ -3605,8 +3605,9 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; highlight-indent-guides
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "highlight-indent-guides"
-  (set-face-background 'highlight-indent-guides-odd-face "black")
-  (set-face-background 'highlight-indent-guides-even-face "navy blue"))
+  ;; colors tailored for zenburn
+  (set-face-background 'highlight-indent-guides-odd-face "#40403A")
+  (set-face-background 'highlight-indent-guides-even-face "#393939"))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

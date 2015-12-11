@@ -531,15 +531,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;--------------------------------------------------------------------
 ;;; evil
 ;;;--------------------------------------------------------------------
-
-;; keeping evil turned off by default now.
-;; Enable evil explicitly for certain modes or file types.
-;; (add-hook 'prog-mode-hook #'evil-local-mode)
-
-
-(when my-use-evil-p
-  (evil-mode 1)) ;; enable globally
-
 (with-eval-after-load "evil"
 
   (when my-graphic-p
@@ -670,6 +661,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;                              (slime-pprint-eval-last-expression)
   ;;                              (evil-normal-state))))
   )
+
+;; keeping evil turned off by default now.
+;; Enable evil explicitly for certain modes or file types.
+;; (add-hook 'prog-mode-hook #'evil-local-mode)
+
+(when my-use-evil-p
+  (evil-mode 1)) ;; enable globally
+
 
 
 ;;;----------------------------------

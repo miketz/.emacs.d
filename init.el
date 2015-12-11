@@ -454,8 +454,6 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 (when my-use-evil-p
 
-  (key-chord-mode 1)                    ; autoloaded function
-
   (with-eval-after-load "key-chord"
     (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
     (setq key-chord-one-key-delay 0.4))
@@ -477,9 +475,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
   ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
-;; (with-eval-after-load "smartparens"
-;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
-;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+  ;; (with-eval-after-load "smartparens"
+  ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
+  ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+
+  (key-chord-mode 1) ;; autoloaded function
   )
 
 

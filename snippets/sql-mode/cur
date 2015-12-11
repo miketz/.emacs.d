@@ -9,7 +9,7 @@
 declare @${1:fetchVar} ${2:type};
 declare ${3:cur} cursor for
     ${4:/*query*/}
-open cur
+open $3
 fetch next from $3 into @$1
 while @@fetch_status = 0
 begin

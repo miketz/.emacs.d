@@ -1275,7 +1275,7 @@ This prevents overlapping themes; something I would rarely want."
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
   (when (eq my-curr-computer 'work-laptop)
-    (setq org-agenda-files '("C:/Users/mtz/TODO.org")))
+    (setq org-agenda-files '("C:/Users/mtz/TODO/TODO.org")))
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (when my-use-evil-p

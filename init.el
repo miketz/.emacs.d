@@ -326,7 +326,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     swiper
     counsel
     color-identifiers-mode
-    svg-mode-line-themes ;; only works on gnu/linux
+    ;;svg-mode-line-themes ;; only works on gnu/linux
     smex
     avy
     helm-flycheck

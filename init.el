@@ -541,7 +541,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (evil-mode 1)) ;; enable globally
 
 (with-eval-after-load "evil"
-  (progn
+
+  (when my-graphic-p
     ;;prevent minibuffer spam when switching modes.
     ;;Cursor style/color is sufficient to determine mode.
     (setq evil-insert-state-message nil)
@@ -552,11 +553,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (setq evil-operator-state-message nil)
     (setq evil-replace-state-message nil)
 
-    (when my-graphic-p
-      ;;Don't waste mode line space displaying Evil-states.
-      ;;Cursor style/color is sufficient to determine mode.
-      ;;but if in a terminal without cursor styles then allow it to exist.
-      (setq evil-mode-line-format nil)))
+    ;;Don't waste mode line space displaying Evil-states.
+    ;;Cursor style/color is sufficient to determine mode.
+    ;;but if in a terminal without cursor styles then allow it to exist.
+    (setq evil-mode-line-format nil))
 
 
   (setq evil-default-cursor t)

@@ -308,7 +308,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     company-irony
     flycheck-irony
     rtags
-    aggressive-indent
+    ;;aggressive-indent
     helm-w32-launcher
     sx
     leerzeichen

@@ -965,8 +965,10 @@ This prevents overlapping themes; something I would rarely want."
      ;;                        :height 155
      ;;                        :width normal))))
      )
-    (when my-graphic-p ;this doens't return true for emacs daemon!
-      (my-color-zenburn))))
+    (when my-graphic-p     ;this doens't return true for emacs daemon!
+      (my-color-zenburn)))
+
+   (t (load-theme 'zenburn t)))
 
 
   ;; (let ((a 92)) ;92

@@ -325,7 +325,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     bug-hunter
     swiper
     counsel
-    apel ;; counsel functions don't work without this lib.
+    apel ;; counsel functions don't work without this lib. TODO: figure out why dependent packs don't auto-download.
     color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex

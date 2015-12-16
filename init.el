@@ -930,6 +930,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;theme of the week and corresponding settings. This may change often.
 (progn
   (cond
+   ((eq my-curr-computer 'wild-dog)
+    (when my-graphic-p
+      (my-color-zenburn)))
+
    ((or (eq my-curr-computer 'work-laptop)
         (eq my-curr-computer 'leyna-laptop)
         (eq my-curr-computer 'a-laptop-old))

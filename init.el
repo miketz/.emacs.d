@@ -1990,7 +1990,13 @@ and indent."
 
   (add-hook 'c-mode-hook
             (lambda ()
-              (highlight-indent-guides-mode 1)))
+              (highlight-indent-guides-mode 1)
+
+              (progn ;; use linux style tabbing/indentation for C
+                ;; these values should be buffer local.
+                (setq c-basic-offset 8)
+                (setq tab-width 8)
+                (setq indent-tabs-mode t))))
 
 
   (add-hook 'c-initialization-hook

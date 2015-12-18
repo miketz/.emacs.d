@@ -5,6 +5,12 @@
 
   (custom-theme-set-faces
    'grandshell
+
+   `(font-lock-comment-face
+     ((t (:foreground "gray50" :slant italic))))
+   `(font-lock-comment-delimiter-face
+     ((t (:foreground "gray50"))))
+
    ;;This isn't a js2 error face. But externals tend to be an error since js2 doesn't find the them.
    '(js2-external-variable ((t :underline (:color "red" :style wave)
                                :background "black")))

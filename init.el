@@ -1044,6 +1044,10 @@ This prevents overlapping themes; something I would rarely want."
   ;;         (insert welcome)))))
 
   (progn
+    (when (eq my-curr-computer 'wild-dog)
+      (setq slime-default-lisp 'ccl
+            slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64")))))
+
     (when (eq my-curr-computer 'work-laptop)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64"))

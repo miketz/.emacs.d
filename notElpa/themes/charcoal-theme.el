@@ -19,6 +19,11 @@
    ;; TODO
    `(default ((t (:foreground ,charcoal-fg :background ,charcoal-bg))))
 
+   '(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))
+
    ;; TODO
    `(fringe ((t (:background "black"))))
 

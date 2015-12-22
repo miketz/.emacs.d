@@ -11,7 +11,7 @@
 
 ;;background: #35352B #000000
 (let ((charcoal-bg "#35352B")
-      (charcoal-fg "snow3" ;gray80 lightyellow3
+      (charcoal-fg "lightyellow3" ;snow3 gray80 lightyellow3
        ))
   (custom-theme-set-faces
    'charcoal
@@ -23,6 +23,9 @@
                                   :bold t
                                   :strike-through t
                                   :background nil))))
+   ;; TODO
+   '(region
+     ((t (:background "#49483E"))))     ;69685E
 
    ;; TODO
    `(fringe ((t (:background "black"))))

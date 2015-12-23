@@ -12,17 +12,18 @@
                                   :bold t
                                   :strike-through t
                                   :background nil))))
-   `(font-lock-comment-face
-     ((t (:foreground "#66A555"))))
+   ;; `(font-lock-comment-face
+   ;;   ((t (:foreground "#66A555"))))
    `(fringe
      ((t (:foreground "burlywood"
                       :background "black"))))
-   `(mode-line
-     ((t (:foreground "#00AF00";"#A08F10"
-                      :background "#150505"
-                      :box (:line-width -1 :style released-button)))
-      (t :inverse-video t)))
-   `(mode-line-inactive
-     ((t (:foreground "dark gray"
-                      :background "#051515"
-                      :box (:line-width -1 :style pressed-button)))))))
+   ;; `(mode-line
+   ;;   ((t (:foreground "#00AF00"         ;"#A08F10"
+   ;;                    :background "#150505"
+   ;;                    :box (:line-width -1 :style released-button)))
+   ;;    (t :inverse-video t)))
+   ;; `(mode-line-inactive
+   ;;   ((t (:foreground "dark gray"
+   ;;                    :background "#051515"
+   ;;                    :box (:line-width -1 :style pressed-button)))))
+   ))

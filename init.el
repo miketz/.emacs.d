@@ -325,11 +325,12 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     speed-type
     bug-hunter
     swiper
+    flx ;; can be used by ivy for ordering flx matches.
     counsel
     apel ;; counsel functions don't work without this lib. TODO: figure out why dependent packs don't auto-download.
     color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
-    smex
+    smex ;; can be used by `counsel-M-x'
     avy
     helm-flycheck
     lispy

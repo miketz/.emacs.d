@@ -75,6 +75,10 @@
    '(hydra-face-amaranth
      ((t (:foreground "green" :bold t))))
 
+   ;; used by lisp doc strings
+   ;; `(font-lock-doc-face ((t (:inherit font-lock-keyword-face :weight normal))))
+   ;; `(font-lock-doc-face ((t (:foreground "moccasin"))))
+
    `(font-lock-comment-face
      ((t (:foreground "#8FB28F" :slant italic))))
    `(font-lock-comment-delimiter-face

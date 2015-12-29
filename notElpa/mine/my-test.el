@@ -20,7 +20,8 @@ Controls the output in a standard way for tests.
 Adds some book keeping so it can be included in a global run of all tests."
   (declare (indent defun))
   ;; automaticall add test to the list
-  (add-to-list 'my-test-funcs name)
+  (when (not (member name my-test-funcs))
+    (add-to-list 'my-test-funcs name))
   ;; expands into a regular function.
   `(defun ,name ()
      (interactive)

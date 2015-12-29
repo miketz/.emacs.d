@@ -1023,7 +1023,17 @@ This prevents overlapping themes; something I would rarely want."
   (when my-use-evil-p
     ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
     (evil-define-key 'normal slime-mode-map (kbd "M-.") #'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") #'slime-edit-definition))
+    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") #'slime-edit-definition)
+
+    ;; (progn
+    ;;   ;; For evil, attempting to get C-n, C-p to move selection in slimes fuzzy completions window.
+    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map (kbd "C-p") #'slime-fuzzy-prev)
+    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map (kbd "C-p") #'slime-fuzzy-prev)
+    ;;   (define-key slime-fuzzy-completions-mode-map (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (define-key slime-target-buffer-fuzzy-completions-map (kbd "C-n") #'slime-fuzzy-next))
+    )
 
   ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)

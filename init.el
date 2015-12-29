@@ -237,7 +237,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 
 ;; TODO: specify if it should use elpa or melpa version of a package.
 (defvar my-packages
-  `(evil
+  `(s ;; string library
+    evil
     evil-leader
     ;;evil-escape
     ;;evil-matchit

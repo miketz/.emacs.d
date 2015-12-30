@@ -731,15 +731,20 @@ Minus the newline char."
     '((inconsolata "Inconsolata" 135 normal) ; looks OK. fits a good number of
                                              ; lines on screen. flaky on bold.
                                              ; no itallic?
-      (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
-      (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
+      (consolas "Consolas" 125 normal) ; consolas is the best looking but fits
+                                       ; fewer lines on screen.
+      (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ; good, but looks a
+                                                           ; bit "tall"
       (fixedsys "FixedSys" 120 normal)))
 
-  (cl-defun my-set-font (&optional &key
-                                   (sym nil) (height nil) (weight nil) (resize-window nil))
+  (cl-defun my-set-font (&optional
+                         &key
+                         (sym nil) (height nil) (weight nil)
+                         (resize-window nil))
     "Sets the font.
 If sym is not specified it uses the configured default set in `my-default-font'.
-If height or weight are not specified then it uses the configured defaults in `my-good-fonts'.
+If height or weight are not specified then it uses the configured defaults
+in `my-good-fonts'.
 Resize-window = t will adjust the window so the modeline fits on screen, etc."
     (unless sym (setq sym my-default-font))
     (let ((the-font (assoc sym my-good-fonts)))
@@ -768,14 +773,16 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
     (let* ((curr-size (if my-curr-font-size ;; use cached value if it's set
                           my-curr-font-size
                         (face-attribute 'default :height (selected-frame))))
-           (step (if bigger-p 1 -1)) ;; TODO: calculate "threshold" step increment.
+           (step (if bigger-p 1 -1)) ;; TODO: calculate "threshold" step
+                                     ;;       increment.
            (new-size (+ curr-size step)))
 
       (custom-set-faces
        `(default
           ((t (:height ,new-size)))))
 
-      ;; must cache the new value becuase :height does not acutally inc until a threshold is breached.
+      ;; must cache the new value becuase :height does not acutally inc until a
+      ;; threshold is breached.
       (setq my-curr-font-size new-size)
 
       (when (fboundp 'my-w32-run) ;; TODO: make it work on non-Windows machines.
@@ -817,7 +824,8 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
    '(ansi-color-faces-vector
      [default default default italic underline success warning error])
    '(ansi-color-names-vector
-     ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
+     ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue"
+      "gray50"])
    '(font-use-system-font t)
    '(tool-bar-mode nil))
   (custom-set-faces
@@ -826,16 +834,17 @@ Resize-window = t will adjust the window so the modeline fits on screen, etc."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(default ((t (:family "Fixed" :foundry "Misc"
-                          :slant normal :weight normal :height 150 :width normal))))))
+                          :slant normal :weight normal :height 150
+                          :width normal))))))
 
 
 
 ;;;------------------------------------------------------
 ;;; Color theme stuff.
 ;;;------------------------------------------------------
-;;TODO: implement a way to undo color settings made outside the theme definition.
-;;      use custom-theme-set-faces to set the colors/styles so they are rolled back
-;;      when switching/disabling themes.
+;;TODO: implement a way to undo color settings made outside the theme
+;;      definition. Use custom-theme-set-faces to set the colors/styles so they
+;;      are rolled back when switching/disabling themes.
 (defadvice load-theme (before disable-before-load)
   "Disable any loaded themes before enabling a new theme.
 This prevents overlapping themes; something I would rarely want."
@@ -857,7 +866,8 @@ This prevents overlapping themes; something I would rarely want."
 
 (progn ; theme changing stuff.
   (autoload #'my-load-theme "my-load-theme" nil t)
-  (autoload #'color "my-load-theme" nil t) ;trying to duplciate vim's :color interface
+  (autoload #'color "my-load-theme" nil t) ; trying to duplciate vim's :color
+                                           ; interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
 
@@ -865,7 +875,8 @@ This prevents overlapping themes; something I would rarely want."
     (global-set-key (kbd "<f9>")
                     (lambda ()
                       (interactive)
-                      ;;nil for no candidate limit. I want to scroll through all the themes.
+                      ;; nil for no candidate limit. I want to scroll through
+                      ;; all the themes.
                       (let ((helm-candidate-number-limit nil))
                         (call-interactively #'my-load-theme)))))
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
@@ -937,7 +948,8 @@ This prevents overlapping themes; something I would rarely want."
 
     (let* ((step (if solider-p 1 -1)))
       (incf my-curr-alpha step)
-      (set-frame-parameter (selected-frame) 'alpha `(,my-curr-alpha ,my-curr-alpha))
+      (set-frame-parameter (selected-frame) 'alpha
+                           `(,my-curr-alpha ,my-curr-alpha))
       (message (int-to-string my-curr-alpha))))
 
   (global-set-key (kbd "C-M-=") (lambda ()

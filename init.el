@@ -63,7 +63,8 @@
 
 (progn ;; JUMPrestore
   ;; tricks to improve startup time.
-  ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+  ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_ste
+  ;; ps_to_speed_up_emacs_start/
   ;; TODO: verify exactly how much these help.
 
   (setq gc-cons-threshold-backup gc-cons-threshold)
@@ -95,7 +96,8 @@ in case that file does not provide any feature."
 ;;;--------------------------------------------------------------------
 ;;; Helper functions and macros
 ;;;--------------------------------------------------------------------
-;; eval-when-compile used to prevent flycheck `cl' warning, but only works for macros?
+;; eval-when-compile used to prevent flycheck `cl' warning, but only works for
+;; macros?
 (require 'cl)
 
 (defmacro not-m (bool)
@@ -152,7 +154,8 @@ Useful to check a boolean state and toggle the state in 1 go."
     leyna-laptop
     hp-tower-2009
     wild-dog)
-  "The computers I use Emacs on.  Specific configurations may be made for some computers.")
+  "The computers I use Emacs on.
+Specific configurations may be made for some computers.")
 
 ;; currently used computer. (manually set)
 ;; Used to conditionally set computer specific options, and paths.
@@ -171,7 +174,8 @@ Specific configs may be made based on the computer.")
 
 ;; (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
 ;;   (if (file-exists-p curr-comp-file)
-;;       (setq my-curr-computer (intern (my-get-string-from-file curr-comp-file)))
+;;       (setq my-curr-computer (intern
+;;                                (my-get-string-from-file curr-comp-file)))
 ;;     (setq my-curr-computer 'unknown)))
 
 ;; TODO: look into a way to use auto-complete for some modes and company for
@@ -185,15 +189,17 @@ Specific configs may be made based on the computer.")
 (defvar my-indent-width 4
   "An omni-variable serving 3 related purposes.
 Becuase I want them to have same value.
--Preferred indent width for C-like languages. `c-basic-offset' `js2-basic-offset'
+-Preferred indent width for C-like langs.  `c-basic-offset' `js2-basic-offset'
 -Number of spaces for a tab.
--How many columns to show for a 'real' tab. `tab-width'")
+-How many columns to show for a 'real' tab.  `tab-width'")
 
 (defvar my-graphic-p (display-graphic-p)
-  "Caching the result of `display-graphic-p' since it is used everywhere and won't change.")
+  "Caching the result of `display-graphic-p'.
+Since it is used everywhere and won't change.")
 
 
-;; TODO: look into a way to limit the values to evil, emacs, and cua. Like an enum. defcustom?
+;; TODO: look into a way to limit the values to evil, emacs, and cua.
+;;       Like an enum. defcustom?
 ;; TODO: support cua.
 (defvar my-ui-type 'evil
   "The user interface type I'm currently using.
@@ -231,7 +237,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 ;;;----------------------------------
 ;;; Packages
 ;;;----------------------------------
-(add-to-list 'load-path "~/.emacs.d/notElpa/") ;stores elisp files that are not "packages".
+(add-to-list 'load-path "~/.emacs.d/notElpa/") ; stores elisp files that are
+                                               ; not "packages".
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
@@ -328,7 +335,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     swiper
     flx ;; can be used by ivy for ordering flx matches.
     counsel
-    apel ;; counsel functions don't work without this lib. TODO: figure out why dependent packs don't auto-download.
+    apel ; counsel functions don't work without this lib. TODO: figure out why
+         ; dependent packs don't automatically download.
     color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
@@ -459,7 +467,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (when my-use-evil-p
 
   (with-eval-after-load "key-chord"
-    (setq key-chord-two-keys-delay 0.2) ;lower to reduce lag when pressing a key of a chord.
+    (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
+                                        ; key of a chord.
     (setq key-chord-one-key-delay 0.4))
 
   (with-eval-after-load "helm"
@@ -476,7 +485,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   ;; (with-eval-after-load "lisp-mode"
   ;;   (when nil ;; trying lispy
-  ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload changes.
+  ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload
+  ;;     ;;       changes.
   ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
   ;; (with-eval-after-load "smartparens"
@@ -504,20 +514,24 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (interactive)
     (let ((args-emacs '())
           (args-evil '())
-          (args-evil-motion '())) ;use same color throughout evil-mode, except for "motion" state.
+          (args-evil-motion '())) ; use same color throughout evil-mode, except
+                                        ; for "motion" state.
       (when color-emacs (setq args-emacs (cons color-emacs args-emacs)))
       (when color-evil (setq args-evil (cons color-evil args-evil)))
-      (when color-motion (setq args-evil-motion (cons color-motion args-evil-motion)))
-      ;;bar hollow box hbar
-      ;; (setq-default cursor-type (cons 'bar args-emacs)) ;;commenting this allows vim command mode : to have a bar cursor.
+      (when color-motion (setq args-evil-motion (cons color-motion
+                                                      args-evil-motion)))
+      ;; bar hollow box hbar
+      ;; commenting this allows vim command mode : to have a bar cursor.
+      ;; (setq-default cursor-type (cons 'bar args-emacs))
       (setq evil-emacs-state-cursor (cons 'bar args-emacs))
       (setq evil-normal-state-cursor (cons 'hollow args-evil))
       (setq evil-insert-state-cursor (cons 'bar args-evil))
       (setq evil-visual-state-cursor (cons 'hollow args-evil))
       (setq evil-operator-state-cursor (cons 'hollow args-evil))
       (setq evil-replace-state-cursor (cons 'hbar args-evil))
-      ;;motion state is when some of evil is disabled (like in the function help and C-h-i pages).
-      ;;give special color I know when it is not full-evil bindings.
+      ;; motion state is when some of evil is disabled (like in the function
+      ;; help and C-h-i pages).
+      ;; give special color I know when it is not full-evil bindings.
       (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
 
   (defun my-cursor-stuff-darkBg ()
@@ -590,9 +604,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;; (evil-define-key 'visual global-map (kbd "C-n") #'evil-exit-visual-state)
 
 
-  ;; For visual mode: press $ to go to the end of the line minus the newline char.
   (defadvice evil-end-of-line (after do-not-highlight-newline)
-    "When in visual mode, press $ to go to the end of the line minus the newline char."
+    "When in visual mode, press $ to go to the end of the line.
+Minus the newline char."
     (when (evil-visual-state-p)
       (evil-backward-char)))
   (ad-activate 'evil-end-of-line)
@@ -713,10 +727,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
           (eq my-curr-computer 'leyna-laptop))
   ;; configure default settings for fonts.
   (defvar my-default-font 'consolas)
-  (defvar my-good-fonts '((inconsolata "Inconsolata" 135 normal) ;looks OK. fits a good number of lines on screen. flaky on bold. no itallic?
-                          (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
-                          (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
-                          (fixedsys "FixedSys" 120 normal)))
+  (defvar my-good-fonts
+    '((inconsolata "Inconsolata" 135 normal) ; looks OK. fits a good number of
+                                             ; lines on screen. flaky on bold.
+                                             ; no itallic?
+      (consolas "Consolas" 125 normal) ; consolas is the best looking but fits fewer lines on screen.
+      (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ;good, but looks a bit "tall"
+      (fixedsys "FixedSys" 120 normal)))
 
   (cl-defun my-set-font (&optional &key
                                    (sym nil) (height nil) (weight nil) (resize-window nil))

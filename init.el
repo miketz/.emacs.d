@@ -941,9 +941,10 @@ This prevents overlapping themes; something I would rarely want."
         (eq my-curr-computer 'leyna-laptop)
         (eq my-curr-computer 'a-laptop-old))
     ;; (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    (my-set-font :sym 'consolas
-                 :height 125            ;'90 105 115 120 125
-                 :weight 'normal)
+    ;; (my-set-font :sym 'consolas
+    ;;              :height 125            ;'90 105 115 120 125
+    ;;              :weight 'normal)
+    (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     (when my-graphic-p
       (my-color-zenburn)))
 

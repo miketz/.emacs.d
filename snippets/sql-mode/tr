@@ -7,7 +7,7 @@
 if object_id('dbo.$1', 'TR') is not null
     drop trigger dbo.$1;
 GO
-create trigger ${1:/*TrigName*/} on dbo.${2:/*Tab*/} for ${3:/*insert, update, delete*/}
+create trigger dbo.${1:/*TrigName*/} on dbo.${2:/*Tab*/} for ${3:/*insert, update, delete*/}
 as
 $0
 GO

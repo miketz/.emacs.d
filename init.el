@@ -963,6 +963,7 @@ This prevents overlapping themes; something I would rarely want."
 (progn
   (cond
    ((eq my-curr-computer 'wild-dog)
+    (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
     (when my-graphic-p
       (my-color-zenburn)))
 

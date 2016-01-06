@@ -967,8 +967,12 @@ This prevents overlapping themes; something I would rarely want."
     (when my-graphic-p
       (my-color-zenburn)))
 
-   ((or (eq my-curr-computer 'work-laptop)
-        (eq my-curr-computer 'leyna-laptop)
+   ((eq my-curr-computer 'work-laptop)
+    (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
+    (when my-graphic-p
+      (my-color-zenburn)))
+
+   ((or (eq my-curr-computer 'leyna-laptop)
         (eq my-curr-computer 'a-laptop-old))
     ;; (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
     ;; (my-set-font :sym 'consolas

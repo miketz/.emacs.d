@@ -3,6 +3,8 @@
 ;; TODO: better msg printing.
 ;; TODO: clickable links to jump to test definition on failure.
 
+(require 'cl-lib)
+
 (defvar my-test-funcs '()
   "List of all test functions.")
 

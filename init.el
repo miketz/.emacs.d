@@ -959,38 +959,31 @@ This prevents overlapping themes; something I would rarely want."
                                 (interactive)
                                 (my-change-alpha nil))))
 
-;;theme of the week and corresponding settings. This may change often.
+;; theme of the week and corresponding settings. This may change often.
 (progn
+  (when my-graphic-p ;; this isn't true for emacs daemon!
+    (my-color-zenburn))
+
   (cond
    ((eq my-curr-computer 'wild-dog)
-    (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
-    (when my-graphic-p
-      (my-color-zenburn)))
+    (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true"))
 
    ((eq my-curr-computer 'work-laptop)
-    (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
-    (when my-graphic-p
-      (my-color-zenburn)))
+    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
+    (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"))
 
    ((or (eq my-curr-computer 'leyna-laptop)
         (eq my-curr-computer 'a-laptop-old))
     ;; (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (my-set-font :sym 'consolas
-    ;;              :height 125            ;'90 105 115 120 125
-    ;;              :weight 'normal)
-    (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    (when my-graphic-p
-      (my-color-zenburn)))
-
-   ((eq my-curr-computer 'raspberry-pi)
-    (when my-graphic-p
-      (my-color-zenburn)))
+    ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+    (my-set-font :sym 'consolas
+                 :height 125            ; 90 105 115 120 125
+                 :weight 'normal))
 
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p
       (custom-set-faces
-       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
-      (my-color-zenburn)))
+       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))))
 
    ((eq my-curr-computer 'a-laptop-faster)
     (custom-set-faces
@@ -999,19 +992,7 @@ This prevents overlapping themes; something I would rarely want."
                             :slant normal
                             :weight semi-bold
                             :height 120
-                            :width normal))))
-     ;; '(default ((t (:family "Inconsolata"
-     ;;                        :foundry "unknown"
-     ;;                        :slant normal
-     ;;                        :weight normal
-     ;;                        :height 155
-     ;;                        :width normal))))
-     )
-    (when my-graphic-p     ;this doens't return true for emacs daemon!
-      (my-color-zenburn)))
-
-   (t (load-theme 'zenburn t)))
-
+                            :width normal)))))))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))

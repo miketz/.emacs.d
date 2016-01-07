@@ -4,9 +4,9 @@
 # key: tab
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-create table dbo.${1:/*Tab*/} (
+create table ${1:dbo}.${2:/*Tab*/} (
     id bigint identity(1,1) not null,
     $0
 
-    CONSTRAINT PK_$1 primary key clustered (id asc)
+    CONSTRAINT PK_$2 primary key clustered (id asc)
 );

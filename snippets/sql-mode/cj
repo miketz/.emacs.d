@@ -4,4 +4,4 @@
 # key: cj
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-cross join ${1:Tab}$0
+cross join ${1:dbo}.${2:Tab}$0

@@ -4,4 +4,4 @@
 # key: coll
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-${1:/*Col*/} ${2:/*Type*/} not null,$0
+${1:/*Col*/} ${2:/*Type*/} ${3:not null},$0

@@ -4,4 +4,4 @@
 # key: acol
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-alter table dbo.${1:/*Tab*/} alter column ${2:/*Col*/} ${3:/*Type*/} not null;$0
+alter table ${1:dbo}.${2:/*Tab*/} alter column ${3:/*Col*/} ${4:/*Type*/} ${5:not null};$0

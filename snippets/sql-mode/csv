@@ -5,7 +5,7 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 declare @csv nvarchar(max) = '';
-	select @csv = @csv + ${2:/*Col(s)*/} + ', '
-    ${1:/*from SomeTable*/}
+	select @csv = @csv + ${3:/*Col(s)*/} + ', '
+    from ${1:dbo}.${2:/*SomeTable*/}
 set @csv = substring(@csv, 0, LEN(@csv)) --trim trailing comma
 $0

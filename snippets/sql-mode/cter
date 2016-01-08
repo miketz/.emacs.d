@@ -5,16 +5,16 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 with ${1:CTE} as (
-    select t.${6:/*cols*/},$0
-    t.$3, t.$5, 0 as depth
-    from ${2:Tab} t
-    where t.${3:ParentID} ${4:is null}
+    select t.${7:/*cols*/},$0
+    t.$4, t.$6, 0 as depth
+    from ${2:dbo}.${3:Tab} t
+    where t.${4:ParentID} ${5:is null} --is root
 
     union all
 
-    select tt.$6,
-    tt.$3, tt.$5, depth + 1
-    from $2 tt
-    inner join $1 cte on cte.${5:ID}=tt.$3
+    select tt.$7,
+    tt.$4, tt.$6, depth + 1
+    from $2.$3 tt
+    inner join $1 cte on cte.${6:ID}=tt.$4 --match parent
 )
 select * from $1

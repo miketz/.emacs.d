@@ -4,5 +4,5 @@
 # key: ck
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if not exists(SELECT top 1 null from information_schema.check_constraints where constraint_name='CH_$2_$4')
+if not exists(SELECT top 1 null from information_schema.check_constraints where constraint_schema='$1' and constraint_name='CH_$2_$4')
     alter table ${1:dbo}.${2:/*Tab*/} add constraint CH_$2_${4:/*descr*/} check (${3:/*Conditions*/});$0

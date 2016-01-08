@@ -4,5 +4,5 @@
 # key: dsp
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if object_id('dbo.$1', 'P') is not null
-    drop procedure dbo.${1:/*ProcName*/};$0
+if object_id('$1.$2', 'P') is not null
+    drop procedure ${1:dbo}.${2:/*ProcName*/};$0

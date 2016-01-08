@@ -4,5 +4,5 @@
 # key: dvw
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if object_id('dbo.$1', 'V') is not null
-    drop view dbo.${1:/*ViewName*/};$0
+if object_id('$1.$2', 'V') is not null
+    drop view ${1:dbo}.${2:/*ViewName*/};$0

@@ -4,5 +4,5 @@
 # key: inss
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-insert into dbo.${1:InsTab} (${2:/*cols*/})
-    ${3:/*query*/}$0
+insert into ${1:dbo}.${2:InsTab} (${3:/*cols*/})
+    ${4:/*query*/}$0

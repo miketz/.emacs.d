@@ -4,6 +4,6 @@
 # key: up
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-update ${1:Tab} set
-${2:col}=@$2
-where ${3:0=1};$0
+update ${1:dbo}.${2:Tab} set
+${3:col}=@$3
+where ${4:0=1};$0

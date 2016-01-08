@@ -4,6 +4,7 @@
 # key: trr
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
+--DEPRECATED: use snippet tr
 if object_id('dbo.tr_$1_$2', 'TR') is not null
     drop trigger dbo.tr_$1_$2;
 GO

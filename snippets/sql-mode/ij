@@ -4,4 +4,4 @@
 # key: ij
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-inner join ${1:/*Tab_A*/} ${2:Alias_A} on $2.${3:key_A} = ${4:Tab_B}.${5:key_B}
+inner join ${1:dbo}.${2:/*Tab_A*/} ${3:Alias_A} on $3.${4:key_A} = ${5:Tab_B}.${6:key_B}

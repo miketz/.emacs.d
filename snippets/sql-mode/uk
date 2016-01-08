@@ -4,5 +4,5 @@
 # key: uk
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if object_id('dbo.UK_$1_$2', 'UQ') is null
-    alter table dbo.${1:/*Tab*/} add constraint UK_$1_$2 unique (${2:/*Col*/});$0
+if object_id('$1.UK_$2_$3', 'UQ') is null
+    alter table ${1:dbo}.${2:/*Tab*/} add constraint UK_$2_$3 unique (${3:/*Col*/});$0

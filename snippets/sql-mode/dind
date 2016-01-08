@@ -4,5 +4,5 @@
 # key: dind
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if exists(select top 1 null from sys.indexes where name='IX_$1_$2' and object_id = OBJECT_ID('dbo.$1'))
-    drop index IX_$1_${2:Col} on dbo.${1:Tab};$0
+if exists(select top 1 null from sys.indexes where name='IX_$2_$3' and object_id = OBJECT_ID('$1.$2'))
+    drop index IX_$2_${3:Col} on ${1:dbo}.${2:Tab};$0

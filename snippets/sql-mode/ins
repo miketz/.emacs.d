@@ -4,8 +4,8 @@
 # key: ins
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-insert into ${1:Tab}(${2:col1})
-values(${2:$(let* ((split (split-string yas-text ","))
+insert into ${1:dbo}.${2:Tab}(${3:col1})
+values(${3:$(let* ((split (split-string yas-text ","))
        (decorated (mapcar (lambda (s)
                             (concat " @" (s-trim s) ","))
                           split)))

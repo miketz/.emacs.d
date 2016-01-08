@@ -4,5 +4,5 @@
 # key: e
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if object_id('${1:ObjName}', '${2:TypeFlag}') is not null
-    ${3:/*HandleExistence*/};$0
+if object_id('${1:dbo}.${2:ObjName}', '${3:TypeFlag}') is not null
+    ${4:/*HandleExistence*/};$0

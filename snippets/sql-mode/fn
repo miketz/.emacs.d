@@ -4,16 +4,16 @@
 # key: fn
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if not exists (select * from sys.objects where object_id = OBJECT_ID(N'[dbo].[$1]') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
-    exec('create function dbo.$1() returns int as begin return 0 end');
+if not exists (select * from sys.objects where object_id = OBJECT_ID(N'[$1].[$2]') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
+    exec('create function $1.$2() returns int as begin return 0 end');
     --TODO: make sure stub function return type matches the real function.
-    --exec('create function dbo.$1() returns table as return (select top 1 null foo from sys.all_objects);');
+    --exec('create function $1.$2() returns table as return (select top 1 null foo from sys.all_objects);');
 GO
 
-alter function dbo.${1:/*FuncName*/} (
-    @${3:/*param1Name*/} ${4:/*type*/}
+alter function ${1:dbo}.${2:/*FuncName*/} (
+    @${4:/*param1Name*/} ${5:/*type*/}
 )
-RETURNS ${2:/*ReturnType*/}
+RETURNS ${3:/*ReturnType*/}
 as
 begin
     $0

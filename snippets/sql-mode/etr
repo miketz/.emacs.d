@@ -4,6 +4,7 @@
 # key: etr
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
+--DEPRECATED: use dtr snippet
 if exists(select null from dbo.sysobjects where name='${1:ObjName}' and OBJECTPROPERTY(id, 'IsTrigger') = 1)
 begin
     drop trigger $1;

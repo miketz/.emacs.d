@@ -4,7 +4,7 @@
 # key: upDT
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-update $2 set
-    $2.${7:col_1} = $4.$7$0
-from ${1:Dest} ${2:d}
-inner join ${3:Source} ${4:s} on $4.${5:SomeKey} = $2.${6:SomeKey};
+update $3 set
+    $3.${9:col_1} = $6.$9$0
+from ${1:dbo}.${2:Dest} ${3:d}
+inner join ${4:dbo}.${5:Source} ${6:s} on $6.${7:SomeKey} = $3.${8:SomeKey};

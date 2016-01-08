@@ -6,8 +6,9 @@
 # --
 select *
 from (
-    select row_number() over (order by ${2:/*Fields*/}) RowNum,
-    ${3:*}
-    from ${1:/*Table*/}
+    select row_number() over (order by ${3:/*Fields*/}) RowNum,
+    ${4:*}
+    from ${1:dbo}.${2:/*Table*/}
     ) as RowNumQuery
-where RowNum between ${4:low} and ${5:high}$0
+where RowNum between ${5:low} and ${6:high}
+$0

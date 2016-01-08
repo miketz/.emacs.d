@@ -4,12 +4,12 @@
 # key: tabg
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if object_id('dbo.$1', 'U') is null
+if object_id('$1.$2', 'U') is null
 begin
-    create table dbo.${1:/*Tab*/} (
+    create table ${1:dbo}.${2:/*Tab*/} (
         id bigint identity(1,1) not null,
         $0
 
-        CONSTRAINT PK_$1 primary key clustered (id asc)
+        CONSTRAINT PK_$2 primary key clustered (id asc)
     );
 end

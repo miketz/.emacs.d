@@ -4,7 +4,7 @@
 # key: if
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if(${1:0=0})
+if (${1:0=0})
 begin
     $0
 end

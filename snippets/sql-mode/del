@@ -4,4 +4,4 @@
 # key: del
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-delete from ${1:Tab} where ${2:0=1};$0
+delete from ${1:dbo}.${2:Tab} where ${3:0=1};$0

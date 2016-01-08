@@ -4,7 +4,7 @@
 # key: dels
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-delete $2
-from ${1:TargetTab} ${2:TargetAlias}
-${3:inner join} ${4:Tab} ${5:Alias} on $5.${6:ID} = $2.${7:ID}
-where ${8:0=1}$0
+delete $3
+from ${1:dbo}.${2:TargetTab} ${3:TargetAlias}
+${4:inner join} ${5:dbo}.${6:Tab} ${7:Alias} on $7.${8:id} = $3.${9:id}
+where ${10:0=1}$0

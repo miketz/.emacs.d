@@ -4,13 +4,13 @@
 # key: fki
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if not exists(select * from information_schema.referential_constraints where constraint_name='FK_$1_$3')
+if not exists(select * from information_schema.referential_constraints where constraint_schema='$1' and constraint_name='FK_$2_$4')
 begin
-    alter table ${1:/*FKtab*/} with check add constraint FK_$1_$3
-        foreign key(${2:/*FKcol*/}) references ${3:/*UKtab*/}(${4:/*UKcol*/});
-    alter table $1 check constraint FK_$1_$3;
+    alter table ${1:dbo}.${2:/*FKtab*/} with check add constraint FK_$2_$4
+        foreign key(${3:/*FKcol*/}) references ${4:/*UKtab*/}(${5:/*UKcol*/});
+    alter table $1.$2 check constraint FK_$2_$4;
 end
 
-if not exists(select top 1 null from sys.indexes where name='IX_$1_$2' and object_id = OBJECT_ID('dbo.$1'))
-    create index IX_$1_$2 on dbo.$1($2);
+if not exists(select top 1 null from sys.indexes where name='IX_$2_$3' and object_id = OBJECT_ID('$1.$2'))
+    create index IX_$2_$3 on $1.$2($3);
 $0

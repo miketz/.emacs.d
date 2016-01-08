@@ -4,7 +4,7 @@
 # key: dcol
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if exists(select top 1 null from sys.columns where Name = N'$2' and Object_ID = Object_ID(N'dbo.$1'))
+if exists(select top 1 null from sys.columns where Name = N'$3' and Object_ID = Object_ID(N'$1.$2'))
 begin
-    alter table dbo.${1:/*Tab*/} drop column ${2:/*Col*/};$0
+    alter table ${1:dbo}.${2:/*Tab*/} drop column ${3:/*Col*/};$0
 end

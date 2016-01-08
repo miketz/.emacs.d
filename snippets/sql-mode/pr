@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# -*- print -*-
+# name: pr
+# key: pr
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+print '${1:}';$0

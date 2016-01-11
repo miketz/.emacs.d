@@ -10,19 +10,36 @@
 (deftheme charcoal "The charcoal color theme")
 
 ;;background: #35352B #000000
-(let ((charcoal-bg "#35352B")
-      (charcoal-fg "lightyellow3" ;snow3 gray80 lightyellow3
-       ))
+(let* ((graphicp    (display-graphic-p)); cache
+       (charcoal-bg "#35352B")
+       (charcoal-fg "lightyellow3"      ; snow3 gray80 lightyellow3
+                    ))
   (custom-theme-set-faces
    'charcoal
 
    ;; TODO
    `(default ((t (:foreground ,charcoal-fg :background ,charcoal-bg))))
 
+   ;; DONE
    '(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
                                   :background nil))))
+
+
+   ;; TODO
+    `(mode-line
+     ((t (:foreground "#8FB28F"
+                           :background "#2B2B2B"
+                           :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   ;; TODO
+   `(mode-line-buffer-id ((t (:foreground "#F0DFAF" :weight bold))))
+   ;; TODO
+   `(mode-line-inactive
+     ((t (:foreground "#5F7F5F"
+                      :background "#383838"
+                      :box (:line-width -1 :style released-button)))))
    ;; TODO
    '(region
      ((t (:background "#49483E"))))     ;69685E

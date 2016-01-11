@@ -18,13 +18,13 @@ begin
 
         CONSTRAINT PK_$2 primary key clustered (id asc)
     );
-    alter table $2 add constraint UK_$2_$3_$5 unique ($3, $5);
-    alter table $2 add constraint UK_$2_$5_$3 unique ($5, $3);
-    alter table $2 with check add constraint FK_$2_$3
-        foreign key($3) references ${7:/*Tab1*/}(${8:/*ID_1*/});
-    alter table $2 check constraint FK_$2_$3;
-    alter table $2 with check add constraint FK_$2_$5
-        foreign key($5) references ${9:/*Tab3*/}(${10:/*ID_3*/});
-    alter table $2 check constraint FK_$2_$5;
+    alter table $1.$2 add constraint UK_$2_$3_$5 unique ($3, $5);
+    alter table $1.$2 add constraint UK_$2_$5_$3 unique ($5, $3);
+    alter table $1.$2 with check add constraint FK_$2_$3
+        foreign key($3) references ${7:dbo}.${8:/*Tab1*/}(${9:/*ID_1*/});
+    alter table $1.$2 check constraint FK_$2_$3;
+    alter table $1.$2 with check add constraint FK_$2_$5
+        foreign key($5) references ${10:dbo}.${11:/*Tab3*/}(${12:/*ID_3*/});
+    alter table $1.$2 check constraint FK_$2_$5;
 end
 $0

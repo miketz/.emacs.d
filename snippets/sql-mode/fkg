@@ -4,10 +4,10 @@
 # key: fkg
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if not exists(select * from information_schema.referential_constraints where constraint_schema='$1' and constraint_name='FK_$2_$4')
+if not exists(select * from information_schema.referential_constraints where constraint_schema='$1' and constraint_name='FK_$2_$5')
 begin
-    alter table ${1:dbo}.${2:/*FKtab*/} with check add constraint FK_$2_$4
-        foreign key(${3:/*FKcol*/}) references ${4:/*UKtab*/}(${5:/*UKcol*/});
-    alter table $1.$2 check constraint FK_$2_$4;
+    alter table ${1:dbo}.${2:/*FKtab*/} with check add constraint FK_$2_$5
+        foreign key(${3:/*FKcol*/}) references ${4:dbo}.${5:/*UKtab*/}(${6:/*UKcol*/});
+    alter table $1.$2 check constraint FK_$2_$5;
 end
 $0

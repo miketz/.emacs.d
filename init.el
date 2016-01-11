@@ -337,7 +337,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     counsel
     apel ; counsel functions don't work without this lib. TODO: figure out why
          ; dependent packs don't automatically download.
-    color-identifiers-mode
+    ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
     avy

@@ -11,21 +11,24 @@
 ;;; cursor
 ;;;----------------------------------
 (setq-default cursor-type '(bar . 2))
-(custom-set-faces
- '(cursor ((t (:background "cyan")))))
+;; (custom-set-faces
+;;  '(cursor ((t (:background "cyan")))))
 
-(load-theme 'deeper-blue)
+;; (load-theme 'deeper-blue)
 
-(if  (eq system-type 'windows-nt)
-  (custom-set-faces
-   `(default ((t (:family "Consolas"
-                          :foundry "outline"
-                          :slant normal
-                          :weight normal
-                          :height 140
-                          :width normal)))))
-    (custom-set-faces
-     '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal))))))
+
+(when (eq system-type 'windows-nt)
+ (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+;; (if (eq system-type 'windows-nt)
+;;     (custom-set-faces
+;;      `(default ((t (:family "Consolas"
+;;                             :foundry "outline"
+;;                             :slant normal
+;;                             :weight normal
+;;                             :height 140
+;;                             :width normal)))))
+;;   (custom-set-faces
+;;    '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal))))))
 
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)

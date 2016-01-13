@@ -7,7 +7,7 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 declare @${1:fetchVar} ${2:type};
-declare ${3:cur} cursor for
+declare ${3:cur} cursor local static forward_only read_only for
     ${4:/*query*/}
 open $3
 fetch next from $3 into @$1

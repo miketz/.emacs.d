@@ -10,9 +10,9 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 create table ${1:dbo}.${2:/*Tab*/} (
-    id bigint identity(1,1) not null,
-    ${3:ID_1} ${4:bigint} not null,
-    ${5:ID_3} ${6:bigint} not null,
+    id int identity(1,1) not null,
+    ${3:ID_1} ${4:int} not null,
+    ${5:ID_3} ${6:int} not null,
 
     CONSTRAINT PK_$2 primary key clustered (id asc)
 );

@@ -7,7 +7,7 @@
 if object_id('$1.$2', 'U') is null
 begin
     create table ${1:dbo}.${2:/*Tab*/} (
-        id bigint identity(1,1) not null,
+        id int identity(1,1) not null,
         $0
 
         CONSTRAINT PK_$2 primary key clustered (id asc)

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# -*- Just a sample to remember syntax. -*-
+# name: schema
+# key: schema
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+if (not exists (select * from sys.schemas where name = 'blah'))
+    exec ('create schema [blah] authorization [dbo]')
+
+alter schema blah
+    transfer dbo.employees
+--------------------------------------------------
+
+declare
+    @sql varchar(8000),
+    @table varchar(1000),
+    @oldschema varchar(1000) = 'dbo',
+    @newschema varchar(1000) = 'blah';
+
+while exists(select * from sys.tables where schema_name(schema_id) = @oldschema)
+begin
+    select @table = name from sys.tables
+    where object_id in(select min(object_id) from sys.tables where  schema_name(schema_id)  = @oldschema)
+
+    set @sql = 'alter schema ' + @newschema + ' transfer ' + @oldschema + '.' + @table
+
+    exec(@sql)
+end

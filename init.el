@@ -2867,7 +2867,7 @@ and indent."
   (progn
     (setq fci-dash-pattern 0.5)   ;; length of the dash 0 to 1
     (setq fci-rule-use-dashes t))
-  (setq fci-rule-color "#555555") ;; tailored for zenburn ATM.
+  (setq fci-rule-color "#4d4d4d") ;; tailored for zenburn ATM.
 
   (defun my-fci-refresh ()
     (interactive)

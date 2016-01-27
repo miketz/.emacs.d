@@ -21,11 +21,11 @@
 ;;      :tag-start "<script"
 ;;      :tag-end "</script"
 ;;      :key-bind-focus (kbd "C-c j")
-;;      :key-bind-unfocus (kbd "C-c u"))
+;;      :key-bind-unfocus (kbd "C-c C-c j"))
 ;;
 ;; While you are editing a file in `web-mode' press [C-c j] to focus on the
 ;; javascript, then `js2-mode' will be turned on automatically.
-;; Press [C-c u] to go unfocus and go back to `web-mode'.
+;; Press [C-c C-c j] to go unfocus and go back to `web-mode'.
 
 ;;; Credits:
 ;;
@@ -50,7 +50,7 @@
   :tag-start "<script"
   :tag-end "</script"
   :key-bind-focus (kbd "C-c j")
-  :key-bind-unfocus (kbd "C-c u"))
+  :key-bind-unfocus (kbd "C-c C-c j"))
 
 ;; for compatibility with < 24.4 emacs, define `with-eval-after-load'
 (unless (fboundp 'with-eval-after-load)

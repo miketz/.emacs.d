@@ -3040,6 +3040,14 @@ and indent."
     (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
 
   (progn ;; counsel completion augmentation
+
+    (defun my-counsel-tmm ()
+      "Same as `counsel-tmm' but with a taller window."
+      (interactive)
+      (let ((ivy-height 35))
+        (call-interactively #'counsel-tmm)))
+    (global-set-key (kbd "C-c m") #'my-counsel-tmm)
+
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)
     ;; TODO: disable warning like i did for the other f9 binding for colors

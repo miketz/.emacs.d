@@ -3041,6 +3041,7 @@ and indent."
 
   (progn ;; counsel completion augmentation
 
+    (autoload #'counsel-tmm "counsel" nil t) ;; not autoloaded by defaut.
     (defun my-counsel-tmm ()
       "Same as `counsel-tmm' but with a taller window."
       (interactive)

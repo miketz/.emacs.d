@@ -983,7 +983,12 @@ This prevents overlapping themes; something I would rarely want."
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p
       (custom-set-faces
-       '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))))
+       '(default ((t (:family "Droid Sans Mono"
+                              :foundry "unknown"
+                              :slant normal
+                              :weight normal
+                              :height 140
+                              :width normal)))))))
 
    ((eq my-curr-computer 'a-laptop-faster)
     (custom-set-faces
@@ -1003,7 +1008,8 @@ This prevents overlapping themes; something I would rarely want."
   ;; (setq highlight-tail-steps 40 ;80
   ;;       highlight-tail-timer 0.04;0.04
   ;;       )
-  ;; (setq highlight-tail-posterior-type t) ;(setq highlight-tail-posterior-type 'const)
+  ;; (setq highlight-tail-posterior-type t)
+  ;; ;;(setq highlight-tail-posterior-type 'const)
   ;; (highlight-tail-mode)
   ;; ;;(highlight-tail-reload)
   )
@@ -1023,7 +1029,8 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; (when my-use-sly
 ;;   (when (eq my-curr-computer 'work-laptop)
-;;     (setq inferior-lisp-program "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
+;;     (setq inferior-lisp-program
+;;           "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
 
 ;;;---------------------------------------------
 ;;; SLIME

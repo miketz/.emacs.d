@@ -2030,7 +2030,9 @@ and indent."
                 ;; these values should be buffer local.
                 (setq c-basic-offset 8)
                 (setq tab-width 8)
-                (setq indent-tabs-mode t))))
+                (setq indent-tabs-mode t))
+
+              (fci-mode 1)))
 
 
   (add-hook 'c-initialization-hook

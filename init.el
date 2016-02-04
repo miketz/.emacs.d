@@ -2964,16 +2964,17 @@ and indent."
       "Switch to erc/circe buffer, completed by ido."
       (interactive)
       (switch-to-buffer
-       (ido-completing-read "Channel:"
-                            (save-excursion
-                              (delq
-                               nil
-                               (mapcar (lambda (buf)
-                                         (when (buffer-live-p buf)
-                                           (with-current-buffer buf
-                                             (and (memq major-mode x/chatbuffer-types)
-                                                  (buffer-name buf)))))
-                                       (buffer-list)))))))
+       (ido-completing-read
+        "Channel:"
+        (save-excursion
+          (delq
+           nil
+           (mapcar (lambda (buf)
+                     (when (buffer-live-p buf)
+                       (with-current-buffer buf
+                         (and (memq major-mode x/chatbuffer-types)
+                              (buffer-name buf)))))
+                   (buffer-list)))))))
     (define-key erc-mode-map (kbd "C-c b") #'x/ido-chat-buffer))
 
   (add-hook 'erc-mode-hook (lambda ()

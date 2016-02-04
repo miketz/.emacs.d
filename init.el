@@ -2367,7 +2367,7 @@ and indent."
 ;;;--------------------
 ;;; ace-link
 ;;;--------------------
-(unless (eq my-ui-type 'evil)
+(unless my-use-evil-p
   ;; TODO: put this in the eval-after-loads. This line slows start up by
   ;; forcing a load of file `ace-link'
   (ace-link-setup-default))

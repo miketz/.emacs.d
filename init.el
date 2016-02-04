@@ -2367,8 +2367,7 @@ and indent."
 ;;;--------------------
 ;;; ace-link
 ;;;--------------------
-(when (or (eq my-ui-type 'emacs)
-          (eq my-ui-type 'cua))
+(unless (eq my-ui-type 'evil)
   ;; TODO: put this in the eval-after-loads. This line slows start up by
   ;; forcing a load of file `ace-link'
   (ace-link-setup-default))

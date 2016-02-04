@@ -636,14 +636,19 @@ Minus the newline char."
 
   ;;TODO: look into equivalent resizing for non-Windows machines.
   (when (eq system-type 'windows-nt)
-    ;;`isFrameMax-my' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
-    (defvar isFrameMax-my nil)
-    (evil-leader/set-key "f" (lambda ()
-                               (interactive)
-                               (let ((action (if (not-m isFrameMax-my)
-                                                 #'max
-                                               #'restore-curr-frame)))
-                                 (my-w32-run action)))))
+    ;;`my-frame-max-p' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+    (defvar my-frame-max-p nil)
+
+    (defun my-toggle-frame-max ()
+      (interactive)
+      (let ((flag (if my-frame-max-p
+                      'restore-curr-frame
+                    'max)))
+        (my-w32-run flag)
+        ;; toggle explicitly. No longer using `not-m'.
+        (setq my-frame-max-p (not my-frame-max-p))))
+
+    (evil-leader/set-key "f" #'my-toggle-frame-max))
 
   ;;evalate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")

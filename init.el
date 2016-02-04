@@ -2504,14 +2504,16 @@ and indent."
                                (dired "c:/users/mtz/proj/ecp/dev/db")))
 
     ;;quick load of TFS \Main\SqlScripts
-    (evil-leader/set-key "3" (lambda ()
-                               (interactive)
-                               (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
+    (evil-leader/set-key "3"
+      (lambda ()
+        (interactive)
+        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
 
     ;;quick load of c:\users\mtz\TODO\TODO.org
-    (evil-leader/set-key "t" (lambda ()
-                               (interactive)
-                               (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
+    (evil-leader/set-key "t"
+      (lambda ()
+        (interactive)
+        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
 
 
 (when (eq system-type 'gnu/linux)

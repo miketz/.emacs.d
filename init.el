@@ -281,7 +281,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
     ;;icicles
     ;;projectile
-    clippy
+    ;;clippy
     yasnippet
     rainbow-delimiters
     rainbow-mode
@@ -1815,9 +1815,10 @@ To make it human readable."
 ;;;---------------------
 ;;; Clippy. pop-up help
 ;;;---------------------
-(when my-use-evil-p
-  (evil-leader/set-key "c" #'clippy-describe-function)
-  (evil-leader/set-key "v" #'clippy-describe-variable))
+;; (when my-use-evil-p
+;;   (evil-leader/set-key "c" #'clippy-describe-function)
+;;   (evil-leader/set-key "v" #'clippy-describe-variable))
+
 ;; (evil-leader/set-key "n"
 ;;   (lambda ()
 ;;     (interactive)

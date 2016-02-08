@@ -3682,6 +3682,18 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; (set-face-background 'highlight-indent-guides-even-face "#3B3B3B")
   (set-face-background 'highlight-indent-guides-even-face "#3D3D3D"))
 
+
+;;;-----------------------------------------------------------------------------
+;;; python-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "python"
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (highlight-indent-guides-mode 1)
+              (electric-pair-mode 1)
+              (electric-spacing-mode 1)
+              (fci-mode 1))))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# -*- synonym -*-
+# name: syn
+# key: syn
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+if not exists(select * from sys.synonyms where [name]='$2')
+    create synonym $2 for ${1:dbo}.${2:obj_name};

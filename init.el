@@ -3216,7 +3216,9 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 
 (defun my-gen-buffer-name ()
   (prog1
-      (concat "my-tmp-buf-"
+      (concat "tmp-"
+              (buffer-name (current-buffer))
+              "-"
               (int-to-string my-counter))
     (cl-incf my-counter)))
 

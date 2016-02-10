@@ -3208,6 +3208,49 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;     (switch-to-buffer buf)))
 
 ;;;-----------------------------------------------------------------------------
+;;; Create a new buffer, stuff text in it, turn on mode.
+;;;-----------------------------------------------------------------------------
+(when nil ;; just a sample for now
+  ;; TODO: move this into a new file. Add autoloads.
+
+  (defvar my-counter 0
+    "Sequential counter used for various things.")
+
+  (defun my-gen-buffer-name ()
+    (prog1
+        (concat "my-tmp-buf-"
+                (int-to-string my-counter))
+      (cl-incf my-counter)))
+
+  (defun my-kill-tmp-buffers ()
+    (interactive)
+    (dolist (b (buffer-list))
+      ;; TODO: implement
+      ))
+
+  (defun my-mode-on-region (start end)
+    "Switch to a new buffer with the highlighted text. Turn on a mode."
+    (interactive "r")
+    (my--mode-on-region start end (intern (completing-read
+                                           "Mode: "
+                                           (mapcar (lambda (e)
+                                                     (list (symbol-name e)))
+                                                   (apropos-internal "-mode$" #'commandp))
+                                           nil t))))
+
+  (defun my-emacs-lisp-mode-on-region (start end)
+    (interactive "r")
+    (my--mode-on-region start end #'emacs-lisp-mode))
+
+  (defun my--mode-on-region (start end mode-fn)
+    (kill-ring-save start end) ;; copy higlihgted text
+    (deactivate-mark)
+    (switch-to-buffer-other-window (my-gen-buffer-name))
+    (yank) ;; paste text
+    ;; interactively select mode, turn it on.
+    (funcall mode-fn)))
+
+;;;-----------------------------------------------------------------------------
 ;;; Focus javascript
 ;;;-----------------------------------------------------------------------------
 ;; delay execution of this code until `web-mode' is turned on.

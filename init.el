@@ -2822,7 +2822,10 @@ and indent."
 
   ;; Speical highlight on the changed words in a line. Makes it easier to see
   ;; what changed.
-  (setq magit-diff-refine-hunk t))
+  (setq magit-diff-refine-hunk t)
+
+  ;; use colored graph lines. Could be a performance issue.
+  (add-to-list 'magit-log-arguments "--color"))
 
 
 ;;;-----------------------------------------------------------------------------

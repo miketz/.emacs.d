@@ -2187,15 +2187,15 @@ and indent."
 ;;;--------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
 ;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;; (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-;; (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-;; (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-;; (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-;; (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-;; (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
-;; ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
-;; ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
+;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
 
 (with-eval-after-load "paredit"
@@ -3384,8 +3384,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (add-hook 'slime-repl-mode-hook #'lispy-mode)
 
 (with-eval-after-load "lispy"
-  ;; (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
-  (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
+  (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
+  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
 
   (setq lispy-avy-style-char 'pre)
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char

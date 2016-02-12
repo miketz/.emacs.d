@@ -2818,7 +2818,11 @@ and indent."
   (when my-use-evil-p
     (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
     ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
-    (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs))))
+    (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
+
+  ;; Speical highlight on the changed words in a line. Makes it easier to see
+  ;; what changed.
+  (setq magit-diff-refine-hunk t))
 
 
 ;;;-----------------------------------------------------------------------------

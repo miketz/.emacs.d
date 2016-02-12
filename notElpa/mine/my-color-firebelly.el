@@ -1,8 +1,17 @@
 (defun my-color-firebelly ()
   (interactive)
   (my-load-theme-make-bold-like-zenburn 'firebelly) ;;(load-theme 'firebelly t)
+  ;; fci color is not a face???
+  (setq fci-rule-color "#343434")
   (custom-theme-set-faces
    'firebelly
+
+   '(highlight-indent-guides-odd-face
+     ((t (:background "#242424"
+                      :weight bold))))
+   '(highlight-indent-guides-even-face
+     ((t (:background "#202020"
+                      :weight bold))))
 
    ;; override the hi-yellow face for printf escapes.
    '(hi-yellow

@@ -5,6 +5,9 @@
   (when my-use-evil-p
     (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
+  ;; fci color is not a face???
+  (setq fci-rule-color "#4d4d4d")
+
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
    'zenburn
@@ -26,6 +29,14 @@
 
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
+
+   '(highlight-indent-guides-odd-face
+     ((t (:background "#3F3F3C" ;; "#40403A"
+                      :weight bold))))
+
+   '(highlight-indent-guides-even-face
+     ((t (:background "#3D3D3D" ;; "#3B3B3B"
+                      :weight bold))))
 
    ;; override the hi-yellow face for printf escapes.
    '(hi-yellow
@@ -115,7 +126,7 @@
                                 :background "black"))))
 
    `(region
-     ((t (:background "#69685E"))));"#49483E"
+     ((t (:background "#69685E"))))     ;"#49483E"
    ;; '(region ((t :background "black")))
    '(isearch ((t :background "black"
                  :foreground "yellow"
@@ -149,8 +160,8 @@
                      :background "black"
                      :foreground "yellow green"
                      :bold nil))))
-   '(leerzeichen ((t (:foreground "yellow4";"#A8A800"
-                                  :background "black";"#D4D4C8"
+   '(leerzeichen ((t (:foreground "yellow4"           ;"#A8A800"
+                                  :background "black" ;"#D4D4C8"
                                   :italic nil
                                   :bold nil))))
    `(show-paren-match ((t (:slant italic

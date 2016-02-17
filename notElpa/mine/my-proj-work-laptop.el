@@ -143,7 +143,8 @@
   ;;load project
   (find-file-existing "C:\\Users\\mtz\\scratch\\lisp\\test.lisp")
   ;;(dired "C:\\Users\\mtz\\scratch\\lisp")
-  (slime))
+  ;;(slime)
+  )
 
 (defun proj-imgtag ()
   (interactive)

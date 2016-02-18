@@ -1046,7 +1046,8 @@ This prevents overlapping themes; something I would rarely want."
                  slime-company
                  slime-banner
                  slime-indentation
-                 slime-highlight-edits))
+                 ;; slime-highlight-edits
+                 ))
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 

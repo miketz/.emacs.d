@@ -32,7 +32,8 @@ Adds some book keeping so it can be included in a global run of all tests."
   ;; expands into a regular function.
   `(defun ,name ()
      (interactive)
-     ,@body))
+     ,@body
+     'pass))
 
 
 (when nil ;; interactive testing

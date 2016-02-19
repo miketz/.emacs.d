@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;; Unit testing helpers
 
 ;; TODO: better msg printing.

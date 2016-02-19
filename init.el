@@ -3472,8 +3472,9 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
     (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)
     (define-key Info-mode-map (kbd "s") my-swoop-fn)
-    ;; TODO find out why the SPC is being over-written with the default
-    (evil-define-key 'normal Info-mode-map (kbd "SPC") #'avy-goto-word-1))
+    ;; TODO: find out why the SPC is being over-written with the default
+    ;;       can't get SPC binding to work so using a remap on Info-scroll-up
+    (define-key Info-mode-map [remap Info-scroll-up] #'avy-goto-word-1))
   ;;TODO: figure out how to bind gg for top.
   )
 

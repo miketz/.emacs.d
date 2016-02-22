@@ -540,7 +540,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   (defun my-cursor-stuff-lightBg ()
     (interactive)
-    (my-cursor-stuff :color-emacs "black" :color-evil "blue"))
+    (my-cursor-stuff :color-emacs "black" :color-evil "blue")
+    (let ((cur '(box "blue")))
+      (setq evil-normal-state-cursor cur)
+      (setq evil-visual-state-cursor '(hollow "blue"))
+      (setq evil-operator-state-cursor cur)))
 
   (when my-graphic-p
     (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.

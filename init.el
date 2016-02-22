@@ -3097,7 +3097,8 @@ and indent."
 (with-eval-after-load "ivy"
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
   ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)
-  (ivy-mode 1)
+  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard against ivy-mode turning on.
+   (ivy-mode 1))
 
   ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
   ;; ;; allow out of order matching.

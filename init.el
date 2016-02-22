@@ -1044,7 +1044,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;---------------------------------------------
 ;;; SLIME
 ;;;---------------------------------------------
-(require 'slime-autoloads)
+;; (require 'slime-autoloads)
 (with-eval-after-load "slime"
   (slime-setup '(slime-fancy
                  slime-company
@@ -1081,13 +1081,16 @@ This prevents overlapping themes; something I would rarely want."
 
 
   ;; redefine `slime-startup-message' to work how I want
-  ;; (defun slime-startup-message ()
-  ;;   (when (zerop (buffer-size))
-  ;;     (let ((welcome (concat ";; "
-  ;;                            (nth 5 slime-words-of-encouragement))))
-  ;;       (if slime-startup-animation
-  ;;           (animate-string welcome 0 0)
-  ;;         (insert welcome)))))
+  (defun slime-startup-message ()
+    (when (zerop (buffer-size))
+      (let* ((orig-welcome (concat "; SLIME " (or (slime-changelog-date)
+                                                  "- ChangeLog file not found")))
+             (welcome (concat orig-welcome ".  "
+                              ;; (slime-random-words-of-encouragement)
+                              (nth 5 slime-words-of-encouragement))))
+        (if slime-startup-animation
+            (animate-string welcome 0 0)
+          (insert welcome)))))
 
   (progn
     (when (eq my-curr-computer 'wild-dog)

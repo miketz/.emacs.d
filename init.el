@@ -3665,7 +3665,6 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; winner-mode
 ;;;-----------------------------------------------------------------------------
 (setq winner-dont-bind-my-keys t) ; doesn't work when set in eval-after-load.
-(winner-mode 1)
 (with-eval-after-load "winner"
   ;; reducing size from 200. Just need to facilitate a few quick undos.
   (setq winner-ring-size 8)
@@ -3673,6 +3672,7 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; NOTE: `winner-redo' only works if invoked immediatley after `winner-undo'.
   ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
+(winner-mode 1)
 
 ;;;-----------------------------------------------------------------------------
 ;;; js2-highlight-vars

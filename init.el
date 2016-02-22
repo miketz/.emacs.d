@@ -1236,7 +1236,8 @@ This prevents overlapping themes; something I would rarely want."
               (set (make-local-variable 'company-backends)
                    '(company-web-html company-files))))
 
-  (define-key web-mode-map (kbd "C-SPC") #'company-web-html))
+  (when my-use-evil-p
+    (define-key web-mode-map (kbd "C-SPC") #'company-web-html)))
 
 
 ;;;---------------------------------------------

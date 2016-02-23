@@ -2185,6 +2185,20 @@ and indent."
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C--") #'er/contract-region)
 
+(defhydra hydra-expand-region (;; :color amaranth
+                                     ;; :body-pre (progn (er/expand-region))
+                               )
+  ;; "expand"
+  ("k" er/expand-region)
+  ("j" er/contract-region)
+
+  ;; ("y" nil)
+
+  ("C-g" nil nil)
+  ("q" nil))
+;; TODO: polish this up. expand on entering hydra.
+(global-set-key (kbd "C-c k") #'hydra-expand-region/body)
+
 ;;;--------------------------------------------------------------------
 ;;; mulitple-cursors
 ;;; https://github.com/magnars/multiple-cursors.el

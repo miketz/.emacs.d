@@ -173,10 +173,6 @@ nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
 
-;; TODO: look into a way to use auto-complete for some modes and company for
-;;       others.
-
-
 ;;;----------------------------------
 ;;; globals
 ;;;----------------------------------
@@ -1252,6 +1248,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;;---------------------------------------------
 ;;; Auto-complete
 ;;;---------------------------------------------
+;; TODO: look into a way to use auto-complete for some modes and company for
+;;       others.
+
 ;; ;;use auto-complete in emacs 24.3 and below
 ;; (when t
 ;;   ;; (and (<= emacs-major-version 24)

@@ -252,6 +252,14 @@
 
 
 
+(defhydra hydra-expand-region (:body-pre (er/expand-region 1))
+  ("k" er/expand-region)
+  ("j" er/contract-region)
+
+  ("C-g" nil nil)
+  ("q" nil))
+
+
 
 
 (progn
@@ -260,6 +268,7 @@
 			      (list #'hydra-easyscroll/body
 				    #'hydra-window/body
 				    #'my-hydra-font/body
+                    #'hydra-expand-region/body
 				    ;;trying paredit #'hydra-paredit/body
 				    )))
   (defun my-choose-hydra ()

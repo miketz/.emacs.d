@@ -172,15 +172,9 @@ Specific configurations may be made for some computers.")
 nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
-;; (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
-;;   (if (file-exists-p curr-comp-file)
-;;       (setq my-curr-computer (intern
-;;                                (my-get-string-from-file curr-comp-file)))
-;;     (setq my-curr-computer 'unknown)))
 
 ;; TODO: look into a way to use auto-complete for some modes and company for
 ;;       others.
-
 
 
 ;;;----------------------------------

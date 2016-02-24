@@ -143,8 +143,7 @@ Useful to check a boolean state and toggle the state in 1 go."
 
 ;; Keeping track of the various computers I use emacs on.
 (defvar my-computers
-  '(unknown ;; if my-curr-computer.txt does not exist
-    work-laptop
+  '(work-laptop
     raspberry-pi
     utilite
     old-sony-vaio
@@ -166,10 +165,11 @@ Specific configurations may be made for some computers.")
 ;; to a symbol.
 (defconst my-curr-computer
   (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
-    (if (file-exists-p curr-comp-file)
-        (intern (my-get-string-from-file curr-comp-file))
-      'unknown))
+    (ignore-errors
+      (when (file-exists-p curr-comp-file)
+        (intern (my-get-string-from-file curr-comp-file)))))
   "The computer running this Emacs.  Identified by a flag file.
+nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
 ;; (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))

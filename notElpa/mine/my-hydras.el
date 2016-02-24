@@ -252,7 +252,13 @@
 
 
 
-(defhydra hydra-expand-region (:body-pre (er/expand-region 1))
+(defhydra hydra-expand-region
+  (:body-pre (er/expand-region 1)
+             ;; TODO: wrapping in `call-interactively' will allow C-g to
+             ;;       preserve the jump back to the orginial position. But
+             ;;       there are issues where it messes up the j key and
+             ;;       key-chord "fj". Get this to work how I want eventually.
+             )
   ("k" er/expand-region)
   ("j" er/contract-region)
 

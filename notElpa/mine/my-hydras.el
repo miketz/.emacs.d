@@ -265,12 +265,12 @@
 (progn
   ;; spawn hydras from a single binding. A hydra of hydras.
   (defvar *my-hydras* (mapcar #'symbol-name
-			      (list #'hydra-easyscroll/body
-				    #'hydra-window/body
-				    #'my-hydra-font/body
-                    #'hydra-expand-region/body
-				    ;;trying paredit #'hydra-paredit/body
-				    )))
+                              (list #'hydra-easyscroll/body
+                                    #'hydra-window/body
+                                    #'my-hydra-font/body
+                                    #'hydra-expand-region/body
+                                    ;;trying paredit #'hydra-paredit/body
+                                    )))
   (defun my-choose-hydra ()
     (interactive)
     (funcall (intern (completing-read "pick one: " *my-hydras*)))))

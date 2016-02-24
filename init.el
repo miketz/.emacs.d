@@ -2834,8 +2834,9 @@ and indent."
     (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
 
   ;; Speical highlight on the changed words in a line. Makes it easier to see
-  ;; what changed.
-  (setq magit-diff-refine-hunk t)
+  ;; what changed. If 'all becomes a performance problem then set it to t so
+  ;; it only affects the currently highlighted diff.
+  (setq magit-diff-refine-hunk 'all)
 
   ;; use colored graph lines. Could be a performance issue.
   (add-to-list 'magit-log-arguments "--color"))

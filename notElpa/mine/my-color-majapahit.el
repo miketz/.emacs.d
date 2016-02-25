@@ -61,6 +61,9 @@
                       :weight normal
                       :inverse-video nil))))
 
+   `(fringe
+     ((t (:foreground "#eddcca"
+                      :background "black"))))
 
    `(region
      ((t (:background "#69685E"))))     ;"#49483E"

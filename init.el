@@ -3750,6 +3750,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (with-eval-after-load "python"
   (add-hook 'python-mode-hook
             (lambda ()
+              (yas-minor-mode 1)
               (rainbow-delimiters-mode-enable)
               (highlight-indent-guides-mode 1)
               (electric-pair-mode 1)

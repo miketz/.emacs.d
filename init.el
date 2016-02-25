@@ -1584,7 +1584,7 @@ This prevents overlapping themes; something I would rarely want."
     ;; reclaim key M-h which nxml stole for`nxml-mark-paragraph'
     (define-key nxml-mode-map (kbd "M-h") #'evil-window-left))
 
-  ;; TODO make a minor mode for elmah logs. Inherit from nxml-mode.
+  ;; TODO: make a minor mode for elmah logs. Inherit from nxml-mode.
   (defun my-elmah-format-xml ()
     "Insert newlines at the escape codes in elmah's XML error message.
 To make it human readable."
@@ -2732,7 +2732,7 @@ and indent."
        ;;   (setcdr (cdr args) nil) ; remove third value returned from query---args
        ;;   args)
        )
-      ;; TODO clear in the header line too.
+      ;; TODO: clear in the header line too.
       (save-excursion
         (goto-char (point-min))
         (while (re-search-forward "" nil t)
@@ -3112,7 +3112,7 @@ and indent."
   ;; remove the default ^ prefix used by `counsel-M-x'
   (when (and (eq system-type 'windows-nt)
              (not (eq my-curr-computer 'leyna-laptop)))
-    ;;TODO fix this for linux and leyna-laptop. set-alist is not found?
+    ;;TODO: fix this for linux and leyna-laptop. set-alist is not found?
     (set-alist 'ivy-initial-inputs-alist 'counsel-M-x ""))
 
   ;; redefine `counsel--load-theme-action' to not require confirmation
@@ -3703,7 +3703,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; my-relative-num
 ;;;-----------------------------------------------------------------------------
 (when nil
-  ;; TODO: put in a package. look for the ideal build in functions.
+  ;; TODO: put in a package. look for the ideal built in functions.
   (defun my-curr-line ()
     "Like `what-line' but return an integer instead of a message."
     (interactive)

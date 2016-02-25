@@ -6,5 +6,4 @@
 # --
 alter table ${1:dbo}.${2:/*FKtab*/} with check add constraint FK_$2_$5
     foreign key(${3:/*FKcol*/}) references ${4:dbo}.${5:/*UKtab*/}(${6:/*UKcol*/});
-alter table $1.$2 check constraint FK_$2_$5;
 $0

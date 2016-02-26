@@ -976,8 +976,7 @@ This prevents overlapping themes; something I would rarely want."
     ;; (set-frame-font "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
-    (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
-    )
+    (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
 
    ((or (eq my-curr-computer 'leyna-laptop)
         (eq my-curr-computer 'a-laptop-old))

@@ -2039,7 +2039,8 @@ and indent."
 
   (add-hook 'c-mode-hook
             (lambda ()
-              (highlight-indent-guides-mode 1)
+              (when my-graphic-p
+               (highlight-indent-guides-mode 1))
 
               (progn ;; use linux style tabbing/indentation for C
                 ;; these values should be buffer local.
@@ -3757,7 +3758,8 @@ When ARG isn't nil, try to pretty print the sexp."
             (lambda ()
               (yas-minor-mode 1)
               (rainbow-delimiters-mode-enable)
-              (highlight-indent-guides-mode 1)
+              (when my-graphic-p
+               (highlight-indent-guides-mode 1))
               (electric-pair-mode 1)
               (electric-spacing-mode 1)
               (fci-mode 1))))

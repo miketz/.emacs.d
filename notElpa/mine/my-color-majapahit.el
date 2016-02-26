@@ -8,6 +8,16 @@
   (custom-theme-set-faces
    'majapahit-dark
 
+   '(isearch ((t :background "black"
+                 :foreground "yellow"
+                 :bold nil
+                 :underline t)))
+   '(lazy-highlight ((t
+                      :background "black"
+                      :foreground "cyan"
+                      :bold nil
+                      :underline t)))
+
    ;; override the hi-yellow face for printf escapes.
    '(hi-yellow
      ((t (:foreground "hotpink"

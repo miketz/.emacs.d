@@ -566,6 +566,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   ;;(add-to-list 'load-path "~/.emacs.d/evil") ; only without ELPA/el-get
   ;; (require 'evil)
+
+  ;; TODO: look into replacing evil-leader with 1 of the following:
+  ;;       https://github.com/justbur/emacs-bind-map
+  ;;       https://github.com/noctuid/general.el
   (require 'evil-leader)
   (global-evil-leader-mode)
   ;; (evil-mode 1)

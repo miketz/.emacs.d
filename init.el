@@ -2048,7 +2048,8 @@ and indent."
                 (setq tab-width 8)
                 (setq indent-tabs-mode t))
 
-              (fci-mode 1)))
+              ;; (fci-mode 1)
+              ))
 
 
   (add-hook 'c-initialization-hook
@@ -3762,7 +3763,8 @@ When ARG isn't nil, try to pretty print the sexp."
                (highlight-indent-guides-mode 1))
               (electric-pair-mode 1)
               (electric-spacing-mode 1)
-              (fci-mode 1))))
+              ;; (fci-mode 1)
+              )))
 
 ;;;-----------------------------------------------------------------------------
 ;;; calendar

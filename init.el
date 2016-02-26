@@ -3765,6 +3765,14 @@ When ARG isn't nil, try to pretty print the sexp."
               (fci-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
+;;; calendar
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "calendar"
+  ;; default is 8 which *should* be correct but seems I need to bump up to 9
+  ;; to stop the calendar window from resizing.
+  (setq calendar-minimum-window-height 9))
+
+;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (when (and nil   ;don't start server for now.

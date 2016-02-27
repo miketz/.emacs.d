@@ -978,11 +978,12 @@ This prevents overlapping themes; something I would rarely want."
     ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
     (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
 
-   ((or (eq my-curr-computer 'leyna-laptop)
-        (eq my-curr-computer 'a-laptop-old))
-    ;; (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+   ((eq my-curr-computer 'leyna-laptop)
+    (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
+
+   ((eq my-curr-computer 'a-laptop-old)
     (my-set-font :sym 'consolas
-                 :height 125            ; 90 105 115 120 125
+                 :height 125    ;; 90 105 115 120 125
                  :weight 'normal))
 
    ((eq my-curr-computer 'hp-tower-2009)

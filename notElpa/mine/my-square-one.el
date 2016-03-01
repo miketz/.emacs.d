@@ -1,5 +1,7 @@
 (defvar my-keep-buffers
-  '("*scratch*" "*Messages*" "*Compile-Log*" "*Minibuf-1*"
+  '("*scratch*" "*Messages*"
+    ;; "*Compile-Log*"
+    "*Minibuf-1*"
     "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
     "*Echo Area 1*" "*helm mini*")
   "Buffers to keep alive, even when wiping all buffers.")

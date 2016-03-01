@@ -3773,7 +3773,10 @@ When ARG isn't nil, try to pretty print the sexp."
 (with-eval-after-load "calendar"
   ;; default is 8 which *should* be correct but seems I need to bump up to 9
   ;; to stop the calendar window from resizing.
-  (setq calendar-minimum-window-height 9))
+  (setq calendar-minimum-window-height 9)
+
+  (when my-use-evil-p ;; use emacs, not evil bindings in calendar.
+    (add-to-list 'evil-buffer-regexps '("\\*Calendar*" . emacs))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

@@ -6,6 +6,12 @@
   (custom-theme-set-faces
    'firebelly
 
+   `(avy-lead-face
+     ((t (:foreground "orange"
+                      :slant normal
+                      :weight normal
+                      :inverse-video nil))))
+
    '(highlight-indent-guides-odd-face
      ((t (:background "#242424"
                       :weight bold))))

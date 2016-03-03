@@ -2980,15 +2980,18 @@ and indent."
 (with-eval-after-load "erc"
   (progn
     ;;from finster on irc #emacs. switch erc buffers
-    ;; TODO make it neutral to ido so i can use helm, swiper, default, etc.
+    ;; TODO; make it neutral to ido so i can use helm, swiper, default, etc.
     (defvar x/chatbuffer-types '(erc-mode
                                  circe-channel-mode
                                  circe-query-mode))
+
+    ;; TODO: rename function since it's no longer ido specific.
     (defun x/ido-chat-buffer ()
       "Switch to erc/circe buffer, completed by ido."
       (interactive)
+      ;; TODO: use ivy, ido, helm specific buffer switch fn.
       (switch-to-buffer
-       (ido-completing-read
+       (completing-read ;; ido-completing-read
         "Channel:"
         (save-excursion
           (delq

@@ -3787,6 +3787,28 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun find-shell (&optional shell-only)
+  ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why_cant_i_convert_to_you/
+  "Find end of shell buffer or create one by splitting the current window.
+If shell is already displayed in current frame, delete other windows
+in frame.  Stop displaying shell in all other windows."
+  (interactive)
+  (let* ((shellbuf (get-buffer "*shell*")))
+    (if (or (eq (window-buffer) shellbuf) shell-only)
+        (delete-other-windows)
+      (if (eq 1 (count-windows))
+          (split-window-vertically))
+      (if (not (eq (window-buffer) shellbuf))
+          (other-window 1)))
+    ;; undisplay shell in other windows (on other devices)
+    (and shellbuf
+         (> (length (get-buffer-window-list shellbuf nil t)) 0)
+         (replace-buffer-in-windows shellbuf)))
+  (shell)
+  (goto-char (point-max))
+  (recenter -2))
+(define-key global-map (kbd "C-c C-z") #'find-shell) ;; mimic slime repl binding.
+
 (when (and nil   ;don't start server for now.
            ;;`server-start' doesn't seemt to work on MS-windows?
            (eq system-type 'gnu/linux))

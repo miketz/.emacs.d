@@ -6,23 +6,48 @@
 (defvar my-backup-fringe-mode 0
   "Backs up the modeline state so it can later be restored after nilling it out.")
 
-(defun my-real-estate-max ()
+
+
+(defun my-real-estate-hide-mode-line ()
   (interactive)
   ;; backup modeline, but only if needed so we don't mess up a good backup.
   (when (null my-backup-mode-line-format)
     (setq my-backup-mode-line-format mode-line-format))
   ;; disable mode-line for vertical real-estate
-  (setq mode-line-format nil)
-  ;; disabel fringe for horizontal real-estate.
-  (set-fringe-mode 0))
+  (setq mode-line-format nil))
 
-(defun my-real-estate-restore ()
+(defun my-real-estate-restore-mode-line ()
   (interactive)
   ;; restore mode line from backup, but only if there is a good backup.
   (when (not (null my-backup-mode-line-format))
-    (setq mode-line-format my-backup-mode-line-format))
-  (set-fringe-mode nil)  ;; nil means the default fringe width. TODO: use a backup value.
+    (setq mode-line-format my-backup-mode-line-format)))
+
+
+
+(defun my-real-estate-hide-fringe ()
+  (interactive)
+  ;; disabel fringe for horizontal real-estate.
+  (set-fringe-mode 0))
+
+(defun my-real-estate-restore-fringe ()
+  (interactive)
+  ;; disabel fringe for horizontal real-estate.
+  (set-fringe-mode nil) ;; nil means the default fringe width. TODO: use a backup value.
   )
+
+
+
+(defun my-real-estate-max ()
+  (interactive)
+  (my-real-estate-hide-mode-line)
+  (my-real-estate-hide-fringe))
+
+(defun my-real-estate-restore ()
+  (interactive)
+  (my-real-estate-restore-mode-line)
+  (my-real-estate-restore-fringe))
+
+
 
 (when nil ; docs on fringe.
   (set-fringe-mode 0)         ; width 0

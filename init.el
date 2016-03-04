@@ -914,6 +914,7 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-rainbow-parens-dark-bg-bold "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-light-bg "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-light-bg2 "my-bg-specific-colors" nil t)
+(autoload #'my-rainbow-parens-light-bg3 "my-bg-specific-colors" nil t)
 
 
 (autoload #'my-color-grandshell "my-color-grandshell" nil t)

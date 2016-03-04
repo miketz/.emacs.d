@@ -54,6 +54,21 @@
   "Colored parens with highlighting."
   (interactive)
   (custom-set-faces
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight normal))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold nil))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold nil))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush" :bold nil))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "lemon chiffon" :bold nil))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background "#EEEEFF" :bold nil))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :bold nil))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :bold nil))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca" :bold nil))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :bold nil))))))
+
+(defun my-rainbow-parens-light-bg3 ()
+  "Colored parens with highlighting."
+  (interactive)
+  (custom-set-faces
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold t))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold t))))

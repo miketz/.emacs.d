@@ -3547,6 +3547,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 (autoload #'my-real-estate-max "my-screen-real-estate" nil t)
 ;; see cooresponding function `my-real-estate-restore'
+(autoload #'my-real-estate-hide-mode-line "my-screen-real-estate" nil t)
+(autoload #'my-real-estate-hide-fringe "my-screen-real-estate" nil t)
 
 ;;;-----------------------------------------------------------------------------
 ;;; electric-spacing

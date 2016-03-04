@@ -35,3 +35,6 @@
   (setq default-frame-alist (append '((minibuffer . nil)) default-frame-alist))
   (setq minibuffer-auto-raise t)
   (setq minibuffer-exit-hook '(lambda () (lower-frame))))
+
+;; (add-to-list 'default-frame-alist '(minibuffer  . nil))
+;; (modify-frame-parameters (selected-frame) '((minibuffer . nil)))

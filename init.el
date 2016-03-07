@@ -3091,7 +3091,7 @@ and indent."
     (defun my-counsel-tmm ()
       "Same as `counsel-tmm' but with a taller window."
       (interactive)
-      (let ((ivy-height 35))
+      (let ((ivy-height 1000))
         (call-interactively #'counsel-tmm)))
     (global-set-key (kbd "C-c m") #'my-counsel-tmm)
 

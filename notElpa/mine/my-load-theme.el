@@ -158,7 +158,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;; (defvar cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
 ;;                         "mint cream" "honeydew" "white smoke" "ghost white"
 ;;                         "snow" "alice blue" "lavender"))
-(defvar cycle-colors `("old lace" "floral white" "snow" "ghost white" "white"
+(defvar cycle-colors `("old lace" "floral white" "snow" "ghost white" "white smoke" "white"
                        "#F3F1DE" "#F3F2EA" ,mayan-smoke))
 (defvar cycle-index 0)
 (defun my-cycle-light-bg ()

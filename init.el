@@ -1171,7 +1171,8 @@ This prevents overlapping themes; something I would rarely want."
     (define-key slime-repl-mode-map key #'my-view-hyperspec)
     (define-key slime-macroexpansion-minor-mode-map key #'my-view-hyperspec))
   (when my-use-ivy-p
-    (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl)))
+    (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl))
+  (global-set-key (kbd "C-c b") #'slime-selector))
 
 
 ;;;---------------------------------------------

@@ -4,7 +4,7 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;;(load-theme 'deeper-blue t)
+(load-theme 'leuven t)
 ;; (set-background-color "white")
 
 ;;;----------------------------------
@@ -14,19 +14,20 @@
 ;; (custom-set-faces
 ;;  '(cursor ((t (:background "cyan")))))
 
-;; (load-theme 'deeper-blue)
-
 
 ;; (when (eq system-type 'windows-nt)
 ;;  (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 (when (eq system-type 'windows-nt)
-    (custom-set-faces
-     `(default ((t (:family "Consolas"
-                            :foundry "outline"
-                            :slant normal
-                            :weight normal
-                            :height 125
-                            :width normal))))))
+  (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+    ;; (custom-set-faces
+    ;;  `(default ((t (:family "Consolas"
+    ;;                         :foundry "outline"
+    ;;                         :slant normal
+    ;;                         :weight normal
+    ;;                         :height 125
+    ;;                         :width )))))
+    )
+
 ;; (custom-set-faces
 ;;  '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
 

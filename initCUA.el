@@ -4,7 +4,7 @@
 ;(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; (load-theme 'github t)
+(load-theme 'leuven t)
 ;; (set-background-color "white")
 
 (progn ;;CUA stuff
@@ -13,19 +13,12 @@
   (setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
   )
 
-;(load-theme 'adwaita)
 (setq-default cursor-type '(bar . 2))
 ;(set-background-color "ivory2")
 ;(set-cursor-color "blue")
 
-
-(custom-set-faces
- `(default ((t (:family "Consolas"
-                        :foundry "outline"
-                        :slant normal
-                        :weight normal
-                        :height 115
-                        :width normal)))))
+(when (eq system-type 'windows-nt)
+  (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"))
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 

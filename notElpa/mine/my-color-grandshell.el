@@ -6,6 +6,12 @@
   (custom-theme-set-faces
    'grandshell
 
+   `(avy-lead-face ;; the first overlay char
+     ((t (:foreground "green"
+                      :slant normal
+                      :weight bold
+                      :inverse-video nil))))
+
    `(font-lock-comment-face
      ((t (:foreground "gray50" :slant italic))))
    `(font-lock-comment-delimiter-face

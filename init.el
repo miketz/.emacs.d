@@ -3400,15 +3400,19 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;;-----------------------------------------------------------------------------
 ;;; lispy
 ;;;-----------------------------------------------------------------------------
-(add-hook 'emacs-lisp-mode-hook       #'lispy-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'lispy-mode)
-(add-hook 'ielm-mode-hook             #'lispy-mode)
-(add-hook 'lisp-mode-hook             #'lispy-mode)
-(add-hook 'lisp-interaction-mode-hook #'lispy-mode)
-(add-hook 'scheme-mode-hook           #'lispy-mode)
-(add-hook 'slime-repl-mode-hook #'lispy-mode)
-
 (with-eval-after-load "lispy"
+  ;; To improve start up speed move hooks to eval-after-load. Otherwise the
+  ;; scratch buffer which uses `lisp-interaction-mode' will load lispy. The
+  ;; first lispy start will be manual, then hooks be set up. On work-laptop
+  ;; this speeds start up by 3-4 seconds.
+  (add-hook 'emacs-lisp-mode-hook       #'lispy-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'lispy-mode)
+  (add-hook 'ielm-mode-hook             #'lispy-mode)
+  (add-hook 'lisp-mode-hook             #'lispy-mode)
+  (add-hook 'lisp-interaction-mode-hook #'lispy-mode)
+  (add-hook 'scheme-mode-hook           #'lispy-mode)
+  (add-hook 'slime-repl-mode-hook #'lispy-mode)
+
   (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
   ;; (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
 

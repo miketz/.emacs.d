@@ -278,18 +278,18 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     expand-region
     ;;multiple-cursors
     ;;omnisharp
-    zenburn-theme
-    firebelly-theme
-    niflheim-theme
-    gruvbox-theme
-    badger-theme
-    monokai-theme
-    tronesque-theme
-    gandalf-theme
+    ;; zenburn-theme
+    ;; firebelly-theme
+    ;; niflheim-theme
+    ;; gruvbox-theme
+    ;; badger-theme
+    ;; monokai-theme
+    ;; tronesque-theme
+    ;; gandalf-theme
     ;;color-theme-sanityinc-tomorrow
-    grandshell-theme
-    tommyh-theme
-    majapahit-theme
+    ;; grandshell-theme
+    ;; tommyh-theme
+    ;; majapahit-theme
     ;;sublimity
     nyan-mode
     nyan-prompt

@@ -11,8 +11,8 @@
 ;;; cursor
 ;;;----------------------------------
 (setq-default cursor-type '(bar . 2))
-;; (custom-set-faces
-;;  '(cursor ((t (:background "cyan")))))
+(custom-set-faces
+ '(cursor ((t (:background "blue")))))
 
 
 ;; (when (eq system-type 'windows-nt)

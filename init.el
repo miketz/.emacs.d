@@ -1913,14 +1913,16 @@ To make it human readable."
   (setq ido-vertical-show-count t))
 
 (with-eval-after-load "smex"
-  ;; insert a hypen - on space like in normal M-x
-  (defadvice smex (around space-inserts-hyphen activate compile)
-    (let ((ido-cannot-complete-command `(lambda ()
-                                          (interactive)
-                                          (if (string= " " (this-command-keys))
-                                              (insert ?-)
-                                            (funcall ,ido-cannot-complete-command)))))
-      ad-do-it)))
+  (when my-use-ido-p ;; GUARD: smex is used for `counsel-M-x' too where this
+                     ;; advice is not needed.
+   ;; insert a hypen - on space like in normal M-x
+   (defadvice smex (around space-inserts-hyphen activate compile)
+     (let ((ido-cannot-complete-command `(lambda ()
+                                           (interactive)
+                                           (if (string= " " (this-command-keys))
+                                               (insert ?-)
+                                             (funcall ,ido-cannot-complete-command)))))
+       ad-do-it))))
 
 ;;;--------------------
 ;;; Yasnippet

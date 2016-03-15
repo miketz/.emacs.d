@@ -3242,73 +3242,14 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;     (switch-to-buffer buf)))
 
 ;;;-----------------------------------------------------------------------------
+;;; mor.el in ~/.emacs.d/notElpa/mine
 ;;; Create a new buffer, stuff text in it, turn on mode.
-;;; TODO: move this into a new file. Add autoloads.
 ;;;-----------------------------------------------------------------------------
-(defvar my-counter 0
-  "Sequential counter used for various things.")
+(autoload #'mor-mode-on-region "mor" nil t)
+(autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
 
-(defvar my-start nil "Start of region.")
-(defvar my-end nil "End of region.")
-(defvar my-orig-buffer nil)
-
-(defun my-gen-buffer-name ()
-  (prog1
-      (concat "tmp-"
-              (buffer-name (current-buffer))
-              "-"
-              (int-to-string my-counter))
-    (cl-incf my-counter)))
-
-(defun my-kill-tmp-buffers ()
-  (interactive)
-  (dolist (b (buffer-list))
-    (when (my-str-starts-with-p (buffer-name b) "tmp-")
-      (kill-buffer b))))
-
-(defun my-mode-on-region (start end)
-  "Switch to a new buffer with the highlighted text. Turn on a mode."
-  (interactive "r")
-  (my--mode-on-region start
-                      end
-                      (intern (completing-read
-                               "Mode: "
-                               (mapcar (lambda (e)
-                                         (list (symbol-name e)))
-                                       (apropos-internal "-mode$" #'commandp))
-                               nil t))))
-
-(defun my-emacs-lisp-mode-on-region (start end)
-  (interactive "r")
-  (my--mode-on-region start end #'emacs-lisp-mode))
-
-(defun my--mode-on-region (start end mode-fn)
-  ;; save buffer and region coordinates to copy the text back in later.
-  (setq my-orig-buffer (current-buffer)
-        my-start start
-        my-end end)
-
-  (kill-ring-save start end) ;; copy higlihgted text
-  (deactivate-mark)
-
-  (switch-to-buffer-other-window (my-gen-buffer-name))
-  (yank)              ;; paste text
-  (funcall mode-fn)   ;; interactively select mode, turn it on.
-  (mark-whole-buffer) ;; for auto indenting
-  (call-interactively #'indent-region) ;; interactive gets region autmoatically
-  )
-
-(defun my-copy-back ()
-  (interactive)
-  (kill-ring-save (point-min) (point-max)) ;; mode buffer text.
-  (switch-to-buffer-other-window my-orig-buffer)
-  ;; highlight the region to overwrite
-  (goto-char my-start)
-  (delete-char (- my-end my-start)) ;; (set-mark my-end)
-  ;; paste new text, overwriting old text.
-  (yank))
-
-;; TODO: keybinds
+(when my-use-evil-p
+  (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Focus javascript

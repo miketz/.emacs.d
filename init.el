@@ -307,7 +307,6 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     flycheck-irony
     rtags
     ;;aggressive-indent
-    helm-w32-launcher
     sx
     leerzeichen
     ;;sql-indent
@@ -330,7 +329,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
     avy
-    helm-flycheck
+    ;;helm-flycheck
     lispy
     ;;helm-descbinds
     worf
@@ -354,7 +353,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 
 (when (eq my-curr-computer 'work-laptop)
   (add-to-list 'my-packages 'omnisharp))
-
+(when (eq system-type 'windows-nt)
+  (add-to-list 'my-packages 'helm-w32-launcher))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -2959,16 +2959,14 @@ and indent."
 ;;;----------------------------------
 ;;; helm-flycheck
 ;;;----------------------------------
-  (when my-use-helm-p
-    (defun my-helm-flycheck ()
-      (interactive)
-      ;;nil for no candidate limit. I want to scroll through all the warnings.
-      (let ((helm-candidate-number-limit nil))
-        (call-interactively #'helm-flycheck)))
-    ;;(evil-define-key 'normal flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
-    (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck)
-    ;;(define-key flycheck-mode-map (kbd "C-c ! h") #'helm-flycheck)
-    ))
+  ;; (when my-use-helm-p
+  ;;   (defun my-helm-flycheck ()
+  ;;     (interactive)
+  ;;     ;;nil for no candidate limit. I want to scroll through all the warnings.
+  ;;     (let ((helm-candidate-number-limit nil))
+  ;;       (call-interactively #'helm-flycheck)))
+  ;;   (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck))
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; hydra

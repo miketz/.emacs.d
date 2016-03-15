@@ -1772,7 +1772,7 @@ To make it human readable."
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
 (when my-use-evil-p
- (evil-leader/set-key "g" #'my-vc-git-grep))
+  (evil-leader/set-key "g" #'my-vc-git-grep))
 
 ;;;--------------------
 ;;; helm-swoop

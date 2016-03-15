@@ -2228,6 +2228,12 @@ and indent."
       (read-kbd-macro paredit-backward-delete-key) nil))
   (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
 
+  ;; barf/slurp keybinds
+  (define-key paredit-mode-map (kbd "C-9") #'paredit-forward-barf-sexp)
+  (define-key paredit-mode-map (kbd "C-0") #'paredit-forward-slurp-sexp)
+  (define-key paredit-mode-map (kbd "C-M-9") #'paredit-backward-slurp-sexp)
+  (define-key paredit-mode-map (kbd "C-M-0") #'paredit-backward-barf-sexp)
+
   (when (eq my-ui-type 'emacs)
     ;; reclaim the M-r binding to move cursor to middle, high, low
     (define-key paredit-mode-map (kbd "M-r") #'move-to-window-line-top-bottom)

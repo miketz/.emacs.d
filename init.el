@@ -3248,6 +3248,10 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (defvar my-counter 0
   "Sequential counter used for various things.")
 
+(defvar my-start nil "Start of region.")
+(defvar my-end nil "End of region.")
+(defvar my-orig-buffer nil)
+
 (defun my-gen-buffer-name ()
   (prog1
       (concat "tmp-"
@@ -3259,8 +3263,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (defun my-kill-tmp-buffers ()
   (interactive)
   (dolist (b (buffer-list))
-    ;; TODO: implement
-    ))
+    (when (my-str-starts-with-p (buffer-name b) "tmp-")
+      (kill-buffer b))))
 
 (defun my-mode-on-region (start end)
   "Switch to a new buffer with the highlighted text. Turn on a mode."
@@ -3279,6 +3283,11 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   (my--mode-on-region start end #'emacs-lisp-mode))
 
 (defun my--mode-on-region (start end mode-fn)
+  ;; save buffer and region coordinates to copy the text back in later.
+  (setq my-orig-buffer (current-buffer)
+        my-start start
+        my-end end)
+
   (kill-ring-save start end) ;; copy higlihgted text
   (deactivate-mark)
 
@@ -3288,6 +3297,16 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   (mark-whole-buffer) ;; for auto indenting
   (call-interactively #'indent-region) ;; interactive gets region autmoatically
   )
+
+(defun my-copy-back ()
+  (interactive)
+  (kill-ring-save (point-min) (point-max)) ;; mode buffer text.
+  (switch-to-buffer-other-window my-orig-buffer)
+  ;; highlight the region to overwrite
+  (goto-char my-start)
+  (delete-char (- my-end my-start)) ;; (set-mark my-end)
+  ;; paste new text, overwriting old text.
+  (yank))
 
 ;; TODO: keybinds
 

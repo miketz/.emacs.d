@@ -726,44 +726,44 @@ Minus the newline char."
 ;;;----------------------------------
 ;;; font
 ;;;----------------------------------
-(when (or (eq my-curr-computer 'work-laptop)
-          (eq my-curr-computer 'leyna-laptop))
-  ;; configure default settings for fonts.
-  (defvar my-default-font 'consolas)
-  (defvar my-good-fonts
-    '((inconsolata "Inconsolata" 135 normal) ; looks OK. fits a good number of
-                                             ; lines on screen. flaky on bold.
-                                             ; no itallic?
-      (consolas "Consolas" 125 normal) ; consolas is the best looking but fits
-                                       ; fewer lines on screen.
-      (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ; good, but looks a
-                                                           ; bit "tall"
-      (fixedsys "FixedSys" 120 normal)))
+;; (when (or (eq my-curr-computer 'work-laptop)
+;;           (eq my-curr-computer 'leyna-laptop))
+;;   ;; configure default settings for fonts.
+;;   (defvar my-default-font 'consolas)
+;;   (defvar my-good-fonts
+;;     '((inconsolata "Inconsolata" 135 normal) ; looks OK. fits a good number of
+;;                                              ; lines on screen. flaky on bold.
+;;                                              ; no itallic?
+;;       (consolas "Consolas" 125 normal) ; consolas is the best looking but fits
+;;                                        ; fewer lines on screen.
+;;       (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ; good, but looks a
+;;                                                            ; bit "tall"
+;;       (fixedsys "FixedSys" 120 normal)))
 
-  (cl-defun my-set-font (&optional
-                         &key
-                         (sym nil) (height nil) (weight nil)
-                         (resize-window nil))
-    "Sets the font.
-If sym is not specified it uses the configured default set in `my-default-font'.
-If height or weight are not specified then it uses the configured defaults
-in `my-good-fonts'.
-Resize-window = t will adjust the window so the modeline fits on screen, etc."
-    (unless sym (setq sym my-default-font))
-    (let ((the-font (assoc sym my-good-fonts)))
-      (unless height (setq height (third the-font)))
-      (unless weight (setq weight (fourth the-font)))
-      (let ((font-str (second the-font)))
-        (custom-set-faces
-         `(default ((t (:family ,font-str
-                                :foundry "outline"
-                                :slant normal
-                                :weight ,weight
-                                :height ,height
-                                :width normal)))))))
-    (when resize-window
-      (my-w32-run 'restore-curr-frame)
-      (my-w32-run 'max))))
+;;   (cl-defun my-set-font (&optional
+;;                          &key
+;;                          (sym nil) (height nil) (weight nil)
+;;                          (resize-window nil))
+;;     "Sets the font.
+;; If sym is not specified it uses the configured default set in `my-default-font'.
+;; If height or weight are not specified then it uses the configured defaults
+;; in `my-good-fonts'.
+;; Resize-window = t will adjust the window so the modeline fits on screen, etc."
+;;     (unless sym (setq sym my-default-font))
+;;     (let ((the-font (assoc sym my-good-fonts)))
+;;       (unless height (setq height (third the-font)))
+;;       (unless weight (setq weight (fourth the-font)))
+;;       (let ((font-str (second the-font)))
+;;         (custom-set-faces
+;;          `(default ((t (:family ,font-str
+;;                                 :foundry "outline"
+;;                                 :slant normal
+;;                                 :weight ,weight
+;;                                 :height ,height
+;;                                 :width normal)))))))
+;;     (when resize-window
+;;       (my-w32-run 'restore-curr-frame)
+;;       (my-w32-run 'max))))
 
 
 (progn ;; inc/dec font size
@@ -986,9 +986,10 @@ This prevents overlapping themes; something I would rarely want."
     (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
 
    ((eq my-curr-computer 'a-laptop-old)
-    (my-set-font :sym 'consolas
-                 :height 125    ;; 90 105 115 120 125
-                 :weight 'normal))
+    ;; (my-set-font :sym 'consolas
+    ;;              :height 125    ;; 90 105 115 120 125
+    ;;              :weight 'normal)
+    (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p

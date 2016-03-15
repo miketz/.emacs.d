@@ -141,7 +141,6 @@ Useful to check a boolean state and toggle the state in 1 go."
 ;; system-type
 ;; my-curr-computer
 
-;; Keeping track of the various computers I use emacs on.
 (defvar my-computers
   '(work-laptop
     raspberry-pi

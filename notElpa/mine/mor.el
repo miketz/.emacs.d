@@ -46,13 +46,13 @@ Turn on the selected mode.
 Region is between START and END inclusive."
   (interactive "r")
   (mor--mode-on-region start
-                      end
-                      (intern (completing-read
-                               "Mode: "
-                               (mapcar (lambda (e)
-                                         (list (symbol-name e)))
-                                       (apropos-internal "-mode$" #'commandp))
-                               nil t))))
+                       end
+                       (intern (completing-read
+                                "Mode: "
+                                (mapcar (lambda (e)
+                                          (list (symbol-name e)))
+                                        (apropos-internal "-mode$" #'commandp))
+                                nil t))))
 
 ;;;###autoload
 (defun mor-emacs-lisp-mode-on-region (start end)

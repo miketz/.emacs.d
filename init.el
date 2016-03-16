@@ -3256,8 +3256,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region))
 
 (with-eval-after-load "mor"
-  (setq mor-format-automatically-p t)
-  (setq mor-switch-buff-fn #'switch-to-buffer-other-window))
+  (setq mor-format-automatically-p t
+        mor-switch-buff-fn #'switch-to-buffer-other-window))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Focus javascript

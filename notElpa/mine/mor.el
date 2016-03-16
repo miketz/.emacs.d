@@ -36,7 +36,14 @@
   "Function used to switch to the tmp buffer (and back again).
 Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 
-
+;; TODO: When tmp buffer is killed, attempt to preserve the original window
+;;       layout. See if there are built in functions for temporary windows
+;;       and/or buffers.
+;; TODO: Make an option to attempt to preserve the original indent when copying
+;;       text back to the original buffer. This could make option
+;;       `mor-format-automatically-p' more useful becuase when it forces
+;;       text to the left edge in tmp, it won't destroy the indent in the orig
+;;       buffer.
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for temp buffer names.")

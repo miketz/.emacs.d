@@ -8,25 +8,37 @@
 (require 'cl-lib)
 (require 'rx)
 
-(defvar mor-counter 0
-  "Sequential counter used to generate unique names for temp buffers.")
-(defvar mor-start nil "Start of region.") ; TODO: use buffer local
-(defvar mor-end nil "End of region.")     ; TODO: use buffer local
-(defvar mor-orig-buffer nil)              ; TODO: use buffer local
 
-(defconst mor-prefix "tmp-"
+(defvar mor-format-automatically-p nil
+  "When t automatically format the copied text iva `indent-region'.")
+
+
+(defconst mor--prefix "mor-tmp-"
   "Prefix used for temp buffer names.")
+(defvar mor--counter 0
+  "Sequential counter used to generate unique names for temp buffers.")
+
+
+(defvar-local mor--orig-buffer nil
+  "Used in tmp buffer to transfer the modified text back to the original buffer.")
+(defvar-local mor--start nil
+  "Start of region.
+Used in tmp buffer to transfer the modified text back to the original buffer.")
+(defvar-local mor--end nil
+  "End of region.
+Used in tmp buffer to transfer the modified text back to the original buffer.")
+
 
 (defun mor--gen-buffer-name ()
   "Generate a unique buffer name."
   (prog1
-      (concat mor-prefix
+      (concat mor--prefix
               (buffer-name (current-buffer))
               "-"
-              (int-to-string mor-counter))
-    (cl-incf mor-counter)))
+              (int-to-string mor--counter))
+    (cl-incf mor--counter)))
 
-(defun mor--str-starts-with-p (string prefix)
+(defun mor--starts-with-p (string prefix)
   "Return t if STRING begins with PREFIX."
   (and (string-match (rx-to-string `(: bos ,prefix) t)
                      string)
@@ -36,7 +48,7 @@
   "Delete the junk tmp buffers."
   (interactive)
   (dolist (b (buffer-list))
-    (when (mor--str-starts-with-p (buffer-name b) mor-prefix)
+    (when (mor--starts-with-p (buffer-name b) mor--prefix)
       (kill-buffer b))))
 
 ;;;###autoload
@@ -67,29 +79,61 @@ Region is between START and END.
 MODE-FN the function to turn on the desired mode."
 
   ;; save buffer and region coordinates to copy the text back in later.
-  (setq mor-orig-buffer (current-buffer)
-        mor-start start
-        mor-end end)
+  (let ((orig-buff (current-buffer))
+        (tmp-buff (mor--gen-buffer-name)))
 
-  (kill-ring-save start end) ;; copy higlihgted text
-  (deactivate-mark)
 
-  (switch-to-buffer-other-window (mor--gen-buffer-name))
-  (yank)              ;; paste text
-  (funcall mode-fn)   ;; interactively select mode, turn it on.
-  (mark-whole-buffer) ;; for auto indenting
-  (call-interactively #'indent-region) ;; interactive gets region autmoatically
+    (kill-ring-save start end) ;; copy higlihgted text
+    (deactivate-mark)
+
+    (switch-to-buffer-other-window tmp-buff)
+    (yank)              ;; paste text
+    (funcall mode-fn)   ;; interactively select mode, turn it on.
+    (with-current-buffer tmp-buff
+      ;; NOTE: these buffer-local vars must be set AFTER `mode-fn' is
+      ;; called. Becuase major modes wipe buffer local vars.
+      (setq mor--orig-buffer orig-buff
+            mor--start start
+            mor--end end))
+    (when mor-format-automatically-p
+      (mark-whole-buffer)                   ;; for auto indenting
+      (call-interactively #'indent-region))) ;; interactive gets region autmoatically
   )
 
+;; TODO: find a way to make the existence of this function buffer-local so I
+;; don't need a guarding check.
 (defun mor-copy-back ()
-  "Copies the temp buffer text back the original buffer.
-WARNING: Overwrites the original text."
+  "Copy the temp buffer text back the original buffer.
+
+WARNING:
+Overwrites the original text.
+May not work correclty if original buffer has been modified since the tmp
+buffer was created.  If in doubt, just manually copy the text back.
+
+TODO: Use a more full-proof technqiue to identity the start/end location to
+overwrite."
   (interactive)
-  (kill-ring-save (point-min) (point-max)) ;; mode buffer text.
-  (switch-to-buffer-other-window mor-orig-buffer)
+  (if (null mor--orig-buffer) ; guard
+      (message "You must be in a mor-tmp buffer for this to work.")
+    (progn
+      (let ((tmp-buff (current-buffer)))
+        (kill-ring-save (point-min) (point-max)) ;; mode buffer text.
+        (mor--copy-back-orig mor--start
+                             mor--end
+                             mor--orig-buffer)
+        ;; kill the tmp buffer becuase mulitple attempts to copy back text
+        ;; will be wrong due to hte static start/end location. Will need
+        ;; to use a better way to track start/end before we can allow the
+        ;; tmp buffer to live longer for mulitple copies.
+        (kill-buffer tmp-buff)))))
+
+(defun mor--copy-back-orig (start end orig-buff)
+  ;; NOTE: start, end, and orig-buff must be parameters becuase the buffer
+  ;; local values don't exist in the original buffer (which we are now in).
+  (switch-to-buffer-other-window orig-buff)
   ;; highlight the region to overwrite
-  (goto-char mor-start)
-  (delete-char (- mor-end mor-start)) ;; (set-mark mor-end)
+  (goto-char start)
+  (delete-char (- end start))
   ;; paste new text, overwriting old text.
   (yank))
 

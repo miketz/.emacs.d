@@ -10,7 +10,7 @@
 
 
 (defvar mor-format-automatically-p nil
-  "When t automatically format the copied text iva `indent-region'.")
+  "When t automatically format the copied text via `indent-region'.")
 
 (defvar mor-switch-buff-fn #'switch-to-buffer-other-window
   "Function used to switch to the tmp buffer (and back again).

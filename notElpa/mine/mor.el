@@ -136,7 +136,7 @@ Overwrites the original text.
 May not work correclty if original buffer has been modified since the tmp
 buffer was created.  If in doubt, just manually copy the text back.
 
-TODO: Use a more full-proof technqiue to identity the start/end location to
+TODO: Use a more full-proof technqiue to identify the start/end location to
 overwrite."
   (interactive)
   (if (null mor--orig-buffer) ; guard

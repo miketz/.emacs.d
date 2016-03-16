@@ -3,8 +3,8 @@
 
 ;;; Commentary:
 ;;;
-;;; Use function `mor-emacs-lisp-mode-on-region' to copy a highlighted region
-;;; to a new buffer and turn on a mode.
+;;; Use function `mor-mode-on-region' to copy a highlighted region to a new
+;;; buffer and turn on a mode.
 ;;;
 ;;; Copy the text back with `mor-copy-back'
 ;;;
@@ -141,7 +141,7 @@ overwrite."
   (interactive)
   (if (null mor--orig-buffer) ; guard
       (message "You must be in a mor-tmp buffer for this to work.")
-    (progn
+    (progn ; else
       (let ((tmp-buff (current-buffer)))
         (kill-ring-save (point-min) (point-max)) ;; mode buffer text.
         (mor--copy-back-orig mor--start

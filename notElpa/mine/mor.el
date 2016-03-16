@@ -1,8 +1,28 @@
 ;;; mor.el --- Mode on region -*- lexical-binding: t -*-
 
+
 ;;; Commentary:
-;;; Copy highlighted region to a new buffer, then turn on a mode.
+;;;
+;;; Use function `mor-emacs-lisp-mode-on-region' to copy a highlighted region
+;;; to a new buffer and turn on a mode.
+;;;
 ;;; Copy the text back with `mor-copy-back'
+;;;
+;;; NOTE: lexical binding is used as a potential micro-optimization for
+;;; variable lookups.  This package *should* work whether lexical or dynamic
+;;; binding is used.
+
+
+;;; Installation:
+;;; Place `mor.el' in folder `/your/choosen/folder'.
+;;; Add the following text to your .emacs or init.el file:
+;;;
+;;;   (add-to-list 'load-path "/your/choosen/folder")
+;;;   (autoload #'mor-mode-on-region "mor" nil t)
+;;;   (autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
+;;;   ;; configure
+;;;   (setq mor-format-automatically-p t)
+
 
 ;;; Code:
 (require 'cl-lib)
@@ -23,8 +43,10 @@ Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 (defvar mor--counter 0
   "Sequential counter used to generate unique names for temp buffers.")
 
+
 (defvar-local mor--orig-buffer nil
-  "Used in tmp buffer to transfer the modified text back to the original buffer.")
+  "The original buffer you highted some text in.
+Used in tmp buffer to transfer the modified text back to the original buffer.")
 (defvar-local mor--start nil
   "Start of region.
 Used in tmp buffer to transfer the modified text back to the original buffer.")
@@ -90,7 +112,7 @@ MODE-FN the function to turn on the desired mode."
     (kill-ring-save start end) ;; copy higlihgted text
     (deactivate-mark)
 
-    (funcall mor-switch-buff-fn tmp-buff);; (switch-to-buffer-other-window tmp-buff)
+    (funcall mor-switch-buff-fn tmp-buff)
     (yank)              ;; paste text
     (funcall mode-fn)   ;; interactively select mode, turn it on.
     (with-current-buffer tmp-buff
@@ -100,9 +122,9 @@ MODE-FN the function to turn on the desired mode."
             mor--start start
             mor--end end))
     (when mor-format-automatically-p
-      (mark-whole-buffer)                   ;; for auto indenting
-      (call-interactively #'indent-region))) ;; interactive gets region autmoatically
-  )
+      (mark-whole-buffer)
+      ;; interactive gets region autmoatically
+      (call-interactively #'indent-region))))
 
 ;; TODO: find a way to make the existence of this function buffer-local so I
 ;; don't need a guarding check.
@@ -132,9 +154,13 @@ overwrite."
         (kill-buffer tmp-buff)))))
 
 (defun mor--copy-back-orig (start end orig-buff)
+  "Copy the tmp buffer text back to the original buffer.
+START of the region.
+END of the region.
+ORIG-BUFF to copy to."
   ;; NOTE: start, end, and orig-buff must be parameters becuase the buffer
   ;; local values don't exist in the original buffer (which we are now in).
-  (funcall mor-switch-buff-fn orig-buff) ;;(switch-to-buffer-other-window orig-buff)
+  (funcall mor-switch-buff-fn orig-buff)
   ;; highlight the region to overwrite
   (goto-char start)
   (delete-char (- end start))

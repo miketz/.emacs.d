@@ -12,12 +12,16 @@
 (defvar mor-format-automatically-p nil
   "When t automatically format the copied text iva `indent-region'.")
 
+(defvar mor-switch-buff-fn #'switch-to-buffer-other-window
+  "Function used to switch to the tmp buffer (and back again).
+Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
+
+
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for temp buffer names.")
 (defvar mor--counter 0
   "Sequential counter used to generate unique names for temp buffers.")
-
 
 (defvar-local mor--orig-buffer nil
   "Used in tmp buffer to transfer the modified text back to the original buffer.")
@@ -86,7 +90,7 @@ MODE-FN the function to turn on the desired mode."
     (kill-ring-save start end) ;; copy higlihgted text
     (deactivate-mark)
 
-    (switch-to-buffer-other-window tmp-buff)
+    (funcall mor-switch-buff-fn tmp-buff);; (switch-to-buffer-other-window tmp-buff)
     (yank)              ;; paste text
     (funcall mode-fn)   ;; interactively select mode, turn it on.
     (with-current-buffer tmp-buff
@@ -130,7 +134,7 @@ overwrite."
 (defun mor--copy-back-orig (start end orig-buff)
   ;; NOTE: start, end, and orig-buff must be parameters becuase the buffer
   ;; local values don't exist in the original buffer (which we are now in).
-  (switch-to-buffer-other-window orig-buff)
+  (funcall mor-switch-buff-fn orig-buff) ;;(switch-to-buffer-other-window orig-buff)
   ;; highlight the region to overwrite
   (goto-char start)
   (delete-char (- end start))

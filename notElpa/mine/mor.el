@@ -126,7 +126,7 @@ overwrite."
                              mor--end
                              mor--orig-buffer)
         ;; kill the tmp buffer becuase mulitple attempts to copy back text
-        ;; will be wrong due to hte static start/end location. Will need
+        ;; will be wrong due to the static start/end location. Will need
         ;; to use a better way to track start/end before we can allow the
         ;; tmp buffer to live longer for mulitple copies.
         (kill-buffer tmp-buff)))))

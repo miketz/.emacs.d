@@ -93,7 +93,7 @@ Region is between START and END inclusive."
   (interactive "r")
   (mor--mode-on-region start
                        end
-                       (intern (completing-read
+                       (intern (completing-read ; uses chooses the mode
                                 "Mode: "
                                 (mapcar (lambda (e)
                                           (list (symbol-name e)))
@@ -122,7 +122,7 @@ MODE-FN the function to turn on the desired mode."
 
     (funcall mor-switch-buff-fn tmp-buff)
     (yank)              ;; paste text
-    (funcall mode-fn)   ;; interactively select mode, turn it on.
+    (funcall mode-fn)   ;; turn on the dedicated mode.
     (with-current-buffer tmp-buff
       ;; NOTE: these buffer-local vars must be set AFTER `mode-fn' is
       ;; called. Becuase major modes wipe buffer local vars.
@@ -131,7 +131,8 @@ MODE-FN the function to turn on the desired mode."
             mor--end end))
     (when mor-format-automatically-p
       (mark-whole-buffer)
-      ;; interactive gets region autmoatically
+      ;; using `call-interactively' becuase it includes the START/END
+      ;; region parameters.
       (call-interactively #'indent-region))))
 
 ;; TODO: find a way to make the existence of this function buffer-local so I
@@ -151,7 +152,7 @@ overwrite."
       (message "You must be in a mor-tmp buffer for this to work.")
     (progn ; else
       (let ((tmp-buff (current-buffer)))
-        (kill-ring-save (point-min) (point-max)) ;; mode buffer text.
+        (kill-ring-save (point-min) (point-max)) ;; tmp buffer text.
         (mor--copy-back-orig mor--start
                              mor--end
                              mor--orig-buffer)

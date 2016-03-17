@@ -3253,7 +3253,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
 
 (when my-use-evil-p
-  (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region))
+  (eval-after-load "evil"
+    '(define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)))
 
 (with-eval-after-load "mor"
   (setq mor-format-automatically-p t

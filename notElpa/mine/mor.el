@@ -23,7 +23,7 @@
 ;;;   (autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
 ;;;   ;; configure
 ;;;   (setq mor-format-automatically-p t)
-;;;   ;; reccomended keybind for evil users.  Press "m" in visual mode.
+;;;   ;; recommended keybind for evil users.  Press "m" in visual mode.
 ;;;   (eval-after-load "evil"
 ;;;     '(define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region))
 

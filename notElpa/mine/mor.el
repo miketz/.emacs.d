@@ -48,6 +48,9 @@ Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 ;;       `mor-format-automatically-p' more useful becuase when it forces
 ;;       text to the left edge in tmp, it won't destroy the indent in the orig
 ;;       buffer.
+;; TODO: Support selection of rectangular regions. Useful for selecting text
+;;       in a comment. So you could exlude the comment markers that would mess
+;;       up the dedicate mode buffer.
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for temp buffer names.")

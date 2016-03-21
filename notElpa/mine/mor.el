@@ -42,9 +42,9 @@ Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 
 (defvar mor-preserve-win-layout-p t
   "When t attempt to preserve the orinal window layout after copying back.
-Implememntation is very crude.") ;; TODO: See if there are built in functions
-                                 ;; for temporary windows and/or buffers.
-                                 ;; Use winner mode if it's available?
+Implementation is very crude.") ;; TODO: See if there are built in functions
+                                ;; for temporary windows and/or buffers.
+                                ;; Use winner mode if it's available?
 
 ;; TODO: Make an option to attempt to preserve the original indent when copying
 ;;       text back to the original buffer. This could make option

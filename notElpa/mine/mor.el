@@ -40,9 +40,12 @@
   "Function used to switch to the tmp buffer (and back again).
 Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 
-;; TODO: When tmp buffer is killed, attempt to preserve the original window
-;;       layout. See if there are built in functions for temporary windows
-;;       and/or buffers.
+(defvar mor-preserve-win-layout-p t
+  "When t attempt to preserve the orinal window layout after copying back.
+Implememntation is very crude.") ;; TODO: See if there are built in functions
+                                 ;; for temporary windows and/or buffers.
+                                 ;; Use winner mode if it's available?
+
 ;; TODO: Make an option to attempt to preserve the original indent when copying
 ;;       text back to the original buffer. This could make option
 ;;       `mor-format-automatically-p' more useful becuase when it forces
@@ -67,6 +70,7 @@ Used in tmp buffer to transfer the modified text back to the original buffer.")
 (defvar-local mor--end nil
   "End of region.
 Used in tmp buffer to transfer the modified text back to the original buffer.")
+(defvar-local mor--orig-win-count nil)
 
 
 (defun mor--gen-buffer-name ()
@@ -113,6 +117,12 @@ Region is between START and END inclusive."
   (interactive "r")
   (mor--mode-on-region start end #'emacs-lisp-mode))
 
+
+(defun mor--win-count ()
+  "Get the number of windows open."
+  (cl-loop for w being the windows of (selected-frame)
+           sum 1))
+
 (defun mor--mode-on-region (start end mode-fn)
   "The core function to copy region to a new buffer.
 Region is between START and END.
@@ -120,7 +130,8 @@ MODE-FN the function to turn on the desired mode."
 
   ;; save buffer and region coordinates to copy the text back in later.
   (let ((orig-buff (current-buffer))
-        (tmp-buff (mor--gen-buffer-name)))
+        (tmp-buff (mor--gen-buffer-name))
+        (win-count (mor--win-count)))
 
 
     (kill-ring-save start end) ;; copy higlihgted text
@@ -134,7 +145,9 @@ MODE-FN the function to turn on the desired mode."
       ;; called. Becuase major modes wipe buffer local vars.
       (setq mor--orig-buffer orig-buff
             mor--start start
-            mor--end end))
+            mor--end end)
+      (when mor-preserve-win-layout-p
+        (setq mor--orig-win-count win-count)))
     (when mor-format-automatically-p
       (mark-whole-buffer)
       ;; using `call-interactively' becuase it includes the START/END
@@ -175,12 +188,17 @@ END of the region.
 ORIG-BUFF to copy to."
   ;; NOTE: start, end, and orig-buff must be parameters becuase the buffer
   ;; local values don't exist in the original buffer (which we are now in).
-  (funcall mor-switch-buff-fn orig-buff)
-  ;; highlight the region to overwrite
-  (goto-char start)
-  (delete-char (- end start))
-  ;; paste new text, overwriting old text.
-  (yank))
+  (let ((delete-win-p (and mor-preserve-win-layout-p
+                           (eq mor-switch-buff-fn #'switch-to-buffer-other-window)
+                           (= mor--orig-win-count 1))))
+    (funcall mor-switch-buff-fn orig-buff)
+    ;; highlight the region to overwrite
+    (goto-char start)
+    (delete-char (- end start))
+    ;; paste new text, overwriting old text.
+    (yank)
+    (when delete-win-p
+      (delete-other-windows))))
 
 (provide 'mor)
 

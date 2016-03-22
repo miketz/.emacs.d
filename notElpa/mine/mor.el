@@ -54,6 +54,8 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
 ;; TODO: Support selection of rectangular regions. Useful for selecting text
 ;;       in a comment. So you could exlude the comment markers that would mess
 ;;       up the dedicated mode buffer.
+;; TODO: Use a buffer-local keybind in the temp buffer to copy back text.
+;;       Maybe create a minor mode just for the purpose of the keybind.
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for temp buffer names.")

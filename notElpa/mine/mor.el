@@ -15,10 +15,10 @@
 
 
 ;;; Installation:
-;;; Place `mor.el' in folder `/your/choosen/folder'.
+;;; Place `mor.el' in folder `/your/chosen/folder'.
 ;;; Add the following text to your .emacs or init.el file:
 ;;;
-;;;   (add-to-list 'load-path "/your/choosen/folder")
+;;;   (add-to-list 'load-path "/your/chosen/folder")
 ;;;   (autoload #'mor-mode-on-region "mor" nil t)
 ;;;   (autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
 ;;;   ;; configure

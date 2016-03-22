@@ -20,12 +20,15 @@
 ;;;
 ;;;   (add-to-list 'load-path "/your/chosen/folder")
 ;;;   (autoload #'mor-mode-on-region "mor" nil t)
+;;;   (autoload #'mor-prev-mode-on-region "mor" nil t)
 ;;;   (autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
 ;;;   ;; configure
 ;;;   (setq mor-format-automatically-p t)
-;;;   ;; recommended keybind for evil users.  Press "m" in visual mode.
+;;;   ;; recommended keybinds for evil users.  Press "m" in visual mode.
 ;;;   (eval-after-load "evil"
-;;;     '(define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region))
+;;;     '(progn
+;;;        (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+;;;        (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)))
 
 
 ;;; Code:
@@ -61,6 +64,10 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
   "Prefix used for temp buffer names.")
 (defvar mor--counter 0
   "Sequential counter used to generate unique names for temp buffers.")
+
+(defvar mor-prev-mode-fn nil
+  "The previous mode used.
+Used by `mor-prev-mode-on-region'")
 
 
 (defvar-local mor--orig-buffer nil
@@ -116,11 +123,25 @@ Region is between START and END inclusive."
                                 nil t))))
 
 ;;;###autoload
+(defun mor-prev-mode-on-region (start end)
+  "Same as `mor-mode-on-region' but use the previous mode.
+Previous mode is saved in variable `mor-prev-mode-fn'.
+Region is between START and END inclusive."
+  (interactive "r")
+  (if (null mor-prev-mode-fn) ; guard against early usage.
+      (message "No previously used mode found.")
+    (mor--mode-on-region start
+                         end
+                         mor-prev-mode-fn)))
+
+;;;###autoload
 (defun mor-emacs-lisp-mode-on-region (start end)
   "Same as `mor-mode-on-region' but use `emacs-lisp-mode'.
 Region is between START and END inclusive."
   (interactive "r")
-  (mor--mode-on-region start end #'emacs-lisp-mode))
+  (mor--mode-on-region start
+                       end
+                       #'emacs-lisp-mode))
 
 
 (defun mor--win-count ()
@@ -132,6 +153,9 @@ Region is between START and END inclusive."
   "The core function to copy region to a new buffer.
 Region is between START and END.
 MODE-FN the function to turn on the desired mode."
+
+  ;; remember the mode for `mor-prev-mode-on-region'
+  (setq mor-prev-mode-fn mode-fn)
 
   ;; save buffer and region coordinates to copy the text back in later.
   (let ((orig-buff (current-buffer))

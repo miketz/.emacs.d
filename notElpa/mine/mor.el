@@ -21,7 +21,6 @@
 ;;;   (add-to-list 'load-path "/your/chosen/folder")
 ;;;   (autoload #'mor-mode-on-region "mor" nil t)
 ;;;   (autoload #'mor-prev-mode-on-region "mor" nil t)
-;;;   (autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
 ;;;   ;; configure
 ;;;   (setq mor-format-automatically-p t)
 ;;;   ;; recommended keybinds for evil users.  Press "m" in visual mode.
@@ -133,16 +132,6 @@ Region is between START and END inclusive."
     (mor--mode-on-region start
                          end
                          mor-prev-mode-fn)))
-
-;;;###autoload
-(defun mor-emacs-lisp-mode-on-region (start end)
-  "Same as `mor-mode-on-region' but use `emacs-lisp-mode'.
-Region is between START and END inclusive."
-  (interactive "r")
-  (mor--mode-on-region start
-                       end
-                       #'emacs-lisp-mode))
-
 
 (defun mor--win-count ()
   "Get the number of windows open."

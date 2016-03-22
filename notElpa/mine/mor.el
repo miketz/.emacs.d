@@ -70,7 +70,10 @@ Used in tmp buffer to transfer the modified text back to the original buffer.")
 (defvar-local mor--end nil
   "End of region.
 Used in tmp buffer to transfer the modified text back to the original buffer.")
-(defvar-local mor--made-new-win-p nil)
+(defvar-local mor--made-new-win-p nil
+  "True if the tmp buffer caused a new window to be created.
+Will be buffer local to the tmp buffer.
+Used in logic to decide whether a window should be deleted.")
 
 
 (defun mor--gen-buffer-name ()

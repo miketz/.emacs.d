@@ -64,7 +64,7 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
 (defvar mor--counter 0
   "Sequential counter used to generate unique names for temp buffers.")
 
-(defvar mor-prev-mode-fn nil
+(defvar mor--prev-mode-fn nil
   "The previous mode used.
 Used by `mor-prev-mode-on-region'")
 
@@ -124,14 +124,14 @@ Region is between START and END inclusive."
 ;;;###autoload
 (defun mor-prev-mode-on-region (start end)
   "Same as `mor-mode-on-region' but use the previous mode.
-Previous mode is saved in variable `mor-prev-mode-fn'.
+Previous mode is saved in variable `mor--prev-mode-fn'.
 Region is between START and END inclusive."
   (interactive "r")
-  (if (null mor-prev-mode-fn) ; guard against early usage.
+  (if (null mor--prev-mode-fn) ; guard against early usage.
       (message "No previously used mode found.")
     (mor--mode-on-region start
                          end
-                         mor-prev-mode-fn)))
+                         mor--prev-mode-fn)))
 
 (defun mor--win-count ()
   "Get the number of windows open."
@@ -144,7 +144,7 @@ Region is between START and END.
 MODE-FN the function to turn on the desired mode."
 
   ;; remember the mode for `mor-prev-mode-on-region'
-  (setq mor-prev-mode-fn mode-fn)
+  (setq mor--prev-mode-fn mode-fn)
 
   ;; save buffer and region coordinates to copy the text back in later.
   (let ((orig-buff (current-buffer))

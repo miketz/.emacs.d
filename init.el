@@ -3250,11 +3250,13 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;; Create a new buffer, stuff text in it, turn on mode.
 ;;;-----------------------------------------------------------------------------
 (autoload #'mor-mode-on-region "mor" nil t)
-(autoload #'mor-emacs-lisp-mode-on-region "mor" nil t)
+(autoload #'mor-prev-mode-on-region "mor" nil t)
 
 (when my-use-evil-p
   (eval-after-load "evil"
-    '(define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)))
+    '(progn
+       (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+       (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region))))
 
 (with-eval-after-load "mor"
   (setq mor-format-automatically-p t

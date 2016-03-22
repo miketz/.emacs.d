@@ -70,7 +70,7 @@ Used in tmp buffer to transfer the modified text back to the original buffer.")
 (defvar-local mor--end nil
   "End of region.
 Used in tmp buffer to transfer the modified text back to the original buffer.")
-(defvar-local mor--orig-win-count nil)
+(defvar-local mor--made-new-win-p nil)
 
 
 (defun mor--gen-buffer-name ()
@@ -131,7 +131,7 @@ MODE-FN the function to turn on the desired mode."
   ;; save buffer and region coordinates to copy the text back in later.
   (let ((orig-buff (current-buffer))
         (tmp-buff (mor--gen-buffer-name))
-        (win-count (mor--win-count)))
+        (orig-win-count (mor--win-count)))
 
 
     (kill-ring-save start end) ;; copy higlihgted text
@@ -145,9 +145,9 @@ MODE-FN the function to turn on the desired mode."
       ;; called. Becuase major modes wipe buffer local vars.
       (setq mor--orig-buffer orig-buff
             mor--start start
-            mor--end end)
-      (when mor-preserve-win-layout-p
-        (setq mor--orig-win-count win-count)))
+            mor--end end
+            mor--made-new-win-p (< orig-win-count
+                                   (mor--win-count))))
     (when mor-format-automatically-p
       (mark-whole-buffer)
       ;; using `call-interactively' becuase it includes the START/END
@@ -188,9 +188,10 @@ END of the region.
 ORIG-BUFF to copy to."
   ;; NOTE: start, end, and orig-buff must be parameters becuase the buffer
   ;; local values don't exist in the original buffer (which we are now in).
-  (let ((delete-win-p (and mor-preserve-win-layout-p
+  (let ((tmp-buff (current-buffer))
+        (delete-win-p (and mor-preserve-win-layout-p
                            (eq mor-switch-buff-fn #'switch-to-buffer-other-window)
-                           (= mor--orig-win-count 1))))
+                           mor--made-new-win-p)))
     (funcall mor-switch-buff-fn orig-buff)
     ;; highlight the region to overwrite
     (goto-char start)
@@ -198,7 +199,7 @@ ORIG-BUFF to copy to."
     ;; paste new text, overwriting old text.
     (yank)
     (when delete-win-p
-      (delete-other-windows))))
+      (delete-window (get-buffer-window tmp-buff)))))
 
 (provide 'mor)
 

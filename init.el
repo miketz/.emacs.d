@@ -3562,7 +3562,12 @@ When ARG isn't nil, try to pretty print the sexp."
     ;; temporarily remove the helm candiate limit. (via dynamic binding).
     (let ((helm-candidate-number-limit nil))
       ad-do-it))
-  (ad-activate 'sx-tab-newest))
+  (ad-activate 'sx-tab-newest)
+
+  (when my-use-evil-p
+    ;; use emacs bindings (not evil).
+    (add-to-list 'evil-buffer-regexps '("\\*question-list" . emacs))
+    (add-to-list 'evil-buffer-regexps '("\\*sx-" . emacs))))
 
 
 

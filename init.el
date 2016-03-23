@@ -2579,7 +2579,10 @@ and indent."
 
 (with-eval-after-load "vc"
   (add-to-list 'vc-directory-exclusion-list "bin")
-  (add-to-list 'vc-directory-exclusion-list "obj"))
+  (add-to-list 'vc-directory-exclusion-list "obj")
+  (when my-use-evil-p
+    ;; use emacs bindings (not evil).
+    (add-to-list 'evil-buffer-regexps '("\\*vc" . emacs))))
 
 ;; (add-hook 'vc-- (lambda () (linum-mode 0)))
 

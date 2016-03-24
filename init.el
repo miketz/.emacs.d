@@ -2259,7 +2259,7 @@ and indent."
 (when (and t ;nil ;; turn off omnisharp for the moment.
            (eq my-curr-computer 'work-laptop))
 
-  (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
+  ;; (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
 
   (with-eval-after-load "omnisharp"
 

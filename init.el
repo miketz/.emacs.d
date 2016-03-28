@@ -2402,9 +2402,27 @@ and indent."
 ;;; ace-link
 ;;;--------------------
 (unless my-use-evil-p
-  ;; TODO: put this in the eval-after-loads. This line slows start up by
-  ;; forcing a load of file `ace-link'
-  (ace-link-setup-default))
+  ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
+  ;;       becuase calling that autoloaded function caused a premature
+  ;;       load of the ace-link feature!
+  ;;       Discovered by `profile-emacs.el'
+  (setq key "o")
+  (eval-after-load "info"
+    `(define-key Info-mode-map ,key 'ace-link-info))
+  (eval-after-load "compile"
+    `(define-key compilation-mode-map ,key 'ace-link-compilation))
+  (eval-after-load "help-mode"
+    `(define-key help-mode-map ,key 'ace-link-help))
+  (eval-after-load "woman"
+    `(define-key woman-mode-map ,key 'ace-link-woman))
+  (eval-after-load "eww"
+    `(progn
+       (define-key eww-link-keymap ,key 'ace-link-eww)
+       (define-key eww-mode-map ,key 'ace-link-eww)))
+  (eval-after-load 'cus-edit
+    `(progn
+       (define-key custom-mode-map ,key 'ace-link-custom))))
+
 
 (when my-use-evil-p
   (with-eval-after-load "info"

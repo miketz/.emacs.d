@@ -3501,7 +3501,7 @@ When ARG isn't nil, try to pretty print the sexp."
   ;;TODO: figure out how to bind gg for top.
 
   (unless my-use-evil-p
-    ;; evil has this keybind by default. Use it in emacs sytle too.
+    ;; evil has this keybind by default. Use it in emacs style too.
     (define-key Info-mode-map (kbd "C-o") #'Info-history-back)))
 
 ;;;-----------------------------------------------------------------------------

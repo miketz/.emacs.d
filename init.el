@@ -3499,7 +3499,10 @@ When ARG isn't nil, try to pretty print the sexp."
     ;; can't get SPC keybind to work so using remap on Info-scroll-up.
     (define-key Info-mode-map [remap Info-scroll-up] #'avy-goto-word-1))
   ;;TODO: figure out how to bind gg for top.
-  )
+
+  (unless my-use-evil-p
+    ;; evil has this keybind by default. Use it in emacs sytle too.
+    (define-key Info-mode-map (kbd "C-o") #'Info-history-back)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; help mode

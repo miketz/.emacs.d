@@ -2577,6 +2577,11 @@ and indent."
 ;;   (add-to-list 'vc-directory-exclusion-list "obj"))
 ;; (ad-activate 'vc-dir)
 
+;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
+;; TODO: revist this later. The performance problems may be fixed soon.
+;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
 (with-eval-after-load "vc"
   (add-to-list 'vc-directory-exclusion-list "bin")
   (add-to-list 'vc-directory-exclusion-list "obj")

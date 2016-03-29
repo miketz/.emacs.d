@@ -3145,7 +3145,7 @@ and indent."
   ;; remove the default ^ prefix used by `counsel-M-x'
   ;;TODO: confirm this fix (move to eval-afeter-load "ivy"
   ;;      for linux and leyna-laptop. set-alist is not found?
-  (set-alist 'ivy-initial-inputs-alist #'counsel-M-x "")
+  (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
   ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)

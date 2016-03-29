@@ -132,6 +132,12 @@
                  :foreground "yellow"
                  :bold nil
                  :underline t)))
+   ;; the non-selected matches from isearch
+   '(lazy-highlight ((t
+                      :background "black"
+                      :foreground "cyan"
+                      :bold nil
+                      :underline t)))
    ;;This isn't a js2 error face. But externals tend to be an error since js2 doesn't find the them.
    '(js2-external-variable ((t :underline (:color "red" :style wave)
                                :background "black")))
@@ -146,11 +152,6 @@
    ;;'(js2-instance-member ((t :foreground "green")))
    ;;'(js2-private-function-call ((t :foreground "green")))
 
-   '(lazy-highlight ((t
-                      :background "black"
-                      :foreground "cyan"
-                      :bold nil
-                      :underline t)))
    ;; '(num3-face-odd ((t)))
    ;; '(num3-face-even ((t (:underline t :background "black"))))
    `(num3-face-even

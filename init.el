@@ -2888,7 +2888,10 @@ and indent."
   (setq ediff-split-window-function #'split-window-horizontally)
   ;; don't use the popup window
   (setq ediff-window-setup-function #'ediff-setup-windows-plain) ;'ediff-setup-windows-multiframe
-  )
+
+  (when (eq my-curr-computer 'work-laptop)
+    (setq ediff-diff3-program "C:/Program Files/KDiff3/bin/diff3.exe")))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; helm-w32-launcher. Microsoft Windows only?

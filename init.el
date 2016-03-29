@@ -3142,6 +3142,11 @@ and indent."
       (evil-leader/set-key "w" #'counsel-yank-pop))))
 
 (with-eval-after-load "ivy"
+  ;; remove the default ^ prefix used by `counsel-M-x'
+  ;;TODO: confirm this fix (move to eval-afeter-load "ivy"
+  ;;      for linux and leyna-laptop. set-alist is not found?
+  (set-alist 'ivy-initial-inputs-alist #'counsel-M-x "")
+
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
   ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)
   (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard against ivy-mode turning on.
@@ -3155,12 +3160,6 @@ and indent."
   (setq ivy-display-style 'fancy))
 
 (with-eval-after-load "counsel"
-  ;; remove the default ^ prefix used by `counsel-M-x'
-  (when (and (eq system-type 'windows-nt)
-             (not (eq my-curr-computer 'leyna-laptop)))
-    ;;TODO: fix this for linux and leyna-laptop. set-alist is not found?
-    (set-alist 'ivy-initial-inputs-alist 'counsel-M-x ""))
-
   ;; redefine `counsel--load-theme-action' to not require confirmation
   ;; TODO: find an alternative to redefine so I don't have to manually
   ;;       merge with the latest version of `counsel--load-theme-action'

@@ -1143,20 +1143,37 @@ This prevents overlapping themes; something I would rarely want."
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
   (when my-use-evil-p
     (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
-    (evil-leader/set-key "r" (lambda ()
-                               (interactive)
-                               (save-excursion
+    (if my-graphic-p
+        (evil-leader/set-key "r" (lambda ()
+                                   (interactive)
+                                   (save-excursion
+                                     (evil-append 1)
+                                     (let ((string (slime-last-expression)))
+                                       (evil-normal-state)
+                                       (slime-eval-async
+                                           `(swank:eval-and-grab-output ,string)
+                                         (lambda (result)
+                                           (cl-destructuring-bind (output value) result
+                                             (pos-tip-show value)
+                                             ;;(push-mark)
+                                             ;;(insert output value)
+                                             )))))))
+      (evil-leader/set-key "r" (lambda ()
+                                 (interactive)
                                  (evil-append 1)
                                  (let ((string (slime-last-expression)))
                                    (evil-normal-state)
                                    (slime-eval-async
-                                    `(swank:eval-and-grab-output ,string)
-                                    (lambda (result)
-                                      (cl-destructuring-bind (output value) result
-                                        (pos-tip-show value)
-                                        ;;(push-mark)
-                                        ;;(insert output value)
-                                        ))))))))
+                                       `(swank:eval-and-grab-output ,string)
+                                     (lambda (result)
+                                       (cl-destructuring-bind (output value) result
+                                         ;; (pos-tip-show value)
+                                         (save-excursion
+                                           (push-mark)
+                                           (evil-append 1)
+                                           (default-indent-new-line)
+                                           (insert output value)
+                                           (evil-normal-state))))))))))
 
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec

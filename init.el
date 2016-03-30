@@ -1549,7 +1549,7 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "json-mode"
   (add-hook 'json-mode-hook
             (lambda ()
-              ;; TODO: figure out why tab-width is not working
+              ;; TODO: figure out why `tab-width' is not working
               (setq tab-width 2) ; buffer local
               (rainbow-delimiters-mode 1)
               (electric-pair-mode 1))))

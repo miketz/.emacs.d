@@ -261,6 +261,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     js2-mode
     js2-highlight-vars
     skewer-mode
+    json-mode
     ;;ac-js2
     web-beautify
     helm
@@ -1541,6 +1542,17 @@ This prevents overlapping themes; something I would rarely want."
               (setq prettify-symbols-alist '(("function" . 955)))
               ;; collapse/show sections of code
               (hs-minor-mode 1))))
+
+;;;-----------------------------------------------------------------------------
+;;; json-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "json-mode"
+  (add-hook 'json-mode-hook
+            (lambda ()
+              ;; TODO: figure out why tab-width is not working
+              (setq tab-width 2) ; buffer local
+              (rainbow-delimiters-mode 1)
+              (electric-pair-mode 1))))
 
 ;;;--------------------------------------
 ;;; web-beautify

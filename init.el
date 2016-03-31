@@ -1187,7 +1187,10 @@ This prevents overlapping themes; something I would rarely want."
 
 (with-eval-after-load "company"
   (when my-use-evil-p
-    (define-key company-mode-map (kbd "C-SPC") #'company-complete)) ;C-Space like Visual Studio
+    ;; C-Space like Visual Studio
+    (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
+    ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
+    )
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)

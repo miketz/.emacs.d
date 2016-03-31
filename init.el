@@ -2059,7 +2059,10 @@ and indent."
               ;; set to 1 so comments on the same line are kept close to the code by default.
               (setq comment-column 1)   ; buffer local
 
-              (flycheck-mode 1)
+              (unless (eq system-type 'windows-nt)
+                ;; sometime in early March 2016, flycheck became very slow on
+                ;; Windows for C.
+                (flycheck-mode 1))
 
               ;; (fci-mode)
 

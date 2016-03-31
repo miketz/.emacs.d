@@ -976,6 +976,21 @@ This prevents overlapping themes; something I would rarely want."
                             :height 120
                             :width normal)))))))
 
+  ;; rainbow delimiters colors for windows terminal (cmd)
+  (when (and (not my-graphic-p)
+             (eq system-type 'windows-nt))
+    (custom-set-faces
+     '(rainbow-delimiters-depth-1-face ((t (:foreground "white"))))
+     '(rainbow-delimiters-depth-2-face ((t (:foreground "lightgreen"))))
+     '(rainbow-delimiters-depth-3-face ((t (:foreground "lightred"))))
+     '(rainbow-delimiters-depth-4-face ((t (:foreground "lightcyan"))))
+     '(rainbow-delimiters-depth-5-face ((t (:foreground "lightmagenta"))))
+     '(rainbow-delimiters-depth-6-face ((t (:foreground "lightblue"))))
+     '(rainbow-delimiters-depth-7-face ((t (:foreground "brown"))))
+     '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
+     '(rainbow-delimiters-depth-9-face ((t (:foreground "magenta"))))
+     '(rainbow-delimiters-unmatched-face ((t (:foreground "lightred" :background "darkgray"))))))
+
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
 

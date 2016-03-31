@@ -2062,6 +2062,7 @@ and indent."
               (unless (eq system-type 'windows-nt)
                 ;; sometime in early March 2016, flycheck became very slow on
                 ;; Windows for C.
+                ;; TODO: find the problem, fix it. Commit upstream if relevant.
                 (flycheck-mode 1))
 
               ;; (fci-mode)

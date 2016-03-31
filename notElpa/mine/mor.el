@@ -199,6 +199,24 @@ overwrite."
         ;; tmp buffer to live longer for mulitple copies.
         (kill-buffer tmp-buff)))))
 
+(defun mor-close-tmp-buffer ()
+  "Kill the temp buffer and clean up the window if applicable.
+Call this if you don't want to copy the text back to the original buffer.
+Convienent because it kills the buffer, and makes a decision whether to close
+the window too."
+  (interactive)
+  (if (null mor--orig-buffer) ; guard
+      (message "You must be in a mor-tmp buffer for this to work.")
+    (progn ; else
+      (let ((tmp-buff (current-buffer)))
+        ;; TODO: remove duplicate logic for deleting window and killing buffer.
+        ;;       just making this quick new function for the moment.
+        (when (and mor-preserve-win-layout-p
+                   (eq mor-switch-buff-fn #'switch-to-buffer-other-window)
+                   mor--made-new-win-p)
+          (delete-window (get-buffer-window tmp-buff)))
+        (kill-buffer tmp-buff)))))
+
 (defun mor--copy-back-orig (start end orig-buff)
   "Copy the tmp buffer text back to the original buffer.
 START of the region.

@@ -3312,7 +3312,12 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 
 (with-eval-after-load "mor"
   (setq mor-format-automatically-p t
-        mor-switch-buff-fn #'switch-to-buffer-other-window))
+        mor-switch-buff-fn #'switch-to-buffer-other-window)
+
+  ;; TODO: replace these global bindings with minor mode bindigns once I
+  ;;       implement a minor mode for mor.el.
+  (global-set-key (kbd "C-c b") #'mor-copy-back)
+  (global-set-key (kbd "C-c c") #'mor-close-tmp-buffer))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Focus javascript

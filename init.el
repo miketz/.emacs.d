@@ -1217,9 +1217,9 @@ This prevents overlapping themes; something I would rarely want."
   ;;                          (mapcar #'length
   ;;                                  company-candidates)))))
 
-  (setq company-idle-delay nil)         ;disable automatic completion
-  (setq company-minimum-prefix-length 3) ;but if automatic is on, don't fire until 3 chars.
-  (setq company-tooltip-limit 20)        ;popup more suggestions.
+  (setq company-idle-delay nil)          ; disable automatic completion
+  (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire until 3 chars.
+  (setq company-tooltip-limit 20)        ; popup more suggestions.
   )
 
 

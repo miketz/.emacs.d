@@ -324,8 +324,9 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     swiper
     flx ;; can be used by ivy for ordering flx matches.
     counsel
-    apel ; counsel functions don't work without this lib. TODO: figure out why
-         ; dependent packs don't automatically download.
+    apel ; used in eval-after-load config counsel/ivy.
+         ; specifically function `set-alist'
+         ; TODO: remove dependency on apel using default elsip functions.
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
@@ -3177,6 +3178,7 @@ and indent."
   ;; remove the default ^ prefix used by `counsel-M-x'
   ;;TODO: confirm this fix (move to eval-afeter-load "ivy"
   ;;      for linux and leyna-laptop. set-alist is not found?
+  ;;      I think it was related to apel package not being included.
   (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind

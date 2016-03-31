@@ -37,6 +37,8 @@
 ;;
 ;;; Code:
 
+(add-to-list 'load-path "~/.emacs.d/notElpa/themes") ; this line added by me
+
 (require 'majapahit-common)
 
 (deftheme majapahit-light "majapahit theme, the light version")

@@ -647,42 +647,7 @@ Minus the newline char."
         ;; toggle explicitly. No longer using `not-m'.
         (setq my-frame-max-p (not my-frame-max-p))))
 
-    (evil-leader/set-key "f" #'my-toggle-frame-max))
-
-  ;;evalate lisp expression. Insert result on a new line.
-  ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
-
-  (defun my-eval-last-sexp ()
-    (interactive)
-    (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
-      (prin1-to-string val)))
-
-  (autoload 'pos-tip-show "pos-tip" nil t)
-  (if my-graphic-p
-      (progn
-        ;;(require 'pos-tip)
-        (evil-leader/set-key "e" (lambda ()
-                                   (interactive)
-                                   ;;(clippy-say (my-eval-last-sexp))
-                                   (pos-tip-show (my-eval-last-sexp)))))
-    (progn
-      (evil-leader/set-key "e"
-        (lambda ()
-          (interactive)
-          (save-excursion
-            (evil-append 1)
-            (default-indent-new-line)
-            (eval-last-sexp t)         ; t to insert result in buffer.
-            (evil-normal-state))))))
-
-  ;; (evil-leader/set-key "a" 'slime-eval-print-last-expression)
-  ;; (evil-leader/set-key "p" (lambda ()
-  ;;                            (interactive)
-  ;;                            (save-excursion ;don't move the point
-  ;;                              (evil-append 1)
-  ;;                              (slime-pprint-eval-last-expression)
-  ;;                              (evil-normal-state))))
-  )
+    (evil-leader/set-key "f" #'my-toggle-frame-max)))
 
 ;; keeping evil turned off by default now.
 ;; Enable evil explicitly for certain modes or file types.
@@ -1143,39 +1108,47 @@ This prevents overlapping themes; something I would rarely want."
                 (aggressive-indent-mode 0))))
 
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
+
   (when my-use-evil-p
-    (evil-define-key 'insert slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
-    (if my-graphic-p
-        (evil-leader/set-key "r" (lambda ()
-                                   (interactive)
-                                   (save-excursion
-                                     (evil-append 1)
-                                     (let ((string (slime-last-expression)))
-                                       (evil-normal-state)
-                                       (slime-eval-async
-                                           `(swank:eval-and-grab-output ,string)
-                                         (lambda (result)
-                                           (cl-destructuring-bind (output value) result
-                                             (pos-tip-show value)
-                                             ;;(push-mark)
-                                             ;;(insert output value)
-                                             )))))))
-      (evil-leader/set-key "r" (lambda ()
-                                 (interactive)
-                                 (evil-append 1)
-                                 (let ((string (slime-last-expression)))
-                                   (evil-normal-state)
-                                   (slime-eval-async
-                                       `(swank:eval-and-grab-output ,string)
-                                     (lambda (result)
-                                       (cl-destructuring-bind (output value) result
-                                         ;; (pos-tip-show value)
-                                         (save-excursion
-                                           (push-mark)
-                                           (evil-append 1)
-                                           (default-indent-new-line)
-                                           (insert output value)
-                                           (evil-normal-state))))))))))
+    (let ((eval-fn (if my-graphic-p
+                       (lambda ()
+                         (interactive)
+                         (save-excursion
+                           (evil-append 1)
+                           (let ((string (slime-last-expression)))
+                             (evil-normal-state)
+                             (slime-eval-async
+                              `(swank:eval-and-grab-output ,string)
+                              (lambda (result)
+                                (cl-destructuring-bind (output value) result
+                                  (pos-tip-show value)
+                                  ;;(push-mark)
+                                  ;;(insert output value)
+                                  ))))))
+                     (lambda ()
+                       (interactive)
+                       (evil-append 1)
+                       (let ((string (slime-last-expression)))
+                         (evil-normal-state)
+                         (slime-eval-async
+                          `(swank:eval-and-grab-output ,string)
+                          (lambda (result)
+                            (cl-destructuring-bind (output value) result
+                              ;; (pos-tip-show value)
+                              (save-excursion
+                                (push-mark)
+                                (evil-append 1)
+                                (default-indent-new-line)
+                                (insert output value)
+                                (evil-normal-state))))))))))
+      ;; NOTE: `evil-leader/set-key-for-mode' doesn't work for minor modes
+      ;;       like `slime-mode'. Binding for `lisp-mode' instead since I
+      ;;       automatically turn on slime.
+      ;; TODO: find alternative to fn `evil-leader/set-key-for-mode' or
+      ;;       even an alternative to `evil-leader' itself.
+      ;; (evil-leader/set-key-for-mode 'slime-mode "e" eval-fn)
+      (evil-leader/set-key-for-mode 'lisp-mode "e" eval-fn)
+      (evil-leader/set-key-for-mode 'slime-repl-mode "e" eval-fn)))
 
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec
@@ -3557,6 +3530,42 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;   (add-hook 'emacs-lisp-mode-hook
 ;;             (lambda ()
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
+
+
+
+;;evalate lisp expression. Insert result on a new line.
+;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
+
+(defun my-eval-last-sexp ()
+  (interactive)
+  (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
+    (prin1-to-string val)))
+
+(autoload 'pos-tip-show "pos-tip" nil t)
+
+(let ((eval-fn (if my-graphic-p
+                   (lambda ()
+                     (interactive)
+                     ;; (clippy-say (my-eval-last-sexp))
+                     (pos-tip-show (my-eval-last-sexp)))
+                 (lambda ()
+                   (interactive)
+                   (save-excursion
+                     (evil-append 1)
+                     (default-indent-new-line)
+                     (eval-last-sexp t)  ; t to insert result in buffer.
+                     (evil-normal-state))))))
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" eval-fn)
+  (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" eval-fn))
+
+;; (evil-leader/set-key "a" 'slime-eval-print-last-expression)
+;; (evil-leader/set-key "p" (lambda ()
+;;                            (interactive)
+;;                            (save-excursion ;don't move the point
+;;                              (evil-append 1)
+;;                              (slime-pprint-eval-last-expression)
+;;                              (evil-normal-state))))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav

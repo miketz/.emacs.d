@@ -3315,7 +3315,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
         mor-switch-buff-fn #'switch-to-buffer-other-window)
 
   ;; TODO: replace these global bindings with minor mode bindigns once I
-  ;;       implement a minor mode for mor.el.
+  ;;       implement a minor mode for mor-tmp buffers.
   (global-set-key (kbd "C-c b") #'mor-copy-back)
   (global-set-key (kbd "C-c c") #'mor-close-tmp-buffer))
 

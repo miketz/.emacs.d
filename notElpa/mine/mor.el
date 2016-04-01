@@ -185,57 +185,58 @@ buffer was created.  If in doubt, just manually copy the text back.
 TODO: Use a more full-proof technqiue to identify the start/end location to
 overwrite."
   (interactive)
+  (mor--finished-with-tmp-buffer t))
+
+(defun mor-close-tmp-buffer ()
+  "Kill the temp buffer and clean up the window if applicable.
+Call this if you don't want to copy the text back to the original buffer."
+  (interactive)
+  (mor--finished-with-tmp-buffer nil))
+
+(defun mor--finished-with-tmp-buffer (copy-back-p)
+  "Manages the end of life of the temp buffer.
+
+When COPY-BACK-P is t, copy text back to the original buffer.
+
+May close a window based on `mor-preserve-win-layout-p' and some
+crude window layout logic.
+
+Kills the temp buffer."
   (if (null mor--orig-buffer) ; guard
       (message "You must be in a mor-tmp buffer for this to work.")
     (progn ; else
-      (let ((tmp-buff (current-buffer)))
-        (kill-ring-save (point-min) (point-max)) ;; tmp buffer text.
-        (mor--copy-back-orig mor--start
-                             mor--end
-                             mor--orig-buffer)
+      ;; Cache tmp buffer local values. They will be invisible once we switch
+      ;; back to the orig buffer.
+      (let ((tmp-buff (current-buffer))
+            (start mor--start)
+            (rng (- mor--end
+                    mor--start))
+            (delete-win-p (and mor-preserve-win-layout-p
+                               mor--made-new-win-p
+                               (eq mor-switch-buff-fn
+                                   #'switch-to-buffer-other-window))))
+        (when copy-back-p
+          ;; tmp buffer text.
+          (kill-ring-save (point-min) (point-max)))
+
+        ;; Switch to orig buff. Buffer local values will be invisible!
+        (funcall mor-switch-buff-fn mor--orig-buffer)
+
+        (when copy-back-p
+          ;; delete original selected region
+          (goto-char start)
+          (delete-char rng)
+          ;; paste new text
+          (yank))
+
+        (when delete-win-p
+          (delete-window (get-buffer-window tmp-buff)))
+
         ;; kill the tmp buffer becuase mulitple attempts to copy back text
         ;; will be wrong due to the static start/end location. Will need
         ;; to use a better way to track start/end before we can allow the
         ;; tmp buffer to live longer for mulitple copies.
         (kill-buffer tmp-buff)))))
-
-(defun mor-close-tmp-buffer ()
-  "Kill the temp buffer and clean up the window if applicable.
-Call this if you don't want to copy the text back to the original buffer.
-Convienent because it kills the buffer, and makes a decision whether to close
-the window too."
-  (interactive)
-  (if (null mor--orig-buffer) ; guard
-      (message "You must be in a mor-tmp buffer for this to work.")
-    (progn ; else
-      (let ((tmp-buff (current-buffer)))
-        ;; TODO: remove duplicate logic for deleting window and killing buffer.
-        ;;       just making this quick new function for the moment.
-        (when (and mor-preserve-win-layout-p
-                   (eq mor-switch-buff-fn #'switch-to-buffer-other-window)
-                   mor--made-new-win-p)
-          (delete-window (get-buffer-window tmp-buff)))
-        (kill-buffer tmp-buff)))))
-
-(defun mor--copy-back-orig (start end orig-buff)
-  "Copy the tmp buffer text back to the original buffer.
-START of the region.
-END of the region.
-ORIG-BUFF to copy to."
-  ;; NOTE: start, end, and orig-buff must be parameters becuase the buffer
-  ;; local values don't exist in the original buffer (which we are now in).
-  (let ((tmp-buff (current-buffer))
-        (delete-win-p (and mor-preserve-win-layout-p
-                           (eq mor-switch-buff-fn #'switch-to-buffer-other-window)
-                           mor--made-new-win-p)))
-    (funcall mor-switch-buff-fn orig-buff)
-    ;; highlight the region to overwrite
-    (goto-char start)
-    (delete-char (- end start))
-    ;; paste new text, overwriting old text.
-    (yank)
-    (when delete-win-p
-      (delete-window (get-buffer-window tmp-buff)))))
 
 (provide 'mor)
 

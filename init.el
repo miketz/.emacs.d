@@ -3316,8 +3316,9 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 
   ;; TODO: replace these global bindings with minor mode bindigns once I
   ;;       implement a minor mode for mor-tmp buffers.
-  (global-set-key (kbd "C-c b") #'mor-copy-back)
-  (global-set-key (kbd "C-c c") #'mor-close-tmp-buffer))
+  (global-set-key (kbd "C-c b") #'mor-copy-back)        ; mnemonic: copy back
+  (global-set-key (kbd "C-c c") #'mor-close-tmp-buffer) ; mnemonic: close
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; Focus javascript

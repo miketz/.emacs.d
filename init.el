@@ -3869,6 +3869,12 @@ When ARG isn't nil, try to pretty print the sexp."
   (when my-use-evil-p ;; use emacs, not evil bindings in calendar.
     (add-to-list 'evil-buffer-regexps '("\\*Calendar*" . emacs))))
 
+
+;;;-----------------------------------------------------------------------------
+;;; twelve-m-calendar.el
+;;;-----------------------------------------------------------------------------
+;; (autoload #'year-calendar "twelve-m-calendar" nil t)
+
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------

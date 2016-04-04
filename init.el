@@ -349,7 +349,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     highlight-tail
     function-args
     highlight-indent-guides
-    ace-link)
+    ace-link
+    smart-tabs-mode)
   "Packages I use from elpa/melpa.")
 
 
@@ -2073,13 +2074,18 @@ and indent."
   (add-hook 'c-mode-hook
             (lambda ()
               (when my-graphic-p
-               (highlight-indent-guides-mode 1))
+                (highlight-indent-guides-mode 1))
 
               (progn ;; use linux style tabbing/indentation for C
                 ;; these values should be buffer local.
                 (setq c-basic-offset 8)
                 (setq tab-width 8)
                 (setq indent-tabs-mode t))
+
+              (progn ;; smart-tabs-mode
+                (smart-tabs-mode-enable)
+                (smart-tabs-advice c-indent-line c-basic-offset)
+                (smart-tabs-advice c-indent-region c-basic-offset))
 
               ;; (fci-mode 1)
               ))
@@ -3875,6 +3881,12 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; twelve-m-calendar.el
 ;;;-----------------------------------------------------------------------------
 ;; (autoload #'year-calendar "twelve-m-calendar" nil t)
+
+;;;-----------------------------------------------------------------------------
+;;; smart-tabs-mode
+;;;-----------------------------------------------------------------------------
+;; NOTE: just setting up hooks manually in eval-after-load for specific langs.
+;; (smart-tabs-insinuate 'c)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

@@ -3898,6 +3898,7 @@ When ARG isn't nil, try to pretty print the sexp."
         lua-default-application "luajit")
   (add-hook 'lua-mode-hook
             (lambda ()
+              (yas-minor-mode 1)
               (rainbow-delimiters-mode 1)
               (electric-pair-mode 1)
               (electric-spacing-mode 1))))

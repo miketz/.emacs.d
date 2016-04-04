@@ -3894,7 +3894,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;; NOTE: auto-mode-alist is already taken care of in lua-mode-autoloads.el
 (with-eval-after-load "lua-mode"
-  (setq lua-indent-level my-indent-width ; 3 by default????
+  (setq lua-indent-level 2
         lua-default-application "luajit")
   (add-hook 'lua-mode-hook
             (lambda ()

@@ -350,7 +350,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     function-args
     highlight-indent-guides
     ace-link
-    smart-tabs-mode)
+    smart-tabs-mode
+    lua-mode)
   "Packages I use from elpa/melpa.")
 
 
@@ -3887,6 +3888,17 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;; NOTE: just setting up hooks manually in eval-after-load for specific langs.
 ;; (smart-tabs-insinuate 'c)
+
+;;;-----------------------------------------------------------------------------
+;;; lua-mode
+;;;-----------------------------------------------------------------------------
+;; NOTE: auto-mode-alist is already taken care of in lua-mode-autoloads.el
+(with-eval-after-load "lua-mode"
+  (add-hook 'lua-mode-hook
+            (lambda ()
+              (rainbow-delimiters-mode 1)
+              (electric-pair-mode 1)
+              (electric-spacing-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

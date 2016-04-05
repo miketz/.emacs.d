@@ -2074,8 +2074,8 @@ and indent."
 
   (add-hook 'c-mode-hook
             (lambda ()
-              (when my-graphic-p
-                (highlight-indent-guides-mode 1))
+              ;; (when my-graphic-p
+              ;;   (highlight-indent-guides-mode 1))
 
               (progn ;; use linux style tabbing/indentation for C
                 ;; these values should be buffer local.

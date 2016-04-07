@@ -58,6 +58,10 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
 ;;       up the dedicated mode buffer.
 ;; TODO: Use a buffer-local keybind in the temp buffer to copy back text.
 ;;       Maybe create a minor mode just for the purpose of the keybind.
+;; TODO: Incorporate code from org-mode. Locks highlighted region form edits.
+;;       Look into how it ferries text back/forth between buffers.
+;; TODO: Optionally create a tmp file on disk. Useful for features that
+;;       require a file on disk (some linters, etc).
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for temp buffer names.")

@@ -2088,6 +2088,8 @@ and indent."
                 ;; these values should be buffer local.
                 (setq c-basic-offset my-indent-width)
                 (setq tab-width my-indent-width)
+                ;; TODO: solve issue of snippets using spaces while I'm using
+                ;;       tabs for C.
                 (setq indent-tabs-mode t))
 
               (progn ;; smart-tabs-mode

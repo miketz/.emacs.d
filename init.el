@@ -341,9 +341,9 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     ;;w3m
     flymake-jslint
     nlinum
-    ido-vertical-mode
-    ido-grid-mode
-    ido-ubiquitous
+    ;;ido-vertical-mode
+    ;;ido-grid-mode
+    ;;ido-ubiquitous
     flx-ido
     ov
     highlight-tail
@@ -1910,7 +1910,7 @@ To make it human readable."
   )
 
 (with-eval-after-load "ido"
-  (let ((my-ido-display 'grid)) ;; Choices: grid vertical nil
+  (let ((my-ido-display nil)) ;; Choices: 'grid 'vertical nil
     (cond ((eq my-ido-display 'vertical)
            ;; 3rd party extension to ido. Display vertically like swiper.
            ;; invokes with-eval-after-load "ido-vertical-mode"

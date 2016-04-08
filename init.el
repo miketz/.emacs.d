@@ -355,8 +355,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "Packages I use from elpa/melpa.")
 
 
-(when (eq my-curr-computer 'work-laptop)
-  (add-to-list 'my-packages 'omnisharp))
+;; (when (eq my-curr-computer 'work-laptop)
+;;   (add-to-list 'my-packages 'omnisharp))
 (when (eq system-type 'windows-nt)
   (add-to-list 'my-packages 'helm-w32-launcher))
 

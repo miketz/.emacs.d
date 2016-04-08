@@ -1900,7 +1900,14 @@ To make it human readable."
   ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
   ;; other modes load ido, inadvertently turning on ido-ubiquitous even
   ;; when i'm not using ido.
-  (ido-ubiquitous-mode 1))
+  (ido-ubiquitous-mode 1)
+  ;; NOTE: i removed some un-wanted advice code from the autoloads file of
+  ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
+  ;; forced a load of ido automatically at start up, even when I'm not using
+  ;; ido!!!
+  ;; ALWAYS-DO: periodically moniotor package `ido-completing-read+' after
+  ;; updates, and remove the un-wanted code in the autoload file.
+  )
 
 (with-eval-after-load "ido"
   (let ((my-ido-display 'grid)) ;; Choices: grid vertical nil

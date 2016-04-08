@@ -1370,7 +1370,10 @@ This prevents overlapping themes; something I would rarely want."
 ;; `electric-pair-mode' is in `c-mode-common-hook' already.
 ;; (add-hook 'csharp-mode-hook #'electric-pair-mode)
 
-(add-hook #'csharp-mode-hook (lambda () (yas-minor-mode 1)))
+(add-hook #'csharp-mode-hook
+          (lambda ()
+            (yas-minor-mode 1)
+            (rainbow-delimiters-mode 1)))
 
 
 ;;;-------------------------

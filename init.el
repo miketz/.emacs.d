@@ -2086,8 +2086,8 @@ and indent."
 
               (progn ;; use linux style tabbing/indentation for C
                 ;; these values should be buffer local.
-                (setq c-basic-offset 8)
-                (setq tab-width 8)
+                (setq c-basic-offset my-indent-width)
+                (setq tab-width my-indent-width)
                 (setq indent-tabs-mode t))
 
               (progn ;; smart-tabs-mode

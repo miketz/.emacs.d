@@ -3916,6 +3916,15 @@ When ARG isn't nil, try to pretty print the sexp."
               (electric-spacing-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
+;;; swift-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "swift-mode"
+  (add-hook 'swift-mode-hook
+            (lambda ()
+              (rainbow-delimiters-mode 1)
+              (electric-pair-mode 1))))
+
+;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (defun find-shell (&optional shell-only)

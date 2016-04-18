@@ -51,6 +51,30 @@
     ;;(my-start-omnisharp-server sln)
     ))
 
+(defun proj-safetyweb-ects ()
+  (interactive)
+  (let* ((root "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development/ECTS/Source/")
+         (sln (concat root "Safety.sln"))
+         ;; (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs"))
+         )
+    ;; helm-cmd-t stuff
+    (add-to-list 'helm-cmd-t-find-prunes "obj")
+    (add-to-list 'helm-cmd-t-find-prunes "bin")
+    (add-to-list 'helm-cmd-t-find-prunes ".svn")
+    (add-to-list 'helm-cmd-t-find-prunes "packages")
+    (add-to-list 'helm-cmd-t-find-prunes "Safety.WebUI.Tests")
+    (add-to-list 'helm-cmd-t-find-prunes "TestResults")
+    (setq dir_ects (helm-cmd-t-get-create-source-dir root))
+    (evil-leader/set-key "h" (lambda ()
+                               (interactive)
+                               (helm :sources '(helm-source-buffers-list
+                                                dir_ects)
+                                     :buffer "*Saftey Web Project*")))
+    (dired root)
+    ;;custom start of omnisharp. The commnad line string made by (omnisharp-start-omnisharp-server sln) doesn't work on my box.
+    ;;(my-start-omnisharp-server sln)
+    ))
+
 (defun proj-rsims ()
   "Enable project features for the RSIMS website."
   (interactive)

@@ -118,7 +118,7 @@ Region is between START and END inclusive."
   (interactive "r")
   (mor--mode-on-region start
                        end
-                       (intern (completing-read ; uses chooses the mode
+                       (intern (completing-read ; user chooses the mode
                                 "Mode: "
                                 (mapcar (lambda (e)
                                           (list (symbol-name e)))

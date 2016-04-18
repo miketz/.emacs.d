@@ -56,7 +56,7 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
 ;; TODO: Support selection of rectangular regions. Useful for selecting text
 ;;       in a comment. So you could exlude the comment markers that would mess
 ;;       up the dedicated mode buffer.
-;; TODO: Use a buffer-local keybind in the temp buffer to copy back text.
+;; TODO: Use a buffer-local keybind in the tmp buffer to copy back text.
 ;;       Maybe create a minor mode just for the purpose of the keybind.
 ;; TODO: Incorporate code from org-mode. Locks highlighted region from edits.
 ;;       Look into how it copies text back/forth between buffers.
@@ -64,9 +64,9 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
 ;;       require a file on disk (some linters, etc).
 
 (defconst mor--prefix "mor-tmp-"
-  "Prefix used for temp buffer names.")
+  "Prefix used for tmp buffer names.")
 (defvar mor--counter 0
-  "Sequential counter used to generate unique names for temp buffers.")
+  "Sequential counter used to generate unique names for tmp buffers.")
 
 (defvar mor--prev-mode-fn nil
   "The previous mode used.
@@ -179,7 +179,7 @@ MODE-FN the function to turn on the desired mode."
 ;; TODO: find a way to make the existence of this function buffer-local so I
 ;; don't need a guarding check.
 (defun mor-copy-back ()
-  "Copy the temp buffer text back the original buffer.
+  "Copy the tmp buffer text back the original buffer.
 
 WARNING:
 Overwrites the original text.
@@ -192,20 +192,20 @@ overwrite."
   (mor--finished-with-tmp-buffer t))
 
 (defun mor-close-tmp-buffer ()
-  "Kill the temp buffer and clean up the window if applicable.
+  "Kill the tmp buffer and clean up the window if applicable.
 Call this if you don't want to copy the text back to the original buffer."
   (interactive)
   (mor--finished-with-tmp-buffer nil))
 
 (defun mor--finished-with-tmp-buffer (copy-back-p)
-  "Manages the end of life of the temp buffer.
+  "Manages the end of life of the tmp buffer.
 
 When COPY-BACK-P is t, copy text back to the original buffer.
 
 May close a window based on `mor-preserve-win-layout-p' and some
 crude window layout logic.
 
-Kills the temp buffer."
+Kills the tmp buffer."
   (if (null mor--orig-buffer) ; guard
       (message "You must be in a mor-tmp buffer for this to work.")
     (progn ; else

@@ -139,8 +139,7 @@ Region is between START and END inclusive."
 
 (defun mor--win-count ()
   "Get the number of windows open."
-  (cl-loop for w being the windows of (selected-frame)
-           sum 1))
+  (length (window-list)))
 
 (defun mor--mode-on-region (start end mode-fn)
   "The core function to copy region to a new buffer.

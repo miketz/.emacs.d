@@ -2926,6 +2926,15 @@ and indent."
 
 
 ;;;-----------------------------------------------------------------------------
+;;; git. Just git stuff external to emacs.
+;;;-----------------------------------------------------------------------------
+(when (eq my-curr-computer 'work-laptop) ; TODO: move this into spearate file.
+  (defun my-git-docs ()
+    (interactive)
+    (eww-open-file "C:/Users/mtz/AppData/Local/Programs/Git/mingw64/share/doc/git-doc/git.html")))
+
+
+;;;-----------------------------------------------------------------------------
 ;;; ediff
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "ediff"

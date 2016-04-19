@@ -4114,7 +4114,15 @@ in frame.  Stop displaying shell in all other windows."
 ;;indent keyword args properly. Use common lisp-style for (if) indendation too?
 ;;(setq lisp-indent-function 'common-lisp-indent-function)
 
-(setq inhibit-startup-message t)
+(progn
+  ;; turn off start up screen
+  (setq inhibit-startup-message t)
+
+  ;; don't display info in the modeline on start up.
+  ;; Need to override this method to do nothing as it looks at the current username.
+  ;; TODO: find an alternative solution???
+  (defun display-startup-echo-area-message ()))
+
 ;;(setq initial-scratch-message ";; Scratch buffer ;;\n\n\n\n")
 (setq initial-scratch-message "\n\n\n\n\n")
 ;; (setq initial-buffer-choice (lambda () (get-buffer-create "foo")))

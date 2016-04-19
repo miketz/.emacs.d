@@ -1908,7 +1908,7 @@ To make it human readable."
   ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
   ;; forced a load of ido automatically at start up, even when I'm not using
   ;; ido!!!
-  ;; ALWAYS-DO: periodically moniotor package `ido-completing-read+' after
+  ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
   ;; updates, and remove the un-wanted code in the autoload file.
   )
 

@@ -2004,6 +2004,16 @@ To make it human readable."
 ;;;--------------------
 ;;; cc-mode
 ;;;--------------------
+(defun my-comment-dwim-aligh-with-spaces ()
+  "Temporarily use spaces while making the comments.
+It will still use tabs for left-side indentation.
+Useful for aligning trailing comments when using tabs for indentation, spaces
+for alignment. Doesn't solve all comment alignment issues but helps in a few
+cases."
+  (interactive)
+  (let ((indent-tabs-mode nil)) ; spaces
+    (call-interactively #'comment-dwim)))
+
 (with-eval-after-load "cc-mode"
   ;; (assoc "cc-mode" c-style-alist)
   ;; (assoc "user" c-style-alist)
@@ -2025,6 +2035,10 @@ To make it human readable."
   (setq-default c-basic-offset my-indent-width) ;tab width
   (setq-default c-electric-flag t)
   (setq-default c-electric-pound-behavior '(alignleft))
+
+  ;; custom function for trailing comment alignment. (useful when using tabs)
+  (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-aligh-with-spaces)
+  (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-aligh-with-spaces)
 
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.

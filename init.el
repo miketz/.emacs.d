@@ -2004,6 +2004,11 @@ To make it human readable."
 ;;;--------------------
 ;;; cc-mode
 ;;;--------------------
+;; This fn is useful for aligning trailing comments when using tabs for
+;; indentation.  It won't work if different numbers of tabs are used within the
+;; aligned set of comments. But that case (different tab level) should be rare
+;; as a different tab level is a differnet block of logic, so you wouldn't have
+;; a set of comments span across it.
 (defun my-comment-dwim-aligh-with-spaces ()
   "Temporarily use spaces while making the comments.
 It will still use tabs for left-side indentation.

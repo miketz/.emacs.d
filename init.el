@@ -4089,8 +4089,7 @@ in frame.  Stop displaying shell in all other windows."
 
 
 ;; if we havn't bound leader-b to buffer switching yet, then default to ibuffer.
-(when (or (eq my-curr-computer 'leyna-laptop)
-          (eq my-curr-computer 'raspberry-pi)
+(when (or (eq my-curr-computer 'raspberry-pi)
           (and (not my-use-helm-p)
                (not my-use-ido-p)
                (not my-use-ivy-p)))

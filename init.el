@@ -3218,9 +3218,6 @@ and indent."
 
 (with-eval-after-load "ivy"
   ;; remove the default ^ prefix used by `counsel-M-x'
-  ;;TODO: confirm this fix (move to eval-afeter-load "ivy"
-  ;;      for linux and leyna-laptop. set-alist is not found?
-  ;;      I think it was related to apel package not being included.
   (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind

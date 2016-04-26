@@ -321,6 +321,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
     unkillable-scratch
     speed-type
     bug-hunter
+    ivy
     swiper
     flx ;; can be used by ivy for ordering flx matches.
     counsel

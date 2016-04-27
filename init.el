@@ -1977,7 +1977,7 @@ To make it human readable."
   ;;       ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
   ;;       ,yas-installed-snippets-dir              ;; the default collection
   ;;       ))
-  (setq yas/triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
+  (setq yas-triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
   (defun my-yas-handle-param (param-str
                               sep-char
                               fn-deco

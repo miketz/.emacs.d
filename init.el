@@ -2123,6 +2123,22 @@ and indent."
               ;; (fci-mode 1)
               ))
 
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (progn ;; use linux style tabbing/indentation.
+                ;; these values should be buffer local.
+                (setq c-basic-offset my-indent-width)
+                (setq tab-width my-indent-width)
+                (setq indent-tabs-mode t))
+
+              (progn ;; smart-tabs-mode
+                (smart-tabs-mode-enable)
+                (smart-tabs-advice c-indent-line c-basic-offset)
+                (smart-tabs-advice c-indent-region c-basic-offset))
+
+              ;; (fci-mode 1)
+              ))
+
 
   (add-hook 'c-initialization-hook
             (lambda ()

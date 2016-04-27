@@ -3303,8 +3303,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
       (funcall mode))
     (switch-to-buffer buf-clone)
     ;;refresh syntax highlighting by toggling `font-lock-mode'
-    (dotimes (i 2)
-      (font-lock-mode))))
+    (cl-loop repeat 2 do
+             (font-lock-mode))))
 
 (defun my-narrow-to-region (start end)
   (interactive "r")

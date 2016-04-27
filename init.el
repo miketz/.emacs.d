@@ -1628,7 +1628,7 @@ This prevents overlapping themes; something I would rarely want."
 To make it human readable."
     (interactive)
     (save-excursion
-      (beginning-of-buffer) ;; go to beggining of buffer
+      (goto-char (point-min)) ;; go to beggining of buffer
       (let ((pos 0))
         (while (not (null pos))
           (setq pos (search-forward "&#xD;&#xA;" nil t))

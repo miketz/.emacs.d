@@ -941,8 +941,10 @@ This prevents overlapping themes; something I would rarely want."
    ((eq my-curr-computer 'wild-dog)
     (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true"))
 
-   ((eq my-curr-computer 'work-laptop)
-    (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+   ((and (eq my-curr-computer 'work-laptop)
+         my-graphic-p)
+    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")

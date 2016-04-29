@@ -3027,7 +3027,7 @@ and indent."
 ;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
 
 ;;;-----------------------------------------------------------------------------
-;;; fill-column-indicator
+;;; fill-column-indicator, fci-mode
 ;;;-----------------------------------------------------------------------------
 ;; (require 'fill-column-indicator)
 ;; (add-hook 'prog-mode-hook (lambda ()

@@ -6,7 +6,7 @@
 # --
 if exists (select null from sys.extended_properties where [major_id] = object_id('$1.$2') and [name] = N'MS_Description' and [minor_id] = (select [column_id] from SYS.COLUMNS where [name] = '$3' and [object_id] = object_id('$1.$2')))
 begin
-exec sys.sp_updateextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA', @level0name=N'${1:dbo}', @level1type=N'TABLE', @level2type=N'COLUMN',
+    exec sys.sp_updateextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA', @level0name=N'${1:dbo}', @level1type=N'TABLE', @level2type=N'COLUMN',
     @level1name=N'${2:Table}',
     @level2name=N'${3:Col}',
     @value=N'$0';

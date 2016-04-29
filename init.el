@@ -3141,13 +3141,15 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; linum-relative
 ;;;-----------------------------------------------------------------------------
-;; ;; (require 'linum-relative) ;linum-mode's behavior is changed by the linum-relative package.
+;; ;; (require 'linum-relative) ; `linum-mode's behavior is changed by the
+;; ;;                           ; linum-relative package.
 ;; (autoload 'linum-relative-toggle "linum-relative" "linum-relative" t)
 
 ;; ;; don't turn on by default. Makes the screen blink when line # changes.
 ;; ;;(linum-relative-toggle) ;;toggle between realtive and straight.
 ;; (with-eval-after-load "linum-relative"
-;;   (setq linum-relative-format "%2s") ;rel numbers should never exceed 2 digits.
+;;   ;; rel nums should never exceed 2 digits.
+;;   (setq linum-relative-format "%2s")
 ;;   (setq linum-relative-current-symbol "0"))
 
 

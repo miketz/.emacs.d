@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# -*- Omni. Add or edit a doc based on existence. -*-
+# name: odoc
+# key: odoc
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @$2_$3_doc nvarchar(4000) = N'$0';
+if not exists (select null from sys.extended_properties where [major_id] = object_id('$1.$2') and [name] = N'MS_Description' and [minor_id] = (select [column_id] from SYS.COLUMNS where [name] = '$3' and [object_id] = object_id('$1.$2')))
+    exec sys.sp_addextendedproperty @name = N'MS_Description', @level0type = N'SCHEMA', @level0name = N'${1:dbo}', @level1type = N'TABLE', @level2type = N'COLUMN',
+    @level1name = N'${2:Table}',--do not use $1 schema here
+    @level2name = N'${3:Col}',
+    @value=@$2_$3_doc;
+else
+    exec sys.sp_updateextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA', @level0name=N'$1', @level1type=N'TABLE', @level2type=N'COLUMN',
+    @level1name=N'$2',
+    @level2name=N'$3',
+    @value=@$2_$3_doc;

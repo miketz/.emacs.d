@@ -128,10 +128,10 @@
    `(region
      ((t (:background "#69685E"))))     ;"#49483E"
    ;; '(region ((t :background "black")))
-   '(isearch ((t :background "black"
-                 :foreground "yellow"
-                 :bold nil
-                 :underline t)))
+   '(isearch ((t :background "yellow"
+                 :foreground "black"
+                 :bold t
+                 :underline nil)))
    ;; the non-selected matches from isearch
    '(lazy-highlight ((t
                       :background "black"

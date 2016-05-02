@@ -5,6 +5,17 @@
    (format-time-string
     "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N")))
 
+(defun my-insert-date-string-new-buff ()
+  (interactive)
+  (let ((tmp-buff "*Date and Time*"))
+    ;; TODO: see if there are any emacs tmp buffer functions that will handle
+    ;;       the window managemnt. ie q to delete, close window, etc.
+    (switch-to-buffer-other-window tmp-buff)
+    (with-current-buffer tmp-buff
+      (goto-char (point-max)) ;;end of buffer
+      (insert "\n\n")
+      (my-insert-date-string))))
+
 (defun now ()
   (interactive)
   (format-time-string "%b %a %m-%d-%Y %I:%M %p"))

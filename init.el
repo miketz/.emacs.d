@@ -704,7 +704,6 @@ Minus the newline char."
 ;; (evil-define-key 'motion global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
 ;; ;;(evil-leader/set-key "," 'evil-execute-in-god-state)
-;; ;;(global-set-key (kbd "C-c i") 'my-insert-date-string)
 
 ;; ;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
 ;; ;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
@@ -3764,7 +3763,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; my-date-stuff.el
 ;;;-----------------------------------------------------------------------------
 (autoload #'my-insert-date-string "my-date-stuff" nil t)
-(global-set-key (kbd "C-c i") #'my-insert-date-string)
+(autoload #'my-insert-date-string-new-buff "my-date-stuff" nil t)
+(global-set-key (kbd "C-c i") #'my-insert-date-string-new-buff)
 
 
 ;;;-----------------------------------------------------------------------------
@@ -4171,9 +4171,10 @@ in frame.  Stop displaying shell in all other windows."
   (setq display-time-load-average nil)
   (setq display-time-load-average-threshold nil)
   ;;(setq-default display-time-day-and-date t)
-  (display-time-mode 1)
   ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
-  (setq display-time-format "%-I:%M%#p"))
+  (setq display-time-format "%-I:%M%#p")
+  ;; (display-time-mode 1)
+  )
 
 ;;show lambdas with the greek symbol
 ;; (when (and (>= emacs-major-version 24)

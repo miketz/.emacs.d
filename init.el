@@ -490,8 +490,29 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
   ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
 
-  (key-chord-mode 1) ;; autoloaded function
-  )
+
+  ;; (key-chord-mode 1) ;; autoloaded function
+
+
+  ;; TODO: use an alternative way to surpress the message. So I don't have to
+  ;;       manually re-sync this definition with the latest version of fn
+  ;;       `key-chord-mode'.
+  ;; NOTE: using lambda instead of a defun so to avoid a junk method
+  ;;       that is not useful after start-up (just want to avoid the msg at
+  ;;       at start-up).
+  (funcall (lambda (arg)
+             "Alternative to fn `key-chord-mode'. To surpress the on message."
+             (interactive "P")
+             (let ((message (lambda (str) nil)))
+               (setq key-chord-mode (if arg
+                                        (> (prefix-numeric-value arg) 0)
+                                      (not key-chord-mode)))
+               (cond (key-chord-mode
+                      (setq input-method-function 'key-chord-input-method))
+                     (t
+                      (setq input-method-function nil)
+                      (message "Key Chord mode off")))))
+           1))
 
 
 ;;;----------------------------------

@@ -84,6 +84,9 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;;(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
+;; turn off warnings when a fn is redifend by `defadvice'
+(setq ad-redefinition-action 'accept)
+
 ;;for compatibility with < 24.4 emacs, define `with-eval-after-load'
 (unless (fboundp 'with-eval-after-load)
   (defmacro with-eval-after-load (file &rest body)

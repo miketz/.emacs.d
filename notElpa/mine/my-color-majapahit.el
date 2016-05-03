@@ -8,6 +8,16 @@
   (custom-theme-set-faces
    'majapahit-dark
 
+   `(mode-line
+     ((t (:foreground "#F8F8F2"
+                      :background "#3E3D31"
+                      :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   `(mode-line-inactive
+     ((t (:foreground "#75715E"
+                      :background "#272822"
+                      :box (:line-width -1 :style released-button)))))
+
    '(isearch ((t :background "black"
                  :foreground "yellow"
                  :bold nil

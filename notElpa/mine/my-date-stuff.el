@@ -12,11 +12,14 @@
   (let ((tmp-buff "*Date and Time*"))
     ;; TODO: see if there are any emacs tmp buffer functions that will handle
     ;;       the window managemnt. ie q to delete, close window, etc.
-    (switch-to-buffer-other-window tmp-buff)
+    (unless (string-equal tmp-buff
+                          (buffer-name (current-buffer)))
+      (switch-to-buffer-other-window tmp-buff))
     (with-current-buffer tmp-buff
       (goto-char (point-max)) ;; end of buffer
       (insert "\n\n")
-      (my-insert-date-string))))
+      (my-insert-date-string)
+      )))
 
 ;; BROKEN
 ;; (defun my-insert-date-string-new-buff2 ()

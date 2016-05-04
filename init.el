@@ -962,7 +962,9 @@ This prevents overlapping themes; something I would rarely want."
 
   (cond
    ((eq my-curr-computer 'wild-dog)
-    (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true"))
+    (set-frame-font "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    ;; (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
+    )
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)

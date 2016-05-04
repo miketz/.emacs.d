@@ -46,3 +46,4 @@
 (defun now-put-in-buffer ()
   (interactive)
   (insert (now)))
+; test

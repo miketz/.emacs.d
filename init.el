@@ -221,7 +221,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using ido at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn #'helm-swoop
+(defvar my-swoop-fn #'swiper
   "Function for searching with an overview.
 Examples: helm-swoop swiper")
 (when my-use-evil-p

@@ -2982,6 +2982,9 @@ and indent."
     ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
     (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
 
+  (when my-use-ivy-p
+    (setq magit-completing-read-function #'ivy-completing-read))
+
   ;; Speical highlight on the changed words in a line. Makes it easier to see
   ;; what changed. If 'all becomes a performance problem then set it to t so
   ;; it only affects the currently highlighted diff.

@@ -3768,6 +3768,11 @@ When ARG isn't nil, try to pretty print the sexp."
 (autoload #'my-insert-date-string-new-buff "my-date-stuff" nil t)
 (global-set-key (kbd "C-c i") #'my-insert-date-string-new-buff)
 
+(when my-use-evil-p
+  (with-eval-after-load "my-date-stuff"
+    ;; TODO: figure out how to get "q" to work for evil normal mode.
+    (define-key my-date-mode-map (kbd "C-c c") #'my-quit-window-date)))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; universal vim escape. Without key-chord dependence

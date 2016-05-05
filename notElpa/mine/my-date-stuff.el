@@ -1,3 +1,17 @@
+(defun my-quit-window-date ()
+  (interactive)
+  (quit-window t) ; kill the buffer too.
+  )
+
+(define-minor-mode my-date-mode
+  "Minor mode to simulate buffer local keybindings."
+  :init-value nil
+  ;; TODO: figure out how to get "q" to work for evil mode.
+  ;; TODO: "q" is breaking for evil-emacs mode "C-z". Fix it.
+  :keymap '(("q" . #'my-quit-window-date)))
+
+
+
 (defun my-insert-date-string ()
   "Insert a date string.  Everything you need to know about the date and time."
   (interactive)
@@ -10,8 +24,6 @@
 (defun my-insert-date-string-new-buff ()
   (interactive)
   (let ((tmp-buff "*Date and Time*"))
-    ;; TODO: see if there are any emacs tmp buffer functions that will handle
-    ;;       the window managemnt. ie q to delete, close window, etc.
     (unless (string-equal tmp-buff
                           (buffer-name (current-buffer)))
       (switch-to-buffer-other-window tmp-buff))
@@ -19,6 +31,7 @@
       (goto-char (point-max)) ;; end of buffer
       (insert "\n\n")
       (my-insert-date-string)
+      (my-date-mode) ; for the windwow closing keybind "q"
       )))
 
 ;; BROKEN

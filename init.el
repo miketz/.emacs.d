@@ -221,10 +221,12 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using ido at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn (if my-use-helm-p
-                        #'helm-swoop
-                      #'swiper)
-  "Function for searching with an overview.")
+(defvar my-swoop-fn #'helm-swoop
+  "Function for searching with an overview.
+Examples: helm-swoop swiper")
+(when my-use-evil-p
+  (with-eval-after-load "evil"
+    (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
 ;;;----------------------------------
 ;;; Packages
@@ -1834,10 +1836,10 @@ To make it human readable."
 ;; (autoload 'helm-swoop "helm-swoop" nil t)
 
 ;; invoke with M-x for now. binding avy to the "s" key
-(when my-use-helm-p
+;; (when my-use-helm-p
   ;; helm needs to be initalized or else helm-swoop won't work. (it doens't `require' everything it needs)
-  (when my-use-evil-p
-    (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
+  ;; (when my-use-evil-p
+  ;;   (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
 ;; (global-set-key (kbd "C-c s") #'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") #'helm-swoop)
@@ -1914,8 +1916,8 @@ To make it human readable."
 ;;;-----------------------------------------------------------
 (when my-use-ido-p
   ;;use swiper on "s" even when using ido.
-  (when my-use-evil-p
-    (define-key evil-normal-state-map (kbd "s") #'swiper))
+  ;; (when my-use-evil-p
+  ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
   (setq ido-everywhere t)
   (ido-mode t) ;;autoloaded function. turn on ido.
@@ -3237,7 +3239,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (when my-use-ivy-p
   (when my-use-evil-p
-    (define-key evil-normal-state-map (kbd "s") #'swiper)
+    ;; (define-key evil-normal-state-map (kbd "s") #'swiper)
     (evil-leader/set-key "b" #'ivy-switch-buffer))
 
   (when (eq my-ui-type 'emacs)

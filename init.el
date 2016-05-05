@@ -31,22 +31,22 @@
 ;;;----------------------------------
 ;;; Git workflow with submodule:
 ;;;----------------------------------
-;;; With ~/.emamcs.d/notElpa/swiper as an example
+;;; With ~/.emacs.d/notElpa/swiper as an example
 ;;;
 ;;; Fork on github
 ;;;
 ;;; Create a submodule from fork
-;;;     cd ~/.emamcs.d/notElpa
+;;;     cd ~/.emacs.d/notElpa
 ;;;     git submodule add https://github.com/miketz/swiper
 ;;;
 ;;; Make changes
 ;;; Push to fork
-;;;     cd ~/.emamcs.d/notElpa/swiper
+;;;     cd ~/.emacs.d/notElpa/swiper
 ;;;     git push origin master
 ;;; Make pull request on github
 ;;;
 ;;; Download from upstream -> local. Then push local -> fork
-;;;     cd ~/.emamcs.d/notElpa/swiper
+;;;     cd ~/.emacs.d/notElpa/swiper
 ;;;     git remote add upstream https://github.com/abo-abo/swiper
 ;;;     git fetch upstream
 ;;;     # then: (like "git pull" which is fetch + merge)

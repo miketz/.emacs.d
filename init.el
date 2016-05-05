@@ -1837,7 +1837,7 @@ To make it human readable."
 (when my-use-helm-p
   ;; helm needs to be initalized or else helm-swoop won't work. (it doens't `require' everything it needs)
   (when my-use-evil-p
-   (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
+    (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
 ;; (global-set-key (kbd "C-c s") #'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") #'helm-swoop)

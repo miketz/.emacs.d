@@ -3263,7 +3263,9 @@ and indent."
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function)
     (when my-use-evil-p
-      (evil-leader/set-key "w" #'counsel-yank-pop))))
+      (evil-leader/set-key "w" #'counsel-yank-pop)
+      (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
+      )))
 
 (with-eval-after-load "ivy"
   ;; remove the default ^ prefix used by `counsel-M-x'

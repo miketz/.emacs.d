@@ -1915,13 +1915,13 @@ To make it human readable."
 (when my-use-ido-p
   ;;use swiper on "s" even when using ido.
   (when my-use-evil-p
-   (define-key evil-normal-state-map (kbd "s") #'swiper))
+    (define-key evil-normal-state-map (kbd "s") #'swiper))
 
   (setq ido-everywhere t)
   (ido-mode t) ;;autoloaded function. turn on ido.
 
   (when my-use-evil-p
-   (evil-leader/set-key "b" #'ido-switch-buffer))
+    (evil-leader/set-key "b" #'ido-switch-buffer))
 
   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
   ;;                   ; when Smex is auto-initialized on its first run.

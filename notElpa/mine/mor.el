@@ -4,8 +4,10 @@
 
 
 ;;; Commentary:
-;;; Use function `mor-mode-on-region' to copy a highlighted region to a new
-;;; buffer and turn on a mode.
+;;; `mor-mode-on-region' copies a highlighted region to a tmp buffer and
+;;; turns on the mode of your choice.
+;;; `mor-prev-mode-on-region' does the same thing, but recalls the previously
+;;; chosen mode.
 ;;;
 ;;; Copy the text back with `mor-copy-back' or C-c b
 ;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c

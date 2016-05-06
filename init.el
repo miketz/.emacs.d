@@ -3411,7 +3411,9 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
        (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region))))
 
 (with-eval-after-load "mor"
-  (setq mor-format-automatically-p t
+  ;; these values are the defaults, but setting them anyway so it's easy to
+  ;; change them later.
+  (setq mor-format-automatically-p nil
         mor-switch-buff-fn #'switch-to-buffer-other-window)
 
   ;; NOTE: replaced these global bindings with minor mode bindigns

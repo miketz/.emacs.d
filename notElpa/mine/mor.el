@@ -34,6 +34,19 @@
 (require 'cl-lib)
 (require 'rx)
 
+(define-minor-mode mor-tmp-buffer-mode
+  "Minor mode to simulate buffer local keybindings for mor tmp buffers.
+Before the this minor mode, tmp buffer funcs were bound globally and
+required guards to verify the user was inside a mor tmp buffer.
+NOTE: the guards still exist for needed protection.  The minor mode
+keybinds just help avoid keybind pollution, and reduce the risk of
+accidentally calling a function not relevant outsdie of a tmp buffer."
+  :init-value nil
+  :lighter " mor-tmp"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c b") #'mor-copy-back)
+            (define-key map (kbd "C-c c") #'mor-close-tmp-buffer)
+            map))
 
 (defvar mor-format-automatically-p nil
   "When t automatically format the copied text via `indent-region'.")
@@ -56,8 +69,6 @@ Implementation is very crude.") ;; TODO: See if there are built in functions
 ;; TODO: Support selection of rectangular regions. Useful for selecting text
 ;;       in a comment. So you could exlude the comment markers that would mess
 ;;       up the dedicated mode buffer.
-;; TODO: Use a buffer-local keybind in the tmp buffer to copy back text.
-;;       Maybe create a minor mode just for the purpose of the keybind.
 ;; TODO: Incorporate code from org-mode. Locks highlighted region from edits.
 ;;       Look into how it copies text back/forth between buffers.
 ;; TODO: Optionally create a tmp file on disk. Useful for features that
@@ -169,14 +180,14 @@ MODE-FN the function to turn on the desired mode."
             mor--end end
             mor--made-new-win-p (< orig-win-count
                                    (mor--win-count))))
+    (mor-tmp-buffer-mode) ; for keybinds.
+
     (when mor-format-automatically-p
       (mark-whole-buffer)
       ;; using `call-interactively' becuase it includes the START/END
       ;; region parameters.
       (call-interactively #'indent-region))))
 
-;; TODO: find a way to make the existence of this function buffer-local so I
-;; don't need a guarding check.
 (defun mor-copy-back ()
   "Copy the tmp buffer text back the original buffer.
 

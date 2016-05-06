@@ -2565,8 +2565,7 @@ and indent."
 ;;; ace-window
 ;;;--------------------
 (unless (eq my-ui-type 'emacs)
-  ;; this is the emacs "copy" keybind, so only don't steal it when using emacs
-  ;; bindings.
+  ;; This is the emacs "copy" keybind. Don't steal it when using emacs bindings.
   (global-set-key (kbd "M-w") #'ace-window))
 
 (with-eval-after-load "ace-window"

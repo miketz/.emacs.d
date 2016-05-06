@@ -9,8 +9,10 @@
 ;;; `mor-prev-mode-on-region' does the same thing, but recalls the previously
 ;;; chosen mode.
 ;;;
-;;; Copy the text back with `mor-copy-back' or C-c b
-;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c
+;;; Copy the text back with `mor-copy-back' or C-c b.
+;;;                                            mnemonic: copy back
+;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c.
+;;;                                                   mnemonic: close
 
 
 ;;; NOTE: lexical binding is used as a potential micro-optimization for

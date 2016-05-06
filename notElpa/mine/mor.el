@@ -10,7 +10,7 @@
 ;;; Copy the text back with `mor-copy-back' or C-c b
 ;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c
 
-;;;
+
 ;;; NOTE: lexical binding is used as a potential micro-optimization for
 ;;; variable lookups.  This package *should* work whether lexical or dynamic
 ;;; binding is used.

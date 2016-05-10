@@ -330,7 +330,7 @@ Examples: helm-swoop swiper")
     swiper
     flx ;; can be used by ivy for ordering flx matches.
     counsel
-    apel ; used in eval-after-load config counsel/ivy.
+    ;; apel ; used in eval-after-load config counsel/ivy.
          ; specifically function `set-alist'
          ; TODO: remove dependency on apel using default elsip functions.
     ;;color-identifiers-mode
@@ -3272,8 +3272,13 @@ and indent."
       )))
 
 (with-eval-after-load "ivy"
-  ;; remove the default ^ prefix used by `counsel-M-x'
-  (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
+  ;; remove the default ^ prefix used by `counsel-M-x' and a few others.
+  (cl-loop for pair in ivy-initial-inputs-alist
+           do
+           (setcdr pair ""))
+  ;; NOTE: no longer using `set-alist' to disable the ^ prefix. Becuase it
+  ;;       pulled in a new package dependency `apel'. And maybe `flim'?
+  ;; (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
   ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)

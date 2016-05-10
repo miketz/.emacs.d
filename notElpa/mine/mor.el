@@ -46,7 +46,7 @@ Before the this minor mode, tmp buffer funcs were bound globally and
 required guards to verify the user was inside a mor tmp buffer.
 NOTE: the guards still exist for needed protection.  The minor mode
 keybinds just help avoid keybind pollution, and reduce the risk of
-accidentally calling a function not relevant outsdie of a tmp buffer."
+accidentally calling a function not relevant outside of a tmp buffer."
   :init-value nil
   :lighter " mor-tmp"
   :keymap (let ((map (make-sparse-keymap)))

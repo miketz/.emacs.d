@@ -53,4 +53,9 @@
 (setq require-final-newline nil)
 (setq mode-require-final-newline nil)
 
+;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
+;; TODO: revist this later. The performance problems may be fixed soon.
+;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
 ;; to access packages run (package-initialize)

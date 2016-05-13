@@ -2674,7 +2674,8 @@ and indent."
     (evil-leader/set-key "t"
       (lambda ()
         (interactive)
-        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
+        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))
+    (evil-leader/set-key "a" #'org-agenda-list)))
 
 
 (when (eq system-type 'gnu/linux)

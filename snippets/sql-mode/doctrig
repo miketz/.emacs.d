@@ -11,16 +11,6 @@ declare @doc nvarchar(4000) = N'${4:doc}';
 declare @full_trigger varchar(151) = (select @schema+'.'+@trigger);
 
 if not exists (select top 1 null from sys.extended_properties where major_id=object_id(@full_trigger, 'TR'))
-    exec sys.sp_addextendedproperty
-        @name = N'MS_Description',
-        @level0type = N'SCHEMA', @level0name = @schema,
-        @level1type = N'TABLE', @level1name = @table,
-        @level2type = N'TRIGGER', @level2name = @trigger,
-        @value = @doc;
+    exec sys.sp_addextendedproperty @name = N'MS_Description', @level0type = N'SCHEMA', @level0name = @schema, @level1type = N'TABLE', @level1name = @table, @level2type = N'TRIGGER', @level2name = @trigger, @value = @doc;
 else
-    exec sys.sp_updateextendedproperty
-        @name = N'MS_Description',
-        @level0type = N'SCHEMA', @level0name = @schema,
-        @level1type = N'TABLE', @level1name = @table,
-        @level2type = N'TRIGGER', @level2name = @trigger,
-        @value = @doc;
+    exec sys.sp_updateextendedproperty @name = N'MS_Description', @level0type = N'SCHEMA', @level0name = @schema, @level1type = N'TABLE', @level1name = @table, @level2type = N'TRIGGER', @level2name = @trigger, @value = @doc;

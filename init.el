@@ -1355,6 +1355,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;; Org mode
 ;;;---------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+(when my-use-evil-p
+  (evil-leader/set-key "a" #'org-agenda-list))
+
 (with-eval-after-load "org"
   (setq org-startup-indented t)
   (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
@@ -1376,6 +1380,14 @@ This prevents overlapping themes; something I would rarely want."
     (let (org-log-done org-log-states)  ; turn off logging
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+  (when (eq my-curr-computer 'wild-dog)
+    (let ((main-todo "~/todo/TODO.org"))
+      (setq org-agenda-files `(,main-todo))) ;; used by `org-agenda-list'
+    (evil-leader/set-key "t"
+      (lambda ()
+        (interactive)
+        (find-file-existing main-todo))))
 
   (when (eq my-curr-computer 'work-laptop)
     (setq org-agenda-files '("C:/Users/mtz/TODO/TODO.org")))
@@ -2674,8 +2686,7 @@ and indent."
     (evil-leader/set-key "t"
       (lambda ()
         (interactive)
-        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))
-    (evil-leader/set-key "a" #'org-agenda-list)))
+        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
 
 
 (when (eq system-type 'gnu/linux)

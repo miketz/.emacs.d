@@ -1362,6 +1362,7 @@ This prevents overlapping themes; something I would rarely want."
 (with-eval-after-load "org"
   (setq org-startup-indented t)
   (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
+  (setq org-agenda-timegrid-use-ampm t)
 
   (progn ;;HOLD keyword stuff
     ;; new keyword for tasks put on hold
@@ -1394,7 +1395,7 @@ This prevents overlapping themes; something I would rarely want."
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (when my-use-evil-p
-   (define-key org-mode-map (kbd "M-h") #'evil-window-left)))
+    (define-key org-mode-map (kbd "M-h") #'evil-window-left)))
 
 ;;;-----------------------------------------
 ;;; worf. key shortcuts for org-mode

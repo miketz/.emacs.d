@@ -1359,6 +1359,14 @@ This prevents overlapping themes; something I would rarely want."
 (when my-use-evil-p
   (evil-leader/set-key "a" #'org-agenda-list))
 
+(defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
+                            (setq my-main-todo "~/todo/TODO.org")))
+  "The main todo file on a particular computer.")
+
+(evil-leader/set-key "t" (lambda ()
+                           (interactive)
+                           (find-file-existing my-main-todo)))
+
 (with-eval-after-load "org"
   (setq org-startup-indented t)
   (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
@@ -1383,12 +1391,8 @@ This prevents overlapping themes; something I would rarely want."
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
   (when (eq my-curr-computer 'wild-dog)
-    (let ((main-todo "~/todo/TODO.org"))
-      (setq org-agenda-files `(,main-todo))) ;; used by `org-agenda-list'
-    (evil-leader/set-key "t"
-      (lambda ()
-        (interactive)
-        (find-file-existing main-todo))))
+    (setq org-agenda-files `(,my-main-todo)) ;; used by `org-agenda-list'
+    )
 
   (when (eq my-curr-computer 'work-laptop)
     (setq org-agenda-files '("C:/Users/mtz/TODO/TODO.org")))

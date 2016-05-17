@@ -1356,16 +1356,24 @@ This prevents overlapping themes; something I would rarely want."
 ;;;---------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-(when my-use-evil-p
-  (evil-leader/set-key "a" #'org-agenda-list))
 
 (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
-                            (setq my-main-todo "~/todo/TODO.org")))
+                            "~/todo/TODO.org")
+
+                           ((eq my-curr-computer 'work-laptop)
+                            "C:/Users/mtz/TODO/TODO.org")
+
+                           t nil)
   "The main todo file on a particular computer.")
 
-(evil-leader/set-key "t" (lambda ()
-                           (interactive)
-                           (find-file-existing my-main-todo)))
+;; if the computer has a main todo file.
+(when my-main-todo
+  (evil-leader/set-key "t" (lambda ()
+                             (interactive)
+                             (find-file-existing my-main-todo)))
+
+  (when my-use-evil-p
+    (evil-leader/set-key "a" #'org-agenda-list)))
 
 (with-eval-after-load "org"
   (setq org-startup-indented t)
@@ -1390,12 +1398,10 @@ This prevents overlapping themes; something I would rarely want."
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
-  (when (eq my-curr-computer 'wild-dog)
-    (setq org-agenda-files `(,my-main-todo)) ;; used by `org-agenda-list'
-    )
-
-  (when (eq my-curr-computer 'work-laptop)
-    (setq org-agenda-files '("C:/Users/mtz/TODO/TODO.org")))
+  ;; on computers that have a main todo file
+  (when my-main-todo
+    ;; `org-agenda-files' is used by fn `org-agenda-list'
+    (setq org-agenda-files `(,my-main-todo)))
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (when my-use-evil-p

@@ -926,6 +926,7 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-color-firebelly "my-color-firebelly" nil t)
 (autoload #'my-color-molokai "my-color-molokai" nil t)
 (autoload #'my-color-majapahit "my-color-majapahit" nil t)
+(autoload #'my-color-deeper-blue "my-color-deeper-blue" nil t)
 
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff

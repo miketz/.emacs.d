@@ -1368,11 +1368,10 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; if the computer has a main todo file.
 (when my-main-todo
-  (evil-leader/set-key "t" (lambda ()
-                             (interactive)
-                             (find-file-existing my-main-todo)))
-
   (when my-use-evil-p
+    (evil-leader/set-key "t" (lambda ()
+                               (interactive)
+                               (find-file-existing my-main-todo)))
     (evil-leader/set-key "a" #'org-agenda-list)))
 
 (with-eval-after-load "org"

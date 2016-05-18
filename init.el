@@ -202,16 +202,14 @@ The code is added to a list which can be invoked in the future with fn
             do
             (add-to-list 'my--delayed-package-code form t))
     ;; else, expand to normal code for immediate execution.
-    (let ((code (first body)))
-      `(print ,code))
-    ;; (let ((code '()))
-    ;;   (loop for form in body
-    ;;         do
-    ;;         (add-to-list 'code form t))
-    ;;   '(print "test"))
-    ))
+    (let ((code '()))
+      (loop for form in body
+            do
+            (add-to-list 'code form t))
+      `(funcall (lambda () ,@code)))))
 
 (defun my-do-full-init-with-packages ()
+  "Only call this 1 time if you started with `my-fast-load-p' = t."
   (interactive)
   (package-initialize)
   ;; TODO: Complete this, test it.
@@ -219,9 +217,29 @@ The code is added to a list which can be invoked in the future with fn
   ;; for packages.
   (cl-loop for form in my--delayed-package-code
            do
-           (eval form)
-           ;(eval `(lambda () ,form) lexical-binding)
+           ;; (eval form)
+           ;; (eval `(lambda () ,form) lexical-binding)
+           (funcall `(lambda () ,form))
            ))
+
+;; (when nil ;; interactive tetsing
+;;   (setq my-fast-load-p t)
+;;   (setq my--delayed-package-code '())
+;;   (setq glob 0)
+
+;;   (my-top-level-package-code
+;;     (print "hi")
+;;     (incf glob))
+
+;;   glob
+
+;;   (macroexpand
+;;    '(my-top-level-package-code
+;;       (incf glob)))
+
+
+;;   (my-do-full-init-with-packages))
+
 
 (defvar my-indent-width 4
   "An omni-variable serving 3 related purposes.

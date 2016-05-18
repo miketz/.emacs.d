@@ -3808,6 +3808,15 @@ When ARG isn't nil, try to pretty print the sexp."
     ;; TODO: figure out how to get "q" to work for evil normal mode.
     (define-key my-date-mode-map (kbd "C-c c") #'my-quit-window-date)))
 
+;;;-----------------------------------------------------------------------------
+;;; iedit. dependency from lispy.
+;;;-----------------------------------------------------------------------------
+;; avoid warning popup for global keybind of C-;
+;; I use that for the universal vim escape.
+;; Doesn't work in eval-after-load becuase the warning code runs during the
+;; load.
+;; TODO: submit a patch upstream so I can set the var nil in eval-after-load.
+(setq iedit-toggle-key-default nil)
 
 ;;;-----------------------------------------------------------------------------
 ;;; universal vim escape. Without key-chord dependence

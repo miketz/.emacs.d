@@ -178,7 +178,7 @@ Specific configs may be made based on the computer.")
 ;;;----------------------------------
 ;;; globals
 ;;;----------------------------------
-(defconst my-fast-load-p t
+(defconst my-fast-load-p nil
   "When t, delay the use of packages.
 For when I want a very fast start without `package-initialize'. So emacs can be
 used for quick vim-like edits.

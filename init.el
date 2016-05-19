@@ -178,7 +178,7 @@ Specific configs may be made based on the computer.")
 ;;;----------------------------------
 ;;; globals
 ;;;----------------------------------
-(defconst my-fast-load-p nil
+(defconst my-fast-load-p t
   "When t, delay the use of packages.
 For when I want a very fast start without `package-initialize'. So emacs can be
 used for quick vim-like edits.
@@ -287,9 +287,10 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-swoop-fn #'swiper
   "Function for searching with an overview.
 Examples: helm-swoop swiper")
-(when my-use-evil-p
-  (with-eval-after-load "evil"
-    (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
+(my-top-level-package-code
+  (when my-use-evil-p
+    (with-eval-after-load "evil"
+      (define-key evil-normal-state-map (kbd "s") my-swoop-fn))))
 
 ;;;----------------------------------
 ;;; Packages
@@ -447,7 +448,8 @@ Examples: helm-swoop swiper")
 
 
 ;; (setq package-enable-at-startup nil)
-(package-initialize) ;; activate all the packages (in particular autoloads)
+(my-top-level-package-code
+  (package-initialize)) ;; activate all the packages (in particular autoloads)
 
 
 (defun my-install-packages ()
@@ -463,7 +465,8 @@ Installs packages in the list `my-packages'."
     (unless (package-installed-p pkg)
       (package-install pkg))))
 
-(my-install-packages)
+(my-top-level-package-code
+  (my-install-packages))
 
 (defun my-upgrade-packages ()
   "Upgrade installed packages.
@@ -559,25 +562,26 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;; (key-chord-mode 1) ;; autoloaded function
 
 
-  ;; TODO: use an alternative way to surpress the message. So I don't have to
-  ;;       manually re-sync this definition with the latest version of fn
-  ;;       `key-chord-mode'.
-  ;; NOTE: using lambda instead of a defun so to avoid a junk method
-  ;;       that is not useful after start-up (just want to avoid the msg at
-  ;;       at start-up).
-  (funcall (lambda (arg)
-             "Alternative to fn `key-chord-mode'. To surpress the on message."
-             (interactive "P")
-             (let ((message (lambda (str) nil)))
-               (setq key-chord-mode (if arg
-                                        (> (prefix-numeric-value arg) 0)
-                                      (not key-chord-mode)))
-               (cond (key-chord-mode
-                      (setq input-method-function 'key-chord-input-method))
-                     (t
-                      (setq input-method-function nil)
-                      (message "Key Chord mode off")))))
-           1))
+  (my-top-level-package-code
+    ;; TODO: use an alternative way to surpress the message. So I don't have to
+    ;;       manually re-sync this definition with the latest version of fn
+    ;;       `key-chord-mode'.
+    ;; NOTE: using lambda instead of a defun so to avoid a junk method
+    ;;       that is not useful after start-up (just want to avoid the msg at
+    ;;       at start-up).
+    (funcall (lambda (arg)
+               "Alternative to fn `key-chord-mode'. To surpress the on message."
+               (interactive "P")
+               (let ((message (lambda (str) nil)))
+                 (setq key-chord-mode (if arg
+                                          (> (prefix-numeric-value arg) 0)
+                                        (not key-chord-mode)))
+                 (cond (key-chord-mode
+                        (setq input-method-function 'key-chord-input-method))
+                       (t
+                        (setq input-method-function nil)
+                        (message "Key Chord mode off")))))
+             1)))
 
 
 ;;;----------------------------------
@@ -745,8 +749,9 @@ Minus the newline char."
 ;; Enable evil explicitly for certain modes or file types.
 ;; (add-hook 'prog-mode-hook #'evil-local-mode)
 
-(when my-use-evil-p
-  (evil-mode 1)) ;; enable globally
+(my-top-level-package-code
+  (when my-use-evil-p
+    (evil-mode 1))) ;; enable globally
 
 
 
@@ -1294,7 +1299,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;;---------------------------------------------
 ;;company mode is breaking emacs 24.3. Works OK in 24.4
 ;; (require 'company)
-(add-hook 'after-init-hook 'global-company-mode) ;all buffers
+(my-top-level-package-code
+  (add-hook 'after-init-hook 'global-company-mode)) ;all buffers
 
 (with-eval-after-load "company"
   (when my-use-evil-p
@@ -1418,25 +1424,26 @@ This prevents overlapping themes; something I would rarely want."
 ;;;---------------------------------------------
 ;;; Org mode
 ;;;---------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(my-top-level-package-code
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 
-(defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
-                            "~/todo/TODO.org")
+  (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
+                              "~/todo/TODO.org")
 
-                           ((eq my-curr-computer 'work-laptop)
-                            "C:/Users/mtz/TODO/TODO.org")
+                             ((eq my-curr-computer 'work-laptop)
+                              "C:/Users/mtz/TODO/TODO.org")
 
-                           t nil)
-  "The main todo file on a particular computer.")
+                             t nil)
+    "The main todo file on a particular computer.")
 
-;; if the computer has a main todo file.
-(when my-main-todo
-  (when my-use-evil-p
-    (evil-leader/set-key "t" (lambda ()
-                               (interactive)
-                               (find-file-existing my-main-todo)))
-    (evil-leader/set-key "a" #'org-agenda-list)))
+  ;; if the computer has a main todo file.
+  (when my-main-todo
+    (when my-use-evil-p
+      (evil-leader/set-key "t" (lambda ()
+                                 (interactive)
+                                 (find-file-existing my-main-todo)))
+      (evil-leader/set-key "a" #'org-agenda-list))))
 
 (with-eval-after-load "org"
   (setq org-startup-indented t)
@@ -1479,18 +1486,19 @@ This prevents overlapping themes; something I would rarely want."
 ;;; csharp-mode
 ;;;---------------------------------------------
 ;;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(setq auto-mode-alist
-      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+(my-top-level-package-code
+  (setq auto-mode-alist
+        (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
 
 
-;; `electric-pair-mode' is in `c-mode-common-hook' already.
-;; (add-hook 'csharp-mode-hook #'electric-pair-mode)
+  ;; `electric-pair-mode' is in `c-mode-common-hook' already.
+  ;; (add-hook 'csharp-mode-hook #'electric-pair-mode)
 
-(add-hook #'csharp-mode-hook
-          (lambda ()
-            (yas-minor-mode 1)
-            (rainbow-delimiters-mode 1)
-            (electric-pair-mode 1)))
+  (add-hook #'csharp-mode-hook
+            (lambda ()
+              (yas-minor-mode 1)
+              (rainbow-delimiters-mode 1)
+              (electric-pair-mode 1))))
 
 
 ;;;-------------------------
@@ -1524,7 +1532,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;; js2-mode
 ;;;---------------------------------------------
 ;;(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(my-top-level-package-code
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 
 (with-eval-after-load "js2-mode"
   (setq-default
@@ -1756,37 +1765,38 @@ To make it human readable."
 ;;;--------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
-(when (and my-use-helm-p
-           (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
-           (not (eq my-curr-computer 'leyna-laptop)))
+(my-top-level-package-code
+  (when (and my-use-helm-p
+             (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
+             (not (eq my-curr-computer 'leyna-laptop)))
 
-  (progn ;;functions in key maps are auto-loaded.
-    (when my-use-evil-p
-     (evil-leader/set-key "b" #'helm-buffers-list))
-    (global-set-key (kbd "C-x b") #'helm-buffers-list)
-    ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
-    ;;(global-set-key (kbd "C-x b")   #'helm-mini)
-    ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-    (global-set-key (kbd "M-x") #'helm-M-x)
-    (global-set-key (kbd "C-x C-f") #'helm-find-files)
-    ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
-    ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-    (global-set-key (kbd "M-y") #'helm-show-kill-ring)
-    (when my-use-evil-p
-     (evil-leader/set-key "i" #'helm-imenu))
-    ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
-    ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
-    ;; (global-set-key (kbd "M-/") #'hippie-expand)
-    ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
-    )
+    (progn ;;functions in key maps are auto-loaded.
+      (when my-use-evil-p
+        (evil-leader/set-key "b" #'helm-buffers-list))
+      (global-set-key (kbd "C-x b") #'helm-buffers-list)
+      ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+      ;;(global-set-key (kbd "C-x b")   #'helm-mini)
+      ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+      (global-set-key (kbd "M-x") #'helm-M-x)
+      (global-set-key (kbd "C-x C-f") #'helm-find-files)
+      ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
+      ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
+      (global-set-key (kbd "M-y") #'helm-show-kill-ring)
+      (when my-use-evil-p
+        (evil-leader/set-key "i" #'helm-imenu))
+      ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
+      ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
+      ;; (global-set-key (kbd "M-/") #'hippie-expand)
+      ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
+      )
 
-  (when my-load-helm-on-init-p
-    (helm-mode 1)) ;helm-selection everywhere like when using M-x.
-  ;; list of functions helm should ignore and allow default completion.
-  ;; NOTE: this breaks if put in eval-after-load. Strange, but it works if
-  ;; I just put it after the call to (helm-mode 1)
-  ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
-  )
+    (when my-load-helm-on-init-p
+      (helm-mode 1))   ;helm-selection everywhere like when using M-x.
+    ;; list of functions helm should ignore and allow default completion.
+    ;; NOTE: this breaks if put in eval-after-load. Strange, but it works if
+    ;; I just put it after the call to (helm-mode 1)
+    ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
+    ))
 
 (with-eval-after-load "helm"
   (setq helm-ff-transformer-show-only-basename nil
@@ -1913,8 +1923,10 @@ To make it human readable."
 ;;;--------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
-(when my-use-evil-p
-  (evil-leader/set-key "g" #'my-vc-git-grep))
+
+(my-top-level-package-code
+  (when my-use-evil-p
+    (evil-leader/set-key "g" #'my-vc-git-grep)))
 
 ;;;--------------------
 ;;; helm-swoop
@@ -2000,34 +2012,35 @@ To make it human readable."
 ;;; flx-ido
 ;;; smex (built on ido)
 ;;;-----------------------------------------------------------
-(when my-use-ido-p
-  ;;use swiper on "s" even when using ido.
-  ;; (when my-use-evil-p
-  ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
+(my-top-level-package-code
+  (when my-use-ido-p
+    ;;use swiper on "s" even when using ido.
+    ;; (when my-use-evil-p
+    ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
-  (setq ido-everywhere t)
-  (ido-mode t) ;;autoloaded function. turn on ido.
+    (setq ido-everywhere t)
+    (ido-mode t) ;;autoloaded function. turn on ido.
 
-  (when my-use-evil-p
-    (evil-leader/set-key "b" #'ido-switch-buffer))
+    (when my-use-evil-p
+      (evil-leader/set-key "b" #'ido-switch-buffer))
 
-  ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-  ;;                   ; when Smex is auto-initialized on its first run.
-  (global-set-key (kbd "M-x") #'smex)
-  (global-set-key (kbd "M-X") #'smex-major-mode-commands)
-  (global-set-key (kbd "C-c M-x") #'execute-extended-command) ; rebind the original M-x command
+    ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+    ;;                   ; when Smex is auto-initialized on its first run.
+    (global-set-key (kbd "M-x") #'smex)
+    (global-set-key (kbd "M-X") #'smex-major-mode-commands)
+    (global-set-key (kbd "C-c M-x") #'execute-extended-command) ; rebind the original M-x command
 
-  ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
-  ;; other modes load ido, inadvertently turning on ido-ubiquitous even
-  ;; when i'm not using ido.
-  (ido-ubiquitous-mode 1)
-  ;; NOTE: i removed some un-wanted advice code from the autoloads file of
-  ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
-  ;; forced a load of ido automatically at start up, even when I'm not using
-  ;; ido!!!
-  ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
-  ;; updates, and remove the un-wanted code in the autoload file.
-  )
+    ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
+    ;; other modes load ido, inadvertently turning on ido-ubiquitous even
+    ;; when i'm not using ido.
+    (ido-ubiquitous-mode 1)
+    ;; NOTE: i removed some un-wanted advice code from the autoloads file of
+    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
+    ;; forced a load of ido automatically at start up, even when I'm not using
+    ;; ido!!!
+    ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
+    ;; updates, and remove the un-wanted code in the autoload file.
+    ))
 
 (with-eval-after-load "ido"
   (let ((my-ido-display nil)) ;; Choices: 'grid 'vertical nil
@@ -2365,15 +2378,16 @@ and indent."
 ;;; rainbow-delimiters
 ;;;--------------------------------------------------------------------
 ;; (require 'rainbow-delimiters)
-(add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
-(add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
+(my-top-level-package-code
+  (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
+  (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode))
 ;;(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)
@@ -2389,11 +2403,12 @@ and indent."
 ;;;--------------------------------------------------------------------
 ;;(require 'expand-region)
 ;; (autoload 'expand-region "expand-region" "expand region" t)
-(global-set-key (kbd "C-=") #'er/expand-region)
-(global-set-key (kbd "C--") #'er/contract-region)
+(my-top-level-package-code
+  (global-set-key (kbd "C-=") #'er/expand-region)
+  (global-set-key (kbd "C--") #'er/contract-region)
 
-(autoload #'hydra-expand-region/body "my-hydras" nil t)
-(global-set-key (kbd "C-c k") #'hydra-expand-region/body)
+  (autoload #'hydra-expand-region/body "my-hydras" nil t)
+  (global-set-key (kbd "C-c k") #'hydra-expand-region/body))
 
 ;;;--------------------------------------------------------------------
 ;;; mulitple-cursors
@@ -2407,13 +2422,14 @@ and indent."
 ;;;--------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
 ;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+(my-top-level-package-code
+  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook #'enable-paredit-mode)
+  (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode 1))))
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
@@ -2558,13 +2574,14 @@ and indent."
 ;;;--------------------
 ;;; Avy
 ;;;--------------------
-(global-set-key (kbd "M-g g") #'avy-goto-line)
-(global-set-key (kbd "M-g M-g") #'avy-goto-line)
-;; (define-key evil-normal-state-map (kbd "s") #'avy-goto-char-2) ;like vim sneak.
-;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
-(when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
-  (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1))
+(my-top-level-package-code
+  (global-set-key (kbd "M-g g") #'avy-goto-line)
+  (global-set-key (kbd "M-g M-g") #'avy-goto-line)
+  ;; (define-key evil-normal-state-map (kbd "s") #'avy-goto-char-2) ;like vim sneak.
+  ;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
+  (when my-use-evil-p
+    (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
+    (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1)))
 
 (with-eval-after-load "avy"
   ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.
@@ -2599,43 +2616,44 @@ and indent."
 ;;;--------------------
 ;;; ace-link
 ;;;--------------------
-(unless my-use-evil-p
-  ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
-  ;;       becuase calling that autoloaded function caused a premature
-  ;;       load of the ace-link feature!
-  ;;       Discovered by `profile-emacs.el'
-  (setq key "o")
-  (with-eval-after-load "info"
-    (define-key Info-mode-map key #'ace-link-info))
-  (with-eval-after-load "compile"
-    (define-key compilation-mode-map key #'ace-link-compilation))
-  (with-eval-after-load "help-mode"
-    (define-key help-mode-map key #'ace-link-help))
-  (with-eval-after-load "woman"
-    (define-key woman-mode-map key #'ace-link-woman))
-  (with-eval-after-load "eww"
-    (define-key eww-link-keymap key #'ace-link-eww)
-    (define-key eww-mode-map key #'ace-link-eww))
-  (with-eval-after-load 'cus-edit
-    (define-key custom-mode-map key #'ace-link-custom)))
+(my-top-level-package-code
+  (unless my-use-evil-p
+    ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
+    ;;       becuase calling that autoloaded function caused a premature
+    ;;       load of the ace-link feature!
+    ;;       Discovered by `profile-emacs.el'
+    (setq key "o")
+    (with-eval-after-load "info"
+      (define-key Info-mode-map key #'ace-link-info))
+    (with-eval-after-load "compile"
+      (define-key compilation-mode-map key #'ace-link-compilation))
+    (with-eval-after-load "help-mode"
+      (define-key help-mode-map key #'ace-link-help))
+    (with-eval-after-load "woman"
+      (define-key woman-mode-map key #'ace-link-woman))
+    (with-eval-after-load "eww"
+      (define-key eww-link-keymap key #'ace-link-eww)
+      (define-key eww-mode-map key #'ace-link-eww))
+    (with-eval-after-load 'cus-edit
+      (define-key custom-mode-map key #'ace-link-custom)))
 
 
-(when my-use-evil-p
-  (with-eval-after-load "info"
-    (define-key Info-mode-map (kbd "o") #'ace-link-info))
-  (with-eval-after-load "compile"
-    (define-key compilation-mode-map (kbd "o") #'ace-link-compilation))
-  (with-eval-after-load "help-mode"
-    (define-key help-mode-map (kbd "o") #'ace-link-help))
-  (with-eval-after-load "woman"
-    ;; TODO: test this binding
-    (define-key woman-mode-map (kbd "o") #'ace-link-woman))
-  (with-eval-after-load "eww"
-    (evil-define-key 'normal eww-link-keymap (kbd "o") #'ace-link-eww)
-    (evil-define-key 'normal eww-mode-map (kbd "o") #'ace-link-eww))
-  (with-eval-after-load 'cus-edit
-    ;; TODO: test this binding
-    (evil-define-key 'normal custom-mode-map (kbd "o") #'ace-link-custom)))
+  (when my-use-evil-p
+    (with-eval-after-load "info"
+      (define-key Info-mode-map (kbd "o") #'ace-link-info))
+    (with-eval-after-load "compile"
+      (define-key compilation-mode-map (kbd "o") #'ace-link-compilation))
+    (with-eval-after-load "help-mode"
+      (define-key help-mode-map (kbd "o") #'ace-link-help))
+    (with-eval-after-load "woman"
+      ;; TODO: test this binding
+      (define-key woman-mode-map (kbd "o") #'ace-link-woman))
+    (with-eval-after-load "eww"
+      (evil-define-key 'normal eww-link-keymap (kbd "o") #'ace-link-eww)
+      (evil-define-key 'normal eww-mode-map (kbd "o") #'ace-link-eww))
+    (with-eval-after-load 'cus-edit
+      ;; TODO: test this binding
+      (evil-define-key 'normal custom-mode-map (kbd "o") #'ace-link-custom))))
 
 ;;;--------------------
 ;;; Ace jump mode
@@ -2650,9 +2668,10 @@ and indent."
 ;;;--------------------
 ;;; ace-window
 ;;;--------------------
-(unless (eq my-ui-type 'emacs)
-  ;; This is the emacs "copy" keybind. Don't steal it when using emacs bindings.
-  (global-set-key (kbd "M-w") #'ace-window))
+(my-top-level-package-code
+  (unless (eq my-ui-type 'emacs)
+    ;; This is the emacs "copy" keybind. Don't steal it when using emacs bindings.
+    (global-set-key (kbd "M-w") #'ace-window)))
 
 (with-eval-after-load "ace-window"
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
@@ -2677,28 +2696,29 @@ and indent."
 ;;;--------------------
 ;;; irony
 ;;;--------------------
-(when (or (eq my-curr-computer 'work-laptop)
-          (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'c-mode-hook 'irony-mode)
-  (add-hook 'objc-mode-hook 'irony-mode)
+(my-top-level-package-code
+  (when (or (eq my-curr-computer 'work-laptop)
+            (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'objc-mode-hook 'irony-mode)
 
-  ;; replace the `completion-at-point' and `complete-symbol' bindings in
-  ;; irony-mode's buffers by irony-mode's asynchronous function
-  (defun my-irony-mode-hook ()
-    (define-key irony-mode-map [remap completion-at-point]
-      'irony-completion-at-point-async)
-    (define-key irony-mode-map [remap complete-symbol]
-      'irony-completion-at-point-async))
-  (add-hook 'irony-mode-hook 'my-irony-mode-hook)
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    ;; replace the `completion-at-point' and `complete-symbol' bindings in
+    ;; irony-mode's buffers by irony-mode's asynchronous function
+    (defun my-irony-mode-hook ()
+      (define-key irony-mode-map [remap completion-at-point]
+        'irony-completion-at-point-async)
+      (define-key irony-mode-map [remap complete-symbol]
+        'irony-completion-at-point-async))
+    (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-  (when (eq my-curr-computer 'work-laptop)
-    ;;directory to libclang.dll
-    (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin"))
+    (when (eq my-curr-computer 'work-laptop)
+      ;;directory to libclang.dll
+      (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin"))
 
-  ;; (irony-cdb-autosetup-compile-options) ;should be in the hook
-  )
+    ;; (irony-cdb-autosetup-compile-options) ;should be in the hook
+    ))
 
 
 
@@ -2740,34 +2760,36 @@ and indent."
     (autoload #'proj-tcpl lisp-file nil t))
 
   ;;quick load of c:\users\mtz
-  (when my-use-evil-p
-    (evil-leader/set-key "1" (lambda ()
-                               (interactive)
-                               (dired "C:/Users/mtz")))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      (evil-leader/set-key "1" (lambda ()
+                                 (interactive)
+                                 (dired "C:/Users/mtz")))
 
-    ;;quick load of c:\users\mtz\proj\ecp\dev\db
-    (evil-leader/set-key "2" (lambda ()
-                               (interactive)
-                               (dired "c:/users/mtz/proj/ecp/dev/db")))
+      ;;quick load of c:\users\mtz\proj\ecp\dev\db
+      (evil-leader/set-key "2" (lambda ()
+                                 (interactive)
+                                 (dired "c:/users/mtz/proj/ecp/dev/db")))
 
-    ;;quick load of TFS \Main\SqlScripts
-    (evil-leader/set-key "3"
-      (lambda ()
-        (interactive)
-        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
+      ;;quick load of TFS \Main\SqlScripts
+      (evil-leader/set-key "3"
+        (lambda ()
+          (interactive)
+          (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
 
-    ;;quick load of c:\users\mtz\TODO\TODO.org
-    (evil-leader/set-key "t"
-      (lambda ()
-        (interactive)
-        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
+      ;;quick load of c:\users\mtz\TODO\TODO.org
+      (evil-leader/set-key "t"
+        (lambda ()
+          (interactive)
+          (find-file-existing "C:/Users/mtz/TODO/TODO.org"))))))
 
 
 (when (eq system-type 'gnu/linux)
-  (when my-use-evil-p
-   (evil-leader/set-key "1" (lambda ()
-                              (interactive)
-                              (dired "~")))))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      (evil-leader/set-key "1" (lambda ()
+                                 (interactive)
+                                 (dired "~"))))))
 
 
 ;;; quick load of the .emacs (or init.el) file.
@@ -2775,10 +2797,11 @@ and indent."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
-(when my-use-evil-p
-  (evil-leader/set-key "`" #'my-load-init)
-  ;; the above key is hard to type on a 60% poker so making an alternative.
-  (evil-leader/set-key "8" #'my-load-init))
+(my-top-level-package-code
+  (when my-use-evil-p
+    (evil-leader/set-key "`" #'my-load-init)
+    ;; the above key is hard to type on a 60% poker so making an alternative.
+    (evil-leader/set-key "8" #'my-load-init)))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -2824,15 +2847,16 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;(require 'web-mode)
 (autoload 'web-mode "web-mode" "web mode" t)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
+(my-top-level-package-code
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode)))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -2840,7 +2864,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;(require 'vimrc-mode)
 (autoload 'vimrc-mode "vimrc-mode" "vimrc mode" t)
-(add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
+(my-top-level-package-code
+  (add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Make dired appear in a side window
@@ -2855,10 +2880,11 @@ and indent."
 ;;; skewer-mode
 ;;;-----------------------------------------------------------------------------
 ;;(skewer-setup)
-(add-hook 'js2-mode-hook 'skewer-mode)
-(add-hook 'css-mode-hook 'skewer-css-mode)
-(add-hook 'html-mode-hook 'skewer-html-mode)
-(add-hook 'web-mode-hook 'skewer-html-mode)
+(my-top-level-package-code
+  (add-hook 'js2-mode-hook 'skewer-mode)
+  (add-hook 'css-mode-hook 'skewer-css-mode)
+  (add-hook 'html-mode-hook 'skewer-html-mode)
+  (add-hook 'web-mode-hook 'skewer-html-mode))
 
 (with-eval-after-load "skewer-mode"
 ;;   (defun my-skewer-repl-clear-buffer ()
@@ -3058,8 +3084,9 @@ and indent."
 ;; Doesn't work when set in eval-after-load ???
 ;; (setq magit-last-seen-setup-instructions "1.4.0")
 
-(when my-use-evil-p
-  (evil-leader/set-key "m" #'magit-status)) ; autoloaded
+(my-top-level-package-code
+  (when my-use-evil-p
+    (evil-leader/set-key "m" #'magit-status))) ; autoloaded
 
 (with-eval-after-load "magit"
   ;; Magit stole my M-h binding, take it back.
@@ -3106,7 +3133,8 @@ and indent."
 ;;; helm-w32-launcher. Microsoft Windows only?
 ;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
-  (global-set-key (kbd "C-c w") #'helm-w32-launcher))
+  (my-top-level-package-code
+    (global-set-key (kbd "C-c w") #'helm-w32-launcher)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; leerzeichen. Displays symbols for tab, space, and newline.
@@ -3288,7 +3316,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; unkillable-scratch
 ;;;-----------------------------------------------------------------------------
-(unkillable-scratch 1)
+(my-top-level-package-code
+  (unkillable-scratch 1))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -3322,40 +3351,41 @@ and indent."
 ;;; ivy
 ;;; counsel -> provides extra features for completing some things.
 ;;;-----------------------------------------------------------------------------
-(when my-use-ivy-p
-  (when my-use-evil-p
-    ;; (define-key evil-normal-state-map (kbd "s") #'swiper)
-    (evil-leader/set-key "b" #'ivy-switch-buffer))
-
-  (when (eq my-ui-type 'emacs)
-    (global-set-key (kbd "C-c C-s") #'swiper)
-    (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
-
-  (progn ;; counsel completion augmentation
-
-    (autoload #'counsel-tmm "counsel" nil t) ;; not autoloaded by defaut.
-    (defun my-counsel-tmm ()
-      "Same as `counsel-tmm' but with a taller window."
-      (interactive)
-      (let ((ivy-height 1000))
-        (call-interactively #'counsel-tmm)))
-    (global-set-key (kbd "C-c m") #'my-counsel-tmm)
-
-    (global-set-key (kbd "M-x") #'counsel-M-x)
-    (global-set-key (kbd "C-x C-f") #'counsel-find-file)
-    ;; TODO: disable warning like i did for the other f9 binding for colors
-    (global-set-key (kbd "<f9>")
-                    (lambda ()
-                      (interactive)
-                      ;; make ivy window taller for viewing themes.
-                      (let ((ivy-height 25))
-                        (call-interactively #'counsel-load-theme))))
-    (global-set-key (kbd "C-h v") #'counsel-describe-variable)
-    (global-set-key (kbd "C-h f") #'counsel-describe-function)
+(my-top-level-package-code
+  (when my-use-ivy-p
     (when my-use-evil-p
-      (evil-leader/set-key "w" #'counsel-yank-pop)
-      (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
-      )))
+      ;; (define-key evil-normal-state-map (kbd "s") #'swiper)
+      (evil-leader/set-key "b" #'ivy-switch-buffer))
+
+    (when (eq my-ui-type 'emacs)
+      (global-set-key (kbd "C-c C-s") #'swiper)
+      (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
+
+    (progn ;; counsel completion augmentation
+
+      (autoload #'counsel-tmm "counsel" nil t) ;; not autoloaded by defaut.
+      (defun my-counsel-tmm ()
+        "Same as `counsel-tmm' but with a taller window."
+        (interactive)
+        (let ((ivy-height 1000))
+          (call-interactively #'counsel-tmm)))
+      (global-set-key (kbd "C-c m") #'my-counsel-tmm)
+
+      (global-set-key (kbd "M-x") #'counsel-M-x)
+      (global-set-key (kbd "C-x C-f") #'counsel-find-file)
+      ;; TODO: disable warning like i did for the other f9 binding for colors
+      (global-set-key (kbd "<f9>")
+                      (lambda ()
+                        (interactive)
+                        ;; make ivy window taller for viewing themes.
+                        (let ((ivy-height 25))
+                          (call-interactively #'counsel-load-theme))))
+      (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+      (global-set-key (kbd "C-h f") #'counsel-describe-function)
+      (when my-use-evil-p
+        (evil-leader/set-key "w" #'counsel-yank-pop)
+        (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
+        ))))
 
 (with-eval-after-load "ivy"
   ;; remove the default ^ prefix used by `counsel-M-x' and a few others.
@@ -3494,11 +3524,12 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 (autoload #'mor-mode-on-region "mor" nil t)
 (autoload #'mor-prev-mode-on-region "mor" nil t)
 
-(when my-use-evil-p
-  (eval-after-load "evil"
-    '(progn
-       (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
-       (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region))))
+(my-top-level-package-code
+  (when my-use-evil-p
+    (eval-after-load "evil"
+      '(progn
+         (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+         (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)))))
 
 (with-eval-after-load "mor"
   ;; these values are the defaults, but setting them anyway so it's easy to
@@ -3622,7 +3653,8 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
 ;;;-----------------------------------------------------------------------------
 ;;; lispy
 ;;;-----------------------------------------------------------------------------
-(add-hook 'lisp-mode-hook #'lispy-mode) ; for common lisp.
+(my-top-level-package-code
+  (add-hook 'lisp-mode-hook #'lispy-mode)) ; for common lisp.
 
 (with-eval-after-load "lispy"
   ;; To improve start up speed move hooks to eval-after-load. Otherwise the
@@ -3740,10 +3772,11 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; elisp emacs lisp
 ;;;-----------------------------------------------------------------------------
-(when my-use-ivy-p
-  ;; two different modes (and maps) for elisp:
-  (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
-  (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
+(my-top-level-package-code
+  (when my-use-ivy-p
+    ;; two different modes (and maps) for elisp:
+    (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
+    (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el)))
 
 
 ;; (with-eval-after-load "lisp-mode"
@@ -3756,46 +3789,48 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (autoload 'pos-tip-show "pos-tip" nil t)
 
-(when my-use-evil-p
-  ;;evalate lisp expression. Insert result on a new line.
-  ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
+(my-top-level-package-code
+  (when my-use-evil-p
+    ;;evalate lisp expression. Insert result on a new line.
+    ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
 
-  (defun my-eval-last-sexp ()
-    (interactive)
-    (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
-      (prin1-to-string val)))
+    (defun my-eval-last-sexp ()
+      (interactive)
+      (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
+        (prin1-to-string val)))
 
-  (let ((eval-fn (if my-graphic-p
+    (let ((eval-fn (if my-graphic-p
+                       (lambda ()
+                         (interactive)
+                         ;; (clippy-say (my-eval-last-sexp))
+                         (pos-tip-show (my-eval-last-sexp)))
                      (lambda ()
                        (interactive)
-                       ;; (clippy-say (my-eval-last-sexp))
-                       (pos-tip-show (my-eval-last-sexp)))
-                   (lambda ()
-                     (interactive)
-                     (save-excursion
-                       (evil-append 1)
-                       (default-indent-new-line)
-                       (eval-last-sexp t) ; t to insert result in buffer.
-                       (evil-normal-state))))))
-    (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" eval-fn)
-    (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" eval-fn))
+                       (save-excursion
+                         (evil-append 1)
+                         (default-indent-new-line)
+                         (eval-last-sexp t) ; t to insert result in buffer.
+                         (evil-normal-state))))))
+      (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" eval-fn)
+      (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" eval-fn))
 
-  ;; (evil-leader/set-key "a" 'slime-eval-print-last-expression)
-  ;; (evil-leader/set-key "p" (lambda ()
-  ;;                            (interactive)
-  ;;                            (save-excursion ;don't move the point
-  ;;                              (evil-append 1)
-  ;;                              (slime-pprint-eval-last-expression)
-  ;;                              (evil-normal-state))))
-  )
+    ;; (evil-leader/set-key "a" 'slime-eval-print-last-expression)
+    ;; (evil-leader/set-key "p" (lambda ()
+    ;;                            (interactive)
+    ;;                            (save-excursion ;don't move the point
+    ;;                              (evil-append 1)
+    ;;                              (slime-pprint-eval-last-expression)
+    ;;                              (evil-normal-state))))
+    ))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav
 ;;; TODO: look into lispy's navigation. Maybe remove this section.
 ;;;-----------------------------------------------------------------------------
-(dolist (hook '(emacs-lisp-mode-hook
-                ielm-mode-hook))
-  (add-hook hook 'turn-on-elisp-slime-nav-mode))
+(my-top-level-package-code
+  (dolist (hook '(emacs-lisp-mode-hook
+                  ielm-mode-hook))
+    (add-hook hook 'turn-on-elisp-slime-nav-mode)))
 
 (with-eval-after-load "elisp-slime-nav"
 
@@ -3879,13 +3914,15 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; Doesn't work in eval-after-load becuase the warning code runs during the
 ;; load.
 ;; TODO: submit a patch upstream so I can set the var nil in eval-after-load.
-(setq iedit-toggle-key-default nil)
+(my-top-level-package-code
+  (setq iedit-toggle-key-default nil))
 
 ;;;-----------------------------------------------------------------------------
 ;;; universal vim escape. Without key-chord dependence
 ;;;-----------------------------------------------------------------------------
-;; rebind iedit-mode to another key. (it used C-; by default)
-(global-set-key (kbd "C-c ;") #'iedit-mode)
+(my-top-level-package-code
+ ;; rebind iedit-mode to another key. (it used C-; by default)
+  (global-set-key (kbd "C-c ;") #'iedit-mode))
 
 (global-set-key (kbd "C-;") #'keyboard-escape-quit)
 ;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
@@ -3924,7 +3961,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; shell-script-mode. (alias for sh-mode)
 ;;;-----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
+(my-top-level-package-code
+  (add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode)))
 
 
 
@@ -3971,7 +4009,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; winner-mode
 ;;;-----------------------------------------------------------------------------
-(setq winner-dont-bind-my-keys t) ; doesn't work when set in eval-after-load.
+(my-top-level-package-code
+  (setq winner-dont-bind-my-keys t)) ; doesn't work when set in eval-after-load.
 (with-eval-after-load "winner"
   ;; reducing size from 200. Just need to facilitate a few quick undos.
   (setq winner-ring-size 8)
@@ -3979,7 +4018,8 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; NOTE: `winner-redo' only works if invoked immediatley after `winner-undo'.
   ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
-(winner-mode 1)
+(my-top-level-package-code
+  (winner-mode 1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; js2-highlight-vars
@@ -4178,9 +4218,10 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (progn ;;use the default emacs scroll bingding for C-v
-  (when my-use-evil-p
-    (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
-    (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command)))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
+      (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command))))
 
 ;; scroll like vim when moving 1 line off screen with j/k.
 ;; has some wierd rules about recentering, but 100 is supposed to
@@ -4191,11 +4232,12 @@ in frame.  Stop displaying shell in all other windows."
 (setq scroll-preserve-screen-position nil)
 
 (progn ;;window navigation.
-  (when my-use-evil-p
-    (global-set-key (kbd "M-h") #'evil-window-left)
-    (global-set-key (kbd "M-j") #'evil-window-down)
-    (global-set-key (kbd "M-k") #'evil-window-up)
-    (global-set-key (kbd "M-l") #'evil-window-right)))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      (global-set-key (kbd "M-h") #'evil-window-left)
+      (global-set-key (kbd "M-j") #'evil-window-down)
+      (global-set-key (kbd "M-k") #'evil-window-up)
+      (global-set-key (kbd "M-l") #'evil-window-right))))
 
 ;; cycle the buffers really fast. Not doing this anymore since these are error handling shortcuts in some modes.
 ;; (global-set-key (kbd "M-n") #'next-buffer)
@@ -4255,8 +4297,9 @@ in frame.  Stop displaying shell in all other windows."
           (and (not my-use-helm-p)
                (not my-use-ido-p)
                (not my-use-ivy-p)))
-  (when my-use-evil-p
-    (evil-leader/set-key "b" #'ibuffer))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      (evil-leader/set-key "b" #'ibuffer)))
   ;; (evil-leader/set-key "b" #'ido-switch-buffer)
   ;; (global-set-key (kbd "M-/") #'hippie-expand)
   ;; (evil-leader/set-key "b" #'ivy-switch-buffer)
@@ -4397,8 +4440,9 @@ in frame.  Stop displaying shell in all other windows."
 ;;; my-square-one
 ;;;--------------------------------------------------------------------
 (autoload #'my-square-one "my-square-one" nil t)
-(when my-use-evil-p
-  (evil-leader/set-key "0" #'my-square-one))
+(my-top-level-package-code
+  (when my-use-evil-p
+  (evil-leader/set-key "0" #'my-square-one)))
 
 
 

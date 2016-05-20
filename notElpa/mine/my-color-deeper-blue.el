@@ -19,7 +19,7 @@
                                                                 :style released-button)))))
    `(mode-line-buffer-id ((t (:weight bold
                                            :background nil
-                                           :foreground "black"))))
+                                           :foreground "slategray"))))
    `(mode-line-inactive ((t (:background "black"
                                               :foreground "gray30"
                                               :box (:line-width -1

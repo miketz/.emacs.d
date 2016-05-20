@@ -8,6 +8,8 @@
   (custom-theme-set-faces
    'deeper-blue
 
+   '(org-agenda-calendar-event ((t (:background "black"))))
+
    ;; `(mode-line ((t (:background "gray40"
    ;;                              :foreground "black"
    ;;                              :box (:line-width -1

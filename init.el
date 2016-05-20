@@ -4147,10 +4147,10 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (defun what-face (pos)
-  "Prints the face at point.  POS = point???"
+  "Prints the face at point.  POS = point"
   (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
+  (let ((face (or (get-char-property pos 'read-face-name)
+                  (get-char-property pos 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
 

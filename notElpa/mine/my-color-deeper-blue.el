@@ -8,6 +8,12 @@
   (custom-theme-set-faces
    'deeper-blue
 
+   ;; separates windwos.
+   '(vertical-border ((t (:foreground "gray20"))))
+
+   '(my-tilde-face
+     ((t (:foreground "gray35"))))
+
    '(org-agenda-calendar-event ((t (:background "black"))))
 
    ;; `(mode-line ((t (:background "gray40"

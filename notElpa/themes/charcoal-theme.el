@@ -26,6 +26,9 @@
                                   :strike-through t
                                   :background nil))))
 
+   ;; separates windwos.
+   '(vertical-border ((t (:foreground "gray25"))))
+
 
    ;; TODO
     `(mode-line

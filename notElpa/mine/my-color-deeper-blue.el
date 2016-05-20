@@ -8,17 +8,22 @@
   (custom-theme-set-faces
    'deeper-blue
 
-   `(mode-line ((t (:background "gray40"
-                                :foreground "black"
-                                :box (:line-width -1
-                                                  :style released-button)))))
+   ;; `(mode-line ((t (:background "gray40"
+   ;;                              :foreground "black"
+   ;;                              :box (:line-width -1
+   ;;                                                :style released-button)))))
+   `(mode-line ((t (:background "black"
+                                              :foreground "slategray"
+                                              :box (:line-width -1
+                                                                :color "gray20"
+                                                                :style released-button)))))
    `(mode-line-buffer-id ((t (:weight bold
                                            :background nil
                                            :foreground "black"))))
    `(mode-line-inactive ((t (:background "black"
-                                              :foreground "gray40"
+                                              :foreground "gray30"
                                               :box (:line-width -1
-                                                                :color "gray20"
+                                                                :color "black"
                                                                 :style released-button)))))
 
 

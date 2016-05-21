@@ -1046,7 +1046,9 @@ This prevents overlapping themes; something I would rarely want."
     )
 
    ((eq my-curr-computer 'leyna-laptop)
-    (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
+    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+    )
 
    ((eq my-curr-computer 'a-laptop-old)
     ;; (my-set-font :sym 'consolas

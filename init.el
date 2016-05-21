@@ -1428,7 +1428,7 @@ This prevents overlapping themes; something I would rarely want."
                            ((eq my-curr-computer 'work-laptop)
                             "C:/Users/mtz/TODO/TODO.org")
 
-                           t nil)
+                           (t nil))
   "The main todo file on a particular computer.")
 
 ;; if the computer has a main todo file.

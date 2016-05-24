@@ -340,7 +340,7 @@ Examples: helm-swoop swiper")
     ;;icicles
     ;;projectile
     ;;clippy
-    yasnippet
+    ;;yasnippet
     rainbow-delimiters
     rainbow-mode
     expand-region
@@ -2080,6 +2080,23 @@ To make it human readable."
 ;;; Yasnippet
 ;;;--------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
+
+
+(progn
+  ;; an older copy of yassnipet before it cuased unwatned indentation on
+  ;; each keystroke.
+  (add-to-list 'load-path "~/.emacs.d/yasnippet-20160416.831_correctIndent")
+
+  (progn
+    ;; manually add the autoloads because i'm not using the package manager
+    ;; for yassnipet anymore.
+    (autoload 'yas-minor-mode "yasnippet" nil t nil)
+    (defvar yas-global-mode nil)
+    (custom-autoload 'yas-global-mode "yasnippet" nil)
+    (autoload 'yas-global-mode "yasnippet" nil t nil)
+    (autoload 'snippet-mode "yasnippet" nil t nil)))
+
+
 
 ;;(require 'yasnippet)
 ;;(yas-global-mode 0)

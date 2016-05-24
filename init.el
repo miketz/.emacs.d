@@ -4289,12 +4289,12 @@ in frame.  Stop displaying shell in all other windows."
 
 
 ;; (setq-default column-number-mode 1) ; show/hide column # in mode line.
-;; (setq-default line-number-mode 1) ; show/hide line # in mode line.
-;;                                   ; or use fn what-line
+(setq-default line-number-mode 0) ; show/hide line # in mode line.
+                                  ; or use fn what-line
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)
-;;(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
+(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
 
 
 

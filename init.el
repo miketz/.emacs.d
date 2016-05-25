@@ -394,8 +394,8 @@ Examples: helm-swoop swiper")
     flx ;; can be used by ivy for ordering flx matches.
     counsel
     ;; apel ; used in eval-after-load config counsel/ivy.
-         ; specifically function `set-alist'
-         ; TODO: remove dependency on apel using default elsip functions.
+                                        ; specifically function `set-alist'
+                                        ; TODO: remove dependency on apel using default elsip functions.
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
@@ -420,7 +420,8 @@ Examples: helm-swoop swiper")
     highlight-indent-guides
     ace-link
     smart-tabs-mode
-    lua-mode)
+    lua-mode
+    ggtags)
   "Packages I use from elpa/melpa.")
 
 
@@ -637,6 +638,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;; evil
 ;;;--------------------------------------------------------------------
 (with-eval-after-load "evil"
+
+  ;; unset some keys. It seems other modes have trouble overriding them when
+  ;; it's set in evil?
+  (define-key evil-normal-state-map (kbd "M-.") nil)
+  (define-key evil-normal-state-map (kbd "M-,") nil)
 
   (when my-graphic-p
     ;;prevent minibuffer spam when switching modes.
@@ -4140,6 +4146,20 @@ When ARG isn't nil, try to pretty print the sexp."
             (lambda ()
               (rainbow-delimiters-mode 1)
               (electric-pair-mode 1))))
+
+;;;-----------------------------------------------------------------------------
+;;; ggtags
+;;;-----------------------------------------------------------------------------
+;; TODO: fix all the keybdings `ggtags-mode' clobbers. Like M-n, M-p.
+(with-eval-after-load "ggtags"
+  ;; doen'st work, added to windows path instead.
+  ;; (when (eq my-curr-computer 'work-laptop)
+  ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
+
+  (when my-use-evil-p
+    (evil-define-key 'normal ggtags-mode-map (kbd "M-.") #'ggtags-find-tag-dwim)
+    ;; `evil-define-key' doesn't wokr here but `define-key' does?
+    (define-key ggtags-mode-map (kbd "M-,") #'pop-tag-mark)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

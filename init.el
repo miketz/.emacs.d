@@ -4300,6 +4300,43 @@ in frame.  Stop displaying shell in all other windows."
 (setq mode-line-position nil) ;hide the % of the buffer you are viewing.
 
 
+(progn
+  ;; replacing postion info in mode line with a function called on demand.
+  ;; Bound to "g a".
+
+  (defun my-what-line ()
+    (interactive)
+    (let ((start (point-min))
+          (n (line-number-at-pos)))
+      (if (= start 1)
+          (format "L%d" n)
+        (save-excursion
+          (save-restriction
+            (widen)
+            (format "L%d (narrowed L%d)"
+                    (+ n (line-number-at-pos start) -1) n))))))
+
+  (defun my-what-position (&optional detail)
+    (interactive "P")
+    (let* ((pos (point))
+           (total (buffer-size))
+           (percent (if (> total 50000)
+                        ;; Avoid overflow from multiplying by 100!
+                        (/ (+ (/ total 200) (1- pos)) (max (/ total 100) 1))
+                      (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
+           (line (my-what-line))
+           (col (+ 1 (current-column))))
+      (message "%d%% %s C%d"
+               percent (my-what-line) col)))
+
+  (when my-use-evil-p
+    ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)
+    (define-key evil-normal-state-map "ga" #'my-what-position)))
+
+
+
+
+
 
 (progn ;; show time in mode line
   ;; disable process average display. Not sure why this is mixed in with time

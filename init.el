@@ -1024,10 +1024,12 @@ This prevents overlapping themes; something I would rarely want."
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (my-color-zenburn))
+    (unless (eq my-curr-computer 'wild-dog)
+      (my-color-zenburn)))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
+    (my-color-deeper-blue)
     (set-frame-font "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
     ;; (set-frame-font "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
     ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")

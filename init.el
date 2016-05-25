@@ -3389,10 +3389,11 @@ and indent."
   ;;       pulled in a new package dependency `apel'. And maybe `flim'?
   ;; (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
-  ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
-  ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)
-  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard against ivy-mode turning on.
-    (ivy-mode 1))
+  ;; turn on ivy completion. turned on when an autoloaded fn is used with a
+  ;; keybind to slightly improve emacs init time. (discovered with
+  ;; profile-dotemacs.el)
+  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard 
+    (ivy-mode 1))    ;; against ivy-mode turning on.
 
   ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
   ;; ;; allow out of order matching.
@@ -3701,8 +3702,10 @@ When ARG isn't nil, try to pretty print the sexp."
       (lispy-slurp 1)))
 
   ;; special means the cursor is at a paren (and in evil-insert).
-  (lispy-define-key lispy-mode-map-special (kbd "<") #'my-lispy-go-left-barf-or-slurp)
-  (lispy-define-key lispy-mode-map-special (kbd ">") #'my-lispy-go-right-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special
+      (kbd "<") #'my-lispy-go-left-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special
+      (kbd ">") #'my-lispy-go-right-barf-or-slurp)
 
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
@@ -3830,10 +3833,14 @@ When ARG isn't nil, try to pretty print the sexp."
 
   ;; evil-mode stole the keybinds! take them back.
   (when my-use-evil-p
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") #'elisp-slime-nav-find-elisp-thing-at-point)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") #'pop-tag-mark)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") #'my-elisp-slime-nav-colored)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") #'my-elisp-slime-nav-colored)))
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "M-.") #'elisp-slime-nav-find-elisp-thing-at-point)
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "M-,") #'pop-tag-mark)
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "C-c C-d d") #'my-elisp-slime-nav-colored)
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "C-c C-d C-d") #'my-elisp-slime-nav-colored)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; maximumize screen real-estate. TODO: complete this.
@@ -4157,7 +4164,7 @@ in frame.  Stop displaying shell in all other windows."
   (shell)
   (goto-char (point-max))
   (recenter -2))
-(define-key global-map (kbd "C-c C-z") #'find-shell) ;; mimic slime repl binding.
+(define-key global-map (kbd "C-c C-z") #'find-shell) ; mimic slime repl binding
 
 (when (and nil   ;don't start server for now.
            ;;`server-start' doesn't seemt to work on MS-windows?
@@ -4220,7 +4227,8 @@ in frame.  Stop displaying shell in all other windows."
     (global-set-key (kbd "M-k") #'evil-window-up)
     (global-set-key (kbd "M-l") #'evil-window-right)))
 
-;; cycle the buffers really fast. Not doing this anymore since these are error handling shortcuts in some modes.
+;; cycle the buffers really fast. Not doing this anymore since these are error
+;; handling shortcuts in some modes.
 ;; (global-set-key (kbd "M-n") #'next-buffer)
 ;; (global-set-key (kbd "M-p") #'previous-buffer)
 

@@ -1021,11 +1021,11 @@ This prevents overlapping themes; something I would rarely want."
       (message (int-to-string my-curr-alpha))))
 
   (global-set-key (kbd "C-M-=") (lambda ()
-                                (interactive)
-                                (my-change-alpha t)))
+                                  (interactive)
+                                  (my-change-alpha t)))
   (global-set-key (kbd "C-M--") (lambda ()
-                                (interactive)
-                                (my-change-alpha nil))))
+                                  (interactive)
+                                  (my-change-alpha nil))))
 
 ;; theme of the week and corresponding settings. This may change often.
 (progn

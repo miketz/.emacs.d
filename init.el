@@ -4158,7 +4158,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
   (when my-use-evil-p
     (evil-define-key 'normal ggtags-mode-map (kbd "M-.") #'ggtags-find-tag-dwim)
-    ;; `evil-define-key' doesn't wokr here but `define-key' does?
+    ;; `evil-define-key' doesn't work here but `define-key' does?
     (define-key ggtags-mode-map (kbd "M-,") #'pop-tag-mark)))
 
 ;;;-----------------------------------------------------------------------------

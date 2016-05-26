@@ -3095,7 +3095,8 @@ and indent."
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (when my-use-evil-p
     (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
-    ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
+    ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some
+    ;; buffers.
     (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
 
   (when my-use-ivy-p
@@ -3169,7 +3170,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; vim-empty-lines-mode
 ;;;-----------------------------------------------------------------------------
-;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
+;; ;; messes up recenter-top-bottom so not using for now.
+;; (global-vim-empty-lines-mode)
 
 ;;;-----------------------------------------------------------------------------
 ;;; fill-column-indicator, fci-mode
@@ -3227,7 +3229,7 @@ and indent."
   ;; (when my-use-helm-p
   ;;   (defun my-helm-flycheck ()
   ;;     (interactive)
-  ;;     ;;nil for no candidate limit. I want to scroll through all the warnings.
+  ;;     ;; nil for no candidate limit. To scroll through all the warnings.
   ;;     (let ((helm-candidate-number-limit nil))
   ;;       (call-interactively #'helm-flycheck)))
   ;;   (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck))
@@ -3304,7 +3306,8 @@ and indent."
 ;; (require 'guide-key)
 
 (with-eval-after-load "guide-key"
-  ;; (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
+  ;; (setq guide-key/guide-key-sequence
+  ;;       '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
   (setq guide-key/idle-delay 1.0)       ;default
   (setq guide-key/guide-key-sequence '("C-x" "C-c"))
   (setq guide-key/recursive-key-sequence-flag t)
@@ -3398,11 +3401,10 @@ and indent."
   ;; turn on ivy completion. turned on when an autoloaded fn is used with a
   ;; keybind to slightly improve emacs init time. (discovered with
   ;; profile-dotemacs.el)
-  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard 
+  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard
     (ivy-mode 1))    ;; against ivy-mode turning on.
 
-  ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
-  ;; ;; allow out of order matching.
+  ;; allow out of order matching.
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   ;; use fancy highlights in the popup window
@@ -3667,7 +3669,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   (add-hook 'slime-repl-mode-hook       #'lispy-mode)
 
   (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
-  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
+  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; emulation of paredit.
 
   (setq lispy-avy-style-char 'pre)
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char
@@ -4255,8 +4257,13 @@ in frame.  Stop displaying shell in all other windows."
 
 (cond
  ((eq my-curr-computer 'work-laptop)
-  (setq ;;browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
-   browse-url-generic-program "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+  (setq
+   ;; browse-url-generic-program
+   ;; "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
+
+   browse-url-generic-program
+   "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+
    browse-url-browser-function #'browse-url-generic))
 
  ((eq my-curr-computer 'hp-tower-2009)
@@ -4392,7 +4399,8 @@ in frame.  Stop displaying shell in all other windows."
   (setq inhibit-startup-message t)
 
   ;; don't display info in the modeline on start up.
-  ;; Need to override this method to do nothing as it looks at the current username.
+  ;; Need to override this method to do nothing as it looks at the current
+  ;; username.
   ;; TODO: find an alternative solution???
   (defun display-startup-echo-area-message ()))
 
@@ -4411,7 +4419,8 @@ in frame.  Stop displaying shell in all other windows."
   ;; (hl-line-mode 1) ; highlight the current line
   )
 
-;; (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
+;; reload buffer if it changes on disk outside emacs.
+(global-auto-revert-mode t)
 
 (setq-default line-spacing nil)
 

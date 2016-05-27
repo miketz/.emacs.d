@@ -202,11 +202,7 @@ The code is added to a list which can be invoked in the future with fn
             do
             (add-to-list 'my--delayed-package-code form t))
     ;; else, expand to normal code for immediate execution.
-    (let ((code '()))
-      (loop for form in body
-            do
-            (add-to-list 'code form t))
-      `(funcall (lambda () ,@code)))))
+    `(funcall (lambda () ,@body))))
 
 (defun my-do-full-init-with-packages ()
   "Only call this 1 time if you started with `my-fast-load-p' = t."

@@ -193,7 +193,9 @@ Call fn `my-do-full-init-with-packages' to continue with the full load.")
 (cl-defmacro my-top-level-package-code (&rest body)
   "Wraps code related to packages.
 This code would have been normal top-level code in the init.el file.
-It should *not* include code that would live inside `eval-after-load'.
+It should *not* include code that would live inside `eval-after-load' of a
+package. (exceptions exist if you use that package a before calling
+`my-do-full-init-with-packages'.
 Wrapping in a macro allows optinally delaying the code to avoid a slow call
 to `package-initialize' during start up.
 The code is added to a list which can be invoked in the future with fn

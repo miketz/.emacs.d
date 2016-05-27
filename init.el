@@ -27,6 +27,9 @@
 ;;;
 ;;; Remove all untracked files and directories.
 ;;;     git clean -fd
+;;;
+;;; Add a private local branch to github:
+;;;     git push -u origin branchName
 
 ;;;----------------------------------
 ;;; Git workflow with submodule:

@@ -30,6 +30,11 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   '(org-agenda-calendar-event ((t (:background "black"))))
+
+   ;; separates windwos.
+   '(vertical-border ((t (:foreground "gray50"))))
+
    '(highlight-indent-guides-odd-face
      ((t (:background "#3F3F3C" ;; "#40403A"
                       :weight bold))))

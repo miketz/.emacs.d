@@ -341,7 +341,7 @@ Examples: helm-swoop swiper")
     ;;icicles
     ;;projectile
     ;;clippy
-    yasnippet
+    ;;yasnippet
     rainbow-delimiters
     rainbow-mode
     expand-region
@@ -395,8 +395,8 @@ Examples: helm-swoop swiper")
     flx ;; can be used by ivy for ordering flx matches.
     counsel
     ;; apel ; used in eval-after-load config counsel/ivy.
-         ; specifically function `set-alist'
-         ; TODO: remove dependency on apel using default elsip functions.
+                                        ; specifically function `set-alist'
+                                        ; TODO: remove dependency on apel using default elsip functions.
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
@@ -421,7 +421,8 @@ Examples: helm-swoop swiper")
     highlight-indent-guides
     ace-link
     smart-tabs-mode
-    lua-mode)
+    lua-mode
+    ggtags)
   "Packages I use from elpa/melpa.")
 
 
@@ -641,6 +642,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;; evil
 ;;;--------------------------------------------------------------------
 (with-eval-after-load "evil"
+
+  ;; unset some keys. It seems other modes have trouble overriding them when
+  ;; it's set in evil?
+  (define-key evil-normal-state-map (kbd "M-.") nil)
+  (define-key evil-normal-state-map (kbd "M-,") nil)
 
   (when my-graphic-p
     ;;prevent minibuffer spam when switching modes.
@@ -1020,20 +1026,24 @@ This prevents overlapping themes; something I would rarely want."
       (message (int-to-string my-curr-alpha))))
 
   (global-set-key (kbd "C-M-=") (lambda ()
-                                (interactive)
-                                (my-change-alpha t)))
+                                  (interactive)
+                                  (my-change-alpha t)))
   (global-set-key (kbd "C-M--") (lambda ()
-                                (interactive)
-                                (my-change-alpha nil))))
+                                  (interactive)
+                                  (my-change-alpha nil))))
 
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (my-color-zenburn))
+    (unless (eq my-curr-computer 'wild-dog)
+      (my-color-zenburn)))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
+    (my-color-deeper-blue)
+    ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
     (set-frame-font "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
     ;; (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
     )
 
@@ -1050,7 +1060,9 @@ This prevents overlapping themes; something I would rarely want."
     )
 
    ((eq my-curr-computer 'leyna-laptop)
-    (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
+    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+    )
 
    ((eq my-curr-computer 'a-laptop-old)
     ;; (my-set-font :sym 'consolas
@@ -1434,8 +1446,8 @@ This prevents overlapping themes; something I would rarely want."
                              ((eq my-curr-computer 'work-laptop)
                               "C:/Users/mtz/TODO/TODO.org")
 
-                             t nil)
-    "The main todo file on a particular computer.")
+                           (t nil))
+  "The main todo file on a particular computer.")
 
   ;; if the computer has a main todo file.
   (when my-main-todo
@@ -2090,6 +2102,23 @@ To make it human readable."
 ;;; Yasnippet
 ;;;--------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
+
+
+(progn
+  ;; an older copy of yassnipet before it cuased unwatned indentation on
+  ;; each keystroke.
+  (add-to-list 'load-path "~/.emacs.d/yasnippet-20160416.831_correctIndent")
+
+  (progn
+    ;; manually add the autoloads because i'm not using the package manager
+    ;; for yassnipet anymore.
+    (autoload 'yas-minor-mode "yasnippet" nil t nil)
+    (defvar yas-global-mode nil)
+    (custom-autoload 'yas-global-mode "yasnippet" nil)
+    (autoload 'yas-global-mode "yasnippet" nil t nil)
+    (autoload 'snippet-mode "yasnippet" nil t nil)))
+
+
 
 ;;(require 'yasnippet)
 ;;(yas-global-mode 0)
@@ -3093,7 +3122,8 @@ and indent."
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (when my-use-evil-p
     (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
-    ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some buffers.
+    ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some
+    ;; buffers.
     (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
 
   (when my-use-ivy-p
@@ -3168,7 +3198,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; vim-empty-lines-mode
 ;;;-----------------------------------------------------------------------------
-;;(global-vim-empty-lines-mode) ; messes up recenter-top-bottom so not using for now.
+;; ;; messes up recenter-top-bottom so not using for now.
+;; (global-vim-empty-lines-mode)
 
 ;;;-----------------------------------------------------------------------------
 ;;; fill-column-indicator, fci-mode
@@ -3226,7 +3257,7 @@ and indent."
   ;; (when my-use-helm-p
   ;;   (defun my-helm-flycheck ()
   ;;     (interactive)
-  ;;     ;;nil for no candidate limit. I want to scroll through all the warnings.
+  ;;     ;; nil for no candidate limit. To scroll through all the warnings.
   ;;     (let ((helm-candidate-number-limit nil))
   ;;       (call-interactively #'helm-flycheck)))
   ;;   (define-key flycheck-mode-map (kbd "C-c f") #'my-helm-flycheck))
@@ -3303,7 +3334,8 @@ and indent."
 ;; (require 'guide-key)
 
 (with-eval-after-load "guide-key"
-  ;; (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
+  ;; (setq guide-key/guide-key-sequence
+  ;;       '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
   (setq guide-key/idle-delay 1.0)       ;default
   (setq guide-key/guide-key-sequence '("C-x" "C-c"))
   (setq guide-key/recursive-key-sequence-flag t)
@@ -3396,13 +3428,13 @@ and indent."
   ;;       pulled in a new package dependency `apel'. And maybe `flim'?
   ;; (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
-  ;; turn on ivy completion. turned on when an autoloaded fn is used with a keybind
-  ;; to slightly improve emacs init time. (discovered with profile-dotemacs.el)
-  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard against ivy-mode turning on.
-    (ivy-mode 1))
+  ;; turn on ivy completion. turned on when an autoloaded fn is used with a
+  ;; keybind to slightly improve emacs init time. (discovered with
+  ;; profile-dotemacs.el)
+  (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard
+    (ivy-mode 1))    ;; against ivy-mode turning on.
 
-  ;; (autoload 'ivy--regex-ignore-order "ivy" nil t) ;;shouldn't need this, but out of order matching is not working.
-  ;; ;; allow out of order matching.
+  ;; allow out of order matching.
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
   ;; use fancy highlights in the popup window
@@ -3669,7 +3701,7 @@ Region defined by START and END is automaticallyl detected by (interactive \"r\"
   (add-hook 'slime-repl-mode-hook       #'lispy-mode)
 
   (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
-  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; lispys emulation of paredit.
+  ;; (lispy-set-key-theme '(special paredit c-digits)) ;; emulation of paredit.
 
   (setq lispy-avy-style-char 'pre)
   (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char
@@ -3710,8 +3742,10 @@ When ARG isn't nil, try to pretty print the sexp."
       (lispy-slurp 1)))
 
   ;; special means the cursor is at a paren (and in evil-insert).
-  (lispy-define-key lispy-mode-map-special (kbd "<") #'my-lispy-go-left-barf-or-slurp)
-  (lispy-define-key lispy-mode-map-special (kbd ">") #'my-lispy-go-right-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special
+      (kbd "<") #'my-lispy-go-left-barf-or-slurp)
+  (lispy-define-key lispy-mode-map-special
+      (kbd ">") #'my-lispy-go-right-barf-or-slurp)
 
   ;; don't evaluate/insert on C-j. Use the plain way like paredit.
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
@@ -3842,10 +3876,14 @@ When ARG isn't nil, try to pretty print the sexp."
 
   ;; evil-mode stole the keybinds! take them back.
   (when my-use-evil-p
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-.") #'elisp-slime-nav-find-elisp-thing-at-point)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "M-,") #'pop-tag-mark)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d d") #'my-elisp-slime-nav-colored)
-    (evil-define-key 'normal elisp-slime-nav-mode-map (kbd "C-c C-d C-d") #'my-elisp-slime-nav-colored)))
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "M-.") #'elisp-slime-nav-find-elisp-thing-at-point)
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "M-,") #'pop-tag-mark)
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "C-c C-d d") #'my-elisp-slime-nav-colored)
+    (evil-define-key 'normal elisp-slime-nav-mode-map
+      (kbd "C-c C-d C-d") #'my-elisp-slime-nav-colored)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; maximumize screen real-estate. TODO: complete this.
@@ -4152,6 +4190,20 @@ When ARG isn't nil, try to pretty print the sexp."
               (electric-pair-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
+;;; ggtags
+;;;-----------------------------------------------------------------------------
+;; TODO: fix all the keybdings `ggtags-mode' clobbers. Like M-n, M-p.
+(with-eval-after-load "ggtags"
+  ;; doen'st work, added to windows path instead.
+  ;; (when (eq my-curr-computer 'work-laptop)
+  ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
+
+  (when my-use-evil-p
+    (evil-define-key 'normal ggtags-mode-map (kbd "M-.") #'ggtags-find-tag-dwim)
+    ;; `evil-define-key' doesn't work here but `define-key' does?
+    (define-key ggtags-mode-map (kbd "M-,") #'pop-tag-mark)))
+
+;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (defun find-shell (&optional shell-only)
@@ -4174,7 +4226,7 @@ in frame.  Stop displaying shell in all other windows."
   (shell)
   (goto-char (point-max))
   (recenter -2))
-(define-key global-map (kbd "C-c C-z") #'find-shell) ;; mimic slime repl binding.
+(define-key global-map (kbd "C-c C-z") #'find-shell) ; mimic slime repl binding
 
 (when (and nil   ;don't start server for now.
            ;;`server-start' doesn't seemt to work on MS-windows?
@@ -4186,10 +4238,10 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (defun what-face (pos)
-  "Prints the face at point.  POS = point???"
+  "Prints the face at point.  POS = point"
   (interactive "d")
-  (let ((face (or (get-char-property (point) 'read-face-name)
-                  (get-char-property (point) 'face))))
+  (let ((face (or (get-char-property pos 'read-face-name)
+                  (get-char-property pos 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
 
 
@@ -4239,15 +4291,21 @@ in frame.  Stop displaying shell in all other windows."
       (global-set-key (kbd "M-k") #'evil-window-up)
       (global-set-key (kbd "M-l") #'evil-window-right))))
 
-;; cycle the buffers really fast. Not doing this anymore since these are error handling shortcuts in some modes.
+;; cycle the buffers really fast. Not doing this anymore since these are error
+;; handling shortcuts in some modes.
 ;; (global-set-key (kbd "M-n") #'next-buffer)
 ;; (global-set-key (kbd "M-p") #'previous-buffer)
 
 
 (cond
  ((eq my-curr-computer 'work-laptop)
-  (setq ;;browse-url-generic-program "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
-   browse-url-generic-program "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+  (setq
+   ;; browse-url-generic-program
+   ;; "C:\\Program Files (x86)\\conkeror\\conkeror.exe"
+
+   browse-url-generic-program
+   "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+
    browse-url-browser-function #'browse-url-generic))
 
  ((eq my-curr-computer 'hp-tower-2009)
@@ -4312,12 +4370,49 @@ in frame.  Stop displaying shell in all other windows."
 
 
 ;; (setq-default column-number-mode 1) ; show/hide column # in mode line.
-;; (setq-default line-number-mode 1) ; show/hide line # in mode line.
-;;                                   ; or use fn what-line
+(setq-default line-number-mode 0) ; show/hide line # in mode line.
+                                  ; or use fn what-line
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)
-;;(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
+(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
+
+
+(progn
+  ;; replacing postion info in mode line with a function called on demand.
+  ;; Bound to "g a".
+
+  (defun my-what-line ()
+    (interactive)
+    (let ((start (point-min))
+          (n (line-number-at-pos)))
+      (if (= start 1)
+          (format "L%d" n)
+        (save-excursion
+          (save-restriction
+            (widen)
+            (format "L%d (narrowed L%d)"
+                    (+ n (line-number-at-pos start) -1) n))))))
+
+  (defun my-what-position (&optional detail)
+    (interactive "P")
+    (let* ((pos (point))
+           (total (buffer-size))
+           (percent (if (> total 50000)
+                        ;; Avoid overflow from multiplying by 100!
+                        (/ (+ (/ total 200) (1- pos)) (max (/ total 100) 1))
+                      (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
+           (line (my-what-line))
+           (col (+ 1 (current-column))))
+      (message "%d%% %s C%d"
+               percent (my-what-line) col)))
+
+  (when my-use-evil-p
+    ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)
+    (define-key evil-normal-state-map "ga" #'my-what-position)))
+
+
+
 
 
 
@@ -4347,7 +4442,8 @@ in frame.  Stop displaying shell in all other windows."
   (setq inhibit-startup-message t)
 
   ;; don't display info in the modeline on start up.
-  ;; Need to override this method to do nothing as it looks at the current username.
+  ;; Need to override this method to do nothing as it looks at the current
+  ;; username.
   ;; TODO: find an alternative solution???
   (defun display-startup-echo-area-message ()))
 
@@ -4366,7 +4462,8 @@ in frame.  Stop displaying shell in all other windows."
   ;; (hl-line-mode 1) ; highlight the current line
   )
 
-;; (global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
+;; reload buffer if it changes on disk outside emacs.
+(global-auto-revert-mode t)
 
 (setq-default line-spacing nil)
 

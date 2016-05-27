@@ -8,17 +8,30 @@
   (custom-theme-set-faces
    'deeper-blue
 
-   `(mode-line ((t (:background "gray40"
-                                :foreground "black"
-                                :box (:line-width -1
-                                                  :style released-button)))))
-   `(mode-line-buffer-id ((t (:weight bold
-                                           :background nil
-                                           :foreground "black"))))
-   `(mode-line-inactive ((t (:background "black"
-                                              :foreground "gray40"
+   ;; separates windwos.
+   '(vertical-border ((t (:foreground "gray20"))))
+
+   '(my-tilde-face
+     ((t (:foreground "gray35"))))
+
+   '(org-agenda-calendar-event ((t (:background "black"))))
+
+   ;; `(mode-line ((t (:background "gray40"
+   ;;                              :foreground "black"
+   ;;                              :box (:line-width -1
+   ;;                                                :style released-button)))))
+   `(mode-line ((t (:background "black"
+                                              :foreground "slategray"
                                               :box (:line-width -1
                                                                 :color "gray20"
+                                                                :style released-button)))))
+   `(mode-line-buffer-id ((t (:weight bold
+                                           :background nil
+                                           :foreground "slategray"))))
+   `(mode-line-inactive ((t (:background "black"
+                                              :foreground "gray30"
+                                              :box (:line-width -1
+                                                                :color "black"
                                                                 :style released-button)))))
 
 

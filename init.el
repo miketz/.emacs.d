@@ -3922,10 +3922,11 @@ When ARG isn't nil, try to pretty print the sexp."
       ad-do-it))
   (ad-activate 'sx-tab-newest)
 
-  (when my-use-evil-p
-    ;; use emacs bindings (not evil).
-    (add-to-list 'evil-buffer-regexps '("\\*question-list" . emacs))
-    (add-to-list 'evil-buffer-regexps '("\\*sx-" . emacs))))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      ;; use emacs bindings (not evil).
+      (add-to-list 'evil-buffer-regexps '("\\*question-list" . emacs))
+      (add-to-list 'evil-buffer-regexps '("\\*sx-" . emacs)))))
 
 
 

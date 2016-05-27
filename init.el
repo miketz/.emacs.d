@@ -2330,7 +2330,8 @@ and indent."
     (define-key dired-mode-map (kbd "H") #'evil-window-top)
     (define-key dired-mode-map (kbd "M") #'evil-window-middle)
     (define-key dired-mode-map (kbd "L") #'evil-window-bottom)
-    (evil-define-key 'normal dired-mode-map (kbd "s") my-swoop-fn)
+    (my-top-level-package-code
+      (evil-define-key 'normal dired-mode-map (kbd "s") my-swoop-fn))
     (define-key dired-mode-map (kbd "SPC") #'avy-goto-word-1)
     (define-key dired-mode-map (kbd "G") #'evil-goto-line)
 
@@ -4407,9 +4408,10 @@ in frame.  Stop displaying shell in all other windows."
       (message "%d%% %s C%d"
                percent (my-what-line) col)))
 
-  (when my-use-evil-p
-    ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)
-    (define-key evil-normal-state-map "ga" #'my-what-position)))
+  (my-top-level-package-code
+    (when my-use-evil-p
+      ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)
+      (define-key evil-normal-state-map "ga" #'my-what-position))))
 
 
 

@@ -4,7 +4,7 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-(load-theme 'leuven t)
+;; (load-theme 'leuven t)
 ;; (set-background-color "white")
 
 ;;;----------------------------------
@@ -18,15 +18,7 @@
 ;; (when (eq system-type 'windows-nt)
 ;;  (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 (when (eq system-type 'windows-nt)
-  (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ;; (custom-set-faces
-    ;;  `(default ((t (:family "Consolas"
-    ;;                         :foundry "outline"
-    ;;                         :slant normal
-    ;;                         :weight normal
-    ;;                         :height 125
-    ;;                         :width )))))
-    )
+  (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
 
 ;; (custom-set-faces
 ;;  '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
@@ -57,8 +49,11 @@
   (setq-default indent-line-function 'insert-tab)
   )
 
-(setq make-backup-files nil backup-inhibited t) ;No annoying backup files
-(setq auto-save-default nil) ;No annoying auto-save files
+(progn ;; for better or worse, prevent creation of tmp backup files
+  (setq make-backup-files nil)          ;No annoying backup files
+  (setq-default backup-inhibited t)
+  (setq auto-save-default nil)          ;No annoying auto-save files
+  )
 
 
 ;;disable annoying newline emacs automatically adds to the end of a file when saving.
@@ -70,5 +65,9 @@
 ;; TODO: revist this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+(defun my-load-full-init ()
+  (interactive)
+  (load "~/.emacs.d/init.el"))
 
 ;; to access packages run (package-initialize)

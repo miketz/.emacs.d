@@ -975,6 +975,19 @@ This prevents overlapping themes; something I would rarely want."
     (dolist (f zen-bold-faces)
       (set-face-attribute f nil :weight 'bold))))
 
+(defvar my-inverse-video-p nil
+  "Flag used by fn `my-toggle-inverse-video'.")
+(cl-defun my-toggle-inverse-video (&optional (inv-p t supplied-p))
+  (interactive)
+  (if supplied-p
+      ;; if user specified
+      (setq my-inverse-video-p inv-p)
+    ;; else toggle
+    (setq my-inverse-video-p (not my-inverse-video-p)))
+  (dolist (f (face-list))
+    (if (eq f 'region)
+        (set-face-attribute f nil :inverse-video (not my-inverse-video-p))
+      (set-face-attribute f nil :inverse-video my-inverse-video-p))))
 
 (autoload #'my-rainbow-parens-dark-bg "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-dark-bg-bold "my-bg-specific-colors" nil t)

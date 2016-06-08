@@ -2603,6 +2603,9 @@ and indent."
 ;;;--------------------
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 (global-set-key (kbd "M-g M-g") #'avy-goto-line)
+;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
+;; work with evil "/" command. But it does work with evil's "?".
+(define-key isearch-mode-map (kbd "C-SPC") #'avy-isearch)
 ;; (define-key evil-normal-state-map (kbd "s") #'avy-goto-char-2) ;like vim sneak.
 ;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
 (when my-use-evil-p

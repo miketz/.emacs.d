@@ -989,6 +989,26 @@ This prevents overlapping themes; something I would rarely want."
         (set-face-attribute f nil :inverse-video (not my-inverse-video-p))
       (set-face-attribute f nil :inverse-video my-inverse-video-p))))
 
+(defun my-load-theme-inverse (&optional theme)
+  (interactive)
+  (when (null theme)
+    (setq theme (intern (completing-read "theme: "
+                                         (mapcar 'symbol-name
+                                                 (custom-available-themes))
+                                         nil t))))
+  (load-theme theme t)        ; load theme
+  (my-toggle-inverse-video t) ; invert it
+  (let* ((frame (selected-frame))
+         ;; the foreground is the background during inverse.
+         (new-bg (face-attribute 'default :foreground frame)))
+    ;; TODO: convert the background to be the foreground.
+    ;; (dolist (f (face-list))
+    ;;   ;; setting teh bg is like setting the fg during inverse
+    ;;   (set-face-attribute f nil :background new-bg (face-attribute f :foreground frame))
+    ;;   ;; setting the fg is like setting the bg during inverse
+    ;;   (set-face-attribute f nil :foreground new-bg))
+    ))
+
 (autoload #'my-rainbow-parens-dark-bg "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-dark-bg-bold "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-light-bg "my-bg-specific-colors" nil t)

@@ -1068,7 +1068,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (load-theme 'gruvbox-dark t))
+    (my-color-zenburn))
 
   (cond
    ((eq my-curr-computer 'wild-dog)

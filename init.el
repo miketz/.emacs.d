@@ -1003,10 +1003,11 @@ This prevents overlapping themes; something I would rarely want."
          (new-bg (face-attribute 'default :foreground frame)))
     ;; TODO: convert the background to be the foreground.
     ;; (dolist (f (face-list))
-    ;;   ;; setting teh bg is like setting the fg during inverse
-    ;;   (set-face-attribute f nil :background new-bg (face-attribute f :foreground frame))
-    ;;   ;; setting the fg is like setting the bg during inverse
-    ;;   (set-face-attribute f nil :foreground new-bg))
+    ;;   (let ((new-fg (face-attribute f :background frame)))
+    ;;     ;; setting teh bg is like setting the fg during inverse
+    ;;     (set-face-attribute f nil :background new-fg)
+    ;;     ;; setting the fg is like setting the bg during inverse
+    ;;     (set-face-attribute f nil :foreground new-bg)))
     ))
 
 (autoload #'my-rainbow-parens-dark-bg "my-bg-specific-colors" nil t)

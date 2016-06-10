@@ -176,8 +176,8 @@ MODE-FN the function to turn on the desired mode."
 
     (funcall mor-switch-buff-fn tmp-buff)
     (yank)              ;; paste text
-    ;; ignore erros before turning on mode, otherwise mor keybinds
-    ;; won't be set. Like C-c to closel
+    ;; ignore erros before turning on mode, otherwise mor keybinds won't be
+    ;; set. Like "C-c c" to close.
     (ignore-errors
       (funcall mode-fn)) ;; turn on the dedicated mode.
     (with-current-buffer tmp-buff

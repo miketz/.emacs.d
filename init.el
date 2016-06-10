@@ -719,7 +719,11 @@ Minus the newline char."
   (evil-leader/set-key "x" #'maximize-window)
   (evil-leader/set-key "," #'delete-other-windows)
   (evil-leader/set-key "d" #'delete-window)
-  (evil-leader/set-key "k" #'kill-this-buffer)
+  (evil-leader/set-key "k" (lambda () ;; #'kill-this-buffer
+                             (interactive)
+                             ;; closes the window too, if one was opened.
+                             (quit-window t))
+    )
 
   (evil-leader/set-key "<" (lambda ()        ;shrink window a little
                              (interactive)

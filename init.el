@@ -4395,6 +4395,7 @@ in frame.  Stop displaying shell in all other windows."
                     (+ n (line-number-at-pos start) -1) n))))))
 
   (defun my-what-position (&optional detail)
+    "Your position in space and time."
     (interactive "P")
     (let* ((pos (point))
            (total (buffer-size))
@@ -4404,8 +4405,9 @@ in frame.  Stop displaying shell in all other windows."
                       (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
            (line (my-what-line))
            (col (+ 1 (current-column))))
-      (message "%d%% %s C%d"
-               percent (my-what-line) col)))
+      (message "%d%% %s C%d     %s"
+               percent (my-what-line) col
+               (format-time-string "%-I:%M%#p %m-%d-%Y"))))
 
   (when my-use-evil-p
     ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)

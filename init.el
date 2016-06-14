@@ -1213,10 +1213,15 @@ This prevents overlapping themes; something I would rarely want."
 
   ;; redefine `slime-startup-message' to work how I want
   (defun slime-startup-message ()
+    (when slime-header-line-p
+      (setq header-line-format
+            (format "%s  Port: %s  Pid: %s"
+                    (slime-lisp-implementation-type)
+                    (slime-connection-port (slime-connection))
+                    (slime-pid))))
     (when (zerop (buffer-size))
-      (let* ((orig-welcome (concat "; SLIME " (or (slime-changelog-date)
-                                                  "- ChangeLog file not found")))
-             (welcome (concat orig-welcome ".  "
+      (let* ((orig-welcome (concat "; SLIME " slime-version))
+             (welcome (concat orig-welcome "   "
                               ;; (slime-random-words-of-encouragement)
                               (nth 5 slime-words-of-encouragement))))
         (if slime-startup-animation

@@ -117,6 +117,7 @@
                       :inverse-video nil))))
    `(avy-lead-face ;;for the chars after the first?
      ((t (:foreground "spring green"
+                      :background "black"
                       :slant normal
                       :weight normal
                       :inverse-video nil))))

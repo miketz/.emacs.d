@@ -60,11 +60,6 @@ accidentally calling a function not relevant outside of a tmp buffer."
   "Function used to switch to the tmp buffer (and back again).
 Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 
-(defvar mor-preserve-win-layout-p t
-  "When t attempt to preserve the orinal window layout after copying back.
-Implementation is very crude.") ;; TODO: See if there are built in functions
-                                ;; for temporary windows and/or buffers.
-                                ;; Use winner mode if it's available?
 
 ;; TODO: Make an option to attempt to preserve the original indent when copying
 ;;       text back to the original buffer. This could make option
@@ -98,10 +93,6 @@ Used in tmp buffer to transfer the modified text back to the original buffer.")
 (defvar-local mor--end nil
   "End of region.
 Used in tmp buffer to transfer the modified text back to the original buffer.")
-(defvar-local mor--made-new-win-p nil
-  "True if the tmp buffer caused a new window to be created.
-Will be buffer local to the tmp buffer.
-Used in logic to decide whether a window should be deleted.")
 
 
 (defun mor--gen-buffer-name ()
@@ -153,10 +144,6 @@ Region is between START and END inclusive."
                          end
                          mor--prev-mode-fn)))
 
-(defun mor--win-count ()
-  "Get the number of windows open."
-  (length (window-list)))
-
 (defun mor--mode-on-region (start end mode-fn)
   "The core function to copy region to a new buffer.
 Region is between START and END.
@@ -167,8 +154,7 @@ MODE-FN the function to turn on the desired mode."
 
   ;; save buffer and region coordinates to copy the text back in later.
   (let ((orig-buff (current-buffer))
-        (tmp-buff (mor--gen-buffer-name))
-        (orig-win-count (mor--win-count)))
+        (tmp-buff (mor--gen-buffer-name)))
 
 
     (kill-ring-save start end) ;; copy higlihgted text
@@ -185,9 +171,7 @@ MODE-FN the function to turn on the desired mode."
       ;; called. Becuase major modes wipe buffer local vars.
       (setq mor--orig-buffer orig-buff
             mor--start start
-            mor--end end
-            mor--made-new-win-p (< orig-win-count
-                                   (mor--win-count))))
+            mor--end end))
     (mor-tmp-buffer-mode) ; for keybinds.
 
     (when mor-format-automatically-p
@@ -213,15 +197,12 @@ overwrite."
   "Kill the tmp buffer and clean up the window if applicable.
 Call this if you don't want to copy the text back to the original buffer."
   (interactive)
-  (mor--finished-with-tmp-buffer nil))
+  (quit-window t))
 
 (defun mor--finished-with-tmp-buffer (copy-back-p)
   "Manages the end of life of the tmp buffer.
 
 When COPY-BACK-P is t, copy text back to the original buffer.
-
-May close a window based on `mor-preserve-win-layout-p' and some
-crude window layout logic.
 
 Kills the tmp buffer."
   (if (null mor--orig-buffer) ; guard
@@ -232,11 +213,7 @@ Kills the tmp buffer."
       (let ((tmp-buff (current-buffer))
             (start mor--start)
             (rng (- mor--end
-                    mor--start))
-            (delete-win-p (and mor-preserve-win-layout-p
-                               mor--made-new-win-p
-                               (eq mor-switch-buff-fn
-                                   #'switch-to-buffer-other-window))))
+                    mor--start)))
         (when copy-back-p
           ;; tmp buffer text.
           (kill-ring-save (point-min) (point-max)))
@@ -251,14 +228,12 @@ Kills the tmp buffer."
           ;; paste new text
           (yank))
 
-        (when delete-win-p
-          (delete-window (get-buffer-window tmp-buff)))
-
         ;; kill the tmp buffer becuase mulitple attempts to copy back text
         ;; will be wrong due to the static start/end location. Will need
         ;; to use a better way to track start/end before we can allow the
         ;; tmp buffer to live longer for mulitple copies.
-        (kill-buffer tmp-buff)))))
+        (quit-window t (get-buffer-window tmp-buff))))))
+
 
 (provide 'mor)
 

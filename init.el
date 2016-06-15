@@ -4214,6 +4214,12 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun my-win-count ()
+  (length (window-list))
+  ;; (cl-loop for w being the windows of (selected-frame)
+  ;;          sum 1)
+  )
+
 (defun find-shell (&optional shell-only)
   ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why_cant_i_convert_to_you/
   "Find end of shell buffer or create one by splitting the current window.

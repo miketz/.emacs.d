@@ -2525,10 +2525,11 @@ and indent."
 ;;;--------------------------
 ;;; Omnisharp
 ;;;--------------------------
-(when (and t ;nil ;; turn off omnisharp for the moment.
+(when (and t                ;nil ;; turn off omnisharp for the moment.
            (eq my-curr-computer 'work-laptop))
 
-  ;; (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
+  ;; (add-hook 'csharp-mode-hook
+  ;;           'omnisharp-mode) ; turn on automatically for C# files.
 
   (with-eval-after-load "omnisharp"
 
@@ -2541,7 +2542,9 @@ and indent."
 
       ;; (evil-define-key 'insert omnisharp-mode-map
       ;;   (kbd "C-SPC") 'omnisharp-auto-complete);C-Space like Visual Studio
-      ;;(define-key omnisharp-mode-map (kbd "C-SPC") 'omnisharp-auto-complete) ;C-Space like Visual Studio
+      ;; (define-key omnisharp-mode-map
+      ;;   (kbd "C-SPC") ; C-Space like Visual Studio
+      ;;   'omnisharp-auto-complete)
 
       (evil-define-key 'normal omnisharp-mode-map
         (kbd "g u") #'omnisharp-find-usages)
@@ -2583,19 +2586,25 @@ and indent."
     ;; downside that documentation is impossible to fetch.
     (setq omnisharp-auto-complete-want-documentation nil)
 
-    (setq omnisharp--curl-executable-path "C:/Users/mtz/programs/curl-7.37.0-win64/bin/curl.exe")
-    (setq omnisharp-server-executable-path "C:/Users/mtz/programs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
-    (setq omnisharp--windows-curl-tmp-file-path "C:/Users/mtz/omnisharp-curl-tmp.cs") ;windows doesn't like the C:\ root folder
-    (setq omnisharp-host "http://localhost:2000/") ;(setq omnisharp-host "http://localhost:2000/")
-                                        ;(setq omnisharp-curl "curl.exe")
-                                        ;`(:command ,omnisharp--curl-executable-path)
+    (setq omnisharp--curl-executable-path
+          "C:/Users/mtz/programs/curl-7.37.0-win64/bin/curl.exe")
+    (setq
+     omnisharp-server-executable-path
+     "C:/Users/mtz/programs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
+    ;; windows doesn't like the C:\ root folder
+    (setq omnisharp--windows-curl-tmp-file-path
+          "C:/Users/mtz/omnisharp-curl-tmp.cs")
+    (setq omnisharp-host "http://localhost:2000/")
+    ;; (setq omnisharp-curl "curl.exe")
+    ;; `(:command ,omnisharp--curl-executable-path)
 
     (let ((i-am-using-omnisharp t))
       (when i-am-using-omnisharp
         (with-eval-after-load 'company
           (add-to-list 'company-backends 'company-omnisharp))))
 
-    (setq omnisharp-company-do-template-completion nil) ;tab completion of paramters. acts weird
+    ;; tab completion of paramters. acts weird
+    (setq omnisharp-company-do-template-completion nil)
     (setq omnisharp-company-ignore-case t)
 
     (defun my-start-omnisharp-server (sln)
@@ -2620,7 +2629,8 @@ and indent."
 ;;(add-hook 'eshell-load-hook 'nyan-prompt-enable)
 
 ;;;--------------------
-;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1, even when all code is commented out. Deleting the elpa folder for now.
+;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1,
+;;; even when all code is commented out. Deleting the elpa folder for now.
 ;;;--------------------
 ;;(powerline-default-theme)
 ;;(powerline-center-theme)
@@ -2634,20 +2644,23 @@ and indent."
 ;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
 ;; work with evil "/" command. But it does work with evil's "?".
 (define-key isearch-mode-map (kbd "C-SPC") #'avy-isearch)
-;; (define-key evil-normal-state-map (kbd "s") #'avy-goto-char-2) ;like vim sneak.
+;; (define-key evil-normal-state-map (kbd "s") ; like vim sneak.
+;;   #'avy-goto-char-2)
 ;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
 (when my-use-evil-p
   (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
   (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1))
 
 (with-eval-after-load "avy"
-  ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.
+  ;; make keys like ace-jump. Lots of letters means more likey to need only 1
+  ;; overlay char.
   (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
                         (cl-loop for i from ?A to ?Z collect i)))
-  (setq avy-style 'at-full) ;;options (pre at at-full post)
-  (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
-  (setq avy-all-windows t)  ;allow jumps between windows.
-  (setq avy-case-fold-search t)         ;case insenstive
+  (setq avy-style 'at-full) ;; options (pre at at-full post)
+  (setq avy-background nil) ; eye is already focused on the jump point so no
+                                        ; need to gray background.
+  (setq avy-all-windows t)              ; allow jumps between windows.
+  (setq avy-case-fold-search t)         ; case insenstive
 
   ;; (defun my-avy-goto-line ()
   ;;   (interactive)
@@ -2664,10 +2677,10 @@ and indent."
                        (read-char "char 3: ")
                        current-prefix-arg))
     (avy--with-avy-keys avy-goto-char-3
-      (avy--generic-jump
-       (regexp-quote (string char1 char2 char3))
-       arg
-       avy-style))))
+                        (avy--generic-jump
+                         (regexp-quote (string char1 char2 char3))
+                         arg
+                         avy-style))))
 
 
 ;;;--------------------
@@ -2716,7 +2729,7 @@ and indent."
 ;;;--------------------
 ;; ;; (add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
 
-;; ;; your eye is already focused on the jump point so no need to gray background.
+;; ;; eye is already focused on the jump point so no need to gray background.
 ;; (setq ace-jump-mode-gray-background nil)
 ;; (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)

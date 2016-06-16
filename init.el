@@ -396,9 +396,6 @@ Examples: helm-swoop swiper")
     swiper
     flx ;; can be used by ivy for ordering flx matches.
     counsel
-    ;; apel ; used in eval-after-load config counsel/ivy.
-                                        ; specifically function `set-alist'
-                                        ; TODO: remove dependency on apel using default elsip functions.
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'

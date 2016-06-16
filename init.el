@@ -1617,7 +1617,8 @@ This prevents overlapping themes; something I would rarely want."
 
   (setq js2-mode-show-strict-warnings t)
 
-  ;; (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint. Doesn't work?
+  ;; ;; recognize vars in the global comment for jslint. Doesn't work?
+  ;; (setq js2-include-jslint-globals t)
 
   ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
   ;; add any symbols to a buffer-local var of acceptable global vars
@@ -1649,7 +1650,8 @@ This prevents overlapping themes; something I would rarely want."
   ;;   ("n" flycheck-next-error)
   ;;   ("p" flycheck-previous-error)
   ;;   ("q" nil))
-  ;; (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'hydra-js2-flycheck/body)
+  ;; (evil-define-key 'normal js2-mode-map (kbd "C-c l")
+  ;;   #'hydra-js2-flycheck/body)
 
   (defhydra my-hydra-js2-flymake (:color amaranth)
     "jslint:flymake: "
@@ -1659,57 +1661,61 @@ This prevents overlapping themes; something I would rarely want."
     ("C-g" nil nil)
     ("q" nil))
   (when my-use-evil-p
-   (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'my-hydra-js2-flymake/body))
+    (evil-define-key 'normal js2-mode-map (kbd "C-c l")
+      #'my-hydra-js2-flymake/body))
 
   ;; (evil-define-key 'normal js2-mode-map (kbd "C-c h") #'my-hydra-hs/body)
 
   ;; Add parsing of jslint output in compilation mode
-  ;; (add-to-list 'compilation-error-regexp-alist-alist '(jslint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), " 1 2 3))
+  ;; (add-to-list 'compilation-error-regexp-alist-alist
+  ;;              '(jslint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), "
+  ;;                       1 2 3))
   ;; (add-to-list 'compilation-error-regexp-alist 'jslint)
 
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (js2-highlight-unused-variables-mode t)
-              ;; replace ambiguous name "Javascript-IDE" with "js2"
-              (setq mode-name "js2")
-              ;; (setq-default js2-global-externs "jQuery $")
-              ;; (setq-default js2-indent-on-enter-key t)
-              ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
+  (defun my-js2-init ()
+    (js2-highlight-unused-variables-mode t)
+    ;; replace ambiguous name "Javascript-IDE" with "js2"
+    (setq mode-name "js2")
+    ;; (setq-default js2-global-externs "jQuery $")
+    ;; (setq-default js2-indent-on-enter-key t)
+    ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
 
-              ;; (when (featurep 'js2-highlight-vars)
-              ;;   (js2-highlight-vars-mode))
+    ;; (when (featurep 'js2-highlight-vars)
+    ;;   (js2-highlight-vars-mode))
 
-              ;;(js2-imenu-extras-mode)
+    ;;(js2-imenu-extras-mode)
 
-              (electric-pair-mode 1)
-              ;; (smartparens-mode 1)
+    (electric-pair-mode 1)
+    ;; (smartparens-mode 1)
 
 
-              (yas-minor-mode 1)
-              (rainbow-delimiters-mode-enable)
-              (electric-spacing-mode 1)
-              ;; use jslint, but only if editing a .js file on disk.
-              ;; TODO: use with in-memory buffer, or narrowed region of html file.
-              ;; TODO: use flycheck instead of flymake
-              (when (and buffer-file-name
-                         (my-str-ends-with-p buffer-file-name ".js"))
-                ;; wireup M-x compile
-                (set (make-local-variable 'compile-command)
-                     (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
-                ;; ;; and turn on flymake-jslint. (only works on saved files)
-                ;; (flymake-jslint-load)
-                ;; ;; bind M-n, M-p to use flymake functions istead of js2 functions
-                ;; (evil-define-key 'normal js2-mode-map (kbd "M-n") #'flymake-goto-next-error)
-                ;; (evil-define-key 'normal js2-mode-map (kbd "M-p") #'flymake-goto-prev-error)
-                ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m") #'flymake-popup-current-error-menu)
-                )
-              ;; regex so M-x complile can parse jslint output.
-              ;; (set (make-local-variable 'compilation-error-regexp-alist)
-              ;;      '(("^[ \t]*\\([A-Za-z.0-9_: \\-]+\\)(\\([0-9]+\\)[,]\\( *[0-9]+\\))\\( Microsoft JScript runtime error\\| JSLINT\\): \\(.+\\)$" 1 2 3)))
-              ;; show a greek lambda for function
-              (setq prettify-symbols-alist '(("function" . 955)))
-              ;; collapse/show sections of code
-              (hs-minor-mode 1))))
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode-enable)
+    (electric-spacing-mode 1)
+    ;; use jslint, but only if editing a .js file on disk.
+    ;; TODO: use with in-memory buffer, or narrowed region of html file.
+    ;; TODO: use flycheck instead of flymake
+    (when (and buffer-file-name
+               (my-str-ends-with-p buffer-file-name ".js"))
+      ;; wireup M-x compile
+      (set (make-local-variable 'compile-command)
+           (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
+      ;; ;; and turn on flymake-jslint. (only works on saved files)
+      ;; (flymake-jslint-load)
+      ;; ;; bind M-n, M-p to use flymake functions istead of js2 functions
+      ;; (evil-define-key 'normal js2-mode-map (kbd "M-n")
+      ;;   #'flymake-goto-next-error)
+      ;; (evil-define-key 'normal js2-mode-map (kbd "M-p")
+      ;;   #'flymake-goto-prev-error)
+      ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m")
+      ;;   #'flymake-popup-current-error-menu)
+      )
+    ;; show a greek lambda for function
+    (setq prettify-symbols-alist '(("function" . 955)))
+    ;; collapse/show sections of code
+    (hs-minor-mode 1))
+
+  (add-hook 'js2-mode-hook #'my-js2-init))
 
 ;;;-----------------------------------------------------------------------------
 ;;; json-mode

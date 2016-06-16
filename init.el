@@ -2069,7 +2069,8 @@ To make it human readable."
   ;;                   ; when Smex is auto-initialized on its first run.
   (global-set-key (kbd "M-x") #'smex)
   (global-set-key (kbd "M-X") #'smex-major-mode-commands)
-  (global-set-key (kbd "C-c M-x") #'execute-extended-command) ; rebind the original M-x command
+  (global-set-key (kbd "C-c M-x")
+                  #'execute-extended-command) ; rebind the original M-x command
 
   ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
   ;; other modes load ido, inadvertently turning on ido-ubiquitous even
@@ -2090,7 +2091,8 @@ To make it human readable."
            ;; invokes with-eval-after-load "ido-vertical-mode"
            (ido-vertical-mode 1))
           ((eq my-ido-display 'grid)
-           ;; TODO: prevent grid mode from messing up the "space-as-dash" advice.
+           ;; TODO: prevent grid mode from messing up the "space-as-dash"
+           ;;       advice.
            ;; TODO: make Tab behave the same for smex, general completion, etc.
            (ido-grid-mode))))
 
@@ -2120,11 +2122,12 @@ To make it human readable."
                      ;; advice is not needed.
    ;; insert a hypen - on space like in normal M-x
    (defadvice smex (around space-inserts-hyphen activate compile)
-     (let ((ido-cannot-complete-command `(lambda ()
-                                           (interactive)
-                                           (if (string= " " (this-command-keys))
-                                               (insert ?-)
-                                             (funcall ,ido-cannot-complete-command)))))
+     (let ((ido-cannot-complete-command
+            `(lambda ()
+               (interactive)
+               (if (string= " " (this-command-keys))
+                   (insert ?-)
+                 (funcall ,ido-cannot-complete-command)))))
        ad-do-it))))
 
 ;;;--------------------
@@ -2159,12 +2162,16 @@ To make it human readable."
   (yas-load-directory "~/.emacs.d/snippets")
 
   ;; (setq yas-snippet-dirs
-  ;;     `("~/.emacs.d/snippets"                 ;; personal snippets
-  ;;       ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-  ;;       ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-  ;;       ,yas-installed-snippets-dir              ;; the default collection
-  ;;       ))
-  (setq yas-triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
+  ;;       `("~/.emacs.d/snippets" ; personal snippets
+  ;;         ;; "/path/to/some/collection/" ; foo-mode and bar-mode snippet
+  ;;         ;;                             ; collection
+  ;;         ;; "/path/to/yasnippet/yasmate/snippets" ; the yasmate collection
+  ;;         ,yas-installed-snippets-dir ; the default collection
+  ;;         ))
+
+  ;; Enable/disable trigger of a sub-snippet while in a snippet.
+  (setq yas-triggers-in-field nil)
+
   (defun my-yas-handle-param (param-str
                               sep-char
                               fn-deco

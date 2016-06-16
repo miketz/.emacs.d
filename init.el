@@ -798,13 +798,14 @@ Minus the newline char."
 ;;   ;; configure default settings for fonts.
 ;;   (defvar my-default-font 'consolas)
 ;;   (defvar my-good-fonts
-;;     '((inconsolata "Inconsolata" 135 normal) ; looks OK. fits a good number of
-;;                                              ; lines on screen. flaky on bold.
-;;                                              ; no itallic?
-;;       (consolas "Consolas" 125 normal) ; consolas is the best looking but fits
-;;                                        ; fewer lines on screen.
-;;       (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ; good, but looks a
-;;                                                            ; bit "tall"
+;;     '(
+;;       ;; looks OK. fits a good number of lines on screen. flaky on bold.
+;;       ;; no itallic?
+;;       (inconsolata "Inconsolata" 135 normal)
+;;       ;; consolas is the best looking but fits fewer lines on screen.
+;;       (consolas "Consolas" 125 normal)
+;;       ;; good, but looks a bit "tall"
+;;       (dejavu "DejaVu Sans Mono for Powerline" 120 normal)
 ;;       (fixedsys "FixedSys" 120 normal)))
 
 ;;   (cl-defun my-set-font (&optional
@@ -812,10 +813,10 @@ Minus the newline char."
 ;;                          (sym nil) (height nil) (weight nil)
 ;;                          (resize-window nil))
 ;;     "Sets the font.
-;; If sym is not specified it uses the configured default set in `my-default-font'.
-;; If height or weight are not specified then it uses the configured defaults
-;; in `my-good-fonts'.
-;; Resize-window = t will adjust the window so the modeline fits on screen, etc."
+;; If sym is not specified it uses the configured default set in
+;; `my-default-font'. If height or weight are not specified then it uses the
+;; configured defaults in `my-good-fonts'. Resize-window = t will adjust the
+;; window so the modeline fits on screen, etc."
 ;;     (unless sym (setq sym my-default-font))
 ;;     (let ((the-font (assoc sym my-good-fonts)))
 ;;       (unless height (setq height (third the-font)))
@@ -1134,7 +1135,8 @@ This prevents overlapping themes; something I would rarely want."
      '(rainbow-delimiters-depth-7-face ((t (:foreground "brown"))))
      '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
      '(rainbow-delimiters-depth-9-face ((t (:foreground "magenta"))))
-     '(rainbow-delimiters-unmatched-face ((t (:foreground "lightred" :background "darkgray"))))))
+     '(rainbow-delimiters-unmatched-face
+       ((t (:foreground "lightred" :background "darkgray"))))))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))

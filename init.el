@@ -2944,7 +2944,8 @@ and indent."
 ;;     (evil-end-of-line)
 ;;     (delete-region 1 (+ (point) 2))
 ;;     (evil-end-of-line))
-;;   (define-key skewer-repl-mode-map (kbd "C-c M-o") #'my-skewer-repl-clear-buffer)
+;;   (define-key skewer-repl-mode-map (kbd "C-c M-o")
+;;     #'my-skewer-repl-clear-buffer)
 
   (add-hook
    'skewer-repl-mode-hook
@@ -2954,18 +2955,21 @@ and indent."
      ;;there's always a trailing space at repl prompt. Don't highlight it. 
      (setq show-trailing-whitespace nil)))
 
-  ;;(require 'simple-httpd)
+  ;; (require 'simple-httpd)
   ;; (defun my-skewer-html ()
   ;;   "Wire up the html file you're editing with skewer."
   ;;   (interactive)
-  ;;   ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
-  ;;   ;;(setq httpd-root "c:/users/mtz/scratch/testwebsite")
+  ;;   ;; (skewer-html-mode) ; this is set in a hook, don't need it here.
+  ;;   ;; (setq httpd-root "c:/users/mtz/scratch/testwebsite")
   ;;   (setq httpd-root (my-current-folder-path))
   ;;   (httpd-start)
   ;;   (browse-url-of-file (concat "http://localhost:8080/"
   ;;                               (file-name-nondirectory buffer-file-name)))
   ;;   (run-skewer)
-  ;;   (message "put this in the <head>: <script src=\"http://localhost:8080/skewer\"></script> --- switch to tab http://localhost:8080/FileOrRouteName, then start evaling html"))
+  ;;   (message
+  ;;    (concat "put this in the <head>: <script src=\"http://localhost:"
+  ;;            "8080/skewer\"></script> --- switch to tab http://localhost:"
+  ;;            "8080/FileOrRouteName, then start evaling html")))
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -2997,13 +3001,19 @@ and indent."
 ;;     )
 
 ;;   ;;set up custome keybindings when the mode loads.
-;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set in the hook. Eval-after-load doesn't work.
+;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set
+;;                               ; in the hook. Eval-after-load doesn't work.
 ;;             (lambda ()
 ;;               ;;Use the same keybinding to clear eshell as the SLIME repl
-;;               (define-key eshell-mode-map (kbd "C-c M-o") 'my-eshell-clear-buffer)
-;;               ;;make evil's dd compatible with the read-only prompt of hte current line.
-;;               ;;(define-key evil-normal-state-map (kbd "<remap> <evil-delete-whole-line>") 'my-eshell-clear-line)
-;;               ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my-eshell-clear-line)
+;;               (define-key eshell-mode-map (kbd "C-c M-o")
+;;                 'my-eshell-clear-buffer)
+;;               ;;make evil's dd compatible with the read-only prompt of the
+;;               ;; current line.
+;;               ;; (define-key evil-normal-state-map
+;;               ;;   (kbd "<remap> <evil-delete-whole-line>")
+;;               ;;   'my-eshell-clear-line)
+;;               ;; (evil-define-key 'normal eshell-mode-map (kbd "d d")
+;;               ;;   'my-eshell-clear-line)
 ;;               )))
 
 ;;;-----------------------------------------------------------------------------

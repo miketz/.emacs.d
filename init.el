@@ -2027,23 +2027,33 @@ To make it human readable."
 ;;;---------------------
 ;;; Clippy. pop-up help
 ;;;---------------------
-;; (when my-use-evil-p
-;;   (evil-leader/set-key "c" #'clippy-describe-function)
-;;   (evil-leader/set-key "v" #'clippy-describe-variable))
+(when my-use-evil-p
+  (evil-leader/set-key "c" #'clippy-describe-function)
+  (evil-leader/set-key "v" #'clippy-describe-variable))
 
-;; (evil-leader/set-key "n"
-;;   (lambda ()
-;;     (interactive)
-;;     (clippy-say "It looks like you want to know more about the [search function]. Please use the [search function] to find out more about the [search function]. The [search function] provides access to more a more detailed description than can be provided in tool-tip help." t)))
+(evil-leader/set-key "n"
+  (lambda ()
+    (interactive)
+    (clippy-say
+     (concat "It looks like you want to know more about the [search "
+             "function]. Please use the [search function] to find out more "
+             "about the [search function]. The [search function] provides "
+             "access to more a more detailed description than can be "
+             "provided in tool-tip help.") t)))
 
-;; (evil-leader/set-key "n"
-;;   (lambda (variable)
-;;     (interactive (list (variable-at-point)))
-;;     (if (not (null variable))
-;;         (clippy-say (format "It looks like you want to know more about [%s]. Please use the [search function] to find out more about [%s]. The [search function] provides access to more a more detailed description than can be provided in tool-tip help."
-;;                             variable
-;;                             variable)
-;;                     t))))
+(evil-leader/set-key "n"
+  (lambda (variable)
+    (interactive (list (variable-at-point)))
+    (if (not (null variable))
+        (clippy-say
+         (format
+          (concat "It looks like you want to know more about [%s]. Please "
+                  "use the [search function] to find out more about [%s]. "
+                  "The [search function] provides access to more a more "
+                  "detailed description than can be provided in tool-tip help.")
+          variable
+          variable)
+         t))))
 
 
 

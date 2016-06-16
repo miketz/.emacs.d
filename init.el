@@ -722,8 +722,8 @@ Minus the newline char."
   (evil-leader/set-key "k" (lambda () ;; #'kill-this-buffer
                              (interactive)
                              ;; closes the window too, if one was opened.
-                             (quit-window t))
-    )
+                             (quit-window t)))
+  (evil-leader/set-key "c" #'quit-window) ; buffer left alive
 
   (evil-leader/set-key "<" (lambda ()        ;shrink window a little
                              (interactive)

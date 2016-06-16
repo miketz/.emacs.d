@@ -1184,28 +1184,43 @@ This prevents overlapping themes; something I would rarely want."
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
   (when my-use-evil-p
-    ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-mode-map (kbd "M-.") #'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") #'slime-edit-definition)
+    ;; ;; override evil's binding of M-. when using slime
+    ;; (define-key slime-mode-map (kbd "M-.") 'slime-edit-definition)
+
+    ;; override evil's binding of M-. when using slime
+    (evil-define-key 'normal slime-mode-map (kbd "M-.")
+      #'slime-edit-definition)
+    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.")
+      #'slime-edit-definition)
 
     ;; (progn
-    ;;   ;; For evil, attempting to get C-n, C-p to move selection in slimes fuzzy completions window.
-    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map (kbd "C-n") #'slime-fuzzy-next)
-    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map (kbd "C-n") #'slime-fuzzy-next)
-    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map (kbd "C-p") #'slime-fuzzy-prev)
-    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map (kbd "C-p") #'slime-fuzzy-prev)
-    ;;   (define-key slime-fuzzy-completions-mode-map (kbd "C-n") #'slime-fuzzy-next)
-    ;;   (define-key slime-target-buffer-fuzzy-completions-map (kbd "C-n") #'slime-fuzzy-next))
+    ;;   ;; For evil, attempting to get C-n, C-p to move selection in slimes
+    ;;   ;; fuzzy completions window.
+    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map
+    ;;     (kbd "C-p") #'slime-fuzzy-prev)
+    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map
+    ;;     (kbd "C-p") #'slime-fuzzy-prev)
+    ;;   (define-key slime-fuzzy-completions-mode-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (define-key slime-target-buffer-fuzzy-completions-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next))
     )
 
-  ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
+  ;; disable the banner header line in repl.
+  ;; TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)
+
   ;; (require 's)
-  ;; (setq slime-words-of-encouragement (let ((words '())) ;;hidden
-  ;;                                      (dolist (w slime-words-of-encouragement)
-  ;;                                        (when (s-contains? "REPL" w)
-  ;;                                          (setq words (cons w words))))
-  ;;                                      words))
+  ;; (setq slime-words-of-encouragement
+  ;;       (let ((words '())) ;;hidden
+  ;;         (dolist (w slime-words-of-encouragement)
+  ;;           (when (s-contains? "REPL" w)
+  ;;             (setq words (cons w words))))
+  ;;         words))
 
 
   ;; redefine `slime-startup-message' to work how I want
@@ -1231,11 +1246,15 @@ This prevents overlapping themes; something I would rarely want."
             slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64")))))
 
     (when (eq my-curr-computer 'work-laptop)
-      (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("C:/Users/mtz/programs/ccl-1.11-windows/ccl/wx86cl64"))
-                                         (sbcl ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
-                                         (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
-                                         (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
+      (setq slime-default-lisp 'ccl)
+      (setq slime-lisp-implementations
+            '((ccl ("C:/Users/mtz/programs/ccl-1.11-windows/ccl/wx86cl64"))
+              (sbcl ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
+              (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
+              ;; clisp is just a fake example for now.
+              (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
+
+
     (when (eq my-curr-computer 'utilite)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("armcl")))))
@@ -1254,8 +1273,10 @@ This prevents overlapping themes; something I would rarely want."
     (when (or (eq my-curr-computer 'work-laptop)
               (eq my-curr-computer 'utilite)
               (eq my-curr-computer 'a-laptop-faster))
-      ;; connect lisp buffers to SLIME automatically.
-      (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
+      ;; Connect lisp buffers to SLIME automatically.
+      ;; Not sure why this works, since it's a hook on slime-mode which I
+      ;; thought would need to be hooked on lisp-mode-hook???
+      (add-hook 'slime-mode-hook
                 (lambda ()
                   (unless (slime-connected-p)
                     (save-excursion (slime)))))))
@@ -1264,11 +1285,13 @@ This prevents overlapping themes; something I would rarely want."
   ;; (add-hook 'slime-repl-mode-hook #'lispy-mode)
   (add-hook 'slime-repl-mode-hook
             (lambda ()
-              ;;turn off line numbers in the repl
+              ;; Turn off line numbers in the repl
               (linum-mode 0)
-              ;;there's always a trailing space at repl prompt. Don't highlight it.
+              ;; There's always a trailing space at repl prompt. Don't
+              ;; highlight it.
               (setq show-trailing-whitespace nil)
-              ;;aggressive-indent moves SLIME's comments in the REPL. Turn it off.
+              ;; Aggressive-indent moves SLIME's comments in the REPL.
+              ;; Turn it off.
               (when (fboundp 'aggressive-indent-mode)
                 (aggressive-indent-mode 0))))
 
@@ -1317,7 +1340,9 @@ This prevents overlapping themes; something I would rarely want."
 
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec
-    (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
+    (setq
+     common-lisp-hyperspec-root
+     "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
 
   (defun my-view-hyperspec ()
     (interactive)
@@ -1359,9 +1384,12 @@ This prevents overlapping themes; something I would rarely want."
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)
-  (define-key company-active-map (kbd "<tab>") #'company-complete) ;expands till -. Completes after that.
-  (define-key company-active-map (kbd "C-v") #'company-next-page) ;would be default, but my other keymap killed this
-  (define-key company-active-map (kbd "M-v") #'company-previous-page) ;default, but set just in case.
+  ;; expands till -. Completes after that.
+  (define-key company-active-map (kbd "<tab>") #'company-complete)
+  ;; would be default, but my other keymap killed this
+  (define-key company-active-map (kbd "C-v") #'company-next-page)
+  ;; default, but set just in case.
+  (define-key company-active-map (kbd "M-v") #'company-previous-page)
   (define-key company-active-map (kbd "M-<") ;go to first candidate
     (lambda ()
       (interactive)
@@ -1373,7 +1401,8 @@ This prevents overlapping themes; something I would rarely want."
       (let ((company-selection-wrap-around nil))
         (company-set-selection company-candidates-length))))
 
-  ;;(setq company-tooltip-minimum-width 60) ;avoids changing width as visislbe candidates change.
+  ;; ;; avoids changing width as visislbe candidates change.
+  ;; (setq company-tooltip-minimum-width 60)
   ;; (add-hook 'company-completion-started-hook
   ;;           (lambda ()
   ;;             (interactive)
@@ -1383,7 +1412,8 @@ This prevents overlapping themes; something I would rarely want."
   ;;                                  company-candidates)))))
 
   (setq company-idle-delay nil)          ; disable automatic completion
-  (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire until 3 chars.
+  (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire
+                                         ; until 3 chars.
   (setq company-tooltip-limit 20)        ; popup more suggestions.
   )
 
@@ -1430,8 +1460,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (require 'auto-complete-config)
 ;;   (ac-config-default)
 
-;;   (define-key ac-mode-map (kbd "C-SPC") 'auto-complete) ;C-Space like Visual Studio
-;;   (setq ac-auto-start nil) ;don't automatically pop up completions. Use C-Space
+;;   ;; C-Space like Visual Studio
+;;   (define-key ac-mode-map (kbd "C-SPC") 'auto-complete)
+;;   ;; don't automatically pop up completions. Use C-Space
+;;   (setq ac-auto-start nil)
 
 ;;   ;;navigate completion menu with c-n and c-p
 ;;   (setq ac-use-menu-map t)
@@ -1447,9 +1479,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;   ;;(set-face-background 'ac-selection-face "steelblue")
 ;;   )
 
-;; ;;;------------------------------------------------
-;; ;;; ac-slime. integrates auto-complete with slime.
-;; ;;;------------------------------------------------
+;;;------------------------------------------------
+;;; ac-slime. integrates auto-complete with slime.
+;;;------------------------------------------------
 ;; (when t
 ;;   (require 'ac-slime)
 ;;   ;;(add-hook 'slime-mode-hook 'set-up-slime-ac)
@@ -1457,12 +1489,12 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (add-hook 'slime-mode-hook (lambda ()
 ;;                                (interactive)
 ;;                                (set-up-slime-ac t))) ;t for fuzzy matching
-;;   (add-hook 'slime-repl-mode-hook (lambda ()
-;;                                     (interactive)
-;;                                     (set-up-slime-ac t))) ;t for fuzzy matching
+;;   (add-hook 'slime-repl-mode-hook
+;;             (lambda ()
+;;               (interactive)
+;;               (set-up-slime-ac t))) ;t for fuzzy matching
 ;;   (eval-after-load "auto-complete"
-;;     '(add-to-list 'ac-modes 'slime-repl-mode))
-;;   )
+;;     '(add-to-list 'ac-modes 'slime-repl-mode)))
 
 ;;;--------------------------------------------------
 ;;; turn on lisp-mode when editing file .stumpwmrc
@@ -1494,7 +1526,8 @@ This prevents overlapping themes; something I would rarely want."
 
 (with-eval-after-load "org"
   (setq org-startup-indented t)
-  (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
+  (setq org-log-done t) ; make timestamp when flagging something done
+                        ; with C-c C-t
   (setq org-agenda-timegrid-use-ampm t)
 
   (progn ;;HOLD keyword stuff
@@ -1507,7 +1540,8 @@ This prevents overlapping themes; something I would rarely want."
     ;;   :group 'org-faces)
 
     ;; icy color to make HOLD items look frozen.
-    (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue" :weight bold)))))
+    (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue"
+                                                          :weight bold)))))
 
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."

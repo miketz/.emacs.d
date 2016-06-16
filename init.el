@@ -3017,14 +3017,15 @@ and indent."
 ;; (setq highlight-tail-steps 40 ;80
 ;;       highlight-tail-timer 0.04;0.04
 ;;       )
-;; (setq highlight-tail-posterior-type t) ;(setq highlight-tail-posterior-type 'const)
+(setq highlight-tail-posterior-type t) ; 'const
 ;; (highlight-tail-mode)
 ;; ;;(highlight-tail-reload)
 
 ;;;-----------------------------------------------------------------------------
 ;;; eww web-browser
 ;;;-----------------------------------------------------------------------------
-;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
+;; (setq browse-url-browser-function ; default for opening links.
+;;       'eww-browse-url)
 
 (with-eval-after-load "eww"
   (when (eq my-curr-computer 'work-laptop)
@@ -3045,7 +3046,8 @@ and indent."
       "Clear the weird ^M character that shows in some eww buffers."
       (interactive
        ;; (let ((args (query-replace-read-args "Replace" t)))
-       ;;   (setcdr (cdr args) nil) ; remove third value returned from query---args
+       ;;   (setcdr (cdr args) nil) ; remove third value returned from
+       ;;                           ; query---args
        ;;   args)
        )
       ;; TODO: clear in the header line too.
@@ -3068,8 +3070,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "w3"
   (defun my-w3-goto (url)
-    ;; "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/Body/m_w_slts.htm"
-    (let ((w3--args nil) ;; prevents errors when loading CL hyperspec pages on local disk
+    (let ((w3--args nil) ; prevents errors when loading CL hyperspec pages on
+                         ; local disk
           (w3-default-homepage url))
       (w3))))
 
@@ -3162,7 +3164,8 @@ and indent."
 (when (eq my-curr-computer 'work-laptop) ; TODO: move this into spearate file.
   (defun my-git-docs ()
     (interactive)
-    (eww-open-file "C:/Users/mtz/AppData/Local/Programs/Git/mingw64/share/doc/git-doc/git.html")))
+    (eww-open-file (concat "C:/Users/mtz/AppData/Local/Programs/Git/"
+                           "mingw64/share/doc/git-doc/git.html"))))
 
 
 ;;;-----------------------------------------------------------------------------

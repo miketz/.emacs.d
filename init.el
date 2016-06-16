@@ -3171,7 +3171,8 @@ and indent."
 (with-eval-after-load "ediff"
   (setq ediff-split-window-function #'split-window-horizontally)
   ;; don't use the popup window
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain) ;'ediff-setup-windows-multiframe
+  (setq ediff-window-setup-function
+        #'ediff-setup-windows-plain) ; 'ediff-setup-windows-multiframe
 
   (when (eq my-curr-computer 'work-laptop)
     (setq ediff-diff3-program "C:/Program Files/KDiff3/bin/diff3.exe")))
@@ -3494,7 +3495,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (defun my-narrow-to-region-indirect (start end)
   "Restrict editing in this buffer to the current region, indirectly.
-Region defined by START and END is automaticallyl detected by (interactive \"r\")."
+Region defined by START and END is automaticallyl detected by
+(interactive \"r\")."
   (interactive "r")
   (deactivate-mark)
   (let ((buf-clone (clone-indirect-buffer nil nil))
@@ -4218,7 +4220,8 @@ When ARG isn't nil, try to pretty print the sexp."
   )
 
 (defun find-shell (&optional shell-only)
-  ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why_cant_i_convert_to_you/
+  ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why_
+  ;;cant_i_convert_to_you/
   "Find end of shell buffer or create one by splitting the current window.
 If shell is already displayed in current frame, delete other windows
 in frame.  Stop displaying shell in all other windows."

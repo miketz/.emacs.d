@@ -1779,8 +1779,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;;--------------------
 ;; (when nil
 ;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
-;;   (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
-;;   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
+;;   (setq ac-js2-evaluate-calls t) ; requires connection to browser with
+;;                                  ; (run-skewer)
+;;   ;; (add-to-list 'ac-js2-external-libraries
+;;   ;;              "path/to/lib/library.js") ; external lib example
 ;;   )
 
 ;;;--------------------
@@ -1811,7 +1813,8 @@ To make it human readable."
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
 (when (and my-use-helm-p
-           (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
+           ;; helm is a little slow on a raspberry pi.
+           (not (eq my-curr-computer 'raspberry-pi))
            (not (eq my-curr-computer 'leyna-laptop)))
 
   (progn ;;functions in key maps are auto-loaded.
@@ -1828,8 +1831,9 @@ To make it human readable."
     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
     (when my-use-evil-p
      (evil-leader/set-key "i" #'helm-imenu))
-    ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
-    ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
+    ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from
+    ;;       finding candidates. The standard emacs `dabbrev-expand' works
+    ;;       fine. `hippie-expand' works too.
     ;; (global-set-key (kbd "M-/") #'hippie-expand)
     ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
     )
@@ -1872,37 +1876,45 @@ To make it human readable."
   ;;(helm-adaptative-mode t)
 
   (progn ;;from tuhdo. Customizing helm window size/display.
-    (setq helm-display-header-line nil) ;save 1 line for rarely used header.
-    (set-face-attribute 'helm-source-header nil :height 1.0) ;don't make source seperators bigger than needed
+    (setq helm-display-header-line nil) ; save 1 line for rarely used header.
+    ;; don't make source seperators bigger than needed
+    (set-face-attribute 'helm-source-header nil :height 1.0)
     ;; (progn
-    ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
-    ;;   ;;helm window size as you type.
+    ;;   ;; helm-autoresize-mode hides other windows, and dynamically adjusts
+    ;;   ;; the helm window size as you type.
     ;;   (helm-autoresize-mode 1)
     ;;   ;;disable the dynamic size adjustment.
     ;;   (setq helm-autoresize-max-height 35)
     ;;   (setq helm-autoresize-min-height 35))
-    ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
-    ;; ;;lots of split windows, keep the popup at the current window.
+    ;; ;; prevents the windown hiding from `helm-autoresize-mode'. And when
+    ;; ;; there are lots of split windows, keep the popup at the current window.
     ;; (setq helm-split-window-in-side-p t)
     )
 
 
-  ;; (progn ;;Trick from tuhdo. Move helm input to top of helm buffer, hide in echo area.
+  ;; (progn
+  ;;   ;; Trick from tuhdo. Move helm input to top of helm buffer, hide
+  ;;   ;; in echo area.
+
   ;;   (setq helm-echo-input-in-header-line t)
-  ;;   (setq helm-split-window-in-side-p t) ;;optoinally put helm buffer inside current buffer.
+  ;;   ;; optionally put helm buffer inside current buffer.
+  ;;   (setq helm-split-window-in-side-p t)
 
   ;;   (defun helm-hide-minibuffer-maybe ()
   ;;     (when (with-helm-buffer helm-echo-input-in-header-line)
   ;;       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
   ;;         (overlay-put ov 'window (selected-window))
-  ;;         (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
-  ;;                                 `(:background ,bg-color :foreground ,bg-color)))
+  ;;         (overlay-put ov 'face
+  ;;                      (let ((bg-color (face-background 'default nil)))
+  ;;                        `(:background ,bg-color :foreground ,bg-color)))
   ;;         (setq-local cursor-type nil))))
 
   ;;   (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe))
 
 
-  ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
+  ;; ;; helm-selection everywhere like when using M-x. Putting this in
+  ;; ;; eval-after-load to decrease start up time a bit.
+  ;; (helm-mode 1)
 
   ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
   ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1913,9 +1925,9 @@ To make it human readable."
   ) ;;end helm eval-after-load
 
 
-;;;------------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-descbinds
-;;;------------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (helm-descbinds-mode)
 
 ;; ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
@@ -1951,7 +1963,8 @@ To make it human readable."
 ;;;--------------------
 ;; (when my-run-sys-specific
 ;;   (defadvice helm-git-grep (after turn-off-activeupdate)
-;;     "Turn off active update in MS-windows. It can't handle grep processes spawning on each keystroke."
+;;     "Turn off active update in MS-windows.
+;; It can't handle grep processes spawning on each keystroke."
 ;;     (helm-toggle-suspend-update))
 ;;   (ad-activate 'helm-git-grep))
 
@@ -1961,9 +1974,10 @@ To make it human readable."
 
 
 ;;;--------------------
-;;; vc-git-grep. This is better for ms-windows since it can't handle helm-git-grep's many processes.
-;;; Also grepping is a pretty heavy weight opperation so I prefer to set up the search inputs first,
-;;; select the top folder, etc instead of searching in real-time for each key press.
+;;; vc-git-grep. This is better for ms-windows since it can't handle
+;;; helm-git-grep's many processes. Also grepping is a pretty heavy weight
+;;; operation so I prefer to set up the search inputs first, select the top
+;;; folder, etc instead of searching in real-time for each key press.
 ;;;--------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
@@ -1975,11 +1989,12 @@ To make it human readable."
 ;;;--------------------
 ;; (autoload 'helm-swoop "helm-swoop" nil t)
 
-;; invoke with M-x for now. binding avy to the "s" key
+;; invoke with M-x for now.
 ;; (when my-use-helm-p
-  ;; helm needs to be initalized or else helm-swoop won't work. (it doens't `require' everything it needs)
-  ;; (when my-use-evil-p
-  ;;   (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
+;;   ;; helm needs to be initalized or else helm-swoop won't work.
+;;   ;; (it doens't `require' everything it needs)
+;;   (when my-use-evil-p
+;;     (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
 ;; (global-set-key (kbd "C-c s") #'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") #'helm-swoop)
@@ -1998,7 +2013,8 @@ To make it human readable."
 
   ;; When doing isearch, hand the word over to helm-swoop
   ;; (define-key isearch-mode-map (kbd "M-i") #'helm-swoop-from-isearch)
-  ;; (define-key helm-swoop-map (kbd "M-i") #'helm-multi-swoop-all-from-helm-swoop)
+  ;; (define-key helm-swoop-map (kbd "M-i")
+  ;;   #'helm-multi-swoop-all-from-helm-swoop)
 
   ;; Save buffer when helm-multi-swoop-edit complete
   ;; (setq helm-multi-swoop-edit-save t)

@@ -2259,23 +2259,26 @@ and indent."
       (when mutate-buffer-p
         (indent-region (point-min) (point-max)))))
 
-  ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
-  ;; And if you the functions fit on screen then it's just wasted modeline space.
-  ;; As an alternative use `beginning-of-defun' C-M-a to jump to the function name.
-  ;; Then `evil-jump-backward' C-o to jump back to where you were.
+  ;; `which-function-mode' is OK, but it turns on the mode globally for all
+  ;; buffers which is annoying. And if the function fits on screen then it's
+  ;; just wasted modeline space. As an alternative use `beginning-of-defun'
+  ;; C-M-a to jump to the function name. Then `evil-jump-backward' C-o to jump
+  ;; back to where you were.
   ;;(eval-after-load 'cc-mode 'which-function-mode)
 
   (add-hook 'c-mode-common-hook
             (lambda ()
               (yas-minor-mode 1)
-              ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
+              ;; (which-function-mode) ; displays function at cursor in the
+              ;;                       ; mode-line. But can be annoying.
               (electric-pair-mode 1)
 
               ;; highlight escapes in the printf format string.
               ;; TODO: highlight placeholders %d differently than escapes \n
               ;; (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
 
-              ;; set to 1 so comments on the same line are kept close to the code by default.
+              ;; set to 1 so comments on the same line are kept close to the
+              ;; code by default.
               (setq comment-column 1)   ; buffer local
 
               (unless (eq system-type 'windows-nt)
@@ -2380,12 +2383,14 @@ and indent."
 ;; (put 'dired-find-alternate-file 'disabled nil)
 
 ;; (progn
-;;   ;; use the same buffer when navigating folders in dired. And use the same buffer when opening a file in dired.
-;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
+;;   ;; use the same buffer when navigating folders in dired. And use the same
+;;   ;; buffer when opening a file in dired.
+;;   (define-key dired-mode-map (kbd "RET")
+;;     'dired-find-alternate-file)       ; was dired-advertised-find-file
 ;;   (define-key dired-mode-map (kbd "^")
 ;;     (lambda ()
 ;;       (interactive)
-;;       (find-alternate-file "..")))) ;; was dired-up-directory
+;;       (find-alternate-file "..")))) ; was dired-up-directory
 
 ;;;---------------------
 ;;; dired-details
@@ -2445,7 +2450,7 @@ and indent."
 (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
-;;(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
+;; (add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode)
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)
 
@@ -2477,7 +2482,8 @@ and indent."
 ;;; Paredit
 ;;;--------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
-;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+;; (autoload 'enable-paredit-mode "paredit"
+;;   "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)

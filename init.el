@@ -1074,34 +1074,50 @@ This prevents overlapping themes; something I would rarely want."
 
   (cond
    ((eq my-curr-computer 'wild-dog)
-    ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    (set-frame-font "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
-    ;; (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
+    ;; (set-frame-font
+    ;;  "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    (set-frame-font
+     "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    ;; (set-frame-font
+    ;;  "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
+    ;; (set-frame-font
+    ;;  (concat "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:"
+    ;;          "slant=normal:width=normal:spacing=100:scalable=true"))
     )
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+    (set-frame-font
+     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
     )
 
    ((eq my-curr-computer 'leyna-laptop)
-    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+    (set-frame-font
+     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
     )
 
    ((eq my-curr-computer 'a-laptop-old)
     ;; (my-set-font :sym 'consolas
     ;;              :height 125    ;; 90 105 115 120 125
     ;;              :weight 'normal)
-    (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+    (set-frame-font
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p

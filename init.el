@@ -6,9 +6,9 @@
 ;;; Windows: registry entry for "open with" option:
 ;;;   Computer\HKEY_CLASSES_ROOT\Applications\runemacs.exe\shell\open\command
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Git incantations:
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Create a new github repo from an existing local repo:
 ;;;     git remote add origin https://github.com/miketz/.emacs.d.git
 ;;;     git push -u origin master
@@ -31,9 +31,9 @@
 ;;; Add a private local branch to github:
 ;;;     git push -u origin branchName
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Git workflow with submodule:
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; With ~/.emacs.d/notElpa/swiper as an example
 ;;;
 ;;; Fork on github
@@ -99,9 +99,9 @@ in case that file does not provide any feature."
     (declare (indent 1) (debug t))
     `(eval-after-load ,file (lambda () ,@body))))
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; eval-when-compile used to prevent flycheck `cl' warning, but only works for
 ;; macros?
 (require 'cl)
@@ -140,9 +140,9 @@ Useful to check a boolean state and toggle the state in 1 go."
     (buffer-string)))
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; flags used for conditional execution
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (display-graphic-p)
 ;; system-type
 ;; my-curr-computer
@@ -178,9 +178,9 @@ nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; globals
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 (defconst my-fast-load-p nil
   "When t, delay the use of packages.
 For when I want a very fast start without `package-initialize'. So emacs can be
@@ -294,9 +294,9 @@ Examples: helm-swoop swiper")
   (with-eval-after-load "evil"
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Packages
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/") ; stores elisp files that are
                                                ; not "packages".
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
@@ -489,9 +489,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
   (defvar my-w32-actions
     '((resize . 61440)
@@ -521,9 +521,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (let ((code (my-w32-get-code action)))
       (w32-send-sys-command code))))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; key-chord
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
 ;;       since it is looking for the chord.
 
@@ -581,9 +581,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
            1))
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; cursor
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 (setq-default cursor-type '(bar . 2))
 (custom-set-faces
  '(cursor ((t (:background "cyan")))))
@@ -634,9 +634,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
   )
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "evil"
 
   ;; unset some keys. It seems other modes have trouble overriding them when
@@ -760,9 +760,9 @@ Minus the newline char."
 
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-snipe
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (setq evil-snipe-enable-highlight nil)
 ;; (setq evil-snipe-enable-incremental-highlight nil)
 ;; (setq evil-snipe-scope 'visible)
@@ -772,9 +772,9 @@ Minus the newline char."
 ;; (global-evil-snipe-mode 1)
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-god-state
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (evil-define-key 'normal global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'motion global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
@@ -783,16 +783,16 @@ Minus the newline char."
 ;; ;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
 ;; ;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-surround
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'evil-surround)
 ;; (global-evil-surround-mode 1)
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; font
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (when (or (eq my-curr-computer 'work-laptop)
 ;;           (eq my-curr-computer 'leyna-laptop))
 ;;   ;; configure default settings for fonts.
@@ -910,9 +910,9 @@ Minus the newline char."
 
 
 
-;;;------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Color theme stuff.
-;;;------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;TODO: implement a way to undo color settings made outside the theme
 ;;      definition. Use custom-theme-set-faces to set the colors/styles so they
 ;;      are rolled back when switching/disabling themes.
@@ -1170,16 +1170,16 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Recursively byte-compile every .el file
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; sly
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (setq my-use-sly nil)
 
 ;; (when my-use-sly
@@ -1187,9 +1187,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;     (setq inferior-lisp-program
 ;;           "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; SLIME
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'slime-autoloads)
 (with-eval-after-load "slime"
   (slime-setup '(slime-fancy
@@ -1375,9 +1375,9 @@ This prevents overlapping themes; something I would rarely want."
   (global-set-key (kbd "C-c b") #'slime-selector))
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; redshank
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'redshank-loader)
 ;; (eval-after-load "redshank-loader"
 ;;   `(redshank-setup '(lisp-mode-hook
@@ -1386,9 +1386,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; ;;     '(progn ...redefine keys, etc....))
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;company mode is breaking emacs 24.3. Works OK in 24.4
 ;; (require 'company)
 (add-hook 'after-init-hook 'global-company-mode) ;all buffers
@@ -1437,9 +1437,9 @@ This prevents overlapping themes; something I would rarely want."
 
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company-web
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "web-mode"
   (add-to-list 'company-backends 'company-web-html)
   (add-to-list 'company-backends 'company-web-jade)
@@ -1454,20 +1454,20 @@ This prevents overlapping themes; something I would rarely want."
     (define-key web-mode-map (kbd "C-SPC") #'company-web-html)))
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company-quickhelp. not using messes up keybinds
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (setq company-quickhelp-idle-delay 0.5)
 ;; (company-quickhelp-mode 1)
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; slime-company
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; this is set in the slime section
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Auto-complete
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; TODO: look into a way to use auto-complete for some modes and company for
 ;;       others.
 
@@ -1497,9 +1497,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;   ;;(set-face-background 'ac-selection-face "steelblue")
 ;;   )
 
-;;;------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; ac-slime. integrates auto-complete with slime.
-;;;------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (when t
 ;;   (require 'ac-slime)
 ;;   ;;(add-hook 'slime-mode-hook 'set-up-slime-ac)
@@ -1514,14 +1514,14 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (eval-after-load "auto-complete"
 ;;     '(add-to-list 'ac-modes 'slime-repl-mode)))
 
-;;;--------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; turn on lisp-mode when editing file .stumpwmrc
-;;;--------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Org mode
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 
@@ -1576,14 +1576,14 @@ This prevents overlapping themes; something I would rarely want."
   (when my-use-evil-p
     (define-key org-mode-map (kbd "M-h") #'evil-window-left)))
 
-;;;-----------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; worf. key shortcuts for org-mode
-;;;-----------------------------------------
+;;;-----------------------------------------------------------------------------
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; csharp-mode
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 (setq auto-mode-alist
       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
@@ -1599,14 +1599,14 @@ This prevents overlapping themes; something I would rarely want."
             (electric-pair-mode 1)))
 
 
-;;;-------------------------
+;;;-----------------------------------------------------------------------------
 ;;; js2-hightlight-vars.el
-;;;-------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'js2-highlight-vars)
 
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; align-let.el in ~/.emacs.d/notElpa
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (autoload 'align-let "align-let" nil t)
 ;; (let ((key (kbd "C-c C-a")))
 ;;   (define-key lisp-mode-map key #'align-let)
@@ -1626,9 +1626,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;       cc            433
 ;;       d             "hello there")
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; js2-mode
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
@@ -1792,9 +1792,9 @@ This prevents overlapping themes; something I would rarely want."
               (rainbow-delimiters-mode 1)
               (electric-pair-mode 1))))
 
-;;;--------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; web-beautify
-;;;--------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; Depends on external programs: nodejs, js-beatify
 ;; So only use on computers with the depedencies set up.
 (when (eq my-curr-computer 'work-laptop)
@@ -1844,9 +1844,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;     "good-stuff" : true
 ;; }
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ac-js2
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (when nil
 ;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
 ;;   (setq ac-js2-evaluate-calls t) ; requires connection to browser with
@@ -1855,9 +1855,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;   ;;              "path/to/lib/library.js") ; external lib example
 ;;   )
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; nxml
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "nxml-mode"
   (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   (when my-use-evil-p
@@ -1877,9 +1877,9 @@ To make it human readable."
           (when (not (null pos))
             (newline)))))))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; Helm
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
 (when (and my-use-helm-p
@@ -2013,24 +2013,24 @@ To make it human readable."
 ;; ;;  - When type C-z, selected command is described without quiting.
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-company
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (eval-after-load 'company
 ;;   '(progn
 ;;      (define-key company-mode-map (kbd "C-SPC") #'helm-company)
 ;;      (define-key company-active-map (kbd "C-SPC") #'helm-company)))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-escape
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(evil-escape-mode 1)
 
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-git-grep (makes emacs crash on windows)
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (when my-run-sys-specific
 ;;   (defadvice helm-git-grep (after turn-off-activeupdate)
 ;;     "Turn off active update in MS-windows.
@@ -2043,20 +2043,20 @@ To make it human readable."
 ;; (evil-leader/set-key "g" #'helm-git-grep)
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; vc-git-grep. This is better for ms-windows since it can't handle
 ;;; helm-git-grep's many processes. Also grepping is a pretty heavy weight
 ;;; operation so I prefer to set up the search inputs first, select the top
 ;;; folder, etc instead of searching in real-time for each key press.
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
 (when my-use-evil-p
   (evil-leader/set-key "g" #'my-vc-git-grep))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-swoop
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (autoload 'helm-swoop "helm-swoop" nil t)
 
 ;; invoke with M-x for now.
@@ -2100,9 +2100,9 @@ To make it human readable."
   ;; (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
   )
 
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;;; sublimity
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;; (with-eval-after-load "sublimity"
 ;;   (setq sublimity-scroll-drift-length 4)
 ;;   (setq sublimity-scroll-weight 8)
@@ -2110,9 +2110,9 @@ To make it human readable."
 ;;   ;; map is annoying;; (require 'sublimity-map)
 ;;   )
 
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;;; Clippy. pop-up help
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;; (when my-use-evil-p
 ;;   (evil-leader/set-key "c" #'clippy-describe-function)
 ;;   (evil-leader/set-key "v" #'clippy-describe-variable))
@@ -2144,13 +2144,13 @@ To make it human readable."
 
 
 
-;;;-----------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; ido
 ;;; ido-veritical-mode
 ;;; ido-ubiquitous
 ;;; flx-ido
 ;;; smex (built on ido)
-;;;-----------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (when my-use-ido-p
   ;;use swiper on "s" even when using ido.
   ;; (when my-use-evil-p
@@ -2227,9 +2227,9 @@ To make it human readable."
                  (funcall ,ido-cannot-complete-command)))))
        ad-do-it))))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; Yasnippet
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
 
 
@@ -2293,9 +2293,9 @@ To make it human readable."
 ;; "'first' - ' MIDDLE1' - ' MIDDLE2' - ' LAST' - |"
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; cc-mode
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; This fn is useful for aligning trailing comments when using tabs for
 ;; indentation.  It won't work if different numbers of tabs are used within the
 ;; aligned set of comments. But that case (different tab level) should be rare
@@ -2447,9 +2447,9 @@ and indent."
   )
 
 
-;;;------------------
+;;;-----------------------------------------------------------------------------
 ;;; Dired
-;;;------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "dired" ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
@@ -2496,18 +2496,18 @@ and indent."
 ;;       (interactive)
 ;;       (find-alternate-file "..")))) ; was dired-up-directory
 
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;;; dired-details
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;; ;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
 ;; (require 'dired-details)
 ;; (dired-details-install)
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; sql-mode
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "sql"
   (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
   (add-hook 'sql-mode-hook #'electric-pair-mode)
@@ -2541,9 +2541,9 @@ and indent."
   )
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; rainbow-delimiters
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'rainbow-delimiters)
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
@@ -2558,15 +2558,15 @@ and indent."
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; rainbow-mode
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(rainbow-mode)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Expand-region
 ;;; https://github.com/magnars/expand-region.el
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(require 'expand-region)
 ;; (autoload 'expand-region "expand-region" "expand region" t)
 (global-set-key (kbd "C-=") #'er/expand-region)
@@ -2575,16 +2575,16 @@ and indent."
 (autoload #'hydra-expand-region/body "my-hydras" nil t)
 (global-set-key (kbd "C-c k") #'hydra-expand-region/body)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; mulitple-cursors
 ;;; https://github.com/magnars/multiple-cursors.el
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(require 'multiple-cursors)
 ;;(global-set-key (kbd "C--") 'mc/edit-lines)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Paredit
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
 ;; (autoload 'enable-paredit-mode "paredit"
 ;;   "Turn on pseudo-structural editing of Lisp code." t)
@@ -2626,15 +2626,15 @@ and indent."
 ;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
 
 
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 ;;; smartparens
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 ;;(require 'smartparens-config)
 
 
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Omnisharp
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 (when (and t                ;nil ;; turn off omnisharp for the moment.
            (eq my-curr-computer 'work-laptop))
 
@@ -2726,29 +2726,29 @@ and indent."
        (concat omnisharp-server-executable-path " -p 2000 -s " sln)))))
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; nyan-mode
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(nyan-mode)
 ;;(setq nyan-wavy-trail nil)
 ;;(nyan-start-animation)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; nyan-prompt
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(add-hook 'eshell-load-hook 'nyan-prompt-enable)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1,
 ;;; even when all code is commented out. Deleting the elpa folder for now.
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(powerline-default-theme)
 ;;(powerline-center-theme)
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; Avy
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 (global-set-key (kbd "M-g M-g") #'avy-goto-line)
 ;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
@@ -2793,9 +2793,9 @@ and indent."
                          avy-style))))
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ace-link
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (unless my-use-evil-p
   ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
   ;;       becuase calling that autoloaded function caused a premature
@@ -2844,9 +2844,9 @@ and indent."
 ;; (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ace-window
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (unless (eq my-ui-type 'emacs)
   ;; This is the emacs "copy" keybind. Don't steal it when using emacs bindings.
   (global-set-key (kbd "M-w") #'ace-window))
@@ -2856,14 +2856,14 @@ and indent."
   (setq aw-background nil) ;; don't dim the background
   )
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ace-jump-zap
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (global-set-key (kbd "M-z") #'ace-jump-zap-to-char)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; clang-format
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; rarely use `clang-format', so commenting it out for now.
 ;; (when (eq my-curr-computer 'work-laptop)
 ;;   (load "C:/Users/mtz/programs/LLVM/share/clang/clang-format.el")
@@ -2871,9 +2871,9 @@ and indent."
 ;;   (global-set-key (kbd "C-c f") 'clang-format-region)
 ;;   (global-set-key (kbd "C-c b") 'clang-format-buffer))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; irony
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (when (or (eq my-curr-computer 'work-laptop)
           (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -2907,9 +2907,9 @@ and indent."
 ;; - https://github.com/Sarcasm/company-irony
 ;; - https://github.com/Sarcasm/ac-irony
 
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company-irony
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (eval-after-load 'company
 ;;   '(add-to-list 'company-backends 'company-irony))
 
@@ -2918,9 +2918,9 @@ and indent."
 ;; ;;     std::|
 ;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Load projects
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 (when (eq my-curr-computer 'work-laptop)
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'proj-safetyweb lisp-file nil t)
@@ -4684,18 +4684,18 @@ in frame.  Stop displaying shell in all other windows."
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; my-square-one
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (autoload #'my-square-one "my-square-one" nil t)
 (when my-use-evil-p
   (evil-leader/set-key "0" #'my-square-one))
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Turn on disabled functions
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
@@ -4725,9 +4725,9 @@ in frame.  Stop displaying shell in all other windows."
 ;;                           'my-history)))
 ;;     (message "you said: %s" txt)))
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; rand
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (autoload 'rand "my-rand" nil t)
 
 ;; (setq msgDb '("hi"))
@@ -4757,15 +4757,15 @@ in frame.  Stop displaying shell in all other windows."
 
 ;; (evil-leader/set-key "m" 'msg)
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; touch typing
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
 (autoload 'my-type-tutor "my-type-tutor" nil t)
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; ms
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (defvar ms-cols 30)
 ;; (defvar ms-rows 25)
 ;; (defvar ms-map ())
@@ -4796,9 +4796,9 @@ in frame.  Stop displaying shell in all other windows."
 ;;   (insert (symbol-name x))
 ;;   (insert " "))
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; hour format conversion. 12 -> 24
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (defun to24 (hour amPm)
 ;;   (cond
 ;;    ((and (equal amPm "AM")
@@ -4851,15 +4851,15 @@ in frame.  Stop displaying shell in all other windows."
 ;;   (assert (= 23 (to24 11 "PM"))))
 
 
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; interact with Microsoft SQL Server
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;sqlcmd -S 127.0.0.1,42000\OSHE
 ;;sqlcmd -S 127.0.0.1,42000\OSHE -q "SELECT 'hello';"
 
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; remove all bold face attributes
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (defun my-remove-bold ()
 ;;   "Remove all bold face attributes."
 ;;   (interactive)

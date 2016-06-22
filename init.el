@@ -3574,6 +3574,8 @@ and indent."
       )))
 
 (with-eval-after-load "ivy"
+  (define-key ivy-mode-map (kbd "C-SPC") #'ivy-avy)
+
   ;; remove the default ^ prefix used by `counsel-M-x' and a few others.
   (cl-loop for pair in ivy-initial-inputs-alist
            do

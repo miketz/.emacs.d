@@ -2301,7 +2301,7 @@ To make it human readable."
 ;; aligned set of comments. But that case (different tab level) should be rare
 ;; as a different tab level is a differnet block of logic, so you wouldn't have
 ;; a set of comments span across it.
-(defun my-comment-dwim-aligh-with-spaces ()
+(defun my-comment-dwim-align-with-spaces ()
   "Temporarily use spaces while making the comments.
 It will still use tabs for left-side indentation.
 Useful for aligning trailing comments when using tabs for indentation, spaces
@@ -2334,8 +2334,8 @@ cases."
   (setq-default c-electric-pound-behavior '(alignleft))
 
   ;; custom function for trailing comment alignment. (useful when using tabs)
-  (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-aligh-with-spaces)
-  (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-aligh-with-spaces)
+  (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
+  (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
 
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.
@@ -4279,9 +4279,18 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; python-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "python"
+
+  ;; use custom fn to avoid alignment issues with horizontal comments. Tabs
+  ;; can't be used *after* code, only before. (otherwise alignment issues
+  ;; occur at different tab widths.
+  (define-key python-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
+
   ;; hook for smart-tabs-mode
   (add-hook 'python-mode-hook
             (lambda ()
+              ;; keeps comments closer to the code. buffer local
+              (setq comment-column 1)
+
               (setq tab-width my-indent-width)
               (setq indent-tabs-mode t)
 

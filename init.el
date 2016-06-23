@@ -4291,7 +4291,8 @@ When ARG isn't nil, try to pretty print the sexp."
               ;; keeps comments closer to the code. buffer local
               (setq comment-column 1)
 
-              (setq tab-width my-indent-width)
+              ;; slightly larger tab-width for python.
+              (setq tab-width 5)
               (setq indent-tabs-mode t)
 
               (smart-tabs-mode-enable)

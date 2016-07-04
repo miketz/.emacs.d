@@ -728,6 +728,7 @@ Minus the newline char."
   (evil-leader/set-key ">" (lambda ()        ;widen window a little
                              (interactive)
                              (enlarge-window-horizontally 15)))
+  (evil-leader/set-key "v" #'evil-visual-block)
   ;; (evil-leader/set-key "j" (lambda ()
   ;;                            (interactive)
   ;;                            (shrink-window 10)))

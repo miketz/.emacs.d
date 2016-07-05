@@ -4585,7 +4585,7 @@ in frame.  Stop displaying shell in all other windows."
            (col (+ 1 (current-column))))
       (message "%d%% %s C%d     %s"
                percent (my-what-line) col
-               (format-time-string "%-I:%M%#p %-m-%-d-%Y"))))
+               (format-time-string "%-I:%M%#p %-m-%-d-%Y %a"))))
 
   (when my-use-evil-p
     ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)

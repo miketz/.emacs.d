@@ -2935,7 +2935,8 @@ and indent."
     (autoload #'proj-imgtag lisp-file nil t)
     (autoload #'proj-cpp lisp-file nil t)
     (autoload #'proj-pcl lisp-file nil t)
-    (autoload #'proj-tcpl lisp-file nil t))
+    (autoload #'proj-tcpl lisp-file nil t)
+    (autoload #'proj-dive-python lisp-file nil t))
 
   ;;quick load of c:\users\mtz
   (when my-use-evil-p

@@ -192,6 +192,13 @@
   (shrink-window-horizontally 24)
   (eww-open-file "c:/users/mtz/downloads/tutorials/practicalcommonlisp_epub/html/index.html"))
 
+(defun proj-dive-python ()
+  (interactive)
+  (interactive)
+  (delete-other-windows)
+  (find-file-existing
+   "C:/Users/mtz/Downloads/tutorials/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt"))
+
 (defun proj-tcpl ()
   (interactive)
   (delete-other-windows)

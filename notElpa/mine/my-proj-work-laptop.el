@@ -195,9 +195,9 @@
 (defun proj-dive-python ()
   (interactive)
   (interactive)
-  (delete-other-windows)
   (find-file-existing
-   "C:/Users/mtz/Downloads/tutorials/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt"))
+   "C:/Users/mtz/Downloads/tutorials/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt")
+  (markdown-mode))
 
 (defun proj-tcpl ()
   (interactive)

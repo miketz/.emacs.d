@@ -6,9 +6,9 @@
 ;;; Windows: registry entry for "open with" option:
 ;;;   Computer\HKEY_CLASSES_ROOT\Applications\runemacs.exe\shell\open\command
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Git incantations:
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Create a new github repo from an existing local repo:
 ;;;     git remote add origin https://github.com/miketz/.emacs.d.git
 ;;;     git push -u origin master
@@ -31,9 +31,9 @@
 ;;; Add a private local branch to github:
 ;;;     git push -u origin branchName
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Git workflow with submodule:
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; With ~/.emacs.d/notElpa/swiper as an example
 ;;;
 ;;; Fork on github
@@ -99,9 +99,9 @@ in case that file does not provide any feature."
     (declare (indent 1) (debug t))
     `(eval-after-load ,file (lambda () ,@body))))
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; eval-when-compile used to prevent flycheck `cl' warning, but only works for
 ;; macros?
 (require 'cl)
@@ -140,9 +140,9 @@ Useful to check a boolean state and toggle the state in 1 go."
     (buffer-string)))
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; flags used for conditional execution
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (display-graphic-p)
 ;; system-type
 ;; my-curr-computer
@@ -178,7 +178,7 @@ nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; globals
 ;;;----------------------------------
 (defconst my-fast-load-p t
@@ -293,9 +293,9 @@ Examples: helm-swoop swiper")
     (with-eval-after-load "evil"
       (define-key evil-normal-state-map (kbd "s") my-swoop-fn))))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Packages
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/") ; stores elisp files that are
                                                ; not "packages".
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
@@ -395,9 +395,6 @@ Examples: helm-swoop swiper")
     swiper
     flx ;; can be used by ivy for ordering flx matches.
     counsel
-    ;; apel ; used in eval-after-load config counsel/ivy.
-                                        ; specifically function `set-alist'
-                                        ; TODO: remove dependency on apel using default elsip functions.
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     smex ;; can be used by `counsel-M-x'
@@ -493,9 +490,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
   (defvar my-w32-actions
     '((resize . 61440)
@@ -525,9 +522,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (let ((code (my-w32-get-code action)))
       (w32-send-sys-command code))))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; key-chord
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
 ;;       since it is looking for the chord.
 
@@ -586,9 +583,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
              1)))
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; cursor
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 (setq-default cursor-type '(bar . 2))
 (custom-set-faces
  '(cursor ((t (:background "cyan")))))
@@ -639,9 +636,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
     (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
   )
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "evil"
 
   ;; unset some keys. It seems other modes have trouble overriding them when
@@ -721,7 +718,11 @@ Minus the newline char."
   (evil-leader/set-key "x" #'maximize-window)
   (evil-leader/set-key "," #'delete-other-windows)
   (evil-leader/set-key "d" #'delete-window)
-  (evil-leader/set-key "k" #'kill-this-buffer)
+  (evil-leader/set-key "k" (lambda () ;; #'kill-this-buffer
+                             (interactive)
+                             ;; closes the window too, if one was opened.
+                             (quit-window t)))
+  (evil-leader/set-key "c" #'quit-window) ; buffer left alive
 
   (evil-leader/set-key "<" (lambda ()        ;shrink window a little
                              (interactive)
@@ -729,6 +730,7 @@ Minus the newline char."
   (evil-leader/set-key ">" (lambda ()        ;widen window a little
                              (interactive)
                              (enlarge-window-horizontally 15)))
+  (evil-leader/set-key "v" #'evil-visual-block)
   ;; (evil-leader/set-key "j" (lambda ()
   ;;                            (interactive)
   ;;                            (shrink-window 10)))
@@ -762,9 +764,9 @@ Minus the newline char."
 
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-snipe
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (setq evil-snipe-enable-highlight nil)
 ;; (setq evil-snipe-enable-incremental-highlight nil)
 ;; (setq evil-snipe-scope 'visible)
@@ -774,9 +776,9 @@ Minus the newline char."
 ;; (global-evil-snipe-mode 1)
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-god-state
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (evil-define-key 'normal global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'motion global-map (kbd "\\") 'evil-execute-in-god-state)
 ;; (evil-define-key 'god global-map [escape] 'evil-god-state-bail)
@@ -785,28 +787,29 @@ Minus the newline char."
 ;; ;; (add-hook 'evil-god-start-hook (lambda () (diminish 'god-local-mode)))
 ;; ;; (add-hook 'evil-god-stop-hook (lambda () (diminish-undo 'god-local-mode)))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-surround
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'evil-surround)
 ;; (global-evil-surround-mode 1)
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; font
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (when (or (eq my-curr-computer 'work-laptop)
 ;;           (eq my-curr-computer 'leyna-laptop))
 ;;   ;; configure default settings for fonts.
 ;;   (defvar my-default-font 'consolas)
 ;;   (defvar my-good-fonts
-;;     '((inconsolata "Inconsolata" 135 normal) ; looks OK. fits a good number of
-;;                                              ; lines on screen. flaky on bold.
-;;                                              ; no itallic?
-;;       (consolas "Consolas" 125 normal) ; consolas is the best looking but fits
-;;                                        ; fewer lines on screen.
-;;       (dejavu "DejaVu Sans Mono for Powerline" 120 normal) ; good, but looks a
-;;                                                            ; bit "tall"
+;;     '(
+;;       ;; looks OK. fits a good number of lines on screen. flaky on bold.
+;;       ;; no itallic?
+;;       (inconsolata "Inconsolata" 135 normal)
+;;       ;; consolas is the best looking but fits fewer lines on screen.
+;;       (consolas "Consolas" 125 normal)
+;;       ;; good, but looks a bit "tall"
+;;       (dejavu "DejaVu Sans Mono for Powerline" 120 normal)
 ;;       (fixedsys "FixedSys" 120 normal)))
 
 ;;   (cl-defun my-set-font (&optional
@@ -814,10 +817,10 @@ Minus the newline char."
 ;;                          (sym nil) (height nil) (weight nil)
 ;;                          (resize-window nil))
 ;;     "Sets the font.
-;; If sym is not specified it uses the configured default set in `my-default-font'.
-;; If height or weight are not specified then it uses the configured defaults
-;; in `my-good-fonts'.
-;; Resize-window = t will adjust the window so the modeline fits on screen, etc."
+;; If sym is not specified it uses the configured default set in
+;; `my-default-font'. If height or weight are not specified then it uses the
+;; configured defaults in `my-good-fonts'. Resize-window = t will adjust the
+;; window so the modeline fits on screen, etc."
 ;;     (unless sym (setq sym my-default-font))
 ;;     (let ((the-font (assoc sym my-good-fonts)))
 ;;       (unless height (setq height (third the-font)))
@@ -911,9 +914,9 @@ Minus the newline char."
 
 
 
-;;;------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Color theme stuff.
-;;;------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;TODO: implement a way to undo color settings made outside the theme
 ;;      definition. Use custom-theme-set-faces to set the colors/styles so they
 ;;      are rolled back when switching/disabling themes.
@@ -978,6 +981,40 @@ This prevents overlapping themes; something I would rarely want."
     (dolist (f zen-bold-faces)
       (set-face-attribute f nil :weight 'bold))))
 
+(defvar my-inverse-video-p nil
+  "Flag used by fn `my-toggle-inverse-video'.")
+(cl-defun my-toggle-inverse-video (&optional (inv-p t supplied-p))
+  (interactive)
+  (if supplied-p
+      ;; if user specified
+      (setq my-inverse-video-p inv-p)
+    ;; else toggle
+    (setq my-inverse-video-p (not my-inverse-video-p)))
+  (dolist (f (face-list))
+    (if (eq f 'region)
+        (set-face-attribute f nil :inverse-video (not my-inverse-video-p))
+      (set-face-attribute f nil :inverse-video my-inverse-video-p))))
+
+(defun my-load-theme-inverse (&optional theme)
+  (interactive)
+  (when (null theme)
+    (setq theme (intern (completing-read "theme: "
+                                         (mapcar 'symbol-name
+                                                 (custom-available-themes))
+                                         nil t))))
+  (load-theme theme t)        ; load theme
+  (my-toggle-inverse-video t) ; invert it
+  (let* ((frame (selected-frame))
+         ;; the foreground is the background during inverse.
+         (new-bg (face-attribute 'default :foreground frame)))
+    ;; TODO: convert the background to be the foreground.
+    ;; (dolist (f (face-list))
+    ;;   (let ((new-fg (face-attribute f :background frame)))
+    ;;     ;; setting teh bg is like setting the fg during inverse
+    ;;     (set-face-attribute f nil :background new-fg)
+    ;;     ;; setting the fg is like setting the bg during inverse
+    ;;     (set-face-attribute f nil :foreground new-bg)))
+    ))
 
 (autoload #'my-rainbow-parens-dark-bg "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-dark-bg-bold "my-bg-specific-colors" nil t)
@@ -1002,6 +1039,7 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-color-molokai "my-color-molokai" nil t)
 (autoload #'my-color-majapahit "my-color-majapahit" nil t)
 (autoload #'my-color-deeper-blue "my-color-deeper-blue" nil t)
+(autoload #'my-color-kosmos "my-color-kosmos" nil t)
 
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff
@@ -1036,40 +1074,54 @@ This prevents overlapping themes; something I would rarely want."
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (unless (eq my-curr-computer 'wild-dog)
-      (my-color-zenburn)))
+    (my-color-zenburn))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
-    (my-color-deeper-blue)
-    ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    (set-frame-font "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    ;; (set-frame-font "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
-    ;; (set-frame-font "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:slant=normal:width=normal:spacing=100:scalable=true")
+    ;; (set-frame-font
+    ;;  "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    (set-frame-font
+     "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    ;; (set-frame-font
+    ;;  "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
+    ;; (set-frame-font
+    ;;  (concat "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:"
+    ;;          "slant=normal:width=normal:spacing=100:scalable=true"))
     )
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+    (set-frame-font
+     "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
     )
 
    ((eq my-curr-computer 'leyna-laptop)
-    (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+    (set-frame-font
+     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
     )
 
    ((eq my-curr-computer 'a-laptop-old)
     ;; (my-set-font :sym 'consolas
     ;;              :height 125    ;; 90 105 115 120 125
     ;;              :weight 'normal)
-    (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+    (set-frame-font
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p
@@ -1103,7 +1155,8 @@ This prevents overlapping themes; something I would rarely want."
      '(rainbow-delimiters-depth-7-face ((t (:foreground "brown"))))
      '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
      '(rainbow-delimiters-depth-9-face ((t (:foreground "magenta"))))
-     '(rainbow-delimiters-unmatched-face ((t (:foreground "lightred" :background "darkgray"))))))
+     '(rainbow-delimiters-unmatched-face
+       ((t (:foreground "lightred" :background "darkgray"))))))
 
   ;; (let ((a 92)) ;92
   ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
@@ -1121,16 +1174,16 @@ This prevents overlapping themes; something I would rarely want."
   )
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Recursively byte-compile every .el file
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; sly
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (setq my-use-sly nil)
 
 ;; (when my-use-sly
@@ -1138,9 +1191,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;     (setq inferior-lisp-program
 ;;           "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; SLIME
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'slime-autoloads)
 (with-eval-after-load "slime"
   (slime-setup '(slime-fancy
@@ -1153,36 +1206,56 @@ This prevents overlapping themes; something I would rarely want."
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
   (when my-use-evil-p
-    ;;(define-key slime-mode-map (kbd "M-.") 'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-mode-map (kbd "M-.") #'slime-edit-definition) ;override evil's binding of M-. when using slime
-    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.") #'slime-edit-definition)
+    ;; ;; override evil's binding of M-. when using slime
+    ;; (define-key slime-mode-map (kbd "M-.") 'slime-edit-definition)
+
+    ;; override evil's binding of M-. when using slime
+    (evil-define-key 'normal slime-mode-map (kbd "M-.")
+      #'slime-edit-definition)
+    (evil-define-key 'normal slime-repl-mode-map (kbd "M-.")
+      #'slime-edit-definition)
 
     ;; (progn
-    ;;   ;; For evil, attempting to get C-n, C-p to move selection in slimes fuzzy completions window.
-    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map (kbd "C-n") #'slime-fuzzy-next)
-    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map (kbd "C-n") #'slime-fuzzy-next)
-    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map (kbd "C-p") #'slime-fuzzy-prev)
-    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map (kbd "C-p") #'slime-fuzzy-prev)
-    ;;   (define-key slime-fuzzy-completions-mode-map (kbd "C-n") #'slime-fuzzy-next)
-    ;;   (define-key slime-target-buffer-fuzzy-completions-map (kbd "C-n") #'slime-fuzzy-next))
+    ;;   ;; For evil, attempting to get C-n, C-p to move selection in slimes
+    ;;   ;; fuzzy completions window.
+    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (evil-define-key 'insert slime-fuzzy-completions-mode-map
+    ;;     (kbd "C-p") #'slime-fuzzy-prev)
+    ;;   (evil-define-key 'insert slime-target-buffer-fuzzy-completions-map
+    ;;     (kbd "C-p") #'slime-fuzzy-prev)
+    ;;   (define-key slime-fuzzy-completions-mode-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next)
+    ;;   (define-key slime-target-buffer-fuzzy-completions-map
+    ;;     (kbd "C-n") #'slime-fuzzy-next))
     )
 
-  ;;disable the banner header line in repl. TODO: get rid of the date string that replaces it too.
+  ;; disable the banner header line in repl.
+  ;; TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)
+
   ;; (require 's)
-  ;; (setq slime-words-of-encouragement (let ((words '())) ;;hidden
-  ;;                                      (dolist (w slime-words-of-encouragement)
-  ;;                                        (when (s-contains? "REPL" w)
-  ;;                                          (setq words (cons w words))))
-  ;;                                      words))
+  ;; (setq slime-words-of-encouragement
+  ;;       (let ((words '())) ;;hidden
+  ;;         (dolist (w slime-words-of-encouragement)
+  ;;           (when (s-contains? "REPL" w)
+  ;;             (setq words (cons w words))))
+  ;;         words))
 
 
   ;; redefine `slime-startup-message' to work how I want
   (defun slime-startup-message ()
+    (when slime-header-line-p
+      (setq header-line-format
+            (format "%s  Port: %s  Pid: %s"
+                    (slime-lisp-implementation-type)
+                    (slime-connection-port (slime-connection))
+                    (slime-pid))))
     (when (zerop (buffer-size))
-      (let* ((orig-welcome (concat "; SLIME " (or (slime-changelog-date)
-                                                  "- ChangeLog file not found")))
-             (welcome (concat orig-welcome ".  "
+      (let* ((orig-welcome (concat "; SLIME " slime-version))
+             (welcome (concat orig-welcome "   "
                               ;; (slime-random-words-of-encouragement)
                               (nth 5 slime-words-of-encouragement))))
         (if slime-startup-animation
@@ -1195,11 +1268,15 @@ This prevents overlapping themes; something I would rarely want."
             slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64")))))
 
     (when (eq my-curr-computer 'work-laptop)
-      (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("C:/Users/mtz/programs/ccl-1.11-windows/ccl/wx86cl64"))
-                                         (sbcl ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
-                                         (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
-                                         (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))));clisp is just a fake example for now.
+      (setq slime-default-lisp 'ccl)
+      (setq slime-lisp-implementations
+            '((ccl ("C:/Users/mtz/programs/ccl-1.11-windows/ccl/wx86cl64"))
+              (sbcl ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
+              (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
+              ;; clisp is just a fake example for now.
+              (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
+
+
     (when (eq my-curr-computer 'utilite)
       (setq slime-default-lisp 'ccl
             slime-lisp-implementations '((ccl ("armcl")))))
@@ -1218,8 +1295,10 @@ This prevents overlapping themes; something I would rarely want."
     (when (or (eq my-curr-computer 'work-laptop)
               (eq my-curr-computer 'utilite)
               (eq my-curr-computer 'a-laptop-faster))
-      ;; connect lisp buffers to SLIME automatically.
-      (add-hook 'slime-mode-hook ;not sure why this works, since it's a hook on slime-mode which I thought would need to be hooked on lisp-mode-hook???
+      ;; Connect lisp buffers to SLIME automatically.
+      ;; Not sure why this works, since it's a hook on slime-mode which I
+      ;; thought would need to be hooked on lisp-mode-hook???
+      (add-hook 'slime-mode-hook
                 (lambda ()
                   (unless (slime-connected-p)
                     (save-excursion (slime)))))))
@@ -1228,11 +1307,13 @@ This prevents overlapping themes; something I would rarely want."
   ;; (add-hook 'slime-repl-mode-hook #'lispy-mode)
   (add-hook 'slime-repl-mode-hook
             (lambda ()
-              ;;turn off line numbers in the repl
+              ;; Turn off line numbers in the repl
               (linum-mode 0)
-              ;;there's always a trailing space at repl prompt. Don't highlight it.
+              ;; There's always a trailing space at repl prompt. Don't
+              ;; highlight it.
               (setq show-trailing-whitespace nil)
-              ;;aggressive-indent moves SLIME's comments in the REPL. Turn it off.
+              ;; Aggressive-indent moves SLIME's comments in the REPL.
+              ;; Turn it off.
               (when (fboundp 'aggressive-indent-mode)
                 (aggressive-indent-mode 0))))
 
@@ -1281,7 +1362,9 @@ This prevents overlapping themes; something I would rarely want."
 
   (when (eq my-curr-computer 'work-laptop)
     ;; use local hyperspec
-    (setq common-lisp-hyperspec-root "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
+    (setq
+     common-lisp-hyperspec-root
+     "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
 
   (defun my-view-hyperspec ()
     (interactive)
@@ -1296,9 +1379,9 @@ This prevents overlapping themes; something I would rarely want."
   (global-set-key (kbd "C-c b") #'slime-selector))
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; redshank
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'redshank-loader)
 ;; (eval-after-load "redshank-loader"
 ;;   `(redshank-setup '(lisp-mode-hook
@@ -1307,9 +1390,9 @@ This prevents overlapping themes; something I would rarely want."
 ;; ;;     '(progn ...redefine keys, etc....))
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;company mode is breaking emacs 24.3. Works OK in 24.4
 ;; (require 'company)
 (my-top-level-package-code
@@ -1324,9 +1407,12 @@ This prevents overlapping themes; something I would rarely want."
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)
-  (define-key company-active-map (kbd "<tab>") #'company-complete) ;expands till -. Completes after that.
-  (define-key company-active-map (kbd "C-v") #'company-next-page) ;would be default, but my other keymap killed this
-  (define-key company-active-map (kbd "M-v") #'company-previous-page) ;default, but set just in case.
+  ;; expands till -. Completes after that.
+  (define-key company-active-map (kbd "<tab>") #'company-complete)
+  ;; would be default, but my other keymap killed this
+  (define-key company-active-map (kbd "C-v") #'company-next-page)
+  ;; default, but set just in case.
+  (define-key company-active-map (kbd "M-v") #'company-previous-page)
   (define-key company-active-map (kbd "M-<") ;go to first candidate
     (lambda ()
       (interactive)
@@ -1338,7 +1424,8 @@ This prevents overlapping themes; something I would rarely want."
       (let ((company-selection-wrap-around nil))
         (company-set-selection company-candidates-length))))
 
-  ;;(setq company-tooltip-minimum-width 60) ;avoids changing width as visislbe candidates change.
+  ;; ;; avoids changing width as visislbe candidates change.
+  ;; (setq company-tooltip-minimum-width 60)
   ;; (add-hook 'company-completion-started-hook
   ;;           (lambda ()
   ;;             (interactive)
@@ -1348,15 +1435,16 @@ This prevents overlapping themes; something I would rarely want."
   ;;                                  company-candidates)))))
 
   (setq company-idle-delay nil)          ; disable automatic completion
-  (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire until 3 chars.
+  (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire
+                                         ; until 3 chars.
   (setq company-tooltip-limit 20)        ; popup more suggestions.
   )
 
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company-web
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "web-mode"
   (add-to-list 'company-backends 'company-web-html)
   (add-to-list 'company-backends 'company-web-jade)
@@ -1371,20 +1459,20 @@ This prevents overlapping themes; something I would rarely want."
     (define-key web-mode-map (kbd "C-SPC") #'company-web-html)))
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company-quickhelp. not using messes up keybinds
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (setq company-quickhelp-idle-delay 0.5)
 ;; (company-quickhelp-mode 1)
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; slime-company
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; this is set in the slime section
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Auto-complete
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; TODO: look into a way to use auto-complete for some modes and company for
 ;;       others.
 
@@ -1395,8 +1483,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (require 'auto-complete-config)
 ;;   (ac-config-default)
 
-;;   (define-key ac-mode-map (kbd "C-SPC") 'auto-complete) ;C-Space like Visual Studio
-;;   (setq ac-auto-start nil) ;don't automatically pop up completions. Use C-Space
+;;   ;; C-Space like Visual Studio
+;;   (define-key ac-mode-map (kbd "C-SPC") 'auto-complete)
+;;   ;; don't automatically pop up completions. Use C-Space
+;;   (setq ac-auto-start nil)
 
 ;;   ;;navigate completion menu with c-n and c-p
 ;;   (setq ac-use-menu-map t)
@@ -1412,9 +1502,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;   ;;(set-face-background 'ac-selection-face "steelblue")
 ;;   )
 
-;; ;;;------------------------------------------------
-;; ;;; ac-slime. integrates auto-complete with slime.
-;; ;;;------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ac-slime. integrates auto-complete with slime.
+;;;-----------------------------------------------------------------------------
 ;; (when t
 ;;   (require 'ac-slime)
 ;;   ;;(add-hook 'slime-mode-hook 'set-up-slime-ac)
@@ -1422,21 +1512,21 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (add-hook 'slime-mode-hook (lambda ()
 ;;                                (interactive)
 ;;                                (set-up-slime-ac t))) ;t for fuzzy matching
-;;   (add-hook 'slime-repl-mode-hook (lambda ()
-;;                                     (interactive)
-;;                                     (set-up-slime-ac t))) ;t for fuzzy matching
+;;   (add-hook 'slime-repl-mode-hook
+;;             (lambda ()
+;;               (interactive)
+;;               (set-up-slime-ac t))) ;t for fuzzy matching
 ;;   (eval-after-load "auto-complete"
-;;     '(add-to-list 'ac-modes 'slime-repl-mode))
-;;   )
+;;     '(add-to-list 'ac-modes 'slime-repl-mode)))
 
-;;;--------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; turn on lisp-mode when editing file .stumpwmrc
-;;;--------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Org mode
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 (my-top-level-package-code
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
@@ -1460,7 +1550,8 @@ This prevents overlapping themes; something I would rarely want."
 
 (with-eval-after-load "org"
   (setq org-startup-indented t)
-  (setq org-log-done t) ;make timestamp when flagging something done with C-c C-t
+  (setq org-log-done t) ; make timestamp when flagging something done
+                        ; with C-c C-t
   (setq org-agenda-timegrid-use-ampm t)
 
   (progn ;;HOLD keyword stuff
@@ -1473,7 +1564,8 @@ This prevents overlapping themes; something I would rarely want."
     ;;   :group 'org-faces)
 
     ;; icy color to make HOLD items look frozen.
-    (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue" :weight bold)))))
+    (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue"
+                                                          :weight bold)))))
 
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -1490,14 +1582,14 @@ This prevents overlapping themes; something I would rarely want."
   (when my-use-evil-p
     (define-key org-mode-map (kbd "M-h") #'evil-window-left)))
 
-;;;-----------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; worf. key shortcuts for org-mode
-;;;-----------------------------------------
+;;;-----------------------------------------------------------------------------
 
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; csharp-mode
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
 (my-top-level-package-code
   (setq auto-mode-alist
@@ -1514,14 +1606,14 @@ This prevents overlapping themes; something I would rarely want."
               (electric-pair-mode 1))))
 
 
-;;;-------------------------
+;;;-----------------------------------------------------------------------------
 ;;; js2-hightlight-vars.el
-;;;-------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'js2-highlight-vars)
 
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; align-let.el in ~/.emacs.d/notElpa
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (autoload 'align-let "align-let" nil t)
 ;; (let ((key (kbd "C-c C-a")))
 ;;   (define-key lisp-mode-map key #'align-let)
@@ -1541,9 +1633,9 @@ This prevents overlapping themes; something I would rarely want."
 ;;       cc            433
 ;;       d             "hello there")
 
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; js2-mode
-;;;---------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(autoload 'js2-mode "js2" nil t)
 (my-top-level-package-code
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
@@ -1581,26 +1673,39 @@ This prevents overlapping themes; something I would rarely want."
   (setq js2-highlight-level 3) ;;maximum highlighting
 
   (setq js2-bounce-indent-p nil) ;; set t to have tab toggle indents
-  (setq js2-basic-offset my-indent-width) ;; default is 4, but set explicilty anyway.
+
+  ;; default is 4, but set explicilty anyway.
+  (setq js2-basic-offset my-indent-width)
 
   (setq js2-mode-show-strict-warnings t)
 
-  ;; (setq js2-include-jslint-globals t) ;; recognize vars in the global comment for jslint. Doesn't work?
+  ;; ;; recognize vars in the global comment for jslint. Doesn't work?
+  ;; (setq js2-include-jslint-globals t)
 
-  ;; After js2 has parsed a js file, we look for jslint globals decl comment ("/* global Fred, _, Harry */") and
-  ;; add any symbols to a buffer-local var of acceptable global vars
-  ;; Note that we also support the "symbol: true" way of specifying names via a hack (remove any ":true"
-  ;; to make it look like a plain decl, and any ':false' are left behind so they'll effectively be ignored as
-  ;; you can;t have a symbol called "someName:false"
+  ;; ;; After js2 has parsed a js file, we look for jslint globals decl
+  ;; ;; comment ("/* global Fred, _, Harry */") and add any symbols to a
+  ;; ;; buffer-local var of acceptable global vars. Note that we also support
+  ;; ;; the "symbol: true" way of specifying names via a hack (remove any
+  ;; ;; ":true" to make it look like a plain decl, and any ':false' are left
+  ;; ;; behind so they'll effectively be ignored as you can't have a symbol
+  ;; ;; called "someName:false"
   ;; (add-hook 'js2-post-parse-callbacks
   ;;           (lambda ()
   ;;             (when (> (buffer-size) 0)
   ;;               (let ((btext (replace-regexp-in-string
   ;;                             ": *true" " "
-  ;;                             (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
-  ;;                 (mapc (apply-partially 'add-to-list 'js2-additional-externs)
+  ;;                             (replace-regexp-in-string
+  ;;                              "[\n\t ]+" " "
+  ;;                              (buffer-substring-no-properties
+  ;;                               1
+  ;;                               (buffer-size))
+  ;;                              t t))))
+  ;;                 (mapc (apply-partially 'add-to-list
+  ;;                                        'js2-additional-externs)
   ;;                       (split-string
-  ;;                        (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
+  ;;                        (if (string-match "/\\* *global *\\(.*?\\) *\\*/"
+  ;;                                          btext)
+  ;;                            (match-string-no-properties 1 btext) "")
   ;;                        " *, *" t))))))
 
   ;;js2 steals M-j keybinding by default. Reclaim it.
@@ -1617,7 +1722,8 @@ This prevents overlapping themes; something I would rarely want."
   ;;   ("n" flycheck-next-error)
   ;;   ("p" flycheck-previous-error)
   ;;   ("q" nil))
-  ;; (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'hydra-js2-flycheck/body)
+  ;; (evil-define-key 'normal js2-mode-map (kbd "C-c l")
+  ;;   #'hydra-js2-flycheck/body)
 
   (defhydra my-hydra-js2-flymake (:color amaranth)
     "jslint:flymake: "
@@ -1627,57 +1733,61 @@ This prevents overlapping themes; something I would rarely want."
     ("C-g" nil nil)
     ("q" nil))
   (when my-use-evil-p
-   (evil-define-key 'normal js2-mode-map (kbd "C-c l") #'my-hydra-js2-flymake/body))
+    (evil-define-key 'normal js2-mode-map (kbd "C-c l")
+      #'my-hydra-js2-flymake/body))
 
   ;; (evil-define-key 'normal js2-mode-map (kbd "C-c h") #'my-hydra-hs/body)
 
   ;; Add parsing of jslint output in compilation mode
-  ;; (add-to-list 'compilation-error-regexp-alist-alist '(jslint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), " 1 2 3))
+  ;; (add-to-list 'compilation-error-regexp-alist-alist
+  ;;              '(jslint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), "
+  ;;                       1 2 3))
   ;; (add-to-list 'compilation-error-regexp-alist 'jslint)
 
-  (add-hook 'js2-mode-hook
-            (lambda ()
-              (js2-highlight-unused-variables-mode t)
-              ;; replace ambiguous name "Javascript-IDE" with "js2"
-              (setq mode-name "js2")
-              ;; (setq-default js2-global-externs "jQuery $")
-              ;; (setq-default js2-indent-on-enter-key t)
-              ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
+  (defun my-js2-init ()
+    (js2-highlight-unused-variables-mode t)
+    ;; replace ambiguous name "Javascript-IDE" with "js2"
+    (setq mode-name "js2")
+    ;; (setq-default js2-global-externs "jQuery $")
+    ;; (setq-default js2-indent-on-enter-key t)
+    ;; (add-to-list 'js2-ecma-262-externs "setTimeout")
 
-              ;; (when (featurep 'js2-highlight-vars)
-              ;;   (js2-highlight-vars-mode))
+    ;; (when (featurep 'js2-highlight-vars)
+    ;;   (js2-highlight-vars-mode))
 
-              ;;(js2-imenu-extras-mode)
+    ;;(js2-imenu-extras-mode)
 
-              (electric-pair-mode 1)
-              ;; (smartparens-mode 1)
+    (electric-pair-mode 1)
+    ;; (smartparens-mode 1)
 
 
-              (yas-minor-mode 1)
-              (rainbow-delimiters-mode-enable)
-              (electric-spacing-mode 1)
-              ;; use jslint, but only if editing a .js file on disk.
-              ;; TODO: use with in-memory buffer, or narrowed region of html file.
-              ;; TODO: use flycheck instead of flymake
-              (when (and buffer-file-name
-                         (my-str-ends-with-p buffer-file-name ".js"))
-                ;; wireup M-x compile
-                (set (make-local-variable 'compile-command)
-                     (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
-                ;; ;; and turn on flymake-jslint. (only works on saved files)
-                ;; (flymake-jslint-load)
-                ;; ;; bind M-n, M-p to use flymake functions istead of js2 functions
-                ;; (evil-define-key 'normal js2-mode-map (kbd "M-n") #'flymake-goto-next-error)
-                ;; (evil-define-key 'normal js2-mode-map (kbd "M-p") #'flymake-goto-prev-error)
-                ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m") #'flymake-popup-current-error-menu)
-                )
-              ;; regex so M-x complile can parse jslint output.
-              ;; (set (make-local-variable 'compilation-error-regexp-alist)
-              ;;      '(("^[ \t]*\\([A-Za-z.0-9_: \\-]+\\)(\\([0-9]+\\)[,]\\( *[0-9]+\\))\\( Microsoft JScript runtime error\\| JSLINT\\): \\(.+\\)$" 1 2 3)))
-              ;; show a greek lambda for function
-              (setq prettify-symbols-alist '(("function" . 955)))
-              ;; collapse/show sections of code
-              (hs-minor-mode 1))))
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode-enable)
+    (electric-spacing-mode 1)
+    ;; use jslint, but only if editing a .js file on disk.
+    ;; TODO: use with in-memory buffer, or narrowed region of html file.
+    ;; TODO: use flycheck instead of flymake
+    (when (and buffer-file-name
+               (my-str-ends-with-p buffer-file-name ".js"))
+      ;; wireup M-x compile
+      (set (make-local-variable 'compile-command)
+           (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
+      ;; ;; and turn on flymake-jslint. (only works on saved files)
+      ;; (flymake-jslint-load)
+      ;; ;; bind M-n, M-p to use flymake functions istead of js2 functions
+      ;; (evil-define-key 'normal js2-mode-map (kbd "M-n")
+      ;;   #'flymake-goto-next-error)
+      ;; (evil-define-key 'normal js2-mode-map (kbd "M-p")
+      ;;   #'flymake-goto-prev-error)
+      ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m")
+      ;;   #'flymake-popup-current-error-menu)
+      )
+    ;; show a greek lambda for function
+    (setq prettify-symbols-alist '(("function" . 955)))
+    ;; collapse/show sections of code
+    (hs-minor-mode 1))
+
+  (add-hook 'js2-mode-hook #'my-js2-init))
 
 ;;;-----------------------------------------------------------------------------
 ;;; json-mode
@@ -1690,9 +1800,9 @@ This prevents overlapping themes; something I would rarely want."
               (rainbow-delimiters-mode 1)
               (electric-pair-mode 1))))
 
-;;;--------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; web-beautify
-;;;--------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; Depends on external programs: nodejs, js-beatify
 ;; So only use on computers with the depedencies set up.
 (when (eq my-curr-computer 'work-laptop)
@@ -1742,18 +1852,20 @@ This prevents overlapping themes; something I would rarely want."
 ;;     "good-stuff" : true
 ;; }
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ac-js2
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (when nil
 ;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
-;;   (setq ac-js2-evaluate-calls t);requires connection to browser with (run-skewer)
-;;   ;;(add-to-list 'ac-js2-external-libraries "path/to/lib/library.js") ;external lib example
+;;   (setq ac-js2-evaluate-calls t) ; requires connection to browser with
+;;                                  ; (run-skewer)
+;;   ;; (add-to-list 'ac-js2-external-libraries
+;;   ;;              "path/to/lib/library.js") ; external lib example
 ;;   )
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; nxml
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "nxml-mode"
   (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   (when my-use-evil-p
@@ -1773,43 +1885,45 @@ To make it human readable."
           (when (not (null pos))
             (newline)))))))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; Helm
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
 
 (my-top-level-package-code
-  (when (and my-use-helm-p
-             (not (eq my-curr-computer 'raspberry-pi)) ;helm is a little slow on a raspberry pi.
-             (not (eq my-curr-computer 'leyna-laptop)))
+ (when (and my-use-helm-p
+	    ;; helm is a little slow on a raspberry pi.
+	    (not (eq my-curr-computer 'raspberry-pi))
+	    (not (eq my-curr-computer 'leyna-laptop)))
 
-    (progn ;;functions in key maps are auto-loaded.
-      (when my-use-evil-p
-        (evil-leader/set-key "b" #'helm-buffers-list))
-      (global-set-key (kbd "C-x b") #'helm-buffers-list)
-      ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
-      ;;(global-set-key (kbd "C-x b")   #'helm-mini)
-      ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-      (global-set-key (kbd "M-x") #'helm-M-x)
-      (global-set-key (kbd "C-x C-f") #'helm-find-files)
-      ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
-      ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
-      (global-set-key (kbd "M-y") #'helm-show-kill-ring)
-      (when my-use-evil-p
-        (evil-leader/set-key "i" #'helm-imenu))
-      ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from finding candidates.
-      ;; the standard emacs `dabbrev-expand' works fine. `hippie-expand' works too.
-      ;; (global-set-key (kbd "M-/") #'hippie-expand)
-      ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
-      )
+   (progn ;;functions in key maps are auto-loaded.
+     (when my-use-evil-p
+       (evil-leader/set-key "b" #'helm-buffers-list))
+     (global-set-key (kbd "C-x b") #'helm-buffers-list)
+     ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
+     ;;(global-set-key (kbd "C-x b")   #'helm-mini)
+     ;;(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
+     (global-set-key (kbd "M-x") #'helm-M-x)
+     (global-set-key (kbd "C-x C-f") #'helm-find-files)
+     ;; (global-set-key (kbd "C-x C-r") #'helm-recentf)
+     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
+     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
+     (when my-use-evil-p
+       (evil-leader/set-key "i" #'helm-imenu))
+     ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from
+     ;;       finding candidates. The standard emacs `dabbrev-expand' works
+     ;;       fine. `hippie-expand' works too.
+     ;; (global-set-key (kbd "M-/") #'hippie-expand)
+     ;; (global-set-key (kbd "M-/") #'helm-dabbrev)
+     )
 
-    (when my-load-helm-on-init-p
-      (helm-mode 1))   ;helm-selection everywhere like when using M-x.
-    ;; list of functions helm should ignore and allow default completion.
-    ;; NOTE: this breaks if put in eval-after-load. Strange, but it works if
-    ;; I just put it after the call to (helm-mode 1)
-    ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
-    ))
+   (when my-load-helm-on-init-p
+     (helm-mode 1))   ;helm-selection everywhere like when using M-x.
+   ;; list of functions helm should ignore and allow default completion.
+   ;; NOTE: this breaks if put in eval-after-load. Strange, but it works if
+   ;; I just put it after the call to (helm-mode 1)
+   ;;(add-to-list 'helm-completing-read-handlers-alist '(my-load-theme . nil))
+   ))
 
 (with-eval-after-load "helm"
   (setq helm-ff-transformer-show-only-basename nil
@@ -1841,37 +1955,45 @@ To make it human readable."
   ;;(helm-adaptative-mode t)
 
   (progn ;;from tuhdo. Customizing helm window size/display.
-    (setq helm-display-header-line nil) ;save 1 line for rarely used header.
-    (set-face-attribute 'helm-source-header nil :height 1.0) ;don't make source seperators bigger than needed
+    (setq helm-display-header-line nil) ; save 1 line for rarely used header.
+    ;; don't make source seperators bigger than needed
+    (set-face-attribute 'helm-source-header nil :height 1.0)
     ;; (progn
-    ;;   ;;helm-autoresize-mode hides other windows, and dynamically adjusts the
-    ;;   ;;helm window size as you type.
+    ;;   ;; helm-autoresize-mode hides other windows, and dynamically adjusts
+    ;;   ;; the helm window size as you type.
     ;;   (helm-autoresize-mode 1)
     ;;   ;;disable the dynamic size adjustment.
     ;;   (setq helm-autoresize-max-height 35)
     ;;   (setq helm-autoresize-min-height 35))
-    ;; ;;prevents the windown hiding from `helm-autoresize-mode'. And when there are
-    ;; ;;lots of split windows, keep the popup at the current window.
+    ;; ;; prevents the windown hiding from `helm-autoresize-mode'. And when
+    ;; ;; there are lots of split windows, keep the popup at the current window.
     ;; (setq helm-split-window-in-side-p t)
     )
 
 
-  ;; (progn ;;Trick from tuhdo. Move helm input to top of helm buffer, hide in echo area.
+  ;; (progn
+  ;;   ;; Trick from tuhdo. Move helm input to top of helm buffer, hide
+  ;;   ;; in echo area.
+
   ;;   (setq helm-echo-input-in-header-line t)
-  ;;   (setq helm-split-window-in-side-p t) ;;optoinally put helm buffer inside current buffer.
+  ;;   ;; optionally put helm buffer inside current buffer.
+  ;;   (setq helm-split-window-in-side-p t)
 
   ;;   (defun helm-hide-minibuffer-maybe ()
   ;;     (when (with-helm-buffer helm-echo-input-in-header-line)
   ;;       (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
   ;;         (overlay-put ov 'window (selected-window))
-  ;;         (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
-  ;;                                 `(:background ,bg-color :foreground ,bg-color)))
+  ;;         (overlay-put ov 'face
+  ;;                      (let ((bg-color (face-background 'default nil)))
+  ;;                        `(:background ,bg-color :foreground ,bg-color)))
   ;;         (setq-local cursor-type nil))))
 
   ;;   (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe))
 
 
-  ;; (helm-mode 1) ;helm-selection everywhere like when using M-x. putting this in eval-after-load to decrease start up time a bit.
+  ;; ;; helm-selection everywhere like when using M-x. Putting this in
+  ;; ;; eval-after-load to decrease start up time a bit.
+  ;; (helm-mode 1)
 
   ;;(global-set-key (kbd "C-x c!")   #'helm-calcul-expression)
   ;;(global-set-key (kbd "C-x c:")   #'helm-eval-expression-with-eldoc)
@@ -1882,9 +2004,9 @@ To make it human readable."
   ) ;;end helm eval-after-load
 
 
-;;;------------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-descbinds
-;;;------------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (helm-descbinds-mode)
 
 ;; ;; Now, `describe-bindings' is replaced to `helm-descbinds'. Type
@@ -1900,27 +2022,28 @@ To make it human readable."
 ;; ;;  - When type C-z, selected command is described without quiting.
 
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-company
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (eval-after-load 'company
 ;;   '(progn
 ;;      (define-key company-mode-map (kbd "C-SPC") #'helm-company)
 ;;      (define-key company-active-map (kbd "C-SPC") #'helm-company)))
 
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; evil-escape
-;;;----------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(evil-escape-mode 1)
 
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-git-grep (makes emacs crash on windows)
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (when my-run-sys-specific
 ;;   (defadvice helm-git-grep (after turn-off-activeupdate)
-;;     "Turn off active update in MS-windows. It can't handle grep processes spawning on each keystroke."
+;;     "Turn off active update in MS-windows.
+;; It can't handle grep processes spawning on each keystroke."
 ;;     (helm-toggle-suspend-update))
 ;;   (ad-activate 'helm-git-grep))
 
@@ -1929,11 +2052,12 @@ To make it human readable."
 ;; (evil-leader/set-key "g" #'helm-git-grep)
 
 
-;;;--------------------
-;;; vc-git-grep. This is better for ms-windows since it can't handle helm-git-grep's many processes.
-;;; Also grepping is a pretty heavy weight opperation so I prefer to set up the search inputs first,
-;;; select the top folder, etc instead of searching in real-time for each key press.
-;;;--------------------
+;;;-----------------------------------------------------------------------------
+;;; vc-git-grep. This is better for ms-windows since it can't handle
+;;; helm-git-grep's many processes. Also grepping is a pretty heavy weight
+;;; operation so I prefer to set up the search inputs first, select the top
+;;; folder, etc instead of searching in real-time for each key press.
+;;;-----------------------------------------------------------------------------
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
 
@@ -1941,16 +2065,17 @@ To make it human readable."
   (when my-use-evil-p
     (evil-leader/set-key "g" #'my-vc-git-grep)))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; helm-swoop
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (autoload 'helm-swoop "helm-swoop" nil t)
 
-;; invoke with M-x for now. binding avy to the "s" key
+;; invoke with M-x for now.
 ;; (when my-use-helm-p
-  ;; helm needs to be initalized or else helm-swoop won't work. (it doens't `require' everything it needs)
-  ;; (when my-use-evil-p
-  ;;   (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
+;;   ;; helm needs to be initalized or else helm-swoop won't work.
+;;   ;; (it doens't `require' everything it needs)
+;;   (when my-use-evil-p
+;;     (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
 ;; (global-set-key (kbd "C-c s") #'helm-swoop)
 ;; (global-set-key (kbd "C-c C-s") #'helm-swoop)
@@ -1969,7 +2094,8 @@ To make it human readable."
 
   ;; When doing isearch, hand the word over to helm-swoop
   ;; (define-key isearch-mode-map (kbd "M-i") #'helm-swoop-from-isearch)
-  ;; (define-key helm-swoop-map (kbd "M-i") #'helm-multi-swoop-all-from-helm-swoop)
+  ;; (define-key helm-swoop-map (kbd "M-i")
+  ;;   #'helm-multi-swoop-all-from-helm-swoop)
 
   ;; Save buffer when helm-multi-swoop-edit complete
   ;; (setq helm-multi-swoop-edit-save t)
@@ -1985,9 +2111,9 @@ To make it human readable."
   ;; (setq helm-swoop-speed-or-color t) ;use color. Worth the small delay.
   )
 
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;;; sublimity
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;; (with-eval-after-load "sublimity"
 ;;   (setq sublimity-scroll-drift-length 4)
 ;;   (setq sublimity-scroll-weight 8)
@@ -1995,9 +2121,9 @@ To make it human readable."
 ;;   ;; map is annoying;; (require 'sublimity-map)
 ;;   )
 
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;;; Clippy. pop-up help
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;; (when my-use-evil-p
 ;;   (evil-leader/set-key "c" #'clippy-describe-function)
 ;;   (evil-leader/set-key "v" #'clippy-describe-variable))
@@ -2005,55 +2131,67 @@ To make it human readable."
 ;; (evil-leader/set-key "n"
 ;;   (lambda ()
 ;;     (interactive)
-;;     (clippy-say "It looks like you want to know more about the [search function]. Please use the [search function] to find out more about the [search function]. The [search function] provides access to more a more detailed description than can be provided in tool-tip help." t)))
+;;     (clippy-say
+;;      (concat "It looks like you want to know more about the [search "
+;;              "function]. Please use the [search function] to find out more "
+;;              "about the [search function]. The [search function] provides "
+;;              "access to more a more detailed description than can be "
+;;              "provided in tool-tip help.") t)))
 
 ;; (evil-leader/set-key "n"
 ;;   (lambda (variable)
 ;;     (interactive (list (variable-at-point)))
 ;;     (if (not (null variable))
-;;         (clippy-say (format "It looks like you want to know more about [%s]. Please use the [search function] to find out more about [%s]. The [search function] provides access to more a more detailed description than can be provided in tool-tip help."
-;;                             variable
-;;                             variable)
-;;                     t))))
+;;         (clippy-say
+;;          (format
+;;           (concat "It looks like you want to know more about [%s]. Please "
+;;                   "use the [search function] to find out more about [%s]. "
+;;                   "The [search function] provides access to more a more "
+;;                   "detailed description than can be provided in tool-tip "
+;;                   "help.")
+;;           variable
+;;           variable)
+;;          t))))
 
 
 
-;;;-----------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; ido
 ;;; ido-veritical-mode
 ;;; ido-ubiquitous
 ;;; flx-ido
 ;;; smex (built on ido)
-;;;-----------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (my-top-level-package-code
-  (when my-use-ido-p
-    ;;use swiper on "s" even when using ido.
-    ;; (when my-use-evil-p
-    ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
+ (when my-use-ido-p
+   ;;use swiper on "s" even when using ido.
+   ;; (when my-use-evil-p
+   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
-    (setq ido-everywhere t)
-    (ido-mode t) ;;autoloaded function. turn on ido.
+   (setq ido-everywhere t)
+   (ido-mode t) ;;autoloaded function. turn on ido.
 
-    (when my-use-evil-p
-      (evil-leader/set-key "b" #'ido-switch-buffer))
+   (when my-use-evil-p
+     (evil-leader/set-key "b" #'ido-switch-buffer))
 
-    ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-    ;;                   ; when Smex is auto-initialized on its first run.
-    (global-set-key (kbd "M-x") #'smex)
-    (global-set-key (kbd "M-X") #'smex-major-mode-commands)
-    (global-set-key (kbd "C-c M-x") #'execute-extended-command) ; rebind the original M-x command
+   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+   ;;                   ; when Smex is auto-initialized on its first run.
+   (global-set-key (kbd "M-x") #'smex)
+   (global-set-key (kbd "M-X") #'smex-major-mode-commands)
+   (global-set-key (kbd "C-c M-x")
+		   #'execute-extended-command) ; rebind the original M-x command
 
-    ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
-    ;; other modes load ido, inadvertently turning on ido-ubiquitous even
-    ;; when i'm not using ido.
-    (ido-ubiquitous-mode 1)
-    ;; NOTE: i removed some un-wanted advice code from the autoloads file of
-    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
-    ;; forced a load of ido automatically at start up, even when I'm not using
-    ;; ido!!!
-    ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
-    ;; updates, and remove the un-wanted code in the autoload file.
-    ))
+   ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
+   ;; other modes load ido, inadvertently turning on ido-ubiquitous even
+   ;; when i'm not using ido.
+   (ido-ubiquitous-mode 1)
+   ;; NOTE: i removed some un-wanted advice code from the autoloads file of
+   ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
+   ;; forced a load of ido automatically at start up, even when I'm not using
+   ;; ido!!!
+   ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
+   ;; updates, and remove the un-wanted code in the autoload file.
+   ))
 
 (with-eval-after-load "ido"
   (let ((my-ido-display nil)) ;; Choices: 'grid 'vertical nil
@@ -2062,7 +2200,8 @@ To make it human readable."
            ;; invokes with-eval-after-load "ido-vertical-mode"
            (ido-vertical-mode 1))
           ((eq my-ido-display 'grid)
-           ;; TODO: prevent grid mode from messing up the "space-as-dash" advice.
+           ;; TODO: prevent grid mode from messing up the "space-as-dash"
+           ;;       advice.
            ;; TODO: make Tab behave the same for smex, general completion, etc.
            (ido-grid-mode))))
 
@@ -2092,16 +2231,17 @@ To make it human readable."
                      ;; advice is not needed.
    ;; insert a hypen - on space like in normal M-x
    (defadvice smex (around space-inserts-hyphen activate compile)
-     (let ((ido-cannot-complete-command `(lambda ()
-                                           (interactive)
-                                           (if (string= " " (this-command-keys))
-                                               (insert ?-)
-                                             (funcall ,ido-cannot-complete-command)))))
+     (let ((ido-cannot-complete-command
+            `(lambda ()
+               (interactive)
+               (if (string= " " (this-command-keys))
+                   (insert ?-)
+                 (funcall ,ido-cannot-complete-command)))))
        ad-do-it))))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; Yasnippet
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
 
 
@@ -2131,12 +2271,16 @@ To make it human readable."
   (yas-load-directory "~/.emacs.d/snippets")
 
   ;; (setq yas-snippet-dirs
-  ;;     `("~/.emacs.d/snippets"                 ;; personal snippets
-  ;;       ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-  ;;       ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-  ;;       ,yas-installed-snippets-dir              ;; the default collection
-  ;;       ))
-  (setq yas-triggers-in-field nil) ;Enable/disable trigger of a sub-snippet while in a snippet.
+  ;;       `("~/.emacs.d/snippets" ; personal snippets
+  ;;         ;; "/path/to/some/collection/" ; foo-mode and bar-mode snippet
+  ;;         ;;                             ; collection
+  ;;         ;; "/path/to/yasnippet/yasmate/snippets" ; the yasmate collection
+  ;;         ,yas-installed-snippets-dir ; the default collection
+  ;;         ))
+
+  ;; Enable/disable trigger of a sub-snippet while in a snippet.
+  (setq yas-triggers-in-field nil)
+
   (defun my-yas-handle-param (param-str
                               sep-char
                               fn-deco
@@ -2161,15 +2305,15 @@ To make it human readable."
 ;; "'first' - ' MIDDLE1' - ' MIDDLE2' - ' LAST' - |"
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; cc-mode
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; This fn is useful for aligning trailing comments when using tabs for
 ;; indentation.  It won't work if different numbers of tabs are used within the
 ;; aligned set of comments. But that case (different tab level) should be rare
 ;; as a different tab level is a differnet block of logic, so you wouldn't have
 ;; a set of comments span across it.
-(defun my-comment-dwim-aligh-with-spaces ()
+(defun my-comment-dwim-align-with-spaces ()
   "Temporarily use spaces while making the comments.
 It will still use tabs for left-side indentation.
 Useful for aligning trailing comments when using tabs for indentation, spaces
@@ -2202,8 +2346,8 @@ cases."
   (setq-default c-electric-pound-behavior '(alignleft))
 
   ;; custom function for trailing comment alignment. (useful when using tabs)
-  (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-aligh-with-spaces)
-  (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-aligh-with-spaces)
+  (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
+  (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
 
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.
@@ -2231,23 +2375,26 @@ and indent."
       (when mutate-buffer-p
         (indent-region (point-min) (point-max)))))
 
-  ;; `which-function-mode' is OK, but it turns on the mode globally for all buffers which is annoying.
-  ;; And if you the functions fit on screen then it's just wasted modeline space.
-  ;; As an alternative use `beginning-of-defun' C-M-a to jump to the function name.
-  ;; Then `evil-jump-backward' C-o to jump back to where you were.
+  ;; `which-function-mode' is OK, but it turns on the mode globally for all
+  ;; buffers which is annoying. And if the function fits on screen then it's
+  ;; just wasted modeline space. As an alternative use `beginning-of-defun'
+  ;; C-M-a to jump to the function name. Then `evil-jump-backward' C-o to jump
+  ;; back to where you were.
   ;;(eval-after-load 'cc-mode 'which-function-mode)
 
   (add-hook 'c-mode-common-hook
             (lambda ()
               (yas-minor-mode 1)
-              ;;(which-function-mode);;displays function at cursor in the mode-line. But can be annoying.
+              ;; (which-function-mode) ; displays function at cursor in the
+              ;;                       ; mode-line. But can be annoying.
               (electric-pair-mode 1)
 
               ;; highlight escapes in the printf format string.
               ;; TODO: highlight placeholders %d differently than escapes \n
               ;; (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
 
-              ;; set to 1 so comments on the same line are kept close to the code by default.
+              ;; set to 1 so comments on the same line are kept close to the
+              ;; code by default.
               (setq comment-column 1)   ; buffer local
 
               (unless (eq system-type 'windows-nt)
@@ -2312,9 +2459,9 @@ and indent."
   )
 
 
-;;;------------------
+;;;-----------------------------------------------------------------------------
 ;;; Dired
-;;;------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "dired" ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
@@ -2353,25 +2500,27 @@ and indent."
 ;; (put 'dired-find-alternate-file 'disabled nil)
 
 ;; (progn
-;;   ;; use the same buffer when navigating folders in dired. And use the same buffer when opening a file in dired.
-;;   (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
+;;   ;; use the same buffer when navigating folders in dired. And use the same
+;;   ;; buffer when opening a file in dired.
+;;   (define-key dired-mode-map (kbd "RET")
+;;     'dired-find-alternate-file)       ; was dired-advertised-find-file
 ;;   (define-key dired-mode-map (kbd "^")
 ;;     (lambda ()
 ;;       (interactive)
-;;       (find-alternate-file "..")))) ;; was dired-up-directory
+;;       (find-alternate-file "..")))) ; was dired-up-directory
 
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;;; dired-details
-;;;---------------------
+;;;-----------------------------------------------------------------------------
 ;; ;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
 ;; (require 'dired-details)
 ;; (dired-details-install)
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; sql-mode
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (with-eval-after-load "sql"
   (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
   (add-hook 'sql-mode-hook #'electric-pair-mode)
@@ -2405,9 +2554,9 @@ and indent."
   )
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; rainbow-delimiters
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (require 'rainbow-delimiters)
 (my-top-level-package-code
   (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
@@ -2419,19 +2568,19 @@ and indent."
   (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
   (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode))
-;;(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode) ;(lambda () (rainbow-delimiters-mode-turn-on)))
+;;(add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode)
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 ;;(global-rainbow-delimiters-mode)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; rainbow-mode
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(rainbow-mode)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Expand-region
 ;;; https://github.com/magnars/expand-region.el
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(require 'expand-region)
 ;; (autoload 'expand-region "expand-region" "expand region" t)
 (my-top-level-package-code
@@ -2441,16 +2590,16 @@ and indent."
   (autoload #'hydra-expand-region/body "my-hydras" nil t)
   (global-set-key (kbd "C-c k") #'hydra-expand-region/body))
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; mulitple-cursors
 ;;; https://github.com/magnars/multiple-cursors.el
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;(require 'multiple-cursors)
 ;;(global-set-key (kbd "C--") 'mc/edit-lines)
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Paredit
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
 ;; (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
 (my-top-level-package-code
@@ -2492,19 +2641,20 @@ and indent."
 ;; (global-set-key (kbd "C-M-0") 'paredit-forward-barf-sexp)
 
 
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 ;;; smartparens
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 ;;(require 'smartparens-config)
 
 
-;;;--------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Omnisharp
-;;;--------------------------
-(when (and t ;nil ;; turn off omnisharp for the moment.
+;;;-----------------------------------------------------------------------------
+(when (and t                ;nil ;; turn off omnisharp for the moment.
            (eq my-curr-computer 'work-laptop))
 
-  ;; (add-hook 'csharp-mode-hook 'omnisharp-mode) ;;turn on automatically for C# files.
+  ;; (add-hook 'csharp-mode-hook
+  ;;           'omnisharp-mode) ; turn on automatically for C# files.
 
   (with-eval-after-load "omnisharp"
 
@@ -2517,7 +2667,9 @@ and indent."
 
       ;; (evil-define-key 'insert omnisharp-mode-map
       ;;   (kbd "C-SPC") 'omnisharp-auto-complete);C-Space like Visual Studio
-      ;;(define-key omnisharp-mode-map (kbd "C-SPC") 'omnisharp-auto-complete) ;C-Space like Visual Studio
+      ;; (define-key omnisharp-mode-map
+      ;;   (kbd "C-SPC") ; C-Space like Visual Studio
+      ;;   'omnisharp-auto-complete)
 
       (evil-define-key 'normal omnisharp-mode-map
         (kbd "g u") #'omnisharp-find-usages)
@@ -2559,19 +2711,25 @@ and indent."
     ;; downside that documentation is impossible to fetch.
     (setq omnisharp-auto-complete-want-documentation nil)
 
-    (setq omnisharp--curl-executable-path "C:/Users/mtz/programs/curl-7.37.0-win64/bin/curl.exe")
-    (setq omnisharp-server-executable-path "C:/Users/mtz/programs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
-    (setq omnisharp--windows-curl-tmp-file-path "C:/Users/mtz/omnisharp-curl-tmp.cs") ;windows doesn't like the C:\ root folder
-    (setq omnisharp-host "http://localhost:2000/") ;(setq omnisharp-host "http://localhost:2000/")
-                                        ;(setq omnisharp-curl "curl.exe")
-                                        ;`(:command ,omnisharp--curl-executable-path)
+    (setq omnisharp--curl-executable-path
+          "C:/Users/mtz/programs/curl-7.37.0-win64/bin/curl.exe")
+    (setq
+     omnisharp-server-executable-path
+     "C:/Users/mtz/programs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
+    ;; windows doesn't like the C:\ root folder
+    (setq omnisharp--windows-curl-tmp-file-path
+          "C:/Users/mtz/omnisharp-curl-tmp.cs")
+    (setq omnisharp-host "http://localhost:2000/")
+    ;; (setq omnisharp-curl "curl.exe")
+    ;; `(:command ,omnisharp--curl-executable-path)
 
     (let ((i-am-using-omnisharp t))
       (when i-am-using-omnisharp
         (with-eval-after-load 'company
           (add-to-list 'company-backends 'company-omnisharp))))
 
-    (setq omnisharp-company-do-template-completion nil) ;tab completion of paramters. acts weird
+    ;; tab completion of paramters. acts weird
+    (setq omnisharp-company-do-template-completion nil)
     (setq omnisharp-company-ignore-case t)
 
     (defun my-start-omnisharp-server (sln)
@@ -2583,28 +2741,29 @@ and indent."
        (concat omnisharp-server-executable-path " -p 2000 -s " sln)))))
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; nyan-mode
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(nyan-mode)
 ;;(setq nyan-wavy-trail nil)
 ;;(nyan-start-animation)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; nyan-prompt
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;(add-hook 'eshell-load-hook 'nyan-prompt-enable)
 
-;;;--------------------
-;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1, even when all code is commented out. Deleting the elpa folder for now.
-;;;--------------------
+;;;-----------------------------------------------------------------------------
+;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1,
+;;; even when all code is commented out. Deleting the elpa folder for now.
+;;;-----------------------------------------------------------------------------
 ;;(powerline-default-theme)
 ;;(powerline-center-theme)
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; Avy
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (my-top-level-package-code
   (global-set-key (kbd "M-g g") #'avy-goto-line)
   (global-set-key (kbd "M-g M-g") #'avy-goto-line)
@@ -2615,13 +2774,15 @@ and indent."
     (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1)))
 
 (with-eval-after-load "avy"
-  ;; make keys like ace-jump. Lots of letters means more likey to need only 1 overlay char.
+  ;; make keys like ace-jump. Lots of letters means more likey to need only 1
+  ;; overlay char.
   (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
                         (cl-loop for i from ?A to ?Z collect i)))
-  (setq avy-style 'at-full) ;;options (pre at at-full post)
-  (setq avy-background nil) ;eye is already focused on the jump point so no need to gray background.
-  (setq avy-all-windows t)  ;allow jumps between windows.
-  (setq avy-case-fold-search t)         ;case insenstive
+  (setq avy-style 'at-full) ;; options (pre at at-full post)
+  (setq avy-background nil) ; eye is already focused on the jump point so no
+                                        ; need to gray background.
+  (setq avy-all-windows t)              ; allow jumps between windows.
+  (setq avy-case-fold-search t)         ; case insenstive
 
   ;; (defun my-avy-goto-line ()
   ;;   (interactive)
@@ -2638,15 +2799,15 @@ and indent."
                        (read-char "char 3: ")
                        current-prefix-arg))
     (avy--with-avy-keys avy-goto-char-3
-      (avy--generic-jump
-       (regexp-quote (string char1 char2 char3))
-       arg
-       avy-style))))
+                        (avy--generic-jump
+                         (regexp-quote (string char1 char2 char3))
+                         arg
+                         avy-style))))
 
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ace-link
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (my-top-level-package-code
   (unless my-use-evil-p
     ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
@@ -2691,14 +2852,14 @@ and indent."
 ;;;--------------------
 ;; ;; (add-to-list 'load-path "/full/path/where/ace-jump-mode.el/in/")
 
-;; ;; your eye is already focused on the jump point so no need to gray background.
+;; ;; eye is already focused on the jump point so no need to gray background.
 ;; (setq ace-jump-mode-gray-background nil)
 ;; (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
 ;; (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ace-window
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (my-top-level-package-code
   (unless (eq my-ui-type 'emacs)
     ;; This is the emacs "copy" keybind. Don't steal it when using emacs bindings.
@@ -2709,14 +2870,14 @@ and indent."
   (setq aw-background nil) ;; don't dim the background
   )
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; ace-jump-zap
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; (global-set-key (kbd "M-z") #'ace-jump-zap-to-char)
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; clang-format
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;; rarely use `clang-format', so commenting it out for now.
 ;; (when (eq my-curr-computer 'work-laptop)
 ;;   (load "C:/Users/mtz/programs/LLVM/share/clang/clang-format.el")
@@ -2724,9 +2885,9 @@ and indent."
 ;;   (global-set-key (kbd "C-c f") 'clang-format-region)
 ;;   (global-set-key (kbd "C-c b") 'clang-format-buffer))
 
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 ;;; irony
-;;;--------------------
+;;;-----------------------------------------------------------------------------
 (my-top-level-package-code
   (when (or (eq my-curr-computer 'work-laptop)
             (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
@@ -2761,20 +2922,20 @@ and indent."
 ;; - https://github.com/Sarcasm/company-irony
 ;; - https://github.com/Sarcasm/ac-irony
 
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; company-irony
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (eval-after-load 'company
 ;;   '(add-to-list 'company-backends 'company-irony))
 
-;; ;; (optional) adds CC special commands to `company-begin-commands' in order to
-;; ;; trigger completion at interesting places, such as after scope operator
+;; ;; (optional) adds CC special commands to `company-begin-commands' in order
+;; ;; to trigger completion at interesting places, such as after scope operator
 ;; ;;     std::|
 ;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Load projects
-;;;-------------------------------
+;;;-----------------------------------------------------------------------------
 (when (eq my-curr-computer 'work-laptop)
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'proj-safetyweb lisp-file nil t)
@@ -2844,9 +3005,11 @@ and indent."
 ;;   (add-to-list 'vc-directory-exclusion-list "obj"))
 ;; (ad-activate 'vc-dir)
 
-;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
+;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/th
+;;e_biggest_performance_improvement_to_emacs_ive/
 ;; TODO: revist this later. The performance problems may be fixed soon.
-;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
+;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.ht
+;;       ml
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 
 (with-eval-after-load "vc"
@@ -2927,7 +3090,8 @@ and indent."
 ;;     (evil-end-of-line)
 ;;     (delete-region 1 (+ (point) 2))
 ;;     (evil-end-of-line))
-;;   (define-key skewer-repl-mode-map (kbd "C-c M-o") #'my-skewer-repl-clear-buffer)
+;;   (define-key skewer-repl-mode-map (kbd "C-c M-o")
+;;     #'my-skewer-repl-clear-buffer)
 
   (add-hook
    'skewer-repl-mode-hook
@@ -2937,18 +3101,21 @@ and indent."
      ;;there's always a trailing space at repl prompt. Don't highlight it. 
      (setq show-trailing-whitespace nil)))
 
-  ;;(require 'simple-httpd)
+  ;; (require 'simple-httpd)
   ;; (defun my-skewer-html ()
   ;;   "Wire up the html file you're editing with skewer."
   ;;   (interactive)
-  ;;   ;;(skewer-html-mode) ; this is set in a hook, don't need it here.
-  ;;   ;;(setq httpd-root "c:/users/mtz/scratch/testwebsite")
+  ;;   ;; (skewer-html-mode) ; this is set in a hook, don't need it here.
+  ;;   ;; (setq httpd-root "c:/users/mtz/scratch/testwebsite")
   ;;   (setq httpd-root (my-current-folder-path))
   ;;   (httpd-start)
   ;;   (browse-url-of-file (concat "http://localhost:8080/"
   ;;                               (file-name-nondirectory buffer-file-name)))
   ;;   (run-skewer)
-  ;;   (message "put this in the <head>: <script src=\"http://localhost:8080/skewer\"></script> --- switch to tab http://localhost:8080/FileOrRouteName, then start evaling html"))
+  ;;   (message
+  ;;    (concat "put this in the <head>: <script src=\"http://localhost:"
+  ;;            "8080/skewer\"></script> --- switch to tab http://localhost:"
+  ;;            "8080/FileOrRouteName, then start evaling html")))
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -2980,13 +3147,19 @@ and indent."
 ;;     )
 
 ;;   ;;set up custome keybindings when the mode loads.
-;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set in the hook. Eval-after-load doesn't work.
+;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set
+;;                               ; in the hook. Eval-after-load doesn't work.
 ;;             (lambda ()
 ;;               ;;Use the same keybinding to clear eshell as the SLIME repl
-;;               (define-key eshell-mode-map (kbd "C-c M-o") 'my-eshell-clear-buffer)
-;;               ;;make evil's dd compatible with the read-only prompt of hte current line.
-;;               ;;(define-key evil-normal-state-map (kbd "<remap> <evil-delete-whole-line>") 'my-eshell-clear-line)
-;;               ;;(evil-define-key 'normal eshell-mode-map (kbd "d d") 'my-eshell-clear-line)
+;;               (define-key eshell-mode-map (kbd "C-c M-o")
+;;                 'my-eshell-clear-buffer)
+;;               ;;make evil's dd compatible with the read-only prompt of the
+;;               ;; current line.
+;;               ;; (define-key evil-normal-state-map
+;;               ;;   (kbd "<remap> <evil-delete-whole-line>")
+;;               ;;   'my-eshell-clear-line)
+;;               ;; (evil-define-key 'normal eshell-mode-map (kbd "d d")
+;;               ;;   'my-eshell-clear-line)
 ;;               )))
 
 ;;;-----------------------------------------------------------------------------
@@ -3000,14 +3173,15 @@ and indent."
 ;; (setq highlight-tail-steps 40 ;80
 ;;       highlight-tail-timer 0.04;0.04
 ;;       )
-;; (setq highlight-tail-posterior-type t) ;(setq highlight-tail-posterior-type 'const)
+(setq highlight-tail-posterior-type t) ; 'const
 ;; (highlight-tail-mode)
 ;; ;;(highlight-tail-reload)
 
 ;;;-----------------------------------------------------------------------------
 ;;; eww web-browser
 ;;;-----------------------------------------------------------------------------
-;;(setq browse-url-browser-function 'eww-browse-url) ;;make default for opening links.
+;; (setq browse-url-browser-function ; default for opening links.
+;;       'eww-browse-url)
 
 (with-eval-after-load "eww"
   (when (eq my-curr-computer 'work-laptop)
@@ -3028,7 +3202,8 @@ and indent."
       "Clear the weird ^M character that shows in some eww buffers."
       (interactive
        ;; (let ((args (query-replace-read-args "Replace" t)))
-       ;;   (setcdr (cdr args) nil) ; remove third value returned from query---args
+       ;;   (setcdr (cdr args) nil) ; remove third value returned from
+       ;;                           ; query---args
        ;;   args)
        )
       ;; TODO: clear in the header line too.
@@ -3051,8 +3226,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "w3"
   (defun my-w3-goto (url)
-    ;; "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/Body/m_w_slts.htm"
-    (let ((w3--args nil) ;; prevents errors when loading CL hyperspec pages on local disk
+    (let ((w3--args nil) ; prevents errors when loading CL hyperspec pages on
+                         ; local disk
           (w3-default-homepage url))
       (w3))))
 
@@ -3146,7 +3321,8 @@ and indent."
 (when (eq my-curr-computer 'work-laptop) ; TODO: move this into spearate file.
   (defun my-git-docs ()
     (interactive)
-    (eww-open-file "C:/Users/mtz/AppData/Local/Programs/Git/mingw64/share/doc/git-doc/git.html")))
+    (eww-open-file (concat "C:/Users/mtz/AppData/Local/Programs/Git/"
+                           "mingw64/share/doc/git-doc/git.html"))))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -3155,7 +3331,8 @@ and indent."
 (with-eval-after-load "ediff"
   (setq ediff-split-window-function #'split-window-horizontally)
   ;; don't use the popup window
-  (setq ediff-window-setup-function #'ediff-setup-windows-plain) ;'ediff-setup-windows-multiframe
+  (setq ediff-window-setup-function
+        #'ediff-setup-windows-plain) ; 'ediff-setup-windows-multiframe
 
   (when (eq my-curr-computer 'work-laptop)
     (setq ediff-diff3-program "C:/Program Files/KDiff3/bin/diff3.exe")))
@@ -3422,6 +3599,8 @@ and indent."
         ))))
 
 (with-eval-after-load "ivy"
+  (define-key ivy-mode-map (kbd "C-SPC") #'ivy-avy)
+
   ;; remove the default ^ prefix used by `counsel-M-x' and a few others.
   (cl-loop for pair in ivy-initial-inputs-alist
            do
@@ -3481,7 +3660,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (defun my-narrow-to-region-indirect (start end)
   "Restrict editing in this buffer to the current region, indirectly.
-Region defined by START and END is automaticallyl detected by (interactive \"r\")."
+Region defined by START and END is automaticallyl detected by
+(interactive \"r\")."
   (interactive "r")
   (deactivate-mark)
   (let ((buf-clone (clone-indirect-buffer nil nil))
@@ -4135,6 +4315,32 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; python-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "python"
+
+  ;; use custom fn to avoid alignment issues with horizontal comments. Tabs
+  ;; can't be used *after* code, only before. (otherwise alignment issues
+  ;; occur at different tab widths.
+  (define-key python-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
+
+  ;; hook for smart-tabs-mode
+  (add-hook 'python-mode-hook
+            (lambda ()
+              ;; keeps comments closer to the code. buffer local
+              (setq comment-column 1)
+
+              ;; slightly larger tab-width for python.
+              (setq tab-width 5)
+              (setq indent-tabs-mode t)
+
+              (smart-tabs-mode-enable)
+              (smart-tabs-advice python-indent-line python-indent-offset)
+              (smart-tabs-advice python-indent-region python-indent-offset)
+              (if
+                  (featurep 'python-mode)
+                  (progn
+                    (smart-tabs-advice py-indent-line py-indent-offset)
+                    (smart-tabs-advice py-newline-and-indent py-indent-offset)
+                    (smart-tabs-advice py-indent-region py-indent-offset)))))
+
   (add-hook 'python-mode-hook
             (lambda ()
               (yas-minor-mode 1)
@@ -4209,8 +4415,15 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun my-win-count ()
+  (length (window-list))
+  ;; (cl-loop for w being the windows of (selected-frame)
+  ;;          sum 1)
+  )
+
 (defun find-shell (&optional shell-only)
-  ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why_cant_i_convert_to_you/
+  ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why_
+  ;;cant_i_convert_to_you/
   "Find end of shell buffer or create one by splitting the current window.
 If shell is already displayed in current frame, delete other windows
 in frame.  Stop displaying shell in all other windows."
@@ -4398,6 +4611,7 @@ in frame.  Stop displaying shell in all other windows."
                     (+ n (line-number-at-pos start) -1) n))))))
 
   (defun my-what-position (&optional detail)
+    "Your position in space and time."
     (interactive "P")
     (let* ((pos (point))
            (total (buffer-size))
@@ -4407,8 +4621,9 @@ in frame.  Stop displaying shell in all other windows."
                       (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
            (line (my-what-line))
            (col (+ 1 (current-column))))
-      (message "%d%% %s C%d"
-               percent (my-what-line) col)))
+      (message "%d%% %s C%d     %s"
+               percent (my-what-line) col
+               (format-time-string "%-I:%M%#p %-m-%-d-%Y %a"))))
 
   (my-top-level-package-code
     (when my-use-evil-p
@@ -4537,9 +4752,9 @@ in frame.  Stop displaying shell in all other windows."
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; my-square-one
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (autoload #'my-square-one "my-square-one" nil t)
 (my-top-level-package-code
   (when my-use-evil-p
@@ -4547,9 +4762,9 @@ in frame.  Stop displaying shell in all other windows."
 
 
 
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Turn on disabled functions
-;;;--------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (put 'narrow-to-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
@@ -4579,9 +4794,9 @@ in frame.  Stop displaying shell in all other windows."
 ;;                           'my-history)))
 ;;     (message "you said: %s" txt)))
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; rand
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (autoload 'rand "my-rand" nil t)
 
 ;; (setq msgDb '("hi"))
@@ -4611,15 +4826,15 @@ in frame.  Stop displaying shell in all other windows."
 
 ;; (evil-leader/set-key "m" 'msg)
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; touch typing
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
 (autoload 'my-type-tutor "my-type-tutor" nil t)
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; ms
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (defvar ms-cols 30)
 ;; (defvar ms-rows 25)
 ;; (defvar ms-map ())
@@ -4650,9 +4865,9 @@ in frame.  Stop displaying shell in all other windows."
 ;;   (insert (symbol-name x))
 ;;   (insert " "))
 
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; hour format conversion. 12 -> 24
-;;;---------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (defun to24 (hour amPm)
 ;;   (cond
 ;;    ((and (equal amPm "AM")
@@ -4705,15 +4920,15 @@ in frame.  Stop displaying shell in all other windows."
 ;;   (assert (= 23 (to24 11 "PM"))))
 
 
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; interact with Microsoft SQL Server
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;sqlcmd -S 127.0.0.1,42000\OSHE
 ;;sqlcmd -S 127.0.0.1,42000\OSHE -q "SELECT 'hello';"
 
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; remove all bold face attributes
-;;;------------------------------------
+;;;-----------------------------------------------------------------------------
 ;; (defun my-remove-bold ()
 ;;   "Remove all bold face attributes."
 ;;   (interactive)

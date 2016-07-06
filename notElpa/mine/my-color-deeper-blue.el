@@ -8,6 +8,12 @@
   (custom-theme-set-faces
    'deeper-blue
 
+
+   '(leerzeichen ((t (:foreground "gray40"           ;"#A8A800"
+                                  :background "black" ;"#D4D4C8"
+                                  :italic nil
+                                  :bold nil))))
+
    ;; separates windwos.
    '(vertical-border ((t (:foreground "gray20"))))
 

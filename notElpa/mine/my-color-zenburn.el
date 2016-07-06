@@ -107,16 +107,19 @@
                       :inverse-video nil))))
    `(avy-lead-face-0 ;; the first overlay char
      ((t (:foreground "spring green"
+                      :background "black"
                       :slant normal
                       :weight normal
                       :inverse-video nil))))
    `(avy-lead-face-1 ;; for matched chars, but currently not used???? matches disapear at the moment.
      ((t (:foreground "green"
+                      :background "black"
                       :slant normal
                       :weight normal
                       :inverse-video nil))))
    `(avy-lead-face ;;for the chars after the first?
      ((t (:foreground "spring green"
+                      :background "black"
                       :slant normal
                       :weight normal
                       :inverse-video nil))))

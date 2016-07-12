@@ -1193,6 +1193,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;;-----------------------------------------------------------------------------
 ;; (require 'slime-autoloads)
 (with-eval-after-load "slime"
+
+  (when my-use-evil-p
+    ;; use emacs bindings in the repl. It's the only way i can get C-n and C-p
+    ;; to work for slimes built in autocompletion.
+    (add-to-list 'evil-buffer-regexps '("\\*slime-repl" . emacs)))
+
+
   (slime-setup '(slime-fancy
                  slime-company
                  slime-banner

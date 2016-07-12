@@ -4212,10 +4212,59 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; js2-highlight-vars
 ;;;-----------------------------------------------------------------------------
-;; commenting out for now. It overwrites the modeline constantly making it
-;; hard to read js2 error messages in the mode line.
-;; (with-eval-after-load "js2-highlight-vars-autoloads"
-;;   (add-hook 'js2-mode-hook (lambda () (js2-highlight-vars-mode))))
+(with-eval-after-load "js2-highlight-vars"
+
+  ;; re-define `js2--do-highlight-vars' without calling `top-level'.
+  ;; The package author calls it to overcome some sort of bug in emacs, but
+  ;; it overwrites the error messages of js2.
+  ;; NOTE: periodically sync this re-definition up with the latest from the
+  ;;       package.
+  ;; TODO: look into the issue deeper. Find/resolve the root issue upstream
+  ;;       either in Emacs itself of the js2-highlight-vars pacakge.
+  (defun js2--do-highlight-vars ()
+    "Highlight variable under cursor within the defining scope"
+    (interactive)
+    (setq js2--highlight-vars-post-command-timer nil)
+    (unless js2--highlight-vars-tokens
+      (let ((node (js2-node-at-point))
+            (tokens nil)
+            name
+            scope)
+        (unless (js2-name-node-p node)
+          (setq node (js2-node-at-point (- (point) 1))))
+        (when (and node (js2-name-node-p node))
+          (setq scope (js2-node-get-enclosing-scope node)
+                name (js2-name-node-name node)
+                js2--highlight-vars-current-token (js2-node-abs-pos node)
+                js2--highlight-vars-current-token-name name)
+          (setq scope (js2-get-defining-scope scope name))
+          (with-silent-modifications
+            (js2-visit-ast
+             scope
+             (lambda (node end-p)
+               (when (and (not end-p)
+                          (js2-name-node-p node)
+                          (string= name (js2-name-node-name node)))
+                 (let* ((beg (js2-node-abs-pos node))
+                        (end (+ beg (js2-node-len node)))
+                        (new-scope (js2-node-get-enclosing-scope node))
+                        (new-scope (js2-get-defining-scope new-scope name))
+                        (ovl (make-overlay beg end)))
+                   (add-to-list 'tokens beg t)
+                   (overlay-put ovl 'keymap js2-highlight-vars-local-keymap)
+                   (overlay-put ovl 'face
+                                (if (eq new-scope scope)
+                                    'js2-highlight-vars-face
+                                  'js2-highlight-vars-second-face))
+                   (overlay-put ovl 'evaporate t)
+                   (overlay-put ovl 'js2-highlight-vars t)))
+               t)))
+          (setq js2--highlight-vars-tokens tokens)
+          ;; (top-level)
+          )))))
+
+(with-eval-after-load "js2-mode"
+  (add-hook 'js2-mode-hook #'js2-highlight-vars-mode))
 
 
 ;;;-----------------------------------------------------------------------------

@@ -4268,7 +4268,33 @@ When ARG isn't nil, try to pretty print the sexp."
                t)))
           (setq js2--highlight-vars-tokens tokens)
           ;; (top-level)
-          )))))
+          ))))
+
+  (defvar my-js2-highlight-var-delay 0.0)
+  ;; redefine `js2-highlight-vars-post-command-hook' to replace a hard coded
+  ;; value 0.5 with a variable.
+  ;; TODO: contribute upstream so I don't have to redefine the function.
+  (defun js2-highlight-vars-post-command-hook ()
+    (ignore-errors
+      (let* ((overlays (overlays-at (point)))
+             (ovl (and overlays
+                       (catch 'found
+                         (dolist (ovl overlays)
+                           (when (overlay-get ovl 'js2-highlight-vars)
+                             (throw 'found ovl)))
+                         nil))))
+        (if (and ovl
+                 (string= js2--highlight-vars-current-token-name
+                          (buffer-substring (overlay-start ovl)
+                                            (overlay-end ovl))))
+            (setq js2--highlight-vars-current-token (overlay-start ovl))
+          (js2--unhighlight-vars)
+          (when js2--highlight-vars-post-command-timer
+            (cancel-timer js2--highlight-vars-post-command-timer))
+          (setq js2--highlight-vars-post-command-timer
+                (run-with-timer my-js2-highlight-var-delay
+                                nil
+                                'js2--do-highlight-vars)))))))
 
 (with-eval-after-load "js2-mode"
   (add-hook 'js2-mode-hook #'js2-highlight-vars-mode))

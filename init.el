@@ -4462,6 +4462,17 @@ When ARG isn't nil, try to pretty print the sexp."
     ;; `evil-define-key' doesn't work here but `define-key' does?
     (define-key ggtags-mode-map (kbd "M-,") #'pop-tag-mark)))
 
+
+;;;-----------------------------------------------------------------------------
+;;; follow-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "follow"
+  ;; scroll the height of all windows combined, not just 1.
+  ;; TODO: fix for evil. evil-normal-state-map seems to take precedence.
+  (define-key follow-mode-map (kbd "C-v") #'follow-scroll-up)
+  (define-key follow-mode-map (kbd "M-v") #'follow-scroll-down))
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------

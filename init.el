@@ -2332,7 +2332,8 @@ cases."
                           (awk-mode . "awk")
                           (other . "linux")))
   ;;(setq-default c-default-style "java")
-  (setq-default c-basic-offset my-indent-width) ;tab width
+  (setq my-indent-width-c 5)
+  (setq-default c-basic-offset my-indent-width-c) ;tab width
   (setq-default c-electric-flag t)
   (setq-default c-electric-pound-behavior '(alignleft))
 
@@ -2406,8 +2407,8 @@ and indent."
 
               (progn ;; use linux style tabbing/indentation for C
                 ;; these values should be buffer local.
-                (setq c-basic-offset my-indent-width)
-                (setq tab-width my-indent-width)
+                (setq c-basic-offset my-indent-width-c)
+                (setq tab-width my-indent-width-c)
                 ;; TODO: solve issue of snippets using spaces while I'm using
                 ;;       tabs for C.
                 (setq indent-tabs-mode t))
@@ -2424,8 +2425,8 @@ and indent."
             (lambda ()
               (progn ;; use linux style tabbing/indentation.
                 ;; these values should be buffer local.
-                (setq c-basic-offset my-indent-width)
-                (setq tab-width my-indent-width)
+                (setq c-basic-offset my-indent-width-c)
+                (setq tab-width my-indent-width-c)
                 (setq indent-tabs-mode t))
 
               (progn ;; smart-tabs-mode

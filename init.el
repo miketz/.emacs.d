@@ -2341,6 +2341,16 @@ cases."
   (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
   (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
 
+  (when (eq my-curr-computer 'work-laptop)
+    (defun my-c-reference ()
+      "Opens the function list of the GNU c docs."
+      (interactive)
+      (split-window-sensibly)
+      (eww-open-file
+       (concat
+        "C:/Users/mtz/programs/libc-html_node/libc/"
+        "Function-Index.html#Function-Index"))))
+
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.
 The variables set are buffer local.

@@ -412,7 +412,7 @@ Examples: helm-swoop swiper")
     nlinum
     ;;ido-vertical-mode
     ;;ido-grid-mode
-    ;;ido-ubiquitous
+    ido-ubiquitous
     flx-ido
     ov
     highlight-tail
@@ -2171,20 +2171,21 @@ To make it human readable."
   (global-set-key (kbd "M-X") #'smex-major-mode-commands)
   (global-set-key (kbd "C-c M-x")
                   #'execute-extended-command) ; rebind the original M-x command
-
-  ;; moving ido-ubiquitous out of (with-eval-after-load "ido") becuase some
-  ;; other modes load ido, inadvertently turning on ido-ubiquitous even
-  ;; when i'm not using ido.
-  (ido-ubiquitous-mode 1)
-  ;; NOTE: i removed some un-wanted advice code from the autoloads file of
-  ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
-  ;; forced a load of ido automatically at start up, even when I'm not using
-  ;; ido!!!
-  ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
-  ;; updates, and remove the un-wanted code in the autoload file.
   )
 
 (with-eval-after-load "ido"
+
+  (when my-use-ido-p ;; GAURD against calling ido-ubiquitous-mode.
+
+    (ido-ubiquitous-mode 1)
+    ;; NOTE: i removed some un-wanted advice code from the autoloads file of
+    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
+    ;; forced a load of ido automatically at start up, even when I'm not using
+    ;; ido!!!
+    ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
+    ;; updates, and remove the un-wanted code in the autoload file.
+    )
+
   (let ((my-ido-display nil)) ;; Choices: 'grid 'vertical nil
     (cond ((eq my-ido-display 'vertical)
            ;; 3rd party extension to ido. Display vertically like swiper.

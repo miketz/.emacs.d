@@ -7,6 +7,7 @@
 
   ;; fci color is not a face???
   (setq fci-rule-color "#4d4d4d")
+  (setq zenburn-bg "#3F3F3F")
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces

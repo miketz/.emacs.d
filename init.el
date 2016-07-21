@@ -268,9 +268,10 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type 'ivy
+(defvar my-narrow-type 'ido
   "The package I'm currenlty using for narrowing completions.
-Choices: ivy ido helm")
+Use nil for the emacs default.
+Choices: ivy ido helm nil")
 
 ;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)

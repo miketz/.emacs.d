@@ -268,7 +268,7 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type 'ido
+(defvar my-narrow-type nil
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
 Choices: ivy ido helm nil")

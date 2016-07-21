@@ -7,3 +7,6 @@
 [submodule "notElpa/swiper"]
 	path = notElpa/swiper
 	url = https://github.com/miketz/swiper
+[submodule "notElpa/slime"]
+	path = notElpa/slime
+	url = https://github.com/slime/slime

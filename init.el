@@ -3555,7 +3555,7 @@ and indent."
 ;;    (t (my-search-bookmarks (rest bookmarks) tags))))
 
 ;;;-----------------------------------------------------------------------------
-;;; swiper. ivy is bundled with swiper.
+;;; swiper. ivy is (or at least was) bundled with swiper.
 ;;; ivy
 ;;; counsel -> provides extra features for completing some things.
 ;;;-----------------------------------------------------------------------------

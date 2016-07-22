@@ -4197,7 +4197,14 @@ When ARG isn't nil, try to pretty print the sexp."
 (with-eval-after-load "whitespace"
   (setq-default whitespace-line-column 80)
   ;;(setq whitespace-style '(face lines-tail))
-  (setq-default whitespace-style '(face trailing)))
+  (setq-default whitespace-style
+                '(face
+                  trailing
+                  ;; show hidden spaces before a tab. Highlihgts the space or
+                  ;; tab depending on the `indent-tabs-mode' value. If you're
+                  ;; using tabs for indentation it will highlight the "bad"
+                  ;; space, and vice versa.
+                  space-before-tab)))
 
 (with-eval-after-load "prog-mode"
   (add-hook 'prog-mode-hook (lambda ()

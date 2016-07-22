@@ -3619,6 +3619,43 @@ and indent."
   ;; use fancy highlights in the popup window
   (setq ivy-display-style 'fancy))
 
+;; (with-eval-after-load "swiper"
+;;   ;; overwrite `swiper--re-builder' to use out-of-order matching.
+;;   ;; TODO: periodicatlly sync this up with the latest package code.
+;;   ;; TODO: make it highlihgt each match, not just the first.
+;;   (defun swiper--re-builder (str)
+;;     "Transform STR into a swiper regex.
+;; This is the regex used in the minibuffer where candidates have
+;; line numbers. For the buffer, use `ivy--regex' instead."
+;;     (let ((re (cond
+;;                ((equal str "")
+;;                 "")
+;;                ((equal str "^")
+;;                 (setq ivy--subexps 0)
+;;                 ".")
+;;                ((string-match "^\\^" str)
+;;                 (setq ivy--old-re "")
+;;                 (let ((re (ivy--regex-ignore-order (substring str 1))) ;;###
+;;                       ;; (re (ivy--regex-plus (substring str 1)))
+;;                       )
+;;                   (if (zerop ivy--subexps)
+;;                       (prog1 (format "^ ?\\(%s\\)" re)
+;;                         (setq ivy--subexps 1))
+;;                     (format "^ %s" re))))
+;;                (t
+;;                 (ivy--regex-ignore-order str) ;;### I changed this line
+;;                 ;; (ivy--regex-plus str)
+;;                 ))))
+;;       (cond ((stringp re)
+;;              (replace-regexp-in-string "\t" "    " re))
+;;             ((and (consp re)
+;;                   (consp (car re)))
+;;              (setf (caar re)
+;;                    (replace-regexp-in-string "\t" "    " (caar re)))
+;;              re)
+;;             (t
+;;              (error "unexpected"))))))
+
 (with-eval-after-load "counsel"
   ;; redefine `counsel--load-theme-action' to not require confirmation
   ;; TODO: find an alternative to redefine so I don't have to manually

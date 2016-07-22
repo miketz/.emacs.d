@@ -271,7 +271,7 @@ Just a convenience to avoid checks agaisnt `my-ui-type'.")
 (defvar my-narrow-type 'ido
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
-Choices: ivy ido helm nil")
+Choices: ivy ido helm sallet nil")
 
 ;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -4219,6 +4219,13 @@ When ARG isn't nil, try to pretty print the sexp."
 (add-to-list 'load-path "~/.emacs.d/notElpa/sallet")
 (autoload #'sallet-buffer "sallet" nil t)
 
+;; NOTE: the sallet package is not ready yet. Just configuring to give it a
+;;       test run.
+(when (eq my-narrow-type 'sallet)
+  ;; keybinds
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'sallet-buffer)))
+
 ;;;-----------------------------------------------------------------------------
 ;;; sunrise-commander. saved to notElpa folder as a git submodule.
 ;;;-----------------------------------------------------------------------------
@@ -4650,7 +4657,8 @@ in frame.  Stop displaying shell in all other windows."
 (when (or (eq my-curr-computer 'raspberry-pi)
           (and (not my-use-helm-p)
                (not my-use-ido-p)
-               (not my-use-ivy-p)))
+               (not my-use-ivy-p)
+               (not (eq my-narrow-type 'sallet))))
   (when my-use-evil-p
     (evil-leader/set-key "b" #'ibuffer))
   ;; (evil-leader/set-key "b" #'ido-switch-buffer)

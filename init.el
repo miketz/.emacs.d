@@ -4206,6 +4206,9 @@ When ARG isn't nil, try to pretty print the sexp."
                   ;; space, and vice versa.
                   space-before-tab)))
 
+ 	;; sample: space before a tab.
+;; sample: traliing white space.  
+
 (with-eval-after-load "prog-mode"
   (add-hook 'prog-mode-hook (lambda ()
                               (whitespace-mode 1))))

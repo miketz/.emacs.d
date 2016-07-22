@@ -4200,11 +4200,10 @@ When ARG isn't nil, try to pretty print the sexp."
   (setq-default whitespace-style
                 '(face
                   trailing
-                  ;; show hidden spaces before a tab. Highlihgts the space or
-                  ;; tab depending on the `indent-tabs-mode' value. If you're
-                  ;; using tabs for indentation it will highlight the "bad"
-                  ;; space, and vice versa.
-                  space-before-tab)))
+                  ;; show hidden spaces before a tab. Useful when using tabs
+                  ;; for indentation becuase spaces before a tab are invisible
+                  ;; if they don't overflow the tab-stop.
+                  space-before-tab::tab)))
 
  	;; sample: space before a tab.
 ;; sample: traliing white space.  

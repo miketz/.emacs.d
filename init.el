@@ -2316,6 +2316,16 @@ cases."
   (let ((indent-tabs-mode nil)) ; spaces
     (call-interactively #'comment-dwim)))
 
+(when (eq my-curr-computer 'work-laptop)
+  (defun my-c-reference ()
+    "Opens the function list of the GNU c docs."
+    (interactive)
+    (split-window-sensibly)
+    (eww-open-file
+     (concat
+      "C:/Users/mtz/programs/libc-html_node/libc/"
+      "Function-Index.html#Function-Index"))))
+
 (with-eval-after-load "cc-mode"
   ;; (assoc "cc-mode" c-style-alist)
   ;; (assoc "user" c-style-alist)
@@ -2342,16 +2352,6 @@ cases."
   ;; custom function for trailing comment alignment. (useful when using tabs)
   (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
   (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
-
-  (when (eq my-curr-computer 'work-laptop)
-    (defun my-c-reference ()
-      "Opens the function list of the GNU c docs."
-      (interactive)
-      (split-window-sensibly)
-      (eww-open-file
-       (concat
-        "C:/Users/mtz/programs/libc-html_node/libc/"
-        "Function-Index.html#Function-Index"))))
 
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.

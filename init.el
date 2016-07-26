@@ -3848,6 +3848,50 @@ Region defined by START and END is automaticallyl detected by
         ;; turn on js2-mode for this region. (and narrow)
         (call-interactively #'my-js2-mode-on-region))))
 
+  (cl-defun my-focus-javascript2 ()
+    "Same as `my-focus-javascript2' but use my mor package to open in a new buffer
+instead of narrowing."
+    (interactive)
+    (save-excursion ;; don't allow tag searches to mess with cursor position.
+      (let ((start-tag-name "<script")
+            (end-tag-name   "</script")
+            (start          nil)
+            (end            nil))
+        ;; Find start tag. Search backwards first to give priority to tag pairs
+        ;; the cursor is currently inside.
+        (setq start (search-backward start-tag-name nil t))
+        (when (null start)
+          ;; if start tag not found backwards, then try forwards.
+          (setq start (search-forward start-tag-name nil t)))
+        (when (null start)
+          (message "start tag not found")
+          (return-from my-focus-javascript nil))
+        ;;start is found, move to the closing bracket >
+        (let ((end-of-start (search-forward ">" nil t)))
+          (when (null end-of-start)
+            (message "start tag not found")
+            (return-from my-focus-javascript nil)))
+        ;; start highlighitng
+        ;; (next-line)
+        ;; (move-beginning-of-line nil)
+        (set-mark-command nil)           ;(evil-visual-line)
+        ;; jump to end tag. always search forward
+        (setq end (search-forward end-tag-name nil t))
+        (when (null end)
+          (deactivate-mark)
+          (message "end tag not found")
+          (return-from my-focus-javascript nil))
+        (let ((start-of-end (search-backward "<" nil t)))
+          (when (null start-of-end)
+            (message "end tag not found")
+            (return-from my-focus-javascript nil)))
+        ;;end tag is found.
+        ;; (previous-line)
+        ;; (move-end-of-line nil)
+        ;; turn on js2-mode for this region.
+        (let ((mor-mode-fn #'js2-mode))
+          (call-interactively #'mor-mode-on-region)))))
+
   (defun my-unfocus-javascript ()
     "Undo the effects of `my-focus-javascript'."
     (interactive)
@@ -3855,7 +3899,7 @@ Region defined by START and END is automaticallyl detected by
     (web-mode))
 
   ;; key bindings
-  (define-key web-mode-map (kbd "C-c j") #'my-focus-javascript)
+  (define-key web-mode-map (kbd "C-c j") #'my-focus-javascript2)
   ;; TODO: Use a different technique for this keybind. If we didn't enter
   ;; `js2-mode' from `web-mode' then we don't want `my-unfocus-javascript' to
   ;; turn on web-mode.

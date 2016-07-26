@@ -117,6 +117,11 @@ Used in tmp buffer to transfer the modified text back to the original buffer.")
     (when (mor--starts-with-p (buffer-name b) mor--prefix)
       (kill-buffer b))))
 
+(defvar mor-mode-fn nil
+  "Making mode-fn a dynamic variable.
+So I can take advantage of dynamic binding.
+Keep this value nil. Only bind it dynamically in a `let' statement.")
+
 ;;;###autoload
 (defun mor-mode-on-region (start end)
   "Switch to a new buffer with the highlighted text.
@@ -125,12 +130,17 @@ Region is between START and END inclusive."
   (interactive "r")
   (mor--mode-on-region start
                        end
-                       (intern (completing-read ; user chooses the mode
-                                "Mode: "
-                                (mapcar (lambda (e)
-                                          (list (symbol-name e)))
-                                        (apropos-internal "-mode$" #'commandp))
-                                nil t))))
+                       (if mor-mode-fn
+                           mor-mode-fn ; use dynamcally bound value if
+                                       ; available.
+                         (intern (completing-read ; otherwise user chooses the
+                                                  ; mode
+                                  "Mode: "
+                                  (mapcar (lambda (e)
+                                            (list (symbol-name e)))
+                                          (apropos-internal "-mode$"
+                                                            #'commandp))
+                                  nil t)))))
 
 ;;;###autoload
 (defun mor-prev-mode-on-region (start end)

@@ -131,10 +131,10 @@ Region is between START and END inclusive."
   (mor--mode-on-region start
                        end
                        (if mor-mode-fn
-                           mor-mode-fn ; use dynamcally bound value if
-                                       ; available.
-                         (intern (completing-read ; otherwise user chooses the
-                                                  ; mode
+                           ;; use dynamcally bound value if available.
+                           mor-mode-fn
+                         ;; otherwise user chooses the mode
+                         (intern (completing-read
                                   "Mode: "
                                   (mapcar (lambda (e)
                                             (list (symbol-name e)))

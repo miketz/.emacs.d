@@ -4575,6 +4575,16 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; follow-mode
 ;;;-----------------------------------------------------------------------------
+(defun my-follow-mode ()
+  "Gets the windows set up for follow mode, then turns it on."
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (shrink-window-horizontally 10)
+  (follow-mode 1))
+
+(global-set-key (kbd "C-x f") #'my-follow-mode)
+
 (with-eval-after-load "follow"
   ;; scroll the height of all windows combined, not just 1.
   ;; TODO: fix for evil. evil-normal-state-map seems to take precedence.

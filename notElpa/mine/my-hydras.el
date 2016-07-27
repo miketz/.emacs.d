@@ -68,21 +68,30 @@
 ;;    ("q" nil "cancel") ;nil for function is an automatic blue head.
 ;;    ))
 
-;; horizontal scroll test 3333-=--------------------------------------------------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCcccccccccccccccccccccccccccccccccccccDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+;; horizontal scroll test 3333-=--------------------------------------------------------------------------------------------------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCcccccccccccccccccccccccccccccccccccccDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee1111111111111111111111111111111111111111111112222222222222222222222222222222222222222233333333333333333333333333333333444444444444444444444444444444444455555555555555555555
 ;;easy 1 key scrolling
 (defhydra hydra-easyscroll (:color amaranth)
   "scroll"
   ("v" scroll-up-command)
   ("M-v" scroll-down-command)
-  ("f" scroll-right)
-  ("b" scroll-left)
+  ;; ("f" scroll-left)
+  ;; ("b" scroll-right)
   ("," beginning-of-buffer)
   ("." end-of-buffer)
 
   ("j" evil-scroll-line-down)
   ("k" evil-scroll-line-up)
-  ("h" evil-scroll-column-left 10)
-  ("l" evil-scroll-column-right 10)
+  ("h" (lambda ()
+         (interactive)
+         (evil-scroll-column-left 20)))
+  ("l" (lambda ()
+         (interactive)
+         (evil-scroll-column-right 20)))
+
+  ("e" move-end-of-line)
+  ("C-e" move-end-of-line)
+  ("a" move-beginning-of-line)
+  ("C-a" move-beginning-of-line)
 
   ("C-g" nil nil)
   ("q" nil))

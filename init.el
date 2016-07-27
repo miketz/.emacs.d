@@ -3444,7 +3444,10 @@ and indent."
 ;;; hydra
 ;;;-----------------------------------------------------------------------------
 (autoload #'my-choose-hydra "my-hydras" nil t)
+(autoload #'hydra-easyscroll/body "my-hydras" nil t)
+
 (when my-use-evil-p
+  (define-key evil-normal-state-map (kbd "z s") #'hydra-easyscroll/body)
   ;; (define-key evil-normal-state-map (kbd "\\") #'my-choose-hydra)
   ;; (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra)
   )

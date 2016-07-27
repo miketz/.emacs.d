@@ -172,13 +172,13 @@ MODE-FN the function to turn on the desired mode."
 
     (funcall mor-switch-buff-fn tmp-buff)
     (yank)              ;; paste text
-    ;; ignore erros before turning on mode, otherwise mor keybinds won't be
+    ;; ignore errors before turning on mode, otherwise mor keybinds won't be
     ;; set. Like "C-c c" to close.
     (with-demoted-errors "Error: %S"
       (funcall mode-fn)) ;; turn on the dedicated mode.
     (with-current-buffer tmp-buff
       ;; NOTE: these buffer-local vars must be set AFTER `mode-fn' is
-      ;; called. Becuase major modes wipe buffer local vars.
+      ;; called. Because major modes wipe buffer local vars.
       (setq mor--orig-buffer orig-buff
             mor--start start
             mor--end end))
@@ -186,7 +186,7 @@ MODE-FN the function to turn on the desired mode."
 
     (when mor-format-automatically-p
       (mark-whole-buffer)
-      ;; using `call-interactively' becuase it includes the START/END
+      ;; using `call-interactively' because it includes the START/END
       ;; region parameters.
       (call-interactively #'indent-region))))
 

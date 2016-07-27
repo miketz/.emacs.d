@@ -1,6 +1,6 @@
 ;;; mor.el --- Mode on region -*- lexical-binding: t -*-
 
-;;; License: GPL version 3 or later.
+;;; License: GPL version 3
 
 
 ;;; Commentary:

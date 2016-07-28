@@ -73,6 +73,7 @@ Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 ;;       up the dedicated mode buffer.
 ;; TODO: Incorporate code from org-mode. Locks highlighted region from edits.
 ;;       Look into how it copies text back/forth between buffers.
+;;       See function `org-edit-special'
 ;; TODO: Optionally create a tmp file on disk. Useful for features that
 ;;       require a file on disk (some linters, etc).
 

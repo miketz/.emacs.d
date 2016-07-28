@@ -120,7 +120,7 @@ Used in tmp buffer to transfer the modified text back to the original buffer.")
 (defvar mor-mode-fn nil
   "Making mode-fn a dynamic variable.
 So I can take advantage of dynamic binding.
-Keep this value nil. Only bind it dynamically in a `let' statement.")
+Keep this value nil.  Only bind it dynamically in a `let' statement.")
 
 ;;;###autoload
 (defun mor-mode-on-region (start end)

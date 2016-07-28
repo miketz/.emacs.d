@@ -30,7 +30,7 @@
 ;;;   ;; configure
 ;;;   (setq mor-format-automatically-p nil)
 ;;;   (setq mor-readonly-for-extra-protection-p t)
-;;;   ;; recommended keybinds for vanilla emacs. Press "C-c m" with text highlighted.
+;;;   ;; recommended keybinds for vanilla Emacs.  Press "C-c m" with text highlighted.
 ;;;   (global-set-key (kbd "C-c m") #'mor-mode-on-region)
 ;;;   (global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
 ;;;   ;; recommended keybinds for evil users.  Press "m" in visual mode.
@@ -224,6 +224,7 @@ Call this if you don't want to copy the text back to the original buffer."
   (quit-window t))
 
 (defun mor--unlock-orig-buffer ()
+  "Unlock the original buffer."
   (when mor-readonly-for-extra-protection-p
     (with-current-buffer mor--orig-buffer
       (read-only-mode 0))))

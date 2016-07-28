@@ -82,8 +82,6 @@ Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 ;;       See function `org-edit-special'
 ;; TODO: Optionally create a tmp file on disk. Useful for features that
 ;;       require a file on disk (some linters, etc).
-;; TODO: release read-only in a hook on the temp buffer. In case they close it
-;;       wihtout using the officla mor functions.
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for tmp buffer names.")
@@ -221,7 +219,19 @@ overwrite."
   "Kill the tmp buffer and clean up the window if applicable.
 Call this if you don't want to copy the text back to the original buffer."
   (interactive)
-  (mor--finished-with-tmp-buffer nil))
+  (quit-window t))
+
+(defun mor--unlock-orig-buffer ()
+  (when mor-readonly-for-extra-protection-p
+    (with-current-buffer mor--orig-buffer
+      (read-only-mode 0))))
+;; use a hook to unlock the orig buffer when the tmp buffer is killed
+(add-hook 'mor-tmp-buffer-mode-hook
+          (lambda ()
+            (add-hook 'kill-buffer-hook
+                      'mor--unlock-orig-buffer
+                      nil
+                      'make-it-local)))
 
 (defun mor--finished-with-tmp-buffer (copy-back-p)
   "Manages the end of life of the tmp buffer.
@@ -233,10 +243,7 @@ Kills the tmp buffer."
       (message "You must be in a mor-tmp buffer for this to work.")
     (progn ; else
 
-      ;; unlock original buffer
-      (when mor-readonly-for-extra-protection-p
-        (with-current-buffer mor--orig-buffer
-          (read-only-mode 0)))
+      (mor--unlock-orig-buffer)
 
       ;; Cache tmp buffer local values. They will be invisible once we switch
       ;; back to the orig buffer.

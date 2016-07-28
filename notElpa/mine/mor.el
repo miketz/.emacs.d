@@ -14,7 +14,7 @@
 ;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c.
 ;;;                                                   mnemonic: close
 ;;;
-;;; This is useful to interact with code in mutli-lanuage files. Such as
+;;; This is useful to interact with code in mutli-lanuage files.  Such as
 ;;; javascript, css, and html mixed in one file.
 ;;; It's also useful to interact with code in tecnical books, while viewing via
 ;;; eww-mode, text-mode, info-mode, etc.

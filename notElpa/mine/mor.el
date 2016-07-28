@@ -55,6 +55,12 @@ accidentally calling a function not relevant outside of a tmp buffer."
             (define-key map (kbd "C-c c") #'mor-close-tmp-buffer)
             map))
 
+(defvar mor-readonly-for-extra-protection-p t
+  "When t the orig buffer will be read only until the tmp buffer is killed.
+This prevents edits in the origin buffer from throwing off the static
+coordinates for copying text back.
+NOTE: This is not full-proof.")
+
 (defvar mor-format-automatically-p nil
   "When t automatically format the copied text via `indent-region'.")
 
@@ -76,6 +82,8 @@ Choices: `switch-to-buffer-other-window' or `switch-to-buffer'")
 ;;       See function `org-edit-special'
 ;; TODO: Optionally create a tmp file on disk. Useful for features that
 ;;       require a file on disk (some linters, etc).
+;; TODO: release read-only in a hook on the temp buffer. In case they close it
+;;       wihtout using the officla mor functions.
 
 (defconst mor--prefix "mor-tmp-"
   "Prefix used for tmp buffer names.")
@@ -170,7 +178,10 @@ MODE-FN the function to turn on the desired mode."
         (tmp-buff (mor--gen-buffer-name)))
 
 
-    (kill-ring-save start end) ;; copy higlihgted text
+    (kill-ring-save start end) ;; copy higlighted text
+    (when mor-readonly-for-extra-protection-p
+      ;; lock down `orig-buff' until `tmp-buff' is killed
+      (read-only-mode 1))
     (deactivate-mark)
 
     (funcall mor-switch-buff-fn tmp-buff)
@@ -210,7 +221,7 @@ overwrite."
   "Kill the tmp buffer and clean up the window if applicable.
 Call this if you don't want to copy the text back to the original buffer."
   (interactive)
-  (quit-window t))
+  (mor--finished-with-tmp-buffer nil))
 
 (defun mor--finished-with-tmp-buffer (copy-back-p)
   "Manages the end of life of the tmp buffer.
@@ -221,6 +232,12 @@ Kills the tmp buffer."
   (if (null mor--orig-buffer) ; guard
       (message "You must be in a mor-tmp buffer for this to work.")
     (progn ; else
+
+      ;; unlock original buffer
+      (when mor-readonly-for-extra-protection-p
+        (with-current-buffer mor--orig-buffer
+          (read-only-mode 0)))
+
       ;; Cache tmp buffer local values. They will be invisible once we switch
       ;; back to the orig buffer.
       (let ((tmp-buff (current-buffer))

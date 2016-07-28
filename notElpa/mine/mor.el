@@ -57,8 +57,8 @@ accidentally calling a function not relevant outside of a tmp buffer."
 
 (defvar mor-readonly-for-extra-protection-p t
   "When t the orig buffer will be read only until the tmp buffer is killed.
-This prevents edits in the origin buffer from throwing off the static
-coordinates for copying text back.
+This prevents edits in the orig buffer from throwing off the static coordinates
+for copying text back.
 NOTE: This is not full-proof.")
 
 (defvar mor-format-automatically-p nil

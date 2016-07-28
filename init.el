@@ -1556,6 +1556,7 @@ This prevents overlapping themes; something I would rarely want."
   (setq org-log-done t) ; make timestamp when flagging something done
                         ; with C-c C-t
   (setq org-agenda-timegrid-use-ampm t)
+  (setq org-src-preserve-indentation t)
 
   (progn ;;HOLD keyword stuff
     ;; new keyword for tasks put on hold

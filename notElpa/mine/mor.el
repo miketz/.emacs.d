@@ -32,8 +32,10 @@
 ;;;   ;; recommended keybinds for evil users.  Press "m" in visual mode.
 ;;;   (eval-after-load "evil"
 ;;;     '(progn
-;;;        (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
-;;;        (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)))
+;;;        (define-key
+;;;          evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+;;;        (define-key
+;;;          evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)))
 
 
 ;;; Code:

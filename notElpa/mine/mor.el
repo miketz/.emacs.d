@@ -195,7 +195,12 @@ MODE-FN the function to turn on the desired mode."
       ;; called. Because major modes wipe buffer local vars.
       (setq mor--orig-buffer orig-buff
             mor--start start
-            mor--end end))
+            mor--end end)
+      ;; show a header with useful keybind info. Like in `org-src-mode' does.
+      (set (make-local-variable 'header-line-format)
+           (substitute-command-keys
+            "[Copy back]: \\[mor-copy-back]  [Abort]: \\[mor-close-tmp-buffer]")))
+
     (mor-tmp-buffer-mode) ; for keybinds.
 
     (when mor-format-automatically-p

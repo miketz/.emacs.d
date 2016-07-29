@@ -14,12 +14,17 @@
 ;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c.
 ;;;                                                   mnemonic: close
 ;;;
-;;; This is useful to interact with code in mutli-lanuage files.  Such as
+;;; This package is useful to work with code in mutli-lanuage files.  Such as
 ;;; javascript, css, and html mixed in one file.
-;;; It's also useful to interact with code in tecnical books, while viewing via
+;;;
+;;; It's also useful to interact with code in tecnical books; while viewing via
 ;;; eww-mode, text-mode, info-mode, etc.
-
-
+;;; Some Emacs compatible books:
+;;;   -- The `sicp' package on melpa is a great info-mode book.
+;;;   -- The Practical Common Lisp in html form.  View with eww.
+;;;   -- The Emacs Lisp intro, bundle with Emacs by default.  info-mode.
+;;;
+;;;
 ;;; NOTE: lexical binding is used as a potential micro-optimization for
 ;;; variable lookups.  This package *should* work whether lexical or dynamic
 ;;; binding is used.

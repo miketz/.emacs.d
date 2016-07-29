@@ -9,9 +9,9 @@
 ;;; `mor-prev-mode-on-region' does the same thing, but recalls the previously
 ;;; chosen mode.
 ;;;
-;;; Copy the text back with `mor-copy-back' or C-c b.
+;;; Copy the text back with `mor-copy-back' or C-x C-c b.
 ;;;                                            mnemonic: copy back
-;;; Abandon your edits with `mor-close-tmp-buffer' or C-c c.
+;;; Abandon your edits with `mor-close-tmp-buffer' or C-x C-c c.
 ;;;                                                   mnemonic: close
 ;;;
 ;;; This package is useful to work with code in mutli-lanuage files.  Such as
@@ -63,8 +63,10 @@ keybinds just help avoid keybind pollution, and reduce the risk of
 accidentally calling a function not relevant outside of a tmp buffer."
   :lighter " mor-tmp"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c b") #'mor-copy-back)
-            (define-key map (kbd "C-c c") #'mor-close-tmp-buffer)
+            (define-key map (kbd "C-x C-c b") #'mor-copy-back)
+            (define-key map (kbd "C-x C-c C-b") #'mor-copy-back)
+            (define-key map (kbd "C-x C-c c") #'mor-close-tmp-buffer)
+            (define-key map (kbd "C-x C-c C-c") #'mor-close-tmp-buffer)
             map))
 
 (defvar mor-readonly-for-extra-protection-p t

@@ -204,7 +204,7 @@ MODE-FN the function to turn on the desired mode."
 
     (mor-tmp-buffer-mode) ; for keybinds.
 
-    ;; show a header with useful keybind info. Like in `org-src-mode' does.
+    ;; show a header with useful keybind info. Like `org-src-mode' does.
     (set (make-local-variable 'header-line-format)
          (substitute-command-keys
           "[Copy back]: \\[mor-copy-back]  [Abort]: \\[mor-close-tmp-buffer]"))

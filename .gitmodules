@@ -10,3 +10,6 @@
 [submodule "notElpa/slime"]
 	path = notElpa/slime
 	url = https://github.com/slime/slime
+[submodule "notElpa/mine/mor"]
+	path = notElpa/mine/mor
+	url = https://github.com/miketz/mor

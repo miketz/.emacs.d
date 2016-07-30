@@ -3771,28 +3771,29 @@ Region defined by START and END is automaticallyl detected by
 ;;     (switch-to-buffer buf)))
 
 ;;;-----------------------------------------------------------------------------
-;;; mor.el in ~/.emacs.d/notElpa/mine
+;;; mor.el in ~/.emacs.d/notElpa/mine/mor/mor.el
+;;; now renamed to mode-on-region.el
 ;;; Create a new buffer, stuff text in it, turn on mode.
 ;;;-----------------------------------------------------------------------------
-(autoload #'mor-mode-on-region "mor" nil t)
-(autoload #'mor-prev-mode-on-region "mor" nil t)
-
-(when my-use-evil-p
-  (eval-after-load "evil"
-    '(progn
-       (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
-       (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region))))
-
-(with-eval-after-load "mor"
-  ;; these values are the defaults, but setting them anyway so it's easy to
-  ;; change them later.
-  (setq mor-format-automatically-p nil
-        mor-switch-buff-fn #'switch-to-buffer-other-window)
-
-  ;; NOTE: replaced these global bindings with minor mode bindigns
-  ;; (global-set-key (kbd "C-c b") #'mor-copy-back)        ; mnemonic: copy back
-  ;; (global-set-key (kbd "C-c c") #'mor-close-tmp-buffer) ; mnemonic: close
-  )
+(add-to-list 'load-path "~/.emacs.d/notElpa/mine/mor")
+(autoload #'mor-mode-on-region "mode-on-region" nil t)
+(autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
+;; configure
+(setq mor-format-automatically-p nil)
+(setq mor-readonly-for-extra-protection-p t)
+;; recommended keybinds for vanilla Emacs.  Press "C-c m" with text highlighted.
+(global-set-key (kbd "C-c m") #'mor-mode-on-region)
+(global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
+;; recommended keybinds for evil users.  Press "m" in visual mode.
+(eval-after-load "evil"
+  '(progn
+     (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+     (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)))
+;; recommended keybinds for the tmp buffer. Both Vanilla and Evil.
+(eval-after-load "mode-on-region"
+  '(progn
+     (define-key mor-tmp-buffer-mode-map (kbd "C-c b") #'mor-copy-back)
+     (define-key mor-tmp-buffer-mode-map (kbd "C-c c") #'mor-close-tmp-buffer)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Focus javascript

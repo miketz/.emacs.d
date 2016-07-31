@@ -4749,19 +4749,16 @@ in frame.  Stop displaying shell in all other windows."
 ;;(global-set-key "\C-x\C-b" 'bs-show)
 
 
-;; if we havn't bound leader-b to buffer switching yet, then default to ibuffer.
+;; if we havn't bound leader-b to buffer switching yet.
 (when (or (eq my-curr-computer 'raspberry-pi)
           (and (not my-use-helm-p)
                (not my-use-ido-p)
                (not my-use-ivy-p)
                (not (eq my-narrow-type 'sallet))))
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'ibuffer))
-  ;; (evil-leader/set-key "b" #'ido-switch-buffer)
-  ;; (global-set-key (kbd "M-/") #'hippie-expand)
-  ;; (evil-leader/set-key "b" #'ivy-switch-buffer)
-  ;; (evil-leader/set-key "b" #'ibuffer)
-  )
+    (evil-leader/set-key "b" #'switch-to-buffer)
+    ;;(evil-leader/set-key "b" #'ibuffer)
+    ))
 
 ;;ibuffer. the way C-x C-b should be.
 (global-set-key (kbd "C-x C-b") #'ibuffer)

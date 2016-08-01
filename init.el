@@ -62,6 +62,18 @@
 ;;;     # push changes to remote fork
 ;;;     git push origin master
 
+;;;-----------------------------------------------------------------------------
+;;; Initialize a git submodule
+;;;-----------------------------------------------------------------------------
+;;; Clone recursively
+;;;     git clone --recursive <URL-OF-REPOSITORY>
+;;;
+;;; Or initialize manually. (cd to the folder first???)
+;;;     git submodule init
+;;;     git submodule update
+;;; Then after a git pull
+;;;     git submodule update --recursive
+
 ;;; Code:
 
 (progn ;; JUMPrestore

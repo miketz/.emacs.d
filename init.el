@@ -302,7 +302,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn #'swiper
   "Function for searching with an overview.
-Examples: helm-swoop swiper")
+Choices: helm-swoop swiper")
 (when my-use-evil-p
   (with-eval-after-load "evil"
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))

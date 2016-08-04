@@ -1050,6 +1050,7 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'my-color-majapahit "my-color-majapahit" nil t)
 (autoload #'my-color-deeper-blue "my-color-deeper-blue" nil t)
 (autoload #'my-color-kosmos "my-color-kosmos" nil t)
+(autoload #'my-color-niflheim "my-color-niflheim" nil t)
 
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff

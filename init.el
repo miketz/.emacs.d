@@ -434,7 +434,8 @@ Choices: helm-swoop swiper")
     ace-link
     smart-tabs-mode
     lua-mode
-    ggtags)
+    ggtags
+    clojure-mode)
   "Packages I use from elpa/melpa.")
 
 
@@ -4608,6 +4609,16 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; TODO: fix for evil. evil-normal-state-map seems to take precedence.
   (define-key follow-mode-map (kbd "C-v") #'follow-scroll-up)
   (define-key follow-mode-map (kbd "M-v") #'follow-scroll-down))
+
+;;;-----------------------------------------------------------------------------
+;;; clojure-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "clojure-mode"
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (rainbow-delimiters-mode-enable)
+              (enable-paredit-mode)
+              (lispy-mode))))
 
 
 ;;;-----------------------------------------------------------------------------

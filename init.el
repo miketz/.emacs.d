@@ -3278,10 +3278,6 @@ and indent."
 
 ;;   (provide 'setup-cedet))
 
-;;;-----------------------------------------------------------------------------
-;;; cider
-;;;-----------------------------------------------------------------------------
-;;"C:\Program Files (x86)\Java\jre7\bin\java" -cp clojure-1.6.0.jar clojure.main
 
 ;;;-----------------------------------------------------------------------------
 ;;; aggressive-indent. Turning off for now since lispy makes it easy to keep

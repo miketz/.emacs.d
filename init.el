@@ -435,7 +435,8 @@ Choices: helm-swoop swiper")
     smart-tabs-mode
     lua-mode
     ggtags
-    clojure-mode)
+    clojure-mode
+    cider)
   "Packages I use from elpa/melpa.")
 
 
@@ -4615,6 +4616,16 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "clojure-mode"
   (add-hook 'clojure-mode-hook
+            (lambda ()
+              (rainbow-delimiters-mode-enable)
+              (enable-paredit-mode)
+              (lispy-mode))))
+
+;;;-----------------------------------------------------------------------------
+;;; cider
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "cider-repl"
+  (add-hook 'cider-repl-mode-hook
             (lambda ()
               (rainbow-delimiters-mode-enable)
               (enable-paredit-mode)

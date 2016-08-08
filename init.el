@@ -421,7 +421,7 @@ Choices: helm-swoop swiper")
     electric-spacing
     ;;w3
     ;;w3m
-    flymake-jslint
+    ;;flymake-jslint
     nlinum
     ;;ido-vertical-mode
     ;;ido-grid-mode
@@ -4174,9 +4174,9 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; flymake-jslint
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "flymake-jslint"
-  (setq flymake-jslint-command "jslint")
-  (setq flymake-jslint-args nil))
+;; (with-eval-after-load "flymake-jslint"
+;;   (setq flymake-jslint-command "jslint")
+;;   (setq flymake-jslint-args nil))
 
 ;;;-----------------------------------------------------------------------------
 ;;; nlinum

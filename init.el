@@ -4620,6 +4620,14 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; cider
 ;;;-----------------------------------------------------------------------------
+(with-eval-after-load "cider"
+  (when (eq my-curr-computer 'work-laptop)
+    (add-to-list 'exec-path "C:/Users/mtz/.lein/bin")))
+
+;; (with-eval-after-load "cider-interaction"
+;;   (when my-use-evil-p
+;;     (evil-leader/set-key-for-mode 'clojure-mode "e" #'cider-eval-last-sexp)))
+
 (with-eval-after-load "cider-repl"
   (add-hook 'cider-repl-mode-hook
             (lambda ()

@@ -2360,7 +2360,9 @@ cases."
                           (awk-mode . "awk")
                           (other . "linux")))
   ;;(setq-default c-default-style "java")
-  (setq my-indent-width-c 5)
+
+  ;; NOTE: sometimes I use a different tab-width for c
+  (setq my-indent-width-c my-indent-width)
   (setq-default c-basic-offset my-indent-width-c) ;tab width
   (setq-default c-electric-flag t)
   (setq-default c-electric-pound-behavior '(alignleft))
@@ -4502,8 +4504,8 @@ When ARG isn't nil, try to pretty print the sexp."
               ;; keeps comments closer to the code. buffer local
               (setq comment-column 1)
 
-              ;; slightly larger tab-width for python.
-              (setq tab-width 5)
+              ;; NOTE: sometimes I use a larger tab-width for python
+              (setq tab-width my-indent-width)
               (setq indent-tabs-mode t)
 
               (smart-tabs-mode-enable)

@@ -4629,6 +4629,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;     (evil-leader/set-key-for-mode 'clojure-mode "e" #'cider-eval-last-sexp)))
 
 (with-eval-after-load "cider-repl"
+  (setq cider-repl-display-help-banner nil) ;; disable wall of text.
+
   (add-hook 'cider-repl-mode-hook
             (lambda ()
               (rainbow-delimiters-mode-enable)

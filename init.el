@@ -4622,7 +4622,10 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "cider"
   (when (eq my-curr-computer 'work-laptop)
-    (add-to-list 'exec-path "C:/Users/mtz/.lein/bin")))
+    (add-to-list 'exec-path "C:/Users/mtz/.lein/bin")
+    ;; 7zip so source lookup will work
+    ;; (add-to-list 'exec-path "C:/Users/mtz/programs/7zip")
+    ))
 
 ;; (with-eval-after-load "cider-interaction"
 ;;   (when my-use-evil-p

@@ -4636,6 +4636,9 @@ When ARG isn't nil, try to pretty print the sexp."
 (with-eval-after-load "cider-repl"
   (setq cider-repl-display-help-banner nil) ;; disable wall of text.
 
+  ;; emulate some SLIME keybinds
+  (define-key cider-repl-mode-map (kbd "C-c M-o") #'cider-repl-clear-buffer)
+
   (add-hook 'cider-repl-mode-hook
             (lambda ()
               (rainbow-delimiters-mode-enable)

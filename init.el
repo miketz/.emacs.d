@@ -4623,6 +4623,10 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; cider
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "cider"
+
+  ;; when looking up docs with C-c C-c C-d, pop up the doc immediately.
+  (setq cider-prompt-for-symbol nil)
+
   (when (eq my-curr-computer 'work-laptop)
     (add-to-list 'exec-path "C:/Users/mtz/.lein/bin")
     ;; 7zip so source lookup will work

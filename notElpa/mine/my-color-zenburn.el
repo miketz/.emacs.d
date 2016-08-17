@@ -31,6 +31,7 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   '(cider-fringe-good-face ((t (:foreground "lime green"))))
    '(cider-result-overlay-face ((t (:foreground "orange"))))
 
    '(org-agenda-calendar-event ((t (:background "black"))))

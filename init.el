@@ -4649,6 +4649,21 @@ When ARG isn't nil, try to pretty print the sexp."
               (enable-paredit-mode)
               (lispy-mode))))
 
+;;;-----------------------------------------------------------------------------
+;;; custom-file.
+;;; Settings saved from the menu -> Options -> Save Options.
+;;;-----------------------------------------------------------------------------
+(defconst my-load-custom-file-p nil
+  "When t load the external custom file on start up.")
+
+;; Store saved settings in a separate file. To keep init.el clean.
+;; Also custom.el will be kept out of source control. As it will tend to have
+;; many machine specific things like fonts, etc. I don't use the Save Options
+;; feature so I'm not concerned about those settings escaping source control.
+(setq custom-file "~/.emacs.d/custom.el")
+
+(when my-load-custom-file-p
+  (load custom-file))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

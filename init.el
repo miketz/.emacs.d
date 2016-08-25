@@ -3593,7 +3593,7 @@ and indent."
       (interactive)
       (let ((ivy-height 1000))
         (call-interactively #'counsel-tmm)))
-    (global-set-key (kbd "C-c m") #'my-counsel-tmm)
+    ;; (global-set-key (kbd "C-c m") #'my-counsel-tmm)
 
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)

@@ -1894,7 +1894,7 @@ To make it human readable."
       (let ((pos 0))
         (while (not (null pos))
           (setq pos (search-forward "&#xD;&#xA;" nil t))
-          (when (not (null pos))
+          (unless (null pos)
             (newline)))))))
 
 ;;;-----------------------------------------------------------------------------
@@ -4685,7 +4685,7 @@ in frame.  Stop displaying shell in all other windows."
         (delete-other-windows)
       (when (eq 1 (count-windows))
         (split-window-vertically))
-      (when (not (eq (window-buffer) shellbuf))
+      (unless (eq (window-buffer) shellbuf)
         (other-window 1)))
     ;; undisplay shell in other windows (on other devices)
     (and shellbuf

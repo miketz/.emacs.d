@@ -4663,7 +4663,8 @@ When ARG isn't nil, try to pretty print the sexp."
 (setq custom-file "~/.emacs.d/custom.el")
 
 (when my-load-custom-file-p
-  (load custom-file))
+  (when (file-exists-p custom-file)
+    (load custom-file)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

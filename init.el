@@ -317,51 +317,52 @@ Choices: helm-swoop swiper")
 
 ;; TODO: specify if it should use elpa or melpa version of a package.
 (defvar my-packages
-  `(s ;; string library
-    evil
-    evil-leader
+  `((s) ;; string library
+    (evil)
+    (evil-leader)
     ;;evil-escape
     ;;evil-matchit
     ;;evil-snipe
     ;;evil-god-state
     ;;evil-surround
-    key-chord
-    slime
+    (key-chord)
+    (slime (wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))
     ;;sly
-    paredit
+    (paredit)
     ;;paxedit
     ;;smartparens
     ;;redshank
     ;;auto-complete
     ;;ac-slime
-    company
-    company-web
+    (company)
+    (company-web)
     ;;company-quickhelp
-    slime-company
+    (slime-company (wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))
     ;;ace-jump-mode
-    ace-window
+    (ace-window)
     ;;ace-jump-zap
-    csharp-mode
-    js2-mode
-    js2-highlight-vars
-    skewer-mode
-    json-mode
+    (csharp-mode)
+    (js2-mode)
+    (js2-highlight-vars)
+    (skewer-mode)
+    (json-mode)
     ;;ac-js2
-    web-beautify
-    helm
-    helm-cmd-t
-    helm-swoop
+    (web-beautify)
+    (helm)
+    (helm-cmd-t (work-laptop))
+    (helm-swoop)
+    (helm-w32-launcher (work-laptop))
     ;;helm-git-grep ;search text of files.
     ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
     ;;icicles
     ;;projectile
     ;;clippy
     ;;yasnippet
-    rainbow-delimiters
-    rainbow-mode
-    expand-region
+    (rainbow-delimiters)
+    (rainbow-mode)
+    (expand-region)
     ;;multiple-cursors
-    ;;omnisharp
+    ;;(omnisharp (work-laptop))
     ;; zenburn-theme
     ;; firebelly-theme
     ;; niflheim-theme
@@ -375,92 +376,75 @@ Choices: helm-swoop swiper")
     ;; tommyh-theme
     ;; majapahit-theme
     ;;sublimity
-    nyan-mode
-    nyan-prompt
+    (nyan-mode)
+    (nyan-prompt)
     ;;powerline
     ;;dired-details ;default feature in emacs 24.4+
-    web-mode
-    htmlize
-    magit
-    vimrc-mode
-    sicp
+    (web-mode)
+    (htmlize)
+    (magit)
+    (vimrc-mode)
+    (sicp)
     ;;neotree
-    num3-mode
-    powershell
-    irony
-    company-irony
-    flycheck-irony
-    rtags
+    (num3-mode)
+    (powershell)
+    (irony (work-laptop wild-dog))
+    (company-irony (work-laptop wild-dog))
+    (flycheck-irony (work-laptop wild-dog))
+    ;;(rtags)
     ;;aggressive-indent
-    sx
-    leerzeichen
+    (sx)
+    (leerzeichen)
     ;;sql-indent
-    darkroom
+    (darkroom)
     ;;vim-empty-lines-mode
-    fill-column-indicator
-    flycheck
-    hydra
+    (fill-column-indicator)
+    (flycheck)
+    (hydra)
     ;;linum-relative
-    guide-key
-    unkillable-scratch
-    speed-type
-    bug-hunter
-    ivy
-    swiper
-    flx ;; can be used by ivy for ordering flx matches.
-    counsel
+    (guide-key)
+    (unkillable-scratch)
+    (speed-type)
+    (bug-hunter)
+    (ivy)
+    (swiper)
+    (flx) ;; can be used by ivy for ordering flx matches.
+    (counsel)
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
-    smex ;; can be used by `counsel-M-x'
-    avy
+    (smex) ;; can be used by `counsel-M-x'
+    (avy)
     ;;helm-flycheck
-    lispy
+    (lispy)
     ;;helm-descbinds
-    worf
-    elisp-slime-nav
-    electric-spacing
+    (worf)
+    (elisp-slime-nav)
+    (electric-spacing)
     ;;w3
     ;;w3m
     ;;flymake-jslint
-    nlinum
+    (nlinum)
     ;;ido-vertical-mode
     ;;ido-grid-mode
-    ido-ubiquitous
-    flx-ido
-    ov
-    highlight-tail
-    function-args
-    highlight-indent-guides
-    ace-link
-    smart-tabs-mode
-    lua-mode
-    ggtags
-    clojure-mode
-    cider)
+    (ido-ubiquitous)
+    (flx-ido)
+    (ov)
+    (highlight-tail)
+    (function-args)
+    (highlight-indent-guides)
+    (ace-link)
+    (smart-tabs-mode)
+    (lua-mode)
+    (ggtags)
+    (clojure-mode)
+    (cider (work-laptop wild-dog)))
   "Packages I use from elpa/melpa.")
-
-
-;; (when (eq my-curr-computer 'work-laptop)
-;;   (add-to-list 'my-packages 'omnisharp))
-(when (eq system-type 'windows-nt)
-  (add-to-list 'my-packages 'helm-w32-launcher))
 
 (require 'package)
 (add-to-list 'package-archives
              ;;'("melpa" . "http://melpa.milkbox.net/packages/")
              '("melpa" . "http://melpa.org/packages/")
              t)
-;; (cl-mapc 'add-to-list
-;;          '(package-archives package-archives)
-;;          '(("melpa" . "http://melpa.milkbox.net/packages/")
-;;            ("marmalade" . "http://marmalade-repo.org/packages/"))
-;;          '(t t))
-
-;; (setq package-archives
-;;       '(("gnu" . "http://elpa.gnu.org/packages/")
-;;         ("melpa" . "http://melpa.milkbox.net/packages/")
-;;         ("marmalade" . "http://marmalade-repo.org/packages/")))
-
 
 ;; (setq package-enable-at-startup nil)
 (package-initialize) ;; activate all the packages (in particular autoloads)
@@ -475,9 +459,13 @@ Installs packages in the list `my-packages'."
     (package-refresh-contents))
 
   ;; install the missing packages
-  (dolist (pkg my-packages)
-    (unless (package-installed-p pkg)
-      (package-install pkg))))
+  (dolist (obj my-packages)
+    (let ((pkg (first obj))
+          (comp-lst (second obj)))
+      (when (or (null comp-lst)         ; no computer filters
+                (member pkg comp-lst))  ; member of computer filter
+        (unless (package-installed-p pkg)
+          (package-install pkg))))))
 
 (my-install-packages)
 
@@ -490,17 +478,17 @@ Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
     (package-menu-mark-upgrades)
     (package-menu-execute t)))
 
-(defun package-list-unaccounted-packages ()
-  "Display unaccounted packages.
-Like `package-list-packages', but only show packages that are installed and not
-in `my-packages'.  Useful for cleaning out unwanted packages."
-  (interactive)
-  (package-show-package-list
-   (remove-if-not (lambda (x)
-                    (and (not (memq x my-packages))
-                         (not (package-built-in-p x))
-                         (package-installed-p x)))
-                  (mapcar 'car package-archive-contents))))
+;; (defun package-list-unaccounted-packages ()
+;;   "Display unaccounted packages.
+;; Like `package-list-packages', but only show packages that are installed and not
+;; in `my-packages'.  Useful for cleaning out unwanted packages."
+;;   (interactive)
+;;   (package-show-package-list
+;;    (remove-if-not (lambda (x)
+;;                     (and (not (memq x my-packages))
+;;                          (not (package-built-in-p x))
+;;                          (package-installed-p x)))
+;;                   (mapcar 'car package-archive-contents))))
 
 
 
@@ -3354,7 +3342,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; helm-w32-launcher. Microsoft Windows only?
 ;;;-----------------------------------------------------------------------------
-(when (eq system-type 'windows-nt)
+(when (fboundp #'helm-w32-launcher) ;;(eq system-type 'windows-nt)
   (global-set-key (kbd "C-c w") #'helm-w32-launcher))
 
 ;;;-----------------------------------------------------------------------------

@@ -462,8 +462,9 @@ Installs packages in the list `my-packages'."
   (dolist (obj my-packages)
     (let ((pkg (first obj))
           (comp-lst (second obj)))
-      (when (or (null comp-lst)         ; no computer filters
-                (member pkg comp-lst))  ; member of computer filter
+      ;; when no computer filter or member of filter
+      (when (or (null comp-lst)
+                (member my-curr-computer comp-lst))
         (unless (package-installed-p pkg)
           (package-install pkg))))))
 

@@ -482,17 +482,18 @@ Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
     (package-menu-mark-upgrades)
     (package-menu-execute t)))
 
-;; (defun package-list-unaccounted-packages ()
-;;   "Display unaccounted packages.
-;; Like `package-list-packages', but only show packages that are installed and not
-;; in `my-packages'.  Useful for cleaning out unwanted packages."
-;;   (interactive)
-;;   (package-show-package-list
-;;    (remove-if-not (lambda (x)
-;;                     (and (not (memq x my-packages))
-;;                          (not (package-built-in-p x))
-;;                          (package-installed-p x)))
-;;                   (mapcar 'car package-archive-contents))))
+(defun package-list-unaccounted-packages ()
+  "Display unaccounted packages.
+Like `package-list-packages', but only show packages that are installed and not
+in `my-packages'.  Useful for cleaning out unwanted packages."
+  (interactive)
+  (package-show-package-list
+   (let ((my-packs (mapcar #'first my-packages)))
+     (remove-if-not (lambda (x)
+                      (and (not (memq x my-packs))
+                           (not (package-built-in-p x))
+                           (package-installed-p x)))
+                    (mapcar 'car package-archive-contents)))))
 
 
 

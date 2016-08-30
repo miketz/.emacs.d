@@ -316,6 +316,9 @@ Choices: helm-swoop swiper")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
 ;; TODO: specify if it should use elpa or melpa version of a package.
+;; NOTE: to limit package intstallation to a specific computer(s), include
+;; the computer name(s) in a list as the 2cd item. Computer name must match
+;; `my-curr-computer'.
 (defvar my-packages
   `((s) ;; string library
     (evil)

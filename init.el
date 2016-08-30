@@ -304,7 +304,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
 (when my-use-evil-p
-  (with-eval-after-load "evil"
+  (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
 ;;;-----------------------------------------------------------------------------
@@ -532,19 +532,20 @@ Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
 
 (when my-use-evil-p
 
-  (with-eval-after-load "key-chord"
+  (with-eval-after-load 'key-chord
     (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
                                         ; key of a chord.
     (setq key-chord-one-key-delay 0.4))
 
-  (with-eval-after-load "helm"
+  (with-eval-after-load "helm" ;; TODO: see if this is correct in the latest
+                               ;; versions of helm.
     ;; must be in eval-after-load so `helm-map' is defined
     (key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
   ;; (with-eval-after-load "ivy"
   ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
 
-  (with-eval-after-load "evil"
+  (with-eval-after-load 'evil
     ;; must be in eval-after-load so key maps are defined.
     (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
     (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
@@ -640,7 +641,7 @@ Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
 ;;;-----------------------------------------------------------------------------
 ;;; evil
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "evil"
+(with-eval-after-load 'evil
 
   ;; unset some keys. It seems other modes have trouble overriding them when
   ;; it's set in evil?
@@ -1196,7 +1197,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;; SLIME
 ;;;-----------------------------------------------------------------------------
 ;; (require 'slime-autoloads)
-(with-eval-after-load "slime"
+(with-eval-after-load 'slime
 
   (when my-use-evil-p
     ;; use emacs bindings in the repl. It's the only way i can get C-n and C-p
@@ -1405,7 +1406,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; (require 'company)
 (add-hook 'after-init-hook 'global-company-mode) ;all buffers
 
-(with-eval-after-load "company"
+(with-eval-after-load 'company
   (when my-use-evil-p
     ;; C-Space like Visual Studio
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
@@ -1452,7 +1453,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;-----------------------------------------------------------------------------
 ;;; company-web
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "web-mode"
+(with-eval-after-load 'web-mode
   (add-to-list 'company-backends 'company-web-html)
   (add-to-list 'company-backends 'company-web-jade)
   (add-to-list 'company-backends 'company-web-slim)
@@ -1554,7 +1555,7 @@ This prevents overlapping themes; something I would rarely want."
                                (find-file-existing my-main-todo)))
     (evil-leader/set-key "a" #'org-agenda-list)))
 
-(with-eval-after-load "org"
+(with-eval-after-load 'org
   (setq org-startup-indented t)
   (setq org-log-done t) ; make timestamp when flagging something done
                         ; with C-c C-t
@@ -1621,7 +1622,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (define-key emacs-lisp-mode-map key #'align-let)
 ;;   (define-key lisp-interaction-mode-map key #'align-let))
 
-(with-eval-after-load "lisp-mode"
+(with-eval-after-load 'lisp-mode
   (autoload 'align-let "align-let" nil t)
   (define-key lisp-mode-shared-map (kbd "C-c C-a") #'align-let))
 
@@ -1640,7 +1641,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;(autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
-(with-eval-after-load "js2-mode"
+(with-eval-after-load 'js2-mode
   (setq-default
    js2-global-externs
    '("$" "module" "require" "buster" "sinon" "assert" "refute"
@@ -1792,7 +1793,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;-----------------------------------------------------------------------------
 ;;; json-mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "json-mode"
+(with-eval-after-load 'json-mode
   (add-hook 'json-mode-hook
             (lambda ()
               ;; TODO: figure out why `tab-width' is not working
@@ -1810,13 +1811,13 @@ This prevents overlapping themes; something I would rarely want."
   ;;   (add-to-list 'web-beautify-args "3")
   ;;   (add-to-list 'web-beautify-args "-m")
   ;;   )
-  (with-eval-after-load "js2-mode"
+  (with-eval-after-load 'js2-mode
     (define-key js2-mode-map (kbd "C-c b") #'web-beautify-js))
   ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-  (with-eval-after-load "js"
+  (with-eval-after-load 'js
     (define-key js-mode-map (kbd "C-c b") #'web-beautify-js))
 
-  (with-eval-after-load "json-mode"
+  (with-eval-after-load 'json-mode
     (define-key json-mode-map (kbd "C-c b") #'web-beautify-js))
 
   ;; (with-eval-after-load "sgml-mode"
@@ -1866,7 +1867,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;-----------------------------------------------------------------------------
 ;;; nxml
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "nxml-mode"
+(with-eval-after-load 'nxml-mode
   (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   (when my-use-evil-p
     ;; reclaim key M-h which nxml stole for`nxml-mark-paragraph'
@@ -2078,7 +2079,7 @@ To make it human readable."
 ;; (global-set-key (kbd "C-c C-s") #'helm-swoop)
 ;;(evil-leader/set-key "s" #'helm-multi-swoop-all)
 
-(with-eval-after-load "helm-swoop"
+(with-eval-after-load 'helm-swoop
   ;;Prevent swoop from grabbing the text under the cursor. I rarely want that.
   (setq helm-swoop-pre-input-function
         (lambda () ""))
@@ -2178,7 +2179,7 @@ To make it human readable."
                   #'execute-extended-command) ; rebind the original M-x command
   )
 
-(with-eval-after-load "ido"
+(with-eval-after-load 'ido
 
   (when my-use-ido-p ;; GAURD against calling ido-ubiquitous-mode.
 
@@ -2214,16 +2215,16 @@ To make it human readable."
                 (funcall ,ido-cannot-complete-command)))))
       ad-do-it)))
 
-(with-eval-after-load "flx-ido"
+(with-eval-after-load 'flx-ido
   ;; disable ido faces to see flx highlights.
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
 
-(with-eval-after-load "ido-vertical-mode"
+(with-eval-after-load 'ido-vertical-mode
   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
   (setq ido-vertical-show-count t))
 
-(with-eval-after-load "smex"
+(with-eval-after-load 'smex
   (when my-use-ido-p ;; GUARD: smex is used for `counsel-M-x' too where this
                      ;; advice is not needed.
    ;; insert a hypen - on space like in normal M-x
@@ -2263,7 +2264,7 @@ To make it human readable."
 ;; (autoload 'yasnippet "yasnippet" "yasnippet mode" t)
 (autoload #'snippet-mode "yasnippet" "A mode for editing yasnippets" t)
 
-(with-eval-after-load "yasnippet"
+(with-eval-after-load 'yasnippet
   ;; so custom snippets are not overwritten when updating from melpa.
   (yas-load-directory "~/.emacs.d/snippets")
 
@@ -2330,7 +2331,7 @@ cases."
       "C:/Users/mtz/programs/libc-html_node/libc/"
       "Function-Index.html#Function-Index"))))
 
-(with-eval-after-load "cc-mode"
+(with-eval-after-load 'cc-mode
   ;; (assoc "cc-mode" c-style-alist)
   ;; (assoc "user" c-style-alist)
   ;; (assoc "c#" c-style-alist)
@@ -2472,7 +2473,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; Dired
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "dired" ; dired -> dired.el in `load-path'
+(with-eval-after-load 'dired ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
 
@@ -2530,7 +2531,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; sql-mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "sql"
+(with-eval-after-load 'sql
   (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
   (add-hook 'sql-mode-hook #'electric-pair-mode)
   (add-hook #'sql-mode-hook
@@ -2621,7 +2622,7 @@ and indent."
 ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
 
-(with-eval-after-load "paredit"
+(with-eval-after-load 'paredit
   ;; Stop SLIME's REPL from grabbing DEL,
   ;; which is annoying when backspacing over a '('
   (defun override-slime-repl-bindings-with-paredit ()
@@ -2663,7 +2664,7 @@ and indent."
   ;; (add-hook 'csharp-mode-hook
   ;;           'omnisharp-mode) ; turn on automatically for C# files.
 
-  (with-eval-after-load "omnisharp"
+  (with-eval-after-load 'omnisharp
 
     ;; TODO; figure out why the M-. keybind is not setting. M-, seems to work.
     (define-key omnisharp-mode-map (kbd "M-.") #'omnisharp-go-to-definition)
@@ -2783,7 +2784,7 @@ and indent."
   (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
   (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1))
 
-(with-eval-after-load "avy"
+(with-eval-after-load 'avy
   ;; make keys like ace-jump. Lots of letters means more likey to need only 1
   ;; overlay char.
   (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
@@ -2824,15 +2825,15 @@ and indent."
   ;;       load of the ace-link feature!
   ;;       Discovered by `profile-emacs.el'
   (setq key "o")
-  (with-eval-after-load "info"
+  (with-eval-after-load 'info
     (define-key Info-mode-map key #'ace-link-info))
-  (with-eval-after-load "compile"
+  (with-eval-after-load 'compile
     (define-key compilation-mode-map key #'ace-link-compilation))
-  (with-eval-after-load "help-mode"
+  (with-eval-after-load 'help-mode
     (define-key help-mode-map key #'ace-link-help))
-  (with-eval-after-load "woman"
+  (with-eval-after-load 'woman
     (define-key woman-mode-map key #'ace-link-woman))
-  (with-eval-after-load "eww"
+  (with-eval-after-load 'eww
     (define-key eww-link-keymap key #'ace-link-eww)
     (define-key eww-mode-map key #'ace-link-eww))
   (with-eval-after-load 'cus-edit
@@ -2840,16 +2841,16 @@ and indent."
 
 
 (when my-use-evil-p
-  (with-eval-after-load "info"
+  (with-eval-after-load 'info
     (define-key Info-mode-map (kbd "o") #'ace-link-info))
-  (with-eval-after-load "compile"
+  (with-eval-after-load 'compile
     (define-key compilation-mode-map (kbd "o") #'ace-link-compilation))
-  (with-eval-after-load "help-mode"
+  (with-eval-after-load 'help-mode
     (define-key help-mode-map (kbd "o") #'ace-link-help))
-  (with-eval-after-load "woman"
+  (with-eval-after-load 'woman
     ;; TODO: test this binding
     (define-key woman-mode-map (kbd "o") #'ace-link-woman))
-  (with-eval-after-load "eww"
+  (with-eval-after-load 'eww
     (evil-define-key 'normal eww-link-keymap (kbd "o") #'ace-link-eww)
     (evil-define-key 'normal eww-mode-map (kbd "o") #'ace-link-eww))
   (with-eval-after-load 'cus-edit
@@ -2873,7 +2874,7 @@ and indent."
   ;; This is the emacs "copy" keybind. Don't steal it when using emacs bindings.
   (global-set-key (kbd "M-w") #'ace-window))
 
-(with-eval-after-load "ace-window"
+(with-eval-after-load 'ace-window
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)) ;;home row
   (setq aw-background nil) ;; don't dim the background
   )
@@ -3021,7 +3022,7 @@ and indent."
 ;;       ml
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 
-(with-eval-after-load "vc"
+(with-eval-after-load 'vc
   (add-to-list 'vc-directory-exclusion-list "bin")
   (add-to-list 'vc-directory-exclusion-list "obj")
   (when my-use-evil-p
@@ -3086,7 +3087,7 @@ and indent."
 ;; (add-hook 'html-mode-hook 'skewer-html-mode)
 ;; (add-hook 'web-mode-hook 'skewer-html-mode)
 
-(with-eval-after-load "skewer-mode"
+(with-eval-after-load 'skewer-mode
 ;;   (defun my-skewer-repl-clear-buffer ()
 ;;     "Deletes the contents of the skewer-reple buffer.
 ;; Depends on evil mode."
@@ -3189,7 +3190,7 @@ and indent."
 ;; (setq browse-url-browser-function ; default for opening links.
 ;;       'eww-browse-url)
 
-(with-eval-after-load "eww"
+(with-eval-after-load 'eww
   (when (eq my-curr-computer 'work-laptop)
     (setq eww-download-directory "C:/Users/mtz/Downloads"))
 
@@ -3230,7 +3231,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; w3
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "w3"
+(with-eval-after-load 'w3
   (defun my-w3-goto (url)
     (let ((w3--args nil) ; prevents errors when loading CL hyperspec pages on
                          ; local disk
@@ -3295,7 +3296,7 @@ and indent."
 (when my-use-evil-p
   (evil-leader/set-key "m" #'magit-status)) ; autoloaded
 
-(with-eval-after-load "magit"
+(with-eval-after-load 'magit
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (when my-use-evil-p
@@ -3329,7 +3330,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; ediff
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "ediff"
+(with-eval-after-load 'ediff
   (setq ediff-split-window-function #'split-window-horizontally)
   ;; don't use the popup window
   (setq ediff-window-setup-function
@@ -3369,7 +3370,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;; (require 'darkroom)
 (autoload 'darkroom-mode "darkroom" "darkroom-mode" t)
-(with-eval-after-load "darkroom"
+(with-eval-after-load 'darkroom
   (setq darkroom-margins 0.15)
   ;;nil keeps margins close to the centered text.
   (setq darkroom-fringes-outside-margins nil))
@@ -3387,7 +3388,7 @@ and indent."
 ;; (add-hook 'prog-mode-hook (lambda ()
 ;;                             (fci-mode 1))) ; fci-mode is autloaded.
 
-(with-eval-after-load "fill-column-indicator"
+(with-eval-after-load 'fill-column-indicator
   (setq fci-rule-column 80)
   (setq fci-rule-width 1)
   (progn
@@ -3425,7 +3426,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; flycheck
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "flycheck"
+(with-eval-after-load 'flycheck
   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
   ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
@@ -3454,7 +3455,7 @@ and indent."
   ;; (define-key evil-motion-state-map (kbd "\\") #'my-choose-hydra)
   )
 
-(with-eval-after-load "hydra"
+(with-eval-after-load 'hydra
   (setq hydra-is-helpful t)
   ;; don't use window for hints. It seems to lock things up.
   ;; And window switcher mode really gets messed up.
@@ -3465,7 +3466,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; erc
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "erc"
+(with-eval-after-load 'erc
   (progn
     ;;from finster on irc #emacs. switch erc buffers
     ;; TODO; make it neutral to ido so i can use helm, swiper, default, etc.
@@ -3515,7 +3516,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;; (require 'guide-key)
 
-(with-eval-after-load "guide-key"
+(with-eval-after-load 'guide-key
   ;; (setq guide-key/guide-key-sequence
   ;;       '("C-x r" "C-x 4" "C-x v" "C-x 8" "C-x +"))
   (setq guide-key/idle-delay 1.0)       ;default
@@ -3599,7 +3600,7 @@ and indent."
       (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
       )))
 
-(with-eval-after-load "ivy"
+(with-eval-after-load 'ivy
   ;; TODO: fix keybind to `ivy-avy'. It seems to be triggering outside of
   ;;       ivy-mode-map. Commenting keybind for now.
   ;; (define-key ivy-mode-map (kbd "C-SPC") #'ivy-avy)
@@ -3661,7 +3662,7 @@ and indent."
 ;;             (t
 ;;              (error "unexpected"))))))
 
-(with-eval-after-load "counsel"
+(with-eval-after-load 'counsel
   ;; redefine `counsel--load-theme-action' to not require confirmation
   ;; TODO: find an alternative to redefine so I don't have to manually
   ;;       merge with the latest version of `counsel--load-theme-action'
@@ -3800,7 +3801,7 @@ Region defined by START and END is automaticallyl detected by
 ;;; Focus javascript
 ;;;-----------------------------------------------------------------------------
 ;; delay execution of this code until `web-mode' is turned on.
-(with-eval-after-load "web-mode"
+(with-eval-after-load 'web-mode
   ;;needed to bind a key for `js2-mode-map'.
   ;;(require 'cl) is also needed but occurs higher up in this file.
   (require 'js2-mode)
@@ -3953,7 +3954,7 @@ instead of narrowing."
 ;;;-----------------------------------------------------------------------------
 (add-hook 'lisp-mode-hook #'lispy-mode) ; for common lisp.
 
-(with-eval-after-load "lispy"
+(with-eval-after-load 'lispy
   ;; To improve start up speed move hooks to eval-after-load. Otherwise the
   ;; scratch buffer which uses `lisp-interaction-mode' will load lispy. The
   ;; first lispy start will be manual, then hooks be set up. On work-laptop
@@ -4024,7 +4025,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Info-mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "info"
+(with-eval-after-load 'info
   ;; rebind keys for vim friendliness.
   ;; orginial bindings. TODO: bind them to something else. Or just use M-x
   '((n Info-next)
@@ -4064,7 +4065,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; help mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "help-mode"
+(with-eval-after-load 'help-mode
   (when my-use-evil-p
     (define-key help-mode-map (kbd "s") my-swoop-fn)))
 
@@ -4128,7 +4129,7 @@ When ARG isn't nil, try to pretty print the sexp."
                 ielm-mode-hook))
   (add-hook hook 'turn-on-elisp-slime-nav-mode))
 
-(with-eval-after-load "elisp-slime-nav"
+(with-eval-after-load 'elisp-slime-nav
 
   (defun my-elisp-slime-nav-colored ()
     (interactive)
@@ -4178,7 +4179,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; sx
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "sx-tab"
+(with-eval-after-load 'sx-tab
   ;; TODO: this is not removing the 100 max limit. make it work.
   ;; using 'around' advice on `sx-tab-newest'
   (defadvice sx-tab-newest (around no-helm-limit)
@@ -4226,7 +4227,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
 ;; the key, and then key doesn't exist by the time the file loads. Just
 ;; duplicate the `kbd' for now
-(with-eval-after-load "evil"
+(with-eval-after-load 'evil
   (let ((esc (kbd "C-;")))
     (define-key evil-insert-state-map esc #'evil-normal-state)
     (define-key evil-visual-state-map esc #'evil-exit-visual-state)
@@ -4236,13 +4237,13 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key evil-replace-state-map esc #'evil-normal-state)))
 (with-eval-after-load "helm"
   (define-key helm-map (kbd "C-;") #'helm-keyboard-quit))
-(with-eval-after-load "ivy"
+(with-eval-after-load 'ivy
   (define-key ivy-mode-map (kbd "C-;") #'keyboard-escape-quit))
 
 ;;;-----------------------------------------------------------------------------
 ;;; list-processes
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "simple"
+(with-eval-after-load 'simple
 
   (defun my-delete-process-at-point ()
     (interactive)
@@ -4281,7 +4282,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 ;;******** whitespace-mode *******
 ;; (require 'whitespace)
-(with-eval-after-load "whitespace"
+(with-eval-after-load 'whitespace
   (setq-default whitespace-line-column 80)
   ;;(setq whitespace-style '(face lines-tail))
   (setq-default whitespace-style
@@ -4295,7 +4296,7 @@ When ARG isn't nil, try to pretty print the sexp."
  	;; sample: space before a tab.
 ;; sample: traliing white space.  
 
-(with-eval-after-load "prog-mode"
+(with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook (lambda ()
                               (whitespace-mode 1))))
 ;;(global-whitespace-mode 1)
@@ -4323,7 +4324,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; winner-mode
 ;;;-----------------------------------------------------------------------------
 (setq winner-dont-bind-my-keys t) ; doesn't work when set in eval-after-load.
-(with-eval-after-load "winner"
+(with-eval-after-load 'winner
   ;; reducing size from 200. Just need to facilitate a few quick undos.
   (setq winner-ring-size 8)
   (define-key winner-mode-map (kbd "C-c u") #'winner-undo)
@@ -4335,7 +4336,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; js2-highlight-vars
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "js2-highlight-vars"
+(with-eval-after-load 'js2-highlight-vars
 
   ;; re-define `js2--do-highlight-vars' without calling `top-level'.
   ;; The package author calls it to overcome some sort of bug in emacs, but
@@ -4412,7 +4413,7 @@ When ARG isn't nil, try to pretty print the sexp."
                                 nil
                                 'js2--do-highlight-vars)))))))
 
-(with-eval-after-load "js2-mode"
+(with-eval-after-load 'js2-mode
   (add-hook 'js2-mode-hook #'js2-highlight-vars-mode))
 
 
@@ -4479,7 +4480,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; python-mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "python"
+(with-eval-after-load 'python
 
   ;; use custom fn to avoid alignment issues with horizontal comments. Tabs
   ;; can't be used *after* code, only before. (otherwise alignment issues
@@ -4518,7 +4519,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; calendar
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "calendar"
+(with-eval-after-load 'calendar
   ;; default is 8 which *should* be correct but seems I need to bump up to 9
   ;; to stop the calendar window from resizing.
   (setq calendar-minimum-window-height 9)
@@ -4542,7 +4543,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; lua-mode
 ;;;-----------------------------------------------------------------------------
 ;; NOTE: auto-mode-alist is already taken care of in lua-mode-autoloads.el
-(with-eval-after-load "lua-mode"
+(with-eval-after-load 'lua-mode
   (setq lua-indent-level 2
         lua-default-application "luajit")
   (add-hook 'lua-mode-hook
@@ -4555,7 +4556,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; swift-mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "swift-mode"
+(with-eval-after-load 'swift-mode
   (add-hook 'swift-mode-hook
             (lambda ()
               (rainbow-delimiters-mode 1)
@@ -4565,7 +4566,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; ggtags
 ;;;-----------------------------------------------------------------------------
 ;; TODO: fix all the keybdings `ggtags-mode' clobbers. Like M-n, M-p.
-(with-eval-after-load "ggtags"
+(with-eval-after-load 'ggtags
   ;; doen'st work, added to windows path instead.
   ;; (when (eq my-curr-computer 'work-laptop)
   ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
@@ -4589,7 +4590,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (global-set-key (kbd "C-x f") #'my-follow-mode)
 
-(with-eval-after-load "follow"
+(with-eval-after-load 'follow
   ;; scroll the height of all windows combined, not just 1.
   ;; TODO: fix for evil. evil-normal-state-map seems to take precedence.
   (define-key follow-mode-map (kbd "C-v") #'follow-scroll-up)
@@ -4598,7 +4599,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; clojure-mode
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "clojure-mode"
+(with-eval-after-load 'clojure-mode
   (add-hook 'clojure-mode-hook
             (lambda ()
               (rainbow-delimiters-mode-enable)
@@ -4608,7 +4609,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; cider
 ;;;-----------------------------------------------------------------------------
-(with-eval-after-load "cider"
+(with-eval-after-load 'cider
 
   ;; when looking up docs with C-c C-c C-d, pop up the doc immediately.
   (setq cider-prompt-for-symbol nil)
@@ -4623,7 +4624,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;   (when my-use-evil-p
 ;;     (evil-leader/set-key-for-mode 'clojure-mode "e" #'cider-eval-last-sexp)))
 
-(with-eval-after-load "cider-repl"
+(with-eval-after-load 'cider-repl
   (setq cider-repl-display-help-banner nil) ;; disable wall of text.
 
   ;; emulate some SLIME keybinds
@@ -4940,7 +4941,7 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (progn ;; hightlight current line stuff
-  (with-eval-after-load "hl-line"
+  (with-eval-after-load 'hl-line
     (setq hl-line-sticky-flag nil)
     (setq global-hl-line-sticky-flag nil))
   ;; (global-hl-line-mode 1)

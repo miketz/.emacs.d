@@ -402,7 +402,7 @@ Choices: helm-swoop swiper")
     (flycheck)
     (hydra)
     ;;linum-relative
-    (guide-key)
+    ;;(guide-key)
     (unkillable-scratch)
     (speed-type)
     (bug-hunter)

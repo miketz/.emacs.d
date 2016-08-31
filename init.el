@@ -347,13 +347,13 @@ Choices: helm-swoop swiper")
     (csharp-mode)
     (js2-mode)
     (js2-highlight-vars)
-    (skewer-mode)
+    (skewer-mode (work-laptop))
     (json-mode)
     ;;ac-js2
     (web-beautify)
-    (helm)
+    (helm (work-laptop))
     (helm-cmd-t (work-laptop))
-    (helm-swoop)
+    (helm-swoop (work-laptop))
     (helm-w32-launcher (work-laptop))
     ;;helm-git-grep ;search text of files.
     ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.

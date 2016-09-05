@@ -1085,10 +1085,13 @@ This prevents overlapping themes; something I would rarely want."
 
   (cond
    ((eq my-curr-computer 'wild-dog)
+    (set-frame-font
+     (concat "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-"
+             "iso10646-1"))
     ;; (set-frame-font
     ;;  "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    (set-frame-font
-     "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
+    ;; (set-frame-font
+    ;;  "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
     ;; (set-frame-font
     ;;  "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
     ;; (set-frame-font

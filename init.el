@@ -1252,6 +1252,7 @@ This prevents overlapping themes; something I would rarely want."
   ;; disable the banner header line in repl.
   ;; TODO: get rid of the date string that replaces it too.
   (setq slime-header-line-p nil)
+  (setq slime-startup-animation nil) ; disable text animation on repl start.
 
   ;; (require 's)
   ;; (setq slime-words-of-encouragement
@@ -1263,21 +1264,21 @@ This prevents overlapping themes; something I would rarely want."
 
 
   ;; redefine `slime-startup-message' to work how I want
-  (defun slime-startup-message ()
-    (when slime-header-line-p
-      (setq header-line-format
-            (format "%s  Port: %s  Pid: %s"
-                    (slime-lisp-implementation-type)
-                    (slime-connection-port (slime-connection))
-                    (slime-pid))))
-    (when (zerop (buffer-size))
-      (let* ((orig-welcome (concat "; SLIME " slime-version))
-             (welcome (concat orig-welcome "   "
-                              ;; (slime-random-words-of-encouragement)
-                              (nth 5 slime-words-of-encouragement))))
-        (if slime-startup-animation
-            (animate-string welcome 0 0)
-          (insert welcome)))))
+  ;; (defun slime-startup-message ()
+  ;;   (when slime-header-line-p
+  ;;     (setq header-line-format
+  ;;           (format "%s  Port: %s  Pid: %s"
+  ;;                   (slime-lisp-implementation-type)
+  ;;                   (slime-connection-port (slime-connection))
+  ;;                   (slime-pid))))
+  ;;   (when (zerop (buffer-size))
+  ;;     (let* ((orig-welcome (concat "; SLIME " slime-version))
+  ;;            (welcome (concat orig-welcome "   "
+  ;;                             ;; (slime-random-words-of-encouragement)
+  ;;                             (nth 5 slime-words-of-encouragement))))
+  ;;       (if slime-startup-animation
+  ;;           (animate-string welcome 0 0)
+  ;;         (insert welcome)))))
 
   (progn
     (when (eq my-curr-computer 'wild-dog)

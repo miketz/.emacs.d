@@ -283,7 +283,7 @@ Just a convenience to avoid checks agaisnt `my-ui-type'.")
 (defvar my-narrow-type 'ivy
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
-Choices: ivy ido helm sallet nil")
+Choices: ivy ido helm icicles sallet nil")
 
 ;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -3052,8 +3052,10 @@ and indent."
 ;;;--------------------
 ;;; icicles
 ;;;--------------------
-;; (require 'icicles) ; Load this library.
-;; (icicle-mode 1)    ; Turn on Icicle mode.
+(when (and (eq my-narrow-type 'icicles)
+           (fboundp #'icicle-mode)) ; package installed. autoloaded fn
+  (require 'icicles)
+  (icicle-mode 1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; web-mode

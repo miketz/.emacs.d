@@ -1151,7 +1151,13 @@ This prevents overlapping themes; something I would rarely want."
                             :slant normal
                             :weight semi-bold
                             :height 120
-                            :width normal)))))))
+                            :width normal))))))
+
+   ;; unknown windows computer.
+   ((and (null my-curr-computer)
+         (eq system-type 'windows-nt))
+    (set-frame-font
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
 
   ;; rainbow delimiters colors for windows terminal (cmd)
   (when (and (not my-graphic-p)

@@ -328,6 +328,7 @@ Choices: helm-swoop swiper")
     ;;evil-snipe
     ;;evil-god-state
     ;;evil-surround
+    (pos-tip) ;; for pop up on eval with leader "e"
     (key-chord)
     (slime (wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))
     ;;sly

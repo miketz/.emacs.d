@@ -352,12 +352,14 @@ Choices: helm-swoop swiper")
     (json-mode)
     ;;ac-js2
     (web-beautify)
-    (helm (work-laptop))
-    (helm-cmd-t (work-laptop))
-    (helm-swoop (work-laptop))
-    (helm-w32-launcher (work-laptop))
-    ;;helm-git-grep ;search text of files.
-    ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
+    ;; (helm (work-laptop))
+    ;; (helm-cmd-t (work-laptop))
+    ;; (helm-swoop (work-laptop))
+    ;; (helm-w32-launcher (work-laptop))
+    ;; ;;helm-git-grep ;search text of files.
+    ;; ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
+    ;; ;;helm-flycheck
+    ;; ;;helm-descbinds
     ;;icicles
     ;;projectile
     ;;clippy
@@ -418,9 +420,7 @@ Choices: helm-swoop swiper")
     ;;svg-mode-line-themes ;; only works on gnu/linux
     (smex) ;; can be used by `counsel-M-x'
     (avy)
-    ;;helm-flycheck
     (lispy)
-    ;;helm-descbinds
     (worf)
     (elisp-slime-nav)
     (electric-spacing)
@@ -1846,32 +1846,32 @@ This prevents overlapping themes; something I would rarely want."
 ;; of external program js-beatify.
 ;; program
 ;; {
-;;     "indent_size": 4,
-;;     "indent_char": " ",
-;;     "eol": "\n",
-;;     "indent_level": 0,
-;;     "indent_with_tabs": false,
-;;     "preserve_newlines": true,
-;;     "max_preserve_newlines": 4,
-;;     "jslint_happy": true,
-;;     "space_after_anon_function": false,
-;;     "brace_style": "collapse",
-;;     "keep_array_indentation": false,
-;;     "keep_function_indentation": false,
-;;     "space_before_conditional": true,
-;;     "break_chained_methods": false,
-;;     "eval_code": false,
-;;     "unescape_strings": false,
-;;     "wrap_line_length": 0,
-;;     "wrap_attributes": "auto",
-;;     "wrap_attributes_indent_size": 4,
-;;     "end_with_newline": false,
-;;     "good-stuff" : true
-;; }
+    ;;     "indent_size": 4,
+    ;;     "indent_char": " ",
+    ;;     "eol": "\n",
+    ;;     "indent_level": 0,
+    ;;     "indent_with_tabs": false,
+    ;;     "preserve_newlines": true,
+    ;;     "max_preserve_newlines": 4,
+    ;;     "jslint_happy": true,
+    ;;     "space_after_anon_function": false,
+    ;;     "brace_style": "collapse",
+    ;;     "keep_array_indentation": false,
+    ;;     "keep_function_indentation": false,
+    ;;     "space_before_conditional": true,
+    ;;     "break_chained_methods": false,
+    ;;     "eval_code": false,
+    ;;     "unescape_strings": false,
+    ;;     "wrap_line_length": 0,
+    ;;     "wrap_attributes": "auto",
+    ;;     "wrap_attributes_indent_size": 4,
+    ;;     "end_with_newline": false,
+    ;;     "good-stuff" : true
+    ;; }
 
-;;;-----------------------------------------------------------------------------
-;;; ac-js2
-;;;-----------------------------------------------------------------------------
+    ;;;-----------------------------------------------------------------------------
+    ;;; ac-js2
+    ;;;-----------------------------------------------------------------------------
 ;; (when nil
 ;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
 ;;   (setq ac-js2-evaluate-calls t) ; requires connection to browser with

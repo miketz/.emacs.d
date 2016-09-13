@@ -38,7 +38,7 @@
                 (loop for gs from 0 to (1- group-size) do
                       (insert (my-getAtIndex (rand 0 chars-len)
                                              chars)))
-                (insert " "))
+                (unless (= gpl (1- groups-per-line)) ; skip space on last one
+                  (insert " ")))
           (insert "\n\n\n")))
   (next-line))
-

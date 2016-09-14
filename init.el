@@ -280,7 +280,7 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type 'ivy
+(defvar my-narrow-type nil
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
 Choices: ivy ido helm icicles sallet nil")
@@ -300,7 +300,9 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using ido at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn #'swiper
+(defvar my-swoop-fn (cond ((null my-narrow-type) #'occur)
+                          (my-use-helm-p #'helm-swoop)
+                          (t #'swiper))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
 (when my-use-evil-p

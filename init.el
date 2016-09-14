@@ -4706,6 +4706,13 @@ When ARG isn't nil, try to pretty print the sexp."
     (load custom-file)))
 
 ;;;-----------------------------------------------------------------------------
+;;; occur
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load "replace"         ; `occur' lives in replace.el
+  ;; automatically scroll buffer to matches like `swiper' or `helm-swoop'.
+  (add-hook 'occur-mode-hook #'next-error-follow-minor-mode))
+
+;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (defun my-win-count ()

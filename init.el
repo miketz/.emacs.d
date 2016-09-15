@@ -4709,8 +4709,39 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; occur
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load "replace"         ; `occur' lives in replace.el
-  ;; automatically scroll buffer to matches like `swiper' or `helm-swoop'.
-  (add-hook 'occur-mode-hook #'next-error-follow-minor-mode))
+  ;; ;; automatically scroll buffer to matches like `swiper' or `helm-swoop'.
+  ;; (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
+
+  (progn ;; functions copied from https://github.com/emacsfodder/occur-follow
+    (defun my--occur-move (move-fn)
+      (funcall move-fn)
+      (occur-mode-goto-occurrence-other-window)
+      ;; (hl-line-mode 1)
+      (recenter)
+      (other-window 1))
+    (defun my-occur-next ()
+      (interactive)
+      (my--occur-move #'occur-next))
+    (defun my-occur-prev ()
+      (interactive)
+      (my--occur-move #'occur-prev))
+
+    (define-key occur-mode-map (kbd "M-n") #'my-occur-next)
+    (define-key occur-mode-map (kbd "M-p") #'my-occur-prev))
+
+  ;; turn off the line highlight when jumping back to the buffer.
+  (defadvice occur-mode-goto-occurrence (after turn-off-highlight)
+    (hl-line-mode 0)
+    ;; close occur window.
+    (quit-window nil (get-buffer-window "*Occur*")))
+  (ad-activate 'occur-mode-goto-occurrence)
+
+  (add-hook 'occur-hook
+            (lambda ()
+              ;; switch to the results window immediatly.
+              (other-window 1)
+              ;; select to the first match.
+              (my-occur-next))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

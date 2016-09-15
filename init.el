@@ -4737,6 +4737,12 @@ When ARG isn't nil, try to pretty print the sexp."
     (quit-window nil (get-buffer-window "*Occur*")))
   (ad-activate 'occur-mode-goto-occurrence)
 
+  ;; treat spaces as wild cards. Like in `swiper'.
+  (defadvice occur (around space-to-wild activate compile)
+    (let* ((new-regexp (replace-regexp-in-string " " ".*" regexp))
+           (regexp new-regexp))
+      ad-do-it))
+
   (add-hook 'occur-hook
             (lambda ()
               ;; switch to the results window immediatly.

@@ -4735,7 +4735,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
   ;; turn off the line highlight when jumping back to the buffer.
   (defadvice occur-mode-goto-occurrence (after turn-off-highlight)
-    (hl-line-mode 0)
+    ;; (hl-line-mode 0)
     ;; close occur window.
     (quit-window nil (get-buffer-window "*Occur*")))
   (ad-activate 'occur-mode-goto-occurrence)

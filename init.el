@@ -4725,7 +4725,8 @@ When ARG isn't nil, try to pretty print the sexp."
     (defun my-occur-prev ()
       (interactive)
       (my--occur-move #'occur-prev))
-
+    (define-key occur-mode-map (kbd "C-n") #'my-occur-next)
+    (define-key occur-mode-map (kbd "C-p") #'my-occur-prev)
     (define-key occur-mode-map (kbd "M-n") #'my-occur-next)
     (define-key occur-mode-map (kbd "M-p") #'my-occur-prev))
 

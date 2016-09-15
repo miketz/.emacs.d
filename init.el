@@ -302,6 +302,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond ((null my-narrow-type) #'occur)
                           (my-use-helm-p #'helm-swoop)
+                          ;; `sallet-occur' is unusabley slow. Dont' use it.
+                          ;; `icicle-occur' is unusabley slow. Dont' use it.
                           (t #'swiper))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")

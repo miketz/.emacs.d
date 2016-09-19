@@ -102,7 +102,12 @@
 ;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
 ;; TODO: revist this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
-(remove-hook 'find-file-hooks 'vc-find-file-hook)
+(if (>= emacs-major-version 25)
+    (remove-hook 'find-file-hooks 'vc-refresh-state)
+  (remove-hook 'find-file-hooks 'vc-find-file-hook))
+
+(when (>= emacs-major-version 25)
+  (global-eldoc-mode 0))
 
 (defun my-load-full-init ()
   (interactive)

@@ -3153,6 +3153,20 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; eshell
 ;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'esh-mode
+
+  (when (fboundp #'eshell/clear-scrollback) ;; emacs 25+
+    (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set
+                                ; in the hook. Eval-after-load doesn't work.
+                                ; Must be buffer local.
+              (lambda ()
+                ;; emulate some SLIME keybind
+                (define-key eshell-mode-map
+                  (kbd "C-c M-o")
+                  (lambda ()
+                    (interactive)
+                    (eshell/clear t)))))))
+
 ;; (with-eval-after-load "eshell-mode"
 ;;   (defun my-eshell-clear-buffer ()
 ;;     "Deletes the contents of eshell buffer, except the last prompt"

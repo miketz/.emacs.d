@@ -3041,7 +3041,9 @@ and indent."
 ;; TODO: revist this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.ht
 ;;       ml
-(remove-hook 'find-file-hooks 'vc-find-file-hook)
+(if (>= emacs-major-version 25)
+    (remove-hook 'find-file-hooks 'vc-refresh-state)
+  (remove-hook 'find-file-hooks 'vc-find-file-hook))
 
 (with-eval-after-load 'vc
   (add-to-list 'vc-directory-exclusion-list "bin")

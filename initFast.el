@@ -17,8 +17,10 @@
 
 ;; (when (eq system-type 'windows-nt)
 ;;  (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+;; (when (eq system-type 'windows-nt)
+;;   (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
 (when (eq system-type 'windows-nt)
-  (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
+  (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
 ;; (custom-set-faces
 ;;  '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))

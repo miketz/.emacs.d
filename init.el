@@ -3229,6 +3229,12 @@ and indent."
 ;; (setq browse-url-browser-function ; default for opening links.
 ;;       'eww-browse-url)
 
+
+;; avoid proportional fonts. Could be used elsewhere besides eww, so set
+;; at top level.
+(when (>= emacs-major-version 25)
+  (setq shr-use-fonts nil))
+
 (with-eval-after-load 'eww
   (when (eq my-curr-computer 'work-laptop)
     (setq eww-download-directory "C:/Users/mtz/Downloads"))

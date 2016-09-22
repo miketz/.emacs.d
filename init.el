@@ -659,6 +659,9 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (define-key evil-normal-state-map (kbd "M-.") nil)
   (define-key evil-normal-state-map (kbd "M-,") nil)
 
+  (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
+  (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command)
+
   (when my-graphic-p
     ;;prevent minibuffer spam when switching modes.
     ;;Cursor style/color is sufficient to determine mode.
@@ -4854,11 +4857,6 @@ in frame.  Stop displaying shell in all other windows."
 ;;          (call-interactively ',(car args))))))
 ;;(global-set-key (kbd "<f12>") (C-u M-x org-refile))
 
-
-(progn ;;use the default emacs scroll bingding for C-v
-  (when my-use-evil-p
-    (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
-    (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command)))
 
 ;; scroll like vim when moving 1 line off screen with j/k.
 ;; has some wierd rules about recentering, but 100 is supposed to

@@ -3222,7 +3222,7 @@ and indent."
 ;; (setq highlight-tail-steps 40 ;80
 ;;       highlight-tail-timer 0.04;0.04
 ;;       )
-(setq highlight-tail-posterior-type t) ; 'const
+;; (setq highlight-tail-posterior-type t) ; 'const
 ;; (highlight-tail-mode)
 ;; ;;(highlight-tail-reload)
 

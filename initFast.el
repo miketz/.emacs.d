@@ -26,6 +26,8 @@
 ;;  '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
 
 
+(setq read-buffer-completion-ignore-case t)
+
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (setq inhibit-startup-message t)

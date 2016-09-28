@@ -446,7 +446,8 @@ Choices: helm-swoop swiper")
     (ggtags)
     (clojure-mode)
     (cider (work-laptop wild-dog))
-    (hl-line+))
+    (hl-line+)
+    (geiser (work-laptop)))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -4784,6 +4785,21 @@ When ARG isn't nil, try to pretty print the sexp."
 (when (>= emacs-major-version 25)
   (global-eldoc-mode 0))
 
+;;;-----------------------------------------------------------------------------
+;;; geiser
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'geiser
+  (when (eq my-curr-computer 'work-laptop)
+    (setq geiser-default-implementation 'racket
+          geiser-active-implementations '(racket))
+    (add-to-list 'exec-path "C:/Users/mtz/programs/Racket")))
+
+(with-eval-after-load 'geiser-repl
+  (add-hook 'geiser-repl-mode-hook
+            (lambda ()
+              (rainbow-delimiters-mode-enable)
+              (enable-paredit-mode)
+              (lispy-mode))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

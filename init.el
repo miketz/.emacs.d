@@ -3584,7 +3584,7 @@ and indent."
 
 
 ;;;-----------------------------------------------------------------------------
-;;; bookmarks
+;;; website bookmarks
 ;;;-----------------------------------------------------------------------------
 ;; (setq my-bookmarks
 ;;       '((google "www.google.com" (search email maps))
@@ -4800,6 +4800,17 @@ When ARG isn't nil, try to pretty print the sexp."
               (rainbow-delimiters-mode-enable)
               (enable-paredit-mode)
               (lispy-mode))))
+
+;;;-----------------------------------------------------------------------------
+;;; bookmark
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'bookmark
+  ;; use LIFO order, not alphabetical order.
+  (setq bookmark-sort-flag nil)
+  ;; Don't wait for emacs to be shutdown to save marks to file. Save as we go.
+  (setq bookmark-save-flag 1)
+  ;; remove hook on emacs-exit. Since we save as we go, it shouldn't be needed.
+  (remove-hook 'kill-emacs-hook 'bookmark-exit-hook-internal))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

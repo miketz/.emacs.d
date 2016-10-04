@@ -32,6 +32,11 @@
                                   :bold t
                                   :strike-through t
                                   :background nil))))
+
+   `(font-lock-function-name-face ((t (:weight bold :foreground "#006699"))))
+   `(font-lock-keyword-face ((t (:bold t :foreground "#0000FF")))) ; #3654DC
+   `(font-lock-builtin-face ((t (:weight bold :foreground "#006FE0"))))
+
    ;; '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    ;; '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight bold))))
    ;; '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :weight bold))))

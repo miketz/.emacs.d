@@ -1113,8 +1113,8 @@ This prevents overlapping themes; something I would rarely want."
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    ;; (set-frame-font
-    ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    (set-frame-font
+     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
     ;; (set-frame-font
     ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
@@ -1123,8 +1123,8 @@ This prevents overlapping themes; something I would rarely want."
     ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
-    (set-frame-font
-     "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
     ;; (set-frame-font

@@ -4552,9 +4552,9 @@ When ARG isn't nil, try to pretty print the sexp."
               (smart-tabs-advice python-indent-line python-indent-offset)
               (smart-tabs-advice python-indent-region python-indent-offset)
               (when (featurep 'python-mode)
-                  (smart-tabs-advice py-indent-line py-indent-offset)
-                  (smart-tabs-advice py-newline-and-indent py-indent-offset)
-                  (smart-tabs-advice py-indent-region py-indent-offset))))
+                (smart-tabs-advice py-indent-line py-indent-offset)
+                (smart-tabs-advice py-newline-and-indent py-indent-offset)
+                (smart-tabs-advice py-indent-region py-indent-offset))))
 
   (add-hook 'python-mode-hook
             (lambda ()

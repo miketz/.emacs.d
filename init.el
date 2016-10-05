@@ -4743,11 +4743,19 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; ;; automatically scroll buffer to matches like `swiper' or `helm-swoop'.
   ;; (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
 
+  (defvar my-blink-fn
+    (if (> emacs-major-version 25)
+        (progn
+          (require 'xref) ;; for fn `xref-pulse-momentarily'. to flash match.
+          #'xref-pulse-momentarily)
+      #'hl-line-flash) ;; TODO: avoid hl-line+ dependency ;; (hl-line-mode 1)
+    "Function to blink the matching line in the bufffer from occur-buffer.")
+
   (progn ;; functions copied from https://github.com/emacsfodder/occur-follow
     (defun my--occur-move (move-fn)
       (funcall move-fn)
       (occur-mode-goto-occurrence-other-window)
-      (hl-line-flash) ;; TODO: avoid hl-line+ dependency ;; (hl-line-mode 1)
+      (funcall my-blink-fn)
       (recenter)
       (other-window 1))
     (defun my-occur-next ()

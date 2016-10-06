@@ -489,7 +489,7 @@ Code taken from http://oremacs.com/2015/03/20/managing-emacs-packages/"
     (package-menu-mark-upgrades)
     (package-menu-execute t)))
 
-(defun package-list-unaccounted-packages ()
+(defun my-package-list-unaccounted-packages ()
   "Display unaccounted packages.
 Like `package-list-packages', but only show packages that are installed and not
 in `my-packages'.  Useful for cleaning out unwanted packages."

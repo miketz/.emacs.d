@@ -1091,9 +1091,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (if (eq my-curr-computer 'work-laptop)
-        (my-color-leuven)
-      (my-color-zenburn)))
+    (my-color-zenburn))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
@@ -1113,6 +1111,9 @@ This prevents overlapping themes; something I would rarely want."
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
+    (custom-theme-set-faces ;; brighter lights in office. more contrast needed.
+     'zenburn
+     '(default ((t (:foreground "#E0E0E0")))))
     ;; (set-frame-font
     ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
     ;; (set-frame-font

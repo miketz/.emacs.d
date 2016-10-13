@@ -2602,7 +2602,7 @@ and indent."
 (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
-(add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
+;; (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
 ;; (add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode)
@@ -2644,7 +2644,7 @@ and indent."
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
@@ -4015,7 +4015,7 @@ instead of narrowing."
   (add-hook 'eval-expression-minibuffer-setup-hook #'lispy-mode)
   (add-hook 'ielm-mode-hook             #'lispy-mode)
   (add-hook 'lisp-interaction-mode-hook #'lispy-mode)
-  (add-hook 'scheme-mode-hook           #'lispy-mode)
+  ;; (add-hook 'scheme-mode-hook           #'lispy-mode)
   (add-hook 'slime-repl-mode-hook       #'lispy-mode)
 
   (lispy-set-key-theme '(special)) ;; helps when using paredit with lispy.
@@ -4795,6 +4795,16 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 (when (>= emacs-major-version 25)
   (global-eldoc-mode 0))
+
+;;;-----------------------------------------------------------------------------
+;;; scheme-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'scheme
+  (add-hook 'scheme-mode-hook
+            (lambda ()
+              (rainbow-delimiters-mode-enable)
+              (enable-paredit-mode)
+              (lispy-mode))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; geiser

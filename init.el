@@ -3009,6 +3009,12 @@ and indent."
         (interactive)
         (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
 
+    ;; quick load of SafeteWebysite TFS folder \Development
+    (evil-leader/set-key "4"
+      (lambda ()
+        (interactive)
+        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")))
+
     ;;quick load of c:\users\mtz\TODO\TODO.org
     (evil-leader/set-key "t"
       (lambda ()

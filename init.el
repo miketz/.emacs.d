@@ -3024,9 +3024,9 @@ and indent."
 
 (when (eq system-type 'gnu/linux)
   (when my-use-evil-p
-   (evil-leader/set-key "1" (lambda ()
-                              (interactive)
-                              (dired "~")))))
+    (evil-leader/set-key "1" (lambda ()
+                               (interactive)
+                               (dired "~")))))
 
 
 ;;; quick load of the .emacs (or init.el) file.

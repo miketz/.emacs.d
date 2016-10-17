@@ -5104,7 +5104,7 @@ in frame.  Stop displaying shell in all other windows."
 
 
 ;; use tilde's as the fringe graphic for empty lines. Like Vim.
-(progn
+(when my-graphic-p
   (define-fringe-bitmap 'tilde [0 0 0 113 219 142 0 0] nil nil 'center)
   (setcdr (assq 'empty-line fringe-indicator-alist) 'tilde)
 

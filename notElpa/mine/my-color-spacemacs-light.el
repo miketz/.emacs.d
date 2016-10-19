@@ -2,6 +2,7 @@
   (interactive)
   (load-theme 'spacemacs-light t)
 
+  (my-cursor-stuff :color-emacs "maroon" :color-evil "blue")
   (let ((cur '(box "blue")))
     (setq evil-normal-state-cursor cur)
     (setq evil-visual-state-cursor '(hollow "blue"))

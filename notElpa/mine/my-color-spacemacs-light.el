@@ -18,11 +18,11 @@
                                   :strike-through t
                                   :background nil))))
 
+   `(font-lock-comment-face ((t (:foreground "purple" :background nil :slant italic))))
+   ;; `(font-lock-comment-delimiter-face ((t (:foreground "purple" :background nil :slant italic))))
+
    `(mode-line ((t (:foreground "#655370" :background "#e7e5eb" :box (:color "#b3b9be"  :line-width -1)))))
    `(mode-line-inactive ((t (:foreground "#655370" :background "#fbf8ef" :box (:color "#b3b9be" :line-width -1)))))
-
-   ;; `(mode-line ((t (:box (:line-width -1
-   ;;                                    :style released-button)))))
-   ;; `(mode-line-inactive ((t (:box (:line-width -1
-   ;;                                             :sytle pressed-button)))))
+   ;; `(mode-line ((t (:box (:line-width -1 :style released-button)))))
+   ;; `(mode-line-inactive ((t (:box (:line-width -1 :sytle pressed-button)))))
    ))

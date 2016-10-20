@@ -1103,12 +1103,14 @@ This prevents overlapping themes; something I would rarely want."
     (custom-theme-set-faces ;; brighter lights in office. more contrast needed.
      'zenburn
      '(default ((t (:foreground "#E0E0E0")))))
+    (set-frame-font
+     "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
     ;; (set-frame-font
     ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    (set-frame-font
-     "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font

@@ -865,9 +865,12 @@ Minus the newline char."
       ;; threshold is breached.
       (setq my-curr-font-size new-size)
 
-      (when (fboundp 'my-w32-run) ;; TODO: make it work on non-Windows machines.
-        (my-w32-run 'restore-curr-frame)
-        (my-w32-run 'max))
+      ;; commenting the window size toggle off. It's seems to have become
+      ;; slow on `work-laptop'.
+      ;; (when (fboundp 'my-w32-run)
+      ;; TODO: make it work on non-Windows machines.
+      ;;   (my-w32-run 'restore-curr-frame)
+      ;;   (my-w32-run 'max))
 
       (message (int-to-string new-size))))
 

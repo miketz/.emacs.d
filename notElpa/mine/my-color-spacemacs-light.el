@@ -11,14 +11,21 @@
   (custom-theme-set-faces
    'spacemacs-light
 
-   `(default ((t (:foreground "black" :background "white"))))
+   ;; `(default ((t (:foreground "black" :background "white"))))
+   `(default ((t (:foreground "black"))))
+
+   `(whitespace-space-before-tab ((t (:background "orange"))))
+
+   `(fringe ((t (:background "gray96"))))
 
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
                                   :background nil))))
 
-   `(font-lock-comment-face ((t (:foreground "purple" :background nil :slant italic))))
+   `(font-lock-constant-face ((t (:foreground "orangered" :background "lemonchiffon" :slant italic))))
+   `(font-lock-comment-face ((t (:foreground "orangered" :background nil :slant italic))))
+   ;; `(font-lock-comment-face ((t (:foreground "purple" :background nil :slant italic))))
    ;; `(font-lock-comment-delimiter-face ((t (:foreground "purple" :background nil :slant italic))))
 
    `(mode-line ((t (:foreground "#655370" :background "#e7e5eb" :box (:color "#b3b9be"  :line-width -1)))))

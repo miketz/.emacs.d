@@ -373,18 +373,6 @@ Choices: helm-swoop swiper")
     (expand-region)
     ;;multiple-cursors
     ;;(omnisharp (work-laptop))
-    ;; zenburn-theme
-    ;; firebelly-theme
-    ;; niflheim-theme
-    ;; gruvbox-theme
-    ;; badger-theme
-    ;; monokai-theme
-    ;; tronesque-theme
-    ;; gandalf-theme
-    ;;color-theme-sanityinc-tomorrow
-    ;; grandshell-theme
-    ;; tommyh-theme
-    ;; majapahit-theme
     ;;sublimity
     (nyan-mode)
     (nyan-prompt)

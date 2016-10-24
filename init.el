@@ -1104,13 +1104,15 @@ This prevents overlapping themes; something I would rarely want."
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    (custom-theme-set-faces ;; brighter lights in office. more contrast needed.
-     'zenburn
-     '(default ((t (:foreground "#E0E0E0")))))
-    (set-frame-font
-     "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1")
+
+    ;; (custom-theme-set-faces ;; brighter lights in office. more contrast needed.
+    ;;  'zenburn
+    ;;  '(default ((t (:foreground "#E0E0E0")))))
+
     ;; (set-frame-font
-    ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;;  "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1")
+    (set-frame-font
+     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
     ;; (set-frame-font
     ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font

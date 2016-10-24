@@ -4647,9 +4647,12 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (with-eval-after-load 'follow
   ;; scroll the height of all windows combined, not just 1.
-  ;; TODO: fix for evil. evil-normal-state-map seems to take precedence.
   (define-key follow-mode-map (kbd "C-v") #'follow-scroll-up)
-  (define-key follow-mode-map (kbd "M-v") #'follow-scroll-down))
+  (define-key follow-mode-map (kbd "M-v") #'follow-scroll-down)
+  (when my-use-evil-p
+    ;; TODO: the keybinds for evil mode don't seem to take hold. Fix it.
+    (evil-define-key 'normal follow-mode-map (kbd "C-v") #'follow-scroll-up)
+    (evil-define-key 'normal follow-mode-map (kbd "M-v") #'follow-scroll-down)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; clojure-mode

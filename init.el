@@ -300,12 +300,12 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using ido at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn (cond ((or (null my-narrow-type)
-                               my-use-ido-p) #'occur)
+(defvar my-swoop-fn (cond (my-use-ivy-p #'swiper)
+                          (my-use-ido-p #'ido-occur)
                           (my-use-helm-p #'helm-swoop)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.
                           ;; `icicle-occur' is unusabley slow. Dont' use it.
-                          (t #'swiper))
+                          (t #'occur))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
 (when my-use-evil-p
@@ -425,6 +425,7 @@ Choices: helm-swoop swiper")
     ;;ido-grid-mode
     (ido-ubiquitous)
     (flx-ido)
+    (ido-occur)
     (ov)
     (highlight-tail)
     (function-args)

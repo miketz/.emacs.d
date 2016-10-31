@@ -4753,7 +4753,7 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
 
   (defvar my-blink-fn
-    (if (> emacs-major-version 25)
+    (if (>= emacs-major-version 25)
         (progn
           (require 'xref) ;; for fn `xref-pulse-momentarily'. to flash match.
           #'xref-pulse-momentarily)

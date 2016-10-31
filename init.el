@@ -353,7 +353,7 @@ Choices: helm-swoop swiper")
      (web-beautify t)
 
      (helm ,my-use-helm-p)
-     (helm-cmd-t ,my-use-helm-p)
+     (helm-cmd-t nil) ;; broken with recent helm versions?
      (helm-swoop ,my-use-helm-p)
      (helm-w32-launcher ,(and my-use-helm-p
                               (eq my-curr-computer 'work-laptop)))

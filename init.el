@@ -405,7 +405,8 @@ Choices: helm-swoop swiper")
      (counsel t)
      ;;color-identifiers-mode
      ;;svg-mode-line-themes ;; only works on gnu/linux
-     (smex t) ;; can be used by `counsel-M-x'
+     (smex ,(or my-use-ido-p
+                my-use-ivy-p)) ;; smex can be used by `counsel-M-x'
      (avy t)
      (lispy t)
      (worf t)
@@ -415,11 +416,11 @@ Choices: helm-swoop swiper")
      ;;w3m
      ;;flymake-jslint
      (nlinum t)
-     (ido-vertical-mode t)
+     (ido-vertical-mode ,my-use-ido-p)
      ;;ido-grid-mode
-     (ido-ubiquitous t)
-     (flx-ido t)
-     (ido-occur t)
+     (ido-ubiquitous ,my-use-ido-p)
+     (flx-ido ,my-use-ido-p)
+     (ido-occur ,my-use-ido-p)
      (ov t)
      (highlight-tail t)
      (function-args t)

@@ -399,10 +399,12 @@ Choices: helm-swoop swiper")
      (unkillable-scratch t)
      (speed-type t)
      (bug-hunter t)
-     (ivy t)
-     (swiper t)
+
+     (ivy ,my-use-ivy-p)
+     (swiper ,my-use-ivy-p)
+     (counsel ,my-use-ivy-p)
      (flx t) ;; can be used by ivy for ordering flx matches.
-     (counsel t)
+
      ;;color-identifiers-mode
      ;;svg-mode-line-themes ;; only works on gnu/linux
      (smex ,(or my-use-ido-p

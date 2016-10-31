@@ -359,7 +359,7 @@ Choices: helm-swoop swiper")
      ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
      ;;helm-flycheck
      ;;helm-descbinds
-     ;;icicles
+     (icicles ,(eq my-narrow-type 'icicles))
      ;;projectile
      ;;clippy
      ;;yasnippet

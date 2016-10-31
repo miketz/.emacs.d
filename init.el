@@ -280,7 +280,7 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type 'ivy
+(defvar my-narrow-type 'ido
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
 Choices: ivy ido helm icicles sallet nil")
@@ -300,7 +300,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using ido at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn (cond ((null my-narrow-type) #'occur)
+(defvar my-swoop-fn (cond ((or (null my-narrow-type)
+                               my-use-ido-p) #'occur)
                           (my-use-helm-p #'helm-swoop)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.
                           ;; `icicle-occur' is unusabley slow. Dont' use it.
@@ -420,7 +421,7 @@ Choices: helm-swoop swiper")
     ;;w3m
     ;;flymake-jslint
     (nlinum)
-    ;;ido-vertical-mode
+    (ido-vertical-mode)
     ;;ido-grid-mode
     (ido-ubiquitous)
     (flx-ido)
@@ -2217,7 +2218,7 @@ To make it human readable."
     ;; updates, and remove the un-wanted code in the autoload file.
     )
 
-  (let ((my-ido-display nil)) ;; Choices: 'grid 'vertical nil
+  (let ((my-ido-display 'vertical)) ;; Choices: 'grid 'vertical nil
     (cond ((eq my-ido-display 'vertical)
            ;; 3rd party extension to ido. Display vertically like swiper.
            ;; invokes with-eval-after-load "ido-vertical-mode"

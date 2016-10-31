@@ -328,17 +328,11 @@ Choices: helm-swoop swiper")
   `((s t) ;; string library
     (evil t)
     (evil-leader t)
-    ;;evil-escape
-    ;;evil-matchit
-    ;;evil-snipe
-    ;;evil-god-state
-    ;;evil-surround
     (pos-tip t) ;; for pop up on eval with leader "e"
     (key-chord t)
     (slime
      ,(member my-curr-computer
               '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-    ;;sly
     (paredit t)
     ;;paxedit
     ;;smartparens
@@ -347,19 +341,15 @@ Choices: helm-swoop swiper")
     ;;ac-slime
     (company t)
     (company-web t)
-    ;;company-quickhelp
     (slime-company
      ,(member my-curr-computer
               '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-    ;;ace-jump-mode
     (ace-window t)
-    ;;ace-jump-zap
     (csharp-mode t)
     (js2-mode t)
     (js2-highlight-vars t)
     (skewer-mode ,(member my-curr-computer '(work-laptop)))
     (json-mode t)
-    ;;ac-js2
     (web-beautify t)
     ;; (helm ,(member my-curr-computer '(work-laptop)))
     ;; (helm-cmd-t ,(member my-curr-computer '(work-laptop)))
@@ -398,7 +388,6 @@ Choices: helm-swoop swiper")
     ;;aggressive-indent
     (sx t)
     (leerzeichen t)
-    ;;sql-indent
     (darkroom t)
     ;;vim-empty-lines-mode
     (fill-column-indicator t)

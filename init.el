@@ -320,119 +320,119 @@ Choices: helm-swoop swiper")
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
-;; TODO: specify if it should use elpa or melpa version of a package.
-;; NOTE: to limit package intstallation to specific computers (or other
-;; conditions), the second place in each list item is a true/false value.
-;; `my-curr-computer'.
-(defvar my-packages
-  `((s t) ;; string library
-    (evil t)
-    (evil-leader t)
-    (pos-tip t) ;; for pop up on eval with leader "e"
-    (key-chord t)
-    (slime
-     ,(member my-curr-computer
-              '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-    (paredit t)
-    ;;paxedit
-    ;;smartparens
-    ;;redshank
-    ;;auto-complete
-    ;;ac-slime
-    (company t)
-    (company-web t)
-    (slime-company
-     ,(member my-curr-computer
-              '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-    (ace-window t)
-    (csharp-mode t)
-    (js2-mode t)
-    (js2-highlight-vars t)
-    (skewer-mode ,(member my-curr-computer '(work-laptop)))
-    (json-mode t)
-    (web-beautify t)
-    ;; (helm ,(member my-curr-computer '(work-laptop)))
-    ;; (helm-cmd-t ,(member my-curr-computer '(work-laptop)))
-    ;; (helm-swoop ,(member my-curr-computer '(work-laptop)))
-    ;; (helm-w32-launcher (work-laptop))
-    ;; ;;helm-git-grep ;search text of files.
-    ;; ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
-    ;; ;;helm-flycheck
-    ;; ;;helm-descbinds
-    ;;icicles
-    ;;projectile
-    ;;clippy
-    ;;yasnippet
-    (rainbow-delimiters t)
-    (rainbow-mode t)
-    (expand-region t)
-    ;;multiple-cursors
-    ;;(omnisharp (work-laptop))
-    ;;sublimity
-    (nyan-mode t)
-    (nyan-prompt t)
-    ;;powerline
-    ;;dired-details ;default feature in emacs 24.4+
-    (web-mode t)
-    (htmlize t)
-    (magit t)
-    (vimrc-mode t)
-    (sicp t)
-    ;;neotree
-    (num3-mode t)
-    (powershell t)
-    (irony ,(member my-curr-computer '(work-laptop wild-dog)))
-    (company-irony ,(member my-curr-computer '(work-laptop wild-dog)))
-    (flycheck-irony ,(member my-curr-computer '(work-laptop wild-dog)))
-    ;;(rtags)
-    ;;aggressive-indent
-    (sx t)
-    (leerzeichen t)
-    (darkroom t)
-    ;;vim-empty-lines-mode
-    (fill-column-indicator t)
-    (flycheck t)
-    (hydra t)
-    ;;linum-relative
-    ;;(guide-key)
-    (unkillable-scratch t)
-    (speed-type t)
-    (bug-hunter t)
-    (ivy t)
-    (swiper t)
-    (flx t) ;; can be used by ivy for ordering flx matches.
-    (counsel t)
-    ;;color-identifiers-mode
-    ;;svg-mode-line-themes ;; only works on gnu/linux
-    (smex t) ;; can be used by `counsel-M-x'
-    (avy t)
-    (lispy t)
-    (worf t)
-    (elisp-slime-nav t)
-    (electric-spacing t)
-    ;;w3
-    ;;w3m
-    ;;flymake-jslint
-    (nlinum t)
-    (ido-vertical-mode t)
-    ;;ido-grid-mode
-    (ido-ubiquitous t)
-    (flx-ido t)
-    (ido-occur t)
-    (ov t)
-    (highlight-tail t)
-    (function-args t)
-    (highlight-indent-guides t)
-    (ace-link t)
-    (smart-tabs-mode t)
-    (lua-mode t)
-    (ggtags t)
-    (clojure-mode t)
-    (cider ,(member my-curr-computer '(work-laptop wild-dog)))
-    (hl-line+ t)
-    (geiser ,(member my-curr-computer '(work-laptop)))
-    (debbugs ,(member my-curr-computer '(work-laptop wild-dog))))
-  "Packages I use from elpa/melpa.")
+(let ((install-slime-p
+       (member my-curr-computer
+               '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))))
+ ;; TODO: specify if it should use elpa or melpa version of a package.
+ ;; NOTE: to limit package intstallation to specific computers (or other
+ ;; conditions), the second place in each list item is a true/false value.
+ ;; `my-curr-computer'.
+ (defvar my-packages
+   `((s t) ;; string library
+     (evil t)
+     (evil-leader t)
+     (pos-tip t) ;; for pop up on eval with leader "e"
+     (key-chord t)
+     (slime ,install-slime-p)
+     (paredit t)
+     ;;paxedit
+     ;;smartparens
+     ;;redshank
+     ;;auto-complete
+     ;;ac-slime
+     (company t)
+     (company-web t)
+     (slime-company ,install-slime-p)
+     (ace-window t)
+     (csharp-mode t)
+     (js2-mode t)
+     (js2-highlight-vars t)
+     (skewer-mode ,(member my-curr-computer '(work-laptop)))
+     (json-mode t)
+     (web-beautify t)
+     (helm ,my-use-helm-p)
+     (helm-cmd-t ,my-use-helm-p)
+     (helm-swoop ,my-use-helm-p)
+     (helm-w32-launcher ,(and my-use-helm-p
+                              (eq my-curr-computer 'work-laptop)))
+     ;;helm-git-grep ;search text of files.
+     ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
+     ;;helm-flycheck
+     ;;helm-descbinds
+     ;;icicles
+     ;;projectile
+     ;;clippy
+     ;;yasnippet
+     (rainbow-delimiters t)
+     (rainbow-mode t)
+     (expand-region t)
+     ;;multiple-cursors
+     ;;(omnisharp (work-laptop))
+     ;;sublimity
+     (nyan-mode t)
+     (nyan-prompt t)
+     ;;powerline
+     ;;dired-details ;default feature in emacs 24.4+
+     (web-mode t)
+     (htmlize t)
+     (magit t)
+     (vimrc-mode t)
+     (sicp t)
+     ;;neotree
+     (num3-mode t)
+     (powershell t)
+     (irony ,(member my-curr-computer '(work-laptop wild-dog)))
+     (company-irony ,(member my-curr-computer '(work-laptop wild-dog)))
+     (flycheck-irony ,(member my-curr-computer '(work-laptop wild-dog)))
+     ;;(rtags)
+     ;;aggressive-indent
+     (sx t)
+     (leerzeichen t)
+     (darkroom t)
+     ;;vim-empty-lines-mode
+     (fill-column-indicator t)
+     (flycheck t)
+     (hydra t)
+     ;;linum-relative
+     ;;(guide-key)
+     (unkillable-scratch t)
+     (speed-type t)
+     (bug-hunter t)
+     (ivy t)
+     (swiper t)
+     (flx t) ;; can be used by ivy for ordering flx matches.
+     (counsel t)
+     ;;color-identifiers-mode
+     ;;svg-mode-line-themes ;; only works on gnu/linux
+     (smex t) ;; can be used by `counsel-M-x'
+     (avy t)
+     (lispy t)
+     (worf t)
+     (elisp-slime-nav t)
+     (electric-spacing t)
+     ;;w3
+     ;;w3m
+     ;;flymake-jslint
+     (nlinum t)
+     (ido-vertical-mode t)
+     ;;ido-grid-mode
+     (ido-ubiquitous t)
+     (flx-ido t)
+     (ido-occur t)
+     (ov t)
+     (highlight-tail t)
+     (function-args t)
+     (highlight-indent-guides t)
+     (ace-link t)
+     (smart-tabs-mode t)
+     (lua-mode t)
+     (ggtags t)
+     (clojure-mode t)
+     (cider ,(member my-curr-computer '(work-laptop wild-dog)))
+     (hl-line+ t)
+     (geiser ,(member my-curr-computer '(work-laptop)))
+     (debbugs ,(member my-curr-computer '(work-laptop wild-dog))))
+   "Packages I use from elpa/melpa."))
 
 (require 'package)
 (add-to-list 'package-archives

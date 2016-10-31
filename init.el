@@ -322,7 +322,8 @@ Choices: helm-swoop swiper")
 
 (let ((install-slime-p
        (member my-curr-computer
-               '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))))
+               '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
+      (has-clang-p (member my-curr-computer '(work-laptop wild-dog))))
  ;; TODO: specify if it should use elpa or melpa version of a package.
  ;; NOTE: to limit package intstallation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
@@ -381,9 +382,9 @@ Choices: helm-swoop swiper")
      ;;neotree
      (num3-mode t)
      (powershell t)
-     (irony ,(member my-curr-computer '(work-laptop wild-dog)))
-     (company-irony ,(member my-curr-computer '(work-laptop wild-dog)))
-     (flycheck-irony ,(member my-curr-computer '(work-laptop wild-dog)))
+     (irony ,has-clang-p)
+     (company-irony ,has-clang-p)
+     (flycheck-irony ,has-clang-p)
      ;;(rtags)
      ;;aggressive-indent
      (sx t)

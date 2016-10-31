@@ -351,6 +351,7 @@ Choices: helm-swoop swiper")
      (skewer-mode ,(member my-curr-computer '(work-laptop)))
      (json-mode t)
      (web-beautify t)
+
      (helm ,my-use-helm-p)
      (helm-cmd-t ,my-use-helm-p)
      (helm-swoop ,my-use-helm-p)
@@ -360,6 +361,7 @@ Choices: helm-swoop swiper")
      ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
      ;;helm-flycheck
      ;;helm-descbinds
+
      (icicles ,(eq my-narrow-type 'icicles))
      ;;projectile
      ;;clippy
@@ -404,6 +406,7 @@ Choices: helm-swoop swiper")
      (swiper ,my-use-ivy-p)
      (counsel ,my-use-ivy-p)
      (flx t) ;; can be used by ivy for ordering flx matches.
+
      ;;color-identifiers-mode
      ;;svg-mode-line-themes ;; only works on gnu/linux
      (avy t)

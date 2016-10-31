@@ -404,11 +404,8 @@ Choices: helm-swoop swiper")
      (swiper ,my-use-ivy-p)
      (counsel ,my-use-ivy-p)
      (flx t) ;; can be used by ivy for ordering flx matches.
-
      ;;color-identifiers-mode
      ;;svg-mode-line-themes ;; only works on gnu/linux
-     (smex ,(or my-use-ido-p
-                my-use-ivy-p)) ;; smex can be used by `counsel-M-x'
      (avy t)
      (lispy t)
      (worf t)
@@ -418,11 +415,15 @@ Choices: helm-swoop swiper")
      ;;w3m
      ;;flymake-jslint
      (nlinum t)
+
      (ido-vertical-mode ,my-use-ido-p)
      ;;ido-grid-mode
      (ido-ubiquitous ,my-use-ido-p)
      (flx-ido ,my-use-ido-p)
      (ido-occur ,my-use-ido-p)
+     (smex ,(or my-use-ido-p
+                my-use-ivy-p)) ;; smex can be used by `counsel-M-x'
+
      (ov t)
      (highlight-tail t)
      (function-args t)

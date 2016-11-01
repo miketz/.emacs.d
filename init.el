@@ -411,7 +411,7 @@ Choices: helm-swoop swiper")
      ;;svg-mode-line-themes ;; only works on gnu/linux
      (avy t)
      (lispy t)
-     (worf t)
+     ;;(worf t)
      (elisp-slime-nav t)
      (electric-spacing t)
      ;;w3

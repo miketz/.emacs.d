@@ -305,13 +305,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           (my-use-helm-p #'helm-swoop)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.
                           ;; `icicle-occur' is unusabley slow. Dont' use it.
-                          (t  (lambda ()
-                                (interactive)
-                                ;; TODO: get `call-interactively' to work with
-                                ;;       `occur'. Seems to break when I attempt
-                                ;;       to set nlines via `curr-prefix-arg'.
-                                ;; add 2 context lines to occur
-                                (occur (read-string "search: ") 2))))
+                          (t  #'my-occur))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
 (when my-use-evil-p
@@ -4758,6 +4752,14 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; occur
 ;;;-----------------------------------------------------------------------------
+(defun my-occur ()
+  (interactive)
+  ;; TODO: get `call-interactively' to work with
+  ;;       `occur'. Seems to break when I attempt
+  ;;       to set nlines via `curr-prefix-arg'.
+  ;; add 2 context lines to occur
+  (occur (read-string "search: ") 2))
+
 (with-eval-after-load "replace" ;; `occur' lives in replace.el
   ;; ;; automatically scroll buffer to matches like `swiper' or `helm-swoop'.
   ;; (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)

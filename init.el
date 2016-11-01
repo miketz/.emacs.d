@@ -465,7 +465,6 @@ Installs packages in the list `my-packages'."
   (dolist (obj my-packages)
     (let ((pkg (first obj))
           (installp (second obj)))
-      ;; when no computer filter or member of filter
       (when installp
         (unless (package-installed-p pkg)
           (package-install pkg))))))

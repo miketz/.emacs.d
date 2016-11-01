@@ -4996,6 +4996,7 @@ in frame.  Stop displaying shell in all other windows."
 
 ;; if we havn't bound leader-b to buffer switching yet.
 (when (or (eq my-curr-computer 'raspberry-pi)
+          (eq my-narrow-type 'icicles)
           (null my-narrow-type))
   (when my-use-evil-p
     (evil-leader/set-key "b" #'switch-to-buffer)

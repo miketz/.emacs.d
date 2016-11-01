@@ -2223,18 +2223,19 @@ To make it human readable."
     ;; ido!!!
     ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
     ;; updates, and remove the un-wanted code in the autoload file.
-    )
 
-  (let ((my-ido-display 'vertical)) ;; Choices: 'grid 'vertical nil
-    (cond ((eq my-ido-display 'vertical)
-           ;; 3rd party extension to ido. Display vertically like swiper.
-           ;; invokes with-eval-after-load "ido-vertical-mode"
-           (ido-vertical-mode 1))
-          ((eq my-ido-display 'grid)
-           ;; TODO: prevent grid mode from messing up the "space-as-dash"
-           ;;       advice.
-           ;; TODO: make Tab behave the same for smex, general completion, etc.
-           (ido-grid-mode))))
+    ;; TODO: figure out what is loading ido on start up. it's forcing me
+    ;;       to include this block of code in the guard.
+    (let ((my-ido-display 'vertical)) ;; Choices: 'grid 'vertical nil
+      (cond ((eq my-ido-display 'vertical)
+             ;; 3rd party extension to ido. Display vertically like swiper.
+             ;; invokes with-eval-after-load "ido-vertical-mode"
+             (ido-vertical-mode 1))
+            ((eq my-ido-display 'grid)
+             ;; TODO: prevent grid mode from messing up the "space-as-dash"
+             ;;       advice.
+             ;; TODO: make Tab behave the same for smex, general completion, etc.
+             (ido-grid-mode)))))
 
   ;; (flx-ido-mode 1) ;; invokes (with-eval-after-load "flx-ido")
 

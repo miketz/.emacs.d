@@ -4785,10 +4785,16 @@ When ARG isn't nil, try to pretty print the sexp."
     (defun my-occur-prev ()
       (interactive)
       (my--occur-move #'occur-prev))
+    (defun my-occur-mode-goto-occurrence ()
+      "Same as the build in `occur-mode-goto-occurrence', but add a blink."
+      (interactive)
+      (occur-mode-goto-occurrence)
+      (funcall my-blink-fn))
     (define-key occur-mode-map (kbd "C-n") #'my-occur-next)
     (define-key occur-mode-map (kbd "C-p") #'my-occur-prev)
     (define-key occur-mode-map (kbd "M-n") #'my-occur-next)
-    (define-key occur-mode-map (kbd "M-p") #'my-occur-prev))
+    (define-key occur-mode-map (kbd "M-p") #'my-occur-prev)
+    (define-key occur-mode-map (kbd "RET") #'my-occur-mode-goto-occurrence))
 
   ;; turn off the line highlight when jumping back to the buffer.
   (defadvice occur-mode-goto-occurrence (after turn-off-highlight)

@@ -944,8 +944,9 @@ This prevents overlapping themes; something I would rarely want."
 (defvar my-charcoal "#35352B" "Expirimental dark background color.")
 (defvar my-peach "#fff9F5"
   "Attempt to re-create what peachpuff looked like on an old monitor.")
-(defvar my-peach2 "#fffeFa"
-  "Attempt to re-create what peachpuff looked like on an old monitor.")
+(defvar my-ultimate "#fffeFa"
+  "Attempt to re-create what my \"ultimate\" color looked like on an old
+monitor.")
 
 
 

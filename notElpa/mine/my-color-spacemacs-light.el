@@ -8,6 +8,9 @@
     (setq evil-visual-state-cursor '(hollow "blue"))
     (setq evil-operator-state-cursor cur))
 
+  ;; fci color is not a face???
+  (setq fci-rule-color "gray88")
+
   (custom-theme-set-faces
    'spacemacs-light
 

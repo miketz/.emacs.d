@@ -14,8 +14,8 @@
   (custom-theme-set-faces
    'spacemacs-light
 
-   ;; `(default ((t (:foreground "black" :background "white"))))
-   `(default ((t (:foreground "black"))))
+   `(default ((t (:foreground "black" :background "#fffeFa"))))
+   ;; `(default ((t (:foreground "black"))))
 
    `(whitespace-space-before-tab ((t (:background "orange"))))
 
@@ -35,4 +35,16 @@
    `(mode-line-inactive ((t (:foreground "#655370" :background "#fbf8ef" :box (:color "#b3b9be" :line-width -1)))))
    ;; `(mode-line ((t (:box (:line-width -1 :style released-button)))))
    ;; `(mode-line-inactive ((t (:box (:line-width -1 :sytle pressed-button)))))
+
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "#09a509"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "red"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "#3388ff"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "black" :background "red"))))
+
    ))

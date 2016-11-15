@@ -1092,7 +1092,9 @@ monitor.")
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (my-color-zenburn))
+    (if (eq my-curr-computer 'work-laptop)
+        (my-color-spacemacs-light)
+      (my-color-zenburn)))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
@@ -1119,14 +1121,14 @@ monitor.")
 
     ;; (set-frame-font
     ;;  "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1")
-    (set-frame-font
-     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
+    ;; (set-frame-font
+    ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
     ;; (set-frame-font
     ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    (set-frame-font
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font

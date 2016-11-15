@@ -26,9 +26,9 @@
                                   :strike-through t
                                   :background nil))))
 
-   `(font-lock-constant-face ((t (:foreground "orangered" :background "lemonchiffon" :slant italic))))
-   `(font-lock-comment-face ((t (:foreground "orangered" :background nil :slant italic))))
-   ;; `(font-lock-comment-face ((t (:foreground "purple" :background nil :slant italic))))
+   `(font-lock-string-face ((t (:foreground "deeppink"))))
+   `(font-lock-constant-face ((t (:foreground "darkgreen" :background "lemonchiffon" :slant italic)))) ;; `(font-lock-comment-face ((t (:foreground "orangered" :background nil :slant italic))))
+   `(font-lock-comment-face ((t (:foreground "#05b505" :background nil :slant italic))))
    ;; `(font-lock-comment-delimiter-face ((t (:foreground "purple" :background nil :slant italic))))
 
    `(mode-line ((t (:foreground "#655370" :background "#e7e5eb" :box (:color "#b3b9be"  :line-width -1)))))

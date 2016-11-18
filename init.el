@@ -281,6 +281,7 @@ Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
 (defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'ivy)
+                             ((eq my-curr-computer 'wild-dog) 'ivy)
                              (t nil))
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.

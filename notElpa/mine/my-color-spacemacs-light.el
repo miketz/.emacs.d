@@ -17,6 +17,12 @@
    `(default ((t (:foreground "black" :background "#fffeFa"))))
    ;; `(default ((t (:foreground "black"))))
 
+   '(highlight-indent-guides-odd-face
+     ((t (:background "floral white"))))
+
+   '(highlight-indent-guides-even-face
+     ((t (:inherit default))))
+
    `(whitespace-space-before-tab ((t (:background "orange"))))
 
    `(fringe ((t (:background "gray96"))))

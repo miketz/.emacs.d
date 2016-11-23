@@ -1115,8 +1115,8 @@ monitor.")
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-
-    ;; (custom-theme-set-faces ;; brighter lights in office. more contrast needed.
+    ;; ;; brighter lights in office. more contrast needed.
+    ;; (custom-theme-set-faces
     ;;  'zenburn
     ;;  '(default ((t (:foreground "#E0E0E0")))))
 

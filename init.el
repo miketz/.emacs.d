@@ -3458,6 +3458,8 @@ and indent."
 (with-eval-after-load 'fill-column-indicator
   (setq fci-rule-column 80)
   (setq fci-rule-width 1)
+  ;; use text, not bitmap to avoid increasing line spacing with fixedsys font.
+  (setq fci-always-use-textual-rule t)
   (progn
     (setq fci-dash-pattern 0.5)   ;; length of the dash 0 to 1
     (setq fci-rule-use-dashes t))

@@ -415,7 +415,9 @@ Choices: helm-swoop swiper")
      (lispy t)
      ;;(worf t)
      (elisp-slime-nav t)
-     (electric-spacing t)
+     ;; as of 11-28-2016 electric-spacing has an unbalanced paren
+     ;; error. Don't use it for now, wait for fix upstream.
+     (electric-spacing nil)
      ;;w3
      ;;w3m
      ;;flymake-jslint
@@ -1800,7 +1802,7 @@ monitor.")
 
     (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
-    (electric-spacing-mode 1)
+    ;; (electric-spacing-mode 1)
     ;; use jslint, but only if editing a .js file on disk.
     ;; TODO: use with in-memory buffer, or narrowed region of html file.
     ;; TODO: use flycheck instead of flymake
@@ -4584,7 +4586,7 @@ When ARG isn't nil, try to pretty print the sexp."
               ;; (when my-graphic-p
               ;;   (highlight-indent-guides-mode 1))
               (electric-pair-mode 1)
-              (electric-spacing-mode 1)
+              ;; (electric-spacing-mode 1)
               ;; (fci-mode 1)
               )))
 
@@ -4623,7 +4625,8 @@ When ARG isn't nil, try to pretty print the sexp."
               (yas-minor-mode 1)
               (rainbow-delimiters-mode 1)
               (electric-pair-mode 1)
-              (electric-spacing-mode 1))))
+              ;; (electric-spacing-mode 1)
+              )))
 
 ;;;-----------------------------------------------------------------------------
 ;;; swift-mode

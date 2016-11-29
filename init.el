@@ -4873,6 +4873,21 @@ When ARG isn't nil, try to pretty print the sexp."
   ;; remove hook on emacs-exit. Since we save as we go, it shouldn't be needed.
   (remove-hook 'kill-emacs-hook 'bookmark-exit-hook-internal))
 
+
+;;;-----------------------------------------------------------------------------
+;;; autorevert (built into emacs)
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'autorevert
+  ;; increase the timestamp ping a little.
+  (setq auto-revert-interval 7)
+  ;; default is t, but set anyway to guarantee
+  (setq auto-revert-stop-on-user-input t)
+  (setq global-auto-revert-non-file-buffers nil)
+  (setq auto-revert-remote-files nil))
+
+;; ;; reload buffer if it changes on disk outside emacs.
+;; (global-auto-revert-mode t)
+
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
@@ -5132,8 +5147,6 @@ in frame.  Stop displaying shell in all other windows."
   ;; (hl-line-mode 1) ; highlight the current line
   )
 
-;; reload buffer if it changes on disk outside emacs.
-(global-auto-revert-mode t)
 
 (setq-default line-spacing nil)
 

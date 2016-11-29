@@ -5102,14 +5102,15 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (progn ;; show time in mode line
-  ;; disable process average display. Not sure why this is mixed in with time
-  ;; display.
-  (setq display-time-default-load-average nil)
-  (setq display-time-load-average nil)
-  (setq display-time-load-average-threshold nil)
-  ;;(setq-default display-time-day-and-date t)
-  ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
-  (setq display-time-format "%-I:%M%#p")
+  (with-eval-after-load 'time
+    ;; disable process average display. Not sure why this is mixed in with time
+    ;; display.
+    (setq display-time-default-load-average nil)
+    (setq display-time-load-average nil)
+    (setq display-time-load-average-threshold nil)
+    ;;(setq-default display-time-day-and-date t)
+    ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
+    (setq display-time-format "%-I:%M%#p"))
   ;; (display-time-mode 1)
   )
 

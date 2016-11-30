@@ -1641,14 +1641,14 @@ monitor.")
       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
 
 
-;; `electric-pair-mode' is in `c-mode-common-hook' already.
-;; (add-hook 'csharp-mode-hook #'electric-pair-mode)
+;; `electric-pair-local-mode' is in `c-mode-common-hook' already.
+;; (add-hook 'csharp-mode-hook #'electric-pair-local-mode)
 
 (add-hook #'csharp-mode-hook
           (lambda ()
             (yas-minor-mode 1)
             (rainbow-delimiters-mode 1)
-            (electric-pair-mode 1)))
+            (electric-pair-local-mode 1)))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -1796,7 +1796,7 @@ monitor.")
 
     ;;(js2-imenu-extras-mode)
 
-    (electric-pair-mode 1)
+    (electric-pair-local-mode 1)
     ;; (smartparens-mode 1)
 
 
@@ -1837,7 +1837,7 @@ monitor.")
               ;; TODO: figure out why `tab-width' is not working
               (setq tab-width 2) ; buffer local
               (rainbow-delimiters-mode 1)
-              (electric-pair-mode 1))))
+              (electric-pair-local-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; web-beautify
@@ -2437,7 +2437,7 @@ and indent."
               (yas-minor-mode 1)
               ;; (which-function-mode) ; displays function at cursor in the
               ;;                       ; mode-line. But can be annoying.
-              (electric-pair-mode 1)
+              (electric-pair-local-mode 1)
 
               ;; highlight escapes in the printf format string.
               ;; TODO: highlight placeholders %d differently than escapes \n
@@ -2572,7 +2572,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'sql
   (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
-  (add-hook 'sql-mode-hook #'electric-pair-mode)
+  (add-hook 'sql-mode-hook #'electric-pair-local-mode)
   (add-hook #'sql-mode-hook
             (lambda ()
               (yas-minor-mode 1)
@@ -4585,7 +4585,7 @@ When ARG isn't nil, try to pretty print the sexp."
               (rainbow-delimiters-mode-enable)
               ;; (when my-graphic-p
               ;;   (highlight-indent-guides-mode 1))
-              (electric-pair-mode 1)
+              (electric-pair-local-mode 1)
               ;; (electric-spacing-mode 1)
               ;; (fci-mode 1)
               )))
@@ -4624,7 +4624,7 @@ When ARG isn't nil, try to pretty print the sexp."
             (lambda ()
               (yas-minor-mode 1)
               (rainbow-delimiters-mode 1)
-              (electric-pair-mode 1)
+              (electric-pair-local-mode 1)
               ;; (electric-spacing-mode 1)
               )))
 
@@ -4635,7 +4635,7 @@ When ARG isn't nil, try to pretty print the sexp."
   (add-hook 'swift-mode-hook
             (lambda ()
               (rainbow-delimiters-mode 1)
-              (electric-pair-mode 1))))
+              (electric-pair-local-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; ggtags

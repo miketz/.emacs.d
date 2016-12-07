@@ -4891,6 +4891,9 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(when (eq my-curr-computer 'work-laptop)
+  (setq find-function-C-source-directory "c:/users/mtz/scratch/emacs/src"))
+
 (defun my-win-count ()
   (length (window-list))
   ;; (cl-loop for w being the windows of (selected-frame)

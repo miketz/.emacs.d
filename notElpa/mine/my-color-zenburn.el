@@ -36,7 +36,7 @@
 
    '(org-agenda-calendar-event ((t (:background "black"))))
 
-   ;; separates windwos.
+   ;; separates windows.
    '(vertical-border ((t (:foreground "gray50"))))
 
    '(highlight-indent-guides-odd-face

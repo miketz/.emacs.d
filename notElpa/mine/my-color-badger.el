@@ -3,6 +3,8 @@
   (load-theme 'badger t)
   (custom-theme-set-faces
    'badger
+   ;; separates windows.
+   '(vertical-border ((t (:foreground "gray15"))))
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t

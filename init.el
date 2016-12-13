@@ -352,7 +352,6 @@ Choices: helm-swoop swiper")
      (js2-highlight-vars t)
      (skewer-mode ,(member my-curr-computer '(work-laptop)))
      (json-mode t)
-     (web-beautify t)
 
      (helm ,my-use-helm-p)
      (helm-cmd-t nil) ;; broken with recent helm versions?
@@ -1916,28 +1915,29 @@ monitor.")
 ;;;-----------------------------------------------------------------------------
 ;;; web-beautify
 ;;;-----------------------------------------------------------------------------
-;; Depends on external programs: nodejs, js-beatify
-;; So only use on computers with the depedencies set up.
-(when (eq my-curr-computer 'work-laptop)
-  ;; (with-eval-after-load "web-beautify"
-  ;;   (add-to-list 'web-beautify-args "3")
-  ;;   (add-to-list 'web-beautify-args "-m")
-  ;;   )
-  (with-eval-after-load 'js2-mode
-    (define-key js2-mode-map (kbd "C-c b") #'web-beautify-js))
-  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
-  (with-eval-after-load 'js
-    (define-key js-mode-map (kbd "C-c b") #'web-beautify-js))
+;; ;; Depends on external programs: nodejs, js-beatify
+;; ;; So only use on computers with the depedencies set up.
+;; (when (eq my-curr-computer 'work-laptop)
+;;   ;; (with-eval-after-load "web-beautify"
+;;   ;;   (add-to-list 'web-beautify-args "3")
+;;   ;;   (add-to-list 'web-beautify-args "-m")
+;;   ;;   )
+;;   (with-eval-after-load 'js2-mode
+;;     (define-key js2-mode-map (kbd "C-c b") #'web-beautify-js))
+;;   ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+;;   (with-eval-after-load 'js
+;;     (define-key js-mode-map (kbd "C-c b") #'web-beautify-js))
 
-  (with-eval-after-load 'json-mode
-    (define-key json-mode-map (kbd "C-c b") #'web-beautify-js))
+;;   (with-eval-after-load 'json-mode
+;;     (define-key json-mode-map (kbd "C-c b") #'web-beautify-js))
 
-  ;; (with-eval-after-load "sgml-mode"
-  ;;   (define-key html-mode-map (kbd "C-c b") #'web-beautify-html))
+;;   ;; (with-eval-after-load "sgml-mode"
+;;   ;;   (define-key html-mode-map (kbd "C-c b") #'web-beautify-html))
 
-  ;; (with-eval-after-load "css-mode"
-  ;;   (define-key css-mode-map (kbd "C-c b") #'web-beautify-css))
-  )
+;;   ;; (with-eval-after-load "css-mode"
+;;   ;;   (define-key css-mode-map (kbd "C-c b") #'web-beautify-css))
+;;   )
+
 ;; put the following JSON text into a .jsbeautifyrc file to control formatting
 ;; of external program js-beatify.
 ;; program

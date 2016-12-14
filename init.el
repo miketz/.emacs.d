@@ -373,8 +373,12 @@ Choices: helm-swoop swiper")
      ;;multiple-cursors
      ;;(omnisharp (work-laptop))
      ;;sublimity
-     (nyan-mode t)
-     (nyan-prompt t)
+
+     ;; nyan-mode is broken on emacs 25 on windows.
+     ;; for now stop using it on windows, look into it later.
+     (nyan-mode ,(not (eq system-type 'windows-nt)))
+     (nyan-prompt ,(not (eq system-type 'windows-nt)))
+
      ;;powerline
      ;;dired-details ;default feature in emacs 24.4+
      (web-mode t)

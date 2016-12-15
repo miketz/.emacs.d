@@ -434,7 +434,8 @@ Choices: helm-swoop swiper")
      (smex ,(or my-use-ido-p
                 my-use-ivy-p)) ;; smex can be used by `counsel-M-x'
 
-     (ov t)
+     ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
+                 ;; because may useful for my own purposes later.
      (highlight-tail t)
      (function-args t)
      (highlight-indent-guides t)

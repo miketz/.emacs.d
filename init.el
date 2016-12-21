@@ -5190,9 +5190,10 @@ in frame.  Stop displaying shell in all other windows."
                       (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
            (line (my-what-line))
            (col (+ 1 (current-column))))
-      (message "%d%% %s C%d     %s"
+      (message "%d%% %s C%d     %s     %s"
                percent (my-what-line) col
-               (format-time-string "%-I:%M%#p %-m-%-d-%Y %a"))))
+               (format-time-string "%-I:%M%#p %-m-%-d-%Y %a")
+               (buffer-name))))
 
   (when my-use-evil-p
     ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)

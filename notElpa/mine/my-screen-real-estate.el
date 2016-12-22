@@ -51,7 +51,7 @@
 
 (when nil ; docs on fringe.
   (set-fringe-mode 0)         ; width 0
-  (set-fringe-mode nil)       ; with default
+  (set-fringe-mode nil)       ; width default
   (set-fringe-mode '(10 . 30)); custom right/left width
   )
 (when nil ;; experimental. moves minibuffer into separate frame, but messes up stuff.

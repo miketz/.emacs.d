@@ -4903,6 +4903,8 @@ When ARG isn't nil, try to pretty print the sexp."
       (interactive)
       (occur-mode-goto-occurrence)
       (funcall my-blink-fn))
+    (define-key occur-mode-map (kbd "n") #'my-occur-next)
+    (define-key occur-mode-map (kbd "p") #'my-occur-prev)
     (define-key occur-mode-map (kbd "C-n") #'my-occur-next)
     (define-key occur-mode-map (kbd "C-p") #'my-occur-prev)
     (define-key occur-mode-map (kbd "M-n") #'my-occur-next)

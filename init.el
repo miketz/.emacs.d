@@ -1193,9 +1193,7 @@ monitor.")
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (if (eq my-curr-computer 'work-laptop)
-        (my-color-spacemacs-light)
-      (my-color-zenburn)))
+    (my-color-zenburn))
 
   (cond
    ((eq my-curr-computer 'wild-dog)

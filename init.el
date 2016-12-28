@@ -5305,7 +5305,9 @@ in frame.  Stop displaying shell in all other windows."
 ;; disable annoying newline emacs automatically adds to the end of a file when
 ;; saving.
 (setq require-final-newline nil)
-(setq mode-require-final-newline nil)
+;; but for certain modes (like c-mode) where a final new line is required per
+;; the language specification, allow the automatic newline.
+(setq mode-require-final-newline t)
 
 ;; (defun sneak-forward ()
 ;;   (interactive)

@@ -4931,6 +4931,8 @@ When ARG isn't nil, try to pretty print the sexp."
               ;; select to the first match.
               (my-occur-next))))
 
+(global-set-key (kbd "C-c o") #'my-occur)
+
 ;;;-----------------------------------------------------------------------------
 ;;; eldoc
 ;;;-----------------------------------------------------------------------------

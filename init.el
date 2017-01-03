@@ -1198,7 +1198,7 @@ monitor.")
   (cond
    ((eq my-curr-computer 'wild-dog)
     (set-frame-font
-     (concat "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"))
+     "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
     ;; (set-frame-font
     ;;  (concat "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-"
     ;;          "iso10646-1"))

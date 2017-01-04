@@ -1231,7 +1231,7 @@ monitor.")
     ;; (set-frame-font
     ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1")
+     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font

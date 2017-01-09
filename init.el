@@ -4485,6 +4485,14 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; NOTE: the sallet package is not ready yet. Just configuring to give it a
 ;;       test run.
 (when (eq my-narrow-type 'sallet)
+  ;; install packages sallet depends on.
+  ;; TODO: look into a way to make this happen without code for a specific case.
+  ;;       (sallet is from git, not package manager). Maybe scrape out the
+  ;;       require symbols?
+  (dolist (pkg '(dash s async flx ov f))
+    (unless (package-installed-p pkg)
+      (package-install pkg)))
+
   ;; keybinds
   (when my-use-evil-p
     (evil-leader/set-key "b" #'sallet-buffer)))

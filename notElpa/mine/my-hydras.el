@@ -262,16 +262,16 @@
 
 
 (defhydra hydra-expand-region
-  (:body-pre (er/expand-region 1)
-             ;; TODO: wrapping in `call-interactively' will allow C-g to
-             ;;       preserve the jump back to the orginial position. But
-             ;;       there are issues where it messes up the j key and
-             ;;       key-chord "fj". Get this to work how I want eventually.
+  (:body-pre (er/expand-region 1) ;; (call-interactively #'er/expand-region)
+             ;; TODO: wire up "fj" keybind to quit with `key-chord'
              )
   ("k" er/expand-region)
   ("j" er/contract-region)
 
-  ("C-g" nil nil)
+  ;; NOTE: don't bind C-g in the hydra as it messes up expand-region's ability
+  ;; to jump back to the original starting point with C-g.
+  ;; ("C-g" nil nil)
+
   ("q" nil))
 
 

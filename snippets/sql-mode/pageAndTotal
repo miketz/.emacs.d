@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# -*- pagination for sql server 2012+. Includes total row count in an extra column. *-*
+# name: pageAndTotal
+# key: pageAndTotal
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+declare @PageNum int = 1;
+declare @PageSize int = 25;
+declare @RowStart int = @PageNum * @PageSize - @PageSize;
+with cte as (
+    select *
+    from core.Foo
+    where IsActive=1
+), 
+cteCount as (
+    select count(0) TotalRecords from cte
+)
+select cteCount.TotalRecords, cte.*
+from cte, cteCount
+order by cte.[LastName]
+offset @RowStart rows fetch next @PageSize rows only;

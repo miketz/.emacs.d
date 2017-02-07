@@ -11,7 +11,7 @@ with cte as (
     select *
     from core.Foo
     where IsActive=1
-), 
+),
 cteCount as (
     select count(0) TotalRecords from cte
 )

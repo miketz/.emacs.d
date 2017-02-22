@@ -4642,10 +4642,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
   (when nil ;; interactive testing
     (my-top-screen-line)
-    (my-bottom-screen-line)
-
-    )
-  )
+    (my-bottom-screen-line)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; my-test

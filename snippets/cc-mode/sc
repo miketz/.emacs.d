@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: sc
+# key: sc
+# --
+{ /* scope */
+    $0
+}

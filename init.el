@@ -4031,8 +4031,8 @@ Region defined by START and END is automaticallyl detected by
         (call-interactively #'my-js2-mode-on-region))))
 
   (cl-defun my-focus-javascript2 ()
-    "Same as `my-focus-javascript2' but use my mor package to open in a new buffer
-instead of narrowing."
+    "Same as `my-focus-javascript2' but use my mor package to open in a new
+buffer instead of narrowing."
     (interactive)
     (save-excursion ;; don't allow tag searches to mess with cursor position.
       (let ((start-tag-name "<script")

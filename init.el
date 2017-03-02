@@ -2324,9 +2324,9 @@ To make it human readable."
 
     (ido-ubiquitous-mode 1)
     ;; NOTE: i removed some un-wanted advice code from the autoloads file of
-    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase it
-    ;; forced a load of ido automatically at start up, even when I'm not using
-    ;; ido!!!
+    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase
+    ;; it forced a load of ido automatically at start up, even when I'm not
+    ;; using ido!!!
     ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
     ;; updates, and remove the un-wanted code in the autoload file.
 
@@ -2340,7 +2340,8 @@ To make it human readable."
             ((eq my-ido-display 'grid)
              ;; TODO: prevent grid mode from messing up the "space-as-dash"
              ;;       advice.
-             ;; TODO: make Tab behave the same for smex, general completion, etc.
+             ;; TODO: make Tab behave the same for smex, general completion,
+             ;;       etc.
              (ido-grid-mode)))))
 
   ;; (flx-ido-mode 1) ;; invokes (with-eval-after-load "flx-ido")

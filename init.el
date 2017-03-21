@@ -4936,7 +4936,7 @@ When ARG isn't nil, try to pretty print the sexp."
             (lambda ()
               ;; switch to the results window immediatly.
               (other-window 1)
-              ;; select to the first match.
+              ;; jump to the first match.
               (my-occur-next))))
 
 (global-set-key (kbd "C-c o") #'my-occur)

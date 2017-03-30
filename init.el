@@ -1507,11 +1507,12 @@ monitor.")
       (evil-leader/set-key-for-mode 'lisp-mode "e" eval-fn)
       (evil-leader/set-key-for-mode 'slime-repl-mode "e" eval-fn)))
 
-  (when (eq my-curr-computer 'work-laptop)
-    ;; use local hyperspec
-    (setq
-     common-lisp-hyperspec-root
-     "file:///C:/users/mtz/AppData/Roaming/CommonLispHyperSpec/HyperSpec/"))
+  (cond ;; set url to common lisp hyperspec.
+   ((eq my-curr-computer 'work-laptop)
+    (setq common-lisp-hyperspec-root
+          "file:///C:/users/mtz/CommonLispHyperSpec/HyperSpec/"))
+   (t (setq common-lisp-hyperspec-root
+            "http://www.lispworks.com/documentation/HyperSpec/")))
 
   (defun my-view-hyperspec ()
     (interactive)

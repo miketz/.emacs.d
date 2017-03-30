@@ -190,7 +190,8 @@
   ;; (common-lisp-mode)
   (split-window-horizontally)
   (shrink-window-horizontally 24)
-  (eww-open-file "c:/users/mtz/downloads/tutorials/practicalcommonlisp_epub/html/index.html"))
+  ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
+  (eww-open-file "c:/Users/mtz/scratch/PracticalCommonLisp_ePub/html/index.html"))
 
 (defun proj-dive-python ()
   (interactive)

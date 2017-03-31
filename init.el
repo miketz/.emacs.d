@@ -3088,7 +3088,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (when (eq my-curr-computer 'wild-dog)
   (let ((lisp-file "my-proj-wild-dog"))
-    (autoload #'proj-dive-python lisp-file nil t)))
+    (autoload #'proj-dive-python lisp-file nil t)
+    (autoload #'proj-pcl lisp-file nil t)))
 
 (when (eq my-curr-computer 'work-laptop)
   (let ((lisp-file "my-proj-work-laptop" ))

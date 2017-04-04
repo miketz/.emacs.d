@@ -3376,6 +3376,10 @@ and indent."
   (define-key eww-mode-map (kbd "B") #'eww-back-url)
   (define-key eww-mode-map (kbd "F") #'eww-forward-url)
 
+  (when my-use-evil-p
+    (evil-define-key 'normal eww-link-keymap (kbd "C-o") #'eww-back-url)
+    (evil-define-key 'normal eww-mode-map (kbd "C-o") #'eww-back-url))
+
   (progn ;; clearing the ^M
     (defun my-clear-wierd-m ()
       "Clear the weird ^M character that shows in some eww buffers."

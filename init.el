@@ -448,7 +448,8 @@ Choices: helm-swoop swiper")
      (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
       ,(<= emacs-major-version 24))
      (geiser ,(member my-curr-computer '(work-laptop)))
-     (debbugs ,(member my-curr-computer '(work-laptop wild-dog))))
+     (debbugs ,(member my-curr-computer '(work-laptop wild-dog)))
+     (adoc-mode t))
    "Packages I use from elpa/melpa."))
 
 (require 'package)

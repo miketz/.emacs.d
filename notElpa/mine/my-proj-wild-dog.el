@@ -15,3 +15,10 @@
   (shrink-window-horizontally 24)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
   (eww-open-file "~/books/PracticalCommonLisp_ePub/html/index.html"))
+
+(defun proj-progit2 ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (shrink-window-horizontally 24)
+  (eww-open-file "~/books/progit2/progit.html"))

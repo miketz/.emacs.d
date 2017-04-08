@@ -1,3 +1,6 @@
+(defvar my-shrink-wild-dog 10
+  "Size to shrink a split window.
+So lines of text are not too long to follow with my eyes.")
 
 (defun proj-dive-python ()
   (interactive)
@@ -12,7 +15,7 @@
   (switch-to-buffer "pcl-test")
   ;; (common-lisp-mode)
   (split-window-horizontally)
-  (shrink-window-horizontally 24)
+  (shrink-window-horizontally my-shrink-wild-dog)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
   (eww-open-file "~/books/PracticalCommonLisp_ePub/html/index.html"))
 
@@ -20,5 +23,5 @@
   (interactive)
   (delete-other-windows)
   (split-window-horizontally)
-  (shrink-window-horizontally 24)
+  (shrink-window-horizontally my-shrink-wild-dog)
   (eww-open-file "~/books/progit2/progit.html"))

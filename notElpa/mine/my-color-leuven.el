@@ -49,7 +49,7 @@
                                   :background nil))))
 
    `(font-lock-function-name-face ((t (:weight bold :foreground "#006699"))))
-   `(font-lock-keyword-face ((t (:bold t :foreground "#0000FF")))) ; #3654D
+   `(font-lock-keyword-face ((t (:bold t :foreground "#0000FF")))) ; #3654DC
    `(font-lock-builtin-face ((t (:weight bold :foreground "#006FE0"))))
 
    `(avy-lead-face ;; if 1 highlight char, or for remaining highlight chars.

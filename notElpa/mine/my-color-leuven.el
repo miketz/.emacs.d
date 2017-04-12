@@ -56,18 +56,24 @@
      ((t (:foreground "black"
                       :background "yellow"
                       :slant normal
-                      :weight normal))))
+                      :weight normal
+                      :strike-through nil
+                      :underline nil))))
 
    `(avy-lead-face-0 ;; the first overlay char if 2+
      ((t (:foreground "black"
                       :background "spring green"
                       :slant normal
-                      :weight normal))))
+                      :weight normal
+                      :strike-through nil
+                      :underline nil))))
    `(avy-lead-face-1 ;; ??? Maybe the 2cd overlay char if 3+ ???
      ((t (:foreground "black"
                       :background "red"
                       :slant normal
-                      :weight normal))))
+                      :weight normal
+                      :strike-through nil
+                      :underline nil))))
 
    ;; '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    ;; '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight bold))))

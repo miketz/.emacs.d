@@ -18,7 +18,22 @@
    `(mode-line-inactive ((t (:box (:line-width -1 :color "#4E4E4C")
                                   :foreground "#F0F0EF" :background "#9B9C97"
                                   :style released-button))))
-   '(js2-function-call ((t :foreground "blue")))
+
+
+   '(js2-function-call ((t :foreground "blue"
+                           :background "alice blue")))
+   '(js2-external-variable ((t :underline (:color "black" :style wave)
+                               ;; :background "yellow"
+                               )))
+   `(js2-warning ((t :underline (:color "black" :style wave)
+                     :strike-through t
+                     :background "lemonchiffon"
+                     )))
+   `(js2-error ((t :underline (:color "blue" :style wave)
+                   :strike-through t
+                   :background "light salmon")))
+
+
    '(erc-timestamp-face ((t :foreground "purple" :weight bold)))
    '(fringe
      ((t (:foreground "#9B9B9B" :background "alice blue"))))
@@ -34,8 +49,25 @@
                                   :background nil))))
 
    `(font-lock-function-name-face ((t (:weight bold :foreground "#006699"))))
-   `(font-lock-keyword-face ((t (:bold t :foreground "#0000FF")))) ; #3654DC
+   `(font-lock-keyword-face ((t (:bold t :foreground "#0000FF")))) ; #3654D
    `(font-lock-builtin-face ((t (:weight bold :foreground "#006FE0"))))
+
+   `(avy-lead-face ;; if 1 highlight char, or for remaining highlight chars.
+     ((t (:foreground "black"
+                      :background "yellow"
+                      :slant normal
+                      :weight normal))))
+
+   `(avy-lead-face-0 ;; the first overlay char if 2+
+     ((t (:foreground "black"
+                      :background "spring green"
+                      :slant normal
+                      :weight normal))))
+   `(avy-lead-face-1 ;; ??? Maybe the 2cd overlay char if 3+ ???
+     ((t (:foreground "black"
+                      :background "red"
+                      :slant normal
+                      :weight normal))))
 
    ;; '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    ;; '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight bold))))

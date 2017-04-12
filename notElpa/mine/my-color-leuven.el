@@ -21,7 +21,7 @@
 
 
    '(js2-function-call ((t :foreground "blue"
-                           :background "alice blue")))
+                           )))
    '(js2-external-variable ((t :underline (:color "black" :style wave)
                                ;; :background "yellow"
                                )))

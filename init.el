@@ -748,6 +748,8 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'evil
 
+  (setq evil-flash-delay 1)
+
   ;; unset some keys. It seems other modes have trouble overriding them when
   ;; it's set in evil?
   (define-key evil-normal-state-map (kbd "M-.") nil)

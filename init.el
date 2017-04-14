@@ -449,7 +449,8 @@ Choices: helm-swoop swiper")
       ,(<= emacs-major-version 24))
      (geiser ,(member my-curr-computer '(work-laptop)))
      (debbugs ,(member my-curr-computer '(work-laptop wild-dog)))
-     (adoc-mode t))
+     (adoc-mode t)
+     (markdown-mode t))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -5008,6 +5009,16 @@ When ARG isn't nil, try to pretty print the sexp."
 
 ;; ;; reload buffer if it changes on disk outside emacs.
 ;; (global-auto-revert-mode t)
+
+
+;;;-----------------------------------------------------------------------------
+;;; markdown-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'markdown-mode
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              ;; usually for reading books, so use word wrap.
+              (visual-line-mode))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

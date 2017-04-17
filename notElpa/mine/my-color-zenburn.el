@@ -31,6 +31,12 @@
    ;; '(minibuffer-prompt
    ;;   ((t (:foreground "spring green"))))
 
+   `(header-line
+     ((t (:foreground "black"
+                      :background "gray73"
+                      :weight bold
+                      :box (:line-width -1 :style released-button)))))
+
    '(cider-fringe-good-face ((t (:foreground "lime green"))))
    '(cider-result-overlay-face ((t (:foreground "orange"))))
 

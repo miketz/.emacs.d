@@ -3150,15 +3150,15 @@ and indent."
                                (dired "~")))))
 
 
-;;; quick load of the .emacs (or init.el) file.
-(defun my-load-init ()
+;;; quick open of the .emacs (or init.el) file.
+(defun my-open-init ()
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
 (when my-use-evil-p
-  (evil-leader/set-key "`" #'my-load-init)
+  (evil-leader/set-key "`" #'my-open-init)
   ;; the above key is hard to type on a 60% poker so making an alternative.
-  (evil-leader/set-key "8" #'my-load-init))
+  (evil-leader/set-key "8" #'my-open-init))
 
 
 ;;;-----------------------------------------------------------------------------

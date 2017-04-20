@@ -3111,7 +3111,8 @@ and indent."
     (autoload #'proj-cpp lisp-file nil t)
     (autoload #'proj-pcl lisp-file nil t)
     (autoload #'proj-tcpl lisp-file nil t)
-    (autoload #'proj-dive-python lisp-file nil t))
+    (autoload #'proj-dive-python lisp-file nil t)
+    (autoload #'proj-progit2 lisp-file nil t))
 
   ;;quick load of c:\users\mtz
   (when my-use-evil-p

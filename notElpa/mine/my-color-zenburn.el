@@ -39,6 +39,7 @@
 
 
    ;; used in adoc-mode
+   '(markup-meta-face ((t (:foreground "yellow green"))))
    '(markup-internal-reference-face ((t (:foreground "yellow green"))))
 
    '(cider-fringe-good-face ((t (:foreground "lime green"))))

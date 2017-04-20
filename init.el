@@ -5188,6 +5188,12 @@ in frame.  Stop displaying shell in all other windows."
 (setq read-file-name-completion-ignore-case t)
 (setq completion-ignore-case t)
 
+(progn ;; allows you to use M-x even if you're in the minibuffer.
+  (setq enable-recursive-minibuffers t)
+  ;; displays depth in minibuffer.
+  ;; (minibuffer-depth-indicate-mode)
+  )
+
 ;; if we havn't bound leader-b to buffer switching yet.
 (when (or (eq my-curr-computer 'raspberry-pi)
           (eq my-narrow-type 'icicles)

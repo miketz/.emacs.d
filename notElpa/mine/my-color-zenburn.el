@@ -37,6 +37,10 @@
    ;;                    :weight bold
    ;;                    :box (:line-width -1 :style released-button)))))
 
+
+   ;; used in adoc-mode
+   '(markup-internal-reference-face ((t (:foreground "yellow green"))))
+
    '(cider-fringe-good-face ((t (:foreground "lime green"))))
    '(cider-result-overlay-face ((t (:foreground "orange"))))
 

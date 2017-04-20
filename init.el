@@ -5014,6 +5014,15 @@ When ARG isn't nil, try to pretty print the sexp."
 
 
 ;;;-----------------------------------------------------------------------------
+;;; adoc-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'adoc-mode
+  (add-hook 'adoc-mode-hook
+            (lambda ()
+              ;; usually for reading books, so use word wrap.
+              (visual-line-mode))))
+
+;;;-----------------------------------------------------------------------------
 ;;; markdown-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'markdown-mode

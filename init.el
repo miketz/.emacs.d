@@ -5183,8 +5183,10 @@ in frame.  Stop displaying shell in all other windows."
 ;;(global-set-key "\C-x\C-b" 'bs-show)
 
 
-;; case insensitive for emacs default buffer switch completion
+;; case insensitive for emacs completion
 (setq read-buffer-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+(setq completion-ignore-case t)
 
 ;; if we havn't bound leader-b to buffer switching yet.
 (when (or (eq my-curr-computer 'raspberry-pi)

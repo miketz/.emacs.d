@@ -26,7 +26,10 @@
 ;;  '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
 
 
+;; case insensitive for emacs completion
 (setq read-buffer-completion-ignore-case t)
+(setq read-file-name-completion-ignore-case t)
+(setq completion-ignore-case t)
 
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 

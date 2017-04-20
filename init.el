@@ -5016,6 +5016,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; adoc-mode
 ;;;-----------------------------------------------------------------------------
+(add-to-list 'auto-mode-alist '("\\.asc\\'" . adoc-mode))
+
 (with-eval-after-load 'adoc-mode
   (add-hook 'adoc-mode-hook
             (lambda ()

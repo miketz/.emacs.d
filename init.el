@@ -3095,6 +3095,7 @@ and indent."
     (autoload #'proj-dive-python lisp-file nil t)
     (autoload #'proj-pcl lisp-file nil t)
     (autoload #'proj-progit2 lisp-file nil t)
+    (autoload #'proj-progit2-dired lisp-file nil t)
     (autoload #'proj-ydnjs lisp-file nil t)))
 
 (when (eq my-curr-computer 'work-laptop)

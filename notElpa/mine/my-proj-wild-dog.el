@@ -26,6 +26,13 @@ So lines of text are not too long to follow with my eyes.")
   (shrink-window-horizontally my-shrink-wild-dog)
   (eww-open-file "~/books/progit2/progit.html"))
 
+(defun proj-progit2-dired ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (shrink-window-horizontally my-shrink-wild-dog)
+  (dired "~/books/progit2/book"))
+
 (defun proj-ydnjs ()
   (interactive)
   (delete-other-windows)

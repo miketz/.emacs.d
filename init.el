@@ -3534,7 +3534,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; leerzeichen. Displays symbols for tab, space, and newline.
 ;;;-----------------------------------------------------------------------------
-(autoload 'leerzeichen-mode "leerzeichen" nil t)
+;; (autoload 'leerzeichen-mode "leerzeichen" nil t)
 ;;(leerzeichen-mode)
 ;; (custom-set-faces
 ;;  '(leerzeichen ((t (:foreground "black";"#A8A800"

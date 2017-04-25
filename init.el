@@ -1203,7 +1203,8 @@ monitor.")
 ;; theme of the week and corresponding settings. This may change often.
 (progn
   (when my-graphic-p ;; this isn't true for emacs daemon!
-    (my-color-zenburn))
+    (unless (eq my-curr-computer 'work-laptop)
+      (my-color-zenburn)))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
@@ -1227,6 +1228,8 @@ monitor.")
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
+    (my-color-leuven)
+    (set-background-color my-ultimate)
     ;; ;; brighter lights in office. more contrast needed.
     ;; (custom-theme-set-faces
     ;;  'zenburn
@@ -1240,10 +1243,10 @@ monitor.")
     ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    ;; (set-frame-font
+    ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font
     ;;  "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; (set-frame-font

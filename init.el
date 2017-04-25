@@ -280,12 +280,13 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'ivy)
+(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
                              ((eq my-curr-computer 'wild-dog) 'ivy)
                              (t nil))
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
-Choices: ivy ido helm icicles sallet nil")
+Use bare-ido for ido without the extra ido packages.
+Choices: ivy ido bare-ido helm icicles sallet nil")
 
 ;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -300,6 +301,10 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-use-ido-p (eq my-narrow-type 'ido)
   "If I'm using ido at the moment.
+Just a convenience to avoid checks against `my-narrow-type'.")
+
+(defvar my-use-bare-ido-p (eq my-narrow-type 'bare-ido)
+  "If I'm using bare-ido at the moment. Without lots of extra ido packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond (my-use-ivy-p #'swiper)
@@ -432,6 +437,7 @@ Choices: helm-swoop swiper")
      (flx-ido ,my-use-ido-p)
      (ido-occur ,my-use-ido-p)
      (smex ,(or my-use-ido-p
+                my-use-bare-ido-p
                 my-use-ivy-p)) ;; smex can be used by `counsel-M-x'
 
      ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
@@ -2304,7 +2310,8 @@ To make it human readable."
 ;;; flx-ido
 ;;; smex (built on ido)
 ;;;-----------------------------------------------------------------------------
-(when my-use-ido-p
+(when (or my-use-ido-p
+          my-use-bare-ido-p)
   ;;use swiper on "s" even when using ido.
   ;; (when my-use-evil-p
   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
@@ -2371,17 +2378,18 @@ To make it human readable."
   (setq ido-vertical-show-count t))
 
 (with-eval-after-load 'smex
-  (when my-use-ido-p ;; GUARD: smex is used for `counsel-M-x' too where this
-                     ;; advice is not needed.
-   ;; insert a hypen - on space like in normal M-x
-   (defadvice smex (around space-inserts-hyphen activate compile)
-     (let ((ido-cannot-complete-command
-            `(lambda ()
-               (interactive)
-               (if (string= " " (this-command-keys))
-                   (insert ?-)
-                 (funcall ,ido-cannot-complete-command)))))
-       ad-do-it))))
+  ;; GUARD: smex is used for `counsel-M-x' too where this advice is not needed.
+  (when (or my-use-ido-p
+            my-use-bare-ido-p)
+    ;; insert a hypen - on space like in normal M-x
+    (defadvice smex (around space-inserts-hyphen activate compile)
+      (let ((ido-cannot-complete-command
+             `(lambda ()
+                (interactive)
+                (if (string= " " (this-command-keys))
+                    (insert ?-)
+                  (funcall ,ido-cannot-complete-command)))))
+        ad-do-it))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Yasnippet

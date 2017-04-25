@@ -2003,9 +2003,9 @@ monitor.")
     ;;     "good-stuff" : true
     ;; }
 
-    ;;;-----------------------------------------------------------------------------
-    ;;; ac-js2
-    ;;;-----------------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ac-js2
+;;;-----------------------------------------------------------------------------
 ;; (when nil
 ;;   (add-hook 'js2-mode-hook 'ac-js2-mode)
 ;;   (setq ac-js2-evaluate-calls t) ; requires connection to browser with
@@ -2706,7 +2706,8 @@ and indent."
   ;;     (interactive "r")
   ;;     (delete-region)
   ;;     (deactivate-mark))
-  ;;   ;; augment the backspace to handle the annoying indentation sql-mode gives.
+  ;;   ;; augment the backspace to handle the annoying indentation sql-mode
+  ;;   ;; gives.
   ;;   (evil-define-key 'insert sql-mode-map (kbd "<backspace>")
   ;;     (lambda ()
   ;;       (interactive)
@@ -5046,7 +5047,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (cond ((eq my-curr-computer 'work-laptop)
-       (setq find-function-C-source-directory "c:/users/mtz/scratch/emacs/src")))
+       (setq find-function-C-source-directory
+             "c:/users/mtz/scratch/emacs/src")))
 
 (defun my-win-count ()
   (length (window-list))

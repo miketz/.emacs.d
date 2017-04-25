@@ -4922,7 +4922,8 @@ When ARG isn't nil, try to pretty print the sexp."
       (occur-mode-goto-occurrence-other-window)
       (recenter)
       (funcall my-blink-fn)
-      (other-window 1))
+      (switch-to-buffer-other-window "*Occur*") ;; (other-window 1)
+      )
     (defun my-occur-next ()
       (interactive)
       (my--occur-move #'occur-next))
@@ -4958,7 +4959,7 @@ When ARG isn't nil, try to pretty print the sexp."
   (add-hook 'occur-hook
             (lambda ()
               ;; switch to the results window immediatly.
-              (other-window 1)
+              (switch-to-buffer-other-window "*Occur*") ;; (other-window 1)
               ;; jump to the first match.
               (my-occur-next))))
 

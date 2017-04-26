@@ -5146,6 +5146,10 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (cond
+ ((eq my-curr-computer 'wild-dog)
+  (setq browse-url-generic-program "firefox"
+        browse-url-browser-function #'browse-url-generic))
+
  ((eq my-curr-computer 'work-laptop)
   (setq
    ;; browse-url-generic-program

@@ -38,6 +38,10 @@
    ;;                    :box (:line-width -1 :style released-button)))))
 
 
+   '(completions-common-part ((t (:foreground "orange"))))
+   '(completions-first-difference ((t (:foreground "green"
+                                                   :weight bold))))
+
    ;; used in adoc-mode
    '(markup-meta-face ((t (:foreground "yellow green"))))
    '(markup-internal-reference-face ((t (:foreground "yellow green"))))

@@ -5266,6 +5266,7 @@ in frame.  Stop displaying shell in all other windows."
                percent (my-what-line) col
                (format-time-string "%-I:%M%#p %-m-%-d-%Y %a")
                (buffer-name))))
+  (defalias 'my-what-time #'my-what-position)
 
   (when my-use-evil-p
     ;; (evil-define-key 'normal global-map (kbd "g a") #'my-what-position)

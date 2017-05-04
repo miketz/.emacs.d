@@ -2317,7 +2317,7 @@ To make it human readable."
   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
   (setq ido-everywhere t)
-  (ido-mode t) ;;autoloaded function. turn on ido.
+  (ido-mode 1) ;;autoloaded function. turn on ido.
 
   (when my-use-evil-p
     (evil-leader/set-key "b" #'ido-switch-buffer))

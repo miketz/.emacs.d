@@ -2316,6 +2316,7 @@ To make it human readable."
   ;; (when my-use-evil-p
   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
+  (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
   (ido-mode 1) ;;autoloaded function. turn on ido.
 
@@ -2370,7 +2371,6 @@ To make it human readable."
 
 (with-eval-after-load 'flx-ido
   ;; disable ido faces to see flx highlights.
-  (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
 
 (with-eval-after-load 'ido-vertical-mode

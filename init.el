@@ -4277,6 +4277,10 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; elisp emacs lisp
 ;;;-----------------------------------------------------------------------------
+;; (define-key emacs-lisp-mode-map (kbd "C-c C-r") #'eval-region)
+;; (define-key lisp-interaction-mode-map (kbd "C-c C-r") #'eval-region)
+(define-key lisp-mode-shared-map (kbd "C-c C-r") #'eval-region)
+
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:
   (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)

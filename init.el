@@ -2318,6 +2318,9 @@ To make it human readable."
 
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
+  ;; TODO: figure out why it's still prompting for new buffer creation even
+  ;; when `ido-create-new-buffer' is set to 'always.
+  (setq ido-create-new-buffer 'always)
   (ido-mode 1) ;;autoloaded function. turn on ido.
 
   (when my-use-evil-p

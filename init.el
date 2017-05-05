@@ -443,7 +443,7 @@ Choices: helm-swoop swiper")
      ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
                  ;; because may useful for my own purposes later.
      (highlight-tail t)
-     (function-args t)
+     (function-args nil)
      (highlight-indent-guides t)
      (ace-link t)
      (smart-tabs-mode t)

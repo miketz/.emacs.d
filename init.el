@@ -2305,6 +2305,11 @@ To make it human readable."
 ;;          t))))
 
 
+;;;-----------------------------------------------------------------------------
+;;; icomplete
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'icomplete
+  (setq icomplete-compute-delay 0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; ido
@@ -2318,6 +2323,10 @@ To make it human readable."
   ;;use swiper on "s" even when using ido.
   ;; (when my-use-evil-p
   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
+
+  ;; icomplete's display is simliar to ido. So use it for completions ido does
+  ;; not support. (ie `describe-function' `load-theme' etc)
+  (icomplete-mode 1)
 
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)

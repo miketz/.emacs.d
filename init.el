@@ -4279,7 +4279,12 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;; (define-key emacs-lisp-mode-map (kbd "C-c C-r") #'eval-region)
 ;; (define-key lisp-interaction-mode-map (kbd "C-c C-r") #'eval-region)
-(define-key lisp-mode-shared-map (kbd "C-c C-r") #'eval-region)
+(defun my-eval-region (start end)
+  "Same as `eval-region' but pass in `t' flag to display the result in the echo
+area."
+  (interactive "r")
+  (eval-region start end t))
+(define-key lisp-mode-shared-map (kbd "C-c C-r") #'my-eval-region)
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:

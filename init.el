@@ -2583,7 +2583,7 @@ and indent."
                 ;; TODO: find the problem, fix it. Commit upstream if relevant.
                 (flycheck-mode 1))
 
-              ;; (fci-mode)
+              (fci-mode 1)
 
               ;; (electric-spacing-mode 1)
               ))

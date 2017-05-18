@@ -2339,7 +2339,7 @@ To make it human readable."
   ;; ;; not support. (ie `describe-function' `load-theme' etc)
   ;; (icomplete-mode 1)
 
-  (setq ido-enable-flex-matching t)
+  (setq ido-enable-flex-matching nil)
   (setq ido-everywhere t)
   ;; TODO: figure out why it's still prompting for new buffer creation even
   ;; when `ido-create-new-buffer' is set to 'always.

@@ -312,7 +312,9 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond (my-use-ivy-p #'swiper)
-                          (my-use-ido-p #'ido-occur)
+                          ;; `ido-occur' is fast but does not split inputs on
+                          ;; spaces. use swiper with ido for now.
+                          (my-use-ido-p #'swiper)
                           (my-use-helm-p #'helm-swoop)
                           (my-use-mish-mash-p #'swiper)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.

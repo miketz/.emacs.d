@@ -281,12 +281,12 @@ Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
 (defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
-                             ((eq my-curr-computer 'wild-dog) 'ivy)
+                             ((eq my-curr-computer 'wild-dog) 'mish-mash)
                              (t nil))
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
 Use bare-ido for ido without the extra ido packages.
-Choices: ivy ido bare-ido helm icicles sallet nil")
+Choices: ivy ido bare-ido helm icicles sallet mish-mash nil")
 
 ;;TODO: make ivy pop-up it's window on the linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -307,9 +307,14 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using bare-ido at the moment. Without lots of extra ido packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
+(defvar my-use-mish-mash-p (eq my-narrow-type 'mish-mash)
+  "If I'm using combination of several narrowing packages.
+Just a convenience to avoid checks against `my-narrow-type'.")
+
 (defvar my-swoop-fn (cond (my-use-ivy-p #'swiper)
                           (my-use-ido-p #'ido-occur)
                           (my-use-helm-p #'helm-swoop)
+                          (my-use-mish-mash-p #'swiper)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.
                           ;; `icicle-occur' is unusabley slow. Dont' use it.
                           (t  #'occur))
@@ -3890,6 +3895,13 @@ and indent."
             (powerline-reset)))
       (error "Problem loading theme %s" x))))
 
+;;;-----------------------------------------------------------------------------
+;;; mish-mash. Keybinds for using several packages for narrowing.
+;;;-----------------------------------------------------------------------------
+(when my-use-mish-mash-p
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'ivy-switch-buffer))
+  (global-set-key (kbd "M-x") #'counsel-M-x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; color-identifiers-mode

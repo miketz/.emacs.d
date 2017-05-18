@@ -3910,16 +3910,19 @@ and indent."
     )
   (global-set-key (kbd "C-h v") #'counsel-describe-variable)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
+  (global-set-key (kbd "M-x") #'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") #'counsel-find-file)
 
-  ;; set up ido and smex with flx matching
-  (setq ido-enable-flex-matching t)
-  (setq ido-use-faces nil) ;; disable ido faces to see flx highlights.
-  (global-set-key (kbd "M-x") #'smex)
-  (global-set-key (kbd "M-X") #'smex-major-mode-commands)
-  ;; (global-set-key (kbd "C-x C-f") #'ido-find-file)
-  ;; (ido-mode 1) ;; seems ido fn's don't work unless ido mode is turned on.
-  (flx-ido-mode 1)
-  (ido-vertical-mode 1))
+  ;; ;; set up ido and smex with flx matching
+  ;; (setq ido-enable-flex-matching t)
+  ;; (setq ido-use-faces nil) ;; disable ido faces to see flx highlights.
+  ;; (global-set-key (kbd "M-x") #'smex)
+  ;; (global-set-key (kbd "M-X") #'smex-major-mode-commands)
+  ;; ;; (global-set-key (kbd "C-x C-f") #'ido-find-file)
+  ;; ;; (ido-mode 1) ;; seems ido fn's don't work unless ido mode is turned on.
+  ;; (flx-ido-mode 1)
+  ;; (ido-vertical-mode 1)
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; color-identifiers-mode

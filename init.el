@@ -280,7 +280,7 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
+(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'mish-mash)
                              ((eq my-curr-computer 'wild-dog) 'bare-ido)
                              (t nil))
   "The package I'm currenlty using for narrowing completions.
@@ -420,7 +420,7 @@ Choices: helm-swoop swiper")
      (ivy ,my-use-ivy-p)
      (swiper ,my-use-ivy-p)
      (counsel ,my-use-ivy-p)
-     (flx t) ;; can be used by ivy for ordering flx matches.
+     (flx t) ;; can be used by ivy and flx-ido for ordering flx matches.
 
      ;;color-identifiers-mode
      ;;svg-mode-line-themes ;; only works on gnu/linux
@@ -436,15 +436,16 @@ Choices: helm-swoop swiper")
      ;;flymake-jslint
      (nlinum t)
 
-     (ido-vertical-mode ,my-use-ido-p)
+     (ido-vertical-mode ,(or my-use-ido-p
+                             my-use-mish-mash-p))
      ;;ido-grid-mode
      (ido-ubiquitous ,my-use-ido-p)
-     (flx-ido ,my-use-ido-p)
+     (flx-ido ,(or my-use-ido-p my-use-mish-mash-p))
      (ido-occur ,my-use-ido-p)
      (smex ,(or my-use-ido-p
                 my-use-bare-ido-p
-                my-use-ivy-p)) ;; smex can be used by `counsel-M-x'
-
+                my-use-ivy-p ;; smex can be used by `counsel-M-x'
+                my-use-mish-mash-p))
      ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
                  ;; because may useful for my own purposes later.
      (highlight-tail t)
@@ -3899,9 +3900,26 @@ and indent."
 ;;; mish-mash. Keybinds for using several packages for narrowing.
 ;;;-----------------------------------------------------------------------------
 (when my-use-mish-mash-p
+  ;; set up ivy/swiper/counsel keybinds
+  ;; Avoid turning on `ivy-mode' becuaes it replaces the `completing-read' fn
+  ;; which i want sometimes for the column-style display.
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'ivy-switch-buffer))
-  (global-set-key (kbd "M-x") #'counsel-M-x))
+    (evil-leader/set-key "b" #'ivy-switch-buffer)
+    (evil-leader/set-key "w" #'counsel-yank-pop)
+    (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
+    )
+  (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+  (global-set-key (kbd "C-h f") #'counsel-describe-function)
+
+  ;; set up ido and smex with flx matching
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil) ;; disable ido faces to see flx highlights.
+  (global-set-key (kbd "M-x") #'smex)
+  (global-set-key (kbd "M-X") #'smex-major-mode-commands)
+  ;; (global-set-key (kbd "C-x C-f") #'ido-find-file)
+  ;; (ido-mode 1) ;; seems ido fn's don't work unless ido mode is turned on.
+  (flx-ido-mode 1)
+  (ido-vertical-mode 1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; color-identifiers-mode

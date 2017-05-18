@@ -4849,7 +4849,7 @@ area."
   (shrink-window-horizontally 10)
   (follow-mode 1))
 
-(global-set-key (kbd "C-x f") #'my-follow-mode)
+;; (global-set-key (kbd "C-x f") #'my-follow-mode)
 
 (with-eval-after-load 'follow
   ;; scroll the height of all windows combined, not just 1.

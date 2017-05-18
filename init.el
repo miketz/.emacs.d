@@ -280,7 +280,7 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'mish-mash)
+(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
                              ((eq my-curr-computer 'wild-dog) 'bare-ido)
                              (t nil))
   "The package I'm currenlty using for narrowing completions.
@@ -315,6 +315,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
                           (my-use-ido-p #'swiper)
+                          (my-use-bare-ido-p #'swiper)
                           (my-use-helm-p #'helm-swoop)
                           (my-use-mish-mash-p #'swiper)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.

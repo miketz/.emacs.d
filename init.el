@@ -465,7 +465,8 @@ Choices: helm-swoop swiper")
      (geiser ,(member my-curr-computer '(work-laptop)))
      (debbugs ,(member my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
-     (markdown-mode t))
+     (markdown-mode t)
+     (tide ,(member my-curr-computer '(work-laptop wild-dog))))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -5104,6 +5105,56 @@ area."
             (lambda ()
               ;; usually for reading books, so use word wrap.
               (visual-line-mode))))
+
+;;;-----------------------------------------------------------------------------
+;;; tide
+;;;-----------------------------------------------------------------------------
+;; set up steps for using tide on regular javascript.
+;; see: https://www.reddit.com/r/emacs/comments/68zacv/using_tidemode_to_typeche
+;; ck_javascript/
+;; step 1: download typescript npm package:
+;;     npm install -g typescript
+;; step 2: put file jsconfig.json in root of project
+;; {
+;;   "compilerOptions": {
+;;     "target": "es2017",
+;;     "allowSyntheticDefaultImports": true,
+;;     "noEmit": true,
+;;     "checkJs": true,
+;;     "jsx": "react",
+;;     "lib": [ "dom", "es2017" ]
+;;   },
+;;   "include": [
+;;     "./src/"
+;;   ]
+;; }
+;; setp 3 (optional): install typings for libraries you use in a project to get
+;;                    even better intelliSense:
+;;     npm install --save-dev @types/lodash @types/rx @types/react @types/react-dom
+
+
+;; currently using tide for it's regular javascript features, so have
+;; eval-after-load on js2-mode.
+(with-eval-after-load 'js2-mode
+  (defun my-setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    ;; company is an optional dependency. You have to
+    ;; install it separately via package-install
+    (company-mode +1))
+
+  ;; Do not automatically call `my-setup-tide-mode' for js2 buffers. Because I
+  ;; won't alwyas have jsconfig.json set up. Call `my-setup-tide-mode'
+  ;; manaually.
+  ;; (add-hook 'js2-mode-hook #'my-setup-tide-mode)
+  )
+
+
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

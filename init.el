@@ -3843,6 +3843,8 @@ and indent."
                         (call-interactively #'counsel-load-theme))))
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function)
+    ;; replace keybind for `bookmark-bmenu-list'
+    (global-set-key (kbd "C-x r l") #'counsel-bookmark)
     (when my-use-evil-p
       (evil-leader/set-key "w" #'counsel-yank-pop)
       (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows

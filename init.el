@@ -5146,6 +5146,26 @@ area."
 ;;;-----------------------------------------------------------------------------
 ;;; tide
 ;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'typescript-mode
+  (defun my-setup-tide-for-ts ()
+    "The example fn in the tide readme file."
+    (interactive)
+    (tide-setup)
+    (flycheck-mode 1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode 1)
+    (tide-hl-identifier-mode 1)
+    (company-mode 1))
+
+  ;; aligns annotation to the right hand side
+  (setq company-tooltip-align-annotations t)
+
+  ;; for now, do not autmoatically turn on tide mode.
+  ;; (add-hook 'typescript-mode-hook #'my-setup-tide-for-ts)
+  )
+
+
+
 ;; set up steps for using tide on regular javascript.
 ;; see: https://www.reddit.com/r/emacs/comments/68zacv/using_tidemode_to_typeche
 ;; ck_javascript/
@@ -5168,7 +5188,6 @@ area."
 ;; setp 3 (optional): install typings for libraries you use in a project to get
 ;;                    even better intelliSense:
 ;;     npm install --save-dev @types/lodash @types/rx @types/react @types/react-dom
-
 
 ;; currently using tide for it's regular javascript features, so have
 ;; eval-after-load on js2-mode.

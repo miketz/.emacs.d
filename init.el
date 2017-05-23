@@ -5160,21 +5160,24 @@ area."
 ;; currently using tide for it's regular javascript features, so have
 ;; eval-after-load on js2-mode.
 (with-eval-after-load 'js2-mode
-  (defun my-setup-tide-mode ()
+  (defun my-setup-tide-for-js ()
+    "Just like the example fn in the tide readme file, but tailored for use on
+vanilla javascript buffers."
     (interactive)
     (tide-setup)
     (flycheck-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
     (eldoc-mode +1)
     (tide-hl-identifier-mode +1)
-    ;; company is an optional dependency. You have to
-    ;; install it separately via package-install
-    (company-mode +1))
+    (company-mode +1)
 
-  ;; Do not automatically call `my-setup-tide-mode' for js2 buffers. Because I
-  ;; won't alwyas have jsconfig.json set up. Call `my-setup-tide-mode'
+    ;; turn off js2-highlight-vars-mode. it duplicates a tide feature
+    (js2-highlight-vars-mode 0))
+
+  ;; Do not automatically call `my-setup-tide-for-js' for js2 buffers. Because I
+  ;; won't alwyas have jsconfig.json set up. Call `my-setup-tide-for-js'
   ;; manaually.
-  ;; (add-hook 'js2-mode-hook #'my-setup-tide-mode)
+  ;; (add-hook 'js2-mode-hook #'my-setup-tide-for-js)
   )
 
 

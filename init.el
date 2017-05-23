@@ -1799,6 +1799,19 @@ monitor.")
 ;;       cc            433
 ;;       d             "hello there")
 
+
+
+;;;-----------------------------------------------------------------------------
+;;; javascript-mode
+;;; js-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'js
+  (add-hook 'js-mode-hook
+            (lambda ()
+              ;; set explicity becuase shorter width in json mode corrupts it.
+              (setq js-indent-level my-indent-width))))
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; js2-mode
 ;;;-----------------------------------------------------------------------------
@@ -1958,12 +1971,23 @@ monitor.")
 ;;; json-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'json-mode
-  (add-hook 'json-mode-hook
-            (lambda ()
-              ;; TODO: figure out why `tab-width' is not working
-              (setq tab-width 2) ; buffer local
-              (rainbow-delimiters-mode 1)
-              (electric-pair-local-mode 1))))
+  (add-hook
+   'json-mode-hook
+   (lambda ()
+     ;; for json, I'd like to use a more compact indentation. 2 chars, and
+     ;; visualize tabs as 2 chars wide. But `js-indent-level' is shared with
+     ;; js-mode and js2-mode currupting it. Can't be fixed with hooks alone as
+     ;; hooks don't fire on already-open buffers. So for now just using indent
+     ;; of 4 to avoid corruption.
+     ;; TODO: modify json-mode to use it's own independent indent-level.
+     (progn
+       ;; buffer local. Safe to change.
+       (setq tab-width my-indent-width)
+       ;; not buffer local! Make sure `js-indent-level' set in hooks
+       ;; for javascript-mode and/or js2-mode.
+       (setq js-indent-level my-indent-width))
+     (rainbow-delimiters-mode 1)
+     (electric-pair-local-mode 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; web-beautify

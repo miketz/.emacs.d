@@ -466,6 +466,7 @@ Choices: helm-swoop swiper")
      (debbugs ,(member my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
      (markdown-mode t)
+     (typescript-mode t)
      (tide ,(member my-curr-computer '(work-laptop wild-dog))))
    "Packages I use from elpa/melpa."))
 
@@ -5129,6 +5130,18 @@ area."
             (lambda ()
               ;; usually for reading books, so use word wrap.
               (visual-line-mode))))
+
+;;;-----------------------------------------------------------------------------
+;;; typescript-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'typescript-mode
+  (setq typescript-indent-level my-indent-width)
+
+  (defun my-typescript-mode-init ()
+    ;; (yas-minor-mode 1)
+    (rainbow-delimiters-mode 1)
+    (electric-pair-local-mode 1))
+  (add-hook 'typescript-mode-hook #'my-typescript-mode-init))
 
 ;;;-----------------------------------------------------------------------------
 ;;; tide

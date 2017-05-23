@@ -67,7 +67,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
           t)))))
 
 
-(defun color (theme &optional no-confirm no-enable)
+(defun my-load-theme-vim (theme &optional no-confirm no-enable)
   "Duplicate of `my-load-theme' to simulate :color in vim.
 See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
   (interactive

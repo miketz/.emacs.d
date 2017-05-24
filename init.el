@@ -3408,17 +3408,29 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; highlight-tail
 ;;;-----------------------------------------------------------------------------
-;; (require 'highlight-tail)
-;; (setq highlight-tail-colors '(("green yellow" . 0)
-;;                               ("lemon chiffon". 40)))
-;; (setq highlight-tail-colors '(("dark cyan" . 0)
-;;                               ("black" . 40)))
-;; (setq highlight-tail-steps 40 ;80
-;;       highlight-tail-timer 0.04;0.04
-;;       )
-;; (setq highlight-tail-posterior-type t) ; 'const
+(with-eval-after-load 'highlight-tail
+
+  (defun my-tail-colors-for-bg ()
+    (if (eq 'light (frame-parameter nil 'background-mode))
+        '(("green yellow" . 0)
+          ("lemon chiffon". 40))
+      '(("dark cyan" . 0)
+        ("black" . 40))))
+
+  ;; no hooks found, so this will be called manually when the theme changes.
+  (defun my-highlight-tail-reload ()
+    "Reload highlight tail with the colors based on the current background."
+    (interactive)
+    (setq highlight-tail-colors (my-tail-colors-for-bg))
+    (highlight-tail-reload))
+
+  (setq highlight-tail-colors (my-tail-colors-for-bg)
+        highlight-tail-steps 40           ;; 80
+        highlight-tail-timer 0.04         ;; 0.04
+        highlight-tail-posterior-type t)) ;;'const
+
 ;; (highlight-tail-mode)
-;; ;;(highlight-tail-reload)
+;; (highlight-tail-reload)
 
 ;;;-----------------------------------------------------------------------------
 ;;; eww web-browser

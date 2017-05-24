@@ -5220,6 +5220,14 @@ vanilla javascript buffers."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(when (or (> emacs-major-version 25)
+          (and (= emacs-major-version 25)
+               (>= emacs-minor-version 2)))
+  ;; Disable the wierd quote characters used in help buffers in emacs 25.
+  ;; var `use-default-font-for-symbols' was introduced in emacs 25.2 to disable
+  ;; the bad behavior introduced in emacs 25.
+  (setq use-default-font-for-symbols nil))
+
 (cond ((eq my-curr-computer 'work-laptop)
        (setq find-function-C-source-directory
              "c:/users/mtz/scratch/emacs/src")))

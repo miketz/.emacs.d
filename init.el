@@ -342,7 +342,6 @@ Choices: helm-swoop swiper")
  ;; TODO: specify if it should use elpa or melpa version of a package.
  ;; NOTE: to limit package intstallation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
- ;; `my-curr-computer'.
  (defvar my-packages
    `((s t) ;; string library
      (evil t)

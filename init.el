@@ -386,10 +386,8 @@ Choices: helm-swoop swiper")
      ;;(omnisharp (work-laptop))
      ;;sublimity
 
-     ;; nyan-mode is broken on emacs 25 on windows.
-     ;; for now stop using it on windows, look into it later.
-     (nyan-mode ,(not (eq system-type 'windows-nt)))
-     (nyan-prompt ,(not (eq system-type 'windows-nt)))
+     (nyan-mode t)
+     (nyan-prompt t)
 
      ;;powerline
      ;;dired-details ;default feature in emacs 24.4+
@@ -2947,6 +2945,7 @@ and indent."
 ;;(setq nyan-wavy-trail nil)
 ;;(nyan-start-animation)
 
+
 ;;;-----------------------------------------------------------------------------
 ;;; nyan-prompt
 ;;;-----------------------------------------------------------------------------
@@ -5407,8 +5406,11 @@ in frame.  Stop displaying shell in all other windows."
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)
-(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
-
+;; hide the % of the buffer you are viewing. Used to set to nil, but that
+;; broke `nyan-mode' which manipulates this variable.
+;; TODO: look into this more to understand the format of this variable.
+(setq mode-line-position '((size-indication-mode nil)
+                           (line-number-mode nil)))
 
 (progn
   ;; replacing postion info in mode line with a function called on demand.

@@ -1321,22 +1321,7 @@ monitor.")
      '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
      '(rainbow-delimiters-depth-9-face ((t (:foreground "magenta"))))
      '(rainbow-delimiters-unmatched-face
-       ((t (:foreground "lightred" :background "darkgray"))))))
-
-  ;; (let ((a 92)) ;92
-  ;;   (set-frame-parameter (selected-frame) 'alpha `(,a ,a)))
-
-  ;; (require 'highlight-tail)
-  ;; (setq highlight-tail-colors '(("dark cyan" . 0)
-  ;;                               ("black" . 40)))
-  ;; (setq highlight-tail-steps 40 ;80
-  ;;       highlight-tail-timer 0.04;0.04
-  ;;       )
-  ;; (setq highlight-tail-posterior-type t)
-  ;; ;;(setq highlight-tail-posterior-type 'const)
-  ;; (highlight-tail-mode)
-  ;; ;;(highlight-tail-reload)
-  )
+       ((t (:foreground "lightred" :background "darkgray")))))))
 
 
 ;;;-----------------------------------------------------------------------------

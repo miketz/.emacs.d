@@ -3846,6 +3846,28 @@ and indent."
       )))
 
 (with-eval-after-load 'ivy
+
+  ;; redefine `ivy-help' to use outline mode. To avoid a long wait loading org.
+  (defun ivy-help ()
+    "Help for `ivy'."
+    (interactive)
+    (let ((buf (get-buffer "*Ivy Help*")))
+      (unless buf
+        (setq buf (get-buffer-create "*Ivy Help*"))
+        (with-current-buffer buf
+          (insert-file-contents ivy-help-file)
+          (if (member 'org features)
+              (org-mode)
+            (outline-mode))
+          (view-mode)
+          (goto-char (point-min))))
+      (if (eq this-command 'ivy-help)
+          (switch-to-buffer buf)
+        (with-ivy-window
+          (pop-to-buffer buf)))
+      (view-mode)
+      (goto-char (point-min))))
+
   ;; TODO: fix keybind to `ivy-avy'. It seems to be triggering outside of
   ;;       ivy-mode-map. Commenting keybind for now.
   ;; (define-key ivy-mode-map (kbd "C-SPC") #'ivy-avy)

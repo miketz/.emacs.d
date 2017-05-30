@@ -1451,8 +1451,9 @@ monitor.")
               (eq my-curr-computer 'utilite)
               (eq my-curr-computer 'a-laptop-faster))
       ;; Connect lisp buffers to SLIME automatically.
-      ;; Not sure why this works, since it's a hook on slime-mode which I
-      ;; thought would need to be hooked on lisp-mode-hook???
+      ;; I think this works because in SLIME's MELPA package, file
+      ;; slime-autoloads.el, it sneakily adds a slime hook to lisp-mode-hook.
+      ;; Using the code: (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
       (add-hook 'slime-mode-hook
                 (lambda ()
                   (unless (slime-connected-p)

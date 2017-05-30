@@ -1446,18 +1446,19 @@ monitor.")
             slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))
                                          (sbcl ("/usr/bin/sbcl")))))
 
-    ;; when on a computer with SLIME set up
-    (when (or (eq my-curr-computer 'work-laptop)
-              (eq my-curr-computer 'utilite)
-              (eq my-curr-computer 'a-laptop-faster))
-      ;; Connect lisp buffers to SLIME automatically.
-      ;; I think this works because in SLIME's MELPA package, file
-      ;; slime-autoloads.el, it sneakily adds a slime hook to lisp-mode-hook.
-      ;; Using the code: (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
-      (add-hook 'slime-mode-hook
-                (lambda ()
-                  (unless (slime-connected-p)
-                    (save-excursion (slime)))))))
+    (when nil ;; don't turn on SLIME automatically for now.
+      ;; when on a computer with SLIME set up
+      (when (or (eq my-curr-computer 'work-laptop)
+                (eq my-curr-computer 'utilite)
+                (eq my-curr-computer 'a-laptop-faster))
+        ;; Connect lisp buffers to SLIME automatically.
+        ;; I think this works because in SLIME's MELPA package, file
+        ;; slime-autoloads.el, it sneakily adds a slime hook to lisp-mode-hook.
+        ;; Using the code: (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+        (add-hook 'slime-mode-hook
+                  (lambda ()
+                    (unless (slime-connected-p)
+                      (save-excursion (slime))))))))
 
   ;; (add-hook 'slime-mode-hook #'lispy-mode)
   ;; (add-hook 'slime-repl-mode-hook #'lispy-mode)

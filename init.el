@@ -470,7 +470,8 @@ Choices: helm-swoop swiper")
 (require 'package)
 (add-to-list 'package-archives
              ;;'("melpa" . "http://melpa.milkbox.net/packages/")
-             '("melpa" . "http://melpa.org/packages/")
+             ;; '("melpa" . "http://melpa.org/packages/")
+             '("melpa" . "https://melpa.org/packages/")
              t)
 
 ;; (setq package-enable-at-startup nil)

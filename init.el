@@ -1421,7 +1421,8 @@ monitor.")
   (progn
     (when (eq my-curr-computer 'wild-dog)
       (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64")))))
+            slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64"))
+                                         (sbcl ("sbcl")))))
 
     (when (eq my-curr-computer 'work-laptop)
       (setq slime-default-lisp 'ccl)

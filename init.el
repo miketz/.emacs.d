@@ -5496,9 +5496,10 @@ in frame.  Stop displaying shell in all other windows."
   ;; (display-time-mode 1)
   )
 
-;;show lambdas with the greek symbol
-;; (when (and (>= emacs-major-version 24)
-;;            (>= emacs-minor-version 4))
+;; show lambdas with the greek symbol
+;; (when (or (> emacs-major-version 24)
+;;           (and (= emacs-major-version 24)
+;;                (>= emacs-minor-version 4)))
 ;;   (unless (eq my-curr-computer 'raspberry-pi)
 ;;     (global-prettify-symbols-mode 1)))
 

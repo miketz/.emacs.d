@@ -1702,10 +1702,12 @@ monitor.")
 
 ;; if the computer has a main todo file.
 (when my-main-todo
+  (defun my-open-main-todo ()
+    (interactive)
+    (message "Opening main todo...")
+    (find-file-existing my-main-todo))
   (when my-use-evil-p
-    (evil-leader/set-key "t" (lambda ()
-                               (interactive)
-                               (find-file-existing my-main-todo)))
+    (evil-leader/set-key "t" #'my-open-main-todo)
     (evil-leader/set-key "a" #'org-agenda-list)))
 
 (with-eval-after-load 'org
@@ -3186,13 +3188,7 @@ and indent."
     (evil-leader/set-key "4"
       (lambda ()
         (interactive)
-        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")))
-
-    ;;quick load of c:\users\mtz\TODO\TODO.org
-    (evil-leader/set-key "t"
-      (lambda ()
-        (interactive)
-        (find-file-existing "C:/Users/mtz/TODO/TODO.org")))))
+        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")))))
 
 
 (when (eq system-type 'gnu/linux)

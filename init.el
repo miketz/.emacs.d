@@ -1085,13 +1085,12 @@ monitor.")
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
 
   (unless my-use-ivy-p
-    (global-set-key (kbd "<f9>")
-                    (lambda ()
-                      (interactive)
-                      ;; nil for no candidate limit. I want to scroll through
-                      ;; all the themes.
-                      (let ((helm-candidate-number-limit nil))
-                        (call-interactively #'my-load-theme)))))
+    (defun my-load-theme-wrapper ()
+      (interactive)
+      ;; nil for no candidate limit. I want to scroll through all the themes.
+      (let ((helm-candidate-number-limit nil))
+        (call-interactively #'my-load-theme)))
+    (global-set-key (kbd "<f9>") #'my-load-theme-wrapper))
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg))
 
@@ -3833,13 +3832,11 @@ and indent."
 
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)
-    ;; TODO: disable warning like i did for the other f9 binding for colors
-    (global-set-key (kbd "<f9>")
-                    (lambda ()
-                      (interactive)
-                      ;; make ivy window taller for viewing themes.
-                      (let ((ivy-height 25))
-                        (call-interactively #'counsel-load-theme))))
+    (defun my-counsel-load-theme ()
+      (interactive)
+      (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
+        (call-interactively #'counsel-load-theme)))
+    (global-set-key (kbd "<f9>") #'my-counsel-load-theme)
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function)
     ;; replace keybind for `bookmark-bmenu-list'

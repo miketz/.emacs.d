@@ -973,13 +973,10 @@ Minus the newline char."
   (defvar my-curr-font-size nil
     "Starts out unknown")
 
-  (defun my-change-font-size (bigger-p)
-    (interactive)
+  (defun my-change-font-size (step)
     (let* ((curr-size (if my-curr-font-size ;; use cached value if it's set
                           my-curr-font-size
                         (face-attribute 'default :height (selected-frame))))
-           (step (if bigger-p 1 -1)) ;; TODO: calculate "threshold" step
-                                     ;;       increment.
            (new-size (+ curr-size step)))
 
       (custom-set-faces
@@ -999,12 +996,16 @@ Minus the newline char."
 
       (message (int-to-string new-size))))
 
-  (global-set-key (kbd "M-=") (lambda ()
-                                (interactive)
-                                (my-change-font-size t)))
-  (global-set-key (kbd "M--") (lambda ()
-                                (interactive)
-                                (my-change-font-size nil))))
+  (defun my-change-font-size-bigger ()
+    (interactive)
+    (my-change-font-size 1)) ;; TODO: calculate "threshold" step increment.
+
+  (defun my-change-font-size-smaller ()
+    (interactive)
+    (my-change-font-size -1)) ;; TODO: calculate "threshold" step decrement.
+
+  (global-set-key (kbd "M-=") #'my-change-font-size-bigger)
+  (global-set-key (kbd "M--") #'my-change-font-size-smaller))
 
 ;; (defun my-set-font-size ()
 ;;   "Interactive layer over my-set-font. Takes the font size as user input."

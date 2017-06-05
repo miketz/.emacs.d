@@ -1555,7 +1555,7 @@ monitor.")
 ;;;-----------------------------------------------------------------------------
 ;;; company
 ;;;-----------------------------------------------------------------------------
-;;company mode is breaking emacs 24.3. Works OK in 24.4
+;; company mode is breaking emacs 24.3. Works OK in 24.4
 ;; (require 'company)
 (add-hook 'after-init-hook 'global-company-mode) ;all buffers
 
@@ -1574,16 +1574,16 @@ monitor.")
   (define-key company-active-map (kbd "C-v") #'company-next-page)
   ;; default, but set just in case.
   (define-key company-active-map (kbd "M-v") #'company-previous-page)
-  (define-key company-active-map (kbd "M-<") ;go to first candidate
-    (lambda ()
-      (interactive)
-      (let ((company-selection-wrap-around nil))
-        (company-set-selection 0))))
-  (define-key company-active-map (kbd "M->") ;go to last candidate
-    (lambda ()
-      (interactive)
-      (let ((company-selection-wrap-around nil))
-        (company-set-selection company-candidates-length))))
+  (defun my-company-jump-to-first ()
+    (interactive)
+    (let ((company-selection-wrap-around nil))
+      (company-set-selection 0)))
+  (defun my-company-jump-to-last ()
+    (interactive)
+    (let ((company-selection-wrap-around nil))
+      (company-set-selection company-candidates-length)))
+  (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
+  (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
   ;; ;; avoids changing width as visislbe candidates change.
   ;; (setq company-tooltip-minimum-width 60)

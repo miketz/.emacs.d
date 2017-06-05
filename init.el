@@ -1187,30 +1187,32 @@ monitor.")
 
   ;; TODO: get this value on-the-fly rather than caching to avoid a
   ;; transparency "jump" if alpha var gets out of sync.
-  (defvar my-curr-alpha 100
+  (defvar my--curr-alpha 100
     "Starts out 100")
 
   ;; using `cl-defun' to allow `return-from'
-  (cl-defun my-change-alpha (solider-p)
-    (interactive)
+  (cl-defun my-change-alpha (step)
     ;; exit early if can't increase or decrease further
-    (when (or (and (= my-curr-alpha 100) solider-p)
-              (and (= my-curr-alpha 0) (not solider-p)))
-      (message (int-to-string my-curr-alpha))
+    (when (or (and (= my--curr-alpha 100) (> step 0))
+              (and (= my--curr-alpha 0) (< step 0)))
+      (message (int-to-string my--curr-alpha))
       (return-from my-change-alpha))
 
-    (let* ((step (if solider-p 1 -1)))
-      (incf my-curr-alpha step)
-      (set-frame-parameter (selected-frame) 'alpha
-                           `(,my-curr-alpha ,my-curr-alpha))
-      (message (int-to-string my-curr-alpha))))
+    (incf my--curr-alpha step)
+    (set-frame-parameter (selected-frame) 'alpha
+                         `(,my--curr-alpha ,my--curr-alpha))
+    (message (int-to-string my--curr-alpha)))
 
-  (global-set-key (kbd "C-M-=") (lambda ()
-                                  (interactive)
-                                  (my-change-alpha t)))
-  (global-set-key (kbd "C-M--") (lambda ()
-                                  (interactive)
-                                  (my-change-alpha nil))))
+  (defun my-change-alpha-more-solid ()
+    (interactive)
+    (my-change-alpha 1))
+
+  (defun my-change-alpha-less-solid ()
+    (interactive)
+    (my-change-alpha -1))
+
+  (global-set-key (kbd "C-M-=") #'my-change-alpha-more-solid)
+  (global-set-key (kbd "C-M--") #'my-change-alpha-less-solid))
 
 ;; theme of the week and corresponding settings. This may change often.
 (progn

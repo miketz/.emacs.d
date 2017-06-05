@@ -3853,6 +3853,9 @@ and indent."
     ;; use emacs bindings (not evil) in ivy-occur buffer
     (add-to-list 'evil-buffer-regexps '("^*ivy-occur" . emacs)))
 
+  (define-key ivy-occur-mode-map (kbd "n") #'ivy-occur-next-line)
+  (define-key ivy-occur-mode-map (kbd "p") #'ivy-occur-previous-line)
+
   ;; redefine `ivy-help' to use outline mode. To avoid a long wait loading org.
   (defun ivy-help ()
     "Help for `ivy'."

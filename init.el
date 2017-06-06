@@ -1759,15 +1759,12 @@ This avoids changing pop-up width while scrolling through candidates."
 (setq auto-mode-alist
       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
 
-
-;; `electric-pair-local-mode' is in `c-mode-common-hook' already.
-;; (add-hook 'csharp-mode-hook #'electric-pair-local-mode)
-
-(add-hook #'csharp-mode-hook
-          (lambda ()
-            (yas-minor-mode 1)
-            (rainbow-delimiters-mode 1)
-            (electric-pair-local-mode 1)))
+(with-eval-after-load 'csharp-mode
+  (defun my-setup-csharp-mode ()
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode 1)
+    (electric-pair-local-mode 1))
+  (add-hook #'csharp-mode-hook #'my-setup-csharp-mode))
 
 
 ;;;-----------------------------------------------------------------------------

@@ -1555,9 +1555,7 @@ monitor.")
 ;;;-----------------------------------------------------------------------------
 ;;; company
 ;;;-----------------------------------------------------------------------------
-;; company mode is breaking emacs 24.3. Works OK in 24.4
-;; (require 'company)
-(add-hook 'after-init-hook 'global-company-mode) ;all buffers
+(add-hook 'after-init-hook #'global-company-mode) ; all buffers
 
 (with-eval-after-load 'company
   (when my-use-evil-p
@@ -1585,15 +1583,16 @@ monitor.")
   (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
-  ;; ;; avoids changing width as visislbe candidates change.
-  ;; (setq company-tooltip-minimum-width 60)
-  ;; (add-hook 'company-completion-started-hook
-  ;;           (lambda ()
-  ;;             (interactive)
-  ;;             (setq company-tooltip-minimum-width
-  ;;                   (apply #'max
-  ;;                          (mapcar #'length
-  ;;                                  company-candidates)))))
+
+  (defun my--company-set-min-width (&rest ignored-hook-args)
+    "Calculate width big enough for the largest candidate and set it.
+This avoids changing pop-up width while scrolling through candidates."
+    (setq company-tooltip-minimum-width
+          (apply #'max
+                 (mapcar #'length
+                         company-candidates))))
+  (add-hook 'company-completion-started-hook
+            #'my--company-set-min-width)
 
   (setq company-idle-delay nil)          ; disable automatic completion
   (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire

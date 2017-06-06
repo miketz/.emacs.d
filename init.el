@@ -849,18 +849,21 @@ Minus the newline char."
   (evil-leader/set-key "x" #'maximize-window)
   (evil-leader/set-key "," #'delete-other-windows)
   (evil-leader/set-key "d" #'delete-window)
-  (evil-leader/set-key "k" (lambda () ;; #'kill-this-buffer
-                             (interactive)
-                             ;; closes the window too, if one was opened.
-                             (quit-window t)))
+  (defun my-quit-window ()
+    "Kill the buffer and close the window if one was opened specifically for
+that buffer."
+    (interactive)
+    (quit-window t))
+  (evil-leader/set-key "k" #'my-quit-window) ;; #'kill-this-buffer
   (evil-leader/set-key "c" #'quit-window) ; buffer left alive
-
-  (evil-leader/set-key "<" (lambda ()        ;shrink window a little
-                             (interactive)
-                             (shrink-window-horizontally 15)))
-  (evil-leader/set-key ">" (lambda ()        ;widen window a little
-                             (interactive)
-                             (enlarge-window-horizontally 15)))
+  (defun my-shrink-window-horizontally ()
+    (interactive)
+    (shrink-window-horizontally 15))
+  (defun my-enlarge-window-horizontally ()
+    (interactive)
+    (enlarge-window-horizontally 15))
+  (evil-leader/set-key "<" #'my-shrink-window-horizontally)
+  (evil-leader/set-key ">" #'my-enlarge-window-horizontally)
   (evil-leader/set-key "v" #'evil-visual-block)
   ;; (evil-leader/set-key "j" (lambda ()
   ;;                            (interactive)

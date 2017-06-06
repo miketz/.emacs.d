@@ -2730,18 +2730,19 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'sql
   (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
-  (add-hook 'sql-mode-hook #'electric-pair-local-mode)
-  (add-hook #'sql-mode-hook
-            (lambda ()
-              (yas-minor-mode 1)
-              ;;electric-indent doesn't work very well with T-sql.
-              ;;use C-j for newline and indent.
-              (when (fboundp 'electric-indent-local-mode)
-                (electric-indent-local-mode -1))
 
-              ;; turn off indent when you press "o" in evil. Buffer local
-              (when my-use-evil-p
-                (setq evil-auto-indent nil))))
+  (defun my-setup-sql ()
+    (electric-pair-local-mode 1)
+    (yas-minor-mode 1)
+    ;; electric-indent doesn't work very well with T-sql.
+    ;; use C-j for newline and indent.
+    (when (fboundp 'electric-indent-local-mode)
+      (electric-indent-local-mode -1))
+    ;; turn off indent when you press "o" in evil. Buffer local
+    (when my-use-evil-p
+      (setq evil-auto-indent nil)))
+
+  (add-hook 'sql-mode-hook #'my-setup-sql)
 
   ;; ;;experiment to handle annoying indents.
   ;; (when nil

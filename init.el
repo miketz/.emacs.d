@@ -2670,7 +2670,9 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'dired ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
-  (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
+  (defun my-setup-dired ()
+    (dired-hide-details-mode 1))
+  (add-hook 'dired-mode-hook #'my-setup-dired)
 
   (define-key dired-mode-map (kbd "C-o") #'dired-up-directory)
   (when my-use-evil-p

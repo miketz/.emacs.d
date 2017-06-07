@@ -3309,13 +3309,12 @@ and indent."
 ;;   (define-key skewer-repl-mode-map (kbd "C-c M-o")
 ;;     #'my-skewer-repl-clear-buffer)
 
-  (add-hook
-   'skewer-repl-mode-hook
-   (lambda ()
-     ;;turn off line numbers in the repl
-     (linum-mode 0)
-     ;;there's always a trailing space at repl prompt. Don't highlight it. 
-     (setq show-trailing-whitespace nil)))
+  (defun my-setup-skewer-mode ()
+    ;;turn off line numbers in the repl
+    (linum-mode 0)
+    ;;there's always a trailing space at repl prompt. Don't highlight it.
+    (setq show-trailing-whitespace nil))
+  (add-hook 'skewer-repl-mode-hook #'my-setup-skewer-mode)
 
   ;; (require 'simple-httpd)
   ;; (defun my-skewer-html ()
@@ -4612,8 +4611,9 @@ area."
 ;; sample: traliing white space.  
 
 (with-eval-after-load 'prog-mode
-  (add-hook 'prog-mode-hook (lambda ()
-                              (whitespace-mode 1))))
+  (defun my-setup-prog-mode ()
+    (whitespace-mode 1))
+  (add-hook 'prog-mode-hook #'my-setup-prog-mode))
 ;;(global-whitespace-mode 1)
 
 ;;;-----------------------------------------------------------------------------
@@ -4807,34 +4807,30 @@ area."
   ;; occur at different tab widths.
   (define-key python-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
 
+
+  (defun my-setup-python-smart-tabs-mode ()
+    ;; keeps comments closer to the code. buffer local
+    (setq comment-column 1)
+
+    ;; NOTE: sometimes I use a larger tab-width for python
+    (setq tab-width my-indent-width)
+    (setq indent-tabs-mode t)
+
+    (smart-tabs-mode-enable)
+    (smart-tabs-advice python-indent-line python-indent-offset)
+    (smart-tabs-advice python-indent-region python-indent-offset)
+    (when (featurep 'python-mode)
+      (smart-tabs-advice py-indent-line py-indent-offset)
+      (smart-tabs-advice py-newline-and-indent py-indent-offset)
+      (smart-tabs-advice py-indent-region py-indent-offset)))
   ;; hook for smart-tabs-mode
-  (add-hook 'python-mode-hook
-            (lambda ()
-              ;; keeps comments closer to the code. buffer local
-              (setq comment-column 1)
+  (add-hook 'python-mode-hook #'my-setup-python-smart-tabs-mode)
 
-              ;; NOTE: sometimes I use a larger tab-width for python
-              (setq tab-width my-indent-width)
-              (setq indent-tabs-mode t)
-
-              (smart-tabs-mode-enable)
-              (smart-tabs-advice python-indent-line python-indent-offset)
-              (smart-tabs-advice python-indent-region python-indent-offset)
-              (when (featurep 'python-mode)
-                (smart-tabs-advice py-indent-line py-indent-offset)
-                (smart-tabs-advice py-newline-and-indent py-indent-offset)
-                (smart-tabs-advice py-indent-region py-indent-offset))))
-
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (yas-minor-mode 1)
-              (rainbow-delimiters-mode-enable)
-              ;; (when my-graphic-p
-              ;;   (highlight-indent-guides-mode 1))
-              (electric-pair-local-mode 1)
-              ;; (electric-spacing-mode 1)
-              ;; (fci-mode 1)
-              )))
+  (defun my-setup-python ()
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode-enable)
+    (electric-pair-local-mode 1))
+  (add-hook 'python-mode-hook #'my-setup-python))
 
 ;;;-----------------------------------------------------------------------------
 ;;; calendar
@@ -4866,22 +4862,22 @@ area."
 (with-eval-after-load 'lua-mode
   (setq lua-indent-level 2
         lua-default-application "luajit")
-  (add-hook 'lua-mode-hook
-            (lambda ()
-              (yas-minor-mode 1)
-              (rainbow-delimiters-mode 1)
-              (electric-pair-local-mode 1)
-              ;; (electric-spacing-mode 1)
-              )))
+
+  (defun my-setup-lua-mode ()
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode 1)
+    ;; (electric-spacing-mode 1)
+    (electric-pair-local-mode 1))
+  (add-hook 'lua-mode-hook #'my-setup-lua-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; swift-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'swift-mode
-  (add-hook 'swift-mode-hook
-            (lambda ()
-              (rainbow-delimiters-mode 1)
-              (electric-pair-local-mode 1))))
+  (defun my-setup-swift-mode ()
+    (rainbow-delimiters-mode 1)
+    (electric-pair-local-mode 1))
+  (add-hook 'swift-mode-hook #'my-setup-swift-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; ggtags
@@ -4924,11 +4920,11 @@ area."
 ;;; clojure-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'clojure-mode
-  (add-hook 'clojure-mode-hook
-            (lambda ()
-              (rainbow-delimiters-mode-enable)
-              (enable-paredit-mode)
-              (lispy-mode))))
+  (defun my-setup-clojure-mode ()
+    (rainbow-delimiters-mode-enable)
+    (enable-paredit-mode)
+    (lispy-mode))
+  (add-hook 'clojure-mode-hook #'my-setup-clojure-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; cider
@@ -4954,11 +4950,11 @@ area."
   ;; emulate some SLIME keybinds
   (define-key cider-repl-mode-map (kbd "C-c M-o") #'cider-repl-clear-buffer)
 
-  (add-hook 'cider-repl-mode-hook
-            (lambda ()
-              (rainbow-delimiters-mode-enable)
-              (enable-paredit-mode)
-              (lispy-mode))))
+  (defun my-setup-cider-repl ()
+    (rainbow-delimiters-mode-enable)
+    (enable-paredit-mode)
+    (lispy-mode))
+  (add-hook 'cider-repl-mode-hook #'my-setup-cider-repl))
 
 ;;;-----------------------------------------------------------------------------
 ;;; overlay for emacs lisp.  Dependant on cider.
@@ -5071,12 +5067,12 @@ area."
            (regexp new-regexp))
       ad-do-it))
 
-  (add-hook 'occur-hook
-            (lambda ()
-              ;; switch to the results window immediatly.
-              (switch-to-buffer-other-window "*Occur*")
-              ;; jump to the first match.
-              (my-occur-next))))
+  (defun my--occur-jump-to-first-match ()
+    ;; switch to the results window immediatly.
+    (switch-to-buffer-other-window "*Occur*")
+    ;; jump to the first match.
+    (my-occur-next))
+  (add-hook 'occur-hook #'my--occur-jump-to-first-match))
 
 (global-set-key (kbd "C-c o") #'occur)
 
@@ -5090,11 +5086,11 @@ area."
 ;;; scheme-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'scheme
-  (add-hook 'scheme-mode-hook
-            (lambda ()
-              (rainbow-delimiters-mode-enable)
-              (enable-paredit-mode)
-              (lispy-mode))))
+  (defun my-setup-scheme ()
+    (rainbow-delimiters-mode-enable)
+    (enable-paredit-mode)
+    (lispy-mode))
+  (add-hook 'scheme-mode-hook #'my-setup-scheme))
 
 ;;;-----------------------------------------------------------------------------
 ;;; geiser
@@ -5106,11 +5102,11 @@ area."
     (add-to-list 'exec-path "C:/Users/mtz/programs/Racket")))
 
 (with-eval-after-load 'geiser-repl
-  (add-hook 'geiser-repl-mode-hook
-            (lambda ()
-              (rainbow-delimiters-mode-enable)
-              (enable-paredit-mode)
-              (lispy-mode))))
+  (defun my-setup-geiser-repl ()
+    (rainbow-delimiters-mode-enable)
+    (enable-paredit-mode)
+    (lispy-mode))
+  (add-hook 'geiser-repl-mode-hook #'my-setup-geiser-repl))
 
 ;;;-----------------------------------------------------------------------------
 ;;; bookmark
@@ -5145,19 +5141,19 @@ area."
 (add-to-list 'auto-mode-alist '("\\.asc\\'" . adoc-mode))
 
 (with-eval-after-load 'adoc-mode
-  (add-hook 'adoc-mode-hook
-            (lambda ()
-              ;; usually for reading books, so use word wrap.
-              (visual-line-mode))))
+  (defun my-setup-adoc-mode ()
+    ;; usually for reading books, so use word wrap.
+    (visual-line-mode))
+  (add-hook 'adoc-mode-hook #'my-setup-adoc-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; markdown-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'markdown-mode
-  (add-hook 'markdown-mode-hook
-            (lambda ()
-              ;; usually for reading books, so use word wrap.
-              (visual-line-mode))))
+  (defun my-setup-markdown-mode ()
+    ;; usually for reading books, so use word wrap.
+    (visual-line-mode))
+  (add-hook 'markdown-mode-hook #'my-setup-markdown-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; typescript-mode
@@ -5165,11 +5161,11 @@ area."
 (with-eval-after-load 'typescript-mode
   (setq typescript-indent-level my-indent-width)
 
-  (defun my-typescript-mode-init ()
+  (defun my-setup-typescript-mode ()
     ;; (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     (electric-pair-local-mode 1))
-  (add-hook 'typescript-mode-hook #'my-typescript-mode-init))
+  (add-hook 'typescript-mode-hook #'my-setup-typescript-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; tide

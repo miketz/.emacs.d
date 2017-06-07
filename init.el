@@ -5707,61 +5707,6 @@ in frame.  Stop displaying shell in all other windows."
 ;;   (insert " "))
 
 ;;;-----------------------------------------------------------------------------
-;;; hour format conversion. 12 -> 24
-;;;-----------------------------------------------------------------------------
-;; (defun to24 (hour amPm)
-;;   (cond
-;;    ((and (equal amPm "AM")
-;;          (= hour 12))
-;;     (- hour 12))
-
-;;    ((or (and (equal amPm "AM")
-;;              (>= hour 1)
-;;              (<= hour 11))
-;;         (and (equal amPm "PM")
-;;              (= hour 12)))
-;;     hour)
-
-;;    (t (+ hour 12))))
-
-;; (defun to12 (hour)
-;;   (cond
-;;    ((= hour 0)
-;;     '(12 . "AM"))
-;;    ((and (> hour 0) (< hour 12))
-;;     `(,hour . "AM"))
-;;    ((= hour 12)
-;;     '(12 . "PM"))
-;;    (t `(,(- hour 12) . "PM"))))
-
-;; (progn ;;test it
-;;   (assert (= 0 (to24 12 "AM")))
-;;   (assert (= 1 (to24 1 "AM")))
-;;   (assert (= 2 (to24 2 "AM")))
-;;   (assert (= 3 (to24 3 "AM")))
-;;   (assert (= 4 (to24 4 "AM")))
-;;   (assert (= 5 (to24 5 "AM")))
-;;   (assert (= 6 (to24 6 "AM")))
-;;   (assert (= 7 (to24 7 "AM")))
-;;   (assert (= 8 (to24 8 "AM")))
-;;   (assert (= 9 (to24 9 "AM")))
-;;   (assert (= 10 (to24 10 "AM")))
-;;   (assert (= 11 (to24 11 "AM")))
-;;   (assert (= 12 ( to24 12 "PM")))
-;;   (assert (= 13 (to24 1 "PM")))
-;;   (assert (= 14 (to24 2 "PM")))
-;;   (assert (= 15 (to24 3 "PM")))
-;;   (assert (= 16 (to24 4 "PM")))
-;;   (assert (= 17 (to24 5 "PM")))
-;;   (assert (= 18 (to24 6 "PM")))
-;;   (assert (= 19 (to24 7 "PM")))
-;;   (assert (= 20 (to24 8 "PM")))
-;;   (assert (= 21 (to24 9 "PM")))
-;;   (assert (= 22 (to24 10 "PM")))
-;;   (assert (= 23 (to24 11 "PM"))))
-
-
-;;;-----------------------------------------------------------------------------
 ;;; interact with Microsoft SQL Server
 ;;;-----------------------------------------------------------------------------
 ;;sqlcmd -S 127.0.0.1,42000\OSHE

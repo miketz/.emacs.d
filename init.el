@@ -1469,17 +1469,16 @@ monitor.")
 
   ;; (add-hook 'slime-mode-hook #'lispy-mode)
   ;; (add-hook 'slime-repl-mode-hook #'lispy-mode)
-  (add-hook 'slime-repl-mode-hook
-            (lambda ()
-              ;; Turn off line numbers in the repl
-              (linum-mode 0)
-              ;; There's always a trailing space at repl prompt. Don't
-              ;; highlight it.
-              (setq show-trailing-whitespace nil)
-              ;; Aggressive-indent moves SLIME's comments in the REPL.
-              ;; Turn it off.
-              (when (fboundp 'aggressive-indent-mode)
-                (aggressive-indent-mode 0))))
+  (defun my-setup-slime-repl ()
+    ;; Turn off line numbers in the repl
+    (linum-mode 0)
+    ;; There's always a trailing space at repl prompt. Don't highlight it.
+    (setq show-trailing-whitespace nil)
+    ;; Aggressive-indent moves SLIME's comments in the REPL. Turn it off.
+    (when (fboundp 'aggressive-indent-mode)
+      (aggressive-indent-mode 0)))
+
+  (add-hook 'slime-repl-mode-hook #'my-setup-slime-repl)
 
   ;;(define-key slime-mode-map (kbd "<tab>") #'slime-indent-and-complete-symbol)
 
@@ -1613,10 +1612,10 @@ This avoids changing pop-up width while scrolling through candidates."
   (add-to-list 'company-backends 'company-web-jade)
   (add-to-list 'company-backends 'company-web-slim)
 
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (set (make-local-variable 'company-backends)
-                   '(company-web-html company-files))))
+  (defun my-setup-company-web ()
+    (set (make-local-variable 'company-backends)
+         '(company-web-html company-files)))
+  (add-hook 'web-mode-hook #'my-setup-company-web)
 
   (when my-use-evil-p
     (define-key web-mode-map (kbd "C-SPC") #'company-web-html)))
@@ -1796,10 +1795,10 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;; js-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'js
-  (add-hook 'js-mode-hook
-            (lambda ()
-              ;; set explicity becuase shorter width in json mode corrupts it.
-              (setq js-indent-level my-indent-width))))
+  (defun my-setup-js ()
+    ;; set explicity becuase shorter width in json mode corrupts it.
+    (setq js-indent-level my-indent-width))
+  (add-hook 'js-mode-hook #'my-setup-js))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -1961,23 +1960,23 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;; json-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'json-mode
-  (add-hook
-   'json-mode-hook
-   (lambda ()
-     ;; for json, I'd like to use a more compact indentation. 2 chars, and
-     ;; visualize tabs as 2 chars wide. But `js-indent-level' is shared with
-     ;; js-mode and js2-mode currupting it. Can't be fixed with hooks alone as
-     ;; hooks don't fire on already-open buffers. So for now just using indent
-     ;; of 4 to avoid corruption.
-     ;; TODO: modify json-mode to use it's own independent indent-level.
-     (progn
-       ;; buffer local. Safe to change.
-       (setq tab-width my-indent-width)
-       ;; not buffer local! Make sure `js-indent-level' set in hooks
-       ;; for javascript-mode and/or js2-mode.
-       (setq js-indent-level my-indent-width))
-     (rainbow-delimiters-mode 1)
-     (electric-pair-local-mode 1))))
+  (defun my-setup-json-mode ()
+    ;; for json, I'd like to use a more compact indentation. 2 chars, and
+    ;; visualize tabs as 2 chars wide. But `js-indent-level' is shared with
+    ;; js-mode and js2-mode; corrupting it. Can't be fixed with hooks alone as
+    ;; hooks don't fire on already-open buffers. So for now just using indent
+    ;; of 4 to avoid corruption.
+    ;; TODO: modify json-mode to use it's own independent indent-level.
+    (progn
+      ;; buffer local. Safe to change.
+      (setq tab-width my-indent-width)
+      ;; not buffer local! Make sure `js-indent-level' set in hooks
+      ;; for javascript-mode and/or js2-mode.
+      (setq js-indent-level my-indent-width))
+    (rainbow-delimiters-mode 1)
+    (electric-pair-local-mode 1))
+
+  (add-hook 'json-mode-hook #'my-setup-json-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; web-beautify
@@ -2588,76 +2587,68 @@ and indent."
   ;; back to where you were.
   ;;(eval-after-load 'cc-mode 'which-function-mode)
 
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (yas-minor-mode 1)
-              ;; (which-function-mode) ; displays function at cursor in the
-              ;;                       ; mode-line. But can be annoying.
-              (electric-pair-local-mode 1)
+  (defun my-setup-c-mode-common ()
+    (yas-minor-mode 1)
+    ;; (which-function-mode) ; displays function at cursor in the
+    ;;                       ; mode-line. But can be annoying.
+    (electric-pair-local-mode 1)
 
-              ;; highlight escapes in the printf format string.
-              ;; TODO: highlight placeholders %d differently than escapes \n
-              ;; (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
+    ;; highlight escapes in the printf format string.
+    ;; TODO: highlight placeholders %d differently than escapes \n
+    ;; (highlight-regexp "%[[:alpha:]]\\|\\\\[[:alpha:]]")
 
-              ;; set to 1 so comments on the same line are kept close to the
-              ;; code by default.
-              (setq comment-column 1)   ; buffer local
+    ;; set to 1 so comments on the same line are kept close to the
+    ;; code by default.
+    (setq comment-column 1)             ; buffer local
 
-              (unless (eq system-type 'windows-nt)
-                ;; sometime in early March 2016, flycheck became very slow on
-                ;; Windows for C.
-                ;; TODO: find the problem, fix it. Commit upstream if relevant.
-                (flycheck-mode 1))
+    (unless (eq system-type 'windows-nt)
+      ;; sometime in early March 2016, flycheck became very slow on
+      ;; Windows for C.
+      ;; TODO: find the problem, fix it. Commit upstream if relevant.
+      (flycheck-mode 1))
 
-              (fci-mode 1)
+    ;; (electric-spacing-mode 1)
+    (fci-mode 1))
+  (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
 
-              ;; (electric-spacing-mode 1)
-              ))
+  (defun my-setup-c-mode ()
+    ;; (when my-graphic-p
+    ;;   (highlight-indent-guides-mode 1))
 
-  (add-hook 'c-mode-hook
-            (lambda ()
-              ;; (when my-graphic-p
-              ;;   (highlight-indent-guides-mode 1))
+    (progn ;; use linux style tabbing/indentation for C
+      ;; these values should be buffer local.
+      (setq c-basic-offset my-indent-width-c)
+      (setq tab-width my-indent-width-c)
+      ;; TODO: solve issue of snippets using spaces while I'm using
+      ;;       tabs for C.
+      (setq indent-tabs-mode t))
 
-              (progn ;; use linux style tabbing/indentation for C
-                ;; these values should be buffer local.
-                (setq c-basic-offset my-indent-width-c)
-                (setq tab-width my-indent-width-c)
-                ;; TODO: solve issue of snippets using spaces while I'm using
-                ;;       tabs for C.
-                (setq indent-tabs-mode t))
+    (progn ;; smart-tabs-mode
+      (smart-tabs-mode-enable)
+      (smart-tabs-advice c-indent-line c-basic-offset)
+      (smart-tabs-advice c-indent-region c-basic-offset)))
+  (add-hook 'c-mode-hook #'my-setup-c-mode)
 
-              (progn ;; smart-tabs-mode
-                (smart-tabs-mode-enable)
-                (smart-tabs-advice c-indent-line c-basic-offset)
-                (smart-tabs-advice c-indent-region c-basic-offset))
+  (defun my-setup-c++-mode ()
+    (progn ;; use linux style tabbing/indentation.
+      ;; these values should be buffer local.
+      (setq c-basic-offset my-indent-width-c)
+      (setq tab-width my-indent-width-c)
+      (setq indent-tabs-mode t))
 
-              ;; (fci-mode 1)
-              ))
-
-  (add-hook 'c++-mode-hook
-            (lambda ()
-              (progn ;; use linux style tabbing/indentation.
-                ;; these values should be buffer local.
-                (setq c-basic-offset my-indent-width-c)
-                (setq tab-width my-indent-width-c)
-                (setq indent-tabs-mode t))
-
-              (progn ;; smart-tabs-mode
-                (smart-tabs-mode-enable)
-                (smart-tabs-advice c-indent-line c-basic-offset)
-                (smart-tabs-advice c-indent-region c-basic-offset))
-
-              ;; (fci-mode 1)
-              ))
+    (progn ;; smart-tabs-mode
+      (smart-tabs-mode-enable)
+      (smart-tabs-advice c-indent-line c-basic-offset)
+      (smart-tabs-advice c-indent-region c-basic-offset)))
+  (add-hook 'c++-mode-hook #'my-setup-c++-mode)
 
 
-  (add-hook 'c-initialization-hook
-            (lambda ()
-              ;;TODO: fill this up
-              ;; hook that runs 1 time.
-              ;; equivalent to using eval-after-load???
-              ))
+  ;; (add-hook 'c-initialization-hook
+  ;;           (lambda ()
+  ;;             ;;TODO: fill this up
+  ;;             ;; hook that runs 1 time.
+  ;;             ;; equivalent to using eval-after-load???
+  ;;             ))
 
   ;; (defun my-make-CR-do-indent ()
   ;;   (define-key c-mode-base-map "\C-m" 'c-context-line-break))
@@ -2816,7 +2807,7 @@ and indent."
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 ;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'slime-repl-mode-hook #'enable-paredit-mode)
 ;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
 ;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
 
@@ -3171,33 +3162,35 @@ and indent."
 
   ;;quick load of c:\users\mtz
   (when my-use-evil-p
-    (evil-leader/set-key "1" (lambda ()
-                               (interactive)
-                               (dired "C:/Users/mtz")))
+    (defun my-open-user-folder ()
+      (interactive)
+      (dired "C:/Users/mtz"))
+    (evil-leader/set-key "1" #'my-open-user-folder)
 
     ;;quick load of c:\users\mtz\proj\ecp\dev\db
-    (evil-leader/set-key "2" (lambda ()
-                               (interactive)
-                               (dired "c:/users/mtz/proj/ecp/dev/db")))
+    ;; (evil-leader/set-key "2" (lambda ()
+    ;;                            (interactive)
+    ;;                            (dired "c:/users/mtz/proj/ecp/dev/db")))
 
     ;;quick load of TFS \Main\SqlScripts
-    (evil-leader/set-key "3"
-      (lambda ()
-        (interactive)
-        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
+    ;; (evil-leader/set-key "3"
+    ;;   (lambda ()
+    ;;     (interactive)
+    ;;     (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Main/DbScripts")))
 
     ;; quick load of SafeteWebysite TFS folder \Development
-    (evil-leader/set-key "4"
-      (lambda ()
-        (interactive)
-        (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")))))
+    (defun my-open-dev-folder ()
+      (interactive)
+      (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development"))
+    (evil-leader/set-key "4" #'my-open-dev-folder)))
 
 
 (when (eq system-type 'gnu/linux)
   (when my-use-evil-p
-    (evil-leader/set-key "1" (lambda ()
-                               (interactive)
-                               (dired "~")))))
+    (defun my-open-user-folder ()
+      (interactive)
+      (dired "~"))
+    (evil-leader/set-key "1" #'my-open-user-folder)))
 
 
 ;;; quick open of the .emacs (or init.el) file.
@@ -3468,9 +3461,9 @@ and indent."
       (my-clear-wierd-m))
     (ad-activate 'eww-render))
 
-  (add-hook 'eww-mode-hook
-            (lambda ()
-              (setq show-trailing-whitespace nil))))
+  (defun my-setup-eww ()
+    (setq show-trailing-whitespace nil))
+  (add-hook 'eww-mode-hook #'my-setup-eww))
 
 ;;;-----------------------------------------------------------------------------
 ;;; w3
@@ -3739,8 +3732,9 @@ and indent."
                    (buffer-list)))))))
     (define-key erc-mode-map (kbd "C-c b") #'x/ido-chat-buffer))
 
-  (add-hook 'erc-mode-hook (lambda ()
-                             (setq show-trailing-whitespace nil))))
+  (defun my-setup-erc ()
+    (setq show-trailing-whitespace nil))
+  (add-hook 'erc-mode-hook #'my-setup-erc))
 
 ;;;-----------------------------------------------------------------------------
 ;;; linum-relative

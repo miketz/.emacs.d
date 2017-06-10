@@ -2972,8 +2972,10 @@ and indent."
 ;;   #'avy-goto-char-2)
 ;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
 (when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
-  (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1))
+  ;; (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
+  ;; (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1)
+  (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-char-timer)
+  (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-char-timer))
 
 (with-eval-after-load 'avy
   ;; make keys like ace-jump. Lots of letters means more likey to need only 1

@@ -2987,6 +2987,7 @@ and indent."
                                         ; need to gray background.
   (setq avy-all-windows t)              ; allow jumps between windows.
   (setq avy-case-fold-search t)         ; case insenstive
+  (setq avy-timeout-seconds 0.3)        ; shorten dealy for avy-goto-char-timer
 
   ;; (defun my-avy-goto-line ()
   ;;   (interactive)

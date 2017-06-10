@@ -2983,11 +2983,11 @@ and indent."
   (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
                         (cl-loop for i from ?A to ?Z collect i)))
   (setq avy-style 'at-full) ;; options (pre at at-full post)
-  (setq avy-background nil) ; eye is already focused on the jump point so no
-                                        ; need to gray background.
-  (setq avy-all-windows t)              ; allow jumps between windows.
-  (setq avy-case-fold-search t)         ; case insenstive
-  (setq avy-timeout-seconds 0.3)        ; shorten dealy for avy-goto-char-timer
+  (setq avy-background nil) ;; eye is already focused on the jump point so no
+                            ;; need to gray-out the background.
+  (setq avy-all-windows t)       ;; allow jumps between windows.
+  (setq avy-case-fold-search t)  ;; case insenstive
+  (setq avy-timeout-seconds 0.3) ;; shorten delay for `avy-goto-char-timer'
 
   ;; (defun my-avy-goto-line ()
   ;;   (interactive)

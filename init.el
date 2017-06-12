@@ -5046,8 +5046,7 @@ area."
       (funcall my-blink-fn))
     (define-key occur-mode-map (kbd "n") #'my-occur-next)
     (define-key occur-mode-map (kbd "p") #'my-occur-prev)
-    (define-key occur-mode-map (kbd "C-n") #'my-occur-next)
-    (define-key occur-mode-map (kbd "C-p") #'my-occur-prev)
+    ;; NOTE: purposely not binding C-n, C-p. To navigate without the jump.
     (define-key occur-mode-map (kbd "M-n") #'my-occur-next)
     (define-key occur-mode-map (kbd "M-p") #'my-occur-prev)
     (define-key occur-mode-map (kbd "RET") #'my-occur-mode-goto-occurrence))

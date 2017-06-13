@@ -1347,7 +1347,7 @@
      `(whitespace-empty                         ((,class (:background nil :foreground ,yellow))
                                                  (,t-class (:background nil :foreground ,t-yellow))))
      `(whitespace-indentation                   ((,class (:background nil :foreground ,war))
-                                                 (,t-class (:background nil :foregrount ,t-war))))
+                                                 (,t-class (:background nil :foreground ,t-war))))
      `(whitespace-line                          ((,class (:background nil :foreground ,comp))
                                                  (,t-class (:background nil :foreground ,t-comp))))
      `(whitespace-newline                       ((,class (:background nil :foreground ,comp))

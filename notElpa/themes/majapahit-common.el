@@ -805,7 +805,7 @@
      `(js2-external-variable                     ((,class (:foreground ,comp  ))
                                                   (,t-class (:foreground ,t-comp))))
      `(js2-function-param                        ((,class (:foreground ,const))
-                                                  (,t-class (:foregorund ,t-const))))
+                                                  (,t-class (:foreground ,t-const))))
      `(js2-jsdoc-html-tag-delimiter              ((,class (:foreground ,type))
                                                   (,t-class (:foreground ,t-type))))
      `(js2-jsdoc-html-tag-name                   ((,class (:foreground ,key1))

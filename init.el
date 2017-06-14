@@ -3954,6 +3954,14 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; mish-mash. Keybinds for using several packages for narrowing.
 ;;;-----------------------------------------------------------------------------
+(when (and (not my-use-ivy-p)
+           (not my-use-helm-p))
+  ;; it's very useful to have out of order matching while selecting the font.
+  (defun my-set-frame-font-ivy ()
+    (interactive)
+    (let ((completing-read-function #'ivy-completing-read))
+      (call-interactively #'set-frame-font))))
+
 (when my-use-mish-mash-p
   ;; set up ivy/swiper/counsel keybinds
   ;; Avoid turning on `ivy-mode' becuaes it replaces the `completing-read' fn

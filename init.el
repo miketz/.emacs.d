@@ -1220,74 +1220,53 @@ monitor.")
 
 ;; theme of the week and corresponding settings. This may change often.
 (progn
-  (when my-graphic-p ;; this isn't true for emacs daemon!
-    (my-color-zenburn))
+  ;; (when my-graphic-p ;; this isn't true for emacs daemon!
+  ;;   (my-color-zenburn))
 
   (cond
    ((eq my-curr-computer 'wild-dog)
-    ;; (set-frame-font
-    ;;  "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7")
-    ;; (set-frame-font
-    ;;  "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7")
+    (my-color-zenburn)
     (set-frame-font
      "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
-    ;; (set-frame-font
-    ;;  (concat "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-"
-    ;;          "iso10646-1"))
-    ;; (set-frame-font
-    ;;  "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    ;; (set-frame-font
-    ;;  "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1")
-    ;; (set-frame-font
-    ;;  "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1")
-    ;; (set-frame-font
-    ;;  (concat "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:"
-    ;;          "slant=normal:width=normal:spacing=100:scalable=true"))
+    ;; "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7"
+    ;; "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7"
+    ;; "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"
+    ;; "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1"
+    ;; "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1"
+    ;; "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1"
+    ;; (concat "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:"
+    ;;         "slant=normal:width=normal:spacing=100:scalable=true")
     )
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    ;; ;; brighter lights in office. more contrast needed.
-    ;; (custom-theme-set-faces
-    ;;  'zenburn
-    ;;  '(default ((t (:foreground "#E0E0E0")))))
-
-    ;; (set-frame-font
-    ;;  "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font
-    ;;  "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+    (my-color-leuven)
     (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
-    ;; (set-frame-font
-    ;;  "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font
-    ;;  "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
+     "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin")
+    ;; "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1"
+    ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+    ;; "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+    ;; "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+    ;; "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+    ;; "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+    ;; "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+    ;; "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
+    ;; "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"
     )
 
    ((eq my-curr-computer 'leyna-laptop)
+    (my-color-zenburn)
     (set-frame-font
-     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin")
-    ;; (set-frame-font
-    ;;  "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin")
-    )
+     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
 
    ((eq my-curr-computer 'a-laptop-old)
-    ;; (my-set-font :sym 'consolas
-    ;;              :height 125    ;; 90 105 115 120 125
-    ;;              :weight 'normal)
+    (my-color-zenburn)
     (set-frame-font
      "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p
+      (my-color-zenburn)
       (custom-set-faces
        '(default ((t (:family "Droid Sans Mono"
                               :foundry "unknown"
@@ -1297,6 +1276,7 @@ monitor.")
                               :width normal)))))))
 
    ((eq my-curr-computer 'a-laptop-faster)
+    (my-color-zenburn)
     (custom-set-faces
      '(default ((t (:family "Source Code Pro"
                             :foundry "adobe"
@@ -1308,6 +1288,7 @@ monitor.")
    ;; unknown windows computer.
    ((and (null my-curr-computer)
          (eq system-type 'windows-nt))
+    (my-color-zenburn)
     (set-frame-font
      "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
 

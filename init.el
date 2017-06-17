@@ -1077,7 +1077,7 @@ monitor.")
 
 
 
-;;programmatically call a fucntion as if a prefix arg C-u was used.
+;; programmatically call a function as if a prefix arg C-u was used.
 ;; (let ((current-prefix-arg '(4)))
 ;;   (call-interactively #'next-line))
 

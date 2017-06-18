@@ -335,6 +335,10 @@ Choices: helm-swoop swiper")
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
+
+(defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)
+  "True if emacs suppports native line number display.")
+
 (let ((install-slime-p
        (member my-curr-computer
                '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
@@ -434,7 +438,7 @@ Choices: helm-swoop swiper")
      ;;w3
      ;;w3m
      ;;flymake-jslint
-     (nlinum t)
+     (nlinum ,(not native-line-numbers-p))
 
      (ido-vertical-mode ,(or my-use-ido-p
                              my-use-mish-mash-p))
@@ -5227,9 +5231,6 @@ vanilla javascript buffers."
 ;;;-----------------------------------------------------------------------------
 ;;; display-line-numbers
 ;;;-----------------------------------------------------------------------------
-(defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)
-  "True if emacs suppports native line number display.")
-
 (when native-line-numbers-p
   (defun my-relative-line-numbers-on ()
     (interactive)

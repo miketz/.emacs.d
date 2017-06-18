@@ -5224,6 +5224,24 @@ vanilla javascript buffers."
   )
 
 
+;;;-----------------------------------------------------------------------------
+;;; display-line-numbers
+;;;-----------------------------------------------------------------------------
+(defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)
+  "True if emacs suppports native line number display.")
+
+(when native-line-numbers-p
+  (defun my-relative-line-numbers-on ()
+    (interactive)
+    (setq-default display-line-numbers 'relative)
+    (setq display-line-width 1)
+    (custom-theme-set-faces
+     'zenburn
+     `(line-number ((t (:background "black";;"#4F4F4F"
+                                    :foreground "gray50"))))))
+  (defun my-relative-line-numbers-off ()
+    (interactive)
+    (setq-default display-line-numbers nil)))
 
 
 ;;;-----------------------------------------------------------------------------

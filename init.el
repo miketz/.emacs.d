@@ -4370,8 +4370,6 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; elisp emacs lisp
 ;;;-----------------------------------------------------------------------------
-;; (define-key emacs-lisp-mode-map (kbd "C-c C-r") #'eval-region)
-;; (define-key lisp-interaction-mode-map (kbd "C-c C-r") #'eval-region)
 (defun my-eval-region (start end)
   "Same as `eval-region' but pass in `t' flag to display the result in the echo
 area."
@@ -4391,42 +4389,31 @@ area."
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
 
-
+(defun my-eval-last-sexp ()
+  (interactive)
+  (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
+    (prin1-to-string val)))
 
 (autoload 'pos-tip-show "pos-tip" nil t)
+(if my-graphic-p
+    (defun my-eval-last-sexp-display ()
+      (interactive)
+      ;; (clippy-say (my-eval-last-sexp))
+      (pos-tip-show (my-eval-last-sexp)))
+  (defun my-eval-last-sexp-display ()
+    (interactive)
+    (save-excursion
+      (evil-append 1)
+      (default-indent-new-line)
+      (eval-last-sexp t) ; t to insert result in buffer.
+      (evil-normal-state))))
 
 (when my-use-evil-p
-  ;;evalate lisp expression. Insert result on a new line.
+  ;; evalate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
 
-  (defun my-eval-last-sexp ()
-    (interactive)
-    (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
-      (prin1-to-string val)))
-
-  (let ((eval-fn (if my-graphic-p
-                     (lambda ()
-                       (interactive)
-                       ;; (clippy-say (my-eval-last-sexp))
-                       (pos-tip-show (my-eval-last-sexp)))
-                   (lambda ()
-                     (interactive)
-                     (save-excursion
-                       (evil-append 1)
-                       (default-indent-new-line)
-                       (eval-last-sexp t) ; t to insert result in buffer.
-                       (evil-normal-state))))))
-    (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" eval-fn)
-    (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" eval-fn))
-
-  ;; (evil-leader/set-key "a" 'slime-eval-print-last-expression)
-  ;; (evil-leader/set-key "p" (lambda ()
-  ;;                            (interactive)
-  ;;                            (save-excursion ;don't move the point
-  ;;                              (evil-append 1)
-  ;;                              (slime-pprint-eval-last-expression)
-  ;;                              (evil-normal-state))))
-  )
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" #'my-eval-last-sexp-display)
+  (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" #'my-eval-last-sexp-display))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav

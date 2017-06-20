@@ -3325,6 +3325,9 @@ and indent."
 (with-eval-after-load 'esh-mode
 
   (when (fboundp #'eshell/clear-scrollback) ;; emacs 25+
+    (defun my-eshell-clear ()
+      (interactive)
+      (eshell/clear t))
     (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set
                                 ; in the hook. Eval-after-load doesn't work.
                                 ; Must be buffer local.
@@ -3332,9 +3335,7 @@ and indent."
                 ;; emulate some SLIME keybind
                 (define-key eshell-mode-map
                   (kbd "C-c M-o")
-                  (lambda ()
-                    (interactive)
-                    (eshell/clear t)))))))
+                  #'my-eshell-clear)))))
 
 ;; (with-eval-after-load "eshell-mode"
 ;;   (defun my-eshell-clear-buffer ()

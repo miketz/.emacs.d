@@ -1864,13 +1864,14 @@ This avoids changing pop-up width while scrolling through candidates."
   ;;                            (match-string-no-properties 1 btext) "")
   ;;                        " *, *" t))))))
 
-  ;;js2 steals M-j keybinding by default. Reclaim it.
+  (defun my-js2-prev-error ()
+    (interactive)
+    (js2-next-error -1))
   (when my-use-evil-p
+    ;; js2 steals M-j keybinding by default. Reclaim it.
     (define-key js2-mode-map (kbd "M-j") #'evil-window-down)
     (evil-define-key 'normal js2-mode-map (kbd "M-n") #'js2-next-error)
-    (evil-define-key 'normal js2-mode-map (kbd "M-p") (lambda ()
-                                                        (interactive)
-                                                        (js2-next-error -1))))
+    (evil-define-key 'normal js2-mode-map (kbd "M-p") #'my-js2-prev-error))
   (define-key js2-mode-map (kbd "C-c e") #'js2-display-error-list)
 
   ;; (defhydra hydra-js2-flycheck ()

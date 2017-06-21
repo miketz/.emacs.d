@@ -345,7 +345,10 @@ reasons)."
   (load (concat custom-theme-directory "solarized"))
   (load (concat custom-theme-directory "solarized-theme-utils"))
   (when nil ;; this actually turns on zonokai so don't run this automatically.
-    (load (concat custom-theme-directory "zonokai"))))
+    (load (concat custom-theme-directory "zonokai")))
+  (load (concat custom-theme-directory "alect-themes"))
+  (load (concat custom-theme-directory "doom-themes"))
+  (load (concat custom-theme-directory "doom-themes-common")))
 
 
 (defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)

@@ -335,6 +335,18 @@ Choices: helm-swoop swiper")
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
+(defun my-handle-weird-theme-setups ()
+  (interactive)
+  "Some themes work in a special way with custom code to initialize them.
+Orginally this code would be run in the autoloads when the themes were melpa
+packages. But I am no longer using the themes as packages (for init performance
+reasons)."
+  (load (concat custom-theme-directory "base16-theme"))
+  (load (concat custom-theme-directory "solarized"))
+  (load (concat custom-theme-directory "solarized-theme-utils"))
+  (when nil ;; this actually turns on zonokai so don't run this automatically.
+    (load (concat custom-theme-directory "zonokai"))))
+
 
 (defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)
   "True if emacs suppports native line number display.")

@@ -124,22 +124,24 @@
  '(underline                 ((t (:underline (:color foreground-color :style line)))))
  '(custom-group-tag          ((t (:foreground "dark violet" :weight bold :height 1.2))))
  '(custom-documentation      ((t nil)))
- '(default                   ((t
-                               (:family "DejaVu Sans Mono"
-                                        :foundry "unknown"
-                                        :width normal
-                                        :height 98
-                                        :weight normal
-                                        :slant normal
-                                        :underline nil
-                                        :overline nil
-                                        :strike-through nil
-                                        :box nil
-                                        :inverse-video nil
-                                        :foreground "#333333"
-                                        :background "#FFFFFF"
-                                        :stipple nil
-                                        :inherit nil))))
+ '(default                   ((t (:foreground "#333333"
+                                              :background "#FFFFFF"))))
+ ;; '(default                   ((t
+ ;;                               (:family "DejaVu Sans Mono"
+ ;;                                        :foundry "unknown"
+ ;;                                        :width normal
+ ;;                                        :height 98
+ ;;                                        :weight normal
+ ;;                                        :slant normal
+ ;;                                        :underline nil
+ ;;                                        :overline nil
+ ;;                                        :strike-through nil
+ ;;                                        :box nil
+ ;;                                        :inverse-video nil
+ ;;                                        :foreground "#333333"
+ ;;                                        :background "#FFFFFF"
+ ;;                                        :stipple nil
+ ;;                                        :inherit nil))))
 
  '(rainbow-delimiters-depth-1-face    ((t (:foreground "black"))))
  '(rainbow-delimiters-depth-2-face    ((t (:foreground "magenta4" :weight semi-bold))))

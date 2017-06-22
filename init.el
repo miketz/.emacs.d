@@ -5236,7 +5236,7 @@ vanilla javascript buffers."
 
 
 ;;;-----------------------------------------------------------------------------
-;;; display-line-numbers
+;;; display-line-numbers. Native line numbers.
 ;;;-----------------------------------------------------------------------------
 (when native-line-numbers-p
   (defun my-relative-line-numbers-on ()

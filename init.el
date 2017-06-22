@@ -335,20 +335,24 @@ Choices: helm-swoop swiper")
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
 
+(defvar my--weird-theme-setup-executed-p nil)
 (defun my-handle-weird-theme-setups ()
   (interactive)
   "Some themes work in a special way with custom code to initialize them.
 Orginally this code would be run in the autoloads when the themes were melpa
 packages. But I am no longer using the themes as packages (for init performance
 reasons)."
-  (load (concat custom-theme-directory "base16-theme"))
-  (load (concat custom-theme-directory "solarized"))
-  (load (concat custom-theme-directory "solarized-theme-utils"))
-  (when nil ;; this actually turns on zonokai so don't run this automatically.
-    (load (concat custom-theme-directory "zonokai")))
-  (load (concat custom-theme-directory "alect-themes"))
-  (load (concat custom-theme-directory "doom-themes"))
-  (load (concat custom-theme-directory "doom-themes-common")))
+  (when (not my--weird-theme-setup-executed-p)
+    (load (concat custom-theme-directory "base16-theme"))
+    (load (concat custom-theme-directory "solarized"))
+    (load (concat custom-theme-directory "solarized-theme-utils"))
+    (when nil ;; this actually turns on zonokai so don't run this automatically.
+      (load (concat custom-theme-directory "zonokai")))
+    (load (concat custom-theme-directory "alect-themes"))
+    (load (concat custom-theme-directory "doom-themes"))
+    (load (concat custom-theme-directory "doom-themes-common"))
+    ;; record the fact we did the set up. To avoid doing it agian.
+    (setq my--weird-theme-setup-executed-p t)))
 
 
 (defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)
@@ -1111,6 +1115,7 @@ monitor.")
   (unless my-use-ivy-p
     (defun my-load-theme-wrapper ()
       (interactive)
+      (my-handle-weird-theme-setups)
       ;; nil for no candidate limit. I want to scroll through all the themes.
       (let ((helm-candidate-number-limit nil))
         (call-interactively #'my-load-theme)))

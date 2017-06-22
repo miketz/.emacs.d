@@ -5241,7 +5241,7 @@ vanilla javascript buffers."
 (when native-line-numbers-p
   (defun my-relative-line-numbers-on ()
     (interactive)
-    (setq-default display-line-numbers 'relative)
+    (setq display-line-numbers 'relative)
     (setq display-line-width 1)
     (custom-theme-set-faces
      'zenburn

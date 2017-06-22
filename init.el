@@ -280,7 +280,7 @@ Choices: evil emacs cua")
 Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 
-(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) nil)
+(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'mish-mash)
                              ((eq my-curr-computer 'wild-dog) 'ivy)
                              (t bare-ido))
   "The package I'm currenlty using for narrowing completions.
@@ -3972,14 +3972,14 @@ and indent."
   ;; Avoid turning on `ivy-mode' becuaes it replaces the `completing-read' fn
   ;; which i want sometimes for the column-style display.
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'ivy-switch-buffer)
+    (evil-leader/set-key "b" #'switch-to-buffer)
     (evil-leader/set-key "w" #'counsel-yank-pop)
     (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
     )
   (global-set-key (kbd "C-h v") #'counsel-describe-variable)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
-  (global-set-key (kbd "M-x") #'counsel-M-x)
-  (global-set-key (kbd "C-x C-f") #'counsel-find-file)
+  ;; (global-set-key (kbd "M-x") #'counsel-M-x)
+  ;; (global-set-key (kbd "C-x C-f") #'counsel-find-file)
 
   ;; ;; set up ido and smex with flx matching
   ;; (setq ido-enable-flex-matching t)

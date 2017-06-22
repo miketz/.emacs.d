@@ -5239,14 +5239,14 @@ vanilla javascript buffers."
 ;;; display-line-numbers. Native line numbers.
 ;;;-----------------------------------------------------------------------------
 (when native-line-numbers-p
+  (custom-theme-set-faces
+   'zenburn
+   `(line-number ((t (:background "black" ;;"#4F4F4F"
+                                  :foreground "gray50")))))
   (defun my-relative-line-numbers-on ()
     (interactive)
     (setq display-line-numbers 'relative)
-    (setq display-line-width 1)
-    (custom-theme-set-faces
-     'zenburn
-     `(line-number ((t (:background "black";;"#4F4F4F"
-                                    :foreground "gray50"))))))
+    (setq display-line-width 1))
   (defun my-relative-line-numbers-off ()
     (interactive)
     (setq-default display-line-numbers nil)))

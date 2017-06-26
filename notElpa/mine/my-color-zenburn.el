@@ -38,9 +38,8 @@
    ;;                    :box (:line-width -1 :style released-button)))))
 
 
-   '(completions-common-part ((t (:foreground "orange"))))
-   '(completions-first-difference ((t (:foreground "green"
-                                                   :weight bold))))
+   '(completions-common-part ((t (:foreground "gray60"))))
+   '(completions-first-difference ((t (:foreground "spring green"))))
 
    ;; used in adoc-mode
    '(markup-meta-face ((t (:foreground "yellow green"))))

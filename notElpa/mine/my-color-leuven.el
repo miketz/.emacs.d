@@ -78,6 +78,12 @@
                       :strike-through nil
                       :underline nil))))
 
+
+   '(completions-common-part ((t (:foreground "gray40"))))
+   '(completions-first-difference ((t (:foreground "black"
+                                                   :background "lemon chiffon"
+                                                   :weight bold))))
+
    ;; '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    ;; '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight bold))))
    ;; '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :weight bold))))

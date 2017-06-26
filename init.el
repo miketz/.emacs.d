@@ -351,6 +351,7 @@ reasons)."
     (load (concat custom-theme-directory "alect-themes"))
     (load (concat custom-theme-directory "doom-themes"))
     (load (concat custom-theme-directory "doom-themes-common"))
+    (load (concat custom-theme-directory "eziam-common"))
     ;; record the fact we did the set up. To avoid doing it agian.
     (setq my--weird-theme-setup-executed-p t)))
 

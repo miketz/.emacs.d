@@ -459,6 +459,7 @@ reasons)."
      ;;w3m
      ;;flymake-jslint
      (nlinum ,(not native-line-numbers-p))
+     (nlinum-relative ,(not native-line-numbers-p))
 
      (ido-vertical-mode ,(or my-use-ido-p
                              my-use-mish-mash-p))
@@ -4494,6 +4495,11 @@ area."
 ;; (with-eval-after-load "nlinum"
 ;;   )
 
+;;;-----------------------------------------------------------------------------
+;;; nlinum-relative
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'nlinum-relative
+  (setq nlinum-relative-current-symbol "0"))
 
 ;;;-----------------------------------------------------------------------------
 ;;; sx

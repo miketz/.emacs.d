@@ -50,7 +50,10 @@
 (let* ((class               '((class color) (min-colors 89)))
        (color-count         (display-color-cells))
        (truecolor-p         (= color-count 16777216))
-       (fancy-color-p       (or truecolor-p (display-graphic-p)))
+       (fancy-color-p       (or truecolor-p
+                                (if (fboundp #'display-graphic-p)
+                                    (display-graphic-p)
+                                  window-system)))
 
        (background          (if fancy-color-p "#263238" "#262626")) ;; sidebar-container
        (current-line        (if fancy-color-p "#37474f" "#3a3a3a")) ;; tree-row

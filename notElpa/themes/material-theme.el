@@ -44,28 +44,31 @@
 
 (deftheme material
   "A UI Theme for Emacs based on material design colors")
-(display-color-cells (selected-frame))
-(let* ((class '((class color) (min-colors 89)))
-       (256color  (eq (display-color-cells (selected-frame)) 256))
-       (truecolor (eq (display-color-cells (selected-frame)) 16777216))
 
-       (background (if (or window-system truecolor) "#263238" "#262626")) ;; sidebar-container
-       (current-line (if (or window-system truecolor)  "#37474f" "#3a3a3a")) ;; tree-row
-       (far-background (if (or window-system truecolor)  "#1c1f26" "#121212")) ;; panel-control
-       (inactive-gray (if (or window-system truecolor) "#78909c" "#8a8a8a"))
-       (header-color (if (or window-system truecolor) "#455A64" "#5f5f5f"))
-       (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
-       (selection "#555555") ;; tab-control-dirty-tab-close-button
+;; (display-color-cells (selected-frame))
+
+(let* ((class               '((class color) (min-colors 89)))
+       (color-count         (display-color-cells))
+       (truecolor-p         (= color-count 16777216))
+       (fancy-color-p       (or truecolor-p (display-graphic-p)))
+
+       (background          (if fancy-color-p "#263238" "#262626")) ;; sidebar-container
+       (current-line        (if fancy-color-p "#37474f" "#3a3a3a")) ;; tree-row
+       (far-background      (if fancy-color-p "#1c1f26" "#121212")) ;; panel-control
+       (inactive-gray       (if fancy-color-p "#78909c" "#8a8a8a"))
+       (header-color        (if fancy-color-p "#455A64" "#5f5f5f"))
+       (subtle              "#a7adba") ;; tree-row-hover-disclosure-button-control
+       (selection           "#555555") ;; tab-control-dirty-tab-close-button
        (secondary-selection "#bf616a") ;; tab-control-hover-tab-close-button
-       (foreground "#ffffff")
-       (comment "#b0bec5") ;; table-row
-       (red "#f36c60") ;; tab-control-hover-tab-close-button
-       (orange "#ff9800") ;; darker tab-control-dirty-tab-close-butto
-       (yellow "#fff59d") ;; tab-control-dirty-tab-close-button
-       (green "#8bc34a") ;; complement tab-control-dirty-tab-close-button
-       (aqua "#81d4fa") ;; lighter complement tab-control-dirty-tab-close-button
-       (blue "#4dd0e1") ;; complement tab-control-dirty-tab-close-button
-       (purple "#b39ddb")) ;; complement tab-control-dirty-tab-close-button
+       (foreground          "#ffffff")
+       (comment             "#b0bec5") ;; table-row
+       (red                 "#f36c60") ;; tab-control-hover-tab-close-button
+       (orange              "#ff9800") ;; darker tab-control-dirty-tab-close-butto
+       (yellow              "#fff59d") ;; tab-control-dirty-tab-close-button
+       (green               "#8bc34a") ;; complement tab-control-dirty-tab-close-button
+       (aqua                "#81d4fa") ;; lighter complement tab-control-dirty-tab-close-button
+       (blue                "#4dd0e1") ;; complement tab-control-dirty-tab-close-button
+       (purple              "#b39ddb")) ;; complement tab-control-dirty-tab-close-button
 
   (custom-theme-set-faces
    'material

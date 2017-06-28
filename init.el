@@ -5247,8 +5247,10 @@ vanilla javascript buffers."
 (when native-line-numbers-p
   (custom-theme-set-faces
    'zenburn
-   `(line-number ((t (:background "black" ;;"#4F4F4F"
-                                  :foreground "gray50")))))
+   `(line-number ((t (:background "#151515" ;;"#4F4F4F"
+                                  :foreground "gray50"))))
+   ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
+   )
 
   (setq display-line-number-width 3) ;; 1 seems to behave like 2.
 

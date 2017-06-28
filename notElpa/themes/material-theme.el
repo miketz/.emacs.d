@@ -45,8 +45,6 @@
 (deftheme material
   "A UI Theme for Emacs based on material design colors")
 
-;; (display-color-cells (selected-frame))
-
 (let* ((class               '((class color) (min-colors 89)))
        (color-count         (display-color-cells))
        (truecolor-p         (= color-count 16777216))

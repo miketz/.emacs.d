@@ -6,8 +6,12 @@
     (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
   ;; fci color is not a face???
-  (setq fci-rule-color "#4d4d4d")
+  ;; (setq fci-rule-color "#4d4d4d")
   (setq zenburn-bg "#3F3F3F")
+
+  (custom-theme-set-variables
+   'zenburn
+   `(fci-rule-color "#4d4d4d"))
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces

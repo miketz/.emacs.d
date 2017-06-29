@@ -2,16 +2,22 @@
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
   (load-theme 'zenburn t)
-  (when my-use-evil-p
-    (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
-  ;; fci color is not a face???
-  ;; (setq fci-rule-color "#4d4d4d")
-  (setq zenburn-bg "#3F3F3F")
-
+  ;; set variables (that are not faces) using `custom-theme-set-variables'. It
+  ;; will allow them to be rolled back automatically when the theme is later
+  ;; disabled.
   (custom-theme-set-variables
    'zenburn
-   `(fci-rule-color "#4d4d4d"))
+   `(fci-rule-color "#4d4d4d")
+
+   `(evil-emacs-state-cursor    '(bar "cyan"))
+   `(evil-normal-state-cursor   '(hollow "spring green"))
+   `(evil-insert-state-cursor   '(bar "spring green"))
+   `(evil-visual-state-cursor   '(hollow "spring green"))
+   `(evil-operator-state-cursor '(hollow "spring green"))
+   `(evil-replace-state-cursor  '(hbar "spring green"))
+   `(evil-motion-state-cursor   '(box)))
+
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces

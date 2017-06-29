@@ -2,11 +2,11 @@
   (interactive)
   (load-theme 'github t)
 
-  (my-cursor-stuff :color-emacs "maroon" :color-evil "blue")
-  (let ((cur '(box "blue")))
-    (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor '(hollow "blue"))
-    (setq evil-operator-state-cursor cur))
+  ;; (my-cursor-stuff :color-emacs "maroon" :color-evil "blue")
+  ;; (let ((cur '(box "blue")))
+  ;;   (setq evil-normal-state-cursor cur)
+  ;;   (setq evil-visual-state-cursor '(hollow "blue"))
+  ;;   (setq evil-operator-state-cursor cur))
 
 
   ;; (set-background-color "white")

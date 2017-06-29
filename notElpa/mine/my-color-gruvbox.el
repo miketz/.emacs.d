@@ -2,7 +2,7 @@
   (interactive)
   (load-theme 'gruvbox t)
   ;;(my-set-font :weight 'normal)
-  (my-cursor-stuff-darkBg)
+  ;; (my-cursor-stuff-darkBg)
   (my-rainbow-parens-dark-bg)
   ;; (set-face-foreground 'font-lock-string-face "salmon")
   ;;(set-face-foreground 'font-lock-comment-face "#66A555")

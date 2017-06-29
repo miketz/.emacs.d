@@ -1,8 +1,6 @@
 (defun my-color-majapahit ()
   (interactive)
   (load-theme 'majapahit-dark t)
-  (when my-use-evil-p
-    (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -55,7 +53,7 @@
                       :background "black"
                       :height 400       ; big font
                       ))))
-   '(cursor ((t (:background "cyan"))))
+   ;; '(cursor ((t (:background "cyan"))))
 
    `(font-lock-comment-delimiter-face
      ((t (:foreground "darkolivegreen3"))))

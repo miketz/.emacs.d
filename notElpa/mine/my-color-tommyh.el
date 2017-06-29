@@ -1,11 +1,11 @@
 (defun my-color-tommyh ()
   (interactive)
   (load-theme 'tommyh t)
-  (my-cursor-stuff-lightBg)
-  (let ((cur '(box "blue")))
-    (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor '(hollow "blue"))
-    (setq evil-operator-state-cursor cur))
+  ;; (my-cursor-stuff-lightBg)
+  ;; (let ((cur '(box "blue")))
+  ;;   (setq evil-normal-state-cursor cur)
+  ;;   (setq evil-visual-state-cursor '(hollow "blue"))
+  ;;   (setq evil-operator-state-cursor cur))
   (custom-theme-set-faces
    'tommyh
 

@@ -1,8 +1,8 @@
 (defun my-color-deeper-blue ()
   (interactive)
   (load-theme 'deeper-blue t)
-  (when my-use-evil-p
-    (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
+  ;; (when my-use-evil-p
+  ;;   (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces

@@ -1,11 +1,11 @@
 (defun my-color-leuven ()
   (interactive)
   (load-theme 'leuven t)
-  (my-cursor-stuff :color-emacs "maroon" :color-evil "blue")
-  (let ((cur '(box "blue")))
-    (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor '(hollow "blue"))
-    (setq evil-operator-state-cursor cur))
+  ;; (my-cursor-stuff :color-emacs "maroon" :color-evil "blue")
+  ;; (let ((cur '(box "blue")))
+  ;;   (setq evil-normal-state-cursor cur)
+  ;;   (setq evil-visual-state-cursor '(hollow "blue"))
+  ;;   (setq evil-operator-state-cursor cur))
 
   ;; fci color is not a face???
   (setq fci-rule-color "gray97")

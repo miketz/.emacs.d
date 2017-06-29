@@ -14,9 +14,9 @@
      ((t (:foreground "dark gray"))))
    `(compilation-info
      ((t (:foreground "DarkOrange2"))))
-   `(cursor
-     ((t (:foreground "black"
-                      :background "green"))))
+   ;; `(cursor
+   ;;   ((t (:foreground "black"
+   ;;                    :background "green"))))
    `(font-lock-comment-face
      ((t (:foreground "#66A555"))))
    `(fringe

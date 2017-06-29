@@ -1,7 +1,7 @@
 (defun my-color-dichromacy ()
   (interactive)
   (load-theme 'dichromacy t)
-  (my-cursor-stuff :color-emacs "red" :color-evil "blue")
+  ;; (my-cursor-stuff :color-emacs "red" :color-evil "blue")
   (custom-theme-set-faces
    'dichromacy
    ;;`(default ((t (:foreground "black" :background ,mayan-smoke))))

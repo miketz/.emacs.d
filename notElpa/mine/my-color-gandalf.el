@@ -1,11 +1,11 @@
 (defun my-color-gandalf ()
   (interactive)
   (load-theme 'gandalf t)
-  (my-cursor-stuff-lightBg)
-  (let ((cur '(box "blue")))
-    (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor '(hollow "blue"))
-    (setq evil-operator-state-cursor cur))
+  ;; (my-cursor-stuff-lightBg)
+  ;; (let ((cur '(box "blue")))
+  ;;   (setq evil-normal-state-cursor cur)
+  ;;   (setq evil-visual-state-cursor '(hollow "blue"))
+  ;;   (setq evil-operator-state-cursor cur))
   (custom-theme-set-faces
    'gandalf
    `(show-paren-match ((t (:slant italic

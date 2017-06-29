@@ -739,54 +739,24 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;; cursor
 ;;;-----------------------------------------------------------------------------
 (setq-default cursor-type '(bar . 2))
-(custom-set-faces
- '(cursor ((t (:background "cyan")))))
+;; (custom-set-faces
+;;  '(cursor ((t (:background "cyan")))))
 (setq x-stretch-cursor t) ;; strech box cursor around a tab \t
 (setq-default cursor-in-non-selected-windows nil)
 (blink-cursor-mode 0)
 
-(when my-use-evil-p
-  (cl-defun my-cursor-stuff (&optional &key (color-emacs nil)
-                                       (color-evil nil)
-                                       (color-motion nil)) ;(color-motion "red")
-    (interactive)
-    (let ((args-emacs '())
-          (args-evil '())
-          (args-evil-motion '())) ; use same color throughout evil-mode, except
-                                        ; for "motion" state.
-      (when color-emacs (setq args-emacs (cons color-emacs args-emacs)))
-      (when color-evil (setq args-evil (cons color-evil args-evil)))
-      (when color-motion (setq args-evil-motion (cons color-motion
-                                                      args-evil-motion)))
-      ;; bar hollow box hbar
-      ;; commenting this allows vim command mode : to have a bar cursor.
-      ;; (setq-default cursor-type (cons 'bar args-emacs))
-      (setq evil-emacs-state-cursor (cons 'bar args-emacs))
-      (setq evil-normal-state-cursor (cons 'hollow args-evil))
-      (setq evil-insert-state-cursor (cons 'bar args-evil))
-      (setq evil-visual-state-cursor (cons 'hollow args-evil))
-      (setq evil-operator-state-cursor (cons 'hollow args-evil))
-      (setq evil-replace-state-cursor (cons 'hbar args-evil))
-      ;; motion state is when some of evil is disabled (like in the function
-      ;; help and C-h-i pages).
-      ;; give special color I know when it is not full-evil bindings.
-      (setq evil-motion-state-cursor (cons 'box args-evil-motion))))
-
-  (defun my-cursor-stuff-darkBg ()
-    (interactive)
-    (my-cursor-stuff :color-emacs "cyan" :color-evil "spring green"))
-
-  (defun my-cursor-stuff-lightBg ()
-    (interactive)
-    (my-cursor-stuff :color-emacs "black" :color-evil "blue")
-    (let ((cur '(box "blue")))
-      (setq evil-normal-state-cursor cur)
-      (setq evil-visual-state-cursor '(hollow "blue"))
-      (setq evil-operator-state-cursor cur)))
-
-  (when my-graphic-p
-    (my-cursor-stuff)) ;set the default cursor style. colors not specified yet.
-  )
+(when (and my-use-evil-p
+           my-graphic-p)
+  ;; set the evil cursor styles. colors not specified yet. colors will be
+  ;; specified later in the theme settings. But I want the same cursor styles
+  ;; of bar/box/hollow/etc regardless of the color theme.
+  (setq evil-emacs-state-cursor    '(bar))
+  (setq evil-normal-state-cursor   '(hollow))
+  (setq evil-insert-state-cursor   '(bar))
+  (setq evil-visual-state-cursor   '(hollow))
+  (setq evil-operator-state-cursor '(hollow))
+  (setq evil-replace-state-cursor  '(hbar))
+  (setq evil-motion-state-cursor   '(box)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; evil

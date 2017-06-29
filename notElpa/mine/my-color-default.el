@@ -6,11 +6,11 @@
     (disable-theme thm))
   ;;(set-background-color "ivory2")
 
-  (my-cursor-stuff-lightBg)
-  (let ((cur '(box "blue")))
-    (setq evil-normal-state-cursor cur)
-    (setq evil-visual-state-cursor '(hollow "blue"))
-    (setq evil-operator-state-cursor cur))
+  ;; (my-cursor-stuff-lightBg)
+  ;; (let ((cur '(box "blue")))
+  ;;   (setq evil-normal-state-cursor cur)
+  ;;   (setq evil-visual-state-cursor '(hollow "blue"))
+  ;;   (setq evil-operator-state-cursor cur))
 
   ;; (my-set-font :sym 'consolas
   ;;              :weight 'bold

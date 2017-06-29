@@ -1,8 +1,6 @@
 (defun my-color-tango-dark ()
   (interactive)
   (load-theme 'tango-dark t)
-  (when my-use-evil-p
-    (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces

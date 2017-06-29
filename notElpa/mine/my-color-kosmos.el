@@ -2,6 +2,8 @@
   (interactive)
   (load-theme 'kosmos t)
 
+  (my-rainbow-parens-dark-bg 'kosmos)
+
   (let ((kosmos-fg "#bdbdbd")
         (kosmos-bg "#000000")
         (kosmos-bg-active "#102040")
@@ -35,14 +37,4 @@
      `(show-paren-match ((t (:slant italic
                                     :bold t
                                     :strike-through t
-                                    :background nil))))
-     '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
-     '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
-     '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))
-     '(rainbow-delimiters-depth-4-face ((t (:foreground "plum"))))
-     '(rainbow-delimiters-depth-5-face ((t (:foreground "lawn green"))))
-     '(rainbow-delimiters-depth-6-face ((t (:foreground "orange"))))
-     '(rainbow-delimiters-depth-7-face ((t (:foreground "white"))))
-     '(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1"))))
-     '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
-     '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black")))))))
+                                    :background nil)))))))

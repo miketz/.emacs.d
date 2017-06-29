@@ -8,8 +8,8 @@
   ;;   (setq evil-visual-state-cursor '(hollow "blue"))
   ;;   (setq evil-operator-state-cursor cur))
 
+  (my-rainbow-parens-light-bg2 'github)
 
-  ;; (set-background-color "white")
   (custom-theme-set-faces
    'github
    `(mode-line ((t (:background "grey75"
@@ -49,14 +49,4 @@
    ;;'(js2-function-param ((t :foreground "green")))
    ;;'(js2-instance-member ((t :foreground "green")))
    ;;'(js2-private-function-call ((t :foreground "green")))
-
-   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight normal))))
-   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold nil))))
-   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold nil))))
-   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "lavenderblush" :bold nil))))
-   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "lemon chiffon" :bold nil))))
-   '(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background "#EEEEFF" :bold nil))))
-   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :bold nil))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :bold nil))))
-   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca" :bold nil))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :bold nil))))))
+   ))

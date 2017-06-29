@@ -7,8 +7,18 @@
   ;;   (setq evil-visual-state-cursor '(hollow "blue"))
   ;;   (setq evil-operator-state-cursor cur))
 
-  ;; fci color is not a face???
-  (setq fci-rule-color "gray97")
+  (custom-theme-set-variables
+   'leuven
+   `(fci-rule-color "gray97")
+
+   `(evil-emacs-state-cursor    '(bar "maroon"))
+   `(evil-normal-state-cursor   '(box "blue"))
+   `(evil-insert-state-cursor   '(bar "blue"))
+   `(evil-visual-state-cursor   '(hollow "blue"))
+   `(evil-operator-state-cursor '(box "blue"))
+   `(evil-replace-state-cursor  '(hbar "blue"))
+   `(evil-motion-state-cursor   '(box)))
+
 
   (custom-theme-set-faces
    'leuven

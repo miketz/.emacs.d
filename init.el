@@ -461,12 +461,11 @@ reasons)."
      (nlinum ,(not native-line-numbers-p))
      (nlinum-relative ,(not native-line-numbers-p))
 
-     (ido-vertical-mode ,(or my-use-ido-p
-                             my-use-mish-mash-p))
+     (ido-vertical-mode ,my-use-ido-p)
      (ido-grid-mode ,my-use-ido-p)
      (ido-ubiquitous ,my-use-ido-p)
-     (flx-ido ,(or my-use-ido-p my-use-mish-mash-p))
-     (ido-occur ,my-use-ido-p)
+     (flx-ido ,my-use-ido-p)
+     ;; (ido-occur ,my-use-ido-p)
      (smex ,(or my-use-ido-p
                 my-use-bare-ido-p
                 my-use-ivy-p ;; smex can be used by `counsel-M-x'

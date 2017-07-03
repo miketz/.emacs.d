@@ -16,7 +16,7 @@
    `(evil-visual-state-cursor   '(hollow "orange"))
    `(evil-operator-state-cursor '(hollow "spring green"))
    `(evil-replace-state-cursor  '(hbar "spring green"))
-   `(evil-motion-state-cursor   '(box)))
+   `(evil-motion-state-cursor   '(box "spring green")))
 
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'

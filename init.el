@@ -5227,7 +5227,8 @@ vanilla javascript buffers."
    ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
    )
 
-  (setq display-line-number-width 1) ;; 1 seems to behave like 2.
+  (setq display-line-number-width 1) ;; 1 seemed to behave like 2.
+  (setq display-line-numbers-current-absolute nil)
 
   (defun my-line-numbers-on ()
     (interactive)

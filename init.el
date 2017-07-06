@@ -353,6 +353,8 @@ reasons)."
     (load (concat custom-theme-directory "doom-themes-common"))
     (load (concat custom-theme-directory "eziam-common"))
     (load (concat custom-theme-directory "farmhouse-theme-common"))
+    (load (concat custom-theme-directory "punpun-common"))
+    (load (concat custom-theme-directory "tao-theme"))
     ;; record the fact we did the set up. To avoid doing it agian.
     (setq my--weird-theme-setup-executed-p t)))
 

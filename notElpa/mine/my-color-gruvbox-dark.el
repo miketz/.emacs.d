@@ -16,4 +16,8 @@
 
   (custom-theme-set-faces
    'gruvbox-dark
-   `(region ((t (:background "#69685E"))))))
+   `(region ((t (:background "#59584E"))))
+   `(show-paren-match ((t (:slant italic
+                                  :bold t
+                                  :strike-through t
+                                  :background nil))))))

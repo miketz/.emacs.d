@@ -10,9 +10,9 @@
 ;;;----------------------------------
 ;;; cursor
 ;;;----------------------------------
-(setq-default cursor-type '(bar . 2))
-(custom-set-faces
- '(cursor ((t (:background "blue")))))
+;; (setq-default cursor-type '(bar . 2))
+;; (custom-set-faces
+;;  '(cursor ((t (:background "blue")))))
 
 
 ;; (when (eq system-type 'windows-nt)
@@ -36,7 +36,7 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "\n\n\n\n\n")
 
-(blink-cursor-mode 0)
+;; (blink-cursor-mode 0)
 ;(hl-line-mode 0)
 
 ;(global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.

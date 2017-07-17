@@ -5244,6 +5244,14 @@ vanilla javascript buffers."
     (interactive)
     (setq display-line-numbers nil)))
 
+;;;-----------------------------------------------------------------------------
+;;; powershell
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'powershell
+  (defun my-setup-powershell-mode ()
+    (electric-pair-local-mode 1)
+    (rainbow-delimiters-mode-enable))
+  (add-hook 'powershell-mode-hook #'my-setup-powershell-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

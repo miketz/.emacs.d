@@ -282,7 +282,7 @@ Just a convenience to avoid checks agaisnt `my-ui-type'.")
 
 (defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'mish-mash)
                              ((eq my-curr-computer 'wild-dog) 'ivy)
-                             (t bare-ido))
+                             (t 'bare-ido))
   "The package I'm currenlty using for narrowing completions.
 Use nil for the emacs default.
 Use bare-ido for ido without the extra ido packages.

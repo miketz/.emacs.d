@@ -4,27 +4,16 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; (load-theme 'leuven t)
-;; (set-background-color "white")
-
 ;;;----------------------------------
 ;;; cursor
 ;;;----------------------------------
 ;; (setq-default cursor-type '(bar . 2))
 ;; (custom-set-faces
 ;;  '(cursor ((t (:background "blue")))))
+;; (blink-cursor-mode 0)
 
-
-;; (when (eq system-type 'windows-nt)
-;;  (set-frame-font "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
-;; (when (eq system-type 'windows-nt)
-;;   (set-frame-font "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
 (when (eq system-type 'windows-nt)
   (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
-
-;; (custom-set-faces
-;;  '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 140 :width normal)))))
-
 
 ;; case insensitive for emacs completion
 (setq read-buffer-completion-ignore-case t)
@@ -36,52 +25,13 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "\n\n\n\n\n")
 
-;; (blink-cursor-mode 0)
-;(hl-line-mode 0)
+;; (hl-line-mode 0)
 
-;(global-auto-revert-mode t) ;;reload buffer if it changes on disk outside emacs.
+;; (global-auto-revert-mode t) ; reload buffer if it changes on disk outside emacs.
 
 (setq-default line-spacing 0)
-;(global-linum-mode 0) ;show/hide line numbers
-;(setq-default column-number-mode t)
-(setq-default line-number-mode 0)
-;; do not display modes in the mode-line. They take up too much space.
-;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
-(setq mode-line-modes nil)
-(setq mode-line-position nil) ;hide the % of the buffer you are viewing.
-(progn
-  ;; replacing postion info in mode line with a function called on demand.
-  ;; Bound to "g a".
 
-  (defun my-what-line ()
-    (interactive)
-    (let ((start (point-min))
-          (n (line-number-at-pos)))
-      (if (= start 1)
-          (format "L%d" n)
-        (save-excursion
-          (save-restriction
-            (widen)
-            (format "L%d (narrowed L%d)"
-                    (+ n (line-number-at-pos start) -1) n))))))
-
-  (defun my-what-position (&optional detail)
-    "Your position in space and time."
-    (interactive "P")
-    (let* ((pos (point))
-           (total (buffer-size))
-           (percent (if (> total 50000)
-                        ;; Avoid overflow from multiplying by 100!
-                        (/ (+ (/ total 200) (1- pos)) (max (/ total 100) 1))
-                      (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
-           (line (my-what-line))
-           (col (+ 1 (current-column))))
-      (message "%d%% %s C%d     %s"
-               percent (my-what-line) col
-               (format-time-string "%-I:%M%#p %-m-%-d-%Y %a")))))
-
-
-;(setq-default indicate-empty-lines t) ;Like vim's tildes
+;; (setq-default indicate-empty-lines t) ; Like vim's tildes
 
 (setq-default transient-mark-mode t)  ;show selected regions
 (setq ring-bell-function 'ignore)
@@ -93,11 +43,9 @@
   )
 
 (progn ;; for better or worse, prevent creation of tmp backup files
-  (setq make-backup-files nil)          ;No annoying backup files
+  (setq make-backup-files nil)          ; No annoying backup files
   (setq-default backup-inhibited t)
-  (setq auto-save-default nil)          ;No annoying auto-save files
-  )
-
+  (setq auto-save-default nil))         ; No annoying auto-save files
 
 ;;disable annoying newline emacs automatically adds to the end of a file when saving.
 (setq require-final-newline nil)

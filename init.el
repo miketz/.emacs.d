@@ -337,11 +337,11 @@ Choices: helm-swoop swiper")
 
 (defvar my--weird-theme-setup-executed-p nil)
 (defun my-handle-weird-theme-setups ()
-  (interactive)
   "Some themes work in a special way with custom code to initialize them.
 Orginally this code would be run in the autoloads when the themes were melpa
 packages. But I am no longer using the themes as packages (for init performance
 reasons)."
+  (interactive)
   (when (not my--weird-theme-setup-executed-p)
     (load (concat custom-theme-directory "base16-theme"))
     (load (concat custom-theme-directory "solarized"))

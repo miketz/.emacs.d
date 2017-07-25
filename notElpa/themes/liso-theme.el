@@ -71,22 +71,22 @@
 
   (custom-theme-set-faces
    'liso
-
-   `(default ((t (:family "Ubuntu Mono"
-                          :foundry "unknown"
-                          :width normal
-                          :height 128
-                          :weight normal
-                          :slant normal
-                          :underline nil
-                          :overline nil
-                          :strike-through nil
-                          :box nil
-                          :inverse-video nil
-                          :foreground ,foreground
-                          :background ,background
-                          :stipple nil
-                          :inherit nil))))
+   `(default ((t (:foreground ,foreground :background ,background))))
+   ;; `(default ((t (:family "Ubuntu Mono"
+   ;;                        :foundry "unknown"
+   ;;                        :width normal
+   ;;                        :height 128
+   ;;                        :weight normal
+   ;;                        :slant normal
+   ;;                        :underline nil
+   ;;                        :overline nil
+   ;;                        :strike-through nil
+   ;;                        :box nil
+   ;;                        :inverse-video nil
+   ;;                        :foreground ,foreground
+   ;;                        :background ,background
+   ;;                        :stipple nil
+   ;;                        :inherit nil))))
    `(cursor ((t (:foreground ,foreground-black :background ,cursor-yellow))))
    `(fixed-pitch ((t (:inherit (default)))))
    `(variable-pitch ((t (:family "Sans Serif"))))
@@ -155,7 +155,8 @@
    ;; helm
    `(helm-action ((t (:foreground ,foreground :underline nil))))
    `(helm-selection ((t (:background ,ml-grey-darker :weight bold))))
-   `(helm-source-header ((t (:background: ,background :foreground ,ml-yellow :family "Ubuntu Mono" :weight normal :height: 1.1))))
+   `(helm-source-header ((t (:background: ,background :foreground ,ml-yellow :weight normal))))
+   ;; `(helm-source-header ((t (:background: ,background :foreground ,ml-yellow :family "Ubuntu Mono" :weight normal :height: 1.1))))
    `(helm-visible-mark ((t (:inherit (diredp-flag-mark)))))
    `(helm-candidate-number ((t (:inherit (match)))))
    `(helm-buffer-directory ((t (:inherit (diredp-dir-priv)))))

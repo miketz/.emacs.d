@@ -1,31 +1,62 @@
-;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors.
-
-;;; Commentary:
-;;; Keywords should appear "raised" or "3D" against the bg.
+;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors. -*- lexical-binding: t -*-
 
 ;;; Code:
 
-(deftheme charcoal "The charcoal color theme")
+(deftheme charcoal "Charcoal color theme")
 
-;;background: #35352B #000000
-(let* ((graphicp (display-graphic-p)) ;;  cache
-       (class t)
-       ;; (class '((class color)
-       ;;          (min-colors 88)
-       ;;          (background dark)))
-       (charcoal-bg "#35352B")
-       (charcoal-fg "lightyellow3")) ;; snow3 gray80 lightyellow3
+(let ((class t)
+      (bg "#35352B")
+      (fg "lightyellow3") ;; snow3 gray80 lightyellow3
+      (faint "#4d4d3d"))
+
+  ;; set variables
+  (custom-theme-set-variables
+   'charcoal
+
+   `(fci-rule-color ,faint)
+
+   `(evil-emacs-state-cursor    '(bar "cyan"))
+   `(evil-normal-state-cursor   '(hollow "spring green"))
+   `(evil-insert-state-cursor   '(bar "spring green"))
+   `(evil-visual-state-cursor   '(hollow "orange"))
+   `(evil-operator-state-cursor '(hollow "spring green"))
+   `(evil-replace-state-cursor  '(hbar "orange red"))
+   `(evil-motion-state-cursor   '(box "spring green"))
+
+   ;; Duplicating the default vc-annotate colors for now.
+   ;; TODO: tailor them for the bg.
+   `(vc-annotate-color-map '((20 . "#FF3F3F")
+                             (40 . "#FF6C3F")
+                             (60 . "#FF993F")
+                             (80 . "#FFC63F")
+                             (100 . "#FFF33F")
+                             (120 . "#DDFF3F")
+                             (140 . "#B0FF3F")
+                             (160 . "#83FF3F")
+                             (180 . "#56FF3F")
+                             (200 . "#3FFF56")
+                             (220 . "#3FFF83")
+                             (240 . "#3FFFB0")
+                             (260 . "#3FFFDD")
+                             (280 . "#3FF3FF")
+                             (300 . "#3FC6FF")
+                             (320 . "#3F99FF")
+                             (340 . "#3F6CFF")
+                             (360 . "#3F3FFF")))
+   `(vc-annotate-very-old-color "blue3"))
+
+  ;; set faces
   (custom-theme-set-faces
    'charcoal
 
-   ;; TODO
-   `(default ((,class (:foreground ,charcoal-fg :background ,charcoal-bg))))
+   `(default ((,class (:foreground ,fg :background ,bg))))
 
-   ;; DONE
+   `(cursor ((,class (:background "spring green"))))
+
    `(show-paren-match ((,class (:slant italic
-                                  :bold t
-                                  :strike-through t
-                                  :background nil))))
+                                       :bold t
+                                       :strike-through t
+                                       :background nil))))
 
    ;; separates windwos.
    `(vertical-border ((,class (:foreground "gray25"))))
@@ -44,7 +75,7 @@
      ((,class (:foreground "#5F7F5F"
                       :background "#383838"
                       :box (:line-width -1 :style released-button)))))
-   ;; TODO
+
    `(region
      ((,class (:background "#49483E"))))     ;69685E
 

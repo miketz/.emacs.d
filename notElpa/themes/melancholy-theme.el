@@ -77,7 +77,8 @@
 ;; completions-common-part                 
 ;; completions-first-difference            
 '(cursor ((t (:background "light blue"))))
-'(default ((t (:inherit nil :stipple nil :background "#161A1F" :foreground "#DBDBDB" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "unknown" :family "DejaVu sans mono"))))
+'(default ((t (:inherit nil :stipple nil :background "#161A1F" :foreground "#DBDBDB" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal))))
+;; '(default ((t (:inherit nil :stipple nil :background "#161A1F" :foreground "#DBDBDB" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "unknown" :family "DejaVu sans mono"))))
 ;; diary                                   
 ;; diff-added                              
 ;; diff-changed                            
@@ -119,7 +120,7 @@
 '(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
 ;; ffap                                    
 ;; file-name-shadow                        
-'(fixed-pitch ((t (:family "Monospace"))))
+;; '(fixed-pitch ((t (:family "Monospace"))))
 '(font-lock-builtin-face ((t (:foreground "#96BF33"))))
 '(font-lock-comment-delimiter-face ((t (:foreground "#8C8C8C"))))
 '(font-lock-comment-face ((t (:foreground "#8C8C8C"))))
@@ -277,14 +278,15 @@
 ;; org-agenda-restriction-lock             
 ;; org-agenda-structure                    
 ;; org-archived                            
-'(org-block ((t (:family "DejaVu sans mono" :foreground "#00BFFF" :box nil))))
+'(org-block ((t (:foreground "#00BFFF" :box nil))))
+;; '(org-block ((t (:family "DejaVu sans mono" :foreground "#00BFFF" :box nil))))
 '(org-block-begin-line ((t (:background "#444444" :foreground "#00BFFF"))))
 '(org-block-end-line ((t (:background "#444444" :foreground "#00BFFF"))))
 ;; org-checkbox                            
 ;; org-checkbox-statistics-done            
 ;; org-checkbox-statistics-todo            
 ;; org-clock-overlay                       
-'(org-code ((t (:family "DejaVu sans mono" ))))
+;; '(org-code ((t (:family "DejaVu sans mono" ))))
 ;; org-column                              
 ;; org-column-title                        
 ;; org-date                                
@@ -325,7 +327,7 @@
 ;; org-scheduled-today                     
 ;; org-sexp-date                           
 ;; org-special-keyword                     
-'(org-table ((t :family "Monospace")))
+;; '(org-table ((t :family "Monospace")))
 ;; org-tag                                 
 ;; org-tag-group                           
 ;; org-target                              
@@ -385,7 +387,8 @@
 ;; undo-tree-visualizer-default-face       
 ;; undo-tree-visualizer-register-face      
 ;; undo-tree-visualizer-unmodified-face    
-'(variable-pitch ((t (:family "DejaVu sans")))))
+;; '(variable-pitch ((t (:family "DejaVu sans"))))
+)
 
 ;;;###autoload
 (when load-file-name

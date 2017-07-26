@@ -34,8 +34,8 @@
 (custom-theme-set-faces
  'green-screen
  '(cursor ((t (:background "green"))))
- '(fixed-pitch ((t (:family "Monospace"))))
- '(variable-pitch ((t (:family "Sans Serif"))))
+ ;; '(fixed-pitch ((t (:family "Monospace"))))
+ ;; '(variable-pitch ((t (:family "Sans Serif"))))
  '(escape-glyph ((t (:foreground "green4"))))
  '(minibuffer-prompt ((t (:foreground "green3" :weight normal))))
  '(highlight ((t (:background "green3" :foreground "lawn green" :weight normal))))
@@ -73,7 +73,8 @@
  '(hl-line ((t (:inherit highlight :background "dark green" :foreground "green"))))
  '(linum ((t (:height 100 :weight normal :box nil :foreground "SpringGreen3" :background "#002200" :inherit default))))
  '(mode-line ((t (:background "#009922" :foreground "#002200" :box (:line-width 1 :color "#009944") :weight normal))))
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "PfEd" :family "IBM 3270 Narrow"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :width normal))))
+ ;; '(default ((t (:inherit nil :stipple nil :background "black" :foreground "green" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "PfEd" :family "IBM 3270 Narrow"))))
  )
 
 (provide-theme 'green-screen)

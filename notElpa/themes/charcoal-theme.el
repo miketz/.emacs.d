@@ -1,4 +1,5 @@
-;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors. -*- lexical-binding: t -*-
+;; -*- lexical-binding: t -*-
+;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors.
 
 ;;; Code:
 

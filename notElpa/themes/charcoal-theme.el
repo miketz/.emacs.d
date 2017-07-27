@@ -7,7 +7,7 @@
 
 (let ((class t)
       (bg "#35352B")
-      (fg "lightyellow3") ;; snow3 gray80 lightyellow3
+      (fg "lightyellow2") ;; snow3 gray80 lightyellow3
       (faint "#4d4d3d"))
 
   ;; set variables

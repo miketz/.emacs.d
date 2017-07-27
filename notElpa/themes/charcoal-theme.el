@@ -59,7 +59,7 @@
                                        :strike-through t
                                        :background nil))))
 
-   ;; separates windwos.
+   ;; line that separates vertically split windows.
    `(vertical-border ((,class (:foreground "gray25"))))
 
 

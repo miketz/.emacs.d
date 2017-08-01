@@ -71,7 +71,8 @@
 
   (custom-theme-set-faces
    'kooten
-   '(default ((t (:family "Consolas" :foundry "nil" :width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "white" :background "#14151E" :stipple nil :inherit nil))))
+   '(default ((t (:foundry "nil" :width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "white" :background "#14151E" :stipple nil :inherit nil))))
+   ;; '(default ((t (:family "Consolas" :foundry "nil" :width normal :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "white" :background "#14151E" :stipple nil :inherit nil))))
    `(bold ((,class (:weight bold))))
    `(bold-italic ((,class (:slant italic :weight bold))))
    `(underline ((,class (:underline t))))
@@ -197,8 +198,10 @@
    `(highlight ((,class (:inverse-video nil :background ,current-line))))
    `(gui-element ((,class (:background ,current-line :foreground ,foreground))))
    `(mode-line ((,class (:foreground nil :background ,current-line
-                                     :box (:line-width 1 :color ,foreground)
-                                     :family "Lucida Grande"))))
+                                     :box (:line-width 1 :color ,foreground)))))
+   ;; `(mode-line ((,class (:foreground nil :background ,current-line
+   ;;                                   :box (:line-width 1 :color ,foreground)
+   ;;                                   :family "Lucida Grande"))))
    `(mode-line-buffer-id ((,class (:foreground ,orange :background nil))))
    `(mode-line-inactive ((,class (:inherit mode-line
                                            :foreground ,comment

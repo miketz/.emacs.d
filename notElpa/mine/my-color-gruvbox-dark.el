@@ -4,7 +4,7 @@
 
   (custom-theme-set-variables
    'gruvbox-dark
-   `(fci-rule-color "#4d4d4d")
+   `(fci-rule-color "#3d3d3d")
 
    `(evil-emacs-state-cursor '(bar "cyan"))
    `(evil-normal-state-cursor '(hollow "spring green"))
@@ -17,6 +17,7 @@
   (custom-theme-set-faces
    'gruvbox-dark
    `(region ((t (:background "#59584E"))))
+   '(fringe ((t (:background "black"))))
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t

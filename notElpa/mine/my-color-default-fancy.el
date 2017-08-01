@@ -5,9 +5,9 @@
   (set-background-color "floral white")
 
   (progn
-    (setq my-curr-alpha 80)
-    (let ((a my-curr-alpha))
-      (set-frame-parameter (selected-frame) 'alpha `(,a ,a))))
+    (setq my--curr-alpha 80)
+    (set-frame-parameter (selected-frame) 'alpha `(,my--curr-alpha
+                                                   ,my--curr-alpha)))
 
   ;; (progn
   ;;   (require 'highlight-tail)

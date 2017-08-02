@@ -4411,9 +4411,10 @@ area."
 (when my-use-evil-p
   ;; evalate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
-
-  (evil-leader/set-key-for-mode 'emacs-lisp-mode "e" #'my-eval-last-sexp-display)
-  (evil-leader/set-key-for-mode 'lisp-interaction-mode "e" #'my-eval-last-sexp-display))
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
+    #'my-eval-last-sexp-display)
+  (evil-leader/set-key-for-mode 'lisp-interaction-mode "e"
+    #'my-eval-last-sexp-display))
 
 ;;;-----------------------------------------------------------------------------
 ;;; elisp-slime-nav

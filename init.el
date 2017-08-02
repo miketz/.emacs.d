@@ -3831,6 +3831,10 @@ and indent."
       (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
       )))
 
+(with-eval-after-load 'swiper
+  (define-key swiper-map (kbd "C-SPC") #'swiper-avy)
+  (define-key swiper-all-map (kbd "C-SPC") #'swiper-avy))
+
 (with-eval-after-load 'ivy
 
   (when my-use-evil-p

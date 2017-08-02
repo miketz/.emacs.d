@@ -5258,6 +5258,29 @@ vanilla javascript buffers."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun my-longest-line ()
+  "Find the longest line in the buffer and jump to it.
+It is slow in large buffers."
+  (interactive)
+  (let ((end (progn
+               (end-of-buffer)
+               (line-number-at-pos)))
+        (start 1)
+        (biggest-col 0)
+        (at-line 0))
+    (cl-loop for line from start to end
+             do
+             (goto-line line)
+             (move-end-of-line nil)
+             (let ((col (current-column)))
+               (when (> col biggest-col)
+                 (setq biggest-col col)
+                 (setq at-line line))))
+    (goto-line at-line)
+    (message (format "biggest col: %d\n line: %d"
+                     biggest-col
+                     at-line))))
+
 (when (or (> emacs-major-version 25)
           (and (= emacs-major-version 25)
                (>= emacs-minor-version 2)))

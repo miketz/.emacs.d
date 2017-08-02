@@ -2335,8 +2335,8 @@ To make it human readable."
   ;; (when my-use-evil-p
   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
-  ;; ;; icomplete's display is simliar to ido. So use it for completions ido does
-  ;; ;; not support. (ie `describe-function' `load-theme' etc)
+  ;; ;; icomplete's display is simliar to ido. So use it for completions ido
+  ;; ;; does not support. (ie `describe-function' `load-theme' etc)
   ;; (icomplete-mode 1)
 
   (setq ido-enable-flex-matching nil)
@@ -5195,8 +5195,8 @@ area."
 ;;   ]
 ;; }
 ;; setp 3 (optional): install typings for libraries you use in a project to get
-;;                    even better intelliSense:
-;;     npm install --save-dev @types/lodash @types/rx @types/react @types/react-dom
+;; even better intelliSense:
+;; npm install --save-dev @types/lodash @types/rx @types/react @types/react-dom
 
 ;; currently using tide for it's regular javascript features, so have
 ;; eval-after-load on js2-mode.

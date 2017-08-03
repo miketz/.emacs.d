@@ -16,7 +16,11 @@
    `(evil-visual-state-cursor   '(hollow "orange"))
    `(evil-operator-state-cursor '(hollow "spring green"))
    `(evil-replace-state-cursor  '(hbar "spring green"))
-   `(evil-motion-state-cursor   '(box "spring green")))
+   `(evil-motion-state-cursor   '(box "spring green"))
+   ;; TODO: finish this off.
+   `(ivy-switch-buffer-faces-alist '((emacs-lisp-mode . '((t (:foreground "yellow"))))
+                                     (dired-mode . ivy-subdir)
+                                     (org-mode . org-level-4))))
 
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'

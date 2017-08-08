@@ -315,7 +315,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
                           (my-use-ido-p #'swiper)
-                          (my-use-bare-ido-p #'swiper)
+                          (my-use-bare-ido-p #'occur)
                           (my-use-helm-p #'helm-swoop)
                           (my-use-mish-mash-p #'swiper)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.

@@ -497,11 +497,15 @@ reasons)."
    "Packages I use from elpa/melpa."))
 
 (require 'package)
-(add-to-list 'package-archives
-             ;;'("melpa" . "http://melpa.milkbox.net/packages/")
-             ;; '("melpa" . "http://melpa.org/packages/")
-             '("melpa" . "https://melpa.org/packages/")
-             t)
+;; set up package archives.
+(let* ((no-ssl? (and (memq system-type '(windows-nt ms-dos))
+                     (not (gnutls-available-p))))
+       (protocol (if no-ssl? "http" "https"))
+       (url (concat protocol "://melpa.org/packages/")))
+  (add-to-list 'package-archives `("melpa" . ,url) t))
+
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; (setq package-enable-at-startup nil)
 (package-initialize) ;; activate all the packages (in particular autoloads)

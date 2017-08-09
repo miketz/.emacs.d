@@ -497,10 +497,14 @@ reasons)."
    "Packages I use from elpa/melpa."))
 
 (require 'package)
+
+(defun my-ssl-p ()
+  "True if the emacs instance has ssl setup/enabled."
+  (or (not (memq system-type '(windows-nt ms-dos)))
+      (gnutls-available-p)))
+
 ;; set up package archives.
-(let* ((no-ssl? (and (memq system-type '(windows-nt ms-dos))
-                     (not (gnutls-available-p))))
-       (protocol (if no-ssl? "http" "https"))
+(let* ((protocol (if (my-ssl-p) "https" "http"))
        (url (concat protocol "://melpa.org/packages/")))
   (add-to-list 'package-archives `("melpa" . ,url) t))
 

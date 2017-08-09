@@ -82,10 +82,10 @@
   ;; ps_to_speed_up_emacs_start/
   ;; TODO: verify exactly how much these help.
 
-  (setq gc-cons-threshold-backup gc-cons-threshold)
+  (defvar gc-cons-threshold-backup gc-cons-threshold)
   (setq gc-cons-threshold 100000000)
 
-  (setq file-name-handler-alist-backup file-name-handler-alist)
+  (defvar file-name-handler-alist-backup file-name-handler-alist)
   (setq file-name-handler-alist nil)
 
   ;; restore original values at end of init.el.
@@ -195,8 +195,8 @@ Specific configs may be made based on the computer.")
 ;;;-----------------------------------------------------------------------------
 (defconst my-fast-load-p nil
   "When t, delay the use of packages.
-For when I want a very fast start without `package-initialize'. So emacs can be
-used for quick vim-like edits.
+For when I want a very fast start without `package-initialize'.  So Emacs can
+be used for quick vim-like edits.
 Call fn `my-do-full-init-with-packages' to continue with the full load.")
 
 (defvar my--delayed-package-code '())
@@ -304,7 +304,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-use-bare-ido-p (eq my-narrow-type 'bare-ido)
-  "If I'm using bare-ido at the moment. Without lots of extra ido packages.
+  "If I'm using bare-ido at the moment.  Without lots of extra ido packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-use-mish-mash-p (eq my-narrow-type 'mish-mash)
@@ -339,8 +339,8 @@ Choices: helm-swoop swiper")
 (defun my-handle-weird-theme-setups ()
   "Some themes work in a special way with custom code to initialize them.
 Orginally this code would be run in the autoloads when the themes were melpa
-packages. But I am no longer using the themes as packages (for init performance
-reasons)."
+packages.  But I am no longer using the themes as packages (for init
+performance reasons)."
   (interactive)
   (when (not my--weird-theme-setup-executed-p)
     (load (concat custom-theme-directory "base16-theme"))
@@ -361,7 +361,7 @@ reasons)."
 
 
 (defvar native-line-numbers-p (fboundp #'toggle-display-line-numbers)
-  "True if emacs suppports native line number display.")
+  "True if Emacs suppports native line number display.")
 
 (let ((install-slime-p
        (member my-curr-computer
@@ -499,7 +499,7 @@ reasons)."
 (require 'package)
 
 (defun my-ssl-p ()
-  "True if the emacs instance has ssl setup/enabled."
+  "True if the Emacs instance has ssl setup/enabled."
   (or (not (memq system-type '(windows-nt ms-dos)))
       (gnutls-available-p)))
 

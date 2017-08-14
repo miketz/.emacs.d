@@ -360,7 +360,7 @@ performance reasons)."
     (setq my--weird-theme-setup-executed-p t)))
 
 
-(defvar native-line-numbers-p (boundp display-line-numbers)
+(defvar native-line-numbers-p (boundp 'display-line-numbers)
   "True if Emacs suppports native line number display.")
 
 (let ((install-slime-p

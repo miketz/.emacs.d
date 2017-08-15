@@ -3825,11 +3825,13 @@ and indent."
 
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)
-    ;; (defun my-counsel-load-theme ()
-    ;;   (interactive)
-    ;;   (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
-    ;;     (call-interactively #'counsel-load-theme)))
-    (global-set-key (kbd "<f9>") #'counsel-load-theme)
+    (defun my-counsel-load-theme ()
+      (interactive)
+      (my-handle-weird-theme-setups)
+      ;; (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
+      ;;   (call-interactively #'counsel-load-theme))
+      (counsel-load-theme))
+    (global-set-key (kbd "<f9>") #'my-counsel-load-theme)
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function)
     ;; ;; replace keybind for `bookmark-bmenu-list'

@@ -19,6 +19,7 @@
    `(evil-motion-state-cursor   '(box "spring green"))
    ;; TODO: finish this off.
    `(ivy-switch-buffer-faces-alist '((emacs-lisp-mode . '((t (:foreground "yellow"))))
+                                     (lisp-interaction-mode . '((t (:foreground "yellow"))))
                                      (dired-mode . ivy-subdir)
                                      (org-mode . org-level-4))))
 

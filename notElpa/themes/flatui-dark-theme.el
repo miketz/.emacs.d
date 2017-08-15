@@ -116,8 +116,10 @@
 
    ;; general font lock faces
    `(font-lock-builtin-face ((,class (:foreground ,orange-bright))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground ,yellow-bright :inherit 'fixed-pitch))))
-   `(font-lock-comment-face ((,class (:foreground ,yellow-bright :inherit 'fixed-pitch :slant italic))))
+   `(font-lock-comment-delimiter-face ((,class (:foreground ,yellow-bright))))
+   ;; `(font-lock-comment-delimiter-face ((,class (:foreground ,yellow-bright :inherit 'fixed-pitch))))
+   `(font-lock-comment-face ((,class (:foreground ,yellow-bright :slant italic))))
+   ;; `(font-lock-comment-face ((,class (:foreground ,yellow-bright :inherit 'fixed-pitch :slant italic))))
    `(font-lock-constant-face ((,class (:foreground ,turquoise-bright))))
    `(font-lock-doc-face ((,class (:foreground ,orange-bright))))
    `(font-lock-doc-string-face ((,class (:foreground ,yellow-bright))))
@@ -516,8 +518,10 @@
    `(org-agenda-date ((,class (:foreground ,grey-bright2))))
    `(org-agenda-done ((,class (:foreground ,green-bright))))
    `(org-agenda-dimmed-todo-face ((,class (:foreground ,grey-dark1))))
-   `(org-block ((,class (:background ,grey-blue-dark :inherit 'fixed-pitch))))
-   `(org-code ((,class (:foreground ,grey-bright2 :inherit 'fixed-pitch))))
+   `(org-block ((,class (:background ,grey-blue-dark))))
+   `(org-code ((,class (:foreground ,grey-bright2))))
+   ;; `(org-block ((,class (:background ,grey-blue-dark :inherit 'fixed-pitch))))
+   ;; `(org-code ((,class (:foreground ,grey-bright2 :inherit 'fixed-pitch))))
    `(org-column ((,class (:inherit default))))
    `(org-column-title ((,class (:inherit mode-line :foreground ,magenta-bright :weight bold :underline t))))
    `(org-date ((,class (:foreground ,blue-dark :underline t))))
@@ -546,7 +550,7 @@
    `(org-upcoming-deadline ((,class (:foreground ,yellow-bright))))
    `(org-verbatim ((,class (:inherit org-code))))
    `(org-warning ((,class (:foreground ,yellow-bright))))
-   `(org-checkbox ((,class (:inherit 'fixed-pitch))))
+   ;; `(org-checkbox ((,class (:inherit 'fixed-pitch))))
 
    ;; outline
    `(outline-1 ((,class (:inherit org-level-1))))

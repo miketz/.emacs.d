@@ -39,8 +39,7 @@
 (progn ;;tab handling
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-  (setq-default indent-line-function 'insert-tab)
-  )
+  (setq-default indent-line-function 'insert-tab))
 
 (progn ;; for better or worse, prevent creation of tmp backup files
   (setq make-backup-files nil)          ; No annoying backup files

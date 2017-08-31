@@ -5042,7 +5042,7 @@ area."
       (interactive)
       (my--occur-move #'occur-prev))
     (defun my-occur-mode-goto-occurrence ()
-      "Same as the build in `occur-mode-goto-occurrence', but add a blink."
+      "Same as the built in `occur-mode-goto-occurrence', but add a blink."
       (interactive)
       (occur-mode-goto-occurrence)
       (funcall my-blink-fn))

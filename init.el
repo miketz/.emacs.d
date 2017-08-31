@@ -2454,7 +2454,7 @@ To make it human readable."
 
 (with-eval-after-load 'yasnippet
   ;; so custom snippets are not overwritten when updating from melpa.
-  (yas-load-directory "~/.emacs.d/snippets")
+  (yas-load-directory "~/.emacs.d/snippets" t)
 
   ;; (setq yas-snippet-dirs
   ;;       `("~/.emacs.d/snippets" ; personal snippets

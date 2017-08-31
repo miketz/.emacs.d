@@ -2450,7 +2450,7 @@ To make it human readable."
 ;;(require 'yasnippet)
 ;;(yas-global-mode 0)
 ;; (autoload 'yasnippet "yasnippet" "yasnippet mode" t)
-(autoload #'snippet-mode "yasnippet" "A mode for editing yasnippets" t)
+;; (autoload #'snippet-mode "yasnippet" "A mode for editing yasnippets" t)
 
 (with-eval-after-load 'yasnippet
   ;; so custom snippets are not overwritten when updating from melpa.

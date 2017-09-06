@@ -29,7 +29,7 @@
 ;; color name strings/values obtained via `list-colors-display' on an Emacs
 ;; running in the the windows command prompt.
 ;; NOTE: the "string" names from `list-colors-display' have  different rgb
-;;       values in different environemnts. So specifying rgb values so the
+;;       values in different environments. So specify rgb values so the
 ;;       theme will look the similar in GUI mode. Even with the same rgb values
 ;;       the colors seem to render diffrently in GUI mode, but it's closer than
 ;;       the string names.

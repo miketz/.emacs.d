@@ -57,7 +57,7 @@
    ((t (:foreground "black"
                     :background "darkgray"
                     :box (:line-width -1 :style released-button)))))
- `(mode-fer-id ((t (:foreground "white" :weight bold))))
+ `(mode-line-buffer-id ((t (:foreground "white" :weight bold))))
 
 
  '(region

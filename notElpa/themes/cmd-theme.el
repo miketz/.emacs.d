@@ -91,7 +91,7 @@
  `(font-lock-warning-face ((t (:foreground "lightred" :background "black" :weight bold))))
 
 
- ;; TODO rainbow-delimiters
+
  '(rainbow-delimiters-depth-1-face ((t (:foreground "white"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "lightgreen"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "lightred"))))

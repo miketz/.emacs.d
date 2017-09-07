@@ -72,7 +72,7 @@
 
   `(default ((t (:foreground ,fg :background ,bg))))
 
-  `(show-paren-match ((t (:background ,black))))
+  `(show-paren-match ((t (:background ,white :foreground ,black))))
 
   ;; separates windows.
   `(vertical-border ((t (:foreground ,darkgray
@@ -140,7 +140,7 @@
   `(rainbow-delimiters-depth-6-face ((t (:foreground ,lightblue))))
   `(rainbow-delimiters-depth-7-face ((t (:foreground ,brown))))
   `(rainbow-delimiters-depth-8-face ((t (:foreground ,red :background ,brown))))
-  `(rainbow-delimiters-depth-9-face ((t (:foreground ,magenta :background ,white))))
+  `(rainbow-delimiters-depth-9-face ((t (:foreground ,white :background ,darkgray))))
   `(rainbow-delimiters-unmatched-face
     ((t (:foreground ,lightred :background ,black))))))
 

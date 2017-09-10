@@ -493,7 +493,8 @@ performance reasons)."
      (markdown-mode t)
      (typescript-mode t)
      (tide ,(member my-curr-computer '(work-laptop wild-dog)))
-     (context-coloring t))
+     (context-coloring t)
+     (nov t))
    "Packages I use from elpa/melpa."))
 
 (require 'package)

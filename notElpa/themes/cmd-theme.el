@@ -129,7 +129,14 @@
   ;; `(ido-indicator ((t (:foreground ,white))))
 
   `(magit-diff-file-heading-highlight ((t :foreground ,white :background ,black)))
-  `(magit-section-highlight ((t :foreground ,white :background ,black)))
+  `(magit-diff-added-highlight ((t :foreground ,lightcyan :background ,green)))
+  ;; magit-log-grpah is the short comment text (highlighted) in magit-log
+  `(magit-section-highlight ((t :background ,white)))
+  ;; magit-log-grpah is the short comment text (unhighlighted) in magit-log
+  `(magit-log-graph ((t :foreground ,fg :background ,bg)))
+  ;; `(magit-section-heading ((t :foreground ,lightred :background ,yellow)))
+  ;; `(magit-section-secondary-heading ((t :foreground ,lightred :background ,yellow)))
+  ;; `(magit-section-heading-selection ((t :foreground ,lightred :background ,yellow)))
 
 
   `(rainbow-delimiters-depth-1-face ((t (:foreground ,black))))

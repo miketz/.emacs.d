@@ -12,8 +12,8 @@
    `(fci-rule-color "gray97")
 
    `(evil-emacs-state-cursor    '(bar "maroon"))
-   `(evil-normal-state-cursor   '(box "blue"))
-   `(evil-insert-state-cursor   '(bar "blue"))
+   `(evil-normal-state-cursor   '(box "#0FB300"))
+   `(evil-insert-state-cursor   '(bar "#0FB300"))
    `(evil-visual-state-cursor   '(hollow "blue"))
    `(evil-operator-state-cursor '(box "blue"))
    `(evil-replace-state-cursor  '(hbar "blue"))

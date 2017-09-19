@@ -30,7 +30,7 @@
 ;; running in the the windows command prompt.
 ;; NOTE: the "string" names from `list-colors-display' have  different rgb
 ;;       values in different environments. So specify rgb values so the
-;;       theme will look the similar in GUI mode. Even with the same rgb values
+;;       theme will look similar in GUI mode. Even with the same rgb values
 ;;       the colors seem to render diffrently in GUI mode, but it's closer than
 ;;       the string names.
 (let* ((black "#000000")

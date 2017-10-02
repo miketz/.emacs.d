@@ -356,7 +356,7 @@ performance reasons)."
     (load (concat custom-theme-directory "punpun-common"))
     (load (concat custom-theme-directory "tao-theme"))
     (load (concat custom-theme-directory "apropospriate"))
-    ;; record the fact we did the set up. To avoid doing it agian.
+    ;; record the fact we did the set up. To avoid doing it again.
     (setq my--weird-theme-setup-executed-p t)))
 
 
@@ -3448,7 +3448,7 @@ and indent."
     (evil-define-key 'normal eww-mode-map (kbd "C-o") #'eww-back-url))
 
   (progn ;; clearing the ^M
-    (defun my-clear-wierd-m ()
+    (defun my-clear-weird-m ()
       "Clear the weird ^M character that shows in some eww buffers."
       (interactive
        ;; (let ((args (query-replace-read-args "Replace" t)))
@@ -3462,9 +3462,9 @@ and indent."
         (while (re-search-forward "" nil t)
           (replace-match ""))))
 
-    (defadvice eww-render (after ad-clear-wierd-m)
+    (defadvice eww-render (after ad-clear-weird-m)
       "Clear the weird ^M character that shows in some eww buffers."
-      (my-clear-wierd-m))
+      (my-clear-weird-m))
     (ad-activate 'eww-render))
 
   (defun my-setup-eww ()
@@ -5305,7 +5305,7 @@ It is slow in large buffers."
 (when (or (> emacs-major-version 25)
           (and (= emacs-major-version 25)
                (>= emacs-minor-version 2)))
-  ;; Disable the wierd quote characters used in help buffers in emacs 25.
+  ;; Disable the weird quote characters used in help buffers in emacs 25.
   ;; var `use-default-font-for-symbols' was introduced in emacs 25.2 to disable
   ;; the bad behavior introduced in emacs 25.
   (setq use-default-font-for-symbols nil))
@@ -5385,7 +5385,7 @@ in frame.  Stop displaying shell in all other windows."
 
 
 ;; scroll like vim when moving 1 line off screen with j/k.
-;; has some wierd rules about recentering, but 100 is supposed to
+;; has some weird rules about recentering, but 100 is supposed to
 ;; not recenter. I had an issue with value 1 where if i held down
 ;; j to scroll, it would perioditcally recenter.
 (setq scroll-conservatively 100)

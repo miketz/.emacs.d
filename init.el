@@ -777,6 +777,15 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   (setq evil-flash-delay 1)
 
+  ;; make "w" treat words separated by _ and - as 1 word. Like in vim.
+  ;; `modify-syntax-entry' is buffer local, so attach to a hook.
+  (defun my-setup-w-for-evil ()
+    (interactive)
+    (modify-syntax-entry ?_ "w")
+    (modify-syntax-entry ?- "w"))
+  (add-hook 'prog-mode-hook #'my-setup-w-for-evil)
+  (add-hook 'text-mode-hook #'my-setup-w-for-evil)
+
   ;; unset some keys. It seems other modes have trouble overriding them when
   ;; it's set in evil?
   (define-key evil-normal-state-map (kbd "M-.") nil)

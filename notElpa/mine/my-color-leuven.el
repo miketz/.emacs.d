@@ -94,6 +94,16 @@
                                                    :background "lemon chiffon"
                                                    :weight bold))))
 
+   ;; ido colors from twilight-bright-theme.el
+   ;; `(ido-only-match ((t (:foreground "#5f9411" :background "#eff8e9"))))
+   ;; `(ido-subdir ((t (:foreground "#a66bab" :background "#f8f1f8"))))
+
+   `(ido-only-match ((t (:foreground "darkgreen" :background "#eff8e9" :weight bold))))
+   `(ido-subdir ((t (:foreground "purple" :background "#f8f1f8"))))
+   `(ido-first-match ((t (:foreground "black" :background "lemonchiffon" :weight bold))))
+   ;; `(ido-indicator ((t (:foreground "red" :background "black"))))
+
+
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight normal))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :weight normal))))

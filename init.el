@@ -4273,6 +4273,7 @@ buffer instead of narrowing."
 ;;;-----------------------------------------------------------------------------
 (autoload #'my-window-search "my-window-search" nil t)
 (global-set-key (kbd "C-c s") #'my-window-search)
+(global-set-key (kbd "C-c C-s") #'my-window-search)
 
 ;; using this binding for swiper when `my-ui-type' is 'emacs
 ;; (global-set-key (kbd "C-c C-s") #'my-window-search)

@@ -1204,6 +1204,7 @@ monitor.")
 (autoload #'my-color-niflheim "my-color-niflheim" nil t)
 (autoload #'my-color-spacemacs-light "my-color-spacemacs-light" nil t)
 (autoload #'my-color-tango-dark "my-color-tango-dark" nil t)
+(autoload #'my-color-sunburn "my-color-sunburn" nil t)
 
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff

@@ -11,8 +11,7 @@
   :keymap '(("q" . #'my-quit-window-date)))
 
 
-
-(defun my-insert-date-string ()
+(defun my-insert-date-big ()
   "Insert a date string.  Everything you need to know about the date and time."
   (interactive)
   (insert
@@ -20,6 +19,10 @@
     "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%-I:%M%#p%nsecond: %S.%3N"
     ;; "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N"
     )))
+
+(defun my-insert-date-short ()
+  (interactive)
+  (insert (format-time-string "%m-%d-%Y")))
 
 (defun my-insert-date-string-new-buff ()
   (interactive)
@@ -30,7 +33,7 @@
     (with-current-buffer tmp-buff
       (goto-char (point-max)) ;; end of buffer
       (insert "\n\n")
-      (my-insert-date-string)
+      (my-insert-date-big)
       (my-date-mode) ; for the windwow closing keybind "q"
       )))
 
@@ -45,7 +48,7 @@
 ;;                                 (select-window (get-buffer-window tmp-buff))
 ;;                                 (goto-char (point-max)) ;;end of buffer
 ;;                                 (insert "\n\n")
-;;                                 (my-insert-date-string)
+;;                                 (my-insert-date-big)
 ;;                                 (help-mode) ; for the window closing features.
 ;;                                             ; press q to close.
 ;;                                 )))

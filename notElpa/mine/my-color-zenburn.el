@@ -214,6 +214,10 @@
                                   :bold t
                                   :strike-through t
                                   :background nil))))
+
+
+   `(ido-subdir ((t (:foreground "light blue" :background "black"))))
+
    '(rainbow-delimiters-depth-1-face ((t (:foreground "orange red"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "cyan"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "yellow"))))

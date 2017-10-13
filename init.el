@@ -4536,9 +4536,11 @@ area."
 ;;;-----------------------------------------------------------------------------
 ;;; my-date-stuff.el
 ;;;-----------------------------------------------------------------------------
-(autoload #'my-insert-date-string "my-date-stuff" nil t)
+(autoload #'my-insert-date-big "my-date-stuff" nil t)
+(autoload #'my-insert-date-short "my-date-stuff" nil t)
 (autoload #'my-insert-date-string-new-buff "my-date-stuff" nil t)
-(global-set-key (kbd "C-c i") #'my-insert-date-string-new-buff)
+(global-set-key (kbd "C-c i") #'my-insert-date-short)
+(global-set-key (kbd "C-c C-c i") #'my-insert-date-string-new-buff)
 
 (when my-use-evil-p
   (with-eval-after-load "my-date-stuff"

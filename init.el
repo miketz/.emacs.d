@@ -494,7 +494,8 @@ performance reasons)."
      (typescript-mode t)
      (tide ,(member my-curr-computer '(work-laptop wild-dog)))
      (context-coloring t)
-     (nov t))
+     (nov t) ;; an epub reader
+     (erc-hl-nicks t))
    "Packages I use from elpa/melpa."))
 
 (require 'package)

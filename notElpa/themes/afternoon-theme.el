@@ -167,8 +167,10 @@
    `(highlight ((,class (:inverse-video nil :background ,current-line))))
    `(gui-element ((,class (:background ,current-line :foreground ,foreground))))
    `(mode-line ((,class (:foreground nil :background ,current-line
-                                     :box (:line-width 1 :color ,foreground)
-                                     :family "Lucida Grande"))))
+                                     :box (:line-width 1 :color ,foreground)))))
+   ;; `(mode-line ((,class (:foreground nil :background ,current-line
+   ;;                                   :box (:line-width 1 :color ,foreground)
+   ;;                                   :family "Lucida Grande"))))
    `(mode-line-buffer-id ((,class (:foreground ,purple :background nil))))
    `(mode-line-inactive ((,class (:inherit mode-line
                                            :foreground ,comment

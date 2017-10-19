@@ -793,6 +793,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;; it's set in evil?
   (define-key evil-normal-state-map (kbd "M-.") nil)
   (define-key evil-normal-state-map (kbd "M-,") nil)
+  ;; unbind the "K" key. I press it accidentally all the time.
+  (define-key evil-normal-state-map (kbd "K") nil)
+  (define-key evil-visual-state-map (kbd "K") nil)
+  (define-key evil-motion-state-map (kbd "K") nil)
 
   (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
   (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command)

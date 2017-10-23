@@ -5312,6 +5312,32 @@ vanilla javascript buffers."
     ;; avoid opening help with the "h" key. I can use "C-h m" instead.
     (evil-define-key 'normal grep-mode-map (kbd "h") #'evil-backward-char)))
 
+
+;;;-----------------------------------------------------------------------------
+;;; horizontal scrolling
+;;;-----------------------------------------------------------------------------
+(defun my-scroll-left ()
+  (interactive)
+  (my-scroll-horizontal #'scroll-left))
+
+(defun my-scroll-right ()
+  (interactive)
+  (my-scroll-horizontal #'scroll-right))
+
+(defun my-scroll-horizontal (scroll-fn)
+  (let ((cols (floor (* 0.25 (window-total-width)))))
+    (funcall scroll-fn cols)
+    ;; TODO: ensure point is moved to a visible character to make subsequent
+    ;; navigation/selection of visible text possible.
+    ))
+
+
+(global-set-key (kbd "C-M-h") #'my-scroll-right)
+(global-set-key (kbd "C-M-l") #'my-scroll-left)
+;; TODO: rebind `mark-defun' (kbd "C-M-h")
+;; TODO: rebind `reposition-window' (kbd "C-M-l")
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------

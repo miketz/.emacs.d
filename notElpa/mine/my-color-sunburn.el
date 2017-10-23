@@ -19,4 +19,7 @@
   (custom-theme-set-faces
    'sunburn
 
-   `(region ((t (:background "#69685E"))))))
+   `(region ((t (:background "#69685E"))))
+
+   '(completions-common-part ((t (:foreground "gray60"))))
+   '(completions-first-difference ((t (:foreground "yellow"))))))

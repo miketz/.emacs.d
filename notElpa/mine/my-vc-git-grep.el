@@ -21,7 +21,7 @@
      (t val))))
 
 (defun my-git-grep-make-cmd (input)
-  ;;git --no-pager grep --no-index --ignore-case -n -e "preview" --and -e "print" -- *.cs
+  ;;git --no-pager grep --color --no-index --ignore-case -n -e "preview" --and -e "print" -- *.cs
   (interactive)
   (let ((patterns (split-string input " "))
         (git-pat ""))
@@ -31,7 +31,7 @@
                                         ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
     (let ((in-gitrepo   (my-is-in-gitrepo))
           (search-all-p current-prefix-arg));if they typed C-u then search all
-      (concat "git --no-pager grep --extended-regexp "
+      (concat "git --no-pager grep --color --extended-regexp "
               (when (not in-gitrepo) "--no-index ")
               (cond
                ;;NOTE: git grep options for using .gitignore (or not) require different

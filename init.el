@@ -5301,6 +5301,13 @@ vanilla javascript buffers."
     (rainbow-delimiters-mode-enable))
   (add-hook 'powershell-mode-hook #'my-setup-powershell-mode))
 
+
+;;;-----------------------------------------------------------------------------
+;;; grep settings. built into emacs.
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'grep
+  (setq grep-highlight-matches t))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------

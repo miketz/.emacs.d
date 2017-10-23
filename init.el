@@ -5306,7 +5306,11 @@ vanilla javascript buffers."
 ;;; grep settings. built into emacs.
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'grep
-  (setq grep-highlight-matches t))
+  (setq grep-highlight-matches t)
+
+  (when my-use-evil-p
+    ;; avoid opening help with the "h" key. I can use "C-h m" instead.
+    (evil-define-key 'normal grep-mode-map (kbd "h") #'evil-backward-char)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

@@ -499,6 +499,7 @@ performance reasons)."
      (tide ,(member my-curr-computer '(work-laptop wild-dog)))
      (context-coloring t)
      (nov t) ;; an epub reader
+     (autothemer t) ;; dependency for some themes.
      (erc-hl-nicks t))
    "Packages I use from elpa/melpa."))
 

@@ -772,7 +772,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (setq evil-normal-state-cursor   '(hollow))
   (setq evil-insert-state-cursor   '(bar))
   (setq evil-visual-state-cursor   '(hollow))
-  (setq evil-operator-state-cursor '(hollow))
+  (setq evil-operator-state-cursor '(box))
   (setq evil-replace-state-cursor  '(hbar))
   (setq evil-motion-state-cursor   '(box)))
 

@@ -14,7 +14,7 @@
    `(evil-normal-state-cursor   '(hollow "spring green"))
    `(evil-insert-state-cursor   '(bar "spring green"))
    `(evil-visual-state-cursor   '(hollow "orange"))
-   `(evil-operator-state-cursor '(hollow "spring green"))
+   `(evil-operator-state-cursor '(box "indian red"))
    `(evil-replace-state-cursor  '(hbar "spring green"))
    `(evil-motion-state-cursor   '(box "spring green"))
    ;; TODO: finish this off.

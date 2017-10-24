@@ -28,7 +28,7 @@
 
 ;;; Code:
 
-(require 'all-the-icons)
+;; (require 'all-the-icons)
 
 (defmacro cached-for (secs &rest body)
   "Cache for SECS the result of the evaluation of BODY."
@@ -96,19 +96,19 @@
 (defvar zerodark-modeline-buffer-identification '(:eval (propertize "%b" 'face 'bold))
   "Mode line construct for displaying the position in the buffer.")
 
-(defvar zerodark-modeline-modified '(:eval (if (buffer-modified-p (current-buffer))
-                                               (all-the-icons-faicon "floppy-o"
-                                                                     :height 0.9
-                                                                     :v-adjust 0
-                                                                     :face (if (zerodark--active-window-p)
-                                                                               'zerodark-modified-face
-                                                                             'mode-line-inactive))
-                                             (all-the-icons-faicon "check"
-                                                                   :height 0.9
-                                                                   :v-adjust 0
-                                                                   :face (if (zerodark--active-window-p)
-                                                                             'zerodark-not-modified-face
-                                                                           'mode-line-inactive)))))
+;; (defvar zerodark-modeline-modified '(:eval (if (buffer-modified-p (current-buffer))
+;;                                                (all-the-icons-faicon "floppy-o"
+;;                                                                      :height 0.9
+;;                                                                      :v-adjust 0
+;;                                                                      :face (if (zerodark--active-window-p)
+;;                                                                                'zerodark-modified-face
+;;                                                                              'mode-line-inactive))
+;;                                              (all-the-icons-faicon "check"
+;;                                                                    :height 0.9
+;;                                                                    :v-adjust 0
+;;                                                                    :face (if (zerodark--active-window-p)
+;;                                                                              'zerodark-not-modified-face
+;;                                                                            'mode-line-inactive)))))
 
 (defvar zerodark-modeline-ro '(:eval (if buffer-read-only
                                          (if (zerodark--active-window-p)
@@ -120,15 +120,15 @@
 (defvar zerodark-buffer-coding '(:eval (unless (eq buffer-file-coding-system (default-value 'buffer-file-coding-system))
                                          mode-line-mule-info)))
 
-(defvar zerodark-modeline-vc '(vc-mode ("   "
-                                        (:eval (all-the-icons-faicon "code-fork"
-                                                                     :height 0.9
-                                                                     :v-adjust 0
-                                                                     :face (when (zerodark--active-window-p)
-                                                                             (zerodark-git-face))))
-                                        (:eval (propertize (truncate-string-to-width vc-mode 25 nil nil "...")
-                                                           'face (when (zerodark--active-window-p)
-                                                                   (zerodark-git-face)))))))
+;; (defvar zerodark-modeline-vc '(vc-mode ("   "
+;;                                         (:eval (all-the-icons-faicon "code-fork"
+;;                                                                      :height 0.9
+;;                                                                      :v-adjust 0
+;;                                                                      :face (when (zerodark--active-window-p)
+;;                                                                              (zerodark-git-face))))
+;;                                         (:eval (propertize (truncate-string-to-width vc-mode 25 nil nil "...")
+;;                                                            'face (when (zerodark--active-window-p)
+;;                                                                    (zerodark-git-face)))))))
 
 (defun zerodark-modeline-flycheck-status ()
   "Return the status of flycheck to be displayed in the mode-line."
@@ -764,22 +764,23 @@ The result is cached for one second to avoid hiccups."
      `(anzu-mode-line ((,class :inherit mode-line :foreground ,purple :weight bold)))
      ))
 
-  (setq-default mode-line-format
-                `("%e"
-                  " "
-                  ,zerodark-modeline-ro " "
-                  ,zerodark-buffer-coding
-                  mode-line-frame-identification " "
-                  " "
-                  ,zerodark-modeline-modified
-                  " "
-                  ,zerodark-modeline-buffer-identification
-                  ,zerodark-modeline-position
-                  ,zerodark-modeline-vc
-                  "  "
-                  (:eval (zerodark-modeline-flycheck-status))
-                  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces
-                  )))
+  ;; (setq-default mode-line-format
+  ;;               `("%e"
+  ;;                 " "
+  ;;                 ,zerodark-modeline-ro " "
+  ;;                 ,zerodark-buffer-coding
+  ;;                 mode-line-frame-identification " "
+  ;;                 " "
+  ;;                 ,zerodark-modeline-modified
+  ;;                 " "
+  ;;                 ,zerodark-modeline-buffer-identification
+  ;;                 ,zerodark-modeline-position
+  ;;                 ,zerodark-modeline-vc
+  ;;                 "  "
+  ;;                 (:eval (zerodark-modeline-flycheck-status))
+  ;;                 "  " mode-line-modes mode-line-misc-info mode-line-end-spaces
+  ;;                 ))
+  )
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)

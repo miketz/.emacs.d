@@ -357,6 +357,9 @@ performance reasons)."
     (load (concat custom-theme-directory "punpun-common"))
     (load (concat custom-theme-directory "tao-theme"))
     (load (concat custom-theme-directory "apropospriate"))
+    (progn ;; kaolin stuff
+      (load (concat custom-theme-directory "kaolin-themes-lib"))
+      (load (concat custom-theme-directory "kaolin-themes")))
     ;; record the fact we did the set up. To avoid doing it again.
     (setq my--weird-theme-setup-executed-p t)))
 

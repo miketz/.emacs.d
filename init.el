@@ -3591,7 +3591,12 @@ and indent."
   (setq magit-diff-refine-hunk 'all)
 
   ;; use colored graph lines. Could be a performance issue.
-  (add-to-list 'magit-log-arguments "--color"))
+  (add-to-list 'magit-log-arguments "--color")
+
+  ;; don't show recent commits when calling `magit-status'.
+  ;; TODO: modify magit code so recent commits are not even queried if the
+  ;;       count is 0.
+  (setq magit-log-section-commit-count 0))
 
 
 ;;;-----------------------------------------------------------------------------

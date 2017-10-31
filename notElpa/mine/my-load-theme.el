@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-load-theme (theme &optional no-confirm no-enable)
   "A duplicate of `load-theme'.
 With a mod to not ask for permission to change color.

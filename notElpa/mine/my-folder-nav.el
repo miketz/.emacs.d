@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-current-file-path ()
   "Return the full file path of the current buffer as a string."
   (interactive)

@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-quit-window-date ()
   (interactive)
   (quit-window t) ; kill the buffer too.

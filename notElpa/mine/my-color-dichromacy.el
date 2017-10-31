@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-dichromacy ()
   (interactive)
   (load-theme 'dichromacy t)

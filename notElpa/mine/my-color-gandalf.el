@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-gandalf ()
   (interactive)
   (load-theme 'gandalf t)

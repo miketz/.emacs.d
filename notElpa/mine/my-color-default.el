@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;;; loads the default emacs theme. Makes a few mods too.
 (defun my-color-default ()
   (interactive)

@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;; (require 'helm-cmd-t)
 
 ;; (defun proj-ecp ()

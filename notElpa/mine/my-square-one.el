@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defvar my-keep-buffers
   '("*scratch*" "*Messages*"
     ;; "*Compile-Log*"

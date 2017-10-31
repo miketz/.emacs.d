@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-default-fancy ()
   (interactive)
   (my-color-default)

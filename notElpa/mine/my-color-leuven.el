@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-leuven ()
   (interactive)
   (load-theme 'leuven t)

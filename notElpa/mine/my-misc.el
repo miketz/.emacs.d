@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (require 'cl-lib)
 
 (defmacro do-n-times (n &rest body)

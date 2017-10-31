@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-badger ()
   (interactive)
   (load-theme 'badger t)

@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-tango-dark ()
   (interactive)
   (load-theme 'tango-dark t)

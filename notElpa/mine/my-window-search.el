@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-window-search ()
   "Interactive search, limited to the visible portion of the buffer."
   (interactive)

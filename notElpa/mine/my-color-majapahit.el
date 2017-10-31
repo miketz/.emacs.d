@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-majapahit ()
   (interactive)
   (load-theme 'majapahit-dark t)

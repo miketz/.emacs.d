@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-firebelly ()
   (interactive)
   (my-load-theme-make-bold-like-zenburn 'firebelly) ;;(load-theme 'firebelly t)

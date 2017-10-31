@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-gruvbox-dark ()
   (interactive)
   (load-theme 'gruvbox-dark t)

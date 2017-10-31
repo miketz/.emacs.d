@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-sunburn ()
   (interactive)
   (load-theme 'sunburn t)

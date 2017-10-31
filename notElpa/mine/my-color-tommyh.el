@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-tommyh ()
   (interactive)
   (load-theme 'tommyh t)

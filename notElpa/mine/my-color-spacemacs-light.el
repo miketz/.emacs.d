@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-spacemacs-light ()
   (interactive)
   (load-theme 'spacemacs-light t)

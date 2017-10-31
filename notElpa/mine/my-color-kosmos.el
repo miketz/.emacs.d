@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-kosmos ()
   (interactive)
   (load-theme 'kosmos t)

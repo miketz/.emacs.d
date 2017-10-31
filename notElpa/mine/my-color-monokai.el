@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-monokai ()
   "Load the monokai theme with several adjustments."
   (interactive)

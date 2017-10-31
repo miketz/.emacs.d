@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defvar my-shrink-wild-dog 10
   "Size to shrink a split window.
 So lines of text are not too long to follow with my eyes.")

@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-niflheim ()
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)

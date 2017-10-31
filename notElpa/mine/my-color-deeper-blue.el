@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-deeper-blue ()
   (interactive)
   (load-theme 'deeper-blue t)

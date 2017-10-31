@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-color-grandshell ()
   "Grandshell with a few mode-specific additoins."
   (interactive)

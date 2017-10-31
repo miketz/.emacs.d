@@ -1,3 +1,6 @@
+;;; -*- lexical-binding: t -*-
+;;; my-rand.el --- Helper functions for random values.
+
 (random t) ;seed random with time
 
 ;;;###autoload
@@ -38,3 +41,7 @@
 ;;     (insert ": ")
 ;;     (insert (int-to-string (elt counts x)))
 ;;     (insert "\n\n")))
+
+(provide 'my-rand)
+
+;;; my-rand.el ends here

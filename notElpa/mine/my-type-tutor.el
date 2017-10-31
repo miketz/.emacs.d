@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
+(require 'my-rand)
+
 (defun my-type-tutor ()
   (interactive)
   ;; (switch-to-buffer "typing practice")

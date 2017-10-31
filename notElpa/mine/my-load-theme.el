@@ -150,7 +150,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
           (progn
             (load-theme thm t))
         (progn
-          (print thm)
+          (message "%s" (symbol-name thm)) ;; (print thm)
           (incf i)
           (when (= i (length themes))
             (setq i 0)))))))

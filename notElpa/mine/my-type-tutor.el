@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun my-type-tutor ()
   (interactive)
   ;; (switch-to-buffer "typing practice")

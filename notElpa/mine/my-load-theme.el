@@ -153,7 +153,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
         (progn
           (message "theme %d/%d %s"
                    (1+ i) len (symbol-name thm))
-          (incf i)
+          (setq i (1+ i))
           (when (= i len)
             (setq i 0)))))))
 

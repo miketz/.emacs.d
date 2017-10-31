@@ -38,8 +38,8 @@
              for l from 0 to (1- lines) do
              (cl-loop for gpl from 0 to (1- groups-per-line) do
                       (cl-loop for gs from 0 to (1- group-size) do
-                               (insert (my-getAtIndex (rand 0 chars-len)
-                                                      chars)))
+                               (insert (nth (rand 0 chars-len)
+                                            chars)))
                       (unless (= gpl (1- groups-per-line)) ; skip space on last one
                         (insert " ")))
              (insert "\n\n\n")))

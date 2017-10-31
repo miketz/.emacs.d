@@ -125,13 +125,12 @@ It mutates BOOL to the opposite value.
 Useful to check a boolean state and toggle the state in 1 go."
   `(setq ,bool (not ,bool)))
 
-
-(defun my-getAtIndex (i lst)
-  "Return the element at I from LST."
-  (cond
-   ((null lst) nil)
-   ((= i 0) (car lst))
-   (t (my-getAtIndex (- i 1) (cdr lst)))))
+;; (defun my-getAtIndex (i lst)
+;;   "Return the element at I from LST."
+;;   (cond
+;;    ((null lst) nil)
+;;    ((= i 0) (car lst))
+;;    (t (my-getAtIndex (- i 1) (cdr lst)))))
 
 (defun my-str-starts-with-p (string prefix)
   "Return t if STRING begins with PREFIX."
@@ -5785,7 +5784,7 @@ in frame.  Stop displaying shell in all other windows."
 ;;   "Display a message."
 ;;   (interactive)
 ;;   (let* ((max (- (length msgDb) 1))
-;;          (msg (my-getAtIndex msgIndex msgDb)))
+;;          (msg (nth msgIndex msgDb)))
 ;;     (setq msgIndex (+ 1 msgIndex))
 ;;     (when (> msgIndex max)
 ;;       (setq msgIndex 0))
@@ -5796,7 +5795,7 @@ in frame.  Stop displaying shell in all other windows."
 ;; ;;   (interactive)
 ;; ;;   (let* ((max (- (length msgDb) 1))
 ;; ;;          (i (rand 0 max))
-;; ;;          (msg (my-getAtIndex i msgDb)))
+;; ;;          (msg (nth i msgDb)))
 ;; ;;     ;(message msg)
 ;; ;;     (clippy-say msg)
 ;; ;;     ;(clippy-say (yow))

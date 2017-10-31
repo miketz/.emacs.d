@@ -23,7 +23,7 @@
 ;;           (while (< gpl groups-per-line)
 ;;             (let ((gs 0))
 ;;               (while (< gs group-size)
-;;                 (insert (my-getAtIndex (rand 0 chars-len)
+;;                 (insert (nth (rand 0 chars-len)
 ;;                                        chars))
 ;;                 (incf gs)))
 ;;             (insert " ")

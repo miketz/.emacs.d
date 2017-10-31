@@ -178,7 +178,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
     (if (= i (1- (length cycle-colors)))
         (setq i 0)
       (setq i (1+ i)))
-    (let* ((pair (my-getAtIndex i cycle-colors))
+    (let* ((pair (nth i cycle-colors))
            (bg (car pair))
            (descr (cdr pair)))
       (set-background-color bg)

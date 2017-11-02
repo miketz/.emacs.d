@@ -2270,10 +2270,13 @@ To make it human readable."
 ;;; operation so I prefer to set up the search inputs first, select the top
 ;;; folder, etc instead of searching in real-time for each key press.
 ;;;-----------------------------------------------------------------------------
+(autoload 'vc-git-grep "vc-git" nil t)
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
+(autoload #'my-grep-dwim "my-grep" nil t)
 (when my-use-evil-p
-  (evil-leader/set-key "g" #'my-vc-git-grep))
+  (evil-leader/set-key "g" #'my-vc-git-grep)
+  (evil-leader/set-key "s" #'my-grep-dwim))
 
 ;;;-----------------------------------------------------------------------------
 ;;; helm-swoop

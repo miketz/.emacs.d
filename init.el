@@ -2275,8 +2275,7 @@ To make it human readable."
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
 (autoload #'my-grep-dwim "my-grep" nil t)
 (when my-use-evil-p
-  (evil-leader/set-key "g" #'my-vc-git-grep)
-  (evil-leader/set-key "s" #'my-grep-dwim))
+  (evil-leader/set-key "g" #'my-grep-dwim))
 
 ;;;-----------------------------------------------------------------------------
 ;;; helm-swoop

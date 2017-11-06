@@ -64,7 +64,7 @@
                  ((and gitrepo-p search-all-p) "--untracked --no-exclude-standard ")
                  ;;--exclude-standard so it honors the .gitignore file when not in a git repo.
                  ((and (not gitrepo-p) (not search-all-p)) "--exclude-standard "))
-                " -Ein -e <R> -- <F>")
+                " -Ein -e <R> -- . <F>")
                regexp files)))
       (when command
         (setq command

@@ -33,7 +33,7 @@
                                             (completing-read "Search all? "
                                                              '("y" "n")
                                                              nil t "y"))
-                            t)))
+                            nil)))
        ;; list values plug into the function args.
        (list regexp files dir search-all-p))))
 

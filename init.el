@@ -4542,6 +4542,13 @@ area."
       ad-do-it))
   (ad-activate 'sx-tab-newest)
 
+  ;; turn off ido completion for sx. Prefer the many columns of the default
+  ;; emacs completion so I can see more options.
+  (defadvice sx-completing-read (around no-ido)
+    (let ((ido-mode nil))
+      ad-do-it))
+  (ad-activate 'sx-completing-read)
+
   (when my-use-evil-p
     ;; use emacs bindings (not evil).
     (add-to-list 'evil-buffer-regexps '("\\*question-list" . emacs))

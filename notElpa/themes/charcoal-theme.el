@@ -5,12 +5,29 @@
 
 (deftheme charcoal "Charcoal color theme")
 
-(let ((class t)
-      (bg "#35352B")
-      (fg "lightyellow2") ;; snow3 gray80 lightyellow3
-      (faint "#4d4d3d"))
+(let* ((class        t)
+       (cnt          (display-color-cells))
+       (color-full-p (>= cnt 16777216))
+       (color-256-p  (and (not color-full-p) (>= cnt 256)))
+       (color-16-p   (and (not color-256-p) (>= cnt 16)))
+       (color-8-p    (and (not color-16-p) (>= cnt 8)))
+       (i            (cond (color-full-p 0)
+                           (color-256-p  1)
+                           (color-16-p   2)
+                           (color-8-p    3)
+                           (t            3)))
+       (todo-colr   "#FFFFFF") ; temp color where I haven't decided yet
 
-  ;; set variables
+       ;; Color Palette      full      256       16        8
+       (bg           (aref ["#35352B" todo-colr todo-colr todo-colr] i))
+       (fg           (aref ["#EEEED1" todo-colr todo-colr todo-colr] i))
+       (faint        (aref ["#4D4D3D" todo-colr todo-colr todo-colr] i))
+       (keyword      (aref ["#FFEBCD" todo-colr todo-colr todo-colr] i))
+       (var          (aref ["#66CDAA" todo-colr todo-colr todo-colr] i)))
+
+  ;; lightyellow2=#EEEED1
+  ;; snow3 gray80 lightyellow3
+
   (custom-theme-set-variables
    'charcoal
 
@@ -46,7 +63,7 @@
                              (360 . "#3F3FFF")))
    `(vc-annotate-very-old-color "blue3"))
 
-  ;; set faces
+
   (custom-theme-set-faces
    'charcoal
 
@@ -66,16 +83,16 @@
    ;; TODO
    `(mode-line
      ((,class (:foreground "#8FB28F"
-                      :background "#2B2B2B"
-                      :box (:line-width -1 :style released-button)))
+                           :background "#2B2B2B"
+                           :box (:line-width -1 :style released-button)))
       (t :inverse-video t)))
    ;; TODO
    `(mode-line-buffer-id ((,class (:foreground "#F0DFAF" :weight bold))))
    ;; TODO
    `(mode-line-inactive
      ((,class (:foreground "#5F7F5F"
-                      :background "#383838"
-                      :box (:line-width -1 :style released-button)))))
+                           :background "#383838"
+                           :box (:line-width -1 :style released-button)))))
 
    `(region
      ((,class (:background "#49483E"))))     ;69685E
@@ -90,14 +107,14 @@
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    ;; `(font-lock-doc-face ((,class (:foreground ,zenburn-green+2))))
    ;; `(font-lock-function-name-face ((,class (:foreground ,zenburn-cyan))))
-   `(font-lock-keyword-face ((,class (:foreground "blanched almond" :weight bold))))
+   `(font-lock-keyword-face ((,class ((,class (:foreground ,keyword :weight bold))))))
    ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
    ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
-   ;; `(font-lock-variable-name-face ((,class (:foreground ,zenburn-orange))))
+   `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
 

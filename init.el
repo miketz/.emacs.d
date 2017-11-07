@@ -1142,6 +1142,7 @@ monitor.")
 (defun my-load-theme-make-bold-like-zenburn (&optional theme)
   (interactive)
   (let ((zen-bold-faces '())
+        (zen-non-bold-faces '())
         (frame (selected-frame))
         ;; show more themes since I'm browsing in addition to selecting
         (ivy-height 25))
@@ -1154,14 +1155,17 @@ monitor.")
     ;; TODO: handle :bold and the different kinds of :weight that are bold
     ;; TODO: also turn off bold on some faces to be like zenburn.
     (load-theme 'zenburn t)
+    ;; collect bold and non-bold faces into lists
     (dolist (f (face-list))
-      (when (eq (face-attribute f :weight frame)
-                'bold)
-        (add-to-list 'zen-bold-faces f)))
+      (if (eq (face-attribute f :weight frame) 'bold)
+          (add-to-list 'zen-bold-faces f)
+        (add-to-list 'zen-non-bold-faces f)))
     ;; load theme and use zenburn's bolding.
     (load-theme theme t)
     (dolist (f zen-bold-faces)
-      (set-face-attribute f nil :weight 'bold))))
+      (set-face-attribute f nil :weight 'bold))
+    (dolist (f zen-non-bold-faces)
+      (set-face-attribute f nil :weight 'normal))))
 
 (defvar my-inverse-video-p nil
   "Flag used by fn `my-toggle-inverse-video'.")

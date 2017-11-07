@@ -2435,6 +2435,10 @@ To make it human readable."
 
   ;; (flx-ido-mode 1) ;; invokes (with-eval-after-load "flx-ido")
 
+  (when my-use-evil-p
+    ;; reclaim M-k keybind. TODO: rebind `ido-forget-work-directory'
+    (define-key ido-file-dir-completion-map (kbd "M-k") #'evil-window-up))
+
   ;; insert a hypen - on space like in normal M-x
   (defadvice ido-switch-buffer (around space-inserts-hyphen activate compile)
     (let ((ido-cannot-complete-command

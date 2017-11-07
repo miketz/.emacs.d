@@ -21,6 +21,12 @@
        ;; Color Palette      full      256       16        8
        (bg           (aref ["#35352B" todo-colr todo-colr todo-colr] i))
        (fg           (aref ["#EEEED1" todo-colr todo-colr todo-colr] i))
+       (bg-purple    (aref ["#440033" todo-colr todo-colr todo-colr] i))
+       (fg-purple    (aref ["#FFC0CB" todo-colr todo-colr todo-colr] i))
+       (bg-green     (aref ["#004400" todo-colr todo-colr todo-colr] i))
+       (fg-green     (aref ["#98FB98" todo-colr todo-colr todo-colr] i))
+       (bg-yellow    (aref ["#3A3A00" todo-colr todo-colr todo-colr] i))
+       (fg-yellow    (aref ["#FFFF00" todo-colr todo-colr todo-colr] i))
        (faint        (aref ["#4D4D3D" todo-colr todo-colr todo-colr] i))
        (keyword      (aref ["#FFEBCD" todo-colr todo-colr todo-colr] i))
        (var          (aref ["#66CDAA" todo-colr todo-colr todo-colr] i)))
@@ -37,7 +43,7 @@
    `(evil-normal-state-cursor   '(hollow "spring green"))
    `(evil-insert-state-cursor   '(bar "spring green"))
    `(evil-visual-state-cursor   '(hollow "orange"))
-   `(evil-operator-state-cursor '(hollow "spring green"))
+   `(evil-operator-state-cursor '(box "red"))
    `(evil-replace-state-cursor  '(hbar "orange red"))
    `(evil-motion-state-cursor   '(box "spring green"))
 
@@ -117,6 +123,9 @@
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
+   `(ido-first-match ((t (:foreground ,fg-yellow :background ,bg-yellow))))
+   `(ido-only-match ((t (:foreground ,fg-green :background ,bg-green))))
+   `(ido-subdir ((t (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; TODO rainbow-delimiters
    `(rainbow-delimiters-depth-1-face ((,class (:foreground "orange red"))))

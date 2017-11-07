@@ -127,7 +127,8 @@
 '(font-lock-constant-face ((t (:foreground "#DFAF8F"))))
 '(font-lock-doc-face ((t (:foreground "#FFB728"))))
 '(font-lock-function-name-face ((t (:foreground "#00BFFF"))))
-'(font-lock-keyword-face ((t (:foreground "#F92672" :height 160 :weight extra-bold))))
+'(font-lock-keyword-face ((t (:foreground "#F92672" :weight extra-bold))))
+;; '(font-lock-keyword-face ((t (:foreground "#F92672" :height 160 :weight extra-bold))))
 '(font-lock-negation-char-face ((t (:foreground "#F37DEE"))))
 '(font-lock-preprocessor-face ((t (:foreground "#F92672"))))
 '(font-lock-regexp-grouping-backslash ((t (:foreground "#A63A62"))))
@@ -292,9 +293,11 @@
 ;; org-date                                
 ;; org-date-selected                       
 ;; org-default                             
-'(org-document-info ((t (:foreground "#00BFFF" :height 1.25 ))))
+'(org-document-info ((t (:foreground "#00BFFF"))))
+;; '(org-document-info ((t (:foreground "#00BFFF" :height 1.25 ))))
 ;; org-document-info-keyword               
-'(org-document-title ((t (:foreground "#00BFFF" :height 1.75 :weight extra-bold ))))
+'(org-document-title ((t (:foreground "#00BFFF" :weight extra-bold ))))
+;; '(org-document-title ((t (:foreground "#00BFFF" :height 1.75 :weight extra-bold ))))
 ;; org-done                                
 ;; org-drawer                              
 ;; org-ellipsis                            
@@ -303,8 +306,10 @@
 ;; org-headline-done                       
 ;; org-hide                                
 ;; org-latex-and-related                   
-'(org-level-1 ((t  :height 1.25 :weight bold)))
-'(org-level-2 ((t  :foreground "#888888" :height 1.15 )))
+'(org-level-1 ((t  :weight bold)))
+;; '(org-level-1 ((t  :height 1.25 :weight bold)))
+'(org-level-2 ((t  :foreground "#888888")))
+;; '(org-level-2 ((t  :foreground "#888888" :height 1.15 )))
 '(org-level-3 ((t  :foreground "#888888" )))
 '(org-level-4 ((t  )))
 '(org-level-5 ((t  )))

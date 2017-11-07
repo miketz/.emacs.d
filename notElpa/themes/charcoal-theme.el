@@ -113,7 +113,7 @@
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    ;; `(font-lock-doc-face ((,class (:foreground ,zenburn-green+2))))
    ;; `(font-lock-function-name-face ((,class (:foreground ,zenburn-cyan))))
-   `(font-lock-keyword-face ((,class ((,class (:foreground ,keyword :weight bold))))))
+   `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))

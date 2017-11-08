@@ -1,6 +1,11 @@
 ;; -*- lexical-binding: t -*-
 ;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors.
 
+;;; Commentary:
+;;; Supports rgb, 256, 16, and 8 color environments.  The main focus is on the
+;;; full 16777216 color rgb version.  Colors are not restricted in the full
+;;; rgb version for the sake of the lesser versions.
+
 ;;; Code:
 
 (deftheme charcoal "Charcoal color theme")
@@ -16,20 +21,20 @@
                            (color-16-p   2)
                            (color-8-p    3)
                            (t            3)))
-       (todo-colr   "#FFFFFF") ; temp color where I haven't decided yet
+       (todo-col   "#FFFFFF") ; temp color where I haven't decided yet
 
-       ;; Color Palette      full      256       16        8
-       (bg           (aref ["#35352B" todo-colr todo-colr todo-colr] i))
-       (fg           (aref ["#EEEED1" todo-colr todo-colr todo-colr] i))
-       (bg-purple    (aref ["#440033" todo-colr todo-colr todo-colr] i))
-       (fg-purple    (aref ["#FFC0CB" todo-colr todo-colr todo-colr] i))
-       (bg-green     (aref ["#004400" todo-colr todo-colr todo-colr] i))
-       (fg-green     (aref ["#98FB98" todo-colr todo-colr todo-colr] i))
-       (bg-yellow    (aref ["#3A3A00" todo-colr todo-colr todo-colr] i))
-       (fg-yellow    (aref ["#FFFF00" todo-colr todo-colr todo-colr] i))
-       (faint        (aref ["#4D4D3D" todo-colr todo-colr todo-colr] i))
-       (keyword      (aref ["#FFEBCD" todo-colr todo-colr todo-colr] i))
-       (var          (aref ["#66CDAA" todo-colr todo-colr todo-colr] i)))
+       ;; Color Palette       full      256       16        8
+       (bg           (aref `["#35352B" "#262626" ,todo-col ,todo-col] i))
+       (fg           (aref `["#EEEED1" "#FFFFD7" ,todo-col ,todo-col] i))
+       (bg-purple    (aref `["#440033" "#5F005F" ,todo-col ,todo-col] i))
+       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" ,todo-col ,todo-col] i))
+       (bg-green     (aref `["#004400" ,todo-col ,todo-col ,todo-col] i))
+       (fg-green     (aref `["#98FB98" ,todo-col ,todo-col ,todo-col] i))
+       (bg-yellow    (aref `["#3A3A00" ,todo-col ,todo-col ,todo-col] i))
+       (fg-yellow    (aref `["#FFFF00" ,todo-col ,todo-col ,todo-col] i))
+       (faint        (aref `["#4D4D3D" ,todo-col ,todo-col ,todo-col] i))
+       (keyword      (aref `["#FFEBCD" ,todo-col ,todo-col ,todo-col] i))
+       (var          (aref `["#66CDAA" ,todo-col ,todo-col ,todo-col] i)))
 
   ;; lightyellow2=#EEEED1
   ;; snow3 gray80 lightyellow3

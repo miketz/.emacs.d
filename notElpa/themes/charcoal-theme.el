@@ -33,8 +33,12 @@
        (fg-yellow    (aref `["#FFFF00" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
        (faint        (aref `["#4D4D3D" ,todo-tmp "#666666" ,todo-tmp] i))
        (faint-less   (aref `["#8D8D8D" ,todo-tmp "#666666" ,todo-tmp] i))
-       (keyword      (aref `["#FFEBCD" ,todo-tmp ,todo-tmp ,todo-tmp] i))
-       (var          (aref `["#66CDAA" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (keyword      (aref `["#FFEBCD" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
+       (var          (aref `["#66CDAA" ,todo-tmp "#00CED1" ,todo-tmp] i))
+       (highlight    (aref `["#49483E" ,todo-tmp "#228B22" ,todo-tmp] i))
+       (popup-bg     (aref `["#222222" ,todo-tmp "#0000CD" ,todo-tmp] i))
+       (scrollb-bg   (aref `["#000000" ,todo-tmp "#666666" ,todo-tmp] i))
+       (scrollb-fg   (aref `["#999999" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
        (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" ,todo-tmp] i))
        (rain-2       (aref `["#00FFFF" ,todo-tmp "#00FFFF" ,todo-tmp] i))
        (rain-3       (aref `["#FFFF00" ,todo-tmp "#A0522D" ,todo-tmp] i))
@@ -118,7 +122,7 @@
                            :box (:line-width -1 :style released-button)))))
 
    `(region
-     ((,class (:background "#49483E"))))     ;69685E
+     ((,class (:background ,highlight))))     ;69685E
 
    ;; TODO
    `(fringe ((,class (:background "black"))))
@@ -150,6 +154,26 @@
    `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
+
+
+   ;; company
+   `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
+   `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
+   `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
+   `(company-tooltip-common ((,class (:foreground ,faint-less))))
+   `(company-tooltip-selection ((,class (:background ,highlight))))
+   ;; company-echo
+   ;; company-echo-common
+   ;; company-preview
+   ;; company-preview-common
+   ;; company-preview-search
+   ;; company-template-field
+   ;; company-tooltip-annotation
+   ;; company-tooltip-annotation-selection
+   ;; company-tooltip-common-selection
+   ;; company-tooltip-mouse
+   ;; company-tooltip-search
+   ;; company-tooltip-search-selection
 
    ;; TODO rainbow-delimiters
    `(rainbow-delimiters-depth-1-face ((,class (:foreground ,rain-1))))

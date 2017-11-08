@@ -1,10 +1,9 @@
-;; -*- lexical-binding: t -*-
-;;; charcoal-theme.el --- A dark theme with pastelish chalkish charcoal colors.
+;;; charcoal-theme.el --- Chalkish charcoal colors. -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;;; Supports rgb, 256, 16, and 8 color environments.  The main focus is on the
 ;;; full 16777216 color rgb version.  Colors are not restricted in the full
-;;; rgb version for the sake of the lesser versions.
+;;; rgb version for the sake of consistency with the lesser versions.
 
 ;;; Code:
 
@@ -21,20 +20,21 @@
                            (color-16-p   2)
                            (color-8-p    3)
                            (t            3)))
-       (todo-col   "#FFFFFF") ; temp color where I haven't decided yet
+       (todo-tmp     "#FFFFFF") ; temp color where I haven't decided yet
 
        ;; Color Palette       full      256       16        8
-       (bg           (aref `["#35352B" "#262626" ,todo-col ,todo-col] i))
-       (fg           (aref `["#EEEED1" "#FFFFD7" ,todo-col ,todo-col] i))
-       (bg-purple    (aref `["#440033" "#5F005F" ,todo-col ,todo-col] i))
-       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" ,todo-col ,todo-col] i))
-       (bg-green     (aref `["#004400" ,todo-col ,todo-col ,todo-col] i))
-       (fg-green     (aref `["#98FB98" ,todo-col ,todo-col ,todo-col] i))
-       (bg-yellow    (aref `["#3A3A00" ,todo-col ,todo-col ,todo-col] i))
-       (fg-yellow    (aref `["#FFFF00" ,todo-col ,todo-col ,todo-col] i))
-       (faint        (aref `["#4D4D3D" ,todo-col ,todo-col ,todo-col] i))
-       (keyword      (aref `["#FFEBCD" ,todo-col ,todo-col ,todo-col] i))
-       (var          (aref `["#66CDAA" ,todo-col ,todo-col ,todo-col] i)))
+       (bg           (aref `["#35352B" "#262626" ,todo-tmp ,todo-tmp] i))
+       (fg           (aref `["#EEEED1" "#FFFFD7" ,todo-tmp ,todo-tmp] i))
+       (bg-purple    (aref `["#440033" "#5F005F" ,todo-tmp ,todo-tmp] i))
+       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" ,todo-tmp ,todo-tmp] i))
+       (bg-green     (aref `["#004400" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (fg-green     (aref `["#98FB98" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (bg-yellow    (aref `["#3A3A00" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (fg-yellow    (aref `["#FFFF00" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (faint        (aref `["#4D4D3D" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (faint-less   (aref `["#8D8D8D" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (keyword      (aref `["#FFEBCD" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (var          (aref `["#66CDAA" ,todo-tmp ,todo-tmp ,todo-tmp] i)))
 
   ;; lightyellow2=#EEEED1
   ;; snow3 gray80 lightyellow3
@@ -128,9 +128,16 @@
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
-   `(ido-first-match ((t (:foreground ,fg-yellow :background ,bg-yellow))))
-   `(ido-only-match ((t (:foreground ,fg-green :background ,bg-green))))
-   `(ido-subdir ((t (:foreground ,fg-purple :background ,bg-purple))))
+   `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
+
+   ;; default emacs completion.
+   `(completions-common-part ((,class (:foreground ,faint-less))))
+   `(completions-first-difference ((,class (:foreground ,fg-green))))
+
+   ;; ido
+   `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
+   `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
+   `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; TODO rainbow-delimiters
    `(rainbow-delimiters-depth-1-face ((,class (:foreground "orange red"))))
@@ -143,3 +150,7 @@
    `(rainbow-delimiters-depth-8-face ((,class (:foreground "hot pink" :background "#2F2F2F"))))
    `(rainbow-delimiters-depth-9-face ((,class (:foreground "burlywood3"))))
    `(rainbow-delimiters-unmatched-face ((,class (:foreground "sienna" :background "black"))))))
+
+(provide-theme 'charcoal)
+
+;;; charcoal-theme.el ends here

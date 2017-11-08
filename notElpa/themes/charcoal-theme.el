@@ -23,8 +23,8 @@
        (todo-tmp     "#FFFFFF") ; temp color where I haven't decided yet
 
        ;; Color Palette       full      256       16        8
-       (bg           (aref `["#35352B" "#262626" ,todo-tmp ,todo-tmp] i))
-       (fg           (aref `["#EEEED1" "#FFFFD7" ,todo-tmp ,todo-tmp] i))
+       (bg           (aref `["#35352B" "#262626" "#000000" "#000000"] i))
+       (fg           (aref `["#EEEED1" "#FFFFD7" "#BEBEBE" "#FFFFFF"] i))
        (bg-purple    (aref `["#440033" "#5F005F" ,todo-tmp ,todo-tmp] i))
        (fg-purple    (aref `["#FFC0CB" "#FFAFD7" ,todo-tmp ,todo-tmp] i))
        (bg-green     (aref `["#004400" ,todo-tmp ,todo-tmp ,todo-tmp] i))
@@ -34,7 +34,19 @@
        (faint        (aref `["#4D4D3D" ,todo-tmp ,todo-tmp ,todo-tmp] i))
        (faint-less   (aref `["#8D8D8D" ,todo-tmp ,todo-tmp ,todo-tmp] i))
        (keyword      (aref `["#FFEBCD" ,todo-tmp ,todo-tmp ,todo-tmp] i))
-       (var          (aref `["#66CDAA" ,todo-tmp ,todo-tmp ,todo-tmp] i)))
+       (var          (aref `["#66CDAA" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" ,todo-tmp] i))
+       (rain-2       (aref `["#00FFFF" ,todo-tmp "#00FFFF" ,todo-tmp] i))
+       (rain-3       (aref `["#FFFF00" ,todo-tmp "#A0522D" ,todo-tmp] i))
+       (rain-4       (aref `["#DDA0DD" ,todo-tmp "#FF00FF" ,todo-tmp] i))
+       (rain-5       (aref `["#7CFC00" ,todo-tmp "#00FF00" ,todo-tmp] i))
+       (rain-6       (aref `["#FFA500" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
+       (rain-7       (aref `["#FFFFFF" ,todo-tmp "#B22222" ,todo-tmp] i))
+       (rain-8       (aref `["#FF69B4" ,todo-tmp "#00CED1" ,todo-tmp] i))
+       (rain-8-bg    (aref `["#101010" ,todo-tmp ,bg       ,todo-tmp] i))
+       (rain-9       (aref `["#CDAA7D" ,todo-tmp "#0000FF" ,todo-tmp] i))
+       (rain-fg-u    (aref `["#A0522D" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
+       (rain-bg-u    (aref `["#000000" ,todo-tmp "#FF0000" ,todo-tmp] i)))
 
   ;; lightyellow2=#EEEED1
   ;; snow3 gray80 lightyellow3
@@ -140,16 +152,16 @@
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; TODO rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((,class (:foreground "orange red"))))
-   `(rainbow-delimiters-depth-2-face ((,class (:foreground "cyan"))))
-   `(rainbow-delimiters-depth-3-face ((,class (:foreground "yellow"))))
-   `(rainbow-delimiters-depth-4-face ((,class (:foreground "plum"))))
-   `(rainbow-delimiters-depth-5-face ((,class (:foreground "lawn green"))))
-   `(rainbow-delimiters-depth-6-face ((,class (:foreground "orange"))))
-   `(rainbow-delimiters-depth-7-face ((,class (:foreground "white"))))
-   `(rainbow-delimiters-depth-8-face ((,class (:foreground "hot pink" :background "#2F2F2F"))))
-   `(rainbow-delimiters-depth-9-face ((,class (:foreground "burlywood3"))))
-   `(rainbow-delimiters-unmatched-face ((,class (:foreground "sienna" :background "black"))))))
+   `(rainbow-delimiters-depth-1-face ((,class (:foreground ,rain-1))))
+   `(rainbow-delimiters-depth-2-face ((,class (:foreground ,rain-2))))
+   `(rainbow-delimiters-depth-3-face ((,class (:foreground ,rain-3))))
+   `(rainbow-delimiters-depth-4-face ((,class (:foreground ,rain-4))))
+   `(rainbow-delimiters-depth-5-face ((,class (:foreground ,rain-5))))
+   `(rainbow-delimiters-depth-6-face ((,class (:foreground ,rain-6))))
+   `(rainbow-delimiters-depth-7-face ((,class (:foreground ,rain-7))))
+   `(rainbow-delimiters-depth-8-face ((,class (:foreground ,rain-8 :background ,rain-8-bg))))
+   `(rainbow-delimiters-depth-9-face ((,class (:foreground ,rain-9))))
+   `(rainbow-delimiters-unmatched-face ((,class (:foreground ,rain-fg-u :background ,rain-bg-u))))))
 
 (provide-theme 'charcoal)
 

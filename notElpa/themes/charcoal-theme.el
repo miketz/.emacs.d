@@ -25,32 +25,40 @@
        ;; Color Palette       full      256       16        8
        (bg           (aref `["#35352B" "#262626" "#000000" "#000000"] i))
        (fg           (aref `["#EEEED1" "#FFFFD7" "#BEBEBE" "#FFFFFF"] i))
-       (bg-purple    (aref `["#440033" "#5F005F" "#8B008B" ,todo-tmp] i))
-       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" "#FF00FF" ,todo-tmp] i))
-       (bg-green     (aref `["#004400" "#005F00" "#228B22" ,todo-tmp] i))
-       (fg-green     (aref `["#98FB98" "#00FF87" "#00FF00" ,todo-tmp] i))
-       (bg-yellow    (aref `["#3A3A00" "#5F5F00" "#A0522D" ,todo-tmp] i))
-       (fg-yellow    (aref `["#FFFF00" "#FFFF00" "#FFFFFF" ,todo-tmp] i))
-       (faint        (aref `["#4D4D3D" "#303030" "#666666" ,todo-tmp] i))
-       (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" ,todo-tmp] i))
+       (bg-purple    (aref `["#440033" "#5F005F" "#8B008B" "#000000"] i))
+       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" "#FF00FF" "#FF00FF"] i))
+       (bg-green     (aref `["#004400" "#005F00" "#228B22" "#000000"] i))
+       (fg-green     (aref `["#98FB98" "#00FF87" "#00FF00" "#00FF00"] i))
+       (bg-yellow    (aref `["#3A3A00" "#5F5F00" "#A0522D" "#000000"] i))
+       (fg-yellow    (aref `["#FFFF00" "#FFFF00" "#FFFFFF" "#FFFF00"] i))
+       (faint        (aref `["#4D4D3D" "#303030" "#666666" "#0000FF"] i))
+       (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
        (keyword      (aref `["#FFEBCD" "#FFAFFF" "#FFFFFF" ,todo-tmp] i))
        (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" ,todo-tmp] i))
        (highlight    (aref `["#49483E" "#4E4E4E" "#228B22" ,todo-tmp] i))
        (popup-bg     (aref `["#222222" ,todo-tmp "#0000CD" ,todo-tmp] i))
        (scrollb-bg   (aref `["#000000" ,todo-tmp "#666666" ,todo-tmp] i))
        (scrollb-fg   (aref `["#999999" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
-       (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" ,todo-tmp] i))
-       (rain-2       (aref `["#00FFFF" ,todo-tmp "#00FFFF" ,todo-tmp] i))
-       (rain-3       (aref `["#FFFF00" ,todo-tmp "#A0522D" ,todo-tmp] i))
-       (rain-4       (aref `["#DDA0DD" ,todo-tmp "#FF00FF" ,todo-tmp] i))
-       (rain-5       (aref `["#7CFC00" ,todo-tmp "#00FF00" ,todo-tmp] i))
-       (rain-6       (aref `["#FFA500" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
-       (rain-7       (aref `["#FFFFFF" ,todo-tmp "#B22222" ,todo-tmp] i))
-       (rain-8       (aref `["#FF69B4" ,todo-tmp "#00CED1" ,todo-tmp] i))
-       (rain-8-bg    (aref `["#101010" ,todo-tmp ,bg       ,todo-tmp] i))
-       (rain-9       (aref `["#CDAA7D" ,todo-tmp "#0000FF" ,todo-tmp] i))
-       (rain-fg-u    (aref `["#A0522D" ,todo-tmp "#FFFFFF" ,todo-tmp] i))
-       (rain-bg-u    (aref `["#000000" ,todo-tmp "#FF0000" ,todo-tmp] i)))
+       (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" "#FF0000"] i))
+       (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-2       (aref `["#00FFFF" ,todo-tmp "#00FFFF" "#00FFFF"] i))
+       (rain-2-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-3       (aref `["#FFFF00" ,todo-tmp "#A0522D" "#FFFF00"] i))
+       (rain-3-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-4       (aref `["#DDA0DD" ,todo-tmp "#FF00FF" "#FF00FF"] i))
+       (rain-4-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-5       (aref `["#7CFC00" ,todo-tmp "#00FF00" "#00FF00"] i))
+       (rain-5-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-6       (aref `["#FFA500" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))
+       (rain-6-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-7       (aref `["#FFFFFF" ,todo-tmp "#B22222" "#0000FF"] i))
+       (rain-7-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-8       (aref `["#FF69B4" ,todo-tmp "#00CED1" "#000000"] i))
+       (rain-8-bg    (aref `["#101010" ,todo-tmp ,bg       "#FF00FF"] i))
+       (rain-9       (aref `["#CDAA7D" ,todo-tmp "#0000FF" "#000000"] i))
+       (rain-9-bg    (aref `[,bg       ,bg       ,bg       "#0000FF"] i))
+       (rain-fg-u    (aref `["#A0522D" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))
+       (rain-bg-u    (aref `["#000000" ,todo-tmp "#FF0000" "#FF0000"] i)))
 
   ;; lightyellow2=#EEEED1
   ;; snow3 gray80 lightyellow3
@@ -175,17 +183,26 @@
    ;; company-tooltip-search
    ;; company-tooltip-search-selection
 
-   ;; TODO rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((,class (:foreground ,rain-1))))
-   `(rainbow-delimiters-depth-2-face ((,class (:foreground ,rain-2))))
-   `(rainbow-delimiters-depth-3-face ((,class (:foreground ,rain-3))))
-   `(rainbow-delimiters-depth-4-face ((,class (:foreground ,rain-4))))
-   `(rainbow-delimiters-depth-5-face ((,class (:foreground ,rain-5))))
-   `(rainbow-delimiters-depth-6-face ((,class (:foreground ,rain-6))))
-   `(rainbow-delimiters-depth-7-face ((,class (:foreground ,rain-7))))
-   `(rainbow-delimiters-depth-8-face ((,class (:foreground ,rain-8 :background ,rain-8-bg))))
-   `(rainbow-delimiters-depth-9-face ((,class (:foreground ,rain-9))))
-   `(rainbow-delimiters-unmatched-face ((,class (:foreground ,rain-fg-u :background ,rain-bg-u))))))
+   `(rainbow-delimiters-depth-1-face
+     ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
+   `(rainbow-delimiters-depth-2-face
+     ((,class (:foreground ,rain-2 :background ,rain-2-bg))))
+   `(rainbow-delimiters-depth-3-face
+     ((,class (:foreground ,rain-3 :background ,rain-3-bg))))
+   `(rainbow-delimiters-depth-4-face
+     ((,class (:foreground ,rain-4 :background ,rain-4-bg))))
+   `(rainbow-delimiters-depth-5-face
+     ((,class (:foreground ,rain-5 :background ,rain-5-bg))))
+   `(rainbow-delimiters-depth-6-face
+     ((,class (:foreground ,rain-6 :background ,rain-6-bg))))
+   `(rainbow-delimiters-depth-7-face
+     ((,class (:foreground ,rain-7 :background ,rain-7-bg))))
+   `(rainbow-delimiters-depth-8-face
+     ((,class (:foreground ,rain-8 :background ,rain-8-bg))))
+   `(rainbow-delimiters-depth-9-face
+     ((,class (:foreground ,rain-9 :background ,rain-9-bg))))
+   `(rainbow-delimiters-unmatched-face
+     ((,class (:foreground ,rain-fg-u :background ,rain-bg-u))))))
 
 (provide-theme 'charcoal)
 

@@ -10,7 +10,11 @@
 (deftheme charcoal "Charcoal color theme")
 
 (let* ((class        t)
-       (cnt          (display-color-cells))
+       (cnt          (if (boundp '*charcoal-color-cnt*)
+                         ;; use dynamically bound count if available.
+                         *charcoal-color-cnt*
+                       ;; else detect the color count.
+                       (display-color-cells)))
        (color-full-p (>= cnt 16777216))
        (color-256-p  (and (not color-full-p) (>= cnt 256)))
        (color-16-p   (and (not color-256-p) (>= cnt 16)))

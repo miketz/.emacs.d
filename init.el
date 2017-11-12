@@ -5297,12 +5297,12 @@ vanilla javascript buffers."
 ;;; display-line-numbers. Native implementation.
 ;;;-----------------------------------------------------------------------------
 (when native-line-numbers-p
-  (custom-theme-set-faces
-   'zenburn
-   `(line-number ((t (:background "#151515" ;;"#4F4F4F"
-                                  :foreground "gray50"))))
-   ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
-   )
+  ;; (custom-theme-set-faces
+  ;;  'zenburn
+  ;;  `(line-number ((t (:background "#151515" ;;"#4F4F4F"
+  ;;                                 :foreground "gray50"))))
+  ;;  ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
+  ;;  )
 
   (setq display-line-number-width 1) ;; 1 seemed to behave like 2.
   (setq display-line-numbers-current-absolute nil)

@@ -25,6 +25,7 @@
                            (color-8-p    3)
                            (t            3)))
        (todo-tmp     "#FFFFFF") ; temp color where I haven't decided yet
+       (todo-tbg     "#000000") ; temp color where I haven't decided yet
 
        ;; Color Palette       full      256       16        8
        (bg           (aref `["#35352B" "#262626" "#000000" "#000000"] i))
@@ -40,8 +41,8 @@
        (keyword      (aref `["#FFEBCD" "#FFAFFF" "#FFFFFF" "#FFFFFF"] i))
        (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" "#00FFFF"] i))
        (highlight    (aref `["#49483E" "#4E4E4E" "#228B22" "#FF00FF"] i))
-       (popup-bg     (aref `["#222222" ,todo-tmp "#0000CD" "#FFFF00"] i))
-       (scrollb-bg   (aref `["#000000" ,todo-tmp "#666666" "#0000FF"] i))
+       (popup-bg     (aref `["#222222" ,todo-tbg "#0000CD" "#FFFF00"] i))
+       (scrollb-bg   (aref `["#000000" ,todo-tbg "#666666" "#0000FF"] i))
        (scrollb-fg   (aref `["#999999" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))
        (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
@@ -58,7 +59,7 @@
        (rain-7       (aref `["#FFFFFF" ,todo-tmp "#B22222" "#0000FF"] i))
        (rain-7-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
        (rain-8       (aref `["#FF69B4" ,todo-tmp "#00CED1" "#000000"] i))
-       (rain-8-bg    (aref `["#101010" ,todo-tmp ,bg       "#FF00FF"] i))
+       (rain-8-bg    (aref `["#101010" ,todo-tbg ,bg       "#FF00FF"] i))
        (rain-9       (aref `["#CDAA7D" ,todo-tmp "#0000FF" "#000000"] i))
        (rain-9-bg    (aref `[,bg       ,bg       ,bg       "#0000FF"] i))
        (rain-fg-u    (aref `["#A0522D" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))

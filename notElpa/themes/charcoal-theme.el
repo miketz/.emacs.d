@@ -46,6 +46,9 @@
        (scrollb-fg   (aref `["#999999" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))
        (mode-line-fg (aref `["#8FB28F" ,todo-tmp ,todo-tmp ,todo-tmp] i))
        (mode-line-bg (aref `["#151515" ,todo-tbg ,todo-tbg ,todo-tbg] i))
+       (ml-inact-fg  (aref `["#5F7F5F" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (ml-inact-bg  (aref `["#383838" ,todo-tbg ,todo-tbg ,todo-tbg] i))
+       (ml-bufferid  (aref `["#F0DFAF" ,todo-tmp ,todo-tmp ,todo-tmp] i))
        (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
        (rain-2       (aref `["#00FFFF" ,todo-tmp "#00FFFF" "#00FFFF"] i))
@@ -121,19 +124,16 @@
    ;; line that separates vertically split windows.
    `(vertical-border ((,class (:foreground "gray25"))))
 
-
-   ;; TODO
    `(mode-line
      ((,class (:foreground ,mode-line-fg ;"#8FB28F"
-                           :background ,mode-line-bg;"#2B2B2B"
+                           :background ,mode-line-bg ;"#2B2B2B"
                            :box (:line-width -1 :style released-button)))
       (t :inverse-video t)))
-   ;; TODO
-   `(mode-line-buffer-id ((,class (:foreground "#F0DFAF" :weight bold))))
-   ;; TODO
+   `(mode-line-buffer-id ((,class (:foreground ,ml-bufferid ;"#F0DFAF"
+                                               :weight bold))))
    `(mode-line-inactive
-     ((,class (:foreground "#5F7F5F"
-                           :background "#383838"
+     ((,class (:foreground ,ml-inact-fg ;"#5F7F5F"
+                           :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
    `(region

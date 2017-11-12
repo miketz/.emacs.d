@@ -44,6 +44,8 @@
        (popup-bg     (aref `["#222222" ,todo-tbg "#0000CD" "#FFFF00"] i))
        (scrollb-bg   (aref `["#000000" ,todo-tbg "#666666" "#0000FF"] i))
        (scrollb-fg   (aref `["#999999" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))
+       (mode-line-fg (aref `["#8FB28F" ,todo-tmp ,todo-tmp ,todo-tmp] i))
+       (mode-line-bg (aref `["#151515" ,todo-tbg ,todo-tbg ,todo-tbg] i))
        (rain-1       (aref `["#FF4500" ,todo-tmp "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
        (rain-2       (aref `["#00FFFF" ,todo-tmp "#00FFFF" "#00FFFF"] i))
@@ -122,8 +124,8 @@
 
    ;; TODO
    `(mode-line
-     ((,class (:foreground "#8FB28F"
-                           :background "#2B2B2B"
+     ((,class (:foreground ,mode-line-fg ;"#8FB28F"
+                           :background ,mode-line-bg;"#2B2B2B"
                            :box (:line-width -1 :style released-button)))
       (t :inverse-video t)))
    ;; TODO

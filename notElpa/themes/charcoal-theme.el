@@ -62,7 +62,7 @@
        (rain-8-bg    (aref `["#101010" ,todo-tbg ,bg       "#FF00FF"] i))
        (rain-9       (aref `["#CDAA7D" ,todo-tmp "#0000FF" "#000000"] i))
        (rain-9-bg    (aref `[,bg       ,bg       ,bg       "#0000FF"] i))
-       (rain-fg-u    (aref `["#A0522D" ,todo-tmp "#FFFFFF" "#FFFFFF"] i))
+       (rain-fg-u    (aref `["#A0522D" ,todo-tbg "#FFFFFF" "#FFFFFF"] i))
        (rain-bg-u    (aref `["#000000" ,todo-tmp "#FF0000" "#FF0000"] i)))
 
   ;; lightyellow2=#EEEED1

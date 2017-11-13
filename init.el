@@ -1305,7 +1305,7 @@ monitor.")
 
    ((and (eq my-curr-computer 'work-laptop)
          (not my-graphic-p))
-    (load-theme 'cmd t))
+    (load-theme 'charcoal t))
 
    ((eq my-curr-computer 'leyna-laptop)
     (my-color-zenburn)

@@ -1387,8 +1387,8 @@ monitor.")
 (with-eval-after-load 'slime
 
   ;; (when my-use-evil-p
-  ;;   ;; use emacs bindings in the repl. It's the only way i can get C-n and C-p
-  ;;   ;; to work for slimes built in autocompletion.
+  ;;   ;; use emacs bindings in the repl. It's the only way i can get C-n and
+  ;;   ;; C-p to work for slimes built in autocompletion.
   ;;   (add-to-list 'evil-buffer-regexps '("\\*slime-repl" . emacs)))
 
 

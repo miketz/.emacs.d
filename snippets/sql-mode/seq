@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# -*- example sequence -*-
+# name: seq
+# key: seq
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+create sequence ${1:schema}.${2:SeqName} as ${3:int}
+    start with 1
+    increment by 1;
+
+select next value for $1.$2$0

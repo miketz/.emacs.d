@@ -191,6 +191,25 @@
    ;; company-tooltip-search
    ;; company-tooltip-search-selection
 
+   `(minesweeper-neighbor ((,class (:background "black"))))
+   `(minesweeper-blank ((,class (:foreground ,fg))))
+   `(minesweeper-marked ((,class (:foreground ,fg))))
+   `(minesweeper-0 ((,class (:foreground ,faint))))
+   `(minesweeper-1 ((,class (:foreground "deepskyblue"))))
+   `(minesweeper-2 ((,class (:foreground "yellowgreen"))))
+   `(minesweeper-3 ((,class (:foreground ,rain-4))))
+   `(minesweeper-4 ((,class (:foreground ,rain-1))))
+   `(minesweeper-5 ((,class (:foreground ,rain-5))))
+   `(minesweeper-6 ((,class (:foreground ,rain-6))))
+   `(minesweeper-7 ((,class (:foreground ,rain-7))))
+   `(minesweeper-8 ((,class (:foreground ,rain-8))))
+   `(minesweeper-explode ((,class (:foreground "black"
+                                               :background "red"
+                                               :weight bold))))
+   `(minesweeper-mismarked ((,class (:background ,highlight
+                                                 :foreground "orange"
+                                                 :weight bold))))
+
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
    `(rainbow-delimiters-depth-2-face

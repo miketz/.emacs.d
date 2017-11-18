@@ -199,7 +199,7 @@
    `(minesweeper-2 ((,class (:foreground "yellowgreen"))))
    `(minesweeper-3 ((,class (:foreground ,rain-4))))
    `(minesweeper-4 ((,class (:foreground ,rain-1))))
-   `(minesweeper-5 ((,class (:foreground ,rain-5))))
+   `(minesweeper-5 ((,class (:foreground ,rain-3))))
    `(minesweeper-6 ((,class (:foreground ,rain-6))))
    `(minesweeper-7 ((,class (:foreground ,rain-7))))
    `(minesweeper-8 ((,class (:foreground ,rain-8))))

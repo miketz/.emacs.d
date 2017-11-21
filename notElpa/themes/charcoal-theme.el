@@ -40,7 +40,6 @@
        (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
        (keyword      (aref `["#EEDD82" "#FFAFFF" "#FFFFFF" "#FFFFFF"] i))
        (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" "#00FFFF"] i))
-       ;; (highlight    (aref `["#49483E" "#4E4E4E" "#228B22" "#FF00FF"] i))
        (highlight    (aref `["#8B5742" "#4E4E4E" "#228B22" "#FF00FF"] i))
        (popup-bg     (aref `["#222222" "#000000" "#0000CD" "#FFFF00"] i))
        (scrollb-bg   (aref `["#000000" "#080808" "#666666" "#0000FF"] i))
@@ -161,6 +160,9 @@
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
    `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
+
+   ;; slime
+   `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
 
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-less))))

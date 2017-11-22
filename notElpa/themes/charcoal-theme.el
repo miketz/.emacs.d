@@ -182,6 +182,17 @@
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
+   ;; isearch
+   `(isearch ((t :background ,bg-green
+                 :foreground ,fg-green
+                 :weight normal
+                 :underline nil)))
+   ;; the non-selected matches from isearch
+   `(lazy-highlight ((,class :background ,bg-purple
+                             :foreground ,fg-purple
+                             :weight normal
+                             :underline nil)))
+
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

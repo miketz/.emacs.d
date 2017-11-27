@@ -183,15 +183,15 @@
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; isearch
-   `(isearch ((t :background ,bg-green
-                 :foreground ,fg-green
-                 :weight normal
+   `(isearch ((t :background "yellow"
+                 :foreground "black"
+                 :weight bold
                  :underline nil)))
    ;; the non-selected matches from isearch
    `(lazy-highlight ((,class :background ,bg-purple
                              :foreground ,fg-purple
                              :weight normal
-                             :underline nil)))
+                             :underline t)))
 
 
    ;; company

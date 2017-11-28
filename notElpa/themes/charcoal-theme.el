@@ -162,8 +162,8 @@
    `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
 
    ;; avy
-   `(avy-lead-face ((,class (:foreground "orange" :background "black"))))
-   `(avy-lead-face-0 ((,class (:foreground "orange" :background "black"))))
+   `(avy-lead-face ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
+   `(avy-lead-face-0 ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
    ;; `(avy-lead-face-1 ((,class (:foreground "green")))) ;; not used?
 
    ;; info

@@ -24,8 +24,8 @@
                            (color-16-p   2)
                            (color-8-p    3)
                            (t            3)))
-       (todo-tmp     "#FFFFFF") ; temp color where I haven't decided yet
-       (todo-tbg     "#000000") ; temp color where I haven't decided yet
+       (todo--fg     "#FFFFFF") ; temp color where I haven't decided yet
+       (todo--bg     "#000000") ; temp color where I haven't decided yet
 
        ;; Color Palette       full      256       16        8
        (bg           (aref `["#35352B" "#262626" "#000000" "#000000"] i))

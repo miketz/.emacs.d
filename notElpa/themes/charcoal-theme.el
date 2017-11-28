@@ -193,6 +193,11 @@
                              :weight normal
                              :underline t)))
 
+   `(header-line
+     ((t (:foreground ,fg-yellow
+                      :background ,bg-yellow
+                      :weight normal
+                      :box (:line-width -1 :style released-button)))))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

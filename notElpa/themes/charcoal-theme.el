@@ -199,6 +199,9 @@
                       :weight normal
                       :box (:line-width -1 :style released-button)))))
 
+   ;; magit
+   `(magit-section-highlight ((t (:background ,faint))))
+
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
    `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))

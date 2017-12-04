@@ -177,6 +177,32 @@
    `(completions-common-part ((,class (:foreground ,faint-less))))
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
+   ;; swiper, ivy, counsel
+   `(swiper-line-face ((,class (:background ,highlight))))
+   ;; face-1 fills in the space between matches. 2-4 are for matches.
+   `(swiper-match-face-1 ((,class (:foreground ,faint-less :background ,bg))))
+   `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background ,bg))))
+   ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
+   ;; TODO: make bug report to swiper about face 3,4
+   `(swiper-match-face-3 ((,class (:foreground ,rain-2 :background ,bg))))
+   `(swiper-match-face-4 ((,class (:foreground ,rain-3 :background ,bg))))
+   ;; `(ivy-action ((,class (:foreground "white"))))
+   ;; `(ivy-confirm-face ((,class (:foreground "white"))))
+   `(ivy-current-match ((,class (:inherit swiper-line-face))))
+   ;; `(ivy-cursor ((,class (:foreground "white"))))
+   ;; `(ivy-highlight-face ((,class (:foreground "white"))))
+   ;; `(ivy-match-required-face ((,class (:foreground "white"))))
+   `(ivy-minibuffer-match-face-1 ((,class (:inherit swiper-match-face-1))))
+   `(ivy-minibuffer-match-face-2 ((,class (:inherit swiper-match-face-2))))
+   `(ivy-minibuffer-match-face-3 ((,class (:inherit swiper-match-face-3))))
+   `(ivy-minibuffer-match-face-4 ((,class (:inherit swiper-match-face-4))))
+   ;; `(ivy-minibuffer-match-highlight ((,class (:foreground "white"))))
+   ;; `(ivy-modified-buffer ((,class (:foreground "white"))))
+   ;; `(ivy-prompt-match ((,class (:foreground "white"))))
+   ;; `(ivy-remote ((,class (:foreground "white"))))
+   ;; `(ivy-subdir ((,class (:foreground "white"))))
+   ;; `(ivy-virtual ((,class (:foreground "white"))))
+
    ;; ido
    `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))

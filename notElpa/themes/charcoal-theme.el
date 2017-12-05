@@ -176,6 +176,9 @@
    ;; slime
    `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
 
+   ;; replace.el
+   `(match ((t (:background "#000000" :foreground ,fg-yellow :weight normal))))
+
    ;; num3
    ;; '(num3-face-odd ((t)))
    ;; '(num3-face-even ((t (:underline t :background "black"))))

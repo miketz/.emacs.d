@@ -178,14 +178,14 @@
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class (:background ,highlight))))
+   `(swiper-line-face ((,class (:background "black"))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
-   `(swiper-match-face-1 ((,class (:foreground ,faint-less :background ,bg))))
-   `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background ,bg))))
+   `(swiper-match-face-1 ((,class (:foreground ,faint-less))))
+   `(swiper-match-face-2 ((,class (:foreground ,rain-1))))
    ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
    ;; TODO: make bug report to swiper about face 3,4
-   `(swiper-match-face-3 ((,class (:foreground ,rain-2 :background ,bg))))
-   `(swiper-match-face-4 ((,class (:foreground ,rain-3 :background ,bg))))
+   `(swiper-match-face-3 ((,class (:foreground ,rain-2))))
+   `(swiper-match-face-4 ((,class (:foreground ,rain-3))))
    ;; `(ivy-action ((,class (:foreground "white"))))
    ;; `(ivy-confirm-face ((,class (:foreground "white"))))
    `(ivy-current-match ((,class (:inherit swiper-line-face))))

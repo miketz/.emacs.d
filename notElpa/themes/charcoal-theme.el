@@ -248,12 +248,15 @@
    ;; company-tooltip-search-selection
 
    `(minesweeper-neighbor ((,class (:background "black"))))
-   `(minesweeper-blank ((,class (:foreground ,fg))))
+   `(minesweeper-blank ((,class (:foreground ,faint-less))))
    `(minesweeper-marked ((,class (:foreground ,fg))))
-   `(minesweeper-0 ((,class (:foreground ,faint))))
-   `(minesweeper-1 ((,class (:foreground "deepskyblue"))))
-   `(minesweeper-2 ((,class (:foreground "yellowgreen"))))
-   `(minesweeper-3 ((,class (:foreground ,rain-4))))
+   `(minesweeper-0 ((,class (:foreground ,faint-less))))
+   `(minesweeper-1 ((,class (:foreground "cyan";"deepskyblue"
+                             ))))
+   `(minesweeper-2 ((,class (:foreground "lawn green";"yellowgreen"
+                             ))))
+   `(minesweeper-3 ((,class (:foreground ,rain-4
+                             ))))
    `(minesweeper-4 ((,class (:foreground ,rain-1))))
    `(minesweeper-5 ((,class (:foreground ,rain-3))))
    `(minesweeper-6 ((,class (:foreground ,rain-6))))

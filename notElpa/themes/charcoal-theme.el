@@ -174,6 +174,14 @@
    ;; slime
    `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
 
+   ;; num3
+   ;; '(num3-face-odd ((t)))
+   ;; '(num3-face-even ((t (:underline t :background "black"))))
+   `(num3-face-even ((t :underline nil
+                        :background "#000000"
+                        :foreground ,fg-green
+                        :bold nil)))
+
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-less))))
    `(completions-first-difference ((,class (:foreground ,fg-green))))

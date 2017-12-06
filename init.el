@@ -960,12 +960,14 @@ that buffer."
 ;;;-----------------------------------------------------------------------------
 (defvar my-change-font-fn
   (if (and (not my-use-ivy-p)
-           (not my-use-helm-p))
+           (not my-use-helm-p)
+           (fboundp #'ivy-completing-read))
       ;; it's very useful to have out of order matching while selecting the font.
       (defun my-set-frame-font-ivy ()
         (interactive)
         (let ((completing-read-function #'ivy-completing-read))
           (call-interactively #'set-frame-font)))
+    ;; else default
     #'set-frame-font)
   "Function to select the font. With out of order matching.")
 

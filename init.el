@@ -419,7 +419,7 @@ performance reasons)."
      ;;sublimity
 
      (nyan-mode t)
-     (nyan-prompt t)
+     ;;(nyan-prompt t) ; nyan-prompt removed from melpa?
 
      ;;powerline
      ;;dired-details ;default feature in emacs 24.4+
@@ -1310,18 +1310,18 @@ monitor.")
     (load-theme 'charcoal t))
 
    ((eq my-curr-computer 'leyna-laptop)
-    (my-color-zenburn)
+    (load-theme 'charcoal t)
     (set-frame-font
      "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
 
    ((eq my-curr-computer 'a-laptop-old)
-    (my-color-zenburn)
+    (load-theme 'charcoal t)
     (set-frame-font
      "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
    ((eq my-curr-computer 'hp-tower-2009)
     (when my-graphic-p
-      (my-color-zenburn)
+      (load-theme 'charcoal t)
       (custom-set-faces
        '(default ((t (:family "Droid Sans Mono"
                               :foundry "unknown"
@@ -1331,7 +1331,7 @@ monitor.")
                               :width normal)))))))
 
    ((eq my-curr-computer 'a-laptop-faster)
-    (my-color-zenburn)
+    (load-theme 'charcoal t)
     (custom-set-faces
      '(default ((t (:family "Source Code Pro"
                             :foundry "adobe"
@@ -1343,7 +1343,7 @@ monitor.")
    ;; unknown windows computer.
    ((and (null my-curr-computer)
          (eq system-type 'windows-nt))
-    (my-color-zenburn)
+    (load-theme 'charcoal t)
     (set-frame-font
      "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
 

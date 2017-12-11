@@ -316,12 +316,12 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
                           (my-use-ido-p #'swiper)
-                          (my-use-bare-ido-p #'occur)
+                          (my-use-bare-ido-p #'my-occur-wild-spaces)
                           (my-use-helm-p #'helm-swoop)
                           (my-use-mish-mash-p #'swiper)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.
                           ;; `icicle-occur' is unusabley slow. Dont' use it.
-                          (t  #'occur))
+                          (t  #'my-occur-wild-spaces))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
 (when my-use-evil-p
@@ -5122,11 +5122,17 @@ area."
     (quit-window nil (get-buffer-window "*Occur*")))
   (ad-activate 'occur-mode-goto-occurrence)
 
-  ;; treat spaces as wild cards. Like in `swiper'.
-  (defadvice occur (around space-to-wild activate compile)
-    (let* ((new-regexp (replace-regexp-in-string " " ".*" regexp))
-           (regexp new-regexp))
-      ad-do-it))
+  (defun my-occur-wild-spaces (regexp &optional nlines)
+    "Same as `occur'.  But treat spaces as wild cards like in `swiper'."
+    (interactive (occur-read-primary-args))
+    (occur-1 (replace-regexp-in-string " " ".*" regexp)
+             nlines
+             (list (current-buffer))))
+  ;; ;; treat spaces as wild cards. Like in `swiper'.
+  ;; (defadvice occur (around space-to-wild activate compile)
+  ;;   (let* ((new-regexp (replace-regexp-in-string " " ".*" regexp))
+  ;;          (regexp new-regexp))
+  ;;     ad-do-it))
 
   (defun my--occur-jump-to-first-match ()
     ;; switch to the results window immediatly.
@@ -5135,7 +5141,9 @@ area."
     (my-occur-next))
   (add-hook 'occur-hook #'my--occur-jump-to-first-match))
 
-(global-set-key (kbd "C-c o") #'occur)
+;; NOTE: replace.el seems to load during init, so `my-occur-wild-spaces' is
+;;       defined despite being in eval-after-load.
+(global-set-key (kbd "C-c o") #'my-occur-wild-spaces)
 
 ;;;-----------------------------------------------------------------------------
 ;;; eldoc

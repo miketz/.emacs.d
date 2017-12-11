@@ -328,6 +328,10 @@ Choices: helm-swoop swiper")
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
+(defvar my-use-lispy-p nil
+  "Whether to use lispy or not. Pulls in ivy as a dependency so avoiding on
+slow computers.")
+
 ;;;-----------------------------------------------------------------------------
 ;;; Packages
 ;;;-----------------------------------------------------------------------------
@@ -457,7 +461,7 @@ performance reasons)."
      ;;color-identifiers-mode
      ;;svg-mode-line-themes ;; only works on gnu/linux
      (avy t)
-     (lispy t)
+     (lispy ,my-use-lispy-p)
      ;;(worf t)
      (elisp-slime-nav t)
      ;; as of 11-28-2016 electric-spacing has an unbalanced paren
@@ -4315,7 +4319,8 @@ buffer instead of narrowing."
 ;;;-----------------------------------------------------------------------------
 ;;; lispy
 ;;;-----------------------------------------------------------------------------
-(add-hook 'lisp-mode-hook #'lispy-mode) ; for common lisp.
+(when my-use-lispy-p
+  (add-hook 'lisp-mode-hook #'lispy-mode)) ; for common lisp.
 
 (with-eval-after-load 'lispy
   ;; To improve start up speed move hooks to eval-after-load. Otherwise the
@@ -4985,7 +4990,8 @@ area."
   (defun my-setup-clojure-mode ()
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
-    (lispy-mode))
+    (when my-use-lispy-p
+      (lispy-mode)))
   (add-hook 'clojure-mode-hook #'my-setup-clojure-mode))
 
 ;;;-----------------------------------------------------------------------------
@@ -5015,7 +5021,8 @@ area."
   (defun my-setup-cider-repl ()
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
-    (lispy-mode))
+    (when my-use-lispy-p
+      (lispy-mode)))
   (add-hook 'cider-repl-mode-hook #'my-setup-cider-repl))
 
 ;;;-----------------------------------------------------------------------------
@@ -5158,7 +5165,8 @@ area."
   (defun my-setup-scheme ()
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
-    (lispy-mode))
+    (when my-use-lispy-p
+      (lispy-mode)))
   (add-hook 'scheme-mode-hook #'my-setup-scheme))
 
 ;;;-----------------------------------------------------------------------------
@@ -5174,7 +5182,8 @@ area."
   (defun my-setup-geiser-repl ()
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
-    (lispy-mode))
+    (when my-use-lispy-p
+      (lispy-mode)))
   (add-hook 'geiser-repl-mode-hook #'my-setup-geiser-repl))
 
 ;;;-----------------------------------------------------------------------------

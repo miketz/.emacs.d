@@ -310,8 +310,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using combination of several narrowing packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn (cond ((member my-curr-computer '(work-laptop wild-dog))
-                           #'swiper)
+(defvar my-swoop-fn (cond ((eq my-curr-computer 'wild-dog) #'swiper)
                           (my-use-ivy-p #'swiper)
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.

@@ -327,7 +327,7 @@ Choices: helm-swoop swiper")
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
-(defvar my-use-lispy-p nil
+(defvar my-use-lispy-p (eq my-curr-computer 'wild-dog)
   "Whether to use lispy or not. Pulls in ivy as a dependency so avoiding on
 slow computers.")
 

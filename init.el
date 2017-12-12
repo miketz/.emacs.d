@@ -492,10 +492,10 @@ performance reasons)."
      (ggtags t)
      (clojure-mode t)
      (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
-     (cider ,(member my-curr-computer '(work-laptop wild-dog)))
+     (cider ,(member my-curr-computer '(wild-dog)))
      (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
       ,(<= emacs-major-version 24))
-     (geiser ,(member my-curr-computer '(work-laptop)))
+     (geiser nil) ;;,(member my-curr-computer '(work-laptop))
      (debbugs ,(member my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
      (markdown-mode t)

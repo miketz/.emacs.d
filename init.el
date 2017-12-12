@@ -469,8 +469,8 @@ performance reasons)."
      ;;w3
      ;;w3m
      ;;flymake-jslint
-     (nlinum ,(not native-line-numbers-p))
-     (nlinum-relative ,(not native-line-numbers-p))
+     ;; (nlinum ,(not native-line-numbers-p))
+     ;; (nlinum-relative ,(not native-line-numbers-p))
 
      (ido-vertical-mode ,my-use-ido-p)
      (ido-grid-mode ,my-use-ido-p)
@@ -491,6 +491,7 @@ performance reasons)."
      (lua-mode t)
      (ggtags t)
      (clojure-mode t)
+     (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
      (cider ,(member my-curr-computer '(work-laptop wild-dog)))
      (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
       ,(<= emacs-major-version 24))

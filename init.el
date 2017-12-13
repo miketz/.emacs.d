@@ -2881,7 +2881,62 @@ and indent."
     ;; reclaim the M-r binding to move cursor to middle, high, low
     (define-key paredit-mode-map (kbd "M-r") #'move-to-window-line-top-bottom)
     ;; rebind paredits raise function
-    (define-key paredit-mode-map (kbd "C-c M-r") #'paredit-raise-sexp)))
+    (define-key paredit-mode-map (kbd "C-c M-r") #'paredit-raise-sexp))
+
+  (defun my-paredit-view-docs ()
+    "View paredit examples in a new buffer."
+    (interactive)
+    (let ((paredit-buff "*paredit examples*"))
+      (when (get-buffer paredit-buff)
+        (kill-buffer paredit-buff))
+      (switch-to-buffer paredit-buff)
+      ;; (unless (string-equal paredit-buff
+      ;;                       (buffer-name (current-buffer)))
+      ;;   (switch-to-buffer paredit-buff))
+      (with-current-buffer paredit-buff
+        (loop for vars in paredit-commands
+              do
+              (cond
+               ;; string headers
+               ((stringp vars)
+                (insert (format ";;;-----------------------------------------------------------------------------\n;;; %s\n;;;-----------------------------------------------------------------------------\n\n"
+                                vars)))
+               ;; examples
+               ((listp vars)
+                (let ((keybinds (first vars))
+                      (cmd-name (second vars))
+                      (examples (cddr vars)))
+                  ;; cmd-name
+                  (insert (format ";;----------------------\n;; %s\n" cmd-name))
+                  ;; key-binds
+                  (insert ";; keybinds: ")
+                  (if (stringp keybinds)
+                      (insert (format "%s" keybinds))
+                    (loop for k in keybinds
+                          with thresh = (1- (length keybinds))
+                          with i = 0
+                          do
+                          (insert k)
+                          (when (< i thresh) ; avoid sep on last
+                            (insert "     "))
+                          (incf i)))
+                  (insert "\n")
+                  ;; examples
+                  (loop for e in examples ; example is a list of strings.
+                        with i = 1 ; example index
+                        do
+                        (insert (format ";; example %d:\n" i))
+                        (dolist (str e) ; before / after strings
+                          (insert (format "%s\n\n" str)))
+                        (insert "\n")
+                        (incf i))
+                  (insert "\n")))
+               ;; something else?
+               (t
+                (insert "Unknown. Please review `my-paredit-view-docs'.\n"))))
+        (emacs-lisp-mode)
+        ;; warp up to the top.
+        (goto-char 0)))))
 
 ;; ;;key maps
 ;; (global-set-key (kbd "C-9") 'paredit-backward-slurp-sexp)

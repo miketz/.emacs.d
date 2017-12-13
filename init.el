@@ -2890,51 +2890,52 @@ and indent."
       (when (get-buffer paredit-buff)
         (kill-buffer paredit-buff))
       (switch-to-buffer paredit-buff)
-      ;; (unless (string-equal paredit-buff
-      ;;                       (buffer-name (current-buffer)))
-      ;;   (switch-to-buffer paredit-buff))
       (with-current-buffer paredit-buff
-        (loop for vars in paredit-commands
-              do
-              (cond
-               ;; string headers
-               ((stringp vars)
-                (insert (format ";;;-----------------------------------------------------------------------------\n;;; %s\n;;;-----------------------------------------------------------------------------\n\n"
-                                vars)))
-               ;; examples
-               ((listp vars)
-                (let ((keybinds (first vars))
-                      (cmd-name (second vars))
-                      (examples (cddr vars)))
-                  ;; cmd-name
-                  (insert (format ";;----------------------\n;; %s\n" cmd-name))
-                  ;; key-binds
-                  (insert ";; keybinds: ")
-                  (if (stringp keybinds)
-                      (insert (format "%s" keybinds))
-                    (loop for k in keybinds
-                          with thresh = (1- (length keybinds))
-                          with i = 0
-                          do
-                          (insert k)
-                          (when (< i thresh) ; avoid sep on last
-                            (insert "     "))
-                          (incf i)))
-                  (insert "\n")
+        (cl-loop for vars in paredit-commands
+                 do
+                 (cond
+                  ;; string headers
+                  ((stringp vars)
+                   (insert (format ";;;-----------------------------------------------------------------------------\n;;; %s\n;;;-----------------------------------------------------------------------------\n\n"
+                                   vars)))
                   ;; examples
-                  (loop for e in examples ; example is a list of strings.
-                        with i = 1 ; example index
-                        do
-                        (insert (format ";; example %d:\n" i))
-                        (dolist (str e) ; before / after strings
-                          (insert (format "%s\n\n" str)))
-                        (insert "\n")
-                        (incf i))
-                  (insert "\n")))
-               ;; something else?
-               (t
-                (insert "Unknown. Please review `my-paredit-view-docs'.\n"))))
+                  ((listp vars)
+                   (let ((keybinds (first vars))
+                         (cmd-name (second vars))
+                         (examples (cddr vars)))
+                     ;; cmd-name
+                     (insert (format ";;----------------------\n;; %s\n"
+                                     cmd-name))
+                     ;; key-binds
+                     (insert ";; keybinds: ")
+                     (if (stringp keybinds)
+                         (insert (format "%s" keybinds))
+                       (cl-loop for k in keybinds
+                                with thresh = (1- (length keybinds))
+                                with i = 0
+                                do
+                                (insert k)
+                                (when (< i thresh) ; avoid sep on last
+                                  (insert "     "))
+                                (cl-incf i)))
+                     (insert "\n")
+                     ;; examples
+                     (cl-loop for e in examples ; example is a list of strings.
+                              with i = 1 ; example index
+                              do
+                              (insert (format ";; example %d:\n" i))
+                              (dolist (str e) ; before / after strings
+                                (insert (format "%s\n\n" str)))
+                              (insert "\n")
+                              (cl-incf i))
+                     (insert "\n")))
+                  ;; something else?
+                  (t
+                   (insert
+                    "Unknown. Please review `my-paredit-view-docs'.\n"))))
+        ;; turn on the relevant modes
         (emacs-lisp-mode)
+        (enable-paredit-mode)
         ;; warp up to the top.
         (goto-char 0)))))
 

@@ -1160,6 +1160,7 @@ monitor.")
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg))
 
 (defun my-load-theme-make-bold-like-zenburn (&optional theme)
+  "Activates THEME with the bolding taken from zenburn."
   (interactive)
   (let ((zen-bold-faces '())
         (zen-non-bold-faces '())
@@ -2573,7 +2574,7 @@ To make it human readable."
   "Temporarily use spaces while making the comments.
 It will still use tabs for left-side indentation.
 Useful for aligning trailing comments when using tabs for indentation, spaces
-for alignment. Doesn't solve all comment alignment issues but helps in a few
+for alignment.  Doesn't solve all comment alignment issues but helps in a few
 cases."
   (interactive)
   (let ((indent-tabs-mode nil)) ; spaces
@@ -4065,7 +4066,7 @@ and indent."
 ;;                    (replace-regexp-in-string "\t" "    " (caar re)))
 ;;              re)
 ;;             (t
-;;              (error "unexpected"))))))
+;;              (error "Unexpected"))))))
 
 (with-eval-after-load 'counsel
   ;; redefine `counsel--load-theme-action' to not require confirmation
@@ -4510,8 +4511,8 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;; elisp emacs lisp
 ;;;-----------------------------------------------------------------------------
 (defun my-eval-region (start end)
-  "Same as `eval-region' but pass in `t' flag to display the result in the echo
-area."
+  "Call `eval-region' with t flag to display the result in the echo area.
+START and END define the region."
   (interactive "r")
   (eval-region start end t))
 (define-key lisp-mode-shared-map (kbd "C-c C-r") #'my-eval-region)
@@ -5457,25 +5458,32 @@ vanilla javascript buffers."
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun my-goto-line (line-num)
+  "Docs say don't use `goto-line' in Lisp code.
+Making my own using the reccomended alternative.
+LINE-NUM = line to goto."
+  (goto-char (point-min))
+  (forward-line (1- line-num)))
+
 (defun my-longest-line ()
   "Find the longest line in the buffer and jump to it.
 It is slow in large buffers."
   (interactive)
   (let ((end (progn
-               (end-of-buffer)
+               (goto-char (point-max)) ; (end-of-buffer)
                (line-number-at-pos)))
         (start 1)
         (biggest-col 0)
         (at-line 0))
     (cl-loop for line from start to end
              do
-             (goto-line line)
+             (my-goto-line line)
              (move-end-of-line nil)
              (let ((col (current-column)))
                (when (> col biggest-col)
                  (setq biggest-col col)
                  (setq at-line line))))
-    (goto-line at-line)
+    (my-goto-line at-line)
     (message (format "biggest col: %d\n line: %d"
                      biggest-col
                      at-line))))
@@ -5531,7 +5539,7 @@ in frame.  Stop displaying shell in all other windows."
 
 
 (defun what-face (pos)
-  "Prints the face at point.  POS = point"
+  "Prints the face at point.  POS = point."
   (interactive "d")
   (let ((face (or (get-char-property pos 'read-face-name)
                   (get-char-property pos 'face))))

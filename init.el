@@ -118,6 +118,19 @@ in case that file does not provide any feature."
 ;; macros?
 (require 'cl)
 
+(cl-defmacro my-time-task (&body body)
+  "Wrap around code to time how long it takes to execute."
+  (interactive)
+  `(let ((start (float-time)))
+     ;; the work
+     ,@body
+     ;; print elapsed time
+     (message
+      (format "elapsed seconds: %f"
+              (time-to-seconds
+               (time-subtract (float-time)
+                              start))))))
+
 (defmacro not-m (bool)
   "Similar to the not function.  But...
 It must operate on a variable (not a value)

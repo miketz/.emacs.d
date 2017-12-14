@@ -341,8 +341,8 @@ Choices: helm-swoop swiper")
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
 (defvar my-use-lispy-p (eq my-curr-computer 'wild-dog)
-  "Whether to use lispy or not. Pulls in ivy as a dependency so avoiding on
-slow computers.")
+  "Whether to use lispy or not.
+Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Packages
@@ -986,7 +986,7 @@ that buffer."
           (call-interactively #'set-frame-font)))
     ;; else default
     #'set-frame-font)
-  "Function to select the font. With out of order matching.")
+  "Function to select the font.  With out of order matching.")
 
 (global-set-key (kbd "<f5>") my-change-font-fn)
 

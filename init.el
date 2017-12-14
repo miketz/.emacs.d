@@ -979,14 +979,15 @@ that buffer."
   (if (and (not my-use-ivy-p)
            (not my-use-helm-p)
            (fboundp #'ivy-completing-read))
-      ;; it's very useful to have out of order matching while selecting the font.
+      ;; it's useful to have out of order matching while selecting the font.
       (defun my-set-frame-font-ivy ()
         (interactive)
         (let ((completing-read-function #'ivy-completing-read))
           (call-interactively #'set-frame-font)))
     ;; else default
     #'set-frame-font)
-  "Function to select the font.  With out of order matching.")
+  "Function to select the font.
+Prefers out of order matching if avaliable.")
 
 (global-set-key (kbd "<f5>") my-change-font-fn)
 
@@ -2905,48 +2906,53 @@ and indent."
         (kill-buffer paredit-buff))
       (switch-to-buffer paredit-buff)
       (with-current-buffer paredit-buff
-        (cl-loop for vars in paredit-commands
-                 do
-                 (cond
-                  ;; string headers
-                  ((stringp vars)
-                   (insert (format ";;;-----------------------------------------------------------------------------\n;;; %s\n;;;-----------------------------------------------------------------------------\n\n"
-                                   vars)))
-                  ;; examples
-                  ((listp vars)
-                   (let ((keybinds (first vars))
-                         (cmd-name (second vars))
-                         (examples (cddr vars)))
-                     ;; cmd-name
-                     (insert (format ";;----------------------\n;; %s\n"
-                                     cmd-name))
-                     ;; key-binds
-                     (insert ";; keybinds: ")
-                     (if (stringp keybinds)
-                         (insert (format "%s" keybinds))
-                       (cl-loop for k in keybinds
-                                with thresh = (1- (length keybinds))
-                                with i = 0
-                                do
-                                (insert k)
-                                (when (< i thresh) ; avoid sep on last
-                                  (insert "     "))
-                                (cl-incf i)))
-                     (insert "\n")
-                     ;; examples
-                     (cl-loop for e in examples ; example is a list of strings.
-                              with i = 1 ; example index
-                              do
-                              (insert (format ";; example %d:\n" i))
-                              (dolist (str e) ; before / after strings
-                                (insert (format "%s\n\n" str)))
-                              (insert "\n")
-                              (cl-incf i))
-                     (insert "\n")))
-                  ;; something else?
-                  (t
-                   (insert
-                    "Unknown. Please review `my-paredit-view-docs'.\n"))))
+        (cl-loop
+         for vars in paredit-commands
+         with header-fmt =
+(concat
+ ";;;---------------------------------------------------------------------\n"
+ ";;; %s\n"
+ ";;;---------------------------------------------------------------------\n\n")
+         do
+         (cond
+          ;; string headers
+          ((stringp vars)
+           (insert (format header-fmt vars)))
+          ;; examples
+          ((listp vars)
+           (let ((keybinds (first vars))
+                 (cmd-name (second vars))
+                 (examples (cddr vars)))
+             ;; cmd-name
+             (insert (format ";;----------------------\n;; %s\n"
+                             cmd-name))
+             ;; key-binds
+             (insert ";; keybinds: ")
+             (if (stringp keybinds)
+                 (insert (format "%s" keybinds))
+               (cl-loop for k in keybinds
+                        with thresh = (1- (length keybinds))
+                        with i = 0
+                        do
+                        (insert k)
+                        (when (< i thresh) ; avoid sep on last
+                          (insert "     "))
+                        (cl-incf i)))
+             (insert "\n")
+             ;; examples
+             (cl-loop for e in examples ; example is a list of strings.
+                      with i = 1 ; example index
+                      do
+                      (insert (format ";; example %d:\n" i))
+                      (dolist (str e) ; before / after strings
+                        (insert (format "%s\n\n" str)))
+                      (insert "\n")
+                      (cl-incf i))
+             (insert "\n")))
+          ;; something else?
+          (t
+           (insert
+            "Unknown. Please review `my-paredit-view-docs'.\n"))))
         ;; turn on the relevant modes
         (emacs-lisp-mode)
         (enable-paredit-mode)

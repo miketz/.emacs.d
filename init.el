@@ -351,6 +351,8 @@ Lispy pulls in ivy as a dependency so avoiding on slow computers.")
                                                ; not "packages".
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
+(add-to-list 'custom-theme-load-path
+             "~/.emacs.d/notElpa/themes/replace-colorthemes/")
 
 (defvar my--weird-theme-setup-executed-p nil)
 (defun my-handle-weird-theme-setups ()

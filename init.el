@@ -1491,7 +1491,7 @@ monitor.")
     (when (eq my-curr-computer 'work-laptop)
       (setq slime-default-lisp 'ccl)
       (setq slime-lisp-implementations
-            '((ccl ("C:/Users/mtz/programs/ccl-1.11-windows/ccl/wx86cl64"))
+            '((ccl ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64"))
               (sbcl ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
               (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
               ;; clisp is just a fake example for now.

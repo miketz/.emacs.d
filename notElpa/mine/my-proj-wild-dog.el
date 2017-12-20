@@ -15,7 +15,7 @@ So lines of text are not too long to follow with my eyes.")
   (interactive)
   (delete-other-windows)
   (switch-to-buffer "pcl-test")
-  ;; (common-lisp-mode)
+  (common-lisp-mode)
   (split-window-horizontally)
   (shrink-window-horizontally my-shrink-wild-dog)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub

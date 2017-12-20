@@ -189,7 +189,7 @@
   (interactive)
   (delete-other-windows)
   (switch-to-buffer "pcl-test")
-  ;; (common-lisp-mode)
+  (common-lisp-mode)
   (split-window-horizontally)
   (shrink-window-horizontally 24)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub

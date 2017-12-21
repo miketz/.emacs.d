@@ -3268,14 +3268,19 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; Load projects
 ;;;-----------------------------------------------------------------------------
-;; TODO: move `proj-pcl-fancy-modes' to another file and autoload it.
+;; TODO: move `my-proj-pcl-fancy-modes' to another file and autoload it.
 ;; TODO: limit fn visibility to buffer were pcl is being viewed.
-(defun proj-pcl-fancy-modes ()
+(defun my-proj-pcl-fancy-modes ()
   "Call this while in the eww buffer."
   (interactive)
   (eww-reload) ; causes images to load that may have failed previously.
-  (common-lisp-mode) ; for syntax highlighting of lisp code.
-  (whitespace-mode 0)) ; don't spam highlights on white space.
+  ;; dynamically override default mor settings
+  (let ((mor-readonly-for-extra-protection-p nil) ; eww is already readonly.
+        (mor-format-automatically-p nil) ; non-lisp text is present.
+        (mor-switch-buff-fn #'switch-to-buffer) ; use same window.
+        (mor-mode-fn #'common-lisp-mode))
+    (mor-mode-on-region (point-min) (point-max))
+    (whitespace-cleanup)))
 
 (when (eq my-curr-computer 'wild-dog)
   (let ((lisp-file "my-proj-wild-dog"))

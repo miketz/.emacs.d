@@ -4547,6 +4547,10 @@ START and END define the region."
   (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
   (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
 
+;; overlays to display eval results
+(let ((fancy-overlay-p nil))
+  (when fancy-overlay-p
+    (require 'cider-style-overlays)))
 
 ;; (with-eval-after-load "lisp-mode"
 ;;   (add-hook 'emacs-lisp-mode-hook

@@ -5483,6 +5483,14 @@ vanilla javascript buffers."
 ;; TODO: rebind `mark-defun' (kbd "C-M-h")
 ;; TODO: rebind `reposition-window' (kbd "C-M-l")
 
+;;;-----------------------------------------------------------------------------
+;;; css-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'css-mode
+  (defun my-setup-css-mode ()
+    (electric-pair-local-mode 1)
+    (rainbow-delimiters-mode-enable))
+  (add-hook 'css-mode-hook #'my-setup-css-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Misc options. Keep this at the bottom

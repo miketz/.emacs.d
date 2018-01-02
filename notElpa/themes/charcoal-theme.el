@@ -109,7 +109,11 @@
                              (320 . "#3F99FF")
                              (340 . "#3F6CFF")
                              (360 . "#3F3FFF")))
-   `(vc-annotate-very-old-color "blue3"))
+   `(vc-annotate-very-old-color "blue3")
+
+   ;; pos-tip. Helper package for tooltip
+   `(pos-tip-foreground-color ,fg)
+   `(pos-tip-background-color ,popup-bg))
 
 
   (custom-theme-set-faces
@@ -242,6 +246,10 @@
 
    ;; magit
    `(magit-section-highlight ((t (:background ,faint))))
+
+   ;; tooltip
+   `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
+
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

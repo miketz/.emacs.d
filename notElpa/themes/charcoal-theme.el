@@ -112,8 +112,8 @@
    `(vc-annotate-very-old-color "blue3")
 
    ;; pos-tip. Helper package for tooltip
-   `(pos-tip-foreground-color ,fg)
-   `(pos-tip-background-color ,popup-bg))
+   `(pos-tip-foreground-color ,fg-green)
+   `(pos-tip-background-color ,bg-green))
 
 
   (custom-theme-set-faces

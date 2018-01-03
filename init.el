@@ -504,7 +504,9 @@ performance reasons)."
      (ace-link t)
      (smart-tabs-mode t)
      (lua-mode t)
-     (ggtags t)
+     (ggtags ,(let ((has-gnu-global-p (member my-curr-computer
+                                              '(work-laptop wild-dog))))
+                has-gnu-global-p))
      (clojure-mode t)
      (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
      (cider ,(member my-curr-computer '(wild-dog)))

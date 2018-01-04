@@ -1,4 +1,4 @@
-;;; init.el --- My emacs config.
+;;; init.el --- My emacs config. -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -1025,8 +1025,10 @@ monitor.")
     ;; collect bold and non-bold faces into lists
     (dolist (f (face-list))
       (if (eq (face-attribute f :weight frame) 'bold)
-          (add-to-list 'zen-bold-faces f)
-        (add-to-list 'zen-non-bold-faces f)))
+        ;;   (add-to-list 'zen-bold-faces f)
+        ;; (add-to-list 'zen-non-bold-faces f)
+          (push f zen-bold-faces)
+        (push f zen-non-bold-faces)))
     ;; load theme and use zenburn's bolding.
     (load-theme theme t)
     (dolist (f zen-bold-faces)

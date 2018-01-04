@@ -4537,6 +4537,12 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; elisp emacs lisp
 ;;;-----------------------------------------------------------------------------
+;; Increase number of list items printed from evaling a lisp expression.  Very
+;; annoying when it cuts off with "...".  But still have a cap in case of
+;; extreme sizes.
+(setq eval-expression-print-length 12000
+      eval-expression-print-level   4000)
+
 (defun my-eval-region (start end)
   "Call `eval-region' with t flag to display the result in the echo area.
 START and END define the region."

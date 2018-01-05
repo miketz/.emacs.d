@@ -5484,6 +5484,14 @@ in frame.  Stop displaying shell in all other windows."
 ;; (global-set-key (kbd "M-n") #'next-buffer)
 ;; (global-set-key (kbd "M-p") #'previous-buffer)
 
+;; delete spaces between words
+(defun my-cycle-spacing ()
+  "Same as `cycle-spacing', but uses fast mode. This deletes the space if there
+is only 1 space. Otherwise it would do nothing on the first call."
+  (interactive)
+  (cycle-spacing current-prefix-arg nil 'fast))
+(global-set-key (kbd "M-\\") #'my-cycle-spacing)
+
 
 (cond
  ((eq my-curr-computer 'wild-dog)

@@ -4398,16 +4398,18 @@ START and END define the region."
   (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
   (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
 
-;; overlays to display eval results
-(let ((fancy-overlay-p nil))
-  (when fancy-overlay-p
-    (require 'cider-style-overlays)))
-
 ;; (with-eval-after-load "lisp-mode"
 ;;   (add-hook 'emacs-lisp-mode-hook
 ;;             (lambda ()
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
+
+(defvar my-fancy-overlay-p (eq my-curr-computer 'wild-dog)
+  "Whether to use the cider-style overlays to display evaluation results.")
+
+(when my-fancy-overlay-p
+  ;; overlays to display eval results
+  (require 'cider-style-overlays))
 
 (defun my-eval-last-sexp ()
   (interactive)
@@ -4416,10 +4418,14 @@ START and END define the region."
 
 (autoload 'pos-tip-show "pos-tip" nil t)
 (if my-graphic-p
-    (defun my-eval-last-sexp-display ()
-      (interactive)
-      ;; (clippy-say (my-eval-last-sexp))
-      (pos-tip-show (my-eval-last-sexp)))
+    (if my-fancy-overlay-p
+        (defun my-eval-last-sexp-display ()
+          (interactive)
+          (call-interactively #'eval-last-sexp))
+      (defun my-eval-last-sexp-display ()
+        (interactive)
+        ;; (clippy-say (my-eval-last-sexp))
+        (pos-tip-show (my-eval-last-sexp))))
   (defun my-eval-last-sexp-display ()
     (interactive)
     (save-excursion

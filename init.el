@@ -320,7 +320,7 @@ performance reasons)."
 
 
 (defvar native-line-numbers-p (boundp 'display-line-numbers)
-  "True if Emacs suppports native line number display.")
+  "Non-nil if Emacs suppports native line number display.")
 
 (let ((install-slime-p
        (member my-curr-computer

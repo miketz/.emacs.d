@@ -270,7 +270,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           (my-use-mish-mash-p #'swiper)
                           ;; `sallet-occur' is unusabley slow. Dont' use it.
                           ;; `icicle-occur' is unusabley slow. Dont' use it.
-                          (t  #'my-occur-wild-spaces))
+                          (t #'my-occur-wild-spaces))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
 (when my-use-evil-p

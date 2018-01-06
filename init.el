@@ -233,7 +233,7 @@ Just a convenience to avoid checks agaisnt `my-ui-type'.")
                              ((eq my-curr-computer 'wild-dog) 'bare-ido)
                              (t 'bare-ido))
   "The package I'm currenlty using for narrowing completions.
-Use nil for the emacs default.
+Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
 Choices: ivy ido bare-ido helm icicles sallet mish-mash nil")
 

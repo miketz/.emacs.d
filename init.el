@@ -603,7 +603,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (funcall (lambda (arg)
              "Alternative to fn `key-chord-mode'. To surpress the on message."
              (interactive "P")
-             (let ((message (lambda (str) nil)))
+             (let ((message (lambda (_str) nil)))
                (setq key-chord-mode (if arg
                                         (> (prefix-numeric-value arg) 0)
                                       (not key-chord-mode)))

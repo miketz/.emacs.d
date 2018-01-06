@@ -1494,7 +1494,7 @@ monitor.")
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
 
-  (defun my--company-set-min-width (&rest ignored-hook-args)
+  (defun my--company-set-min-width (&rest _ignored-hook-args)
     "Calculate width big enough for the largest candidate and set it.
 This avoids changing pop-up width while scrolling through candidates."
     (setq company-tooltip-minimum-width

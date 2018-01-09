@@ -323,9 +323,9 @@ performance reasons)."
   "Non-nil if Emacs suppports native line number display.")
 
 (let ((install-slime-p
-       (member my-curr-computer
-               '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-      (has-clang-p (member my-curr-computer '(work-laptop wild-dog))))
+       (memq my-curr-computer
+             '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
+      (has-clang-p (memq my-curr-computer '(work-laptop wild-dog))))
  ;; TODO: specify if it should use elpa or melpa version of a package.
  ;; NOTE: to limit package intstallation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
@@ -349,7 +349,7 @@ performance reasons)."
      (csharp-mode t)
      (js2-mode t)
      (js2-highlight-vars t)
-     (skewer-mode ,(member my-curr-computer '(work-laptop)))
+     (skewer-mode ,(memq my-curr-computer '(work-laptop)))
      (json-mode t)
 
      (helm ,my-use-helm-p)
@@ -441,20 +441,20 @@ performance reasons)."
      (ace-link t)
      (smart-tabs-mode t)
      (lua-mode t)
-     (ggtags ,(let ((has-gnu-global-p (member my-curr-computer
-                                              '(work-laptop wild-dog))))
+     (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
+                                            '(work-laptop wild-dog))))
                 has-gnu-global-p))
      (clojure-mode t)
      (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
-     (cider ,(member my-curr-computer '(wild-dog)))
+     (cider ,(memq my-curr-computer '(wild-dog)))
      (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
       ,(<= emacs-major-version 24))
-     (geiser nil) ;;,(member my-curr-computer '(work-laptop))
-     (debbugs ,(member my-curr-computer '(work-laptop wild-dog)))
+     (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
+     (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
      (markdown-mode t)
      (typescript-mode t)
-     (tide ,(member my-curr-computer '(work-laptop wild-dog)))
+     (tide ,(memq my-curr-computer '(work-laptop wild-dog)))
      (context-coloring t)
      (nov t) ;; an epub reader
      (autothemer t) ;; dependency for some themes.
@@ -3867,7 +3867,7 @@ and indent."
         (setq buf (get-buffer-create "*Ivy Help*"))
         (with-current-buffer buf
           (insert-file-contents ivy-help-file)
-          (if (member 'org features)
+          (if (memq 'org features)
               (org-mode)
             (outline-mode))
           (view-mode)

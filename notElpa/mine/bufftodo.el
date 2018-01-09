@@ -105,7 +105,7 @@
   (bufftodo--clean-deleted-buffs)
   (let ((ibuffer-filtering-alist '((todo-only "todo"
                                               (lambda (buf qualifier)
-                                                (member buf bufftodo-lst))))))
+                                                (memq buf bufftodo-lst))))))
     (ibuffer bufftodo-open-new-window-p
              "TODO buffers"
              ibuffer-filtering-alist)))

@@ -4407,7 +4407,7 @@ START and END define the region."
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
 
-(defvar my-fancy-overlay-p (eq my-curr-computer 'wild-dog)
+(defvar my-fancy-overlay-p (memq my-curr-computer '(wild-dog work-laptop))
   "Whether to use the cider-style overlays to display evaluation results.")
 
 (when my-fancy-overlay-p

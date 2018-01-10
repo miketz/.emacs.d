@@ -4420,31 +4420,37 @@ START and END define the region."
   (require 'cider-style-overlays))
 
 ;;;-----------------------------------------------------------------------------
-;;; popup eval result for emacs lisp.
+;;; popup eval result for emacs lisp.  For leader-E key.
 ;;;-----------------------------------------------------------------------------
 (defun my-eval-last-sexp ()
   (interactive)
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
 
-
 (autoload 'pos-tip-show "pos-tip" nil t)
-(if my-graphic-p
-    (if my-fancy-overlay-p
+(cond
+ ;; cider overlays
+ (my-fancy-overlay-p
+  (setq my-eval-last-sexp-display
         (defun my-eval-last-sexp-display ()
           (interactive)
-          (call-interactively #'eval-last-sexp))
-      (defun my-eval-last-sexp-display ()
-        (interactive)
-        ;; (clippy-say (my-eval-last-sexp))
-        (pos-tip-show (my-eval-last-sexp))))
-  (defun my-eval-last-sexp-display ()
-    (interactive)
-    (save-excursion
-      (evil-append 1)
-      (default-indent-new-line)
-      (eval-last-sexp t) ; t to insert result in buffer.
-      (evil-normal-state))))
+          (call-interactively #'eval-last-sexp))))
+ ;; popup
+ (my-graphic-p
+  (setq my-eval-last-sexp-display
+        (defun my-eval-last-sexp-display ()
+          (interactive)
+          ;; (clippy-say (my-eval-last-sexp))
+          (pos-tip-show (my-eval-last-sexp)))))
+ (t ; else in a terminal, no fancy
+  (setq my-eval-last-sexp-display
+        (defun my-eval-last-sexp-display ()
+          (interactive)
+          (save-excursion
+            (evil-append 1)
+            (default-indent-new-line)
+            (eval-last-sexp t)    ; t to insert result in buffer.
+            (evil-normal-state))))))
 
 (when my-use-evil-p
   ;; evalate lisp expression. Insert result on a new line.

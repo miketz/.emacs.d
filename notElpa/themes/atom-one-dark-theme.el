@@ -357,7 +357,7 @@ Current modes, and their faces, impacted by this variable:
   (interactive)
   (and (eq atom-one-dark-theme-force-faces-for-mode t)
        (cond
-        ((member major-mode '(js2-mode))
+        ((memq major-mode '(js2-mode))
          ;; atom-one-dark-orange-1
          (face-remap-add-relative 'font-lock-constant-face :foreground "#D19A66")
          (face-remap-add-relative 'font-lock-doc-face '(:inherit (font-lock-comment-face)))

@@ -3789,7 +3789,7 @@ and indent."
 ;;   (let ((has-a-tag-p nil))
 ;;     (cl-block check
 ;;       (dolist (v vals)
-;;         (when (member v lst)
+;;         (when (memq v lst)
 ;;           (setq has-a-tag-p t)
 ;;           (return-from check))))
 ;;     has-a-tag-p))

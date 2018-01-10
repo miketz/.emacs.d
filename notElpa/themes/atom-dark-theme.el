@@ -188,13 +188,13 @@ Current modes, and their faces, impacted by this variable:
   (interactive)
   (and (eq atom-dark-theme-force-faces-for-mode t)
        (cond
-        ((member major-mode '(conf-mode conf-javaprop-mode html-mode yaml-mode))
+        ((memq major-mode '(conf-mode conf-javaprop-mode html-mode yaml-mode))
          (face-remap-add-relative 'font-lock-variable-name-face '(:inherit (font-lock-keyword-face))))
         ((eq major-mode 'java-mode)
          (face-remap-add-relative 'font-lock-variable-name-face '(:inherit (js2-function-param))))
         ((eq major-mode 'markdown-mode)
          (face-remap-add-relative 'default '(:foreground "#999")))
-        ((member major-mode '(javascript-mode js2-mode))
+        ((memq major-mode '(javascript-mode js2-mode))
          (face-remap-add-relative 'font-lock-doc-face '(:inherit (font-lock-comment-face)))))))
 
 (add-hook 'after-change-major-mode-hook 'atom-dark-theme-change-faces-for-mode)

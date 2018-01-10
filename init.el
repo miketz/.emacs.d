@@ -4406,6 +4406,11 @@ START and END define the region."
 ;;             (lambda ()
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
+;;;-----------------------------------------------------------------------------
+;;; cider-style-overlays
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'cider-style-overlays
+  (setq cider-eval-result-prefix ""))
 
 (defvar my-fancy-overlay-p (memq my-curr-computer '(wild-dog work-laptop))
   "Whether to use the cider-style overlays to display evaluation results.")
@@ -4414,10 +4419,14 @@ START and END define the region."
   ;; overlays to display eval results
   (require 'cider-style-overlays))
 
+;;;-----------------------------------------------------------------------------
+;;; popup eval result for emacs lisp.
+;;;-----------------------------------------------------------------------------
 (defun my-eval-last-sexp ()
   (interactive)
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
+
 
 (autoload 'pos-tip-show "pos-tip" nil t)
 (if my-graphic-p

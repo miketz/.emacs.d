@@ -244,6 +244,10 @@
                              :weight normal
                              :underline t)))
 
+   `(cider-result-overlay-face ((,class :background ,bg-green
+                                        :foreground ,fg-green
+                                        :box (:line-width -1 :color "black"))))
+
    `(header-line
      ((t (:foreground ,fg-yellow
                       :background ,bg-yellow

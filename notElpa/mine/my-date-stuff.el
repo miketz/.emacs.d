@@ -28,16 +28,14 @@
 
 (defun my-insert-date-string-new-buff ()
   (interactive)
-  (let ((tmp-buff "*Date and Time*"))
-    (unless (string-equal tmp-buff
-                          (buffer-name (current-buffer)))
+  (let ((tmp-buff (get-buffer-create "*Date and Time*")))
+    (unless (eq tmp-buff (current-buffer))
       (switch-to-buffer-other-window tmp-buff))
     (with-current-buffer tmp-buff
       (goto-char (point-max)) ;; end of buffer
       (insert "\n\n")
       (my-insert-date-big)
-      (my-date-mode) ; for the windwow closing keybind "q"
-      )))
+      (my-date-mode)))) ; for the windwow closing keybind "q"
 
 ;; BROKEN
 ;; (defun my-insert-date-string-new-buff2 ()

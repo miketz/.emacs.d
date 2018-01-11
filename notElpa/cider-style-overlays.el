@@ -1,4 +1,4 @@
-;;;;;; CIDER overlays
+;;;;;; CIDER overlays  -*- lexical-binding: t -*-
 
 ;; Very cool!
 ;; http://endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html

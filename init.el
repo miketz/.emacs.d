@@ -1,4 +1,4 @@
-;;; init.el --- My emacs config.
+;;; init.el --- My emacs config. -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -110,6 +110,25 @@ FILE is normally a feature name, but it can also be a file name,
 in case that file does not provide any feature."
     (declare (indent 1) (debug t))
     `(eval-after-load ,file (lambda () ,@body))))
+
+;;;-----------------------------------------------------------------------------
+;;; defvars
+;;; This config uses lexical binding. So any dynamic vars from packages not yet
+;;; loaded will be incorrectly lexically bound in any `let' statements.
+;;; Making a redundant defvar here will ensure they are bound dynamically.
+;;;
+;;; NOTE: To find dynamic vars that may be accidentally lexically bound, byte
+;;; compile init.el then look for the warning "Unused lexical variable".
+;;;-----------------------------------------------------------------------------
+(defvar mor-format-automatically-p)
+(defvar mor-switch-buff-fn)
+(defvar mor-readonly-for-extra-protection-p)
+(defvar mor-mode-fn)
+(defvar helm-candidate-number-limit)
+(defvar ivy-height)
+(defvar w3-default-homepage)
+(defvar w3--args)
+(defvar lispy-do-pprint)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1061,17 +1080,17 @@ monitor.")
                                          nil t))))
   (load-theme theme t)        ; load theme
   (my-toggle-inverse-video t) ; invert it
-  (let* ((frame (selected-frame))
-         ;; the foreground is the background during inverse.
-         (new-bg (face-attribute 'default :foreground frame)))
-    ;; TODO: convert the background to be the foreground.
-    ;; (dolist (f (face-list))
-    ;;   (let ((new-fg (face-attribute f :background frame)))
-    ;;     ;; setting teh bg is like setting the fg during inverse
-    ;;     (set-face-attribute f nil :background new-fg)
-    ;;     ;; setting the fg is like setting the bg during inverse
-    ;;     (set-face-attribute f nil :foreground new-bg)))
-    ))
+  ;; (let* ((frame (selected-frame))
+  ;;        ;; the foreground is the background during inverse.
+  ;;        (new-bg (face-attribute 'default :foreground frame)))
+  ;;   ;; TODO: convert the background to be the foreground.
+  ;;   (dolist (f (face-list))
+  ;;     (let ((new-fg (face-attribute f :background frame)))
+  ;;       ;; setting teh bg is like setting the fg during inverse
+  ;;       (set-face-attribute f nil :background new-fg)
+  ;;       ;; setting the fg is like setting the bg during inverse
+  ;;       (set-face-attribute f nil :foreground new-bg))))
+  )
 
 (autoload #'my-rainbow-parens-dark-bg "my-bg-specific-colors" nil t)
 (autoload #'my-rainbow-parens-dark-bg-bold "my-bg-specific-colors" nil t)
@@ -1398,7 +1417,7 @@ monitor.")
             (slime-eval-async
              `(swank:eval-and-grab-output ,string)
              (lambda (result)
-               (cl-destructuring-bind (output value) result
+               (cl-destructuring-bind (_output value) result
                  (pos-tip-show value)
                  ;;(push-mark)
                  ;;(insert output value)
@@ -1639,11 +1658,12 @@ This avoids changing pop-up width while scrolling through candidates."
     (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue"
                                                           :weight bold)))))
 
-  (defun org-summary-todo (n-done n-not-done)
-    "Switch entry to DONE when all subentries are done, to TODO otherwise."
-    (let (org-log-done org-log-states)  ; turn off logging
-      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+  ;; TODO: fix `org-summary-todo'. Not working. Commented out for now.
+  ;; (defun org-summary-todo (n-done n-not-done)
+  ;;   "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  ;;   (let ((org-log-done org-log-states)) ; turn off logging
+  ;;     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  ;; (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
   ;; on computers that have a main todo file
   (when my-main-todo
@@ -3648,12 +3668,12 @@ and indent."
     ;; TODO: handle for auto-complete too. It's on emacs.stackexchange.
     (defvar-local company-fci-mode-on-p nil)
 
-    (defun company-turn-off-fci (&rest ignore)
+    (defun company-turn-off-fci (&rest _ignore)
       (when (boundp 'fci-mode)
         (setq company-fci-mode-on-p fci-mode)
         (when fci-mode (fci-mode -1))))
 
-    (defun company-maybe-turn-on-fci (&rest ignore)
+    (defun company-maybe-turn-on-fci (&rest _ignore)
       (when company-fci-mode-on-p (fci-mode 1)))
 
     (add-hook 'company-completion-started-hook #'company-turn-off-fci)
@@ -5621,7 +5641,7 @@ is only 1 space. Otherwise it would do nothing on the first call."
             (format "L%d (narrowed L%d)"
                     (+ n (line-number-at-pos start) -1) n))))))
 
-  (defun my-what-position (&optional detail)
+  (defun my-what-position (&optional _detail)
     "Your position in space and time."
     (interactive "P")
     (let* ((pos (point))
@@ -5633,7 +5653,7 @@ is only 1 space. Otherwise it would do nothing on the first call."
            (line (my-what-line))
            (col (+ 1 (current-column))))
       (message "%d%% %s C%d     %s     %s"
-               percent (my-what-line) col
+               percent line col
                (format-time-string "%-I:%M%#p %-m-%-d-%Y %a")
                (buffer-name))))
   (defalias 'my-what-time #'my-what-position)

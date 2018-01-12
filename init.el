@@ -477,7 +477,8 @@ performance reasons)."
      (context-coloring t)
      (nov t) ;; an epub reader
      (autothemer t) ;; dependency for some themes.
-     (erc-hl-nicks t))
+     (erc-hl-nicks t)
+     (sql-indent nil))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -494,6 +495,10 @@ performance reasons)."
 
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(when (boundp 'package-pinned-packages) ; Emacs 24.4 or newer
+  (setq package-pinned-packages
+        '((sql-indent . "gnu"))))
 
 ;; (setq package-enable-at-startup nil)
 (package-initialize) ;; activate all the packages (in particular autoloads)
@@ -2666,7 +2671,9 @@ and indent."
       (electric-indent-local-mode -1))
     ;; turn off indent when you press "o" in evil. Buffer local
     (when my-use-evil-p
-      (setq evil-auto-indent nil)))
+      (setq evil-auto-indent nil))
+    ;; (sqlind-minor-mode 1)
+    )
 
   (add-hook 'sql-mode-hook #'my-setup-sql)
 

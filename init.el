@@ -434,7 +434,7 @@ performance reasons)."
      (lispy ,my-use-lispy-p)
      ;;(worf t)
      (elisp-slime-nav t)
-     ;; on 11-28-2016 electric-spacing has an unbalanced paren
+     ;; on 11-28-2016 electric-spacing had an unbalanced paren
      ;; seems to be fixed now. Using it again.
      (electric-spacing t)
      ;;w3
@@ -1868,7 +1868,7 @@ This avoids changing pop-up width while scrolling through candidates."
 
     (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
-    ;; (electric-spacing-mode 1)
+    (electric-spacing-mode 1)
     ;; use jslint, but only if editing a .js file on disk.
     ;; TODO: use with in-memory buffer, or narrowed region of html file.
     ;; TODO: use flycheck instead of flymake
@@ -2551,7 +2551,7 @@ and indent."
       ;; TODO: find the problem, fix it. Commit upstream if relevant.
       (flycheck-mode 1))
 
-    ;; (electric-spacing-mode 1)
+    (electric-spacing-mode 1)
     (fci-mode 1))
   (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
 
@@ -4938,7 +4938,7 @@ START and END define the region."
   (defun my-setup-lua-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
-    ;; (electric-spacing-mode 1)
+    (electric-spacing-mode 1)
     (electric-pair-local-mode 1))
   (add-hook 'lua-mode-hook #'my-setup-lua-mode))
 

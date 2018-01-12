@@ -188,15 +188,15 @@
    `(sldb-condition-face ((,class (:foreground ,rain-1))))
 
    ;; replace.el
-   `(match ((t (:background "#000000" :foreground ,fg-yellow :weight normal))))
+   `(match ((,class (:background "#000000" :foreground ,fg-yellow :weight normal))))
 
    ;; num3
-   ;; '(num3-face-odd ((t)))
-   ;; '(num3-face-even ((t (:underline t :background "black"))))
-   `(num3-face-even ((t :underline nil
-                        :background "#000000"
-                        :foreground ,fg-green
-                        :bold nil)))
+   ;; '(num3-face-odd ((,class)))
+   ;; '(num3-face-even ((,class (:underline t :background "black"))))
+   `(num3-face-even ((,class :underline nil
+                             :background "#000000"
+                             :foreground ,fg-green
+                             :bold nil)))
 
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-less))))
@@ -234,10 +234,10 @@
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; isearch
-   `(isearch ((t :background "yellow"
-                 :foreground "black"
-                 :weight bold
-                 :underline nil)))
+   `(isearch ((,class :background "yellow"
+                      :foreground "black"
+                      :weight bold
+                      :underline nil)))
    ;; the non-selected matches from isearch
    `(lazy-highlight ((,class :background ,bg-purple
                              :foreground ,fg-purple
@@ -249,13 +249,13 @@
                                         :box (:line-width -1 :color "black"))))
 
    `(header-line
-     ((t (:foreground ,fg-yellow
-                      :background ,bg-yellow
-                      :weight normal
-                      :box (:line-width -1 :style released-button)))))
+     ((,class (:foreground ,fg-yellow
+                           :background ,bg-yellow
+                           :weight normal
+                           :box (:line-width -1 :style released-button)))))
 
    ;; magit
-   `(magit-section-highlight ((t (:background ,faint))))
+   `(magit-section-highlight ((,class (:background ,faint))))
 
    ;; tooltip
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))

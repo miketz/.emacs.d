@@ -434,9 +434,9 @@ performance reasons)."
      (lispy ,my-use-lispy-p)
      ;;(worf t)
      (elisp-slime-nav t)
-     ;; as of 11-28-2016 electric-spacing has an unbalanced paren
-     ;; error. Don't use it for now, wait for fix upstream.
-     (electric-spacing nil)
+     ;; on 11-28-2016 electric-spacing has an unbalanced paren
+     ;; seems to be fixed now. Using it again.
+     (electric-spacing t)
      ;;w3
      ;;w3m
      ;;flymake-jslint
@@ -478,7 +478,8 @@ performance reasons)."
      (nov t) ;; an epub reader
      (autothemer t) ;; dependency for some themes.
      (erc-hl-nicks t)
-     (sql-indent nil))
+     (sql-indent nil)
+     (vdiff nil))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -499,7 +500,9 @@ performance reasons)."
 (when (boundp 'package-pinned-packages) ; Emacs 24.4 or newer
   (setq package-pinned-packages
         '((sql-indent . "gnu")
-          (aggressive-indent . "melpa"))))
+          (electric-spacing . "melpa")
+          (aggressive-indent . "melpa")
+          (vdiff . "melpa"))))
 
 ;; (setq package-enable-at-startup nil)
 (package-initialize) ;; activate all the packages (in particular autoloads)

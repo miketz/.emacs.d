@@ -498,7 +498,8 @@ performance reasons)."
 
 (when (boundp 'package-pinned-packages) ; Emacs 24.4 or newer
   (setq package-pinned-packages
-        '((sql-indent . "gnu"))))
+        '((sql-indent . "gnu")
+          (aggressive-indent . "melpa"))))
 
 ;; (setq package-enable-at-startup nil)
 (package-initialize) ;; activate all the packages (in particular autoloads)

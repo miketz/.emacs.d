@@ -280,6 +280,9 @@
    ;; company-tooltip-search
    ;; company-tooltip-search-selection
 
+   ;; erc
+   `(erc-notice-face ((,class (:foreground ,faint-less))))
+
    `(minesweeper-neighbor ((,class (:background "black"))))
    `(minesweeper-blank ((,class (:foreground ,faint-less))))
    `(minesweeper-marked ((,class (:foreground ,fg))))

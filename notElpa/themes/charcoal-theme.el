@@ -15,6 +15,16 @@
 
 (deftheme charcoal "Charcoal color theme")
 
+;; NOTE: You most likely want to use a `let' statement to bind a value to
+;; dynamic var `*charcoal-color-cnt*'. So you can temporarily test this theme at
+;; different color counts.
+;; Example:
+;;     (let ((*charcoal-color-cnt* 8))
+;;       (load-theme 'charcoal t))
+;; If you give it a value with `setq' it will remember the value each time you
+;; turn on the color theme.
+(defvar *charcoal-color-cnt*)
+
 (let* ((class        t)
        (cnt          (if (boundp '*charcoal-color-cnt*)
                          ;; use dynamically bound count if available.

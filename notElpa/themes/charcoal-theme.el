@@ -270,6 +270,10 @@
    ;; tooltip
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
 
+   ;; js2
+   `(js2-function-call ((,class :inherit font-lock-function-name-face)))
+   `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
+
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

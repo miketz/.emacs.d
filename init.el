@@ -1783,6 +1783,7 @@ This avoids changing pop-up width while scrolling through candidates."
   (setq js2-basic-offset my-indent-width)
 
   (setq js2-mode-show-strict-warnings t)
+  (setq js2-warn-about-unused-function-arguments t)
 
   ;; ;; recognize vars in the global comment for jslint. Doesn't work?
   ;; (setq js2-include-jslint-globals t)

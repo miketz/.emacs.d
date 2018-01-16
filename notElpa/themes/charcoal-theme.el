@@ -167,10 +167,10 @@
 
    ;; TODO font lock
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
-   `(font-lock-comment-face ((,class (:foreground "#8FB28F" :slant italic))))
+   `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
-   ;; `(font-lock-doc-face ((,class (:foreground ,zenburn-green+2))))
+   `(font-lock-doc-face ((,class (:inherit font-lock-comment-face))))
    ;; `(font-lock-function-name-face ((,class (:foreground ,zenburn-cyan))))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
@@ -273,7 +273,17 @@
    ;; js2
    `(js2-function-call ((,class :inherit font-lock-function-name-face)))
    `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
+   `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
+   `(js2-warning ((,class :underline (:color "yellow" :style wave))))
+   `(js2-error ((,class :underline (:color "red" :style wave))))
+   `(js2-external-variable ((,class :underline (:color "orange" :style wave))))
+   `(js2-jsdoc-tag ((,class :foreground "lime green")))
+   `(js2-jsdoc-type ((,class :inherit font-lock-type-face)))
+   `(js2-jsdoc-value ((,class :inherit font-lock-constant-face)))
 
+   ;; js2-highlight-vars
+   `(js2-highlight-vars-face ((,class :foreground ,fg-green :background ,bg-green)))
+   `(js2-highlight-vars-second-face ((,class :foreground ,fg-purple :background ,bg-purple)))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

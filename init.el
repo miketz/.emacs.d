@@ -3023,37 +3023,28 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; ace-link
 ;;;-----------------------------------------------------------------------------
-(unless my-use-evil-p
-  ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
-  ;;       becuase calling that autoloaded function caused a premature
-  ;;       load of the ace-link feature!
-  ;;       Discovered by `profile-emacs.el'
-  (setq key "o")
-  (with-eval-after-load 'info
-    (define-key Info-mode-map key #'ace-link-info))
-  (with-eval-after-load 'compile
-    (define-key compilation-mode-map key #'ace-link-compilation))
-  (with-eval-after-load 'help-mode
-    (define-key help-mode-map key #'ace-link-help))
-  (with-eval-after-load 'woman
-    (define-key woman-mode-map key #'ace-link-woman))
-  (with-eval-after-load 'eww
-    (define-key eww-link-keymap key #'ace-link-eww)
-    (define-key eww-mode-map key #'ace-link-eww))
-  (with-eval-after-load 'cus-edit
-    (define-key custom-mode-map key #'ace-link-custom)))
+;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
+;;       becuase calling that autoloaded function caused a premature
+;;       load of the ace-link feature!
+;;       Discovered by `profile-emacs.el'
+(with-eval-after-load 'info
+  (define-key Info-mode-map (kbd "o") #'ace-link-info))
+(with-eval-after-load 'compile
+  (define-key compilation-mode-map (kbd "o") #'ace-link-compilation))
+(with-eval-after-load 'help-mode
+  (define-key help-mode-map (kbd "o") #'ace-link-help))
+(with-eval-after-load 'woman
+  ;; TODO: test this binding
+  (define-key woman-mode-map (kbd "o") #'ace-link-woman))
 
+(unless my-use-evil-p
+  (with-eval-after-load 'eww
+    (define-key eww-link-keymap (kbd "o") #'ace-link-eww)
+    (define-key eww-mode-map (kbd "o") #'ace-link-eww))
+  (with-eval-after-load 'cus-edit
+    (define-key custom-mode-map (kbd "o") #'ace-link-custom)))
 
 (when my-use-evil-p
-  (with-eval-after-load 'info
-    (define-key Info-mode-map (kbd "o") #'ace-link-info))
-  (with-eval-after-load 'compile
-    (define-key compilation-mode-map (kbd "o") #'ace-link-compilation))
-  (with-eval-after-load 'help-mode
-    (define-key help-mode-map (kbd "o") #'ace-link-help))
-  (with-eval-after-load 'woman
-    ;; TODO: test this binding
-    (define-key woman-mode-map (kbd "o") #'ace-link-woman))
   (with-eval-after-load 'eww
     (evil-define-key 'normal eww-link-keymap (kbd "o") #'ace-link-eww)
     (evil-define-key 'normal eww-mode-map (kbd "o") #'ace-link-eww))

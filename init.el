@@ -311,32 +311,33 @@ Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 (add-to-list 'custom-theme-load-path
              "~/.emacs.d/notElpa/themes/replace-colorthemes/")
 
-(defvar my--weird-theme-setup-executed-p nil)
-(defun my-handle-weird-theme-setups ()
-  "Some themes work in a special way with custom code to initialize them.
+(let ((executed-p nil))
+  (defun my-handle-weird-theme-setups ()
+    "Some themes work in a special way with custom code to initialize them.
 Orginally this code would be run in the autoloads when the themes were melpa
 packages.  But I am no longer using the themes as packages (for init
-performance reasons)."
-  (interactive)
-  (when (not my--weird-theme-setup-executed-p)
-    (load (concat custom-theme-directory "base16-theme"))
-    (load (concat custom-theme-directory "solarized"))
-    (load (concat custom-theme-directory "solarized-theme-utils"))
-    (when nil ;; this actually turns on zonokai so don't run this automatically.
-      (load (concat custom-theme-directory "zonokai")))
-    (load (concat custom-theme-directory "alect-themes"))
-    (load (concat custom-theme-directory "doom-themes"))
-    (load (concat custom-theme-directory "doom-themes-common"))
-    (load (concat custom-theme-directory "eziam-common"))
-    (load (concat custom-theme-directory "farmhouse-theme-common"))
-    (load (concat custom-theme-directory "punpun-common"))
-    (load (concat custom-theme-directory "tao-theme"))
-    (load (concat custom-theme-directory "apropospriate"))
-    (progn ;; kaolin stuff
-      (load (concat custom-theme-directory "kaolin-themes-lib"))
-      (load (concat custom-theme-directory "kaolin-themes")))
-    ;; record the fact we did the set up. To avoid doing it again.
-    (setq my--weird-theme-setup-executed-p t)))
+performance reasons).
+Closure over executed-p."
+    (interactive)
+    (unless executed-p
+      (load (concat custom-theme-directory "base16-theme"))
+      (load (concat custom-theme-directory "solarized"))
+      (load (concat custom-theme-directory "solarized-theme-utils"))
+      (when nil ;; this actually turns on zonokai so don't run this automatically.
+        (load (concat custom-theme-directory "zonokai")))
+      (load (concat custom-theme-directory "alect-themes"))
+      (load (concat custom-theme-directory "doom-themes"))
+      (load (concat custom-theme-directory "doom-themes-common"))
+      (load (concat custom-theme-directory "eziam-common"))
+      (load (concat custom-theme-directory "farmhouse-theme-common"))
+      (load (concat custom-theme-directory "punpun-common"))
+      (load (concat custom-theme-directory "tao-theme"))
+      (load (concat custom-theme-directory "apropospriate"))
+      (progn ;; kaolin stuff
+        (load (concat custom-theme-directory "kaolin-themes-lib"))
+        (load (concat custom-theme-directory "kaolin-themes")))
+      ;; record the fact we did the set up. To avoid doing it again.
+      (setq executed-p t))))
 
 
 (defvar native-line-numbers-p (boundp 'display-line-numbers)

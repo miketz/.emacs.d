@@ -795,17 +795,17 @@ that buffer."
 
   ;;TODO: look into equivalent resizing for non-Windows machines.
   (when (eq system-type 'windows-nt)
-    ;;`my-frame-max-p' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
-    (defvar my-frame-max-p nil)
-
-    (defun my-toggle-frame-max ()
-      (interactive)
-      (let ((flag (if my-frame-max-p
-                      'restore-curr-frame
-                    'max)))
-        (my-w32-run flag)
-        ;; toggle explicitly. No longer using `not-m'.
-        (setq my-frame-max-p (not my-frame-max-p))))
+    ;;`maxp' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+    (let ((maxp nil))
+      (defun my-toggle-frame-max ()
+        "Closure over `maxp'."
+        (interactive)
+        (let ((flag (if maxp
+                        'restore-curr-frame
+                      'max)))
+          (my-w32-run flag)
+          ;; toggle explicitly. No longer using `not-m'.
+          (setq maxp (not maxp)))))
 
     (evil-leader/set-key "f" #'my-toggle-frame-max)))
 

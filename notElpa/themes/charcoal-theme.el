@@ -31,18 +31,13 @@
                          *charcoal-color-cnt*
                        ;; else detect the color count.
                        (display-color-cells)))
-       (color-full-p (>= cnt 16777216))
-       (color-256-p  (and (not color-full-p) (>= cnt 256)))
-       (color-16-p   (and (not color-256-p) (>= cnt 16)))
-       (color-8-p    (and (not color-16-p) (>= cnt 8)))
-       (i            (cond (color-full-p 0)
-                           (color-256-p  1)
-                           (color-16-p   2)
-                           (color-8-p    3)
-                           (t            3)))
+       (i            (cond ((>= cnt 16777216) 0)
+                           ((>= cnt 256)      1)
+                           ((>= cnt 16)       2)
+                           ((>= cnt 8)        3)
+                           (t                 3)))
        (todo--fg     "#FFFFFF") ; temp color where I haven't decided yet
        (todo--bg     "#000000") ; temp color where I haven't decided yet
-
        ;; Color Palette       full      256       16        8
        (bg           (aref `["#35352B" "#262626" "#000000" "#000000"] i))
        (fg           (aref `["#EEEED1" "#FFFFD7" "#BEBEBE" "#FFFFFF"] i))

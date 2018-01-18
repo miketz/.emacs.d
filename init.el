@@ -3286,6 +3286,21 @@ and indent."
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
 
+(with-eval-after-load 'web-mode
+  ;; Auto-close on > and </
+  (setq web-mode-auto-close-style 2)
+
+  ;; indent widths of different code sections
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset    4
+        web-mode-code-indent-offset   4
+        web-mode-sql-indent-offset    4)
+
+  (defun my-setup-web-mode ()
+    ;; useful for embedded javascript or css
+    (rainbow-delimiters-mode 1))
+  (add-hook 'web-mode-hook #'my-setup-web-mode))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; vimrc-mode

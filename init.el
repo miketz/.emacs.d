@@ -909,24 +909,23 @@ Prefers out of order matching if avaliable.")
 ;;       (my-w32-run 'max))))
 
 
-(progn ;; inc/dec font size
-
-  (defvar my-curr-font-size nil
-    "Starts out unknown")
-
+;;;-----------------------------------------------------------------------------
+;;; inc/dec font size
+;;;-----------------------------------------------------------------------------
+(let ((curr-font-size nil)) ;; Starts out unknown
   (defun my-change-font-size (step)
-    (let* ((curr-size (if my-curr-font-size ;; use cached value if it's set
-                          my-curr-font-size
+    "Make font bigger or smaller by STEP.
+Closure over `curr-font-size'."
+    (let* ((curr-size (if curr-font-size ;; use cached value if it's set
+                          curr-font-size
                         (face-attribute 'default :height (selected-frame))))
            (new-size (+ curr-size step)))
 
-      (custom-set-faces
-       `(default
-          ((t (:height ,new-size)))))
+      (custom-set-faces `(default ((t (:height ,new-size)))))
 
       ;; must cache the new value becuase :height does not acutally inc until a
       ;; threshold is breached.
-      (setq my-curr-font-size new-size)
+      (setq curr-font-size new-size)
 
       ;; commenting the window size toggle off. It's seems to have become
       ;; slow on `work-laptop'.
@@ -935,18 +934,20 @@ Prefers out of order matching if avaliable.")
       ;;   (my-w32-run 'restore-curr-frame)
       ;;   (my-w32-run 'max))
 
-      (message (int-to-string new-size))))
+      (message (int-to-string new-size)))))
 
-  (defun my-change-font-size-bigger ()
-    (interactive)
-    (my-change-font-size 1)) ;; TODO: calculate "threshold" step increment.
+(defun my-change-font-size-bigger ()
+  (interactive)
+  (my-change-font-size 1)) ;; TODO: calculate "threshold" step increment.
 
-  (defun my-change-font-size-smaller ()
-    (interactive)
-    (my-change-font-size -1)) ;; TODO: calculate "threshold" step decrement.
+(defun my-change-font-size-smaller ()
+  (interactive)
+  (my-change-font-size -1)) ;; TODO: calculate "threshold" step decrement.
 
-  (global-set-key (kbd "M-=") #'my-change-font-size-bigger)
-  (global-set-key (kbd "M--") #'my-change-font-size-smaller))
+(global-set-key (kbd "M-=") #'my-change-font-size-bigger)
+(global-set-key (kbd "M--") #'my-change-font-size-smaller)
+
+
 
 ;; (defun my-set-font-size ()
 ;;   "Interactive layer over my-set-font. Takes the font size as user input."
@@ -1068,19 +1069,20 @@ monitor.")
     (dolist (f zen-non-bold-faces)
       (set-face-attribute f nil :weight 'normal))))
 
-(defvar my-inverse-video-p nil
-  "Flag used by fn `my-toggle-inverse-video'.")
-(cl-defun my-toggle-inverse-video (&optional (inv-p t supplied-p))
-  (interactive)
-  (if supplied-p
-      ;; if user specified
-      (setq my-inverse-video-p inv-p)
-    ;; else toggle
-    (setq my-inverse-video-p (not my-inverse-video-p)))
-  (dolist (f (face-list))
-    (if (eq f 'region)
-        (set-face-attribute f nil :inverse-video (not my-inverse-video-p))
-      (set-face-attribute f nil :inverse-video my-inverse-video-p))))
+(let ((inverse-video-p nil)) ;; Flag used by fn `my-toggle-inverse-video'.
+  (cl-defun my-toggle-inverse-video (&optional (inv-p t supplied-p))
+    "Toggle inverse video.
+Closure over `inverse-video-p'"
+    (interactive)
+    (if supplied-p
+        ;; if user specified
+        (setq inverse-video-p inv-p)
+      ;; else toggle
+      (setq inverse-video-p (not inverse-video-p)))
+    (dolist (f (face-list))
+      (if (eq f 'region)
+          (set-face-attribute f nil :inverse-video nil) ;; (not inverse-video-p)
+        (set-face-attribute f nil :inverse-video inverse-video-p)))))
 
 (defun my-load-theme-inverse (&optional theme)
   (interactive)
@@ -1136,23 +1138,22 @@ monitor.")
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff
 
-  ;; TODO: get this value on-the-fly rather than caching to avoid a
+  ;; TODO: get `curr-alpha' on-the-fly rather than caching to avoid a
   ;; transparency "jump" if alpha var gets out of sync.
-  (defvar my--curr-alpha 100
-    "Starts out 100")
+  (let ((curr-alpha 100)) ;; Starts out 100
+    ;; using `cl-defun' to allow `return-from'
+    (cl-defun my-change-alpha (step)
+      "Make frame more or less transparent by STEP."
+      ;; exit early if can't increase or decrease further
+      (when (or (and (= curr-alpha 100) (> step 0))
+                (and (= curr-alpha 0) (< step 0)))
+        (message (int-to-string curr-alpha))
+        (return-from my-change-alpha))
 
-  ;; using `cl-defun' to allow `return-from'
-  (cl-defun my-change-alpha (step)
-    ;; exit early if can't increase or decrease further
-    (when (or (and (= my--curr-alpha 100) (> step 0))
-              (and (= my--curr-alpha 0) (< step 0)))
-      (message (int-to-string my--curr-alpha))
-      (return-from my-change-alpha))
-
-    (incf my--curr-alpha step)
-    (set-frame-parameter (selected-frame) 'alpha
-                         `(,my--curr-alpha ,my--curr-alpha))
-    (message (int-to-string my--curr-alpha)))
+      (incf curr-alpha step)
+      (set-frame-parameter (selected-frame) 'alpha
+                           `(,curr-alpha ,curr-alpha))
+      (message (int-to-string curr-alpha))))
 
   (defun my-change-alpha-more-solid ()
     (interactive)

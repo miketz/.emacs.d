@@ -1141,19 +1141,23 @@ Closure over `inverse-video-p'"
   ;; TODO: get `curr-alpha' on-the-fly rather than caching to avoid a
   ;; transparency "jump" if alpha var gets out of sync.
   (let ((curr-alpha 100)) ;; Starts out 100
-    ;; using `cl-defun' to allow `return-from'
-    (cl-defun my-change-alpha (step)
-      "Make frame more or less transparent by STEP."
-      ;; exit early if can't increase or decrease further
-      (when (or (and (= curr-alpha 100) (> step 0))
-                (and (= curr-alpha 0) (< step 0)))
-        (message (int-to-string curr-alpha))
-        (return-from my-change-alpha))
 
-      (incf curr-alpha step)
+    (cl-defun my-set-alpha (alpha)
+      "Set frame's transparency to ALPHA."
+      ;; exit early if not in range 1-100.
+      (when (or (> alpha 100)
+                (< alpha 0))
+        (message (int-to-string curr-alpha))
+        (return-from my-set-alpha))
+      (setq curr-alpha alpha)
       (set-frame-parameter (selected-frame) 'alpha
                            `(,curr-alpha ,curr-alpha))
-      (message (int-to-string curr-alpha))))
+      (message (int-to-string curr-alpha)))
+
+    (defun my-change-alpha (step)
+      "Make frame more or less transparent by STEP."
+      (let ((new-alpha (+ curr-alpha step)))
+        (my-set-alpha new-alpha))))
 
   (defun my-change-alpha-more-solid ()
     (interactive)

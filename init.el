@@ -3302,7 +3302,8 @@ and indent."
 
   (defun my-setup-web-mode ()
     ;; useful for embedded javascript or css
-    (rainbow-delimiters-mode 1))
+    (rainbow-delimiters-mode 1)
+    (electric-pair-local-mode 1))
   (add-hook 'web-mode-hook #'my-setup-web-mode))
 
 

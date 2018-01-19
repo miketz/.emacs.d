@@ -4146,7 +4146,6 @@ Region defined by START and END is automaticallyl detected by
      (custom-set-faces
       `(mor-readonly-face
         ((t (:background "black" :foreground "red" :strike-through t)))))
-
      ;; recommended keybinds for the tmp buffer.  Both Vanilla and Evil.
      (define-key mor-tmp-buffer-mode-map (kbd "C-c b") #'mor-copy-back)
      (define-key mor-tmp-buffer-mode-map (kbd "C-c c") #'mor-close-tmp-buffer)))

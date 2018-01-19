@@ -4124,8 +4124,7 @@ Region defined by START and END is automaticallyl detected by
 ;;     (switch-to-buffer buf)))
 
 ;;;-----------------------------------------------------------------------------
-;;; mor.el in ~/.emacs.d/notElpa/mine/mor/mor.el
-;;; now renamed to mode-on-region.el
+;;; mode-on-region.el in ~/.emacs.d/notElpa/mine/mor/
 ;;; Create a new buffer, stuff text in it, turn on mode.
 ;;;-----------------------------------------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/notElpa/mine/mor")

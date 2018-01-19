@@ -4141,7 +4141,7 @@ Region defined by START and END is automaticallyl detected by
 ;; Configure
 (eval-after-load 'mode-on-region
   '(progn
-     (setq mor-format-automatically-p t)
+     (setq mor-format-automatically-p nil)
      (setq mor-readonly-for-extra-protection-p t)
      (custom-set-faces
       `(mor-readonly-face

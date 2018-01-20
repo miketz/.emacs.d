@@ -5700,9 +5700,9 @@ is only 1 space. Otherwise it would do nothing on the first call."
     (setq display-time-load-average-threshold nil)
     ;;(setq-default display-time-day-and-date t)
     ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
-    (setq display-time-format "%-I:%M%#p"))
-  ;; (display-time-mode 1)
-  )
+    ;; (setq display-time-format "%-I:%M%#p")
+    (setq display-time-format "%a %-m/%-d %-I:%M%#p"))
+  (display-time-mode 1))
 
 ;; show lambdas with the greek symbol
 ;; (when (or (> emacs-major-version 24)

@@ -151,13 +151,6 @@ in case that file does not provide any feature."
                (time-subtract (float-time)
                               start))))))
 
-(defmacro not-m (bool)
-  "Similar to the not function.  But...
-It must operate on a variable (not a value)
-It mutates BOOL to the opposite value.
-Useful to check a boolean state and toggle the state in 1 go."
-  `(setq ,bool (not ,bool)))
-
 ;; (defun my-getAtIndex (i lst)
 ;;   "Return the element at I from LST."
 ;;   (cond
@@ -805,7 +798,7 @@ that buffer."
                         'restore-curr-frame
                       'max)))
           (my-w32-run flag)
-          ;; toggle explicitly. No longer using `not-m'.
+          ;; toggle bool flag
           (setq maxp (not maxp)))))
 
     (evil-leader/set-key "f" #'my-toggle-frame-max)))
@@ -4672,7 +4665,8 @@ START and END define the region."
 
 ;; (defun my-toggle-show-trailing-whitespace ()
 ;;   (interactive)
-;;   (not-m show-trailing-whitespace)
+;;   ;; toggle bool flag.
+;;   (setq show-trailing-whitespace (not show-trailing-whitespace))
 ;;   ;;visual state makes the dipslay refresh.
 ;;   (evil-visual-char)
 ;;   (evil-exit-visual-state))

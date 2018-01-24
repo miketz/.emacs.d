@@ -36,25 +36,25 @@ load, and then run them."
       (cl-loop
        for dir in
        (mapcar #'first
-               (remove-if (lambda (f)
-                            (or (my-str-ends-with-p (first f) ".")
-                                (my-str-ends-with-p (first f) "..")))
-                          (remove-if-not (lambda (f)
-                                           (second f))
-                                         (directory-files-and-attributes
-                                          "~/.emacs.d/elpa" t))))
+               (cl-remove-if (lambda (f)
+                               (or (my-str-ends-with-p (first f) ".")
+                                   (my-str-ends-with-p (first f) "..")))
+                             (cl-remove-if-not (lambda (f)
+                                                 (second f))
+                                               (directory-files-and-attributes
+                                                "~/.emacs.d/elpa" t))))
        do
        (cl-loop
-        for a in (remove-if-not (lambda (x)
-                                  (and
-                                   ;; is file
-                                   (not (second x))
-                                   ;; is autoload file
-                                   (my-str-ends-with-p
-                                    (first x)
-                                    "-autoloads.el")))
-                                (directory-files-and-attributes
-                                 dir t))
+        for a in (cl-remove-if-not (lambda (x)
+                                     (and
+                                      ;; is file
+                                      (not (second x))
+                                      ;; is autoload file
+                                      (my-str-ends-with-p
+                                       (first x)
+                                       "-autoloads.el")))
+                                   (directory-files-and-attributes
+                                    dir t))
         do
         ;; append text to `my-autoloads-dump-file'
         (insert "\n")

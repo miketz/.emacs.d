@@ -119,7 +119,10 @@ in case that file does not provide any feature."
 ;;;
 ;;; NOTE: To find dynamic vars that may be accidentally lexically bound, byte
 ;;; compile init.el then look for the warning "Unused lexical variable".
+;;; NOTE: It's useful to include a redundant defvar even if the var is not used
+;;; in a `let'. Just to remove the warnings about free variables.
 ;;;-----------------------------------------------------------------------------
+;; let bound dynamic vars. ensure they are bound dynamically
 (defvar mor-format-automatically-p)
 (defvar mor-switch-buff-fn)
 (defvar mor-readonly-for-extra-protection-p)
@@ -130,6 +133,220 @@ in case that file does not provide any feature."
 (defvar w3--args)
 (defvar lispy-do-pprint)
 (defvar *charcoal-color-cnt*)
+(defvar company-selection-wrap-around)
+
+;; dynamic vars not let bound (yet). Just surpressing the free var warnings.
+(defvar evil-normal-state-map)
+(defvar my-packages)
+(defvar key-chord-two-keys-delay)
+(defvar key-chord-one-key-delay)
+(defvar helm-map)
+(defvar evil-insert-state-map)
+(defvar evil-visual-state-map)
+(defvar key-chord-mode)
+(defvar evil-emacs-state-cursor)
+(defvar evil-normal-state-cursor)
+(defvar evil-insert-state-cursor)
+(defvar evil-visual-state-cursor)
+(defvar evil-operator-state-cursor)
+(defvar evil-replace-state-cursor)
+(defvar evil-motion-state-cursor)
+(defvar evil-flash-delay)
+(defvar evil-motion-state-map)
+(defvar evil-insert-state-message)
+(defvar evil-emacs-state-message)
+(defvar evil-visual-state-message)
+(defvar evil-motion-state-message)
+(defvar evil-normal-state-message)
+(defvar evil-operator-state-message)
+(defvar evil-replace-state-message)
+(defvar evil-mode-line-format)
+(defvar evil-default-cursor)
+(defvar slime-complete-symbol*-fancy)
+(defvar slime-complete-symbol-function)
+(defvar slime-mode-map)
+(defvar slime-repl-mode-map)
+(defvar slime-header-line-p)
+(defvar slime-startup-animation)
+(defvar slime-default-lisp)
+(defvar slime-lisp-implementations)
+(defvar common-lisp-hyperspec-root)
+(defvar slime-macroexpansion-minor-mode-map)
+(defvar company-mode-map)
+(defvar company-active-map)
+(defvar company-candidates-length)
+(defvar company-tooltip-minimum-width)
+;; `company-candidates' is buffer-local. The defvar is just to flag it as
+;; dynamic. It hould still become buffer-local after `company' is loaded.
+(defvar company-candidates)
+(defvar company-idle-delay)
+(defvar company-minimum-prefix-length)
+(defvar company-tooltip-limit)
+(defvar company-backends)
+(defvar web-mode-map)
+(defvar org-startup-indented)
+(defvar org-log-done)
+(defvar org-agenda-timegrid-use-ampm)
+(defvar org-src-preserve-indentation)
+(defvar org-todo-keywords)
+(defvar org-todo-keyword-faces)
+(defvar org-agenda-files)
+(defvar org-mode-map)
+(defvar js-indent-level)
+(defvar js2-highlight-level)
+(defvar js2-bounce-indent-p)
+(defvar js2-basic-offset)
+(defvar js2-mode-show-strict-warnings)
+(defvar js2-warn-about-unused-function-arguments)
+(defvar js2-mode-map)
+(defvar nxml-slash-auto-complete-flag)
+(defvar nxml-mode-map)
+(defvar helm-ff-transformer-show-only-basename)
+(defvar helm-buffers-fuzzy-matching)
+(defvar helm-ff-lynx-style-map)
+(defvar helm-input-idle-delay)
+(defvar helm-idle-delay)
+(defvar helm-display-header-line)
+(defvar helm-swoop-pre-input-function)
+(defvar helm-swoop-speed-or-color)
+(defvar icomplete-compute-delay)
+(defvar ido-enable-flex-matching)
+(defvar ido-everywhere)
+(defvar ido-create-new-buffer)
+(defvar ido-file-dir-completion-map)
+(defvar ido-use-faces)
+(defvar ido-vertical-define-keys)
+(defvar ido-vertical-show-count)
+(defvar yas-triggers-in-field)
+(defvar c-default-style)
+(defvar c-mode-map)
+(defvar c++-mode-map)
+(defvar c-basic-offset)
+(defvar dired-mode-map)
+(defvar evil-auto-indent)
+(defvar paredit-backward-delete-key)
+(defvar paredit-mode-map)
+(defvar paredit-commands)
+(defvar omnisharp-mode-map)
+(defvar omnisharp-auto-complete-want-documentation)
+(defvar omnisharp--curl-executable-path)
+(defvar omnisharp-server-executable-path)
+(defvar omnisharp--windows-curl-tmp-file-path)
+(defvar omnisharp-host)
+(defvar omnisharp-company-do-template-completion)
+(defvar omnisharp-company-ignore-case)
+(defvar avy-keys)
+(defvar avy-background)
+(defvar avy-all-windows)
+(defvar avy-case-fold-search)
+(defvar avy-timeout-seconds)
+(defvar avy-style)
+(defvar compilation-mode-map)
+(defvar woman-mode-map)
+(defvar eww-link-keymap)
+(defvar eww-mode-map)
+(defvar custom-mode-map)
+(defvar aw-keys)
+(defvar aw-background)
+(defvar irony-mode-map)
+(defvar evil-buffer-regexps)
+(defvar web-mode-auto-close-style)
+(defvar web-mode-markup-indent-offset)
+(defvar web-mode-css-indent-offset)
+(defvar web-mode-code-indent-offset)
+(defvar web-mode-sql-indent-offset)
+(defvar eshell-mode-map)
+(defvar highlight-tail-colors)
+(defvar highlight-tail-steps)
+(defvar highlight-tail-timer)
+(defvar highlight-tail-posterior-type)
+(defvar shr-use-fonts)
+(defvar eww-download-directory)
+(defvar magit-mode-map)
+(defvar magit-completing-read-function)
+(defvar magit-diff-refine-hunk)
+(defvar magit-log-arguments)
+(defvar magit-log-section-commit-count)
+(defvar ediff-split-window-function)
+(defvar ediff-window-setup-function)
+(defvar ediff-diff3-program)
+(defvar darkroom-margins)
+(defvar darkroom-fringes-outside-margins)
+(defvar fci-rule-column)
+(defvar fci-rule-width)
+(defvar fci-always-use-textual-rule)
+(defvar fci-dash-pattern)
+(defvar fci-rule-use-dashes)
+(defvar flycheck-mode-map)
+(defvar erc-mode-map)
+(defvar guide-key/idle-delay)
+(defvar guide-key/guide-key-sequence)
+(defvar guide-key/recursive-key-sequence-flag)
+(defvar swiper-map)
+(defvar swiper-all-map)
+(defvar ivy-occur-mode-map)
+(defvar ivy-help-file)
+(defvar ivy-initial-inputs-alist)
+(defvar ivy-re-builders-alist)
+(defvar ivy-display-style)
+(defvar mor-tmp-buffer-mode-map)
+(defvar lispy-avy-style-char)
+(defvar lispy-avy-style-paren)
+(defvar lispy-avy-style-symbol)
+(defvar lispy-mode-map-special)
+(defvar lispy-mode-map)
+(defvar cider-eval-result-prefix)
+(defvar elisp-slime-nav-mode-map)
+(defvar nlinum-relative-current-symbol)
+(defvar my-date-mode-map)
+(defvar iedit-toggle-key-default)
+(defvar evil-ex-completion-map)
+(defvar evil-read-key-map)
+(defvar evil-replace-state-map)
+(defvar ivy-mode-map)
+(defvar winner-dont-bind-my-keys)
+(defvar winner-ring-size)
+(defvar winner-mode-map)
+(defvar js2-highlight-vars-local-keymap)
+(defvar js2--highlight-vars-tokens) ; buffer-local, just flagging as dynamic.
+(defvar js2--highlight-vars-current-token-name) ; buffer-local
+(defvar js2--highlight-vars-current-token) ; buffer-local
+(defvar js2--highlight-vars-post-command-timer) ; buffer-local
+(defvar python-mode-map)
+(defvar calendar-minimum-window-height)
+(defvar lua-indent-level)
+(defvar lua-default-application)
+(defvar ggtags-mode-map)
+(defvar follow-mode-map)
+(defvar cider-prompt-for-symbol)
+(defvar cider-repl-display-help-banner)
+(defvar cider-repl-mode-map)
+(defvar geiser-default-implementation)
+(defvar geiser-active-implementations)
+(defvar bookmark-sort-flag)
+(defvar bookmark-save-flag)
+(defvar auto-revert-interval)
+(defvar auto-revert-stop-on-user-input)
+(defvar global-auto-revert-non-file-buffers)
+(defvar auto-revert-remote-files)
+(defvar typescript-indent-level)
+(defvar flycheck-check-syntax-automatically)
+(defvar company-tooltip-align-annotations)
+(defvar display-line-number-width)
+(defvar display-line-numbers-current-absolute)
+(defvar display-line-numbers)
+(defvar grep-highlight-matches)
+(defvar grep-mode-map)
+(defvar find-function-C-source-directory)
+(defvar browse-url-generic-program)
+(defvar browse-url-browser-function)
+(defvar display-time-default-load-average)
+(defvar display-time-load-average)
+(defvar display-time-load-average-threshold)
+(defvar display-time-format)
+(defvar hl-line-sticky-flag)
+(defvar global-hl-line-sticky-flag)
+(defvar show-paren-delay)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -537,11 +754,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (interactive)
   (package-show-package-list
    (let ((my-packs (mapcar #'cl-first my-packages)))
-     (remove-if-not (lambda (x)
-                      (and (not (memq x my-packs))
-                           (not (package-built-in-p x))
-                           (package-installed-p x)))
-                    (mapcar 'car package-archive-contents)))))
+     (cl-remove-if-not (lambda (x)
+                         (and (not (memq x my-packs))
+                              (not (package-built-in-p x))
+                              (package-installed-p x)))
+                       (mapcar 'car package-archive-contents)))))
 
 
 
@@ -1537,8 +1754,7 @@ This avoids changing pop-up width while scrolling through candidates."
   (setq company-idle-delay nil)          ; disable automatic completion
   (setq company-minimum-prefix-length 3) ; but if automatic is on, don't fire
                                          ; until 3 chars.
-  (setq company-tooltip-limit 20)        ; popup more suggestions.
-  )
+  (setq company-tooltip-limit 20))       ; popup more suggestions.
 
 
 
@@ -2492,7 +2708,7 @@ cases."
   ;;(setq-default c-default-style "java")
 
   ;; NOTE: sometimes I use a different tab-width for c
-  (setq my-indent-width-c my-indent-width)
+  (defvar my-indent-width-c my-indent-width)
   (setq-default c-basic-offset my-indent-width-c) ;tab width
   (setq-default c-electric-flag t)
   (setq-default c-electric-pound-behavior '(alignleft))
@@ -3008,17 +3224,19 @@ and indent."
   ;; (global-set-key (kbd "M-g g") #'my-avy-goto-line)
   ;; (global-set-key (kbd "M-g M-g") #'my-avy-goto-line)
 
-  (defun my-avy-goto-char-3 (char1 char2 char3 &optional arg)
-    "Copied `avy-goto-char-2' but reading 3 chars. Feels like too many."
-    (interactive (list (read-char "char 1: ")
-                       (read-char "char 2: ")
-                       (read-char "char 3: ")
-                       current-prefix-arg))
-    (avy--with-avy-keys avy-goto-char-3
-                        (avy--generic-jump
-                         (regexp-quote (string char1 char2 char3))
-                         arg
-                         avy-style))))
+  ;; commenitng out. was avy-goto-char-3 deleted?
+  ;; (defun my-avy-goto-char-3 (char1 char2 char3 &optional arg)
+  ;;   "Copied `avy-goto-char-2' but reading 3 chars. Feels like too many."
+  ;;   (interactive (list (read-char "char 1: ")
+  ;;                      (read-char "char 2: ")
+  ;;                      (read-char "char 3: ")
+  ;;                      current-prefix-arg))
+  ;;   (avy--with-avy-keys avy-goto-char-3
+  ;;                       (avy--generic-jump
+  ;;                        (regexp-quote (string char1 char2 char3))
+  ;;                        arg
+  ;;                        avy-style)))
+  )
 
 
 ;;;-----------------------------------------------------------------------------
@@ -3217,6 +3435,7 @@ and indent."
 
 ;;; quick open of the .emacs (or init.el) file.
 (defun my-open-init ()
+  "Open my Emacs init file."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
 
@@ -3669,6 +3888,9 @@ and indent."
 ;; (add-hook 'prog-mode-hook (lambda ()
 ;;                             (fci-mode 1))) ; fci-mode is autloaded.
 
+
+(defvar-local company-fci-mode-on-p nil) ; put this in top level.
+                                         ; flycheck warning.
 (with-eval-after-load 'fill-column-indicator
   (setq fci-rule-column 80)
   (setq fci-rule-width 1)
@@ -3687,7 +3909,7 @@ and indent."
   (progn ;work-around issue where `fill-column-indicator' moves company
     ;; suggestion box.
     ;; TODO: handle for auto-complete too. It's on emacs.stackexchange.
-    (defvar-local company-fci-mode-on-p nil)
+    ;; (defvar-local company-fci-mode-on-p nil) ; moved to top level
 
     (defun company-turn-off-fci (&rest _ignore)
       (when (boundp 'fci-mode)
@@ -4048,7 +4270,7 @@ and indent."
 (defun my-narrow-to-region-indirect (start end)
   "Restrict editing in this buffer to the current region, indirectly.
 Region defined by START and END is automaticallyl detected by
-(interactive \"r\")."
+\(interactive \"r\"\)."
   (interactive "r")
   (deactivate-mark)
   (let ((buf-clone (clone-indirect-buffer nil nil))
@@ -4067,6 +4289,9 @@ Region defined by START and END is automaticallyl detected by
              (font-lock-mode))))
 
 (defun my-narrow-to-region (start end)
+  "Narrow to region and invoke an Emacs mode.
+START of region.
+END of region."
   (interactive "r")
   (deactivate-mark)
   (let ((mode (intern (completing-read
@@ -4462,6 +4687,7 @@ START and END define the region."
 ;;; popup eval result for emacs lisp.  For leader-E key.
 ;;;-----------------------------------------------------------------------------
 (defun my-eval-last-sexp ()
+  "Eval the last sybmolic expresion.  Return the value as a string."
   (interactive)
   (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
     (prin1-to-string val)))
@@ -4470,26 +4696,23 @@ START and END define the region."
 (cond
  ;; cider overlays
  (my-fancy-overlay-p
-  (setq my-eval-last-sexp-display
-        (defun my-eval-last-sexp-display ()
-          (interactive)
-          (call-interactively #'eval-last-sexp))))
+  (defun my-eval-last-sexp-display ()
+    (interactive)
+    (call-interactively #'eval-last-sexp)))
  ;; popup
  (my-graphic-p
-  (setq my-eval-last-sexp-display
-        (defun my-eval-last-sexp-display ()
-          (interactive)
-          ;; (clippy-say (my-eval-last-sexp))
-          (pos-tip-show (my-eval-last-sexp)))))
+  (defun my-eval-last-sexp-display ()
+    (interactive)
+    ;; (clippy-say (my-eval-last-sexp))
+    (pos-tip-show (my-eval-last-sexp))))
  (t ; else in a terminal, no fancy
-  (setq my-eval-last-sexp-display
-        (defun my-eval-last-sexp-display ()
-          (interactive)
-          (save-excursion
-            (evil-append 1)
-            (default-indent-new-line)
-            (eval-last-sexp t)    ; t to insert result in buffer.
-            (evil-normal-state))))))
+  (defun my-eval-last-sexp-display ()
+    (interactive)
+    (save-excursion
+      (evil-append 1)
+      (default-indent-new-line)
+      (eval-last-sexp t)    ; t to insert result in buffer.
+      (evil-normal-state)))))
 
 (when my-use-evil-p
   ;; evalate lisp expression. Insert result on a new line.
@@ -4647,7 +4870,7 @@ START and END define the region."
              (delete-process process)
              (revert-buffer))
             (t
-             (error "no process at point!")))))
+             (error "No process at point!")))))
 
   (define-key process-menu-mode-map (kbd "C-k") #'my-delete-process-at-point))
 
@@ -4979,7 +5202,7 @@ START and END define the region."
 ;;; follow-mode
 ;;;-----------------------------------------------------------------------------
 (defun my-follow-mode ()
-  "Gets the windows set up for follow mode, then turns it on."
+  "Get the windows set up for `follow-mode', then turn it on."
   (interactive)
   (delete-other-windows)
   (split-window-horizontally)
@@ -5378,14 +5601,18 @@ vanilla javascript buffers."
 ;;; horizontal scrolling
 ;;;-----------------------------------------------------------------------------
 (defun my-scroll-left ()
+  "Scroll left."
   (interactive)
   (my-scroll-horizontal #'scroll-left))
 
 (defun my-scroll-right ()
+  "Scroll right."
   (interactive)
   (my-scroll-horizontal #'scroll-right))
 
 (defun my-scroll-horizontal (scroll-fn)
+  "Scroll 25% of the window width.
+SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
   (let ((cols (floor (* 0.25 (window-total-width)))))
     (funcall scroll-fn cols)
     ;; TODO: ensure point is moved to a visible character to make subsequent
@@ -5453,6 +5680,7 @@ It is slow in large buffers."
              "c:/users/mtz/scratch/emacs/src")))
 
 (defun my-win-count ()
+  "Calculate the number of windows in the current frame."
   (length (window-list))
   ;; (cl-loop for w being the windows of (selected-frame)
   ;;          sum 1)
@@ -5463,7 +5691,8 @@ It is slow in large buffers."
   ;;cant_i_convert_to_you/
   "Find end of shell buffer or create one by splitting the current window.
 If shell is already displayed in current frame, delete other windows
-in frame.  Stop displaying shell in all other windows."
+in frame.  Stop displaying shell in all other windows.
+SHELL-ONLY will be documented later."
   (interactive)
   (let* ((shellbuf (get-buffer "*shell*")))
     (if (or (eq (window-buffer) shellbuf) shell-only)
@@ -5544,8 +5773,9 @@ in frame.  Stop displaying shell in all other windows."
 
 ;; delete spaces between words
 (defun my-cycle-spacing ()
-  "Same as `cycle-spacing', but uses fast mode. This deletes the space if there
-is only 1 space. Otherwise it would do nothing on the first call."
+  "Call `cycle-spacing', using fast mode.
+This deletes the space if there is only 1 space.  Otherwise it would do nothing
+on the first call."
   (interactive)
   (cycle-spacing current-prefix-arg nil 'fast))
 (global-set-key (kbd "M-\\") #'my-cycle-spacing)

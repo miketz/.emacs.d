@@ -2731,15 +2731,17 @@ and indent."
              (setq tab-width 4)
              (setq indent-tabs-mode nil)
              (when mutate-buffer-p
-               (mark-whole-buffer)
-               (call-interactively #'untabify)))
+               ;; (mark-whole-buffer)
+               ;; (call-interactively #'untabify)
+               (untabify (point-min) (point-max))))
             ((eq tab-style 'linux)
              (setq c-basic-offset 8)
              (setq tab-width 8)
              (setq indent-tabs-mode t)
              (when mutate-buffer-p
-               (mark-whole-buffer)
-               (call-interactively #'tabify))))
+               ;; (mark-whole-buffer)
+               ;; (call-interactively #'tabify)
+               (tabify (point-min) (point-max)))))
       (when mutate-buffer-p
         (indent-region (point-min) (point-max)))))
 
@@ -3926,7 +3928,7 @@ and indent."
 ;; ;;make fci compatible with emacs built-in variable `show-trailing-whitespace'
 ;; ;;TODO: it doesn't seem to be working!
 ;; ;;TODID: used "white-space-mode" instead of `show-trailing-whitespace'.
-;; (setq whitespace-style '(face trailing))   
+;; (setq whitespace-style '(face trailing))
 
 ;;;-----------------------------------------------------------------------------
 ;;; flycheck
@@ -4686,11 +4688,18 @@ START and END define the region."
 ;;;-----------------------------------------------------------------------------
 ;;; popup eval result for emacs lisp.  For leader-E key.
 ;;;-----------------------------------------------------------------------------
-(defun my-eval-last-sexp ()
-  "Eval the last sybmolic expresion.  Return the value as a string."
-  (interactive)
-  (let ((val (eval (eval-sexp-add-defvars (preceding-sexp)) lexical-binding)))
-    (prin1-to-string val)))
+(let ((preceding-sexp-fn (if (< emacs-major-version 25)
+                             ;; don't hash-quote `preceding-sexp' to trick
+                             ;; flycheck and suppress warning.
+                             'preceding-sexp
+                           #'elisp--preceding-sexp)))
+  (defun my-eval-last-sexp ()
+    "Eval the last sybmolic expresion.  Return the value as a string.
+Closure over `preceding-sexp-fn'."
+    (interactive)
+    (let ((val (eval (eval-sexp-add-defvars (funcall preceding-sexp-fn))
+                     lexical-binding)))
+      (prin1-to-string val))))
 
 (autoload 'pos-tip-show "pos-tip" nil t)
 (cond
@@ -4910,9 +4919,6 @@ START and END define the region."
                   ;; for indentation becuase spaces before a tab are invisible
                   ;; if they don't overflow the tab-stop.
                   space-before-tab::tab)))
-
- 	;; sample: space before a tab.
-;; sample: traliing white space.  
 
 (with-eval-after-load 'prog-mode
   (defun my-setup-prog-mode ()

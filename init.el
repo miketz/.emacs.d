@@ -136,7 +136,7 @@ in case that file does not provide any feature."
 ;;;-----------------------------------------------------------------------------
 ;; eval-when-compile used to prevent flycheck `cl' warning, but only works for
 ;; macros?
-(require 'cl)
+(require 'cl-lib)
 
 (cl-defmacro my-time-task (&body body)
   "Wrap around code to time how long it takes to execute."
@@ -235,7 +235,7 @@ Since it is used everywhere and won't change.")
 ;; TODO: support cua.
 (defvar my-ui-type 'evil
   "The user interface type I'm currently using.
-Choices: evil emacs cua")
+Choices: `evil' `emacs' `cua'")
 
 (defvar my-use-evil-p (eq my-ui-type 'evil)
   "Whether i'm using evil at the moment or not.
@@ -513,8 +513,8 @@ Installs packages in the list `my-packages'."
 
   ;; install the missing packages
   (dolist (obj my-packages)
-    (let ((pkg (first obj))
-          (installp (second obj)))
+    (let ((pkg (cl-first obj))
+          (installp (cl-second obj)))
       (when installp
         (unless (package-installed-p pkg)
           (package-install pkg))))))
@@ -536,7 +536,7 @@ Like `package-list-packages', but only show packages that are installed and not
 in `my-packages'.  Useful for cleaning out unwanted packages."
   (interactive)
   (package-show-package-list
-   (let ((my-packs (mapcar #'first my-packages)))
+   (let ((my-packs (mapcar #'cl-first my-packages)))
      (remove-if-not (lambda (x)
                       (and (not (memq x my-packs))
                            (not (package-built-in-p x))
@@ -930,10 +930,12 @@ Closure over `curr-font-size'."
       (message (int-to-string new-size)))))
 
 (defun my-change-font-size-bigger ()
+  "Make font size bigger."
   (interactive)
   (my-change-font-size 1)) ;; TODO: calculate "threshold" step increment.
 
 (defun my-change-font-size-smaller ()
+  "Make font size smaller."
   (interactive)
   (my-change-font-size -1)) ;; TODO: calculate "threshold" step decrement.
 
@@ -1001,10 +1003,9 @@ This prevents overlapping themes; something I would rarely want."
 (defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
 (defvar my-charcoal "#35352B" "Expirimental dark background color.")
 (defvar my-peach "#fff9F5"
-  "Attempt to re-create what peachpuff looked like on an old monitor.")
+  "Re-create what peachpuff looked like on an old monitor.")
 (defvar my-ultimate "#fffeFa"
-  "Attempt to re-create what my \"ultimate\" color looked like on an old
-monitor.")
+  "Re-create what my \"ultimate\" color looked like on an old monitor.")
 
 
 
@@ -1078,6 +1079,7 @@ Closure over `inverse-video-p'"
         (set-face-attribute f nil :inverse-video inverse-video-p)))))
 
 (defun my-load-theme-inverse (&optional theme)
+  "Set THEME to inverse of itself."
   (interactive)
   (when (null theme)
     (setq theme (intern (completing-read "theme: "
@@ -1141,7 +1143,7 @@ Closure over `inverse-video-p'"
       (when (or (> alpha 100)
                 (< alpha 0))
         (message (int-to-string curr-alpha))
-        (return-from my-set-alpha))
+        (cl-return-from my-set-alpha))
       (setq curr-alpha alpha)
       (set-frame-parameter (selected-frame) 'alpha
                            `(,curr-alpha ,curr-alpha))
@@ -2801,8 +2803,8 @@ and indent."
            (insert (format header-fmt vars)))
           ;; examples
           ((listp vars)
-           (let ((keybinds (first vars))
-                 (cmd-name (second vars))
+           (let ((keybinds (cl-first vars))
+                 (cmd-name (cl-second vars))
                  (examples (cddr vars)))
              ;; cmd-name
              (insert (format ";;----------------------\n;; %s\n"
@@ -3830,7 +3832,7 @@ and indent."
 ;;       (dolist (v vals)
 ;;         (when (memq v lst)
 ;;           (setq has-a-tag-p t)
-;;           (return-from check))))
+;;           (cl-return-from check))))
 ;;     has-a-tag-p))
 
 
@@ -4149,7 +4151,7 @@ Region defined by START and END is automaticallyl detected by
 ;; delay execution of this code until `web-mode' is turned on.
 (with-eval-after-load 'web-mode
   ;;needed to bind a key for `js2-mode-map'.
-  ;;(require 'cl) is also needed but occurs higher up in this file.
+  ;;(require 'cl-lib) is also needed but occurs higher up in this file.
   (require 'js2-mode)
 
   (defun my-js2-mode-on-region (start end)
@@ -4159,7 +4161,7 @@ Region defined by START and END is automaticallyl detected by
     (narrow-to-region start end)
     (js2-mode))
 
-  (cl-defun my-focus-javascript () ;using `cl-defun' to allow `return-from'
+  (cl-defun my-focus-javascript () ;using `cl-defun' to allow `cl-return-from'
     "Automatcially narrow between <script> tags, then turn on js2-mode."
     (interactive)
     (save-excursion ;; don't allow tag searches to mess with cursor position.
@@ -4175,12 +4177,12 @@ Region defined by START and END is automaticallyl detected by
           (setq start (search-forward start-tag-name nil t)))
         (when (null start)
           (message "start tag not found")
-          (return-from my-focus-javascript nil))
+          (cl-return-from my-focus-javascript nil))
         ;;start is found, move to the closing bracket >
         (let ((end-of-start (search-forward ">" nil t)))
           (when (null end-of-start)
             (message "start tag not found")
-            (return-from my-focus-javascript nil)))
+            (cl-return-from my-focus-javascript nil)))
         ;; start highlighitng
         ;; (next-line)
         ;; (move-beginning-of-line nil)
@@ -4190,11 +4192,11 @@ Region defined by START and END is automaticallyl detected by
         (when (null end)
           (deactivate-mark)
           (message "end tag not found")
-          (return-from my-focus-javascript nil))
+          (cl-return-from my-focus-javascript nil))
         (let ((start-of-end (search-backward "<" nil t)))
           (when (null start-of-end)
             (message "end tag not found")
-            (return-from my-focus-javascript nil)))
+            (cl-return-from my-focus-javascript nil)))
         ;;end tag is found.
         ;; (previous-line)
         ;; (move-end-of-line nil)
@@ -4218,12 +4220,12 @@ buffer instead of narrowing."
           (setq start (search-forward start-tag-name nil t)))
         (when (null start)
           (message "start tag not found")
-          (return-from my-focus-javascript nil))
+          (cl-return-from my-focus-javascript nil))
         ;;start is found, move to the closing bracket >
         (let ((end-of-start (search-forward ">" nil t)))
           (when (null end-of-start)
             (message "start tag not found")
-            (return-from my-focus-javascript nil)))
+            (cl-return-from my-focus-javascript nil)))
         ;; start highlighitng
         ;; (next-line)
         ;; (move-beginning-of-line nil)
@@ -4233,11 +4235,11 @@ buffer instead of narrowing."
         (when (null end)
           (deactivate-mark)
           (message "end tag not found")
-          (return-from my-focus-javascript nil))
+          (cl-return-from my-focus-javascript nil))
         (let ((start-of-end (search-backward "<" nil t)))
           (when (null start-of-end)
             (message "end tag not found")
-            (return-from my-focus-javascript nil)))
+            (cl-return-from my-focus-javascript nil)))
         ;;end tag is found.
         ;; (previous-line)
         ;; (move-end-of-line nil)
@@ -5583,12 +5585,12 @@ is only 1 space. Otherwise it would do nothing on the first call."
 ;;   (let ((i 0))
 ;;     (while (< i 10)
 ;;       (insert-image nyan-prompt-nyan-cat-image)
-;;       (incf i)))
+;;       (cl-incf i)))
 ;;   (insert "\n\n")
 ;;   (let ((i 0))
 ;;     (while (< i 10)
 ;;       (insert-image nyan-prompt-nyan-cat-image)
-;;       (incf i))))
+;;       (cl-incf i))))
 
 
 ;;transparent

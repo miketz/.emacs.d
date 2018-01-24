@@ -21,14 +21,14 @@ The code is added to a list which can be invoked in the future with fn
   (declare (indent 0)) ;; indent like progn
   (if my-fast-load-p
       ;; don't expand/execute the code. Just add it to a list.
-      (loop for form in body ;; looping to sort of "splice" `body'
-            do
-            (add-to-list 'my--delayed-package-code form t))
+      (cl-loop for form in body ;; looping to sort of "splice" `body'
+               do
+               (add-to-list 'my--delayed-package-code form t))
     ;; else, expand to normal code for immediate execution.
     (let ((code '()))
-      (loop for form in body
-            do
-            (add-to-list 'code form t))
+      (cl-loop for form in body
+               do
+               (add-to-list 'code form t))
       `(funcall (lambda () ,@code)))))
 
 (defun my-do-full-init-with-packages ()
@@ -52,13 +52,13 @@ The code is added to a list which can be invoked in the future with fn
 
 ;;   (my-top-level-package-code
 ;;     (print "hi")
-;;     (incf glob))
+;;     (cl-incf glob))
 
 ;;   glob
 
 ;;   (macroexpand
 ;;    '(my-top-level-package-code
-;;       (incf glob)))
+;;       (cl-incf glob)))
 
 
 ;;   (my-do-full-init-with-packages))

@@ -9,13 +9,13 @@
 (defvar my-test-funcs '()
   "List of all test functions.")
 
-(cl-defun my-run-all-tests () ;;using `cl-defun' to allow `return-from'
+(cl-defun my-run-all-tests () ;;using `cl-defun' to allow `cl-return-from'
   "Runs all defined tests."
   (interactive)
   (when (null my-test-funcs)
     (let ((msg "no tests"))
       (message msg)
-      (return-from my-run-all-tests msg)))
+      (cl-return-from my-run-all-tests msg)))
   (dolist (test my-test-funcs)
     (message (concat "running " (symbol-name test)))
     (funcall test))

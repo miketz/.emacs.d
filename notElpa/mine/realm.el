@@ -101,7 +101,7 @@ KEY-BIND-UNFOCUS => to leave the realm and set appropriate modes."
     `(with-eval-after-load (symbol-name ,base-mode)
        ;;load mode library so we can bind keys.
        (require ,focus-mode)
-       ;;using `cl-defun' to allow `return-from'
+       ;;using `cl-defun' to allow `cl-return-from'
        (cl-defun ,fn-focus-name ()
          (interactive)
          (let ((start-tag-name ,tag-start)
@@ -116,7 +116,7 @@ KEY-BIND-UNFOCUS => to leave the realm and set appropriate modes."
              (setq start (search-forward start-tag-name nil t)))
            (when (null start)
              (message "start tag not found")
-             (return-from my-focus-javascript nil))
+             (cl-return-from my-focus-javascript nil))
            ;;start is found, move cursor down a line, start highlighitng
            (next-line)
            (move-beginning-of-line nil)
@@ -126,7 +126,7 @@ KEY-BIND-UNFOCUS => to leave the realm and set appropriate modes."
            (when (null end)
              (deactivate-mark)
              (message "end tag not found")
-             (return-from my-focus-javascript nil))
+             (cl-return-from my-focus-javascript nil))
            ;;end tag is found. now move cursor up one line
            (previous-line)
            (move-end-of-line nil)

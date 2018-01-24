@@ -168,9 +168,9 @@ Assums a vertically stacked display of the list.
             (let ((val (nth i lst)))
               (when (not (null val));last col may have empty slots to be skipped
                 (setq column (append column (list val)))))
-            (incf i))
+            (cl-incf i))
           (setq lst-of-columns (cons column lst-of-columns)))
-        (incf c))
+        (cl-incf c))
       (reverse lst-of-columns)))
 
   (defun my-get-longest-forEachCol (lst num-cols) ;;PASS

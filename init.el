@@ -348,6 +348,13 @@ in case that file does not provide any feature."
 (defvar global-hl-line-sticky-flag)
 (defvar show-paren-delay)
 
+;; suppress warnings on functions from files not yet loaded.
+(declare-function swiper 'swiper)
+(declare-function helm-swoop 'helm-swoop)
+(declare-function helm-keyboard-quit 'helm)
+(declare-function mor-copy-back 'mode-on-region)
+(declare-function mor-close-tmp-buffer 'mode-on-region)
+
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
 ;;;-----------------------------------------------------------------------------

@@ -819,7 +819,8 @@ Closure over executed-p."
       (load (concat custom-theme-directory "base16-theme"))
       (load (concat custom-theme-directory "solarized"))
       (load (concat custom-theme-directory "solarized-theme-utils"))
-      (when nil ;; this actually turns on zonokai so don't run this automatically.
+      (when nil
+        ;; this actually turns on zonokai so don't run this automatically.
         (load (concat custom-theme-directory "zonokai")))
       (load (concat custom-theme-directory "alect-themes"))
       (load (concat custom-theme-directory "doom-themes"))

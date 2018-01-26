@@ -347,6 +347,7 @@ in case that file does not provide any feature."
 (defvar hl-line-sticky-flag)
 (defvar global-hl-line-sticky-flag)
 (defvar show-paren-delay)
+(defvar w32-pipe-read-delay)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -632,6 +633,7 @@ in case that file does not provide any feature."
 (declare-function evil-backward-char 'suppress)
 (declare-function evil-window-right 'suppress)
 (declare-function my-square-one 'suppress)
+(declare-function w32-send-sys-command 'suppress)
 
 
 ;;;-----------------------------------------------------------------------------

@@ -121,6 +121,9 @@ in case that file does not provide any feature."
 ;;; compile init.el then look for the warning "Unused lexical variable".
 ;;; NOTE: It's useful to include a redundant defvar even if the var is not used
 ;;; in a `let'. Just to remove the warnings about free variables.
+;;; NOTE: buffer local dynamic vars are also defvar'd here. Since no value is
+;;; provided it should not affect their local status when they are
+;;; "defvarlocal'd" later.
 ;;;-----------------------------------------------------------------------------
 ;; let bound dynamic vars. ensure they are bound dynamically
 (defvar mor-format-automatically-p)
@@ -176,9 +179,7 @@ in case that file does not provide any feature."
 (defvar company-active-map)
 (defvar company-candidates-length)
 (defvar company-tooltip-minimum-width)
-;; `company-candidates' is buffer-local. The defvar is just to flag it as
-;; dynamic. It hould still become buffer-local after `company' is loaded.
-(defvar company-candidates)
+(defvar company-candidates) ; buffer-local
 (defvar company-idle-delay)
 (defvar company-minimum-prefix-length)
 (defvar company-tooltip-limit)
@@ -348,6 +349,7 @@ in case that file does not provide any feature."
 (defvar global-hl-line-sticky-flag)
 (defvar show-paren-delay)
 (defvar w32-pipe-read-delay)
+(defvar company-selection) ; buffer-local
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -634,6 +636,7 @@ in case that file does not provide any feature."
 (declare-function evil-window-right 'suppress)
 (declare-function my-square-one 'suppress)
 (declare-function w32-send-sys-command 'suppress)
+(declare-function my-company-M-r 'suppress)
 
 
 ;;;-----------------------------------------------------------------------------

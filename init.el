@@ -2034,7 +2034,9 @@ Closure over `inverse-video-p'"
 
   (defvar my--company-pos 'top)
   (defun my-company-M-r ()
-    ;; TODO: finish implementation.
+    ;; TODO: handle issue where an odd scroll postion forces a small scroll
+    ;; relative to the current selection. If curr `company-selection' is near
+    ;; the bottom of the scroll window, it will warp to the top.
     ;; TODO: reset `my--company-pos' to `top' after M-r keypress chain is
     ;; stopped.
     "Jump to the  mid/bot/top of the currently displayed company candidates.
@@ -2052,17 +2054,16 @@ This is an unfinished attempt to simulate the behavior of function
     (let* ((page-size (if (< company-candidates-length company-tooltip-limit)
                           company-candidates-length
                         company-tooltip-limit))
-           ;; TODO: company-selection does not change as the user scrolls
-           ;; over candidates. Must get row-num a different way.
            (row-num       company-selection)
            (offset-curr   (mod row-num page-size))
            (offset-target (cond ((eq my--company-pos 'top) 0)
                                 ((eq my--company-pos 'mid) (1- (/ page-size 2)))
                                 ((eq my--company-pos 'bot) (1- page-size))))
            (move-cnt      (- offset-target
-                             offset-curr)))
+                             offset-curr))
+           (row-num-target (+ row-num move-cnt)))
       ;; the jump
-      (company-set-selection (+ offset-curr move-cnt))))
+      (company-set-selection row-num-target)))
   (define-key company-active-map (kbd "M-r") #'my-company-M-r)
 
 

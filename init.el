@@ -3092,11 +3092,12 @@ and indent."
     ;; code by default.
     (setq comment-column 1)             ; buffer local
 
-    (unless (eq system-type 'windows-nt)
-      ;; sometime in early March 2016, flycheck became very slow on
-      ;; Windows for C.
-      ;; TODO: find the problem, fix it. Commit upstream if relevant.
-      (flycheck-mode 1))
+    (when nil ; don't turn on flycheck for now.
+      (unless (eq system-type 'windows-nt)
+        ;; sometime in early March 2016, flycheck became very slow on
+        ;; Windows for C.
+        ;; TODO: find the problem, fix it. Commit upstream if relevant.
+        (flycheck-mode 1)))
 
     (electric-spacing-mode 1)
     (fci-mode 1))

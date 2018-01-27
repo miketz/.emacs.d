@@ -2029,6 +2029,39 @@ Closure over `inverse-video-p'"
   (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
+  (defvar my--company-pos 'top)
+  (defun my-company-M-r ()
+    ;; TODO: finish implementation.
+    ;; TODO: reset `my--company-pos' to `top' after M-r keypress chain is
+    ;; stopped.
+    "Jump to the  mid/bot/top of the currently displayed company candidates.
+Cycles between 3 locations mid/bot/top.
+This is an unfinished attempt to simulate the behavior of function
+`move-to-window-line-top-bottom' (M-r) in normal buffers."
+    (interactive)
+    ;; advance to next target position
+    (setq my--company-pos
+          (cond ((eq my--company-pos 'top) 'mid)
+                ((eq my--company-pos 'mid) 'bot)
+                ((eq my--company-pos 'bot) 'top)
+                (t 'mid)))
+    ;; jump to target.
+    (let* ((page-size (if (< company-candidates-length company-tooltip-limit)
+                          company-candidates-length
+                        company-tooltip-limit))
+           ;; TODO: company-selection does not change as the user scrolls
+           ;; over candidates. Must get row-num a different way.
+           (row-num       company-selection)
+           (offset-curr   (mod row-num page-size))
+           (offset-target (cond ((eq my--company-pos 'top) 0)
+                                ((eq my--company-pos 'mid) (1- (/ page-size 2)))
+                                ((eq my--company-pos 'bot) (1- page-size))))
+           (move-cnt      (- offset-target
+                             offset-curr)))
+      ;; the jump
+      (company-set-selection (+ offset-curr move-cnt))))
+  (define-key company-active-map (kbd "M-r") #'my-company-M-r)
+
 
   (defun my--company-set-min-width (&rest _ignored-hook-args)
     "Calculate width big enough for the largest candidate and set it.

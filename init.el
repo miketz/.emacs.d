@@ -2037,24 +2037,25 @@ Closure over `inverse-video-p'"
   (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
-  (defvar my--company-pos 'top)
+  (defvar my--company-pos nil)
   (defun my-company-M-r ()
     ;; TODO: handle issue where an odd scroll postion forces a small scroll
     ;; relative to the current selection. If curr `company-selection' is near
     ;; the bottom of the scroll window, it will warp to the top.
-    ;; TODO: reset `my--company-pos' to `top' after M-r keypress chain is
-    ;; stopped.
     "Jump to the  mid/bot/top of the currently displayed company candidates.
 Cycles between 3 locations mid/bot/top.
 This is an unfinished attempt to simulate the behavior of function
 `move-to-window-line-top-bottom' (M-r) in normal buffers."
     (interactive)
-    ;; advance to next target position
-    (setq my--company-pos
-          (cond ((eq my--company-pos 'top) 'mid)
-                ((eq my--company-pos 'mid) 'bot)
-                ((eq my--company-pos 'bot) 'top)
-                (t 'mid)))
+    (if (eq this-command last-command) ; if repeat
+        ;; advance to next target position in cycle.
+        (setq my--company-pos
+              (cond ((eq my--company-pos 'top) 'mid)
+                    ((eq my--company-pos 'mid) 'bot)
+                    ((eq my--company-pos 'bot) 'top)
+                    (t 'mid)))
+      ;; else not a repeat. go to mid as the first jump.
+      (setq  my--company-pos 'mid))
     ;; jump to target.
     (let* ((page-size (if (< company-candidates-length company-tooltip-limit)
                           company-candidates-length

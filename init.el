@@ -2057,7 +2057,7 @@ This is an unfinished attempt to simulate the behavior of function
            (row-num       company-selection)
            (offset-curr   (mod row-num page-size))
            (offset-target (cond ((eq my--company-pos 'top) 0)
-                                ((eq my--company-pos 'mid) (1- (/ page-size 2)))
+                                ((eq my--company-pos 'mid) (/ page-size 2))
                                 ((eq my--company-pos 'bot) (1- page-size))))
            (move-cnt      (- offset-target
                              offset-curr))

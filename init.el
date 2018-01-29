@@ -2053,6 +2053,8 @@ Similar to `move-to-window-line-top-bottom' (M-r) in normal buffers."
       ;; else not a repeat. go to mid as the first jump.
       (setq  my--company-pos 'mid))
     ;; jump to target.
+    ;; TODO: in page-size caluculation, detect situation where small window
+    ;; causes a smaller displayed page size.
     (let* ((page-size (if (< company-candidates-length company-tooltip-limit)
                           company-candidates-length
                         company-tooltip-limit))

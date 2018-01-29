@@ -2015,6 +2015,7 @@ Closure over `inverse-video-p'"
   ;; unbind C-h. it interfere's with C-h k to lookup what is bound.
   (define-key company-active-map (kbd "C-h") nil)
   (define-key company-active-map (kbd "C-SPC") #'company-complete-common)
+  (define-key company-active-map (kbd "SPC") #'company-complete-common)
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)

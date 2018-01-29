@@ -2021,7 +2021,7 @@ Closure over `inverse-video-p'"
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)
   ;; expands till -. Completes after that.
   (define-key company-active-map (kbd "C-<tab>") #'company-complete-common)
-  ;; (define-key company-active-map (kbd "<tab>") #'company-complete-common)
+  (define-key company-active-map (kbd "<tab>") #'company-complete)
   ;; would be default, but my other keymap killed this
   (define-key company-active-map (kbd "C-v") #'company-next-page)
   ;; default, but set just in case.

@@ -2012,11 +2012,14 @@ Closure over `inverse-video-p'"
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
     )
+  ;; unbind C-h. it interfere's with C-h k to lookup what is bound.
+  (define-key company-active-map (kbd "C-h") nil)
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)
   ;; expands till -. Completes after that.
-  (define-key company-active-map (kbd "<tab>") #'company-complete)
+  (define-key company-active-map (kbd "C-<tab>") #'company-complete-common)
+  ;; (define-key company-active-map (kbd "<tab>") #'company-complete-common)
   ;; would be default, but my other keymap killed this
   (define-key company-active-map (kbd "C-v") #'company-next-page)
   ;; default, but set just in case.

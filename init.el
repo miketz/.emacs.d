@@ -2039,13 +2039,9 @@ Closure over `inverse-video-p'"
 
   (defvar my--company-pos nil)
   (defun my-company-M-r ()
-    ;; TODO: handle issue where an odd scroll postion forces a small scroll
-    ;; relative to the current selection. If curr `company-selection' is near
-    ;; the bottom of the scroll window, it will warp to the top.
     "Jump to the  mid/bot/top of the currently displayed company candidates.
 Cycles between 3 locations mid/bot/top.
-This is an unfinished attempt to simulate the behavior of function
-`move-to-window-line-top-bottom' (M-r) in normal buffers."
+Similar to `move-to-window-line-top-bottom' (M-r) in normal buffers."
     (interactive)
     (if (eq this-command last-command) ; if repeat
         ;; advance to next target position in cycle.
@@ -2060,13 +2056,10 @@ This is an unfinished attempt to simulate the behavior of function
     (let* ((page-size (if (< company-candidates-length company-tooltip-limit)
                           company-candidates-length
                         company-tooltip-limit))
-           (row-num       company-selection)
-           (offset-curr   (mod row-num page-size))
-           (offset-target (cond ((eq my--company-pos 'top) 0)
-                                ((eq my--company-pos 'mid) (/ page-size 2))
-                                ((eq my--company-pos 'bot) (1- page-size))))
-           (move-cnt      (- offset-target
-                             offset-curr))
+           (row-num   company-tooltip-offset) ; lines-above
+           (move-cnt  (cond ((eq my--company-pos 'top) 0)
+                            ((eq my--company-pos 'mid) (/ page-size 2))
+                            ((eq my--company-pos 'bot) (1- page-size))))
            (row-num-target (+ row-num move-cnt)))
       ;; the jump
       (company-set-selection row-num-target)))

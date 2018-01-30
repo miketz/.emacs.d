@@ -2022,7 +2022,7 @@ Closure over `inverse-video-p'"
     "Return the page size of the actively dispalyed company popup."
     ;; page-size-pseudo gives the correct page size when a small window forces
     ;; a smaller company popup.
-    (let* ((page-size-pseudo (company--pseudo-tooltip-height))
+    (let* ((page-size-pseudo (abs (company--pseudo-tooltip-height)))
            (page-size-normal (if (< company-candidates-length
                                     company-tooltip-limit)
                                  company-candidates-length

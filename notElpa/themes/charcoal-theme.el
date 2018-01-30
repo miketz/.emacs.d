@@ -24,6 +24,7 @@
 ;; If you give it a value with `setq' it will remember the value each time you
 ;; turn on the color theme.
 (defvar *charcoal-color-cnt*)
+(defvar ibuffer-filter-group-name-face)
 
 (let* ((class        t)
        (cnt          (if (boundp '*charcoal-color-cnt*)
@@ -126,6 +127,14 @@
    `(pos-tip-foreground-color ,fg-green)
    `(pos-tip-background-color ,bg-green))
 
+  (progn
+    ;; old fashioned setq's. `custom-theme-set-variables' does not seem to work
+    ;; for some packages.
+
+    ;; ibuffer
+    (setq ibuffer-filter-group-name-face `((,class :weight bold
+                                                   :foreground ,fg
+                                                   :background "black"))))
 
   (custom-theme-set-faces
    'charcoal

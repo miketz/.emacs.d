@@ -9,7 +9,7 @@
 ;;; 256 color tested on linux in gnome-terminal
 ;;; 16 color tested on ms-windows in cmd.exe
 ;;; 8 color tested on linux in text mode
-;;; 8 color is messed up on linux in xterm. TODO: handle it
+;;; 8 color is messed up on linux in xterm.  TODO: handle it
 
 ;;; Code:
 

@@ -350,6 +350,7 @@ in case that file does not provide any feature."
 (defvar show-paren-delay)
 (defvar w32-pipe-read-delay)
 (defvar company-selection) ; buffer-local
+(defvar company-tooltip-offset) ; buffer-local
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -637,7 +638,11 @@ in case that file does not provide any feature."
 (declare-function my-square-one 'suppress)
 (declare-function w32-send-sys-command 'suppress)
 (declare-function my-company-M-r 'suppress)
-
+(declare-function company--pseudo-tooltip-height 'suppress)
+(declare-function my-company-page-size 'suppress)
+(declare-function my-company-next-page 'suppress)
+(declare-function my-company-previous-page 'suppress)
+(declare-function company-complete-common 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -2012,6 +2017,48 @@ Closure over `inverse-video-p'"
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
     )
+
+  (defun my-company-page-size ()
+    "Return the page size of the actively dispalyed company popup."
+    ;; page-size-pseudo gives the correct page size when a small window forces
+    ;; a smaller company popup.
+    (let* ((page-size-pseudo (company--pseudo-tooltip-height))
+           (page-size-normal (if (< company-candidates-length
+                                    company-tooltip-limit)
+                                 company-candidates-length
+                               company-tooltip-limit))
+           (page-size        (if (< page-size-pseudo page-size-normal)
+                                 page-size-pseudo
+                               page-size-normal)))
+      page-size))
+
+  (defun my-company-next-page ()
+    "Copy of `company-next-page'.  But with different page size calucalation."
+    (interactive)
+    (when (company-manual-begin)
+      (if (and company-selection-wrap-around
+               (= company-selection (1- company-candidates-length)))
+          (company-set-selection 0)
+        (let (company-selection-wrap-around)
+          (company-set-selection
+           (+ company-selection
+              (my-company-page-size) ; company-tooltip-limit
+              ))))))
+
+  (defun my-company-previous-page ()
+    "Copy of `company-previous-page'.
+But with different page size calucalation."
+    (interactive)
+    (when (company-manual-begin)
+      (if (and company-selection-wrap-around
+               (zerop company-selection))
+          (company-set-selection (1- company-candidates-length))
+        (let (company-selection-wrap-around)
+          (company-set-selection
+           (- company-selection
+              (my-company-page-size) ; company-tooltip-limit
+              ))))))
+
   ;; unbind C-h. it interfere's with C-h k to lookup what is bound.
   (define-key company-active-map (kbd "C-h") nil)
   (define-key company-active-map (kbd "C-SPC") #'company-complete-common)
@@ -2023,9 +2070,9 @@ Closure over `inverse-video-p'"
   (define-key company-active-map (kbd "C-<tab>") #'company-complete-common)
   (define-key company-active-map (kbd "<tab>") #'company-complete)
   ;; would be default, but my other keymap killed this
-  (define-key company-active-map (kbd "C-v") #'company-next-page)
+  (define-key company-active-map (kbd "C-v") #'my-company-next-page)
   ;; default, but set just in case.
-  (define-key company-active-map (kbd "M-v") #'company-previous-page)
+  (define-key company-active-map (kbd "M-v") #'my-company-previous-page)
   (defun my-company-jump-to-first ()
     (interactive)
     (let ((company-selection-wrap-around nil))
@@ -2053,11 +2100,7 @@ Similar to `move-to-window-line-top-bottom' (M-r) in normal buffers."
       ;; else not a repeat. go to mid as the first jump.
       (setq  my--company-pos 'mid))
     ;; jump to target.
-    ;; TODO: in page-size caluculation, detect situation where small window
-    ;; causes a smaller displayed page size.
-    (let* ((page-size (if (< company-candidates-length company-tooltip-limit)
-                          company-candidates-length
-                        company-tooltip-limit))
+    (let* ((page-size (my-company-page-size))
            (row-num   company-tooltip-offset) ; lines-above
            (move-cnt  (cond ((eq my--company-pos 'top) 0)
                             ((eq my--company-pos 'mid) (/ page-size 2))

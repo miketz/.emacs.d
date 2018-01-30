@@ -351,6 +351,8 @@ in case that file does not provide any feature."
 (defvar w32-pipe-read-delay)
 (defvar company-selection) ; buffer-local
 (defvar company-tooltip-offset) ; buffer-local
+(defvar ibuffer-show-empty-filter-groups)
+(defvar ibuffer-saved-filter-groups)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -643,6 +645,8 @@ in case that file does not provide any feature."
 (declare-function my-company-next-page 'suppress)
 (declare-function my-company-previous-page 'suppress)
 (declare-function company-complete-common 'suppress)
+(declare-function my-setup-ibuffer-mode 'suppress)
+(declare-function ibuffer-switch-to-saved-filter-groups 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6014,7 +6018,32 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
   (add-hook 'css-mode-hook #'my-setup-css-mode))
 
 ;;;-----------------------------------------------------------------------------
-;;; Misc options. Keep this at the bottom
+;;; ibuffer
+;;;-----------------------------------------------------------------------------
+(global-set-key (kbd "C-x C-b") #'ibuffer) ; the way C-x C-b should be.
+
+(with-eval-after-load 'ibuffer
+  (setq ibuffer-show-empty-filter-groups nil) ; hide headers on empty groups
+  (setq ibuffer-saved-filter-groups
+        '(("lots" ; lots of groups
+           ("Magit" (name . "\.*magit"))
+           ("Emacs-conifg" (or (filename . ".emacs.d")
+                               (filename . "init.el")))
+           ("Web Dev" (or (mode . web-mode)
+                          (mode . html-mode)
+                          (mode . js2-mode)
+                          (mode . css-mode)))
+           ("ERC" (mode . erc-mode))
+           ("Help" (or (name . "\*Help\*")
+                       (name . "\*Apropos\*")
+                       (name . "\*info\*"))))))
+
+  (defun my-setup-ibuffer-mode ()
+    (ibuffer-switch-to-saved-filter-groups "lots"))
+  (add-hook 'ibuffer-mode-hook #'my-setup-ibuffer-mode))
+
+;;;-----------------------------------------------------------------------------
+;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (defun my-goto-line (line-num)
   "Docs say don't use `goto-line' in Lisp code.
@@ -6236,11 +6265,6 @@ on the first call."
     (evil-leader/set-key "b" #'switch-to-buffer)
     ;;(evil-leader/set-key "b" #'ibuffer)
     ))
-
-;;ibuffer. the way C-x C-b should be.
-(global-set-key (kbd "C-x C-b") #'ibuffer)
-
-
 
 ;; (setq-default column-number-mode 1) ; show/hide column # in mode line.
 (setq-default line-number-mode 0) ; show/hide line # in mode line.

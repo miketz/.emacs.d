@@ -6026,7 +6026,8 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
   (setq ibuffer-show-empty-filter-groups nil) ; hide headers on empty groups
   (setq ibuffer-saved-filter-groups
         '(("lots" ; lots of groups
-           ("Magit" (name . "\.*magit"))
+           ("Source control" (or (name . "^\*magit")
+                                 (name . "^\*vc")))
            ("Emacs-conifg" (or (filename . ".emacs.d")
                                (filename . "init.el")))
            ("Web Dev" (or (mode . web-mode)
@@ -6036,11 +6037,28 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
            ("ERC" (mode . erc-mode))
            ("Help" (or (name . "\*Help\*")
                        (name . "\*Apropos\*")
-                       (name . "\*info\*"))))))
+                       (name . "\*info\*")))
+           ("Special" (name . "^\*")))))
 
   (defun my-setup-ibuffer-mode ()
     (ibuffer-switch-to-saved-filter-groups "lots"))
-  (add-hook 'ibuffer-mode-hook #'my-setup-ibuffer-mode))
+  (add-hook 'ibuffer-mode-hook #'my-setup-ibuffer-mode)
+
+  (progn ;; advice for collapsing some groups by default. From emacswiki.
+
+    (defvar my-ibuffer-collapsed-groups '("Source control" "Special"))
+
+    (defadvice ibuffer (after collapse-helm)
+      (dolist (group my-ibuffer-collapsed-groups)
+        (progn
+          (goto-char 1)
+          (when (search-forward (concat "[ " group " ]") (point-max) t)
+            (progn
+              (move-beginning-of-line nil)
+              (ibuffer-toggle-filter-group)))))
+      (goto-char 1)
+      (search-forward "[ " (point-max) t))
+    (ad-activate 'ibuffer)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

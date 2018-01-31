@@ -353,6 +353,8 @@ in case that file does not provide any feature."
 (defvar company-tooltip-offset) ; buffer-local
 (defvar ibuffer-show-empty-filter-groups)
 (defvar ibuffer-saved-filter-groups)
+(defvar sql-product)
+(defvar sqlind-default-indentation-offsets-alist)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -991,7 +993,7 @@ Closure over executed-p."
      (nov t) ;; an epub reader
      (autothemer t) ;; dependency for some themes.
      (erc-hl-nicks t)
-     (sql-indent nil)
+     (sql-indent t)
      (vdiff nil))
    "Packages I use from elpa/melpa."))
 
@@ -3257,12 +3259,26 @@ and indent."
 ;; (dired-details-install)
 
 
+;;;-----------------------------------------------------------------------------
+;;; sql-indent
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'sql-indent
+  (setq-default sqlind-basic-offset 4)
+  (setq-default sqlind-indentation-offsets-alist
+                `((select-clause 0)
+                  (insert-clause 0)
+                  (delete-clause 0)
+                  (update-clause 0)
+                  (select-table-continuation 0)
+                  ,@sqlind-default-indentation-offsets-alist)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; sql-mode
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'sql
   (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
+
+  (setq sql-product 'ms) ; using sql server at the moment.
 
   (defun my-setup-sql ()
     (electric-pair-local-mode 1)
@@ -3274,8 +3290,7 @@ and indent."
     ;; turn off indent when you press "o" in evil. Buffer local
     (when my-use-evil-p
       (setq evil-auto-indent nil))
-    ;; (sqlind-minor-mode 1)
-    )
+    (sqlind-minor-mode 1))
 
   (add-hook 'sql-mode-hook #'my-setup-sql)
 
@@ -4238,11 +4253,6 @@ and indent."
 ;;                                 ;;:box t
 ;;                                 )))))
 
-;;;-----------------------------------------------------------------------------
-;;; sql-indent
-;;;-----------------------------------------------------------------------------
-;; (eval-after-load "sql"
-;;   '(load-library "sql-indent"))
 
 ;;;-----------------------------------------------------------------------------
 ;;; darkroom

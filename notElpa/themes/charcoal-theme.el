@@ -101,6 +101,11 @@
    `(evil-replace-state-cursor  '(hbar "orange red"))
    `(evil-motion-state-cursor   '(box "spring green"))
 
+   ;; ibuffer
+   `(ibuffer-filter-group-name-face '((t :weight bold
+                                         :foreground ,fg
+                                         :background "black")))
+
    ;; Duplicating the default vc-annotate colors for now.
    ;; TODO: tailor them for the bg.
    `(vc-annotate-color-map '((20 . "#FF3F3F")
@@ -126,15 +131,6 @@
    ;; pos-tip. Helper package for tooltip
    `(pos-tip-foreground-color ,fg-green)
    `(pos-tip-background-color ,bg-green))
-
-  (progn
-    ;; old fashioned setq's. `custom-theme-set-variables' does not seem to work
-    ;; for some packages.
-
-    ;; ibuffer
-    (setq ibuffer-filter-group-name-face `((,class :weight bold
-                                                   :foreground ,fg
-                                                   :background "black"))))
 
   (custom-theme-set-faces
    'charcoal

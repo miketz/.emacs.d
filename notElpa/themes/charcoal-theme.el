@@ -101,9 +101,9 @@
    `(evil-motion-state-cursor   '(box "spring green"))
 
    ;; ibuffer
-   `(ibuffer-filter-group-name-face '((t :weight bold
-                                         :foreground ,fg
-                                         :background "black")))
+   `(ibuffer-filter-group-name-face '((,class :weight bold
+                                              :foreground ,fg
+                                              :background "black")))
 
    ;; Duplicating the default vc-annotate colors for now.
    ;; TODO: tailor them for the bg.

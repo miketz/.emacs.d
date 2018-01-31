@@ -24,7 +24,6 @@
 ;; If you give it a value with `setq' it will remember the value each time you
 ;; turn on the color theme.
 (defvar *charcoal-color-cnt*)
-(defvar ibuffer-filter-group-name-face)
 
 (let* ((class        t)
        (cnt          (if (boundp '*charcoal-color-cnt*)

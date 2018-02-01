@@ -3270,6 +3270,7 @@ and indent."
                   (delete-clause 0)
                   (update-clause 0)
                   (select-table-continuation 0)
+                  (in-select-clause 0)
                   ,@sqlind-default-indentation-offsets-alist)))
 
 ;;;-----------------------------------------------------------------------------

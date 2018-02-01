@@ -641,7 +641,7 @@ in case that file does not provide any feature."
 (declare-function evil-window-right 'suppress)
 (declare-function my-square-one 'suppress)
 (declare-function w32-send-sys-command 'suppress)
-(declare-function my-company-M-r 'suppress)
+(declare-function my-company-cycle-position 'suppress)
 (declare-function company--pseudo-tooltip-height 'suppress)
 (declare-function my-company-page-size 'suppress)
 (declare-function my-company-next-page 'suppress)
@@ -2094,25 +2094,24 @@ But with different page size calucalation."
   (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
-  (let ((pos nil) ; remember previous pos for repeated M-r presses.
-        (page-size nil)) ; cache page-size for repeated M-r presses.
-    (defun my-company-M-r ()
+  (let* ((positions '(mid bot top)) ; positions to cycle
+         (pos nil) ; remember previous pos for repeated M-r presses.
+         (page-size nil); cache page-size for repeated M-r presses.
+         (next-pos-fn (lambda (repeatp)
+                        (if repeatp
+                            (cl-first (or (cl-rest (member pos positions))
+                                          positions))
+                          (cl-first positions)))))
+    (defun my-company-cycle-position ()
       "Jump to the  mid/bot/top of the currently displayed company candidates.
 Cycles between 3 locations mid/bot/top.
 Similar to `move-to-window-line-top-bottom' (M-r) in normal buffers.
 Closure over `pos', `page-size'."
       (interactive)
-      (cond
-       ;; if repeat, advance to next target position in cycle.
-       ((eq this-command last-command)
-        (setq pos (cond ((eq pos 'top) 'mid)
-                        ((eq pos 'mid) 'bot)
-                        ((eq pos 'bot) 'top)
-                        (t 'mid))))
-       ;; else not a repeat. go to mid as the first jump.
-       (t (setq pos 'mid)
-          (setq page-size (my-company-page-size))))
-      ;; jump to target.
+      (let ((repeatp (eq this-command last-command)))
+        (unless repeatp
+          (setq page-size (my-company-page-size)))
+        (setq pos (funcall next-pos-fn repeatp)))
       (let* ((row-num company-tooltip-offset) ; lines-above
              (move-cnt (cond ((eq pos 'top) 0)
                              ((eq pos 'mid) (/ page-size 2))
@@ -2120,7 +2119,7 @@ Closure over `pos', `page-size'."
              (row-num-target (+ row-num move-cnt)))
         ;; the jump
         (company-set-selection row-num-target))))
-  (define-key company-active-map (kbd "M-r") #'my-company-M-r)
+  (define-key company-active-map (kbd "M-r") #'my-company-cycle-position)
 
 
   (defun my--company-set-min-width (&rest _ignored-hook-args)

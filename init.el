@@ -6055,23 +6055,24 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
     (ibuffer-switch-to-saved-filter-groups "lots"))
   (add-hook 'ibuffer-mode-hook #'my-setup-ibuffer-mode)
 
-  (progn ;; advice for collapsing some groups by default. From emacswiki.
+  ;; (progn ;; advice for collapsing some groups by default. From emacswiki.
 
-    (defvar my-ibuffer-collapsed-groups '("Source control" "Special"))
+  ;;   (defvar my-ibuffer-collapsed-groups '("Source control" "Special"))
 
-    (defadvice ibuffer (after collapse-helm)
-      (dolist (group my-ibuffer-collapsed-groups)
-        (progn
-          (goto-char 1)
-          (when (search-forward (concat "[ " group " ]") (point-max) t)
-            (progn
-              (move-beginning-of-line nil)
-              (ibuffer-toggle-filter-group)))))
-      (goto-char 1)
-      (search-forward "[ " (point-max) t)
-      (ibuffer-forward-line)
-      (move-beginning-of-line))
-    (ad-activate 'ibuffer)))
+  ;;   (defadvice ibuffer (after collapse-helm)
+  ;;     (dolist (group my-ibuffer-collapsed-groups)
+  ;;       (progn
+  ;;         (goto-char 1)
+  ;;         (when (search-forward (concat "[ " group " ]") (point-max) t)
+  ;;           (progn
+  ;;             (move-beginning-of-line nil)
+  ;;             (ibuffer-toggle-filter-group)))))
+  ;;     (goto-char 1)
+  ;;     (search-forward "[ " (point-max) t)
+  ;;     (ibuffer-forward-line)
+  ;;     (move-beginning-of-line))
+  ;;   (ad-activate 'ibuffer))
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

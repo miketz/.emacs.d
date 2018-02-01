@@ -1212,6 +1212,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (define-key evil-normal-state-map (kbd "C-v") #'scroll-up-command)
   (define-key evil-motion-state-map (kbd "C-v") #'scroll-up-command)
 
+  (define-key evil-visual-state-map (kbd "\\") #'indent-region)
+  (define-key evil-visual-state-map (kbd "<tab>") #'indent-region)
+  ;; TODO: rebind evil-jump-forward from <tab> to something else.
+
   (when my-graphic-p
     ;;prevent minibuffer spam when switching modes.
     ;;Cursor style/color is sufficient to determine mode.

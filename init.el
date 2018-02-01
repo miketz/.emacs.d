@@ -2099,7 +2099,7 @@ But with different page size calucalation."
          (page-size nil); cache page-size for repeated M-r presses.
          (next-pos-fn (lambda (repeatp)
                         (if repeatp
-                            (cl-first (or (cl-rest (member pos positions))
+                            (cl-first (or (cl-rest (memq pos positions))
                                           positions))
                           (cl-first positions)))))
     (defun my-company-cycle-position ()

@@ -6067,7 +6067,9 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
               (move-beginning-of-line nil)
               (ibuffer-toggle-filter-group)))))
       (goto-char 1)
-      (search-forward "[ " (point-max) t))
+      (search-forward "[ " (point-max) t)
+      (ibuffer-forward-line)
+      (move-beginning-of-line))
     (ad-activate 'ibuffer)))
 
 ;;;-----------------------------------------------------------------------------

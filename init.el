@@ -2103,7 +2103,7 @@ But with different page size calucalation."
                                           positions))
                           (cl-first positions)))))
     (defun my-company-cycle-position ()
-      "Jump to the  mid/bot/top of the currently displayed company candidates.
+      "Jump to the mid/bot/top of the currently displayed company candidates.
 Cycles between 3 locations mid/bot/top.
 Similar to `move-to-window-line-top-bottom' (M-r) in normal buffers.
 Closure over `pos', `page-size'."

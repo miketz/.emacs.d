@@ -355,6 +355,7 @@ in case that file does not provide any feature."
 (defvar ibuffer-saved-filter-groups)
 (defvar sql-product)
 (defvar sqlind-default-indentation-offsets-alist)
+(defvar feebleline-mode-line-text)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -363,6 +364,7 @@ in case that file does not provide any feature."
 (declare-function mor-copy-back 'mode-on-region)
 (declare-function mor-close-tmp-buffer 'mode-on-region)
 (declare-function js2-mark-defun 'js2-mode)
+(declare-function feebleline-mode 'feebleline)
 ;; TODO: change `suppress' to the actual feature or file.
 ;;       Just supressing warnings for now.
 (declare-function ivy-completing-read 'suppress)
@@ -650,6 +652,7 @@ in case that file does not provide any feature."
 (declare-function company-complete-common 'suppress)
 (declare-function my-setup-ibuffer-mode 'suppress)
 (declare-function ibuffer-switch-to-saved-filter-groups 'suppress)
+(declare-function my-js2-indent-defun 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6084,6 +6087,24 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
   ;;     (move-beginning-of-line))
   ;;   (ad-activate 'ibuffer))
   )
+
+;;;-----------------------------------------------------------------------------
+;;; feebleline
+;;;-----------------------------------------------------------------------------
+(autoload #'feebleline-mode "feebleline" nil t)
+
+(with-eval-after-load 'feebleline
+  (setq feebleline-mode-line-text
+        '(("%3s" ((format "%s"
+                          (format-mode-line "%l")))
+           (face feebleline-linum-face))
+          (" : %s" ((buffer-name))
+           (face feebleline-bufname-face))
+          ("%s" ((if (and (buffer-file-name) (buffer-modified-p))
+                     "*"
+                   "" ))
+           (face feebleline-asterisk-face)))))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

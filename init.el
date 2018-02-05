@@ -362,6 +362,7 @@ in case that file does not provide any feature."
 (declare-function helm-keyboard-quit 'helm)
 (declare-function mor-copy-back 'mode-on-region)
 (declare-function mor-close-tmp-buffer 'mode-on-region)
+(declare-function js2-mark-defun 'js2-mode)
 ;; TODO: change `suppress' to the actual feature or file.
 ;;       Just supressing warnings for now.
 (declare-function ivy-completing-read 'suppress)
@@ -2421,6 +2422,13 @@ This avoids changing pop-up width while scrolling through candidates."
     (evil-define-key 'normal js2-mode-map (kbd "M-n") #'js2-next-error)
     (evil-define-key 'normal js2-mode-map (kbd "M-p") #'my-js2-prev-error))
   (define-key js2-mode-map (kbd "C-c e") #'js2-display-error-list)
+
+  (defun my-js2-indent-defun ()
+    "Indent the function the cursor is inside."
+    (interactive)
+    (js2-mark-defun)
+    (call-interactively #'indent-region))
+  (define-key js2-mode-map (kbd "C-c <tab>") #'my-indent-defun)
 
   ;; (defhydra hydra-js2-flycheck ()
   ;;   "js2 flycheck"
@@ -6080,6 +6088,13 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun my-indent-defun ()
+  "Indent the function the cursor is inside."
+  (interactive)
+  (mark-defun)
+  (call-interactively #'indent-region))
+(define-key prog-mode-map (kbd "C-c <tab>") #'my-indent-defun)
+
 (defun my-insert-ruler ()
   "Insert text to visually measure width in the buffer.  By columns."
   ;; TODO: make it recursive, to handle 1000's, millions, etc.

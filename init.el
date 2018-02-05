@@ -6120,7 +6120,10 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
   "Insert text to visually measure width in the buffer.  By columns."
   ;; TODO: make it recursive, to handle 1000's, millions, etc.
   (interactive)
-  (let* ((cols 110)
+  (let* ((default-cols 110)
+         (cols (if (equal current-prefix-arg '(4))
+                   (read-number "cols: " default-cols)
+                 default-cols))
          (secs-10 (/ cols 10))
          (remainder-10 (mod cols 10))
          (secs-100 (/ cols 100)))

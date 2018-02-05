@@ -2428,7 +2428,7 @@ This avoids changing pop-up width while scrolling through candidates."
     (interactive)
     (js2-mark-defun)
     (call-interactively #'indent-region))
-  (define-key js2-mode-map (kbd "C-c <tab>") #'my-indent-defun)
+  (define-key js2-mode-map (kbd "C-c <tab>") #'my-js2-indent-defun)
 
   ;; (defhydra hydra-js2-flycheck ()
   ;;   "js2 flycheck"

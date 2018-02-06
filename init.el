@@ -653,6 +653,7 @@ in case that file does not provide any feature."
 (declare-function my-setup-ibuffer-mode 'suppress)
 (declare-function ibuffer-switch-to-saved-filter-groups 'suppress)
 (declare-function my-js2-indent-defun 'suppress)
+(declare-function my-cycle-line-position 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6105,6 +6106,42 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
                    "" ))
            (face feebleline-asterisk-face)))))
 
+
+;;;-----------------------------------------------------------------------------
+;;; my-cycle-line-position
+;;;-----------------------------------------------------------------------------
+(let ((positions '(mid bot top))
+      ;; cache values for repeated M-r presses.
+      (pos nil)
+      (page-top nil)
+      (page-bot nil)
+      (page-mid nil)
+      (next-pos-fn (lambda (repeatp pos positions)
+                     (if repeatp
+                         (car (or (cdr (memq pos positions))
+                                  positions))
+                       (car positions)))))
+  (defun my-cycle-line-position ()
+    "Cycle between the mid, bot, and top positions in the buffer.
+Similar to `move-to-window-line-top-bottom' but takes into account buffer sizes
+smaller than the window height."
+    (interactive)
+    (let ((repeatp (eq this-command last-command)))
+      (unless repeatp
+        ;; calculate line numbers.
+        (setq page-top (line-number-at-pos (window-start)))
+        ;; TODO: figure out how much to subtract. 2 is needed most often.
+        (setq page-bot (- (line-number-at-pos (window-end)) 2))
+        (setq page-mid (+ page-top
+                          (/ (1+ (- page-bot page-top)) 2))))
+      (setq pos (funcall next-pos-fn repeatp pos positions))
+      ;; per emacs warnings, don't use `goto-line'.
+      (goto-char (point-min))
+      (forward-line (1- (cond ((eq pos 'top) page-top)
+                              ((eq pos 'mid) page-mid)
+                              ((eq pos 'bot) page-bot)))))))
+
+(global-set-key (kbd "M-r") #'my-cycle-line-position)
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

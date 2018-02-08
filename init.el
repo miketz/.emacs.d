@@ -6098,16 +6098,20 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 
 (with-eval-after-load 'feebleline
   (setq feebleline-mode-line-text
-        '(("%3s" ((format "%s"
-                          (format-mode-line "%l")))
-           (face feebleline-linum-face))
-          (" : %s" ((buffer-name))
+        '(;; ("%3s" ((format "%s"
+          ;;                 (format-mode-line "%l")))
+          ;;  (face feebleline-linum-face))
+          ;; (" : %s" ((buffer-name))
+          ;;  (face feebleline-bufname-face))
+          (" %s" ((buffer-name))
            (face feebleline-bufname-face))
-          ("%s" ((if (and (buffer-file-name) (buffer-modified-p))
-                     "*"
-                   "" ))
-           (face feebleline-asterisk-face)))))
+          ;; ("%s" ((if (and (buffer-file-name) (buffer-modified-p))
+          ;;            "*"
+          ;;          "" ))
+          ;;  (face feebleline-asterisk-face))
+          )))
 
+(feebleline-mode 1)
 
 ;;;-----------------------------------------------------------------------------
 ;;; my-cycle-line-position

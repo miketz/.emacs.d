@@ -133,16 +133,18 @@ sent to `add-text-properties'.")
               (run-with-timer 0 0.1 'feebleline-mode-line-proxy-fn))
         (if feebleline-use-legacy-settings (feebleline-legacy-settings-on)
           (feebleline-default-settings-on))
-        (ad-activate 'handle-switch-frame)
-        (add-hook 'focus-in-hook 'feebleline-mode-line-proxy-fn))
+        ;; (ad-activate 'handle-switch-frame)
+        ;; (add-hook 'focus-in-hook 'feebleline-mode-line-proxy-fn)
+        (add-hook 'buffer-list-update-hook #'feebleline-mode-line-proxy-fn))
 
     ;; Deactivation:
     (custom-set-faces '(mode-line ((t :height unspecified))))
     (custom-set-variables
      '(mode-line-format feebleline/mode-line-format-previous))
     (cancel-timer feebleline/timer)
-    (ad-deactivate 'handle-switch-frame)
-    (remove-hook 'focus-in-hook 'feebleline-mode-line-proxy-fn)
+    ;; (ad-deactivate 'handle-switch-frame)
+    ;; (remove-hook 'focus-in-hook 'feebleline-mode-line-proxy-fn)
+    (remove-hook 'buffer-list-update-hook #'feebleline-mode-line-proxy-fn)
     (with-current-buffer " *Minibuf-0*"
       (erase-buffer))))
 
@@ -169,11 +171,11 @@ sent to `add-text-properties'.")
   (unless (current-message)
     (feebleline-write-buffer-name-maybe)))
 
-(defadvice handle-switch-frame (after switch-frame-message-name)
-  "Get the modeline proxy to work with i3 switch focus."
-  (feebleline-write-buffer-name-maybe)
-  ad-do-it
-  (feebleline-write-buffer-name-maybe))
+;; (defadvice handle-switch-frame (after switch-frame-message-name)
+;;   "Get the modeline proxy to work with i3 switch focus."
+;;   (feebleline-write-buffer-name-maybe)
+;;   ad-do-it
+;;   (feebleline-write-buffer-name-maybe))
 
 (provide 'feebleline)
 ;;; feebleline.el ends here

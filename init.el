@@ -654,6 +654,7 @@ in case that file does not provide any feature."
 (declare-function ibuffer-switch-to-saved-filter-groups 'suppress)
 (declare-function my-js2-indent-defun 'suppress)
 (declare-function my-cycle-line-position 'suppress)
+(declare-function my-next-cycle-pos 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -699,6 +700,13 @@ in case that file does not provide any feature."
   (with-temp-buffer
     (insert-file-contents filePath)
     (buffer-string)))
+
+(let ((positions '(mid bot top)))
+  (defun my-next-cycle-pos (pos)
+    "Get the next position from `positions' based on the current POS.
+Closure over `positions'."
+    (car (or (cdr (memq pos positions))
+             positions))))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -2099,14 +2107,8 @@ But with different page size calucalation."
   (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
-  (let* ((positions '(mid bot top)) ; positions to cycle
-         (pos nil) ; remember previous pos for repeated M-r presses.
-         (page-size nil); cache page-size for repeated M-r presses.
-         (next-pos-fn (lambda (repeatp)
-                        (if repeatp
-                            (cl-first (or (cl-rest (memq pos positions))
-                                          positions))
-                          (cl-first positions)))))
+  (let* ((pos nil) ; cache values for repeated M-r presses.
+         (page-size nil))
     (defun my-company-cycle-position ()
       "Jump to the mid/bot/top of the currently displayed company candidates.
 Cycles between 3 locations mid/bot/top.
@@ -2116,7 +2118,7 @@ Closure over `pos', `page-size'."
       (let ((repeatp (eq this-command last-command)))
         (unless repeatp
           (setq page-size (my-company-page-size)))
-        (setq pos (funcall next-pos-fn repeatp)))
+        (setq pos (my-next-cycle-pos (if repeatp pos nil))))
       (let* ((row-num company-tooltip-offset) ; lines-above
              (move-cnt (cond ((eq pos 'top) 0)
                              ((eq pos 'mid) (/ page-size 2))
@@ -6110,17 +6112,10 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 ;;;-----------------------------------------------------------------------------
 ;;; my-cycle-line-position
 ;;;-----------------------------------------------------------------------------
-(let ((positions '(mid bot top))
-      ;; cache values for repeated M-r presses.
-      (pos nil)
+(let ((pos nil) ; cache values for repeated M-r presses.
       (page-top nil)
       (page-bot nil)
-      (page-mid nil)
-      (next-pos-fn (lambda (repeatp pos positions)
-                     (if repeatp
-                         (car (or (cdr (memq pos positions))
-                                  positions))
-                       (car positions)))))
+      (page-mid nil))
   (defun my-cycle-line-position ()
     "Cycle between the mid, bot, and top positions in the buffer.
 Similar to `move-to-window-line-top-bottom' but takes into account buffer sizes
@@ -6134,7 +6129,7 @@ smaller than the window height."
         (setq page-bot (- (line-number-at-pos (window-end)) 2))
         (setq page-mid (+ page-top
                           (/ (1+ (- page-bot page-top)) 2))))
-      (setq pos (funcall next-pos-fn repeatp pos positions))
+      (setq pos (my-next-cycle-pos (if repeatp pos nil)))
       ;; per emacs warnings, don't use `goto-line'.
       (goto-char (point-min))
       (forward-line (1- (cond ((eq pos 'top) page-top)

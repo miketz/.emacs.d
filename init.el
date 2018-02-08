@@ -6111,7 +6111,7 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
           ;;  (face feebleline-asterisk-face))
           )))
 
-(feebleline-mode 1)
+;; (feebleline-mode 1) ; turn on feebleline
 
 ;;;-----------------------------------------------------------------------------
 ;;; my-cycle-line-position

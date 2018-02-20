@@ -1724,10 +1724,10 @@ Closure over `inverse-video-p'"
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    (load-theme 'charcoal t)
-    ;; (set-background-color my-ultimate)
+    (my-color-leuven)
+    (set-background-color my-ultimate)
     (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+     "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin")
     ;; "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1"
     ;; "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
     ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"

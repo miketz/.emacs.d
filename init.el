@@ -6060,6 +6060,7 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
   (setq ibuffer-saved-filter-groups
         '(("lots" ; lots of groups
            ("Source control" (or (name . "^\*magit")
+                                 (name . "^\magit") ; stars removed recently?
                                  (name . "^\*vc")))
            ("Emacs-conifg" (or (filename . ".emacs.d")
                                (filename . "init.el")))

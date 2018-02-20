@@ -3402,6 +3402,10 @@ and indent."
   (define-key paredit-mode-map (kbd "C-0") #'paredit-forward-slurp-sexp)
   (define-key paredit-mode-map (kbd "C-M-9") #'paredit-backward-slurp-sexp)
   (define-key paredit-mode-map (kbd "C-M-0") #'paredit-backward-barf-sexp)
+  ;; don't allow paredit to steal the M-r keybind.
+  (define-key paredit-mode-map (kbd "M-r") #'my-cycle-line-position)
+  ;; rebind `paredit-raise-sexp' to C-M-r
+  (define-key paredit-mode-map (kbd "C-M-r") #'paredit-raise-sexp)
 
   (when (eq my-ui-type 'emacs)
     ;; reclaim the M-r binding to move cursor to middle, high, low

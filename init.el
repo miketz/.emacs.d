@@ -655,6 +655,7 @@ in case that file does not provide any feature."
 (declare-function my-js2-indent-defun 'suppress)
 (declare-function my-cycle-line-position 'suppress)
 (declare-function my-next-cycle-pos 'suppress)
+(declare-function my-company-complete-common 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -2082,10 +2083,19 @@ But with different page size calucalation."
               (my-company-page-size) ; company-tooltip-limit
               ))))))
 
+  (defun my-company-complete-common ()
+    "Like `company-complete-common', but insert a hyphen on repeated press."
+    (interactive)
+    (let ((repeatp (eq this-command last-command)))
+      (if repeatp
+          (insert "-")
+        (company-complete-common))))
+  (define-key company-active-map (kbd "SPC") #'my-company-complete-common)
+
   ;; unbind C-h. it interfere's with C-h k to lookup what is bound.
   (define-key company-active-map (kbd "C-h") nil)
   (define-key company-active-map (kbd "C-SPC") #'company-complete-common)
-  (define-key company-active-map (kbd "SPC") #'company-complete-common)
+  ;; (define-key company-active-map (kbd "SPC") #'company-complete-common)
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous)
   (define-key company-active-map (kbd "\C-d") #'company-show-doc-buffer)

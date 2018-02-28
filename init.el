@@ -656,6 +656,7 @@ in case that file does not provide any feature."
 (declare-function my-cycle-line-position 'suppress)
 (declare-function my-next-cycle-pos 'suppress)
 (declare-function my-company-complete-common 'suppress)
+(declare-function my-find-file-by-name 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6161,6 +6162,18 @@ smaller than the window height."
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(when (eq system-type 'windows-nt)
+  (defun my-find-file-by-name ()
+    "Find files by name starting in current directory."
+    (interactive)
+    (let ((compile-command "dir /b/s "))
+      ;; #'shell-command
+      ;; #'grep
+      (call-interactively #'compile)))
+
+  (when my-use-evil-p
+    (evil-leader/set-key "h" #'my-find-file-by-name)))
+
 (defun my-indent-defun ()
   "Indent the function the cursor is inside."
   (interactive)

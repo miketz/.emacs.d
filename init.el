@@ -6342,6 +6342,11 @@ SHELL-ONLY will be documented later."
 ;; maintain cursor location when scrolling
 (setq scroll-preserve-screen-position nil)
 
+;; scrolling performance increase?
+;; see https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movemen
+;; t-lag/28746
+(setq auto-window-vscroll nil)
+
 (progn ;;window navigation.
   (when my-use-evil-p
     (global-set-key (kbd "M-h") #'evil-window-left)

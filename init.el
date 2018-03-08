@@ -1729,7 +1729,7 @@ Closure over `inverse-video-p'"
     (my-color-leuven)
     (set-background-color my-ultimate)
     (set-frame-font
-     "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin")
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
     ;; "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1"
     ;; "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
     ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"

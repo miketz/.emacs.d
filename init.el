@@ -6485,10 +6485,10 @@ on the first call."
                       (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
            (line (my-what-line))
            (col (+ 1 (current-column))))
-      (message "%d%% %s C%d     %s     %s"
+      (message "%s  %d%% %s C%d     %s"
+               (buffer-name)
                percent line col
-               (format-time-string "%-I:%M%#p %-m-%-d-%Y %a")
-               (buffer-name))))
+               (format-time-string "%-m-%-d-%Y %a %-I:%M%#p"))))
   (defalias 'my-what-time #'my-what-position)
 
   (when my-use-evil-p
@@ -6510,7 +6510,7 @@ on the first call."
     ;;(setq-default display-time-day-and-date t)
     ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
     ;; (setq display-time-format "%-I:%M%#p")
-    (setq display-time-format "%a %-m/%-d %-I:%M%#p"))
+    (setq display-time-format "%-m/%-d %a %-I:%M%#p"))
   (display-time-mode 1))
 
 ;; show lambdas with the greek symbol

@@ -6083,10 +6083,14 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
            ("Help" (or (name . "\*Help\*")
                        (name . "\*Apropos\*")
                        (name . "\*info\*")))
-           ("Special" (name . "^\*")))))
+           ("Special" (name . "^\*")))
+
+          ("less" ; fewer groups
+           ("Special" (or (name . "^\*")
+                          (name . "^\magit"))))))
 
   (defun my-setup-ibuffer-mode ()
-    (ibuffer-switch-to-saved-filter-groups "lots"))
+    (ibuffer-switch-to-saved-filter-groups "less"))
   (add-hook 'ibuffer-mode-hook #'my-setup-ibuffer-mode)
 
   ;; (progn ;; advice for collapsing some groups by default. From emacswiki.

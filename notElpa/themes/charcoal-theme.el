@@ -286,6 +286,10 @@
    `(js2-highlight-vars-face ((,class :foreground ,fg-green :background ,bg-green)))
    `(js2-highlight-vars-second-face ((,class :foreground ,fg-purple :background ,bg-purple)))
 
+   ;; web-mode
+   `(web-mode-current-element-highlight-face ((,class :background ,faint)))
+   `(web-mode-current-column-highlight-face ((,class :background ,faint)))
+
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
    `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))

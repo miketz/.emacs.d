@@ -356,6 +356,8 @@ in case that file does not provide any feature."
 (defvar sql-product)
 (defvar sqlind-default-indentation-offsets-alist)
 (defvar feebleline-mode-line-text)
+(defvar web-mode-enable-current-element-highlight)
+(defvar web-mode-enable-current-column-highlight)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -3934,6 +3936,10 @@ and indent."
 (with-eval-after-load 'web-mode
   ;; Auto-close on > and </
   (setq web-mode-auto-close-style 2)
+
+  ;; highlights for start/closing tags and vertical line between them.
+  (setq web-mode-enable-current-element-highlight t
+        web-mode-enable-current-column-highlight  t)
 
   ;; indent widths of different code sections
   (setq web-mode-markup-indent-offset 2

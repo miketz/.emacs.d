@@ -195,6 +195,17 @@
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
   (eww-open-file "c:/Users/mtz/scratch/PracticalCommonLisp_ePub/html/index.html"))
 
+(defun my-proj-paip ()
+  "Open the PAIP book."
+  (interactive)
+  (delete-other-windows)
+  (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs")
+  (let ((paip (car (member "paip" (bookmark-all-names)))))
+    (when paip
+      (split-window-horizontally)
+      (shrink-window-horizontally 24)
+      (bookmark-jump paip))))
+
 (defun proj-progit2 ()
   (interactive)
   (delete-other-windows)

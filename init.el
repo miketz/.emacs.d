@@ -659,6 +659,7 @@ in case that file does not provide any feature."
 (declare-function my-next-cycle-pos 'suppress)
 (declare-function my-company-complete-common 'suppress)
 (declare-function my-find-file-by-name 'suppress)
+(declare-function my-proj-paip 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -3827,7 +3828,8 @@ and indent."
     (autoload #'proj-pcl lisp-file nil t)
     (autoload #'proj-tcpl lisp-file nil t)
     (autoload #'proj-dive-python lisp-file nil t)
-    (autoload #'proj-progit2 lisp-file nil t))
+    (autoload #'proj-progit2 lisp-file nil t)
+    (autoload #'my-proj-paip lisp-file nil t))
 
   ;;quick load of c:\users\mtz
   (when my-use-evil-p

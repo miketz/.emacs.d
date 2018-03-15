@@ -31,7 +31,7 @@
 ;;     ))
 
 
-(defun proj-safetyweb ()
+(defun my-proj-safetyweb ()
   "Open the ECP project."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\Source\\")
@@ -56,7 +56,7 @@
     ;;(my-start-omnisharp-server sln)
     ))
 
-(defun proj-safetyweb-ects ()
+(defun my-proj-safetyweb-ects ()
   "Open the ECTS project."
   (interactive)
   (let* ((root "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development/ECTS/Source/")
@@ -81,7 +81,7 @@
     ;;(my-start-omnisharp-server sln)
     ))
 
-(defun proj-rsims ()
+(defun my-proj-rsims ()
   "Enable project features for the RSIMS website."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\RSIMS\\Main\\Source\\")
@@ -100,7 +100,7 @@
     ;;                                  :buffer "*RSIMS Web Project*")))
     (dired root)))
 
-(defun proj-daily-diff ()
+(defun my-proj-daily-diff ()
   "Enable project features for the RSIMS website."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\DD_DailyDiff\\")
@@ -119,7 +119,7 @@
     ;;                                  :buffer "*Daily Diff*")))
     (dired root)))
 
-(defun proj-db-safety ()
+(defun my-proj-db-safety ()
   "Open the /Main/DbScripts folder."
   (interactive)
   (let ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts"))
@@ -130,7 +130,7 @@
     ;;                                  :buffer "*OSHE DB Scripts*")))
     (dired root)))
 
-(defun proj-trighist ()
+(defun my-proj-trighist ()
   "Open the history trigger generator project."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\HistoryImp\\dev\\code\\v3_GeneralHistory\\HistoryTriggerGen\\")
@@ -153,7 +153,7 @@
     ;;(my-start-omnisharp-server sln)
     ))
 
-(defun proj-emacs ()
+(defun my-proj-emacs ()
   "Open the Emacs source code folder."
   (interactive)
   (let* ((emacs-root "C:\\Users\\mtz\\scratch\\emacs\\"))
@@ -167,7 +167,7 @@
     ;;                                  :buffer "*Emacs Project*")))
     (dired emacs-root)))
 
-(defun proj-cl ()
+(defun my-proj-cl ()
   "Open a scratch Lisp file."
   (interactive)
   ;; ;; helm-cmd-t stuff
@@ -183,7 +183,7 @@
   ;;(slime)
   )
 
-(defun proj-imgtag ()
+(defun my-proj-imgtag ()
   "Open a scratch project for testing web-based image drag-n-drop."
   (interactive)
   (delete-other-windows)
@@ -197,7 +197,7 @@
     (evil-window-move-far-left)
     (shrink-window-horizontally 35)))
 
-(defun proj-pcl ()
+(defun my-proj-pcl ()
   "Open the Practical Common Lisp ebook."
   (interactive)
   (delete-other-windows)
@@ -219,7 +219,7 @@
       (shrink-window-horizontally 24)
       (bookmark-jump paip))))
 
-(defun proj-progit2 ()
+(defun my-proj-progit2 ()
   "Open the progit2 ebook."
   (interactive)
   (delete-other-windows)
@@ -227,14 +227,14 @@
   (shrink-window-horizontally 24)
   (dired "c:/users/mtz/scratch/progit2/book"))
 
-(defun proj-dive-python ()
+(defun my-proj-dive-python ()
   "Open the dive into python ebook."
   (interactive)
   (find-file-existing
    "C:/Users/mtz/Downloads/tutorials/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt")
   (markdown-mode))
 
-(defun proj-tcpl ()
+(defun my-proj-tcpl ()
   "Open a scratch C file."
   (interactive)
   (delete-other-windows)
@@ -244,7 +244,7 @@
   (other-window 1)
   (eshell))
 
-(defun proj-cpp ()
+(defun my-proj-cpp ()
   "Open a scratch c++ folder."
   (interactive)
   ;; (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))

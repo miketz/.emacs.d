@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
+(require 'bookmark)
 ;; (require 'helm-cmd-t)
 
 ;; (defun proj-ecp ()

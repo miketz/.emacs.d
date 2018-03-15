@@ -31,10 +31,12 @@
 
 
 (defun proj-safetyweb ()
+  "Open the ECP project."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\Source\\")
-         (sln (concat root "Safety.sln"))
-         (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs")))
+         ;; (sln (concat root "Safety.sln"))
+         ;; (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs"))
+         )
     ;; ;; helm-cmd-t stuff
     ;; (add-to-list 'helm-cmd-t-find-prunes "obj")
     ;; (add-to-list 'helm-cmd-t-find-prunes "bin")
@@ -54,9 +56,10 @@
     ))
 
 (defun proj-safetyweb-ects ()
+  "Open the ECTS project."
   (interactive)
   (let* ((root "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development/ECTS/Source/")
-         (sln (concat root "Safety.sln"))
+         ;; (sln (concat root "Safety.sln"))
          ;; (defaultFile (concat root "Safety.WebUI\\Areas\\ECP\\Controllers\\ProcedureController.cs"))
          )
     ;; ;; helm-cmd-t stuff
@@ -81,7 +84,8 @@
   "Enable project features for the RSIMS website."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\RSIMS\\Main\\Source\\")
-         (sln (concat root "Rsims.sln")))
+         ;; (sln (concat root "Rsims.sln"))
+         )
     ;; ;; helm-cmd-t stuff
     ;; (add-to-list 'helm-cmd-t-find-prunes "obj")
     ;; (add-to-list 'helm-cmd-t-find-prunes "bin")
@@ -99,7 +103,8 @@
   "Enable project features for the RSIMS website."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\DD_DailyDiff\\")
-         (sln (concat root "DD_DailyDiff.sln")))
+         ;; (sln (concat root "DD_DailyDiff.sln"))
+         )
     ;; ;; helm-cmd-t stuff
     ;; (add-to-list 'helm-cmd-t-find-prunes "obj")
     ;; (add-to-list 'helm-cmd-t-find-prunes "bin")
@@ -114,6 +119,7 @@
     (dired root)))
 
 (defun proj-db-safety ()
+  "Open the /Main/DbScripts folder."
   (interactive)
   (let ((root "C:\\Users\\mtz\\proj\\TFS\\SafetyWebsite\\OSHE\\Main\\DbScripts"))
     ;; (setq root-cmd-t (helm-cmd-t-get-create-source-dir root))
@@ -124,9 +130,11 @@
     (dired root)))
 
 (defun proj-trighist ()
+  "Open the history trigger generator project."
   (interactive)
   (let* ((root "C:\\Users\\mtz\\proj\\HistoryImp\\dev\\code\\v3_GeneralHistory\\HistoryTriggerGen\\")
-         (sln (concat root "HistoryTriggerGen.sln")))
+         ;; (sln (concat root "HistoryTriggerGen.sln"))
+         )
     ;; ;; helm-cmd-t stuff
     ;; (add-to-list 'helm-cmd-t-find-prunes "obj")
     ;; (add-to-list 'helm-cmd-t-find-prunes "bin")
@@ -145,6 +153,7 @@
     ))
 
 (defun proj-emacs ()
+  "Open the Emacs source code folder."
   (interactive)
   (let* ((emacs-root "C:\\Users\\mtz\\scratch\\emacs\\"))
     ;; ;; helm-cmd-t stuff
@@ -158,6 +167,7 @@
     (dired emacs-root)))
 
 (defun proj-cl ()
+  "Open a scratch Lisp file."
   (interactive)
   ;; ;; helm-cmd-t stuff
   ;; (setq root_dir_cl (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\lisp"))
@@ -173,6 +183,7 @@
   )
 
 (defun proj-imgtag ()
+  "Open a scratch project for testing web-based image drag-n-drop."
   (interactive)
   (delete-other-windows)
   (let* ((root "C:\\Users\\mtz\\scratch\\ImgDragAndDrop\\")
@@ -186,6 +197,7 @@
     (shrink-window-horizontally 35)))
 
 (defun proj-pcl ()
+  "Open the Practical Common Lisp ebook."
   (interactive)
   (delete-other-windows)
   (switch-to-buffer "pcl-test")
@@ -207,6 +219,7 @@
       (bookmark-jump paip))))
 
 (defun proj-progit2 ()
+  "Open the progit2 ebook."
   (interactive)
   (delete-other-windows)
   (split-window-horizontally)
@@ -214,13 +227,14 @@
   (dired "c:/users/mtz/scratch/progit2/book"))
 
 (defun proj-dive-python ()
-  (interactive)
+  "Open the dive into python ebook."
   (interactive)
   (find-file-existing
    "C:/Users/mtz/Downloads/tutorials/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt")
   (markdown-mode))
 
 (defun proj-tcpl ()
+  "Open a scratch C file."
   (interactive)
   (delete-other-windows)
   (find-file-existing "c:/users/mtz/scratch/test5/test.c")
@@ -230,6 +244,7 @@
   (eshell))
 
 (defun proj-cpp ()
+  "Open a scratch c++ folder."
   (interactive)
   ;; (setq root_dir_cpp (helm-cmd-t-get-create-source-dir "C:\\Users\\mtz\\scratch\\cpp"))
   ;; (evil-leader/set-key "h" (lambda ()

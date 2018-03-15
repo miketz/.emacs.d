@@ -212,12 +212,15 @@
   "Open the PAIP book."
   (interactive)
   (delete-other-windows)
-  (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs")
+  (switch-to-buffer "paip-test")
+  (common-lisp-mode)
+  (split-window-horizontally)
+  (shrink-window-horizontally 13)
   (let ((paip (car (member "paip" (bookmark-all-names)))))
-    (when paip
-      (split-window-horizontally)
-      (shrink-window-horizontally 24)
-      (bookmark-jump paip))))
+    (if paip
+        (bookmark-jump paip)
+      ;; else go to the folder
+      (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs"))))
 
 (defun my-proj-progit2 ()
   "Open the progit2 ebook."

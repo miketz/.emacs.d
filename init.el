@@ -3812,7 +3812,8 @@ and indent."
     (autoload #'my-proj-pcl lisp-file nil t)
     (autoload #'my-proj-progit2 lisp-file nil t)
     (autoload #'my-proj-progit2-dired lisp-file nil t)
-    (autoload #'my-proj-ydnjs lisp-file nil t)))
+    (autoload #'my-proj-ydnjs lisp-file nil t)
+    (autoload #'my-proj-paip lisp-file nil t)))
 
 (when (eq my-curr-computer 'work-laptop)
   (let ((lisp-file "my-proj-work-laptop" ))

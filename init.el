@@ -597,6 +597,7 @@ in case that file does not provide any feature."
 (declare-function my-proj-pcl 'suppress)
 (declare-function my-proj-progit2 'suppress)
 (declare-function proj-safetyweb 'suppress)
+(declare-function my-proj-safetyweb 'suppress)
 (declare-function my-proj-safetyweb-ects 'suppress)
 (declare-function my-proj-rsims 'suppress)
 (declare-function my-proj-daily-diff 'suppress)

@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
+(require 'bookmark)
+
 (defvar my-shrink-wild-dog 10
   "Size to shrink a split window.
 So lines of text are not too long to follow with my eyes.")
@@ -42,3 +44,17 @@ So lines of text are not too long to follow with my eyes.")
   (shrink-window-horizontally my-shrink-wild-dog)
   ;; (find-file-existing "~/books/You-Dont-Know-JS/README.md")
   (dired "~/books/javascript/You-Dont-Know-JS"))
+
+(defun my-proj-paip ()
+  "Open the PAIP book."
+  (interactive)
+  (delete-other-windows)
+  (switch-to-buffer "paip-test")
+  (common-lisp-mode)
+  (split-window-horizontally)
+  (shrink-window-horizontally 13)
+  (let ((paip (car (member "paip" (bookmark-all-names)))))
+    (if paip
+        (bookmark-jump paip)
+      ;; else go to the folder
+      (dired "~/books/lisp/paip-lisp/docs"))))

@@ -7,13 +7,14 @@
 So lines of text are not too long to follow with my eyes.")
 
 (defun my-proj-dive-python ()
-  (interactive)
+  "Open the dive into python ebook."
   (interactive)
   (find-file-existing
    "/home/mike/books/python/diveintopython-5.4/diveintopython.txt")
   (markdown-mode))
 
 (defun my-proj-pcl ()
+  "Open the Practical Common Lisp ebook."
   (interactive)
   (delete-other-windows)
   (switch-to-buffer "pcl-test")
@@ -24,6 +25,7 @@ So lines of text are not too long to follow with my eyes.")
   (eww-open-file "~/books/lisp/PracticalCommonLisp_ePub/html/index.html"))
 
 (defun my-proj-progit2 ()
+  "Open the progit2 ebook."
   (interactive)
   (delete-other-windows)
   (split-window-horizontally)
@@ -31,6 +33,7 @@ So lines of text are not too long to follow with my eyes.")
   (eww-open-file "~/books/git/progit2/progit.html"))
 
 (defun my-proj-progit2-dired ()
+  "Open the progit2 ebook folder."
   (interactive)
   (delete-other-windows)
   (split-window-horizontally)
@@ -38,6 +41,7 @@ So lines of text are not too long to follow with my eyes.")
   (dired "~/books/git/progit2/book"))
 
 (defun my-proj-ydnjs ()
+  "Open the You Don't Know JS ebook."
   (interactive)
   (delete-other-windows)
   (split-window-horizontally)

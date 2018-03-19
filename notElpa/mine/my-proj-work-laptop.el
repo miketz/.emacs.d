@@ -1,4 +1,8 @@
-;;; -*- lexical-binding: t -*-
+;;; my-proj-work-laptop.el --- Proj functions -*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;;; Code:
 
 (require 'bookmark)
 ;; (require 'helm-cmd-t)
@@ -183,6 +187,9 @@
   ;;(slime)
   )
 
+;; suppress flycheck warning.
+(declare-function evil-window-move-far-left 'evil-commands)
+
 (defun my-proj-imgtag ()
   "Open a scratch project for testing web-based image drag-n-drop."
   (interactive)
@@ -259,3 +266,7 @@
   (dired "C:\\Users\\mtz\\scratch\\cpp")
   ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
   )
+
+(provide 'my-proj-work-laptop)
+
+;;; my-proj-work-laptop.el ends here

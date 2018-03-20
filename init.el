@@ -6472,6 +6472,13 @@ on the first call."
 (setq mode-line-position '((size-indication-mode nil)
                            (line-number-mode nil)))
 
+
+
+;; Don't suggest keybinds in minibuffer.  It messes up functions that use the
+;; minibuffer for output.  Instead use "C-h f func" to see the current keybind
+;; of a function.
+(setq suggest-key-bindings nil)
+
 (progn
   ;; replacing postion info in mode line with a function called on demand.
   ;; Bound to "g a".

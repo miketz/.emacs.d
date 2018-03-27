@@ -235,7 +235,22 @@
   (delete-other-windows)
   (split-window-horizontally)
   (shrink-window-horizontally 24)
-  (dired "c:/users/mtz/scratch/progit2/book"))
+  (let ((progit2 (car (member "progit2" (bookmark-all-names)))))
+    (if progit2
+        (progn
+          (bookmark-jump progit2)
+          ;; go to the table of contents so you can see the order of chapters.
+          (let ((folder (file-name-directory buffer-file-name)))
+            (other-window 1)
+            (dired folder)
+            (dired-up-directory)
+            (dired-previous-line 1)
+            (dired-find-file)
+            ;; jump back to the text
+            (other-window 1)
+            ))
+      ;; else no bookmark. Go to the top folder
+      (dired "c:/users/mtz/scratch/progit2/book"))))
 
 (defun my-proj-dive-python ()
   "Open the dive into python ebook."

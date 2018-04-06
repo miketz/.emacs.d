@@ -135,7 +135,7 @@ in case that file does not provide any feature."
 (defvar w3-default-homepage)
 (defvar w3--args)
 (defvar lispy-do-pprint)
-(defvar *charcoal-color-cnt*)
+(defvar charcoal-color-cnt)
 (defvar company-selection-wrap-around)
 
 ;; dynamic vars not let bound (yet). Just surpressing the free var warnings.

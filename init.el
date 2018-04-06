@@ -358,6 +358,8 @@ in case that file does not provide any feature."
 (defvar feebleline-mode-line-text)
 (defvar web-mode-enable-current-element-highlight)
 (defvar web-mode-enable-current-column-highlight)
+(defvar highlight-indent-guides-method)
+(defvar highlight-indent-guides-character)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

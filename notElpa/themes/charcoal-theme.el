@@ -44,6 +44,7 @@ Example:
        (bg-red       (aref `["#300000" ,todo--bg "#000000" ,todo--bg] i))
        (fg-red       (aref `["#FF0000" ,todo--fg "#FF0000" ,todo--fg] i))
        (faint        (aref `["#4D4D3D" "#303030" "#666666" "#0000FF"] i))
+       (fainter      (aref `["#3F3F35" ,todo--fg ,todo--fg ,todo--fg] i))
        (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
        (keyword      (aref `["#EEDD82" "#FFAFFF" "#FFFFFF" "#FFFFFF"] i))
        (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" "#00FFFF"] i))
@@ -202,6 +203,9 @@ Example:
                              :background "#000000"
                              :foreground ,fg-green
                              :bold nil)))
+
+   ;; highlight-indent-guides
+   `(highlight-indent-guides-character-face ((,class :foreground ,fainter)))
 
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-less))))

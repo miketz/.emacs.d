@@ -15,27 +15,21 @@
 
 (deftheme charcoal "Charcoal color theme")
 
-;; NOTE: You most likely want to use a `let' statement to bind a value to
-;; dynamic var `*charcoal-color-cnt*'. So you can temporarily test this theme at
-;; different color counts.
-;; Example:
-;;     (let ((*charcoal-color-cnt* 8))
-;;       (load-theme 'charcoal t))
-;; If you give it a value with `setq' it will remember the value each time you
-;; turn on the color theme.
-(defvar *charcoal-color-cnt*)
+(defvar charcoal-color-cnt (display-color-cells)
+  "The color count of the computer.  Used to decide the most colorful version
+of the theme that can be used.
+
+You can try out a lesser version of the theme by overriding this value.
+Example:
+    (let ((charcoal-color-cnt 8))
+      (load-theme 'charcoal t)) ")
 
 (let* ((class        t)
-       (cnt          (if (boundp '*charcoal-color-cnt*)
-                         ;; use dynamically bound count if available.
-                         *charcoal-color-cnt*
-                       ;; else detect the color count.
-                       (display-color-cells)))
-       (i            (cond ((>= cnt 16777216) 0)
-                           ((>= cnt 256)      1)
-                           ((>= cnt 16)       2)
-                           ((>= cnt 8)        3)
-                           (t                 3)))
+       (i            (cond ((>= charcoal-color-cnt 16777216) 0)
+                           ((>= charcoal-color-cnt 256)      1)
+                           ((>= charcoal-color-cnt 16)       2)
+                           ((>= charcoal-color-cnt 8)        3)
+                           (t                                3)))
        (todo--fg     "#FFFFFF") ; temp color where I haven't decided yet
        (todo--bg     "#000000") ; temp color where I haven't decided yet
        ;; Color Palette       full      256       16        8

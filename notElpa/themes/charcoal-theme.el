@@ -16,13 +16,13 @@
 (deftheme charcoal "Charcoal color theme")
 
 (defvar charcoal-color-cnt (display-color-cells)
-  "The color count of the computer.  Used to decide the most colorful version
-of the theme that can be used.
+  "The color count of the computer.
+Used to decide the most colorful version of the theme that can be used.
 
-You can try out a lesser version of the theme by overriding this value.
+Override this value to try out a lesser version of the theme.
 Example:
     (let ((charcoal-color-cnt 8))
-      (load-theme 'charcoal t)) ")
+      (load-theme 'charcoal t))")
 
 (let* ((class        t)
        (i            (cond ((>= charcoal-color-cnt 16777216) 0)

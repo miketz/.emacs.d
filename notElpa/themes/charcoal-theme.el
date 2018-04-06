@@ -205,7 +205,7 @@ Example:
                              :bold nil)))
 
    ;; highlight-indent-guides
-   `(highlight-indent-guides-character-face ((,class :foreground ,fainter)))
+   `(highlight-indent-guides-character-face ((,class (:foreground ,fainter))))
 
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-less))))

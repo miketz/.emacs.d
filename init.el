@@ -5534,8 +5534,9 @@ Closure over `preceding-sexp-fn'."
 ;;;-----------------------------------------------------------------------------
 ;;; highlight-indent-guides
 ;;;-----------------------------------------------------------------------------
-;; NOTE: color configs moved to theme files
-;; (with-eval-after-load "highlight-indent-guides")
+(with-eval-after-load 'highlight-indent-guides
+  (setq highlight-indent-guides-method 'character
+        highlight-indent-guides-character 124))
 
 
 ;;;-----------------------------------------------------------------------------

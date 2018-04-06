@@ -5536,7 +5536,7 @@ Closure over `preceding-sexp-fn'."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'highlight-indent-guides
   (setq highlight-indent-guides-method 'character
-        highlight-indent-guides-character 124))
+        highlight-indent-guides-character ?\|))
 
 
 ;;;-----------------------------------------------------------------------------

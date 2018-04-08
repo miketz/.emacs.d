@@ -663,6 +663,7 @@ in case that file does not provide any feature."
 (declare-function my-company-complete-common 'suppress)
 (declare-function my-find-file-by-name 'suppress)
 (declare-function my-proj-paip 'suppress)
+(declare-function highlight-tail-mode 'highlight-tail)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -990,7 +991,7 @@ Closure over executed-p."
                 my-use-mish-mash-p))
      ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
                  ;; because may useful for my own purposes later.
-     (highlight-tail t)
+     (highlight-tail nil) ;; removed from melpa (emacs wiki purge?)
      (function-args nil)
      (highlight-indent-guides t)
      (ace-link t)
@@ -4084,6 +4085,8 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; highlight-tail
 ;;;-----------------------------------------------------------------------------
+(autoload #'highlight-tail-mode "highlight-tail" nil t)
+
 (with-eval-after-load 'highlight-tail
 
   (defun my-tail-colors-for-bg ()

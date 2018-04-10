@@ -212,14 +212,14 @@ Example:
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class (:background ,ivy-line-bg))))
+   `(swiper-line-face ((,class (:background "gray30"))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
-   `(swiper-match-face-1 ((,class (:foreground ,faint-less))))
-   `(swiper-match-face-2 ((,class (:foreground ,rain-1))))
+   `(swiper-match-face-1 ((,class (:foreground ,faint-less :background "black"))))
+   `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background "black"))))
    ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
    ;; TODO: make bug report to swiper about face 3,4
-   `(swiper-match-face-3 ((,class (:foreground ,rain-2))))
-   `(swiper-match-face-4 ((,class (:foreground ,rain-3))))
+   `(swiper-match-face-3 ((,class (:foreground ,rain-2 :background "black"))))
+   `(swiper-match-face-4 ((,class (:foreground ,rain-3 :background "black"))))
    `(ivy-action ((,class (:foreground ,fg-green))))
    ;; `(ivy-confirm-face ((,class (:foreground "yellow" :italic t))))
    `(ivy-current-match ((,class (:inherit swiper-line-face))))

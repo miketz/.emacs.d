@@ -1039,6 +1039,7 @@ Closure over executed-p."
         '((sql-indent . "gnu")
           (electric-spacing . "melpa")
           (aggressive-indent . "melpa")
+          (ggtags . "melpa")
           (vdiff . "melpa"))))
 
 ;; (setq package-enable-at-startup nil)

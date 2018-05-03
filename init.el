@@ -1016,7 +1016,8 @@ Closure over executed-p."
      (autothemer t) ;; dependency for some themes.
      (erc-hl-nicks t)
      (sql-indent t)
-     (vdiff nil))
+     (vdiff nil)
+     (browse-kill-ring t))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -6179,6 +6180,12 @@ smaller than the window height."
                               ((eq pos 'bot) page-bot)))))))
 
 (global-set-key (kbd "M-r") #'my-cycle-line-position)
+
+;;;-----------------------------------------------------------------------------
+;;; browse-kill-ring
+;;;-----------------------------------------------------------------------------
+(global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

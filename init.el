@@ -360,6 +360,7 @@ in case that file does not provide any feature."
 (defvar web-mode-enable-current-column-highlight)
 (defvar highlight-indent-guides-method)
 (defvar highlight-indent-guides-character)
+(defvar ido-work-directory-list)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -664,6 +665,7 @@ in case that file does not provide any feature."
 (declare-function my-find-file-by-name 'suppress)
 (declare-function my-proj-paip 'suppress)
 (declare-function highlight-tail-mode 'highlight-tail)
+(declare-function my-ido-find-file 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -2946,6 +2948,18 @@ To make it human readable."
   )
 
 (with-eval-after-load 'ido
+
+  (defun my-ido-find-file ()
+    "Calls `ido-find-file'.
+But shadows `ido-work-directory-list' to prevent ido from brining in
+completions from folders other than the current one."
+    (interactive)
+    (let ((ido-work-directory-list '()))
+      (ido-find-file)))
+
+  (when (or my-use-ido-p
+            my-use-bare-ido-p)
+    (global-set-key (kbd "C-x C-f") #'my-ido-find-file))
 
   (when my-use-ido-p ;; GAURD against calling ido-ubiquitous-mode.
 

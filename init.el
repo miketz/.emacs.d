@@ -5053,6 +5053,17 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Info-mode
 ;;;-----------------------------------------------------------------------------
+
+;; This turns on info mode with the user-friendly GUI.
+;; see https://stackoverflow.com/questions/1921049/how-to-open-info-file-in-emac
+;; s-in-info-mode
+(defun my-info-mode ()
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (kill-buffer (current-buffer))
+    (info file-name)))
+(add-to-list 'auto-mode-alist '("\\.info\\'" . my-info-mode))
+
 (with-eval-after-load 'info
   ;; rebind keys for vim friendliness.
   ;; orginial bindings. TODO: bind them to something else. Or just use M-x

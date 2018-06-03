@@ -1046,7 +1046,8 @@ Closure over executed-p."
           (vdiff . "melpa"))))
 
 ;; (setq package-enable-at-startup nil)
-(package-initialize) ;; activate all the packages (in particular autoloads)
+(when (version< emacs-version "27.0")
+  (package-initialize)) ;; activate all the packages (in particular autoloads)
 
 
 (defun my-install-packages ()

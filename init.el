@@ -729,6 +729,7 @@ Closure over `positions'."
 
 (defvar my-computers
   '(work-laptop
+    work-laptop-bash
     raspberry-pi
     utilite
     old-sony-vaio
@@ -817,6 +818,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond ((eq my-curr-computer 'wild-dog) #'swiper)
+                          ((eq my-curr-computer 'work-laptop-bash) #'swiper)
                           (my-use-ivy-p #'swiper)
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
@@ -1005,8 +1007,8 @@ Closure over executed-p."
      (clojure-mode t)
      (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
      (cider ,(memq my-curr-computer '(wild-dog)))
-     (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
-      ,(<= emacs-major-version 24))
+     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
+     ;;  ,(<= emacs-major-version 24))
      (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
      (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
@@ -1752,6 +1754,9 @@ Closure over `inverse-video-p'"
     ;; "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
     ;; "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"
     )
+
+   ((eq my-curr-computer 'work-laptop-bash)
+    (load-theme 'charcoal t))
 
    ((and (eq my-curr-computer 'work-laptop)
          (not my-graphic-p))

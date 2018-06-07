@@ -5141,7 +5141,7 @@ START and END define the region."
 (with-eval-after-load 'cider-style-overlays
   (setq cider-eval-result-prefix ""))
 
-(defvar my-fancy-overlay-p (memq my-curr-computer t) ;'(wild-dog work-laptop)
+(defvar my-fancy-overlay-p t ;;(memq my-curr-computer '(wild-dog work-laptop))
   "Whether to use the cider-style overlays to display evaluation results.")
 
 (when my-fancy-overlay-p

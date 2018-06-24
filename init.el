@@ -2254,7 +2254,8 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;;-----------------------------------------------------------------------------
 ;;; turn on lisp-mode when editing file .stumpwmrc
 ;;;-----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
+;; don't need this anymore. Using a mode hint comment in .stumpwmrc instead.
+;; (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Org mode

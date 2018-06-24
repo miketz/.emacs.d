@@ -5356,7 +5356,7 @@ Closure over `preceding-sexp-fn'."
 ;;; shell-script-mode. (alias for sh-mode)
 ;;;-----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
 
 
 

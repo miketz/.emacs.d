@@ -361,6 +361,7 @@ in case that file does not provide any feature."
 (defvar highlight-indent-guides-method)
 (defvar highlight-indent-guides-character)
 (defvar ido-work-directory-list)
+(defvar cquery-executable)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -666,6 +667,7 @@ in case that file does not provide any feature."
 (declare-function my-proj-paip 'suppress)
 (declare-function highlight-tail-mode 'highlight-tail)
 (declare-function my-ido-find-file 'suppress)
+(declare-function my-setup-cquery 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1021,7 +1023,10 @@ Closure over executed-p."
      (erc-hl-nicks t)
      (sql-indent t)
      (vdiff nil)
-     (browse-kill-ring t))
+     (browse-kill-ring t)
+     (lsp-mode t)
+     (company-lsp t)
+     (cquery ,(memq my-curr-computer '(wild-dog))))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -2254,7 +2259,8 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;;-----------------------------------------------------------------------------
 ;;; turn on lisp-mode when editing file .stumpwmrc
 ;;;-----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
+;; don't need this anymore. Using a mode hint comment in .stumpwmrc instead.
+;; (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Org mode
@@ -5146,7 +5152,7 @@ START and END define the region."
 (with-eval-after-load 'cider-style-overlays
   (setq cider-eval-result-prefix ""))
 
-(defvar my-fancy-overlay-p  t ;(memq my-curr-computer '(wild-dog work-laptop))
+(defvar my-fancy-overlay-p t ;;(memq my-curr-computer '(wild-dog work-laptop))
   "Whether to use the cider-style overlays to display evaluation results.")
 
 (when my-fancy-overlay-p
@@ -5355,7 +5361,7 @@ Closure over `preceding-sexp-fn'."
 ;;; shell-script-mode. (alias for sh-mode)
 ;;;-----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
 
 
 
@@ -6217,6 +6223,37 @@ smaller than the window height."
 ;;;-----------------------------------------------------------------------------
 ;; (global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
 
+
+;;;-----------------------------------------------------------------------------
+;;; company-lsp
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'lsp-mode
+  (require 'company-lsp)
+  (push 'company-lsp company-backends))
+
+;;;-----------------------------------------------------------------------------
+;;; cquery. Not an elisp project. Built separately.
+;;; NOTE: put compile_commands.json in each project root (or symlink).
+;;;-----------------------------------------------------------------------------
+(when (eq my-curr-computer 'wild-dog)
+  (add-to-list 'exec-path "/home/mike/proj/cquery/build/release/bin"))
+
+;;;-----------------------------------------------------------------------------
+;;; cquery. Melpa elisp package. (works with cquery binary above.)
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'cquery
+  (when (eq my-curr-computer 'wild-dog)
+    (setq cquery-executable "/home/mike/proj/cquery/build/release/bin/cquery")))
+
+(when (eq my-curr-computer 'wild-dog)
+  (defun my-setup-cquery ()
+    ;; autoload for `lsp-cquery-enable' is broken so just requre the
+    ;; `cquery' library to make it available.
+    (require 'cquery)
+    (lsp-cquery-enable))
+  ;; turn on cquery atuomatically.  But might go wonky if
+  ;; compile_commands.json is not in the project root.
+  (add-hook 'c-mode-common-hook #'my-setup-cquery))
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

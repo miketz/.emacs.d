@@ -1024,8 +1024,8 @@ Closure over executed-p."
      (sql-indent t)
      (vdiff nil)
      (browse-kill-ring t)
-     (lsp-mode t)
-     (company-lsp t)
+     (lsp-mode ,(not (version< emacs-version "25.1")))
+     (company-lsp ,(not (version< emacs-version "25.1")))
      (cquery ,(memq my-curr-computer '(wild-dog))))
    "Packages I use from elpa/melpa."))
 

@@ -2062,6 +2062,8 @@ Closure over `inverse-video-p'"
   (when my-use-evil-p
     ;; C-Space like Visual Studio
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
+    ;; C-SPC doesn't work in some terminals, so bind an alternativ key.
+    (evil-define-key 'insert company-mode-map (kbd "C-o") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
     )
 

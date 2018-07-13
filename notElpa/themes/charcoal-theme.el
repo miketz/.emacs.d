@@ -5,7 +5,7 @@
 ;;; full 16777216 color rgb version.  Colors are not restricted in the full
 ;;; rgb version for the sake of consistency with the lesser versions.
 
-;;; full color tested on ms-widnows in linux-X11
+;;; full color tested on ms-widnows and linux-X11
 ;;; 256 color tested on linux in gnome-terminal
 ;;; 16 color tested on ms-windows in cmd.exe
 ;;; 8 color tested on linux in text mode

@@ -153,6 +153,10 @@ Example:
                            :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
+   `(line-number ((t (:background "black"
+                                :foreground "gray50"))))
+   `(line-number-current-line ((t :inherit line-number)))
+
    `(region
      ((,class (:background ,highlight))))     ;69685E
 

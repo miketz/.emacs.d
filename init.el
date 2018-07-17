@@ -362,6 +362,7 @@ in case that file does not provide any feature."
 (defvar highlight-indent-guides-character)
 (defvar ido-work-directory-list)
 (defvar cquery-executable)
+(defvar ibuffer-expert)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

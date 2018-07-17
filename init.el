@@ -664,6 +664,7 @@ in case that file does not provide any feature."
 (declare-function my-find-file-by-name 'suppress)
 (declare-function my-proj-paip 'suppress)
 (declare-function highlight-tail-mode 'highlight-tail)
+(declare-function my-proj-emacs-manual 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros

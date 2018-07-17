@@ -6129,6 +6129,7 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 (global-set-key (kbd "C-x C-b") #'ibuffer) ; the way C-x C-b should be.
 
 (with-eval-after-load 'ibuffer
+  (setq ibuffer-expert t)
   (setq ibuffer-show-empty-filter-groups nil) ; hide headers on empty groups
   (setq ibuffer-saved-filter-groups
         '(("lots" ; lots of groups

@@ -264,7 +264,7 @@
 
 
 (defhydra hydra-expand-region
-  (:body-pre (er/expand-region 1) ;; (call-interactively #'er/expand-region)
+  (:body-pre (er/expand-region 2) ;; (call-interactively #'er/expand-region)
              ;; TODO: wire up "fj" keybind to quit with `key-chord'
              )
   ("k" er/expand-region)

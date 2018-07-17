@@ -360,6 +360,9 @@ in case that file does not provide any feature."
 (defvar web-mode-enable-current-column-highlight)
 (defvar highlight-indent-guides-method)
 (defvar highlight-indent-guides-character)
+(defvar ido-work-directory-list)
+(defvar cquery-executable)
+(defvar ibuffer-expert)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -542,7 +545,7 @@ in case that file does not provide any feature."
 (declare-function my-change-alpha 'suppress)
 (declare-function my-change-alpha-more-solid 'suppress)
 (declare-function my-change-alpha-less-solid 'suppress)
-(declare-function evil-define-key 'suppress)
+(declare-function evil-define-key 'evil-core)
 (declare-function slime-edit-definition 'suppress)
 (declare-function evil-append 'suppress)
 (declare-function company-select-next 'suppress)
@@ -664,7 +667,12 @@ in case that file does not provide any feature."
 (declare-function my-find-file-by-name 'suppress)
 (declare-function my-proj-paip 'suppress)
 (declare-function highlight-tail-mode 'highlight-tail)
+<<<<<<< HEAD
 (declare-function my-proj-emacs-manual 'suppress)
+=======
+(declare-function my-ido-find-file 'suppress)
+(declare-function my-setup-cquery 'suppress)
+>>>>>>> 00c97c75cd708816637b4c6862265d72f9f84d78
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -728,6 +736,7 @@ Closure over `positions'."
 
 (defvar my-computers
   '(work-laptop
+    work-laptop-bash
     raspberry-pi
     utilite
     old-sony-vaio
@@ -816,6 +825,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond ((eq my-curr-computer 'wild-dog) #'swiper)
+                          ((eq my-curr-computer 'work-laptop-bash) #'swiper)
                           (my-use-ivy-p #'swiper)
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
@@ -1006,8 +1016,8 @@ Closure over executed-p."
      (clojure-mode t)
      (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
      (cider ,(memq my-curr-computer '(wild-dog)))
-     (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
-      ,(<= emacs-major-version 24))
+     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
+     ;;  ,(<= emacs-major-version 24))
      (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
      (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
@@ -1020,8 +1030,16 @@ Closure over executed-p."
      (erc-hl-nicks t)
      (sql-indent t)
      (vdiff nil)
+<<<<<<< HEAD
      (tern ,has-nodejs-p)
      (company-tern ,has-nodejs-p))
+=======
+     (browse-kill-ring t)
+     (git-gutter ,(not (version< emacs-version "24.3")))
+     (lsp-mode ,(not (version< emacs-version "25.1")))
+     (company-lsp ,(not (version< emacs-version "25.1")))
+     (cquery ,(memq my-curr-computer '(wild-dog))))
+>>>>>>> 00c97c75cd708816637b4c6862265d72f9f84d78
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -1048,7 +1066,8 @@ Closure over executed-p."
           (vdiff . "melpa"))))
 
 ;; (setq package-enable-at-startup nil)
-(package-initialize) ;; activate all the packages (in particular autoloads)
+(when (version< emacs-version "27.0")
+  (package-initialize)) ;; activate all the packages (in particular autoloads)
 
 
 (defun my-install-packages ()
@@ -1755,6 +1774,9 @@ Closure over `inverse-video-p'"
     ;; "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"
     )
 
+   ((eq my-curr-computer 'work-laptop-bash)
+    (load-theme 'zenburn t))
+
    ((and (eq my-curr-computer 'work-laptop)
          (not my-graphic-p))
     (load-theme 'charcoal t))
@@ -2053,6 +2075,8 @@ Closure over `inverse-video-p'"
   (when my-use-evil-p
     ;; C-Space like Visual Studio
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
+    ;; C-SPC doesn't work in some terminals, so bind an alternativ key.
+    (evil-define-key 'insert company-mode-map (kbd "C-o") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
     )
 
@@ -2250,7 +2274,8 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;;-----------------------------------------------------------------------------
 ;;; turn on lisp-mode when editing file .stumpwmrc
 ;;;-----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
+;; don't need this anymore. Using a mode hint comment in .stumpwmrc instead.
+;; (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Org mode
@@ -2950,6 +2975,18 @@ To make it human readable."
   )
 
 (with-eval-after-load 'ido
+
+  (defun my-ido-find-file ()
+    "Calls `ido-find-file'.
+But shadows `ido-work-directory-list' to prevent ido from brining in
+completions from folders other than the current one."
+    (interactive)
+    (let ((ido-work-directory-list '()))
+      (ido-find-file)))
+
+  (when (or my-use-ido-p
+            my-use-bare-ido-p)
+    (global-set-key (kbd "C-x C-f") #'my-ido-find-file))
 
   (when my-use-ido-p ;; GAURD against calling ido-ubiquitous-mode.
 
@@ -3906,9 +3943,13 @@ and indent."
 ;; TODO: revist this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.ht
 ;;       ml
-(if (>= emacs-major-version 25)
-    (remove-hook 'find-file-hooks 'vc-refresh-state)
-  (remove-hook 'find-file-hooks 'vc-find-file-hook))
+(cond ((>= emacs-major-version 27)
+       ;; `find-file-hooks' replaced by `find-file-hook'.
+       (remove-hook 'find-file-hook 'vc-refresh-state))
+      ((>= emacs-major-version 25)
+       (remove-hook 'find-file-hooks 'vc-refresh-state))
+      (t ; else emacs older than 25
+       (remove-hook 'find-file-hooks 'vc-find-file-hook)))
 
 (with-eval-after-load 'vc
   (add-to-list 'vc-directory-exclusion-list "bin")
@@ -5048,6 +5089,18 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;;-----------------------------------------------------------------------------
 ;;; Info-mode
 ;;;-----------------------------------------------------------------------------
+
+;; This turns on info mode with the user-friendly GUI.
+;; see https://stackoverflow.com/questions/1921049/how-to-open-info-file-in-emac
+;; s-in-info-mode
+(defun my-info-mode ()
+  "Turn on info mode with the user-friendly GUI."
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (kill-buffer (current-buffer))
+    (info file-name)))
+(add-to-list 'auto-mode-alist '("\\.info\\'" . my-info-mode))
+
 (with-eval-after-load 'info
   ;; rebind keys for vim friendliness.
   ;; orginial bindings. TODO: bind them to something else. Or just use M-x
@@ -5124,7 +5177,7 @@ START and END define the region."
 (with-eval-after-load 'cider-style-overlays
   (setq cider-eval-result-prefix ""))
 
-(defvar my-fancy-overlay-p (memq my-curr-computer '(wild-dog work-laptop))
+(defvar my-fancy-overlay-p t ;;(memq my-curr-computer '(wild-dog work-laptop))
   "Whether to use the cider-style overlays to display evaluation results.")
 
 (when my-fancy-overlay-p
@@ -5333,7 +5386,7 @@ Closure over `preceding-sexp-fn'."
 ;;; shell-script-mode. (alias for sh-mode)
 ;;;-----------------------------------------------------------------------------
 (add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
-(add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
 
 
 
@@ -6094,6 +6147,7 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 (global-set-key (kbd "C-x C-b") #'ibuffer) ; the way C-x C-b should be.
 
 (with-eval-after-load 'ibuffer
+  (setq ibuffer-expert t)
   (setq ibuffer-show-empty-filter-groups nil) ; hide headers on empty groups
   (setq ibuffer-saved-filter-groups
         '(("lots" ; lots of groups
@@ -6191,6 +6245,7 @@ smaller than the window height."
 (global-set-key (kbd "M-r") #'my-cycle-line-position)
 
 ;;;-----------------------------------------------------------------------------
+<<<<<<< HEAD
 ;;; tern
 ;;;-----------------------------------------------------------------------------
 
@@ -6200,6 +6255,43 @@ smaller than the window height."
 (with-eval-after-load 'company
   (add-to-list 'company-backends 'company-tern))
 
+=======
+;;; browse-kill-ring
+;;;-----------------------------------------------------------------------------
+;; (global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
+
+
+;;;-----------------------------------------------------------------------------
+;;; company-lsp
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'lsp-mode
+  (require 'company-lsp)
+  (push 'company-lsp company-backends))
+
+;;;-----------------------------------------------------------------------------
+;;; cquery. Not an elisp project. Built separately.
+;;; NOTE: put compile_commands.json in each project root (or symlink).
+;;;-----------------------------------------------------------------------------
+(when (eq my-curr-computer 'wild-dog)
+  (add-to-list 'exec-path "/home/mike/proj/cquery/build/release/bin"))
+
+;;;-----------------------------------------------------------------------------
+;;; cquery. Melpa elisp package. (works with cquery binary above.)
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'cquery
+  (when (eq my-curr-computer 'wild-dog)
+    (setq cquery-executable "/home/mike/proj/cquery/build/release/bin/cquery")))
+
+(when (eq my-curr-computer 'wild-dog)
+  (defun my-setup-cquery ()
+    ;; autoload for `lsp-cquery-enable' is broken so just requre the
+    ;; `cquery' library to make it available.
+    (require 'cquery)
+    (lsp-cquery-enable))
+  ;; turn on cquery atuomatically.  But might go wonky if
+  ;; compile_commands.json is not in the project root.
+  (add-hook 'c-mode-common-hook #'my-setup-cquery))
+>>>>>>> 00c97c75cd708816637b4c6862265d72f9f84d78
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

@@ -5,7 +5,7 @@
 ;;; full 16777216 color rgb version.  Colors are not restricted in the full
 ;;; rgb version for the sake of consistency with the lesser versions.
 
-;;; full color tested on ms-widnows in linux-X11
+;;; full color tested on ms-widnows and linux-X11
 ;;; 256 color tested on linux in gnome-terminal
 ;;; 16 color tested on ms-windows in cmd.exe
 ;;; 8 color tested on linux in text mode
@@ -77,7 +77,43 @@ Example:
        (rain-9       (aref `["#CDAA7D" "#CDCD00" "#0000FF" "#000000"] i))
        (rain-9-bg    (aref `[,bg       ,bg       ,bg       "#0000FF"] i))
        (rain-fg-u    (aref `["#A0522D" "#AF0000" "#FFFFFF" "#FFFFFF"] i))
-       (rain-bg-u    (aref `["#000000" "#080808" "#FF0000" "#FF0000"] i)))
+       (rain-bg-u    (aref `["#000000" "#080808" "#FF0000" "#FF0000"] i))
+       (zenburn-fg+1     "#FFFFEF")
+       (zenburn-fg       "#DCDCCC")
+       (zenburn-fg-1     "#656555")
+       (zenburn-bg-2     "#000000")
+       (zenburn-bg-1     "#2B2B2B")
+       (zenburn-bg-05    "#383838")
+       (zenburn-bg       "#3F3F3F")
+       (zenburn-bg+05    "#494949")
+       (zenburn-bg+1     "#4F4F4F")
+       (zenburn-bg+2     "#5F5F5F")
+       (zenburn-bg+3     "#6F6F6F")
+       (zenburn-red+1    "#DCA3A3")
+       (zenburn-red      "#CC9393")
+       (zenburn-red-1    "#BC8383")
+       (zenburn-red-2    "#AC7373")
+       (zenburn-red-3    "#9C6363")
+       (zenburn-red-4    "#8C5353")
+       (zenburn-orange   "#DFAF8F")
+       (zenburn-yellow   "#F0DFAF")
+       (zenburn-yellow-1 "#E0CF9F")
+       (zenburn-yellow-2 "#D0BF8F")
+       (zenburn-green-1  "#5F7F5F")
+       (zenburn-green    "#7F9F7F")
+       (zenburn-green+1  "#8FB28F")
+       (zenburn-green+2  "#9FC59F")
+       (zenburn-green+3  "#AFD8AF")
+       (zenburn-green+4  "#BFEBBF")
+       (zenburn-cyan     "#93E0E3")
+       (zenburn-blue+1   "#94BFF3")
+       (zenburn-blue     "#8CD0D3")
+       (zenburn-blue-1   "#7CB8BB")
+       (zenburn-blue-2   "#6CA0A3")
+       (zenburn-blue-3   "#5C888B")
+       (zenburn-blue-4   "#4C7073")
+       (zenburn-blue-5   "#366060")
+       (zenburn-magenta  "#DC8CC3"))
 
   ;; lightyellow2=#EEEED1
   ;; snow3 gray80 lightyellow3
@@ -152,6 +188,10 @@ Example:
      ((,class (:foreground ,ml-inact-fg ;"#5F7F5F"
                            :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
+
+   `(line-number ((t (:background "black"
+                                :foreground "gray50"))))
+   `(line-number-current-line ((t :inherit line-number)))
 
    `(region
      ((,class (:background ,highlight))))     ;69685E
@@ -331,6 +371,26 @@ Example:
    `(minesweeper-mismarked ((,class (:background ,highlight
                                                  :foreground "orange"
                                                  :weight bold))))
+
+
+   ;; ediff. temporarily borrowing from zenburn.
+   ;; TODO: customize colors for charcoal
+   `(ediff-current-diff-A ((t (:foreground ,zenburn-fg :background ,zenburn-red-4))))
+   `(ediff-current-diff-Ancestor ((t (:foreground ,zenburn-fg :background ,zenburn-red-4))))
+   `(ediff-current-diff-B ((t (:foreground ,zenburn-fg :background ,zenburn-green-1))))
+   `(ediff-current-diff-C ((t (:foreground ,zenburn-fg :background ,zenburn-blue-5))))
+   `(ediff-even-diff-A ((t (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-Ancestor ((t (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-B ((t (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-C ((t (:background ,zenburn-bg+1))))
+   `(ediff-fine-diff-A ((t (:foreground ,zenburn-fg :background ,zenburn-red-2 :weight bold))))
+   `(ediff-fine-diff-Ancestor ((t (:foreground ,zenburn-fg :background ,zenburn-red-2 weight bold))))
+   `(ediff-fine-diff-B ((t (:foreground ,zenburn-fg :background ,zenburn-green :weight bold))))
+   `(ediff-fine-diff-C ((t (:foreground ,zenburn-fg :background ,zenburn-blue-3 :weight bold ))))
+   `(ediff-odd-diff-A ((t (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-Ancestor ((t (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-B ((t (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-C ((t (:background ,zenburn-bg+2))))
 
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))

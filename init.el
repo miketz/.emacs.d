@@ -822,6 +822,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond ((eq my-curr-computer 'wild-dog) #'swiper)
+                          ((eq my-curr-computer 'work-laptop) #'swiper)
                           ((eq my-curr-computer 'work-laptop-bash) #'swiper)
                           (my-use-ivy-p #'swiper)
                           ;; `ido-occur' is fast but does not split inputs on
@@ -1752,10 +1753,9 @@ Closure over `inverse-video-p'"
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
-    (my-color-leuven)
-    (set-background-color my-ultimate)
+    (load-theme 'charcoal t)
     (set-frame-font
-     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ;; "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1"
     ;; "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
     ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"

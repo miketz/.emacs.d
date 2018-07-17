@@ -667,12 +667,9 @@ in case that file does not provide any feature."
 (declare-function my-find-file-by-name 'suppress)
 (declare-function my-proj-paip 'suppress)
 (declare-function highlight-tail-mode 'highlight-tail)
-<<<<<<< HEAD
 (declare-function my-proj-emacs-manual 'suppress)
-=======
 (declare-function my-ido-find-file 'suppress)
 (declare-function my-setup-cquery 'suppress)
->>>>>>> 00c97c75cd708816637b4c6862265d72f9f84d78
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1030,16 +1027,13 @@ Closure over executed-p."
      (erc-hl-nicks t)
      (sql-indent t)
      (vdiff nil)
-<<<<<<< HEAD
      (tern ,has-nodejs-p)
-     (company-tern ,has-nodejs-p))
-=======
+     (company-tern ,has-nodejs-p)
      (browse-kill-ring t)
      (git-gutter ,(not (version< emacs-version "24.3")))
      (lsp-mode ,(not (version< emacs-version "25.1")))
      (company-lsp ,(not (version< emacs-version "25.1")))
      (cquery ,(memq my-curr-computer '(wild-dog))))
->>>>>>> 00c97c75cd708816637b4c6862265d72f9f84d78
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -6245,7 +6239,6 @@ smaller than the window height."
 (global-set-key (kbd "M-r") #'my-cycle-line-position)
 
 ;;;-----------------------------------------------------------------------------
-<<<<<<< HEAD
 ;;; tern
 ;;;-----------------------------------------------------------------------------
 
@@ -6255,7 +6248,7 @@ smaller than the window height."
 (with-eval-after-load 'company
   (add-to-list 'company-backends 'company-tern))
 
-=======
+;;;-----------------------------------------------------------------------------
 ;;; browse-kill-ring
 ;;;-----------------------------------------------------------------------------
 ;; (global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
@@ -6291,7 +6284,6 @@ smaller than the window height."
   ;; turn on cquery atuomatically.  But might go wonky if
   ;; compile_commands.json is not in the project root.
   (add-hook 'c-mode-common-hook #'my-setup-cquery))
->>>>>>> 00c97c75cd708816637b4c6862265d72f9f84d78
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

@@ -882,7 +882,9 @@ Closure over executed-p."
 (let ((install-slime-p
        (memq my-curr-computer
              '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-      (has-clang-p (memq my-curr-computer '(work-laptop wild-dog))))
+      (has-clang-p (memq my-curr-computer '(work-laptop wild-dog)))
+      (has-nodejs-p
+       (memq my-curr-computer '(work-laptop work-laptop-bash wild-dog))))
  ;; TODO: specify if it should use elpa or melpa version of a package.
  ;; NOTE: to limit package intstallation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
@@ -1017,7 +1019,9 @@ Closure over executed-p."
      (autothemer t) ;; dependency for some themes.
      (erc-hl-nicks t)
      (sql-indent t)
-     (vdiff nil))
+     (vdiff nil)
+     (tern ,has-nodejs-p)
+     (company-tern ,has-nodejs-p))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -3836,7 +3840,12 @@ and indent."
     (autoload #'my-proj-tcpl lisp-file nil t)
     (autoload #'my-proj-dive-python lisp-file nil t)
     (autoload #'my-proj-progit2 lisp-file nil t)
-    (autoload #'my-proj-paip lisp-file nil t))
+    (autoload #'my-proj-paip lisp-file nil t)
+    (autoload #'my-proj-emacs-manual lisp-file nil t)
+    (defun my-bookmarks-web ()
+      "My browser bookmarks from IE saved to a text file."
+      (interactive)
+      (find-file "c:/users/mtz/bookmarks.txt")))
 
   ;;quick load of c:\users\mtz
   (when my-use-evil-p
@@ -6180,6 +6189,17 @@ smaller than the window height."
                               ((eq pos 'bot) page-bot)))))))
 
 (global-set-key (kbd "M-r") #'my-cycle-line-position)
+
+;;;-----------------------------------------------------------------------------
+;;; tern
+;;;-----------------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
+;;; company-tern
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-tern))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

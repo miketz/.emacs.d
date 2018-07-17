@@ -229,6 +229,15 @@
       ;; else go to the folder
       (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs"))))
 
+(defun my-proj-emacs-manual ()
+  "Open the emacs manual."
+  (interactive)
+  (let ((bm (car (member "emacs-man" (bookmark-all-names)))))
+    (if bm
+        (bookmark-jump bm)
+      ;; else go to top emacs info node.
+      (info "emacs"))))
+
 (defun my-proj-progit2 ()
   "Open the progit2 ebook."
   (interactive)

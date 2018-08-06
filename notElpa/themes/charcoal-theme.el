@@ -277,6 +277,13 @@ Example:
    ;; `(ivy-subdir ((,class (:foreground "white"))))
    ;; `(ivy-virtual ((,class (:foreground "white"))))
 
+   ;; ace-window
+   `(aw-leading-char-face ; ace-window character.
+     ((,class :foreground ,fg-green
+              ;; :background "black"
+              :height 300))) ; big font
+   `(aw-background-face ((,class :foreground ,faint-less)))
+
    ;; ido
    `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))

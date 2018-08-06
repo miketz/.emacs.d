@@ -189,9 +189,9 @@ Example:
                            :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
-   `(line-number ((t (:background "black"
+   `(line-number ((,class (:background "black"
                                 :foreground "gray50"))))
-   `(line-number-current-line ((t :inherit line-number)))
+   `(line-number-current-line ((,class :inherit line-number)))
 
    `(region
      ((,class (:background ,highlight))))     ;69685E
@@ -375,22 +375,22 @@ Example:
 
    ;; ediff. temporarily borrowing from zenburn.
    ;; TODO: customize colors for charcoal
-   `(ediff-current-diff-A ((t (:foreground ,zenburn-fg :background ,zenburn-red-4))))
-   `(ediff-current-diff-Ancestor ((t (:foreground ,zenburn-fg :background ,zenburn-red-4))))
-   `(ediff-current-diff-B ((t (:foreground ,zenburn-fg :background ,zenburn-green-1))))
-   `(ediff-current-diff-C ((t (:foreground ,zenburn-fg :background ,zenburn-blue-5))))
-   `(ediff-even-diff-A ((t (:background ,zenburn-bg+1))))
-   `(ediff-even-diff-Ancestor ((t (:background ,zenburn-bg+1))))
-   `(ediff-even-diff-B ((t (:background ,zenburn-bg+1))))
-   `(ediff-even-diff-C ((t (:background ,zenburn-bg+1))))
-   `(ediff-fine-diff-A ((t (:foreground ,zenburn-fg :background ,zenburn-red-2 :weight bold))))
-   `(ediff-fine-diff-Ancestor ((t (:foreground ,zenburn-fg :background ,zenburn-red-2 weight bold))))
-   `(ediff-fine-diff-B ((t (:foreground ,zenburn-fg :background ,zenburn-green :weight bold))))
-   `(ediff-fine-diff-C ((t (:foreground ,zenburn-fg :background ,zenburn-blue-3 :weight bold ))))
-   `(ediff-odd-diff-A ((t (:background ,zenburn-bg+2))))
-   `(ediff-odd-diff-Ancestor ((t (:background ,zenburn-bg+2))))
-   `(ediff-odd-diff-B ((t (:background ,zenburn-bg+2))))
-   `(ediff-odd-diff-C ((t (:background ,zenburn-bg+2))))
+   `(ediff-current-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))
+   `(ediff-current-diff-Ancestor ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))
+   `(ediff-current-diff-B ((,class (:foreground ,zenburn-fg :background ,zenburn-green-1))))
+   `(ediff-current-diff-C ((,class (:foreground ,zenburn-fg :background ,zenburn-blue-5))))
+   `(ediff-even-diff-A ((,class (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-Ancestor ((,class (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-B ((,class (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-C ((,class (:background ,zenburn-bg+1))))
+   `(ediff-fine-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-2 :weight bold))))
+   `(ediff-fine-diff-Ancestor ((,class (:foreground ,zenburn-fg :background ,zenburn-red-2 weight bold))))
+   `(ediff-fine-diff-B ((,class (:foreground ,zenburn-fg :background ,zenburn-green :weight bold))))
+   `(ediff-fine-diff-C ((,class (:foreground ,zenburn-fg :background ,zenburn-blue-3 :weight bold ))))
+   `(ediff-odd-diff-A ((,class (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-Ancestor ((,class (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
 
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))

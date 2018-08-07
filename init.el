@@ -545,7 +545,7 @@ in case that file does not provide any feature."
 (declare-function my-change-alpha 'suppress)
 (declare-function my-change-alpha-more-solid 'suppress)
 (declare-function my-change-alpha-less-solid 'suppress)
-(declare-function evil-define-key 'evil-core)
+;; (declare-function evil-define-key 'evil-core)
 (declare-function slime-edit-definition 'suppress)
 (declare-function evil-append 'suppress)
 (declare-function company-select-next 'suppress)

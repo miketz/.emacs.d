@@ -6079,7 +6079,29 @@ vanilla javascript buffers."
     (setq display-line-numbers 'relative))
   (defun my-line-numbers-off ()
     (interactive)
-    (setq display-line-numbers nil)))
+    (setq display-line-numbers nil))
+
+  ;; ;; Attempt at turning on relative line numbers in visual mode.
+  ;; (when my-use-evil-p
+  ;;   (let ((cache nil)) ; lexically bound `cache'.
+  ;;     (defun my-vis-entry ()
+  ;;       (setq cache display-line-numbers)
+  ;;       (unless (or (eq display-line-numbers 'relative)
+  ;;                   ;; don't do anything if visual is from expand-region.
+  ;;                   (memq last-command
+  ;;                         '(er/expand-region
+  ;;                           er/contract-region
+  ;;                           hydra-expand-region/er/expand-region
+  ;;                           hydra-expand-region/er/contract-region)))
+  ;;         (setq display-line-numbers 'relative)))
+
+  ;;     (defun my-vis-exit ()
+  ;;       (unless (eq display-line-numbers cache)
+  ;;         (setq display-line-numbers cache))))
+
+  ;;   (add-hook 'evil-visual-state-entry-hook #'my-vis-entry)
+  ;;   (add-hook 'evil-visual-state-exit-hook #'my-vis-exit))
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; powershell

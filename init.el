@@ -670,6 +670,7 @@ in case that file does not provide any feature."
 (declare-function my-proj-emacs-manual 'suppress)
 (declare-function my-ido-find-file 'suppress)
 (declare-function my-setup-cquery 'suppress)
+(declare-function my-line-numbers-cycle 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6080,6 +6081,22 @@ vanilla javascript buffers."
   (defun my-line-numbers-off ()
     (interactive)
     (setq display-line-numbers nil))
+
+
+  ;; line number display styles. lexically bound.
+  (let ((styles '(relative absolute off))
+        (curr nil))
+    (defun my-line-numbers-cycle ()
+      "Cycle line number display styles. relative, absolute, off.
+Closure over `styles', `curr'."
+      (interactive)
+      (setq curr (car (or (cdr (memq curr styles))
+                          styles)))
+      (setq display-line-numbers (cond ((eq curr 'relative) 'relative)
+                                       ((eq curr 'absolute) t)
+                                       ((eq curr 'off) nil)))))
+
+  (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
 
   ;; ;; Attempt at turning on relative line numbers in visual mode.
   ;; (when my-use-evil-p

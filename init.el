@@ -881,6 +881,7 @@ Closure over executed-p."
       (progn ;; kaolin stuff
         (load (concat custom-theme-directory "kaolin-themes-lib"))
         (load (concat custom-theme-directory "kaolin-themes")))
+      (load (concat custom-theme-directory "one-themes"))
       ;; record the fact we did the set up. To avoid doing it again.
       (setq executed-p t))))
 

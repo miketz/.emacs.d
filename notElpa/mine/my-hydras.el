@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 ;; (defhydra hydra-zoom (global-map "<f2>")
 ;;   "zoom"
 ;;   ;; The property name ":color" is misleading.
@@ -279,16 +281,14 @@
 
 
 
-
-(progn
-  ;; spawn hydras from a single binding. A hydra of hydras.
-  (defvar *my-hydras* (mapcar #'symbol-name
-                              (list #'hydra-easyscroll/body
-                                    #'hydra-window/body
-                                    #'my-hydra-font/body
-                                    #'hydra-expand-region/body
-                                    ;;trying paredit #'hydra-paredit/body
-                                    )))
+;; spawn hydras from a single binding. A hydra of hydras.
+(let ((my-hydras (mapcar #'symbol-name
+                         (list #'hydra-easyscroll/body
+                               #'hydra-window/body
+                               #'my-hydra-font/body
+                               #'hydra-expand-region/body
+                               ;;trying paredit #'hydra-paredit/body
+                               ))))
   (defun my-choose-hydra ()
     (interactive)
-    (funcall (intern (completing-read "pick one: " *my-hydras*)))))
+    (funcall (intern (completing-read "pick one: " my-hydras)))))

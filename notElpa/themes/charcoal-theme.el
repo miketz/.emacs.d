@@ -399,6 +399,9 @@ Example:
    `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
    `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
 
+   ;; org
+   `(org-hide ((,class :foreground ,faint)))
+
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
    `(rainbow-delimiters-depth-2-face

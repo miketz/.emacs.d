@@ -231,7 +231,8 @@ Example:
 
    ;; slime
    `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
-   `(sldb-condition-face ((,class (:foreground ,rain-1))))
+   `(sldb-condition-face ((,class :foreground ,fg-red
+                                  :background ,bg-red)))
 
    ;; replace.el
    `(match ((,class (:background "#000000" :foreground ,fg-yellow :weight normal))))

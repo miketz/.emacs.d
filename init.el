@@ -2304,6 +2304,10 @@ This avoids changing pop-up width while scrolling through candidates."
 
 (with-eval-after-load 'org
   (setq org-startup-indented t)
+  ;; show the leading stars. But it's set to t again by `org-indent-mode'?
+  ;; TODO: try setting in a hook.
+  (setq org-hide-leading-stars nil)
+
   (setq org-log-done t) ; make timestamp when flagging something done
                         ; with C-c C-t
   (setq org-agenda-timegrid-use-ampm t)

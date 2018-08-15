@@ -1036,7 +1036,8 @@ Closure over executed-p."
      (git-gutter ,(not (version< emacs-version "24.3")))
      (lsp-mode ,(not (version< emacs-version "25.1")))
      (company-lsp ,(not (version< emacs-version "25.1")))
-     (cquery ,(memq my-curr-computer '(wild-dog))))
+     (cquery ,(memq my-curr-computer '(wild-dog)))
+     (websocket t))
    "Packages I use from elpa/melpa."))
 
 (require 'package)
@@ -1060,7 +1061,8 @@ Closure over executed-p."
           (electric-spacing . "melpa")
           (aggressive-indent . "melpa")
           (ggtags . "melpa")
-          (vdiff . "melpa"))))
+          (vdiff . "melpa")
+          (websocket . "melpa"))))
 
 ;; (setq package-enable-at-startup nil)
 (cond
@@ -6332,6 +6334,19 @@ smaller than the window height."
   ;; turn on cquery atuomatically.  But might go wonky if
   ;; compile_commands.json is not in the project root.
   (add-hook 'c-mode-common-hook #'my-setup-cquery))
+
+
+;;;-----------------------------------------------------------------------------
+;;; Indium (formerly Jade). Javascript IDE.
+;;;-----------------------------------------------------------------------------
+;; NOTE: must install server with the following command.
+;;       npm install -g indium
+;; NOTE: must install package dependency `websocket'. Currently getting it from
+;;       melpa.
+(add-to-list 'load-path "~/.emacs.d/notElpa/Indium") ; git submodule
+(autoload #'indium-connect "indium-interaction" nil t)
+(with-eval-after-load 'indium
+  )
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

@@ -13,3 +13,6 @@
 [submodule "notElpa/mine/mor"]
 	path = notElpa/mine/mor
 	url = https://github.com/miketz/mor
+[submodule "notElpa/Indium"]
+	path = notElpa/Indium
+	url = https://github.com/NicolasPetton/Indium

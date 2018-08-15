@@ -193,6 +193,7 @@ in case that file does not provide any feature."
 (defvar org-todo-keyword-faces)
 (defvar org-agenda-files)
 (defvar org-mode-map)
+(defvar org-hide-leading-stars)
 (defvar js-indent-level)
 (defvar js2-highlight-level)
 (defvar js2-bounce-indent-p)
@@ -6344,7 +6345,7 @@ smaller than the window height."
 ;; NOTE: must install package dependency `websocket'. Currently getting it from
 ;;       melpa.
 (add-to-list 'load-path "~/.emacs.d/notElpa/Indium") ; git submodule
-(autoload #'indium-connect "indium-interaction" nil t)
+(autoload 'indium-connect "indium-interaction" nil t)
 (with-eval-after-load 'indium
   )
 

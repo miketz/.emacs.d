@@ -76,22 +76,28 @@
 
 ;;; Code:
 
-(progn ;; JUMPrestore
-  ;; tricks to improve startup time.
-  ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_ste
-  ;; ps_to_speed_up_emacs_start/
-  ;; TODO: verify exactly how much these help.
+;; JUMPrestore
+;; tricks to improve startup time.
+;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_ste
+;; ps_to_speed_up_emacs_start/
+;; TODO: verify exactly how much these help.
 
-  (defvar gc-cons-threshold-backup gc-cons-threshold)
-  (setq gc-cons-threshold 100000000)
+;; backup vals lexically bound.
+(let ((gc-cons-threshold-backup gc-cons-threshold)
+      (file-name-handler-alist-backup file-name-handler-alist))
+  (defun my-change-vals-faster-init ()
+    ;; set to better vals for when init is loading.
+    (setq gc-cons-threshold       2000000000
+          file-name-handler-alist nil))
+  (defun my-change-vals-restore-after-init ()
+    (setq gc-cons-threshold gc-cons-threshold-backup
+          file-name-handler-alist file-name-handler-alist-backup)))
 
-  (defvar file-name-handler-alist-backup file-name-handler-alist)
-  (setq file-name-handler-alist nil)
+(my-change-vals-faster-init)
+;; restore original values at end of init.el.
+;; sort of like my own dynamic binding. I dont' want to wrap the entire
+;; config in a giant let.
 
-  ;; restore original values at end of init.el.
-  ;; sort of like my own dynamic binding. I dont' want to wrap the entire
-  ;; config in a giant let.
-  )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -1120,33 +1126,33 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.
 ;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
-  (defvar my-w32-actions
-    '((resize . 61440)
-      (move . 61456)
-      (min . 61472)
-      (max . 61488)
-      (next-window . 61504)
-      (prev-window . 61520)
-      (close-window . 61536)
-      (vert-scroll . 61552)
-      (horizontal-scroll . 61568)
-      (mouse-menu . 61584)
-      (activate-menubar . 61696)
-      (arrange . 61712)
-      (restore-curr-frame . 61728)
-      (simulate-start-btn . 61744)
-      (screen-saver . 61760)
-      (hotkey . 61776)))
-  (defun my-w32-get-code (action)
-    "Get the numeric code from the action symbol."
-    (cdr (assoc action my-w32-actions)))
-  (defun my-w32-get-action (code)
-    "Get the action symbol from the numeric code."
-    (car (cl-rassoc code my-w32-actions)))
-  (defun my-w32-run (action)
-    "Executes a w32 action."
-    (let ((code (my-w32-get-code action)))
-      (w32-send-sys-command code))))
+  (let ((my-w32-actions
+         '((resize . 61440)
+           (move . 61456)
+           (min . 61472)
+           (max . 61488)
+           (next-window . 61504)
+           (prev-window . 61520)
+           (close-window . 61536)
+           (vert-scroll . 61552)
+           (horizontal-scroll . 61568)
+           (mouse-menu . 61584)
+           (activate-menubar . 61696)
+           (arrange . 61712)
+           (restore-curr-frame . 61728)
+           (simulate-start-btn . 61744)
+           (screen-saver . 61760)
+           (hotkey . 61776))))
+    (defun my-w32-get-code (action)
+      "Get the numeric code from the action symbol."
+      (cdr (assoc action my-w32-actions)))
+    (defun my-w32-get-action (code)
+      "Get the action symbol from the numeric code."
+      (car (cl-rassoc code my-w32-actions)))
+    (defun my-w32-run (action)
+      "Executes a w32 action."
+      (let ((code (my-w32-get-code action)))
+        (w32-send-sys-command code)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; key-chord
@@ -6948,9 +6954,9 @@ on the first call."
 ;;    (face-list)))
 
 
-(progn ;; JUMPrestore. restore values is set earlier for startup time.
-  (setq file-name-handler-alist file-name-handler-alist-backup)
-  (setq gc-cons-threshold gc-cons-threshold-backup))
+;; JUMPrestore. restore values set earlier for startup time.
+(my-change-vals-restore-after-init)
+
 
 
 ;;; init.el ends here

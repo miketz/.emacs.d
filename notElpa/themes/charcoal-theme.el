@@ -233,6 +233,44 @@ Example:
    `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
    `(sldb-condition-face ((,class :foreground ,fg-red
                                   :background ,bg-red)))
+   `(sldb-section-face ((,class :foreground ,fg-yellow
+                                :background ,bg-yellow
+                                :box (:line-width -1 :style released-button))))
+   ;; sldb-reference-face
+   ;; sldb-catch-tag-face
+   ;; sldb-local-value-face
+   ;; sldb-local-name-face
+   ;; sldb-detailed-frame-line-face
+   ;; sldb-non-restartable-frame-line-face
+   ;; sldb-restartable-frame-line-face
+   ;; sldb-frame-line-face
+   ;; sldb-restart-number-face
+   ;; sldb-restart-face
+   ;; sldb-restart-type-face
+   ;; sldb-frame-label-face
+   ;; sldb-topline-face
+   ;; slime-reader-conditional-face
+   ;; slime-repl-output-mouseover-face
+   ;; slime-repl-result-face
+   ;; slime-repl-input-face
+   ;; slime-repl-output-face
+   ;; slime-repl-prompt-face
+   ;; slime-inspector-type-face
+   ;; slime-inspector-action-face
+   ;; slime-inspector-value-face
+   ;; slime-inspector-label-face
+   ;; slime-inspector-topline-face
+   ;; slime-apropos-label
+   ;; slime-apropos-symbol
+   ;; slime-highlight-face
+   ;; slime-final-deprecation-warning-face
+   ;; slime-late-deprecation-warning-face
+   ;; slime-early-deprecation-warning-face
+   ;; slime-note-face
+   ;; slime-style-warning-face
+   ;; slime-warning-face
+   ;; slime-error-face
+
 
    ;; replace.el
    `(match ((,class (:background "#000000" :foreground ,fg-yellow :weight normal))))

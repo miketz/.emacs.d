@@ -264,20 +264,28 @@
 ;; (define-key helm-map (kbd "<escape>") 'helm-like-unite/body)
 
 
+(let ((initial-expand 2))
 
-(defhydra hydra-expand-region
-  (:body-pre (er/expand-region 2) ; expand twice for a head start.
-             ;; (call-interactively #'er/expand-region)
-             ;; TODO: wire up "fj" keybind to quit with `key-chord'
-             )
-  ("k" er/expand-region)
-  ("j" er/contract-region)
+ (defhydra hydra-expand-region
+   (:body-pre
+    (er/expand-region initial-expand) ; expand mulitple times for a head start.
+    ;; (call-interactively #'er/expand-region)
+    ;; TODO: wire up "fj" keybind to quit with `key-chord'
+    )
+   ("k" er/expand-region)
+   ("j" er/contract-region)
 
-  ;; NOTE: don't bind C-g in the hydra as it messes up expand-region's ability
-  ;; to jump back to the original starting point with C-g.
-  ;; ("C-g" nil nil)
+   ;; NOTE: don't bind C-g in the hydra as it messes up expand-region's ability
+   ;; to jump back to the original starting point with C-g.
+   ;; ("C-g" nil nil)
 
-  ("q" nil))
+   ("q" nil))
+
+ (defun my-hydra-set-initial-expand ()
+   (interactive)
+   (setq initial-expand
+         (read-number "initial-expand: "
+                      initial-expand)))) ; default to current val.
 
 
 

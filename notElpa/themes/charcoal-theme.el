@@ -395,7 +395,36 @@ Example:
 
    ;; erc
    `(erc-notice-face ((,class (:foreground ,faint-less))))
+   `(erc-input-face ((,class :foreground "tan"))) ; my own text.
+   `(erc-timestamp-face ((,class :foreground ,fg-green)))
+   ;; erc-keyword-face
+   ;; erc-fool-face
+   ;; erc-pal-face
+   ;; erc-dangerous-host-face
+   ;; erc-current-nick-face
+   ;; erc-hl-nicks-nick-base-face
+   ;; erc-button
+   ;; erc-underline-face
+   ;; erc-inverse-face
+   ;; erc-bold-face
+   ;; erc-nick-msg-face
+   ;; erc-nick-default-face
+   ;; erc-my-nick-face
+   ;; erc-error-face
+   ;; erc-action-face
+   ;; erc-command-indicator-face
+   ;; erc-prompt-face
+   ;; erc-header-line
+   ;; erc-direct-msg-face
+   ;; erc-my-nick-prefix-face
+   ;; erc-nick-prefix-face
+   ;; erc-default-face
 
+   ;; erc-hl-nicks
+   ;; erc-hl-nicks-nick-USERNAME1-face ; dynamically created faces? handle in a loop?
+   ;; erc-hl-nicks-nick-USERNAME2-face ; dynamically created faces? handle in a loop?
+
+   ;; minesweeper
    `(minesweeper-neighbor ((,class (:background "black"))))
    `(minesweeper-blank ((,class (:foreground ,faint-less))))
    `(minesweeper-marked ((,class (:foreground ,fg))))

@@ -678,6 +678,7 @@ in case that file does not provide any feature."
 (declare-function my-ido-find-file 'suppress)
 (declare-function my-setup-cquery 'suppress)
 (declare-function my-line-numbers-cycle 'suppress)
+(declare-function my-cycle-ivy-match-style 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -4665,6 +4666,24 @@ and indent."
   ;; allow out of order matching.
   (setq ivy-re-builders-alist
         '((t . ivy--regex-ignore-order)))
+  ;; helper function to cycle the ivy matching styles.
+  ;; NOTE: periodically look for new supported styles in ivy and add them to
+  ;;       the local styles to cycle.
+  (let ((styles '(ivy--regex-ignore-order
+                  ivy--regex-plus
+                  ivy--regex-fuzzy
+                  ivy--regex
+                  regexp-quote))
+        (curr 'ivy--regex-ignore-order))
+    (defun my-cycle-ivy-match-style ()
+      (interactive)
+      (setq curr (car (or (cdr (memq curr styles))
+                          styles)))
+      (setq ivy-re-builders-alist `((t . ,curr)))
+      (message "swiper match style: %s" (symbol-name curr))))
+
+  (global-set-key (kbd "<f7>") #'my-cycle-ivy-match-style)
+
   ;; use fancy highlights in the popup window
   (setq ivy-display-style 'fancy))
 

@@ -32,7 +32,7 @@
 ;;;     git push -u origin branchName
 
 ;;;-----------------------------------------------------------------------------
-;;; Git workflow with submodule:
+;;; Git work flow with submodule:
 ;;;-----------------------------------------------------------------------------
 ;;; With ~/.emacs.d/notElpa/swiper as an example
 ;;;
@@ -95,7 +95,7 @@
 
 (my-change-vals-faster-init)
 ;; restore original values at end of init.el.
-;; sort of like my own dynamic binding. I dont' want to wrap the entire
+;; sort of like my own dynamic binding. I don't want to wrap the entire
 ;; config in a giant let.
 
 
@@ -105,7 +105,7 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;;(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
-;; turn off warnings when a fn is redifend by `defadvice'
+;; turn off warnings when a fn is redefined by `defadvice'
 (setq ad-redefinition-action 'accept)
 
 ;;for compatibility with < 24.4 emacs, define `with-eval-after-load'
@@ -144,7 +144,7 @@ in case that file does not provide any feature."
 (defvar charcoal-color-cnt)
 (defvar company-selection-wrap-around)
 
-;; dynamic vars not let bound (yet). Just surpressing the free var warnings.
+;; dynamic vars not let bound (yet). Just suppressing the free var warnings.
 (defvar evil-normal-state-map)
 (defvar my-packages)
 (defvar key-chord-two-keys-delay)
@@ -380,7 +380,7 @@ in case that file does not provide any feature."
 (declare-function js2-mark-defun 'js2-mode)
 (declare-function feebleline-mode 'feebleline)
 ;; TODO: change `suppress' to the actual feature or file.
-;;       Just supressing warnings for now.
+;;       Just suppressing warnings for now.
 (declare-function ivy-completing-read 'suppress)
 (declare-function my-setup-slime-repl 'suppress)
 (declare-function slime-last-expression 'suppress)
@@ -795,25 +795,25 @@ Since it is used everywhere and won't change.")
 Choices: `evil' `emacs' `cua'")
 
 (defvar my-use-evil-p (eq my-ui-type 'evil)
-  "Whether i'm using evil at the moment or not.
-Just a convenience to avoid checks agaisnt `my-ui-type'.")
+  "Whether I'm using evil at the moment or not.
+Just a convenience to avoid checks against `my-ui-type'.")
 
 
 (defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
                              ((eq my-curr-computer 'wild-dog) 'bare-ido)
                              (t 'bare-ido))
-  "The package I'm currenlty using for narrowing completions.
+  "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
 Choices: ivy ido bare-ido helm icicles sallet mish-mash nil")
 
-;;TODO: make ivy pop-up it's window on the linux tty.
+;;TODO: make ivy pop-up it's window on the Linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
   "If I'm using ivy completion at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-use-helm-p (eq my-narrow-type 'helm)
-  "Whether i'm using helm at the momnet or not.
+  "Whether I'm using helm at the moment or not.
 Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-load-helm-on-init-p t
   "Whether to load helm during start up, or postpone till first attempted use.")
@@ -840,8 +840,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           (my-use-bare-ido-p #'my-occur-wild-spaces)
                           (my-use-helm-p #'helm-swoop)
                           (my-use-mish-mash-p #'swiper)
-                          ;; `sallet-occur' is unusabley slow. Dont' use it.
-                          ;; `icicle-occur' is unusabley slow. Dont' use it.
+                          ;; `sallet-occur' is unusably slow. Don't use it.
+                          ;; `icicle-occur' is unusably slow. Don't use it.
                           (t #'my-occur-wild-spaces))
   "Function for searching with an overview.
 Choices: helm-swoop swiper")
@@ -866,7 +866,7 @@ Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 (let ((executed-p nil))
   (defun my-handle-weird-theme-setups ()
     "Some themes work in a special way with custom code to initialize them.
-Orginally this code would be run in the autoloads when the themes were melpa
+Originally this code would be run in the autoloads when the themes were melpa
 packages.  But I am no longer using the themes as packages (for init
 performance reasons).
 Closure over executed-p."
@@ -895,7 +895,7 @@ Closure over executed-p."
 
 
 (defvar native-line-numbers-p (boundp 'display-line-numbers)
-  "Non-nil if Emacs suppports native line number display.")
+  "Non-nil if Emacs supports native line number display.")
 
 (let ((install-slime-p
        (memq my-curr-computer
@@ -904,7 +904,7 @@ Closure over executed-p."
       (has-nodejs-p
        (memq my-curr-computer '(work-laptop work-laptop-bash wild-dog))))
  ;; TODO: specify if it should use elpa or melpa version of a package.
- ;; NOTE: to limit package intstallation to specific computers (or other
+ ;; NOTE: to limit package installation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
  (defvar my-packages
    `((s t) ;; string library
@@ -1022,7 +1022,7 @@ Closure over executed-p."
                                             '(work-laptop wild-dog))))
                 has-gnu-global-p))
      (clojure-mode t)
-     (iedit t) ;; include explicity. Originaly got it as a lispy dependency.
+     (iedit t) ;; include explicitly. Originally got it as a lispy dependency.
      (cider ,(memq my-curr-computer '(wild-dog)))
      ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
      ;;  ,(<= emacs-major-version 24))
@@ -1194,14 +1194,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 
   ;; (key-chord-mode 1) ;; autoloaded function
 
-  ;; TODO: use an alternative way to surpress the message. So I don't have to
+  ;; TODO: use an alternative way to suppress the message. So I don't have to
   ;;       manually re-sync this definition with the latest version of fn
   ;;       `key-chord-mode'.
   ;; NOTE: using lambda instead defun to avoid a junk method that is not useful
   ;; after start-up (just want to avoid the msg at start-up).
   (let ((my-key-chord-mode-fn
          (lambda (arg)
-           "Alternative to fn `key-chord-mode'. To surpress the on message."
+           "Alternative to fn `key-chord-mode'. To suppress the on message."
            (interactive "P")
            (setq key-chord-mode (if arg
                                     (> (prefix-numeric-value arg) 0)
@@ -1224,7 +1224,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (setq-default cursor-type '(bar . 2))
 ;; (custom-set-faces
 ;;  '(cursor ((t (:background "cyan")))))
-(setq x-stretch-cursor t) ;; strech box cursor around a tab \t
+(setq x-stretch-cursor t) ;; stretch box cursor around a tab \t
 (setq-default cursor-in-non-selected-windows nil)
 (blink-cursor-mode 0)
 
@@ -1307,7 +1307,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;(define-key <keymap> key 'function)
 
 
-  ;; Make j/k movement keys go up/down accross wrapped lines.
+  ;; Make j/k movement keys go up/down across wrapped lines.
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>")
     #'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>")
@@ -1319,7 +1319,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;;(setq-default evil-cross-lines t) ;; Make horizontal movement cross lines
 
 
-  ;; make C-k kill to the end of hte line in insert mode.
+  ;; make C-k kill to the end of the line in insert mode.
   (define-key evil-insert-state-map (kbd "C-k") #'kill-line)
 
 
@@ -1371,7 +1371,7 @@ that buffer."
 
   ;;TODO: look into equivalent resizing for non-Windows machines.
   (when (eq system-type 'windows-nt)
-    ;;`maxp' can get out of sync. Hit <Leader>f a 2cd time to re-sync.
+    ;;`maxp' can get out of sync. Hit <Leader>f a 2nd time to re-sync.
     (let ((maxp nil))
       (defun my-toggle-frame-max ()
         "Closure over `maxp'."
@@ -1439,7 +1439,7 @@ that buffer."
     ;; else default
     #'set-frame-font)
   "Function to select the font.
-Prefers out of order matching if avaliable.")
+Prefers out of order matching if available.")
 
 (global-set-key (kbd "<f5>") my-change-font-fn)
 
@@ -1450,7 +1450,7 @@ Prefers out of order matching if avaliable.")
 ;;   (defvar my-good-fonts
 ;;     '(
 ;;       ;; looks OK. fits a good number of lines on screen. flaky on bold.
-;;       ;; no itallic?
+;;       ;; no italic?
 ;;       (inconsolata "Inconsolata" 135 normal)
 ;;       ;; consolas is the best looking but fits fewer lines on screen.
 ;;       (consolas "Consolas" 125 normal)
@@ -1498,7 +1498,7 @@ Closure over `curr-font-size'."
 
       (custom-set-faces `(default ((t (:height ,new-size)))))
 
-      ;; must cache the new value becuase :height does not acutally inc until a
+      ;; must cache the new value because :height does not actually inc until a
       ;; threshold is breached.
       (setq curr-font-size new-size)
 
@@ -1583,7 +1583,7 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
 (defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
-(defvar my-charcoal "#35352B" "Expirimental dark background color.")
+(defvar my-charcoal "#35352B" "Experimental dark background color.")
 (defvar my-peach "#fff9F5"
   "Re-create what peachpuff looked like on an old monitor.")
 (defvar my-ultimate "#fffeFa"

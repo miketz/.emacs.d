@@ -1598,7 +1598,7 @@ This prevents overlapping themes; something I would rarely want."
 
 (progn ; theme changing stuff.
   (autoload #'my-load-theme "my-load-theme" nil t)
-  (autoload #'color "my-load-theme" nil t) ; trying to duplciate vim's :color
+  (autoload #'color "my-load-theme" nil t) ; trying to duplicate vim's :color
                                            ; interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
@@ -1676,7 +1676,7 @@ Closure over `inverse-video-p'"
   ;;   ;; TODO: convert the background to be the foreground.
   ;;   (dolist (f (face-list))
   ;;     (let ((new-fg (face-attribute f :background frame)))
-  ;;       ;; setting teh bg is like setting the fg during inverse
+  ;;       ;; setting the bg is like setting the fg during inverse
   ;;       (set-face-attribute f nil :background new-fg)
   ;;       ;; setting the fg is like setting the bg during inverse
   ;;       (set-face-attribute f nil :foreground new-bg))))
@@ -2085,13 +2085,13 @@ Closure over `inverse-video-p'"
   (when my-use-evil-p
     ;; C-Space like Visual Studio
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
-    ;; C-SPC doesn't work in some terminals, so bind an alternativ key.
+    ;; C-SPC doesn't work in some terminals, so bind an alternative key.
     (evil-define-key 'insert company-mode-map (kbd "C-o") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
     )
 
   (defun my-company-page-size ()
-    "Return the page size of the actively dispalyed company popup."
+    "Return the page size of the actively displayed company popup."
     ;; page-size-pseudo gives the correct page size when a small window forces
     ;; a smaller company popup.
     (let* ((page-size-pseudo (abs (company--pseudo-tooltip-height)))
@@ -2105,7 +2105,7 @@ Closure over `inverse-video-p'"
       page-size))
 
   (defun my-company-next-page ()
-    "Copy of `company-next-page'.  But with different page size calucalation."
+    "Copy of `company-next-page'.  But with different page size calculation."
     (interactive)
     (when (company-manual-begin)
       (if (and company-selection-wrap-around
@@ -2119,7 +2119,7 @@ Closure over `inverse-video-p'"
 
   (defun my-company-previous-page ()
     "Copy of `company-previous-page'.
-But with different page size calucalation."
+But with different page size calculation."
     (interactive)
     (when (company-manual-begin)
       (if (and company-selection-wrap-around
@@ -2140,7 +2140,7 @@ But with different page size calucalation."
         (company-complete-common))))
   (define-key company-active-map (kbd "SPC") #'my-company-complete-common)
 
-  ;; unbind C-h. it interfere's with C-h k to lookup what is bound.
+  ;; unbind C-h. it interferes with C-h k to lookup what is bound.
   (define-key company-active-map (kbd "C-h") nil)
   (define-key company-active-map (kbd "C-SPC") #'company-complete-common)
   ;; (define-key company-active-map (kbd "SPC") #'company-complete-common)
@@ -2318,7 +2318,7 @@ This avoids changing pop-up width while scrolling through candidates."
   ;; TODO: try setting in a hook.
   (setq org-hide-leading-stars nil)
 
-  (setq org-log-done t) ; make timestamp when flagging something done
+  (setq org-log-done t) ; make time stamp when flagging something done
                         ; with C-c C-t
   (setq org-agenda-timegrid-use-ampm t)
   (setq org-src-preserve-indentation t)
@@ -2338,7 +2338,7 @@ This avoids changing pop-up width while scrolling through candidates."
 
   ;; TODO: fix `org-summary-todo'. Not working. Commented out for now.
   ;; (defun org-summary-todo (n-done n-not-done)
-  ;;   "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  ;;   "Switch entry to DONE when all sub-entries are done, to TODO otherwise."
   ;;   (let ((org-log-done org-log-states)) ; turn off logging
   ;;     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
   ;; (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
@@ -2402,7 +2402,7 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'js
   (defun my-setup-js ()
-    ;; set explicity becuase shorter width in json mode corrupts it.
+    ;; set explicitly because shorter width in json mode corrupts it.
     (setq js-indent-level my-indent-width))
   (add-hook 'js-mode-hook #'my-setup-js))
 

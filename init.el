@@ -6375,6 +6375,20 @@ smaller than the window height."
   )
 
 ;;;-----------------------------------------------------------------------------
+;;; ispell
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'ispell
+  ;; NOTE: instructions to set up hunspell on windows:
+  ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
+  (when (eq my-curr-computer 'work-laptop)
+    (add-to-list 'exec-path
+                 "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin")
+    (setq ispell-program-name (locate-file "hunspell"
+                                           exec-path
+                                           exec-suffixes
+                                           'file-executable-p))))
+
+;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)

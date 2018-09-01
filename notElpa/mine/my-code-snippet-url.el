@@ -1,4 +1,4 @@
-;;; my-code-snippet-url.el --- Mode on region -*- lexical-binding: t -*-
+;;; my-code-snippet-url.el --- Code snippet url -*- lexical-binding: t -*-
 
 
 ;;; Code:

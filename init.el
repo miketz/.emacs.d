@@ -679,6 +679,7 @@ in case that file does not provide any feature."
 (declare-function my-setup-cquery 'suppress)
 (declare-function my-line-numbers-cycle 'suppress)
 (declare-function my-cycle-ivy-match-style 'suppress)
+(declare-function my-code-snippet-url 'my-code-snippet-url)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros

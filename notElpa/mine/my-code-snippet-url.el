@@ -3,7 +3,7 @@
 
 ;;; Code:
 
-(defvar default-past-site 'debian)
+(defvar default-paste-site 'debian)
 
 (defvar paste-sites '((debian . "http://paste.debian.net/")
                       (mozilla . "https://pastebin.mozilla.org/"))
@@ -14,7 +14,7 @@
 ;;       the text box.
 (defun my-code-snippet-url ()
   (interactive)
-  (browse-url (cdr (assoc default-past-site paste-sites))))
+  (browse-url (cdr (assoc default-paste-site paste-sites))))
 
 
 (provide 'my-code-snippet-url)

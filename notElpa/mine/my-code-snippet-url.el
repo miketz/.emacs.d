@@ -1,5 +1,7 @@
 ;;; my-code-snippet-url.el --- Code snippet url -*- lexical-binding: t -*-
 
+;;; Commentary:
+;;; Helper function for hosting code snippets.
 
 ;;; Code:
 
@@ -23,5 +25,4 @@
 
 
 (provide 'my-code-snippet-url)
-
 ;;; my-code-snippet-url.el ends here

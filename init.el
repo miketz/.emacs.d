@@ -6396,6 +6396,12 @@ smaller than the window height."
 (autoload #'my-code-snippet-url "my-code-snippet-url" nil t)
 
 ;;;-----------------------------------------------------------------------------
+;;; offline.el. optionally load some settings not stored in source control
+;;;-----------------------------------------------------------------------------
+(when (eq my-curr-computer 'wild-dog)
+  (load-file "~/.emacs.d/offline.el"))
+
+;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)

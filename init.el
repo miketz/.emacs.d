@@ -4506,6 +4506,8 @@ and indent."
   (if (eq my-curr-computer 'wild-dog)
       (my-erc-set-data))
 
+  (setq erc-header-line-format nil) ; hide header for more screen space.
+
   (defun my-setup-erc ()
     (setq show-trailing-whitespace nil))
   (add-hook 'erc-mode-hook #'my-setup-erc))

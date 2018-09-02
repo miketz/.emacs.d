@@ -680,6 +680,7 @@ in case that file does not provide any feature."
 (declare-function my-line-numbers-cycle 'suppress)
 (declare-function my-cycle-ivy-match-style 'suppress)
 (declare-function my-code-snippet-url 'my-code-snippet-url)
+(declare-function my-erc-set-data 'offline)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -4502,6 +4503,9 @@ and indent."
                    (buffer-list)))))))
     (define-key erc-mode-map (kbd "C-c b") #'x/ido-chat-buffer))
 
+  (if (eq my-curr-computer 'wild-dog)
+      (my-erc-set-data))
+
   (defun my-setup-erc ()
     (setq show-trailing-whitespace nil))
   (add-hook 'erc-mode-hook #'my-setup-erc))
@@ -6399,7 +6403,7 @@ smaller than the window height."
 ;;; offline.el. optionally load some settings not stored in source control
 ;;;-----------------------------------------------------------------------------
 (when (eq my-curr-computer 'wild-dog)
-  (load-file "~/.emacs.d/offline.el"))
+  (autoload #'my-erc-set-data "offline" nil t))
 
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

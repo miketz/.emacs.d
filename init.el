@@ -6372,8 +6372,8 @@ smaller than the window height."
 ;;       melpa.
 (add-to-list 'load-path "~/.emacs.d/notElpa/Indium") ; git submodule
 (autoload 'indium-connect "indium-interaction" nil t)
-(with-eval-after-load 'indium
-  )
+;; (with-eval-after-load 'indium
+;;   )
 
 ;;;-----------------------------------------------------------------------------
 ;;; ispell

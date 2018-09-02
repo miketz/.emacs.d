@@ -4668,18 +4668,19 @@ and indent."
   (when my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard
     (ivy-mode 1))    ;; against ivy-mode turning on.
 
-  ;; allow out of order matching.
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-ignore-order)))
+  ;; ;; allow out of order matching.
+  ;; (setq ivy-re-builders-alist
+  ;;       '((t . ivy--regex-ignore-order)))
+
   ;; helper function to cycle the ivy matching styles.
   ;; NOTE: periodically look for new supported styles in ivy and add them to
   ;;       the local styles to cycle.
-  (let ((styles '(ivy--regex-ignore-order
-                  ivy--regex-plus
+  (let ((styles '(ivy--regex-plus
+                  ivy--regex-ignore-order
                   ivy--regex-fuzzy
                   ivy--regex
                   regexp-quote))
-        (curr 'ivy--regex-ignore-order))
+        (curr 'ivy--regex-plus))
     (defun my-cycle-ivy-match-style ()
       (interactive)
       (setq curr (car (or (cdr (memq curr styles))

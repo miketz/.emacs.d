@@ -370,6 +370,8 @@ in case that file does not provide any feature."
 (defvar ido-work-directory-list)
 (defvar cquery-executable)
 (defvar ibuffer-expert)
+(defvar erc-header-line-format)
+(defvar ispell-program-name)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

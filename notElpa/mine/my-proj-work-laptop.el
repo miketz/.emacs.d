@@ -229,14 +229,26 @@
       ;; else go to the folder
       (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs"))))
 
+(defun my-proj-general-info-book (bm-name top-node-name)
+  (let ((bm (car (member bm-name (bookmark-all-names)))))
+    (if bm
+        (bookmark-jump bm)
+      ;; else go to the top info node.
+      (progn
+        (message "%s bookmark not found.  Defaulting to top level node."
+                 bm-name)
+        (info top-node-name)))))
+
 (defun my-proj-emacs-manual ()
   "Open the emacs manual."
   (interactive)
-  (let ((bm (car (member "emacs-man" (bookmark-all-names)))))
-    (if bm
-        (bookmark-jump bm)
-      ;; else go to top emacs info node.
-      (info "emacs"))))
+  (my-proj-general-info-book "emacs-man" "emacs"))
+
+(defun my-proj-sicp ()
+  "Open the sicp info book."
+  (interactive)
+  (my-proj-general-info-book "sicp" "SICP"))
+
 
 (defun my-proj-progit2 ()
   "Open the progit2 ebook."

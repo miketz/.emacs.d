@@ -12,8 +12,11 @@
           "`" "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" "-" "=" ;top row
           "~" "!" "@" "#" "$" "%" "^" "&" "*" "(" ")" "_" "+" ;Shift top row
           "[" "]" "{" "}")))
+    ;; new buff in text-mode
+    (switch-to-buffer (get-buffer-create "*type-tutor*"))
+    (text-mode)
+    ;; insert text
     (my-type-tutor-insert-buffer char-lst lines groups-per-line group-size)))
-
 
 (defun my-type-tutor-insert-buffer (chars lines groups-per-line group-size)
   (save-excursion

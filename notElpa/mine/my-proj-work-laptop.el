@@ -229,7 +229,7 @@
       ;; else go to the folder
       (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs"))))
 
-(defun my-proj-general-info-book (bm-name top-node-name)
+(cl-defun my-proj-general-info-book (&key bm-name top-node-name)
   (let ((bm (car (member bm-name (bookmark-all-names)))))
     (if bm
         (bookmark-jump bm)
@@ -242,12 +242,14 @@
 (defun my-proj-emacs-manual ()
   "Open the emacs manual."
   (interactive)
-  (my-proj-general-info-book "emacs-man" "emacs"))
+  (my-proj-general-info-book :bm-name "emacs-man"
+                             :top-node-name "emacs"))
 
 (defun my-proj-sicp ()
   "Open the sicp info book."
   (interactive)
-  (my-proj-general-info-book "sicp" "SICP"))
+  (my-proj-general-info-book :bm-name "sicp"
+                             :top-node-name "SICP"))
 
 
 (defun my-proj-progit2 ()

@@ -683,6 +683,7 @@ in case that file does not provide any feature."
 (declare-function my-cycle-ivy-match-style 'suppress)
 (declare-function my-code-snippet-url 'my-code-snippet-url)
 (declare-function my-erc-set-data 'offline)
+(declare-function my-proj-sicp 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -3897,6 +3898,7 @@ and indent."
     (autoload #'my-proj-progit2 lisp-file nil t)
     (autoload #'my-proj-paip lisp-file nil t)
     (autoload #'my-proj-emacs-manual lisp-file nil t)
+    (autoload #'my-proj-sicp lisp-file nil t)
     (defun my-bookmarks-web ()
       "My browser bookmarks from IE saved to a text file."
       (interactive)

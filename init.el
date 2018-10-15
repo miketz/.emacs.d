@@ -895,6 +895,7 @@ Closure over executed-p."
         (load (concat custom-theme-directory "kaolin-themes-lib"))
         (load (concat custom-theme-directory "kaolin-themes")))
       (load (concat custom-theme-directory "one-themes"))
+      (load (concat custom-theme-directory "purp-common"))
       ;; record the fact we did the set up. To avoid doing it again.
       (setq executed-p t))))
 

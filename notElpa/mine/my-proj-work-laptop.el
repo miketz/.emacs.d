@@ -223,11 +223,15 @@
   (common-lisp-mode)
   (split-window-horizontally)
   (shrink-window-horizontally 13)
-  (let ((paip (car (member "paip" (bookmark-all-names)))))
-    (if paip
-        (bookmark-jump paip)
+  (let* ((bm-name "paip")
+         (bm (car (member bm-name (bookmark-all-names)))))
+    (if bm
+        (bookmark-jump bm)
       ;; else go to the folder
-      (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs"))))
+      (progn
+        (message "%s bookmark not found.  Defaulting to top level node."
+                 bm-name)
+        (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs")))))
 
 (cl-defun my-proj-general-info-book (&key bm-name top-node-name)
   (let ((bm (car (member bm-name (bookmark-all-names)))))

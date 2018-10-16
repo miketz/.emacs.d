@@ -6701,16 +6701,18 @@ on the first call."
     ))
 
 ;; (setq-default column-number-mode 1) ; show/hide column # in mode line.
-(setq-default line-number-mode 0) ; show/hide line # in mode line.
-                                  ; or use fn what-line
+(when nil ;skip this for now
+  (setq-default line-number-mode 0)) ; show/hide line # in mode line.
+                                     ; or use fn what-line
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)
-;; hide the % of the buffer you are viewing. Used to set to nil, but that
-;; broke `nyan-mode' which manipulates this variable.
-;; TODO: look into this more to understand the format of this variable.
-(setq mode-line-position '((size-indication-mode nil)
-                           (line-number-mode nil)))
+(when nil ;skip this for now. showing % and line number again.
+  ;; hide the % of the buffer you are viewing. Used to set to nil, but that
+  ;; broke `nyan-mode' which manipulates this variable.
+  ;; TODO: look into this more to understand the format of this variable.
+  (setq mode-line-position '((size-indication-mode nil)
+                             (line-number-mode nil))))
 
 
 

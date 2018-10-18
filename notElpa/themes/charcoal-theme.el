@@ -291,7 +291,12 @@ Example:
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class (:background "gray30"))))
+   `(swiper-line-face ((,class :background ,(if (= charcoal-color-cnt 16)
+                                                highlight
+                                              "gray30")
+                               ,@(cond ((= charcoal-color-cnt 16)
+                                        `(:foreground ,fg))
+                                       (t nil)))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
    `(swiper-match-face-1 ((,class (:foreground ,faint-less :background "black"))))
    `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background "black"))))

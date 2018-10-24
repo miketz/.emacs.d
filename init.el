@@ -6131,7 +6131,7 @@ vanilla javascript buffers."
 
   ;; line number display styles. lexically bound.
   (let ((styles '(relative absolute off))
-        (curr nil))
+        (curr nil)) ;; TODO: make curr buffer local.
     (defun my-line-numbers-cycle ()
       "Cycle line number display styles. relative, absolute, off.
 Closure over `styles', `curr'."
@@ -6140,7 +6140,8 @@ Closure over `styles', `curr'."
                           styles)))
       (setq display-line-numbers (cond ((eq curr 'relative) 'relative)
                                        ((eq curr 'absolute) t)
-                                       ((eq curr 'off) nil)))))
+                                       ((eq curr 'off) nil)))
+      (message "line numbers: %s" curr)))
 
   (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
 

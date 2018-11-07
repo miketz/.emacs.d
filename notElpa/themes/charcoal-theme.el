@@ -189,8 +189,10 @@ Example:
                            :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
-   `(line-number ((,class (:background "black"
-                                :foreground "gray50"))))
+   `(line-number ((,class ,@(cond ((= charcoal-color-cnt 16)
+                                     `(:inherit mode-line))
+                                  (t '(:background "black"
+                                       :foreground "gray50"))))))
    `(line-number-current-line ((,class :inherit line-number)))
 
    `(region

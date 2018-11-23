@@ -844,6 +844,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-swoop-fn (cond ((eq my-curr-computer 'wild-dog) #'swiper)
                           ((eq my-curr-computer 'work-laptop) #'swiper)
                           ((eq my-curr-computer 'work-laptop-bash) #'swiper)
+                          ((eq my-curr-computer 'a-laptop-faster) #'swiper)
                           (my-use-ivy-p #'swiper)
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
@@ -996,9 +997,9 @@ Closure over executed-p."
      (speed-type t)
      (bug-hunter t)
 
-     (ivy ,my-use-ivy-p)
-     (swiper ,my-use-ivy-p)
-     (counsel ,my-use-ivy-p)
+     (ivy t)
+     (swiper t)
+     (counsel t)
      (flx t) ;; can be used by ivy and flx-ido for ordering flx matches.
 
      ;;color-identifiers-mode

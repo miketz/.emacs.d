@@ -108,6 +108,31 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;;(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 
+
+
+;;;-----------------------------------------------------------------------------
+;;; minimum emacs version
+;;;-----------------------------------------------------------------------------
+(defconst my-minimal-emacs "24.1"
+  "Minimum Emacs version needed to run this init.el.
+This version introduced lexical binding.")
+
+(defun my-assert-dependencies ()
+  "Check for required dependencies.  Warn the user if any are missing."
+  (when (version< emacs-version
+                  my-minimal-emacs)
+    (display-warning
+     'my-init
+     (format "my init.el requires Emacs >= %s, you are using %s."
+             my-minimal-emacs emacs-version)
+     :error)))
+
+;; Don't prevent use of the init.
+;; Just warn then let the chips fall where they may.
+(my-assert-dependencies)
+
+
+
 ;; turn off warnings when a fn is redefined by `defadvice'
 (setq ad-redefinition-action 'accept)
 

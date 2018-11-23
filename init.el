@@ -83,19 +83,20 @@
 ;; TODO: verify exactly how much these help.
 
 ;; backup vals lexically bound.
-(let ((gc-cons-threshold-backup gc-cons-threshold)
-      (file-name-handler-alist-backup file-name-handler-alist))
-  (defun my-change-vals-faster-init ()
-    ;; set to better vals for when init is loading.
-    (setq gc-cons-threshold       (if (version< emacs-version "24.4") 
-				      200000000
-				    2000000000)
-          file-name-handler-alist nil))
-  (defun my-change-vals-restore-after-init ()
-    (setq gc-cons-threshold gc-cons-threshold-backup
-          file-name-handler-alist file-name-handler-alist-backup)))
+(when (not (version< emacs-version "24.4"))
+  (let ((gc-cons-threshold-backup gc-cons-threshold)
+		(file-name-handler-alist-backup file-name-handler-alist))
+	(defun my-change-vals-faster-init ()
+	  ;; set to better vals for when init is loading.
+	  (setq gc-cons-threshold       (if (version< emacs-version "24.4") 
+										200000000
+									  2000000000)
+			file-name-handler-alist nil))
+	(defun my-change-vals-restore-after-init ()
+	  (setq gc-cons-threshold gc-cons-threshold-backup
+			file-name-handler-alist file-name-handler-alist-backup)))
 
-(my-change-vals-faster-init)
+  (my-change-vals-faster-init))
 ;; restore original values at end of init.el.
 ;; sort of like my own dynamic binding. I don't want to wrap the entire
 ;; config in a giant let.
@@ -117,7 +118,9 @@
 FILE is normally a feature name, but it can also be a file name,
 in case that file does not provide any feature."
     (declare (indent 1) (debug t))
-    `(eval-after-load ,file (lambda () ,@body))))
+    `(eval-after-load ,file
+       '(progn 
+	  ,@body))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; defvars
@@ -906,12 +909,14 @@ Closure over executed-p."
 (defvar native-line-numbers-p (boundp 'display-line-numbers)
   "Non-nil if Emacs supports native line number display.")
 
+
+(defvar has-nodejs-p
+       	(memq my-curr-computer '(work-laptop work-laptop-bash wild-dog)))
+
 (let ((install-slime-p
        (memq my-curr-computer
              '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-      (has-clang-p (memq my-curr-computer '(work-laptop wild-dog)))
-      (has-nodejs-p
-       (memq my-curr-computer '(work-laptop work-laptop-bash wild-dog))))
+      (has-clang-p (memq my-curr-computer '(work-laptop wild-dog))))
  ;; TODO: specify if it should use elpa or melpa version of a package.
  ;; NOTE: to limit package installation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
@@ -1103,7 +1108,6 @@ Installs packages in the list `my-packages'."
   (dolist (obj my-packages)
     (let ((pkg (cl-first obj))
           (installp (cl-second obj)))
-      (print obj)
       (when installp
         (unless (package-installed-p pkg)
 	  (message "installing pkg: %s" (symbol-name pkg))
@@ -1827,13 +1831,14 @@ Closure over `inverse-video-p'"
 
    ((eq my-curr-computer 'a-laptop-faster)
     (load-theme 'charcoal t)
-    (custom-set-faces
-     '(default ((t (:family "Source Code Pro"
-                            :foundry "adobe"
-                            :slant normal
-                            :weight semi-bold
-                            :height 120
-                            :width normal))))))
+    ;; (custom-set-faces
+    ;;  '(default ((t (:family "Source Code Pro"
+    ;;                         :foundry "adobe"
+    ;;                         :slant normal
+    ;;                         :weight semi-bold
+    ;;                         :height 120
+    ;;                         :width normal)))))
+	)
 
    ;; unknown windows computer.
    ((and (null my-curr-computer)
@@ -6345,7 +6350,8 @@ smaller than the window height."
 ;;; company-tern
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'company
-  (add-to-list 'company-backends 'company-tern))
+  (when has-nodejs-p
+    (add-to-list 'company-backends 'company-tern)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; browse-kill-ring
@@ -7025,7 +7031,8 @@ on the first call."
 
 
 ;; JUMPrestore. restore values set earlier for startup time.
-(my-change-vals-restore-after-init)
+(when (not (version< emacs-version "24.4"))
+  (my-change-vals-restore-after-init))
 
 
 

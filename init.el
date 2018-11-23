@@ -1831,6 +1831,8 @@ Closure over `inverse-video-p'"
 
    ((eq my-curr-computer 'a-laptop-faster)
     (load-theme 'charcoal t)
+	(set-frame-font
+      "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
     ;; (custom-set-faces
     ;;  '(default ((t (:family "Source Code Pro"
     ;;                         :foundry "adobe"

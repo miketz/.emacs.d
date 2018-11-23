@@ -1177,62 +1177,61 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
 ;;       since it is looking for the chord.
 
-(unless (eq my-curr-computer 'a-laptop-faster)
-  (when my-use-evil-p
+(when my-use-evil-p
 
-    (with-eval-after-load 'key-chord
-			  (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
+  (with-eval-after-load 'key-chord
+	(setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
                                         ; key of a chord.
-			  (setq key-chord-one-key-delay 0.4))
+	(setq key-chord-one-key-delay 0.4))
 
-    (with-eval-after-load "helm" ;; TODO: see if this is correct in the latest
-			  ;; versions of helm.
-			  ;; must be in eval-after-load so `helm-map' is defined
-			  (key-chord-define helm-map "fj" #'helm-keyboard-quit))
+  (with-eval-after-load "helm" ;; TODO: see if this is correct in the latest
+	;; versions of helm.
+	;; must be in eval-after-load so `helm-map' is defined
+	(key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
-    ;; (with-eval-after-load "ivy"
-    ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
+  ;; (with-eval-after-load "ivy"
+  ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
 
-    (with-eval-after-load 'evil
-			  ;; must be in eval-after-load so key maps are defined.
-			  (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
-			  (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
+  (with-eval-after-load 'evil
+	;; must be in eval-after-load so key maps are defined.
+	(key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
+	(key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
 
-    ;; (with-eval-after-load "lisp-mode"
-    ;;   (when nil ;; trying lispy
-    ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload
-    ;;     ;;       changes.
-    ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+  ;; (with-eval-after-load "lisp-mode"
+  ;;   (when nil ;; trying lispy
+  ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload
+  ;;     ;;       changes.
+  ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
-    ;; (with-eval-after-load "smartparens"
-    ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
-    ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+  ;; (with-eval-after-load "smartparens"
+  ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
+  ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
 
 
-    ;; (key-chord-mode 1) ;; autoloaded function
+  ;; (key-chord-mode 1) ;; autoloaded function
 
-    ;; TODO: use an alternative way to suppress the message. So I don't have to
-    ;;       manually re-sync this definition with the latest version of fn
-    ;;       `key-chord-mode'.
-    ;; NOTE: using lambda instead defun to avoid a junk method that is not useful
-    ;; after start-up (just want to avoid the msg at start-up).
-    (let ((my-key-chord-mode-fn
-	   (lambda (arg)
-	     "Alternative to fn `key-chord-mode'. To suppress the on message."
-	     (interactive "P")
-	     (setq key-chord-mode (if arg
-				      (> (prefix-numeric-value arg) 0)
-				    (not key-chord-mode)))
-	     (cond (key-chord-mode
-		    (setq input-method-function 'key-chord-input-method)
-		    ;; (message "Key Chord mode on")
-		    )
-		   (t
-		    (setq input-method-function nil)
-		    (message "Key Chord mode off"))))))
-      ;; turn on key-chord using a function that does not spam a message when
-      ;; turning on.
-      (funcall my-key-chord-mode-fn 1))))
+  ;; TODO: use an alternative way to suppress the message. So I don't have to
+  ;;       manually re-sync this definition with the latest version of fn
+  ;;       `key-chord-mode'.
+  ;; NOTE: using lambda instead defun to avoid a junk method that is not useful
+  ;; after start-up (just want to avoid the msg at start-up).
+  (let ((my-key-chord-mode-fn
+		 (lambda (arg)
+		   "Alternative to fn `key-chord-mode'. To suppress the on message."
+		   (interactive "P")
+		   (setq key-chord-mode (if arg
+									(> (prefix-numeric-value arg) 0)
+								  (not key-chord-mode)))
+		   (cond (key-chord-mode
+				  (setq input-method-function 'key-chord-input-method)
+				  ;; (message "Key Chord mode on")
+				  )
+				 (t
+				  (setq input-method-function nil)
+				  (message "Key Chord mode off"))))))
+	;; turn on key-chord using a function that does not spam a message when
+	;; turning on.
+	(funcall my-key-chord-mode-fn 1)))
 
 
 ;;;-----------------------------------------------------------------------------

@@ -87,7 +87,9 @@
       (file-name-handler-alist-backup file-name-handler-alist))
   (defun my-change-vals-faster-init ()
     ;; set to better vals for when init is loading.
-    (setq gc-cons-threshold       2000000000
+    (setq gc-cons-threshold       (if (version< emacs-version "24.4") 
+				      200000000
+				    2000000000)
           file-name-handler-alist nil))
   (defun my-change-vals-restore-after-init ()
     (setq gc-cons-threshold gc-cons-threshold-backup
@@ -803,6 +805,7 @@ Choices: `evil' `emacs' `cua'")
   "Whether I'm using evil at the moment or not.
 Just a convenience to avoid checks against `my-ui-type'.")
 
+(defvar my-use-js2-highlight-vars-p (not (version< emacs-version "24.4")))
 
 (defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
                              ((eq my-curr-computer 'wild-dog) 'bare-ido)
@@ -927,11 +930,12 @@ Closure over executed-p."
      ;;ac-slime
      (company t)
      (company-web t)
-     (slime-company ,install-slime-p)
+     (slime-company ,(and install-slime-p
+			  (not (version< emacs-version "24.4"))))
      (ace-window t)
      (csharp-mode t)
      (js2-mode t)
-     (js2-highlight-vars t)
+     (js2-highlight-vars ,(not (version< emacs-version "24.4")))
      (skewer-mode ,(memq my-curr-computer '(work-laptop)))
      (json-mode t)
 
@@ -963,7 +967,7 @@ Closure over executed-p."
      ;;dired-details ;default feature in emacs 24.4+
      (web-mode t)
      (htmlize t)
-     (magit t)
+     (magit ,(not (version< emacs-version "25.1")))
      (vimrc-mode t)
      (sicp t)
      ;;neotree
@@ -974,7 +978,7 @@ Closure over executed-p."
      (flycheck-irony ,has-clang-p)
      ;;(rtags)
      ;;aggressive-indent
-     (sx t)
+     (sx ,(not (version< emacs-version "24.4")))
      (leerzeichen t)
      (darkroom t)
      ;;vim-empty-lines-mode
@@ -1027,7 +1031,7 @@ Closure over executed-p."
      (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
                                             '(work-laptop wild-dog))))
                 has-gnu-global-p))
-     (clojure-mode t)
+     (clojure-mode ,(not (version< emacs-version "25.1")))
      (iedit t) ;; include explicitly. Originally got it as a lispy dependency.
      (cider ,(memq my-curr-computer '(wild-dog)))
      ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
@@ -1035,11 +1039,11 @@ Closure over executed-p."
      (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
      (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
      (adoc-mode t)
-     (markdown-mode t)
+     (markdown-mode ,(not (version< emacs-version "24.4")))
      (typescript-mode t)
      (tide ,(memq my-curr-computer '(work-laptop wild-dog)))
      (context-coloring t)
-     (nov t) ;; an epub reader
+     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
      (autothemer t) ;; dependency for some themes.
      (erc-hl-nicks t)
      (sql-indent t)
@@ -1099,8 +1103,10 @@ Installs packages in the list `my-packages'."
   (dolist (obj my-packages)
     (let ((pkg (cl-first obj))
           (installp (cl-second obj)))
+      (print obj)
       (when installp
         (unless (package-installed-p pkg)
+	  (message "installing pkg: %s" (symbol-name pkg))
           (package-install pkg))))))
 
 (my-install-packages)
@@ -1167,61 +1173,62 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
 ;;       since it is looking for the chord.
 
-(when my-use-evil-p
+(unless (eq my-curr-computer 'a-laptop-faster)
+  (when my-use-evil-p
 
-  (with-eval-after-load 'key-chord
-    (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
+    (with-eval-after-load 'key-chord
+			  (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
                                         ; key of a chord.
-    (setq key-chord-one-key-delay 0.4))
+			  (setq key-chord-one-key-delay 0.4))
 
-  (with-eval-after-load "helm" ;; TODO: see if this is correct in the latest
-                               ;; versions of helm.
-    ;; must be in eval-after-load so `helm-map' is defined
-    (key-chord-define helm-map "fj" #'helm-keyboard-quit))
+    (with-eval-after-load "helm" ;; TODO: see if this is correct in the latest
+			  ;; versions of helm.
+			  ;; must be in eval-after-load so `helm-map' is defined
+			  (key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
-  ;; (with-eval-after-load "ivy"
-  ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
+    ;; (with-eval-after-load "ivy"
+    ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
 
-  (with-eval-after-load 'evil
-    ;; must be in eval-after-load so key maps are defined.
-    (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
-    (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
+    (with-eval-after-load 'evil
+			  ;; must be in eval-after-load so key maps are defined.
+			  (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
+			  (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
 
-  ;; (with-eval-after-load "lisp-mode"
-  ;;   (when nil ;; trying lispy
-  ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload
-  ;;     ;;       changes.
-  ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
+    ;; (with-eval-after-load "lisp-mode"
+    ;;   (when nil ;; trying lispy
+    ;;     ;; TODO: make sure `hydra-paredit/body' still works after autoload
+    ;;     ;;       changes.
+    ;;     (key-chord-define lisp-mode-shared-map "df" #'hydra-paredit/body)))
 
-  ;; (with-eval-after-load "smartparens"
-  ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
-  ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
+    ;; (with-eval-after-load "smartparens"
+    ;;   (load "~/.emacs.d/notElpa/mine/my-hydras.el")
+    ;;   (key-chord-define smartparens-mode-map "df" #'hydra-smartparens/body))
 
 
-  ;; (key-chord-mode 1) ;; autoloaded function
+    ;; (key-chord-mode 1) ;; autoloaded function
 
-  ;; TODO: use an alternative way to suppress the message. So I don't have to
-  ;;       manually re-sync this definition with the latest version of fn
-  ;;       `key-chord-mode'.
-  ;; NOTE: using lambda instead defun to avoid a junk method that is not useful
-  ;; after start-up (just want to avoid the msg at start-up).
-  (let ((my-key-chord-mode-fn
-         (lambda (arg)
-           "Alternative to fn `key-chord-mode'. To suppress the on message."
-           (interactive "P")
-           (setq key-chord-mode (if arg
-                                    (> (prefix-numeric-value arg) 0)
-                                  (not key-chord-mode)))
-           (cond (key-chord-mode
-                  (setq input-method-function 'key-chord-input-method)
-                  ;; (message "Key Chord mode on")
-                  )
-                 (t
-                  (setq input-method-function nil)
-                  (message "Key Chord mode off"))))))
-    ;; turn on key-chord using a function that does not spam a message when
-    ;; turning on.
-    (funcall my-key-chord-mode-fn 1)))
+    ;; TODO: use an alternative way to suppress the message. So I don't have to
+    ;;       manually re-sync this definition with the latest version of fn
+    ;;       `key-chord-mode'.
+    ;; NOTE: using lambda instead defun to avoid a junk method that is not useful
+    ;; after start-up (just want to avoid the msg at start-up).
+    (let ((my-key-chord-mode-fn
+	   (lambda (arg)
+	     "Alternative to fn `key-chord-mode'. To suppress the on message."
+	     (interactive "P")
+	     (setq key-chord-mode (if arg
+				      (> (prefix-numeric-value arg) 0)
+				    (not key-chord-mode)))
+	     (cond (key-chord-mode
+		    (setq input-method-function 'key-chord-input-method)
+		    ;; (message "Key Chord mode on")
+		    )
+		   (t
+		    (setq input-method-function nil)
+		    (message "Key Chord mode off"))))))
+      ;; turn on key-chord using a function that does not spam a message when
+      ;; turning on.
+      (funcall my-key-chord-mode-fn 1))))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -5222,7 +5229,7 @@ START and END define the region."
 (with-eval-after-load 'cider-style-overlays
   (setq cider-eval-result-prefix ""))
 
-(defvar my-fancy-overlay-p t ;;(memq my-curr-computer '(wild-dog work-laptop))
+(defvar my-fancy-overlay-p (not (memq my-curr-computer '(a-laptop-faster)))
   "Whether to use the cider-style overlays to display evaluation results.")
 
 (when my-fancy-overlay-p
@@ -5591,8 +5598,9 @@ Closure over `preceding-sexp-fn'."
                                 nil
                                 'js2--do-highlight-vars)))))))
 
-(with-eval-after-load 'js2-mode
-  (add-hook 'js2-mode-hook #'js2-highlight-vars-mode))
+(when my-use-js2-highlight-vars-p
+  (with-eval-after-load 'js2-mode
+    (add-hook 'js2-mode-hook #'js2-highlight-vars-mode)))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -6095,7 +6103,8 @@ vanilla javascript buffers."
     (company-mode +1)
 
     ;; turn off js2-highlight-vars-mode. it duplicates a tide feature
-    (js2-highlight-vars-mode 0))
+    (when my-use-js2-highlight-vars-p
+      (js2-highlight-vars-mode 0)))
 
   ;; Do not automatically call `my-setup-tide-for-js' for js2 buffers. Because I
   ;; won't alwyas have jsconfig.json set up. Call `my-setup-tide-for-js'

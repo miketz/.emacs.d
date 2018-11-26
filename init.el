@@ -85,16 +85,16 @@
 ;; backup vals lexically bound.
 (when (not (version< emacs-version "24.4"))
   (let ((gc-cons-threshold-backup gc-cons-threshold)
-		(file-name-handler-alist-backup file-name-handler-alist))
-	(defun my-change-vals-faster-init ()
-	  ;; set to better vals for when init is loading.
-	  (setq gc-cons-threshold       (if (version< emacs-version "24.4") 
-										200000000
-									  2000000000)
-			file-name-handler-alist nil))
-	(defun my-change-vals-restore-after-init ()
-	  (setq gc-cons-threshold gc-cons-threshold-backup
-			file-name-handler-alist file-name-handler-alist-backup)))
+        (file-name-handler-alist-backup file-name-handler-alist))
+    (defun my-change-vals-faster-init ()
+      ;; set to better vals for when init is loading.
+      (setq gc-cons-threshold       (if (version< emacs-version "24.4")
+                                        200000000
+                                      2000000000)
+            file-name-handler-alist nil))
+    (defun my-change-vals-restore-after-init ()
+      (setq gc-cons-threshold gc-cons-threshold-backup
+            file-name-handler-alist file-name-handler-alist-backup)))
 
   (my-change-vals-faster-init))
 ;; restore original values at end of init.el.
@@ -144,8 +144,8 @@ FILE is normally a feature name, but it can also be a file name,
 in case that file does not provide any feature."
     (declare (indent 1) (debug t))
     `(eval-after-load ,file
-       '(progn 
-	  ,@body))))
+       '(progn
+          ,@body))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; defvars
@@ -937,7 +937,7 @@ Closure over executed-p."
 
 
 (defvar has-nodejs-p
-       	(memq my-curr-computer '(work-laptop work-laptop-bash wild-dog)))
+  (memq my-curr-computer '(work-laptop work-laptop-bash wild-dog)))
 
 (let ((install-slime-p
        (memq my-curr-computer
@@ -1136,7 +1136,7 @@ Installs packages in the list `my-packages'."
           (installp (cl-second obj)))
       (when installp
         (unless (package-installed-p pkg)
-	  (message "installing pkg: %s" (symbol-name pkg))
+          (message "installing pkg: %s" (symbol-name pkg))
           (package-install pkg))))))
 
 (my-install-packages)
@@ -1206,22 +1206,22 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (when my-use-evil-p
 
   (with-eval-after-load 'key-chord
-	(setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
+    (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a
                                         ; key of a chord.
-	(setq key-chord-one-key-delay 0.4))
+    (setq key-chord-one-key-delay 0.4))
 
   (with-eval-after-load "helm" ;; TODO: see if this is correct in the latest
-	;; versions of helm.
-	;; must be in eval-after-load so `helm-map' is defined
-	(key-chord-define helm-map "fj" #'helm-keyboard-quit))
+    ;; versions of helm.
+    ;; must be in eval-after-load so `helm-map' is defined
+    (key-chord-define helm-map "fj" #'helm-keyboard-quit))
 
   ;; (with-eval-after-load "ivy"
   ;;   (key-chord-define ivy-mode-map "fj" #'keyboard-escape-quit))
 
   (with-eval-after-load 'evil
-	;; must be in eval-after-load so key maps are defined.
-	(key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
-	(key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
+    ;; must be in eval-after-load so key maps are defined.
+    (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
+    (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state))
 
   ;; (with-eval-after-load "lisp-mode"
   ;;   (when nil ;; trying lispy
@@ -1242,22 +1242,22 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   ;; NOTE: using lambda instead defun to avoid a junk method that is not useful
   ;; after start-up (just want to avoid the msg at start-up).
   (let ((my-key-chord-mode-fn
-		 (lambda (arg)
-		   "Alternative to fn `key-chord-mode'. To suppress the on message."
-		   (interactive "P")
-		   (setq key-chord-mode (if arg
-									(> (prefix-numeric-value arg) 0)
-								  (not key-chord-mode)))
-		   (cond (key-chord-mode
-				  (setq input-method-function 'key-chord-input-method)
-				  ;; (message "Key Chord mode on")
-				  )
-				 (t
-				  (setq input-method-function nil)
-				  (message "Key Chord mode off"))))))
-	;; turn on key-chord using a function that does not spam a message when
-	;; turning on.
-	(funcall my-key-chord-mode-fn 1)))
+         (lambda (arg)
+           "Alternative to fn `key-chord-mode'. To suppress the on message."
+           (interactive "P")
+           (setq key-chord-mode (if arg
+                                    (> (prefix-numeric-value arg) 0)
+                                  (not key-chord-mode)))
+           (cond (key-chord-mode
+                  (setq input-method-function 'key-chord-input-method)
+                  ;; (message "Key Chord mode on")
+                  )
+                 (t
+                  (setq input-method-function nil)
+                  (message "Key Chord mode off"))))))
+    ;; turn on key-chord using a function that does not spam a message when
+    ;; turning on.
+    (funcall my-key-chord-mode-fn 1)))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -1856,7 +1856,7 @@ Closure over `inverse-video-p'"
 
    ((eq my-curr-computer 'a-laptop-faster)
     (load-theme 'charcoal t)
-	(set-frame-font
+    (set-frame-font
       "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
     ;; (custom-set-faces
     ;;  '(default ((t (:family "Source Code Pro"
@@ -3343,7 +3343,7 @@ and indent."
 (with-eval-after-load 'dired ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (defun my-setup-dired ()
-	(when (fboundp #'dired-hide-details-mode) ;; avoid break on older emacs
+    (when (fboundp #'dired-hide-details-mode) ;; avoid break on older emacs
       (dired-hide-details-mode 1)))
   (add-hook 'dired-mode-hook #'my-setup-dired)
 

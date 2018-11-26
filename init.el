@@ -767,6 +767,14 @@ Closure over `positions'."
     (car (or (cdr (memq pos positions))
              positions))))
 
+(defun my-turn-on-electric-pair-local-mode ()
+  "Attempt to turn on `electric-pair-local-mode'.
+But check for existance first to avoid breaks on older emacs verisons.
+Do not fall back to `electric-pair-mode' because it's global."
+  (if (fboundp #'electric-pair-local-mode)
+      (electric-pair-local-mode 1)
+    (message "electric-pair-local-mode not supported.")))
+
 
 ;;;-----------------------------------------------------------------------------
 ;;; flags used for conditional execution
@@ -2413,7 +2421,8 @@ This avoids changing pop-up width while scrolling through candidates."
   (defun my-setup-csharp-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
-    (electric-pair-local-mode 1))
+
+    (my-turn-on-electric-pair-local-mode))
   (add-hook #'csharp-mode-hook #'my-setup-csharp-mode))
 
 
@@ -2584,7 +2593,7 @@ This avoids changing pop-up width while scrolling through candidates."
 
     ;;(js2-imenu-extras-mode)
 
-    (electric-pair-local-mode 1)
+    (my-turn-on-electric-pair-local-mode)
     ;; (smartparens-mode 1)
 
 
@@ -2634,7 +2643,7 @@ This avoids changing pop-up width while scrolling through candidates."
       ;; for javascript-mode and/or js2-mode.
       (setq js-indent-level my-indent-width))
     (rainbow-delimiters-mode 1)
-    (electric-pair-local-mode 1))
+    (my-turn-on-electric-pair-local-mode))
 
   (add-hook 'json-mode-hook #'my-setup-json-mode))
 
@@ -3271,7 +3280,7 @@ and indent."
     (yas-minor-mode 1)
     ;; (which-function-mode) ; displays function at cursor in the
     ;;                       ; mode-line. But can be annoying.
-    (electric-pair-local-mode 1)
+    (my-turn-on-electric-pair-local-mode)
 
     ;; highlight escapes in the printf format string.
     ;; TODO: highlight placeholders %d differently than escapes \n
@@ -3420,7 +3429,7 @@ and indent."
   (setq sql-product 'ms) ; using sql server at the moment.
 
   (defun my-setup-sql ()
-    (electric-pair-local-mode 1)
+    (my-turn-on-electric-pair-local-mode)
     (yas-minor-mode 1)
     ;; electric-indent doesn't work very well with T-sql.
     ;; use C-j for newline and indent.
@@ -4070,7 +4079,7 @@ and indent."
   (defun my-setup-web-mode ()
     ;; useful for embedded javascript or css
     (rainbow-delimiters-mode 1)
-    (electric-pair-local-mode 1))
+    (my-turn-on-electric-pair-local-mode))
   (add-hook 'web-mode-hook #'my-setup-web-mode))
 
 
@@ -5726,7 +5735,7 @@ Closure over `preceding-sexp-fn'."
   (defun my-setup-python ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
-    (electric-pair-local-mode 1))
+    (my-turn-on-electric-pair-local-mode))
   (add-hook 'python-mode-hook #'my-setup-python))
 
 ;;;-----------------------------------------------------------------------------
@@ -5764,7 +5773,7 @@ Closure over `preceding-sexp-fn'."
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     (electric-spacing-mode 1)
-    (electric-pair-local-mode 1))
+    (my-turn-on-electric-pair-local-mode))
   (add-hook 'lua-mode-hook #'my-setup-lua-mode))
 
 ;;;-----------------------------------------------------------------------------
@@ -5773,7 +5782,7 @@ Closure over `preceding-sexp-fn'."
 (with-eval-after-load 'swift-mode
   (defun my-setup-swift-mode ()
     (rainbow-delimiters-mode 1)
-    (electric-pair-local-mode 1))
+    (my-turn-on-electric-pair-local-mode))
   (add-hook 'swift-mode-hook #'my-setup-swift-mode))
 
 ;;;-----------------------------------------------------------------------------
@@ -6072,7 +6081,7 @@ Closure over `preceding-sexp-fn'."
   (defun my-setup-typescript-mode ()
     ;; (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
-    (electric-pair-local-mode 1))
+    (my-turn-on-electric-pair-local-mode))
   (add-hook 'typescript-mode-hook #'my-setup-typescript-mode))
 
 ;;;-----------------------------------------------------------------------------
@@ -6214,7 +6223,7 @@ Closure over `styles', `curr'."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'powershell
   (defun my-setup-powershell-mode ()
-    (electric-pair-local-mode 1)
+    (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable))
   (add-hook 'powershell-mode-hook #'my-setup-powershell-mode))
 
@@ -6263,7 +6272,7 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 ;;;-----------------------------------------------------------------------------
 (with-eval-after-load 'css-mode
   (defun my-setup-css-mode ()
-    (electric-pair-local-mode 1)
+    (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable))
   (add-hook 'css-mode-hook #'my-setup-css-mode))
 

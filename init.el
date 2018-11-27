@@ -402,6 +402,7 @@ in case that file does not provide any feature."
 (defvar ibuffer-expert)
 (defvar erc-header-line-format)
 (defvar ispell-program-name)
+(defvar diff-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -769,8 +770,8 @@ Closure over `positions'."
 
 (defun my-turn-on-electric-pair-local-mode ()
   "Attempt to turn on `electric-pair-local-mode'.
-But check for existance first to avoid breaks on older emacs verisons.
-Do not fall back to `electric-pair-mode' because it's global."
+But check for existance first to avoid breaks on older Emacs verisons.
+Do not fall back to function `electric-pair-mode' because it's global."
   (if (fboundp #'electric-pair-local-mode)
       (electric-pair-local-mode 1)
     (message "electric-pair-local-mode not supported.")))

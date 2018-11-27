@@ -6473,6 +6473,15 @@ smaller than the window height."
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------
+(defun my-list-holidays ()
+  "List the major holidays."
+  (interactive)
+  (let ((year (string-to-number (format-time-string "%Y"))))
+    (list-holidays year
+                   year
+                   (append holiday-general-holidays
+                           holiday-christian-holidays))))
+
 (when (eq system-type 'windows-nt)
   (defun my-find-file-by-name ()
     "Find files by name starting in current directory."

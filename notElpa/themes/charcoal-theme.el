@@ -222,6 +222,10 @@ Example:
 
    `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
 
+   ;; hl-fill-column
+   `(hl-fill-column-face ((,class :foreground ,fg-red
+                                  :background ,bg-red)))
+
    ;; avy
    `(avy-lead-face ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
    `(avy-lead-face-0 ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))

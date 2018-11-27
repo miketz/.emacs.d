@@ -6466,6 +6466,16 @@ smaller than the window height."
 (when (eq my-curr-computer 'wild-dog)
   (autoload #'my-erc-set-data "offline" nil t))
 
+
+;;;-----------------------------------------------------------------------------
+;;; diff-mode
+;;;-----------------------------------------------------------------------------
+(with-eval-after-load 'diff-mode
+  (when my-use-evil-p
+    (define-key diff-mode-map (kbd "M-h") #'evil-window-left)
+    ;; rebind the keys we just clobbered
+    (define-key diff-mode-map (kbd "C-c h") #'describe-mode)))
+
 ;;;-----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;-----------------------------------------------------------------------------

@@ -5197,7 +5197,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (with-eval-after-load 'info
   ;; rebind keys for vim friendliness.
-  ;; orginial bindings. TODO: bind them to something else. Or just use M-x
+  ;; orginal bindings. TODO: bind them to something else. Or just use M-x
   '((n Info-next)
     (p Info-prev)
     (f Info-follow-reference)

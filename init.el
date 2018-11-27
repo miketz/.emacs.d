@@ -76,31 +76,24 @@
 
 ;;; Code:
 
-;; JUMPrestore
-;; tricks to improve startup time.
-;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_ste
-;; ps_to_speed_up_emacs_start/
-;; TODO: verify exactly how much these help.
+(progn ;; JUMPrestore
+  ;; tricks to improve startup time.
+  ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_ste
+  ;; ps_to_speed_up_emacs_start/
+  ;; TODO: verify exactly how much these help.
 
-;; backup vals lexically bound.
-(when (not (version< emacs-version "24.4"))
-  (let ((gc-cons-threshold-backup gc-cons-threshold)
-        (file-name-handler-alist-backup file-name-handler-alist))
-    (defun my-change-vals-faster-init ()
-      ;; set to better vals for when init is loading.
-      (setq gc-cons-threshold       (if (version< emacs-version "24.4")
-                                        200000000
-                                      2000000000)
-            file-name-handler-alist nil))
-    (defun my-change-vals-restore-after-init ()
-      (setq gc-cons-threshold gc-cons-threshold-backup
-            file-name-handler-alist file-name-handler-alist-backup)))
+  (defvar gc-cons-threshold-backup gc-cons-threshold)
+  (setq gc-cons-threshold (if (version< emacs-version "24.4")
+                              200000000
+                            2000000000))
 
-  (my-change-vals-faster-init))
-;; restore original values at end of init.el.
-;; sort of like my own dynamic binding. I don't want to wrap the entire
-;; config in a giant let.
+  (defvar file-name-handler-alist-backup file-name-handler-alist)
+  (setq file-name-handler-alist nil)
 
+  ;; restore original values at end of init.el.
+  ;; sort of like my own dynamic binding. I dont' want to wrap the entire
+  ;; config in a giant let.
+  )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -7078,10 +7071,12 @@ on the first call."
 ;;    (face-list)))
 
 
-;; JUMPrestore. restore values set earlier for startup time.
-(when (not (version< emacs-version "24.4"))
-  (my-change-vals-restore-after-init))
-
+(progn ;; JUMPrestore. restore values is set earlier for startup time.
+  (setq file-name-handler-alist file-name-handler-alist-backup)
+  (setq gc-cons-threshold gc-cons-threshold-backup)
+  ;; unbind junk variables. Avoid namespace pollution.
+  (makunbound 'file-name-handler-alist-backup)
+  (makunbound 'gc-cons-threshold-backup))
 
 
 ;;; init.el ends here

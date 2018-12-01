@@ -1015,7 +1015,7 @@ Closure over executed-p."
      (leerzeichen t)
      (darkroom t)
      ;;vim-empty-lines-mode
-     (fill-column-indicator t)
+     (fill-column-indicator ,(not (version< emacs-version "25")))
      (flycheck t)
      (hydra t)
      ;;linum-relative
@@ -3292,7 +3292,8 @@ and indent."
         (flycheck-mode 1)))
 
     (electric-spacing-mode 1)
-    (fci-mode 1))
+    (when (fboundp #'fci-mode)
+      (fci-mode 1)))
   (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
 
   (defun my-setup-c-mode ()

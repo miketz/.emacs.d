@@ -1290,6 +1290,51 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
   (setq evil-replace-state-cursor  '(hbar))
   (setq evil-motion-state-cursor   '(box)))
 
+
+
+;;;-----------------------------------------------------------------------------
+;;; special cursor handling for light/dark backgrounds.
+;;;-----------------------------------------------------------------------------
+(defvar my-curr-theme)
+
+(defun my-cursor-light-bg ()
+  "Set cursor colors and styles for a typical light background.
+NOTE: depends on `my-curr-theme' being set via advice."
+  (interactive)
+  (custom-theme-set-variables
+   my-curr-theme
+
+   `(evil-emacs-state-cursor    '(bar "blue"))
+   `(evil-normal-state-cursor   '(hollow "black"))
+   `(evil-insert-state-cursor   '(bar "black"))
+   `(evil-visual-state-cursor   '(hollow "black"))
+   `(evil-operator-state-cursor '(box "red"))
+   `(evil-replace-state-cursor  '(hbar "orange red"))
+   `(evil-motion-state-cursor   '(box "black")))
+  ;; toggle visual mode to force cursor update
+  (evil-visual-char)
+  (evil-exit-visual-state))
+
+(defun my-cursor-dark-bg ()
+  "Set cursor colors and styles for a typical dark background.
+NOTE: depends on `my-curr-theme' being set via advice."
+  (interactive)
+  (custom-theme-set-variables
+   my-curr-theme
+
+   `(evil-emacs-state-cursor    '(bar "cyan"))
+   `(evil-normal-state-cursor   '(hollow "spring green"))
+   `(evil-insert-state-cursor   '(bar "spring green"))
+   `(evil-visual-state-cursor   '(hollow "orange"))
+   `(evil-operator-state-cursor '(box "red"))
+   `(evil-replace-state-cursor  '(hbar "orange red"))
+   `(evil-motion-state-cursor   '(box "spring green")))
+  ;; toggle visual mode to force cursor update
+  (evil-visual-char)
+  (evil-exit-visual-state))
+
+
+
 ;;;-----------------------------------------------------------------------------
 ;;; evil
 ;;;-----------------------------------------------------------------------------
@@ -1627,7 +1672,23 @@ Closure over `curr-font-size'."
 This prevents overlapping themes; something I would rarely want."
   (dolist (theme custom-enabled-themes)
     (disable-theme theme)))
+
+(defadvice load-theme (before capture-theme)
+  "Capture the theme in a global var."
+  (setq my-curr-theme theme))
+
+(defadvice load-theme (around disable-security)
+  "Disable the confirmation to load themes."
+    (let ((no-confirm t))
+      ad-do-it))
+
 (ad-activate 'load-theme)
+
+
+;; (defun my-capture-theme (theme)
+;;   (setq my-curr-theme theme))
+;; (add-function :before (load-theme theme) #'my-capture-theme)
+;; (remove-function (load-theme theme) #'my-capture-theme)
 
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
@@ -1646,7 +1707,7 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (progn ; theme changing stuff.
-  (autoload #'my-load-theme "my-load-theme" nil t)
+  ;; (autoload #'my-load-theme "my-load-theme" nil t)
   (autoload #'color "my-load-theme" nil t) ; trying to duplicate vim's :color
                                            ; interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
@@ -1658,7 +1719,7 @@ This prevents overlapping themes; something I would rarely want."
       (my-handle-weird-theme-setups)
       ;; nil for no candidate limit. I want to scroll through all the themes.
       (let ((helm-candidate-number-limit nil))
-        (call-interactively #'my-load-theme)))
+        (call-interactively #'load-theme)))
     (global-set-key (kbd "<f9>") #'my-load-theme-wrapper))
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg))

@@ -6996,8 +6996,8 @@ on the first call."
 ;; saving.
 (setq require-final-newline nil)
 ;; but for certain modes (like c-mode) where a final new line is required per
-;; the language specification, allow the automatic newline.
-(setq mode-require-final-newline t)
+;; the language specification, prompt user for a newline.
+(setq mode-require-final-newline 'ask)
 
 ;; (defun sneak-forward ()
 ;;   (interactive)

@@ -1,10 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
-(defun my-rainbow-parens-dark-bg (theme)
+(defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)
   (custom-theme-set-faces
-   theme
+   my-curr-theme
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
@@ -20,11 +20,12 @@
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
-(defun my-rainbow-parens-dark-bg-bold (theme)
-  "Colors for parens that are easy to distinguish from each other when against a dark bg."
+(defun my-rainbow-parens-dark-bg-bold ()
+  "Colors for parens that are easy to distinguish from each other when against a dark bg.
+Depends on `my-curr-theme' being set via advice."
   (interactive)
   (custom-theme-set-faces
-   theme
+   my-curr-theme
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
@@ -40,10 +41,10 @@
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3" :bold t))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black" :bold t))))))
 
-(defun my-rainbow-parens-light-bg (theme)
+(defun my-rainbow-parens-light-bg ()
   (interactive)
   (custom-theme-set-faces
-   theme
+   my-curr-theme
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "#09a509"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red"))))
@@ -55,11 +56,11 @@
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "black" :background "red"))))))
 
-(defun my-rainbow-parens-light-bg2 (theme)
+(defun my-rainbow-parens-light-bg2 ()
   "Colored parens with highlighting."
   (interactive)
   (custom-theme-set-faces
-   theme
+   my-curr-theme
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight normal))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold nil))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold nil))))
@@ -71,11 +72,11 @@
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca" :bold nil))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :bold nil))))))
 
-(defun my-rainbow-parens-light-bg3 (theme)
+(defun my-rainbow-parens-light-bg3 ()
   "Colored parens with highlighting."
   (interactive)
   (custom-theme-set-faces
-   theme
+   my-curr-theme
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold t))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold t))))

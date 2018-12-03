@@ -1295,7 +1295,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;-----------------------------------------------------------------------------
 ;;; special cursor handling for light/dark backgrounds.
 ;;;-----------------------------------------------------------------------------
-(defvar my-curr-theme)
+(defvar my-curr-theme nil)
 
 (defun my-cursor-light-bg ()
   "Set cursor colors and styles for a typical light background.

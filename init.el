@@ -964,7 +964,7 @@ Closure over executed-p."
      (company t)
      (company-web t)
      (slime-company ,(and install-slime-p
-			  (not (version< emacs-version "24.4"))))
+                          (not (version< emacs-version "24.4"))))
      (ace-window t)
      (csharp-mode t)
      (js2-mode t)
@@ -1867,7 +1867,7 @@ Closure over `inverse-video-p'"
     ;;                         :weight semi-bold
     ;;                         :height 120
     ;;                         :width normal)))))
-	)
+    )
 
    ;; unknown windows computer.
    ((and (null my-curr-computer)

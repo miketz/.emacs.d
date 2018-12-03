@@ -941,10 +941,15 @@ Closure over executed-p."
 (defvar has-nodejs-p
   (memq my-curr-computer '(work-laptop work-laptop-bash wild-dog)))
 
+;; TODO: set up clang on more machines.
+(defvar my-has-clang-p (memq my-curr-computer
+                             '(;; work-laptop
+                               wild-dog
+                               hp-tower-2009)))
+
 (let ((install-slime-p
        (memq my-curr-computer
-             '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster)))
-      (has-clang-p (memq my-curr-computer '(work-laptop wild-dog))))
+             '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))))
  ;; TODO: specify if it should use elpa or melpa version of a package.
  ;; NOTE: to limit package installation to specific computers (or other
  ;; conditions), the second place in each list item is a true/false value.
@@ -1006,9 +1011,9 @@ Closure over executed-p."
      ;;neotree
      (num3-mode t)
      (powershell t)
-     (irony ,has-clang-p)
-     (company-irony ,has-clang-p)
-     (flycheck-irony ,has-clang-p)
+     (irony ,my-has-clang-p)
+     (company-irony ,my-has-clang-p)
+     (flycheck-irony ,my-has-clang-p)
      ;;(rtags)
      ;;aggressive-indent
      (sx ,(not (version< emacs-version "24.4")))
@@ -3852,8 +3857,7 @@ and indent."
 ;;;-----------------------------------------------------------------------------
 ;;; irony
 ;;;-----------------------------------------------------------------------------
-(when (or (eq my-curr-computer 'work-laptop)
-          (eq my-curr-computer 'hp-tower-2009)) ;TODO: set up on more machines.
+(when my-has-clang-p
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
   (add-hook 'objc-mode-hook 'irony-mode)

@@ -6995,9 +6995,9 @@ on the first call."
 ;; disable annoying newline emacs automatically adds to the end of a file when
 ;; saving.
 (setq require-final-newline nil)
-;; but for certain modes (like c-mode) where a final new line is required per
-;; the language specification, prompt user for a newline.
-(setq mode-require-final-newline 'ask)
+;; for certain modes (like c-mode) a final new line is required per the
+;; language specification. For now do not add newlines per mode.
+(setq mode-require-final-newline nil)
 
 ;; (defun sneak-forward ()
 ;;   (interactive)

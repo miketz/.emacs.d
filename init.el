@@ -4420,6 +4420,12 @@ and indent."
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (when my-use-evil-p
     (define-key magit-mode-map (kbd "M-h") #'evil-window-left)
+
+    ;; reclaim keybinds stolen by magit-log
+    (define-key magit-mode-map (kbd "M-w") #'ace-window)
+    ;; re-bind the keys we clobbered
+    (define-key magit-mode-map (kbd "C-c w") #'magit-copy-buffer-revision)
+
     ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some
     ;; buffers.
     (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))

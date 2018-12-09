@@ -121,7 +121,7 @@ Depends on `my-curr-theme' being set via advice."
   ;; (when my-use-evil-p
   ;;   (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
-  (my-rainbow-parens-dark-bg 'deeper-blue)
+  (my-rainbow-parens-dark-bg)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -258,7 +258,7 @@ Depends on `my-curr-theme' being set via advice."
   (load-theme 'dichromacy t)
   ;; (my-cursor-stuff :color-emacs "red" :color-evil "blue")
 
-  (my-rainbow-parens-light-bg2 'dichromacy)
+  (my-rainbow-parens-light-bg2)
 
   (custom-theme-set-faces
    'dichromacy
@@ -291,7 +291,7 @@ Depends on `my-curr-theme' being set via advice."
    'firebelly
    `(fci-rule-color "#343434"))
 
-  (my-rainbow-parens-dark-bg 'firebelly)
+  (my-rainbow-parens-dark-bg)
 
   (custom-theme-set-faces
    'firebelly
@@ -351,7 +351,7 @@ Depends on `my-curr-theme' being set via advice."
   ;;   (setq evil-visual-state-cursor '(hollow "blue"))
   ;;   (setq evil-operator-state-cursor cur))
 
-  (my-rainbow-parens-light-bg2 'gandalf)
+  (my-rainbow-parens-light-bg2)
 
   (custom-theme-set-faces
    'gandalf
@@ -396,7 +396,7 @@ Depends on `my-curr-theme' being set via advice."
   ;;   (setq evil-visual-state-cursor '(hollow "blue"))
   ;;   (setq evil-operator-state-cursor cur))
 
-  (my-rainbow-parens-light-bg2 'github)
+  (my-rainbow-parens-light-bg2)
 
   (custom-theme-set-faces
    'github
@@ -506,7 +506,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'gruvbox t)
 
-  (my-rainbow-parens-dark-bg 'gruvbox)
+  (my-rainbow-parens-dark-bg)
 
   (custom-theme-set-faces
    'gruvbox
@@ -526,7 +526,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'kosmos t)
 
-  (my-rainbow-parens-dark-bg 'kosmos)
+  (my-rainbow-parens-dark-bg)
 
   (let ((kosmos-fg "#bdbdbd")
         (kosmos-bg "#000000")
@@ -684,7 +684,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'majapahit-dark t)
 
-  (my-rainbow-parens-dark-bg 'majapahit-dark)
+  (my-rainbow-parens-dark-bg)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -799,7 +799,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'molokai t)
 
-  (my-rainbow-parens-dark-bg 'molokai)
+  (my-rainbow-parens-dark-bg)
 
   (custom-theme-set-faces
    'molokai
@@ -861,7 +861,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'monokai t)
 
-  (my-rainbow-parens-dark-bg 'monokai)
+  (my-rainbow-parens-dark-bg)
 
   (custom-theme-set-faces
    'monokai
@@ -921,7 +921,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'niflheim t)
 
-  (my-rainbow-parens-dark-bg 'niflheim)
+  (my-rainbow-parens-dark-bg)
 
   (let ((class '((class color) (min-colors 89)))
         (background "#303030")
@@ -990,7 +990,7 @@ Depends on `my-curr-theme' being set via advice."
    'spacemacs-light
    `(fci-rule-color "#4d4d4d"))
 
-  (my-rainbow-parens-light-bg 'spacemacs-light)
+  (my-rainbow-parens-light-bg)
 
   (custom-theme-set-faces
    'spacemacs-light
@@ -1027,7 +1027,7 @@ Depends on `my-curr-theme' being set via advice."
 (defun my-color-sunburn ()
   (interactive)
   (load-theme 'sunburn t)
-  (my-rainbow-parens-dark-bg 'sunburn)
+  (my-rainbow-parens-dark-bg)
 
   (custom-theme-set-variables
    'sunburn
@@ -1054,7 +1054,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'tango-dark t)
 
-  (my-rainbow-parens-dark-bg 'tango-dark)
+  (my-rainbow-parens-dark-bg)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -1085,7 +1085,7 @@ Depends on `my-curr-theme' being set via advice."
   (interactive)
   (load-theme 'tommyh t)
 
-  (my-rainbow-parens-light-bg2 'tommyh)
+  (my-rainbow-parens-light-bg2)
 
   (custom-theme-set-faces
    'tommyh

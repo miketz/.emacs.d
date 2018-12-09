@@ -193,7 +193,7 @@ Example:
                                      `(:inherit mode-line))
                                   (t '(:background "black"
                                        :foreground "gray50"))))))
-   `(line-number-current-line ((,class :inherit line-number)))
+   `(line-number-current-line ((,class (:inherit line-number))))
 
    `(region
      ((,class (:background ,highlight))))     ;69685E
@@ -206,10 +206,10 @@ Example:
    `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
-   `(font-lock-doc-face ((,class :foreground "darkolivegreen3")))
-   `(font-lock-function-name-face ((,class :foreground "pale turquoise"
-                                           :weight normal
-                                           :box (:line-width -1 :color ,faint-less))))
+   `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
+   `(font-lock-function-name-face ((,class (:foreground "pale turquoise"
+														:weight normal
+														:box (:line-width -1 :color ,faint-less)))))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
@@ -223,8 +223,8 @@ Example:
    `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
 
    ;; hl-fill-column
-   `(hl-fill-column-face ((,class :foreground ,fg-red
-                                  :background ,bg-red)))
+   `(hl-fill-column-face ((,class (:foreground ,fg-red
+											   :background ,bg-red))))
 
    ;; avy
    `(avy-lead-face ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
@@ -237,11 +237,11 @@ Example:
 
    ;; slime
    `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
-   `(sldb-condition-face ((,class :foreground ,fg-red
-                                  :background ,bg-red)))
-   `(sldb-section-face ((,class :foreground ,fg-yellow
-                                :background ,bg-yellow
-                                :box (:line-width -1 :style released-button))))
+   `(sldb-condition-face ((,class (:foreground ,fg-red
+											   :background ,bg-red))))
+   `(sldb-section-face ((,class (:foreground ,fg-yellow
+											 :background ,bg-yellow
+											 :box (:line-width -1 :style released-button)))))
    ;; sldb-reference-face
    ;; sldb-catch-tag-face
    ;; sldb-local-value-face
@@ -284,10 +284,10 @@ Example:
    ;; num3
    ;; '(num3-face-odd ((,class)))
    ;; '(num3-face-even ((,class (:underline t :background "black"))))
-   `(num3-face-even ((,class :underline nil
-                             :background "#000000"
-                             :foreground ,fg-green
-                             :bold nil)))
+   `(num3-face-even ((,class (:underline nil
+										 :background "#000000"
+										 :foreground ,fg-green
+										 :bold nil))))
 
    ;; highlight-indent-guides
    `(highlight-indent-guides-character-face ((,class (:foreground ,fainter))))
@@ -297,12 +297,12 @@ Example:
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class :background ,(if (= charcoal-color-cnt 16)
-                                                highlight
-                                              "gray30")
-                               ,@(cond ((= charcoal-color-cnt 16)
-                                        `(:foreground ,fg))
-                                       (t nil)))))
+   `(swiper-line-face ((,class (:background ,(if (= charcoal-color-cnt 16)
+												 highlight
+											   "gray30")
+											,@(cond ((= charcoal-color-cnt 16)
+													 `(:foreground ,fg))
+													(t nil))))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
    `(swiper-match-face-1 ((,class (:foreground ,faint-less :background "black"))))
    `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background "black"))))
@@ -329,10 +329,10 @@ Example:
 
    ;; ace-window
    `(aw-leading-char-face ; ace-window character.
-     ((,class :foreground ,fg-green
-              ;; :background "black"
-              :height 300))) ; big font
-   `(aw-background-face ((,class :foreground ,faint-less)))
+     ((,class (:foreground ,fg-green
+						   ;; :background "black"
+						   :height 300)))) ; big font
+   `(aw-background-face ((,class (:foreground ,faint-less))))
 
    ;; ido
    `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
@@ -340,19 +340,19 @@ Example:
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; isearch
-   `(isearch ((,class :background "yellow"
-                      :foreground "black"
-                      :weight bold
-                      :underline nil)))
+   `(isearch ((,class (:background "yellow"
+								   :foreground "black"
+								   :weight bold
+								   :underline nil))))
    ;; the non-selected matches from isearch
-   `(lazy-highlight ((,class :background ,bg-purple
-                             :foreground ,fg-purple
-                             :weight normal
-                             :underline t)))
+   `(lazy-highlight ((,class (:background ,bg-purple
+										  :foreground ,fg-purple
+										  :weight normal
+										  :underline t))))
 
-   `(cider-result-overlay-face ((,class :background ,bg-green
-                                        :foreground ,fg-green
-                                        :box (:line-width -1 :color "black"))))
+   `(cider-result-overlay-face ((,class (:background ,bg-green
+													 :foreground ,fg-green
+													 :box (:line-width -1 :color "black")))))
 
    `(header-line
      ((,class (:foreground ,fg-yellow
@@ -367,23 +367,23 @@ Example:
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
 
    ;; js2
-   `(js2-function-call ((,class :inherit font-lock-function-name-face)))
+   `(js2-function-call ((,class (:inherit font-lock-function-name-face))))
    `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
    `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
    `(js2-warning ((,class :underline (:color "yellow" :style wave))))
    `(js2-error ((,class :underline (:color "red" :style wave))))
-   `(js2-external-variable ((,class :underline (:color "orange" :style wave))))
-   `(js2-jsdoc-tag ((,class :foreground "lime green")))
-   `(js2-jsdoc-type ((,class :inherit font-lock-type-face)))
-   `(js2-jsdoc-value ((,class :inherit font-lock-constant-face)))
+   `(js2-external-variable ((,class (:underline (:color "orange" :style wave)))))
+   `(js2-jsdoc-tag ((,class (:foreground "lime green"))))
+   `(js2-jsdoc-type ((,class (:inherit font-lock-type-face))))
+   `(js2-jsdoc-value ((,class (:inherit font-lock-constant-face))))
 
    ;; js2-highlight-vars
-   `(js2-highlight-vars-face ((,class :foreground ,fg-green :background ,bg-green)))
-   `(js2-highlight-vars-second-face ((,class :foreground ,fg-purple :background ,bg-purple)))
+   `(js2-highlight-vars-face ((,class (:foreground ,fg-green :background ,bg-green))))
+   `(js2-highlight-vars-second-face ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; web-mode
-   `(web-mode-current-element-highlight-face ((,class :background ,faint)))
-   `(web-mode-current-column-highlight-face ((,class :background ,faint)))
+   `(web-mode-current-element-highlight-face ((,class (:background ,faint))))
+   `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
@@ -406,8 +406,8 @@ Example:
 
    ;; erc
    `(erc-notice-face ((,class (:foreground ,faint-less))))
-   `(erc-input-face ((,class :foreground "tan"))) ; my own text.
-   `(erc-timestamp-face ((,class :foreground ,fg-green)))
+   `(erc-input-face ((,class (:foreground "tan")))) ; my own text.
+   `(erc-timestamp-face ((,class (:foreground ,fg-green))))
    ;; erc-keyword-face
    ;; erc-fool-face
    ;; erc-pal-face
@@ -479,7 +479,7 @@ Example:
    `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
 
    ;; org
-   `(org-hide ((,class :foreground ,faint)))
+   `(org-hide ((,class (:foreground ,faint))))
 
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))

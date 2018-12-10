@@ -4,7 +4,7 @@
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)
   (custom-theme-set-faces
-   my-curr-theme
+   (car custom-enabled-themes)
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
@@ -21,11 +21,10 @@
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
 (defun my-rainbow-parens-dark-bg-bold ()
-  "Colors for parens that are easy to distinguish from each other when against a dark bg.
-Depends on `my-curr-theme' being set via advice."
+  "Colors for parens that are easy to distinguish from each other when against a dark bg. "
   (interactive)
   (custom-theme-set-faces
-   my-curr-theme
+   (car custom-enabled-themes)
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
@@ -44,7 +43,7 @@ Depends on `my-curr-theme' being set via advice."
 (defun my-rainbow-parens-light-bg ()
   (interactive)
   (custom-theme-set-faces
-   my-curr-theme
+   (car custom-enabled-themes)
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "#09a509"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red"))))
@@ -60,7 +59,7 @@ Depends on `my-curr-theme' being set via advice."
   "Colored parens with highlighting."
   (interactive)
   (custom-theme-set-faces
-   my-curr-theme
+   (car custom-enabled-themes)
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight normal))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold nil))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold nil))))
@@ -76,7 +75,7 @@ Depends on `my-curr-theme' being set via advice."
   "Colored parens with highlighting."
   (interactive)
   (custom-theme-set-faces
-   my-curr-theme
+   (car custom-enabled-themes)
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold t))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold t))))

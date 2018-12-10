@@ -1296,14 +1296,11 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;-----------------------------------------------------------------------------
 ;;; special cursor handling for light/dark backgrounds.
 ;;;-----------------------------------------------------------------------------
-(defvar my-curr-theme nil)
-
 (defun my-cursor-light-bg ()
-  "Set cursor colors and styles for a typical light background.
-NOTE: depends on `my-curr-theme' being set via advice."
+  "Set cursor colors and styles for a typical light background."
   (interactive)
   (custom-theme-set-variables
-   my-curr-theme
+   (car custom-enabled-themes)
 
    `(evil-emacs-state-cursor    '(bar "blue"))
    `(evil-normal-state-cursor   '(hollow "black"))
@@ -1317,11 +1314,10 @@ NOTE: depends on `my-curr-theme' being set via advice."
   (evil-exit-visual-state))
 
 (defun my-cursor-dark-bg ()
-  "Set cursor colors and styles for a typical dark background.
-NOTE: depends on `my-curr-theme' being set via advice."
+  "Set cursor colors and styles for a typical dark background."
   (interactive)
   (custom-theme-set-variables
-   my-curr-theme
+   (car custom-enabled-themes)
 
    `(evil-emacs-state-cursor    '(bar "cyan"))
    `(evil-normal-state-cursor   '(hollow "spring green"))
@@ -1674,9 +1670,9 @@ This prevents overlapping themes; something I would rarely want."
   (dolist (theme custom-enabled-themes)
     (disable-theme theme)))
 
-(defadvice load-theme (before capture-theme)
-  "Capture the theme in a global var."
-  (setq my-curr-theme theme))
+;; (defadvice load-theme (before capture-theme)
+;;   "Capture the theme in a global var."
+;;   (setq my-curr-theme theme))
 
 (defadvice load-theme (around disable-security)
   "Disable the confirmation to load themes."
@@ -1685,11 +1681,6 @@ This prevents overlapping themes; something I would rarely want."
 
 (ad-activate 'load-theme)
 
-
-;; (defun my-capture-theme (theme)
-;;   (setq my-curr-theme theme))
-;; (add-function :before (load-theme theme) #'my-capture-theme)
-;; (remove-function (load-theme theme) #'my-capture-theme)
 
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*

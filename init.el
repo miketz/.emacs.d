@@ -708,6 +708,7 @@ in case that file does not provide any feature."
 (declare-function my-code-snippet-url 'my-code-snippet-url)
 (declare-function my-erc-set-data 'offline)
 (declare-function my-proj-sicp 'suppress)
+(declare-function lsp-cquery-enable 'suppress)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Helper functions and macros

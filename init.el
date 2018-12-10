@@ -1674,10 +1674,11 @@ This prevents overlapping themes; something I would rarely want."
 ;;   "Capture the theme in a global var."
 ;;   (setq my-curr-theme theme))
 
-(defadvice load-theme (around disable-security)
-  "Disable the confirmation to load themes."
-    (let ((no-confirm t))
-      ad-do-it))
+(setq custom-safe-themes t) ;; Disable the confirmation to load themes.
+;; (defadvice load-theme (around disable-security)
+;;   "Disable the confirmation to load themes."
+;;     (let ((no-confirm t))
+;;       ad-do-it))
 
 (ad-activate 'load-theme)
 

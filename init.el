@@ -855,8 +855,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "Whether I'm using helm at the moment or not.
 Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-load-helm-on-init-p t
-  "Load helm during start up if t. Else postpone load untill the first
-attempted use.")
+  "Set to t to load helm during start up.
+Otherwise postpone loading helm untill the first attempted use.")
 
 (defvar my-use-ido-p (eq my-narrow-type 'ido)
   "If I'm using ido at the moment.

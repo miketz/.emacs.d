@@ -709,6 +709,7 @@ in case that file does not provide any feature."
 (declare-function my-erc-set-data 'offline)
 (declare-function my-proj-sicp 'suppress)
 (declare-function lsp-cquery-enable 'suppress)
+(declare-function dired-details-install 'dired-details)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -3462,9 +3463,17 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; dired-details
 ;;;----------------------------------------------------------------------------
-;; ;;allows collapsing the file details with "(" and ")" in emacs <= 24.3
-;; (require 'dired-details)
-;; (dired-details-install)
+;; allows collapsing the file details with "(" and ")" in emacs <= 24.3
+
+;; only use dired-details on older Emacs versions. If available use the built
+;; in function `dired-hide-details-mode' instead.
+(with-eval-after-load 'dired
+  ;; NOTE: `unless' guard does not work when wrapping `with-eval-after-load'.
+  ;; So putting guard inside `with-eval-after-load' instead.
+  ;; Maybe something to do with the code running at macro expansion time?
+  (unless (fboundp #'dired-hide-details-mode)
+    (require 'dired-details)
+    (dired-details-install)))
 
 
 ;;;----------------------------------------------------------------------------

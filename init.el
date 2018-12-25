@@ -950,154 +950,158 @@ Closure over executed-p."
                                wild-dog
                                hp-tower-2009)))
 
-(let ((install-slime-p
-       (memq my-curr-computer
-             '(wild-dog work-laptop utilite hp-tower-2009 a-laptop-faster))))
- ;; TODO: specify if it should use elpa or melpa version of a package.
- ;; NOTE: to limit package installation to specific computers (or other
- ;; conditions), the second place in each list item is a true/false value.
- (defvar my-packages
-   `((s t) ;; string library
-     (evil t)
-     (evil-leader t)
-     (pos-tip t) ;; for pop up on eval with leader "e"
-     (key-chord t)
-     (slime ,install-slime-p)
-     (paredit t)
-     ;;paxedit
-     ;;smartparens
-     ;;redshank
-     ;;auto-complete
-     ;;ac-slime
-     (company t)
-     (company-web t)
-     (slime-company ,(and install-slime-p
-                          (not (version< emacs-version "24.4"))))
-     (ace-window t)
-     (csharp-mode t)
-     (js2-mode t)
-     (js2-highlight-vars ,(not (version< emacs-version "24.4")))
-     (skewer-mode ,(memq my-curr-computer '(work-laptop)))
-     (json-mode t)
+(defvar my-install-slime-p (memq my-curr-computer
+                                 '(wild-dog work-laptop utilite hp-tower-2009
+                                   a-laptop-faster)))
 
-     (helm ,my-use-helm-p)
-     (helm-cmd-t nil) ;; broken with recent helm versions?
-     (helm-swoop ,my-use-helm-p)
-     (helm-w32-launcher ,(and my-use-helm-p
-                              (eq my-curr-computer 'work-laptop)))
-     ;;helm-git-grep ;search text of files.
-     ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
-     ;;helm-flycheck
-     ;;helm-descbinds
+(defvar my-install-slime-company-p (and my-install-slime-p
+                                        (not (version< emacs-version
+                                                       "24.4"))))
 
-     (icicles ,(eq my-narrow-type 'icicles))
-     ;;projectile
-     ;;clippy
-     ;;yasnippet
-     (rainbow-delimiters t)
-     (rainbow-mode t)
-     (expand-region t)
-     ;;multiple-cursors
-     ;;(omnisharp (work-laptop))
-     ;;sublimity
+;; TODO: specify if it should use elpa or melpa version of a package.
+;; NOTE: to limit package installation to specific computers (or other
+;; conditions), the second place in each list item is a true/false value.
+(defvar my-packages
+  `((s t) ;; string library
+    (evil t)
+    (evil-leader t)
+    (pos-tip t) ;; for pop up on eval with leader "e"
+    (key-chord t)
+    (slime ,my-install-slime-p)
+    (paredit t)
+    ;;paxedit
+    ;;smartparens
+    ;;redshank
+    ;;auto-complete
+    ;;ac-slime
+    (company t)
+    (company-web t)
+    (slime-company ,my-install-slime-company-p)
+    (ace-window t)
+    (csharp-mode t)
+    (js2-mode t)
+    (js2-highlight-vars ,(not (version< emacs-version "24.4")))
+    (skewer-mode ,(memq my-curr-computer '(work-laptop)))
+    (json-mode t)
 
-     (nyan-mode t)
-     ;;(nyan-prompt t) ; nyan-prompt removed from melpa?
+    (helm ,my-use-helm-p)
+    (helm-cmd-t nil) ;; broken with recent helm versions?
+    (helm-swoop ,my-use-helm-p)
+    (helm-w32-launcher ,(and my-use-helm-p
+                             (eq my-curr-computer 'work-laptop)))
+    ;;helm-git-grep ;search text of files.
+    ;;helm-ls-git ;search for files. Similar to helm-cmd-t but with git.
+    ;;helm-flycheck
+    ;;helm-descbinds
 
-     ;;powerline
-     ;;dired-details ;default feature in emacs 24.4+
-     (web-mode t)
-     (htmlize t)
-     (magit ,(not (version< emacs-version "25.1")))
-     (vimrc-mode t)
-     (sicp t)
-     ;;neotree
-     (num3-mode t)
-     (powershell t)
-     (irony ,my-has-clang-p)
-     (company-irony ,my-has-clang-p)
-     (flycheck-irony ,my-has-clang-p)
-     ;;(rtags)
-     ;;aggressive-indent
-     (sx ,(not (version< emacs-version "24.4")))
-     (leerzeichen t)
-     (darkroom t)
-     ;;vim-empty-lines-mode
-     (fill-column-indicator ,(not (version< emacs-version "25")))
-     (flycheck t)
-     (hydra t)
-     ;;linum-relative
-     ;;(guide-key)
-     (unkillable-scratch t)
-     (speed-type t)
-     (bug-hunter t)
+    (icicles ,(eq my-narrow-type 'icicles))
+    ;;projectile
+    ;;clippy
+    ;;yasnippet
+    (rainbow-delimiters t)
+    (rainbow-mode t)
+    (expand-region t)
+    ;;multiple-cursors
+    ;;(omnisharp (work-laptop))
+    ;;sublimity
 
-     (ivy t)
-     (swiper t)
-     (counsel t)
-     (flx t) ;; can be used by ivy and flx-ido for ordering flx matches.
+    (nyan-mode t)
+    ;;(nyan-prompt t) ; nyan-prompt removed from melpa?
 
-     ;;color-identifiers-mode
-     ;;svg-mode-line-themes ;; only works on gnu/linux
-     (avy t)
-     (lispy ,my-use-lispy-p)
-     ;;(worf t)
-     (elisp-slime-nav t)
-     ;; on 11-28-2016 electric-spacing had an unbalanced paren
-     ;; seems to be fixed now. Using it again.
-     (electric-spacing t)
-     ;;w3
-     ;;w3m
-     ;;flymake-jslint
-     ;; (nlinum ,(not native-line-numbers-p))
-     ;; (nlinum-relative ,(not native-line-numbers-p))
+    ;;powerline
+    ;;dired-details ;default feature in emacs 24.4+
+    (web-mode t)
+    (htmlize t)
+    (magit ,(not (version< emacs-version "25.1")))
+    (vimrc-mode t)
+    (sicp t)
+    ;;neotree
+    (num3-mode t)
+    (powershell t)
+    (irony ,my-has-clang-p)
+    (company-irony ,my-has-clang-p)
+    (flycheck-irony ,my-has-clang-p)
+    ;;(rtags)
+    ;;aggressive-indent
+    (sx ,(not (version< emacs-version "24.4")))
+    (leerzeichen t)
+    (darkroom t)
+    ;;vim-empty-lines-mode
+    (fill-column-indicator ,(not (version< emacs-version "25")))
+    (flycheck t)
+    (hydra t)
+    ;;linum-relative
+    ;;(guide-key)
+    (unkillable-scratch t)
+    (speed-type t)
+    (bug-hunter t)
 
-     (ido-vertical-mode ,my-use-ido-p)
-     (ido-grid-mode ,my-use-ido-p)
-     (ido-ubiquitous ,my-use-ido-p)
-     (flx-ido ,my-use-ido-p)
-     ;; (ido-occur ,my-use-ido-p)
-     (smex ,(or my-use-ido-p
-                my-use-bare-ido-p
-                my-use-ivy-p ;; smex can be used by `counsel-M-x'
-                my-use-mish-mash-p))
-     ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
-                 ;; because may useful for my own purposes later.
-     (highlight-tail nil) ;; removed from melpa (emacs wiki purge?)
-     (function-args nil)
-     (highlight-indent-guides t)
-     (ace-link t)
-     (smart-tabs-mode t)
-     (lua-mode t)
-     (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
-                                            '(work-laptop wild-dog))))
-                has-gnu-global-p))
-     (clojure-mode ,(not (version< emacs-version "25.1")))
-     (iedit t) ;; include explicitly. Originally got it as a lispy dependency.
-     (cider ,(memq my-curr-computer '(wild-dog)))
-     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
-     ;;  ,(<= emacs-major-version 24))
-     (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
-     (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
-     (adoc-mode t)
-     (markdown-mode ,(not (version< emacs-version "24.4")))
-     (typescript-mode t)
-     (tide ,(memq my-curr-computer '(work-laptop wild-dog)))
-     (context-coloring t)
-     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
-     (autothemer t) ;; dependency for some themes.
-     (erc-hl-nicks t)
-     (sql-indent t)
-     (vdiff nil)
-     (tern ,has-nodejs-p)
-     (company-tern ,has-nodejs-p)
-     (browse-kill-ring t)
-     (git-gutter ,(not (version< emacs-version "24.3")))
-     (lsp-mode ,(not (version< emacs-version "25.1")))
-     (company-lsp ,(not (version< emacs-version "25.1")))
-     (cquery ,(memq my-curr-computer '(wild-dog)))
-     (websocket t))
-   "Packages I use from elpa/melpa."))
+    (ivy t)
+    (swiper t)
+    (counsel t)
+    (flx t) ;; can be used by ivy and flx-ido for ordering flx matches.
+
+    ;;color-identifiers-mode
+    ;;svg-mode-line-themes ;; only works on gnu/linux
+    (avy t)
+    (lispy ,my-use-lispy-p)
+    ;;(worf t)
+    (elisp-slime-nav t)
+    ;; on 11-28-2016 electric-spacing had an unbalanced paren
+    ;; seems to be fixed now. Using it again.
+    (electric-spacing t)
+    ;;w3
+    ;;w3m
+    ;;flymake-jslint
+    ;; (nlinum ,(not native-line-numbers-p))
+    ;; (nlinum-relative ,(not native-line-numbers-p))
+
+    (ido-vertical-mode ,my-use-ido-p)
+    (ido-grid-mode ,my-use-ido-p)
+    (ido-ubiquitous ,my-use-ido-p)
+    (flx-ido ,my-use-ido-p)
+    ;; (ido-occur ,my-use-ido-p)
+    (smex ,(or my-use-ido-p
+               my-use-bare-ido-p
+               my-use-ivy-p ;; smex can be used by `counsel-M-x'
+               my-use-mish-mash-p))
+    ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
+    ;; because may useful for my own purposes later.
+    (highlight-tail nil) ;; removed from melpa (emacs wiki purge?)
+    (function-args nil)
+    (highlight-indent-guides t)
+    (ace-link t)
+    (smart-tabs-mode t)
+    (lua-mode t)
+    (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
+                                           '(work-laptop wild-dog))))
+               has-gnu-global-p))
+    (clojure-mode ,(not (version< emacs-version "25.1")))
+    (iedit t) ;; include explicitly. Originally got it as a lispy dependency.
+    (cider ,(memq my-curr-computer '(wild-dog)))
+    ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
+    ;;  ,(<= emacs-major-version 24))
+    (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
+    (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
+    (adoc-mode t)
+    (markdown-mode ,(not (version< emacs-version "24.4")))
+    (typescript-mode t)
+    (tide ,(memq my-curr-computer '(work-laptop wild-dog)))
+    (context-coloring t)
+    (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
+    (autothemer t) ;; dependency for some themes.
+    (erc-hl-nicks t)
+    (sql-indent t)
+    (vdiff nil)
+    (tern ,has-nodejs-p)
+    (company-tern ,has-nodejs-p)
+    (browse-kill-ring t)
+    (git-gutter ,(not (version< emacs-version "24.3")))
+    (lsp-mode ,(not (version< emacs-version "25.1")))
+    (company-lsp ,(not (version< emacs-version "25.1")))
+    (cquery ,(memq my-curr-computer '(wild-dog)))
+    (websocket t))
+  "Packages I use from elpa/melpa.")
 
 (require 'package)
 
@@ -1987,11 +1991,13 @@ Closure over `inverse-video-p'"
 
 
   (slime-setup '(slime-fancy
-                 slime-company
+                 ;; slime-company
                  slime-banner
                  slime-indentation
                  ;; slime-highlight-edits
                  ))
+  (if my-install-slime-company-p
+    (add-to-list 'slime-setup 'slime-company t))
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 
@@ -2082,8 +2088,7 @@ Closure over `inverse-video-p'"
 
     (when (eq my-curr-computer 'a-laptop-faster)
       (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("~/Downloads/ccl/lx86cl"))
-                                         (sbcl ("/usr/bin/sbcl")))))
+            slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl")))))
 
     (when nil ;; don't turn on SLIME automatically for now.
       ;; when on a computer with SLIME set up

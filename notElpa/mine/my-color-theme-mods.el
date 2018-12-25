@@ -543,6 +543,11 @@
 
     (custom-theme-set-faces
      'kosmos
+	 
+      ;; default emacs completion.
+     `(completions-common-part ((t (:foreground "#656565"))))
+     `(completions-first-difference ((t (:foreground "green"))))
+
      `(show-paren-match ((t (:slant italic
                                     :bold t
                                     :strike-through t

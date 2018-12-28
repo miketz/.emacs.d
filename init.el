@@ -4615,6 +4615,10 @@ and indent."
 ;;; erc
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'erc
+  (let ((format "%-I:%M%#p")) ;; use 12 hour format. am/pm
+    (setq erc-timestamp-format       format
+          erc-timestamp-format-right format))
+
   (progn
     ;;from finster on irc #emacs. switch erc buffers
     ;; TODO; make it neutral to ido so i can use helm, swiper, default, etc.

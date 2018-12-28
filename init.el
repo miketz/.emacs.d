@@ -1990,14 +1990,15 @@ Closure over `inverse-video-p'"
   ;;   (add-to-list 'evil-buffer-regexps '("\\*slime-repl" . emacs)))
 
 
-  (slime-setup '(slime-fancy
-                 ;; slime-company
-                 slime-banner
-                 slime-indentation
-                 ;; slime-highlight-edits
-                 ))
-  (if my-install-slime-company-p
-    (add-to-list 'slime-setup 'slime-company t))
+  (let ((lst '(slime-fancy
+               ;; slime-company
+               slime-banner
+               slime-indentation
+               ;; slime-highlight-edits
+               )))
+    (when my-install-slime-company-p
+      (add-to-list 'lst 'slime-company t))
+    (slime-setup lst))
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
 

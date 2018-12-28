@@ -2062,7 +2062,7 @@ Closure over `inverse-video-p'"
 
   (progn
     (when (eq my-curr-computer 'wild-dog)
-      (setq slime-default-lisp 'ccl
+      (setq slime-default-lisp 'sbcl
             slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64"))
                                          (sbcl ("sbcl")))))
 
@@ -4645,7 +4645,7 @@ and indent."
                    (buffer-list)))))))
     (define-key erc-mode-map (kbd "C-c b") #'x/ido-chat-buffer))
 
-  (if (eq my-curr-computer 'wild-dog)
+  (if nil ;;(eq my-curr-computer 'wild-dog)
       (my-erc-set-data))
 
   (setq erc-header-line-format nil) ; hide header for more screen space.
@@ -6556,7 +6556,7 @@ smaller than the window height."
 ;;;----------------------------------------------------------------------------
 ;;; offline.el. optionally load some settings not stored in source control
 ;;;----------------------------------------------------------------------------
-(when (eq my-curr-computer 'wild-dog)
+(when nil ;;(eq my-curr-computer 'wild-dog)
   (autoload #'my-erc-set-data "offline" nil t))
 
 

@@ -1997,7 +1997,7 @@ Closure over `inverse-video-p'"
                ;; slime-highlight-edits
                )))
     (when my-install-slime-company-p
-      (add-to-list 'lst 'slime-company t))
+      (push 'slime-company lst))
     (slime-setup lst))
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)

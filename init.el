@@ -396,6 +396,8 @@ in case that file does not provide any feature."
 (defvar erc-header-line-format)
 (defvar ispell-program-name)
 (defvar diff-mode-map)
+(defvar erc-timestamp-format)
+(defvar erc-timestamp-format-right)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

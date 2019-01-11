@@ -4090,13 +4090,14 @@ and indent."
 ;; TODO: revist this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.h
 ;;       tml
-(cond ((>= emacs-major-version 27)
-       ;; `find-file-hooks' replaced by `find-file-hook'.
-       (remove-hook 'find-file-hook 'vc-refresh-state))
-      ((>= emacs-major-version 25)
-       (remove-hook 'find-file-hooks 'vc-refresh-state))
-      (t ; else emacs older than 25
-       (remove-hook 'find-file-hooks 'vc-find-file-hook)))
+(let ((file-hook (if (version< emacs-version "22.1")
+                     'find-file-hooks
+                   'find-file-hook))
+      (vc-hook-attach (if (version< emacs-version "25.1")
+                          'vc-find-file-hook
+                        'vc-refresh-state)))
+  ;; remove a vc source control hook that slows down opening files.
+  (remove-hook file-hook vc-hook-attach))
 
 (with-eval-after-load 'vc
   (add-to-list 'vc-directory-exclusion-list "bin")

@@ -2166,12 +2166,15 @@ Closure over `inverse-video-p'"
     (evil-leader/set-key-for-mode 'slime-repl-mode "e"
       #'my-slime-eval-last-sexp-display))
 
-  (cond ;; set url to common lisp hyperspec.
-   ((eq my-curr-computer 'work-laptop)
-    (setq common-lisp-hyperspec-root
-          "file:///C:/users/mtz/CommonLispHyperSpec/HyperSpec/"))
-   (t (setq common-lisp-hyperspec-root
-            "http://www.lispworks.com/documentation/HyperSpec/")))
+  ;; set link to common lisp hyperspec.
+  (setq common-lisp-hyperspec-root
+        (cond
+         ((eq my-curr-computer 'work-laptop)
+          "file:///C:/users/mtz/CommonLispHyperSpec/HyperSpec/")
+         ((eq my-curr-computer 'wild-dog)
+          "file:///home/mike/books/lisp/hyperspec/HyperSpec/")
+         ;; else use the online version.
+         (t "http://www.lispworks.com/documentation/HyperSpec/")))
 
   (defun my-view-hyperspec ()
     (interactive)

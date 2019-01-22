@@ -10,6 +10,8 @@
 ;;; Git incantations:
 ;;;----------------------------------------------------------------------------
 ;;; Create a new github repo from an existing local repo:
+;;;     Go to github.com and set up a new *empty* repo. Use local folder name
+;;;     ".emacs.d" for the repo name.
 ;;;     git remote add origin https://github.com/miketz/.emacs.d.git
 ;;;     git push -u origin master
 ;;;

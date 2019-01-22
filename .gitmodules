@@ -16,3 +16,6 @@
 [submodule "notElpa/Indium"]
 	path = notElpa/Indium
 	url = https://github.com/NicolasPetton/Indium
+[submodule "notElpa/hyperspec"]
+	path = notElpa/hyperspec
+	url = https://github.com/miketz/hyperspec

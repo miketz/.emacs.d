@@ -2170,13 +2170,17 @@ Closure over `inverse-video-p'"
 
   ;; set link to common lisp hyperspec.
   (setq common-lisp-hyperspec-root
-        (cond
-         ((eq my-curr-computer 'work-laptop)
-          "file:///C:/users/mtz/CommonLispHyperSpec/HyperSpec/")
-         ((eq my-curr-computer 'wild-dog)
-          "file:///home/mike/books/lisp/hyperspec/HyperSpec/")
-         ;; else use the online version.
-         (t "http://www.lispworks.com/documentation/HyperSpec/")))
+        (concat "file://"
+                (expand-file-name "~/")
+                ".emacs.d/notElpa/hyperspec/HyperSpec/")
+        ;; (cond
+        ;;  ((eq my-curr-computer 'work-laptop)
+        ;;   "file:///C:/users/mtz/CommonLispHyperSpec/HyperSpec/")
+        ;;  ((eq my-curr-computer 'wild-dog)
+        ;;   "file:///home/mike/books/lisp/hyperspec/HyperSpec/")
+        ;;  ;; else use the online version.
+        ;;  (t "http://www.lispworks.com/documentation/HyperSpec/"))
+        )
 
   (defun my-view-hyperspec ()
     (interactive)

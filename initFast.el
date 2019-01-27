@@ -57,9 +57,14 @@
 ;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
 ;; TODO: revist this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
-(if (>= emacs-major-version 25)
-    (remove-hook 'find-file-hooks 'vc-refresh-state)
-  (remove-hook 'find-file-hooks 'vc-find-file-hook))
+(let ((file-hook (if (version< emacs-version "22.1")
+                     'find-file-hooks
+                   'find-file-hook))
+      (vc-hook-attach (if (version< emacs-version "25.1")
+                          'vc-find-file-hook
+                        'vc-refresh-state)))
+  ;; remove a vc source control hook that slows down opening files.
+  (remove-hook file-hook vc-hook-attach))
 
 (when (>= emacs-major-version 25)
   (global-eldoc-mode 0))

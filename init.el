@@ -4472,7 +4472,24 @@ and indent."
   ;; don't show recent commits when calling `magit-status'.
   ;; TODO: modify magit code so recent commits are not even queried if the
   ;;       count is 0.
-  (setq magit-log-section-commit-count 0))
+  (setq magit-log-section-commit-count 0)
+
+  ;; function to remove hooks magit adds to `find-file-hook'.
+  ;; It slows down opening new files on ms-windows by a few seconds.
+  (defun my-remove-slow-magit-hooks ()
+    "TODO: find the root cause of the slowness. Removing hooks on
+`find-file-hook' does not fix the performance issue.
+TODO: call this function when it works."
+    (interactive)
+    (let ((file-hook (if (version< emacs-version "22.1")
+                         'find-file-hooks
+                       'find-file-hook)))
+      (remove-hook file-hook 'magit-edit-branch*description-check-buffers)
+      (remove-hook file-hook 'global-magit-file-mode-check-buffers)
+      (remove-hook file-hook 'magit-auto-revert-mode-check-buffers)
+      (remove-hook file-hook 'auto-revert-find-file-function)
+      (remove-hook file-hook 'git-commit-setup-check-buffer)
+      (remove-hook file-hook 'which-func-ff-hook))))
 
 
 ;;;----------------------------------------------------------------------------

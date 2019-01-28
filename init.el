@@ -2171,6 +2171,7 @@ Closure over `inverse-video-p'"
   ;; set link to common lisp hyperspec.
   (setq common-lisp-hyperspec-root
         (concat "file://"
+                (if (eq system-type 'windows-nt) "/" "") ; extra / on windows.
                 (expand-file-name "~/")
                 ".emacs.d/notElpa/hyperspec/HyperSpec/")
         ;; (cond

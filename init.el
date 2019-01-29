@@ -2004,9 +2004,11 @@ Closure over `inverse-video-p'"
       (push 'slime-company lst))
     (slime-setup lst))
   (setq slime-complete-symbol*-fancy t)
-  ;; `slime-complete-symbol-function' is obsolete. comment out.
-  ;; TODO: set `slime-completion-at-point-functions' instead.
+  ;; `slime-complete-symbol-function' is obsolete. comment out and use
+  ;; `slime-completion-at-point-functions' instead.
   ;; (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
+  (add-to-list 'slime-completion-at-point-functions
+               'slime-fuzzy-complete-symbol)
 
   (when my-use-evil-p
     ;; ;; override evil's binding of M-. when using slime

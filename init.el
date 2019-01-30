@@ -6606,6 +6606,54 @@ smaller than the window height."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
+(defun my-load-everything-for-pdump ()
+  "Load libraries so they will be part of the saved image from pdumper.
+For faster subsequent start up."
+  (interactive)
+  (my-handle-weird-theme-setups)
+  (load "my-hydras") ;; TODO: provide a feature so i can use `require'.
+
+  (require 'swiper)
+  (require 'ivy)
+  (require 'counsel)
+  (require 'flx)
+  (require 'smex)
+  (require 'expand-region)
+  (require 'ibuffer)
+  (require 'org)
+  (require 'slime)
+  (require 'js2-mode)
+  (require 'js2-highlight-vars)
+  (require 'json-mode)
+  (require 'cc-mode)
+  (require 'json-mode)
+  (require 'num3-mode)
+  (require 'powershell)
+  (require 'leerzeichen)
+  (require 'fill-column-indicator)
+  (require 'hydra)
+  (require 'avy)
+  (require 'lispy)
+  (require 'elisp-slime-nav)
+  (require 'electric-spacing)
+  (require 'highlight-tail)
+  (require 'highlight-indent-guides)
+  (require 'smart-tabs-mode)
+  (require 'lua-mode)
+  (require 'typescript-mode)
+  (require 'erc)
+  (require 'erc-hl-nicks)
+  (require 'flycheck)
+  (require 'unkillable-scratch)
+  (require 'web-mode)
+  (require 'htmlize)
+  (require 'rainbow-mode)
+  (require 'paredit)
+  (require 'sql-indent)
+  (require 'yasnippet)
+  ;; (require 'magit) ; exclude magit until hook performance is resolved.
+  (message "Finished loading libs."))
+
 (defun my-list-holidays ()
   "List the major holidays."
   (interactive)

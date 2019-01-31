@@ -93,7 +93,7 @@
   (setq file-name-handler-alist nil)
 
   ;; restore original values at end of init.el.
-  ;; sort of like my own dynamic binding. I dont' want to wrap the entire
+  ;; sort of like my own dynamic binding. I don't want to wrap the entire
   ;; config in a giant let.
   )
 
@@ -770,7 +770,7 @@ Closure over `positions'."
 
 (defun my-turn-on-electric-pair-local-mode ()
   "Attempt to turn on `electric-pair-local-mode'.
-But check for existance first to avoid breaks on older Emacs verisons.
+But check for existence first to avoid breaks on older Emacs versions.
 Do not fall back to function `electric-pair-mode' because it's global."
   (if (fboundp #'electric-pair-local-mode)
       (electric-pair-local-mode 1)
@@ -821,7 +821,7 @@ Specific configs may be made based on the computer.")
 ;;;----------------------------------------------------------------------------
 (defvar my-indent-width 4
   "An omni-variable serving 3 related purposes.
-Becuase I want them to have same value.
+Because I want them to have same value.
 -Preferred indent width for C-like langs.  `c-basic-offset' `js2-basic-offset'
 -Number of spaces for a tab.
 -How many columns to show for a 'real' tab.  `tab-width'")
@@ -862,7 +862,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-load-helm-on-init-p t
   "Set to t to load helm during start up.
-Otherwise postpone loading helm untill the first attempted use.")
+Otherwise postpone loading helm until the first attempted use.")
 
 (defvar my-use-ido-p (eq my-narrow-type 'ido)
   "If I'm using ido at the moment.

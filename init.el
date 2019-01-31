@@ -6613,9 +6613,12 @@ For faster subsequent start up."
   (interactive)
   ;; measure time spent loading libs.
   (let ((start (float-time)))
+    ;; my libs
     (my-handle-weird-theme-setups)
     (load "my-hydras") ;; TODO: provide a feature so i can use `require'.
+    (require 'my-rand)
 
+    ;; 3rd party libs.
     (require 'company)
     (require 'swiper)
     (require 'ivy)

@@ -583,7 +583,10 @@ in case that file does not provide any feature."
 (declare-function my-change-alpha 'suppress)
 (declare-function my-change-alpha-more-solid 'suppress)
 (declare-function my-change-alpha-less-solid 'suppress)
-;; (declare-function evil-define-key 'evil-core)
+;; these 2 like to break?
+(declare-function evil-visual-char 'evil-states)
+(declare-function evil-define-key 'evil-core)
+
 (declare-function slime-edit-definition 'suppress)
 (declare-function evil-append 'suppress)
 (declare-function company-select-next 'suppress)
@@ -1492,6 +1495,9 @@ that buffer."
 ;; (add-hook 'prog-mode-hook #'evil-local-mode)
 
 (when my-use-evil-p
+  ;; require evil in an attempt to solve the issue with `evil-visual-char' and
+  ;; `evil-define-key' causing issues with their `declare-function' statements.
+  (require 'evil)
   (evil-mode 1)) ;; enable globally
 
 

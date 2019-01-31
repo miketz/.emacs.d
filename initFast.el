@@ -55,7 +55,7 @@
 
 
 ;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
-;; TODO: revist this later. The performance problems may be fixed soon.
+;; TODO: revisit this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.html
 (let ((file-hook (if (version< emacs-version "22.1")
                      'find-file-hooks

@@ -2693,7 +2693,7 @@ This avoids changing pop-up width while scrolling through candidates."
            (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
       ;; ;; and turn on flymake-jslint. (only works on saved files)
       ;; (flymake-jslint-load)
-      ;; ;; bind M-n, M-p to use flymake functions istead of js2 functions
+      ;; ;; bind M-n, M-p to use flymake functions instead of js2 functions
       ;; (evil-define-key 'normal js2-mode-map (kbd "M-n")
       ;;   #'flymake-goto-next-error)
       ;; (evil-define-key 'normal js2-mode-map (kbd "M-p")
@@ -2701,7 +2701,7 @@ This avoids changing pop-up width while scrolling through candidates."
       ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m")
       ;;   #'flymake-popup-current-error-menu)
       )
-    ;; show a greek lambda for function
+    ;; show a Greek lambda for function
     (setq prettify-symbols-alist '(("function" . 955)))
     ;; collapse/show sections of code
     (hs-minor-mode 1))
@@ -2734,7 +2734,7 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;; web-beautify
 ;;;----------------------------------------------------------------------------
 ;; ;; Depends on external programs: nodejs, js-beatify
-;; ;; So only use on computers with the depedencies set up.
+;; ;; So only use on computers with the dependencies set up.
 ;; (when (eq my-curr-computer 'work-laptop)
 ;;   ;; (with-eval-after-load "web-beautify"
 ;;   ;;   (add-to-list 'web-beautify-args "3")
@@ -2809,7 +2809,7 @@ This avoids changing pop-up width while scrolling through candidates."
 To make it human readable."
     (interactive)
     (save-excursion
-      (goto-char (point-min)) ;; go to beggining of buffer
+      (goto-char (point-min)) ;; go to beginning of buffer
       (let ((pos 0))
         (while (not (null pos))
           (setq pos (search-forward "&#xD;&#xA;" nil t))
@@ -2886,7 +2886,7 @@ To make it human readable."
 
   (progn ;;from tuhdo. Customizing helm window size/display.
     (setq helm-display-header-line nil) ; save 1 line for rarely used header.
-    ;; don't make source seperators bigger than needed
+    ;; don't make source separators bigger than needed
     (set-face-attribute 'helm-source-header nil :height 1.0)
     ;; (progn
     ;;   ;; helm-autoresize-mode hides other windows, and dynamically adjusts
@@ -2895,7 +2895,7 @@ To make it human readable."
     ;;   ;;disable the dynamic size adjustment.
     ;;   (setq helm-autoresize-max-height 35)
     ;;   (setq helm-autoresize-min-height 35))
-    ;; ;; prevents the windown hiding from `helm-autoresize-mode'. And when
+    ;; ;; prevents the window hiding from `helm-autoresize-mode'. And when
     ;; ;; there are lots of split windows, keep the popup at the current
     ;; ;; window.
     ;; (setq helm-split-window-in-side-p t)
@@ -3003,8 +3003,8 @@ To make it human readable."
 
 ;; invoke with M-x for now.
 ;; (when my-use-helm-p
-;;   ;; helm needs to be initalized or else helm-swoop won't work.
-;;   ;; (it doens't `require' everything it needs)
+;;   ;; helm needs to be initialized or else helm-swoop won't work.
+;;   ;; (it doesn't `require' everything it needs)
 ;;   (when my-use-evil-p
 ;;     (define-key evil-normal-state-map (kbd "s") #'helm-swoop)))
 
@@ -3093,7 +3093,7 @@ To make it human readable."
 
 ;;;----------------------------------------------------------------------------
 ;;; ido
-;;; ido-veritical-mode
+;;; ido-vertical-mode
 ;;; ido-ubiquitous
 ;;; flx-ido
 ;;; smex (built on ido)
@@ -3104,7 +3104,7 @@ To make it human readable."
   ;; (when my-use-evil-p
   ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
 
-  ;; ;; icomplete's display is simliar to ido. So use it for completions ido
+  ;; ;; icomplete's display is similar to ido. So use it for completions ido
   ;; ;; does not support. (ie `describe-function' `load-theme' etc)
   ;; (icomplete-mode 1)
 
@@ -3140,11 +3140,11 @@ completions from folders other than the current one."
             my-use-bare-ido-p)
     (global-set-key (kbd "C-x C-f") #'my-ido-find-file))
 
-  (when my-use-ido-p ;; GAURD against calling ido-ubiquitous-mode.
+  (when my-use-ido-p ;; GUARD against calling ido-ubiquitous-mode.
 
     (ido-ubiquitous-mode 1)
     ;; NOTE: i removed some un-wanted advice code from the autoloads file of
-    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Becuase
+    ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Because
     ;; it forced a load of ido automatically at start up, even when I'm not
     ;; using ido!!!
     ;; ALWAYS-DO: periodically monitor package `ido-completing-read+' after
@@ -3170,7 +3170,7 @@ completions from folders other than the current one."
     ;; reclaim M-k keybind. TODO: rebind `ido-forget-work-directory'
     (define-key ido-file-dir-completion-map (kbd "M-k") #'evil-window-up))
 
-  ;; insert a hypen - on space like in normal M-x
+  ;; insert a hyphen - on space like in normal M-x
   (defadvice ido-switch-buffer (around space-inserts-hyphen activate compile)
     (let ((ido-cannot-complete-command
            `(lambda ()
@@ -3192,7 +3192,7 @@ completions from folders other than the current one."
   ;; GUARD: smex is used for `counsel-M-x' too where this advice is not needed.
   (when (or my-use-ido-p
             my-use-bare-ido-p)
-    ;; insert a hypen - on space like in normal M-x
+    ;; insert a hyphen - on space like in normal M-x
     (defadvice smex (around space-inserts-hyphen activate compile)
       (let ((ido-cannot-complete-command
              `(lambda ()
@@ -3209,13 +3209,13 @@ completions from folders other than the current one."
 
 
 (progn
-  ;; an older copy of yassnipet before it cuased unwatned indentation on
+  ;; an older copy of yasnippet before it caused unwanted indentation on
   ;; each keystroke.
   (add-to-list 'load-path "~/.emacs.d/yasnippet-20160416.831_correctIndent")
 
   (progn
-    ;; manually add the autoloads because i'm not using the package manager
-    ;; for yassnipet anymore.
+    ;; manually add the autoloads because I'm not using the package manager
+    ;; for yasnippet anymore.
     (autoload 'yas-minor-mode "yasnippet" nil t nil)
     (defvar yas-global-mode nil)
     (custom-autoload 'yas-global-mode "yasnippet" nil)
@@ -3249,7 +3249,7 @@ completions from folders other than the current one."
                               fn-deco
                               fn-fix-first
                               fn-fix-last)
-    "Does something special for each paramter in a snippet."
+    "Does something special for each parameter in a snippet."
     (let* ((split (split-string param-str sep-char))
            (decorated (mapcar fn-deco split)))
       (setcar decorated (funcall fn-fix-first (car decorated)))
@@ -3274,7 +3274,7 @@ completions from folders other than the current one."
 ;; This fn is useful for aligning trailing comments when using tabs for
 ;; indentation.  It won't work if different numbers of tabs are used within the
 ;; aligned set of comments. But that case (different tab level) should be rare
-;; as a different tab level is a differnet block of logic, so you wouldn't have
+;; as a different tab level is a different block of logic, so you wouldn't have
 ;; a set of comments span across it.
 (defun my-comment-dwim-align-with-spaces ()
   "Temporarily use spaces while making the comments.

@@ -3589,7 +3589,7 @@ and indent."
 (global-set-key (kbd "C-c k") #'hydra-expand-region/body)
 
 ;;;----------------------------------------------------------------------------
-;;; mulitple-cursors
+;;; multiple-cursors
 ;;; https://github.com/magnars/multiple-cursors.el
 ;;;----------------------------------------------------------------------------
 ;;(require 'multiple-cursors)
@@ -3791,7 +3791,7 @@ and indent."
         (with-eval-after-load 'company
           (add-to-list 'company-backends 'company-omnisharp))))
 
-    ;; tab completion of paramters. acts weird
+    ;; tab completion of parameters. acts weird
     (setq omnisharp-company-do-template-completion nil)
     (setq omnisharp-company-ignore-case t)
 
@@ -3844,7 +3844,7 @@ and indent."
   )
 
 (with-eval-after-load 'avy
-  ;; make keys like ace-jump. Lots of letters means more likey to need only 1
+  ;; make keys like ace-jump. Lots of letters means more likely to need only 1
   ;; overlay char.
   (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
                         (cl-loop for i from ?A to ?Z collect i)))
@@ -3852,7 +3852,7 @@ and indent."
   (setq avy-background nil) ;; eye is already focused on the jump point so no
                             ;; need to gray-out the background.
   (setq avy-all-windows t)       ;; allow jumps between windows.
-  (setq avy-case-fold-search t)  ;; case insenstive
+  (setq avy-case-fold-search t)  ;; case insensitive
   (setq avy-timeout-seconds 0.3) ;; shorten delay for `avy-goto-char-timer'
 
   ;; (defun my-avy-goto-line ()
@@ -3863,7 +3863,7 @@ and indent."
   ;; (global-set-key (kbd "M-g g") #'my-avy-goto-line)
   ;; (global-set-key (kbd "M-g M-g") #'my-avy-goto-line)
 
-  ;; commenitng out. was avy-goto-char-3 deleted?
+  ;; commenting out. was avy-goto-char-3 deleted?
   ;; (defun my-avy-goto-char-3 (char1 char2 char3 &optional arg)
   ;;   "Copied `avy-goto-char-2' but reading 3 chars. Feels like too many."
   ;;   (interactive (list (read-char "char 1: ")
@@ -3882,7 +3882,7 @@ and indent."
 ;;; ace-link
 ;;;----------------------------------------------------------------------------
 ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
-;;       becuase calling that autoloaded function caused a premature
+;;       because calling that autoloaded function caused a premature
 ;;       load of the ace-link feature!
 ;;       Discovered by `profile-emacs.el'
 (with-eval-after-load 'info
@@ -4102,7 +4102,7 @@ and indent."
 
 ;; speed up opening files. see https://www.reddit.com/r/emacs/comments/4c0mi3/t
 ;; he_biggest_performance_improvement_to_emacs_ive/
-;; TODO: revist this later. The performance problems may be fixed soon.
+;; TODO: revisit this later. The performance problems may be fixed soon.
 ;;       see: https://lists.gnu.org/archive/html/emacs-devel/2016-02/msg00440.h
 ;;       tml
 (let ((file-hook (if (version< emacs-version "22.1")
@@ -4203,7 +4203,7 @@ and indent."
 
 (with-eval-after-load 'skewer-mode
 ;;   (defun my-skewer-repl-clear-buffer ()
-;;     "Deletes the contents of the skewer-reple buffer.
+;;     "Deletes the contents of the skewer-repl buffer.
 ;; Depends on evil mode."
 ;;     (interactive)
 ;;     (evil-goto-line) ;bottom
@@ -4281,7 +4281,7 @@ and indent."
 ;;     ;;(message "") ;delete multiple lines of junk in the mini buffer.
 ;;     )
 
-;;   ;;set up custome keybindings when the mode loads.
+;;   ;;set up custom key bindings when the mode loads.
 ;;   (add-hook 'eshell-mode-hook ; `eshell-mode-map' not recognized unless set
 ;;                               ; in the hook. Eval-after-load doesn't work.
 ;;             (lambda ()
@@ -4424,7 +4424,7 @@ and indent."
 
 ;;;----------------------------------------------------------------------------
 ;;; aggressive-indent. Turning off for now since lispy makes it easy to keep
-;;; things indented and aggressive-ident causes a noticeable lag when barfing/
+;;; things indented and aggressive-indent causes a noticeable lag when barfing/
 ;;; slurping in larger, deeply nested expressions.
 ;;;----------------------------------------------------------------------------
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
@@ -4466,7 +4466,7 @@ and indent."
   (when my-use-ivy-p
     (setq magit-completing-read-function #'ivy-completing-read))
 
-  ;; Speical highlight on the changed words in a line. Makes it easier to see
+  ;; Special highlight on the changed words in a line. Makes it easier to see
   ;; what changed. If 'all becomes a performance problem then set it to t so
   ;; it only affects the currently highlighted diff.
   (setq magit-diff-refine-hunk 'all)
@@ -4500,7 +4500,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; git. Just git stuff external to emacs.
 ;;;----------------------------------------------------------------------------
-(when (eq my-curr-computer 'work-laptop) ; TODO: move this into spearate file.
+(when (eq my-curr-computer 'work-laptop) ; TODO: move this into separate file.
   (defun my-git-docs ()
     (interactive)
     (eww-open-file (concat "C:/Users/mtz/AppData/Local/Programs/Git/"
@@ -4561,7 +4561,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;; (require 'fill-column-indicator)
 ;; (add-hook 'prog-mode-hook (lambda ()
-;;                             (fci-mode 1))) ; fci-mode is autloaded.
+;;                             (fci-mode 1))) ; fci-mode is autoloaded.
 
 
 (defvar-local company-fci-mode-on-p nil) ; put this in top level.
@@ -4697,7 +4697,7 @@ TODO: call this function when it works."
 ;; (autoload 'linum-relative-toggle "linum-relative" "linum-relative" t)
 
 ;; ;; don't turn on by default. Makes the screen blink when line # changes.
-;; ;;(linum-relative-toggle) ;;toggle between realtive and straight.
+;; ;;(linum-relative-toggle) ;;toggle between relative and straight.
 ;; (with-eval-after-load "linum-relative"
 ;;   ;; rel nums should never exceed 2 digits.
 ;;   (setq linum-relative-format "%2s")
@@ -4769,7 +4769,7 @@ TODO: call this function when it works."
 
   (progn ;; counsel completion augmentation
 
-    (autoload #'counsel-tmm "counsel" nil t) ;; not autoloaded by defaut.
+    (autoload #'counsel-tmm "counsel" nil t) ;; not autoloaded by default.
     (defun my-counsel-tmm ()
       "Same as `counsel-tmm' but with a taller window."
       (interactive)
@@ -4837,7 +4837,7 @@ TODO: call this function when it works."
   (cl-loop for pair in ivy-initial-inputs-alist
            do
            (setcdr pair ""))
-  ;; NOTE: no longer using `set-alist' to disable the ^ prefix. Becuase it
+  ;; NOTE: no longer using `set-alist' to disable the ^ prefix. Because it
   ;;       pulled in a new package dependency `apel'. And maybe `flim'?
   ;; (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
 
@@ -4874,8 +4874,8 @@ TODO: call this function when it works."
 
 ;; (with-eval-after-load "swiper"
 ;;   ;; overwrite `swiper--re-builder' to use out-of-order matching.
-;;   ;; TODO: periodicatlly sync this up with the latest package code.
-;;   ;; TODO: make it highlihgt each match, not just the first.
+;;   ;; TODO: periodically sync this up with the latest package code.
+;;   ;; TODO: make it highlight each match, not just the first.
 ;;   (defun swiper--re-builder (str)
 ;;     "Transform STR into a swiper regex.
 ;; This is the regex used in the minibuffer where candidates have
@@ -4929,7 +4929,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 (when my-use-mish-mash-p
   ;; set up ivy/swiper/counsel keybinds
-  ;; Avoid turning on `ivy-mode' becuaes it replaces the `completing-read' fn
+  ;; Avoid turning on `ivy-mode' because it replaces the `completing-read' fn
   ;; which i want sometimes for the column-style display.
   (when my-use-evil-p
     (evil-leader/set-key "b" #'switch-to-buffer)
@@ -4971,11 +4971,11 @@ TODO: call this function when it works."
 
 ;;;----------------------------------------------------------------------------
 ;;; Integrate narrow-to-region with indirect buffers. To allow multiple
-;;; major modes operatiing on 1 file.
+;;; major modes operating on 1 file.
 ;;;----------------------------------------------------------------------------
 (defun my-narrow-to-region-indirect (start end)
   "Restrict editing in this buffer to the current region, indirectly.
-Region defined by START and END is automaticallyl detected by
+Region defined by START and END is automatically detected by
 \(interactive \"r\"\)."
   (interactive "r")
   (deactivate-mark)
@@ -5094,7 +5094,7 @@ END of region."
     (js2-mode))
 
   (cl-defun my-focus-javascript () ;using `cl-defun' to allow `cl-return-from'
-    "Automatcially narrow between <script> tags, then turn on js2-mode."
+    "Automatically narrow between <script> tags, then turn on js2-mode."
     (interactive)
     (save-excursion ;; don't allow tag searches to mess with cursor position.
       (let ((start-tag-name "<script")
@@ -5115,7 +5115,7 @@ END of region."
           (when (null end-of-start)
             (message "start tag not found")
             (cl-return-from my-focus-javascript nil)))
-        ;; start highlighitng
+        ;; start highlighting
         ;; (next-line)
         ;; (move-beginning-of-line nil)
         (set-mark-command nil)           ;(evil-visual-line)
@@ -5158,7 +5158,7 @@ buffer instead of narrowing."
           (when (null end-of-start)
             (message "start tag not found")
             (cl-return-from my-focus-javascript nil)))
-        ;; start highlighitng
+        ;; start highlighting
         ;; (next-line)
         ;; (move-beginning-of-line nil)
         (set-mark-command nil)           ;(evil-visual-line)
@@ -5252,7 +5252,7 @@ buffer instead of narrowing."
   ;; (lispy-set-key-theme '(special paredit c-digits)) ;; emulation of paredit.
 
   (setq lispy-avy-style-char 'pre)
-  (setq lispy-avy-style-paren 'at) ;not at-full becuase parents are 1 char
+  (setq lispy-avy-style-paren 'at) ;not at-full because parents are 1 char
   (setq lispy-avy-style-symbol 'at-full)
 
   ;; re-implementing `lispy-eval-and-insert' to always save excursion
@@ -5275,8 +5275,8 @@ When ARG isn't nil, try to pretty print the sexp."
         (save-excursion
           (doit)))))
 
-  ;; make functions so "<" will alwoas go left. ">" will alwyas go right.
-  ;; whether that's acheieved via a barf or slurp.
+  ;; make functions so "<" will always go left. ">" will always go right.
+  ;; whether that's achieved via a barf or slurp.
   ;; TODO: make it handle number inputs (instead of defaulting to 1).
   (defun my-lispy-go-left-barf-or-slurp ()
     (interactive)
@@ -5321,7 +5321,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (with-eval-after-load 'info
   ;; rebind keys for vim friendliness.
-  ;; orginal bindings. TODO: bind them to something else. Or just use M-x
+  ;; original bindings. TODO: bind them to something else. Or just use M-x
   '((n Info-next)
     (p Info-prev)
     (f Info-follow-reference)
@@ -5411,7 +5411,7 @@ START and END define the region."
                              'preceding-sexp
                            #'elisp--preceding-sexp)))
   (defun my-eval-last-sexp ()
-    "Eval the last sybmolic expresion.  Return the value as a string.
+    "Eval the last symbolic expression.  Return the value as a string.
 Closure over `preceding-sexp-fn'."
     (interactive)
     (let ((val (eval (eval-sexp-add-defvars (funcall preceding-sexp-fn))
@@ -5441,7 +5441,7 @@ Closure over `preceding-sexp-fn'."
       (evil-normal-state)))))
 
 (when my-use-evil-p
-  ;; evalate lisp expression. Insert result on a new line.
+  ;; evaluate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
   (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
     #'my-eval-last-sexp-display)
@@ -5476,10 +5476,10 @@ Closure over `preceding-sexp-fn'."
       (kbd "C-c C-d C-d") #'my-elisp-slime-nav-colored)))
 
 ;;;----------------------------------------------------------------------------
-;;; maximumize screen real-estate. TODO: complete this.
+;;; maximize screen real-estate. TODO: complete this.
 ;;;----------------------------------------------------------------------------
 (autoload #'my-real-estate-max "my-screen-real-estate" nil t)
-;; see cooresponding function `my-real-estate-restore'
+;; see corresponding function `my-real-estate-restore'
 (autoload #'my-real-estate-hide-mode-line "my-screen-real-estate" nil t)
 (autoload #'my-real-estate-hide-fringe "my-screen-real-estate" nil t)
 
@@ -5515,7 +5515,7 @@ Closure over `preceding-sexp-fn'."
   ;; TODO: this is not removing the 100 max limit. make it work.
   ;; using 'around' advice on `sx-tab-newest'
   (defadvice sx-tab-newest (around no-helm-limit)
-    ;; temporarily remove the helm candiate limit. (via dynamic binding).
+    ;; temporarily remove the helm candidate limit. (via dynamic binding).
     (let ((helm-candidate-number-limit nil))
       ad-do-it))
   (ad-activate 'sx-tab-newest)
@@ -5555,7 +5555,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;; avoid warning popup for global keybind of C-;
 ;; I use that for the universal vim escape.
-;; Doesn't work in eval-after-load becuase the warning code runs during the
+;; Doesn't work in eval-after-load because the warning code runs during the
 ;; load.
 ;; TODO: submit a patch upstream so I can set the var nil in eval-after-load.
 (setq iedit-toggle-key-default nil)
@@ -5567,7 +5567,7 @@ Closure over `preceding-sexp-fn'."
 (global-set-key (kbd "C-c ;") #'iedit-mode)
 
 (global-set-key (kbd "C-;") #'keyboard-escape-quit)
-;; NOTE: can't wrap eval-after-loads in a let becuase it doesn't evaluate
+;; NOTE: can't wrap eval-after-loads in a let because it doesn't evaluate
 ;; the key, and then key doesn't exist by the time the file loads. Just
 ;; duplicate the `kbd' for now
 (with-eval-after-load 'evil
@@ -5619,7 +5619,7 @@ Closure over `preceding-sexp-fn'."
 ;;   (interactive)
 ;;   ;; toggle bool flag.
 ;;   (setq show-trailing-whitespace (not show-trailing-whitespace))
-;;   ;;visual state makes the dipslay refresh.
+;;   ;;visual state makes the display refresh.
 ;;   (evil-visual-char)
 ;;   (evil-exit-visual-state))
 ;; (global-set-key (kbd "C-c t") #'my-toggle-show-trailing-whitespace)
@@ -5634,7 +5634,7 @@ Closure over `preceding-sexp-fn'."
                 '(face
                   trailing
                   ;; show hidden spaces before a tab. Useful when using tabs
-                  ;; for indentation becuase spaces before a tab are invisible
+                  ;; for indentation because spaces before a tab are invisible
                   ;; if they don't overflow the tab-stop.
                   space-before-tab::tab)))
 
@@ -5679,7 +5679,7 @@ Closure over `preceding-sexp-fn'."
   ;; reducing size from 200. Just need to facilitate a few quick undos.
   (setq winner-ring-size 8)
   (define-key winner-mode-map (kbd "C-c u") #'winner-undo)
-  ;; NOTE: `winner-redo' only works if invoked immediatley after `winner-undo'.
+  ;; NOTE: `winner-redo' only works if invoked immediately after `winner-undo'.
   ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
 (winner-mode 1)
@@ -5695,7 +5695,7 @@ Closure over `preceding-sexp-fn'."
   ;; NOTE: periodically sync this re-definition up with the latest from the
   ;;       package.
   ;; TODO: look into the issue deeper. Find/resolve the root issue upstream
-  ;;       either in Emacs itself of the js2-highlight-vars pacakge.
+  ;;       either in Emacs itself of the js2-highlight-vars package.
   (defun js2--do-highlight-vars ()
     "Highlight variable under cursor within the defining scope"
     (interactive)
@@ -5912,9 +5912,9 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; ggtags
 ;;;----------------------------------------------------------------------------
-;; TODO: fix all the keybdings `ggtags-mode' clobbers. Like M-n, M-p.
+;; TODO: fix all the key bindings `ggtags-mode' clobbers. Like M-n, M-p.
 (with-eval-after-load 'ggtags
-  ;; doen'st work, added to windows path instead.
+  ;; doesn't work, added to windows path instead.
   ;; (when (eq my-curr-computer 'work-laptop)
   ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
 
@@ -6061,7 +6061,7 @@ Closure over `preceding-sexp-fn'."
           (require 'xref) ;; for fn `xref-pulse-momentarily'. to flash match.
           #'xref-pulse-momentarily)
       #'hl-line-flash) ;; TODO: avoid hl-line+ dependency ;; (hl-line-mode 1)
-    "Function to blink the matching line in the bufffer from occur-buffer.")
+    "Function to blink the matching line in the buffer from occur-buffer.")
 
   (progn ;; functions copied from https://github.com/emacsfodder/occur-follow
     (defun my--occur-move (move-fn)
@@ -6108,7 +6108,7 @@ Closure over `preceding-sexp-fn'."
   ;;     ad-do-it))
 
   (defun my--occur-jump-to-first-match ()
-    ;; switch to the results window immediatly.
+    ;; switch to the results window immediately.
     (switch-to-buffer-other-window "*Occur*")
     ;; jump to the first match.
     (my-occur-next))
@@ -6228,7 +6228,7 @@ Closure over `preceding-sexp-fn'."
   ;; aligns annotation to the right hand side
   (setq company-tooltip-align-annotations t)
 
-  ;; for now, do not autmoatically turn on tide mode.
+  ;; for now, do not automatically turn on tide mode.
   ;; (add-hook 'typescript-mode-hook #'my-setup-tide-for-ts)
   )
 
@@ -6253,7 +6253,7 @@ Closure over `preceding-sexp-fn'."
 ;;     "./src/"
 ;;   ]
 ;; }
-;; setp 3 (optional): install typings for libraries you use in a project to get
+;; step 3 (optional): install typings for libraries you use in a project to get
 ;; even better intelliSense:
 ;; npm install --save-dev @types/lodash @types/rx @types/react @types/react-dom
 
@@ -6276,8 +6276,8 @@ vanilla javascript buffers."
       (js2-highlight-vars-mode 0)))
 
   ;; Do not automatically call `my-setup-tide-for-js' for js2 buffers. Because
-  ;; I won't alwyas have jsconfig.json set up. Call `my-setup-tide-for-js'
-  ;; manaually.
+  ;; I won't always have jsconfig.json set up. Call `my-setup-tide-for-js'
+  ;; manually.
   ;; (add-hook 'js2-mode-hook #'my-setup-tide-for-js)
   )
 
@@ -6547,11 +6547,11 @@ smaller than the window height."
 
 (when (eq my-curr-computer 'wild-dog)
   (defun my-setup-cquery ()
-    ;; autoload for `lsp-cquery-enable' is broken so just requre the
+    ;; autoload for `lsp-cquery-enable' is broken so just require the
     ;; `cquery' library to make it available.
     (require 'cquery)
     (lsp-cquery-enable))
-  ;; turn on cquery atuomatically.  But might go wonky if
+  ;; turn on cquery automatically.  But might go wonky if
   ;; compile_commands.json is not in the project root.
   (add-hook 'c-mode-common-hook #'my-setup-cquery))
 
@@ -6754,7 +6754,7 @@ For faster subsequent start up."
 
 (defun my-goto-line (line-num)
   "Docs say don't use `goto-line' in Lisp code.
-Making my own using the reccomended alternative.
+Making my own using the recommended alternative.
 LINE-NUM = line to goto."
   (goto-char (point-min))
   (forward-line (1- line-num)))
@@ -6816,7 +6816,7 @@ SHELL-ONLY will be documented later."
         (split-window-vertically))
       (unless (eq (window-buffer) shellbuf)
         (other-window 1)))
-    ;; undisplay shell in other windows (on other devices)
+    ;; un-display shell in other windows (on other devices)
     (and shellbuf
          (> (length (get-buffer-window-list shellbuf nil t)) 0)
          (replace-buffer-in-windows shellbuf)))
@@ -6826,11 +6826,11 @@ SHELL-ONLY will be documented later."
 (define-key global-map (kbd "C-c C-z") #'find-shell) ; mimic slime repl binding
 
 (when (and nil   ;don't start server for now.
-           ;;`server-start' doesn't seemt to work on MS-windows?
+           ;;`server-start' doesn't seem to work on MS-windows?
            (eq system-type 'gnu/linux))
   (server-start))
 
-;; prevents warnings where you must select endcoding (like in `list-packages')
+;; prevents warnings where you must select encoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
 
 
@@ -6867,9 +6867,9 @@ SHELL-ONLY will be documented later."
 
 
 ;; scroll like vim when moving 1 line off screen with j/k.
-;; has some weird rules about recentering, but 100 is supposed to
+;; has some weird rules about re-centering, but 100 is supposed to
 ;; not recenter. I had an issue with value 1 where if i held down
-;; j to scroll, it would perioditcally recenter.
+;; j to scroll, it would periodically recenter.
 (setq scroll-conservatively 100)
 ;; maintain cursor location when scrolling
 (setq scroll-preserve-screen-position nil)
@@ -6969,7 +6969,7 @@ on the first call."
   ;; (minibuffer-depth-indicate-mode)
   )
 
-;; if we havn't bound leader-b to buffer switching yet.
+;; if we haven't bound leader-b to buffer switching yet.
 (when (or (eq my-curr-computer 'raspberry-pi)
           (eq my-narrow-type 'icicles)
           (null my-narrow-type))
@@ -7000,7 +7000,7 @@ on the first call."
 (setq suggest-key-bindings nil)
 
 (progn
-  ;; replacing postion info in mode line with a function called on demand.
+  ;; replacing position info in mode line with a function called on demand.
   ;; Bound to "g a".
 
   (defun my-what-line ()
@@ -7054,14 +7054,14 @@ on the first call."
     (setq display-time-format "%-m/%-d %a %-I:%M%#p"))
   (display-time-mode 1))
 
-;; show lambdas with the greek symbol
+;; show lambdas with the Greek symbol
 ;; (when (or (> emacs-major-version 24)
 ;;           (and (= emacs-major-version 24)
 ;;                (>= emacs-minor-version 4)))
 ;;   (unless (eq my-curr-computer 'raspberry-pi)
 ;;     (global-prettify-symbols-mode 1)))
 
-;;indent keyword args properly. Use common lisp-style for (if) indendation too?
+;;indent keyword args properly. Use common lisp-style for (if) indentation too?
 ;;(setq lisp-indent-function 'common-lisp-indent-function)
 
 (progn
@@ -7070,7 +7070,7 @@ on the first call."
 
   ;; don't display info in the modeline on start up.
   ;; Need to override this method to do nothing as it looks at the current
-  ;; username.
+  ;; user-name.
   ;; TODO: find an alternative solution???
   (defun display-startup-echo-area-message ()))
 
@@ -7081,7 +7081,7 @@ on the first call."
 
 
 
-(progn ;; hightlight current line stuff
+(progn ;; highlight current line stuff
   (with-eval-after-load 'hl-line
     (setq hl-line-sticky-flag nil)
     (setq global-hl-line-sticky-flag nil))

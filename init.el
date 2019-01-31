@@ -400,6 +400,7 @@ in case that file does not provide any feature."
 (defvar diff-mode-map)
 (defvar erc-timestamp-format)
 (defvar erc-timestamp-format-right)
+(defvar slime-completion-at-point-functions)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

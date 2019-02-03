@@ -2230,7 +2230,7 @@ Closure over `inverse-video-p'"
     ;; C-SPC doesn't work in some terminals, so bind an alternative key.
     (evil-define-key 'insert company-mode-map (kbd "C-o") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
-    )
+    (evil-define-key 'insert company-mode-map (kbd "C-w") #'company-ispell))
 
   (defun my-company-page-size ()
     "Return the page size of the actively displayed company popup."

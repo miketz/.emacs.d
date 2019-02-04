@@ -6291,6 +6291,10 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; display-line-numbers. Native implementation.
 ;;;----------------------------------------------------------------------------
+(defvar-local my-curr-line-style nil
+  "The current line number style used in a buffer.
+Possible values: `relative', `absolute', `off'.")
+
 (when native-line-numbers-p
   ;; (custom-theme-set-faces
   ;;  'zenburn
@@ -6314,18 +6318,18 @@ vanilla javascript buffers."
 
 
   ;; line number display styles. lexically bound.
-  (let ((styles '(relative absolute off))
-        (curr nil)) ;; TODO: make curr buffer local.
+  (let ((styles '(relative absolute off)))
     (defun my-line-numbers-cycle ()
       "Cycle line number display styles. relative, absolute, off.
-Closure over `styles', `curr'."
+Closure over `styles'."
       (interactive)
-      (setq curr (car (or (cdr (memq curr styles))
-                          styles)))
-      (setq display-line-numbers (cond ((eq curr 'relative) 'relative)
-                                       ((eq curr 'absolute) t)
-                                       ((eq curr 'off) nil)))
-      (message "line numbers: %s" curr)))
+      (setq my-curr-line-style (car (or (cdr (memq my-curr-line-style styles))
+                                        styles)))
+      (setq display-line-numbers (cond
+                                  ((eq my-curr-line-style 'relative) 'relative)
+                                  ((eq my-curr-line-style 'absolute) t)
+                                  ((eq my-curr-line-style 'off) nil)))
+      (message "line numbers: %s" my-curr-line-style)))
 
   (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
 

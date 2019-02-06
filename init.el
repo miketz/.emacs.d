@@ -6625,7 +6625,7 @@ For faster subsequent start up."
   (let ((start (float-time)))
     ;; my libs
     (my-handle-weird-theme-setups)
-    (load "my-hydras") ;; TODO: provide a feature so i can use `require'.
+    (require 'my-hydras)
     (require 'my-rand)
 
     ;; 3rd party libs.

@@ -300,3 +300,6 @@
   (defun my-choose-hydra ()
     (interactive)
     (funcall (intern (completing-read "pick one: " my-hydras)))))
+
+
+(provide 'my-hydras)

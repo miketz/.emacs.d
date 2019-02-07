@@ -36,3 +36,4 @@
 /offline.el
 /offline.el~
 /notElpa/mine/offline.el
+*.yas-compiled-snippets*

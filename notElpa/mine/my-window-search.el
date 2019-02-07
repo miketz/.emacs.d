@@ -19,3 +19,5 @@
 ;; (defun window-search-backward ()
 ;;   (interactive)
 ;;   (my-window-search #'isearch-backward))
+
+(provide 'my-window-search)

@@ -62,3 +62,5 @@
 (defun now-put-in-buffer ()
   (interactive)
   (insert (now)))
+
+(provide 'my-date-stuff)

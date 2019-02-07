@@ -6627,6 +6627,15 @@ For faster subsequent start up."
     (my-handle-weird-theme-setups)
     (require 'my-hydras)
     (require 'my-rand)
+    (require 'my-type-tutor)
+    (require 'my-window-search)
+    (require 'my-square-one)
+    (require 'my-screen-real-estate)
+    (require 'my-load-theme)
+    (require 'my-grep)
+    (require 'my-date-stuff)
+    (require 'my-color-theme-mods)
+    (require 'my-code-snippet-url)
 
     ;; 3rd party libs.
     (require 'company)

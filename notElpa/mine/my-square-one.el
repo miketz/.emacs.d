@@ -29,3 +29,5 @@ edge cases not covered by buffer killing."
     (let ((to-kill (cl-set-difference (buffer-list)
                                       (mapcar 'get-buffer my-keep-buffers))))
       (mapc 'kill-buffer to-kill))))
+
+(provide 'my-square-one)

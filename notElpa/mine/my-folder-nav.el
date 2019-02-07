@@ -22,3 +22,5 @@
     (shrink-window-horizontally bigNumToCollapse)
     (enlarge-window-horizontally (- width
                                     (window-total-width)))))
+
+(provide 'my-folder-nav)

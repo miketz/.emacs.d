@@ -66,3 +66,5 @@
 
 ;; (add-to-list 'default-frame-alist '(minibuffer  . nil))
 ;; (modify-frame-parameters (selected-frame) '((minibuffer . nil)))
+
+(provide 'my-screen-real-estate)

@@ -1338,3 +1338,5 @@
                                                       ))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
+
+(provide 'my-color-theme-mods)

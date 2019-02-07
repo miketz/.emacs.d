@@ -31,3 +31,6 @@
                         (insert " ")))
              (insert "\n\n\n")))
   (next-line))
+
+
+(provide 'my-type-tutor)

@@ -187,3 +187,5 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
     (if (= i (1- len))
         (setq i 0)
       (setq i (1+ i)))))
+
+(provide 'my-load-theme)

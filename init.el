@@ -4195,7 +4195,7 @@ and indent."
 (autoload #'my-current-file-path "my-folder-nav" nil t)
 (autoload #'my-current-folder-path "my-folder-nav" nil t)
 (autoload #'my-folder-nav "my-folder-nav" nil t)
-(global-set-key (kbd "<f8>") #'my-folder-nav)
+;; (global-set-key (kbd "<f8>") #'my-folder-nav)
 
 
 ;;;----------------------------------------------------------------------------

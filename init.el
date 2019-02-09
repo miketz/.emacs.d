@@ -718,6 +718,7 @@ in case that file does not provide any feature."
 (declare-function my-proj-sicp 'suppress)
 (declare-function lsp-cquery-enable 'suppress)
 (declare-function dired-details-install 'dired-details)
+(declare-function my-cycle-fonts 'suppress)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1878,33 +1879,13 @@ Closure over `inverse-video-p'"
    ((eq my-curr-computer 'wild-dog)
     (load-theme 'charcoal t)
     (set-frame-font
-     "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
-    ;; "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7"
-    ;; "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7"
-    ;; "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"
-    ;; "-xos4-Terminus-normal-normal-normal-*-22-*-*-*-c-110-iso10646-1"
-    ;; "-xos4-Terminus-bold-normal-normal-*-22-*-*-*-c-110-iso10646-1"
-    ;; "-xos4-Terminus-normal-normal-normal-*-18-*-*-*-c-100-iso10646-1"
-    ;; (concat "Ubuntu Mono:pixelsize=19:foundry=unknown:weight=normal:"
-    ;;         "slant=normal:width=normal:spacing=100:scalable=true")
-    )
+     "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"))
 
    ((and (eq my-curr-computer 'work-laptop)
          my-graphic-p)
     (load-theme 'charcoal t)
     (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ;; "-raster-ProFontWindows-normal-normal-normal-*-22-*-*-*-c-*-iso8859-1"
-    ;; "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
-    ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
-    ;; "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
-    ;; "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-    ;; "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-    ;; "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
-    ;; "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-    ;; "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
-    ;; "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"
-    )
+     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"))
 
    ((eq my-curr-computer 'work-laptop-bash)
     (load-theme 'zenburn t))
@@ -1952,24 +1933,48 @@ Closure over `inverse-video-p'"
          (eq system-type 'windows-nt))
     (load-theme 'charcoal t)
     (set-frame-font
-     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
+     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))))
 
-  ;; ;; rainbow delimiters colors for windows terminal (cmd)
-  ;; (when (and (not my-graphic-p)
-  ;;            (eq system-type 'windows-nt))
-  ;;   (custom-set-faces
-  ;;    '(rainbow-delimiters-depth-1-face ((t (:foreground "white"))))
-  ;;    '(rainbow-delimiters-depth-2-face ((t (:foreground "lightgreen"))))
-  ;;    '(rainbow-delimiters-depth-3-face ((t (:foreground "lightred"))))
-  ;;    '(rainbow-delimiters-depth-4-face ((t (:foreground "lightcyan"))))
-  ;;    '(rainbow-delimiters-depth-5-face ((t (:foreground "lightmagenta"))))
-  ;;    '(rainbow-delimiters-depth-6-face ((t (:foreground "lightblue"))))
-  ;;    '(rainbow-delimiters-depth-7-face ((t (:foreground "brown"))))
-  ;;    '(rainbow-delimiters-depth-8-face ((t (:foreground "red"))))
-  ;;    '(rainbow-delimiters-depth-9-face ((t (:foreground "magenta"))))
-  ;;    '(rainbow-delimiters-unmatched-face
-  ;;      ((t (:foreground "lightred" :background "darkgray"))))))
-  )
+
+
+(defun my-curr-font-name ()
+  "Return the current font name as a string."
+  (aref (font-info (face-attribute 'default :font))
+        1))
+
+(let
+    ((curr-font (my-curr-font-name))
+     (fonts
+      (cond
+       ((eq my-curr-computer 'wild-dog)
+        '("-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"
+          "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7"
+          "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7"
+          "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"))
+       ((eq my-curr-computer 'work-laptop)
+        '("-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+          "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          ;; (concat "-raster-ProFontWindows-normal-normal-normal"
+          ;;         "-*-22-*-*-*-c-*-iso8859-1")
+          "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
+          "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+          "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+          "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
+          "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"))
+       (t '()))))
+
+  (defun my-cycle-fonts ()
+    "Cycle through several good fonts for the current computer.
+Closure over `fonts'."
+    (interactive)
+    (setq curr-font (car (or (cdr (member curr-font fonts))
+                             fonts)))
+    (set-frame-font curr-font)
+    (message "font: %s" curr-font)))
+
+(global-set-key (kbd "<f8>") #'my-cycle-fonts)
 
 
 ;;;----------------------------------------------------------------------------

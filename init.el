@@ -1937,10 +1937,13 @@ Closure over `inverse-video-p'"
 
 
 
-(defun my-curr-font-name ()
+(cl-defun my-curr-font-name ()
   "Return the current font name as a string."
-  (aref (font-info (face-attribute 'default :font))
-        1))
+  (interactive)
+  (let* ((font-obj (face-attribute 'default :font)))
+    (when (eq font-obj 'unspecified)
+      (cl-return-from my-curr-font-name nil))
+    (aref (font-info font-obj) 1)))
 
 (let
     ((curr-font (my-curr-font-name))

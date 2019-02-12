@@ -1943,7 +1943,7 @@ Closure over `inverse-video-p'"
   (let* ((font-obj (face-attribute 'default :font)))
     (when (eq font-obj 'unspecified)
       (cl-return-from my-curr-font-name nil))
-    (aref (font-info font-obj) 1)))
+    (aref (font-info font-obj) 0)))
 
 (let
     ((curr-font (my-curr-font-name))

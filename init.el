@@ -6613,6 +6613,7 @@ For faster subsequent start up."
     (require 'my-date-stuff)
     (require 'my-color-theme-mods)
     (require 'my-code-snippet-url)
+    (require 'my-font-cycle)
 
     ;; 3rd party libs.
     (require 'company)

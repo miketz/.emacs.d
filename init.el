@@ -1740,7 +1740,11 @@ This prevents overlapping themes; something I would rarely want."
       (let ((helm-candidate-number-limit nil))
         (call-interactively #'load-theme)))
     (global-set-key (kbd "<f9>") #'my-load-theme-wrapper))
-  (global-set-key (kbd "<f10>") #'my-cycle-theme)
+  ;; after calling `counsel-load-theme', call `ivy-occur' to see a UI
+  ;; for theme selection. This is better than `my-cycle-theme' becuase it
+  ;; does not redunantly call (custom-available-themes) and you can skip
+  ;; around.
+  (global-set-key (kbd "<f10>") #'counsel-load-theme)
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
   (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))
 

@@ -164,7 +164,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
 ;;                         "snow" "alice blue" "lavender"))
 
 ;;        format (color . description)
-(let* ((colors `(("old lace" . "old lace")
+(let* ((colors `[("old lace" . "old lace")
                  ("floral white" . "floral white" )
                  ("snow" . "snow")
                  ("ghost white" . "ghost white")
@@ -176,7 +176,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                  (,my-ultimate . "my-ultimate")
                  ("ivory" . "ivory")
                  ("ivory2" . "ivory2")
-                 ("ivory3" . "ivory3")))
+                 ("ivory3" . "ivory3")])
        (len (length colors))
        (i 0))
 
@@ -186,7 +186,7 @@ See docs of `load-theme' to read about args THEME, NO-CONFIRM, NO-ENABLE."
                     (< new-i 0))
                 (mod new-i len) ; if i out of range then wrap via mod.
               new-i))
-    (let* ((pair (nth i colors))
+    (let* ((pair (aref colors i))
            (bg (car pair))
            (descr (cdr pair)))
       (set-background-color bg)

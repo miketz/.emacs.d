@@ -549,6 +549,8 @@ in case that file does not provide any feature."
 (declare-function color 'suppress)
 (declare-function my-cycle-theme 'suppress)
 (declare-function my-cycle-light-bg 'suppress)
+(declare-function my-cycle-light-bg-forward 'suppress)
+(declare-function my-cycle-light-bg-backward 'suppress)
 (declare-function my-handle-weird-theme-setups 'suppress)
 (declare-function my-load-theme-wrapper 'suppress)
 (declare-function my-toggle-inverse-video 'suppress)
@@ -1727,6 +1729,8 @@ This prevents overlapping themes; something I would rarely want."
                                            ; interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
+  (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)
+  (autoload #'my-cycle-light-bg-backward "my-load-theme" nil t)
 
   (unless my-use-ivy-p
     (defun my-load-theme-wrapper ()
@@ -1737,7 +1741,8 @@ This prevents overlapping themes; something I would rarely want."
         (call-interactively #'load-theme)))
     (global-set-key (kbd "<f9>") #'my-load-theme-wrapper))
   (global-set-key (kbd "<f10>") #'my-cycle-theme)
-  (global-set-key (kbd "<f12>") #'my-cycle-light-bg))
+  (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
+  (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))
 
 (defun my-load-theme-make-bold-like-zenburn (&optional theme)
   "Activates THEME with the bolding taken from zenburn."

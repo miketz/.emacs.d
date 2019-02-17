@@ -6703,6 +6703,15 @@ For faster subsequent start up."
              (time-to-seconds (time-subtract (float-time)
                                              start))))))
 
+;; after the dump is made start emacs with the command:
+;; emacs --dump-file=~/.emacs.d/dump.pdmp
+(defun my-make-pdump ()
+  "Make a pdump.  You may want to call `my-load-everything-for-pdump' first."
+  (interactive)
+  (let ((dmp-file "~/.emacs.d/dump.pdmp"))
+    (dump-emacs-portable dmp-file)
+    (message "Emacs image dumped to %s" dmp-file)))
+
 (defun my-list-holidays ()
   "List the major holidays."
   (interactive)

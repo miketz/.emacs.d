@@ -482,6 +482,9 @@ Example:
    `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
    `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
 
+   ;; markdown-mode
+   `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
+
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
 

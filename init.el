@@ -1727,9 +1727,6 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (progn ; theme changing stuff.
-  ;; (autoload #'my-load-theme "my-load-theme" nil t)
-  (autoload #'color "my-load-theme" nil t) ; trying to duplicate vim's :color
-                                           ; interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)

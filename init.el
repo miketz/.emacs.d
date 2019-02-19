@@ -733,7 +733,10 @@ in case that file does not provide any feature."
 
 (cl-defmacro my-time-task (&body body)
   "Wrap around code to time how long it takes to execute."
-  (interactive)
+  ;; require `time-date' for time-to-seconds alias. pay cost of loading lib
+  ;; once during the first macro expansion. Prevents `time-to-seconds' call
+  ;; from autoloading the `time-date' library during time measurement.
+  (require 'time-date)
   `(let ((start (float-time)))
      ;; the work
      ,@body

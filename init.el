@@ -1881,70 +1881,62 @@ Closure over `inverse-video-p'"
   (global-set-key (kbd "C-M-=") #'my-change-alpha-more-solid)
   (global-set-key (kbd "C-M--") #'my-change-alpha-less-solid))
 
-;; theme of the week and corresponding settings. This may change often.
-(progn
-  ;; (when my-graphic-p ;; this isn't true for emacs daemon!
-  ;;   (my-color-zenburn))
+;;;----------------------------------------------------------------------------
+;;; theme of the week and corresponding settings. This may change often.
+;;;----------------------------------------------------------------------------
+;; (when my-graphic-p ;; this isn't true for emacs daemon!
+;;   (my-color-zenburn))
+(cond
+ ((eq my-curr-computer 'wild-dog)
+  (load-theme 'charcoal t)
+  (set-frame-font
+   "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"))
 
-  (cond
-   ((eq my-curr-computer 'wild-dog)
+ ((and (eq my-curr-computer 'work-laptop)
+       my-graphic-p)
+  (load-theme 'charcoal t)
+  (set-frame-font
+   "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"))
+
+ ((eq my-curr-computer 'work-laptop-bash)
+  (load-theme 'zenburn t))
+
+ ((and (eq my-curr-computer 'work-laptop)
+       (not my-graphic-p))
+  (load-theme 'charcoal t))
+
+ ((eq my-curr-computer 'leyna-laptop)
+  (load-theme 'charcoal t)
+  (set-frame-font
+   "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
+
+ ((eq my-curr-computer 'a-laptop-old)
+  (load-theme 'charcoal t)
+  (set-frame-font
+   "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+
+ ((eq my-curr-computer 'hp-tower-2009)
+  (when my-graphic-p
     (load-theme 'charcoal t)
-    (set-frame-font
-     "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"))
+    (custom-set-faces
+     '(default ((t (:family "Droid Sans Mono"
+                            :foundry "unknown"
+                            :slant normal
+                            :weight normal
+                            :height 140
+                            :width normal)))))))
 
-   ((and (eq my-curr-computer 'work-laptop)
-         my-graphic-p)
-    (load-theme 'charcoal t)
-    (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"))
+ ((eq my-curr-computer 'a-laptop-faster)
+  (load-theme 'charcoal t)
+  (set-frame-font
+   "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
 
-   ((eq my-curr-computer 'work-laptop-bash)
-    (load-theme 'zenburn t))
-
-   ((and (eq my-curr-computer 'work-laptop)
-         (not my-graphic-p))
-    (load-theme 'charcoal t))
-
-   ((eq my-curr-computer 'leyna-laptop)
-    (load-theme 'charcoal t)
-    (set-frame-font
-     "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
-
-   ((eq my-curr-computer 'a-laptop-old)
-    (load-theme 'charcoal t)
-    (set-frame-font
-     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
-
-   ((eq my-curr-computer 'hp-tower-2009)
-    (when my-graphic-p
-      (load-theme 'charcoal t)
-      (custom-set-faces
-       '(default ((t (:family "Droid Sans Mono"
-                              :foundry "unknown"
-                              :slant normal
-                              :weight normal
-                              :height 140
-                              :width normal)))))))
-
-   ((eq my-curr-computer 'a-laptop-faster)
-    (load-theme 'charcoal t)
-    (set-frame-font
-     "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1")
-    ;; (custom-set-faces
-    ;;  '(default ((t (:family "Source Code Pro"
-    ;;                         :foundry "adobe"
-    ;;                         :slant normal
-    ;;                         :weight semi-bold
-    ;;                         :height 120
-    ;;                         :width normal)))))
-    )
-
-   ;; unknown windows computer.
-   ((and (null my-curr-computer)
-         (eq system-type 'windows-nt))
-    (load-theme 'charcoal t)
-    (set-frame-font
-     "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))))
+ ;; unknown windows computer.
+ ((and (null my-curr-computer)
+       (eq system-type 'windows-nt))
+  (load-theme 'charcoal t)
+  (set-frame-font
+   "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
 
 
 

@@ -1895,15 +1895,12 @@ Closure over `inverse-video-p'"
  ((and (eq my-curr-computer 'work-laptop)
        my-graphic-p)
   (load-theme 'charcoal t)
-  (set-frame-font
-   "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"))
+  (when my-graphic-p
+    (set-frame-font
+     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
 
  ((eq my-curr-computer 'work-laptop-bash)
   (load-theme 'zenburn t))
-
- ((and (eq my-curr-computer 'work-laptop)
-       (not my-graphic-p))
-  (load-theme 'charcoal t))
 
  ((eq my-curr-computer 'leyna-laptop)
   (load-theme 'charcoal t)
@@ -1916,15 +1913,7 @@ Closure over `inverse-video-p'"
    "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
  ((eq my-curr-computer 'hp-tower-2009)
-  (when my-graphic-p
-    (load-theme 'charcoal t)
-    (custom-set-faces
-     '(default ((t (:family "Droid Sans Mono"
-                            :foundry "unknown"
-                            :slant normal
-                            :weight normal
-                            :height 140
-                            :width normal)))))))
+  (load-theme 'charcoal t))
 
  ((eq my-curr-computer 'a-laptop-faster)
   (load-theme 'charcoal t)
@@ -1937,7 +1926,6 @@ Closure over `inverse-video-p'"
   (load-theme 'charcoal t)
   (set-frame-font
    "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
-
 
 
 ;;;----------------------------------------------------------------------------

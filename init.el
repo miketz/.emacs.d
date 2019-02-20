@@ -960,7 +960,7 @@ Closure over executed-p."
 ;; TODO: set up clang on more machines.
 (defvar my-has-clang-p (memq my-curr-computer
                              '(;; work-laptop
-                               wild-dog
+                               ;; wild-dog
                                hp-tower-2009)))
 
 (defvar my-install-slime-p (memq my-curr-computer
@@ -6541,7 +6541,7 @@ smaller than the window height."
     (setq cquery-executable
           "/home/mike/proj/cquery/build/release/bin/cquery")))
 
-(when (eq my-curr-computer 'wild-dog)
+(when nil ;(eq my-curr-computer 'wild-dog)
   (defun my-setup-cquery ()
     ;; autoload for `lsp-cquery-enable' is broken so just require the
     ;; `cquery' library to make it available.

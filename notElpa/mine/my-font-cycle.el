@@ -8,9 +8,6 @@
 (require 'cl-lib)
 
 (defvar my-curr-computer)
-;; (declare-function my-cycle-font-forward 'my-font-cycle)
-;; (declare-function my-cycle-font-backward 'my-font-cycle)
-;; (declare-function my-print-font 'my-font-cycle)
 (declare-function my-font-set-index 'my-font-cycle)
 (declare-function my-cycle-font 'my-font-cycle)
 
@@ -42,15 +39,12 @@
        ((eq my-curr-computer 'work-laptop)
         '["-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
           "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-          ;; (concat "-raster-ProFontWindows-normal-normal-normal"
-          ;;         "-*-22-*-*-*-c-*-iso8859-1")
           "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
           "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
           "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
           "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-          "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
-          "-raster-peep-normal-normal-normal-mono-21-*-*-*-c-*-ms-oemlatin"])
+          "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"])
        (t nil)))
      (i 0)
      (len (length my-fonts)))

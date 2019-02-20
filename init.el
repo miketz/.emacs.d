@@ -733,7 +733,10 @@ in case that file does not provide any feature."
 
 (cl-defmacro my-time-task (&body body)
   "Wrap around code to time how long it takes to execute."
-  (interactive)
+  ;; require `time-date' for time-to-seconds alias. pay cost of loading lib
+  ;; once during the first macro expansion. Prevents `time-to-seconds' call
+  ;; from autoloading the `time-date' library during time measurement.
+  (require 'time-date)
   `(let ((start (float-time)))
      ;; the work
      ,@body
@@ -1724,9 +1727,6 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (progn ; theme changing stuff.
-  ;; (autoload #'my-load-theme "my-load-theme" nil t)
-  (autoload #'color "my-load-theme" nil t) ; trying to duplicate vim's :color
-                                           ; interface
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)

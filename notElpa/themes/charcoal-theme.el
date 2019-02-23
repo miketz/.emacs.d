@@ -11,8 +11,8 @@
 ;;; 8 color tested on linux in text mode
 ;;; 8 color is messed up on linux in xterm.  TODO: handle it
 
-;;; Lexical binding is not required for this theme. It is only used as a
-;;; micro-optimization for variable lookups in the let statement. There should
+;;; Lexical binding is not required for this theme.  It is only used as a
+;;; micro-optimization for variable lookups in the let statement.  There should
 ;;; be no difference in behavior if dynamic binding is used.
 
 ;;; Code:

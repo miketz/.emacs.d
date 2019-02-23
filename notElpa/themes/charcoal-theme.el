@@ -238,6 +238,7 @@ Example:
    ;; info
    `(info-xref-visited ((,class (:foreground ,fg-purple))))
    `(info-xref ((,class (:foreground ,fg-green))))
+   `(Info-quoted ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
 
    ;; slime
    `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))

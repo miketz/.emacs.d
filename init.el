@@ -1844,7 +1844,8 @@ Closure over `inverse-video-p'"
   (autoload #'my-color-niflheim file nil t)
   (autoload #'my-color-spacemacs-light file nil t)
   (autoload #'my-color-tango-dark file nil t)
-  (autoload #'my-color-sunburn file nil t))
+  (autoload #'my-color-sunburn file nil t)
+  (autoload #'my-color-overcast file nil t))
 
 (when my-graphic-p ;; transparency stuff
   ;; TODO: auto load the transparency stuff

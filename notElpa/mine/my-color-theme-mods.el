@@ -1106,6 +1106,17 @@
                                   :strike-through t
                                   :background "yellow"))))))
 
+(defun my-color-overcast ()
+  (interactive)
+  (load-theme 'overcast t)
+  (custom-theme-set-faces
+   'overcast
+
+   (my-rainbow-parens-dark-bg-bold)
+   ;; (color-comment "#005353") "#70C3C3"
+   `(font-lock-comment-face ((t (:foreground "#50A3A3"))))
+   `(font-lock-doc-face ((t (:inherit font-lock-string-face))))))
+
 (defun my-color-zenburn ()
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)

@@ -1123,16 +1123,30 @@ Closure over executed-p."
 
 (defun my-ssl-p ()
   "True if the Emacs instance has ssl setup/enabled."
-  (or (not (memq system-type '(windows-nt ms-dos)))
-      (gnutls-available-p)))
+  (if (eq my-curr-computer 'work-laptop)
+      ;; temporarily stop using SSL on work-laptop. Performance issue during
+      ;; `list-packages'?
+      nil
+    ;; else detect ssl
+    (or (not (memq system-type '(windows-nt ms-dos)))
+        (gnutls-available-p))))
+
+(when (eq my-curr-computer 'work-laptop)
+  ;; temporarily stop using ssl on work-laptop.
+  ;; remove the https url for gnu elpa
+  (setq package-archives
+        (delq (assoc "gnu" package-archives) package-archives))
+  ;; add gnu elpa back without https
+  (add-to-list 'package-archives `("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; set up package archives.
 (let* ((protocol (if (my-ssl-p) "https" "http"))
-       (url (concat protocol "://melpa.org/packages/")))
-  (add-to-list 'package-archives `("melpa" . ,url) t))
+       (url-melpa (concat protocol "://melpa.org/packages/")))
+  (add-to-list 'package-archives `("melpa" . ,url-melpa) t)
 
-(when (< emacs-major-version 24)
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  (when (< emacs-major-version 24)
+    (let ((url-elpa (concat protocol "://elpa.gnu.org/packages/")))
+      (add-to-list 'package-archives `("gnu" . ,url-elpa)))))
 
 (when (boundp 'package-pinned-packages) ; Emacs 24.4 or newer
   (setq package-pinned-packages

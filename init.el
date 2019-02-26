@@ -6599,6 +6599,20 @@ smaller than the window height."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
+(defun my-delete-brackets (start end)
+  "Delete brackets [] in the region.
+START = start of region.
+END = end of region."
+  (interactive "r") ; automatically wires up the current region's start/end to
+                    ; the args start/end.
+  ;; TODO: fix bug where the start/end bounds appear to be off sometimes.
+  (goto-char start)
+  (while (search-forward "[" end t)
+    (replace-match ""))
+  (goto-char start)
+  (while (search-forward "]" end t)
+    (replace-match "")))
+
 (defun my-load-everything-for-pdump ()
   "Load libraries so they will be part of the saved image from pdumper.
 For faster subsequent start up."

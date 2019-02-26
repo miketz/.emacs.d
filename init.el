@@ -1150,14 +1150,13 @@ Closure over executed-p."
 ;;     (let ((url-elpa (concat protocol "://elpa.gnu.org/packages/")))
 ;;       (add-to-list 'package-archives `("gnu" . ,url-elpa)))))
 
-(when (boundp 'package-pinned-packages) ; Emacs 24.4 or newer
-  (setq package-pinned-packages
-        '((sql-indent . "gnu")
-          (electric-spacing . "melpa")
-          (aggressive-indent . "melpa")
-          (ggtags . "melpa")
-          (vdiff . "melpa")
-          (websocket . "melpa"))))
+(setq package-pinned-packages ; Emacs 24.4 or newer
+      '((sql-indent . "gnu")
+        (electric-spacing . "melpa")
+        (aggressive-indent . "melpa")
+        (ggtags . "melpa")
+        (vdiff . "melpa")
+        (websocket . "melpa")))
 
 ;; (setq package-enable-at-startup nil)
 (cond

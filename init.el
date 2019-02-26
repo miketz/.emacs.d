@@ -581,6 +581,7 @@ in case that file does not provide any feature."
 (declare-function my-color-spacemacs-light 'suppress)
 (declare-function my-color-tango-dark 'suppress)
 (declare-function my-color-sunburn 'suppress)
+(declare-function my-color-overcast 'suppress)
 (declare-function my-set-alpha 'suppress)
 (declare-function my-change-alpha 'suppress)
 (declare-function my-change-alpha-more-solid 'suppress)

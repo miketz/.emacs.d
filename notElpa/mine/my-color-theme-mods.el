@@ -673,6 +673,11 @@
    ;; `(ido-indicator ((t (:foreground "red" :background "black"))))
 
 
+   `(line-number ((t (:background "#EEEEEE"
+                                  :foreground "#888888"))))
+   `(line-number-current-line ((t (:inherit line-number))))
+
+
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :weight normal))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :weight normal))))

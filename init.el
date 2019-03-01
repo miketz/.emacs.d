@@ -7277,38 +7277,6 @@ on the first call."
 ;; defined in ~/.emacs.d/notElpa/mine/my-type-tutor.el
 (autoload 'my-type-tutor "my-type-tutor" nil t)
 
-;;;----------------------------------------------------------------------------
-;;; ms
-;;;----------------------------------------------------------------------------
-;; (defvar ms-cols 30)
-;; (defvar ms-rows 25)
-;; (defvar ms-map ())
-
-;; ;; u f O *
-
-;; (defun ms-init ()
-;;   (setq ms-map ()) ;; clear
-;;   (let ((times (* ms-cols ms-rows)))
-;;     (dotimes (i times)
-;;       (setq ms-map (cons 'u ms-map)))))
-
-;; (defun ms-get-index (r c)
-;;   (+ (* r ms-cols) c))
-
-;; (defun ms-render-map (map)
-;;   (dotimes (r ms-rows)
-;;     (dotimes (c ms-cols)
-;;       (insert (symbol-name (nth (ms-get-index r c)
-;;                                 ms-map)))
-;;       (insert " "))
-;;     (insert "\n")))
-
-;; ;; interactive testing
-;; (ms-render-map ms-map)
-;; (ms-init)
-;; (dolist (x ms-map)
-;;   (insert (symbol-name x))
-;;   (insert " "))
 
 ;;;----------------------------------------------------------------------------
 ;;; interact with Microsoft SQL Server

@@ -5776,31 +5776,31 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; my-relative-num
 ;;;----------------------------------------------------------------------------
-(when nil
-  ;; TODO: put in a package. look for the ideal built in functions.
-  (defun my-curr-line ()
-    "Like `what-line' but return an integer instead of a message."
-    (interactive)
-    (let ((start (point-min))
-          (n (line-number-at-pos)))
-      (if (= start 1)
-          n
-        (save-excursion
-          (save-restriction
-            (widen)
-            (+ n (line-number-at-pos start) -1))))))
+;; (when nil
+;;   ;; TODO: put in a package. look for the ideal built in functions.
+;;   (defun my-curr-line ()
+;;     "Like `what-line' but return an integer instead of a message."
+;;     (interactive)
+;;     (let ((start (point-min))
+;;           (n (line-number-at-pos)))
+;;       (if (= start 1)
+;;           n
+;;         (save-excursion
+;;           (save-restriction
+;;             (widen)
+;;             (+ n (line-number-at-pos start) -1))))))
 
-  (defun my-top-screen-line ()
-    (interactive)
-    (line-number-at-pos (window-start)))
+;;   (defun my-top-screen-line ()
+;;     (interactive)
+;;     (line-number-at-pos (window-start)))
 
-  (defun my-bottom-screen-line ()
-    (interactive)
-    (line-number-at-pos (- (window-end) 1)))
+;;   (defun my-bottom-screen-line ()
+;;     (interactive)
+;;     (line-number-at-pos (- (window-end) 1)))
 
-  (when nil ;; interactive testing
-    (my-top-screen-line)
-    (my-bottom-screen-line)))
+;;   (when nil ;; interactive testing
+;;     (my-top-screen-line)
+;;     (my-bottom-screen-line)))
 
 ;;;----------------------------------------------------------------------------
 ;;; my-test

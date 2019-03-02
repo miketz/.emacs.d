@@ -35,7 +35,8 @@
         '["-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"
           "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7"
           "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7"
-          "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"])
+          "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"
+          "-DAMA-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"])
        ((eq my-curr-computer 'work-laptop)
         '["-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
           "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"

@@ -724,6 +724,13 @@ in case that file does not provide any feature."
 (declare-function my-cycle-fonts 'suppress)
 (declare-function my-cycle-font-forward 'my-font-cycle)
 (declare-function my-cycle-font-backward 'my-font-cycle)
+(declare-function my-insert-ruler 'my-ruler)
+(declare-function my-longest-line 'my-ruler)
+(declare-function my-load-everything-for-pdump 'my-pdump)
+(declare-function my-make-pdump 'my-pdump)
+(declare-function my-delete-brackets 'my-misc)
+(declare-function my-list-holidays 'my-misc)
+(declare-function my-indent-defun 'my-misc)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6614,46 +6621,16 @@ smaller than the window height."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
-(defun my-delete-brackets (start end)
-  "Delete brackets [] in the region.
-START = start of region.
-END = end of region."
-  (interactive "r") ; automatically wires up the current region's start/end to
-                    ; the args start/end.
-  ;; TODO: fix bug where the start/end bounds appear to be off sometimes.
-  (goto-char start)
-  (while (search-forward "[" end t)
-    (replace-match ""))
-  (goto-char start)
-  (while (search-forward "]" end t)
-    (replace-match "")))
-
-(defun my-list-holidays ()
-  "List the major holidays."
-  (interactive)
-  (let ((year (string-to-number (format-time-string "%Y"))))
-    (list-holidays year
-                   year
-                   (append holiday-general-holidays
-                           holiday-christian-holidays))))
+(autoload #'my-delete-brackets "my-misc" nil t)
+(autoload #'my-list-holidays "my-misc" nil t)
 
 (when (eq system-type 'windows-nt)
-  (defun my-find-file-by-name ()
-    "Find files by name starting in current directory."
-    (interactive)
-    (let ((compile-command "dir /b/s "))
-      ;; #'shell-command
-      ;; #'grep
-      (call-interactively #'compile)))
-
+  (autoload #'my-find-file-by-name "my-misc" nil t)
   (when my-use-evil-p
     (evil-leader/set-key "h" #'my-find-file-by-name)))
 
-(defun my-indent-defun ()
-  "Indent the function the cursor is inside."
-  (interactive)
-  (mark-defun)
-  (call-interactively #'indent-region))
+
+(autoload #'my-indent-defun "my-misc" nil t)
 (define-key prog-mode-map (kbd "C-c <tab>") #'my-indent-defun)
 
 

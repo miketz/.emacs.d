@@ -206,3 +206,43 @@ Assums a vertically stacked display of the list.
       (insert ")")))
 
   );end when, render list functions
+
+(defun my-delete-brackets (start end)
+  "Delete brackets [] in the region.
+START = start of region.
+END = end of region."
+  (interactive "r") ; automatically wires up the current region's start/end to
+                    ; the args start/end.
+  ;; TODO: fix bug where the start/end bounds appear to be off sometimes.
+  (goto-char start)
+  (while (search-forward "[" end t)
+    (replace-match ""))
+  (goto-char start)
+  (while (search-forward "]" end t)
+    (replace-match "")))
+
+(defun my-list-holidays ()
+  "List the major holidays."
+  (interactive)
+  (let ((year (string-to-number (format-time-string "%Y"))))
+    (list-holidays year
+                   year
+                   (append holiday-general-holidays
+                           holiday-christian-holidays))))
+
+(when (eq system-type 'windows-nt)
+  (defun my-find-file-by-name ()
+    "Find files by name starting in current directory."
+    (interactive)
+    (let ((compile-command "dir /b/s "))
+      ;; #'shell-command
+      ;; #'grep
+      (call-interactively #'compile))))
+
+(defun my-indent-defun ()
+  "Indent the function the cursor is inside."
+  (interactive)
+  (mark-defun)
+  (call-interactively #'indent-region))
+
+(provide 'my-misc)

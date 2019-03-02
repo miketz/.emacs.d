@@ -77,4 +77,6 @@ It is slow in large buffers."
                      biggest-col
                      at-line))))
 
+(provide 'my-ruler)
+
 ;;; my-ruler.el ends here

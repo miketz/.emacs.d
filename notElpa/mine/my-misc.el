@@ -245,4 +245,83 @@ END = end of region."
   (mark-defun)
   (call-interactively #'indent-region))
 
+(defun my-win-count ()
+  "Calculate the number of windows in the current frame."
+  (length (window-list))
+  ;; (cl-loop for w being the windows of (selected-frame)
+  ;;          sum 1)
+  )
+
+(defun find-shell (&optional shell-only)
+  ;; from jwd630. https://www.reddit.com/r/emacs/comments/48opk1/eshell_and_why
+  ;; _cant_i_convert_to_you/
+  "Find end of shell buffer or create one by splitting the current window.
+If shell is already displayed in current frame, delete other windows
+in frame.  Stop displaying shell in all other windows.
+SHELL-ONLY will be documented later."
+  (interactive)
+  (let* ((shellbuf (get-buffer "*shell*")))
+    (if (or (eq (window-buffer) shellbuf) shell-only)
+        (delete-other-windows)
+      (when (eq 1 (count-windows))
+        (split-window-vertically))
+      (unless (eq (window-buffer) shellbuf)
+        (other-window 1)))
+    ;; un-display shell in other windows (on other devices)
+    (and shellbuf
+         (> (length (get-buffer-window-list shellbuf nil t)) 0)
+         (replace-buffer-in-windows shellbuf)))
+  (shell)
+  (goto-char (point-max))
+  (recenter -2))
+
+(defun what-face (pos)
+  "Prints the face at point.  POS = point."
+  (interactive "d")
+  (let ((face (or (get-char-property pos 'read-face-name)
+                  (get-char-property pos 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+;; delete spaces between words
+(defun my-cycle-spacing ()
+  "Call `cycle-spacing', using fast mode.
+This deletes the space if there is only 1 space.  Otherwise it would do nothing
+on the first call."
+  (interactive)
+  (cycle-spacing current-prefix-arg nil 'fast))
+
+
+(progn
+  ;; replacing position info in mode line with a function called on demand.
+  ;; Bound to "g a".
+
+  (defun my-what-line ()
+    (interactive)
+    (let ((start (point-min))
+          (n (line-number-at-pos)))
+      (if (= start 1)
+          (format "L%d" n)
+        (save-excursion
+          (save-restriction
+            (widen)
+            (format "L%d (narrowed L%d)"
+                    (+ n (line-number-at-pos start) -1) n))))))
+
+  (defun my-what-position (&optional _detail)
+    "Your position in space and time."
+    (interactive "P")
+    (let* ((pos (point))
+           (total (buffer-size))
+           (percent (if (> total 50000)
+                        ;; Avoid overflow from multiplying by 100!
+                        (/ (+ (/ total 200) (1- pos)) (max (/ total 100) 1))
+                      (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
+           (line (my-what-line))
+           (col (+ 1 (current-column))))
+      (message "%s  %d%% %s C%d     %s"
+               (buffer-name)
+               percent line col
+               (format-time-string "%-m-%-d-%Y %a %-I:%M%#p"))))
+  (defalias 'my-what-time #'my-what-position))
+
 (provide 'my-misc)

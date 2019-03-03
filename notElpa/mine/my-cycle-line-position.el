@@ -25,7 +25,8 @@ smaller than the window height."
         (setq page-bot (- (line-number-at-pos (window-end)) 2))
         (setq page-mid (+ page-top
                           (/ (1+ (- page-bot page-top)) 2))))
-      (setq curr-pos (car (or (cdr (memq curr-pos positions))
+      (setq curr-pos (car (or (cdr (memq (if repeatp curr-pos nil)
+                                         positions))
                               positions)))
       ;; (setq curr-pos (my-next-cycle-pos (if repeatp curr-pos nil)))
       ;; per emacs warnings, don't use `goto-line'.

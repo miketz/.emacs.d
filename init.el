@@ -5927,15 +5927,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; follow-mode
 ;;;----------------------------------------------------------------------------
-(defun my-follow-mode ()
-  "Get the windows set up for `follow-mode', then turn it on."
-  (interactive)
-  (delete-other-windows)
-  (split-window-horizontally)
-  (shrink-window-horizontally 10)
-  (follow-mode 1))
-
-;; (global-set-key (kbd "C-x f") #'my-follow-mode)
+(autoload #'my-follow-mode "my-misc" nil t)
 
 (with-eval-after-load 'follow
   ;; scroll the height of all windows combined, not just 1.

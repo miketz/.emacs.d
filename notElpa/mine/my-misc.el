@@ -324,4 +324,13 @@ on the first call."
                (format-time-string "%-m-%-d-%Y %a %-I:%M%#p"))))
   (defalias 'my-what-time #'my-what-position))
 
+
+(defun my-follow-mode ()
+  "Get the windows set up for `follow-mode', then turn it on."
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (shrink-window-horizontally 10)
+  (follow-mode 1))
+
 (provide 'my-misc)

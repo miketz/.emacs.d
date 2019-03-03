@@ -788,13 +788,6 @@ in case that file does not provide any feature."
     (insert-file-contents filePath)
     (buffer-string)))
 
-(let ((positions '(mid bot top)))
-  (defun my-next-cycle-pos (pos)
-    "Get the next position from `positions' based on the current POS.
-Closure over `positions'."
-    (car (or (cdr (memq pos positions))
-             positions))))
-
 (defun my-turn-on-electric-pair-local-mode ()
   "Attempt to turn on `electric-pair-local-mode'.
 But check for existence first to avoid breaks on older Emacs versions.
@@ -2305,7 +2298,8 @@ But with different page size calculation."
   (define-key company-active-map (kbd "M-<") #'my-company-jump-to-first)
   (define-key company-active-map (kbd "M->") #'my-company-jump-to-last)
 
-  (let* ((pos nil) ; cache values for repeated M-r presses.
+  (let* ((positions '(mid bot top))
+         (pos nil) ; cache values for repeated M-r presses.
          (page-size nil))
     (defun my-company-cycle-position ()
       "Jump to the mid/bot/top of the currently displayed company candidates.
@@ -2316,7 +2310,8 @@ Closure over `pos', `page-size'."
       (let ((repeatp (eq this-command last-command)))
         (unless repeatp
           (setq page-size (my-company-page-size)))
-        (setq pos (my-next-cycle-pos (if repeatp pos nil))))
+        (setq pos (car (or (cdr (memq (if repeatp pos nil) positions))
+                                positions))))
       (let* ((row-num company-tooltip-offset) ; lines-above
              (move-cnt (cond ((eq pos 'top) 0)
                              ((eq pos 'mid) (/ page-size 2))

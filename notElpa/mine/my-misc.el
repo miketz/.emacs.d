@@ -333,4 +333,48 @@ on the first call."
   (shrink-window-horizontally 10)
   (follow-mode 1))
 
+
+(cl-defmacro my-time-task (&body body)
+  "Wrap around code to time how long it takes to execute."
+  ;; require `time-date' for time-to-seconds alias. pay cost of loading lib
+  ;; once during the first macro expansion. Prevents `time-to-seconds' call
+  ;; from autoloading the `time-date' library during time measurement.
+  (require 'time-date)
+  `(let ((start (float-time)))
+     ;; the work
+     ,@body
+     ;; print elapsed time
+     (message
+      (format "elapsed seconds: %f"
+              (time-to-seconds
+               (time-subtract (float-time)
+                              start))))))
+
+;; (defun my-getAtIndex (i lst)
+;;   "Return the element at I from LST."
+;;   (cond
+;;    ((null lst) nil)
+;;    ((= i 0) (car lst))
+;;    (t (my-getAtIndex (- i 1) (cdr lst)))))
+
+(defun my-str-starts-with-p (string prefix)
+  "Return t if STRING begins with PREFIX."
+  (and (string-match (rx-to-string `(: bos ,prefix) t)
+                     string)
+       t))
+
+(defun my-str-ends-with-p (string suffix)
+  "Return t if STRING ends with SUFFIX."
+  (and (string-match (rx-to-string `(: ,suffix eos) t)
+                     string)
+       t))
+
+(defun my-turn-on-electric-pair-local-mode ()
+  "Attempt to turn on `electric-pair-local-mode'.
+But check for existence first to avoid breaks on older Emacs versions.
+Do not fall back to function `electric-pair-mode' because it's global."
+  (if (fboundp #'electric-pair-local-mode)
+      (electric-pair-local-mode 1)
+    (message "electric-pair-local-mode not supported.")))
+
 (provide 'my-misc)

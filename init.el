@@ -705,7 +705,7 @@ in case that file does not provide any feature."
 (declare-function my-setup-ibuffer-mode 'suppress)
 (declare-function ibuffer-switch-to-saved-filter-groups 'suppress)
 (declare-function my-js2-indent-defun 'suppress)
-(declare-function my-cycle-line-position 'suppress)
+(declare-function my-cycle-line-position 'my-cycle-line-position)
 (declare-function my-next-cycle-pos 'suppress)
 (declare-function my-company-complete-common 'suppress)
 (declare-function my-find-file-by-name 'suppress)
@@ -6488,30 +6488,7 @@ SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
 ;;;----------------------------------------------------------------------------
 ;;; my-cycle-line-position
 ;;;----------------------------------------------------------------------------
-(let ((pos nil) ; cache values for repeated M-r presses.
-      (page-top nil)
-      (page-bot nil)
-      (page-mid nil))
-  (defun my-cycle-line-position ()
-    "Cycle between the mid, bot, and top positions in the buffer.
-Similar to `move-to-window-line-top-bottom' but takes into account buffer sizes
-smaller than the window height."
-    (interactive)
-    (let ((repeatp (eq this-command last-command)))
-      (unless repeatp
-        ;; calculate line numbers.
-        (setq page-top (line-number-at-pos (window-start)))
-        ;; TODO: figure out how much to subtract. 2 is needed most often.
-        (setq page-bot (- (line-number-at-pos (window-end)) 2))
-        (setq page-mid (+ page-top
-                          (/ (1+ (- page-bot page-top)) 2))))
-      (setq pos (my-next-cycle-pos (if repeatp pos nil)))
-      ;; per emacs warnings, don't use `goto-line'.
-      (goto-char (point-min))
-      (forward-line (1- (cond ((eq pos 'top) page-top)
-                              ((eq pos 'mid) page-mid)
-                              ((eq pos 'bot) page-bot)))))))
-
+(autoload #'my-cycle-line-position "my-cycle-line-position" nil t)
 (global-set-key (kbd "M-r") #'my-cycle-line-position)
 
 ;;;----------------------------------------------------------------------------

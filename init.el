@@ -6284,10 +6284,6 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; display-line-numbers. Native implementation.
 ;;;----------------------------------------------------------------------------
-(defvar-local my-curr-line-style nil
-  "The current line number style used in a buffer.
-Possible values: `relative', `absolute', `off'.")
-
 (when native-line-numbers-p
   ;; (custom-theme-set-faces
   ;;  'zenburn
@@ -6299,54 +6295,13 @@ Possible values: `relative', `absolute', `off'.")
   (setq display-line-number-width 1) ;; 1 seemed to behave like 2.
   (setq display-line-numbers-current-absolute nil)
 
-  (defun my-line-numbers-on ()
-    (interactive)
-    (setq display-line-numbers t))
-  (defun my-line-numbers-relative-on ()
-    (interactive)
-    (setq display-line-numbers 'relative))
-  (defun my-line-numbers-off ()
-    (interactive)
-    (setq display-line-numbers nil))
 
+  (autoload #'my-line-numbers-on "my-line-nums" nil t)
+  (autoload #'my-line-numbers-relative-on "my-line-nums" nil t)
+  (autoload #'my-line-numbers-off "my-line-nums" nil t)
 
-  ;; line number display styles. lexically bound.
-  (let ((styles '(relative absolute off)))
-    (defun my-line-numbers-cycle ()
-      "Cycle line number display styles. relative, absolute, off.
-Closure over `styles'."
-      (interactive)
-      (setq my-curr-line-style (car (or (cdr (memq my-curr-line-style styles))
-                                        styles)))
-      (setq display-line-numbers (cond
-                                  ((eq my-curr-line-style 'relative) 'relative)
-                                  ((eq my-curr-line-style 'absolute) t)
-                                  ((eq my-curr-line-style 'off) nil)))
-      (message "line numbers: %s" my-curr-line-style)))
-
-  (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
-
-  ;; ;; Attempt at turning on relative line numbers in visual mode.
-  ;; (when my-use-evil-p
-  ;;   (let ((cache nil)) ; lexically bound `cache'.
-  ;;     (defun my-vis-entry ()
-  ;;       (setq cache display-line-numbers)
-  ;;       (unless (or (eq display-line-numbers 'relative)
-  ;;                   ;; don't do anything if visual is from expand-region.
-  ;;                   (memq last-command
-  ;;                         '(er/expand-region
-  ;;                           er/contract-region
-  ;;                           hydra-expand-region/er/expand-region
-  ;;                           hydra-expand-region/er/contract-region)))
-  ;;         (setq display-line-numbers 'relative)))
-
-  ;;     (defun my-vis-exit ()
-  ;;       (unless (eq display-line-numbers cache)
-  ;;         (setq display-line-numbers cache))))
-
-  ;;   (add-hook 'evil-visual-state-entry-hook #'my-vis-entry)
-  ;;   (add-hook 'evil-visual-state-exit-hook #'my-vis-exit))
-  )
+  (autoload #'my-line-numbers-cycle "my-line-nums" nil t)
+  (global-set-key (kbd "<f6>") #'my-line-numbers-cycle))
 
 ;;;----------------------------------------------------------------------------
 ;;; powershell

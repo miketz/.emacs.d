@@ -6372,25 +6372,8 @@ Closure over `styles'."
 ;;;----------------------------------------------------------------------------
 ;;; horizontal scrolling
 ;;;----------------------------------------------------------------------------
-(defun my-scroll-left ()
-  "Scroll left."
-  (interactive)
-  (my-scroll-horizontal #'scroll-left))
-
-(defun my-scroll-right ()
-  "Scroll right."
-  (interactive)
-  (my-scroll-horizontal #'scroll-right))
-
-(defun my-scroll-horizontal (scroll-fn)
-  "Scroll 25% of the window width.
-SCROLL-FN will be `my-scroll-left' or `my-scroll-right'."
-  (let ((cols (floor (* 0.25 (window-total-width)))))
-    (funcall scroll-fn cols)
-    ;; TODO: ensure point is moved to a visible character to make subsequent
-    ;; navigation/selection of visible text possible.
-    ))
-
+(autoload #'my-scroll-right "my-horizontal-scroll" nil t)
+(autoload #'my-scroll-left "my-horizontal-scroll" nil t)
 
 (global-set-key (kbd "C-M-h") #'my-scroll-right)
 (global-set-key (kbd "C-M-l") #'my-scroll-left)

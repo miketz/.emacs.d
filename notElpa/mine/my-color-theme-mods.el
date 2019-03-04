@@ -87,7 +87,39 @@
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca" :bold t))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :bold t))))))
 
+(defun my-cursor-light-bg ()
+  "Set cursor colors and styles for a typical light background."
+  (interactive)
+  (custom-theme-set-variables
+   (car custom-enabled-themes)
 
+   `(evil-emacs-state-cursor    '(bar "blue"))
+   `(evil-normal-state-cursor   '(hollow "black"))
+   `(evil-insert-state-cursor   '(bar "black"))
+   `(evil-visual-state-cursor   '(hollow "black"))
+   `(evil-operator-state-cursor '(box "red"))
+   `(evil-replace-state-cursor  '(hbar "orange red"))
+   `(evil-motion-state-cursor   '(box "black")))
+  ;; toggle visual mode to force cursor update
+  (evil-visual-char)
+  (evil-exit-visual-state))
+
+(defun my-cursor-dark-bg ()
+  "Set cursor colors and styles for a typical dark background."
+  (interactive)
+  (custom-theme-set-variables
+   (car custom-enabled-themes)
+
+   `(evil-emacs-state-cursor    '(bar "cyan"))
+   `(evil-normal-state-cursor   '(hollow "spring green"))
+   `(evil-insert-state-cursor   '(bar "spring green"))
+   `(evil-visual-state-cursor   '(hollow "orange"))
+   `(evil-operator-state-cursor '(box "red"))
+   `(evil-replace-state-cursor  '(hbar "orange red"))
+   `(evil-motion-state-cursor   '(box "spring green")))
+  ;; toggle visual mode to force cursor update
+  (evil-visual-char)
+  (evil-exit-visual-state))
 
 
 (defun my-color-badger ()

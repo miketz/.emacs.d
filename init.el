@@ -1499,123 +1499,18 @@ that buffer."
 ;;;----------------------------------------------------------------------------
 ;;; font
 ;;;----------------------------------------------------------------------------
-(defvar my-change-font-fn
-  (if (and (not my-use-ivy-p)
-           (not my-use-helm-p)
-           (fboundp #'ivy-completing-read))
-      ;; it's useful to have out of order matching while selecting the font.
-      (defun my-set-frame-font-ivy ()
-        (interactive)
-        (let ((completing-read-function #'ivy-completing-read))
-          (call-interactively #'set-frame-font)))
-    ;; else default
-    #'set-frame-font)
-  "Function to select the font.
-Prefers out of order matching if available.")
-
-(global-set-key (kbd "<f5>") my-change-font-fn)
-
-;; (when (or (eq my-curr-computer 'work-laptop)
-;;           (eq my-curr-computer 'leyna-laptop))
-;;   ;; configure default settings for fonts.
-;;   (defvar my-default-font 'consolas)
-;;   (defvar my-good-fonts
-;;     '(
-;;       ;; looks OK. fits a good number of lines on screen. flaky on bold.
-;;       ;; no italic?
-;;       (inconsolata "Inconsolata" 135 normal)
-;;       ;; consolas is the best looking but fits fewer lines on screen.
-;;       (consolas "Consolas" 125 normal)
-;;       ;; good, but looks a bit "tall"
-;;       (dejavu "DejaVu Sans Mono for Powerline" 120 normal)
-;;       (fixedsys "FixedSys" 120 normal)))
-
-;;   (cl-defun my-set-font (&optional
-;;                          &key
-;;                          (sym nil) (height nil) (weight nil)
-;;                          (resize-window nil))
-;;     "Sets the font.
-;; If sym is not specified it uses the configured default set in
-;; `my-default-font'. If height or weight are not specified then it uses the
-;; configured defaults in `my-good-fonts'. Resize-window = t will adjust the
-;; window so the modeline fits on screen, etc."
-;;     (unless sym (setq sym my-default-font))
-;;     (let ((the-font (assoc sym my-good-fonts)))
-;;       (unless height (setq height (third the-font)))
-;;       (unless weight (setq weight (fourth the-font)))
-;;       (let ((font-str (second the-font)))
-;;         (custom-set-faces
-;;          `(default ((t (:family ,font-str
-;;                                 :foundry "outline"
-;;                                 :slant normal
-;;                                 :weight ,weight
-;;                                 :height ,height
-;;                                 :width normal)))))))
-;;     (when resize-window
-;;       (my-w32-run 'restore-curr-frame)
-;;       (my-w32-run 'max))))
+(autoload #'my-set-frame-font-ivy "my-font-stuff" nil t)
+(global-set-key (kbd "<f5>") #'my-set-frame-font-ivy)
 
 
 ;;;----------------------------------------------------------------------------
 ;;; inc/dec font size
 ;;;----------------------------------------------------------------------------
-(let ((curr-font-size nil)) ;; Starts out unknown
-  (defun my-change-font-size (step)
-    "Make font bigger or smaller by STEP.
-Closure over `curr-font-size'."
-    (let* ((curr-size (if curr-font-size ;; use cached value if it's set
-                          curr-font-size
-                        (face-attribute 'default :height (selected-frame))))
-           (new-size (+ curr-size step)))
-
-      (custom-set-faces `(default ((t (:height ,new-size)))))
-
-      ;; must cache the new value because :height does not actually inc until a
-      ;; threshold is breached.
-      (setq curr-font-size new-size)
-
-      ;; commenting the window size toggle off. It's seems to have become
-      ;; slow on `work-laptop'.
-      ;; (when (fboundp 'my-w32-run)
-      ;; TODO: make it work on non-Windows machines.
-      ;;   (my-w32-run 'restore-curr-frame)
-      ;;   (my-w32-run 'max))
-
-      (message (int-to-string new-size)))))
-
-(defun my-change-font-size-bigger ()
-  "Make font size bigger."
-  (interactive)
-  (my-change-font-size 1)) ;; TODO: calculate "threshold" step increment.
-
-(defun my-change-font-size-smaller ()
-  "Make font size smaller."
-  (interactive)
-  (my-change-font-size -1)) ;; TODO: calculate "threshold" step decrement.
+(autoload #'my-change-font-size-bigger "my-font-stuff" nil t)
+(autoload #'my-change-font-size-smaller "my-font-stuff" nil t)
 
 (global-set-key (kbd "M-=") #'my-change-font-size-bigger)
 (global-set-key (kbd "M--") #'my-change-font-size-smaller)
-
-
-
-;; (defun my-set-font-size ()
-;;   "Interactive layer over my-set-font. Takes the font size as user input."
-;;   (interactive)
-;;   (let ((size (string-to-number (read-string "font-size: "
-;;                                              nil
-;;                                              'my-history))))
-;;     (my-set-font :height size
-;;                  :resize-window t)))
-;; (defun my-set-font-weight ()
-;;   "Interactive layer over my-set-font."
-;;   (interactive)
-;;   (let ((weight (intern (read-string "font-weight: "
-;;                                              nil
-;;                                              'my-history))))
-;;     (my-set-font :weight weight
-;;                  :resize-window t)))
-
-
 
 ;;;----------------------------------------------------------------------------
 ;;; Color theme stuff.

@@ -377,4 +377,46 @@ Do not fall back to function `electric-pair-mode' because it's global."
       (electric-pair-local-mode 1)
     (message "electric-pair-local-mode not supported.")))
 
+
+
+
+
+
+;;;----------------------------------------------------------------------------
+;;; transparency stuff
+;;;----------------------------------------------------------------------------
+;; TODO: get `curr-alpha' on-the-fly rather than caching to avoid a
+;; transparency "jump" if alpha var gets out of sync.
+(let ((curr-alpha 100)) ;; Starts out 100
+
+  (cl-defun my-set-alpha (alpha)
+    "Set frame's transparency to ALPHA."
+    ;; exit early if not in range 1-100.
+    (when (or (> alpha 100)
+              (< alpha 0))
+      (message (int-to-string curr-alpha))
+      (cl-return-from my-set-alpha))
+    (setq curr-alpha alpha)
+    (set-frame-parameter (selected-frame) 'alpha
+                         `(,curr-alpha ,curr-alpha))
+    (message (int-to-string curr-alpha)))
+
+  (defun my-change-alpha (step)
+    "Make frame more or less transparent by STEP."
+    (let ((new-alpha (+ curr-alpha step)))
+      (my-set-alpha new-alpha))))
+
+(defun my-change-alpha-more-solid ()
+  (interactive)
+  (my-change-alpha 1))
+
+(defun my-change-alpha-less-solid ()
+  (interactive)
+  (my-change-alpha -1))
+
+
+
+
+
+
 (provide 'my-misc)

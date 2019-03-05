@@ -1559,19 +1559,8 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-backward "my-load-theme" nil t)
 
-  (defun my-load-theme-wrapper ()
-    (interactive)
-    (my-handle-weird-theme-setups)
-    ;; nil for no candidate limit. I want to scroll through all the themes.
-    (let ((helm-candidate-number-limit nil))
-      (call-interactively #'load-theme)))
-  (defun my-counsel-load-theme ()
-    (interactive)
-    (my-handle-weird-theme-setups)
-    ;; (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
-    ;;   (call-interactively #'counsel-load-theme))
-    (counsel-load-theme))
-
+  (autoload #'my-load-theme-wrapper "my-load-theme" nil t)
+  (autoload #'my-counsel-load-theme "my-load-theme" nil t)
   (if my-use-ivy-p
       (global-set-key (kbd "<f9>") #'my-counsel-load-theme)
     (global-set-key (kbd "<f9>") #'my-load-theme-wrapper))
@@ -1584,73 +1573,12 @@ This prevents overlapping themes; something I would rarely want."
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
   (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))
 
-(defun my-load-theme-make-bold-like-zenburn (&optional theme)
-  "Activates THEME with the bolding taken from zenburn."
-  (interactive)
-  (let ((zen-bold-faces '())
-        (zen-non-bold-faces '())
-        (frame (selected-frame))
-        ;; show more themes since I'm browsing in addition to selecting
-        (ivy-height 25))
-    (when (null theme)
-      (setq theme (intern (completing-read "theme: "
-                                           (mapcar 'symbol-name
-                                                   (custom-available-themes))
-                                           nil t))))
-    ;; TODO: figure out a way to do this without actually turning on zenburn
-    ;; TODO: handle :bold and the different kinds of :weight that are bold
-    ;; TODO: also turn off bold on some faces to be like zenburn.
-    (load-theme 'zenburn t)
-    ;; collect bold and non-bold faces into lists
-    (dolist (f (face-list))
-      (if (eq (face-attribute f :weight frame) 'bold)
-        ;;   (add-to-list 'zen-bold-faces f)
-        ;; (add-to-list 'zen-non-bold-faces f)
-          (push f zen-bold-faces)
-        (push f zen-non-bold-faces)))
-    ;; load theme and use zenburn's bolding.
-    (load-theme theme t)
-    (dolist (f zen-bold-faces)
-      (set-face-attribute f nil :weight 'bold))
-    (dolist (f zen-non-bold-faces)
-      (set-face-attribute f nil :weight 'normal))))
 
-(let ((inverse-video-p nil)) ;; Flag used by fn `my-toggle-inverse-video'.
-  (cl-defun my-toggle-inverse-video (&optional (inv-p t supplied-p))
-    "Toggle inverse video.
-Closure over `inverse-video-p'"
-    (interactive)
-    (if supplied-p
-        ;; if user specified
-        (setq inverse-video-p inv-p)
-      ;; else toggle
-      (setq inverse-video-p (not inverse-video-p)))
-    (dolist (f (face-list))
-      (if (eq f 'region)
-          (set-face-attribute f nil :inverse-video nil) ; (not inverse-video-p)
-        (set-face-attribute f nil :inverse-video inverse-video-p)))))
+(autoload #'my-load-theme-make-bold-like-zenburn "my-load-theme" nil t)
 
-(defun my-load-theme-inverse (&optional theme)
-  "Set THEME to inverse of itself."
-  (interactive)
-  (when (null theme)
-    (setq theme (intern (completing-read "theme: "
-                                         (mapcar 'symbol-name
-                                                 (custom-available-themes))
-                                         nil t))))
-  (load-theme theme t)        ; load theme
-  (my-toggle-inverse-video t) ; invert it
-  ;; (let* ((frame (selected-frame))
-  ;;        ;; the foreground is the background during inverse.
-  ;;        (new-bg (face-attribute 'default :foreground frame)))
-  ;;   ;; TODO: convert the background to be the foreground.
-  ;;   (dolist (f (face-list))
-  ;;     (let ((new-fg (face-attribute f :background frame)))
-  ;;       ;; setting the bg is like setting the fg during inverse
-  ;;       (set-face-attribute f nil :background new-fg)
-  ;;       ;; setting the fg is like setting the bg during inverse
-  ;;       (set-face-attribute f nil :foreground new-bg))))
-  )
+(autoload #'my-toggle-inverse-video "my-load-theme" nil t)
+(autoload #'my-load-theme-inverse "my-load-theme" nil t)
+
 
 (let ((file "my-color-theme-mods"))
   (autoload #'my-rainbow-parens-dark-bg file nil t)
@@ -1684,36 +1612,8 @@ Closure over `inverse-video-p'"
   (autoload #'my-color-overcast file nil t))
 
 (when my-graphic-p ;; transparency stuff
-  ;; TODO: auto load the transparency stuff
-
-  ;; TODO: get `curr-alpha' on-the-fly rather than caching to avoid a
-  ;; transparency "jump" if alpha var gets out of sync.
-  (let ((curr-alpha 100)) ;; Starts out 100
-
-    (cl-defun my-set-alpha (alpha)
-      "Set frame's transparency to ALPHA."
-      ;; exit early if not in range 1-100.
-      (when (or (> alpha 100)
-                (< alpha 0))
-        (message (int-to-string curr-alpha))
-        (cl-return-from my-set-alpha))
-      (setq curr-alpha alpha)
-      (set-frame-parameter (selected-frame) 'alpha
-                           `(,curr-alpha ,curr-alpha))
-      (message (int-to-string curr-alpha)))
-
-    (defun my-change-alpha (step)
-      "Make frame more or less transparent by STEP."
-      (let ((new-alpha (+ curr-alpha step)))
-        (my-set-alpha new-alpha))))
-
-  (defun my-change-alpha-more-solid ()
-    (interactive)
-    (my-change-alpha 1))
-
-  (defun my-change-alpha-less-solid ()
-    (interactive)
-    (my-change-alpha -1))
+  (autoload #'my-change-alpha-more-solid "my-misc" nil t)
+  (autoload #'my-change-alpha-less-solid "my-misc" nil t)
 
   (global-set-key (kbd "C-M-=") #'my-change-alpha-more-solid)
   (global-set-key (kbd "C-M--") #'my-change-alpha-less-solid))

@@ -477,7 +477,7 @@ in case that file does not provide any feature."
 (declare-function counsel-M-x 'suppress)
 (declare-function counsel-find-file 'suppress)
 (declare-function counsel-load-theme 'suppress)
-(declare-function my-counsel-load-theme 'suppress)
+;; (declare-function my-counsel-load-theme 'suppress)
 (declare-function counsel-describe-variable 'suppress)
 (declare-function counsel-describe-function 'suppress)
 (declare-function counsel-yank-pop 'suppress)
@@ -552,7 +552,7 @@ in case that file does not provide any feature."
 (declare-function my-cycle-light-bg-forward 'suppress)
 (declare-function my-cycle-light-bg-backward 'suppress)
 (declare-function my-handle-weird-theme-setups 'suppress)
-(declare-function my-load-theme-wrapper 'suppress)
+;;(declare-function my-load-theme-wrapper 'suppress)
 (declare-function my-toggle-inverse-video 'suppress)
 (declare-function my-rainbow-parens-dark-bg 'suppress)
 (declare-function my-rainbow-parens-dark-bg-bold 'suppress)
@@ -588,7 +588,7 @@ in case that file does not provide any feature."
 (declare-function my-change-alpha-less-solid 'suppress)
 ;; these 2 like to break?
 (declare-function evil-visual-char 'evil-states)
-(declare-function evil-define-key 'evil-core)
+;; (declare-function evil-define-key 'evil-core)
 
 (declare-function slime-edit-definition 'suppress)
 (declare-function evil-append 'suppress)
@@ -1559,19 +1559,28 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-backward "my-load-theme" nil t)
 
-  (unless my-use-ivy-p
-    (defun my-load-theme-wrapper ()
-      (interactive)
-      (my-handle-weird-theme-setups)
-      ;; nil for no candidate limit. I want to scroll through all the themes.
-      (let ((helm-candidate-number-limit nil))
-        (call-interactively #'load-theme)))
+  (defun my-load-theme-wrapper ()
+    (interactive)
+    (my-handle-weird-theme-setups)
+    ;; nil for no candidate limit. I want to scroll through all the themes.
+    (let ((helm-candidate-number-limit nil))
+      (call-interactively #'load-theme)))
+  (defun my-counsel-load-theme ()
+    (interactive)
+    (my-handle-weird-theme-setups)
+    ;; (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
+    ;;   (call-interactively #'counsel-load-theme))
+    (counsel-load-theme))
+
+  (if my-use-ivy-p
+      (global-set-key (kbd "<f9>") #'my-counsel-load-theme)
     (global-set-key (kbd "<f9>") #'my-load-theme-wrapper))
+
   ;; after calling `counsel-load-theme', call `ivy-occur' to see a UI
   ;; for theme selection. This is better than `my-cycle-theme' becuase it
   ;; does not redunantly call (custom-available-themes) and you can skip
   ;; around.
-  (global-set-key (kbd "<f10>") #'counsel-load-theme)
+  (global-set-key (kbd "<f10>") #'my-counsel-load-theme)
   (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
   (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))
 
@@ -4581,13 +4590,7 @@ TODO: call this function when it works."
 
     (global-set-key (kbd "M-x") #'counsel-M-x)
     (global-set-key (kbd "C-x C-f") #'counsel-find-file)
-    (defun my-counsel-load-theme ()
-      (interactive)
-      (my-handle-weird-theme-setups)
-      ;; (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
-      ;;   (call-interactively #'counsel-load-theme))
-      (counsel-load-theme))
-    (global-set-key (kbd "<f9>") #'my-counsel-load-theme)
+
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function)
     ;; ;; replace keybind for `bookmark-bmenu-list'

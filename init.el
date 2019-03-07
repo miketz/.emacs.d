@@ -599,7 +599,7 @@ in case that file does not provide any feature."
 (declare-function my-change-alpha-less-solid 'suppress)
 ;; these 2 like to break?
 (declare-function evil-visual-char 'evil-states)
-;; (declare-function evil-define-key 'evil-core)
+(declare-function evil-define-key 'evil-core)
 
 (declare-function slime-edit-definition 'suppress)
 (declare-function evil-append 'suppress)

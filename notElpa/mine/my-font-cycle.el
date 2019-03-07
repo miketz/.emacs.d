@@ -33,6 +33,8 @@
       (cond
        ((eq my-curr-computer 'wild-dog)
         '["-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"
+          "-misc-fixed-bold-r-normal--18-*-100-100-c-90-iso10646-1"
+          "-misc-fixed-medium-r-normal--18-*-100-100-c-90-iso10646-1"
           "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7"
           "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7"
           "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"

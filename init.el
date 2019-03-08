@@ -749,7 +749,23 @@ in case that file does not provide any feature."
 (declare-function my-what-line 'my-misc)
 (declare-function my-what-position 'my-misc)
 (declare-function my-what-time 'my-misc)
-
+(declare-function my-time-task 'my-misc)
+(declare-function my-str-starts-with-p 'my-misc)
+(declare-function my-str-ends-with-p 'my-misc)
+(declare-function my-turn-on-electric-pair-local-mode 'my-misc)
+(declare-function my-cursor-light-bg 'my-color-theme-mods)
+(declare-function my-cursor-dark-bg 'my-color-theme-mods)
+(declare-function my-set-frame-font-ivy 'my-font-stuff)
+(declare-function my-change-font-size-bigger 'my-font-stuff)
+(declare-function my-change-font-size-smaller 'my-font-stuff)
+(declare-function my-load-theme-make-bold-like-zenburn 'my-load-theme)
+(declare-function my-load-theme-inverse 'my-load-theme)
+(declare-function my-follow-mode 'my-misc)
+(declare-function my-line-numbers-on 'my-line-nums)
+(declare-function my-line-numbers-relative-on 'my-line-nums)
+(declare-function my-line-numbers-off 'my-line-nums)
+(declare-function my-scroll-right 'my-horizontal-scroll)
+(declare-function my-scroll-left 'my-horizontal-scroll)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

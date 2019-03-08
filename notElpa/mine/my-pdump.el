@@ -20,7 +20,8 @@ For faster subsequent start up."
     ;; my libs
     (my-handle-weird-theme-setups)
     (require 'my-hydras)
-    (require 'my-rand) (require 'my-type-tutor)
+    (require 'my-rand)
+    (require 'my-type-tutor)
     (require 'my-window-search)
     (require 'my-square-one)
     (require 'my-screen-real-estate)
@@ -31,6 +32,11 @@ For faster subsequent start up."
     (require 'my-code-snippet-url)
     (require 'my-font-cycle)
     (require 'my-ruler)
+    (require 'my-cycle-line-position)
+    (require 'my-font-stuff)
+    (require 'my-horizontal-scroll)
+    (require 'my-line-nums)
+    (require 'my-misc)
 
     ;; 3rd party libs.
     (require 'company)

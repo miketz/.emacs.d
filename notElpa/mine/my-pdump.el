@@ -17,8 +17,14 @@ For faster subsequent start up."
   (interactive)
   ;; measure time spent loading libs.
   (let ((start (float-time)))
+    ;; byte compile my libs before loading them. So fast versions will be
+    ;; loaded for the dump.
+    (byte-recompile-directory
+     (expand-file-name "~/.emacs.d/notElpa/mine/") 0)
+
     ;; my libs
     (my-handle-weird-theme-setups)
+    (require 'mode-on-region)
     (require 'my-hydras)
     (require 'my-rand)
     (require 'my-type-tutor)
@@ -37,6 +43,7 @@ For faster subsequent start up."
     (require 'my-horizontal-scroll)
     (require 'my-line-nums)
     (require 'my-misc)
+    (require 'my-pdump) ; we're already in here, but just to be complete.
 
     ;; 3rd party libs.
     (require 'company)
@@ -101,7 +108,6 @@ For faster subsequent start up."
     (require 'ispell)
     (require 'grep)
     (require 'bookmark)
-    (require 'mode-on-region)
     (require 'darkroom)
     (require 'ediff)
     (require 'vimrc-mode)

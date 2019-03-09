@@ -2,6 +2,7 @@
 
 (require 'vc-git)
 (require 'grep)
+(require 'cl-lib)
 
 (defun my-is-in-gitrepo ()
   "Returns t if the current directory is in a git repo."
@@ -27,8 +28,8 @@
   (interactive)
   (let ((patterns (split-string input " "))
         (git-pat ""))
-    (setq git-pat (my-git-grep-make-param (first patterns)))
-    (dolist (p (rest patterns))
+    (setq git-pat (my-git-grep-make-param (cl-first patterns)))
+    (dolist (p (cl-rest patterns))
       (setq git-pat (concat git-pat " --and " (my-git-grep-make-param p))))
                                         ;(concat "git --no-pager grep --no-index --ignore-case -n " git-pat)
     (let ((in-gitrepo   (my-is-in-gitrepo))

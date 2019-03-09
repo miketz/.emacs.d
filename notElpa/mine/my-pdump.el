@@ -20,7 +20,11 @@ For faster subsequent start up."
     ;; byte compile my libs before loading them. So fast versions will be
     ;; loaded for the dump.
     (byte-recompile-directory
-     (expand-file-name "~/.emacs.d/notElpa/mine/") 0)
+     (expand-file-name "~/.emacs.d/notElpa/mine/")
+     0  ;; 0 means compile .el files if .elc is missing.
+     t) ;; t means force re-compile even if the .elc is up-to-date. May be
+        ;; useful if the Emacs version changed and should have an .elc compiled
+        ;; again to be compatible.
 
     ;; my libs
     (my-handle-weird-theme-setups)

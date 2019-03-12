@@ -22,6 +22,9 @@
 
 
 
+(declare-function my-cycle-light-bg-set-index 'my-load-theme)
+(defvar mayan-smoke)
+(defvar my-ultimate)
 ;; (defvar cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
 ;;                         "mint cream" "honeydew" "white smoke" "ghost white"
 ;;                         "snow" "alice blue" "lavender"))
@@ -90,6 +93,7 @@
   (counsel-load-theme))
 
 
+(defvar ivy-height)
 (defun my-load-theme-make-bold-like-zenburn (&optional theme)
   "Activates THEME with the bolding taken from zenburn."
   (interactive)

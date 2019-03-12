@@ -73,7 +73,7 @@
 
 
 
-
+(defvar helm-candidate-number-limit)
 
 (defun my-load-theme-wrapper ()
   (interactive)

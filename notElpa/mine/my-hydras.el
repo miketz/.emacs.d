@@ -1,5 +1,8 @@
 ;; -*- lexical-binding: t -*-
 
+(require 'my-font-stuff)
+(require 'expand-region-core)
+
 ;; (defhydra hydra-zoom (global-map "<f2>")
 ;;   "zoom"
 ;;   ;; The property name ":color" is misleading.
@@ -137,19 +140,19 @@
   ("C-g" nil nil)
   ("q" nil))
 
-(defhydra my-hydra-hs (:color amaranth)
-  "hyrda for hs-minor-mode"
-  ("f" hs-hide-block)
-  ("j" hs-show-block)
+;; (defhydra my-hydra-hs (:color amaranth)
+;;   "hyrda for hs-minor-mode"
+;;   ("f" hs-hide-block)
+;;   ("j" hs-show-block)
 
-  ("d" hs-hide-level)
-  ("k" hs-show-block)
+;;   ("d" hs-hide-level)
+;;   ("k" hs-show-block)
 
-  ("s" hs-hide-all)
-  ("l" hs-show-all)
+;;   ("s" hs-hide-all)
+;;   ("l" hs-show-all)
 
-  ("C-g" nil nil)
-  ("q" nil))
+;;   ("C-g" nil nil)
+;;   ("q" nil))
 
 ;; avoid moving hand to arrow keys for barf/slurp
 (defhydra hydra-paredit ()

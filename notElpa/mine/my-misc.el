@@ -113,8 +113,8 @@ BODY is the core code that will use the variables."
         (let ((val1 (nth i lst1))
               (val2 (nth i lst2)))
           (insert val1) (insert " ")
-          (dotimes (p (- long1 (length val1)))
-            (insert " "))
+          (cl-loop repeat (- long1 (length val1)) do
+                   (insert " "))
           (insert val2)
           (insert "\n")))))
 
@@ -155,20 +155,21 @@ Assums a vertically stacked display of the list.
     ;;STRANGE: for some reason if I align docstring to the left without white
     ;;space it messes up paredit's ability to match parens in the code
     ;;following this fucntion.
-    (let ((len            (length lst))
-          (lst-of-columns nil) ;the goal
-          (num-rows (+ (floor (/ len num-cols))
-                       (if (> (mod len num-cols) 0) 1 0)))
-          (i 0)
-          (c              0))
+    (let* ((len            (length lst))
+           (lst-of-columns nil) ;the goal
+           (num-rows (+ (floor (/ len num-cols))
+                        (if (> (mod len num-cols) 0) 1 0)))
+           (i 0)
+           (c              0))
       (while (< c num-cols)
         (let ((column nil)
-              (r 0))
-          (dotimes (r num-rows)
-            (let ((val (nth i lst)))
-              (when (not (null val));last col may have empty slots to be skipped
-                (setq column (append column (list val)))))
-            (cl-incf i))
+              ;; (r 0)
+              )
+          (cl-loop repeat num-rows do
+                   (let ((val (nth i lst)))
+                     (when (not (null val));last col may have empty slots to be skipped
+                       (setq column (append column (list val)))))
+                   (cl-incf i))
           (setq lst-of-columns (cons column lst-of-columns)))
         (cl-incf c))
       (reverse lst-of-columns)))
@@ -198,8 +199,8 @@ Assums a vertically stacked display of the list.
             (when (not (null val))
               (insert val)
               (unless is-last-col
-                (dotimes (s min-col-spaces) (insert " "))
-                (dotimes (p pad-size) (insert " ")))))
+                (cl-loop repeat min-col-spaces do (insert " "))
+                (cl-loop repeat pad-size do (insert " ")))))
           )
         (unless (= r (- num-rows 1)) ;unless last row
           (insert "\n")))

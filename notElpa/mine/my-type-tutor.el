@@ -30,7 +30,8 @@
                       (unless (= gpl (1- groups-per-line))
                         (insert " ")))
              (insert "\n\n\n")))
-  (next-line))
+  (print 'forward-line)
+  (forward-line)) ; (next-line)
 
 
 (provide 'my-type-tutor)

@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Defines several functions to maintain a "TODO list" of buffers. It's just
+;; Defines several functions to maintain a "TODO list" of buffers.  It's just
 ;; a plain list of buffers.
 ;;
 ;; The list of buffers is viewed with `ibuffer', exluding buffers not in the

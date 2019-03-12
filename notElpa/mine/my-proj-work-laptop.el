@@ -5,6 +5,7 @@
 ;;; Code:
 
 (require 'bookmark)
+(require 'dired)
 ;; (require 'helm-cmd-t)
 
 ;; (defun proj-ecp ()

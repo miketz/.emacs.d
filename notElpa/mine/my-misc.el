@@ -407,6 +407,9 @@ Do not fall back to function `electric-pair-mode' because it's global."
     (let ((new-alpha (+ curr-alpha step)))
       (my-set-alpha new-alpha))))
 
+(declare-function my-set-alpha 'my-misc)
+(declare-function my-change-alpha 'my-misc)
+
 (defun my-change-alpha-more-solid ()
   (interactive)
   (my-change-alpha 1))

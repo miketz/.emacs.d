@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
+(require 'my-misc) ; for fn `my-set-alpha'
+
 (defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)

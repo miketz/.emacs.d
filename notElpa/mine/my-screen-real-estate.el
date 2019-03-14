@@ -25,7 +25,7 @@
    (when (not (null backup-format))
      (setq mode-line-format backup-format))))
 
-
+(declare-function my-real-estate-restore-mode-line 'my-screen-real-estate)
 
 (defun my-real-estate-hide-fringe ()
   (interactive)

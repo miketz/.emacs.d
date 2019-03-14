@@ -182,7 +182,6 @@ in case that file does not provide any feature."
 
 ;; dynamic vars not let bound (yet). Just suppressing the free var warnings.
 (defvar evil-normal-state-map)
-(defvar my-packages)
 (defvar key-chord-two-keys-delay)
 (defvar key-chord-one-key-delay)
 (defvar helm-map)

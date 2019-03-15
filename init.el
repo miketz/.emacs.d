@@ -4391,6 +4391,9 @@ TODO: call this function when it works."
     (setq erc-timestamp-format       format
           erc-timestamp-format-right format))
 
+  (setq erc-autojoin-channels-alist
+        '(("freenode.net" "#emacs")))
+
   (progn
     ;;from finster on irc #emacs. switch erc buffers
     ;; TODO; make it neutral to ido so i can use helm, swiper, default, etc.

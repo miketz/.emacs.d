@@ -411,6 +411,7 @@ in case that file does not provide any feature."
 (defvar erc-timestamp-format)
 (defvar erc-timestamp-format-right)
 (defvar slime-completion-at-point-functions)
+(defvar erc-autojoin-channels-alist)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

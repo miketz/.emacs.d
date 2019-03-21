@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (require 'my-font-stuff)
-(require 'expand-region-core)
+(require 'expand-region)
 
 ;; (defhydra hydra-zoom (global-map "<f2>")
 ;;   "zoom"

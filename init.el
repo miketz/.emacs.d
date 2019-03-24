@@ -412,6 +412,7 @@ in case that file does not provide any feature."
 (defvar erc-timestamp-format-right)
 (defvar slime-completion-at-point-functions)
 (defvar erc-autojoin-channels-alist)
+(defvar ccls-executable)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -1113,7 +1114,8 @@ Closure over executed-p."
     (git-gutter ,(not (version< emacs-version "24.3")))
     (lsp-mode ,(not (version< emacs-version "25.1")))
     (company-lsp ,(not (version< emacs-version "25.1")))
-    (cquery ,(memq my-curr-computer '(wild-dog)))
+    (ccls ,(memq my-curr-computer '(wild-dog)))
+    ;; (cquery ,(memq my-curr-computer '(wild-dog)))
     (websocket t))
   "Packages I use from elpa/melpa.")
 
@@ -6179,7 +6181,7 @@ vanilla javascript buffers."
 ;;; cquery. Not an elisp project. Built separately.
 ;;; NOTE: put compile_commands.json in each project root (or symlink).
 ;;;----------------------------------------------------------------------------
-(when (eq my-curr-computer 'wild-dog)
+(when nil ;(eq my-curr-computer 'wild-dog)
   (add-to-list 'exec-path "/home/mike/proj/cquery/build/release/bin"))
 
 ;;;----------------------------------------------------------------------------
@@ -6199,6 +6201,41 @@ vanilla javascript buffers."
   ;; turn on cquery automatically.  But might go wonky if
   ;; compile_commands.json is not in the project root.
   (add-hook 'c-mode-common-hook #'my-setup-cquery))
+
+
+;;;----------------------------------------------------------------------------
+;;; ccls. Not an elisp project. C++ proj build separetly.
+;;; NOTE: put compile_commands.json or .ccls in each project root (or symlink).
+;;;----------------------------------------------------------------------------
+(defvar my-ccls-folder (cond ((eq my-curr-computer 'wild-dog)
+                              "/home/mike/proj/ccls/Release/")
+                             (t nil)))
+
+(when (eq my-curr-computer 'wild-dog)
+  ;; binary is /home/mike/proj/ccls/Release/ccls
+  (add-to-list 'exec-path my-ccls-folder))
+
+;;;----------------------------------------------------------------------------
+;;; ccls. Melpa elisp package. (works with ccls binary above.)
+;;;----------------------------------------------------------------------------
+;; (require 'ccls)
+(with-eval-after-load 'ccls
+  (when (eq my-curr-computer 'wild-dog)
+    (setq ccls-executable (concat my-ccls-folder "ccls"))
+    ;; ;; use flycheck
+    ;; (setq lsp-prefer-flymake nil)
+    ;; (setq-default flycheck-disabled-checkers
+    ;;               '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+    ))
+
+(defun my-setup-ccls ()
+  "Hook to run on c/c++ files to set up ccls."
+  (require 'ccls)
+  (lsp))
+(when (eq my-curr-computer 'wild-dog)
+  ;; turn on ccls automatically.  But might go wonky if compile_commands.json
+  ;; or .ccls is not in the project root.
+  (add-hook 'c-mode-common-hook #'my-setup-ccls))
 
 
 ;;;----------------------------------------------------------------------------

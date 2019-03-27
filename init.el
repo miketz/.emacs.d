@@ -1952,6 +1952,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; company
 ;;;----------------------------------------------------------------------------
+(require 'company)
 (add-hook 'after-init-hook #'global-company-mode) ; all buffers
 
 (with-eval-after-load 'company

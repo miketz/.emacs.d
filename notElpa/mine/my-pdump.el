@@ -82,7 +82,6 @@ For faster subsequent start up."
     (require 'js2-highlight-vars)
     (require 'json-mode)
     (require 'cc-mode)
-    (require 'json-mode)
     (require 'num3-mode)
     (require 'powershell)
     (require 'leerzeichen)
@@ -120,7 +119,12 @@ For faster subsequent start up."
     (require 'ace-link)
     (require 'dired)
     (require 'nxml-mode)
+    (require 'winner)
     ;; (require 'magit) ; exclude magit until hook performance is resolved.
+
+    ;; make sure winner-mode is off. It breaks the pdump!
+    (winner-mode -1) ; TODO: revisit this in the future.
+
     ;; print elapsed time
     (message
      (format "Finished loading libs. elapsed seconds: %f"

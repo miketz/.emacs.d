@@ -119,11 +119,9 @@ For faster subsequent start up."
     (require 'ace-link)
     (require 'dired)
     (require 'nxml-mode)
-    (require 'winner)
+    ;; (require 'winner) ; exclude winner. I breaks the dump.
     ;; (require 'magit) ; exclude magit until hook performance is resolved.
 
-    ;; make sure winner-mode is off. It breaks the pdump!
-    (winner-mode -1) ; TODO: revisit this in the future.
 
     ;; print elapsed time
     (message

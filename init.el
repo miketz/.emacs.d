@@ -413,6 +413,7 @@ in case that file does not provide any feature."
 (defvar slime-completion-at-point-functions)
 (defvar erc-autojoin-channels-alist)
 (defvar ccls-executable)
+(defvar deadgrep-max-line-length)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -1116,7 +1117,8 @@ Closure over executed-p."
     (company-lsp ,(not (version< emacs-version "25.1")))
     (ccls ,(memq my-curr-computer '(wild-dog)))
     ;; (cquery ,(memq my-curr-computer '(wild-dog)))
-    (websocket t))
+    (websocket t)
+    (deadgrep ,(not (version< emacs-version "25.1"))))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -6330,6 +6332,12 @@ vanilla javascript buffers."
 (autoload #'my-load-everything-for-pdump "my-pdump" nil t)
 (autoload #'my-make-pdump "my-pdump" nil t)
 
+
+;;;----------------------------------------------------------------------------
+;;; deadgrep
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'deadgrep
+  (setq deadgrep-max-line-length 250))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

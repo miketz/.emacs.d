@@ -81,9 +81,9 @@
 ;;;----------------------------------------------------------------------------
 ;;; Create a "stub" init file at C:/Users/???/AppData/Roaming/.emacs.d/init.el
 ;;; put the follwing code in init.el:
-;;; (setq user-init-file "C:/Users/???/AppData/Local/.emacs.d/init.el")
-;;; (setq user-emacs-directory "C:/Users/???/AppData/Local/.emacs.d/")
-;;; (setq default-directory "c:/Users/???/")
+;;; (setq user-init-file "C:/Users/???/AppData/Local/.emacs.d/init" ; no .el
+;;;       user-emacs-directory "C:/Users/???/AppData/Local/.emacs.d/"
+;;;       default-directory "c:/Users/???/")
 ;;; (setenv "HOME" "C:/Users/???/AppData/Local/") ; so ~ expands correctly
 ;;; (load user-init-file)
 

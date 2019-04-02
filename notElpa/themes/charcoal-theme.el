@@ -409,6 +409,18 @@ Example:
    ;; company-tooltip-search
    ;; company-tooltip-search-selection
 
+   ;; compile
+   `(compilation-info ((,class (:foreground ,fg-green :underline t))))
+   `(compilation-line-number ((,class (:inherit font-lock-keyword-face
+                                                :weight normal))))
+
+   ;; deadgrep
+   `(deadgrep-meta-face ((,class (:foreground "gray"))))
+   `(deadgrep-filename-face ((,class (:inherit compilation-info))))
+   `(deadgrep-search-term-face ((,class (:foreground ,fg-green :background ,bg-green))))
+   `(deadgrep-regexp-metachar-face ((,class (:foreground ,fg-purple :background ,bg-green))))
+   `(deadgrep-match-face ((,class (:inherit match))))
+
    ;; erc
    `(erc-notice-face ((,class (:foreground ,faint-less))))
    `(erc-input-face ((,class (:foreground "tan")))) ; my own text.

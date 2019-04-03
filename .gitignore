@@ -38,3 +38,4 @@
 /notElpa/mine/offline.el
 *.yas-compiled-snippets*
 /transient/
+/.lsp-session-v1

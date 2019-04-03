@@ -418,6 +418,7 @@ in case that file does not provide any feature."
 (defvar rg-group-result)
 (defvar rg-align-position-numbers)
 (defvar rg-mode-map)
+(defvar rg-command-line-flags)
 
 
 ;; suppress warnings on functions from files not yet loaded.
@@ -6354,6 +6355,8 @@ vanilla javascript buffers."
 ;;; rg
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'rg
+  (setq rg-command-line-flags '("-M 250")) ; truncate long lines in display.
+
   (setq rg-show-columns nil)
   (setq rg-group-result nil)
   (setq rg-align-position-numbers nil)

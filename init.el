@@ -414,6 +414,11 @@ in case that file does not provide any feature."
 (defvar erc-autojoin-channels-alist)
 (defvar ccls-executable)
 (defvar deadgrep-max-line-length)
+(defvar rg-show-columns)
+(defvar rg-group-result)
+(defvar rg-align-position-numbers)
+(defvar rg-mode-map)
+
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -768,6 +773,11 @@ in case that file does not provide any feature."
 (declare-function my-line-numbers-off 'my-line-nums)
 (declare-function my-scroll-right 'my-horizontal-scroll)
 (declare-function my-scroll-left 'my-horizontal-scroll)
+(declare-function evil-forward-char 'evil-commands)
+(declare-function evil-change-whole-line 'evil-commands)
+(declare-function wgrep-change-to-wgrep-mode 'wgrep)
+(declare-function rg-save-search-as-name 'rg)
+(declare-function rg-save-search 'rg)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1118,7 +1128,8 @@ Closure over executed-p."
     (ccls ,(memq my-curr-computer '(wild-dog)))
     ;; (cquery ,(memq my-curr-computer '(wild-dog)))
     (websocket t)
-    (deadgrep ,(not (version< emacs-version "25.1"))))
+    ;; (deadgrep ,(not (version< emacs-version "25.1")))
+    (rg ,(not (version< emacs-version "24.4"))))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -6338,6 +6349,27 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'deadgrep
   (setq deadgrep-max-line-length 250))
+
+;;;----------------------------------------------------------------------------
+;;; rg
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'rg
+  (setq rg-show-columns nil)
+  (setq rg-group-result nil)
+  (setq rg-align-position-numbers nil)
+
+  (when my-use-evil-p
+    (define-key rg-mode-map (kbd "l") #'evil-forward-char)
+    (define-key rg-mode-map (kbd "h") #'evil-backward-char)
+    (define-key rg-mode-map (kbd "w") #'evil-forward-word-begin)
+    (define-key rg-mode-map (kbd "s") my-swoop-fn)
+    (define-key rg-mode-map (kbd "S") #'evil-change-whole-line)
+    ;; rebind the keys we just clobbered
+    (define-key rg-mode-map (kbd "C-c l") #'rg-list-searches)
+    (define-key rg-mode-map (kbd "C-c h") #'describe-mode)
+    (define-key rg-mode-map (kbd "C-c w") #'wgrep-change-to-wgrep-mode)
+    (define-key rg-mode-map (kbd "C-c s") #'rg-save-search-as-name)
+    (define-key rg-mode-map (kbd "C-c S") #'rg-save-search)))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

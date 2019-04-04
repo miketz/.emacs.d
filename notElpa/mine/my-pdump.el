@@ -119,6 +119,7 @@ For faster subsequent start up."
     (require 'ace-link)
     (require 'dired)
     (require 'nxml-mode)
+    (require 'rg)
     ;; (require 'winner) ; exclude winner. It breaks the dump.
     ;; (require 'magit) ; exclude magit until hook performance is resolved.
 

@@ -985,6 +985,8 @@ Closure over executed-p."
                                         (not (version< emacs-version
                                                        "24.4"))))
 
+(defvar my-install-rg-p (not (version< emacs-version "24.4")))
+
 ;; TODO: specify if it should use elpa or melpa version of a package.
 ;; NOTE: to limit package installation to specific computers (or other
 ;; conditions), the second place in each list item is a true/false value.
@@ -1130,7 +1132,7 @@ Closure over executed-p."
     ;; (cquery ,(memq my-curr-computer '(wild-dog)))
     (websocket t)
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
-    (rg ,(not (version< emacs-version "24.4"))))
+    (rg my-install-rg-p))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -2777,8 +2779,8 @@ To make it human readable."
 ;; defined in ~/emacs.d/notElpa/mine/my-vc-git-grep.el
 (autoload 'my-vc-git-grep "my-vc-git-grep" nil t)
 (autoload #'my-grep-dwim "my-grep" nil t)
-(when my-use-evil-p
-  (evil-leader/set-key "g" #'my-grep-dwim))
+;; (when my-use-evil-p
+;;   (evil-leader/set-key "g" #'my-grep-dwim))
 
 ;;;----------------------------------------------------------------------------
 ;;; helm-swoop
@@ -6373,6 +6375,14 @@ vanilla javascript buffers."
     (define-key rg-mode-map (kbd "C-c w") #'wgrep-change-to-wgrep-mode)
     (define-key rg-mode-map (kbd "C-c s") #'rg-save-search-as-name)
     (define-key rg-mode-map (kbd "C-c S") #'rg-save-search)))
+
+(when my-use-evil-p
+  (let ((search-fn (if my-install-rg-p
+                       #'rg
+                     ;; i use git to control the emacs config so git grep is
+                     ;; always available.
+                     #'my-grep-dwim)))
+    (evil-leader/set-key "g" search-fn)))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

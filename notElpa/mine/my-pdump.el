@@ -120,6 +120,7 @@ For faster subsequent start up."
     (require 'dired)
     (require 'nxml-mode)
     (require 'rg)
+    (require 'tramp)
     ;; (require 'winner) ; exclude winner. It breaks the dump.
     ;; (require 'magit) ; exclude magit until hook performance is resolved.
 

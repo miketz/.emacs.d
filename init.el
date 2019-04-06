@@ -6384,6 +6384,23 @@ vanilla javascript buffers."
                      #'my-grep-dwim)))
     (evil-leader/set-key "g" search-fn)))
 
+
+;;;----------------------------------------------------------------------------
+;;; tramp
+;;;----------------------------------------------------------------------------
+;; https://old.reddit.com/r/emacs/comments/b9u049/remote_development_with_an_od
+;; d_situation/ek6x43b/
+;; TRAMP doesn't really introduce very much overhead on top of whatever
+;; protocol you're using in my experience.
+;; If TRAMP is slow for you, then using something like rsync, scp or ssh to
+;; transfer files on save will also be slow.
+;; You can configure the protocol that tramp uses:
+;; (setq tramp-default-method "ssh")
+;; You can configure ssh connection to keep the socket alive:
+;; Host * ControlMaster auto ControlPath ~/.ssh/master-socket/%r@%h:%p ControlP
+;; ersist 3s
+;; There are other options too.
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------

@@ -214,7 +214,7 @@
   (split-window-horizontally)
   (shrink-window-horizontally 24)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
-  (eww-open-file "c:/Users/mtz/scratch/PracticalCommonLisp_ePub/html/index.html"))
+  (eww-open-file "c:/Users/mtz/books/PracticalCommonLisp_ePub/html/index.html"))
 
 (defun my-proj-paip ()
   "Open the PAIP book."
@@ -232,7 +232,7 @@
       (progn
         (message "%s bookmark not found.  Defaulting to top level node."
                  bm-name)
-        (dired "c:/Users/mtz/Downloads/tutorials/paip-lisp/docs")))))
+        (dired "c:/Users/mtz/books/paip-lisp/docs")))))
 
 (cl-defun my-proj-general-info-book (&key bm-name top-node-name)
   (let ((bm (car (member bm-name (bookmark-all-names)))))
@@ -278,13 +278,13 @@
             (other-window 1)
             ))
       ;; else no bookmark. Go to the top folder
-      (dired "c:/users/mtz/scratch/progit2/book"))))
+      (dired "c:/users/mtz/books/progit2/book"))))
 
 (defun my-proj-dive-python ()
   "Open the dive into python ebook."
   (interactive)
   (find-file-existing
-   "C:/Users/mtz/Downloads/tutorials/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt")
+   "C:/Users/mtz/books/diveintopython-text-5.4/diveintopython-5.4/diveintopython.txt")
   (markdown-mode))
 
 (defun my-proj-tcpl ()

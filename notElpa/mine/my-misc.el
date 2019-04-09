@@ -214,13 +214,14 @@ START = start of region.
 END = end of region."
   (interactive "r") ; automatically wires up the current region's start/end to
                     ; the args start/end.
-  ;; TODO: fix bug where the start/end bounds appear to be off sometimes.
   (goto-char start)
   (while (search-forward "[" end t)
-    (replace-match ""))
+    (replace-match "")
+    (cl-decf end))
   (goto-char start)
   (while (search-forward "]" end t)
-    (replace-match "")))
+    (replace-match "")
+    (cl-decf end)))
 
 (defun my-list-holidays ()
   "List the major holidays."

@@ -4431,7 +4431,8 @@ TODO: call this function when it works."
   (setq hydra-is-helpful t)
   ;; don't use window for hints. It seems to lock things up.
   ;; And window switcher mode really gets messed up.
-  (setq hydra-lv nil))
+  (setq hydra-hint-display-type 'message) ;; (setq hydra-lv nil)
+  )
 
 
 

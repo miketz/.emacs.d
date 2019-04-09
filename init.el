@@ -985,7 +985,10 @@ Closure over executed-p."
                                         (not (version< emacs-version
                                                        "24.4"))))
 
-(defvar my-install-rg-p (not (version< emacs-version "24.4")))
+(defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog work-laptop))
+  "Non-nil if rg executable is installed.")
+(defvar my-install-rg-p (not (version< emacs-version "24.4"))
+  "Whether to install the `rg' package from melpa.")
 
 ;; TODO: specify if it should use elpa or melpa version of a package.
 ;; NOTE: to limit package installation to specific computers (or other
@@ -6377,7 +6380,7 @@ vanilla javascript buffers."
     (define-key rg-mode-map (kbd "C-c S") #'rg-save-search)))
 
 (when my-use-evil-p
-  (let ((search-fn (if my-install-rg-p
+  (let ((search-fn (if (and my-has-rg-exe-p my-install-rg-p)
                        #'rg
                      ;; i use git to control the emacs config so git grep is
                      ;; always available.

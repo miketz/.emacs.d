@@ -105,7 +105,7 @@
 
 
 (defhydra my-hydra-font (:color amaranth)
-  "hyrda for changing font size/style"
+  "Hydra for changing font size/style."
   ("j" (lambda ()
          (interactive)
          (my-change-font-size t)))
@@ -141,7 +141,7 @@
   ("q" nil))
 
 ;; (defhydra my-hydra-hs (:color amaranth)
-;;   "hyrda for hs-minor-mode"
+;;   "Hydra for hs-minor-mode."
 ;;   ("f" hs-hide-block)
 ;;   ("j" hs-show-block)
 

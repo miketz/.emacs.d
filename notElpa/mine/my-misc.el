@@ -231,14 +231,26 @@ END = end of region."
                    (append holiday-general-holidays
                            holiday-christian-holidays))))
 
-(when (eq system-type 'windows-nt)
-  (defun my-find-file-by-name ()
+(defun my-find-file-by-name-windows ()
     "Find files by name starting in current directory."
     (interactive)
     (let ((compile-command "dir /b/s "))
       ;; #'shell-command
       ;; #'grep
-      (call-interactively #'compile))))
+      (call-interactively #'compile)))
+
+;; (require 'my-grep) ; for `my-is-in-gitrepo'
+(defun my-find-file-omni ()
+  "Find files by name."
+  (interactive)
+  ;; Try `counsel-git' first. If it errors out due to not being in a git
+  ;; repo, then fall back to other commands. Erroring out seems to be faster
+  ;; than checking for presence of a git repo first on ms-win.
+  (unless (ignore-errors (counsel-git))
+    (let ((fn (cond
+               ((eq system-type 'windows-nt) #'my-find-file-by-name-windows)
+               ((eq system-type 'gnu/linux) #'find-name-dired))))
+      (funcall fn))))
 
 (defun my-indent-defun ()
   "Indent the function the cursor is inside."

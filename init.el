@@ -779,6 +779,7 @@ in case that file does not provide any feature."
 (declare-function wgrep-change-to-wgrep-mode 'wgrep)
 (declare-function rg-save-search-as-name 'rg)
 (declare-function rg-save-search 'rg)
+(declare-function my-find-file-omni 'my-misc)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -4579,7 +4580,7 @@ TODO: call this function when it works."
     ;; (global-set-key (kbd "C-x r l") #'counsel-bookmark)
     (when my-use-evil-p
       (evil-leader/set-key "w" #'counsel-yank-pop)
-      (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
+      ;; (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
       )))
 
 (with-eval-after-load 'swiper
@@ -4721,7 +4722,7 @@ TODO: call this function when it works."
   (when my-use-evil-p
     (evil-leader/set-key "b" #'switch-to-buffer)
     (evil-leader/set-key "w" #'counsel-yank-pop)
-    (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
+    ;; (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
     )
   (global-set-key (kbd "C-h v") #'counsel-describe-variable)
   (global-set-key (kbd "C-h f") #'counsel-describe-function)
@@ -6411,10 +6412,9 @@ vanilla javascript buffers."
 (autoload #'my-delete-brackets "my-misc" nil t)
 (autoload #'my-list-holidays "my-misc" nil t)
 
-(when (eq system-type 'windows-nt)
-  (autoload #'my-find-file-by-name "my-misc" nil t)
-  (when my-use-evil-p
-    (evil-leader/set-key "h" #'my-find-file-by-name)))
+(autoload #'my-find-file-omni "my-misc" nil t)
+(when my-use-evil-p
+  (evil-leader/set-key "h" #'my-find-file-omni))
 
 
 (autoload #'my-indent-defun "my-misc" nil t)

@@ -104,6 +104,7 @@ For faster subsequent start up."
     (require 'css-mode)
     (require 'htmlize)
     (require 'rainbow-mode)
+    (require 'rainbow-delimiters)
     (require 'paredit)
     (provide 'sql)
     (require 'sql-indent)
@@ -121,6 +122,11 @@ For faster subsequent start up."
     (require 'nxml-mode)
     (require 'rg)
     (require 'tramp)
+    (require 'help-fns)
+    (require 'apropos)
+    (require 'info)
+    (require 'browse-url)
+    (require 'goto-addr)
     ;; (require 'winner) ; exclude winner. It breaks the dump.
     ;; (require 'magit) ; exclude magit until hook performance is resolved.
 

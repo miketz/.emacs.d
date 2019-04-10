@@ -250,7 +250,10 @@ END = end of region."
   (unless (ignore-errors (counsel-git))
     (let ((fn (cond
                ((eq system-type 'windows-nt) #'my-find-file-by-name-windows)
-               ((eq system-type 'gnu/linux) #'find-name-dired))))
+               ((eq system-type 'gnu/linux)
+                (lambda ()
+                  (interactive)
+                  (call-interactively #'find-name-dired))))))
       (funcall fn))))
 
 (defun my-indent-defun ()

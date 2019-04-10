@@ -18,13 +18,13 @@
   (interactive)
   (insert
    (format-time-string
-    "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%-I:%M%#p%nsecond: %S.%3N"
+    "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %-e, %Y%n%-I:%M%#p%nsecond: %S.%3N"
     ;; "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N"
     )))
 
 (defun my-insert-date-short ()
   (interactive)
-  (insert (format-time-string "%m-%d-%Y")))
+  (insert (format-time-string "%-m-%-d-%Y")))
 
 (defun my-insert-date-string-new-buff ()
   (interactive)

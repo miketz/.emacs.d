@@ -224,19 +224,44 @@ END = end of region."
     (cl-decf end)))
 
 (defun my-inject-newlines (pat1 pat2)
-  "Inject a new line between strings PAT1 and PAT2 throughout a buffer.
+  "Inject newlines throughout a buffer based on PAT1 and PAT2.
 Useful to break up long lines that cause performance issues.
+
+If PAT1 and PAT2 are supplied, a newline is injected between PAT1 and PAT2.
+If PAT1 is ommited a newline is injected before PAT2.
+If PAT2 is ommited a newline is injected after PAT1.
+
 For example in an html file you may break up long lines by injecting newlines
 between > and <."
   (interactive
    ;; wires up pat1 and pat2 args with user input if fn called interactively.
    (list (read-string "start pattern: ")
          (read-string "end pattern: ")))
-  (let ((full-pat (concat pat1 pat2))
-        (with-nl-injected (concat pat1 "\n" pat2)))
-    (goto-char 1)
-    (while (search-forward full-pat nil t)
-      (replace-match with-nl-injected))))
+  (save-excursion
+    (let ((has-pat1 (and (not (null pat1)) (not (string= "" pat1))))
+          (has-pat2 (and (not (null pat2)) (not (string= "" pat2)))))
+      (cond
+       ;; missing pat1. inject newline before pat2
+       ((and (not has-pat1) has-pat2)
+        (goto-char 1)
+        (let ((with-nl-injected (concat "\n" pat2)))
+          (while (search-forward pat2 nil t)
+            (replace-match with-nl-injected))))
+       ;; missing pat2. inject newline after pat1
+       ((and (not has-pat2) has-pat1)
+        (goto-char 1)
+        (let ((with-nl-injected (concat pat1 "\n")))
+          (while (search-forward pat1 nil t)
+            (replace-match with-nl-injected))))
+       ;; has pat1 and pat2.  inject newline between pat1 and pat2
+       ((and has-pat1 has-pat2)
+        (goto-char 1)
+        (let ((full-pat (concat pat1 pat2))
+              (with-nl-injected (concat pat1 "\n" pat2)))
+          (while (search-forward full-pat nil t)
+            (replace-match with-nl-injected))))
+       ;; missing both pat1 and pat2
+       (t (message "Please supply start and/or end patterns."))))))
 
 (defun my-list-holidays ()
   "List the major holidays."

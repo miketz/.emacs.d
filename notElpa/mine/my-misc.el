@@ -223,6 +223,21 @@ END = end of region."
     (replace-match "")
     (cl-decf end)))
 
+(defun my-inject-newlines (pat1 pat2)
+  "Inject a new line between strings PAT1 and PAT2 throughout a buffer.
+Useful to break up long lines that cause performance issues.
+For example in an html file you may break up long lines by injecting newlines
+between > and <."
+  (interactive
+   ;; wires up pat1 and pat2 args with user input if fn called interactively.
+   (list (read-string "start pattern: ")
+         (read-string "end pattern: ")))
+  (let ((full-pat (concat pat1 pat2))
+        (with-nl-injected (concat pat1 "\n" pat2)))
+    (goto-char 1)
+    (while (search-forward full-pat nil t)
+      (replace-match with-nl-injected))))
+
 (defun my-list-holidays ()
   "List the major holidays."
   (interactive)

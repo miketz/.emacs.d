@@ -748,6 +748,7 @@ in case that file does not provide any feature."
 (declare-function my-load-everything-for-pdump 'my-pdump)
 (declare-function my-make-pdump 'my-pdump)
 (declare-function my-delete-brackets 'my-misc)
+(declare-function my-inject-newlines 'my-misc)
 (declare-function my-list-holidays 'my-misc)
 (declare-function my-indent-defun 'my-misc)
 (declare-function my-win-count 'my-misc)
@@ -6409,6 +6410,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
+(autoload #'my-inject-newlines "my-misc" nil t)
 (autoload #'my-delete-brackets "my-misc" nil t)
 (autoload #'my-list-holidays "my-misc" nil t)
 

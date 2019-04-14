@@ -46,8 +46,9 @@ edge cases not covered by buffer killing."
       ;; (mapc 'kill-buffer to-kill)
       (cl-loop for b in to-kill
                do
-               (unless (eq 'erc-mode (buffer-mode b))
-                 (kill-buffer b))))))
+               (when (or current-prefix-arg ; C-u to kill erc buffers
+                         (not (eq 'erc-mode (buffer-mode b))))
+                   (kill-buffer b))))))
 
 (provide 'my-square-one)
 

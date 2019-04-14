@@ -1,4 +1,4 @@
-;;; package --- Kill all buffers helper -*- lexical-binding: t -*-
+;;; my-square-one.el --- Kill all buffers -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;;; Kills all the open buffers.  But excludes buffers based on a white list and

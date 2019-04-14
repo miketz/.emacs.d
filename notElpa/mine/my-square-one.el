@@ -1,5 +1,19 @@
-;;; -*- lexical-binding: t -*-
+;;; package --- Kill all buffers helper -*- lexical-binding: t -*-
 
+;;; Commentary:
+;;; Kills all the open buffers.  But excludes buffers based on a white list and
+;;; major mode detection.
+
+;;; Code:
+
+(require 'cl-lib)
+(require 'cl-seq)
+
+
+(defun buffer-mode (buffer-or-string)
+  "Return the major mode associated with BUFFER-OR-STRING."
+  (with-current-buffer buffer-or-string
+    major-mode))
 
 ;; Buffers to keep alive, even when wiping all buffers.
 (let ((my-keep-buffers
@@ -24,10 +38,17 @@ edge cases not covered by buffer killing."
     (interactive)
     (switch-to-buffer "*scratch*")
     (delete-other-windows)
-    ;;cl-set-difference does not work on strings.
-    ;;so use a set of buffer pointers, not buffer names
+    ;; cl-set-difference does not work on strings.
+    ;; so use a set of buffer pointers, not buffer names
     (let ((to-kill (cl-set-difference (buffer-list)
-                                      (mapcar 'get-buffer my-keep-buffers))))
-      (mapc 'kill-buffer to-kill))))
+                                      (mapcar #'get-buffer
+                                              my-keep-buffers))))
+      ;; (mapc 'kill-buffer to-kill)
+      (cl-loop for b in to-kill
+               do
+               (unless (eq 'erc-mode (buffer-mode b))
+                 (kill-buffer b))))))
 
 (provide 'my-square-one)
+
+;;; my-square-one.el ends here

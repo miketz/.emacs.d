@@ -4519,7 +4519,10 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; unkillable-scratch
 ;;;----------------------------------------------------------------------------
-(unkillable-scratch 1)
+(with-eval-after-load 'unkillable-scratch
+  (setq unkillable-scratch-behavior 'do-nothing)
+  (setq unkillable-scratch-do-not-reset-scratch-buffer t))
+(unkillable-scratch 1) ; autoloaded
 
 
 ;;;----------------------------------------------------------------------------

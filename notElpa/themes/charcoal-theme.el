@@ -62,6 +62,8 @@ Example:
        (ml-inact-bg  (aref `["#383838" "#3A3A3A" "#000000" "#0000FF"] i))
        (ml-bufferid  (aref `["#F0DFAF" "#FFFFAF" "#BEBEBE" "#FFFFFF"] i))
        (ivy-line-bg  (aref `["#000000" ,todo--bg "#0000CD" ,todo--bg] i))
+       (isearch-fg   (aref `["#FFFF00" ,fg-yellow ,fg-yellow ,fg-yellow] i))
+       (isearch-bg   (aref `["#000000" ,bg-yellow ,bg-yellow ,bg-yellow] i))
        (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
        (rain-2       (aref `["#00FFFF" "#00FFFF" "#00FFFF" "#00FFFF"] i))
@@ -347,8 +349,8 @@ Example:
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
    ;; isearch
-   `(isearch ((,class (:background "yellow"
-								   :foreground "black"
+   `(isearch ((,class (:background ,isearch-bg
+								   :foreground ,isearch-fg
 								   :weight bold
 								   :underline nil))))
    ;; the non-selected matches from isearch

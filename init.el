@@ -5740,7 +5740,7 @@ Closure over `preceding-sexp-fn'."
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p
-      (lispy-mode)))
+      (lispy-mode 1)))
   (add-hook 'clojure-mode-hook #'my-setup-clojure-mode))
 
 ;;;----------------------------------------------------------------------------
@@ -5772,7 +5772,7 @@ Closure over `preceding-sexp-fn'."
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p
-      (lispy-mode)))
+      (lispy-mode 1)))
   (add-hook 'cider-repl-mode-hook #'my-setup-cider-repl))
 
 ;;;----------------------------------------------------------------------------
@@ -5916,7 +5916,7 @@ Closure over `preceding-sexp-fn'."
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p
-      (lispy-mode)))
+      (lispy-mode 1)))
   (add-hook 'scheme-mode-hook #'my-setup-scheme))
 
 ;;;----------------------------------------------------------------------------
@@ -5933,7 +5933,7 @@ Closure over `preceding-sexp-fn'."
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p
-      (lispy-mode)))
+      (lispy-mode 1)))
   (add-hook 'geiser-repl-mode-hook #'my-setup-geiser-repl))
 
 ;;;----------------------------------------------------------------------------

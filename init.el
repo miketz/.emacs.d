@@ -1686,7 +1686,7 @@ This prevents overlapping themes; something I would rarely want."
      "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
 
  ((eq my-curr-computer 'work-laptop-bash)
-  (load-theme 'zenburn t))
+  (load-theme 'charcoal t))
 
  ((eq my-curr-computer 'leyna-laptop)
   (load-theme 'charcoal t)

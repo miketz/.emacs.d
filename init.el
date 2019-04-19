@@ -4262,8 +4262,11 @@ and indent."
   ;; it only affects the currently highlighted diff.
   (setq magit-diff-refine-hunk 'all)
 
-  ;; use colored graph lines. Could be a performance issue.
-  (add-to-list 'magit-log-arguments "--color")
+  ;; NOTE: var `magit-log-arguments' was removed. Only set it if using an
+  ;; older magit version. TODO: look into replacement for the newer magit.
+  (when (boundp 'magit-log-arguments)
+    ;; use colored graph lines. Could be a performance issue.
+    (add-to-list 'magit-log-arguments "--color"))
 
   ;; don't show recent commits when calling `magit-status'.
   ;; TODO: modify magit code so recent commits are not even queried if the

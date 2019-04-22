@@ -6484,10 +6484,10 @@ vanilla javascript buffers."
 
 
 ;; scroll like vim when moving 1 line off screen with j/k.
-;; has some weird rules about re-centering, but 100 is supposed to
+;; has some weird rules about re-centering, but >=101 is supposed to
 ;; not recenter. I had an issue with value 1 where if i held down
 ;; j to scroll, it would periodically recenter.
-(setq scroll-conservatively 100)
+(setq scroll-conservatively 101)
 ;; maintain cursor location when scrolling
 (setq scroll-preserve-screen-position nil)
 

@@ -277,6 +277,12 @@
     )
    ("k" er/expand-region)
    ("j" er/contract-region)
+   ("i" (lambda ()
+          (interactive)
+          (er/expand-region 2)))
+   ("u" (lambda ()
+          (interactive)
+          (er/contract-region 2)))
 
    ;; NOTE: don't bind C-g in the hydra as it messes up expand-region's ability
    ;; to jump back to the original starting point with C-g.

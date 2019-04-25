@@ -3899,9 +3899,9 @@ and indent."
 (let ((hook (if (boundp 'find-file-hook)
                 'find-file-hook      ; use new hook var if available
               'find-file-hooks))     ; else older emacs-version < 22.1
-      (fn (if (fboundp #'vc-refresh-state)
-              #'vc-refresh-state     ; use new hook fn if available.
-            #'vc-find-file-hook)))   ; else older emacs-version < 25.1
+      (fn (if (fboundp 'vc-refresh-state)
+              'vc-refresh-state      ; use new hook fn if available.
+            'vc-find-file-hook)))    ; else older emacs-version < 25.1
   ;; remove a vc source control hook that greatly slows down opening files.
   (remove-hook hook fn))
 

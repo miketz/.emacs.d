@@ -6453,6 +6453,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; eros
 ;;;----------------------------------------------------------------------------
+(with-eval-after-load 'eros
+  (setq eros-eval-result-prefix "")
+  (setq eros-eval-result-duration 'command))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

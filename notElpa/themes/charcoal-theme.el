@@ -360,8 +360,10 @@ Example:
 										  :underline t))))
 
    `(cider-result-overlay-face ((,class (:background ,bg-green
-													 :foreground ,fg-green
-													 :box (:line-width -1 :color "black")))))
+                                                     :foreground ,fg-green
+                                                     :box (:line-width -1 :color "black")))))
+
+   `(eros-result-overlay-face ((,class (:inherit cider-result-overlay-face))))
 
    `(header-line
      ((,class (:foreground ,fg-yellow

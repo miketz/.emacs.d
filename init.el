@@ -419,6 +419,8 @@ in case that file does not provide any feature."
 (defvar rg-align-position-numbers)
 (defvar rg-mode-map)
 (defvar rg-command-line-flags)
+(defvar eros-eval-result-prefix)
+(defvar eros-eval-result-duration)
 
 
 ;; suppress warnings on functions from files not yet loaded.
@@ -781,6 +783,8 @@ in case that file does not provide any feature."
 (declare-function rg-save-search-as-name 'rg)
 (declare-function rg-save-search 'rg)
 (declare-function my-find-file-omni 'my-misc)
+(declare-function eros--eval-overlay 'eros)
+(declare-function slime-eval 'slime)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

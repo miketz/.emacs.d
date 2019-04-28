@@ -1137,7 +1137,8 @@ Closure over executed-p."
     ;; (cquery ,(memq my-curr-computer '(wild-dog)))
     (websocket t)
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
-    (rg my-install-rg-p))
+    (rg my-install-rg-p)
+    (eros t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -1871,6 +1872,42 @@ This prevents overlapping themes; something I would rarely want."
                   (lambda ()
                     (unless (slime-connected-p)
                       (save-excursion (slime))))))))
+
+  ;; overlay using the 'eros package. TODO: wire-up to a keybind.
+  (defun slime-eval-last-sexp-overlay ()
+    (interactive)
+    (eros--eval-overlay
+     (let ((result (s-trim (slime-eval `(swank:pprint-eval ,(slime-last-expression))))))
+       (cond
+        ;; number or string, eval it
+        ((-contains-p '(?0 ?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?\")
+                      (string-to-char (substring result 0 1)))
+         (eval (car (read-from-string result))))
+
+        ;; eg #\\Newline
+        ((s-starts-with-p "#\\" result) result)
+
+        ;; cf http://www.lispworks.com/documentation/HyperSpec/Body/02_dh.htm
+        ;; eg #p"arst" => "#p arst"
+        ((s-starts-with-p "#" result)
+         (format "%s %s"
+                 (substring result 0 2)
+                 (substring result 3 (- (length result) 1))))
+
+        ;; maybe remove NIL from the end
+        ((s-ends-with-p "\nNIL" result) result)
+
+        ;; list
+        ((and (s-starts-with-p "(" result)
+              (s-ends-with-p ")" result))
+         (eval (car (read-from-string (format "(quote %s)" result)))))
+
+        ;; spaces, give up
+        ((s-contains-p " " result) result)
+
+        ;; symbol
+        (t (eval (car (read-from-string (format "(quote %s)" result)))))))
+     (point)))
 
   ;; (add-hook 'slime-mode-hook #'lispy-mode)
   ;; (add-hook 'slime-repl-mode-hook #'lispy-mode)
@@ -6412,6 +6449,10 @@ vanilla javascript buffers."
 ;; Host * ControlMaster auto ControlPath ~/.ssh/master-socket/%r@%h:%p ControlP
 ;; ersist 3s
 ;; There are other options too.
+
+;;;----------------------------------------------------------------------------
+;;; eros
+;;;----------------------------------------------------------------------------
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

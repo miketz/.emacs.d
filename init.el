@@ -421,6 +421,8 @@ in case that file does not provide any feature."
 (defvar rg-command-line-flags)
 (defvar eros-eval-result-prefix)
 (defvar eros-eval-result-duration)
+(defvar unkillable-scratch-behavior)
+(defvar unkillable-scratch-do-not-reset-scratch-buffer)
 
 
 ;; suppress warnings on functions from files not yet loaded.
@@ -785,6 +787,11 @@ in case that file does not provide any feature."
 (declare-function my-find-file-omni 'my-misc)
 (declare-function eros--eval-overlay 'eros)
 (declare-function slime-eval 'slime)
+(declare-function -contains-p 'dash)
+(declare-function s-starts-with-p 's)
+(declare-function s-ends-with-p 's)
+(declare-function s-contains-p 's)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1880,6 +1887,8 @@ This prevents overlapping themes; something I would rarely want."
                       (save-excursion (slime))))))))
 
   ;; overlay using the 'eros package. TODO: wire-up to a keybind.
+  (require 'dash)
+  (require 's)
   (defun slime-eval-last-sexp-overlay ()
     (interactive)
     (eros--eval-overlay

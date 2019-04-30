@@ -39,34 +39,40 @@ load, and then run them."
     (delete-char (1- (point-max)))
 
     ;; append autoload code of each package into the dump file
-    (cl-loop
-     for dir in (directory-files "~/.emacs.d/elpa" t "^[^.]" t)
-     do
-     (cl-loop
-      for a in (directory-files dir t "-autoloads.el$" t)
-      do
-      ;; append text to `my-autoloads-dump-file'
-      (insert "\n")
-      (insert (format "\n(add-to-list 'load-path \"%s\")\n" dir))
+    (let* ((dir-infos (cl-remove-if-not
+                       (lambda (f)
+                         (cl-second f))
+                       (directory-files-and-attributes "~/.emacs.d/elpa"
+                                                       t "^[^.]" t)))
+           (dir-names (mapcar #'cl-first dir-infos)))
+      (cl-loop
+       for dir in dir-names
+       do
+       (cl-loop
+        for a in (directory-files dir t "-autoloads.el$" t)
+        do
+        ;; append text to `my-autoloads-dump-file'
+        (insert "\n")
+        (insert (format "\n(add-to-list 'load-path \"%s\")\n" dir))
 
-      ;; TODO: copy/paste the s-replace function(s) into
-      ;; init.el becuase this code executes before all the
-      ;; package stuff is set up.
+        ;; TODO: copy/paste the s-replace function(s) into
+        ;; init.el becuase this code executes before all the
+        ;; package stuff is set up.
 
-      ;; comment out the adds to load-path from the autoload
-      ;; file as it detects the current folder ~/.emacs.d/
-      ;; which is not the actual package folder.
-      (let ((autoload-file-str (my-get-string-from-file a)))
-        (setq autoload-file-str
-              (s-replace "(add-to-list 'load-path (directory-file-name"
-                         "(fake-add-to-list 'load-path '(directory-file-name"
-                         autoload-file-str))
-        ;; allow byte-compiling
-        (setq autoload-file-str
-              (s-replace "no-byte-compile: t"
-                         "no-byte-compile: nil"
-                         autoload-file-str))
-        (insert autoload-file-str))))
+        ;; comment out the adds to load-path from the autoload
+        ;; file as it detects the current folder ~/.emacs.d/
+        ;; which is not the actual package folder.
+        (let ((autoload-file-str (my-get-string-from-file a)))
+          (setq autoload-file-str
+                (s-replace "(add-to-list 'load-path (directory-file-name"
+                           "(fake-add-to-list 'load-path '(directory-file-name"
+                           autoload-file-str))
+          ;; allow byte-compiling
+          (setq autoload-file-str
+                (s-replace "no-byte-compile: t"
+                           "no-byte-compile: nil"
+                           autoload-file-str))
+          (insert autoload-file-str)))))
     (save-buffer)
     (byte-compile-file my-autoloads-dump-file)))
 

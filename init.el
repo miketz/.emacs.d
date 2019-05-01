@@ -4903,7 +4903,8 @@ END of region."
 ;; Configure
 (eval-after-load 'mode-on-region
   '(progn
-     (setq mor-format-automatically-p nil)
+     (setq mor-format-automatically-p t)
+     (setq mor-fix-whitespace-p t)
      (setq mor-readonly-for-extra-protection-p t)
      (custom-set-faces
       `(mor-readonly-face

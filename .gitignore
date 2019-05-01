@@ -40,3 +40,5 @@
 /transient/
 /.lsp-session-v1
 dump.pdmp
+package-quickstart.el
+package-quickstart.elc

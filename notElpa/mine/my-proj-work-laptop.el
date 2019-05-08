@@ -216,6 +216,17 @@
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
   (eww-open-file "c:/Users/mtz/books/PracticalCommonLisp_ePub/html/index.html"))
 
+(defun my-proj-ticpp ()
+  "Open the Thinking in C++ ebook."
+  (interactive)
+  (delete-other-windows)
+  (switch-to-buffer "cpp-test")
+  (split-window-horizontally)
+  (shrink-window-horizontally 24)
+  ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
+  (eww-open-file
+   "c:/Users/mtz/books/TICPP-2nd-ed-Vol-one/TICPP-2nd-ed-Vol-one-html/SimpleContents.html"))
+
 (defun my-proj-paip ()
   "Open the PAIP book."
   (interactive)

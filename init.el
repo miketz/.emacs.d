@@ -3884,6 +3884,7 @@ and indent."
     (autoload #'my-proj-paip lisp-file nil t)
     (autoload #'my-proj-emacs-manual lisp-file nil t)
     (autoload #'my-proj-sicp lisp-file nil t)
+    (autoload #'my-proj-ticpp lisp-file nil t)
     (defun my-bookmarks-web ()
       "My browser bookmarks from IE saved to a text file."
       (interactive)

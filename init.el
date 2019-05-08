@@ -169,6 +169,7 @@ in case that file does not provide any feature."
 ;;;----------------------------------------------------------------------------
 ;; let bound dynamic vars. ensure they are bound dynamically
 (defvar mor-format-automatically-p)
+(defvar mor-fix-whitespace-p)
 (defvar mor-switch-buff-fn)
 (defvar mor-readonly-for-extra-protection-p)
 (defvar mor-mode-fn)

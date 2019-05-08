@@ -3225,8 +3225,9 @@ and indent."
         (flycheck-mode 1)))
 
     (electric-spacing-mode 1)
-    (when (fboundp #'fci-mode)
-      (fci-mode 1)))
+    ;; (when (fboundp #'fci-mode)
+    ;;   (fci-mode 1))
+    )
   (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
 
   (defun my-setup-c-mode ()

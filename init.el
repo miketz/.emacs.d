@@ -681,6 +681,7 @@ in case that file does not provide any feature."
 (declare-function my-proj-imgtag 'suppress)
 (declare-function my-proj-cpp 'suppress)
 (declare-function my-proj-tcpl 'suppress)
+(declare-function my-proj-ticpp 'suppress)
 (declare-function my-open-user-folder 'suppress)
 (declare-function my-open-dev-folder 'suppress)
 (declare-function my-current-file-path 'suppress)

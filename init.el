@@ -1153,7 +1153,8 @@ Closure over executed-p."
     (websocket t)
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
     (rg my-install-rg-p)
-    (eros t))
+    (eros t)
+    (hl-block-mode t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)

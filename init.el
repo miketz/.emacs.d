@@ -3253,6 +3253,7 @@ and indent."
 
   (defun my-setup-c++-mode ()
     (progn ;; use linux style tabbing/indentation.
+      (c-set-offset 'innamespace [0]) ;; disable namesapce indentation.
       ;; these values should be buffer local.
       (setq c-basic-offset my-indent-width-c)
       (setq tab-width my-indent-width-c)

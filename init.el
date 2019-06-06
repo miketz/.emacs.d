@@ -6483,6 +6483,11 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
+(when (eq system-type 'windows-nt)
+  ;; performance tweak for weird fonts on windows.
+  ;; see https://github.com/sabof/org-bullets/issues/11
+  (setq inhibit-compacting-font-caches t))
+
 (autoload #'my-inject-newlines "my-misc" nil t)
 (autoload #'my-delete-brackets "my-misc" nil t)
 (autoload #'my-list-holidays "my-misc" nil t)

@@ -71,6 +71,11 @@
 (when (>= emacs-major-version 25)
   (global-eldoc-mode 0))
 
+(when (eq system-type 'windows-nt)
+  ;; performance tweak for weird fonts on windows.
+  ;; see https://github.com/sabof/org-bullets/issues/11
+  (setq inhibit-compacting-font-caches t))
+
 (defun my-load-full-init ()
   (interactive)
   (load "~/.emacs.d/init.el"))

@@ -1677,7 +1677,8 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-color-spacemacs-light file nil t)
   (autoload #'my-color-tango-dark file nil t)
   (autoload #'my-color-sunburn file nil t)
-  (autoload #'my-color-overcast file nil t))
+  (autoload #'my-color-overcast file nil t)
+  (autoload #'my-color-warm-night file nil t))
 
 (when my-graphic-p ;; transparency stuff
   (autoload #'my-change-alpha-more-solid "my-misc" nil t)

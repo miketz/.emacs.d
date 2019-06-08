@@ -1391,4 +1391,18 @@
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
+(defun my-color-warm-night ()
+  (interactive)
+  (load-theme 'warm-night t)
+  (my-rainbow-parens-dark-bg)
+
+  (custom-theme-set-faces
+   'warm-night
+
+
+   `(region ((t (:background "#69685E"))))
+
+   '(completions-common-part ((t (:foreground "gray60"))))
+   '(completions-first-difference ((t (:foreground "yellow"))))))
+
 (provide 'my-color-theme-mods)

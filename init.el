@@ -424,7 +424,7 @@ in case that file does not provide any feature."
 (defvar eros-eval-result-duration)
 (defvar unkillable-scratch-behavior)
 (defvar unkillable-scratch-do-not-reset-scratch-buffer)
-
+(defvar ido-decorations)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -2975,6 +2975,11 @@ To make it human readable."
   )
 
 (with-eval-after-load 'ido
+
+  (setf (nth 0 ido-decorations) nil)
+  (setf (nth 1 ido-decorations) nil)
+  (setf (nth 2 ido-decorations) "\n") ; vertical style
+  (setf (nth 3 ido-decorations) " ...")
 
   (defun my-ido-find-file ()
     "Calls `ido-find-file'.

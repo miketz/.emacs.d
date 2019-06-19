@@ -2976,10 +2976,10 @@ To make it human readable."
 
 (with-eval-after-load 'ido
 
-  (setf (nth 0 ido-decorations) nil)
-  (setf (nth 1 ido-decorations) nil)
-  (setf (nth 2 ido-decorations) "\n") ; vertical style
-  (setf (nth 3 ido-decorations) " ...")
+  ;; (setf (nth 0 ido-decorations) nil)
+  ;; (setf (nth 1 ido-decorations) nil)
+  ;; (setf (nth 2 ido-decorations) "\n") ; vertical style
+  ;; (setf (nth 3 ido-decorations) " ...")
 
   (defun my-ido-find-file ()
     "Calls `ido-find-file'.

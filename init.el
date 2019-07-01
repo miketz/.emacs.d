@@ -1155,7 +1155,7 @@ Closure over executed-p."
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
     (rg my-install-rg-p)
     (eros t)
-    (hl-block-mode t))
+    (hl-block-mode ,(not (version< emacs-version "26.0"))))
   "Packages I use from elpa/melpa.")
 
 (require 'package)

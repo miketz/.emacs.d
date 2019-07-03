@@ -1976,6 +1976,18 @@ This prevents overlapping themes; something I would rarely want."
                (default-indent-new-line)
                (insert output value)
                (evil-normal-state))))))))
+
+  (require 'eros)
+  (defun slime-eval-last-expression-eros ()
+    (interactive)
+    (save-excursion
+      (forward-char)
+      (cl-destructuring-bind (output value)
+          (slime-eval `(swank:eval-and-grab-output ,(slime-last-expression)))
+        (eros--make-result-overlay (concat output value)
+          :where (point)
+          :duration eros-eval-result-duration))))
+
   (when my-use-evil-p
     ;; NOTE: `evil-leader/set-key-for-mode' doesn't work for minor modes
     ;;       like `slime-mode'. Binding for `lisp-mode' instead since I
@@ -1984,9 +1996,11 @@ This prevents overlapping themes; something I would rarely want."
     ;;       even an alternative to `evil-leader' itself.
     ;; (evil-leader/set-key-for-mode 'slime-mode "e" eval-fn)
     (evil-leader/set-key-for-mode 'lisp-mode "e"
-      #'my-slime-eval-last-sexp-display)
+      ;#'my-slime-eval-last-sexp-display
+      #'slime-eval-last-expression-eros)
     (evil-leader/set-key-for-mode 'slime-repl-mode "e"
-      #'my-slime-eval-last-sexp-display))
+      ;#'my-slime-eval-last-sexp-display
+      #'slime-eval-last-expression-eros))
 
   ;; set link to common lisp hyperspec.
   (setq common-lisp-hyperspec-root

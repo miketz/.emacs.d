@@ -4,7 +4,6 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://github.com/bbatsov/zenburn-emacs
-;; Package-Version: 20181014.1555
 ;; Version: 2.7-snapshot
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -36,6 +35,7 @@
 
 (defgroup zenburn-theme nil
   "Zenburn theme."
+  :group 'faces
   :prefix "zenburn-theme-"
   :link '(url-link :tag "GitHub" "http://github.com/bbatsov/zenburn-emacs")
   :tag "Zenburn theme")
@@ -785,6 +785,10 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(helm-moccur-buffer ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
    `(helm-mu-contacts-address-face ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
    `(helm-mu-contacts-name-face ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
+;;;;; helm-lxc
+   `(helm-lxc-face-frozen ((t (:foreground ,zenburn-blue :background ,zenburn-bg))))
+   `(helm-lxc-face-running ((t (:foreground ,zenburn-green :background ,zenburn-bg))))
+   `(helm-lxc-face-stopped ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
 ;;;;; helm-swoop
    `(helm-swoop-target-line-face ((t (:foreground ,zenburn-fg :background ,zenburn-bg+1))))
    `(helm-swoop-target-word-face ((t (:foreground ,zenburn-yellow :background ,zenburn-bg+2 :weight bold))))
@@ -1193,7 +1197,9 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-ellipsis ((t (:foreground ,zenburn-yellow-1 :underline t))))
    `(org-footnote ((t (:foreground ,zenburn-cyan :underline t))))
    `(org-document-title ((t (:inherit ,z-variable-pitch :foreground ,zenburn-blue
-                                         :weight bold :height ,zenburn-height-plus-4))))
+                                      :weight bold
+                                      ,@(when zenburn-scale-org-headlines
+                                          (list :height zenburn-height-plus-4))))))
    `(org-document-info ((t (:foreground ,zenburn-blue))))
    `(org-habit-ready-face ((t :background ,zenburn-green)))
    `(org-habit-alert-face ((t :background ,zenburn-yellow-1 :foreground ,zenburn-bg)))
@@ -1394,6 +1400,8 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(speedbar-selected-face ((t (:foreground ,zenburn-red))))
    `(speedbar-separator-face ((t (:foreground ,zenburn-bg :background ,zenburn-blue-1))))
    `(speedbar-tag-face ((t (:foreground ,zenburn-yellow))))
+;;;;; swiper
+   `(swiper-isearch-current-match ((t (:foreground ,zenburn-bg :background ,zenburn-blue-1))))
 ;;;;; sx
    `(sx-custom-button
      ((t (:background ,zenburn-fg :foreground ,zenburn-bg-1

@@ -173,6 +173,9 @@ in case that file does not provide any feature."
 (defvar mor-switch-buff-fn)
 (defvar mor-readonly-for-extra-protection-p)
 (defvar mor-mode-fn)
+(defvar mor-tmp-buffer-mode-map)
+(defvar mor-allow-tmp-files-p)
+(defvar mor-modes-to-create-tmp-files)
 (defvar helm-candidate-number-limit)
 (defvar ivy-height)
 (defvar w3-default-homepage)
@@ -333,7 +336,6 @@ in case that file does not provide any feature."
 (defvar ivy-initial-inputs-alist)
 (defvar ivy-re-builders-alist)
 (defvar ivy-display-style)
-(defvar mor-tmp-buffer-mode-map)
 (defvar lispy-avy-style-char)
 (defvar lispy-avy-style-paren)
 (defvar lispy-avy-style-symbol)
@@ -793,7 +795,8 @@ in case that file does not provide any feature."
 (declare-function s-starts-with-p 's)
 (declare-function s-ends-with-p 's)
 (declare-function s-contains-p 's)
-
+(declare-function eros--make-result-overlay 'eros)
+(declare-function slime-eval-last-expression-eros 'suppress)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

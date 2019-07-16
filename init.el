@@ -2529,6 +2529,15 @@ In that case, insert the number."
   ;;                       1 2 3))
   ;; (add-to-list 'compilation-error-regexp-alist 'jslint)
 
+  (defun my-set-jslint-compile-command ()
+    "Set the `compile-command' to jslint."
+    (interactive)
+    ;; wireup M-x compile
+    (when buffer-file-name
+      (set (make-local-variable 'compile-command)
+           (concat "jslint --terse "
+                   (shell-quote-argument buffer-file-name)))))
+
   (defun my-js2-init ()
     (js2-highlight-unused-variables-mode t)
     ;; replace ambiguous name "Javascript-IDE" with "js2"

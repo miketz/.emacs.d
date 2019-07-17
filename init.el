@@ -176,6 +176,7 @@ in case that file does not provide any feature."
 (defvar mor-tmp-buffer-mode-map)
 (defvar mor-allow-tmp-files-p)
 (defvar mor-modes-to-create-tmp-files)
+(defvar mor-auto-delete-tmp-files-p)
 (defvar helm-candidate-number-limit)
 (defvar ivy-height)
 (defvar w3-default-homepage)
@@ -4957,8 +4958,9 @@ END of region."
      (setq mor-format-automatically-p t)
      (setq mor-fix-whitespace-p t)
      (setq mor-readonly-for-extra-protection-p t)
-     (setq mor-allow-tmp-files-p t
-           mor-modes-to-create-tmp-files '(js2-mode js-mode))
+     (setq mor-allow-tmp-files-p         t
+           mor-modes-to-create-tmp-files '(js2-mode js-mode)
+           mor-auto-delete-tmp-files-p   t)
      (custom-set-faces
       `(mor-readonly-face
         ((t (:background "black" :foreground "red" :strike-through t)))))

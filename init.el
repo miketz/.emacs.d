@@ -1610,6 +1610,8 @@ This prevents overlapping themes; something I would rarely want."
 (ad-activate 'load-theme)
 
 
+(defvar my-themes '(charcoal dark-bright cmd ultimate)
+  "Themes I created.")
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
 (defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")

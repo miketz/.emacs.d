@@ -428,6 +428,8 @@ in case that file does not provide any feature."
 (defvar unkillable-scratch-behavior)
 (defvar unkillable-scratch-do-not-reset-scratch-buffer)
 (defvar ido-decorations)
+(defvar inhibit-compacting-font-caches)
+(defvar use-default-font-for-symbols)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

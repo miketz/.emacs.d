@@ -4681,7 +4681,7 @@ TODO: call this function when it works."
       )))
 
 (with-eval-after-load 'swiper
-  (setq swiper-isearch-highlight-delay '(2 0.4))
+  (setq swiper-isearch-highlight-delay '(2 0.8))
   (define-key swiper-map (kbd "C-SPC") #'swiper-avy)
   (define-key swiper-all-map (kbd "C-SPC") #'swiper-avy))
 

@@ -920,17 +920,14 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using combination of several narrowing packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn (cond ((eq my-curr-computer 'wild-dog) #'swiper)
-                          ((eq my-curr-computer 'work-laptop) #'swiper)
-                          ((eq my-curr-computer 'work-laptop-bash) #'swiper)
-                          ((eq my-curr-computer 'a-laptop-faster) #'swiper)
-                          (my-use-ivy-p #'swiper)
+(defvar my-swoop-fn (cond (t #'swiper-isearch) ; always use this for now.
+                          (my-use-ivy-p #'swiper-isearch)
                           ;; `ido-occur' is fast but does not split inputs on
                           ;; spaces. use swiper with ido for now.
-                          (my-use-ido-p #'swiper)
+                          (my-use-ido-p #'swiper-isearch)
                           (my-use-bare-ido-p #'my-occur-wild-spaces)
                           (my-use-helm-p #'helm-swoop)
-                          (my-use-mish-mash-p #'swiper)
+                          (my-use-mish-mash-p #'swiper-isearch)
                           ;; `sallet-occur' is unusably slow. Don't use it.
                           ;; `icicle-occur' is unusably slow. Don't use it.
                           (t #'my-occur-wild-spaces))
@@ -2980,10 +2977,6 @@ To make it human readable."
 ;;;----------------------------------------------------------------------------
 (when (or my-use-ido-p
           my-use-bare-ido-p)
-  ;;use swiper on "s" even when using ido.
-  ;; (when my-use-evil-p
-  ;;   (define-key evil-normal-state-map (kbd "s") #'swiper))
-
   ;; ;; icomplete's display is similar to ido. So use it for completions ido
   ;; ;; does not support. (ie `describe-function' `load-theme' etc)
   ;; (icomplete-mode 1)
@@ -4658,11 +4651,10 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 (when my-use-ivy-p
   (when my-use-evil-p
-    ;; (define-key evil-normal-state-map (kbd "s") #'swiper)
     (evil-leader/set-key "b" #'ivy-switch-buffer))
 
   (when (eq my-ui-type 'emacs)
-    (global-set-key (kbd "C-c C-s") #'swiper)
+    (global-set-key (kbd "C-c C-s") #'swiper-isearch)
     (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
 
   (progn ;; counsel completion augmentation

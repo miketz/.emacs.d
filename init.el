@@ -4802,6 +4802,9 @@ TODO: call this function when it works."
 ;;              (error "Unexpected"))))))
 
 (with-eval-after-load 'counsel
+  ;; (setq counsel-grep-base-command
+  ;;       "rg -i -M 120 --no-heading --line-number --color never %s %s")
+
   ;; redefine `counsel--load-theme-action' to not require confirmation
   ;; TODO: find an alternative to redefine so I don't have to manually
   ;;       merge with the latest version of `counsel--load-theme-action'

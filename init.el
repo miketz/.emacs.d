@@ -6526,7 +6526,7 @@ vanilla javascript buffers."
   (global-so-long-mode 1))
 
 ;;;----------------------------------------------------------------------------
-;;; ctags. universal ctags or exhuberant ctags.
+;;; ctags. universal ctags or exuberant ctags.
 ;;;----------------------------------------------------------------------------
 (defvar my-ctags-exe
   (cond ((eq my-curr-computer 'work-laptop)

@@ -6526,6 +6526,29 @@ vanilla javascript buffers."
   (global-so-long-mode 1))
 
 ;;;----------------------------------------------------------------------------
+;;; ctags. universal ctags or exhuberant ctags.
+;;;----------------------------------------------------------------------------
+(defvar my-ctags-exe
+  (cond ((eq my-curr-computer 'work-laptop)
+         "c:/users/mtz/programs/ctags-2019-07-18_ff180005-x64/ctags.exe")
+        ((eq my-curr-computer 'work-laptop-bash)
+         "ctags")
+        (t nil)))
+
+(cl-defun my-create-ctags (dir-name)
+  "Create tags file using DIR-NAME as project root."
+  (interactive "DDirectory: ")
+  ;; GUARD: must have ctags program configured in `my-ctags-exe'.
+  (when (null my-ctags-exe)
+      (message "Set path to ctags in my-ctags-exe.")
+      (cl-return-from my-create-ctags))
+
+  (shell-command
+   (format "%s -f TAGS -e -R %s"
+           my-ctags-exe
+           (directory-file-name dir-name))))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)

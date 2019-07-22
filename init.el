@@ -933,7 +933,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                           ;; `icicle-occur' is unusably slow. Don't use it.
                           (t #'my-occur-wild-spaces))
   "Function for searching with an overview.
-Choices: helm-swoop swiper")
+Choices: helm-swoop swiper swiper-isearch ido-occur sallet-occur icicle-occur
+occur my-occur-wild-spaces")
 (when my-use-evil-p
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))

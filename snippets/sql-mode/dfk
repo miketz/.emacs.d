@@ -4,5 +4,5 @@
 # key: dfk
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-if exists(select * from information_schema.referential_constraints where constraint_schema='$1' and constraint_name='FK_$2_$3')
-    alter table ${1:dbo}.${2:/*FKtab*/} drop FK_$2_${3:/*UKtab*/};$0
+if exists(select * from information_schema.referential_constraints where constraint_schema='$1' and constraint_name='FK_$2_$3_$4')
+    alter table ${1:dbo}.${2:/*FKtab*/} drop FK_$2_${3:/*col*/}_${4:/*UKtab*/};$0

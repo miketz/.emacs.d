@@ -74,6 +74,42 @@
 
 
 
+(let* ((colors [("#35352B" . "charcoal")
+                ("#262626" . "charcoal256")
+                ("#3F3F3F" . "zenburn")
+                ("black" . "black")
+                ("#24221c" . "desert-night") ; vim
+                ("#282828" . "gruvbox")]) ; vim
+       (len (length colors))
+       (i 0))
+
+  (defun my-cycle-dark-bg-set-index (new-i)
+    (interactive "n") ; read new index from minibuffer if not provided.
+    (setq i (if (or (>= new-i len)
+                    (< new-i 0))
+                (mod new-i len) ; if i out of range then wrap via mod.
+              new-i))
+    (let* ((pair (aref colors i))
+           (bg (car pair))
+           (descr (cdr pair)))
+      (set-background-color bg)
+      (message (format "color %d/%d. %s, %s"
+                       (1+ i) len bg descr))))
+
+  (defun my-cycle-dark-bg (step)
+    (interactive "n") ; read `step' from minibuffer if not provided.
+    (my-cycle-dark-bg-set-index (+ i step)))
+
+  (defun my-cycle-dark-bg-forward ()
+    (interactive)
+    (my-cycle-dark-bg 1))
+
+  (defun my-cycle-dark-bg-backward ()
+    (interactive)
+    (my-cycle-dark-bg -1)))
+
+
+
 
 
 (defvar helm-candidate-number-limit)

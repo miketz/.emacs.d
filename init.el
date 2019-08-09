@@ -6549,6 +6549,15 @@ vanilla javascript buffers."
            (directory-file-name dir-name))))
 
 ;;;----------------------------------------------------------------------------
+;;; libvterm
+;;;----------------------------------------------------------------------------
+(when (eq my-curr-computer 'wild-dog)
+  (add-to-list 'load-path "~/proj/emacs-libvterm/")
+  ;; (require 'vterm)
+  (autoload #'vterm "vterm" nil t))
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)

@@ -48,7 +48,7 @@ For faster subsequent start up."
     (require 'my-horizontal-scroll)
     (require 'my-line-nums)
     (require 'my-misc)
-    ;; (require 'my-pdump) ; we're already in here, but just to be complete.
+    (require 'my-pdump) ; we're already in here, but just to be complete.
 
     ;; 3rd party libs.
     (require 'company)

@@ -9,6 +9,7 @@
 ;; Function `my-handle-weird-theme-setups' lives in init.el.
 ;; That may change soon.
 (declare-function my-handle-weird-theme-setups 'suppress)
+(defvar my-install-slime-p) ; from init.el
 
 
 (defun my-load-everything-for-pdump ()
@@ -47,7 +48,7 @@ For faster subsequent start up."
     (require 'my-horizontal-scroll)
     (require 'my-line-nums)
     (require 'my-misc)
-    (require 'my-pdump) ; we're already in here, but just to be complete.
+    ;; (require 'my-pdump) ; we're already in here, but just to be complete.
 
     ;; 3rd party libs.
     (require 'company)
@@ -75,7 +76,8 @@ For faster subsequent start up."
     (require 'org-macs)
     (require 'org-loaddefs)
     (require 'calendar)
-    (require 'slime)
+    (when my-install-slime-p
+      (require 'slime))
     (require 'eww)
     (require 'js)
     (require 'js2-mode)

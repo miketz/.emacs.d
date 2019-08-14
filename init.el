@@ -1229,7 +1229,8 @@ Installs packages in the list `my-packages'."
           (message "installing pkg: %s" (symbol-name pkg))
           (package-install pkg))))))
 
-(my-install-packages)
+(unless (eq my-curr-computer 'work-laptop-bash)
+  (my-install-packages))
 
 (defun my-upgrade-packages ()
   "Upgrade installed packages.

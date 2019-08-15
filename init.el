@@ -1204,13 +1204,14 @@ Closure over executed-p."
         (websocket . "melpa")))
 
 ;; (setq package-enable-at-startup nil)
-(cond
- ;; older emacs
- ((version< emacs-version "27.0")
-  (package-initialize)) ;; activate all the packages (in particular autoloads)
- ;; newer emacs
- ((not package--initialized)
-  (package-initialize t)))
+;; (cond
+;;  ;; older emacs
+;;  ((version< emacs-version "27.0")
+;;   (package-initialize)) ;; activate all the packages (in particular autoloads)
+;;  ;; newer emacs
+;;  ((not package--initialized)
+;;   (package-initialize t)))
+(package-initialize)
 
 (defun my-install-packages ()
   "Call this function on a new Emacs installation to install packages.
@@ -5577,7 +5578,7 @@ Closure over `preceding-sexp-fn'."
   ;; NOTE: `winner-redo' only works if invoked immediately after `winner-undo'.
   ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
-(winner-mode 1)
+;; (winner-mode 1)
 
 ;;;----------------------------------------------------------------------------
 ;;; js2-highlight-vars

@@ -431,6 +431,7 @@ in case that file does not provide any feature."
 (defvar inhibit-compacting-font-caches)
 (defvar use-default-font-for-symbols)
 (defvar swiper-isearch-highlight-delay)
+(defvar mini-modeline-update-interval)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

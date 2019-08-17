@@ -1161,7 +1161,8 @@ Closure over executed-p."
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
     (rg my-install-rg-p)
     (eros t)
-    (hl-block-mode ,(not (version< emacs-version "26.0"))))
+    (hl-block-mode ,(not (version< emacs-version "26.0")))
+    (mini-modeline t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -6558,6 +6559,11 @@ vanilla javascript buffers."
   ;; (require 'vterm)
   (autoload #'vterm "vterm" nil t))
 
+;;;----------------------------------------------------------------------------
+;;; mini-modeline
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'mini-modeline
+  (setq mini-modeline-update-interval 0.2))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

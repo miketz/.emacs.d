@@ -19,9 +19,7 @@
 
 (deftheme charcoal "Charcoal color theme")
 
-(defvar charcoal-color-cnt (min (display-color-cells)
-                                (length (list-colors-duplicates
-                                         (defined-colors))))
+(defvar charcoal-color-cnt (display-color-cells)
   "The color count of the computer.
 Used to decide the most colorful version of the theme that can be used.
 

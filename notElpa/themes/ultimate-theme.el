@@ -1,0 +1,503 @@
+;;; ultimate-theme.el --- Light pastelish -*- lexical-binding: t -*-
+
+;;; Commentary:
+;;; Lexical binding is not required for this theme.  It is only used as a
+;;; micro-optimization for variable lookups in the let statement.
+
+;;; Code:
+
+(deftheme ultimate "Ultimate color theme")
+
+(let* ((class        t)
+       (todo--fg "black")
+       (todo--bg "white")
+       (i 0)
+       ;; Color Palette
+       (bg           "#D5D1B3")
+       (fg           "#000000")
+       (bg-purple    (aref `["#440033" "#5F005F" "#8B008B" "#000000"] i))
+       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" "#FF00FF" "#FF00FF"] i))
+       (bg-green     (aref `["#004400" "#005F00" "#228B22" "#000000"] i))
+       (fg-green     (aref `["#98FB98" "#00FF87" "#00FF00" "#00FF00"] i))
+       (bg-yellow    (aref `["#3A3A00" "#5F5F00" "#A0522D" "#000000"] i))
+       (fg-yellow    (aref `["#FFFF00" "#FFFF00" "#FFFFFF" "#FFFF00"] i))
+       (bg-red       (aref `["#300000" ,todo--bg "#000000" ,todo--bg] i))
+       (fg-red       (aref `["#FF0000" ,todo--fg "#FF0000" ,todo--fg] i))
+       (faint        (aref `["#4D4D3D" "#303030" "#666666" "#0000FF"] i))
+       (fainter      (aref `["#3F3F35" ,todo--fg "#0000CD" ,todo--fg] i))
+       (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
+       (keyword      (aref `["#EEDD82" "#FFAFFF" "#FFFFFF" "#FFFFFF"] i))
+       (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" "#00FFFF"] i))
+       (highlight    (aref `["#8B5742" "#4E4E4E" "#228B22" "#FF00FF"] i))
+       (popup-bg     (aref `["#222222" "#000000" "#0000CD" "#FFFF00"] i))
+       (scrollb-bg   (aref `["#000000" "#080808" "#666666" "#0000FF"] i))
+       (scrollb-fg   (aref `["#999999" "#BCBCBC" "#FFFFFF" "#FFFFFF"] i))
+       (mode-line-fg (aref `["#8DEECD" ,fg       "#BEBEBE" "#FFFFFF"] i))
+       (mode-line-bg (aref `["#000000" "#121212" "#0000CD" "#FFFF00"] i))
+       (ml-inact-fg  (aref `["gray" ,fg       "#BEBEBE" "#FFFFFF"] i))
+       (ml-inact-bg  (aref `["#000000" "#3A3A3A" "#000000" "#0000FF"] i))
+       (ml-bufferid  (aref `["#F0DFAF" "#FFFFAF" "#BEBEBE" "#FFFFFF"] i))
+       (ivy-line-bg  (aref `["#000000" ,todo--bg "#0000CD" ,todo--bg] i))
+       (isearch-fg   (aref `["#FFFF00" ,fg-yellow ,fg-yellow ,fg-yellow] i))
+       (isearch-bg   (aref `["#000000" ,bg-yellow ,bg-yellow ,bg-yellow] i))
+       (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
+       (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-2       (aref `["#00FFFF" "#00FFFF" "#00FFFF" "#00FFFF"] i))
+       (rain-2-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-3       (aref `["#FFFF00" "#FFFF00" "#A0522D" "#FFFF00"] i))
+       (rain-3-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-4       (aref `["#DDA0DD" "#D75FFF" "#FF00FF" "#FF00FF"] i))
+       (rain-4-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-5       (aref `["#7CFC00" "#00FF00" "#00FF00" "#00FF00"] i))
+       (rain-5-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-6       (aref `["#FFA500" "#FF8700" "#FFFFFF" "#FFFFFF"] i))
+       (rain-6-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-7       (aref `["#FFFFFF" "#FFFFFF" "#B22222" "#0000FF"] i))
+       (rain-7-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
+       (rain-8       (aref `["#FF69B4" "#FF87FF" "#00CED1" "#000000"] i))
+       (rain-8-bg    (aref `["#101010" "#080808" ,bg       "#FF00FF"] i))
+       (rain-9       (aref `["#CDAA7D" "#CDCD00" "#0000FF" "#000000"] i))
+       (rain-9-bg    (aref `[,bg       ,bg       ,bg       "#0000FF"] i))
+       (rain-fg-u    (aref `["#A0522D" "#AF0000" "#FFFFFF" "#FFFFFF"] i))
+
+       (rain-bg-u    (aref `["#000000" "#080808" "#FF0000" "#FF0000"] i))
+       (zenburn-fg+1     "#FFFFEF")
+       (zenburn-fg       "#DCDCCC")
+       (zenburn-fg-1     "#656555")
+       (zenburn-bg-2     "#000000")
+       (zenburn-bg-1     "#2B2B2B")
+       (zenburn-bg-05    "#383838")
+       (zenburn-bg       "#3F3F3F")
+       (zenburn-bg+05    "#494949")
+       (zenburn-bg+1     "#4F4F4F")
+       (zenburn-bg+2     "#5F5F5F")
+       (zenburn-bg+3     "#6F6F6F")
+       (zenburn-red+1    "#DCA3A3")
+       (zenburn-red      "#CC9393")
+       (zenburn-red-1    "#BC8383")
+       (zenburn-red-2    "#AC7373")
+       (zenburn-red-3    "#9C6363")
+       (zenburn-red-4    "#8C5353")
+       (zenburn-orange   "#DFAF8F")
+       (zenburn-yellow   "#F0DFAF")
+       (zenburn-yellow-1 "#E0CF9F")
+       (zenburn-yellow-2 "#D0BF8F")
+       (zenburn-green-1  "#5F7F5F")
+       (zenburn-green    "#7F9F7F")
+       (zenburn-green+1  "#8FB28F")
+       (zenburn-green+2  "#9FC59F")
+       (zenburn-green+3  "#AFD8AF")
+       (zenburn-green+4  "#BFEBBF")
+       (zenburn-cyan     "#93E0E3")
+       (zenburn-blue+1   "#94BFF3")
+       (zenburn-blue     "#8CD0D3")
+       (zenburn-blue-1   "#7CB8BB")
+       (zenburn-blue-2   "#6CA0A3")
+       (zenburn-blue-3   "#5C888B")
+       (zenburn-blue-4   "#4C7073")
+       (zenburn-blue-5   "#366060")
+       (zenburn-magenta  "#DC8CC3"))
+
+  ;; lightyellow2=#EEEED1
+  ;; snow3 gray80 lightyellow3
+
+  (custom-theme-set-variables
+   'ultimate
+
+   `(fci-rule-color ,faint)
+
+   `(evil-emacs-state-cursor    '(bar "cyan"))
+   `(evil-normal-state-cursor   '(hollow "spring green"))
+   `(evil-insert-state-cursor   '(bar "spring green"))
+   `(evil-visual-state-cursor   '(hollow "orange"))
+   `(evil-operator-state-cursor '(box "red"))
+   `(evil-replace-state-cursor  '(hbar "orange red"))
+   `(evil-motion-state-cursor   '(box "spring green"))
+
+   ;; ibuffer
+   `(ibuffer-filter-group-name-face '((,class :weight bold
+                                              :foreground ,fg
+                                              :background "black")))
+
+   ;; Duplicating the default vc-annotate colors for now.
+   ;; TODO: tailor them for the bg.
+   `(vc-annotate-color-map '((20 . "#FF3F3F")
+                             (40 . "#FF6C3F")
+                             (60 . "#FF993F")
+                             (80 . "#FFC63F")
+                             (100 . "#FFF33F")
+                             (120 . "#DDFF3F")
+                             (140 . "#B0FF3F")
+                             (160 . "#83FF3F")
+                             (180 . "#56FF3F")
+                             (200 . "#3FFF56")
+                             (220 . "#3FFF83")
+                             (240 . "#3FFFB0")
+                             (260 . "#3FFFDD")
+                             (280 . "#3FF3FF")
+                             (300 . "#3FC6FF")
+                             (320 . "#3F99FF")
+                             (340 . "#3F6CFF")
+                             (360 . "#3F3FFF")))
+   `(vc-annotate-very-old-color "blue3")
+
+   ;; pos-tip. Helper package for tooltip
+   `(pos-tip-foreground-color ,fg-green)
+   `(pos-tip-background-color ,bg-green))
+
+  (custom-theme-set-faces
+   'ultimate
+
+   `(default ((,class (:foreground ,fg :background ,bg))))
+
+   `(cursor ((,class (:background "spring green"))))
+
+   `(show-paren-match ((,class (:slant italic
+                                       :bold t
+                                       :strike-through t
+                                       :background nil))))
+
+   ;; line that separates vertically split windows.
+   `(vertical-border ((,class (:foreground "gray25"))))
+
+   `(mode-line
+     ((,class (:foreground ,mode-line-fg ;"#8FB28F"
+                           :background ,mode-line-bg ;"#2B2B2B"
+                           :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   `(mode-line-buffer-id ((,class (:foreground ,ml-bufferid ;"#F0DFAF"
+                                               :weight bold))))
+   `(mode-line-inactive
+     ((,class (:foreground ,ml-inact-fg ;"#5F7F5F"
+                           :background ,ml-inact-bg ;"#383838"
+                           :box (:line-width -1 :style released-button)))))
+
+   `(line-number ((,class '(:background "black"
+                                        :foreground "gray50"))))
+   `(line-number-current-line ((,class (:inherit line-number
+                                                 :foreground "#77AA55"
+                                                 :background "#171717"))))
+
+   `(region
+     ((,class (:background ,highlight))))     ;69685E
+
+   ;; TODO
+   `(fringe ((,class (:background "black"))))
+
+   ;; TODO font lock
+   ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
+   `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))
+   `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
+   ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
+   `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
+   `(font-lock-function-name-face ((,class (:foreground "pale turquoise"
+														:weight normal
+														:box (:line-width -1 :color ,faint-less)))))
+   `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
+   ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
+   ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
+   ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
+   ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
+   ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
+   ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
+   `(font-lock-variable-name-face ((,class (:foreground ,var))))
+   ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
+
+   `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
+
+   ;; hl-fill-column
+   `(hl-fill-column-face ((,class (:foreground ,fg-red
+											   :background ,bg-red))))
+
+   ;; avy
+   `(avy-lead-face ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
+   `(avy-lead-face-0 ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
+   ;; `(avy-lead-face-1 ((,class (:foreground "green")))) ;; not used?
+
+   ;; info
+   `(info-xref-visited ((,class (:foreground ,fg-purple))))
+   `(info-xref ((,class (:foreground ,fg-green))))
+   `(Info-quoted ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
+
+   ;; slime
+   `(slime-repl-inputed-output-face ((,class (:foreground ,fg-purple))))
+   `(sldb-condition-face ((,class (:foreground ,fg-red
+											   :background ,bg-red))))
+   `(sldb-section-face ((,class (:foreground ,fg-yellow
+											 :background ,bg-yellow
+											 :box (:line-width -1 :style released-button)))))
+   ;; sldb-reference-face
+   ;; sldb-catch-tag-face
+   ;; sldb-local-value-face
+   ;; sldb-local-name-face
+   ;; sldb-detailed-frame-line-face
+   ;; sldb-non-restartable-frame-line-face
+   ;; sldb-restartable-frame-line-face
+   ;; sldb-frame-line-face
+   ;; sldb-restart-number-face
+   ;; sldb-restart-face
+   ;; sldb-restart-type-face
+   ;; sldb-frame-label-face
+   ;; sldb-topline-face
+   ;; slime-reader-conditional-face
+   ;; slime-repl-output-mouseover-face
+   ;; slime-repl-result-face
+   ;; slime-repl-input-face
+   ;; slime-repl-output-face
+   ;; slime-repl-prompt-face
+   ;; slime-inspector-type-face
+   ;; slime-inspector-action-face
+   ;; slime-inspector-value-face
+   ;; slime-inspector-label-face
+   ;; slime-inspector-topline-face
+   ;; slime-apropos-label
+   ;; slime-apropos-symbol
+   ;; slime-highlight-face
+   ;; slime-final-deprecation-warning-face
+   ;; slime-late-deprecation-warning-face
+   ;; slime-early-deprecation-warning-face
+   ;; slime-note-face
+   ;; slime-style-warning-face
+   ;; slime-warning-face
+   ;; slime-error-face
+
+
+   ;; replace.el
+   `(match ((,class (:background "#000000" :foreground ,fg-yellow :weight normal))))
+
+   ;; num3
+   ;; '(num3-face-odd ((,class)))
+   ;; '(num3-face-even ((,class (:underline t :background "black"))))
+   `(num3-face-even ((,class (:underline nil
+										 :background "#000000"
+										 :foreground ,fg-green
+										 :bold nil))))
+
+   ;; highlight-indent-guides
+   `(highlight-indent-guides-character-face ((,class (:foreground ,fainter))))
+
+   ;; default emacs completion.
+   `(completions-common-part ((,class (:foreground ,faint-less))))
+   `(completions-first-difference ((,class (:foreground ,fg-green))))
+
+   ;; swiper, ivy, counsel
+   `(swiper-line-face ((,class (:background "gray30"))))
+   ;; face-1 fills in the space between matches. 2-4 are for matches.
+   `(swiper-match-face-1 ((,class (:foreground ,faint-less :background "black"))))
+   `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background "black"))))
+   ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
+   ;; TODO: make bug report to swiper about face 3,4
+   `(swiper-match-face-3 ((,class (:foreground ,rain-2 :background "black"))))
+   `(swiper-match-face-4 ((,class (:foreground ,rain-3 :background "black"))))
+   `(ivy-action ((,class (:foreground ,fg-green))))
+   ;; `(ivy-confirm-face ((,class (:foreground "yellow" :italic t))))
+   `(ivy-current-match ((,class (:inherit swiper-line-face))))
+   ;; `(ivy-cursor ((,class (:foreground "white"))))
+   ;; `(ivy-highlight-face ((,class (:background "white"))))
+   `(ivy-match-required-face ((,class (:foreground ,fg-red :background ,bg-red))))
+   `(ivy-minibuffer-match-face-1 ((,class (:inherit swiper-match-face-1))))
+   `(ivy-minibuffer-match-face-2 ((,class (:inherit swiper-match-face-2))))
+   `(ivy-minibuffer-match-face-3 ((,class (:inherit swiper-match-face-3))))
+   `(ivy-minibuffer-match-face-4 ((,class (:inherit swiper-match-face-4))))
+   ;; `(ivy-minibuffer-match-highlight ((,class (:background "white"))))
+   ;; `(ivy-modified-buffer ((,class (:foreground "white"))))
+   ;; `(ivy-prompt-match ((,class (:foreground "white"))))
+   ;; `(ivy-remote ((,class (:foreground "white"))))
+   ;; `(ivy-subdir ((,class (:foreground "white"))))
+   ;; `(ivy-virtual ((,class (:foreground "white"))))
+
+   ;; ace-window
+   `(aw-leading-char-face ; ace-window character.
+     ((,class (:foreground ,fg-green
+						   ;; :background "black"
+						   :height 300)))) ; big font
+   `(aw-background-face ((,class (:foreground ,faint-less))))
+
+   ;; ido
+   `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
+   `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
+   `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
+
+   ;; isearch
+   `(isearch ((,class (:background ,isearch-bg
+								   :foreground ,isearch-fg
+								   :weight bold
+								   :underline nil))))
+   ;; the non-selected matches from isearch
+   `(lazy-highlight ((,class (:background ,bg-purple
+										  :foreground ,fg-purple
+										  :weight normal
+										  :underline t))))
+
+   `(cider-result-overlay-face ((,class (:background ,bg-green
+                                                     :foreground ,fg-green
+                                                     :box (:line-width -1 :color "black")))))
+
+   `(eros-result-overlay-face ((,class (:inherit cider-result-overlay-face))))
+
+   `(header-line
+     ((,class (:foreground ,fg-yellow
+                           :background ,bg-yellow
+                           :weight normal
+                           :box (:line-width -1 :style released-button)))))
+
+   ;; magit
+   `(magit-section-highlight ((,class (:background ,faint))))
+
+   ;; tooltip
+   `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
+
+   ;; js2
+   `(js2-function-call ((,class (:inherit font-lock-function-name-face))))
+   `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
+   `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
+   `(js2-warning ((,class :underline (:color "yellow" :style wave))))
+   `(js2-error ((,class :underline (:color "red" :style wave))))
+   `(js2-external-variable ((,class (:underline (:color "orange" :style wave)))))
+   `(js2-jsdoc-tag ((,class (:foreground "lime green"))))
+   `(js2-jsdoc-type ((,class (:inherit font-lock-type-face))))
+   `(js2-jsdoc-value ((,class (:inherit font-lock-constant-face))))
+
+   ;; js2-highlight-vars
+   `(js2-highlight-vars-face ((,class (:foreground ,fg-green :background ,bg-green))))
+   `(js2-highlight-vars-second-face ((,class (:foreground ,fg-purple :background ,bg-purple))))
+
+   ;; web-mode
+   `(web-mode-current-element-highlight-face ((,class (:background ,faint))))
+   `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
+
+   ;; company
+   `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
+   `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
+   `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
+   `(company-tooltip-common ((,class (:foreground ,faint-less))))
+   `(company-tooltip-selection ((,class (:background ,highlight))))
+   ;; company-echo
+   ;; company-echo-common
+   ;; company-preview
+   ;; company-preview-common
+   ;; company-preview-search
+   ;; company-template-field
+   ;; company-tooltip-annotation
+   ;; company-tooltip-annotation-selection
+   ;; company-tooltip-common-selection
+   ;; company-tooltip-mouse
+   ;; company-tooltip-search
+   ;; company-tooltip-search-selection
+
+   ;; compile
+   `(compilation-info ((,class (:foreground ,fg-green :underline t))))
+   `(compilation-line-number ((,class (:inherit font-lock-keyword-face
+                                                :weight normal))))
+
+   ;; deadgrep
+   `(deadgrep-meta-face ((,class (:foreground "gray"))))
+   `(deadgrep-filename-face ((,class (:inherit compilation-info))))
+   `(deadgrep-search-term-face ((,class (:foreground ,fg-green :background ,bg-green))))
+   `(deadgrep-regexp-metachar-face ((,class (:foreground ,fg-purple :background ,bg-green))))
+   `(deadgrep-match-face ((,class (:inherit match))))
+
+   ;; erc
+   `(erc-notice-face ((,class (:foreground ,faint-less))))
+   `(erc-input-face ((,class (:foreground "tan")))) ; my own text.
+   `(erc-timestamp-face ((,class (:foreground ,fg-green))))
+   ;; erc-keyword-face
+   ;; erc-fool-face
+   ;; erc-pal-face
+   ;; erc-dangerous-host-face
+   ;; erc-current-nick-face
+   ;; erc-hl-nicks-nick-base-face
+   ;; erc-button
+   ;; erc-underline-face
+   ;; erc-inverse-face
+   ;; erc-bold-face
+   ;; erc-nick-msg-face
+   ;; erc-nick-default-face
+   ;; erc-my-nick-face
+   ;; erc-error-face
+   ;; erc-action-face
+   ;; erc-command-indicator-face
+   ;; erc-prompt-face
+   ;; erc-header-line
+   ;; erc-direct-msg-face
+   ;; erc-my-nick-prefix-face
+   ;; erc-nick-prefix-face
+   ;; erc-default-face
+
+   ;; erc-hl-nicks
+   ;; erc-hl-nicks-nick-USERNAME1-face ; dynamically created faces? handle in a loop?
+   ;; erc-hl-nicks-nick-USERNAME2-face ; dynamically created faces? handle in a loop?
+
+   ;; minesweeper
+   `(minesweeper-neighbor ((,class (:background "black"))))
+   `(minesweeper-blank ((,class (:foreground ,faint-less))))
+   `(minesweeper-marked ((,class (:foreground ,fg))))
+   `(minesweeper-0 ((,class (:foreground ,faint-less))))
+   `(minesweeper-1 ((,class (:foreground "cyan";"deepskyblue"
+                             ))))
+   `(minesweeper-2 ((,class (:foreground "lawn green";"yellowgreen"
+                             ))))
+   `(minesweeper-3 ((,class (:foreground ,rain-4
+                             ))))
+   `(minesweeper-4 ((,class (:foreground ,rain-1))))
+   `(minesweeper-5 ((,class (:foreground ,rain-3))))
+   `(minesweeper-6 ((,class (:foreground ,rain-6))))
+   `(minesweeper-7 ((,class (:foreground ,rain-7))))
+   `(minesweeper-8 ((,class (:foreground ,rain-8))))
+   `(minesweeper-explode ((,class (:foreground "black"
+                                               :background "red"
+                                               :weight bold))))
+   `(minesweeper-mismarked ((,class (:background ,highlight
+                                                 :foreground "orange"
+                                                 :weight bold))))
+
+
+   ;; ediff. temporarily borrowing from zenburn.
+   ;; TODO: customize colors for charcoal
+   `(ediff-current-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))
+   `(ediff-current-diff-Ancestor ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))
+   `(ediff-current-diff-B ((,class (:foreground ,zenburn-fg :background ,zenburn-green-1))))
+   `(ediff-current-diff-C ((,class (:foreground ,zenburn-fg :background ,zenburn-blue-5))))
+   `(ediff-even-diff-A ((,class (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-Ancestor ((,class (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-B ((,class (:background ,zenburn-bg+1))))
+   `(ediff-even-diff-C ((,class (:background ,zenburn-bg+1))))
+   `(ediff-fine-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-2 :weight bold))))
+   `(ediff-fine-diff-Ancestor ((,class (:foreground ,zenburn-fg :background ,zenburn-red-2 weight bold))))
+   `(ediff-fine-diff-B ((,class (:foreground ,zenburn-fg :background ,zenburn-green :weight bold))))
+   `(ediff-fine-diff-C ((,class (:foreground ,zenburn-fg :background ,zenburn-blue-3 :weight bold ))))
+   `(ediff-odd-diff-A ((,class (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-Ancestor ((,class (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
+   `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
+
+   ;; markdown-mode
+   `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
+
+   ;; org
+   `(org-hide ((,class (:foreground ,faint))))
+
+   `(rainbow-delimiters-depth-1-face
+     ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
+   `(rainbow-delimiters-depth-2-face
+     ((,class (:foreground ,rain-2 :background ,rain-2-bg))))
+   `(rainbow-delimiters-depth-3-face
+     ((,class (:foreground ,rain-3 :background ,rain-3-bg))))
+   `(rainbow-delimiters-depth-4-face
+     ((,class (:foreground ,rain-4 :background ,rain-4-bg))))
+   `(rainbow-delimiters-depth-5-face
+     ((,class (:foreground ,rain-5 :background ,rain-5-bg))))
+   `(rainbow-delimiters-depth-6-face
+     ((,class (:foreground ,rain-6 :background ,rain-6-bg))))
+   `(rainbow-delimiters-depth-7-face
+     ((,class (:foreground ,rain-7 :background ,rain-7-bg))))
+   `(rainbow-delimiters-depth-8-face
+     ((,class (:foreground ,rain-8 :background ,rain-8-bg))))
+   `(rainbow-delimiters-depth-9-face
+     ((,class (:foreground ,rain-9 :background ,rain-9-bg))))
+   `(rainbow-delimiters-unmatched-face
+     ((,class (:foreground ,rain-fg-u :background ,rain-bg-u))))))
+
+(provide-theme 'ultimate)
+
+;;; ultimate-theme.el ends here

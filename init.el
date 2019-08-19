@@ -1142,7 +1142,7 @@ Closure over executed-p."
     (adoc-mode t)
     (markdown-mode ,(not (version< emacs-version "24.4")))
     (typescript-mode t)
-    (tide ,(memq my-curr-computer '(work-laptop wild-dog)))
+    (tide ,(memq my-curr-computer '(work-laptop wild-dog work-laptop-bash)))
     (context-coloring t)
     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
     (autothemer t) ;; dependency for some themes.

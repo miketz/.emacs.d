@@ -15,52 +15,51 @@
        ;; Color Palette
        (bg           "#D5D1B3")
        (fg           "#000000")
-       (bg-purple    (aref `["#440033" "#5F005F" "#8B008B" "#000000"] i))
-       (fg-purple    (aref `["#FFC0CB" "#FFAFD7" "#FF00FF" "#FF00FF"] i))
-       (bg-green     (aref `["#004400" "#005F00" "#228B22" "#000000"] i))
-       (fg-green     (aref `["#98FB98" "#00FF87" "#00FF00" "#00FF00"] i))
-       (bg-yellow    (aref `["#3A3A00" "#5F5F00" "#A0522D" "#000000"] i))
-       (fg-yellow    (aref `["#FFFF00" "#FFFF00" "#FFFFFF" "#FFFF00"] i))
-       (bg-red       (aref `["#300000" ,todo--bg "#000000" ,todo--bg] i))
-       (fg-red       (aref `["#FF0000" ,todo--fg "#FF0000" ,todo--fg] i))
-       (faint        (aref `["#4D4D3D" "#303030" "#666666" "#0000FF"] i))
-       (fainter      (aref `["#3F3F35" ,todo--fg "#0000CD" ,todo--fg] i))
-       (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
-       (keyword      (aref `["#EEDD82" "#FFAFFF" "#FFFFFF" "#FFFFFF"] i))
-       (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" "#00FFFF"] i))
-       (highlight    (aref `["#8B5742" "#4E4E4E" "#228B22" "#FF00FF"] i))
-       (popup-bg     (aref `["#222222" "#000000" "#0000CD" "#FFFF00"] i))
-       (scrollb-bg   (aref `["#000000" "#080808" "#666666" "#0000FF"] i))
-       (scrollb-fg   (aref `["#999999" "#BCBCBC" "#FFFFFF" "#FFFFFF"] i))
-       (mode-line-fg (aref `["#8DEECD" ,fg       "#BEBEBE" "#FFFFFF"] i))
-       (mode-line-bg (aref `["#000000" "#121212" "#0000CD" "#FFFF00"] i))
-       (ml-inact-fg  (aref `["gray" ,fg       "#BEBEBE" "#FFFFFF"] i))
-       (ml-inact-bg  (aref `["#000000" "#3A3A3A" "#000000" "#0000FF"] i))
-       (ml-bufferid  (aref `["#F0DFAF" "#FFFFAF" "#BEBEBE" "#FFFFFF"] i))
-       (ivy-line-bg  (aref `["#000000" ,todo--bg "#0000CD" ,todo--bg] i))
-       (isearch-fg   (aref `["#FFFF00" ,fg-yellow ,fg-yellow ,fg-yellow] i))
-       (isearch-bg   (aref `["#000000" ,bg-yellow ,bg-yellow ,bg-yellow] i))
-       (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
-       (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-2       (aref `["#00FFFF" "#00FFFF" "#00FFFF" "#00FFFF"] i))
-       (rain-2-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-3       (aref `["#FFFF00" "#FFFF00" "#A0522D" "#FFFF00"] i))
-       (rain-3-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-4       (aref `["#DDA0DD" "#D75FFF" "#FF00FF" "#FF00FF"] i))
-       (rain-4-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-5       (aref `["#7CFC00" "#00FF00" "#00FF00" "#00FF00"] i))
-       (rain-5-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-6       (aref `["#FFA500" "#FF8700" "#FFFFFF" "#FFFFFF"] i))
-       (rain-6-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-7       (aref `["#FFFFFF" "#FFFFFF" "#B22222" "#0000FF"] i))
-       (rain-7-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
-       (rain-8       (aref `["#FF69B4" "#FF87FF" "#00CED1" "#000000"] i))
-       (rain-8-bg    (aref `["#101010" "#080808" ,bg       "#FF00FF"] i))
-       (rain-9       (aref `["#CDAA7D" "#CDCD00" "#0000FF" "#000000"] i))
-       (rain-9-bg    (aref `[,bg       ,bg       ,bg       "#0000FF"] i))
-       (rain-fg-u    (aref `["#A0522D" "#AF0000" "#FFFFFF" "#FFFFFF"] i))
-
-       (rain-bg-u    (aref `["#000000" "#080808" "#FF0000" "#FF0000"] i))
+       (bg-purple    "#440033")
+       (fg-purple    "#FFC0CB")
+       (bg-green     "#004400")
+       (fg-green     "#98FB98")
+       (bg-yellow    "#3A3A00")
+       (fg-yellow    "#FFFF00")
+       (bg-red       "#300000")
+       (fg-red       "#FF0000")
+       (faint        "#4D4D3D")
+       (fainter      "#3F3F35")
+       (faint-less   "#8D8D8D")
+       (keyword      "navy blue")
+       (var          "#66CDAA")
+       (highlight    "#8B5742")
+       (popup-bg     "#222222")
+       (scrollb-bg   "#000000")
+       (scrollb-fg   "#999999")
+       (mode-line-fg "#8DEECD")
+       (mode-line-bg "#000000")
+       (ml-inact-fg  "gray")
+       (ml-inact-bg  "#000000")
+       (ml-bufferid  "#F0DFAF")
+       (ivy-line-bg  "#000000")
+       (isearch-fg   "#FFFF00")
+       (isearch-bg   "#000000")
+       (rain-1       "#FF4500")
+       (rain-1-bg    bg)
+       (rain-2       "#00FFFF")
+       (rain-2-bg    bg)
+       (rain-3       "#FFFF00")
+       (rain-3-bg    bg)
+       (rain-4       "#DDA0DD")
+       (rain-4-bg    bg)
+       (rain-5       "#7CFC00")
+       (rain-5-bg    bg)
+       (rain-6       "#FFA500")
+       (rain-6-bg    bg)
+       (rain-7       "#FFFFFF")
+       (rain-7-bg    bg)
+       (rain-8       "#FF69B4")
+       (rain-8-bg    "#101010")
+       (rain-9       "#CDAA7D")
+       (rain-9-bg    bg)
+       (rain-fg-u    "#A0522D")
+       (rain-bg-u    "#000000")
        (zenburn-fg+1     "#FFFFEF")
        (zenburn-fg       "#DCDCCC")
        (zenburn-fg-1     "#656555")
@@ -106,40 +105,20 @@
 
    `(fci-rule-color ,faint)
 
-   `(evil-emacs-state-cursor    '(bar "cyan"))
-   `(evil-normal-state-cursor   '(hollow "spring green"))
-   `(evil-insert-state-cursor   '(bar "spring green"))
-   `(evil-visual-state-cursor   '(hollow "orange"))
+
+   `(evil-emacs-state-cursor    '(bar "blue"))
+   `(evil-normal-state-cursor   '(hollow "black"))
+   `(evil-insert-state-cursor   '(bar "black"))
+   `(evil-visual-state-cursor   '(hollow "black"))
    `(evil-operator-state-cursor '(box "red"))
    `(evil-replace-state-cursor  '(hbar "orange red"))
-   `(evil-motion-state-cursor   '(box "spring green"))
+   `(evil-motion-state-cursor   '(box "black"))
+
 
    ;; ibuffer
    `(ibuffer-filter-group-name-face '((,class :weight bold
                                               :foreground ,fg
-                                              :background "black")))
-
-   ;; Duplicating the default vc-annotate colors for now.
-   ;; TODO: tailor them for the bg.
-   `(vc-annotate-color-map '((20 . "#FF3F3F")
-                             (40 . "#FF6C3F")
-                             (60 . "#FF993F")
-                             (80 . "#FFC63F")
-                             (100 . "#FFF33F")
-                             (120 . "#DDFF3F")
-                             (140 . "#B0FF3F")
-                             (160 . "#83FF3F")
-                             (180 . "#56FF3F")
-                             (200 . "#3FFF56")
-                             (220 . "#3FFF83")
-                             (240 . "#3FFFB0")
-                             (260 . "#3FFFDD")
-                             (280 . "#3FF3FF")
-                             (300 . "#3FC6FF")
-                             (320 . "#3F99FF")
-                             (340 . "#3F6CFF")
-                             (360 . "#3F3FFF")))
-   `(vc-annotate-very-old-color "blue3")
+                                              :background "gray")))
 
    ;; pos-tip. Helper package for tooltip
    `(pos-tip-foreground-color ,fg-green)
@@ -190,9 +169,10 @@
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
-   `(font-lock-function-name-face ((,class (:foreground "pale turquoise"
+   `(font-lock-function-name-face ((,class (:foreground "dark blue"
 														:weight normal
-														:box (:line-width -1 :color ,faint-less)))))
+														;; :box (:line-width -1 :color ,faint-less)
+                                                        ))))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
@@ -453,7 +433,7 @@
 
 
    ;; ediff. temporarily borrowing from zenburn.
-   ;; TODO: customize colors for charcoal
+   ;; TODO: customize colors for ultimate
    `(ediff-current-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))
    `(ediff-current-diff-Ancestor ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))
    `(ediff-current-diff-B ((,class (:foreground ,zenburn-fg :background ,zenburn-green-1))))
@@ -477,26 +457,18 @@
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
 
-   `(rainbow-delimiters-depth-1-face
-     ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
-   `(rainbow-delimiters-depth-2-face
-     ((,class (:foreground ,rain-2 :background ,rain-2-bg))))
-   `(rainbow-delimiters-depth-3-face
-     ((,class (:foreground ,rain-3 :background ,rain-3-bg))))
-   `(rainbow-delimiters-depth-4-face
-     ((,class (:foreground ,rain-4 :background ,rain-4-bg))))
-   `(rainbow-delimiters-depth-5-face
-     ((,class (:foreground ,rain-5 :background ,rain-5-bg))))
-   `(rainbow-delimiters-depth-6-face
-     ((,class (:foreground ,rain-6 :background ,rain-6-bg))))
-   `(rainbow-delimiters-depth-7-face
-     ((,class (:foreground ,rain-7 :background ,rain-7-bg))))
-   `(rainbow-delimiters-depth-8-face
-     ((,class (:foreground ,rain-8 :background ,rain-8-bg))))
-   `(rainbow-delimiters-depth-9-face
-     ((,class (:foreground ,rain-9 :background ,rain-9-bg))))
-   `(rainbow-delimiters-unmatched-face
-     ((,class (:foreground ,rain-fg-u :background ,rain-bg-u))))))
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "#C5C1A3" :weight bold))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight normal))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#C5C1A3" :weight normal))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight normal))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight normal))))
+   `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
+                                                      :weight normal))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight normal))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background "#C5C1A3" :weight normal))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50" ;:background "#fff7ca"
+                                                      :weight normal))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight normal))))))
 
 (provide-theme 'ultimate)
 

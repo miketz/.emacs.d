@@ -15,6 +15,7 @@
        ;; Color Palette
        (bg           "#D5D1B3")
        (fg           "#000000")
+       (bg-highlight "#C5C1A3")
        (bg-purple    "#440033")
        (fg-purple    "#FFC0CB")
        (bg-green     "#004400")
@@ -27,8 +28,8 @@
        (fainter      "#3F3F35")
        (faint-less   "#8D8D8D")
        (keyword      "navy blue")
-       (var          "#66CDAA")
-       (highlight    "#8B5742")
+       (var          "blue")
+       (highlight    "#FFA366")
        (popup-bg     "#222222")
        (scrollb-bg   "#000000")
        (scrollb-fg   "#999999")
@@ -129,7 +130,7 @@
 
    `(default ((,class (:foreground ,fg :background ,bg))))
 
-   `(cursor ((,class (:background "spring green"))))
+   `(cursor ((,class (:background "blue"))))
 
    `(show-paren-match ((,class (:slant italic
                                        :bold t
@@ -165,10 +166,10 @@
 
    ;; TODO font lock
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
-   `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
+   `(font-lock-comment-face ((,class (:foreground "dark green"))))
+   `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
-   `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
+   `(font-lock-doc-face ((,class (:foreground "dark red"))))
    `(font-lock-function-name-face ((,class (:foreground "dark blue"
 														:weight normal
 														;; :box (:line-width -1 :color ,faint-less)
@@ -179,11 +180,11 @@
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
    ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
-   ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
+   `(font-lock-type-face ((,class (:foreground "blue" :background ,bg-highlight))))
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
-   `(minibuffer-prompt ((,class (:foreground ,fg-purple))))
+   `(minibuffer-prompt ((,class (:foreground ,fg :background ,bg-highlight))))
 
    ;; hl-fill-column
    `(hl-fill-column-face ((,class (:foreground ,fg-red
@@ -457,18 +458,18 @@
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
 
-   '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "#C5C1A3" :weight bold))))
-   '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight normal))))
-   '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#C5C1A3" :weight normal))))
-   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight normal))))
-   '(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight normal))))
+   `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight normal))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight normal))))
+   `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight normal))))
+   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight normal))))
    `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
                                                       :weight normal))))
-   '(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight normal))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background "#C5C1A3" :weight normal))))
-   '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50" ;:background "#fff7ca"
+   `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight normal))))
+   `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight normal))))
+   `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50" ;:background "#fff7ca"
                                                       :weight normal))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight normal))))))
+   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight normal))))))
 
 (provide-theme 'ultimate)
 

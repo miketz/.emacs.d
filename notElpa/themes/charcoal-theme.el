@@ -219,7 +219,7 @@ Example:
 														:weight normal
 														:box (:line-width -1 :color ,faint-less)))))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
-   ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
+   `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))

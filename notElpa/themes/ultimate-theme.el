@@ -170,10 +170,11 @@
    `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class (:foreground "dark red"))))
-   `(font-lock-function-name-face ((,class (:foreground "dark blue"
-														:weight normal
-														;; :box (:line-width -1 :color ,faint-less)
-                                                        ))))
+   `(font-lock-function-name-face ((,class :foreground "black"
+                                           :background "lightsteelblue1"
+										   :weight normal
+										   ;; :box (:line-width -1 :color ,faint-less)
+                                           )))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))

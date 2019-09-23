@@ -1593,6 +1593,9 @@ that buffer."
 ;;;----------------------------------------------------------------------------
 ;;; Color theme stuff.
 ;;;----------------------------------------------------------------------------
+;; In Emacs 27+ make `custom-theme-set-faces' work immediately.
+(setq custom--inhibit-theme-enable nil)
+
 ;;TODO: implement a way to undo color settings made outside the theme
 ;;      definition. Use custom-theme-set-faces to set the colors/styles so they
 ;;      are rolled back when switching/disabling themes.

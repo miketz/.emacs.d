@@ -504,6 +504,11 @@ Example:
    ;; markdown-mode
    `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
 
+   ;; used in adoc-mode
+   '(markup-meta-face ((t (:foreground "yellow green"))))
+   '(markup-internal-reference-face ((t (:inherit markup-reference-face))))
+   '(markup-meta-hide-face ((t (:foreground "powder blue"))))
+
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
 

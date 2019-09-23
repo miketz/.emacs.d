@@ -215,9 +215,11 @@ Example:
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
-   `(font-lock-function-name-face ((,class (:foreground "pale turquoise"
-														:weight normal
-														:box (:line-width -1 :color ,faint-less)))))
+   `(font-lock-function-name-face ((,class :foreground "pale turquoise"
+                                           :background "black"
+										   :weight normal
+										   ;; :box (:line-width -1 :color ,faint-less)
+                                           )))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))

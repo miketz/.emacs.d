@@ -31,16 +31,16 @@
        (var          "blue")
        (highlight    "#FFA366")
        (popup-bg     "#222222")
-       (scrollb-bg   "#000000")
-       (scrollb-fg   "#999999")
+       (scrollb-bg   bg)
+       (scrollb-fg   "royalblue")
        (mode-line-fg "#8DEECD")
        (mode-line-bg "#000000")
        (ml-inact-fg  "gray")
        (ml-inact-bg  "#000000")
        (ml-bufferid  "#F0DFAF")
        (ivy-line-bg  "#000000")
-       (isearch-fg   "#FFFF00")
-       (isearch-bg   "#000000")
+       (isearch-fg   "#000000")
+       (isearch-bg   "#FFFF00")
        (rain-1       "#FF4500")
        (rain-1-bg    bg)
        (rain-2       "#00FFFF")
@@ -263,14 +263,15 @@
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class (:background "gray30"))))
+   `(swiper-line-face ((,class (:background ,bg-highlight ;"gray30"
+                                ))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
-   `(swiper-match-face-1 ((,class (:foreground ,faint-less :background "black"))))
-   `(swiper-match-face-2 ((,class (:foreground ,rain-1 :background "black"))))
+   `(swiper-match-face-1 ((,class (:foreground "#F9F5D7" :background ,bg-highlight))))
+   `(swiper-match-face-2 ((,class (:foreground "black" :background ,rain-1))))
    ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
    ;; TODO: make bug report to swiper about face 3,4
-   `(swiper-match-face-3 ((,class (:foreground ,rain-2 :background "black"))))
-   `(swiper-match-face-4 ((,class (:foreground ,rain-3 :background "black"))))
+   `(swiper-match-face-3 ((,class (:foreground "black" :background ,rain-2))))
+   `(swiper-match-face-4 ((,class (:foreground "black" :background ,rain-3))))
    `(ivy-action ((,class (:foreground ,fg-green))))
    ;; `(ivy-confirm-face ((,class (:foreground "yellow" :italic t))))
    `(ivy-current-match ((,class (:inherit swiper-line-face))))
@@ -286,7 +287,7 @@
    ;; `(ivy-prompt-match ((,class (:foreground "white"))))
    ;; `(ivy-remote ((,class (:foreground "white"))))
    ;; `(ivy-subdir ((,class (:foreground "white"))))
-   ;; `(ivy-virtual ((,class (:foreground "white"))))
+   ;; `(ivy-virtual ((,class (:foreground "white" :background ,bg))))
 
    ;; ace-window
    `(aw-leading-char-face ; ace-window character.
@@ -306,10 +307,8 @@
 								   :weight bold
 								   :underline nil))))
    ;; the non-selected matches from isearch
-   `(lazy-highlight ((,class (:background ,bg-purple
-										  :foreground ,fg-purple
-										  :weight normal
-										  :underline t))))
+   `(lazy-highlight ((,class (:inherit isearch
+									   :weight normal))))
 
    `(cider-result-overlay-face ((,class (:background ,bg-green
                                                      :foreground ,fg-green
@@ -349,7 +348,7 @@
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
 
    ;; company
-   `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
+   `(company-tooltip ((,class (:background ,bg-highlight :foreground ,fg))))
    `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
    `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
    `(company-tooltip-common ((,class (:foreground ,faint-less))))
@@ -452,6 +451,10 @@
    `(ediff-odd-diff-Ancestor ((,class (:background ,zenburn-bg+2))))
    `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
    `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
+
+   ;; rg
+   `(rg-filename-face ((,class :inherit font-lock-constant-face)))
+   `(rg-match-position-face ((,class :foreground ,fg)))
 
    ;; markdown-mode
    `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.

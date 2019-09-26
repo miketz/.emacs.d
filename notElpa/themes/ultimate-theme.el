@@ -263,7 +263,7 @@
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class (:background ,bg-highlight ;"gray30"
+   `(swiper-line-face ((,class (:background ,highlight ;,bg-highlight ;"gray30"
                                 ))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
    `(swiper-match-face-1 ((,class (:foreground "#F9F5D7" :background ,bg-highlight))))
@@ -272,6 +272,11 @@
    ;; TODO: make bug report to swiper about face 3,4
    `(swiper-match-face-3 ((,class (:foreground "black" :background ,rain-2))))
    `(swiper-match-face-4 ((,class (:foreground "black" :background ,rain-3))))
+   ;; the non-selected lines in the minibuffer
+   `(swiper-background-match-face-1 ((,class :inherit swiper-match-face-1)))
+   `(swiper-background-match-face-2 ((,class :inherit swiper-match-face-2)))
+   `(swiper-background-match-face-3 ((,class :inherit swiper-match-face-3)))
+   `(swiper-background-match-face-4 ((,class :inherit swiper-match-face-e)))
    `(ivy-action ((,class (:foreground ,fg-green))))
    ;; `(ivy-confirm-face ((,class (:foreground "yellow" :italic t))))
    `(ivy-current-match ((,class (:inherit swiper-line-face))))

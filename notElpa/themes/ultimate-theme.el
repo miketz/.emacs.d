@@ -276,7 +276,7 @@
    `(swiper-background-match-face-1 ((,class :inherit swiper-match-face-1)))
    `(swiper-background-match-face-2 ((,class :inherit swiper-match-face-2)))
    `(swiper-background-match-face-3 ((,class :inherit swiper-match-face-3)))
-   `(swiper-background-match-face-4 ((,class :inherit swiper-match-face-e)))
+   `(swiper-background-match-face-4 ((,class :inherit swiper-match-face-4)))
    `(ivy-action ((,class (:foreground ,fg-green))))
    ;; `(ivy-confirm-face ((,class (:foreground "yellow" :italic t))))
    `(ivy-current-match ((,class (:inherit swiper-line-face))))

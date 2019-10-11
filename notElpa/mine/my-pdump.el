@@ -96,7 +96,7 @@ For faster subsequent start up."
     (require 'highlight-tail)
     (require 'highlight-indent-guides)
     (require 'smart-tabs-mode)
-    (require 'lua-mode)
+    ;; (require 'lua-mode) ; issue with void var rx-parent.
     (require 'typescript-mode)
     (require 'erc)
     (require 'erc-hl-nicks)

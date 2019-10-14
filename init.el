@@ -948,12 +948,11 @@ Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 ;;;----------------------------------------------------------------------------
 ;;; Packages
 ;;;----------------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/notElpa/") ; stores elisp files that are
-                                               ; not "packages".
-(add-to-list 'load-path "~/.emacs.d/notElpa/mine/")
+(push "~/.emacs.d/notElpa/" load-path) ; stores elisp files that are
+                                       ; not "packages".
+(push "~/.emacs.d/notElpa/mine/" load-path)
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
-(add-to-list 'custom-theme-load-path
-             "~/.emacs.d/notElpa/themes/replace-colorthemes/")
+(push "~/.emacs.d/notElpa/themes/replace-colorthemes/" custom-theme-load-path)
 
 ;; (setq package-quickstart t) ; pre-generates a giant autoloads file
 
@@ -1801,8 +1800,8 @@ This prevents overlapping themes; something I would rarely want."
   ;; `slime-complete-symbol-function' is obsolete. comment out and use
   ;; `slime-completion-at-point-functions' instead.
   ;; (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-  (add-to-list 'slime-completion-at-point-functions
-               'slime-fuzzy-complete-symbol)
+  (push 'slime-fuzzy-complete-symbol
+        slime-completion-at-point-functions)
 
   (when my-use-evil-p
     ;; ;; override evil's binding of M-. when using slime
@@ -2222,9 +2221,9 @@ In that case, insert the number."
 ;;; company-web
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'web-mode
-  (add-to-list 'company-backends 'company-web-html)
-  (add-to-list 'company-backends 'company-web-jade)
-  (add-to-list 'company-backends 'company-web-slim)
+  (push 'company-web-html company-backends)
+  (push 'company-web-jade company-backends)
+  (push 'company-web-slim company-backends)
 
   (defun my-setup-company-web ()
     (set (make-local-variable 'company-backends)
@@ -2304,7 +2303,7 @@ In that case, insert the number."
 ;;;----------------------------------------------------------------------------
 ;;; Org mode
 ;;;----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(push '("\\.org\\'" . org-mode) auto-mode-alist)
 
 
 (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
@@ -2339,7 +2338,7 @@ In that case, insert the number."
 
   (progn ;;HOLD keyword stuff
     ;; new keyword for tasks put on hold
-    (add-to-list 'org-todo-keywords '(sequence "HOLD") t)
+    (push '(sequence "HOLD") org-todo-keywords)
 
     ;; (defface org-hold ;; font-lock-warning-face
     ;;   '((t (:foreground "powder blue" :weight bold)))
@@ -2426,7 +2425,7 @@ In that case, insert the number."
 ;;; js2-mode
 ;;;----------------------------------------------------------------------------
 ;;(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(push '("\\.js$" . js2-mode) auto-mode-alist)
 
 (with-eval-after-load 'js2-mode
   (setq-default
@@ -3099,7 +3098,7 @@ completions from folders other than the current one."
 (progn
   ;; an older copy of yasnippet before it caused unwanted indentation on
   ;; each keystroke.
-  (add-to-list 'load-path "~/.emacs.d/yasnippet-20160416.831_correctIndent")
+  (push "~/.emacs.d/yasnippet-20160416.831_correctIndent" load-path)
 
   (progn
     ;; manually add the autoloads because I'm not using the package manager
@@ -3679,7 +3678,7 @@ and indent."
     (let ((i-am-using-omnisharp t))
       (when i-am-using-omnisharp
         (with-eval-after-load 'company
-          (add-to-list 'company-backends 'company-omnisharp))))
+          (push 'company-omnisharp company-backends))))
 
     ;; tab completion of parameters. acts weird
     (setq omnisharp-company-do-template-completion nil)
@@ -3857,7 +3856,7 @@ and indent."
 
   (when (eq my-curr-computer 'work-laptop)
     ;;directory to libclang.dll
-    (add-to-list 'exec-path "C:/Users/mtz/programs/LLVM/bin"))
+    (push "C:/Users/mtz/programs/LLVM/bin" exec-path))
 
   ;; (irony-cdb-autosetup-compile-options) ;should be in the hook
   )
@@ -4006,11 +4005,11 @@ and indent."
   (remove-hook hook fn))
 
 (with-eval-after-load 'vc
-  (add-to-list 'vc-directory-exclusion-list "bin")
-  (add-to-list 'vc-directory-exclusion-list "obj")
+  (push "bin" vc-directory-exclusion-list)
+  (push "obj" vc-directory-exclusion-list)
   (when my-use-evil-p
     ;; use emacs bindings (not evil).
-    (add-to-list 'evil-buffer-regexps '("\\*vc" . emacs))))
+    (push '("\\*vc" . emacs) evil-buffer-regexps)))
 
 ;; (add-hook 'vc-- (lambda () (linum-mode 0)))
 
@@ -4036,15 +4035,15 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;(require 'web-mode)
 (autoload 'web-mode "web-mode" "web mode" t)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . web-mode))
+(push '("\\.phtml\\'" . web-mode) auto-mode-alist)
+(push '("\\.tpl\\.php\\'" . web-mode) auto-mode-alist)
+(push '("\\.[gj]sp\\'" . web-mode) auto-mode-alist)
+(push '("\\.as[cp]x\\'" . web-mode) auto-mode-alist)
+(push '("\\.erb\\'" . web-mode) auto-mode-alist)
+(push '("\\.mustache\\'" . web-mode) auto-mode-alist)
+(push '("\\.djhtml\\'" . web-mode) auto-mode-alist)
+(push '("\\.html?\\'" . web-mode) auto-mode-alist)
+(push '("\\.cshtml\\'" . web-mode) auto-mode-alist)
 
 (with-eval-after-load 'web-mode
   ;; Auto-close on > and </
@@ -4072,7 +4071,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;(require 'vimrc-mode)
 (autoload 'vimrc-mode "vimrc-mode" "vimrc mode" t)
-(add-to-list 'auto-mode-alist '(".vim\\(rc\\)?$" . vimrc-mode))
+(push '(".vim\\(rc\\)?$" . vimrc-mode) auto-mode-alist)
 
 ;;;----------------------------------------------------------------------------
 ;;; Make dired appear in a side window
@@ -4352,7 +4351,7 @@ and indent."
 
     ;; use emacs bindings (not evil). the new v2.1.0 magit uses evil for some
     ;; buffers.
-    (add-to-list 'evil-buffer-regexps '("\\*magit" . emacs)))
+    (push '("\\*magit" . emacs) evil-buffer-regexps))
 
   (when my-use-ivy-p
     (setq magit-completing-read-function #'ivy-completing-read))
@@ -4366,7 +4365,7 @@ and indent."
   ;; older magit version. TODO: look into replacement for the newer magit.
   (when (boundp 'magit-log-arguments)
     ;; use colored graph lines. Could be a performance issue.
-    (add-to-list 'magit-log-arguments "--color"))
+    (push "--color" magit-log-arguments))
 
   ;; don't show recent commits when calling `magit-status'.
   ;; TODO: modify magit code so recent commits are not even queried if the
@@ -4698,7 +4697,7 @@ TODO: call this function when it works."
 
   (when my-use-evil-p
     ;; use emacs bindings (not evil) in ivy-occur buffer
-    (add-to-list 'evil-buffer-regexps '("^*ivy-occur" . emacs)))
+    (push '("^*ivy-occur" . emacs) evil-buffer-regexps))
 
   (define-key ivy-occur-mode-map (kbd "n") #'ivy-occur-next-line)
   (define-key ivy-occur-mode-map (kbd "p") #'ivy-occur-previous-line)
@@ -4951,7 +4950,7 @@ END of region."
 ;;; mode-on-region.el in ~/.emacs.d/notElpa/mine/mor/
 ;;; Create a new buffer, stuff text in it, turn on mode.
 ;;;----------------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/notElpa/mine/mor")
+(push "~/.emacs.d/notElpa/mine/mor" load-path)
 (autoload #'mor-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
 ;; Recommended keybinds for vanilla Emacs. Press "C-c m" with text highlighted.
@@ -5219,7 +5218,7 @@ When ARG isn't nil, try to pretty print the sexp."
   (let ((file-name (buffer-file-name)))
     (kill-buffer (current-buffer))
     (info file-name)))
-(add-to-list 'auto-mode-alist '("\\.info\\'" . my-info-mode))
+(push '("\\.info\\'" . my-info-mode) auto-mode-alist)
 
 (with-eval-after-load 'info
   ;; rebind keys for vim friendliness.
@@ -5431,8 +5430,8 @@ Closure over `preceding-sexp-fn'."
 
   (when my-use-evil-p
     ;; use emacs bindings (not evil).
-    (add-to-list 'evil-buffer-regexps '("\\*question-list" . emacs))
-    (add-to-list 'evil-buffer-regexps '("\\*sx-" . emacs))))
+    (push '("\\*question-list" . emacs) evil-buffer-regexps)
+    (push '("\\*sx-" . emacs) evil-buffer-regexps)))
 
 
 
@@ -5505,7 +5504,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; shell-script-mode. (alias for sh-mode)
 ;;;----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.gitignore$" . shell-script-mode))
+(push '("\\.gitignore$" . shell-script-mode) auto-mode-alist)
 ;; (add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
 
 
@@ -5549,7 +5548,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; sallet. from fuco. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/notElpa/sallet")
+(push "~/.emacs.d/notElpa/sallet" load-path)
 (autoload #'sallet-buffer "sallet" nil t)
 
 ;; NOTE: the sallet package is not ready yet. Just configuring to give it a
@@ -5570,7 +5569,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; sunrise-commander. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/notElpa/sunrise-commander")
+(push "~/.emacs.d/notElpa/sunrise-commander" load-path)
 (autoload #'sunrise-cd "sunrise-commander" nil t)
 
 ;;;----------------------------------------------------------------------------
@@ -5773,7 +5772,7 @@ Closure over `preceding-sexp-fn'."
   (setq calendar-minimum-window-height 9)
 
   (when my-use-evil-p ;; use emacs, not evil bindings in calendar.
-    (add-to-list 'evil-buffer-regexps '("\\*Calendar*" . emacs))))
+    (push '("\\*Calendar*" . emacs) evil-buffer-regexps)))
 
 
 ;;;----------------------------------------------------------------------------
@@ -5862,7 +5861,7 @@ Closure over `preceding-sexp-fn'."
   (setq cider-prompt-for-symbol nil)
 
   (when (eq my-curr-computer 'work-laptop)
-    (add-to-list 'exec-path "C:/Users/mtz/.lein/bin")
+    (push "C:/Users/mtz/.lein/bin" exec-path)
     ;; 7zip so source lookup will work
     ;; (add-to-list 'exec-path "C:/Users/mtz/programs/7zip")
     ))
@@ -6036,7 +6035,7 @@ Closure over `preceding-sexp-fn'."
   (when (eq my-curr-computer 'work-laptop)
     (setq geiser-default-implementation 'racket
           geiser-active-implementations '(racket))
-    (add-to-list 'exec-path "C:/Users/mtz/programs/Racket")))
+    (push "C:/Users/mtz/programs/Racket" exec-path)))
 
 (with-eval-after-load 'geiser-repl
   (defun my-setup-geiser-repl ()
@@ -6076,7 +6075,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; adoc-mode
 ;;;----------------------------------------------------------------------------
-(add-to-list 'auto-mode-alist '("\\.asc\\'" . adoc-mode))
+(push '("\\.asc\\'" . adoc-mode) auto-mode-alist)
 
 (with-eval-after-load 'adoc-mode
   (defun my-setup-adoc-mode ()
@@ -6328,7 +6327,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'company
   (when has-nodejs-p
-    (add-to-list 'company-backends 'company-tern)))
+    (push 'company-tern company-backends)))
 
 ;;;----------------------------------------------------------------------------
 ;;; browse-kill-ring
@@ -6348,7 +6347,7 @@ vanilla javascript buffers."
 ;;; NOTE: put compile_commands.json in each project root (or symlink).
 ;;;----------------------------------------------------------------------------
 (when nil ;(eq my-curr-computer 'wild-dog)
-  (add-to-list 'exec-path "/home/mike/proj/cquery/build/release/bin"))
+  (push "/home/mike/proj/cquery/build/release/bin" exec-path))
 
 ;;;----------------------------------------------------------------------------
 ;;; cquery. Melpa elisp package. (works with cquery binary above.)
@@ -6379,7 +6378,7 @@ vanilla javascript buffers."
 
 (when (eq my-curr-computer 'wild-dog)
   ;; binary is /home/mike/proj/ccls/Release/ccls
-  (add-to-list 'exec-path my-ccls-folder))
+  (push my-ccls-folder exec-path))
 
 ;;;----------------------------------------------------------------------------
 ;;; ccls. Melpa elisp package. (works with ccls binary above.)
@@ -6411,7 +6410,7 @@ vanilla javascript buffers."
 ;;       npm install -g indium
 ;; NOTE: must install package dependency `websocket'. Currently getting it from
 ;;       melpa.
-(add-to-list 'load-path "~/.emacs.d/notElpa/Indium") ; git submodule
+(push "~/.emacs.d/notElpa/Indium" load-path) ; git submodule
 (autoload 'indium-connect "indium-interaction" nil t)
 ;; (with-eval-after-load 'indium
 ;;   )
@@ -6423,8 +6422,8 @@ vanilla javascript buffers."
   ;; NOTE: instructions to set up hunspell on windows:
   ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
   (when (eq my-curr-computer 'work-laptop)
-    (add-to-list 'exec-path
-                 "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin")
+    (push "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin"
+          exec-path)
     (setq ispell-program-name (locate-file "hunspell"
                                            exec-path
                                            exec-suffixes
@@ -6560,7 +6559,7 @@ vanilla javascript buffers."
 ;;; libvterm
 ;;;----------------------------------------------------------------------------
 (when (eq my-curr-computer 'wild-dog)
-  (add-to-list 'load-path "~/proj/emacs-libvterm/")
+  (push "~/proj/emacs-libvterm/" load-path)
   ;; (require 'vterm)
   (autoload #'vterm "vterm" nil t))
 

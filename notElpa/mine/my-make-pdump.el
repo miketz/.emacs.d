@@ -2,10 +2,10 @@
 ;;; make a pdump.
 ;;;
 ;;; to make a dump:
-;;;     emacs --batch -l ~/.emacs.d/notElpa/mine/my-make-pdump.el
+;;;     emacs --batch -Q -l ~/.emacs.d/notElpa/mine/my-make-pdump.el
 ;;;
 ;;; run with the dump
-;;;     emacs --dump-file=~/.emacs.d/dump.pdmp
+;;;     emacs -Q --dump-file=~/.emacs.d/dump.pdmp
 ;;;----------------------------------------------------------------------------
 
 ;; load init file

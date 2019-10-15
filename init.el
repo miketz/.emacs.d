@@ -833,6 +833,7 @@ in case that file does not provide any feature."
 (defvar my-computers
   '(work-laptop
     work-laptop-bash
+    work-laptop-2019
     raspberry-pi
     utilite
     old-sony-vaio
@@ -940,7 +941,7 @@ occur my-occur-wild-spaces")
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
-(defvar my-use-lispy-p (eq my-curr-computer 'wild-dog)
+(defvar my-use-lispy-p (memq my-curr-computer '(wild-dog work-laptop-2019))
   "Whether to use lispy or not.
 Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 
@@ -1719,6 +1720,12 @@ This prevents overlapping themes; something I would rarely want."
     (set-frame-font
      "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
 
+ ((eq my-curr-computer 'work-laptop-2019)
+  (load-theme 'charcoal t)
+  (when my-graphic-p
+    (set-frame-font
+     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
+
  ((eq my-curr-computer 'work-laptop-bash)
   (load-theme 'charcoal t))
 
@@ -2309,7 +2316,8 @@ In that case, insert the number."
 (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
                             "~/todo/TODO.org")
 
-                           ((eq my-curr-computer 'work-laptop)
+                           ((memq my-curr-computer '(work-laptop
+                                                     work-laptop-2019))
                             "C:/Users/mtz/TODO/TODO.org")
 
                            (t nil))
@@ -4409,7 +4417,8 @@ TODO: call this function when it works."
   (setq ediff-window-setup-function
         #'ediff-setup-windows-plain) ; 'ediff-setup-windows-multiframe
 
-  (when (eq my-curr-computer 'work-laptop)
+  (when (memq my-curr-computer '(work-laptop work-laptop-2019))
+    (setq ediff-diff-program "C:/Program Files/KDiff3/bin/diff.exe")
     (setq ediff-diff3-program "C:/Program Files/KDiff3/bin/diff3.exe")))
 
 

@@ -108,7 +108,7 @@
 
 
    `(evil-emacs-state-cursor    '(bar "blue"))
-   `(evil-normal-state-cursor   '(hollow "black"))
+   `(evil-normal-state-cursor   '(box "dark green"))
    `(evil-insert-state-cursor   '(bar "black"))
    `(evil-visual-state-cursor   '(hollow "black"))
    `(evil-operator-state-cursor '(box "red"))

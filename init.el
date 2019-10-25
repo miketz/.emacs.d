@@ -1716,7 +1716,7 @@ This prevents overlapping themes; something I would rarely want."
  ((eq my-curr-computer 'wild-dog)
   (load-theme 'charcoal t)
   (set-frame-font
-   "-misc-fixed-bold-r-normal--15-140-75-75-c-90-iso8859-7"))
+   "-misc-fixed-bold-r-normal--18-*-100-100-c-90-iso10646-1"))
 
  ((eq my-curr-computer 'work-laptop)
   (load-theme 'charcoal t)

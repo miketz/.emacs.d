@@ -6674,6 +6674,11 @@ vanilla javascript buffers."
 ;; nt-lag/28746
 (setq auto-window-vscroll nil)
 
+
+
+
+
+
 (progn ;;window navigation.
   (when my-use-evil-p
     (global-set-key (kbd "M-h") #'evil-window-left)

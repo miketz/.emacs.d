@@ -807,6 +807,7 @@ in case that file does not provide any feature."
 (declare-function s-contains-p 's)
 (declare-function eros--make-result-overlay 'eros)
 (declare-function slime-eval-last-expression-eros 'suppress)
+(declare-function vterm 'vterm)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

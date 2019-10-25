@@ -433,6 +433,9 @@ in case that file does not provide any feature."
 (defvar use-default-font-for-symbols)
 (defvar swiper-isearch-highlight-delay)
 (defvar mini-modeline-update-interval)
+(defvar *minesweeper-board-width*)
+(defvar *minesweeper-board-height*)
+(defvar *minesweeper-mines*)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -1163,7 +1166,8 @@ Closure over executed-p."
     (rg my-install-rg-p)
     (eros t)
     (hl-block-mode ,(not (version< emacs-version "26.0")))
-    (mini-modeline t))
+    (mini-modeline t)
+    (minesweeper))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -6568,6 +6572,14 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'mini-modeline
   (setq mini-modeline-update-interval 0.2))
+
+;;;----------------------------------------------------------------------------
+;;; minesweeper
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'minesweeper
+  (setq *minesweeper-board-width* 30)
+  (setq *minesweeper-board-height* 10)
+  (setq *minesweeper-mines* 75))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

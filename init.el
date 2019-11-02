@@ -436,6 +436,8 @@ in case that file does not provide any feature."
 (defvar *minesweeper-board-width*)
 (defvar *minesweeper-board-height*)
 (defvar *minesweeper-mines*)
+(defvar nov-text-width)
+(defvar nov-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -808,6 +810,7 @@ in case that file does not provide any feature."
 (declare-function eros--make-result-overlay 'eros)
 (declare-function slime-eval-last-expression-eros 'suppress)
 (declare-function vterm 'vterm)
+(declare-function nov-goto-toc 'nov)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -6592,7 +6595,9 @@ vanilla javascript buffers."
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 (with-eval-after-load 'nov
-  (setq nov-text-width 80))
+  (setq nov-text-width 80)
+  ;; TODO: this keybind isn't working. fix it.
+  (define-key nov-mode-map (kbd "C-o") #'nov-goto-toc))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

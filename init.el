@@ -6583,6 +6583,18 @@ vanilla javascript buffers."
   (setq *minesweeper-mines* 75))
 
 ;;;----------------------------------------------------------------------------
+;;; nov
+;;;----------------------------------------------------------------------------
+;; Make sure you have an unzip executable on PATH, otherwise the extraction of
+;; EPUB files will fail. If you for some reason have unzip in a non-standard
+;; location, customize `nov-unzip-program' to its path. You'll also need an
+;; Emacs compiled with libxml2 support, otherwise rendering will fail.
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+(with-eval-after-load 'nov
+  (setq nov-text-width 80))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)

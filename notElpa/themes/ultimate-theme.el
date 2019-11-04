@@ -108,7 +108,7 @@
 
 
    `(evil-emacs-state-cursor    '(bar "blue"))
-   `(evil-normal-state-cursor   '(hollow "black"))
+   `(evil-normal-state-cursor   '(box "dark green"))
    `(evil-insert-state-cursor   '(bar "black"))
    `(evil-visual-state-cursor   '(hollow "black"))
    `(evil-operator-state-cursor '(box "red"))
@@ -172,7 +172,7 @@
    `(font-lock-doc-face ((,class (:foreground "dark red"))))
    `(font-lock-function-name-face ((,class :foreground "black"
                                            :background "lightsteelblue1"
-										   :weight normal
+										   ;; :weight normal
 										   ;; :box (:line-width -1 :color ,faint-less)
                                            )))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
@@ -192,8 +192,14 @@
 											   :background ,bg-red))))
 
    ;; avy
-   `(avy-lead-face ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
-   `(avy-lead-face-0 ((,class (:foreground "orange" :background "black" :weight normal :slant normal))))
+   `(avy-lead-face ((,class :foreground "orange"
+                            :background "black"
+                            ;; :weight normal
+                            :slant normal)))
+   `(avy-lead-face-0 ((,class :foreground "orange"
+                              :background "black"
+                              ;; :weight normal
+                              :slant normal)))
    ;; `(avy-lead-face-1 ((,class (:foreground "green")))) ;; not used?
 
    ;; info
@@ -245,7 +251,9 @@
 
 
    ;; replace.el
-   `(match ((,class (:background "#000000" :foreground ,fg-yellow :weight normal))))
+   `(match ((,class (:background "#000000" :foreground ,fg-yellow
+                                 ;; :weight normal
+                                 ))))
 
    ;; num3
    ;; '(num3-face-odd ((,class)))
@@ -324,7 +332,7 @@
    `(header-line
      ((,class (:foreground ,fg-yellow
                            :background ,bg-yellow
-                           :weight normal
+                           ;; :weight normal
                            :box (:line-width -1 :style released-button)))))
 
    ;; magit
@@ -468,17 +476,17 @@
    `(org-hide ((,class (:foreground ,faint))))
 
    `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight normal))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight normal))))
-   `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight normal))))
-   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight normal))))
+   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight bold))))
+   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight bold))))
    `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
-                                                      :weight normal))))
-   `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight normal))))
-   `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight normal))))
+                                                      :weight bold))))
+   `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight bold))))
+   `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight bold))))
    `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50" ;:background "#fff7ca"
-                                                      :weight normal))))
-   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight normal))))))
+                                                      :weight bold))))
+   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))))
 
 (provide-theme 'ultimate)
 

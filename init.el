@@ -435,6 +435,11 @@ in case that file does not provide any feature."
 (defvar use-default-font-for-symbols)
 (defvar swiper-isearch-highlight-delay)
 (defvar mini-modeline-update-interval)
+(defvar *minesweeper-board-width*)
+(defvar *minesweeper-board-height*)
+(defvar *minesweeper-mines*)
+(defvar nov-text-width)
+(defvar nov-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -806,6 +811,8 @@ in case that file does not provide any feature."
 (declare-function s-contains-p 's)
 (declare-function eros--make-result-overlay 'eros)
 (declare-function slime-eval-last-expression-eros 'suppress)
+(declare-function vterm 'vterm)
+(declare-function nov-goto-toc 'nov)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1166,7 +1173,8 @@ Closure over executed-p."
     (rg my-install-rg-p)
     (eros t)
     (hl-block-mode ,(not (version< emacs-version "26.0")))
-    (mini-modeline t))
+    (mini-modeline t)
+    (minesweeper))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -6581,6 +6589,28 @@ vanilla javascript buffers."
   (setq mini-modeline-update-interval 0.2))
 
 ;;;----------------------------------------------------------------------------
+;;; minesweeper
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'minesweeper
+  (setq *minesweeper-board-width* 30)
+  (setq *minesweeper-board-height* 10)
+  (setq *minesweeper-mines* 75))
+
+;;;----------------------------------------------------------------------------
+;;; nov
+;;;----------------------------------------------------------------------------
+;; Make sure you have an unzip executable on PATH, otherwise the extraction of
+;; EPUB files will fail. If you for some reason have unzip in a non-standard
+;; location, customize `nov-unzip-program' to its path. You'll also need an
+;; Emacs compiled with libxml2 support, otherwise rendering will fail.
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+(with-eval-after-load 'nov
+  (setq nov-text-width 80)
+  ;; TODO: this keybind isn't working. fix it.
+  (define-key nov-mode-map (kbd "C-o") #'nov-goto-toc))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
 (when (eq system-type 'windows-nt)
@@ -6655,6 +6685,10 @@ vanilla javascript buffers."
 ;;(global-set-key (kbd "<f12>") (C-u M-x org-refile))
 
 
+;;;----------------------------------------------------------------------------
+;;; scrolling
+;;;----------------------------------------------------------------------------
+(setq fast-but-imprecise-scrolling t)
 ;; scroll like vim when moving 1 line off screen with j/k.
 ;; has some weird rules about re-centering, but >=101 is supposed to
 ;; not recenter. I had an issue with value 1 where if i held down
@@ -6667,6 +6701,11 @@ vanilla javascript buffers."
 ;; see https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-moveme
 ;; nt-lag/28746
 (setq auto-window-vscroll nil)
+
+
+
+
+
 
 (progn ;;window navigation.
   (when my-use-evil-p

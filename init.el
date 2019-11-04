@@ -6607,6 +6607,11 @@ vanilla javascript buffers."
 
 (with-eval-after-load 'nov
   (setq nov-text-width 80)
+
+  (when (eq my-curr-computer 'work-laptop-2019)
+    (setq nov-unzip-program
+          "C:/Users/mtz/programs/unzip-5.51-1-bin/bin/unzip.exe"))
+
   ;; TODO: this keybind isn't working. fix it.
   (define-key nov-mode-map (kbd "C-o") #'nov-goto-toc))
 

@@ -39,7 +39,7 @@
           "-misc-fixed-medium-r-normal--15-140-75-75-c-90-iso8859-7"
           "-DAMA-Ubuntu Mono-normal-normal-normal-*-20-*-*-*-m-0-iso10646-1"
           "-DAMA-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"])
-       ((eq my-curr-computer 'work-laptop)
+       ((memq my-curr-computer '(work-laptop-2019 work-laptop))
         '["-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
           "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"

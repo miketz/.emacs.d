@@ -109,7 +109,8 @@
   )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-(when (version< emacs-version "27.0") ; executes in early-init.el for emacs 27+
+(when (or (version< emacs-version "27.0") ; executes in early-init.el for emacs 27+
+          (eq system-type 'windows-nt))
   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -318,6 +319,7 @@ in case that file does not provide any feature."
 (defvar magit-log-section-commit-count)
 (defvar ediff-split-window-function)
 (defvar ediff-window-setup-function)
+(defvar ediff-diff-program)
 (defvar ediff-diff3-program)
 (defvar darkroom-margins)
 (defvar darkroom-fringes-outside-margins)
@@ -942,7 +944,7 @@ occur my-occur-wild-spaces")
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
-(defvar my-use-lispy-p (memq my-curr-computer '(wild-dog work-laptop-2019))
+(defvar my-use-lispy-p (memq my-curr-computer '(wild-dog))
   "Whether to use lispy or not.
 Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 
@@ -1102,7 +1104,7 @@ Closure over executed-p."
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     (avy t)
-    (lispy ,my-use-lispy-p)
+    (lispy t)
     ;;(worf t)
     (elisp-slime-nav t)
     ;; on 11-28-2016 electric-spacing had an unbalanced paren
@@ -3919,7 +3921,7 @@ and indent."
     (autoload #'my-proj-ydnjs lisp-file nil t)
     (autoload #'my-proj-paip lisp-file nil t)))
 
-(when (eq my-curr-computer 'work-laptop)
+(when (memq my-curr-computer '(work-laptop-2019 work-laptop))
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'my-proj-safetyweb lisp-file nil t)
     (autoload #'my-proj-safetyweb-ects lisp-file nil t)

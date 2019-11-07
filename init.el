@@ -1014,7 +1014,7 @@ Closure over executed-p."
 
 (defvar my-install-slime-p (memq my-curr-computer
                                  '(wild-dog work-laptop utilite hp-tower-2009
-                                   a-laptop-faster)))
+                                   a-laptop-faster work-laptop-2019)))
 
 (defvar my-install-slime-company-p (and my-install-slime-p
                                         (not (version< emacs-version
@@ -1878,50 +1878,56 @@ This prevents overlapping themes; something I would rarely want."
   ;;           (animate-string welcome 0 0)
   ;;         (insert welcome)))))
 
-  (progn
-    (when (eq my-curr-computer 'wild-dog)
-      (setq slime-default-lisp 'sbcl
-            slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64"))
-                                         (sbcl ("sbcl")))))
+  (cond
+   ((eq my-curr-computer 'wild-dog)
+    (setq slime-default-lisp 'sbcl
+          slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64"))
+                                       (sbcl ("sbcl")))))
 
-    (when (eq my-curr-computer 'work-laptop)
-      (setq slime-default-lisp 'ccl)
-      (setq slime-lisp-implementations
-            '((ccl
-               ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64"))
-              (sbcl
-               ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
-              (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
-              ;; clisp is just a fake example for now.
-              (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
+   ((eq my-curr-computer 'work-laptop)
+    (setq slime-default-lisp 'ccl)
+    (setq slime-lisp-implementations
+          '((ccl
+             ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64"))
+            (sbcl
+             ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
+            (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
+            ;; clisp is just a fake example for now.
+            (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
+
+   ((eq my-curr-computer 'work-laptop-2019)
+    (setq slime-default-lisp 'ccl)
+    (setq slime-lisp-implementations
+          '((ccl
+             ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64")))))
 
 
-    (when (eq my-curr-computer 'utilite)
-      (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("armcl")))))
+   ((eq my-curr-computer 'utilite)
+    (setq slime-default-lisp 'ccl
+          slime-lisp-implementations '((ccl ("armcl")))))
 
-    (when (eq my-curr-computer 'hp-tower-2009)
-      (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("~/software/ccl/lx86cl64"))
-                                         (sbcl ("/usr/bin/sbcl")))))
+   ((eq my-curr-computer 'hp-tower-2009)
+    (setq slime-default-lisp 'ccl
+          slime-lisp-implementations '((ccl ("~/software/ccl/lx86cl64"))
+                                       (sbcl ("/usr/bin/sbcl")))))
 
-    (when (eq my-curr-computer 'a-laptop-faster)
-      (setq slime-default-lisp 'ccl
-            slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl")))))
+   ((eq my-curr-computer 'a-laptop-faster)
+    (setq slime-default-lisp 'ccl
+          slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl"))))))
 
-    (when nil ;; don't turn on SLIME automatically for now.
-      ;; when on a computer with SLIME set up
-      (when (or (eq my-curr-computer 'work-laptop)
-                (eq my-curr-computer 'utilite)
-                (eq my-curr-computer 'a-laptop-faster))
-        ;; Connect lisp buffers to SLIME automatically.
-        ;; I think this works because in SLIME's MELPA package, file
-        ;; slime-autoloads.el, it sneakily adds a slime hook to lisp-mode-hook.
-        ;; Using the code: (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
-        (add-hook 'slime-mode-hook
-                  (lambda ()
-                    (unless (slime-connected-p)
-                      (save-excursion (slime))))))))
+  (when nil ;; don't turn on SLIME automatically for now.
+    ;; when on a computer with SLIME set up
+    (when (or (eq my-curr-computer 'work-laptop)
+              (eq my-curr-computer 'utilite)
+              (eq my-curr-computer 'a-laptop-faster))
+      ;; Connect lisp buffers to SLIME automatically.
+      ;; I think this works because in SLIME's MELPA package, file
+      ;; slime-autoloads.el, it sneakily adds a slime hook to lisp-mode-hook.
+      ;; Using the code: (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+      (add-hook 'slime-mode-hook
+                (lambda ()
+                  (unless (slime-connected-p)
+                    (save-excursion (slime)))))))
 
   ;; overlay using the 'eros package. TODO: wire-up to a keybind.
   (require 'dash)

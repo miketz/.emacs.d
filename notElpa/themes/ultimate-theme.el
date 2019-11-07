@@ -161,8 +161,7 @@
    `(region
      ((,class (:background ,highlight))))     ;69685E
 
-   ;; TODO
-   `(fringe ((,class (:background "black"))))
+   `(fringe ((,class (:background "#959173"))))
 
    ;; TODO font lock
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
@@ -203,8 +202,8 @@
    ;; `(avy-lead-face-1 ((,class (:foreground "green")))) ;; not used?
 
    ;; info
-   `(info-xref-visited ((,class (:foreground ,fg-purple))))
-   `(info-xref ((,class (:foreground ,fg-green))))
+   `(info-xref-visited ((,class (:foreground "medium sea green"))))
+   `(info-xref ((,class (:foreground "dark blue"))))
    `(Info-quoted ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
 
    ;; slime
@@ -486,7 +485,11 @@
    `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight bold))))
    `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50" ;:background "#fff7ca"
                                                       :weight bold))))
-   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))))
+   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))
+
+   ;; custom faces for my config
+   `(my-tilde-face ((,class :foreground "blue"
+                            :background ,bg)))))
 
 (provide-theme 'ultimate)
 

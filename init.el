@@ -440,6 +440,7 @@ in case that file does not provide any feature."
 (defvar *minesweeper-mines*)
 (defvar nov-text-width)
 (defvar nov-mode-map)
+(defvar nov-unzip-program)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

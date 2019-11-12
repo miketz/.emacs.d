@@ -1021,7 +1021,9 @@ Closure over executed-p."
                                         (not (version< emacs-version
                                                        "24.4"))))
 
-(defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog work-laptop))
+(defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog
+                                                 work-laptop-2019
+                                                 work-laptop))
   "Non-nil if rg executable is installed.")
 (defvar my-install-rg-p (not (version< emacs-version "24.4"))
   "Whether to install the `rg' package from melpa.")

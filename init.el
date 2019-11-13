@@ -6449,13 +6449,15 @@ vanilla javascript buffers."
 (with-eval-after-load 'ispell
   ;; NOTE: instructions to set up hunspell on windows:
   ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
-  (when (eq my-curr-computer 'work-laptop)
-    (push "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin"
-          exec-path)
-    (setq ispell-program-name (locate-file "hunspell"
-                                           exec-path
-                                           exec-suffixes
-                                           'file-executable-p))))
+  (when (memq my-curr-computer '(work-laptop-2019 work-laptop))
+    ;; (push "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin"
+    ;;       exec-path)
+    ;; (setq ispell-program-name (locate-file "hunspell"
+    ;;                                        exec-path
+    ;;                                        exec-suffixes
+    ;;                                        'file-executable-p))
+    (setq ispell-program-name
+          "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin/hunspell.exe")))
 
 
 ;;;----------------------------------------------------------------------------

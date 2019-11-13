@@ -4078,7 +4078,7 @@ and indent."
 
   ;; highlights for start/closing tags and vertical line between them.
   (setq web-mode-enable-current-element-highlight t
-        web-mode-enable-current-column-highlight  t)
+        web-mode-enable-current-column-highlight  nil)
 
   ;; indent widths of different code sections
   (setq web-mode-markup-indent-offset 2

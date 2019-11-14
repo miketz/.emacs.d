@@ -2376,6 +2376,22 @@ In that case, insert the number."
     (setq org-todo-keyword-faces '(("HOLD" . (:foreground "deep sky blue"
                                                           :weight bold)))))
 
+  (defun my-org-export-html ()
+    "Custom Emacs fthemes tend to produce unreadable colors in html docs.
+Disable themes before explorting to html, then turn them back on."
+    (interactive)
+    (let ((themes custom-enabled-themes))
+      ;; disable themes
+      (dolist (thm themes)
+        (disable-theme thm))
+
+      ;; export
+      (org-html-export-as-html)
+
+      ;; turn themes back on
+      (dolist (thm themes)
+        (load-theme thm t))))
+
   ;; TODO: fix `org-summary-todo'. Not working. Commented out for now.
   ;; (defun org-summary-todo (n-done n-not-done)
   ;;   "Switch entry to DONE when all sub-entries are done, to TODO otherwise."

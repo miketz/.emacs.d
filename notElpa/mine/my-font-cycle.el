@@ -47,6 +47,7 @@
           "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
           "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-outline-Consolas-bold-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"])
        (t nil)))
      (i 0)

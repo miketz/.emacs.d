@@ -96,7 +96,8 @@
    (car custom-enabled-themes)
 
    `(evil-emacs-state-cursor    '(bar "blue"))
-   `(evil-normal-state-cursor   '(hollow "black"))
+   `(evil-normal-state-cursor   '(box "#0FB300") ;'(hollow "black")
+     )
    `(evil-insert-state-cursor   '(bar "black"))
    `(evil-visual-state-cursor   '(hollow "black"))
    `(evil-operator-state-cursor '(box "red"))

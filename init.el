@@ -6642,6 +6642,17 @@ vanilla javascript buffers."
   ;; TODO: this keybind isn't working. fix it.
   (define-key nov-mode-map (kbd "C-o") #'nov-goto-toc))
 
+
+;;;----------------------------------------------------------------------------
+;;; display-fill-column-indicator
+;;;----------------------------------------------------------------------------
+;; a new built-in line display in Emacs.
+;; It can replace package `fill-column-indicator' and it's `fci-mode'.
+;; call `display-fill-column-indicator-mode' to toggle the new mode.
+
+(with-eval-after-load 'display-fill-column-indicator
+  (setq-default display-fill-column-indicator-column 79))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------

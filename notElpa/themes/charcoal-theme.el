@@ -519,6 +519,10 @@ Example:
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
 
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((,class :foreground ,faint)))
+
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
    `(rainbow-delimiters-depth-2-face

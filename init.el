@@ -4805,7 +4805,7 @@ TODO: call this function when it works."
       (setq ivy-re-builders-alist `((t . ,curr)))
       (message "swiper match style: %s" (symbol-name curr))))
 
-  (global-set-key (kbd "<f7>") #'my-cycle-ivy-match-style)
+  ;; (global-set-key (kbd "<f7>") #'my-cycle-ivy-match-style)
 
   ;; use fancy highlights in the popup window
   (setq ivy-display-style 'fancy))
@@ -6651,7 +6651,29 @@ vanilla javascript buffers."
 ;; call `display-fill-column-indicator-mode' to toggle the new mode.
 
 (with-eval-after-load 'display-fill-column-indicator
-  (setq-default display-fill-column-indicator-column 79))
+  (setq-default display-fill-column-indicator-column 79)
+
+  (let ((cols '(nil 79 80 100 110))
+        (curr nil))
+    (defun my-cycle-col-line ()
+      (interactive)
+      (setq curr (car (or (cdr (memq curr cols))
+                          cols)))
+
+      (cond
+       ;; if mode on and cycled to nil col.
+       ((and display-fill-column-indicator-mode
+             (eq curr nil))
+        (display-fill-column-indicator-mode 0))
+       ;; if mode off and cycled to integer col.
+       ((and (not display-fill-column-indicator-mode)
+             (integerp curr))
+        (display-fill-column-indicator-mode 1)))
+
+      (setq display-fill-column-indicator-column curr)
+      (message "display-fill-column-indicator-column: %s" curr)))
+
+  (global-set-key (kbd "<f7>") #'my-cycle-col-line))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom

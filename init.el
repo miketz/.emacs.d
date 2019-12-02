@@ -6682,7 +6682,7 @@ vanilla javascript buffers."
   ;; the bad behavior introduced in emacs 25.
   (setq use-default-font-for-symbols nil))
 
-(cond ((eq my-curr-computer 'work-laptop)
+(cond ((memq my-curr-computer '(work-laptop-2019 work-laptop))
        (setq find-function-C-source-directory
              "c:/users/mtz/scratch/emacs/src")))
 

@@ -6651,7 +6651,9 @@ vanilla javascript buffers."
 ;; call `display-fill-column-indicator-mode' to toggle the new mode.
 
 (with-eval-after-load 'display-fill-column-indicator
-  (setq-default display-fill-column-indicator-column 79))
+  (setq-default display-fill-column-indicator-column 79)
+  ;; pipe | (ascii 124). Unicode alternative ?\u2502
+  (setq-default display-fill-column-indicator-character ?\|))
 
 (let ((cols '(nil 79 80 100 110))
       (curr nil))

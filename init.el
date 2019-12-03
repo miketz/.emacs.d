@@ -6699,6 +6699,7 @@ vanilla javascript buffers."
     (setq display-fill-column-indicator-column curr)
     (message "display-fill-column-indicator-column: %s" curr)))
 
+(declare-function my-cycle-col-line 'suppress)
 (global-set-key (kbd "<f7>") #'my-cycle-col-line)
 
 ;;;----------------------------------------------------------------------------

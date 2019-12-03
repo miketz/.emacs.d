@@ -2427,6 +2427,10 @@ Disable themes before explorting to html, then turn them back on."
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
 
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 110) ; long lines in C#
+      (display-fill-column-indicator-mode 1))
+
     (my-turn-on-electric-pair-local-mode))
   (add-hook #'csharp-mode-hook #'my-setup-csharp-mode))
 
@@ -2462,7 +2466,19 @@ Disable themes before explorting to html, then turn them back on."
 (with-eval-after-load 'js
   (defun my-setup-js ()
     ;; set explicitly because shorter width in json mode corrupts it.
-    (setq js-indent-level my-indent-width))
+    (setq js-indent-level my-indent-width)
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79)
+      (display-fill-column-indicator-mode 1))
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode-enable)
+    (electric-spacing-mode 1)
+    (when (and buffer-file-name
+               (my-str-ends-with-p buffer-file-name ".js"))
+      ;; wireup M-x compile
+      (set (make-local-variable 'compile-command)
+           (concat "jslint --terse " (shell-quote-argument buffer-file-name)))))
+
   (add-hook 'js-mode-hook #'my-setup-js))
 
 
@@ -2607,31 +2623,32 @@ Disable themes before explorting to html, then turn them back on."
 
     ;;(js2-imenu-extras-mode)
 
-    (my-turn-on-electric-pair-local-mode)
+    ;; (my-turn-on-electric-pair-local-mode)
     ;; (smartparens-mode 1)
 
 
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode-enable)
-    (electric-spacing-mode 1)
+    ;; (rainbow-delimiters-mode-enable)
+    ;; (electric-spacing-mode 1)
+
     ;; use jslint, but only if editing a .js file on disk.
     ;; TODO: use with in-memory buffer, or narrowed region of html file.
     ;; TODO: use flycheck instead of flymake
-    (when (and buffer-file-name
-               (my-str-ends-with-p buffer-file-name ".js"))
-      ;; wireup M-x compile
-      (set (make-local-variable 'compile-command)
-           (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
-      ;; ;; and turn on flymake-jslint. (only works on saved files)
-      ;; (flymake-jslint-load)
-      ;; ;; bind M-n, M-p to use flymake functions instead of js2 functions
-      ;; (evil-define-key 'normal js2-mode-map (kbd "M-n")
-      ;;   #'flymake-goto-next-error)
-      ;; (evil-define-key 'normal js2-mode-map (kbd "M-p")
-      ;;   #'flymake-goto-prev-error)
-      ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m")
-      ;;   #'flymake-popup-current-error-menu)
-      )
+    ;; (when (and buffer-file-name
+    ;;            (my-str-ends-with-p buffer-file-name ".js"))
+    ;;   ;; wireup M-x compile
+    ;;   (set (make-local-variable 'compile-command)
+    ;;        (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
+    ;;   ;; ;; and turn on flymake-jslint. (only works on saved files)
+    ;;   ;; (flymake-jslint-load)
+    ;;   ;; ;; bind M-n, M-p to use flymake functions instead of js2 functions
+    ;;   ;; (evil-define-key 'normal js2-mode-map (kbd "M-n")
+    ;;   ;;   #'flymake-goto-next-error)
+    ;;   ;; (evil-define-key 'normal js2-mode-map (kbd "M-p")
+    ;;   ;;   #'flymake-goto-prev-error)
+    ;;   ;; (evil-define-key 'normal js2-mode-map (kbd "C-c m")
+    ;;   ;;   #'flymake-popup-current-error-menu)
+    ;;   )
     ;; show a Greek lambda for function
     (setq prettify-symbols-alist '(("function" . 955)))
     ;; collapse/show sections of code

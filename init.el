@@ -6705,6 +6705,13 @@ vanilla javascript buffers."
 (declare-function my-cycle-col-line 'suppress)
 (global-set-key (kbd "<f7>") #'my-cycle-col-line)
 
+;; use it for lisps
+(when (fboundp #'display-fill-column-indicator-mode)
+  (add-hook 'emacs-lisp-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'lisp-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'scheme-mode-hook #'display-fill-column-indicator-mode)
+  (add-hook 'clojure-mode-hook #'display-fill-column-indicator-mode))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------

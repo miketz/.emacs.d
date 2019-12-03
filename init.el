@@ -3316,7 +3316,9 @@ and indent."
     (electric-spacing-mode 1)
     ;; (when (fboundp #'fci-mode)
     ;;   (fci-mode 1))
-    )
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79)
+      (display-fill-column-indicator-mode 1)))
   (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
 
   (defun my-setup-c-mode ()

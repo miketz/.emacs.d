@@ -5828,7 +5828,10 @@ Closure over `preceding-sexp-fn'."
   (defun my-setup-python ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
-    (my-turn-on-electric-pair-local-mode))
+    (my-turn-on-electric-pair-local-mode)
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 100)
+      (display-fill-column-indicator-mode 1)))
   (add-hook 'python-mode-hook #'my-setup-python))
 
 ;;;----------------------------------------------------------------------------

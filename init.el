@@ -441,6 +441,7 @@ in case that file does not provide any feature."
 (defvar nov-text-width)
 (defvar nov-mode-map)
 (defvar nov-unzip-program)
+(defvar display-fill-column-indicator-mode)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -814,6 +815,7 @@ in case that file does not provide any feature."
 (declare-function slime-eval-last-expression-eros 'suppress)
 (declare-function vterm 'vterm)
 (declare-function nov-goto-toc 'nov)
+(declare-function org-html-export-as-html 'ox-html)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

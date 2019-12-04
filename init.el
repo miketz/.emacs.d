@@ -1901,10 +1901,11 @@ This prevents overlapping themes; something I would rarely want."
             (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
 
    ((eq my-curr-computer 'work-laptop-2019)
-    (setq slime-default-lisp 'ccl)
+    (setq slime-default-lisp 'sbcl)
     (setq slime-lisp-implementations
           '((ccl
-             ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64")))))
+             ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64"))
+            (sbcl ("sbcl")))))
 
 
    ((eq my-curr-computer 'utilite)

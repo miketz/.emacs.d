@@ -6616,7 +6616,9 @@ vanilla javascript buffers."
 ;;; ctags. universal ctags or exuberant ctags.
 ;;;----------------------------------------------------------------------------
 (defvar my-ctags-exe
-  (cond ((eq my-curr-computer 'work-laptop)
+  (cond ((eq my-curr-computer 'work-laptop-2019)
+         "C:/Users/mtz/programs/ctags-2019-12-04_2ebf5b1b-x64/ctags.exe")
+        ((eq my-curr-computer 'work-laptop)
          "c:/users/mtz/programs/ctags-2019-07-18_ff180005-x64/ctags.exe")
         ((eq my-curr-computer 'work-laptop-bash) "ctags")
         ((eq my-curr-computer 'wild-dog) "/usr/bin/ctags-exuberant")

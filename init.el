@@ -3370,6 +3370,12 @@ and indent."
       (smart-tabs-advice c-indent-region c-basic-offset)))
   (add-hook 'c++-mode-hook #'my-setup-c++-mode)
 
+  (defun my-setup-java-mode ()
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 110) ; long lines in java.
+      (display-fill-column-indicator-mode 1)))
+  (add-hook 'java-mode-hook #'my-setup-java-mode)
+
 
   ;; (add-hook 'c-initialization-hook
   ;;           (lambda ()

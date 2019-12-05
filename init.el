@@ -817,6 +817,8 @@ in case that file does not provide any feature."
 (declare-function nov-goto-toc 'nov)
 (declare-function org-html-export-as-html 'ox-html)
 (declare-function my-setup-java-mode 'suppress)
+(declare-function tide-setup 'tide)
+(declare-function tide-hl-identifier-mode 'tide)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
@@ -1159,7 +1161,8 @@ Closure over executed-p."
     (adoc-mode t)
     (markdown-mode ,(not (version< emacs-version "24.4")))
     (typescript-mode t)
-    (tide ,(memq my-curr-computer '(work-laptop wild-dog work-laptop-bash)))
+    (tide ,(memq my-curr-computer
+                 '(work-laptop-2019 work-laptop wild-dog work-laptop-bash)))
     (context-coloring t)
     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
     (autothemer t) ;; dependency for some themes.

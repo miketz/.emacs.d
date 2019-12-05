@@ -816,6 +816,7 @@ in case that file does not provide any feature."
 (declare-function vterm 'vterm)
 (declare-function nov-goto-toc 'nov)
 (declare-function org-html-export-as-html 'ox-html)
+(declare-function my-setup-java-mode 'suppress)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

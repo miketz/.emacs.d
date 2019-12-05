@@ -523,6 +523,10 @@ Example:
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((,class :foreground ,faint)))
 
+   ;; ert
+   `(ert-test-result-expected ((,class :foreground ,fg-green :background ,bg-green)))
+   `(ert-test-result-unexpected ((,class :foreground ,fg-red :background ,bg-red)))
+
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
    `(rainbow-delimiters-depth-2-face

@@ -109,7 +109,7 @@
   )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-(when (or (version< emacs-version "27.0") ; executes in early-init.el for emacs 27+
+(when (or (version< emacs-version "27.0") ; in early-init.el for emacs 27+
           (eq system-type 'windows-nt))
   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -1229,7 +1229,7 @@ Closure over executed-p."
 ;; (cond
 ;;  ;; older emacs
 ;;  ((version< emacs-version "27.0")
-;;   (package-initialize)) ;; activate all the packages (in particular autoloads)
+;;   (package-initialize)) ;; activate all packages (in particular autoloads)
 ;;  ;; newer emacs
 ;;  ((not package--initialized)
 ;;   (package-initialize t)))
@@ -1945,7 +1945,8 @@ This prevents overlapping themes; something I would rarely want."
   (defun slime-eval-last-sexp-overlay ()
     (interactive)
     (eros--eval-overlay
-     (let ((result (s-trim (slime-eval `(swank:pprint-eval ,(slime-last-expression))))))
+     (let ((result (s-trim (slime-eval `(swank:pprint-eval
+                                         ,(slime-last-expression))))))
        (cond
         ;; number or string, eval it
         ((-contains-p '(?0 ?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9 ?\")
@@ -2482,7 +2483,8 @@ Disable themes before explorting to html, then turn them back on."
                (my-str-ends-with-p buffer-file-name ".js"))
       ;; wireup M-x compile
       (set (make-local-variable 'compile-command)
-           (concat "jslint --terse " (shell-quote-argument buffer-file-name)))))
+           (concat "jslint --terse "
+                   (shell-quote-argument buffer-file-name)))))
 
   (add-hook 'js-mode-hook #'my-setup-js))
 
@@ -2643,7 +2645,8 @@ Disable themes before explorting to html, then turn them back on."
     ;;            (my-str-ends-with-p buffer-file-name ".js"))
     ;;   ;; wireup M-x compile
     ;;   (set (make-local-variable 'compile-command)
-    ;;        (concat "jslint --terse " (shell-quote-argument buffer-file-name)))
+    ;;        (concat "jslint --terse "
+    ;;                (shell-quote-argument buffer-file-name)))
     ;;   ;; ;; and turn on flymake-jslint. (only works on saved files)
     ;;   ;; (flymake-jslint-load)
     ;;   ;; ;; bind M-n, M-p to use flymake functions instead of js2 functions

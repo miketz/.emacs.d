@@ -442,6 +442,7 @@ in case that file does not provide any feature."
 (defvar nov-mode-map)
 (defvar nov-unzip-program)
 (defvar display-fill-column-indicator-mode)
+(defvar flycheck-emacs-lisp-load-path)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

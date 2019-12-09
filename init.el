@@ -4588,6 +4588,7 @@ TODO: call this function when it works."
   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)
   ;;(evil-define-key 'flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
+  (setq flycheck-emacs-lisp-load-path 'inherit)
 
 ;;;----------------------------------
 ;;; helm-flycheck

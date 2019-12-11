@@ -24,7 +24,7 @@
        (fg-yellow    "#FFFF00")
        (bg-red       "#300000")
        (fg-red       "#FF0000")
-       (faint        "#4D4D3D")
+       (faint        "#F0DBBD")
        (fainter      "#3F3F35")
        (faint-less   "#8D8D8D")
        (keyword      "navy blue")
@@ -473,6 +473,10 @@
 
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
+
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((,class :foreground ,faint)))
 
    `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))

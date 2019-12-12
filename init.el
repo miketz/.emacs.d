@@ -6679,6 +6679,7 @@ vanilla javascript buffers."
 
 (with-eval-after-load 'nov
   (setq nov-text-width 80)
+  (setq nov-variable-pitch nil) ; use configured emacs font
 
   (when (eq my-curr-computer 'work-laptop-2019)
     (setq nov-unzip-program

@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 ;;; my-rand.el --- Helper functions for random values.
 
+(require 'cl-lib)
 (random t) ;seed random with time
 
 ;;;###autoload
@@ -23,13 +24,13 @@
 ;;        (rng (1+ (- max min)))
 ;;        (times 1000000)
 ;;        (target-occurs (/ times (* 1.0 rng)))
-;;        (rVals (loop repeat times
-;;                     collect (rand min max)))
+;;        (rVals (cl-loop repeat times
+;;                        collect (rand min max)))
 ;;        (sum (apply #'+ rVals))
 ;;        (len times) ; (len (length rVals))
 ;;        (avg (/ sum (* 1.0 len)))
-;;        (counts (loop for n from min to max
-;;                      collect 0))
+;;        (counts (cl-loop for n from min to max
+;;                         collect 0))
 ;;        (thresh-off-perc 0.05)
 ;;        (thresh-off (* target-occurs thresh-off-perc)))
 ;;   ;; count the distribution
@@ -65,13 +66,13 @@
          (rng (1+ (- max min)))
          (times 250000)
          (target-occurs (/ times (* 1.0 rng)))
-         (rVals (loop repeat times
-                      collect (rand min max)))
+         (rVals (cl-loop repeat times
+                         collect (rand min max)))
          (sum (apply #'+ rVals))
          (len times)                    ; (len (length rVals))
          (avg (/ sum (* 1.0 len)))
-         (counts (loop for n from min to max
-                       collect 0))
+         (counts (cl-loop for n from min to max
+                          collect 0))
          (thresh-off-perc 0.05)
          (thresh-off (* target-occurs thresh-off-perc)))
     ;; count the distribution

@@ -17,7 +17,7 @@
 (defun rollCheck (val)
   (>= val (roll)))
 
-;; testing distribution of `rand'
+;; ;; testing distribution of `rand'
 ;; (let* ((min 1)
 ;;        (max 100)
 ;;        (rng (1+ (- max min)))
@@ -29,7 +29,9 @@
 ;;        (len times) ; (len (length rVals))
 ;;        (avg (/ sum (* 1.0 len)))
 ;;        (counts (loop for n from min to max
-;;                      collect 0)))
+;;                      collect 0))
+;;        (thresh-off-perc 0.05)
+;;        (thresh-off (* target-occurs thresh-off-perc)))
 ;;   ;; count the distribution
 ;;   (dolist (r rVals)
 ;;     (let ((index (- r 1)))
@@ -41,11 +43,19 @@
 ;;                   "\n"))
 ;;   (insert "target: " (number-to-string target-occurs))
 ;;   (insert "\n")
+;;   (insert "thresh-off-perc: " (number-to-string thresh-off-perc))
+;;   (insert "\n")
+;;   (insert "thresh-off: " (number-to-string thresh-off))
+;;   (insert "\n")
 ;;   (cl-loop for x from min to max
 ;;            do
 ;;            (insert (number-to-string x))
 ;;            (insert ": ")
 ;;            (insert (number-to-string (elt counts (1- x))))
+;;            (let ((off-by (- target-occurs (elt counts (1- x)))))
+;;              (insert (format ", off by: %d" off-by))
+;;              (when (> off-by thresh-off)
+;;                (insert " !!!")))
 ;;            (insert "\n\n")))
 
 (ert-deftest rand-range-overflow-test ()

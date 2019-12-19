@@ -18,30 +18,35 @@
   (>= val (roll)))
 
 ;; testing distribution of `rand'
-;; (let* ((times 1000000)
-;;        (rVals (loop for i from 1 to times
-;;                     collect (rand 1 100)))
+;; (let* ((min 1)
+;;        (max 100)
+;;        (rng (1+ (- max min)))
+;;        (times 1000000)
+;;        (target-occurs (/ times (* 1.0 rng)))
+;;        (rVals (loop repeat times
+;;                     collect (rand min max)))
 ;;        (sum (apply #'+ rVals))
-;;        (len (length rVals))
-;;        (avg (/ sum len))
-;;        (counts (loop for n from 0 to 99
+;;        (len times) ; (len (length rVals))
+;;        (avg (/ sum (* 1.0 len)))
+;;        (counts (loop for n from min to max
 ;;                      collect 0)))
 ;;   ;; count the distribution
 ;;   (dolist (r rVals)
-;;     (setf (elt counts (- r 1))
-;;           (+ 1 (elt counts (- r 1)))))
+;;     (let ((index (- r 1)))
+;;       (setf (elt counts index)
+;;             (+ 1 (elt counts index)))))
 ;;   ;; print
 ;;   (insert (concat "avg: "
-;;                   (int-to-string avg)
+;;                   (number-to-string avg)
 ;;                   "\n"))
-;;   (insert "target: " (int-to-string (/ times 100)))
+;;   (insert "target: " (number-to-string target-occurs))
 ;;   (insert "\n")
-;;   (dotimes (x 100)
-;;     (insert (int-to-string (+ x 1)))
-;;     (insert ": ")
-;;     (insert (int-to-string (elt counts x)))
-;;     (insert "\n\n")))
-
+;;   (cl-loop for x from min to max
+;;            do
+;;            (insert (number-to-string x))
+;;            (insert ": ")
+;;            (insert (number-to-string (elt counts (1- x))))
+;;            (insert "\n\n")))
 
 (ert-deftest rand-range-overflow-test ()
   "Make sure `rand' generates values within range."

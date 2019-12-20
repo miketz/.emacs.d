@@ -2,6 +2,7 @@
 ;;; my-rand.el --- Helper functions for random values.
 
 (require 'cl-lib)
+(require 'ert)
 (random t) ;seed random with time
 
 ;;;###autoload
@@ -68,9 +69,6 @@
          (target-occurs (/ times (* 1.0 rng)))
          (rVals (cl-loop repeat times
                          collect (rand min max)))
-         (sum (apply #'+ rVals))
-         (len times)                    ; (len (length rVals))
-         (avg (/ sum (* 1.0 len)))
          (counts (cl-loop for n from min to max
                           collect 0))
          (thresh-off-perc 0.05)
@@ -80,29 +78,10 @@
       (let ((index (- r 1)))
         (setf (elt counts index)
               (+ 1 (elt counts index)))))
-    ;; ;; print
-    ;; (insert (concat "avg: "
-    ;;                 (number-to-string avg)
-    ;;                 "\n"))
-    ;; (insert "target: " (number-to-string target-occurs))
-    ;; (insert "\n")
-    ;; (insert "thresh-off-perc: " (number-to-string thresh-off-perc))
-    ;; (insert "\n")
-    ;; (insert "thresh-off: " (number-to-string thresh-off))
-    ;; (insert "\n")
     (cl-loop for x from min to max
              do
-             ;; (insert (number-to-string x))
-             ;; (insert ": ")
-             ;; (insert (number-to-string (elt counts (1- x))))
              (let ((off-by (- target-occurs (elt counts (1- x)))))
-               ;; (insert (format ", off by: %d" off-by))
-               (should (<= off-by thresh-off))
-               ;; (when (> off-by thresh-off)
-               ;;   (insert " !!!")))
-               )
-             ;; (insert "\n\n")
-             )))
+               (should (<= off-by thresh-off))))))
 
 (ert-deftest rand-range-overflow-test ()
   "Make sure `rand' generates values within range."

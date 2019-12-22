@@ -6738,6 +6738,8 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options. Keep this at the bottom
 ;;;----------------------------------------------------------------------------
+(setq read-process-output-max 65536)
+
 (when (eq system-type 'windows-nt)
   ;; performance tweak for weird fonts on windows.
   ;; see https://github.com/sabof/org-bullets/issues/11

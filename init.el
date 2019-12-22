@@ -6736,7 +6736,7 @@ vanilla javascript buffers."
   (add-hook 'clojure-mode-hook #'display-fill-column-indicator-mode))
 
 ;;;----------------------------------------------------------------------------
-;;; MISC options. Keep this at the bottom
+;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (setq read-process-output-max 65536)
 

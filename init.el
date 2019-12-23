@@ -444,6 +444,7 @@ in case that file does not provide any feature."
 (defvar display-fill-column-indicator-mode)
 (defvar flycheck-emacs-lisp-load-path)
 (defvar nov-variable-pitch)
+(defvar read-process-output-max)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

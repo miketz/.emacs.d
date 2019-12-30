@@ -1,6 +1,4 @@
 /.#init.el
-/init.el~
-/initFast.el~
 /.mc-lists.el
 /ac-comphist.dat
 /auto-save-list/
@@ -16,10 +14,8 @@
 /yasnippet/
 /url/
 /.sx/
-/.init.el.un~
 /my-curr-computer.txt
 /.tutor/
-/my-curr-computer.txt~
 /recentf
 /places
 /smex-items
@@ -27,14 +23,12 @@
 /flycheck_init.el
 /#init.el#
 *.elc
-/ido.last~
 /.#ido.last
 /bookmarks
 /custom.el
 /all-packages-autoloads.el
 /nov-places
 /offline.el
-/offline.el~
 /notElpa/mine/offline.el
 *.yas-compiled-snippets*
 /transient/
@@ -42,3 +36,5 @@
 dump.pdmp
 package-quickstart.el
 package-quickstart.elc
+# backup files
+*~

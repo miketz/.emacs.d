@@ -1,4 +1,6 @@
-;;; wilmersdorf-theme.el --- Emacs theme with dark subtle syntax highlighting
+;;; twilight-theme.el --- A port of the classic old-school theme
+
+;; https://github.com/ianpan870102/twilight-emacs-theme
 
 ;; Copyright (C) 2019 , Ian Y.E. Pan
 
@@ -23,33 +25,36 @@
 
 ;;; Code:
 
-(deftheme wilmersdorf)
+(deftheme twilight-ianpan)
 (let ((class '((class color) (min-colors 89)))
-      (fg0     "#d3d3d3")
-      (fg1     "#c6c6c6")
-      (fg2     "#ababab")
-      (fg3     "#929292")
-      (fg4     "#888395")
-      (bg00    "#18191f")
-      (bg0     "#1f2024")
-      (bg1     "#282b33")
-      (bg2     "#34373e")
-      (bg3     "#41454b")
-      (bg4     "#515462")
-      (key2    "#90a6db")
-      (key3    "#7289bc")
-      (accent  "#c9d9ff")
-      (builtin "#7ebebd")
-      (keyword "#819cd6")
-      (const   "#a6c1e0")
-      (comment "#6e7899")
-      (func    "#cccccc")
-      (str     "#5b94ab")
-      (type    "#b0a2e7")
-      (var     "#a6c1e0")
-      (warning "#e1c1ee"))
+      (fg0     "#cacaca")
+      (fg1     "#d8d8d8")
+      (fg2     "#e8e8e8")
+      (fg3     "#f4f4f4")
+      (fg4     "#fafafa")
+      (bg00    "#000000")
+      (bg0     "#0a0a0a")
+      (bg1     "#141414")
+      (bg2     "#252525")
+      (bg3     "#313131")
+      (bg4     "#4b474c")
+      (tw-r    "#d05e5f")
+      (tw-g    "#bce580")
+      (tw-b    "#71a2db")
+      (key2    "#f2b73f")
+      (key3    "#f2b73f")
+      (accent  "#ffffff")
+      (builtin "#89788a")
+      (keyword "#cda869")
+      (const   "#cf6a4c")
+      (comment "#888888")
+      (func    "#9b703f")
+      (str     "#ececec")
+      (type    "#89788a")
+      (var     "#7587a6")
+      (warning "#ef2929"))
   (custom-theme-set-faces
-   'wilmersdorf
+   'twilight-ianpan
    `(default ((,class (:background ,bg1 :foreground ,fg1))))
 
    `(company-preview-common ((t (:foreground unspecified :background ,bg2))))
@@ -72,15 +77,15 @@
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    `(font-lock-warning-face ((,class (:foreground ,warning :background ,bg2))))
 
-   `(region ((,class (:background ,bg2 :foreground ,fg0))))
+   `(region ((,class (:background ,bg2))))
    `(highlight ((,class (:foreground ,bg3 :background ,fg3))))
    `(hl-line ((,class (:background  ,bg2))))
    `(fringe ((,class (:background ,bg1 :foreground ,fg4))))
    `(cursor ((,class (:background ,fg1))))
    `(show-paren-match-face ((,class (:background ,warning))))
-   `(show-paren-match ((t (:background ,bg4))))
+   `(show-paren-match ((t (:foreground ,accent :underline t))))
    `(show-paren-mismatch ((t (:background ,warning))))
-   `(isearch ((,class (:bold t :foreground ,func :background ,bg4))))
+   `(isearch ((,class (:bold t :foreground ,accent :background ,bg4))))
    `(vertical-border ((,class (:foreground ,bg3))))
    `(minibuffer-prompt ((,class (:bold t :foreground ,keyword))))
    `(default-italic ((,class (:italic t))))
@@ -88,8 +93,8 @@
    `(warning ((,class (:foreground ,warning))))
    `(dired-directory ((t (:inherit (font-lock-keyword-face)))))
 
-   `(mode-line ((,class (:bold nil :foreground ,fg1 :background ,bg4))))
-   `(mode-line-inactive ((,class (:bold nil :foreground ,fg2 :background ,bg3))))
+   `(mode-line ((,class (:bold nil :foreground ,fg1 :background ,bg1))))
+   `(mode-line-inactive ((,class (:bold nil :foreground ,fg2 :background ,bg1))))
    `(mode-line-buffer-id ((,class (:bold t :foreground ,func :background nil))))
    `(mode-line-highlight ((,class (:foreground ,keyword :box nil :weight bold))))
    `(mode-line-emphasis ((,class (:foreground ,fg1))))
@@ -267,8 +272,8 @@
    `(jde-java-font-lock-number-face ((t (:foreground ,var))))
 
    `(centaur-tabs-default ((t (:background ,bg1 :foreground ,fg1))))
-   `(centaur-tabs-selected ((t (:background ,bg1 :foreground ,fg0 :box nil))))
-   `(centaur-tabs-unselected ((t (:background ,bg0 :foreground ,fg3 :box nil))))
+   `(centaur-tabs-selected ((t (:background ,bg1 :foreground ,fg3 :box nil))))
+   `(centaur-tabs-unselected ((t (:background ,bg0 :foreground ,fg0 :box nil))))
    `(centaur-tabs-selected-modified ((t (:background ,bg1 :foreground ,accent :box nil))))
    `(centaur-tabs-unselected-modified ((t (:background ,bg0 :foreground ,fg4 :box nil))))
    `(centaur-tabs-active-bar-face ((t (:background ,accent :box nil))))
@@ -301,8 +306,19 @@
    `(swiper-match-face-3 ((t (:inherit ivy-minibuffer-match-face-3))))
    `(swiper-match-face-4 ((t (:inherit ivy-minibuffer-match-face-4))))
    `(swiper-line-face ((t (:foreground ,fg0 :background ,bg4))))
+
+
+   `(diff-hl-insert ((t (:foreground ,tw-g))))
+   `(diff-hl-delete ((t (:foreground ,tw-r))))
+   `(diff-hl-change ((t (:foreground ,tw-b))))
+
+   `(sml/global    ((t :foreground ,keyword :weight normal)))
+   `(sml/filename  ((t :foreground ,accent  :weight normal)))
+   `(sml/prefix    ((t :foreground ,fg3     :weight normal)))
+   `(sml/read-only ((t :foreground ,keyword :weight normal)))
+   `(sml/modes     ((t :foreground ,type    :weight normal)))
    ))
 
-(provide-theme 'wilmersdorf)
+(provide-theme 'twilight-ianpan)
 
 ;;; wilmersdorf-theme.el ends here

@@ -5,8 +5,8 @@
 /ede-projects.el
 /elpa/
 /eshell/
-/github-theme.el
 /ido.last
+/.#ido.last
 /projectile-bookmarks.eld
 /projectile.cache
 /server/
@@ -23,7 +23,6 @@
 /flycheck_init.el
 /#init.el#
 *.elc
-/.#ido.last
 /bookmarks
 /custom.el
 /all-packages-autoloads.el
@@ -35,6 +34,5 @@
 /.lsp-session-v1
 dump.pdmp
 package-quickstart.el
-package-quickstart.elc
 # backup files
 *~

@@ -983,6 +983,8 @@ packages.  But I am no longer using the themes as packages (for init
 performance reasons).
 Closure over executed-p."
     (interactive)
+    ;; TODO: use an autoload solution instead of loading everything
+    ;; immediately.
     (unless executed-p
       (load (concat custom-theme-directory "base16-theme"))
       (load (concat custom-theme-directory "solarized"))
@@ -1004,6 +1006,7 @@ Closure over executed-p."
       (load (concat custom-theme-directory "one-themes"))
       (load (concat custom-theme-directory "purp-common"))
       (load (concat custom-theme-directory "almost-mono-themes"))
+      (load (concat custom-theme-directory "humanoid-themes"))
       ;; record the fact we did the set up. To avoid doing it again.
       (setq executed-p t))))
 

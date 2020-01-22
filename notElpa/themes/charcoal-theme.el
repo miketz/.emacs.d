@@ -521,7 +521,7 @@ Example:
 
    ;; Emacs built-in display-fill-column-indicator.
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
-   `(fill-column-indicator ((,class :foreground ,faint)))
+   `(fill-column-indicator ((,class :foreground ,fainter)))
 
    ;; ert
    `(ert-test-result-expected ((,class :foreground ,fg-green :background ,bg-green)))

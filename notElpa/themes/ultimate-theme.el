@@ -467,6 +467,7 @@
    ;; rg
    `(rg-filename-face ((,class :inherit font-lock-constant-face)))
    `(rg-match-position-face ((,class :foreground ,fg)))
+   `(rg-info-face ((,class :inherit font-lock-function-name-face)))
 
    ;; markdown-mode
    `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.

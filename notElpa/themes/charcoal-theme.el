@@ -161,8 +161,8 @@ Example:
                              (300 . "#3FC6FF")
                              (320 . "#3F99FF")
                              (340 . "#3F6CFF")
-                             (360 . "#3F3FFF")))
-   `(vc-annotate-very-old-color "blue3")
+                             (360 . "MediumOrchid2"))) ;"#3F3FFF"
+   `(vc-annotate-very-old-color "DarkOrchid2")
 
    ;; pos-tip. Helper package for tooltip
    `(pos-tip-foreground-color ,fg-green)

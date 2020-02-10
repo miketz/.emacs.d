@@ -6680,7 +6680,7 @@ vanilla javascript buffers."
 ;; EPUB files will fail. If you for some reason have unzip in a non-standard
 ;; location, customize `nov-unzip-program' to its path. You'll also need an
 ;; Emacs compiled with libxml2 support, otherwise rendering will fail.
-(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(push '("\\.epub\\'" . nov-mode) auto-mode-alist)
 
 (with-eval-after-load 'nov
   (setq nov-text-width 80)

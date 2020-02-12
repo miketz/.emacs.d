@@ -6160,8 +6160,10 @@ Closure over `preceding-sexp-fn'."
   (setq global-auto-revert-non-file-buffers nil)
   (setq auto-revert-remote-files nil))
 
-;; ;; reload buffer if it changes on disk outside emacs.
-;; (global-auto-revert-mode t)
+;; reload buffer if it changes on disk outside emacs.
+(global-auto-revert-mode t)
+;; auto refresh dired when file changes
+(add-hook 'dired-mode-hook #'auto-revert-mode)
 
 
 ;;;----------------------------------------------------------------------------

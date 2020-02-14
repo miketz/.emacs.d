@@ -33,6 +33,7 @@
 
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "\n\n\n\n\n")
+(setq initial-major-mode #'fundamental-mode) ;;for faster startup.
 
 ;; (hl-line-mode 0)
 

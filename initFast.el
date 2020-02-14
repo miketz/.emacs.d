@@ -22,7 +22,13 @@
 (setq frame-inhibit-implied-resize t)
 
 (when (eq system-type 'windows-nt)
-  (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+  ;; (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+
+  ;; faster than `set-frame-font' for setting the font?
+  ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_da
+  ;; mn_fast/
+  (push '(font . "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
+        default-frame-alist))
 
 ;; case insensitive for emacs completion
 (setq read-buffer-completion-ignore-case t)

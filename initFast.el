@@ -15,6 +15,12 @@
 ;;  '(cursor ((t (:background "blue")))))
 ;; (blink-cursor-mode 0)
 
+
+;; Avoid resizing the GUI frame when font changes.
+;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn
+;; _fast/
+(setq frame-inhibit-implied-resize t)
+
 (when (eq system-type 'windows-nt)
   (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 

@@ -1731,6 +1731,12 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; theme of the week and corresponding settings. This may change often.
 ;;;----------------------------------------------------------------------------
+
+;; Avoid resizing the GUI frame when font changes.
+;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn
+;; _fast/
+(setq frame-inhibit-implied-resize t)
+
 ;; (when my-graphic-p ;; this isn't true for emacs daemon!
 ;;   (my-color-zenburn))
 (cond

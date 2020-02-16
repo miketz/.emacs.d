@@ -2430,7 +2430,34 @@ Disable themes before explorting to html, then turn them back on."
 
   ;; org mode steals M-h keybind. reclaim it. TODO: rebind org fn to a key.
   (when my-use-evil-p
-    (define-key org-mode-map (kbd "M-h") #'evil-window-left)))
+    (define-key org-mode-map (kbd "M-h") #'evil-window-left))
+
+  (defun my-wrap-in-org-src-block (start end)
+    "Wrap the region in an org source block.
+Defaults to c for `c-mode'.
+TODO: specify the mode in a place-holder with `yasnippet'.
+
+START = start of region.
+END = end of region.
+
+Inserts a new line and the beginning and end with text values:
+#+BEGIN_SRC c
+#+END_SRC"
+    (interactive "r") ; automatically wires up the current region's start/end
+                      ; to the args start/end.
+    (goto-char end)
+    (insert "#+END_SRC\n")
+
+    (goto-char start)
+    (insert "#+BEGIN_SRC c\n"))
+
+  (when my-use-evil-p
+    ;; (define-key org-mode-map (kbd "M-h") #'evil-window-left)
+    (evil-define-key
+      'visual
+      org-mode-map
+      (kbd ";")
+      #'my-wrap-in-org-src-block)))
 
 ;;;----------------------------------------------------------------------------
 ;;; worf. key shortcuts for org-mode

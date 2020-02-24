@@ -819,6 +819,7 @@ in case that file does not provide any feature."
 (declare-function vterm 'vterm)
 (declare-function nov-goto-toc 'nov)
 (declare-function org-html-export-as-html 'ox-html)
+(declare-function org-html-export-to-html 'ox-html)
 (declare-function my-setup-java-mode 'suppress)
 (declare-function tide-setup 'tide)
 (declare-function tide-hl-identifier-mode 'tide)
@@ -2410,7 +2411,7 @@ Disable themes before explorting to html, then turn them back on."
         (disable-theme thm))
 
       ;; export
-      (org-html-export-as-html)
+      (org-html-export-to-html) ; (org-html-export-as-html)
 
       ;; turn themes back on
       (dolist (thm themes)

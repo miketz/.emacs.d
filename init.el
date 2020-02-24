@@ -6472,6 +6472,18 @@ vanilla javascript buffers."
 
 
 ;;;----------------------------------------------------------------------------
+;;; lsp-mode
+;;;----------------------------------------------------------------------------
+;; (with-eval-after-load 'lsp-pwsh ; powershell
+;;   ;; powershell server
+;;   ;; NOTE: first must manually download .zip folder from:
+;;   ;; https://github.com/PowerShell/PowerShellEditorServices/releases/latest/
+;;   ;; download/PowerShellEditorServices.zip
+;;   ;; to:
+;;   ;; ~/.emacs.d/.cache/lsp/pwsh
+;;   )
+
+;;;----------------------------------------------------------------------------
 ;;; company-lsp
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'lsp-mode

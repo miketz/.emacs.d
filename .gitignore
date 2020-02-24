@@ -36,3 +36,4 @@ dump.pdmp
 package-quickstart.el
 # backup files
 *~
+/.cache/

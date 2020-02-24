@@ -1759,8 +1759,12 @@ This prevents overlapping themes; something I would rarely want."
  ((eq my-curr-computer 'work-laptop-2019)
   (load-theme 'charcoal t)
   (when my-graphic-p
-    (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
+    (push
+     '(font . "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+     default-frame-alist)
+    ;; (set-frame-font
+    ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+    ))
 
  ((eq my-curr-computer 'work-laptop-bash)
   (load-theme 'charcoal t))

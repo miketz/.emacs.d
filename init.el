@@ -1190,7 +1190,8 @@ Closure over executed-p."
     (eros t)
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline t)
-    (minesweeper))
+    (minesweeper t)
+    (yaml-mode t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)

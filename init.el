@@ -1180,6 +1180,7 @@ Closure over executed-p."
     (company-tern ,has-nodejs-p)
     (browse-kill-ring t)
     (git-gutter ,(not (version< emacs-version "24.3")))
+    (eglot ,(not (version< emacs-version "26.1")))
     (lsp-mode ,(not (version< emacs-version "25.1")))
     (company-lsp ,(not (version< emacs-version "25.1")))
     (ccls ,(memq my-curr-computer '(wild-dog)))

@@ -1232,7 +1232,8 @@ Closure over executed-p."
         (aggressive-indent . "melpa")
         (ggtags . "melpa")
         (vdiff . "melpa")
-        (websocket . "melpa")))
+        (websocket . "melpa")
+        (eglot . "melpa")))
 
 ;; (setq package-enable-at-startup nil)
 ;; (cond

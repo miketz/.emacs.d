@@ -5522,6 +5522,29 @@ Closure over `preceding-sexp-fn'."
 ;; originally called smart-operator-mode.
 ;; `electric-spacing-mode' is autoloaded.
 
+
+(with-eval-after-load 'electric-spacing
+
+  (defun my-search-line-backwards (str)
+    (let ((line-start (save-excursion
+                        (beginning-of-line 1)
+                        (point))))
+      (save-excursion
+        (search-backward str line-start t))))
+
+  ;; redefine package fn to not always insert newline.
+  ;; Hamfisted approach. Occasionally look at package code to see if this
+  ;; function is still relevant.
+  (defun electric-spacing-\; ()
+    "See `electric-spacing-insert'."
+    (insert ";")
+    (indent-according-to-mode)
+
+    (unless (my-search-line-backwards "return")
+      (newline)
+      (indent-according-to-mode))))
+
+
 ;;;----------------------------------------------------------------------------
 ;;; flymake-jslint
 ;;;----------------------------------------------------------------------------

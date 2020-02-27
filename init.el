@@ -1192,7 +1192,8 @@ Closure over executed-p."
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline t)
     (minesweeper t)
-    (yaml-mode t))
+    (yaml-mode t)
+    (php-mode t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)

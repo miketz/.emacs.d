@@ -365,7 +365,7 @@
    `(company-tooltip ((,class (:background ,bg-highlight :foreground ,fg))))
    `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
    `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
-   `(company-tooltip-common ((,class (:foreground ,faint-less))))
+   `(company-tooltip-common ((,class (:foreground "#F8F8F8"))))
    `(company-tooltip-selection ((,class (:background ,highlight))))
    ;; company-echo
    ;; company-echo-common

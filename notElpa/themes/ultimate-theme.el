@@ -25,8 +25,8 @@
        (bg-red       "#FF4500")
        (fg-red       "#300000")
        (faint        "#F0DBBD")
-       (fainter      "#3F3F35")
-       (faint-less   "#8D8D8D")
+       (fainter      "#DDD9BB")
+       (faint-less   "#B5B193")
        (keyword      "navy blue")
        (var          "blue")
        (highlight    "#FFA366")
@@ -480,7 +480,7 @@
 
    ;; Emacs built-in display-fill-column-indicator.
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
-   `(fill-column-indicator ((,class :foreground ,faint)))
+   `(fill-column-indicator ((,class :foreground ,fainter)))
 
    `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))

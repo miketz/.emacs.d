@@ -16,14 +16,14 @@
        (bg           "#D5D1B3")
        (fg           "#000000")
        (bg-highlight "#C5C1A3")
-       (bg-purple    "#440033")
-       (fg-purple    "#FFC0CB")
-       (bg-green     "#004400")
-       (fg-green     "#98FB98")
-       (bg-yellow    "#3A3A00")
-       (fg-yellow    "#FFFF00")
-       (bg-red       "#300000")
-       (fg-red       "#FF0000")
+       (bg-purple    "#FFC0CB")
+       (fg-purple    "#440033")
+       (bg-green     "#98FB98")
+       (fg-green     "black")
+       (bg-yellow    "#FFFF00")
+       (fg-yellow    "black")
+       (bg-red       "#FF4500")
+       (fg-red       "#300000")
        (faint        "#F0DBBD")
        (fainter      "#3F3F35")
        (faint-less   "#8D8D8D")
@@ -213,6 +213,8 @@
    `(sldb-section-face ((,class (:foreground ,fg-yellow
 											 :background ,bg-yellow
 											 :box (:line-width -1 :style released-button)))))
+   `(sldb-restartable-frame-line-face ((,class (:foreground ,fg-green
+                                                            :background ,bg-green))))
    ;; sldb-reference-face
    ;; sldb-catch-tag-face
    ;; sldb-local-value-face
@@ -466,6 +468,7 @@
 
    ;; rg
    `(rg-filename-face ((,class :inherit font-lock-constant-face)))
+   `(rg-match-face ((,class :foreground ,fg-yellow :background ,bg-yellow)))
    `(rg-match-position-face ((,class :foreground ,fg)))
    `(rg-info-face ((,class :inherit font-lock-function-name-face)))
 

@@ -5538,19 +5538,21 @@ Closure over `preceding-sexp-fn'."
       (save-excursion
         (search-backward str line-start t))))
 
-  (defun my-next-char-}-p ()
+  (cl-defun my-next-char-}-p ()
     "Return t if the first non-whitespace char after point is }.
 Also only return t if the } is relatively close to (point)."
-    ;; search a max of 3 chars forward so we are only looking for brackets
-    ;; that are close by.
-    (cl-loop for i from (point) to (+ (point) 3)
-         do
-         (let ((c (byte-to-string (char-after i))))
-           ;; unless whitespace
-           (unless (or (string-equal c " ")
-                       (string-equal c "	")
-                       (string-equal c "\n"))
-             (return (string-equal c "}"))))))
+    ;; Search a max of 200 chars forward (or less if near end of buffer).
+    (let* ((distance-until-end (- (buffer-size) (point)))
+           (end (min 200 distance-until-end)))
+      (cl-loop named loop for i from (point) to end
+               do
+               (let ((c (byte-to-string (char-after i))))
+                 ;; unless whitespace
+                 (unless (or (string-equal c " ")
+                             (string-equal c "	")
+                             (string-equal c "\n"))
+                   ;; (return (string-equal c "}"))
+                   (cl-return-from my-next-char-}-p (string-equal c "}")))))))
 
   ;; redefine package fn to not always insert newline.
   ;; Hamfisted approach. Occasionally look at package code to see if this

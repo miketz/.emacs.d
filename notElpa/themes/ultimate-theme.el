@@ -27,6 +27,7 @@
        (faint        "#F0DBBD")
        (fainter      "#DDD9BB")
        (faint-less   "#B5B193")
+       (faint-lesser "#858163")
        (keyword      "navy blue")
        (var          "blue")
        (highlight    "#FFA366")
@@ -393,7 +394,7 @@
    `(deadgrep-match-face ((,class (:inherit match))))
 
    ;; erc
-   `(erc-notice-face ((,class (:foreground ,faint-less))))
+   `(erc-notice-face ((,class (:foreground ,faint-lesser))))
    `(erc-input-face ((,class (:foreground "tan")))) ; my own text.
    `(erc-timestamp-face ((,class (:foreground ,fg-green))))
    ;; erc-keyword-face

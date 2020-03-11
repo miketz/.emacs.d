@@ -1762,10 +1762,12 @@ This prevents overlapping themes; something I would rarely want."
      "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
 
  ((eq my-curr-computer 'work-laptop-2019)
-  (load-theme 'charcoal t)
+  (load-theme 'ultimate t)
+  (set-background-color "#E5E1C3")
   (when my-graphic-p
     (push
-     '(font . "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+     '(font
+       . "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
      default-frame-alist)
     ;; (set-frame-font
     ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")

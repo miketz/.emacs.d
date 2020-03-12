@@ -3864,9 +3864,8 @@ and indent."
 (when my-use-evil-p
   (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
   (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1)
-  ;; (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-char-timer)
-  ;; (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-char-timer)
-  )
+  (define-key evil-normal-state-map (kbd "C-c SPC") #'avy-goto-char-timer)
+  (define-key evil-motion-state-map (kbd "C-c SPC") #'avy-goto-char-timer))
 
 (with-eval-after-load 'avy
   ;; make keys like ace-jump. Lots of letters means more likely to need only 1
@@ -3878,7 +3877,7 @@ and indent."
                             ;; need to gray-out the background.
   (setq avy-all-windows t)       ;; allow jumps between windows.
   (setq avy-case-fold-search t)  ;; case insensitive
-  (setq avy-timeout-seconds 0.3) ;; shorten delay for `avy-goto-char-timer'
+  (setq avy-timeout-seconds 0.5) ;; delay for `avy-goto-char-timer'
 
   ;; (defun my-avy-goto-line ()
   ;;   (interactive)

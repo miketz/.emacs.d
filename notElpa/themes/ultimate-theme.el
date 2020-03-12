@@ -192,15 +192,16 @@
 											   :background ,bg-red))))
 
    ;; avy
-   `(avy-lead-face ((,class :foreground "orange"
-                            :background "black"
-                            ;; :weight normal
-                            :slant normal)))
-   `(avy-lead-face-0 ((,class :foreground "orange"
-                              :background "black"
-                              ;; :weight normal
-                              :slant normal)))
-   ;; `(avy-lead-face-1 ((,class (:foreground "green")))) ;; not used?
+   `(avy-lead-face ((,class :background "yellow"
+                            :foreground "black")))
+   `(avy-lead-face-0 ((,class :background "cyan"
+                              :foreground "black")))
+   `(avy-lead-face-1 ((,class :background "green" ;; not lettersused?
+                              :foreground "black")))
+   `(avy-lead-face-2 ((,class :background "#FF4500" ;; not used?
+                              :foreground "black")))
+   `(avy-goto-char-timer-face ((,class :background "DarkSeaGreen2")))
+   `(avy-background-face ((,class :foreground ,faint-lesser)))
 
    ;; info
    `(info-xref-visited ((,class (:foreground "medium sea green"))))

@@ -3864,8 +3864,7 @@ and indent."
 (when my-use-evil-p
   (define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
   (define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1)
-  (define-key evil-normal-state-map (kbd "C-c SPC") #'avy-goto-char-timer)
-  (define-key evil-motion-state-map (kbd "C-c SPC") #'avy-goto-char-timer))
+  (evil-leader/set-key "s" #'avy-goto-char-timer))
 
 (with-eval-after-load 'avy
   ;; make keys like ace-jump. Lots of letters means more likely to need only 1

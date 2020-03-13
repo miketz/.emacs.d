@@ -484,6 +484,11 @@
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((,class :foreground ,fainter)))
 
+   ;; package
+   `(package-status-new ((,class :weight bold
+                                 :background ,bg-green
+                                 :foreground ,fg-green)))
+
    `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))
    `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight bold))))

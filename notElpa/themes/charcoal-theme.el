@@ -530,6 +530,11 @@ Example:
    ;; leerzeichen
    `(leerzeichen ((t (:foreground ,faint-less)))) ;;"yellow4" ;"#A8A800"
 
+   ;; package
+   `(package-status-new ((,class :weight bold
+                                 :background ,bg-green
+                                 :foreground ,fg-green)))
+
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
    `(rainbow-delimiters-depth-2-face

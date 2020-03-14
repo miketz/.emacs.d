@@ -397,7 +397,8 @@
    ;; erc
    `(erc-notice-face ((,class (:foreground ,faint-lesser))))
    `(erc-input-face ((,class (:foreground "tan")))) ; my own text.
-   `(erc-timestamp-face ((,class (:foreground ,fg-green))))
+   `(erc-timestamp-face ((,class :foreground ,faint-lesser
+                                 :background ,fainter)))
    ;; erc-keyword-face
    ;; erc-fool-face
    ;; erc-pal-face

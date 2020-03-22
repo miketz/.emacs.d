@@ -262,8 +262,8 @@
    ;; '(num3-face-odd ((,class)))
    ;; '(num3-face-even ((,class (:underline t :background "black"))))
    `(num3-face-even ((,class (:underline nil
-										 :background "#000000"
-										 :foreground ,fg-green
+										 :background "#252525"
+										 :foreground "#82FA32"
 										 :bold nil))))
 
    ;; highlight-indent-guides

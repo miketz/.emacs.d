@@ -5280,7 +5280,7 @@ buffer instead of narrowing."
   (add-hook 'lisp-mode-hook #'lispy-mode) ; for common lisp.
   ;; now that I default the *scratch* buffer to fundamental-mode, the slow
   ;; loading of lispy will not affect startup time.
-  (add-hook 'emacs-lisp-mode-hook #'lisp-mode)
+  (add-hook 'emacs-lisp-mode-hook #'lispy-mode)
   (add-hook 'lisp-interaction-mode-hook #'lispy-mode)
   (add-hook 'ielm-mode-hook             #'lispy-mode)
   (add-hook 'slime-repl-mode-hook       #'lispy-mode))

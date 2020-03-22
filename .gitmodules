@@ -19,3 +19,9 @@
 [submodule "notElpa/hyperspec"]
 	path = notElpa/hyperspec
 	url = https://github.com/miketz/hyperspec
+[submodule "notElpa/selectrum"]
+	path = notElpa/selectrum
+	url = https://github.com/raxod502/selectrum
+[submodule "notElpa/ctrlf"]
+	path = notElpa/ctrlf
+	url = https://github.com/raxod502/ctrlf

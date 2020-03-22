@@ -37,3 +37,5 @@ package-quickstart.el
 # backup files
 *~
 /.cache/
+# var folder used by prescient package
+/var/

@@ -911,13 +911,15 @@ Just a convenience to avoid checks against `my-ui-type'.")
 
 (defvar my-use-js2-highlight-vars-p (not (version< emacs-version "24.4")))
 
-(defvar my-narrow-type (cond ((eq my-curr-computer 'work-laptop) 'bare-ido)
-                             ((eq my-curr-computer 'wild-dog) 'bare-ido)
-                             (t 'bare-ido))
+(defvar my-narrow-type
+  (cond ((eq my-curr-computer 'wild-dog) 'selectrum)
+        ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
+        ((eq my-curr-computer 'work-laptop) 'bare-ido)
+        (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
-Choices: ivy ido bare-ido helm icicles sallet mish-mash nil")
+Choices: ivy ido bare-ido helm icicles sallet selectrum mish-mash nil")
 
 ;;TODO: make ivy pop-up it's window on the Linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -1193,7 +1195,8 @@ Closure over executed-p."
     (mini-modeline t)
     (minesweeper t)
     (yaml-mode t)
-    (php-mode t))
+    (php-mode t)
+    (prescient t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -5744,6 +5747,36 @@ Also only return t if the } is relatively close to (point)."
   ;; keybinds
   (when my-use-evil-p
     (evil-leader/set-key "b" #'sallet-buffer)))
+
+
+;;;----------------------------------------------------------------------------
+;;; ctrlf. by raxod502. saved to notElpa folder as a git submodule.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ctrlf" load-path)
+;; NOTE: will use this in conjunction with selectrum by the same author.
+
+;;;----------------------------------------------------------------------------
+;;; selectrum. by raxod502. saved to notElpa folder as a git submodule.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/selectrum" load-path)
+;; add an autoload so I can use selectrum even if it's not `my-narrow-type'.
+(autoload #'selectrum-mode "selectrum" nil t)
+
+(when (eq my-narrow-type 'selectrum)
+  (require 'selectrum)
+  ;; turn on selectrum
+  (selectrum-mode 1)
+
+  ;; ;; NOTE: the selecturm author reccomends using his prescient for sorting.
+  ;; ;; prescient is currently installed as a melpa package.
+  ;; (require 'prescient)
+  ;; (selectrum-prescient-mode 1)
+  ;; (prescient-persist-mode)
+
+  ;; swiper-like search by the same author raxod502
+  (require 'ctrlf)
+  (ctrlf-mode))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; sunrise-commander. saved to notElpa folder as a git submodule.

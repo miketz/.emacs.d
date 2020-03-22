@@ -25,3 +25,6 @@
 [submodule "notElpa/ctrlf"]
 	path = notElpa/ctrlf
 	url = https://github.com/raxod502/ctrlf
+[submodule "notElpa/prescient.el"]
+	path = notElpa/prescient.el
+	url = https://github.com/raxod502/prescient.el

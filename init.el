@@ -1198,8 +1198,7 @@ Closure over executed-p."
     (mini-modeline t)
     (minesweeper t)
     (yaml-mode t)
-    (php-mode t)
-    (prescient t))
+    (php-mode t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -5768,6 +5767,13 @@ Also only return t if the } is relatively close to (point)."
 ;; NOTE: will use this in conjunction with selectrum by the same author.
 
 ;;;----------------------------------------------------------------------------
+;;; prescient. by raxod502. saved to notElpa folder as a git submodule.
+;;;----------------------------------------------------------------------------
+;; the author names the base git repo folder "prescient.el". It's a folder,
+;; not an elisp file
+(push "~/.emacs.d/notElpa/prescient.el" load-path)
+
+;;;----------------------------------------------------------------------------
 ;;; selectrum. by raxod502. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/selectrum" load-path)
@@ -5779,11 +5785,10 @@ Also only return t if the } is relatively close to (point)."
   ;; turn on selectrum
   (selectrum-mode 1)
 
-  ;; ;; NOTE: the selecturm author reccomends using his prescient for sorting.
-  ;; ;; prescient is currently installed as a melpa package.
-  ;; (require 'prescient)
-  ;; (selectrum-prescient-mode 1)
-  ;; (prescient-persist-mode)
+  ;; NOTE: the selecturm author reccomends using his prescient for sorting.
+  (require 'selectrum-prescient)
+  (selectrum-prescient-mode 1)
+  (prescient-persist-mode)
 
   ;; swiper-like search by the same author raxod502
   (require 'ctrlf)

@@ -5762,6 +5762,9 @@ Also only return t if the } is relatively close to (point)."
 ;;; ctrlf. by raxod502. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/ctrlf" load-path)
+;; NOTE: ctrlf-mode sets up keybindings on (C-s, C-r, C-M-s, C-M-r, M-s w,
+;; M-s _, M-s .)
+(autoload #'ctrlf-mode "ctrlf" nil t)
 ;; NOTE: will use this in conjunction with selectrum by the same author.
 
 ;;;----------------------------------------------------------------------------

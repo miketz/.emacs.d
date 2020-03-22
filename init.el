@@ -823,6 +823,9 @@ in case that file does not provide any feature."
 (declare-function my-setup-java-mode 'suppress)
 (declare-function tide-setup 'tide)
 (declare-function tide-hl-identifier-mode 'tide)
+(declare-function my-search-line-backwards 'suppress)
+(declare-function my-next-char-}-p 'suppress)
+(declare-function ctrlf-mode 'ctrlf)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

@@ -826,6 +826,8 @@ in case that file does not provide any feature."
 (declare-function my-search-line-backwards 'suppress)
 (declare-function my-next-char-}-p 'suppress)
 (declare-function ctrlf-mode 'ctrlf)
+(declare-function selectrum-prescient-mode 'selectrum-prescient)
+(declare-function prescient-persist-mode 'prescient)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

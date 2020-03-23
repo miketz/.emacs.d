@@ -5799,13 +5799,12 @@ Also only return t if the } is relatively close to (point)."
 
   ;; NOTE: the selecturm author reccomends using his prescient for sorting.
   (selectrum-prescient-mode 1)
-  (prescient-persist-mode)
-
-  ;; swiper-like search by the same author raxod502
-  (ctrlf-mode))
+  (prescient-persist-mode))
 
 (when (eq my-narrow-type 'selectrum)
-  (selectrum-mode 1))
+  (selectrum-mode 1)
+  ;; swiper-like search by the same author raxod502
+  (ctrlf-mode))
 
 
 ;;;----------------------------------------------------------------------------

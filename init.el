@@ -969,7 +969,8 @@ occur my-occur-wild-spaces")
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
 
-(defvar my-use-lispy-p (memq my-curr-computer '(wild-dog))
+(defvar my-use-lispy-p (memq my-curr-computer '(wild-dog
+                                                work-laptop-2019))
   "Whether to use lispy or not.
 Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 

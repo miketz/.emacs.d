@@ -445,6 +445,7 @@ in case that file does not provide any feature."
 (defvar flycheck-emacs-lisp-load-path)
 (defvar nov-variable-pitch)
 (defvar read-process-output-max)
+(defvar swiper-use-visual-line-p)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

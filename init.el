@@ -1204,7 +1204,8 @@ Closure over executed-p."
     (mini-modeline t)
     (minesweeper t)
     (yaml-mode t)
-    (php-mode t))
+    (php-mode t)
+    (lsp-python-ms t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -6006,7 +6007,12 @@ Also only return t if the } is relatively close to (point)."
     (my-turn-on-electric-pair-local-mode)
     (when (fboundp #'display-fill-column-indicator-mode)
       (setq display-fill-column-indicator-column 79) ; PEP 8
-      (display-fill-column-indicator-mode 1)))
+      (display-fill-column-indicator-mode 1))
+
+    ;; lsp stuff
+    (require 'lsp-python-ms)
+    ;; (add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
+    )
   (add-hook 'python-mode-hook #'my-setup-python))
 
 ;;;----------------------------------------------------------------------------

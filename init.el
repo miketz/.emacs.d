@@ -5983,11 +5983,10 @@ Also only return t if the } is relatively close to (point)."
 
   (defun my-setup-python-smart-tabs-mode ()
     ;; keeps comments closer to the code. buffer local
-    (setq comment-column 1)
+    (setq comment-column 1) ; buffer local
 
-    ;; NOTE: sometimes I use a larger tab-width for python
-    (setq tab-width my-indent-width)
-    (setq indent-tabs-mode t)
+    (setq tab-width my-indent-width) ; buffer local
+    (setq indent-tabs-mode t) ; buffer local
 
     (smart-tabs-mode-enable)
     (smart-tabs-advice python-indent-line python-indent-offset)
@@ -5996,8 +5995,10 @@ Also only return t if the } is relatively close to (point)."
       (smart-tabs-advice py-indent-line py-indent-offset)
       (smart-tabs-advice py-newline-and-indent py-indent-offset)
       (smart-tabs-advice py-indent-region py-indent-offset)))
-  ;; hook for smart-tabs-mode
-  (add-hook 'python-mode-hook #'my-setup-python-smart-tabs-mode)
+
+  (when nil ; for now don't use tabs as PEP 8 says use 4 spaces.
+    ;; hook for smart-tabs-mode
+    (add-hook 'python-mode-hook #'my-setup-python-smart-tabs-mode))
 
   (defun my-setup-python ()
     (yas-minor-mode 1)

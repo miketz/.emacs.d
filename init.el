@@ -5795,6 +5795,9 @@ Also only return t if the } is relatively close to (point)."
   ;; turn on selectrum
   (selectrum-mode 1)
 
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'switch-to-buffer))
+
   ;; NOTE: the selecturm author reccomends using his prescient for sorting.
   (require 'selectrum-prescient)
   (selectrum-prescient-mode 1)

@@ -277,7 +277,9 @@
    `(swiper-line-face ((,class (:background ,highlight ;,bg-highlight ;"gray30"
                                 ))))
    ;; face-1 fills in the space between matches. 2-4 are for matches.
-   `(swiper-match-face-1 ((,class (:foreground "#F9F5D7" :background ,bg-highlight))))
+   `(swiper-match-face-1 ((,class :foreground "white";"#F9F5D7"
+                                  :background "#A5A183";,bg-highlight
+                                  )))
    `(swiper-match-face-2 ((,class (:foreground "black" :background ,rain-1))))
    ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
    ;; TODO: make bug report to swiper about face 3,4

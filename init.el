@@ -4844,9 +4844,8 @@ TODO: call this function when it works."
 
 (with-eval-after-load 'ivy
   (when nil
-   ;; an optional 3rd party sorting/filtering for ivy.
-   ;; will remember remember past selections during find-file, etc.
-    (require 'ivy-prescient)
+    ;; an optional 3rd party sorting/filtering for ivy.
+    ;; will remember remember past selections during find-file, etc.
     (ivy-prescient-mode 1)
     (prescient-persist-mode))
 
@@ -5783,6 +5782,9 @@ Also only return t if the } is relatively close to (point)."
 ;; the author names the base git repo folder "prescient.el". It's a folder,
 ;; not an elisp file
 (push "~/.emacs.d/notElpa/prescient.el" load-path)
+(autoload #'selectrum-prescient-mode "selectrum-prescient" nil t)
+(autoload #'ivy-prescient-mode "ivy-prescient" nil t)
+(autoload #'prescient-persist-mode "prescient" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; selectrum. by raxod502. saved to notElpa folder as a git submodule.
@@ -5791,22 +5793,19 @@ Also only return t if the } is relatively close to (point)."
 ;; add an autoload so I can use selectrum even if it's not `my-narrow-type'.
 (autoload #'selectrum-mode "selectrum" nil t)
 
-(when (eq my-narrow-type 'selectrum)
-  (require 'selectrum)
-  ;; turn on selectrum
-  (selectrum-mode 1)
-
+(with-eval-after-load 'selectrum
   (when my-use-evil-p
     (evil-leader/set-key "b" #'switch-to-buffer))
 
   ;; NOTE: the selecturm author reccomends using his prescient for sorting.
-  (require 'selectrum-prescient)
   (selectrum-prescient-mode 1)
   (prescient-persist-mode)
 
   ;; swiper-like search by the same author raxod502
-  (require 'ctrlf)
   (ctrlf-mode))
+
+(when (eq my-narrow-type 'selectrum)
+  (selectrum-mode 1))
 
 
 ;;;----------------------------------------------------------------------------

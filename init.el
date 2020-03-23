@@ -1083,7 +1083,9 @@ Closure over executed-p."
     ;;helm-flycheck
     ;;helm-descbinds
 
-    (icicles ,(eq my-narrow-type 'icicles))
+    ;; NOTE: icicles removed from melpa due to emacs wiki hosting.
+    ;; (icicles ,(eq my-narrow-type 'icicles))
+
     ;;projectile
     ;;clippy
     ;;yasnippet

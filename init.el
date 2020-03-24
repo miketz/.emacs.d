@@ -446,6 +446,7 @@ in case that file does not provide any feature."
 (defvar nov-variable-pitch)
 (defvar read-process-output-max)
 (defvar swiper-use-visual-line-p)
+(defvar python-shell-interpreter)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -829,6 +830,7 @@ in case that file does not provide any feature."
 (declare-function ctrlf-mode 'ctrlf)
 (declare-function selectrum-prescient-mode 'selectrum-prescient)
 (declare-function prescient-persist-mode 'prescient)
+(declare-function my-setup-inferior-python-mode 'suppress)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

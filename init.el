@@ -976,6 +976,11 @@ occur my-occur-wild-spaces")
   "Whether to use lispy or not.
 Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 
+(defvar my-native-json-p (functionp 'json-parse-string)
+  "True if Emacs was compiled with native json support.
+Using the Jansson C library.
+This should speed up lsp related modes.")
+
 ;;;----------------------------------------------------------------------------
 ;;; Packages
 ;;;----------------------------------------------------------------------------

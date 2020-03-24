@@ -5975,6 +5975,8 @@ Also only return t if the } is relatively close to (point)."
 ;;; python-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'python
+  ;; defualt to python3 for command `run-python'.
+  (setq python-shell-interpreter "python3")
 
   ;; use custom fn to avoid alignment issues with horizontal comments. Tabs
   ;; can't be used *after* code, only before. (otherwise alignment issues

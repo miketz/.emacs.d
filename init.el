@@ -5978,6 +5978,12 @@ Also only return t if the } is relatively close to (point)."
   ;; defualt to python3 for command `run-python'.
   (setq python-shell-interpreter "python3")
 
+  (defun my-setup-inferior-python-mode ()
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode-enable)
+    (my-turn-on-electric-pair-local-mode))
+  (add-hook 'inferior-python-mode-hook #'my-setup-inferior-python-mode)
+
   ;; use custom fn to avoid alignment issues with horizontal comments. Tabs
   ;; can't be used *after* code, only before. (otherwise alignment issues
   ;; occur at different tab widths.

@@ -270,7 +270,7 @@
    `(highlight-indent-guides-character-face ((,class (:foreground ,fainter))))
 
    ;; default emacs completion.
-   `(completions-common-part ((,class (:foreground ,faint-less))))
+   `(completions-common-part ((,class (:foreground ,faint-lesser))))
    `(completions-first-difference ((,class (:foreground ,fg-green))))
 
    ;; swiper, ivy, counsel

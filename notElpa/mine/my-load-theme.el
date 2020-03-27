@@ -45,7 +45,9 @@
                  ("#F5F1D3" . "my-ultimate4")
                  ("ivory" . "ivory")
                  ("ivory2" . "ivory2")
-                 ("ivory3" . "ivory3")])
+                 ("ivory3" . "ivory3")
+                 ("#adada1" . "ivory3.5")
+                 ("ivory4" . "ivory4")])
        (len (length colors))
        (i 0))
 

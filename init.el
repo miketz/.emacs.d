@@ -6678,7 +6678,7 @@ vanilla javascript buffers."
   "Hook to run on c/c++ files to set up ccls."
   (require 'ccls)
   (lsp))
-(when (eq my-curr-computer 'wild-dog)
+(when nil ; (eq my-curr-computer 'wild-dog)
   ;; turn on ccls automatically.  But might go wonky if compile_commands.json
   ;; or .ccls is not in the project root.
   (add-hook 'c-mode-common-hook #'my-setup-ccls))

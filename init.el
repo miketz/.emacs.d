@@ -6886,7 +6886,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; display-fill-column-indicator
 ;;;----------------------------------------------------------------------------
-;; a new built-in line display in Emacs.
+;; a new native built-in line display in Emacs.
 ;; It can replace package `fill-column-indicator' and it's `fci-mode'.
 ;; call `display-fill-column-indicator-mode' to toggle the new mode.
 

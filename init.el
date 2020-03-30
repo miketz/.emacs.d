@@ -825,8 +825,6 @@ in case that file does not provide any feature."
 (declare-function my-setup-java-mode 'suppress)
 (declare-function tide-setup 'tide)
 (declare-function tide-hl-identifier-mode 'tide)
-(declare-function my-search-line-backwards 'suppress)
-(declare-function my-next-char-}-p 'suppress)
 (declare-function ctrlf-mode 'ctrlf)
 (declare-function selectrum-prescient-mode 'selectrum-prescient)
 (declare-function prescient-persist-mode 'prescient)
@@ -3299,6 +3297,42 @@ completions from folders other than the current one."
 ;; "'first' - ' MIDDLE1' - ' MIDDLE2' - ' LAST' - |"
 
 
+
+;;;----------------------------------------------------------------------------
+;;; my auto-newline functions. used by cc-mode and electric-spacing-mode.
+;;;----------------------------------------------------------------------------
+(defun my-search-line-backwards (str)
+  (interactive)
+  (let ((line-start (save-excursion
+                      (beginning-of-line 1)
+                      (point))))
+    (save-excursion
+      (search-backward str line-start t))))
+
+(cl-defun my-next-char-}-p ()
+  "Return t if the first non-whitespace char after point is }.
+Also only return t if the } is relatively close to (point)."
+  (interactive)
+  ;; Search a max of 200 chars forward (or less if near end of buffer).
+  (let* ((distance-until-end (- (buffer-size) (point)))
+         (end (min 200 distance-until-end)))
+    (cl-loop named loop for i from (point) to end
+             do
+             (let ((c (byte-to-string (char-after i))))
+               ;; unless whitespace
+               (unless (or (string-equal c " ")
+                           (string-equal c "	")
+                           (string-equal c "\n"))
+                 ;; (return (string-equal c "}"))
+                 (cl-return-from my-next-char-}-p (string-equal c "}")))))))
+
+(defun my-add-newline-automatically-p ()
+  (interactive)
+  (if (or (my-search-line-backwards "return")
+          (my-next-char-}-p))
+      'stop
+    'yes-add-newline))
+
 ;;;----------------------------------------------------------------------------
 ;;; cc-mode
 ;;;----------------------------------------------------------------------------
@@ -3391,6 +3425,10 @@ and indent."
   ;; back to where you were.
   ;;(eval-after-load 'cc-mode 'which-function-mode)
 
+  ;; TODO: look into a way to add to this list. For some reason it's a sybmol
+  ;; by default, not a list. So doing a heavy handed overwrite for now.
+  (setq c-hanging-semi&comma-criteria '(my-add-newline-automatically-p))
+
   (defun my-setup-c-mode-common ()
     (yas-minor-mode 1)
     ;; (which-function-mode) ; displays function at cursor in the
@@ -3412,8 +3450,13 @@ and indent."
         ;; TODO: find the problem, fix it. Commit upstream if relevant.
         (flycheck-mode 1)))
 
-    (electric-spacing-mode 1)
-    ;; (when (fboundp #'fci-mode)
+    ;; TODO add this back when i figured out how to disable it's auto
+    ;; newline feature that conflicts with cc mode's auto-newline.
+    ;; (electric-spacing-mode 1)
+    (c-toggle-hungry-state 1)
+    (c-toggle-auto-newline 1)
+
+    ;; (when (fboundp #'fci-mode) ; NOTE: using the new native alternative.
     ;;   (fci-mode 1))
     (when (fboundp #'display-fill-column-indicator-mode)
       (setq display-fill-column-indicator-column 79)
@@ -5561,30 +5604,6 @@ Closure over `preceding-sexp-fn'."
 
 
 (with-eval-after-load 'electric-spacing
-
-  (defun my-search-line-backwards (str)
-    (let ((line-start (save-excursion
-                        (beginning-of-line 1)
-                        (point))))
-      (save-excursion
-        (search-backward str line-start t))))
-
-  (cl-defun my-next-char-}-p ()
-    "Return t if the first non-whitespace char after point is }.
-Also only return t if the } is relatively close to (point)."
-    ;; Search a max of 200 chars forward (or less if near end of buffer).
-    (let* ((distance-until-end (- (buffer-size) (point)))
-           (end (min 200 distance-until-end)))
-      (cl-loop named loop for i from (point) to end
-               do
-               (let ((c (byte-to-string (char-after i))))
-                 ;; unless whitespace
-                 (unless (or (string-equal c " ")
-                             (string-equal c "	")
-                             (string-equal c "\n"))
-                   ;; (return (string-equal c "}"))
-                   (cl-return-from my-next-char-}-p (string-equal c "}")))))))
-
   ;; redefine package fn to not always insert newline.
   ;; Hamfisted approach. Occasionally look at package code to see if this
   ;; function is still relevant.

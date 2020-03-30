@@ -3453,7 +3453,7 @@ and indent."
     ;; NOTE: only enable `electric-spacing-mode' if ";" is removed from
     ;; `electric-spacing-operators'. Otherwise it dupelicates newline
     ;; functionality of cc mode's auto-newline.
-    (electric-spacing-mode 1)
+    ;; (electric-spacing-mode 1)
     (c-toggle-hungry-state 1)
     (c-toggle-auto-newline 1)
 

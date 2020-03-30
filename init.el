@@ -3450,9 +3450,10 @@ and indent."
         ;; TODO: find the problem, fix it. Commit upstream if relevant.
         (flycheck-mode 1)))
 
-    ;; TODO add this back when i figured out how to disable it's auto
-    ;; newline feature that conflicts with cc mode's auto-newline.
-    ;; (electric-spacing-mode 1)
+    ;; NOTE: only enable `electric-spacing-mode' if ";" is removed from
+    ;; `electric-spacing-operators'. Otherwise it dupelicates newline
+    ;; functionality of cc mode's auto-newline.
+    (electric-spacing-mode 1)
     (c-toggle-hungry-state 1)
     (c-toggle-auto-newline 1)
 
@@ -5604,6 +5605,14 @@ Closure over `preceding-sexp-fn'."
 
 
 (with-eval-after-load 'electric-spacing
+  ;; remove semi-colon ";". It adds newlines after ; which duplicates
+  ;; the auto-newline feature in cc-mode. Coudl be useful for non-cc modes
+  ;; but for now just remove it entirely.
+  (cl-delete ?\; electric-spacing-operators)
+
+  (setq electric-spacing-control-statement-parens t)
+  (setq electric-spacing-double-space-docs t)
+
   ;; redefine package fn to not always insert newline.
   ;; Hamfisted approach. Occasionally look at package code to see if this
   ;; function is still relevant.

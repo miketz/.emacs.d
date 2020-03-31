@@ -471,6 +471,15 @@
    `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
    `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
 
+
+   ;; diff
+   `(diff-indicator-removed ((,class :background "red")))
+   `(diff-removed ((,class :background "#FF8888")))
+   ;; `(diff-refine-removed ((,class :background "yellow")))
+   `(diff-added ((,class :background "#eeFFdd")))
+   `(diff-indicator-added ((,class :background "green")))
+   `(diff-refine-added ((,class :background ,bg-green)))
+
    ;; rg
    `(rg-filename-face ((,class :inherit font-lock-constant-face)))
    `(rg-match-face ((,class :foreground ,fg-yellow :background ,bg-yellow)))

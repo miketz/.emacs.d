@@ -447,6 +447,9 @@ in case that file does not provide any feature."
 (defvar read-process-output-max)
 (defvar swiper-use-visual-line-p)
 (defvar python-shell-interpreter)
+(defvar electric-spacing-operators)
+(defvar electric-spacing-control-statement-parens)
+(defvar electric-spacing-double-space-docs)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

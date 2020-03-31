@@ -165,7 +165,7 @@
    `(fringe ((,class (:background "#959173"))))
 
    ;; TODO font lock
-   ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
+   `(font-lock-builtin-face ((,class (:foreground ,fg :weight bold))))
    `(font-lock-comment-face ((,class (:foreground "dark green"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
@@ -362,6 +362,8 @@
    ;; web-mode
    `(web-mode-current-element-highlight-face ((,class (:background ,faint))))
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
+   `(web-mode-html-attr-name-face ((,class :foreground ,fg)))
+   `(web-mode-html-tag-face ((,class :foreground "#1059ff")))
 
    ;; company
    `(company-tooltip ((,class (:background ,bg-highlight :foreground ,fg))))

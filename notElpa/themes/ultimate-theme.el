@@ -153,11 +153,10 @@
                            :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
-   `(line-number ((,class '(:background "black"
-                                        :foreground "gray50"))))
-   `(line-number-current-line ((,class (:inherit line-number
-                                                 :foreground "#77AA55"
-                                                 :background "#171717"))))
+   `(line-number ((,class :background "#656143"
+                          :foreground "#AAAAAA")))
+   `(line-number-current-line ((,class :inherit line-number
+                                       :foreground "#d0c66c")))
 
    `(region
      ((,class (:background ,highlight))))     ;69685E

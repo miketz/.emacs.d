@@ -31,7 +31,7 @@
        (keyword      "navy blue")
        (var          "blue")
        (highlight    "#FFA366")
-       (popup-bg     "#222222")
+       (popup-bg     "powder blue")
        (scrollb-bg   bg)
        (scrollb-fg   "royalblue")
        (mode-line-fg "#8DEECD")

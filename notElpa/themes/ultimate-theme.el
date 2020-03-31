@@ -254,9 +254,7 @@
 
 
    ;; replace.el
-   `(match ((,class (:background "#000000" :foreground ,fg-yellow
-                                 ;; :weight normal
-                                 ))))
+   `(match ((,class :foreground ,fg-yellow :background ,bg-yellow)))
 
    ;; num3
    ;; '(num3-face-odd ((,class)))

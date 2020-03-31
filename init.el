@@ -5167,14 +5167,17 @@ END of region."
 (push "~/.emacs.d/notElpa/mine/mor" load-path)
 (autoload #'mor-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
+(autoload #'mor-curr-mode-on-region "mode-on-region" nil t)
 ;; Recommended keybinds for vanilla Emacs. Press "C-c m" with text highlighted.
 (global-set-key (kbd "C-c m") #'mor-mode-on-region)
 (global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
+(global-set-key (kbd "C-c r") #'mor-curr-mode-on-region)
 ;; Recommended keybinds for evil users. Press "m" in visual mode.
 (eval-after-load 'evil
   '(progn
      (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
-     (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)))
+     (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)
+     (define-key evil-visual-state-map (kbd "r") #'mor-curr-mode-on-region)))
 ;; Configure
 (eval-after-load 'mode-on-region
   '(progn

@@ -3304,6 +3304,9 @@ completions from folders other than the current one."
 ;;;----------------------------------------------------------------------------
 ;;; my auto-newline functions. used by cc-mode and electric-spacing-mode.
 ;;;----------------------------------------------------------------------------
+(defvar my-auto-newline-p nil
+  "Use my custom auto newline functionality if t.  For cc mode.")
+
 (defun my-search-line-backwards (str)
   (interactive)
   (let ((line-start (save-excursion
@@ -3428,9 +3431,10 @@ and indent."
   ;; back to where you were.
   ;;(eval-after-load 'cc-mode 'which-function-mode)
 
-  ;; TODO: look into a way to add to this list. For some reason it's a sybmol
-  ;; by default, not a list. So doing a heavy handed overwrite for now.
-  (setq c-hanging-semi&comma-criteria '(my-add-newline-automatically-p))
+  (when my-auto-newline-p
+    ;; TODO: look into a way to add to this list. For some reason it's a sybmol
+    ;; by default, not a list. So doing a heavy handed overwrite for now.
+    (setq c-hanging-semi&comma-criteria '(my-add-newline-automatically-p)))
 
   (defun my-setup-c-mode-common ()
     (yas-minor-mode 1)
@@ -3458,7 +3462,7 @@ and indent."
     ;; functionality of cc mode's auto-newline.
     ;; (electric-spacing-mode 1)
     (c-toggle-hungry-state 1)
-    (c-toggle-auto-newline 1)
+    ;; (c-toggle-auto-newline 1)
 
     ;; (when (fboundp #'fci-mode) ; NOTE: using the new native alternative.
     ;;   (fci-mode 1))

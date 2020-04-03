@@ -1837,6 +1837,15 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
+(defun my-byte-compile-curr-dir ()
+  "Byte compile all elisp files in the current directory."
+  (interactive)
+  (byte-recompile-directory
+   default-directory   ; current directory
+   0                   ; 0 means compile .el files if .elc is missing.
+   t) ; t means force re-compile even if the .elc is up-to-date. May be
+  )
+
 
 
 ;;;----------------------------------------------------------------------------

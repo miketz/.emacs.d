@@ -3368,6 +3368,9 @@ cases."
   (let ((indent-tabs-mode nil)) ; spaces
     (call-interactively #'comment-dwim)))
 
+
+;; TODO: incorpate ref docs from:
+;; https://en.cppreference.com/w/
 (when (eq my-curr-computer 'work-laptop)
   (defun my-c-reference ()
     "Opens the function list of the GNU c docs."

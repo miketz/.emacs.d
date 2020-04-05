@@ -6581,7 +6581,8 @@ vanilla javascript buffers."
 
           ("less" ; fewer groups
            ("Special" (or (name . "^\*")
-                          (name . "^\magit"))))))
+                          (name . "^\magit")))
+           ("ERC" (mode . erc-mode)))))
 
   (defun my-setup-ibuffer-mode ()
     (ibuffer-switch-to-saved-filter-groups "less"))

@@ -5182,32 +5182,30 @@ END of region."
 (autoload #'mor-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-curr-mode-on-region "mode-on-region" nil t)
+;; Config vars. Control behavior of the package.
+(setq mor-format-automatically-p t)
+(setq mor-fix-whitespace-p t)
+(setq mor-readonly-for-extra-protection-p t)
+(setq mor-allow-tmp-files-p         t
+      mor-modes-to-create-tmp-files '(js2-mode js-mode)
+      mor-auto-delete-tmp-files-p   t)
+;; Face for the selected region when readonly mode is enabled.
+(custom-set-faces `(mor-readonly-face ((t :background "black"
+                                          :foreground "red"
+                                          :strike-through t))))
 ;; Recommended keybinds for vanilla Emacs. Press "C-c m" with text highlighted.
 (global-set-key (kbd "C-c m") #'mor-mode-on-region)
 (global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
 (global-set-key (kbd "C-c r") #'mor-curr-mode-on-region)
-;; Recommended keybinds for evil users. Press "m" in visual mode.
-(eval-after-load 'evil
-  '(progn
-     (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
-     (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)
-     (define-key evil-visual-state-map (kbd "r") #'mor-curr-mode-on-region)))
-;; Configure
-(eval-after-load 'mode-on-region
-  '(progn
-     (setq mor-format-automatically-p t)
-     (setq mor-fix-whitespace-p t)
-     (setq mor-readonly-for-extra-protection-p t)
-     (setq mor-allow-tmp-files-p         t
-           mor-modes-to-create-tmp-files '(js2-mode js-mode)
-           mor-auto-delete-tmp-files-p   t)
-     (custom-set-faces
-      `(mor-readonly-face
-        ((t (:background "black" :foreground "red" :strike-through t)))))
-     ;; recommended keybinds for the tmp buffer.  Both Vanilla and Evil.
-     (define-key mor-tmp-buffer-mode-map (kbd "C-c b") #'mor-copy-back)
-     (define-key mor-tmp-buffer-mode-map (kbd "C-c c")
-       #'mor-close-tmp-buffer)))
+(with-eval-after-load 'evil
+  ;; Recommended keybinds for evil users. Press "m" in visual mode.
+  (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+  (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)
+  (define-key evil-visual-state-map (kbd "r") #'mor-curr-mode-on-region))
+(with-eval-after-load 'mode-on-region
+  ;; Recommended keybinds for the tmp buffer.  Both Vanilla and Evil.
+  (define-key mor-tmp-buffer-mode-map (kbd "C-c b") #'mor-copy-back)
+  (define-key mor-tmp-buffer-mode-map (kbd "C-c c") #'mor-close-tmp-buffer))
 
 ;;;----------------------------------------------------------------------------
 ;;; Focus javascript

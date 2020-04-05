@@ -3467,7 +3467,7 @@ and indent."
         (flycheck-mode 1)))
 
     ;; NOTE: only enable `electric-spacing-mode' if ";" is removed from
-    ;; `electric-spacing-operators'. Otherwise it dupelicates newline
+    ;; `electric-spacing-operators'. Otherwise it duplicates newline
     ;; functionality of cc mode's auto-newline.
     ;; (electric-spacing-mode 1)
     (c-toggle-hungry-state 1)

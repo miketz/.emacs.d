@@ -450,6 +450,7 @@ in case that file does not provide any feature."
 (defvar electric-spacing-operators)
 (defvar electric-spacing-control-statement-parens)
 (defvar electric-spacing-double-space-docs)
+(defvar c-hanging-semi&comma-criteria)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -832,6 +833,7 @@ in case that file does not provide any feature."
 (declare-function selectrum-prescient-mode 'selectrum-prescient)
 (declare-function prescient-persist-mode 'prescient)
 (declare-function my-setup-inferior-python-mode 'suppress)
+(declare-function c-toggle-hungry-state 'cc-cmds)
 
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros

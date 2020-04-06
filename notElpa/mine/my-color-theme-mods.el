@@ -669,6 +669,9 @@
    `(font-lock-function-name-face ((t (:weight bold :foreground "#006699"))))
    `(font-lock-keyword-face ((t (:bold t :foreground "#0000FF")))) ; #3654DC
    `(font-lock-builtin-face ((t (:weight bold :foreground "#006FE0"))))
+   `(font-lock-comment-face ((t :foreground "dark green")))
+   `(font-lock-comment-delimiter-face ((t :inherit font-lock-comment-face)))
+   `(font-lock-string-face ((t (:foreground "deep pink"))))
 
    `(avy-lead-face ;; if 1 highlight char, or for remaining highlight chars.
      ((t (:foreground "black"

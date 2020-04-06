@@ -175,8 +175,11 @@
 										   ;; :box (:line-width -1 :color ,faint-less)
                                            )))
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
-   ;; `(font-lock-negation-char-face ((,class (:foreground ,zenburn-yellow :weight bold))))
-   ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
+   `(font-lock-negation-char-face ((,class :foreground "#Ae0000"
+                                           :background "#ffe0eb"
+                                           :box (:line-width -1 :style pressed-button)
+                                           :weight bold)))
+   `(font-lock-preprocessor-face ((,class (:foreground "#5b1503"))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
    ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))

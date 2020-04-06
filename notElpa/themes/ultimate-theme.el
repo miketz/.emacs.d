@@ -326,7 +326,8 @@
 								   :underline nil))))
    ;; the non-selected matches from isearch
    `(lazy-highlight ((,class (:inherit isearch
-									   :weight normal))))
+									   ;:weight normal
+                                       ))))
 
    `(cider-result-overlay-face ((,class (:background ,bg-green
                                                      :foreground ,fg-green

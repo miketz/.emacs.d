@@ -48,7 +48,11 @@
           "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-bold-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-          "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"])
+          ;; "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
+          "-outline-Ubuntu Mono-normal-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Ubuntu Mono-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"
+          "-outline-Envy Code R-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"])
        (t nil)))
      (i 0)
      (len (length my-fonts)))

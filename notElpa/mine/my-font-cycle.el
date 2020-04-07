@@ -60,7 +60,7 @@
      (my-fonts-list (cl-loop for f across my-fonts
                              with lst = '()
                              do
-                             (add-to-list 'lst f t)
+                             (push f lst) ; (add-to-list 'lst f t)
                              finally
                              (return lst))))
 

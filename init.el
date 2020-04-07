@@ -1829,6 +1829,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 (autoload #'my-cycle-font-forward "my-font-cycle" nil t)
 (autoload #'my-cycle-font-backward "my-font-cycle" nil t)
+(autoload #'my-select-font "my-font-cycle" nil t)
 
 (global-set-key (kbd "<f8>") #'my-cycle-font-forward)
 (global-set-key (kbd "S-<f8>") #'my-cycle-font-backward)

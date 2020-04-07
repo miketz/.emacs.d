@@ -55,7 +55,14 @@
           "-outline-Envy Code R-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"])
        (t nil)))
      (i 0)
-     (len (length my-fonts)))
+     (len (length my-fonts))
+     ;; convert the array to a list so i can use `completing-read'.
+     (my-fonts-list (cl-loop for f across my-fonts
+                             with lst = '()
+                             do
+                             (add-to-list 'lst f t)
+                             finally
+                             (return lst))))
 
   (defun my-font-set-index (new-i)
     "Set the current font index and display that font.
@@ -75,7 +82,12 @@ Closure over `my-fonts'."
     "Cycle through several good fonts for the current computer by N STEPs.
 Closure over `my-fonts'."
     (interactive "n") ; read step from minibuffer if not provided.
-    (my-font-set-index (+ i step))))
+    (my-font-set-index (+ i step)))
+
+  (defun my-select-font ()
+    "Use `completing-read' to select the font instead of cycling."
+    (interactive)
+    (set-frame-font (ivy-completing-read "font: " my-fonts-list))))
 
 (defun my-cycle-font-forward ()
   "Cycle through several good fonts for the current computer."

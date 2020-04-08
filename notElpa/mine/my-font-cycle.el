@@ -87,7 +87,12 @@ Closure over `my-fonts'."
   (defun my-select-font ()
     "Use `completing-read' to select the font instead of cycling."
     (interactive)
-    (set-frame-font (ivy-completing-read "font: " my-fonts-list))))
+    (let (;; dynamically shadow ivy completion style to ignore order.
+          (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+          ;; taller ivy window
+          (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
+                                              ; doens't go off screen.
+      (set-frame-font (ivy-completing-read "font: " my-fonts-list)))))
 
 (defun my-cycle-font-forward ()
   "Cycle through several good fonts for the current computer."

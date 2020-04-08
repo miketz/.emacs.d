@@ -12,7 +12,9 @@
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
         ;; dynamically shadow ivy completion style to ignore order.
-        (ivy-re-builders-alist '((t . ivy--regex-ignore-order))))
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window
+        (ivy-height (- (window-height) )))
     (call-interactively #'set-frame-font)))
 
 

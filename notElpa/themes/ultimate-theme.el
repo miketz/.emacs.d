@@ -164,7 +164,8 @@
    `(fringe ((,class (:background "#959173"))))
 
    ;; TODO font lock
-   `(font-lock-builtin-face ((,class (:foreground ,fg :weight bold))))
+   `(font-lock-builtin-face ((,class :foreground "dodgerblue4"
+                                     :weight bold)))
    `(font-lock-comment-face ((,class (:foreground "dark green"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))

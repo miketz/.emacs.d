@@ -74,7 +74,7 @@
 ;;;     git submodule init
 ;;;     git submodule update
 ;;; Then after a git pull
-;;;     git submodule update --recursive
+;;;     git submodule update --init --recursive
 
 ;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.

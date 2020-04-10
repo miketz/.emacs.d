@@ -28,3 +28,6 @@
 [submodule "notElpa/prescient.el"]
 	path = notElpa/prescient.el
 	url = https://github.com/raxod502/prescient.el
+[submodule "notElpa/paredit"]
+	path = notElpa/paredit
+	url = https://mumble.net/~campbell/git/paredit.git

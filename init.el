@@ -1069,7 +1069,7 @@ Closure over executed-p."
     (pos-tip t) ;; for pop up on eval with leader "e"
     (key-chord t)
     (slime ,my-install-slime-p)
-    (paredit t)
+    ;; (paredit t) ; using git submodule instead of melpa package
     ;;paxedit
     ;;smartparens
     ;;redshank
@@ -3708,9 +3708,9 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Paredit
 ;;;----------------------------------------------------------------------------
-;; ;;(add-to-list 'load-path "~/.emacs.d/paredit")
-;; (autoload 'enable-paredit-mode "paredit"
-;;   "Turn on pseudo-structural editing of Lisp code." t)
+(push "~/.emacs.d/notElpa/paredit" load-path)
+(autoload 'enable-paredit-mode "paredit"
+  "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)

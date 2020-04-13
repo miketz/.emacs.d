@@ -1191,7 +1191,7 @@ Closure over executed-p."
     (typescript-mode t)
     (tide ,(memq my-curr-computer
                  '(work-laptop-2019 work-laptop wild-dog work-laptop-bash)))
-    (context-coloring t)
+    (context-coloring nil)
     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
     (autothemer t) ;; dependency for some themes.
     (erc-hl-nicks t)

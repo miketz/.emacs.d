@@ -344,6 +344,9 @@
 
    ;; magit
    `(magit-section-highlight ((,class (:background ,faint))))
+   `(magit-log-author ((,class (:foreground "deepskyblue4"))))
+   `(magit-log-date ((,class (:foreground "#803030"))))
+   `(magit-hash ((,class (:foreground "#803030"))))
 
    ;; tooltip
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))

@@ -1,4 +1,4 @@
-;;; modules.el --- Package handling -*- lexical-binding: t -*-
+;;; my-modules.el --- Package handling -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;;; Tracking elisp packages.  Mostly as git submodules, but other
@@ -123,4 +123,4 @@ Some info may be purely for informational/doc purposes."
 
 (provide 'my-modules)
 
-;;; modules.el ends here
+;;; my-modules.el ends here

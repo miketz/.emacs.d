@@ -4882,6 +4882,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/swiper" load-path)
 (autoload #'swiper-isearch "swiper" nil t)
+(autoload #'counsel-load-theme "counsel" nil t)
 ;; TODO: set up more autoloads
 
 (when my-use-ivy-p

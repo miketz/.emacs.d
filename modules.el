@@ -1,9 +1,14 @@
 ;;; modules.el --- Package handling -*- lexical-binding: t -*-
 
 ;;; Commentary:
-;;; Tracking/handling elisp packages.  Mostly as git submodules, but other
+;;; Tracking elisp packages.  Mostly as git submodules, but other
 ;;; ways too if the package is not a git repo.
 ;;; Avoiding the pacakge manager package.el and elpa/melpa/etc.
+;;;
+;;; This file is more about documenting info about pacakges than handling the
+;;; packages. Using git features to manually handle packages. This file is just
+;;; info that may be useful. Maybe a few automated things will be added like
+;;; byte compiling elisp files.
 
 ;;; Code:
 (require 'cl-lib)

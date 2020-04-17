@@ -1065,7 +1065,7 @@ Closure over executed-p."
 (defvar my-packages
   `((s t) ;; string library
     (evil t)
-    (evil-leader t)
+    (evil-leader nil) ;; using git submodule
     (pos-tip t) ;; for pop up on eval with leader "e"
     (key-chord t)
     (slime ,my-install-slime-p)
@@ -1439,6 +1439,15 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (autoload #'my-cursor-light-bg "my-color-theme-mods" nil t)
 (autoload #'my-cursor-dark-bg "my-color-theme-mods" nil t)
 
+
+;;;----------------------------------------------------------------------------
+;;; evil-leader
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/evil-leader" load-path)
+(autoload #'global-evil-leader-mode "evil-leader" nil t)
+(autoload #'evil-leader-mode "evil-leader" nil t)
+(autoload #'evil-leader/set-key "evil-leader" nil t)
+(autoload #'evil-leader/set-key-for-mode "evil-leader" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; evil

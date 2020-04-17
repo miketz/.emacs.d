@@ -34,3 +34,6 @@
 [submodule "notElpa/lispy"]
 	path = notElpa/lispy
 	url = https://github.com/miketz/lispy
+[submodule "notElpa/evil-leader"]
+	path = notElpa/evil-leader
+	url = https://github.com/miketz/evil-leader

@@ -62,6 +62,15 @@ Some info may be purely for informational/doc purposes."
                      (zoutline "0.1.0"))
       :depend-soft '())
     ,(make-module
+      :name 'evil-leader
+      :folder (concat my-module-folder "evil-leader")
+      :remote-mine "https://github.com/miketz/evil-leader"
+      :remote-upstream "https://github.com/cofi/evil-leader"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '((evil "0"))
+      :depend-soft '())
+    ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
       :remote-mine "https://github.com/miketz/mor"
@@ -71,7 +80,7 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())))
 
-(defun my-byte-compile-modules ()
+(defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."
   (interactive)
   (cl-loop for mod in my-modules
@@ -83,6 +92,22 @@ Some info may be purely for informational/doc purposes."
                ;; be useful if the Emacs version changed and should have an
                ;; .elc compiled again to be compatible.
            ))
+
+(defun my-byte-compile-module ()
+  "Byte compile .el files for the selected module."
+  (interactive)
+  (let* ((mod-name (intern (completing-read "module: "
+                                            (mapcar (lambda (m)
+                                                      (module-name m))
+                                                    my-modules))))
+         (mod (car (cl-member mod-name
+                              my-modules
+                              :test (lambda (sym mod)
+                                      (eq sym (module-name mod)))))))
+    (byte-recompile-directory
+     (module-folder mod)
+     0 ;; 0 means compile .el files if .elc is missing.
+     t)))
 
 (provide 'my-modules)
 

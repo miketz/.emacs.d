@@ -1312,6 +1312,12 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
                        (mapcar 'car package-archive-contents)))))
 
 
+;;;----------------------------------------------------------------------------
+;;; my-modules
+;;;----------------------------------------------------------------------------
+(autoload #'my-byte-compile-all-modules "my-modules" nil t)
+(autoload #'my-byte-compile-module "my-modules" nil t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.

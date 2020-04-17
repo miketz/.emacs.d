@@ -1103,7 +1103,7 @@ Closure over executed-p."
     ;;yasnippet
     (rainbow-delimiters t)
     (rainbow-mode t)
-    (expand-region t)
+    (expand-region nil) ;; using git submodule
     ;;multiple-cursors
     ;;(omnisharp (work-laptop))
     ;;sublimity
@@ -3707,11 +3707,12 @@ and indent."
 ;;(rainbow-mode)
 
 ;;;----------------------------------------------------------------------------
-;;; Expand-region
+;;; expand-region
 ;;; https://github.com/magnars/expand-region.el
 ;;;----------------------------------------------------------------------------
-;;(require 'expand-region)
-;; (autoload 'expand-region "expand-region" "expand region" t)
+(push "~/.emacs.d/notElpa/expand-region.el" load-path)
+(autoload #'er/expand-region "expand-region" nil t)
+(autoload #'er/contract-region "expand-region-core" nil t)
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C--") #'er/contract-region)
 

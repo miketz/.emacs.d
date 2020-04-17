@@ -40,3 +40,6 @@
 [submodule "notElpa/evil"]
 	path = notElpa/evil
 	url = https://github.com/miketz/evil
+[submodule "notElpa/expand-region.el"]
+	path = notElpa/expand-region.el
+	url = https://github.com/miketz/expand-region.el

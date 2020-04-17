@@ -1139,15 +1139,16 @@ Closure over executed-p."
     (speed-type t)
     (bug-hunter t)
 
-    (ivy t)
-    (swiper t)
-    (counsel t)
+    ;; NOTE: using git submodule instead of package for ivy, swiper, counsel.
+    (ivy nil)
+    (swiper nil)
+    (counsel nil)
     (flx t) ;; can be used by ivy and flx-ido for ordering flx matches.
 
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
     (avy t)
-    (lispy t)
+    (lispy nil) ;; using git submodule for lispy.
     ;;(worf t)
     (elisp-slime-nav t)
     ;; on 11-28-2016 electric-spacing had an unbalanced paren
@@ -4875,10 +4876,14 @@ TODO: call this function when it works."
 ;;    (t (my-search-bookmarks (rest bookmarks) tags))))
 
 ;;;----------------------------------------------------------------------------
-;;; swiper. ivy is (or at least was) bundled with swiper.
+;;; swiper. ivy is (or at least was) bundled with swiper. git submodule
 ;;; ivy
 ;;; counsel -> provides extra features for completing some things.
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/swiper" load-path)
+(autoload #'swiper-isearch "swiper" nil t)
+;; TODO: set up more autoloads
+
 (when my-use-ivy-p
   (when my-use-evil-p
     (evil-leader/set-key "b" #'ivy-switch-buffer))
@@ -5363,8 +5368,11 @@ buffer instead of narrowing."
 ;; (global-set-key (kbd "C-c C-s") #'my-window-search)
 
 ;;;----------------------------------------------------------------------------
-;;; lispy
+;;; lispy. git submodle
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/lispy" load-path)
+(autoload #'lispy-mode "lispy" nil t)
+
 (when my-use-lispy-p
   (add-hook 'lisp-mode-hook #'lispy-mode) ; for common lisp.
   ;; now that I default the *scratch* buffer to fundamental-mode, the slow

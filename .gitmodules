@@ -31,3 +31,6 @@
 [submodule "notElpa/paredit"]
 	path = notElpa/paredit
 	url = https://mumble.net/~campbell/git/paredit.git
+[submodule "notElpa/lispy"]
+	path = notElpa/lispy
+	url = https://github.com/miketz/lispy

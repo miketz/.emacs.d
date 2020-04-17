@@ -16,7 +16,7 @@
 ;;;     git push -u origin master
 ;;;
 ;;; Download from github to a new computer:
-;;;     git clone https://github.com/miketz/.emacs.d.git
+;;;     git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
 ;;;
 ;;; Get latest changes from github:
 ;;;     git pull origin master

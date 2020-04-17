@@ -1064,7 +1064,7 @@ Closure over executed-p."
 ;; conditions), the second place in each list item is a true/false value.
 (defvar my-packages
   `((s t) ;; string library
-    (evil t)
+    (evil nil) ;; using git submodule
     (evil-leader nil) ;; using git submodule
     (pos-tip t) ;; for pop up on eval with leader "e"
     (key-chord t)
@@ -1452,6 +1452,10 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------------------------------------------------
 ;;; evil
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/evil" load-path)
+(autoload #'evil-mode "evil-core" nil t)
+(autoload #'evil-define-key "evil-core" nil t)
+
 (with-eval-after-load 'evil
 
   (setq evil-flash-delay 1)

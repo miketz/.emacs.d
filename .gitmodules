@@ -37,3 +37,6 @@
 [submodule "notElpa/evil-leader"]
 	path = notElpa/evil-leader
 	url = https://github.com/miketz/evil-leader
+[submodule "notElpa/evil"]
+	path = notElpa/evil
+	url = https://github.com/miketz/evil

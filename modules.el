@@ -62,6 +62,18 @@ Some info may be purely for informational/doc purposes."
                      (zoutline "0.1.0"))
       :depend-soft '())
     ,(make-module
+      :name 'evil
+      :folder (concat my-module-folder "evil")
+      :remote-mine "https://github.com/miketz/evil"
+      :remote-upstream "https://github.com/emacs-evil/evil"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '((emacs "24.1")
+                     (undo-tree "0.7.4")
+                     (goto-chg "1.6")
+                     (cl-lib "0.5"))
+      :depend-soft '())
+    ,(make-module
       :name 'evil-leader
       :folder (concat my-module-folder "evil-leader")
       :remote-mine "https://github.com/miketz/evil-leader"

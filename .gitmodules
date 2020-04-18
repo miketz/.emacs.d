@@ -94,3 +94,6 @@
 [submodule "notElpa/eglot"]
 	path = notElpa/eglot
 	url = https://github.com/miketz/eglot
+[submodule "notElpa/nyan-mode"]
+	path = notElpa/nyan-mode
+	url = https://github.com/miketz/nyan-mode

@@ -1112,7 +1112,7 @@ Closure over executed-p."
     ;;(omnisharp (work-laptop))
     ;;sublimity
 
-    (nyan-mode t)
+    (nyan-mode nil) ;; using git submodule
     ;;(nyan-prompt t) ; nyan-prompt removed from melpa?
 
     ;;powerline
@@ -4031,6 +4031,8 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; nyan-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/nyan-mode" load-path)
+(autoload #'nyan-mode "nyan-mode" nil t)
 ;;(nyan-mode)
 ;;(setq nyan-wavy-trail nil)
 ;;(nyan-start-animation)

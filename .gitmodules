@@ -61,3 +61,15 @@
 [submodule "notElpa/company-lsp"]
 	path = notElpa/company-lsp
 	url = https://github.com/miketz/company-lsp
+[submodule "notElpa/company-mode"]
+	path = notElpa/company-mode
+	url = https://github.com/miketz/company-mode
+[submodule "notElpa/web-completion-data"]
+	path = notElpa/web-completion-data
+	url = https://github.com/miketz/web-completion-data
+[submodule "notElpa/company-web"]
+	path = notElpa/company-web
+	url = https://github.com/miketz/company-web
+[submodule "notElpa/slime-company"]
+	path = notElpa/slime-company
+	url = https://github.com/miketz/slime-company

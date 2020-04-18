@@ -1075,9 +1075,11 @@ Closure over executed-p."
     ;;redshank
     ;;auto-complete
     ;;ac-slime
-    (company t)
-    (company-web t)
-    (slime-company ,my-install-slime-company-p)
+    (company nil) ;; using git submodule
+    (company-web nil) ;; using git submodule
+    (slime-company nil ;; using git submodule
+                   ;;,my-install-slime-company-p
+     )
     (ace-window t)
     (csharp-mode t)
     (js2-mode t)
@@ -2197,6 +2199,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; company
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/company-mode" load-path)
 (require 'company)
 (add-hook 'after-init-hook #'global-company-mode) ; all buffers
 
@@ -2354,10 +2357,17 @@ In that case, insert the number."
   (define-key map (kbd "<return>") nil))
 
 
+;;;----------------------------------------------------------------------------
+;;; web-completion-data. dependency of company-web
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/web-completion-data" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; company-web
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/company-web" load-path)
+(autoload #'company-web-html "company-web-html" nil t)
+
 (with-eval-after-load 'web-mode
   (push 'company-web-html company-backends)
   (push 'company-web-jade company-backends)
@@ -2381,6 +2391,7 @@ In that case, insert the number."
 ;;;----------------------------------------------------------------------------
 ;;; slime-company
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/slime-company" load-path)
 ;; this is set in the slime section
 
 ;;;----------------------------------------------------------------------------

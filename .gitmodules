@@ -97,3 +97,6 @@
 [submodule "notElpa/nyan-mode"]
 	path = notElpa/nyan-mode
 	url = https://github.com/miketz/nyan-mode
+[submodule "notElpa/zoutline"]
+	path = notElpa/zoutline
+	url = https://github.com/miketz/zoutline

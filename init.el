@@ -5488,6 +5488,11 @@ buffer instead of narrowing."
 ;; (global-set-key (kbd "C-c C-s") #'my-window-search)
 
 ;;;----------------------------------------------------------------------------
+;;; zoutline. depency of lispy.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/zoutline" load-path)
+
+;;;----------------------------------------------------------------------------
 ;;; lispy. git submodle
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/lispy" load-path)
@@ -5503,6 +5508,7 @@ buffer instead of narrowing."
   (add-hook 'slime-repl-mode-hook       #'lispy-mode))
 
 (with-eval-after-load 'lispy
+  (require 'zoutline)
   ;; To improve start up speed move hooks to eval-after-load. Otherwise the
   ;; scratch buffer which uses `lisp-interaction-mode' will load lispy. The
   ;; first lispy start will be manual, then hooks be set up. On work-laptop

@@ -91,3 +91,6 @@
 [submodule "notElpa/rainbow-delimiters"]
 	path = notElpa/rainbow-delimiters
 	url = https://github.com/miketz/rainbow-delimiters
+[submodule "notElpa/eglot"]
+	path = notElpa/eglot
+	url = https://github.com/miketz/eglot

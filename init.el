@@ -1208,7 +1208,9 @@ Closure over executed-p."
     ;; (company-tern ,has-nodejs-p)
     (browse-kill-ring t)
     (git-gutter ,(not (version< emacs-version "24.3")))
-    (eglot ,(not (version< emacs-version "26.1")))
+    (eglot nil ;; using git submodule
+           ;;,(not (version< emacs-version "26.1"))
+     )
     (lsp-mode nil ;; using git submodule
               ;;,(not (version< emacs-version "25.1"))
 	      )
@@ -6789,6 +6791,15 @@ vanilla javascript buffers."
 ;;; browse-kill-ring
 ;;;----------------------------------------------------------------------------
 ;; (global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
+
+
+;;;----------------------------------------------------------------------------
+;;; eglot
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/eglot" load-path)
+(autoload #'eglot "eglot" nil t)
+(autoload #'eglot-ensure "eglot" nil t)
+(autoload #'eglot "eglot" nil t)
 
 
 ;;;----------------------------------------------------------------------------

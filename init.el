@@ -1136,7 +1136,7 @@ Closure over executed-p."
     ;;vim-empty-lines-mode
     (fill-column-indicator ,(not (version< emacs-version "25")))
     (flycheck t)
-    (hydra t)
+    (hydra nil) ;; using git submodule
     ;;linum-relative
     ;;(guide-key)
     (unkillable-scratch t)
@@ -4846,6 +4846,9 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; hydra
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/hydra" load-path)
+(autoload #'defhydra "hydra" nil t)
+
 (autoload #'my-choose-hydra "my-hydras" nil t)
 (autoload #'hydra-easyscroll/body "my-hydras" nil t)
 

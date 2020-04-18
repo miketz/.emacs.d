@@ -85,3 +85,6 @@
 [submodule "notElpa/elisp-bug-hunter"]
 	path = notElpa/elisp-bug-hunter
 	url = https://github.com/miketz/elisp-bug-hunter
+[submodule "notElpa/hydra"]
+	path = notElpa/hydra
+	url = https://github.com/miketz/hydra

@@ -1067,7 +1067,7 @@ Closure over executed-p."
     (evil nil) ;; using git submodule
     (evil-leader nil) ;; using git submodule
     (pos-tip t) ;; for pop up on eval with leader "e"
-    (key-chord t)
+    (key-chord nil) ;; using file in /notElpa/
     (slime nil ;; using git submodule
            ;;,my-install-slime-p
      )
@@ -1390,10 +1390,16 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------------------------------------------------
 ;;; key-chord
 ;;;----------------------------------------------------------------------------
+(autoload #'key-chord-mode "key-chord" nil t)
+(autoload #'key-chord-define-global "key-chord" nil t)
+(autoload #'key-chord-define-local "key-chord" nil t)
+(autoload #'key-chord-define "key-chord" nil t)
+
 ;; NOTE: "fj" chord slows down movement when in visual mode when pressing "j"
 ;;       since it is looking for the chord.
 
 (when my-use-evil-p
+  (require 'key-chord)
 
   (with-eval-after-load 'key-chord
     (setq key-chord-two-keys-delay 0.2) ; lower to reduce lag when pressing a

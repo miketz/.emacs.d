@@ -1141,7 +1141,7 @@ Closure over executed-p."
     ;;(guide-key)
     (unkillable-scratch t)
     (speed-type t)
-    (bug-hunter t)
+    (bug-hunter nil) ;; using git submodule
 
     ;; NOTE: using git submodule instead of package for ivy, swiper, counsel.
     (ivy nil)
@@ -1333,6 +1333,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------------------------------------------------
 (autoload #'my-byte-compile-all-modules "my-modules" nil t)
 (autoload #'my-byte-compile-module "my-modules" nil t)
+
+;;;----------------------------------------------------------------------------
+;; bug-hunter
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/elisp-bug-hunter" load-path)
+(autoload #'bug-hunter-file "bug-hunter" nil t)
+(autoload #'bug-hunter-init-file "bug-hunter" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; s

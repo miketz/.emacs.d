@@ -82,3 +82,6 @@
 [submodule "notElpa/leerzeichen.el"]
 	path = notElpa/leerzeichen.el
 	url = https://github.com/miketz/leerzeichen.el
+[submodule "notElpa/elisp-bug-hunter"]
+	path = notElpa/elisp-bug-hunter
+	url = https://github.com/miketz/elisp-bug-hunter

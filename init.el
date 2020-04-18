@@ -1068,7 +1068,9 @@ Closure over executed-p."
     (evil-leader nil) ;; using git submodule
     (pos-tip t) ;; for pop up on eval with leader "e"
     (key-chord t)
-    (slime ,my-install-slime-p)
+    (slime nil ;; using git submodule
+           ;;,my-install-slime-p
+     )
     ;; (paredit t) ; using git submodule instead of melpa package
     ;;paxedit
     ;;smartparens
@@ -1908,8 +1910,31 @@ This prevents overlapping themes; something I would rarely want."
 ;;           "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
 
 ;;;----------------------------------------------------------------------------
+;;; macrostep
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/macrostep" load-path)
+(autoload #'macrostep-c-mode-hook "macrostep-c" nil t)
+(autoload #'macrostep-mode "macrostep" nil t)
+(autoload #'macrostep-expand "macrostep" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; SLIME
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/slime" load-path)
+(push "~/.emacs.d/notElpa/slime/contrib" load-path)
+(push "~/.emacs.d/notElpa/slime/lib" load-path)
+(autoload #'slime "slime" nil t)
+(autoload #'slime-mode "slime" nil t)
+(autoload #'slime-connect "slime" nil t)
+(autoload #'slime-selector "slime" nil t)
+(autoload #'slime-selector "slime" nil t)
+(autoload #'slime-lisp-mode-hook "slime" nil t)
+;; (autoload #'slime-sheme "slime-scheme" nil t)
+(autoload #'slime-setup "slime" nil t)
+
+;; this line taken from slime-autoloads.el. Makes things work?
+(add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+
 ;; (require 'slime-autoloads)
 (with-eval-after-load 'slime
 

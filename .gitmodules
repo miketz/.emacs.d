@@ -73,3 +73,6 @@
 [submodule "notElpa/slime-company"]
 	path = notElpa/slime-company
 	url = https://github.com/miketz/slime-company
+[submodule "notElpa/macrostep"]
+	path = notElpa/macrostep
+	url = https://github.com/miketz/macrostep

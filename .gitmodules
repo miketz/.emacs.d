@@ -100,3 +100,6 @@
 [submodule "notElpa/zoutline"]
 	path = notElpa/zoutline
 	url = https://github.com/miketz/zoutline
+[submodule "notElpa/darkroom"]
+	path = notElpa/darkroom
+	url = https://github.com/miketz/darkroom

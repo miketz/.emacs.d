@@ -1132,7 +1132,7 @@ Closure over executed-p."
     ;;aggressive-indent
     (sx ,(not (version< emacs-version "24.4")))
     (leerzeichen nil) ;; using git submodule
-    (darkroom t)
+    (darkroom nil) ;; using git submodule
     ;;vim-empty-lines-mode
     (fill-column-indicator ,(not (version< emacs-version "25")))
     (flycheck t)
@@ -4773,8 +4773,10 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; darkroom
 ;;;----------------------------------------------------------------------------
-;; (require 'darkroom)
-(autoload 'darkroom-mode "darkroom" "darkroom-mode" t)
+(push "~/.emacs.d/notElpa/darkroom" load-path)
+(autoload 'darkroom-mode "darkroom" nil t)
+(autoload 'darkroom-tentative-mode "darkroom" nil t)
+
 (with-eval-after-load 'darkroom
   (setq darkroom-margins 0.15)
   ;;nil keeps margins close to the centered text.

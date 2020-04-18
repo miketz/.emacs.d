@@ -1223,7 +1223,6 @@ Closure over executed-p."
     (eros t)
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline t)
-    (minesweeper t)
     (yaml-mode t)
     (php-mode t)
     ;; (lsp-python-ms t)
@@ -7038,6 +7037,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; minesweeper
 ;;;----------------------------------------------------------------------------
+(autoload #'minesweeper "minesweeper" nil t)
 (with-eval-after-load 'minesweeper
   (setq *minesweeper-board-width* 30)
   (setq *minesweeper-board-height* 10)

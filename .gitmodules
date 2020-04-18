@@ -76,3 +76,6 @@
 [submodule "notElpa/macrostep"]
 	path = notElpa/macrostep
 	url = https://github.com/miketz/macrostep
+[submodule "notElpa/iedit"]
+	path = notElpa/iedit
+	url = https://github.com/miketz/iedit

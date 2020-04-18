@@ -1185,7 +1185,7 @@ Closure over executed-p."
                                            '(work-laptop wild-dog))))
                has-gnu-global-p))
     (clojure-mode ,(not (version< emacs-version "25.1")))
-    (iedit t) ;; include explicitly. Originally got it as a lispy dependency.
+    (iedit nil) ;; using git submodule
     (cider ,(memq my-curr-computer '(wild-dog)))
     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
     ;;  ,(<= emacs-major-version 24))
@@ -5819,6 +5819,11 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; iedit. dependency from lispy.
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/iedit" load-path)
+(autoload #'iedit-mode "iedit" nil t)
+(autoload #'iedit-mode-toggle-on-function "iedit" nil t)
+(autoload #'iedit-rectangle-mode "iedit-rect" nil t)
+
 ;; avoid warning popup for global keybind of C-;
 ;; I use that for the universal vim escape.
 ;; Doesn't work in eval-after-load because the warning code runs during the

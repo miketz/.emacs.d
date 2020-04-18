@@ -79,3 +79,6 @@
 [submodule "notElpa/iedit"]
 	path = notElpa/iedit
 	url = https://github.com/miketz/iedit
+[submodule "notElpa/leerzeichen.el"]
+	path = notElpa/leerzeichen.el
+	url = https://github.com/miketz/leerzeichen.el

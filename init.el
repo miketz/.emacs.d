@@ -1131,7 +1131,7 @@ Closure over executed-p."
     ;;(rtags)
     ;;aggressive-indent
     (sx ,(not (version< emacs-version "24.4")))
-    (leerzeichen t)
+    (leerzeichen nil) ;; using git submodule
     (darkroom t)
     ;;vim-empty-lines-mode
     (fill-column-indicator ,(not (version< emacs-version "25")))
@@ -4737,7 +4737,8 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; leerzeichen. Displays symbols for tab, space, and newline.
 ;;;----------------------------------------------------------------------------
-;; (autoload 'leerzeichen-mode "leerzeichen" nil t)
+(push "~/.emacs.d/notElpa/leerzeichen.el" load-path)
+(autoload #'leerzeichen-mode "leerzeichen" nil t)
 ;;(leerzeichen-mode)
 ;; (custom-set-faces
 ;;  '(leerzeichen ((t (:foreground "black";"#A8A800"

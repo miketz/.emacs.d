@@ -1063,7 +1063,7 @@ Closure over executed-p."
 ;; NOTE: to limit package installation to specific computers (or other
 ;; conditions), the second place in each list item is a true/false value.
 (defvar my-packages
-  `((s t) ;; string library
+  `((s nil) ;; string library. using git submodule
     (evil nil) ;; using git submodule
     (evil-leader nil) ;; using git submodule
     (pos-tip t) ;; for pop up on eval with leader "e"
@@ -1190,8 +1190,10 @@ Closure over executed-p."
     (adoc-mode t)
     (markdown-mode ,(not (version< emacs-version "24.4")))
     (typescript-mode t)
-    (tide ,(memq my-curr-computer
-                 '(work-laptop-2019 work-laptop wild-dog work-laptop-bash)))
+    (tide nil ;; using git submodule
+          ;; ,(memq my-curr-computer
+          ;;        '(work-laptop-2019 work-laptop wild-dog work-laptop-bash))
+          )
     (context-coloring nil)
     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
     (autothemer t) ;; dependency for some themes.
@@ -1199,24 +1201,35 @@ Closure over executed-p."
     (sql-indent t)
     (vdiff nil)
     (tern ,has-nodejs-p)
-    (company-tern ,has-nodejs-p)
+    ;; (company-tern ,has-nodejs-p)
     (browse-kill-ring t)
     (git-gutter ,(not (version< emacs-version "24.3")))
     (eglot ,(not (version< emacs-version "26.1")))
-    (lsp-mode ,(not (version< emacs-version "25.1")))
-    (company-lsp ,(not (version< emacs-version "25.1")))
-    (ccls ,(memq my-curr-computer '(wild-dog)))
+    (lsp-mode nil ;; using git submodule
+              ;;,(not (version< emacs-version "25.1"))
+	      )
+    (company-lsp nil ;; using git submodule
+                ;;,(not (version< emacs-version "25.1"))
+		 )
+    ;; (ccls ,(memq my-curr-computer '(wild-dog)))
     ;; (cquery ,(memq my-curr-computer '(wild-dog)))
     (websocket t)
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
-    (rg my-install-rg-p)
+    (rg nil) ;; using git submodule
     (eros t)
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline t)
     (minesweeper t)
     (yaml-mode t)
     (php-mode t)
-    (lsp-python-ms t))
+    ;; (lsp-python-ms t)
+    (transient t)
+    (wgrep t)
+    (lv t)
+    (spinner t)
+    (ht t)
+    (dash-functional t)
+    (dash t))
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -1318,6 +1331,17 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (autoload #'my-byte-compile-all-modules "my-modules" nil t)
 (autoload #'my-byte-compile-module "my-modules" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; s
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/s.el" load-path)
+(require 's) ; TODO: make autoloads for the appropriate functions.
+
+;;;----------------------------------------------------------------------------
+;;; f
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/f.el" load-path)
+(require 'f) ; TODO: make autoloads for the appropriate functions.
 
 ;;;----------------------------------------------------------------------------
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.
@@ -6106,8 +6130,8 @@ Closure over `preceding-sexp-fn'."
       (display-fill-column-indicator-mode 1))
 
     ;; lsp stuff
-    (require 'lsp-python-ms)
-    ;; (add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
+    ;; (require 'lsp-python-ms)
+    ;; ;; (add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
     )
   (add-hook 'python-mode-hook #'my-setup-python))
 
@@ -6457,6 +6481,17 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; tide
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/tide" load-path)
+(autoload #'company-tide "tide" nil t)
+(autoload #'tide-format-before-save "tide" nil t)
+(autoload #'tide-format "tide" nil t)
+(autoload #'tide-setup "tide" nil t)
+(autoload #'tide-mode "tide" nil t)
+(autoload #'tide-project-errors "tide" nil t)
+(autoload #'tide-unhighlight-identifiers "tide" nil t)
+(autoload #'tide-hl-identifier "tide" nil t)
+(autoload #'tide-hl-identifier-mode "tide" nil t)
+
 (with-eval-after-load 'typescript-mode
   (defun my-setup-tide-for-ts ()
     "The example fn in the tide readme file."
@@ -6676,9 +6711,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; company-tern
 ;;;----------------------------------------------------------------------------
-(with-eval-after-load 'company
-  (when has-nodejs-p
-    (push 'company-tern company-backends)))
+;; (with-eval-after-load 'company
+;;   (when has-nodejs-p
+;;     (push 'company-tern company-backends)))
 
 ;;;----------------------------------------------------------------------------
 ;;; browse-kill-ring
@@ -6689,6 +6724,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; lsp-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/lsp-mode" load-path)
+(autoload #'lsp "lsp-mode" nil t)
+
 ;; (with-eval-after-load 'lsp-pwsh ; powershell
 ;;   ;; powershell server
 ;;   ;; NOTE: first must manually download .zip folder from:
@@ -6701,6 +6739,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; company-lsp
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/company-lsp" load-path)
 (with-eval-after-load 'lsp-mode
   (require 'company-lsp)
   (push 'company-lsp company-backends))
@@ -6709,61 +6748,60 @@ vanilla javascript buffers."
 ;;; cquery. Not an elisp project. Built separately.
 ;;; NOTE: put compile_commands.json in each project root (or symlink).
 ;;;----------------------------------------------------------------------------
-(when nil ;(eq my-curr-computer 'wild-dog)
-  (push "/home/mike/proj/cquery/build/release/bin" exec-path))
+;; (when nil ;(eq my-curr-computer 'wild-dog)
+;;   (push "/home/mike/proj/cquery/build/release/bin" exec-path))
 
 ;;;----------------------------------------------------------------------------
 ;;; cquery. Melpa elisp package. (works with cquery binary above.)
 ;;;----------------------------------------------------------------------------
-(with-eval-after-load 'cquery
-  (when (eq my-curr-computer 'wild-dog)
-    (setq cquery-executable
-          "/home/mike/proj/cquery/build/release/bin/cquery")))
+;; (with-eval-after-load 'cquery
+;;   (when (eq my-curr-computer 'wild-dog)
+;;     (setq cquery-executable
+;;           "/home/mike/proj/cquery/build/release/bin/cquery")))
 
-(when nil ;(eq my-curr-computer 'wild-dog)
-  (defun my-setup-cquery ()
-    ;; autoload for `lsp-cquery-enable' is broken so just require the
-    ;; `cquery' library to make it available.
-    (require 'cquery)
-    (lsp-cquery-enable))
-  ;; turn on cquery automatically.  But might go wonky if
-  ;; compile_commands.json is not in the project root.
-  (add-hook 'c-mode-common-hook #'my-setup-cquery))
+;; (when nil ;(eq my-curr-computer 'wild-dog)
+;;   (defun my-setup-cquery ()
+;;     ;; autoload for `lsp-cquery-enable' is broken so just require the
+;;     ;; `cquery' library to make it available.
+;;     (require 'cquery)
+;;     (lsp-cquery-enable))
+;;   ;; turn on cquery automatically.  But might go wonky if
+;;   ;; compile_commands.json is not in the project root.
+;;   (add-hook 'c-mode-common-hook #'my-setup-cquery))
 
 
 ;;;----------------------------------------------------------------------------
 ;;; ccls. Not an elisp project. C++ proj build separetly.
 ;;; NOTE: put compile_commands.json or .ccls in each project root (or symlink).
 ;;;----------------------------------------------------------------------------
-(defvar my-ccls-folder (cond ((eq my-curr-computer 'wild-dog)
-                              "/home/mike/proj/ccls/Release/")
-                             (t nil)))
+;; (defvar my-ccls-folder (cond ((eq my-curr-computer 'wild-dog)
+;;                               "/home/mike/proj/ccls/Release/")
+;;                              (t nil)))
 
-(when (eq my-curr-computer 'wild-dog)
-  ;; binary is /home/mike/proj/ccls/Release/ccls
-  (push my-ccls-folder exec-path))
+;; (when (eq my-curr-computer 'wild-dog)
+;;   ;; binary is /home/mike/proj/ccls/Release/ccls
+;;   (push my-ccls-folder exec-path))
 
 ;;;----------------------------------------------------------------------------
 ;;; ccls. Melpa elisp package. (works with ccls binary above.)
 ;;;----------------------------------------------------------------------------
-;; (require 'ccls)
-(with-eval-after-load 'ccls
-  (when (eq my-curr-computer 'wild-dog)
-    (setq ccls-executable (concat my-ccls-folder "ccls"))
-    ;; ;; use flycheck
-    ;; (setq lsp-prefer-flymake nil)
-    ;; (setq-default flycheck-disabled-checkers
-    ;;               '(c/c++-clang c/c++-cppcheck c/c++-gcc))
-    ))
+;; (with-eval-after-load 'ccls
+;;   (when (eq my-curr-computer 'wild-dog)
+;;     (setq ccls-executable (concat my-ccls-folder "ccls"))
+;;     ;; ;; use flycheck
+;;     ;; (setq lsp-prefer-flymake nil)
+;;     ;; (setq-default flycheck-disabled-checkers
+;;     ;;               '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+;;     ))
 
-(defun my-setup-ccls ()
-  "Hook to run on c/c++ files to set up ccls."
-  (require 'ccls)
-  (lsp))
-(when nil ; (eq my-curr-computer 'wild-dog)
-  ;; turn on ccls automatically.  But might go wonky if compile_commands.json
-  ;; or .ccls is not in the project root.
-  (add-hook 'c-mode-common-hook #'my-setup-ccls))
+;; (defun my-setup-ccls ()
+;;   "Hook to run on c/c++ files to set up ccls."
+;;   (require 'ccls)
+;;   (lsp))
+;; (when nil ; (eq my-curr-computer 'wild-dog)
+;;   ;; turn on ccls automatically.  But might go wonky if compile_commands.json
+;;   ;; or .ccls is not in the project root.
+;;   (add-hook 'c-mode-common-hook #'my-setup-ccls))
 
 
 ;;;----------------------------------------------------------------------------
@@ -6839,6 +6877,11 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; rg
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/rg.el" load-path)
+;; adding /test/ folder helps with byte compiler errors
+(push "~/.emacs.d/notElpa/rg.el/test" load-path)
+(autoload #'rg "rg" nil t)
+
 (with-eval-after-load 'rg
   (setq rg-command-line-flags '("-M 250")) ; truncate long lines in display.
 

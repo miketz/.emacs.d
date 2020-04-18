@@ -92,6 +92,15 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 's
+      :folder (concat my-module-folder "expand-region.el")
+      :remote-mine "https://github.com/miketz/expand-region.el"
+      :remote-upstream "https://github.com/magnars/expand-region.el"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
       :remote-mine "https://github.com/miketz/mor"

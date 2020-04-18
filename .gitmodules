@@ -43,3 +43,21 @@
 [submodule "notElpa/expand-region.el"]
 	path = notElpa/expand-region.el
 	url = https://github.com/miketz/expand-region.el
+[submodule "notElpa/s.el"]
+	path = notElpa/s.el
+	url = https://github.com/miketz/s.el
+[submodule "notElpa/f.el"]
+	path = notElpa/f.el
+	url = https://github.com/miketz/f.el
+[submodule "notElpa/rg.el"]
+	path = notElpa/rg.el
+	url = https://github.com/miketz/rg.el
+[submodule "notElpa/tide"]
+	path = notElpa/tide
+	url = https://github.com/miketz/tide
+[submodule "notElpa/lsp-mode"]
+	path = notElpa/lsp-mode
+	url = https://github.com/miketz/lsp-mode
+[submodule "notElpa/company-lsp"]
+	path = notElpa/company-lsp
+	url = https://github.com/miketz/company-lsp

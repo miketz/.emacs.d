@@ -88,3 +88,6 @@
 [submodule "notElpa/hydra"]
 	path = notElpa/hydra
 	url = https://github.com/miketz/hydra
+[submodule "notElpa/rainbow-delimiters"]
+	path = notElpa/rainbow-delimiters
+	url = https://github.com/miketz/rainbow-delimiters

@@ -1105,7 +1105,7 @@ Closure over executed-p."
     ;;projectile
     ;;clippy
     ;;yasnippet
-    (rainbow-delimiters t)
+    (rainbow-delimiters nil) ;; using git submodule
     (rainbow-mode t)
     (expand-region nil) ;; using git submodule
     ;;multiple-cursors
@@ -3768,7 +3768,11 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; rainbow-delimiters
 ;;;----------------------------------------------------------------------------
-;; (require 'rainbow-delimiters)
+(push "~/.emacs.d/notElpa/rainbow-delimiters" load-path)
+(autoload #'rainbow-delimiters-mode "rainbow-delimiters" nil t)
+(autoload #'rainbow-delimiters-mode-enable "rainbow-delimiters" nil t)
+(autoload #'rainbow-delimiters-mode-disable "rainbow-delimiters" nil t)
+
 (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)

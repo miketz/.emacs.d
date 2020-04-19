@@ -7159,6 +7159,12 @@ vanilla javascript buffers."
   (add-hook 'clojure-mode-hook #'display-fill-column-indicator-mode))
 
 ;;;----------------------------------------------------------------------------
+;;; slime-volleyball
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/slime-volleyball" load-path)
+(autoload #'slime-volleyball "slime-volleyball" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (setq read-process-output-max 65536)

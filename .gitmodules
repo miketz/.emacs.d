@@ -103,3 +103,6 @@
 [submodule "notElpa/darkroom"]
 	path = notElpa/darkroom
 	url = https://github.com/miketz/darkroom
+[submodule "notElpa/slime-volleyball"]
+	path = notElpa/slime-volleyball
+	url = https://github.com/miketz/slime-volleyball

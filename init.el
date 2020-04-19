@@ -1204,7 +1204,7 @@ Closure over executed-p."
     (context-coloring nil)
     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
     (autothemer t) ;; dependency for some themes.
-    (erc-hl-nicks t)
+    (erc-hl-nicks nil) ;; using git submodule
     (sql-indent t)
     (vdiff nil)
     (tern ,has-nodejs-p)
@@ -4984,6 +4984,18 @@ TODO: call this function when it works."
   (defun my-setup-erc ()
     (setq show-trailing-whitespace nil))
   (add-hook 'erc-mode-hook #'my-setup-erc))
+
+;;;----------------------------------------------------------------------------
+;;; erc-hl-nicks
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/erc-hl-nicks" load-path)
+(autoload #'erc-hl-nicks-force-nick-face "erc-hl-nicks" nil nil)
+(autoload #'erc-hl-nicks-alias-nick "erc-hl-nicks" nil nil)
+(autoload #'erc-hl-nicks "erc-hl-nicks" nil nil)
+
+(with-eval-after-load 'erc
+  (require 'erc-hl-nicks)
+  (add-to-list 'erc-modules 'hl-nicks t))
 
 ;;;----------------------------------------------------------------------------
 ;;; linum-relative

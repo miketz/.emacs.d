@@ -133,3 +133,6 @@
 [submodule "notElpa/eros"]
 	path = notElpa/eros
 	url = https://github.com/miketz/eros
+[submodule "notElpa/erc-hl-nicks"]
+	path = notElpa/erc-hl-nicks
+	url = https://github.com/miketz/erc-hl-nicks

@@ -1117,7 +1117,7 @@ Closure over executed-p."
 
     ;;powerline
     ;;dired-details ;default feature in emacs 24.4+
-    (web-mode t)
+    (web-mode nil) ;; using git submodule
     (htmlize t)
     (magit ,(not (version< emacs-version "25.1")))
     (vimrc-mode t)
@@ -2432,6 +2432,7 @@ In that case, insert the number."
 (autoload #'company-web-html "company-web-html" nil t)
 
 (with-eval-after-load 'web-mode
+  (require 'company) ; for company-backends
   (push 'company-web-html company-backends)
   (push 'company-web-jade company-backends)
   (push 'company-web-slim company-backends)
@@ -4425,8 +4426,8 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; web-mode
 ;;;----------------------------------------------------------------------------
-;;(require 'web-mode)
-(autoload 'web-mode "web-mode" "web mode" t)
+(push "~/.emacs.d/notElpa/web-mode" load-path)
+(autoload #'web-mode "web-mode" nil t)
 (push '("\\.phtml\\'" . web-mode) auto-mode-alist)
 (push '("\\.tpl\\.php\\'" . web-mode) auto-mode-alist)
 (push '("\\.[gj]sp\\'" . web-mode) auto-mode-alist)

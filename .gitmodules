@@ -127,3 +127,6 @@
 [submodule "notElpa/smarttabs"]
 	path = notElpa/smarttabs
 	url = https://github.com/miketz/smarttabs
+[submodule "notElpa/web-mode"]
+	path = notElpa/web-mode
+	url = https://github.com/miketz/web-mode

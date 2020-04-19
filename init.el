@@ -1130,7 +1130,9 @@ Closure over executed-p."
     (flycheck-irony ,my-has-clang-p)
     ;;(rtags)
     ;;aggressive-indent
-    (sx ,(not (version< emacs-version "24.4")))
+    (sx nil ;; using git submodule
+        ;;,(not (version< emacs-version "24.4"))
+     )
     (leerzeichen nil) ;; using git submodule
     (darkroom nil) ;; using git submodule
     ;;vim-empty-lines-mode
@@ -1195,7 +1197,9 @@ Closure over executed-p."
     (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
     (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
     (adoc-mode t)
-    (markdown-mode ,(not (version< emacs-version "24.4")))
+    (markdown-mode nil ;; using git submodule
+                   ;;,(not (version< emacs-version "24.4"))
+     )
     (typescript-mode t)
     (tide nil ;; using git submodule
           ;; ,(memq my-curr-computer
@@ -5886,7 +5890,32 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; sx
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/sx.el" load-path)
+(autoload #'sx-tab-all-questions "sx-tab" nil t)
+(autoload #'sx-tab-unanswered "sx-tab" nil t)
+(autoload #'sx-tab-unanswered-my-tags "sx-tab" nil t)
+(autoload #'sx-tab-featured "sx-tab" nil t)
+(autoload #'sx-tab-starred "sx-tab" nil t)
+(autoload #'sx-tab-frontpage "sx-tab" nil t)
+(autoload #'sx-tab-newest "sx-tab" nil t)
+(autoload #'sx-tab-topvoted "sx-tab" nil t)
+(autoload #'sx-tab-hot "sx-tab" nil t)
+(autoload #'sx-tab-week "sx-tab" nil t)
+(autoload #'sx-tab-month "sx-tab" nil t)
+(autoload #'sx-search "sx-search" nil t)
+(autoload #'sx-search-tag-at-point "sx-search" nil t)
+(autoload #'sx-open-link "sx-interaction" nil t)
+(autoload #'sx-org-get-link "sx-interaction" nil t)
+(autoload #'sx-ask "sx-interaction" nil t)
+(autoload #'sx-authenticate "sx-auth" nil t)
+(autoload #'sx-bug-report "sx" nil t)
+(autoload #'sx-inbox "sx-inbox" nil t)
+(autoload #'sx-inbox-notifications "sx-inbox" nil t)
+
 (with-eval-after-load 'sx-tab
+  ;; supposed to be autolaoded?
+  (define-prefix-command 'sx-switchto-map)
+
   ;; TODO: this is not removing the 100 max limit. make it work.
   ;; using 'around' advice on `sx-tab-newest'
   (defadvice sx-tab-newest (around no-helm-limit)
@@ -6635,6 +6664,16 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; markdown-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/markdown-mode" load-path)
+(autoload #'markdown-mode "markdown-mode" nil t)
+(autoload #'gfm-mode "markdown-mode" nil t)
+(autoload #'markdown-view-mode "markdown-mode" nil t)
+(autoload #'gfm-view-mode "markdown-mode" nil t)
+(autoload #'markdown-live-preview-mode "markdown-mode" nil t)
+(push
+ '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+ auto-mode-alist)
+
 (with-eval-after-load 'markdown-mode
   (defun my-setup-markdown-mode ()
     ;; usually for reading books, so use word wrap.

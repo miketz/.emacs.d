@@ -139,3 +139,9 @@
 [submodule "notElpa/rainbow-mode"]
 	path = notElpa/rainbow-mode
 	url = https://github.com/miketz/rainbow-mode
+[submodule "notElpa/markdown-mode"]
+	path = notElpa/markdown-mode
+	url = https://github.com/miketz/markdown-mode
+[submodule "notElpa/sx.el"]
+	path = notElpa/sx.el
+	url = https://github.com/miketz/sx.el

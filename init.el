@@ -1178,7 +1178,7 @@ Closure over executed-p."
     (highlight-tail nil) ;; removed from melpa (emacs wiki purge?)
     (function-args nil)
     (highlight-indent-guides t)
-    (ace-link t)
+    (ace-link nil) ;; using git submodule
     (smart-tabs-mode t)
     (lua-mode t)
     (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
@@ -4104,6 +4104,30 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; ace-link
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ace-link" load-path)
+(autoload #'ace-link "ace-link" nil t)
+(autoload #'ace-link-info "ace-link" nil t)
+(autoload #'ace-link-help "ace-link" nil t)
+(autoload #'ace-link-man "ace-link" nil t)
+(autoload #'ace-link-woman "ace-link" nil t)
+(autoload #'ace-link-eww "ace-link" nil t)
+(autoload #'ace-link-w3m "ace-link" nil t)
+(autoload #'ace-link-compilation "ace-link" nil t)
+(autoload #'ace-link-gnus "ace-link" nil t)
+(autoload #'ace-link-mu4e "ace-link" nil t)
+(autoload #'ace-link-org "ace-link" nil t)
+(autoload #'ace-link-org-agenda "ace-link" nil t)
+(autoload #'ace-link-xref "ace-link" nil t)
+(autoload #'ace-link-custom "ace-link" nil t)
+(autoload #'ace-link-addr "ace-link" nil t)
+(autoload #'xace-link-sldbxx "ace-link" nil t)
+(autoload #'ace-link-slime-xref "ace-link" nil t)
+(autoload #'ace-link-slime-inspector "ace-link" nil t)
+(autoload #'ace-link-indium-inspector "ace-link" nil t)
+(autoload #'ace-link-indium-debugger-frames "ace-link" nil t)
+(autoload #'ace-link-cider-inspector "ace-link" nil t)
+(autoload #'ace-link-setup-default "ace-link" nil t)
+
 ;; NOTE: this code is (mostly) copy/pasted from `ace-link-setup-default'
 ;;       because calling that autoloaded function caused a premature
 ;;       load of the ace-link feature!

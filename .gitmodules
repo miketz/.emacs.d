@@ -109,3 +109,6 @@
 [submodule "notElpa/elisp-slime-nav"]
 	path = notElpa/elisp-slime-nav
 	url = https://github.com/miketz/elisp-slime-nav
+[submodule "notElpa/ace-link"]
+	path = notElpa/ace-link
+	url = https://github.com/miketz/ace-link

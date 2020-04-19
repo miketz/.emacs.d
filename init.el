@@ -1227,7 +1227,7 @@ Closure over executed-p."
     (rg nil) ;; using git submodule
     (eros nil) ;; using git submodule
     (hl-block-mode ,(not (version< emacs-version "26.0")))
-    (mini-modeline t)
+    (mini-modeline nil)
     (yaml-mode t)
     (php-mode t)
     ;; (lsp-python-ms t)

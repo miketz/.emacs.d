@@ -1182,7 +1182,7 @@ Closure over executed-p."
     (function-args nil)
     (highlight-indent-guides t)
     (ace-link nil) ;; using git submodule
-    (smart-tabs-mode t)
+    (smart-tabs-mode nil) ;; using git submodule
     (lua-mode t)
     (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
                                            '(work-laptop wild-dog))))
@@ -6306,6 +6306,16 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; smart-tabs-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/smarttabs" load-path)
+(autoload #'smart-tabs-when "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-create-advice-list "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-create-language-advice "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-mode "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-mode-enable "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-advice "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-insinuate "smart-tabs-mode" nil t)
+(autoload #'smart-tabs-add-language-support "smart-tabs-mode" nil t)
+
 ;; NOTE: just setting up hooks manually in eval-after-load for specific langs.
 ;; (smart-tabs-insinuate 'c)
 

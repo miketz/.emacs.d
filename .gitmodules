@@ -124,3 +124,6 @@
 [submodule "notElpa/smex"]
 	path = notElpa/smex
 	url = https://github.com/miketz/smex
+[submodule "notElpa/smarttabs"]
+	path = notElpa/smarttabs
+	url = https://github.com/miketz/smarttabs

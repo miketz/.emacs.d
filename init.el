@@ -1149,7 +1149,8 @@ Closure over executed-p."
     (ivy nil)
     (swiper nil)
     (counsel nil)
-    (flx t) ;; can be used by ivy and flx-ido for ordering flx matches.
+    (flx nil) ;; using git submodule.
+              ;; flx can be used by ivy and flx-ido for ordering flx matches.
 
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
@@ -1169,7 +1170,9 @@ Closure over executed-p."
     (ido-vertical-mode ,my-use-ido-p)
     (ido-grid-mode ,my-use-ido-p)
     (ido-ubiquitous ,my-use-ido-p)
-    (flx-ido ,my-use-ido-p)
+    (flx-ido nil ;; TODO: move this into a git submodule.
+             ;;,my-use-ido-p
+     )
     ;; (ido-occur ,my-use-ido-p)
     (smex nil ;; using git submodule
 
@@ -3279,6 +3282,12 @@ To make it human readable."
                     (insert ?-)
                   (funcall ,ido-cannot-complete-command)))))
         ad-do-it))))
+
+;;;----------------------------------------------------------------------------
+;;; flx
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/flx" load-path)
+(autoload #'flx-ido-mode "flx-ido" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; ido

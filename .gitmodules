@@ -145,3 +145,6 @@
 [submodule "notElpa/sx.el"]
 	path = notElpa/sx.el
 	url = https://github.com/miketz/sx.el
+[submodule "notElpa/flx"]
+	path = notElpa/flx
+	url = https://github.com/miketz/flx

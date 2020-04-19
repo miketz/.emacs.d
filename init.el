@@ -1154,7 +1154,7 @@ Closure over executed-p."
     (avy t)
     (lispy nil) ;; using git submodule for lispy.
     ;;(worf t)
-    (elisp-slime-nav t)
+    (elisp-slime-nav nil) ;; using git submodule
     ;; on 11-28-2016 electric-spacing had an unbalanced paren
     ;; seems to be fixed now. Using it again.
     (electric-spacing t)
@@ -5733,9 +5733,16 @@ Closure over `preceding-sexp-fn'."
 ;;; elisp-slime-nav
 ;;; TODO: look into lispy's navigation. Maybe remove this section.
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/elisp-slime-nav" load-path)
+;; `elisp-slime-nav-mode' replaces `turn-on-elisp-slime-nav-mode'
+(autoload #'elisp-slime-nav-mode "elisp-slime-nav" nil t)
+(autoload #'elisp-slime-nav-find-elisp-thing-at-point "elisp-slime-nav" nil t)
+(autoload #'elisp-slime-nav-describe-elisp-thing-at-point "elisp-slime-nav" nil
+  t)
+
 (dolist (hook '(emacs-lisp-mode-hook
                 ielm-mode-hook))
-  (add-hook hook 'turn-on-elisp-slime-nav-mode))
+  (add-hook hook 'elisp-slime-nav-mode))
 
 (with-eval-after-load 'elisp-slime-nav
 

@@ -106,3 +106,6 @@
 [submodule "notElpa/slime-volleyball"]
 	path = notElpa/slime-volleyball
 	url = https://github.com/miketz/slime-volleyball
+[submodule "notElpa/elisp-slime-nav"]
+	path = notElpa/elisp-slime-nav
+	url = https://github.com/miketz/elisp-slime-nav

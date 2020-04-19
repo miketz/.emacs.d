@@ -121,3 +121,6 @@
 [submodule "notElpa/num3-mode"]
 	path = notElpa/num3-mode
 	url = https://github.com/miketz/num3-mode
+[submodule "notElpa/smex"]
+	path = notElpa/smex
+	url = https://github.com/miketz/smex

@@ -1169,10 +1169,13 @@ Closure over executed-p."
     (ido-ubiquitous ,my-use-ido-p)
     (flx-ido ,my-use-ido-p)
     ;; (ido-occur ,my-use-ido-p)
-    (smex ,(or my-use-ido-p
-               my-use-bare-ido-p
-               my-use-ivy-p ;; smex can be used by `counsel-M-x'
-               my-use-mish-mash-p))
+    (smex nil ;; using git submodule
+
+          ;; ,(or my-use-ido-p
+          ;;      my-use-bare-ido-p
+          ;;      my-use-ivy-p ;; smex can be used by `counsel-M-x'
+          ;;      my-use-mish-mash-p)
+          )
     ;; (ov nil) ;; ov is no longer a needed dependency? keep it as a comment
     ;; because may useful for my own purposes later.
     (highlight-tail nil) ;; removed from melpa (emacs wiki purge?)
@@ -3250,11 +3253,32 @@ To make it human readable."
   (setq icomplete-compute-delay 0))
 
 ;;;----------------------------------------------------------------------------
+;;; smex. used by ido, ivy
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/smex" load-path)
+(autoload #'smex "smex" nil t)
+(autoload #'smex-major-mode-commands "smex" nil t)
+(autoload #'smex-initialize "smex" nil t)
+
+(with-eval-after-load 'smex
+  ;; GUARD: smex is used for `counsel-M-x' too where this advice is not needed.
+  (when (or my-use-ido-p
+            my-use-bare-ido-p)
+    ;; insert a hyphen - on space like in normal M-x
+    (defadvice smex (around space-inserts-hyphen activate compile)
+      (let ((ido-cannot-complete-command
+             `(lambda ()
+                (interactive)
+                (if (string= " " (this-command-keys))
+                    (insert ?-)
+                  (funcall ,ido-cannot-complete-command)))))
+        ad-do-it))))
+
+;;;----------------------------------------------------------------------------
 ;;; ido
 ;;; ido-vertical-mode
 ;;; ido-ubiquitous
 ;;; flx-ido
-;;; smex (built on ido)
 ;;;----------------------------------------------------------------------------
 (when (or my-use-ido-p
           my-use-bare-ido-p)
@@ -3346,20 +3370,6 @@ completions from folders other than the current one."
 (with-eval-after-load 'ido-vertical-mode
   (setq ido-vertical-define-keys 'C-n-and-C-p-only)
   (setq ido-vertical-show-count t))
-
-(with-eval-after-load 'smex
-  ;; GUARD: smex is used for `counsel-M-x' too where this advice is not needed.
-  (when (or my-use-ido-p
-            my-use-bare-ido-p)
-    ;; insert a hyphen - on space like in normal M-x
-    (defadvice smex (around space-inserts-hyphen activate compile)
-      (let ((ido-cannot-complete-command
-             `(lambda ()
-                (interactive)
-                (if (string= " " (this-command-keys))
-                    (insert ?-)
-                  (funcall ,ido-cannot-complete-command)))))
-        ad-do-it))))
 
 ;;;----------------------------------------------------------------------------
 ;;; Yasnippet

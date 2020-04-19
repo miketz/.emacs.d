@@ -139,6 +139,25 @@ Some info may be purely for informational/doc purposes."
      0 ;; 0 means compile .el files if .elc is missing.
      t)))
 
+(defun my-byte-compile-all-notElpa-folders ()
+  "Byte compile .el files in every folder under /notElpa."
+  (interactive)
+  (let* ((dir-infos (cl-remove-if-not ;; remove if not a folder
+                     (lambda (f)
+                       (cl-second f))
+                     (directory-files-and-attributes "~/.emacs.d/notElpa"
+                                                     t "^[^.]" t)))
+         (dir-names (mapcar #'cl-first dir-infos)))
+    (cl-loop for dir in dir-names
+             do
+             (byte-recompile-directory
+              dir
+              0 ;; 0 means compile .el files if .elc is missing.
+              t) ;; t means force re-compile even if the .elc is up-to-date. May
+             ;; be useful if the Emacs version changed and should have an
+             ;; .elc compiled again to be compatible.
+             )))
+
 (provide 'my-modules)
 
 ;;; my-modules.el ends here

@@ -1341,6 +1341,7 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------------------------------------------------
 (autoload #'my-byte-compile-all-modules "my-modules" nil t)
 (autoload #'my-byte-compile-module "my-modules" nil t)
+(autoload #'my-byte-compile-all-notElpa-folders "my-modules" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;; bug-hunter

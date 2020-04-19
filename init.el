@@ -1123,7 +1123,7 @@ Closure over executed-p."
     (vimrc-mode t)
     (sicp t)
     ;;neotree
-    (num3-mode t)
+    (num3-mode nil) ;; using git submodule
     (powershell t)
     (irony ,my-has-clang-p)
     (company-irony ,my-has-clang-p)
@@ -1353,6 +1353,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/f.el" load-path)
 (require 'f) ; TODO: make autoloads for the appropriate functions.
+
+;;;----------------------------------------------------------------------------
+;;; num3-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/num3-mode" load-path)
+(autoload #'num3-mode "num3-mode" nil t)
+(autoload #'global-num3-mode "num3-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.

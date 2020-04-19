@@ -118,3 +118,6 @@
 [submodule "notElpa/ace-window"]
 	path = notElpa/ace-window
 	url = https://github.com/miketz/ace-window
+[submodule "notElpa/num3-mode"]
+	path = notElpa/num3-mode
+	url = https://github.com/miketz/num3-mode

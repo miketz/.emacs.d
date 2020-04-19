@@ -112,3 +112,9 @@
 [submodule "notElpa/ace-link"]
 	path = notElpa/ace-link
 	url = https://github.com/miketz/ace-link
+[submodule "notElpa/avy"]
+	path = notElpa/avy
+	url = https://github.com/miketz/avy
+[submodule "notElpa/ace-window"]
+	path = notElpa/ace-window
+	url = https://github.com/miketz/ace-window

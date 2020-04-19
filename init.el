@@ -1082,7 +1082,7 @@ Closure over executed-p."
     (slime-company nil ;; using git submodule
                    ;;,my-install-slime-company-p
      )
-    (ace-window t)
+    (ace-window nil) ;; using git submodule
     (csharp-mode t)
     (js2-mode t)
     (js2-highlight-vars ,(not (version< emacs-version "24.4")))
@@ -1151,7 +1151,7 @@ Closure over executed-p."
 
     ;;color-identifiers-mode
     ;;svg-mode-line-themes ;; only works on gnu/linux
-    (avy t)
+    (avy nil) ;; using git submodule
     (lispy nil) ;; using git submodule for lispy.
     ;;(worf t)
     (elisp-slime-nav nil) ;; using git submodule
@@ -4053,6 +4053,14 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Avy
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/avy" load-path)
+(autoload #'avy-goto-line "avy" nil t)
+(autoload #'avy-isearch "avy" nil t)
+(autoload #'avy-goto-word-1 "avy" nil t)
+(autoload #'avy-goto-char-timer "avy" nil t)
+;; TODO: Add more autoloads. Only making autoloads for what i'm currently using
+;;       at the moment.
+
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 (global-set-key (kbd "M-g M-g") #'avy-goto-line)
 ;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
@@ -4170,6 +4178,15 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; ace-window
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ace-window" load-path)
+(autoload #'ace-select-window "ace-window" nil t)
+(autoload #'ace-delete-window "ace-window" nil t)
+(autoload #'ace-swap-window "ace-window" nil t)
+(autoload #'ace-delete-other-windows "ace-window" nil t)
+(autoload #'ace-display-buffer "ace-window" nil t)
+(autoload #'ace-window "ace-window" nil t)
+(autoload #'ace-window-display-mode "ace-window" nil t)
+
 (unless (eq my-ui-type 'emacs)
   ;; This is the emacs "copy" keybind. Don't clobber it.
   (global-set-key (kbd "M-w") #'ace-window))

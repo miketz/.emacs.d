@@ -1134,7 +1134,7 @@ Closure over executed-p."
     (leerzeichen nil) ;; using git submodule
     (darkroom nil) ;; using git submodule
     ;;vim-empty-lines-mode
-    (fill-column-indicator ,(not (version< emacs-version "25")))
+    ;; (fill-column-indicator ,(not (version< emacs-version "25")))
     (flycheck t)
     (hydra nil) ;; using git submodule
     ;;linum-relative
@@ -4789,53 +4789,44 @@ TODO: call this function when it works."
 
 ;;;----------------------------------------------------------------------------
 ;;; fill-column-indicator, fci-mode
+;;; NOTE: I have replaced this package with the native Emacs package
+;;;       `display-fill-column-indicator'.
 ;;;----------------------------------------------------------------------------
-;; (require 'fill-column-indicator)
-;; (add-hook 'prog-mode-hook (lambda ()
-;;                             (fci-mode 1))) ; fci-mode is autoloaded.
+;; (defvar-local company-fci-mode-on-p nil) ; put this in top level.
+;;                                          ; flycheck warning.
+;; (with-eval-after-load 'fill-column-indicator
+;;   (setq fci-rule-column 79)
+;;   (setq fci-rule-width 1)
+;;   ;; use text, not bitmap to avoid increasing line spacing with fixedsys font.
+;;   (setq fci-always-use-textual-rule t)
+;;   (progn
+;;     (setq fci-dash-pattern 0.5)   ;; length of the dash 0 to 1
+;;     (setq fci-rule-use-dashes t))
+;;   ;; (setq fci-rule-color "#4d4d4d") ;; tailored for zenburn ATM.
+
+;;   (defun my-fci-refresh ()
+;;     (interactive)
+;;     (fci-mode 0)
+;;     (fci-mode 1))
+
+;;   (progn ;work-around issue where `fill-column-indicator' moves company
+;;     ;; suggestion box.
+;;     ;; TODO: handle for auto-complete too. It's on emacs.stackexchange.
+;;     ;; (defvar-local company-fci-mode-on-p nil) ; moved to top level
+
+;;     (defun company-turn-off-fci (&rest _ignore)
+;;       (when (boundp 'fci-mode)
+;;         (setq company-fci-mode-on-p fci-mode)
+;;         (when fci-mode (fci-mode -1))))
+
+;;     (defun company-maybe-turn-on-fci (&rest _ignore)
+;;       (when company-fci-mode-on-p (fci-mode 1)))
+
+;;     (add-hook 'company-completion-started-hook #'company-turn-off-fci)
+;;     (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
+;;     (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci)))
 
 
-(defvar-local company-fci-mode-on-p nil) ; put this in top level.
-                                         ; flycheck warning.
-(with-eval-after-load 'fill-column-indicator
-  (setq fci-rule-column 79)
-  (setq fci-rule-width 1)
-  ;; use text, not bitmap to avoid increasing line spacing with fixedsys font.
-  (setq fci-always-use-textual-rule t)
-  (progn
-    (setq fci-dash-pattern 0.5)   ;; length of the dash 0 to 1
-    (setq fci-rule-use-dashes t))
-  ;; (setq fci-rule-color "#4d4d4d") ;; tailored for zenburn ATM.
-
-  (defun my-fci-refresh ()
-    (interactive)
-    (fci-mode 0)
-    (fci-mode 1))
-
-  (progn ;work-around issue where `fill-column-indicator' moves company
-    ;; suggestion box.
-    ;; TODO: handle for auto-complete too. It's on emacs.stackexchange.
-    ;; (defvar-local company-fci-mode-on-p nil) ; moved to top level
-
-    (defun company-turn-off-fci (&rest _ignore)
-      (when (boundp 'fci-mode)
-        (setq company-fci-mode-on-p fci-mode)
-        (when fci-mode (fci-mode -1))))
-
-    (defun company-maybe-turn-on-fci (&rest _ignore)
-      (when company-fci-mode-on-p (fci-mode 1)))
-
-    (add-hook 'company-completion-started-hook #'company-turn-off-fci)
-    (add-hook 'company-completion-finished-hook #'company-maybe-turn-on-fci)
-    (add-hook 'company-completion-cancelled-hook #'company-maybe-turn-on-fci)))
-
-
-;; (progn
-;;   ;; make fci compatible with emacs built-in variable
-;;   ;; `show-trailing-whitespace'.
-;;   ;; TODO: it doesn't seem to be working!
-;;   ;; TO-DID: used "white-space-mode" instead of `show-trailing-whitespace'.
-;;   (setq whitespace-style '(face trailing)))
 
 ;;;----------------------------------------------------------------------------
 ;;; flycheck

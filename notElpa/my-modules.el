@@ -139,13 +139,24 @@ Some info may be purely for informational/doc purposes."
      0 ;; 0 means compile .el files if .elc is missing.
      t)))
 
+
+(defun my-folder-p (f)
+  (cl-second f))
+
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."
   (interactive)
-  (let* ((dir-infos (cl-remove-if-not ;; remove if not a folder
+  (let* ((dir-infos (cl-remove-if
                      (lambda (f)
-                       (cl-second f))
-                     (directory-files-and-attributes "~/.emacs.d/notElpa"
+                       (or (not (my-folder-p f)) ;; skip indiviudal files
+                           ;; skip themes
+                           (s-ends-with-p "themes" (cl-first f))
+                           ;; Skip specific projects that don't ignore .elc files.
+                           ;; Revist this after I fork the projects, and use a personal branch.
+                           (s-ends-with-p "sunrise-commander" (cl-first f))
+                           (s-ends-with-p "paredit" (cl-first f))
+                           (s-ends-with-p "sallet" (cl-first f))))
+                     (directory-files-and-attributes my-module-folder
                                                      t "^[^.]" t)))
          (dir-names (mapcar #'cl-first dir-infos)))
     (cl-loop for dir in dir-names

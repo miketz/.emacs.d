@@ -1106,7 +1106,7 @@ Closure over executed-p."
     ;;clippy
     ;;yasnippet
     (rainbow-delimiters nil) ;; using git submodule
-    (rainbow-mode t)
+    (rainbow-mode nil) ;; using git submodule
     (expand-region nil) ;; using git submodule
     ;;multiple-cursors
     ;;(omnisharp (work-laptop))
@@ -3814,7 +3814,8 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; rainbow-mode
 ;;;----------------------------------------------------------------------------
-;;(rainbow-mode)
+(push "~/.emacs.d/notElpa/rainbow-mode" load-path)
+(autoload #'rainbow-mode "rainbow-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; expand-region

@@ -1230,7 +1230,6 @@ Closure over executed-p."
     ;; (lsp-python-ms t)
     (transient t)
     (wgrep t)
-    (lv t)
     (spinner t)
     (ht t)
     (dash-functional t)
@@ -4882,6 +4881,13 @@ TODO: call this function when it works."
   )
 
 
+;;;----------------------------------------------------------------------------
+;;; lv. This is a file in hydra that lsp-mode depends on.
+;;;----------------------------------------------------------------------------
+(defvar lv-force-update)
+(autoload #'lv-window "lv" nil t)
+(autoload #'lv-message "lv" nil t)
+(autoload #'lv-delete-window "lv" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; erc

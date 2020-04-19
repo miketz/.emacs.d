@@ -130,3 +130,6 @@
 [submodule "notElpa/web-mode"]
 	path = notElpa/web-mode
 	url = https://github.com/miketz/web-mode
+[submodule "notElpa/eros"]
+	path = notElpa/eros
+	url = https://github.com/miketz/eros

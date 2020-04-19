@@ -1222,10 +1222,10 @@ Closure over executed-p."
 		 )
     ;; (ccls ,(memq my-curr-computer '(wild-dog)))
     ;; (cquery ,(memq my-curr-computer '(wild-dog)))
-    (websocket t)
+    (websocket nil) ;; not used? maybe an old dependency?
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
     (rg nil) ;; using git submodule
-    (eros t)
+    (eros nil) ;; using git submodule
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline t)
     (yaml-mode t)
@@ -7101,6 +7101,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; eros
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/eros" load-path)
+(autoload #'eros-mode "eros" nil t)
+
 (with-eval-after-load 'eros
   (setq eros-eval-result-prefix "")
   (setq eros-eval-result-duration 'command))

@@ -2666,7 +2666,7 @@ Inserts a new line and the beginning and end with text values:
 (push "~/.emacs.d/notElpa/csharp-mode" load-path)
 (autoload #'csharp-mode "csharp-mode" nil t)
 
-(push '(("\\.cs$" . csharp-mode)) auto-mode-alist)
+;; (push '(("\\.cs$" . csharp-mode)) auto-mode-alist)
 
 (with-eval-after-load 'csharp-mode
   (defun my-setup-csharp-mode ()

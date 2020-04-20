@@ -2905,6 +2905,18 @@ Inserts a new line and the beginning and end with text values:
   (add-hook 'js2-mode-hook #'my-js2-init))
 
 ;;;----------------------------------------------------------------------------
+;;; json-snatcher. dependency of json-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/json-snatcher" load-path)
+(autoload #'jsons-print-path "json-snatcher" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; json-reformat. dependency of json-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/json-reformat" load-path)
+(autoload #'json-reformat-region "json-reformat" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; json-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/json-mode" load-path)

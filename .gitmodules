@@ -196,3 +196,6 @@
 [submodule "notElpa/js2-highlight-vars.el"]
 	path = notElpa/js2-highlight-vars.el
 	url = https://github.com/miketz/js2-highlight-vars.el
+[submodule "notElpa/js2-mode"]
+	path = notElpa/js2-mode
+	url = https://github.com/miketz/js2-mode

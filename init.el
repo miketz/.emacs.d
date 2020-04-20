@@ -1098,7 +1098,7 @@ Closure over executed-p."
      )
     (ace-window nil) ;; using git submodule
     (csharp-mode nil) ;; using git submodule
-    (js2-mode t)
+    (js2-mode nil) ;; using git submodule
     (js2-highlight-vars nil ;; using git submodule
                         ;;,(not (version< emacs-version "24.4"))
      )
@@ -2737,7 +2737,14 @@ Inserts a new line and the beginning and end with text values:
 ;;;----------------------------------------------------------------------------
 ;;; js2-mode
 ;;;----------------------------------------------------------------------------
-;;(autoload 'js2-mode "js2" nil t)
+(push "~/.emacs.d/notElpa/js2-mode" load-path)
+(autoload 'js2-imenu-extras-setup "js2-imenu-extras" nil nil nil)
+(autoload 'js2-imenu-extras-mode "js2-imenu-extras" nil t nil)
+(autoload 'js2-highlight-unused-variables-mode "js2-mode" nil t nil)
+(autoload 'js2-minor-mode "js2-mode" nil t nil)
+(autoload 'js2-mode "js2-mode" nil t nil)
+(autoload 'js2-jsx-mode "js2-mode" nil t nil)
+
 (push '("\\.js$" . js2-mode) auto-mode-alist)
 
 (with-eval-after-load 'js2-mode

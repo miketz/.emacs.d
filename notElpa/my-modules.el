@@ -187,7 +187,7 @@ Saves me from typing a lot of module stuff."
              (insert (format ",(make-module
   :name '%s
   :folder (concat my-module-folder \"%s\")
-  :remote-mine https://github.com/miketz/%s
+  :remote-mine \"https://github.com/miketz/%s\"
   :remote-upstream nil
   :source-control 'git
   :submodule-p t

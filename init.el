@@ -1236,7 +1236,7 @@ Closure over executed-p."
     (tern ,has-nodejs-p)
     ;; (company-tern ,has-nodejs-p)
     (browse-kill-ring t)
-    (git-gutter ,(not (version< emacs-version "24.3")))
+    ;; (git-gutter ,(not (version< emacs-version "24.3")))
     (eglot nil ;; using git submodule
            ;;,(not (version< emacs-version "26.1"))
      )

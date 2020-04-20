@@ -464,6 +464,7 @@ in case that file does not provide any feature."
 (defvar electric-spacing-control-statement-parens)
 (defvar electric-spacing-double-space-docs)
 (defvar c-hanging-semi&comma-criteria)
+(defvar erc-modules)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

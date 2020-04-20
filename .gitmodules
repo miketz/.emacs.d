@@ -157,3 +157,6 @@
 [submodule "notElpa/php-mode"]
 	path = notElpa/php-mode
 	url = https://github.com/miketz/php-mode
+[submodule "notElpa/yaml-mode"]
+	path = notElpa/yaml-mode
+	url = https://github.com/miketz/yaml-mode

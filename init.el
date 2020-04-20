@@ -1249,7 +1249,7 @@ Closure over executed-p."
     (eros nil) ;; using git submodule
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline nil)
-    (yaml-mode t)
+    (yaml-mode nil) ;; using git submodule
     (php-mode nil) ;; using git submodule
     ;; (lsp-python-ms t)
     (transient t)
@@ -7323,6 +7323,12 @@ vanilla javascript buffers."
 (push "~/.emacs.d/notElpa/php-mode" load-path)
 (autoload #'php-mode "autothemer" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; yaml-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/yaml-mode" load-path)
+(autoload 'yaml-mode "yaml-mode" nil t nil)
+(push '("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode) auto-mode-alist)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

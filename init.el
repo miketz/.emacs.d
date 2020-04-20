@@ -1210,7 +1210,7 @@ Closure over executed-p."
           )
     (context-coloring nil)
     (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
-    (autothemer t) ;; dependency for some themes.
+    (autothemer nil) ;; dependency for some themes. using git submodule.
     (erc-hl-nicks nil) ;; using git submodule
     (sql-indent t)
     (vdiff nil)
@@ -7295,6 +7295,13 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/slime-volleyball" load-path)
 (autoload #'slime-volleyball "slime-volleyball" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; autothemer
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/autothemer" load-path)
+(autoload #'autothemer-deftheme "autothemer" nil nil)
+(autoload #'autothemer-generate-templates "autothemer" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

@@ -151,3 +151,6 @@
 [submodule "notElpa/FlamesOfFreedom"]
 	path = notElpa/FlamesOfFreedom
 	url = https://github.com/wiz21b/FlamesOfFreedom
+[submodule "notElpa/autothemer"]
+	path = notElpa/autothemer
+	url = https://github.com/miketz/autothemer

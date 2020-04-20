@@ -148,3 +148,6 @@
 [submodule "notElpa/flx"]
 	path = notElpa/flx
 	url = https://github.com/miketz/flx
+[submodule "notElpa/FlamesOfFreedom"]
+	path = notElpa/FlamesOfFreedom
+	url = https://github.com/wiz21b/FlamesOfFreedom

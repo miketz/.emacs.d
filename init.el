@@ -1134,7 +1134,7 @@ Closure over executed-p."
     (web-mode nil) ;; using git submodule
     (htmlize t)
     (magit ,(not (version< emacs-version "25.1")))
-    (vimrc-mode t)
+    (vimrc-mode nil) ;; using git submodule
     (sicp nil) ;; using git submodule
     ;;neotree
     (num3-mode nil) ;; using git submodule
@@ -4591,8 +4591,8 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; vimrc-mode
 ;;;----------------------------------------------------------------------------
-;;(require 'vimrc-mode)
-(autoload 'vimrc-mode "vimrc-mode" "vimrc mode" t)
+(push "~/.emacs.d/notElpa/vimrc-mode" load-path)
+(autoload #'vimrc-mode "vimrc-mode" nil t)
 (push '(".vim\\(rc\\)?$" . vimrc-mode) auto-mode-alist)
 
 ;;;----------------------------------------------------------------------------

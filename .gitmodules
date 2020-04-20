@@ -181,3 +181,6 @@
 [submodule "notElpa/sicp-info"]
 	path = notElpa/sicp-info
 	url = https://github.com/miketz/sicp-info
+[submodule "notElpa/vimrc-mode"]
+	path = notElpa/vimrc-mode
+	url = https://github.com/miketz/vimrc-mode

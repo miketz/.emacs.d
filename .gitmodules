@@ -175,3 +175,6 @@
 [submodule "notElpa/pos-tip"]
 	path = notElpa/pos-tip
 	url = https://github.com/miketz/pos-tip
+[submodule "notElpa/lua-mode"]
+	path = notElpa/lua-mode
+	url = https://github.com/miketz/lua-mode

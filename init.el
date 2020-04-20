@@ -1202,7 +1202,7 @@ Closure over executed-p."
     (highlight-indent-guides t)
     (ace-link nil) ;; using git submodule
     (smart-tabs-mode nil) ;; using git submodule
-    (lua-mode t)
+    (lua-mode nil) ;; using git submodule
     (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
                                            '(work-laptop wild-dog))))
                has-gnu-global-p))
@@ -6488,7 +6488,12 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; lua-mode
 ;;;----------------------------------------------------------------------------
-;; NOTE: auto-mode-alist is already taken care of in lua-mode-autoloads.el
+(push "~/.emacs.d/notElpa/lua-mode" load-path)
+(autoload #'lua-mode "lua-mode" nil t nil)
+(autoload #'lua-start-process "lua-mode" nil t)
+(push '("\\.lua\\'" . lua-mode) auto-mode-alist)
+(push '("lua" . lua-mode) auto-mode-alist)
+
 (with-eval-after-load 'lua-mode
   (setq lua-indent-level 2
         lua-default-application "luajit")

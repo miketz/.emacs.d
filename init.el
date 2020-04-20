@@ -7906,7 +7906,7 @@ vanilla javascript buffers."
 
 
 ;;;----------------------------------------------------------------------------
-;;; restore values is set earlier for startup time. JUMPrestore
+;;; restore values set earlier for startup time. JUMPrestore
 ;;;----------------------------------------------------------------------------
 (setq file-name-handler-alist file-name-handler-alist-backup)
 (setq gc-cons-threshold gc-cons-threshold-backup)

@@ -1097,7 +1097,7 @@ Closure over executed-p."
                    ;;,my-install-slime-company-p
      )
     (ace-window nil) ;; using git submodule
-    (csharp-mode t)
+    (csharp-mode nil) ;; using git submodule
     (js2-mode t)
     (js2-highlight-vars ,(not (version< emacs-version "24.4")))
     (skewer-mode ,(memq my-curr-computer '(work-laptop)))
@@ -2656,9 +2656,10 @@ Inserts a new line and the beginning and end with text values:
 ;;;----------------------------------------------------------------------------
 ;;; csharp-mode
 ;;;----------------------------------------------------------------------------
-;;(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
-(setq auto-mode-alist
-      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+(push "~/.emacs.d/notElpa/csharp-mode" load-path)
+(autoload #'csharp-mode "csharp-mode" nil t)
+
+(push '(("\\.cs$" . csharp-mode)) auto-mode-alist)
 
 (with-eval-after-load 'csharp-mode
   (defun my-setup-csharp-mode ()

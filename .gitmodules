@@ -169,3 +169,6 @@
 [submodule "notElpa/projectile"]
 	path = notElpa/projectile
 	url = https://github.com/miketz/projectile
+[submodule "notElpa/csharp-mode"]
+	path = notElpa/csharp-mode
+	url = https://github.com/miketz/csharp-mode

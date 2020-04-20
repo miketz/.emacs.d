@@ -156,6 +156,7 @@ Some info may be purely for informational/doc purposes."
                            (s-ends-with-p "sunrise-commander" (cl-first f))
                            (s-ends-with-p "paredit" (cl-first f))
                            (s-ends-with-p "markup-faces" (cl-first f))
+                           (s-ends-with-p "sicp-info" (cl-first f))
                            (s-ends-with-p "sallet" (cl-first f))))
                      (directory-files-and-attributes my-module-folder
                                                      t "^[^.]" t)))

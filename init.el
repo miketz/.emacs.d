@@ -77,6 +77,19 @@
 ;;;     git submodule update --init --recursive
 
 ;;;----------------------------------------------------------------------------
+;;; Making a local branch, pushing it to remote server.
+;;;----------------------------------------------------------------------------
+;;; Create a new branch:
+;;;     git checkout -b feature_branch_name
+;;; Push your branch to the remote repository:
+;;;     git push -u origin feature_branch_name
+;;;
+;;; To view both remote-tracking branches and local branches, run the command:
+;;;     git branch -a
+;;; If you already have a branch and you want to track a remote branch:
+;;;     git branch --set-upstream-to origin/BRANCH
+
+;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.
 ;;;----------------------------------------------------------------------------
 ;;; Create a "stub" init file at C:/Users/???/AppData/Roaming/.emacs.d/init.el

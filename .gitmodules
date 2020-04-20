@@ -184,3 +184,6 @@
 [submodule "notElpa/vimrc-mode"]
 	path = notElpa/vimrc-mode
 	url = https://github.com/miketz/vimrc-mode
+[submodule "notElpa/json-mode"]
+	path = notElpa/json-mode
+	url = https://github.com/miketz/json-mode

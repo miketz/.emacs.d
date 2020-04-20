@@ -1101,7 +1101,7 @@ Closure over executed-p."
     (js2-mode t)
     (js2-highlight-vars ,(not (version< emacs-version "24.4")))
     (skewer-mode ,(memq my-curr-computer '(work-laptop)))
-    (json-mode t)
+    (json-mode nil) ;; using git submodule
 
     (helm ,my-use-helm-p)
     (helm-cmd-t nil) ;; broken with recent helm versions?
@@ -2907,6 +2907,12 @@ Inserts a new line and the beginning and end with text values:
 ;;;----------------------------------------------------------------------------
 ;;; json-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/json-mode" load-path)
+(autoload #'json-mode "json-mode" nil t nil)
+(autoload #'json-mode-show-path "json-mode" nil t nil)
+(autoload #'json-mode-kill-path "json-mode" nil t nil)
+(autoload #'json-mode-beautify "json-mode" nil t nil)
+
 (with-eval-after-load 'json-mode
   (defun my-setup-json-mode ()
     ;; for json, I'd like to use a more compact indentation. 2 chars, and

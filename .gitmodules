@@ -160,3 +160,6 @@
 [submodule "notElpa/yaml-mode"]
 	path = notElpa/yaml-mode
 	url = https://github.com/miketz/yaml-mode
+[submodule "notElpa/adoc-mode"]
+	path = notElpa/adoc-mode
+	url = https://github.com/miketz/adoc-mode

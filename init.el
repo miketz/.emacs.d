@@ -1213,7 +1213,7 @@ Closure over executed-p."
     ;;  ,(<= emacs-major-version 24))
     (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
     (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
-    (adoc-mode t)
+    (adoc-mode nil) ;; using git submodule
     (markdown-mode nil ;; using git submodule
                    ;;,(not (version< emacs-version "24.4"))
      )
@@ -6681,6 +6681,8 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; adoc-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/adoc-mode" load-path)
+(autoload #'adoc-mode "adoc-mode" nil t)
 (push '("\\.asc\\'" . adoc-mode) auto-mode-alist)
 
 (with-eval-after-load 'adoc-mode

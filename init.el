@@ -1247,7 +1247,11 @@ Closure over executed-p."
     ;; (deadgrep ,(not (version< emacs-version "25.1")))
     (rg nil) ;; using git submodule
     (eros nil) ;; using git submodule
-    (hl-block-mode ,(not (version< emacs-version "26.0")))
+
+    ;; hl-block-mode shades outers scopes progresivly darker.
+    (hl-block-mode nil
+                   ;;,(not (version< emacs-version "26.0"))
+     )
     (mini-modeline nil)
     (yaml-mode nil) ;; using git submodule
     (php-mode nil) ;; using git submodule

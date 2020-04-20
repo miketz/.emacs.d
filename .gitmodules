@@ -193,3 +193,6 @@
 [submodule "notElpa/json-snatcher"]
 	path = notElpa/json-snatcher
 	url = https://github.com/miketz/json-snatcher
+[submodule "notElpa/js2-highlight-vars.el"]
+	path = notElpa/js2-highlight-vars.el
+	url = https://github.com/miketz/js2-highlight-vars.el

@@ -1099,7 +1099,9 @@ Closure over executed-p."
     (ace-window nil) ;; using git submodule
     (csharp-mode nil) ;; using git submodule
     (js2-mode t)
-    (js2-highlight-vars ,(not (version< emacs-version "24.4")))
+    (js2-highlight-vars nil ;; using git submodule
+                        ;;,(not (version< emacs-version "24.4"))
+     )
     (skewer-mode ,(memq my-curr-computer '(work-laptop)))
     (json-mode nil) ;; using git submodule
 
@@ -6281,6 +6283,9 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; js2-highlight-vars
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/js2-highlight-vars.el" load-path)
+(autoload #'js2-highlight-vars-mode "js2-highlight-vars" nil t)
+
 (with-eval-after-load 'js2-highlight-vars
 
   ;; re-define `js2--do-highlight-vars' without calling `top-level'.

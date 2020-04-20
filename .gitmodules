@@ -163,3 +163,6 @@
 [submodule "notElpa/adoc-mode"]
 	path = notElpa/adoc-mode
 	url = https://github.com/miketz/adoc-mode
+[submodule "notElpa/markup-faces"]
+	path = notElpa/markup-faces
+	url = https://github.com/miketz/markup-faces

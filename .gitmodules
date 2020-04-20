@@ -166,3 +166,6 @@
 [submodule "notElpa/markup-faces"]
 	path = notElpa/markup-faces
 	url = https://github.com/miketz/markup-faces
+[submodule "notElpa/projectile"]
+	path = notElpa/projectile
+	url = https://github.com/miketz/projectile

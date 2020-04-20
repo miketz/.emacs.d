@@ -1172,9 +1172,12 @@ Closure over executed-p."
     (lispy nil) ;; using git submodule for lispy.
     ;;(worf t)
     (elisp-slime-nav nil) ;; using git submodule
-    ;; on 11-28-2016 electric-spacing had an unbalanced paren
-    ;; seems to be fixed now. Using it again.
-    (electric-spacing t)
+
+    ;; on 11-28-2016 electric-spacing had an unbalanced paren. seems to be
+    ;; fixed now. Using it again.
+    ;; weird spacing rules introduced. stop using again.
+    (electric-spacing nil)
+
     ;;w3
     ;;w3m
     ;;flymake-jslint
@@ -2718,7 +2721,7 @@ Inserts a new line and the beginning and end with text values:
       (display-fill-column-indicator-mode 1))
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)
-    (electric-spacing-mode 1)
+    ;; (electric-spacing-mode 1)
     (when (and buffer-file-name
                (my-str-ends-with-p buffer-file-name ".js"))
       ;; wireup M-x compile
@@ -6519,7 +6522,7 @@ Closure over `preceding-sexp-fn'."
   (defun my-setup-lua-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
-    (electric-spacing-mode 1)
+    ;; (electric-spacing-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'lua-mode-hook #'my-setup-lua-mode))
 

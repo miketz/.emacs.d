@@ -1135,7 +1135,7 @@ Closure over executed-p."
     (htmlize t)
     (magit ,(not (version< emacs-version "25.1")))
     (vimrc-mode t)
-    (sicp t)
+    (sicp nil) ;; using git submodule
     ;;neotree
     (num3-mode nil) ;; using git submodule
     (powershell t)
@@ -7442,6 +7442,11 @@ vanilla javascript buffers."
 
 ;; I don't use yaml-mode regularly, so don't slow down mode selection.
 ;; (push '("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode) auto-mode-alist)
+
+;;;----------------------------------------------------------------------------
+;;; sicp
+;;;----------------------------------------------------------------------------
+;; (push "~/.emacs.d/notElpa/sicp-info" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

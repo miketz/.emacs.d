@@ -178,3 +178,6 @@
 [submodule "notElpa/lua-mode"]
 	path = notElpa/lua-mode
 	url = https://github.com/miketz/lua-mode
+[submodule "notElpa/sicp-info"]
+	path = notElpa/sicp-info
+	url = https://github.com/miketz/sicp-info

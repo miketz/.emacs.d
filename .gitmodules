@@ -172,3 +172,6 @@
 [submodule "notElpa/csharp-mode"]
 	path = notElpa/csharp-mode
 	url = https://github.com/miketz/csharp-mode
+[submodule "notElpa/pos-tip"]
+	path = notElpa/pos-tip
+	url = https://github.com/miketz/pos-tip

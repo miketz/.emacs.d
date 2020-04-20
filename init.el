@@ -1080,7 +1080,7 @@ Closure over executed-p."
   `((s nil) ;; string library. using git submodule
     (evil nil) ;; using git submodule
     (evil-leader nil) ;; using git submodule
-    (pos-tip t) ;; for pop up on eval with leader "e"
+    (pos-tip nil) ;; for pop up on eval with leader "e". git submodule
     (key-chord nil) ;; using file in /notElpa/
     (slime nil ;; using git submodule
            ;;,my-install-slime-p
@@ -1957,6 +1957,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (when (eq my-curr-computer 'work-laptop)
 ;;     (setq inferior-lisp-program
 ;;           "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
+
+
+;;;----------------------------------------------------------------------------
+;;; pos-tip
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/pos-tip" load-path)
+(autoload #'pos-tip-show "pos-tip" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; macrostep
@@ -5883,7 +5890,6 @@ Closure over `preceding-sexp-fn'."
                      lexical-binding)))
       (prin1-to-string val))))
 
-(autoload 'pos-tip-show "pos-tip" nil t)
 (cond
  ;; cider overlays
  (my-fancy-overlay-p

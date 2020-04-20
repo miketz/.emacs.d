@@ -169,6 +169,32 @@ Some info may be purely for informational/doc purposes."
              ;; .elc compiled again to be compatible.
              )))
 
+(defun my-scrape-module-info ()
+  "This is is for dev-time use only.
+Generates a skeleton list for `my-modules'. With possilbly incorrect and
+imcomplete info about the modules.
+Saves me from typing a lot of module stuff."
+  (let* ((dir-infos (cl-remove-if
+                     (lambda (f)
+                       (or (not (my-folder-p f)) ;; skip indiviudal files
+                           ;; skip themes
+                           (s-ends-with-p "themes" (cl-first f))))
+                     (directory-files-and-attributes my-module-folder
+                                                     nil "^[^.]" nil)))
+         (dir-names (mapcar #'cl-first dir-infos)))
+    (cl-loop for dir in dir-names
+             do
+             (insert (format ",(make-module
+  :name '%s
+  :folder (concat my-module-folder \"%s\")
+  :remote-mine https://github.com/miketz/%s
+  :remote-upstream nil
+  :source-control 'git
+  :submodule-p t
+  :depend-hard '()
+  :depend-soft '())\n"
+                             dir dir dir)))))
+
 (provide 'my-modules)
 
 ;;; my-modules.el ends here

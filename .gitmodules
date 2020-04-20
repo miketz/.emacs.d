@@ -199,3 +199,6 @@
 [submodule "notElpa/js2-mode"]
 	path = notElpa/js2-mode
 	url = https://github.com/miketz/js2-mode
+[submodule "notElpa/powershell.el"]
+	path = notElpa/powershell.el
+	url = https://github.com/miketz/powershell.el

@@ -1140,7 +1140,7 @@ Closure over executed-p."
     (sicp nil) ;; using git submodule
     ;;neotree
     (num3-mode nil) ;; using git submodule
-    (powershell t)
+    (powershell nil) ;; using git submodule
     (irony ,my-has-clang-p)
     (company-irony ,my-has-clang-p)
     (flycheck-irony ,my-has-clang-p)
@@ -6967,6 +6967,11 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; powershell
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/powershell.el" load-path)
+(autoload #'powershell-mode "powershell" nil t)
+(autoload #'powershell "powershell" nil t)
+(push '("\\.ps[dm]?1\\'" . powershell-mode) auto-mode-alist)
+
 (with-eval-after-load 'powershell
   (defun my-setup-powershell-mode ()
     (my-turn-on-electric-pair-local-mode)

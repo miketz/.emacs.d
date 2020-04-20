@@ -7882,12 +7882,16 @@ vanilla javascript buffers."
 ;;    (face-list)))
 
 
-(progn ;; JUMPrestore. restore values is set earlier for startup time.
-  (setq file-name-handler-alist file-name-handler-alist-backup)
-  (setq gc-cons-threshold gc-cons-threshold-backup)
-  ;; unbind junk variables. Avoid namespace pollution.
-  (makunbound 'file-name-handler-alist-backup)
-  (makunbound 'gc-cons-threshold-backup))
+;;;----------------------------------------------------------------------------
+;;; restore values is set earlier for startup time. JUMPrestore
+;;;----------------------------------------------------------------------------
+(setq file-name-handler-alist file-name-handler-alist-backup)
+(setq gc-cons-threshold gc-cons-threshold-backup)
+
+;; Let the junk vars live for now. Unbinding them breaks profile-dotemacs.el
+;; ;; unbind junk variables. Avoid namespace pollution.
+;; (makunbound 'file-name-handler-alist-backup)
+;; (makunbound 'gc-cons-threshold-backup)
 
 
 ;;; init.el ends here

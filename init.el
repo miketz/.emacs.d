@@ -1236,7 +1236,7 @@ Closure over executed-p."
     (hl-block-mode ,(not (version< emacs-version "26.0")))
     (mini-modeline nil)
     (yaml-mode t)
-    (php-mode t)
+    (php-mode nil) ;; using git submodule
     ;; (lsp-python-ms t)
     (transient t)
     (wgrep t)
@@ -7302,6 +7302,13 @@ vanilla javascript buffers."
 (push "~/.emacs.d/notElpa/autothemer" load-path)
 (autoload #'autothemer-deftheme "autothemer" nil nil)
 (autoload #'autothemer-generate-templates "autothemer" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; php-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/php-mode" load-path)
+(autoload #'php-mode "autothemer" nil t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

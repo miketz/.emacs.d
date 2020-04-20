@@ -154,3 +154,6 @@
 [submodule "notElpa/autothemer"]
 	path = notElpa/autothemer
 	url = https://github.com/miketz/autothemer
+[submodule "notElpa/php-mode"]
+	path = notElpa/php-mode
+	url = https://github.com/miketz/php-mode

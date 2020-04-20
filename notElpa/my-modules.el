@@ -93,9 +93,9 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '())
     ,(make-module
       :name 's
-      :folder (concat my-module-folder "expand-region.el")
-      :remote-mine "https://github.com/miketz/expand-region.el"
-      :remote-upstream "https://github.com/magnars/expand-region.el"
+      :folder (concat my-module-folder "s.el")
+      :remote-mine "https://github.com/miketz/s.el"
+      :remote-upstream "https://github.com/magnars/s.el"
       :source-control 'git
       :submodule-p t
       :depend-hard '()

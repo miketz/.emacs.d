@@ -1215,7 +1215,7 @@ Closure over executed-p."
                has-gnu-global-p))
     (clojure-mode ,(not (version< emacs-version "25.1")))
     (iedit nil) ;; using git submodule
-    (cider ,(memq my-curr-computer '(wild-dog)))
+    ;; (cider ,(memq my-curr-computer '(wild-dog)))
     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
     ;;  ,(<= emacs-major-version 24))
     (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
@@ -1267,7 +1267,7 @@ Closure over executed-p."
     ;; (lsp-python-ms t)
     (transient nil) ;; using git submodule
     (wgrep t)
-    (spinner t)
+    ;; (spinner t)
     (ht t)
     (dash-functional t)
     (dash t))

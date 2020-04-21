@@ -214,3 +214,6 @@
 [submodule "notElpa/with-editor"]
 	path = notElpa/with-editor
 	url = https://github.com/miketz/with-editor
+[submodule "notElpa/unkillable-scratch"]
+	path = notElpa/unkillable-scratch
+	url = https://github.com/miketz/unkillable-scratch

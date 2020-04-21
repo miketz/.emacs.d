@@ -1159,7 +1159,7 @@ Closure over executed-p."
     (hydra nil) ;; using git submodule
     ;;linum-relative
     ;;(guide-key)
-    (unkillable-scratch t)
+    (unkillable-scratch nil) ;; using git submodule
     ;; (speed-type t)
     (bug-hunter nil) ;; using git submodule
 
@@ -5230,6 +5230,9 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; unkillable-scratch
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/unkillable-scratch" load-path)
+(autoload #'unkillable-scratch "unkillable-scratch" nil t)
+
 (with-eval-after-load 'unkillable-scratch
   (setq unkillable-scratch-behavior 'do-nothing)
   (setq unkillable-scratch-do-not-reset-scratch-buffer t))

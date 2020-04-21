@@ -238,3 +238,6 @@
 [submodule "notElpa/flycheck"]
 	path = notElpa/flycheck
 	url = https://github.com/miketz/flycheck
+[submodule "notElpa/pkg-info"]
+	path = notElpa/pkg-info
+	url = https://github.com/miketz/pkg-info

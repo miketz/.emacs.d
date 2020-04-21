@@ -5120,6 +5120,17 @@ TODO: call this function when it works."
 
 
 ;;;----------------------------------------------------------------------------
+;;; pkg-info. dependency of flycheck.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/pkg-info" load-path)
+(autoload #'pkg-info-library-original-version "pkg-info" nil t)
+(autoload #'pkg-info-library-version "pkg-info" nil t)
+(autoload #'pkg-info-defining-library-original-version "pkg-info" nil t)
+(autoload #'pkg-info-defining-library-version "pkg-info" nil t)
+(autoload #'pkg-info-package-version "pkg-info" nil t)
+(autoload #'pkg-info-version-info "pkg-info" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; flycheck
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/flycheck" load-path)

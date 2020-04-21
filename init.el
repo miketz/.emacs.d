@@ -1166,7 +1166,7 @@ Closure over executed-p."
     (powershell nil) ;; using git submodule
     (irony ,my-has-clang-p)
     (company-irony ,my-has-clang-p)
-    (flycheck-irony ,my-has-clang-p)
+    ;; (flycheck-irony ,my-has-clang-p)
     ;;(rtags)
     ;;aggressive-indent
     (sx nil ;; using git submodule
@@ -1176,7 +1176,7 @@ Closure over executed-p."
     (darkroom nil) ;; using git submodule
     ;;vim-empty-lines-mode
     ;; (fill-column-indicator ,(not (version< emacs-version "25")))
-    (flycheck t)
+    (flycheck nil) ;; using git submodule
     (hydra nil) ;; using git submodule
     ;;linum-relative
     ;;(guide-key)
@@ -5122,6 +5122,16 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; flycheck
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/flycheck" load-path)
+(autoload #'flycheck-manual "flycheck" nil t)
+(autoload #'flycheck-mode "flycheck" nil t)
+(autoload #'global-flycheck-mode "flycheck" nil t)
+(autoload #'flycheck-define-error-level "flycheck" nil t)
+(autoload #'flycheck-define-command-checker "flycheck" nil t)
+(autoload #'flycheck-def-config-file-var "flycheck" nil t)
+(autoload #'flycheck-def-option-var "flycheck" nil t)
+(autoload #'flycheck-define-checker "flycheck" nil t)
+
 (with-eval-after-load 'flycheck
   (define-key flycheck-mode-map (kbd "M-n") #'flycheck-next-error)
   (define-key flycheck-mode-map (kbd "M-p") #'flycheck-previous-error)

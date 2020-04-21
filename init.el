@@ -1292,8 +1292,9 @@ Closure over executed-p."
     (wgrep nil) ;; using git submodule
     ;; (spinner t)
     (ht nil) ;; using git submodule
-    (dash-functional t)
-    (dash t))
+    (dash-functional nil) ;; using git submodule
+    (dash nil) ;; using git submodule
+    )
   "Packages I use from elpa/melpa.")
 
 (require 'package)
@@ -1410,6 +1411,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (autoload #'async-byte-recompile-directory "async-bytecomp" nil t)
 (autoload #'async-bytecomp-package-mode "async-bytecomp" nil t)
 (autoload #'async-byte-compile-file "async-bytecomp" nil t)
+
+
+;;;----------------------------------------------------------------------------
+;;; dash
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/dash.el" load-path)
+;; NOTE: contains dash-functional.el which is a separate pacakge on melpa.
 
 ;;;----------------------------------------------------------------------------
 ;; bug-hunter

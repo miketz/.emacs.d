@@ -247,3 +247,6 @@
 [submodule "notElpa/emacs-async"]
 	path = notElpa/emacs-async
 	url = https://github.com/miketz/emacs-async
+[submodule "notElpa/dash.el"]
+	path = notElpa/dash.el
+	url = https://github.com/miketz/dash.el

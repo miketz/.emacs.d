@@ -205,3 +205,6 @@
 [submodule "notElpa/nov.el"]
 	path = notElpa/nov.el
 	url = https://github.com/miketz/nov.el
+[submodule "notElpa/esxml"]
+	path = notElpa/esxml
+	url = https://github.com/miketz/esxml

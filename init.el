@@ -1573,10 +1573,14 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 ;;; evil
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/evil" load-path)
+;; NOTE: goto-chg and undo-tree are under /evil/lib/. They are separate
+;; packages in melpa.
+(push "~/.emacs.d/notElpa/evil/lib/" load-path)
 (autoload #'evil-mode "evil-core" nil t)
 (autoload #'evil-define-key "evil-core" nil t)
 
 (with-eval-after-load 'evil
+  (require 'undo-tree) ; stored in /notElpa/evil/lib
 
   (setq evil-flash-delay 1)
 

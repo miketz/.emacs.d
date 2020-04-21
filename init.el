@@ -77,6 +77,27 @@
 ;;;     git submodule update --init --recursive
 
 ;;;----------------------------------------------------------------------------
+;;; remove, then re-add a submodule where the folder mysteriously disappears?
+;;;----------------------------------------------------------------------------
+;;; git rm --cached path_to_submodule (no trailing slash)
+;;;
+;;; rm -rf path_to_submodule
+;;;
+;;; Delete the relevant lines from the .gitmodules file. e.g. delete these:
+;;; [submodule "path_to_submodule"]
+;;;     path = path_to_submodule
+;;;     url = https://github.com/path_to_submodule
+;;;
+;;; Delete the relevant section from .git/config. e.g. delete these:
+;;; [submodule "path_to_submodule"]
+;;;     url = https://github.com/path_to_submodule
+;;;
+;;; rm -rf .git/modules/path_to_submodule
+;;;
+;;; Then, you can finally:
+;;; git submodule add https://github.com/path_to_submodule
+
+;;;----------------------------------------------------------------------------
 ;;; Making a local branch, pushing it to remote server.
 ;;;----------------------------------------------------------------------------
 ;;; Create a new branch:

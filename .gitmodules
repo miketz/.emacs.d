@@ -214,3 +214,6 @@
 [submodule "notElpa/transient"]
 	path = notElpa/transient
 	url = https://github.com/miketz/transient
+[submodule "notElpa/with-editor"]
+	path = notElpa/with-editor
+	url = https://github.com/miketz/with-editor

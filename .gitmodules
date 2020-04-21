@@ -226,3 +226,6 @@
 [submodule "notElpa/goto-chg"]
 	path = notElpa/goto-chg
 	url = https://github.com/miketz/goto-chg
+[submodule "notElpa/highlight-indent-guides"]
+	path = notElpa/highlight-indent-guides
+	url = https://github.com/miketz/highlight-indent-guides

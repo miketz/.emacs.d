@@ -1227,7 +1227,7 @@ Closure over executed-p."
     ;; because may useful for my own purposes later.
     (highlight-tail nil) ;; removed from melpa (emacs wiki purge?)
     (function-args nil)
-    (highlight-indent-guides t)
+    (highlight-indent-guides nil) ;; using git submodule
     (ace-link nil) ;; using git submodule
     (smart-tabs-mode nil) ;; using git submodule
     (lua-mode nil) ;; using git submodule
@@ -6502,6 +6502,11 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; highlight-indent-guides
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/highlight-indent-guides" load-path)
+(autoload #'highlight-indent-guides-auto-set-faces "highlight-indent-guides"
+  nil t)
+(autoload #'highlight-indent-guides-mode "highlight-indent-guides" nil t)
+
 (with-eval-after-load 'highlight-indent-guides
   (setq highlight-indent-guides-method 'character
         highlight-indent-guides-character ?\|))

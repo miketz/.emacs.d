@@ -1231,9 +1231,11 @@ Closure over executed-p."
     (ace-link nil) ;; using git submodule
     (smart-tabs-mode nil) ;; using git submodule
     (lua-mode nil) ;; using git submodule
-    (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
-                                           '(work-laptop wild-dog))))
-               has-gnu-global-p))
+
+    ;; (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
+    ;;                                        '(work-laptop wild-dog))))
+    ;;            has-gnu-global-p))
+
     ;; (clojure-mode ,(not (version< emacs-version "25.1")))
     (iedit nil) ;; using git submodule
     ;; (cider ,(memq my-curr-computer '(wild-dog)))

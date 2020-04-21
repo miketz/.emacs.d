@@ -223,3 +223,6 @@
 [submodule "notElpa/Emacs-wgrep"]
 	path = notElpa/Emacs-wgrep
 	url = https://github.com/miketz/Emacs-wgrep
+[submodule "notElpa/goto-chg"]
+	path = notElpa/goto-chg
+	url = https://github.com/miketz/goto-chg

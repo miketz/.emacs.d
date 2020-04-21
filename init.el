@@ -1563,6 +1563,13 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (autoload #'evil-leader/set-key-for-mode "evil-leader" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; goto-chg. dependency of evil.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/goto-chg" load-path)
+(autoload #'goto-last-change "goto-chg" nil t)
+(autoload #'goto-last-change-reverse "goto-chg" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; evil
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/evil" load-path)

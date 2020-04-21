@@ -1297,7 +1297,7 @@ Closure over executed-p."
     )
   "Packages I use from elpa/melpa.")
 
-(require 'package)
+;; (require 'package)
 
 ;; (defun my-ssl-p ()
 ;;   "True if the Emacs instance has ssl setup/enabled."
@@ -1309,15 +1309,6 @@ Closure over executed-p."
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
         ("melpa" . "http://melpa.org/packages/")))
-
-;; (when (eq my-curr-computer 'work-laptop)
-;;   ;; temporarily stop using ssl on work-laptop.
-;;   ;; remove the https url for gnu elpa
-;;   (setq package-archives
-;;         (delq (assoc "gnu" package-archives) package-archives))
-;;   ;; add gnu elpa back without https
-;;   (add-to-list 'package-archives
-;;                `("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; ;; set up package archives.
 ;; (let* ((protocol (if (my-ssl-p) "https" "http"))
@@ -1337,15 +1328,7 @@ Closure over executed-p."
         (websocket . "melpa")
         (eglot . "melpa")))
 
-;; (setq package-enable-at-startup nil)
-;; (cond
-;;  ;; older emacs
-;;  ((version< emacs-version "27.0")
-;;   (package-initialize)) ;; activate all packages (in particular autoloads)
-;;  ;; newer emacs
-;;  ((not package--initialized)
-;;   (package-initialize t)))
-(package-initialize)
+;; (package-initialize)
 
 (defun my-install-packages ()
   "Call this function on a new Emacs installation to install packages.
@@ -1364,8 +1347,8 @@ Installs packages in the list `my-packages'."
           (message "installing pkg: %s" (symbol-name pkg))
           (package-install pkg))))))
 
-(unless (eq my-curr-computer 'work-laptop-bash)
-  (my-install-packages))
+;; (unless (eq my-curr-computer 'work-laptop-bash)
+;;   (my-install-packages))
 
 (defun my-upgrade-packages ()
   "Upgrade installed packages.

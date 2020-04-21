@@ -211,3 +211,6 @@
 [submodule "notElpa/magit"]
 	path = notElpa/magit
 	url = https://github.com/miketz/magit
+[submodule "notElpa/transient"]
+	path = notElpa/transient
+	url = https://github.com/miketz/transient

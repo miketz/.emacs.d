@@ -1265,7 +1265,7 @@ Closure over executed-p."
     (yaml-mode nil) ;; using git submodule
     (php-mode nil) ;; using git submodule
     ;; (lsp-python-ms t)
-    (transient t)
+    (transient nil) ;; using git submodule
     (wgrep t)
     (spinner t)
     (ht t)
@@ -4883,6 +4883,10 @@ and indent."
 ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
 ;; (add-to-list 'aggressive-indent-excluded-modes 'sql-mode)
 
+;;;----------------------------------------------------------------------------
+;;; transient. dependency of magit
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/transient/lisp" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; magit

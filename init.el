@@ -4890,7 +4890,16 @@ and indent."
 (push "~/.emacs.d/notElpa/magit/lisp" load-path)
 (autoload #'magit-status "magit-status" nil t)
 (autoload #'magit-init "magit-status" nil t)
+;; NOTE: autoloads for git-commit. It's a separate melpa package, but in the
+;; same git repo as magit itself.
+(custom-autoload 'global-git-commit-mode "git-commit" nil)
+(autoload 'global-git-commit-mode "git-commit" nil t nil)
+(autoload 'git-commit-setup-check-buffer "git-commit" nil t nil)
+(autoload 'git-commit-setup "git-commit" nil nil nil)
 ;; TODO: add more autoloads
+
+
+
 
 ;; prevent warning message.
 ;; Doesn't work when set in eval-after-load ???

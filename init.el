@@ -1258,7 +1258,7 @@ Closure over executed-p."
     (erc-hl-nicks nil) ;; using git submodule
     (sql-indent t)
     (vdiff nil)
-    (tern ,has-nodejs-p)
+    ;; (tern ,has-nodejs-p)
     ;; (company-tern ,has-nodejs-p)
     ;; (browse-kill-ring t)
     ;; (git-gutter ,(not (version< emacs-version "24.3")))

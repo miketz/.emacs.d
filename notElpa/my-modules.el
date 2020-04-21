@@ -110,6 +110,9 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '((emacs "25.1")
                      (async "20180527")
                      (dash "20180910")
+                     ;; git-commit is a file within magit! not really a
+                     ;; dependency, but it is a separate melp package so
+                     ;; keep it here for doc purposes.
                      (git-commit "20181104")
                      (transient "20190812")
                      (with-editor "20181103"))

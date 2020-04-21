@@ -220,3 +220,6 @@
 [submodule "notElpa/flx"]
 	path = notElpa/flx
 	url = https://github.com/miketz/flx
+[submodule "notElpa/Emacs-wgrep"]
+	path = notElpa/Emacs-wgrep
+	url = https://github.com/miketz/Emacs-wgrep

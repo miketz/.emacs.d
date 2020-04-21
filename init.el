@@ -1287,7 +1287,7 @@ Closure over executed-p."
     (php-mode nil) ;; using git submodule
     ;; (lsp-python-ms t)
     (transient nil) ;; using git submodule
-    (wgrep t)
+    (wgrep nil) ;; using git submodule
     ;; (spinner t)
     (ht t)
     (dash-functional t)
@@ -7334,6 +7334,11 @@ vanilla javascript buffers."
   (setq deadgrep-max-line-length 250))
 
 ;;;----------------------------------------------------------------------------
+;;; wgrep. dependency of rg
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/Emacs-wgrep" load-path)
+
+;;;----------------------------------------------------------------------------
 ;;; rg
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/rg.el" load-path)
@@ -7342,6 +7347,7 @@ vanilla javascript buffers."
 (autoload #'rg "rg" nil t)
 
 (with-eval-after-load 'rg
+  (require 'wgrep)
   (setq rg-command-line-flags '("-M 250")) ; truncate long lines in display.
 
   (setq rg-show-columns nil)

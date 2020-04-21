@@ -1258,7 +1258,7 @@ Closure over executed-p."
      ) ;; an epub reader
     (autothemer nil) ;; dependency for some themes. using git submodule.
     (erc-hl-nicks nil) ;; using git submodule
-    (sql-indent t)
+    ;; (sql-indent t)
     (vdiff nil)
     ;; (tern ,has-nodejs-p)
     ;; (company-tern ,has-nodejs-p)
@@ -3872,7 +3872,7 @@ and indent."
     ;; turn off indent when you press "o" in evil. Buffer local
     (when my-use-evil-p
       (setq evil-auto-indent nil))
-    (sqlind-minor-mode 1)
+    ;; (sqlind-minor-mode 1)
     (when (fboundp #'display-fill-column-indicator-mode)
       (setq display-fill-column-indicator-column 100)
       (display-fill-column-indicator-mode 1)))

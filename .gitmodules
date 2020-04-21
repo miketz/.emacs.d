@@ -229,3 +229,6 @@
 [submodule "notElpa/highlight-indent-guides"]
 	path = notElpa/highlight-indent-guides
 	url = https://github.com/miketz/highlight-indent-guides
+[submodule "notElpa/typescript.el"]
+	path = notElpa/typescript.el
+	url = https://github.com/miketz/typescript.el

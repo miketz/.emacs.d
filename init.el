@@ -1245,7 +1245,7 @@ Closure over executed-p."
     (markdown-mode nil ;; using git submodule
                    ;;,(not (version< emacs-version "24.4"))
      )
-    (typescript-mode t)
+    (typescript-mode nil) ;; using git submodule
     (tide nil ;; using git submodule
           ;; ,(memq my-curr-computer
           ;;        '(work-laptop-2019 work-laptop wild-dog work-laptop-bash))
@@ -6930,7 +6930,12 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; typescript-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/typescript.el" load-path)
+(autoload #'typescript-mode "typescript-mode" nil t)
+(push '("\\.ts$" . typescript-mode) auto-mode-alist)
+
 (with-eval-after-load 'typescript-mode
+  (put 'typescript-indent-level 'safe-local-variable #'integerp)
   (setq typescript-indent-level my-indent-width)
 
   (defun my-setup-typescript-mode ()

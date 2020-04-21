@@ -101,6 +101,20 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'magit
+      :folder (concat my-module-folder "magit")
+      :remote-mine "https://github.com/miketz/magit"
+      :remote-upstream "https://github.com/magit/magit"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '((emacs "25.1")
+                     (async "20180527")
+                     (dash "20180910")
+                     (git-commit "20181104")
+                     (transient "20190812")
+                     (with-editor "20181103"))
+      :depend-soft '())
+    ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
       :remote-mine "https://github.com/miketz/mor"

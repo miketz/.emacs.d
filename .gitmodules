@@ -208,3 +208,6 @@
 [submodule "notElpa/esxml"]
 	path = notElpa/esxml
 	url = https://github.com/miketz/esxml
+[submodule "notElpa/magit"]
+	path = notElpa/magit
+	url = https://github.com/miketz/magit

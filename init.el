@@ -1135,7 +1135,9 @@ Closure over executed-p."
     ;;dired-details ;default feature in emacs 24.4+
     (web-mode nil) ;; using git submodule
     (htmlize t)
-    (magit ,(not (version< emacs-version "25.1")))
+    (magit nil ;; using git submodule
+           ;;,(not (version< emacs-version "25.1"))
+     )
     (vimrc-mode nil) ;; using git submodule
     (sicp nil) ;; using git submodule
     ;;neotree
@@ -4885,6 +4887,11 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; magit
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/magit/lisp" load-path)
+(autoload #'magit-status "magit-status" nil t)
+(autoload #'magit-init "magit-status" nil t)
+;; TODO: add more autoloads
+
 ;; prevent warning message.
 ;; Doesn't work when set in eval-after-load ???
 ;; (setq magit-last-seen-setup-instructions "1.4.0")

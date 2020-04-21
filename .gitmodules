@@ -241,3 +241,6 @@
 [submodule "notElpa/pkg-info"]
 	path = notElpa/pkg-info
 	url = https://github.com/miketz/pkg-info
+[submodule "notElpa/epl"]
+	path = notElpa/epl
+	url = https://github.com/miketz/epl

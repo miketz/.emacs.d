@@ -1155,7 +1155,7 @@ Closure over executed-p."
     ;;powerline
     ;;dired-details ;default feature in emacs 24.4+
     (web-mode nil) ;; using git submodule
-    (htmlize t)
+    ;; (htmlize t)
     (magit nil ;; using git submodule
            ;;,(not (version< emacs-version "25.1"))
      )

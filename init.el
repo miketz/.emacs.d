@@ -1160,7 +1160,7 @@ Closure over executed-p."
     ;;linum-relative
     ;;(guide-key)
     (unkillable-scratch t)
-    (speed-type t)
+    ;; (speed-type t)
     (bug-hunter nil) ;; using git submodule
 
     ;; NOTE: using git submodule instead of package for ivy, swiper, counsel.

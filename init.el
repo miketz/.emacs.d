@@ -5931,7 +5931,7 @@ START and END define the region."
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
 ;;;----------------------------------------------------------------------------
-;;; cider-style-overlays
+;;; cider-style-overlays. file in /notElpa/
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'cider-style-overlays
   (setq cider-eval-result-prefix ""))

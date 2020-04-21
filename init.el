@@ -1289,7 +1289,7 @@ Closure over executed-p."
     (transient nil) ;; using git submodule
     (wgrep nil) ;; using git submodule
     ;; (spinner t)
-    (ht t)
+    (ht nil) ;; using git submodule
     (dash-functional t)
     (dash t))
   "Packages I use from elpa/melpa.")
@@ -7200,6 +7200,11 @@ vanilla javascript buffers."
 (autoload #'eglot-ensure "eglot" nil t)
 (autoload #'eglot "eglot" nil t)
 
+
+;;;----------------------------------------------------------------------------
+;;; ht. dependency of lsp-mode.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ht.el" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; lsp-mode

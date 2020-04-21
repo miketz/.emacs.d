@@ -232,3 +232,6 @@
 [submodule "notElpa/typescript.el"]
 	path = notElpa/typescript.el
 	url = https://github.com/miketz/typescript.el
+[submodule "notElpa/ht.el"]
+	path = notElpa/ht.el
+	url = https://github.com/miketz/ht.el

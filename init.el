@@ -1228,7 +1228,9 @@ Closure over executed-p."
           ;;        '(work-laptop-2019 work-laptop wild-dog work-laptop-bash))
           )
     (context-coloring nil)
-    (nov ,(not (version< emacs-version "24.4"))) ;; an epub reader
+    (nov nil ;; using git submodule
+         ;;,(not (version< emacs-version "24.4"))
+     ) ;; an epub reader
     (autothemer nil) ;; dependency for some themes. using git submodule.
     (erc-hl-nicks nil) ;; using git submodule
     (sql-indent t)
@@ -7390,6 +7392,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; nov
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/nov.el" load-path)
+(autoload #'nov-mode "nov" nil t)
+
 ;; Make sure you have an unzip executable on PATH, otherwise the extraction of
 ;; EPUB files will fail. If you for some reason have unzip in a non-standard
 ;; location, customize `nov-unzip-program' to its path. You'll also need an

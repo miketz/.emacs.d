@@ -1213,7 +1213,7 @@ Closure over executed-p."
     (ggtags ,(let ((has-gnu-global-p (memq my-curr-computer
                                            '(work-laptop wild-dog))))
                has-gnu-global-p))
-    (clojure-mode ,(not (version< emacs-version "25.1")))
+    ;; (clojure-mode ,(not (version< emacs-version "25.1")))
     (iedit nil) ;; using git submodule
     ;; (cider ,(memq my-curr-computer '(wild-dog)))
     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25

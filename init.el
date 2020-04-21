@@ -1397,6 +1397,21 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
 (autoload #'my-byte-compile-all-notElpa-folders "my-modules" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; async
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/emacs-async" load-path)
+(autoload #'async-start-process "async" nil t)
+(autoload #'async-start "async" nil t)
+(autoload #'dired-async-mode "dired-async" nil t)
+(autoload #'dired-async-do-copy "dired-async" nil t)
+(autoload #'dired-async-do-symlink "dired-async" nil t)
+(autoload #'dired-async-do-hardlink "dired-async" nil t)
+(autoload #'dired-async-do-rename "dired-async" nil t)
+(autoload #'async-byte-recompile-directory "async-bytecomp" nil t)
+(autoload #'async-bytecomp-package-mode "async-bytecomp" nil t)
+(autoload #'async-byte-compile-file "async-bytecomp" nil t)
+
+;;;----------------------------------------------------------------------------
 ;; bug-hunter
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/elisp-bug-hunter" load-path)

@@ -244,3 +244,6 @@
 [submodule "notElpa/epl"]
 	path = notElpa/epl
 	url = https://github.com/miketz/epl
+[submodule "notElpa/emacs-async"]
+	path = notElpa/emacs-async
+	url = https://github.com/miketz/emacs-async

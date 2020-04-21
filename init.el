@@ -1242,7 +1242,7 @@ Closure over executed-p."
     ;; (hl-line+ ;; used for custom `occur' mods, but only pre emacs 25
     ;;  ,(<= emacs-major-version 24))
     (geiser nil) ;;,(memq my-curr-computer '(work-laptop))
-    (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
+    ;; (debbugs ,(memq my-curr-computer '(work-laptop wild-dog)))
     (adoc-mode nil) ;; using git submodule
     (markdown-mode nil ;; using git submodule
                    ;;,(not (version< emacs-version "24.4"))

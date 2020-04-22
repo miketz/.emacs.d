@@ -19,6 +19,7 @@
 (eval-when-compile
   ;; stuff
   )
+;; But it *will* run if loading a non-compiled .el file???
 
 
 ;; similar to eval-when-compile, but will won't run in non-byte-compiled code?
@@ -32,4 +33,14 @@
 ;; definition and compilation checker would be silent in such cases
 ;; also see:
 ;; https://emacs.stackexchange.com/questions/17347/why-does-eval-when-compile-run-at-file-load-and-byte-compiled-to-elc
+;; ---
+;; But it has drawbacks too.
+;; Drawback 1: t slows down byte compliation (especially on MS Windows) due to
+;; literally running require during compliation.
+;; Drawback 2: it does not prevent dynamic vars from being incorreclty
+;; lexically bound in a let statment becuase the defvar form never occurs, as
+;; the (require 'lib) only runs during byte compilation time. The (defvar foo)
+;; trick protects against this incorrect lexical binding.
+
+
 

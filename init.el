@@ -870,6 +870,17 @@ in case that file does not provide any feature."
 (declare-function my-setup-inferior-python-mode 'suppress)
 (declare-function c-toggle-hungry-state 'cc-cmds)
 
+;; silence more byte compiler warnings.
+;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as
+;; this code only runs when compiling, not during init.
+(cl-eval-when 'compile (require 'company))
+(cl-eval-when 'compile (require 'info))
+(cl-eval-when 'compile (require 'rg))
+(cl-eval-when 'compile (require 'magit))
+(cl-eval-when 'compile (require 'python))
+
+
+
 ;;;----------------------------------------------------------------------------
 ;;; Helper functions and macros
 ;;;----------------------------------------------------------------------------

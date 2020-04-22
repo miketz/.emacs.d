@@ -22,7 +22,7 @@
 ;; But it *will* run if loading a non-compiled .el file???
 
 
-;; similar to eval-when-compile, but will won't run in non-byte-compiled code?
+;; similar to eval-when-compile, but won't run in non-byte-compiled code?
 ;; Can be used to (require 'some-package) to silence byte-compiler warnings,
 ;; about free vars during compile time, but not actually require the package
 ;; during init time.

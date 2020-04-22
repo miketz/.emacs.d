@@ -172,7 +172,6 @@ Some info may be purely for informational/doc purposes."
                            ;; Revist this after I fork the projects, and use a personal branch.
                            (s-ends-with-p "sunrise-commander" (cl-first f))
                            (s-ends-with-p "FlamesOfFreedom" (cl-first f))
-                           (s-ends-with-p "paredit" (cl-first f))
                            (s-ends-with-p "markup-faces" (cl-first f))
                            (s-ends-with-p "sicp-info" (cl-first f))
                            (s-ends-with-p "sallet" (cl-first f))))

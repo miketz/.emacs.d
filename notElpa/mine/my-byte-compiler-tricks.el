@@ -25,11 +25,11 @@
 ;; Can be used to (require 'some-package) to silence byte-compiler warnings,
 ;; about free vars during compile time, but not actually require the package
 ;; during init time.
-(eval-when 'compile
+(cl-eval-when 'compile
   (require 'autorevert))
 ;; this techinique shoudl be better than the (defvar foo) solution used
 ;; to silence free var warnigns. I can mistype name or package can remove
 ;; definition and compilation checker would be silent in such cases
-
-
+;; also see:
+;; https://emacs.stackexchange.com/questions/17347/why-does-eval-when-compile-run-at-file-load-and-byte-compiled-to-elc
 

@@ -30,7 +30,7 @@
 	url = https://github.com/raxod502/prescient.el
 [submodule "notElpa/paredit"]
 	path = notElpa/paredit
-	url = https://mumble.net/~campbell/git/paredit.git
+	url = https://github.com/miketz/paredit
 [submodule "notElpa/lispy"]
 	path = notElpa/lispy
 	url = https://github.com/miketz/lispy

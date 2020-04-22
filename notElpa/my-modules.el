@@ -32,7 +32,7 @@ Some info may be purely for informational/doc purposes."
   `(,(make-module
       :name 'paredit
       :folder (concat my-module-folder "paredit")
-      :remote-mine nil
+      :remote-mine "https://github.com/miketz/paredit"
       :remote-upstream "https://mumble.net/~campbell/git/paredit.git"
       :source-control 'git
       :submodule-p t

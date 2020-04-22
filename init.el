@@ -873,11 +873,12 @@ in case that file does not provide any feature."
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as
 ;; this code only runs when compiling, not during init.
-(cl-eval-when 'compile (require 'company))
-(cl-eval-when 'compile (require 'info))
-(cl-eval-when 'compile (require 'rg))
-(cl-eval-when 'compile (require 'magit))
-(cl-eval-when 'compile (require 'python))
+;; Commenting out. Makes byte compilation very slow on MS-windows
+;; (cl-eval-when 'compile (require 'company))
+;; (cl-eval-when 'compile (require 'info))
+;; (cl-eval-when 'compile (require 'rg))
+;; (cl-eval-when 'compile (require 'magit))
+;; (cl-eval-when 'compile (require 'python))
 
 
 

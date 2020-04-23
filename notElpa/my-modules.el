@@ -12,6 +12,7 @@
 
 ;;; Code:
 (require 'cl-lib)
+(require 's)
 
 (defvar my-module-folder "~/.emacs.d/notElpa/")
 
@@ -188,7 +189,7 @@ Some info may be purely for informational/doc purposes."
              ;; .elc compiled again to be compatible.
              )))
 
-(defun my-scrape-module-info ()
+(defun my--scrape-module-info ()
   "This is is for dev-time use only.
 Generates a skeleton list for `my-modules'. With possilbly incorrect and
 imcomplete info about the modules.

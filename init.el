@@ -2065,7 +2065,12 @@ This prevents overlapping themes; something I would rarely want."
     (global-company-mode 1)
     (company-complete))
   (evil-define-key 'insert global-map (kbd "C-SPC") #'my-company-bootstrap)
-  (evil-define-key 'insert global-map (kbd "C-o") #'my-company-bootstrap))
+  (evil-define-key 'insert global-map (kbd "C-o") #'my-company-bootstrap)
+  (evil-define-key 'insert global-map (kbd "C-w")
+    (lambda ()      ;; bootstrap version of `company-ispell'. will be rebound
+      (interactive) ;; after first call.
+      (global-company-mode 1)
+      (call-interactively #'company-ispell))))
 
 
 (with-eval-after-load 'company

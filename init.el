@@ -1155,13 +1155,11 @@ Closure over executed-p."
 ;;; s
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/s.el" load-path)
-(require 's) ; TODO: make autoloads for the appropriate functions.
 
 ;;;----------------------------------------------------------------------------
 ;;; f
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/f.el" load-path)
-(require 'f) ; TODO: make autoloads for the appropriate functions.
 
 ;;;----------------------------------------------------------------------------
 ;;; num3-mode

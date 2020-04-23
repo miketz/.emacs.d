@@ -2053,36 +2053,19 @@ This prevents overlapping themes; something I would rarely want."
 ;; (add-hook 'after-init-hook #'global-company-mode) ; all buffers
 
 (when my-use-evil-p
-  ;; Called the first time C-SPC, or C-o is pressed.
-  ;; `company-complete' only works if company-mode is currently enabled.
-  ;; But I avoid loading company at start up for init speed. This special
-  ;; boot strap fn wil be bound to C-SPC initially, and it will turn on
-  ;; company-mode right before invoking `company-complete'.
-  ;; C-SPC and C-o will be to `company-complete' in the eval-after-load.
-  ;; A lot of hoops to jump through, but aggressively autoloading everything.
-  (defun my-company-bootstrap ()
-    (interactive)
-    (global-company-mode 1)
-    (company-complete))
-  (evil-define-key 'insert global-map (kbd "C-SPC") #'my-company-bootstrap)
-  (evil-define-key 'insert global-map (kbd "C-o") #'my-company-bootstrap)
-  (evil-define-key 'insert global-map (kbd "C-w")
-    (lambda ()      ;; bootstrap version of `company-ispell'. will be rebound
-      (interactive) ;; after first call.
-      (global-company-mode 1)
-      (call-interactively #'company-ispell))))
+  (evil-define-key 'insert global-map (kbd "C-SPC") #'company-complete)
+  (evil-define-key 'insert global-map (kbd "C-o") #'company-complete)
+  (evil-define-key 'insert global-map (kbd "C-w") #'company-ispell))
 
 
 (with-eval-after-load 'company
+  (global-company-mode 1) ; company functions require company mode to be "on".
   (when my-use-evil-p
     ;; C-Space like Visual Studio
-    (evil-define-key 'insert global-map (kbd "C-SPC") #'company-complete)
     (evil-define-key 'insert company-mode-map (kbd "C-SPC") #'company-complete)
     ;; C-SPC doesn't work in some terminals, so bind an alternative key.
-    (evil-define-key 'insert global-map (kbd "C-o") #'company-complete)
     (evil-define-key 'insert company-mode-map (kbd "C-o") #'company-complete)
     ;; (define-key company-mode-map (kbd "C-SPC") #'company-complete)
-    (evil-define-key 'insert global-map (kbd "C-w") #'company-ispell)
     (evil-define-key 'insert company-mode-map (kbd "C-w") #'company-ispell))
 
   (defun my-company-page-size ()

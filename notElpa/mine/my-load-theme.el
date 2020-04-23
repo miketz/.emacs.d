@@ -117,6 +117,42 @@
 
 
 
+(let ((executed-p nil))
+  (defun my-handle-weird-theme-setups ()
+    "Some themes work in a special way with custom code to initialize them.
+Originally this code would be run in the autoloads when the themes were melpa
+packages.  But I am no longer using the themes as packages (for init
+performance reasons).
+Closure over executed-p."
+    (interactive)
+    ;; TODO: use an autoload solution instead of loading everything
+    ;; immediately.
+    (unless executed-p
+      (load (concat custom-theme-directory "base16-theme"))
+      (load (concat custom-theme-directory "solarized"))
+      (load (concat custom-theme-directory "solarized-theme-utils"))
+      (when nil
+        ;; this actually turns on zonokai so don't run this automatically.
+        (load (concat custom-theme-directory "zonokai")))
+      (load (concat custom-theme-directory "alect-themes"))
+      (load (concat custom-theme-directory "doom-themes"))
+      (load (concat custom-theme-directory "doom-themes-common"))
+      (load (concat custom-theme-directory "eziam-common"))
+      (load (concat custom-theme-directory "farmhouse-theme-common"))
+      (load (concat custom-theme-directory "punpun-common"))
+      (load (concat custom-theme-directory "tao-theme"))
+      (load (concat custom-theme-directory "apropospriate"))
+      (progn ;; kaolin stuff
+        (load (concat custom-theme-directory "kaolin-themes-lib"))
+        (load (concat custom-theme-directory "kaolin-themes")))
+      (load (concat custom-theme-directory "one-themes"))
+      (load (concat custom-theme-directory "purp-common"))
+      (load (concat custom-theme-directory "almost-mono-themes"))
+      (load (concat custom-theme-directory "humanoid-themes"))
+      ;; record the fact we did the set up. To avoid doing it again.
+      (setq executed-p t))))
+
+
 (defvar helm-candidate-number-limit)
 
 (defun my-load-theme-wrapper ()

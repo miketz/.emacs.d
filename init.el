@@ -5364,7 +5364,7 @@ END of region."
 (setq mor-format-automatically-p t)
 (setq mor-fix-whitespace-p t)
 (setq mor-readonly-for-extra-protection-p t)
-(setq mor-default-to-emacs-lisp-mode-p t)
+(setq mor-prev-mode-fn #'emacs-lisp-mode) ; default so "." works immediately.
 (setq mor-allow-tmp-files-p         t
       mor-modes-to-create-tmp-files '(js2-mode js-mode)
       mor-auto-delete-tmp-files-p   t)

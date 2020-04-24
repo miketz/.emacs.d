@@ -5360,6 +5360,10 @@ END of region."
 (autoload #'mor-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-curr-mode-on-region "mode-on-region" nil t)
+;; For faster init speed, avoid require. However when byte compiling the init
+;; file, it can be useful to require the lib immediatly before compilation to
+;; avoid free variable assignment warnings.
+(cl-eval-when 'compile (require 'mode-on-region))
 ;; Config vars
 (setq mor-format-automatically-p t)
 (setq mor-fix-whitespace-p t)

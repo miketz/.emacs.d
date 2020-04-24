@@ -3207,7 +3207,10 @@ completions from folders other than the current one."
 (progn
   ;; an older copy of yasnippet before it caused unwanted indentation on
   ;; each keystroke.
-  (push "~/.emacs.d/yasnippet-20160416.831_correctIndent" load-path)
+  ;; (push "~/.emacs.d/yasnippet-20160416.831_correctIndent" load-path)
+
+  ;; using a recent version of yasnippet again. Things seem to work now.
+  (push "~/.emacs.d/notElpa/yasnippet" load-path)
 
   (progn
     ;; manually add the autoloads because I'm not using the package manager

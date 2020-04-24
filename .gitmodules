@@ -250,3 +250,6 @@
 [submodule "notElpa/dash.el"]
 	path = notElpa/dash.el
 	url = https://github.com/miketz/dash.el
+[submodule "notElpa/yasnippet"]
+	path = notElpa/yasnippet
+	url = https://github.com/miketz/yasnippet

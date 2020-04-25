@@ -256,3 +256,6 @@
 [submodule "notElpa/icicles"]
 	path = notElpa/icicles
 	url = https://github.com/miketz/icicles
+[submodule "notElpa/haskell-mode"]
+	path = notElpa/haskell-mode
+	url = https://github.com/miketz/haskell-mode

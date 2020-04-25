@@ -5053,7 +5053,17 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/swiper" load-path)
 (autoload #'swiper-isearch "swiper" nil t)
+(autoload #'swiper-avy "swiper" nil t)
+(autoload #'ivy-switch-buffer "ivy" nil t)
+(autoload #'counsel-find-file "counsel" nil t)
+(autoload #'counsel-switch-buffer "counsel" nil t)
 (autoload #'counsel-load-theme "counsel" nil t)
+(autoload #'counsel-M-x "counsel" nil t)
+(autoload #'counsel-tmm "counsel" nil t)
+(autoload #'counsel-describe-function "counsel" nil t)
+(autoload #'counsel-describe-variable "counsel" nil t)
+(autoload #'counsel-yank-pop "counsel" nil t)
+
 ;; TODO: set up more autoloads
 
 (when my-use-ivy-p

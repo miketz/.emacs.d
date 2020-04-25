@@ -253,3 +253,6 @@
 [submodule "notElpa/yasnippet"]
 	path = notElpa/yasnippet
 	url = https://github.com/miketz/yasnippet
+[submodule "notElpa/icicles"]
+	path = notElpa/icicles
+	url = https://github.com/miketz/icicles

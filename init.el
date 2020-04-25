@@ -4333,11 +4333,11 @@ and indent."
 ;; (setq projectile-enable-caching t)
 ;; (define-key projectile-mode-map (kbd "C-x C-b") 'projectile-ibuffer)
 
-;;;--------------------
+;;;----------------------------------------------------------------------------
 ;;; icicles
-;;;--------------------
-(when (and (eq my-narrow-type 'icicles)
-           (fboundp #'icicle-mode)) ; package installed. autoloaded fn
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/icicles" load-path)
+(when (eq my-narrow-type 'icicles)
   (require 'icicles)
   (icicle-mode 1))
 

@@ -7360,6 +7360,19 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+(defun my-load-common ()
+  "Load some commonly used features.  Where it's a gray area whether I should
+load during init, or wait with autoloads."
+  (interactive)
+  (require 'company)
+  (require 'expand-region)
+  (require 'swiper)
+  (require 'ivy)
+  (require 'counsel)
+  (require 'lispy)
+  (with-current-buffer (get-buffer-create "*scratch*")
+    (emacs-lisp-mode)))
+
 (setq read-process-output-max 65536)
 
 (when (eq system-type 'windows-nt)

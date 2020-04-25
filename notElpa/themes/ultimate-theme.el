@@ -180,6 +180,8 @@
                                            :background "#ffe0eb"
                                            ;; :box (:line-width -1 :style pressed-button)
                                            :weight bold)))
+   ;; warning is used for mode names by ibufffer. like Elisp/d.
+   `(warning ((,class :inherit font-lock-negation-char-face)))
    `(font-lock-preprocessor-face ((,class (:foreground "#5b1503"))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))

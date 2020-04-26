@@ -6122,7 +6122,7 @@ Closure over `preceding-sexp-fn'."
   ;; NOTE: `winner-redo' only works if invoked immediately after `winner-undo'.
   ;; TODO: find a way to make this keybind exist temporarily after the undo.
   (define-key winner-mode-map (kbd "C-c r") #'winner-redo))
-;; (winner-mode 1)
+;; (winner-mode 1) ; portable dumper doens't like winner. keep off for now.
 
 ;;;----------------------------------------------------------------------------
 ;;; js2-highlight-vars

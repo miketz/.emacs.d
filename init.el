@@ -7371,7 +7371,8 @@ load during init, or wait with autoloads."
   (require 'counsel)
   (require 'lispy)
   (with-current-buffer (get-buffer-create "*scratch*")
-    (emacs-lisp-mode)))
+    (unless (eq major-mode #'emacs-lisp-mode)
+      (emacs-lisp-mode))))
 
 (setq read-process-output-max 65536)
 

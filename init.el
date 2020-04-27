@@ -6821,6 +6821,7 @@ vanilla javascript buffers."
 
 (with-eval-after-load 'powershell
   (defun my-setup-powershell-mode ()
+    (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable))
   (add-hook 'powershell-mode-hook #'my-setup-powershell-mode))

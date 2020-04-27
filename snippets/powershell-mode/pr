@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pr
+# key: pr
+# --
+Write-Host "${1:msg}" -ForegroundColor ${2:Cyan} -BackgroundColor ${3:Black}

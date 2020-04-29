@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fore
+# key: fore
+# --
+foreach (${1:$v} in ${2:@(1,2)}) {
+    $0
+}

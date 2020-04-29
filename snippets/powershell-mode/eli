@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : eli { ... }
+# key: eli
+# --
+elseif (${1:cond}) {
+    $0
+}

@@ -977,7 +977,8 @@ Just a convenience to avoid checks against `my-ui-type'.")
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
-Choices: ivy ido bare-ido helm icicles sallet selectrum fido mish-mash nil")
+Choices: ivy ido bare-ido helm icicles sallet selectrum fido icomplete
+mish-mash nil")
 
 ;;TODO: make ivy pop-up it's window on the Linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -3073,6 +3074,12 @@ To make it human readable."
 ;;;----------------------------------------------------------------------------
 ;;; icomplete, fido
 ;;;----------------------------------------------------------------------------
+(when (eq my-narrow-type 'icomplete)
+  (icomplete-mode 1)
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'switch-to-buffer)))
+
+;; Fido is just icomplete, but configured to work similar to ido.
 (when (eq my-narrow-type 'fido)
   (fido-mode 1)
   (when my-use-evil-p

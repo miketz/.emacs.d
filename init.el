@@ -977,7 +977,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
-Choices: ivy ido bare-ido helm icicles sallet selectrum mish-mash nil")
+Choices: ivy ido bare-ido helm icicles sallet selectrum fido mish-mash nil")
 
 ;;TODO: make ivy pop-up it's window on the Linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -1003,17 +1003,20 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using combination of several narrowing packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
-(defvar my-swoop-fn (cond (t #'swiper-isearch) ; always use this for now.
-                          (my-use-ivy-p #'swiper-isearch)
-                          ;; `ido-occur' is fast but does not split inputs on
-                          ;; spaces. use swiper with ido for now.
-                          (my-use-ido-p #'swiper-isearch)
-                          (my-use-bare-ido-p #'my-occur-wild-spaces)
-                          (my-use-helm-p #'helm-swoop)
-                          (my-use-mish-mash-p #'swiper-isearch)
-                          ;; `sallet-occur' is unusably slow. Don't use it.
-                          ;; `icicle-occur' is unusably slow. Don't use it.
-                          (t #'my-occur-wild-spaces))
+(defvar my-swoop-fn (cond
+                     ;; NOTE: fido breaks swiper.
+                     ((eq my-narrow-type 'fido) #'my-occur-wild-spaces)
+                     (t #'swiper-isearch) ; always use this for now.
+                     (my-use-ivy-p #'swiper-isearch)
+                     ;; `ido-occur' is fast but does not split inputs on
+                     ;; spaces. use swiper with ido for now.
+                     (my-use-ido-p #'swiper-isearch)
+                     (my-use-bare-ido-p #'my-occur-wild-spaces)
+                     (my-use-helm-p #'helm-swoop)
+                     (my-use-mish-mash-p #'swiper-isearch)
+                     ;; `sallet-occur' is unusably slow. Don't use it.
+                     ;; `icicle-occur' is unusably slow. Don't use it.
+                     (t #'my-occur-wild-spaces))
   "Function for searching with an overview.
 Choices: helm-swoop swiper swiper-isearch ido-occur sallet-occur icicle-occur
 occur my-occur-wild-spaces")
@@ -3068,8 +3071,13 @@ To make it human readable."
 
 
 ;;;----------------------------------------------------------------------------
-;;; icomplete
+;;; icomplete, fido
 ;;;----------------------------------------------------------------------------
+(when (eq my-narrow-type 'fido)
+  (fido-mode 1)
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'switch-to-buffer)))
+
 (with-eval-after-load 'icomplete
   (setq icomplete-compute-delay 0))
 

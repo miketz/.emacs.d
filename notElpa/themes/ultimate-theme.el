@@ -284,6 +284,9 @@
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
+   ;; icomplete, fido
+   `(icomplete-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
+
    ;; isearch
    `(isearch ((,class (:background ,isearch-bg
 								   :foreground ,isearch-fg

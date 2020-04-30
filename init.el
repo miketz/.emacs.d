@@ -5055,6 +5055,7 @@ TODO: call this function when it works."
 (autoload #'swiper-isearch "swiper" nil t)
 (autoload #'swiper-avy "swiper" nil t)
 (autoload #'ivy-switch-buffer "ivy" nil t)
+(autoload #'ivy-completing-read "ivy" nil nil)
 (autoload #'counsel-find-file "counsel" nil t)
 (autoload #'counsel-switch-buffer "counsel" nil t)
 (autoload #'counsel-load-theme "counsel" nil t)

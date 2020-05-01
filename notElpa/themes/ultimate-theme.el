@@ -236,7 +236,8 @@
 
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-lesser))))
-   `(completions-first-difference ((,class (:foreground ,fg-green))))
+   `(completions-first-difference ((,class :foreground ,fg-green
+                                           :background ,bg-green)))
 
    ;; swiper, ivy, counsel
    `(swiper-line-face ((,class (:background ,highlight ;,bg-highlight ;"gray30"

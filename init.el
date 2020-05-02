@@ -3095,7 +3095,10 @@ To make it human readable."
       (setq-local icomplete-tidy-shadowed-file-names t
                   icomplete-show-matches-on-no-input t
                   icomplete-hide-common-prefix nil
-                  completion-styles '(basic partial-completion emacs22)
+                  completion-styles '(basic
+                                      partial-completion
+                                      emacs22
+                                      substring)
                   completion-flex-nospace nil
                   completion-category-defaults nil)))
 

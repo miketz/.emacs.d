@@ -3086,6 +3086,19 @@ To make it human readable."
     (evil-leader/set-key "b" #'switch-to-buffer)))
 
 (with-eval-after-load 'icomplete
+  ;; redefine the set up fn to avoid flex matching
+  (defun icomplete--fido-mode-setup ()
+    "Setup `fido-mode''s minibuffer."
+    (when (and icomplete-mode (icomplete-simple-completing-p))
+      (use-local-map (make-composed-keymap icomplete-fido-mode-map
+                                           (current-local-map)))
+      (setq-local icomplete-tidy-shadowed-file-names t
+                  icomplete-show-matches-on-no-input t
+                  icomplete-hide-common-prefix nil
+                  completion-styles '(basic partial-completion emacs22)
+                  completion-flex-nospace nil
+                  completion-category-defaults nil)))
+
   (setq icomplete-compute-delay 0))
 
 ;;;----------------------------------------------------------------------------

@@ -410,25 +410,25 @@
    ;; erc-hl-nicks-nick-USERNAME2-face ; dynamically created faces? handle in a loop?
 
    ;; minesweeper
-   `(minesweeper-neighbor ((,class (:background "black"))))
-   `(minesweeper-blank ((,class (:foreground ,faint-less))))
+   `(minesweeper-neighbor ((,class (:background "#EEEEEE"))))
+   `(minesweeper-blank ((,class (:foreground ,faint-lesser))))
    `(minesweeper-marked ((,class (:foreground ,fg))))
-   `(minesweeper-0 ((,class (:foreground ,faint-less))))
-   `(minesweeper-1 ((,class (:foreground "cyan";"deepskyblue"
+   `(minesweeper-0 ((,class (:foreground ,faint-lesser))))
+   `(minesweeper-1 ((,class (:foreground "blue";"deepskyblue"
                              ))))
-   `(minesweeper-2 ((,class (:foreground "lawn green";"yellowgreen"
+   `(minesweeper-2 ((,class (:foreground "forest green";"yellowgreen"
                              ))))
-   `(minesweeper-3 ((,class (:foreground ,rain-4
+   `(minesweeper-3 ((,class (:foreground "purple"
                              ))))
-   `(minesweeper-4 ((,class (:foreground ,rain-1))))
-   `(minesweeper-5 ((,class (:foreground ,rain-3))))
-   `(minesweeper-6 ((,class (:foreground ,rain-6))))
-   `(minesweeper-7 ((,class (:foreground ,rain-7))))
-   `(minesweeper-8 ((,class (:foreground ,rain-8))))
+   `(minesweeper-4 ((,class (:foreground "red"))))
+   `(minesweeper-5 ((,class (:foreground "darkorange" :background "#555555"))))
+   `(minesweeper-6 ((,class (:foreground "yellow" :background "black"))))
+   `(minesweeper-7 ((,class (:foreground "white" :background "black"))))
+   `(minesweeper-8 ((,class (:foreground ,rain-8 :background "black"))))
    `(minesweeper-explode ((,class (:foreground "black"
                                                :background "red"
                                                :weight bold))))
-   `(minesweeper-mismarked ((,class (:background ,highlight
+   `(minesweeper-mismarked ((,class (:background "black"
                                                  :foreground "orange"
                                                  :weight bold))))
 

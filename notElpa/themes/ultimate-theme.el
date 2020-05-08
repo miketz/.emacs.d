@@ -387,7 +387,7 @@
    ;; erc-fool-face
    ;; erc-pal-face
    ;; erc-dangerous-host-face
-   ;; erc-current-nick-face
+   `(erc-current-nick-face ((,class :foreground ,fg)))
    ;; erc-hl-nicks-nick-base-face
    ;; erc-button
    ;; erc-underline-face

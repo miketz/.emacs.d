@@ -23,6 +23,7 @@
        (bg-yellow    "#FFFF00")
        (fg-yellow    "black")
        (bg-red       "#FF4500")
+       (bg-red2      "#FFB5B5")
        (fg-red       "#300000")
        (faint        "#F0DBBD")
        (fainter      "#DDD9BB")
@@ -392,7 +393,8 @@
    ;; erc-underline-face
    ;; erc-inverse-face
    ;; erc-bold-face
-   ;; erc-nick-msg-face
+   `(erc-nick-msg-face ((,class :foreground ,fg-red :background ,bg-red)))
+   `(erc-direct-msg-face ((,class :foreground ,fg-red :background ,bg-red2)))
    ;; erc-nick-default-face
    ;; erc-my-nick-face
    ;; erc-error-face
@@ -400,7 +402,6 @@
    ;; erc-command-indicator-face
    ;; erc-prompt-face
    ;; erc-header-line
-   ;; erc-direct-msg-face
    ;; erc-my-nick-prefix-face
    ;; erc-nick-prefix-face
    ;; erc-default-face

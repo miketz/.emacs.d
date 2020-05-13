@@ -1647,7 +1647,8 @@ This prevents overlapping themes; something I would rarely want."
   (when my-graphic-p
     (push
      '(font
-       . "-outline-Ubuntu Mono-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1")
+       .
+       "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1")
      default-frame-alist)
     ;; (set-frame-font
     ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")

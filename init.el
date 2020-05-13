@@ -6381,14 +6381,14 @@ Closure over `preceding-sexp-fn'."
 ;;; smart-tabs-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/smarttabs" load-path)
-(autoload #'smart-tabs-when "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-create-advice-list "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-create-language-advice "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-mode "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-mode-enable "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-advice "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-insinuate "smart-tabs-mode" nil t)
-(autoload #'smart-tabs-add-language-support "smart-tabs-mode" nil t)
+(autoload 'smart-tabs-when "smart-tabs-mode" nil nil t)
+(autoload 'smart-tabs-create-advice-list "smart-tabs-mode" nil nil t)
+(autoload 'smart-tabs-create-language-advice "smart-tabs-mode" nil nil t)
+(autoload 'smart-tabs-mode "smart-tabs-mode" nil t nil)
+(autoload 'smart-tabs-mode-enable "smart-tabs-mode" nil nil nil)
+(autoload 'smart-tabs-advice "smart-tabs-mode" nil nil t)
+(autoload 'smart-tabs-insinuate "smart-tabs-mode" nil nil nil)
+(autoload 'smart-tabs-add-language-support "smart-tabs-mode" nil nil t)
 
 ;; NOTE: just setting up hooks manually in eval-after-load for specific langs.
 ;; (smart-tabs-insinuate 'c)

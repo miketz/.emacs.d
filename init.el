@@ -3485,9 +3485,9 @@ and indent."
       (setq indent-tabs-mode t))
 
     (progn ;; smart-tabs-mode
-      (smart-tabs-mode-enable)
       (smart-tabs-advice c-indent-line c-basic-offset)
-      (smart-tabs-advice c-indent-region c-basic-offset)))
+      (smart-tabs-advice c-indent-region c-basic-offset)
+      (smart-tabs-mode-enable)))
   (add-hook 'c-mode-hook #'my-setup-c-mode)
 
   (defun my-setup-c++-mode ()
@@ -3499,9 +3499,9 @@ and indent."
       (setq indent-tabs-mode t))
 
     (progn ;; smart-tabs-mode
-      (smart-tabs-mode-enable)
       (smart-tabs-advice c-indent-line c-basic-offset)
-      (smart-tabs-advice c-indent-region c-basic-offset)))
+      (smart-tabs-advice c-indent-region c-basic-offset)
+      (smart-tabs-mode-enable)))
   (add-hook 'c++-mode-hook #'my-setup-c++-mode)
 
   (defun my-setup-java-mode ()
@@ -6333,13 +6333,13 @@ Closure over `preceding-sexp-fn'."
     (setq tab-width my-indent-width) ; buffer local
     (setq indent-tabs-mode t) ; buffer local
 
-    (smart-tabs-mode-enable)
     (smart-tabs-advice python-indent-line python-indent-offset)
     (smart-tabs-advice python-indent-region python-indent-offset)
     (when (featurep 'python-mode)
       (smart-tabs-advice py-indent-line py-indent-offset)
       (smart-tabs-advice py-newline-and-indent py-indent-offset)
-      (smart-tabs-advice py-indent-region py-indent-offset)))
+      (smart-tabs-advice py-indent-region py-indent-offset))
+    (smart-tabs-mode-enable))
 
   (when nil ; for now don't use tabs as PEP 8 says use 4 spaces.
     ;; hook for smart-tabs-mode

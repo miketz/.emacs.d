@@ -52,7 +52,7 @@
           ;; "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
           "-raster-ProggySquare-normal-normal-normal-mono-11-*-*-*-c-*-iso8859-1"
           "-outline-Ubuntu Mono-normal-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
-          "-outline-Ubuntu Mono-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
           "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"
           "-outline-Envy Code R-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"])
        (t nil)))

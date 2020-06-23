@@ -470,6 +470,8 @@
 
    ;; markdown-mode
    `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
+   `(markdown-markup-face ((,class :foreground "black"
+                                   :background ,faint)))
 
    ;; org
    `(org-hide ((,class (:foreground ,faint))))

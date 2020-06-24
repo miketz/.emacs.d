@@ -2624,6 +2624,7 @@ Inserts a new line and the beginning and end with text values:
   (defun my-set-jslint-compile-command ()
     "Set the `compile-command' to jslint."
     (interactive)
+    ;; TODO: look into a way to send the text to jslint without a file.
     ;; wireup M-x compile
     (when buffer-file-name
       (set (make-local-variable 'compile-command)
@@ -2631,6 +2632,11 @@ Inserts a new line and the beginning and end with text values:
                    (shell-quote-argument buffer-file-name)))))
 
   (defun my-js2-init ()
+    ;; NOTE: if a tmp file is created after js2-mode loads, this won't set
+    ;; the `compile-command'. But `my-set-jslint-compile-command' can be
+    ;; called manually in that case.
+    (my-set-jslint-compile-command)
+
     (js2-highlight-unused-variables-mode t)
     ;; replace ambiguous name "Javascript-IDE" with "js2"
     (setq mode-name "js2")

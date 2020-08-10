@@ -346,6 +346,8 @@
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
    `(web-mode-html-attr-name-face ((,class :foreground ,fg)))
    `(web-mode-html-tag-face ((,class :foreground "#1059ff")))
+   `(web-mode-doctype-face ((,class :foreground ,fg
+                                    :background "gray")))
 
    ;; company
    `(company-tooltip ((,class (:background ,bg-highlight :foreground ,fg))))

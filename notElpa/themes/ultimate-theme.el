@@ -324,9 +324,15 @@
    `(js2-function-call ((,class (:inherit font-lock-function-name-face))))
    `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
    `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
-   `(js2-warning ((,class :underline (:color "yellow" :style wave))))
-   `(js2-error ((,class :underline (:color "red" :style wave))))
-   `(js2-external-variable ((,class (:underline (:color "orange" :style wave)))))
+   `(js2-warning ((,class :underline (:color "yellow" :style wave )
+                          :background "black"
+                          :foreground "yellow")))
+   `(js2-error ((,class :underline (:color "red" :style wave)
+                        :background "black"
+                        :foreground "red")))
+   `(js2-external-variable ((,class :underline (:color "orange" :style wave)
+                                    :background "black"
+                                    :foreground "orange")))
    `(js2-jsdoc-tag ((,class (:foreground "lime green"))))
    `(js2-jsdoc-type ((,class (:inherit font-lock-type-face))))
    `(js2-jsdoc-value ((,class (:inherit font-lock-constant-face))))

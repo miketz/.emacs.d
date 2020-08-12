@@ -3621,6 +3621,42 @@ and indent."
 
   (setq sql-product 'ms) ; using sql server at the moment.
 
+  (progn
+    ;; some SqlServer related keyboard macros to help prepare a generated insert
+    ;; statement. Just textual manipulations. Ad hoc.
+    (fset 'my-kbd-sql-delete-brackets
+          (kmacro-lambda-form [?/ ?i ?n ?s ?e ?r ?t return ?v ?/ ?\) return ?\M-x ?m ?y ?- ?d ?e ?l ?e ?t ?e ?- ?b ?r ?e backspace ?a ?c ?k ?e ?t ?s return] 0 "%d"))
+
+    (fset 'my-kbd-sql-move-stuff-left
+          (kmacro-lambda-form [?/ ?v ?a ?l ?u ?e ?s return ?0 ?D ?i ?s ?e ?l ?e ?c ?t escape ?j ?w ?v ?% ?3 ?< ?% ?x ?? ?s ?e ?l ?e ?c ?t return ?j ?x] 0 "%d"))
+
+    (fset 'my-kbd-sql-fix-col-1
+          (kmacro-lambda-form [?x ?i ?\C-q ?\[ escape ?/ ?, return ?i ?\C-q ?\] escape ?l ?l ?D ?j ?0] 0 "%d"))
+
+    (fset 'my-kbd-sql-fix-col-n
+          (kmacro-lambda-form [?x ?x ?i ?\C-q ?\[ escape ?/ ?, return ?i ?\C-q ?\] escape ?l ?l ?D ?j ?0] 0 "%d"))
+
+
+    (defun my-prepare-sql-insert ()
+      (interactive)
+      "Run several pre-recorded keyboard macros to prepare a sql insert
+statement generated my SqlServer."
+      (my-kbd-sql-delete-brackets)
+      (my-kbd-sql-move-stuff-left)
+      (my-kbd-sql-fix-col-1)
+      (cl-loop repeat 3 do
+               (my-kbd-sql-fix-col-n)))
+
+    (defun my-sql-fix-n ()
+      (interactive)
+      (let ((reps (if (null current-prefix-arg)
+                      1
+                    current-prefix-arg)))
+        (cl-loop repeat reps do
+                 (my-kbd-sql-fix-col-n)))))
+
+
+
   (defun my-setup-sql ()
     (my-turn-on-electric-pair-local-mode)
     (yas-minor-mode 1)

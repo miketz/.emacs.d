@@ -148,7 +148,7 @@
    `(font-lock-preprocessor-face ((,class (:foreground "#5b1503"))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
-   ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
+   `(font-lock-string-face ((,class (:foreground "dark red"))))
    `(font-lock-type-face ((,class (:foreground "blue" :background ,bg-highlight))))
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))

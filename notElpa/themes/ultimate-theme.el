@@ -312,7 +312,8 @@
                            :box (:line-width -1 :style released-button)))))
 
    ;; magit
-   `(magit-section-highlight ((,class (:background ,faint))))
+   `(magit-section-highlight ((,class (:background "#C5FfC5";,faint
+                                       ))))
    `(magit-log-author ((,class (:foreground "deepskyblue4"))))
    `(magit-log-date ((,class (:foreground "#803030"))))
    `(magit-hash ((,class (:foreground "#803030"))))

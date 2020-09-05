@@ -1407,6 +1407,11 @@
    `(region ((t (:background "#69685E"))))
 
    '(completions-common-part ((t (:foreground "gray60"))))
-   '(completions-first-difference ((t (:foreground "yellow"))))))
+   '(completions-first-difference ((t (:foreground "yellow"))))
+
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((t (:foreground "#303030")
+                               )))))
 
 (provide 'my-color-theme-mods)

@@ -1414,4 +1414,24 @@
    `(fill-column-indicator ((t (:foreground "#303030")
                                )))))
 
+(defun my-color-avk-daylight ()
+  (interactive)
+  (load-theme 'avk-daylight t)
+  (my-rainbow-parens-light-bg3)
+  (custom-theme-set-faces
+   'avk-daylight
+
+   `(font-lock-function-name-face
+     ((t :foreground nil
+         :background "khaki2"
+         ;; box looks nice but creates extra vertial/horizontal space even with negative line-width
+         ;; :box (:line-width -1
+         ;;                   :color "gray94"
+         ;;                   :style released-button)
+         )))
+
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((t (:foreground "#FCDCDC"))))))
+
 (provide 'my-color-theme-mods)

@@ -668,6 +668,7 @@ in case that file does not provide any feature."
 (declare-function my-color-sunburn 'my-color-theme-mods)
 (declare-function my-color-overcast 'my-color-theme-mods)
 (declare-function my-color-warm-night 'my-color-theme-mods)
+(declare-function my-color-avk-daylight 'my-color-theme-mods)
 (declare-function my-set-alpha 'suppress)
 (declare-function my-change-alpha 'suppress)
 (declare-function my-change-alpha-more-solid 'suppress)
@@ -1604,7 +1605,9 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-color-tango-dark file nil t)
   (autoload #'my-color-sunburn file nil t)
   (autoload #'my-color-overcast file nil t)
-  (autoload #'my-color-warm-night file nil t))
+  (autoload #'my-color-warm-night file nil t)
+  (autoload #'my-color-avk-daylight file nil t))
+
 
 (when my-graphic-p ;; transparency stuff
   (autoload #'my-change-alpha-more-solid "my-misc" nil t)

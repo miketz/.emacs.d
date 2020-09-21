@@ -119,6 +119,15 @@ Some info may be purely for informational/doc purposes."
                      (with-editor "20181103"))
       :depend-soft '())
     ,(make-module
+      :name 'csharp-mode
+      :folder (concat my-module-folder "csharp-mode")
+      :remote-mine "https://github.com/miketz/csharp-mode"
+      :remote-upstream "https://github.com/josteink/csharp-mode"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
       :remote-mine "https://github.com/miketz/mor"

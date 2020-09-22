@@ -7440,6 +7440,13 @@ vanilla javascript buffers."
 (push "~/.emacs.d/notElpa/haskell-mode" load-path)
 
 ;;;----------------------------------------------------------------------------
+;;; spinner
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/spinner.el" load-path)
+(autoload #'spinner-create "spinner.el" nil nil)
+(autoload #'spinner-start "spinner.el" nil nil)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-load-common ()

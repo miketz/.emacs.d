@@ -128,6 +128,15 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'spinner
+      :folder (concat my-module-folder "spinner.el")
+      :remote-mine "https://github.com/miketz/spinner.el"
+      :remote-upstream "https://github.com/Malabarba/spinner.el"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
       :remote-mine "https://github.com/miketz/mor"

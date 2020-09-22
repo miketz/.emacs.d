@@ -259,3 +259,6 @@
 [submodule "notElpa/haskell-mode"]
 	path = notElpa/haskell-mode
 	url = https://github.com/miketz/haskell-mode
+[submodule "notElpa/spinner.el"]
+	path = notElpa/spinner.el
+	url = https://github.com/miketz/spinner.el

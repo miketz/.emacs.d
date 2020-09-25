@@ -4739,6 +4739,12 @@ statement generated my SqlServer."
 ;;; transient. dependency of magit
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/transient/lisp" load-path)
+(autoload #'transient-define-prefix "transient" nil nil 'macro)
+(autoload #'transient-insert-suffix "transient" nil nil nil)
+(autoload #'transient-append-suffix "transient" nil nil nil)
+(autoload #'transient-replace-suffix "transient" nil nil nil)
+(autoload #'transient-remove-suffix "transient" nil nil nil)
+(autoload #'transient-remove-suffix "transient" nil nil nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; magit

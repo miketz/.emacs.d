@@ -7443,8 +7443,8 @@ vanilla javascript buffers."
 ;;; spinner
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/spinner.el" load-path)
-(autoload #'spinner-create "spinner.el" nil nil)
-(autoload #'spinner-start "spinner.el" nil nil)
+(autoload #'spinner-create "spinner" nil nil)
+(autoload #'spinner-start "spinner" nil nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

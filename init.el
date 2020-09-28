@@ -2035,7 +2035,8 @@ This prevents overlapping themes; something I would rarely want."
     (define-key slime-repl-mode-map key #'my-view-hyperspec)
     (define-key slime-macroexpansion-minor-mode-map key #'my-view-hyperspec))
   (when my-use-ivy-p
-    (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl))
+    ;; (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl)
+    (define-key slime-mode-map (kbd "C-M-i") #'complete-symbol))
   (global-set-key (kbd "C-c b") #'slime-selector))
 
 
@@ -8272,8 +8273,11 @@ START and END define the region."
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:
-  (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
-  (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
+  (define-key emacs-lisp-mode-map (kbd "C-M-i") #'complete-symbol)
+  (define-key lisp-interaction-mode-map (kbd "C-M-i") #'complete-symbol)
+  ;; (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
+  ;; (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el)
+  )
 
 ;; (with-eval-after-load "lisp-mode"
 ;;   (add-hook 'emacs-lisp-mode-hook

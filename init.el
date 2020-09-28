@@ -9771,6 +9771,13 @@ vanilla javascript buffers."
            (directory-file-name dir-name))))
 
 ;;;----------------------------------------------------------------------------
+;;; xref. used in conjunction with ctags when jumping to definition.
+;;;----------------------------------------------------------------------------
+;; use emacs bindings (not evil)
+(when my-use-evil-p
+  (push '("^*xref" . emacs) evil-buffer-regexps))
+
+;;;----------------------------------------------------------------------------
 ;;; libvterm
 ;;;----------------------------------------------------------------------------
 (when (eq my-curr-computer 'wild-dog)

@@ -486,6 +486,9 @@ in case that file does not provide any feature."
 (defvar electric-spacing-double-space-docs)
 (defvar c-hanging-semi&comma-criteria)
 (defvar erc-modules)
+(defvar company-prefix) ; buffer-local
+(defvar icomplete-fido-mode-map)
+(defvar Info-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -870,6 +873,8 @@ in case that file does not provide any feature."
 (declare-function prescient-persist-mode 'prescient)
 (declare-function my-setup-inferior-python-mode 'suppress)
 (declare-function c-toggle-hungry-state 'cc-cmds)
+(declare-function company-complete-number 'company)
+(declare-function company-abort 'company)
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

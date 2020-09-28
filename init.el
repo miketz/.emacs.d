@@ -875,6 +875,8 @@ in case that file does not provide any feature."
 (declare-function c-toggle-hungry-state 'cc-cmds)
 (declare-function company-complete-number 'company)
 (declare-function company-abort 'company)
+(declare-function my-set-jslint-compile-command 'suppress)
+(declare-function icomplete-simple-completing-p 'icomplete)
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

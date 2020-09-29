@@ -1057,6 +1057,12 @@ Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 Using the Jansson C library.
 This should speed up lsp related modes.")
 
+(defvar my-native-comp-p (and (fboundp 'native-comp-available-p)
+                              (native-comp-available-p))
+  "True if Emacs is using native elsip compliation.
+aka gccemacs.
+Currently available on git branch: feature/native-comp.")
+
 ;;;----------------------------------------------------------------------------
 ;;; Packages
 ;;;----------------------------------------------------------------------------

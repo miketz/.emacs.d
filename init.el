@@ -486,6 +486,9 @@ in case that file does not provide any feature."
 (defvar electric-spacing-double-space-docs)
 (defvar c-hanging-semi&comma-criteria)
 (defvar erc-modules)
+(defvar company-prefix) ; buffer-local
+(defvar icomplete-fido-mode-map)
+(defvar Info-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -870,6 +873,10 @@ in case that file does not provide any feature."
 (declare-function prescient-persist-mode 'prescient)
 (declare-function my-setup-inferior-python-mode 'suppress)
 (declare-function c-toggle-hungry-state 'cc-cmds)
+(declare-function company-complete-number 'company)
+(declare-function company-abort 'company)
+(declare-function my-set-jslint-compile-command 'suppress)
+(declare-function icomplete-simple-completing-p 'icomplete)
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as
@@ -2030,7 +2037,8 @@ This prevents overlapping themes; something I would rarely want."
     (define-key slime-repl-mode-map key #'my-view-hyperspec)
     (define-key slime-macroexpansion-minor-mode-map key #'my-view-hyperspec))
   (when my-use-ivy-p
-    (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl))
+    ;; (define-key slime-mode-map (kbd "C-M-i") #'counsel-cl)
+    (define-key slime-mode-map (kbd "C-M-i") #'complete-symbol))
   (global-set-key (kbd "C-c b") #'slime-selector))
 
 
@@ -8267,8 +8275,11 @@ START and END define the region."
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:
-  (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
-  (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el))
+  (define-key emacs-lisp-mode-map (kbd "C-M-i") #'complete-symbol)
+  (define-key lisp-interaction-mode-map (kbd "C-M-i") #'complete-symbol)
+  ;; (define-key emacs-lisp-mode-map (kbd "C-M-i") #'counsel-el)
+  ;; (define-key lisp-interaction-mode-map (kbd "C-M-i") #'counsel-el)
+  )
 
 ;; (with-eval-after-load "lisp-mode"
 ;;   (add-hook 'emacs-lisp-mode-hook
@@ -8939,8 +8950,27 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; ggtags
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ggtags" load-path)
+(autoload #'ggtags-find-project "ggtags" nil nil nil)
+(autoload #'ggtags-find-tag-dwim "ggtags" nil t nil)
+(autoload #'ggtags-mode "ggtags" nil t nil)
+(autoload #'ggtags-build-imenu-index "ggtags" nil nil nil)
+(autoload #'ggtags-build-imenu-index "ggtags" nil nil nil)
+(autoload #'ggtags-try-complete-tag "ggtags" nil nil nil)
+
+
 ;; TODO: fix all the key bindings `ggtags-mode' clobbers. Like M-n, M-p.
 (with-eval-after-load 'ggtags
+  ;; Don't try to update GTAGS on each save; makes the system sluggish for huge
+  ;; projects.
+  (setq ggtags-update-on-save nil)
+  ;; Don't auto-highlight tag at point.. makes the system really sluggish!
+  (setq ggtags-highlight-tag nil)
+  (setq ggtags-sort-by-nearness nil) ; Enabling nearness requires global 6.5+
+  (setq ggtags-navigation-mode-lighter nil)
+  (setq ggtags-mode-line-project-name nil)
+  (setq ggtags-oversize-limit (* 30 1024 1024)) ; 30 MB
+
   ;; doesn't work, added to windows path instead.
   ;; (when (eq my-curr-computer 'work-laptop)
   ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
@@ -9536,9 +9566,11 @@ vanilla javascript buffers."
 ;;; company-lsp
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/company-lsp" load-path)
-(with-eval-after-load 'lsp-mode
-  (require 'company-lsp)
-  (push 'company-lsp company-backends))
+
+;; avoid this until I start using lsp. TODO: add it back later?
+;; (with-eval-after-load 'lsp-mode
+;;   (require 'company-lsp)
+;;   (push 'company-lsp company-backends))
 
 ;;;----------------------------------------------------------------------------
 ;;; cquery. Not an elisp project. Built separately.
@@ -9769,6 +9801,13 @@ vanilla javascript buffers."
    (format "%s -f TAGS -e -R %s"
            my-ctags-exe
            (directory-file-name dir-name))))
+
+;;;----------------------------------------------------------------------------
+;;; xref. used in conjunction with ctags when jumping to definition.
+;;;----------------------------------------------------------------------------
+;; use emacs bindings (not evil)
+(when my-use-evil-p
+  (push '("^*xref" . emacs) evil-buffer-regexps))
 
 ;;;----------------------------------------------------------------------------
 ;;; libvterm

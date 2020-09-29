@@ -8957,7 +8957,7 @@ Closure over `preceding-sexp-fn'."
 (autoload #'ggtags-build-imenu-index "ggtags" nil nil nil)
 (autoload #'ggtags-build-imenu-index "ggtags" nil nil nil)
 (autoload #'ggtags-try-complete-tag "ggtags" nil nil nil)
-
+(autoload #'ggtags-create-tags "ggtags" nil t nil)
 
 ;; TODO: fix all the key bindings `ggtags-mode' clobbers. Like M-n, M-p.
 (with-eval-after-load 'ggtags
@@ -8970,6 +8970,10 @@ Closure over `preceding-sexp-fn'."
   (setq ggtags-navigation-mode-lighter nil)
   (setq ggtags-mode-line-project-name nil)
   (setq ggtags-oversize-limit (* 30 1024 1024)) ; 30 MB
+
+  (cond
+   ((eq my-curr-computer 'work-laptop-2019)
+    (setq ggtags-executable-directory "C:/Users/mtz/programs/glo663wb/bin")))
 
   ;; doesn't work, added to windows path instead.
   ;; (when (eq my-curr-computer 'work-laptop)

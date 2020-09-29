@@ -489,6 +489,13 @@ in case that file does not provide any feature."
 (defvar company-prefix) ; buffer-local
 (defvar icomplete-fido-mode-map)
 (defvar Info-mode-map)
+(defvar ggtags-update-on-save)
+(defvar ggtags-highlight-tag)
+(defvar ggtags-sort-by-nearness)
+(defvar ggtags-navigation-mode-lighter)
+(defvar ggtags-mode-line-project-name)
+(defvar ggtags-oversize-limit)
+(defvar ggtags-executable-directory)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -877,6 +884,13 @@ in case that file does not provide any feature."
 (declare-function company-abort 'company)
 (declare-function my-set-jslint-compile-command 'suppress)
 (declare-function icomplete-simple-completing-p 'icomplete)
+(declare-function my-kbd-sql-delete-brackets 'suppress)
+(declare-function my-kbd-sql-move-stuff-left 'suppress)
+(declare-function my-kbd-sql-fix-col-1 'suppress)
+(declare-function my-kbd-sql-fix-col-n 'suppress)
+(declare-function Info-history-back 'info)
+(declare-function package-installed-p 'package)
+(declare-function rg-list-searches 'rg-ibuffer)
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

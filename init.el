@@ -8961,6 +8961,16 @@ Closure over `preceding-sexp-fn'."
 
 ;; TODO: fix all the key bindings `ggtags-mode' clobbers. Like M-n, M-p.
 (with-eval-after-load 'ggtags
+  ;; Don't try to update GTAGS on each save; makes the system sluggish for huge
+  ;; projects.
+  (setq ggtags-update-on-save nil)
+  ;; Don't auto-highlight tag at point.. makes the system really sluggish!
+  (setq ggtags-highlight-tag nil)
+  (setq ggtags-sort-by-nearness nil) ; Enabling nearness requires global 6.5+
+  (setq ggtags-navigation-mode-lighter nil)
+  (setq ggtags-mode-line-project-name nil)
+  (setq ggtags-oversize-limit (* 30 1024 1024)) ; 30 MB
+
   ;; doesn't work, added to windows path instead.
   ;; (when (eq my-curr-computer 'work-laptop)
   ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))

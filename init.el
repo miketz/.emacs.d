@@ -8950,6 +8950,15 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; ggtags
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ggtags" load-path)
+(autoload #'ggtags-find-project "ggtags" nil nil nil)
+(autoload #'ggtags-find-tag-dwim "ggtags" nil t nil)
+(autoload #'ggtags-mode "ggtags" nil t nil)
+(autoload #'ggtags-build-imenu-index "ggtags" nil nil nil)
+(autoload #'ggtags-build-imenu-index "ggtags" nil nil nil)
+(autoload #'ggtags-try-complete-tag "ggtags" nil nil nil)
+
+
 ;; TODO: fix all the key bindings `ggtags-mode' clobbers. Like M-n, M-p.
 (with-eval-after-load 'ggtags
   ;; doesn't work, added to windows path instead.

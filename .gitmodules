@@ -262,3 +262,6 @@
 [submodule "notElpa/spinner.el"]
 	path = notElpa/spinner.el
 	url = https://github.com/miketz/spinner.el
+[submodule "notElpa/ggtags"]
+	path = notElpa/ggtags
+	url = https://github.com/miketz/ggtags

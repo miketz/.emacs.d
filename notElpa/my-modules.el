@@ -137,6 +137,15 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'ggtags
+      :folder (concat my-module-folder "ggtags")
+      :remote-mine "https://github.com/miketz/ggtags"
+      :remote-upstream "https://github.com/leoliu/ggtags"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
       :remote-mine "https://github.com/miketz/mor"

@@ -15,6 +15,9 @@
 ;;  '(cursor ((t (:background "blue")))))
 ;; (blink-cursor-mode 0)
 
+;; sacrifice proper display of right-to-left languages for performance.
+(setq bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
 
 ;; Avoid resizing the GUI frame when font changes.
 ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn

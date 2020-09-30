@@ -190,6 +190,13 @@ in case that file does not provide any feature."
           ,@body))))
 
 ;;;----------------------------------------------------------------------------
+;;; bidi stuff for performance
+;;;----------------------------------------------------------------------------
+;; sacrifice proper display of right-to-left languages for performance.
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
+
+;;;----------------------------------------------------------------------------
 ;;; defvars
 ;;; This config uses lexical binding. So any dynamic vars from packages not yet
 ;;; loaded will be incorrectly lexically bound in any `let' statements.

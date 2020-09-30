@@ -8999,6 +8999,8 @@ Closure over `preceding-sexp-fn'."
   ;; (when (eq my-curr-computer 'work-laptop)
   ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
 
+  (define-key ggtags-mode-map (kbd "C-c C-d d") #'ggtags-show-definition)
+  (define-key ggtags-mode-map (kbd "C-c C-d C-d") #'ggtags-show-definition)
   (when my-use-evil-p
     (evil-define-key 'normal ggtags-mode-map (kbd "M-.")
       #'ggtags-find-tag-dwim)

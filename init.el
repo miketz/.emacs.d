@@ -9824,10 +9824,18 @@ vanilla javascript buffers."
       (message "Set path to ctags in my-ctags-exe.")
       (cl-return-from my-create-ctags))
 
+  ;; create tags
   (shell-command
    (format "%s -f TAGS -e -R %s"
            my-ctags-exe
-           (directory-file-name dir-name))))
+           (directory-file-name dir-name)))
+
+  ;; `xref' stores TAGS file in global variable `tags-file-name'. Set it as
+  ;; that's usually what I want.
+  ;; NOTE: when switching to a new project, must manually set `tags-file-name'
+  ;; or regenrate the TAGS file with this fn.
+  (setq tags-file-name (concat (directory-file-name dir-name)
+                               "/TAGS")))
 
 ;;;----------------------------------------------------------------------------
 ;;; xref. used in conjunction with ctags when jumping to definition.

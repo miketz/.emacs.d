@@ -16,7 +16,7 @@
 ;; (blink-cursor-mode 0)
 
 ;; sacrifice proper display of right-to-left languages for performance.
-(setq bidi-paragraph-direction 'left-to-right)
+(setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
 
 ;; Avoid resizing the GUI frame when font changes.

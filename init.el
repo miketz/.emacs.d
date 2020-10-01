@@ -9601,10 +9601,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/company-lsp" load-path)
 
-;; avoid this until I start using lsp. TODO: add it back later?
-;; (with-eval-after-load 'lsp-mode
-;;   (require 'company-lsp)
-;;   (push 'company-lsp company-backends))
+(with-eval-after-load 'lsp-mode
+  (require 'company-lsp)
+  (push 'company-lsp company-backends))
 
 ;;;----------------------------------------------------------------------------
 ;;; cquery. Not an elisp project. Built separately.

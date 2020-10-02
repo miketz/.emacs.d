@@ -9846,9 +9846,10 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; xref. used in conjunction with ctags when jumping to definition.
 ;;;----------------------------------------------------------------------------
-;; use emacs bindings (not evil)
-(when my-use-evil-p
-  (push '("^*xref" . emacs) evil-buffer-regexps))
+(with-eval-after-load 'xref
+  (when my-use-evil-p
+    ;; use emacs bindings (not evil)
+    (push '("^*xref" . emacs) evil-buffer-regexps)))
 
 ;;;----------------------------------------------------------------------------
 ;;; libvterm

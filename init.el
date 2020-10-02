@@ -8989,6 +8989,9 @@ Closure over `preceding-sexp-fn'."
 
 ;; TODO: fix all the key bindings `ggtags-mode' clobbers. Like M-n, M-p.
 (with-eval-after-load 'ggtags
+  ;; this messes up keybinds like M-< and M->. Even in buffers not using
+  ;; ggtags-mode??? stop that.
+  (setq ggtags-enable-navigation-keys nil)
   ;; Don't try to update GTAGS on each save; makes the system sluggish for huge
   ;; projects.
   (setq ggtags-update-on-save nil)
@@ -9009,11 +9012,15 @@ Closure over `preceding-sexp-fn'."
 
   (define-key ggtags-mode-map (kbd "C-c C-d d") #'ggtags-show-definition)
   (define-key ggtags-mode-map (kbd "C-c C-d C-d") #'ggtags-show-definition)
+
   (when my-use-evil-p
     (evil-define-key 'normal ggtags-mode-map (kbd "M-.")
       #'ggtags-find-tag-dwim)
     ;; `evil-define-key' doesn't work here but `define-key' does?
-    (define-key ggtags-mode-map (kbd "M-,") #'pop-tag-mark)))
+    (define-key ggtags-mode-map (kbd "M-,") #'pop-tag-mark)
+
+    ;; use emacs bindings (not evil) in the tag list buffer
+    (push '("^*ggtags" . emacs) evil-buffer-regexps)))
 
 
 ;;;----------------------------------------------------------------------------

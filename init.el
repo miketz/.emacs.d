@@ -9836,8 +9836,8 @@ vanilla javascript buffers."
   (interactive "DDirectory: ")
   ;; GUARD: must have ctags program configured in `my-ctags-exe'.
   (when (null my-ctags-exe)
-      (message "Set path to ctags in my-ctags-exe.")
-      (cl-return-from my-create-ctags))
+    (message "Set path to ctags in my-ctags-exe.")
+    (cl-return-from my-create-ctags))
 
   ;; create tags
   (shell-command
@@ -9849,8 +9849,11 @@ vanilla javascript buffers."
   ;; that's usually what I want.
   ;; NOTE: when switching to a new project, must manually set `tags-file-name'
   ;; or regenrate the TAGS file with this fn.
-  (setq tags-file-name (concat (directory-file-name dir-name)
-                               "/TAGS")))
+  (visit-tags-table (concat (directory-file-name dir-name)
+                            "/TAGS"))
+  ;; (setq tags-file-name (concat (directory-file-name dir-name)
+  ;;                              "/TAGS"))
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; xref. used in conjunction with ctags when jumping to definition.

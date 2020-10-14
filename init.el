@@ -3745,17 +3745,18 @@ statement generated my SqlServer."
 (autoload #'rainbow-delimiters-mode-enable "rainbow-delimiters" nil t)
 (autoload #'rainbow-delimiters-mode-disable "rainbow-delimiters" nil t)
 
-(add-hook 'lisp-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'rainbow-delimiters-mode)
-;; (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'sql-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'c-mode-common-hook #'rainbow-delimiters-mode)
-;; (add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode)
-;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'lisp-interaction-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'ielm-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'eval-expression-minibuffer-setup-hook
+          #'rainbow-delimiters-mode-enable)
+;; (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'sql-mode-hook #'rainbow-delimiters-mode-enable)
+(add-hook 'c-mode-common-hook #'rainbow-delimiters-mode-enable)
+;; (add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode-enable)
+;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode-enable)
 ;;(global-rainbow-delimiters-mode)
 
 ;;;----------------------------------------------------------------------------
@@ -5938,7 +5939,7 @@ Closure over `preceding-sexp-fn'."
     (interactive)
     (call-interactively #'elisp-slime-nav-describe-elisp-thing-at-point)
     (with-current-buffer (help-buffer)
-      (rainbow-delimiters-mode)))
+      (rainbow-delimiters-mode-enable)))
 
   ;; evil-mode stole the keybinds! take them back.
   (when my-use-evil-p

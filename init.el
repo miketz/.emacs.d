@@ -467,6 +467,7 @@ in case that file does not provide any feature."
 (defvar rg-align-position-numbers)
 (defvar rg-mode-map)
 (defvar rg-command-line-flags)
+(defvar rg-ignore-case)
 (defvar eros-eval-result-prefix)
 (defvar eros-eval-result-duration)
 (defvar unkillable-scratch-behavior)

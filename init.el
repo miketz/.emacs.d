@@ -7320,6 +7320,7 @@ vanilla javascript buffers."
   (setq rg-show-columns nil)
   (setq rg-group-result nil)
   (setq rg-align-position-numbers nil)
+  (setq rg-ignore-case 'force) ; case insensitive always
 
   (when my-use-evil-p
     (define-key rg-mode-map (kbd "l") #'evil-forward-char)

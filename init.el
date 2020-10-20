@@ -1340,6 +1340,17 @@ Currently available on git branch: feature/native-comp.")
   ;; dependency on undo-tree was removed recently from evil. do not require.
   ;; (require 'undo-tree) ; stored in /notElpa/evil/lib
 
+  (when (fboundp #'undo-redo) ; emacs 28+
+    ;; (setq evil-undo-system 'undo-redo)
+
+    ;; this is a weird fn that is used to set `evil-undo-system' via custom.
+    ;; TODO: figure out how to properly set `evil-undo-system'.
+    (funcall (lambda (sym value)
+               (evil-set-undo-system value)
+               (set-default sym value))
+             'evil-undo-system
+             'undo-redo))
+
   (setq evil-flash-delay 1)
 
   (when nil ;; don't do this for now.

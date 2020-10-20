@@ -1337,7 +1337,8 @@ Currently available on git branch: feature/native-comp.")
 (autoload #'evil-define-key "evil-core" nil t)
 
 (with-eval-after-load 'evil
-  (require 'undo-tree) ; stored in /notElpa/evil/lib
+  ;; dependency on undo-tree was removed recently from evil. do not require.
+  ;; (require 'undo-tree) ; stored in /notElpa/evil/lib
 
   (setq evil-flash-delay 1)
 

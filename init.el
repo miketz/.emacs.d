@@ -7582,6 +7582,15 @@ vanilla javascript buffers."
 (autoload #'spinner-start "spinner" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; electric-indent
+;;;----------------------------------------------------------------------------
+;; default emacs behavior got weird in Emacs 24.4. Turn it off.
+;; see https://emacs.stackexchange.com/questions/5939/how-to-disable-auto-inden
+;; tation-of-new-lines/5941
+(when (fboundp #'electric-indent-mode)
+  (electric-indent-mode -1))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-load-common ()

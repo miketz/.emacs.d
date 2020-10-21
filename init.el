@@ -7588,8 +7588,22 @@ vanilla javascript buffers."
 ;; default emacs behavior got weird in Emacs 24.4. Turn it off.
 ;; see https://emacs.stackexchange.com/questions/5939/how-to-disable-auto-inden
 ;; tation-of-new-lines/5941
+
+;; turn off electric-indent-mode globally.
+;; It makes newlines in fundamental-mode and text-mode annoying.
 (when (fboundp #'electric-indent-mode)
   (electric-indent-mode -1))
+;; also avoid auto ident on evil "o" keybind
+(when my-use-evil-p
+  (setq-default evil-auto-indent nil))
+
+;; But I usually want electric-indent in programming mode buffers.
+;; Except for sql-mode which has bad indentation.
+(with-eval-after-load 'prog-mode
+  (defun my-setup-prog-mode-indent ()
+    (electric-indent-local-mode 1)
+    (setq evil-auto-indent t))
+  (add-hook 'prog-mode-hook #'my-setup-prog-mode-indent))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

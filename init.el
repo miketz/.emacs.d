@@ -902,6 +902,7 @@ in case that file does not provide any feature."
 (declare-function rg-list-searches 'rg-ibuffer)
 (declare-function ggtags-show-definition 'ggtags)
 (declare-function magit-copy-buffer-revision 'magit-extras)
+(declare-function my-setup-log-edit-mode 'suppress)
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

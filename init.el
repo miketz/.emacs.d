@@ -4369,6 +4369,22 @@ statement generated my SqlServer."
 
 ;; (add-hook 'vc-- (lambda () (linum-mode 0)))
 
+
+;;;----------------------------------------------------------------------------
+;;; log-edit-mode. used by vc for the commit msg buffer.
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'log-edit
+  ;; set up auto-fill mode
+  (defun my-setup-log-edit-mode ()
+    (setq fill-column 72) ; max line length. buffer-local so set in hook.
+    (turn-on-auto-fill)
+    ;; prevent indentation 1
+    (when (fboundp #'electric-indent-local-mode)
+      (electric-indent-local-mode -1))
+    ;; prevent indentation 2
+    (paragraph-indent-minor-mode 1))
+  (add-hook 'log-edit-hook #'my-setup-log-edit-mode))
+
 ;;;----------------------------------------------------------------------------
 ;;; Projectile
 ;;;----------------------------------------------------------------------------

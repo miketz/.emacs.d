@@ -467,7 +467,7 @@
    ;; diff
    `(diff-indicator-removed ((,class :background "red")))
    `(diff-removed ((,class :background "#FF8888")))
-   ;; `(diff-refine-removed ((,class :background "yellow")))
+   `(diff-refine-removed ((,class :background "#Ff8080")))
    `(diff-added ((,class :background "#eeFFdd")))
    `(diff-indicator-added ((,class :background "green")))
    `(diff-refine-added ((,class :background ,bg-green)))

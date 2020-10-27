@@ -47,6 +47,8 @@ Example:
        (fg-yellow    (aref `["#FFFF00" "#FFFF00" "#FFFFFF" "#FFFF00"] i))
        (bg-red       (aref `["#300000" ,todo--bg "#000000" ,todo--bg] i))
        (fg-red       (aref `["#FF0000" ,todo--fg "#FF0000" ,todo--fg] i))
+       (bg-blue      (aref `["#021458" ,todo--bg ,todo--bg ,todo--bg] i))
+       (fg-blue      (aref `["#30cf9f" ,todo--fg ,todo--fg ,todo--fg] i))
        (faint        (aref `["#4D4D3D" "#303030" "#666666" "#0000FF"] i))
        (fainter      (aref `["#3F3F35" ,todo--fg "#0000CD" ,todo--fg] i))
        (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
@@ -535,6 +537,16 @@ Example:
                                  :background ,bg-green
                                  :foreground ,fg-green)))
 
+   ;; tree-sitter-hl
+   `(tree-sitter-hl-face:function.call
+     ((,class ;;:inherit font-lock-function-name-face
+              :foreground "#EFB0BB"
+              :background "#232319")))
+   `(tree-sitter-hl-face:operator
+     ((,class :inherit font-lock-keyword-face
+              :weight normal)))
+
+   ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
    `(rainbow-delimiters-depth-2-face

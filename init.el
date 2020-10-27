@@ -1087,7 +1087,9 @@ Currently available on git branch: feature/native-comp.")
 ;; (setq package-quickstart t) ; pre-generates a giant autoloads file
 
 
-
+(defvar my-modules-p (and (functionp 'module-load) ; should be t
+                          module-file-suffix)      ; should be non-nil
+  "Non-nil if Emacs supports dynamic modules.")
 
 (defvar native-line-numbers-p (boundp 'display-line-numbers)
   "Non-nil if Emacs supports native line number display.")
@@ -7604,6 +7606,34 @@ vanilla javascript buffers."
     (electric-indent-local-mode 1)
     (setq evil-auto-indent t))
   (add-hook 'prog-mode-hook #'my-setup-prog-mode-indent))
+
+;;;----------------------------------------------------------------------------
+;;; tree-sitter, tree-sitter-langs
+;;;----------------------------------------------------------------------------
+(cl-defun my-start-tree-sitter-hl ()
+  "Manually invoke this method in a buffer for syntax highlighting.
+TODO: delete this fn and replace with hooks, etc."
+  (interactive)
+  ;; GUARD
+  (unless my-modules-p
+    (cl-return-from my-start-tree-sitter-hl))
+
+  ;; init
+  (progn
+    (package-initialize) ; using melpa temporarily.
+    (require 'tree-sitter)
+
+    ;; prevent downloads with dummy fn on windows. I manually extract the
+    ;; dll's with 7zip as gzip is not available.
+    (when (eq system-type 'windows-nt)
+      (defun tree-sitter-langs-install-grammars
+          (&optional skip-if-installed version os keep-bundle))
+      (defun tree-sitter-langs-compile (lang-symbol &optional clean)))
+    (require 'tree-sitter-langs))
+
+  ;; enable modes
+  (tree-sitter-mode 1)
+  (tree-sitter-hl-mode 1))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

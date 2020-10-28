@@ -7610,6 +7610,33 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; tree-sitter, tree-sitter-langs
 ;;;----------------------------------------------------------------------------
+(with-eval-after-load 'tree-sitter
+  (progn ;; handle issue where tree-sitter goes crazy during yasnippet
+         ;; expansion. Just turn it off temporarily.
+    (defun my-turn-off-tree-sitter-hl ()
+      (tree-sitter-hl-mode -1)
+      (tree-sitter-mode -1))
+    (defun my-turn-on-tree-sitter-hl ()
+      (tree-sitter-mode 1)
+      (tree-sitter-hl-mode 1))
+
+    (defun my-add-yas-tree-sitter-hooks ()
+      (interactive)
+      (add-hook 'yas-before-expand-snippet-hook #'my-turn-off-tree-sitter-hl)
+      (add-hook 'yas-after-exit-snippet-hook #'my-turn-on-tree-sitter-hl))
+    ;; TODO: figure out an automatic way (hooks?) to remove these hooks. This
+    ;; way requires manually invoking the fn below.
+    (defun my-remove-yas-tree-sitter-hooks ()
+      "Manually invoke this fn to remove tree-sitter hooks from yasnippet.
+The hooks are only relevant in buffers using tree-sitter.
+If the hooks are not removed, they will turn on tree-sitter during yasnippet
+expansion in cases where you aren't even using tree-sitter."
+      (interactive)
+      (remove-hook 'yas-before-expand-snippet-hook
+                   #'my-turn-off-tree-sitter-hl)
+      (remove-hook 'yas-after-exit-snippet-hook
+                   #'my-turn-on-tree-sitter-hl))))
+
 (cl-defun my-start-tree-sitter-hl ()
   "Manually invoke this method in a buffer for syntax highlighting.
 TODO: delete this fn and replace with hooks, etc."
@@ -7629,7 +7656,11 @@ TODO: delete this fn and replace with hooks, etc."
       (defun tree-sitter-langs-install-grammars
           (&optional skip-if-installed version os keep-bundle))
       (defun tree-sitter-langs-compile (lang-symbol &optional clean)))
-    (require 'tree-sitter-langs))
+    (require 'tree-sitter-langs)
+
+    ;; add hooks to disable tree-sitter during yasnippet expansion. Yasnippet
+    ;; borks tree-sitter.
+    (my-add-yas-tree-sitter-hooks))
 
   ;; enable modes
   (tree-sitter-mode 1)

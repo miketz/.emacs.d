@@ -54,6 +54,8 @@
 ;;;     cd ~/.emacs.d/notElpa/swiper
 ;;;     git remote add upstream https://github.com/abo-abo/swiper
 ;;;     git fetch upstream
+;;;     # to see new changes.
+;;;     git diff master upstream/master
 ;;;     # then: (like "git pull" which is fetch + merge)
 ;;;     git merge upstream/master master
 ;;;

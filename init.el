@@ -4821,6 +4821,11 @@ statement generated my SqlServer."
 (autoload #'transient-remove-suffix "transient" nil nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; libgit. dependency of magit
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/libegit2" load-path)
+
+;;;----------------------------------------------------------------------------
 ;;; magit
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/magit/lisp" load-path)

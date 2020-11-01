@@ -117,6 +117,15 @@ Some info may be purely for informational/doc purposes."
                      (git-commit "20181104")
                      (transient "20190812")
                      (with-editor "20181103"))
+      :depend-soft '((libgit "???")))
+    ,(make-module
+      :name 'libgit
+      :folder (concat my-module-folder "libegit2")
+      :remote-mine "https://github.com/miketz/libegit2"
+      :remote-upstream "https://github.com/magit/libegit2"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '()
       :depend-soft '())
     ,(make-module
       :name 'csharp-mode

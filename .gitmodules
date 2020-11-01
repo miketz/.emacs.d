@@ -265,3 +265,6 @@
 [submodule "notElpa/ggtags"]
 	path = notElpa/ggtags
 	url = https://github.com/miketz/ggtags
+[submodule "notElpa/libegit2"]
+	path = notElpa/libegit2
+	url = https://github.com/miketz/libegit2

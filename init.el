@@ -3466,6 +3466,11 @@ cases."
   (define-key c-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
   (define-key c++-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
 
+  ;; switch between .c/.h file.
+  (let ((key (kbd "C-c f")))
+    (define-key c-mode-map key #'ff-find-other-file)
+    (define-key c++-mode-map key #'ff-find-other-file))
+
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.
 The variables set are buffer local.

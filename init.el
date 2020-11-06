@@ -1690,10 +1690,7 @@ This prevents overlapping themes; something I would rarely want."
   ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_da
   ;; mn_fast/
   (push
-   '(font .
-          "-Bits-Bitstream Vera Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"
-          ;; "-DAMA-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-          )
+   '(font . "-DAMA-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1")
    default-frame-alist))
 
  ((eq my-curr-computer 'work-laptop)

@@ -77,6 +77,9 @@
 ;;;     git submodule update
 ;;; Then after a git pull
 ;;;     git submodule update --init --recursive
+;;; If submodules folders are *still* empty for some reason try this.
+;;; Note that it may not check out the correct branch, so avoid if possible.
+;;;     git submodule update --init --force --remote
 
 ;;;----------------------------------------------------------------------------
 ;;; remove, then re-add a submodule where the folder mysteriously disappears?

@@ -1684,13 +1684,13 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (my-color-zenburn))
 (cond
  ((eq my-curr-computer 'wild-dog)
-  (load-theme 'ultimate t)
+  (load-theme 'charcoal t)
 
   ;; faster than `set-frame-font' for setting the font?
   ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_da
   ;; mn_fast/
   (push
-   '(font . "-DAMA-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1")
+   '(font . "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
    default-frame-alist))
 
  ((eq my-curr-computer 'work-laptop)

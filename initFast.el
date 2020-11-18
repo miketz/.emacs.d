@@ -84,7 +84,8 @@
   ;; remove a vc source control hook that greatly slows down opening files.
   (remove-hook hook fn))
 
-(when (>= emacs-major-version 25)
+(when (and (boundp global-eldoc-mode) ;;(>= emacs-major-version 25)
+           global-eldoc-mode)
   (global-eldoc-mode 0))
 
 (when (eq system-type 'windows-nt)

@@ -545,6 +545,10 @@ Example:
    `(tree-sitter-hl-face:operator
      ((,class :inherit font-lock-keyword-face
               :weight normal)))
+   `(tree-sitter-hl-face:label
+     ((,class :foreground ,fg
+              :background "#232319"
+              :weight bold)))
 
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face

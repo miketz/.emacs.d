@@ -7685,6 +7685,15 @@ TODO: delete this fn and replace with hooks, etc."
   (tree-sitter-hl-mode 1))
 
 ;;;----------------------------------------------------------------------------
+;;; cookie1. replacement for yow? also see 'fortune
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'cookie1
+  (when (eq my-curr-computer 'wild-dog)
+    ;; http://cvs.savannah.gnu.org/viewvc/*checkout*/emacs/etc/yow.lines?revisi
+    ;; on=1.10&amp;root=emacs
+    (setq cookie-file "~/Downloads/yow.lines")))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-load-common ()

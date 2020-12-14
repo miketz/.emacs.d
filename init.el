@@ -1703,15 +1703,17 @@ This prevents overlapping themes; something I would rarely want."
      "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
 
  ((eq my-curr-computer 'work-laptop-2019)
-  (load-theme 'ultimate t)
-  (set-background-color "#E5E1C3")
+  (load-theme 'charcoal t)
+  ;; (set-background-color "#E5E1C3")
+  ;; (set-background-color "ivory2")
   (when my-graphic-p
     (push
      '(font
        .
        ;; "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+       "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
        ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
-       "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
        )
      default-frame-alist)
     ;; (set-frame-font

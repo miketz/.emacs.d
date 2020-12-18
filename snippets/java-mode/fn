@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fn
+# key: fn
+# --
+${1:public} ${2:void} ${3:func_name}($0)
+{
+}

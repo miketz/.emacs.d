@@ -7423,7 +7423,8 @@ vanilla javascript buffers."
         ((eq my-curr-computer 'work-laptop)
          "c:/users/mtz/programs/ctags-2019-07-18_ff180005-x64/ctags.exe")
         ((eq my-curr-computer 'work-laptop-bash) "ctags")
-        ((eq my-curr-computer 'wild-dog) "~/proj/ctags/ctags"
+        ((eq my-curr-computer 'wild-dog)
+         "~/proj/ctags/ctags" ; universal
          ;; "/usr/bin/ctags-exuberant"
          )
         (t nil)))

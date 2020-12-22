@@ -162,6 +162,17 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
+      :depend-soft '())
+    ,(make-module
+      :name 'rg
+      :folder (concat my-module-folder "rg.el")
+      :remote-mine "https://github.com/miketz/rg.el"
+      :remote-upstream "https://github.com/dajva/rg.el"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '((emacs "25.1")
+                     (transient "0.1.0")
+                     (wgrep "2.1.10"))
       :depend-soft '())))
 
 (defun my-byte-compile-all-modules ()

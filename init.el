@@ -5242,6 +5242,8 @@ TODO: call this function when it works."
 (autoload #'counsel-describe-variable "counsel" nil t)
 (autoload #'counsel-yank-pop "counsel" nil t)
 (autoload #'counsel-git "counsel" nil t)
+(autoload #'counsel-file-jump "counsel" nil t)
+(autoload #'counsel-file-register "counsel" nil t)
 
 ;; TODO: set up more autoloads
 

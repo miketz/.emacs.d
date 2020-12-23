@@ -164,6 +164,15 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'iedit
+      :folder (concat my-module-folder "iedit")
+      :remote-mine "https://github.com/miketz/iedit"
+      :remote-upstream "https://github.com/victorhge/iedit"
+      :source-control 'git
+      :submodule-p t
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'rg
       :folder (concat my-module-folder "rg.el")
       :remote-mine "https://github.com/miketz/rg.el"

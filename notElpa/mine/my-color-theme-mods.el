@@ -2,11 +2,22 @@
 
 (require 'my-misc) ; for fn `my-set-alpha'
 
+(defun my-get-theme ()
+  "Get the current theme.
+
+NOTE: when using this to set faces via `custom-theme-set-faces' be wary if no
+theme has been loaded (ie theme 'user). The faces set during this time tend to
+be sticky and won't go away even after loading a theme that explicitly sets
+those faces."
+  (interactive)
+  (or (car custom-enabled-themes)
+      'user))
+
 (defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)
   (custom-theme-set-faces
-   (car custom-enabled-themes)
+   (my-get-theme)
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
@@ -26,7 +37,7 @@
   "Colors for parens that are easy to distinguish from each other when against a dark bg. "
   (interactive)
   (custom-theme-set-faces
-   (car custom-enabled-themes)
+   (my-get-theme)
    `(show-paren-match ((t (:slant italic
                                   :bold t
                                   :strike-through t
@@ -45,7 +56,7 @@
 (defun my-rainbow-parens-light-bg ()
   (interactive)
   (custom-theme-set-faces
-   (car custom-enabled-themes)
+   (my-get-theme)
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black"))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "#09a509"))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red"))))
@@ -61,7 +72,7 @@
   "Colored parens with highlighting."
   (interactive)
   (custom-theme-set-faces
-   (car custom-enabled-themes)
+   (my-get-theme)
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight normal))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold nil))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold nil))))
@@ -77,7 +88,7 @@
   "Colored parens with highlighting."
   (interactive)
   (custom-theme-set-faces
-   (car custom-enabled-themes)
+   (my-get-theme)
    '(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "gray94" :weight bold))))
    '(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "light cyan" :bold t))))
    '(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background "#faEaEa" :bold t))))
@@ -93,7 +104,7 @@
   "Set cursor colors and styles for a typical light background."
   (interactive)
   (custom-theme-set-variables
-   (car custom-enabled-themes)
+   (my-get-theme)
 
    `(evil-emacs-state-cursor    '(bar "blue"))
    `(evil-normal-state-cursor   '(box "#0FB300") ;'(hollow "black")
@@ -111,7 +122,7 @@
   "Set cursor colors and styles for a typical dark background."
   (interactive)
   (custom-theme-set-variables
-   (car custom-enabled-themes)
+   (my-get-theme)
 
    `(evil-emacs-state-cursor    '(bar "cyan"))
    `(evil-normal-state-cursor   '(hollow "spring green"))

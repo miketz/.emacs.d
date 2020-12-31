@@ -26,6 +26,7 @@ Some info may be purely for informational/doc purposes."
   (remote-upstream nil)
   (source-control nil) ; git svn
   (submodule-p nil)
+  (use-branch "") ; master, mine
   (depend-hard '())
   (depend-soft '()))
 

@@ -353,9 +353,18 @@ Example:
    `(aw-background-face ((,class (:foreground ,faint-less))))
 
    ;; ido
-   `(ido-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
+   `(ido-first-match ((,class (:foreground ,fg-yellow :background "#000000";,bg-yellow
+                                           ))))
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
+
+   ;; ido-grid
+   `(ido-grid-common-match ((,class :foreground ,fg-green)))
+   ;; `(ido-grid-match ((,class :foreground "pink")))
+   `(ido-grid-match-1 ((,class :inherit completions-common-part)))
+   ;; `(ido-grid-match-2 ((,class :foreground "purple" :background "yellow")))
+   ;; `(ido-grid-match-3 ((,class :foreground "black" :background "white")))
+
 
    ;; isearch
    `(isearch ((,class (:background ,isearch-bg

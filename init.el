@@ -3220,6 +3220,8 @@ To make it human readable."
 
   (setq ido-enable-flex-matching nil)
   (setq ido-everywhere t)
+  (setq ido-show-dot-for-dired nil) ; prefer history not folder.
+                                    ; use C-d for dired
   ;; TODO: figure out why it's still prompting for new buffer creation even
   ;; when `ido-create-new-buffer' is set to 'always.
   (setq ido-create-new-buffer 'always)

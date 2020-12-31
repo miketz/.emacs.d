@@ -1031,7 +1031,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "Set to t to load helm during start up.
 Otherwise postpone loading helm until the first attempted use.")
 
-(defvar my-use-ido-p (eq my-narrow-type 'ido)
+(defvar my-use-fancy-ido-p (eq my-narrow-type 'ido)
   "If I'm using ido at the moment.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
@@ -1050,7 +1050,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                      (my-use-ivy-p #'swiper-isearch)
                      ;; `ido-occur' is fast but does not split inputs on
                      ;; spaces. use swiper with ido for now.
-                     (my-use-ido-p #'swiper-isearch)
+                     (my-use-fancy-ido-p #'swiper-isearch)
                      (my-use-bare-ido-p #'my-occur-wild-spaces)
                      (my-use-helm-p #'helm-swoop)
                      (my-use-mish-mash-p #'swiper-isearch)
@@ -3188,7 +3188,7 @@ To make it human readable."
 
 (with-eval-after-load 'smex
   ;; GUARD: smex is used for `counsel-M-x' too where this advice is not needed.
-  (when (or my-use-ido-p
+  (when (or my-use-fancy-ido-p
             my-use-bare-ido-p)
     ;; insert a hyphen - on space like in normal M-x
     (defadvice smex (around space-inserts-hyphen activate compile)
@@ -3212,7 +3212,7 @@ To make it human readable."
 ;;; ido-ubiquitous
 ;;; flx-ido
 ;;;----------------------------------------------------------------------------
-(when (or my-use-ido-p
+(when (or my-use-fancy-ido-p
           my-use-bare-ido-p)
   ;; ;; icomplete's display is similar to ido. So use it for completions ido
   ;; ;; does not support. (ie `describe-function' `load-theme' etc)
@@ -3253,11 +3253,11 @@ completions from folders other than the current one."
     (let ((ido-work-directory-list '()))
       (ido-find-file)))
 
-  (when (or my-use-ido-p
+  (when (or my-use-fancy-ido-p
             my-use-bare-ido-p)
     (global-set-key (kbd "C-x C-f") #'my-ido-find-file))
 
-  (when my-use-ido-p ;; GUARD against calling ido-ubiquitous-mode.
+  (when my-use-fancy-ido-p ;; GUARD against calling ido-ubiquitous-mode.
 
     (ido-ubiquitous-mode 1)
     ;; NOTE: i removed some un-wanted advice code from the autoloads file of
@@ -7672,8 +7672,8 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
       ad-do-it))
   (ad-activate 'ido-grid--completions))
 
-(ido-grid-enable) ; TODO: handle this in `my-narrow-type'.
-                  ; enabling here just for a temporary test run.
+;; (ido-grid-enable) ; TODO: handle this in `my-narrow-type'.
+;;                   ; enabling here just for a temporary test run.
 
 ;;;----------------------------------------------------------------------------
 ;;; electric-indent

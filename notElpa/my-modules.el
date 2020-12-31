@@ -174,6 +174,16 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'ido-grid
+      :folder (concat my-module-folder "ido-grid.el")
+      :remote-mine "https://github.com/miketz/ido-grid.el"
+      :remote-upstream "https://github.com/larkery/ido-grid.el"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'rg
       :folder (concat my-module-folder "rg.el")
       :remote-mine "https://github.com/miketz/rg.el"

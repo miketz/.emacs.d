@@ -268,3 +268,6 @@
 [submodule "notElpa/libegit2"]
 	path = notElpa/libegit2
 	url = https://github.com/miketz/libegit2
+[submodule "notElpa/ido-grid.el"]
+	path = notElpa/ido-grid.el
+	url = https://github.com/miketz/ido-grid.el

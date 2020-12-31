@@ -475,7 +475,33 @@ Do not fall back to function `electric-pair-mode' because it's global."
   (my-change-alpha -1))
 
 
+;;;----------------------------------------------------------------------------
+;;; string interpolation via a macro. Like the new C# feature.
+;;;----------------------------------------------------------------------------
+(defmacro template-format (str)
+  "String interpolation macro.
+Made by tali713 in 15 minutes on #emacs irc freenode.
 
+Example use:
+(let ((foo \"quux\")
+      (bar 'baz))
+  (template-format \"A string with {{foo}} and {{bar}} and maybe {{foo}} again.\"))"
+  (let ((index nil)
+        (locs nil)
+        (strs nil))
+    (while (let ((loc (string-match (rx (or "{{" "}}"))
+                                    str index)))
+             (when loc
+               (push loc locs)
+               (setq index (1+ loc)))))
+    (setq locs (nreverse locs))
+    (while locs
+      (push (substring str (+ 2 (pop locs)) (pop locs))
+            strs))
+    `(format ,(replace-regexp-in-string (rx (seq "{{" (+ (not "}")) "}}"))
+                                        "%s"
+                                        str)
+             ,@(mapcar 'intern (nreverse strs)))))
 
 
 

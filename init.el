@@ -3314,6 +3314,74 @@ completions from folders other than the current one."
   (setq ido-vertical-show-count t))
 
 ;;;----------------------------------------------------------------------------
+;;; ido-grid. The successor to ido-grid-mode (same author?)
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ido-grid.el" load-path)
+(autoload #'ido-grid-enable "ido-grid" nil t)
+
+(with-eval-after-load 'ido-grid
+  (setq ido-grid-bind-keys nil)
+  (setq ido-grid-rows 0.25) ; Float for %. Whole number for exact num.
+  (setq ido-grid-max-columns nil) ; as many as can fit on screen
+  ;; not showing the grid sort of defeats the purpose.
+  (setq ido-grid-start-small nil)
+
+
+  (defun my-ido-grid-page-down ()
+    (interactive)
+    (ido-grid--shift (* ido-grid--rows
+                        ido-grid--cols)))
+  (defun my-ido-grid-page-up ()
+    (interactive)
+    (ido-grid--shift (- (* ido-grid--rows
+                           ido-grid--cols))))
+
+  (defun my-ido-grid-keybinds-hook ()
+    "Normally I would not set keybinds in a hook as it executes repeatedly.
+But ido-grid is weird and only lets you set keybinds on the fly?"
+    ;; default keybinds from the author
+    ;; (setq ido-grid--prior-ccc ido-cannot-complete-command
+    ;;       ido-cannot-complete-command #'ido-grid-down)
+    (define-key ido-completion-map (kbd "<right>") #'ido-grid-right)
+    (define-key ido-completion-map (kbd "<left>")  #'ido-grid-left)
+    (define-key ido-completion-map (kbd "<up>")    #'ido-grid-up-or-expand)
+    (define-key ido-completion-map (kbd "<down>")  #'ido-grid-down-or-expand)
+    (define-key ido-completion-map (kbd "C-<up>")  #'ido-grid-display-more-rows)
+    (define-key ido-completion-map (kbd "C-p")     #'ido-grid-up)
+    (define-key ido-completion-map (kbd "C-n")     #'ido-grid-down)
+
+    ;; vim-like keybinds
+    (define-key ido-completion-map (kbd "C-l") #'ido-grid-right)
+    (define-key ido-completion-map (kbd "C-h")  #'ido-grid-left)
+    ;; classic ido keybinds
+    (define-key ido-completion-map (kbd "C-s") #'ido-grid-right)
+    (define-key ido-completion-map (kbd "C-r")  #'ido-grid-left)
+    ;; paging. With the "wrap around" style UI this doesn't work quite as
+    ;; wanted. But sort of works, so going with it.
+    (define-key ido-completion-map (kbd "M->") #'my-ido-grid-page-down)
+    (define-key ido-completion-map (kbd "M-<") #'my-ido-grid-page-up)
+    )
+  (add-hook 'ido-setup-hook #'my-ido-grid-keybinds-hook)
+  ;; TODO: maybe remove this hook when ido-grid is disabled.
+  ;;       (remove-hook 'ido-setup-hook #'my-ido-grid-keybinds-hook)
+
+
+  ;; insert a hyphen - on space like in normal M-x
+  (defadvice ido-grid--completions (around space-inserts-hyphen activate compile)
+    (let ((ido-cannot-complete-command
+           `(lambda ()
+              (interactive)
+              (if (string= " " (this-command-keys))
+                  (insert ?-)
+                (funcall ,ido-cannot-complete-command)))))
+      ad-do-it))
+  (ad-activate 'ido-grid--completions))
+
+(when my-use-grid-ido-p
+  (ido-grid-enable))
+
+
+;;;----------------------------------------------------------------------------
 ;;; Yasnippet
 ;;;----------------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
@@ -7616,72 +7684,6 @@ vanilla javascript buffers."
 (autoload #'spinner-create "spinner" nil nil)
 (autoload #'spinner-start "spinner" nil nil)
 
-;;;----------------------------------------------------------------------------
-;;; ido-grid. The successor to ido-grid-mode (same author?)
-;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ido-grid.el" load-path)
-(autoload #'ido-grid-enable "ido-grid" nil t)
-
-(with-eval-after-load 'ido-grid
-  (setq ido-grid-bind-keys nil)
-  (setq ido-grid-rows 0.25) ; Float for %. Whole number for exact num.
-  (setq ido-grid-max-columns nil) ; as many as can fit on screen
-  ;; not showing the grid sort of defeats the purpose.
-  (setq ido-grid-start-small nil)
-
-
-  (defun my-ido-grid-page-down ()
-    (interactive)
-    (ido-grid--shift (* ido-grid--rows
-                        ido-grid--cols)))
-  (defun my-ido-grid-page-up ()
-    (interactive)
-    (ido-grid--shift (- (* ido-grid--rows
-                           ido-grid--cols))))
-
-  (defun my-ido-grid-keybinds-hook ()
-    "Normally I would not set keybinds in a hook as it executes repeatedly.
-But ido-grid is weird and only lets you set keybinds on the fly?"
-    ;; default keybinds from the author
-    ;; (setq ido-grid--prior-ccc ido-cannot-complete-command
-    ;;       ido-cannot-complete-command #'ido-grid-down)
-    (define-key ido-completion-map (kbd "<right>") #'ido-grid-right)
-    (define-key ido-completion-map (kbd "<left>")  #'ido-grid-left)
-    (define-key ido-completion-map (kbd "<up>")    #'ido-grid-up-or-expand)
-    (define-key ido-completion-map (kbd "<down>")  #'ido-grid-down-or-expand)
-    (define-key ido-completion-map (kbd "C-<up>")  #'ido-grid-display-more-rows)
-    (define-key ido-completion-map (kbd "C-p")     #'ido-grid-up)
-    (define-key ido-completion-map (kbd "C-n")     #'ido-grid-down)
-
-    ;; vim-like keybinds
-    (define-key ido-completion-map (kbd "C-l") #'ido-grid-right)
-    (define-key ido-completion-map (kbd "C-h")  #'ido-grid-left)
-    ;; classic ido keybinds
-    (define-key ido-completion-map (kbd "C-s") #'ido-grid-right)
-    (define-key ido-completion-map (kbd "C-r")  #'ido-grid-left)
-    ;; paging. With the "wrap around" style UI this doesn't work quite as
-    ;; wanted. But sort of works, so going with it.
-    (define-key ido-completion-map (kbd "M->") #'my-ido-grid-page-down)
-    (define-key ido-completion-map (kbd "M-<") #'my-ido-grid-page-up)
-    )
-  (add-hook 'ido-setup-hook #'my-ido-grid-keybinds-hook)
-  ;; TODO: maybe remove this hook when ido-grid is disabled.
-  ;;       (remove-hook 'ido-setup-hook #'my-ido-grid-keybinds-hook)
-
-
-  ;; insert a hyphen - on space like in normal M-x
-  (defadvice ido-grid--completions (around space-inserts-hyphen activate compile)
-    (let ((ido-cannot-complete-command
-           `(lambda ()
-              (interactive)
-              (if (string= " " (this-command-keys))
-                  (insert ?-)
-                (funcall ,ido-cannot-complete-command)))))
-      ad-do-it))
-  (ad-activate 'ido-grid--completions))
-
-(when my-use-grid-ido-p
-  (ido-grid-enable))
 
 ;;;----------------------------------------------------------------------------
 ;;; electric-indent

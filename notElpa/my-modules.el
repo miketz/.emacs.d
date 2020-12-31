@@ -22,8 +22,10 @@ Some info may be acted on by an automated process.
 Some info may be purely for informational/doc purposes."
   (name nil)
   (folder nil)
-  (remote-mine nil)
-  (remote-upstream nil)
+  (remote-mine-url nil)
+  (remote-mine-alias "") ; assume "origin" if empty string
+  (remote-upstream-url nil)
+  (remote-upstream-alias "") ; assume "upstream" if emtpy string
   (source-control nil) ; git svn
   (submodule-p nil)
   (use-branch "") ; master, mine
@@ -34,8 +36,8 @@ Some info may be purely for informational/doc purposes."
   `(,(make-module
       :name 'paredit
       :folder (concat my-module-folder "paredit")
-      :remote-mine "https://github.com/miketz/paredit"
-      :remote-upstream "https://mumble.net/~campbell/git/paredit.git"
+      :remote-mine-url "https://github.com/miketz/paredit"
+      :remote-upstream-url "https://mumble.net/~campbell/git/paredit.git"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -43,8 +45,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'swiper
       :folder (concat my-module-folder "swiper")
-      :remote-mine "https://github.com/miketz/swiper"
-      :remote-upstream "https://github.com/abo-abo/swiper"
+      :remote-mine-url "https://github.com/miketz/swiper"
+      :remote-upstream-url "https://github.com/abo-abo/swiper"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -52,8 +54,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'lispy
       :folder (concat my-module-folder "lispy")
-      :remote-mine "https://github.com/miketz/lispy"
-      :remote-upstream "https://github.com/abo-abo/lispy"
+      :remote-mine-url "https://github.com/miketz/lispy"
+      :remote-upstream-url "https://github.com/abo-abo/lispy"
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "24.3")
@@ -66,8 +68,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'evil
       :folder (concat my-module-folder "evil")
-      :remote-mine "https://github.com/miketz/evil"
-      :remote-upstream "https://github.com/emacs-evil/evil"
+      :remote-mine-url "https://github.com/miketz/evil"
+      :remote-upstream-url "https://github.com/emacs-evil/evil"
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "24.1")
@@ -78,8 +80,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'evil-leader
       :folder (concat my-module-folder "evil-leader")
-      :remote-mine "https://github.com/miketz/evil-leader"
-      :remote-upstream "https://github.com/cofi/evil-leader"
+      :remote-mine-url "https://github.com/miketz/evil-leader"
+      :remote-upstream-url "https://github.com/cofi/evil-leader"
       :source-control 'git
       :submodule-p t
       :depend-hard '((evil "0"))
@@ -87,8 +89,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'expand-region
       :folder (concat my-module-folder "expand-region.el")
-      :remote-mine "https://github.com/miketz/expand-region.el"
-      :remote-upstream "https://github.com/magnars/expand-region.el"
+      :remote-mine-url "https://github.com/miketz/expand-region.el"
+      :remote-upstream-url "https://github.com/magnars/expand-region.el"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -96,8 +98,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 's
       :folder (concat my-module-folder "s.el")
-      :remote-mine "https://github.com/miketz/s.el"
-      :remote-upstream "https://github.com/magnars/s.el"
+      :remote-mine-url "https://github.com/miketz/s.el"
+      :remote-upstream-url "https://github.com/magnars/s.el"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -105,8 +107,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'magit
       :folder (concat my-module-folder "magit")
-      :remote-mine "https://github.com/miketz/magit"
-      :remote-upstream "https://github.com/magit/magit"
+      :remote-mine-url "https://github.com/miketz/magit"
+      :remote-upstream-url "https://github.com/magit/magit"
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "25.1")
@@ -122,8 +124,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'libgit
       :folder (concat my-module-folder "libegit2")
-      :remote-mine "https://github.com/miketz/libegit2"
-      :remote-upstream "https://github.com/magit/libegit2"
+      :remote-mine-url "https://github.com/miketz/libegit2"
+      :remote-upstream-url "https://github.com/magit/libegit2"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -131,8 +133,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'csharp-mode
       :folder (concat my-module-folder "csharp-mode")
-      :remote-mine "https://github.com/miketz/csharp-mode"
-      :remote-upstream "https://github.com/josteink/csharp-mode"
+      :remote-mine-url "https://github.com/miketz/csharp-mode"
+      :remote-upstream-url "https://github.com/josteink/csharp-mode"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -140,8 +142,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'spinner
       :folder (concat my-module-folder "spinner.el")
-      :remote-mine "https://github.com/miketz/spinner.el"
-      :remote-upstream "https://github.com/Malabarba/spinner.el"
+      :remote-mine-url "https://github.com/miketz/spinner.el"
+      :remote-upstream-url "https://github.com/Malabarba/spinner.el"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -149,8 +151,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'ggtags
       :folder (concat my-module-folder "ggtags")
-      :remote-mine "https://github.com/miketz/ggtags"
-      :remote-upstream "https://github.com/leoliu/ggtags"
+      :remote-mine-url "https://github.com/miketz/ggtags"
+      :remote-upstream-url "https://github.com/leoliu/ggtags"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -158,8 +160,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
-      :remote-mine "https://github.com/miketz/mor"
-      :remote-upstream nil ; my own project, so no 3rd party upstream
+      :remote-mine-url "https://github.com/miketz/mor"
+      :remote-upstream-url nil ; my own project, so no 3rd party upstream
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -167,8 +169,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'iedit
       :folder (concat my-module-folder "iedit")
-      :remote-mine "https://github.com/miketz/iedit"
-      :remote-upstream "https://github.com/victorhge/iedit"
+      :remote-mine-url "https://github.com/miketz/iedit"
+      :remote-upstream-url "https://github.com/victorhge/iedit"
       :source-control 'git
       :submodule-p t
       :depend-hard '()
@@ -176,8 +178,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'ido-grid
       :folder (concat my-module-folder "ido-grid.el")
-      :remote-mine "https://github.com/miketz/ido-grid.el"
-      :remote-upstream "https://github.com/larkery/ido-grid.el"
+      :remote-mine-url "https://github.com/miketz/ido-grid.el"
+      :remote-upstream-url "https://github.com/larkery/ido-grid.el"
       :source-control 'git
       :submodule-p t
       :use-branch "mine"
@@ -186,8 +188,8 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'rg
       :folder (concat my-module-folder "rg.el")
-      :remote-mine "https://github.com/miketz/rg.el"
-      :remote-upstream "https://github.com/dajva/rg.el"
+      :remote-mine-url "https://github.com/miketz/rg.el"
+      :remote-upstream-url "https://github.com/dajva/rg.el"
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "25.1")
@@ -274,8 +276,8 @@ Saves me from typing a lot of module stuff."
              (insert (format ",(make-module
   :name '%s
   :folder (concat my-module-folder \"%s\")
-  :remote-mine \"https://github.com/miketz/%s\"
-  :remote-upstream nil
+  :remote-mine-url \"https://github.com/miketz/%s\"
+  :remote-upstream-url nil
   :source-control 'git
   :submodule-p t
   :depend-hard '()

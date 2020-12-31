@@ -7621,8 +7621,15 @@ vanilla javascript buffers."
   ;; not showing the grid sort of defeats the purpose.
   (setq ido-grid-start-small nil)
 
-  (defun my-insert-space ()
-    (self-insert-command 1))
+
+  (defun my-ido-grid-page-down ()
+    (interactive)
+    (ido-grid--shift (* ido-grid--rows
+                        ido-grid--cols)))
+  (defun my-ido-grid-page-up ()
+    (interactive)
+    (ido-grid--shift (- (* ido-grid--rows
+                           ido-grid--cols))))
 
   (defun my-ido-grid-keybinds-hook ()
     "Normally I would not set keybinds in a hook as it executes repeatedly.
@@ -7643,7 +7650,12 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
     (define-key ido-completion-map (kbd "C-h")  #'ido-grid-left)
     ;; classic ido keybinds
     (define-key ido-completion-map (kbd "C-s") #'ido-grid-right)
-    (define-key ido-completion-map (kbd "C-r")  #'ido-grid-left))
+    (define-key ido-completion-map (kbd "C-r")  #'ido-grid-left)
+    ;; paging. With the "wrap around" style UI this doesn't work quite as
+    ;; wanted. But sort of works, so going with it.
+    (define-key ido-completion-map (kbd "M->") #'my-ido-grid-page-down)
+    (define-key ido-completion-map (kbd "M-<") #'my-ido-grid-page-up)
+    )
   (add-hook 'ido-setup-hook #'my-ido-grid-keybinds-hook)
   ;; TODO: maybe remove this hook when ido-grid is disabled.
   ;;       (remove-hook 'ido-setup-hook #'my-ido-grid-keybinds-hook)

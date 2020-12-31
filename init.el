@@ -3321,7 +3321,7 @@ completions from folders other than the current one."
 
 (with-eval-after-load 'ido-grid
   (setq ido-grid-bind-keys nil)
-  (setq ido-grid-rows 0.25) ; Float for %. Whole number for exact num.
+  (setq ido-grid-rows 20) ; Float for %. Whole number for exact num.
   (setq ido-grid-max-columns nil) ; as many as can fit on screen
   ;; not showing the grid sort of defeats the purpose.
   (setq ido-grid-start-small nil)

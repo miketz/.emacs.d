@@ -7609,6 +7609,19 @@ vanilla javascript buffers."
 (autoload #'spinner-start "spinner" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; ido-grid. The successor to ido-grid-mode (same author?)
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ido-grid.el" load-path)
+(autoload #'ido-grid-enable "ido-grid" nil t)
+
+(with-eval-after-load 'ido-grid
+  (setq ido-grid-rows 0.25) ; Float for %. Whole number for exact num.
+  (setq ido-grid-max-columns nil) ; as many as can fit on screen
+  ;; not showing the grid sort of defeats the purpose.
+  (setq ido-grid-start-small nil))
+
+
+;;;----------------------------------------------------------------------------
 ;;; electric-indent
 ;;;----------------------------------------------------------------------------
 ;; default emacs behavior got weird in Emacs 24.4. Turn it off.

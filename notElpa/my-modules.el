@@ -179,7 +179,9 @@ Some info may be purely for informational/doc purposes."
       :name 'ido-grid
       :folder (concat my-module-folder "ido-grid.el")
       :remote-mine-url "https://github.com/miketz/ido-grid.el"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/larkery/ido-grid.el"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
       :use-branch "mine"

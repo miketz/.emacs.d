@@ -3257,7 +3257,8 @@ To make it human readable."
 But shadows `ido-work-directory-list' to prevent ido from brining in
 completions from folders other than the current one."
     (interactive)
-    (let ((ido-work-directory-list '()))
+    (let ((ido-work-directory-list '())
+          (ido-grid-rows 0.8)) ; taller ido-grid completion window for files.
       (ido-find-file)))
 
   (when (or my-use-fancy-ido-p

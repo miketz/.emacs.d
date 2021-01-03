@@ -1011,7 +1011,6 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
-        ((eq my-curr-computer 'work-laptop) 'bare-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.

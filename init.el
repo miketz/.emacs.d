@@ -1105,16 +1105,15 @@ Currently available on git branch: feature/native-comp.")
 
 
 (defvar has-nodejs-p
-  (memq my-curr-computer '(work-laptop work-laptop-bash wild-dog)))
+  (memq my-curr-computer '(wild-dog)))
 
 ;; TODO: set up clang on more machines.
 (defvar my-has-clang-p (memq my-curr-computer
-                             '(;; work-laptop
-                               ;; wild-dog
+                             '(;; wild-dog
                                hp-tower-2009)))
 
 (defvar my-install-slime-p (memq my-curr-computer
-                                 '(wild-dog work-laptop utilite hp-tower-2009
+                                 '(wild-dog utilite hp-tower-2009
                                    a-laptop-faster work-laptop-2019)))
 
 (defvar my-install-slime-company-p (and my-install-slime-p
@@ -1122,8 +1121,7 @@ Currently available on git branch: feature/native-comp.")
                                                        "24.4"))))
 
 (defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog
-                                                 work-laptop-2019
-                                                 work-laptop))
+                                                 work-laptop-2019))
   "Non-nil if rg executable is installed.")
 (defvar my-install-rg-p (not (version< emacs-version "24.4"))
   "Whether to install the `rg' package from melpa.")
@@ -1700,12 +1698,6 @@ This prevents overlapping themes; something I would rarely want."
    '(font . "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
    default-frame-alist))
 
- ((eq my-curr-computer 'work-laptop)
-  (load-theme 'charcoal t)
-  (when my-graphic-p
-    (set-frame-font
-     "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")))
-
  ((eq my-curr-computer 'work-laptop-2019)
   (load-theme 'charcoal t)
   ;; (set-background-color "#E5E1C3")
@@ -1723,9 +1715,6 @@ This prevents overlapping themes; something I would rarely want."
     ;; (set-frame-font
     ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ))
-
- ((eq my-curr-computer 'work-laptop-bash)
-  (load-theme 'charcoal t))
 
  ((eq my-curr-computer 'leyna-laptop)
   (load-theme 'charcoal t)
@@ -2392,8 +2381,7 @@ In that case, insert the number."
 (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
                             "~/todo/TODO.org")
 
-                           ((memq my-curr-computer '(work-laptop
-                                                     work-laptop-2019))
+                           ((memq my-curr-computer '(work-laptop-2019))
                             "C:/Users/mtz/TODO/TODO.org")
 
                            (t nil))
@@ -5010,7 +4998,7 @@ TODO: call this function when it works."
   (setq ediff-window-setup-function
         #'ediff-setup-windows-plain) ; 'ediff-setup-windows-multiframe
 
-  (when (memq my-curr-computer '(work-laptop work-laptop-2019))
+  (when (memq my-curr-computer '(work-laptop-2019))
     (setq ediff-diff-program "C:/Program Files/KDiff3/bin/diff.exe")
     (setq ediff-diff3-program "C:/Program Files/KDiff3/bin/diff3.exe")))
 
@@ -7367,7 +7355,7 @@ vanilla javascript buffers."
 (with-eval-after-load 'ispell
   ;; NOTE: instructions to set up hunspell on windows:
   ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
-  (when (memq my-curr-computer '(work-laptop-2019 work-laptop))
+  (when (memq my-curr-computer '(work-laptop-2019))
     ;; (push "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin"
     ;;       exec-path)
     ;; (setq ispell-program-name (locate-file "hunspell"
@@ -7501,9 +7489,6 @@ vanilla javascript buffers."
 (defvar my-ctags-exe
   (cond ((eq my-curr-computer 'work-laptop-2019)
          "C:/Users/mtz/programs/ctags-2019-12-04_2ebf5b1b-x64/ctags.exe")
-        ((eq my-curr-computer 'work-laptop)
-         "c:/users/mtz/programs/ctags-2019-07-18_ff180005-x64/ctags.exe")
-        ((eq my-curr-computer 'work-laptop-bash) "ctags")
         ((eq my-curr-computer 'wild-dog)
          "~/proj/ctags/ctags" ; universal
          ;; "/usr/bin/ctags-exuberant"
@@ -7826,7 +7811,7 @@ load during init, or wait with autoloads."
   ;; the bad behavior introduced in emacs 25.
   (setq use-default-font-for-symbols nil))
 
-(cond ((memq my-curr-computer '(work-laptop-2019 work-laptop))
+(cond ((memq my-curr-computer '(work-laptop-2019))
        (setq find-function-C-source-directory
              "c:/users/mtz/scratch/emacs/src")))
 

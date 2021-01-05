@@ -1010,7 +1010,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
 
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
-        ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
+        ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
@@ -1085,7 +1085,8 @@ aka gccemacs.
 Currently available on git branch: feature/native-comp.")
 
 ;;;----------------------------------------------------------------------------
-;;; Packages
+;;; Packages. NOTE: with the conversion to git submodules, most of the old
+;;; package code is moved to ~/.emacs.d/notElpa/mine/my-package-stuff.el
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/" load-path) ; stores elisp files that are
                                        ; not "packages".
@@ -1127,11 +1128,16 @@ Currently available on git branch: feature/native-comp.")
   "Whether to install the `rg' package from melpa.")
 
 
-;; temporarily stop using ssl (https) in the package archive urls.
-;; https causes a hang on ms-windows when calling `list-packages'.
-(setq package-archives
-      '(("gnu" . "http://elpa.gnu.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")))
+;;; add melpa.
+(with-eval-after-load 'package
+  (push '("melpa" . "https://melpa.org/packages/") package-archives))
+
+;; ;; temporarily stop using ssl (https) in the package archive urls.
+;; ;; https causes a hang on ms-windows when calling `list-packages'.
+;; (setq package-archives
+;;       '(("gnu" . "http://elpa.gnu.org/packages/")
+;;         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+;;         ("melpa" . "http://melpa.org/packages/")))
 
 
 

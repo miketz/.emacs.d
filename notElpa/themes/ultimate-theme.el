@@ -287,6 +287,15 @@
    `(ido-only-match ((,class (:foreground ,fg-green :background ,bg-green))))
    `(ido-subdir ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
+
+   ;; ido-grid
+   `(ido-grid-common-match ((,class :foreground ,fg-green
+                                    :background ,bg-green)))
+   ;; `(ido-grid-match ((,class :foreground "pink")))
+   `(ido-grid-match-1 ((,class :inherit completions-common-part)))
+   ;; `(ido-grid-match-2 ((,class :foreground "purple" :background "yellow")))
+   ;; `(ido-grid-match-3 ((,class :foreground "black" :background "white")))
+
    ;; icomplete, fido
    `(icomplete-first-match ((,class (:foreground ,fg-yellow :background ,bg-yellow))))
 

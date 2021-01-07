@@ -23,12 +23,12 @@ Some info may be purely for informational/doc purposes."
   (name nil)
   (folder nil)
   (remote-mine-url nil)
-  (remote-mine-alias "") ; assume "origin" if empty string
+  (remote-mine-alias nil) ; assume "origin" if empty string
   (remote-upstream-url nil)
-  (remote-upstream-alias "") ; assume "upstream" if emtpy string
+  (remote-upstream-alias nil) ; assume "upstream" if emtpy string
   (source-control nil) ; git svn
   (submodule-p nil)
-  (use-branch "") ; master, mine
+  (use-branch nil) ; master, mine
   (depend-hard '())
   (depend-soft '()))
 

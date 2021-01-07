@@ -6301,6 +6301,13 @@ Closure over `preceding-sexp-fn'."
 ;;(global-whitespace-mode 1)
 
 ;;;----------------------------------------------------------------------------
+;;; ov
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ov" load-path)
+(autoload #'ov-clear "ov" nil t)
+;; at the moment ov is just used as a dependency for sallet.
+
+;;;----------------------------------------------------------------------------
 ;;; sallet. from fuco. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/sallet" load-path)

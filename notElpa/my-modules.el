@@ -209,7 +209,7 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :use-branch "master"
-      :depend-hard '()
+      :depend-hard '((dash) (s) (async) (flx) (ov) (f) (shut-up))
       :depend-soft '())
     ,(make-module
       :name 'rg

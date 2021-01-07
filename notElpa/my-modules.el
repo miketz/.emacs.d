@@ -200,6 +200,18 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'sallet
+      :folder (concat my-module-folder "sallet")
+      :remote-mine-url nil ; TODO: use my own fork
+      :remote-mine-alias nil
+      :remote-upstream-url "https://github.com/Fuco1/sallet"
+      :remote-upstream-alias "origin"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'rg
       :folder (concat my-module-folder "rg.el")
       :remote-mine-url "https://github.com/miketz/rg.el"

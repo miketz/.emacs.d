@@ -271,3 +271,6 @@
 [submodule "notElpa/ido-grid.el"]
 	path = notElpa/ido-grid.el
 	url = https://github.com/miketz/ido-grid.el
+[submodule "notElpa/ov"]
+	path = notElpa/ov
+	url = https://github.com/miketz/ov

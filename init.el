@@ -6313,7 +6313,7 @@ Closure over `preceding-sexp-fn'."
   ;; TODO: look into a way to make this happen without code for a specific
   ;; case. (sallet is from git, not package manager). Maybe scrape out the
   ;; require symbols?
-  (progn
+  (when nil ; no longer using package.el but keep this code for doc purposes.
     (require 'package)
     (dolist (pkg '(dash s async flx ov f))
       (unless (package-installed-p pkg)

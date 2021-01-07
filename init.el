@@ -20,6 +20,7 @@
 ;;;
 ;;; Get latest changes from github:
 ;;;     git pull origin master
+;;;     git submodule update --init --recursive
 ;;;
 ;;; Push local changes up to github:
 ;;;     git push origin master

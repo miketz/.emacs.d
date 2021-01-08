@@ -130,6 +130,8 @@
 ;;; within the submodule:
 ;;;     observe current remotes:
 ;;;         git remote -v
+;;;     frist fetch latest from the remote you plan to swtich to
+;;;         git fetch RemoteName
 ;;;     set new default:
 ;;;         git branch --set-upstream-to=RemoteName/BranchName BranchName
 

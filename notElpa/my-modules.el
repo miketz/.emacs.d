@@ -203,10 +203,10 @@ Some info may be purely for informational/doc purposes."
     ,(make-module
       :name 'sallet
       :folder (concat my-module-folder "sallet")
-      :remote-mine-url nil ; TODO: use my own fork
-      :remote-mine-alias nil
+      :remote-mine-url "https://github.com/miketz/sallet"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/Fuco1/sallet"
-      :remote-upstream-alias "origin"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
       :use-branch "master"

@@ -117,6 +117,14 @@
 ;;;     git branch --set-upstream-to origin/BRANCH
 
 ;;;----------------------------------------------------------------------------
+;;; rename a remote
+;;;----------------------------------------------------------------------------
+;;; observe current remotes:
+;;;     git remote -v
+;;; rename the remote
+;;;     git remote rename currentName newName
+
+;;;----------------------------------------------------------------------------
 ;;; Change default remote to push/pull to.
 ;;;----------------------------------------------------------------------------
 ;;; within the submodule:

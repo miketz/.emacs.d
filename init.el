@@ -117,6 +117,14 @@
 ;;;     git branch --set-upstream-to origin/BRANCH
 
 ;;;----------------------------------------------------------------------------
+;;; Change default remote to push/pull to
+;;;----------------------------------------------------------------------------
+;;; observe current remotes:
+;;;     git remote -v
+;;; set new default:
+;;;     git branch --set-upstream-to=RemoteName/BranchName BranchName
+
+;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.
 ;;;----------------------------------------------------------------------------
 ;;; Create a "stub" init file at C:/Users/???/AppData/Roaming/.emacs.d/init.el

@@ -206,6 +206,7 @@ Some info may be purely for informational/doc purposes."
       :remote-mine-url "https://github.com/miketz/sallet"
       :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/Fuco1/sallet"
+      ;; NOTE: original upstream url was https://github.com/tetracat/sallet
       :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t

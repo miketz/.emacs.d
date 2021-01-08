@@ -7825,6 +7825,18 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+
+;; make fn `display-buffer' behave like it did in XEmacs, as JWZ expects.
+;; see blog:
+;; https://www.jwz.org/blog/2021/01/very-much-do-not-have-my-emacs-setup-just-h
+;; ow-i-like-it/
+;; https://old.reddit.com/r/emacs/comments/kr8mg2/jwz_very_much_do_not_have_my_
+;; emacs_setup_just_how/
+(when (fboundp #'display-buffer-use-least-recent-window)
+  (setq display-buffer-alist
+        '((".*" display-buffer-use-least-recent-window))))
+
+
 (defun my-load-common ()
   "Load some commonly used features.  Where it's a gray area whether I should
 load during init, or wait with autoloads."

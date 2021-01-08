@@ -6336,6 +6336,12 @@ Closure over `preceding-sexp-fn'."
 ;; at the moment ov is just used as a dependency for sallet.
 
 ;;;----------------------------------------------------------------------------
+;;; deferred
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/emacs-deferred" load-path)
+;; at the moment deferred is just used as a dependency for sallet.
+
+;;;----------------------------------------------------------------------------
 ;;; sallet. from fuco. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/sallet" load-path)
@@ -7805,10 +7811,6 @@ TODO: delete this fn and replace with hooks, etc."
     ;; on=1.10&amp;root=emacs
     (setq cookie-file "~/Downloads/yow.lines")))
 
-;;;----------------------------------------------------------------------------
-;;; deferred
-;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/emacs-deferred" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

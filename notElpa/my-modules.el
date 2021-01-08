@@ -227,6 +227,19 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'avy
+      :comment "Jump to positions in buffers."
+      :folder (concat my-module-folder "avy")
+      :remote-mine-url "https://github.com/miketz/avy"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/abo-abo/avy"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'rg
       :comment "Has a UI that more closely resembles the built-in emacs grep
 style. More importantly it avoids spamming rg as you type or prematurely."

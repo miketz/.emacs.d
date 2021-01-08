@@ -228,6 +228,8 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-soft '())
     ,(make-module
       :name 'rg
+      :comment "Has a UI that more closely resembles the built-in emacs grep
+style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "rg.el")
       :remote-mine-url "https://github.com/miketz/rg.el"
       :remote-upstream-url "https://github.com/dajva/rg.el"

@@ -75,10 +75,10 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "24.1")
-                     (undo-tree "0.7.4")
-                     (goto-chg "1.6")
                      (cl-lib "0.5"))
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '((;; (undo-tree "0.7.4") ; no longer a dependency
+                         goto-chg "1.6")))
     ,(make-module
       :name 'evil-leader
       :folder (concat my-module-folder "evil-leader")

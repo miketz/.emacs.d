@@ -210,8 +210,8 @@ Some info may be purely for informational/doc purposes."
       :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
-      :use-branch "master"
-      :depend-hard '((dash) (s) (async) (flx) (ov) (f) (shut-up))
+      :use-branch "mine"
+      :depend-hard '((dash) (s) (async) (flx) (ov) (f) (shut-up) (deferred))
       :depend-soft '())
     ,(make-module
       :name 'eros

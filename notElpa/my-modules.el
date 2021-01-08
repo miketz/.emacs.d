@@ -213,6 +213,20 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '((dash) (s) (async) (flx) (ov) (f) (shut-up))
       :depend-soft '())
     ,(make-module
+      :name 'eros
+      :comment "Package to display eval'd results in an overlay. Implementation
+scraped out of cider. I was able to make eros work for common lisp evals."
+      :folder (concat my-module-folder "eros")
+      :remote-mine-url "https://github.com/miketz/eros"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/xiongtx/eros"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '())
+    ,(make-module
       :name 'rg
       :folder (concat my-module-folder "rg.el")
       :remote-mine-url "https://github.com/miketz/rg.el"

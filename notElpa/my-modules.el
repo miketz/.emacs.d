@@ -27,7 +27,15 @@ Some info may be purely for informational/doc purposes."
   (remote-mine-alias nil) ; assume "origin" if empty string
   (remote-upstream-url nil)
   (remote-upstream-alias nil) ; assume "upstream" if emtpy string
-  (source-control nil) ; git svn
+  ;; Choices: git svn file
+  ;; file means I just copied the file(s) into my /.emacs.d/. It technically
+  ;; is under git but this distinguishes the special case where it's absorbed
+  ;; into my /.emacs.d/ git repo. Maybe too lazy to set up a separate git repo
+  ;; or submodule. Or just a little one-off package.
+  (source-control nil)
+  ;; Choices: t nil
+  ;; t if using a submodule within /.emacs.d/
+  ;; nil if using a repo outside of /.emacs.d/
   (submodule-p nil)
   (use-branch nil) ; master, mine
   (depend-hard '()) ; requried or important dependencies.

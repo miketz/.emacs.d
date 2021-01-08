@@ -244,8 +244,8 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :name 'slime
       :comment "Interactive mode for common lisp."
       :folder (concat my-module-folder "slime")
-      :remote-mine-url nil
-      :remote-mine-alias nil
+      :remote-mine-url "https://github.com/miketz/slime"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/slime/slime"
       :remote-upstream-alias "upstream"
       :source-control 'git

@@ -241,6 +241,20 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'slime
+      :comment "Interactive mode for common lisp."
+      :folder (concat my-module-folder "slime")
+      :remote-mine-url nil
+      :remote-mine-alias nil
+      :remote-upstream-url "https://github.com/slime/slime"
+      :remote-upstream-alias "origin"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '((macrostep)))
+    ,(make-module
       :name 'avy
       :comment "Jump to positions in buffers."
       :folder (concat my-module-folder "avy")

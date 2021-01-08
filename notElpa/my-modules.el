@@ -247,7 +247,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-mine-url nil
       :remote-mine-alias nil
       :remote-upstream-url "https://github.com/slime/slime"
-      :remote-upstream-alias "origin"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
       :use-branch "master"

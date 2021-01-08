@@ -21,6 +21,7 @@
 Some info may be acted on by an automated process.
 Some info may be purely for informational/doc purposes."
   (name nil)
+  (comment nil)
   (folder nil)
   (remote-mine-url nil)
   (remote-mine-alias nil) ; assume "origin" if empty string

@@ -7832,9 +7832,11 @@ TODO: delete this fn and replace with hooks, etc."
 ;; ow-i-like-it/
 ;; https://old.reddit.com/r/emacs/comments/kr8mg2/jwz_very_much_do_not_have_my_
 ;; emacs_setup_just_how/
-(when (fboundp #'display-buffer-use-least-recent-window)
-  (setq display-buffer-alist
-        '((".*" display-buffer-use-least-recent-window))))
+(when nil ; don't do this for now, it's switching buffers in multiple windows
+          ; at once!
+ (when (fboundp #'display-buffer-use-least-recent-window)
+   (setq display-buffer-alist
+         '((".*" display-buffer-use-least-recent-window)))))
 
 
 (defun my-load-common ()

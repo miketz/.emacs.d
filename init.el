@@ -117,12 +117,32 @@
 ;;;     git branch --set-upstream-to origin/BRANCH
 
 ;;;----------------------------------------------------------------------------
-;;; Change default remote to push/pull to
+;;; Change default remote to push/pull to.
 ;;;----------------------------------------------------------------------------
-;;; observe current remotes:
-;;;     git remote -v
-;;; set new default:
-;;;     git branch --set-upstream-to=RemoteName/BranchName BranchName
+;;; within the submodule:
+;;;     observe current remotes:
+;;;         git remote -v
+;;;     set new default:
+;;;         git branch --set-upstream-to=RemoteName/BranchName BranchName
+
+;;;----------------------------------------------------------------------------
+;;; Change the remote a git submodule is wired up to.
+;;;----------------------------------------------------------------------------
+;;; case: initially used upstream repo, then later switch to fork
+;;; Edit the .gitmodules file to update the URL
+;;; Then run
+;;;     git submodule sync --recursive
+;;; to reflect that change to the superproject and your working copy.
+;;; Then go to the .git/modules/path_to_submodule dir and change the config
+;;; file to update git path.
+;;; If repo history is different then you need to checkout new branch manually:
+;;;     git submodule sync --recursive
+;;;     cd <submodule_dir>
+;;;     git fetch
+;;;     git checkout origin/master
+;;;     git branch master -f
+;;;     git checkout master
+
 
 ;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.

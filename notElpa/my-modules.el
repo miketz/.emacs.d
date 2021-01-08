@@ -201,6 +201,18 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'deferred
+      :folder (concat my-module-folder "emacs-deferred")
+      :remote-mine-url "https://github.com/miketz/emacs-deferred"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/kiwanami/emacs-deferred"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '((undercover)))
+    ,(make-module
       :name 'sallet
       :folder (concat my-module-folder "sallet")
       :remote-mine-url "https://github.com/miketz/sallet"

@@ -9,7 +9,7 @@
 	url = https://github.com/miketz/swiper
 [submodule "notElpa/slime"]
 	path = notElpa/slime
-	url = https://github.com/slime/slime
+	url = https://github.com/miketz/slime
 [submodule "notElpa/mine/mor"]
 	path = notElpa/mine/mor
 	url = https://github.com/miketz/mor

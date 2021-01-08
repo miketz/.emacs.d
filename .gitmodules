@@ -274,3 +274,6 @@
 [submodule "notElpa/ov"]
 	path = notElpa/ov
 	url = https://github.com/miketz/ov
+[submodule "notElpa/emacs-deferred"]
+	path = notElpa/emacs-deferred
+	url = https://github.com/miketz/emacs-deferred

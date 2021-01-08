@@ -30,8 +30,9 @@ Some info may be purely for informational/doc purposes."
   (source-control nil) ; git svn
   (submodule-p nil)
   (use-branch nil) ; master, mine
-  (depend-hard '())
-  (depend-soft '()))
+  (depend-hard '()) ; requried or important dependencies.
+  (depend-soft '()) ; optional dependencies. Or only needed for the tests.
+  (depend-bundled '())) ; note when packages bundle dependencies.
 
 (defvar my-modules
   `(,(make-module

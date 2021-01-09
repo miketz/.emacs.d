@@ -7305,7 +7305,6 @@ vanilla javascript buffers."
 (push "~/.emacs.d/notElpa/eglot" load-path)
 (autoload #'eglot "eglot" nil t)
 (autoload #'eglot-ensure "eglot" nil t)
-(autoload #'eglot "eglot" nil t)
 
 
 ;;;----------------------------------------------------------------------------

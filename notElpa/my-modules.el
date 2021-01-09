@@ -263,6 +263,21 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-soft '()
       :depend-bundled '((macrostep)))
     ,(make-module
+      :name 'eglot
+      :comment "A mode for LSP. Nice due to no external dependencies for the
+mode itself. External language servers are required to use it of course."
+      :folder (concat my-module-folder "eglot")
+      :remote-mine-url "https://github.com/miketz/eglot"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/joaotavora/eglot"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'avy
       :comment "Jump to positions in buffers."
       :folder (concat my-module-folder "avy")

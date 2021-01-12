@@ -7833,6 +7833,7 @@ TODO: delete this fn and replace with hooks, etc."
 
 (with-eval-after-load 'rust-mode
   (defun my-setup-rust-mode ()
+    (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)
     ;; set to 1 so comments on the same line are kept close to the code.

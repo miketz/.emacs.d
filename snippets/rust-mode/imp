@@ -1,0 +1,8 @@
+# name: imp
+# key: imp
+# --
+impl $1 {
+    fn new($2) -> Self {
+        $1 { $0 }
+    }
+}

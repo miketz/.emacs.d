@@ -7831,6 +7831,17 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'rust-mode "rust-mode" nil t)
 (autoload #'rust-dbg-wrap-or-unwrap "rust-mode" nil t)
 
+(with-eval-after-load 'rust-mode
+  (defun my-setup-rust-mode ()
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode-enable)
+    ;; set to 1 so comments on the same line are kept close to the code.
+    (setq comment-column 1) ; buffer local
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1)))
+  (add-hook 'rust-mode-hook #'my-setup-rust-mode))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

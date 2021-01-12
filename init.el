@@ -7823,6 +7823,13 @@ TODO: delete this fn and replace with hooks, etc."
     ;; on=1.10&amp;root=emacs
     (setq cookie-file "~/Downloads/yow.lines")))
 
+;;;----------------------------------------------------------------------------
+;;; rust-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/rust-mode" load-path)
+(push '("\\.rs\\'" . rust-mode) auto-mode-alist) ; use rust-mode for .rs files
+(autoload #'rust-mode "rust-mode" nil t)
+(autoload #'rust-dbg-wrap-or-unwrap "rust-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

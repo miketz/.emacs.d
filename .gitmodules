@@ -277,3 +277,6 @@
 [submodule "notElpa/emacs-deferred"]
 	path = notElpa/emacs-deferred
 	url = https://github.com/miketz/emacs-deferred
+[submodule "notElpa/rust-mode"]
+	path = notElpa/rust-mode
+	url = https://github.com/miketz/rust-mode

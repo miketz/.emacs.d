@@ -291,6 +291,20 @@ mode itself. External language servers are required to use it of course."
       :depend-hard '()
       :depend-soft '())
     ,(make-module
+      :name 'rust-mode
+      :comment nil
+      :folder (concat my-module-folder "rust-mode")
+      :remote-mine-url "https://github.com/miketz/rust-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/rust-lang/rust-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'rg
       :comment "Has a UI that more closely resembles the built-in emacs grep
 style. More importantly it avoids spamming rg as you type or prematurely."

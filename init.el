@@ -7562,6 +7562,7 @@ vanilla javascript buffers."
     (message "Set path to ctags in my-ctags-exe.")
     (cl-return-from my-create-ctags))
 
+  (require 's) ; for `s-split'
   (let* ((lang-str (shell-command-to-string (format "%s --list-languages"
                                                     my-ctags-exe)))
          (supported-langs (s-split "\n" lang-str))

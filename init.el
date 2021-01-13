@@ -7562,11 +7562,23 @@ vanilla javascript buffers."
     (message "Set path to ctags in my-ctags-exe.")
     (cl-return-from my-create-ctags))
 
-  ;; create tags
-  (shell-command
-   (format "%s -f TAGS -e -R %s"
-           my-ctags-exe
-           (directory-file-name dir-name)))
+  (let* ((lang-str (shell-command-to-string (format "%s --list-languages"
+                                                    my-ctags-exe)))
+         (supported-langs (s-split "\n" lang-str))
+         (lang (completing-read "Lang: " supported-langs)))
+    ;; TODO: the --lanauges option works for universal ctags. verify for
+    ;;       exuberant ctags.
+    ;; create tags.
+    (shell-command
+     (format "%s --languages=%s -f TAGS -e -R %s"
+             my-ctags-exe
+             lang
+             (directory-file-name dir-name)))
+    ;; (shell-command
+    ;;  (format "%s -f TAGS -e -R %s"
+    ;;          my-ctags-exe
+    ;;          (directory-file-name dir-name)))
+    )
 
   ;; `xref' stores TAGS file in global variable `tags-file-name'. Set it as
   ;; that's usually what I want.

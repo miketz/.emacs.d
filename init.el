@@ -7906,10 +7906,7 @@ load during init, or wait with autoloads."
 
 (autoload #'my-find-file-omni "my-misc" nil t)
 (when my-use-evil-p
-  (cond ((eq system-type 'gnu/linux)
-         (evil-leader/set-key "h" #'counsel-file-jump))
-        (t
-         (evil-leader/set-key "h" #'my-find-file-omni))))
+  (evil-leader/set-key "h" #'my-find-file-omni))
 
 
 (autoload #'my-indent-defun "my-misc" nil t)

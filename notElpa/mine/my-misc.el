@@ -284,22 +284,23 @@ between > and <."
 (defun my-find-file-omni ()
   "Find files by name."
   (interactive)
-  ;; Try `counsel-git' first. If it errors out due to not being in a git
-  ;; repo, then fall back to other commands. Erroring out seems to be faster
-  ;; than checking for presence of a git repo first on ms-win.
-  (unless (ignore-errors (let ((completing-read-function #'ivy-completing-read)
-                               ;; dynamically shadow ivy completion style to ignore order.
-                               (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-                               ;; taller ivy window
-                               (ivy-height (- (window-height) 4)))
-                           (counsel-git)))
-    (let ((fn (cond
-               ((eq system-type 'windows-nt) #'my-find-file-by-name-windows)
-               ((eq system-type 'gnu/linux)
-                (lambda ()
-                  (interactive)
-                  (call-interactively #'find-name-dired))))))
-      (funcall fn))))
+  (let ((completing-read-function #'ivy-completing-read)
+        ;; dynamically shadow ivy completion style to ignore order.
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window
+        (ivy-height (- (window-height) 4)))
+    ;; Try `counsel-git' first. If it errors out due to not being in a git
+    ;; repo, then fall back to other commands. Erroring out seems to be faster
+    ;; than checking for presence of a git repo first on ms-win.
+    (unless (ignore-errors (counsel-git))
+      (let ((fn (cond
+                 ((eq system-type 'windows-nt) #'my-find-file-by-name-windows)
+                 ((eq system-type 'gnu/linux) #'counsel-file-jump
+                  ;; (lambda ()
+                  ;;   (interactive)
+                  ;;   (call-interactively #'find-name-dired))
+                  ))))
+        (funcall fn)))))
 
 (defun my-indent-defun ()
   "Indent the function the cursor is inside."

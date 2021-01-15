@@ -2,4 +2,4 @@
 # name: pr
 # key: pr
 # --
-println!("${1:var}: {}", $1);
+println!("${1:format}"$0);

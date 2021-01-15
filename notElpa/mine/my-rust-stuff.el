@@ -19,6 +19,13 @@
                                        "index.html"))
 
 ;;;###autoload
+(defun my-rust-open-top-level-docs ()
+  "Open the top level doc page."
+  (interactive)
+  (browse-url (concat my-rust-doc-dir
+                      "rust/html/index.html")))
+
+;;;###autoload
 (defun my-rust-open-the-book ()
   "Open the book."
   (interactive)

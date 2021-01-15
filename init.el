@@ -7863,6 +7863,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; my-rust-stuff. extra's, like opening local docs, etc.
 ;;;----------------------------------------------------------------------------
+(autoload #'my-rust-open-top-level-docs "my-rust-stuff" nil t)
 (autoload #'my-rust-open-the-book "my-rust-stuff" nil t)
 
 ;;;----------------------------------------------------------------------------

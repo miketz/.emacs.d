@@ -343,6 +343,25 @@ mode itself. External language servers are required to use it of course."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'racer
+      :comment nil
+      :folder (concat my-module-folder "emacs-racer")
+      :remote-mine-url "https://github.com/miketz/emacs-racer"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/racer-rust/emacs-racer"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "25.1")
+                     (rust-mode "0.2.0")
+                     (dash "2.13.0")
+                     (s "1.10.0")
+                     (f "0.18.2")
+                     (pos-tip "0.4.6"))
+      :depend-soft '((undercover)) ; undercover is used for tests.
+      :depend-bundled '())
+    ,(make-module
       :name 'rg
       :comment "Has a UI that more closely resembles the built-in emacs grep
 style. More importantly it avoids spamming rg as you type or prematurely."

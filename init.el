@@ -7316,6 +7316,7 @@ vanilla javascript buffers."
 ;;; lsp-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/lsp-mode" load-path)
+(push "~/.emacs.d/notElpa/lsp-mode/clients" load-path)
 (autoload #'lsp "lsp-mode" nil t)
 
 ;; (with-eval-after-load 'lsp-pwsh ; powershell

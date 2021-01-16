@@ -7850,6 +7850,11 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'rust-dbg-wrap-or-unwrap "rust-mode" nil t)
 
 (with-eval-after-load 'rust-mode
+  ;; keybinds
+  (define-key rust-mode-map (kbd "C-c C-c") #'compile)
+  (define-key rust-mode-map (kbd "C-c c") #'compile)
+
+  ;; hook
   (defun my-setup-rust-mode ()
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)

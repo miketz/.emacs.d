@@ -7867,6 +7867,12 @@ TODO: delete this fn and replace with hooks, etc."
   (add-hook 'rust-mode-hook #'my-setup-rust-mode))
 
 ;;;----------------------------------------------------------------------------
+;;; racer
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/emacs-racer" load-path)
+
+
+;;;----------------------------------------------------------------------------
 ;;; my-rust-stuff. extra's, like opening local docs, etc.
 ;;;----------------------------------------------------------------------------
 (autoload #'my-rust-open-top-level-docs "my-rust-stuff" nil t)

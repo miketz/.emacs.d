@@ -278,6 +278,27 @@ mode itself. External language servers are required to use it of course."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'lsp-mode
+      :comment "A mode for LSP. More fancy features?"
+      :folder (concat my-module-folder "lsp-mode")
+      :remote-mine-url "https://github.com/miketz/lsp-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/emacs-lsp/lsp-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "26.1")
+                     (dash "2.14.1")
+                     (dash-functional "2.14.1")
+                     (f "0.20.0")
+                     (ht "2.0")
+                     (spinner "1.7.3")
+                     (markdown-mode "2.3")
+                     (lv "0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'avy
       :comment "Jump to positions in buffers."
       :folder (concat my-module-folder "avy")

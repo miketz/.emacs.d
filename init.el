@@ -7870,7 +7870,15 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; racer
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/emacs-racer" load-path)
+(autoload #'racer-find-definition "racer" nil t)
+(autoload #'racer-find-definition-other-window "racer" nil t)
+(autoload #'racer-find-definition-other-frame "racer" nil t)
+(autoload #'racer-mode "racer" nil t)
 
+(with-eval-after-load 'rust-mode
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode) ; show fn sig in minibuffer
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; my-rust-stuff. extra's, like opening local docs, etc.

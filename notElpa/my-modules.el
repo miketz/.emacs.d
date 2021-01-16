@@ -174,7 +174,7 @@ Some info may be purely for informational/doc purposes."
       :remote-upstream-url nil ; my own project, so no 3rd party upstream
       :source-control 'git
       :submodule-p t
-      :depend-hard '()
+      :depend-hard '((emacs "24.1"))
       :depend-soft '())
     ,(make-module
       :name 'iedit

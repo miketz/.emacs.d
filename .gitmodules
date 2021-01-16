@@ -280,3 +280,6 @@
 [submodule "notElpa/rust-mode"]
 	path = notElpa/rust-mode
 	url = https://github.com/miketz/rust-mode
+[submodule "notElpa/emacs-racer"]
+	path = notElpa/emacs-racer
+	url = https://github.com/miketz/emacs-racer

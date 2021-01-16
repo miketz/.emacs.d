@@ -51,7 +51,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'swiper
       :folder (concat my-module-folder "swiper")
@@ -60,7 +61,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'lispy
       :folder (concat my-module-folder "lispy")
@@ -74,7 +76,8 @@ Some info may be purely for informational/doc purposes."
                      (counsel "0.11.0") ; swiper package
                      (hydra "0.14.0")
                      (zoutline "0.1.0"))
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'evil
       :folder (concat my-module-folder "evil")
@@ -95,7 +98,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '((evil "0"))
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'expand-region
       :folder (concat my-module-folder "expand-region.el")
@@ -104,7 +108,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 's
       :folder (concat my-module-folder "s.el")
@@ -113,7 +118,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'magit
       :folder (concat my-module-folder "magit")
@@ -139,7 +145,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'csharp-mode
       :folder (concat my-module-folder "csharp-mode")
@@ -148,7 +155,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'spinner
       :folder (concat my-module-folder "spinner.el")
@@ -157,7 +165,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'ggtags
       :folder (concat my-module-folder "ggtags")
@@ -166,7 +175,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'mode-on-region
       :folder (concat my-module-folder "mine/mor")
@@ -175,7 +185,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "24.1"))
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'iedit
       :folder (concat my-module-folder "iedit")
@@ -184,7 +195,8 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'ido-grid
       :folder (concat my-module-folder "ido-grid.el")
@@ -196,7 +208,8 @@ Some info may be purely for informational/doc purposes."
       :submodule-p t
       :use-branch "mine"
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'ov
       :folder (concat my-module-folder "ov")
@@ -208,7 +221,8 @@ Some info may be purely for informational/doc purposes."
       :submodule-p t
       :use-branch "master"
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'deferred
       :folder (concat my-module-folder "emacs-deferred")
@@ -233,7 +247,8 @@ Some info may be purely for informational/doc purposes."
       :submodule-p t
       :use-branch "mine"
       :depend-hard '((dash) (s) (async) (flx) (ov) (f) (shut-up) (deferred))
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'eros
       :comment "Package to display eval'd results in an overlay. Implementation
@@ -247,7 +262,8 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :submodule-p t
       :use-branch "master"
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'slime
       :comment "Interactive mode for common lisp."
@@ -310,7 +326,8 @@ mode itself. External language servers are required to use it of course."
       :submodule-p t
       :use-branch "mine"
       :depend-hard '()
-      :depend-soft '())
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'rust-mode
       :comment nil
@@ -337,7 +354,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '((emacs "25.1")
                      (transient "0.1.0")
                      (wgrep "2.1.10"))
-      :depend-soft '())))
+      :depend-soft '()
+      :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."
@@ -423,7 +441,8 @@ Saves me from typing a lot of module stuff."
   :source-control 'git
   :submodule-p t
   :depend-hard '()
-  :depend-soft '())\n"
+  :depend-soft '()
+  :depend-bundled '())\n"
                              dir dir dir)))))
 
 (provide 'my-modules)

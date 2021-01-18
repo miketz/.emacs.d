@@ -1817,6 +1817,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; sly
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/sly" load-path)
+(push "~/.emacs.d/notElpa/sly/contrib" load-path)
+(push "~/.emacs.d/notElpa/sly/lib" load-path)
+
 ;; (setq my-use-sly nil)
 
 ;; (when my-use-sly

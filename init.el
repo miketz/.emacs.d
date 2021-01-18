@@ -1853,10 +1853,12 @@ with duplicate bundled libs in Sly and SLIME.")
 ;;;----------------------------------------------------------------------------
 ;;; SLIME
 ;;;----------------------------------------------------------------------------
-(unless my-use-sly ; testing out sly. avoid conflicts with SLIME.
+(unless my-use-sly ; avoid conflicts with SLIME when testing out sly.
   (push "~/.emacs.d/notElpa/slime" load-path)
   (push "~/.emacs.d/notElpa/slime/contrib" load-path)
-  (push "~/.emacs.d/notElpa/slime/lib" load-path)
+  ;; don't add /slime/lib/. it's added conditonally in slime.el if needed.
+  ;; (push "~/.emacs.d/notElpa/slime/lib" load-path)
+
   (autoload #'slime "slime" nil t)
   (autoload #'slime-mode "slime" nil t)
   (autoload #'slime-connect "slime" nil t)

@@ -950,6 +950,19 @@ in case that file does not provide any feature."
 (declare-function ggtags-show-definition 'ggtags)
 (declare-function magit-copy-buffer-revision 'magit-extras)
 (declare-function my-setup-log-edit-mode 'suppress)
+(declare-function slime 'slime)
+(declare-function slime-mode 'slime)
+(declare-function slime-connect 'slime)
+(declare-function slime-selector 'slime)
+(declare-function slime-lisp-mode-hook 'slime)
+(declare-function slime-setup 'slime)
+(declare-function s-split 's)
+(declare-function tree-sitter-hl-mode 'tree-sitter-hl)
+(declare-function tree-sitter-mode 'tree-sitter)
+(declare-function my-turn-off-tree-sitter-hl 'suppress)
+(declare-function my-turn-on-tree-sitter-hl 'suppress)
+(declare-function my-add-yas-tree-sitter-hooks 'suppress)
+
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

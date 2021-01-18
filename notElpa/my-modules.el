@@ -279,6 +279,21 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-soft '()
       :depend-bundled '((macrostep)))
     ,(make-module
+      :name 'sly
+      :comment "Fork of SLIME. Seems to make text entry in a lisp file
+sluggish. Not currently using."
+      :folder (concat my-module-folder "sly")
+      :remote-mine-url "https://github.com/miketz/sly"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/joaotavora/sly"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'eglot
       :comment "A mode for LSP. Nice due to no external dependencies for the
 mode itself. External language servers are required to use it of course."

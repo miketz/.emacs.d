@@ -283,3 +283,6 @@
 [submodule "notElpa/emacs-racer"]
 	path = notElpa/emacs-racer
 	url = https://github.com/miketz/emacs-racer
+[submodule "notElpa/sly"]
+	path = notElpa/sly
+	url = https://github.com/miketz/sly

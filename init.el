@@ -1817,16 +1817,23 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; sly
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/sly" load-path)
-(push "~/.emacs.d/notElpa/sly/contrib" load-path)
-(push "~/.emacs.d/notElpa/sly/lib" load-path)
+(defvar my-use-sly nil
+  "Whether I'm using sly or not. Used to avoid adding folders to the load-path
+with duplicate bundled libs in Sly and SLIME.")
 
-;; (setq my-use-sly nil)
+(when my-use-sly ; avoid duplicate bundled libraries also in SLIME.
+  (push "~/.emacs.d/notElpa/sly" load-path)
+  (push "~/.emacs.d/notElpa/sly/contrib" load-path)
+  (push "~/.emacs.d/notElpa/sly/lib" load-path))
 
-;; (when my-use-sly
-;;   (when (eq my-curr-computer 'work-laptop)
-;;     (setq inferior-lisp-program
-;;           "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64")))
+
+(when my-use-sly
+  ;; (when (eq my-curr-computer 'work-laptop)
+  ;;   (setq inferior-lisp-program
+  ;;         "C:/Users/mtz/programs/ccl-1.10-windowsx86/ccl/wx86cl64"))
+
+  (require 'sly-autoloads)
+  (setq inferior-lisp-program "sbcl"))
 
 
 ;;;----------------------------------------------------------------------------
@@ -1846,20 +1853,21 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; SLIME
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/slime" load-path)
-(push "~/.emacs.d/notElpa/slime/contrib" load-path)
-(push "~/.emacs.d/notElpa/slime/lib" load-path)
-(autoload #'slime "slime" nil t)
-(autoload #'slime-mode "slime" nil t)
-(autoload #'slime-connect "slime" nil t)
-(autoload #'slime-selector "slime" nil t)
-(autoload #'slime-selector "slime" nil t)
-(autoload #'slime-lisp-mode-hook "slime" nil t)
-;; (autoload #'slime-sheme "slime-scheme" nil t)
-(autoload #'slime-setup "slime" nil t)
+(unless my-use-sly ; testing out sly. avoid conflicts with SLIME.
+  (push "~/.emacs.d/notElpa/slime" load-path)
+  (push "~/.emacs.d/notElpa/slime/contrib" load-path)
+  (push "~/.emacs.d/notElpa/slime/lib" load-path)
+  (autoload #'slime "slime" nil t)
+  (autoload #'slime-mode "slime" nil t)
+  (autoload #'slime-connect "slime" nil t)
+  (autoload #'slime-selector "slime" nil t)
+  (autoload #'slime-selector "slime" nil t)
+  (autoload #'slime-lisp-mode-hook "slime" nil t)
+  ;; (autoload #'slime-sheme "slime-scheme" nil t)
+  (autoload #'slime-setup "slime" nil t)
 
-;; this line taken from slime-autoloads.el. Makes things work?
-(add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+  ;; this line taken from slime-autoloads.el. Makes things work?
+  (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook))
 
 ;; (require 'slime-autoloads)
 (with-eval-after-load 'slime

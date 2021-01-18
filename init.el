@@ -7846,6 +7846,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/rust-mode" load-path)
 (push '("\\.rs\\'" . rust-mode) auto-mode-alist) ; use rust-mode for .rs files
+(push '("\\.lock\\'" . conf-toml-mode) auto-mode-alist)
 (autoload #'rust-mode "rust-mode" nil t)
 (autoload #'rust-dbg-wrap-or-unwrap "rust-mode" nil t)
 

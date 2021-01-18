@@ -549,6 +549,9 @@ in case that file does not provide any feature."
 (defvar ggtags-oversize-limit)
 (defvar ggtags-executable-directory)
 (defvar ggtags-enable-navigation-keys)
+(defvar package-archives)
+(defvar cookie-file)
+(defvar rust-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

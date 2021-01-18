@@ -7837,8 +7837,14 @@ TODO: delete this fn and replace with hooks, etc."
     ;; dll's with 7zip as gzip is not available.
     (when (eq system-type 'windows-nt)
       (defun tree-sitter-langs-install-grammars
-          (&optional skip-if-installed version os keep-bundle))
-      (defun tree-sitter-langs-compile (lang-symbol &optional clean)))
+          (&optional skip-if-installed version os keep-bundle)
+        (print skip-if-installed)
+        (print version)
+        (print os)
+        (print keep-bundle))
+      (defun tree-sitter-langs-compile (lang-symbol &optional clean)
+        (print lang-symbol)
+        (print clean)))
     (require 'tree-sitter-langs)
 
     ;; add hooks to disable tree-sitter during yasnippet expansion. Yasnippet

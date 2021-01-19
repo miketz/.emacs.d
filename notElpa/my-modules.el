@@ -47,9 +47,12 @@ Some info may be purely for informational/doc purposes."
       :name 'paredit
       :folder (concat my-module-folder "paredit")
       :remote-mine-url "https://github.com/miketz/paredit"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://mumble.net/~campbell/git/paredit.git"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
@@ -57,9 +60,12 @@ Some info may be purely for informational/doc purposes."
       :name 'swiper
       :folder (concat my-module-folder "swiper")
       :remote-mine-url "https://github.com/miketz/swiper"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/abo-abo/swiper"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

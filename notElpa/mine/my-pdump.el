@@ -20,6 +20,9 @@ For faster subsequent start up."
   (let ((start (float-time)))
     ;; byte compile my libs before loading them. So fast versions will be
     ;; loaded for the dump.
+    ;; TODO: delete all "elc" files first. Sometimes there are issues where an
+    ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
+    ;; impossible to hunt down issue when it happens.
     (byte-recompile-directory
      (expand-file-name "~/.emacs.d/notElpa/mine/")
      0  ;; 0 means compile .el files if .elc is missing.

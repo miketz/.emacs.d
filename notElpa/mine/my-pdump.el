@@ -17,14 +17,13 @@
 For faster subsequent start up."
   (interactive)
   ;; measure time spent loading libs.
-  (let ((start (float-time)))
+  (let ((start (float-time))
+        (dir (expand-file-name "~/.emacs.d/notElpa/mine/")))
+    (my-delete-elc-files dir)
     ;; byte compile my libs before loading them. So fast versions will be
     ;; loaded for the dump.
-    ;; TODO: delete all "elc" files first. Sometimes there are issues where an
-    ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
-    ;; impossible to hunt down issue when it happens.
     (byte-recompile-directory
-     (expand-file-name "~/.emacs.d/notElpa/mine/")
+     dir
      0  ;; 0 means compile .el files if .elc is missing.
      t) ;; t means force re-compile even if the .elc is up-to-date. May be
         ;; useful if the Emacs version changed and should have an .elc compiled

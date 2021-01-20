@@ -1819,22 +1819,27 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
+
+(defun my-delete-elc-files (dir-str)
+  "Delete all elc files in folder DIR-STR."
+  (let ((elc-files (directory-files-recursively
+                    dir-str
+                    "\.elc$")))
+    ;; Optionally, on linux manually delete. First verify file list with:
+    ;;   find . -name "*.elc" -type f
+    ;; then run:
+    ;;   find . -name "*.elc" -type f -delete
+    (cl-loop for f in elc-files
+             do
+             (delete-file f))))
+
 (defun my-byte-compile-curr-dir ()
   "Byte compile all elisp files in the current directory."
   (interactive)
   ;; delete all "elc" files first. Sometimes there are issues where an
   ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
   ;; impossible to hunt down issue when it happens.
-  (let ((elc-files (directory-files-recursively
-                    default-directory ; current directory
-                    "\.elc$")))
-    ;; Optionally, on linus manually delete. Verify file list with:
-    ;;   find . -name "*.elc" -type f
-    ;; then run:
-    ;;   find . -name "*.elc" -type f -delete
-    (cl-loop for f in elc-files
-             do
-             (delete-file f)))
+  (my-delete-elc-files default-directory) ; current directory
 
   (byte-recompile-directory
    default-directory   ; current directory

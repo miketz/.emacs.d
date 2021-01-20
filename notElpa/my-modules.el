@@ -402,6 +402,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
   (interactive)
   (cl-loop for mod in my-modules
            do
+           ;; TODO: delete all "elc" files first. Sometimes there are issues where an
+           ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
+           ;; impossible to hunt down issue when it happens.
            (byte-recompile-directory
             (module-folder mod)
             0  ;; 0 means compile .el files if .elc is missing.
@@ -421,6 +424,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                               my-modules
                               :test (lambda (sym mod)
                                       (eq sym (module-name mod)))))))
+    ;; TODO: delete all "elc" files first. Sometimes there are issues where an
+    ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
+    ;; impossible to hunt down issue when it happens.
     (byte-recompile-directory
      (module-folder mod)
      0 ;; 0 means compile .el files if .elc is missing.
@@ -450,6 +456,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
          (dir-names (mapcar #'cl-first dir-infos)))
     (cl-loop for dir in dir-names
              do
+             ;; TODO: delete all "elc" files first. Sometimes there are issues where an
+             ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
+             ;; impossible to hunt down issue when it happens.
              (byte-recompile-directory
               dir
               0 ;; 0 means compile .el files if .elc is missing.

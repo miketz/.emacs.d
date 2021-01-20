@@ -1822,6 +1822,13 @@ This prevents overlapping themes; something I would rarely want."
 (defun my-byte-compile-curr-dir ()
   "Byte compile all elisp files in the current directory."
   (interactive)
+  ;; TODO: delete all "elc" files first. Sometimes there are issues where an
+  ;; elc is loaded which breaks compliation of an el file. Rare, but makes an
+  ;; impossible to hunt down issue when it happens.
+  ;; On linux, verify with:
+  ;;   find . -name "*.elc" -type f
+  ;; then run:
+  ;;   find . -name "*.elc" -type f -delete
   (byte-recompile-directory
    default-directory   ; current directory
    0                   ; 0 means compile .el files if .elc is missing.

@@ -552,6 +552,7 @@ in case that file does not provide any feature."
 (defvar package-archives)
 (defvar cookie-file)
 (defvar rust-mode-map)
+(defvar inferior-lisp-program)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -7904,6 +7905,9 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.lock\\'" . conf-toml-mode) auto-mode-alist)
 (autoload #'rust-mode "rust-mode" nil t)
 (autoload #'rust-dbg-wrap-or-unwrap "rust-mode" nil t)
+
+;; silence byte compiler warning
+(declare-function my-setup-rust-mode 'suppress)
 
 (with-eval-after-load 'rust-mode
   ;; keybinds

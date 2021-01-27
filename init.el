@@ -7532,7 +7532,14 @@ vanilla javascript buffers."
 
 (with-eval-after-load 'rg
   (require 'wgrep)
-  (setq rg-command-line-flags '("-M 250")) ; truncate long lines in display.
+  (setq rg-command-line-flags
+        `("-M 250" ; truncate long lines in display.
+          ;; search dot files/folders but not .git
+          ;; TODO: figure out how to get it to searh .classpath
+          "--hidden"
+          ,(if (eq system-type 'windows-nt)
+               "-g \"!.git/\""
+             "-g '!.git/'")))
 
   (setq rg-show-columns nil)
   (setq rg-group-result nil)

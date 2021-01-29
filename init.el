@@ -1105,7 +1105,6 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 (defvar my-swoop-fn (cond
                      ;; NOTE: fido breaks swiper.
                      ((eq my-narrow-type 'fido) #'my-occur-wild-spaces)
-                     (t #'swiper-isearch) ; always use this for now.
                      (my-use-ivy-p #'swiper-isearch)
                      ;; `ido-occur' is fast but does not split inputs on
                      ;; spaces. use swiper with ido for now.

@@ -2967,6 +2967,14 @@ To make it human readable."
 ;;; Helm
 ;;;----------------------------------------------------------------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
+(push "~/.emacs.d/notElpa/helm" load-path)
+(autoload #'helm "helm" nil nil)
+(autoload #'helm-mode "helm-mode" nil t)
+(autoload #'helm-buffers-list "helm-buffers" nil t)
+(autoload #'helm-M-x "helm-command" nil t)
+(autoload #'helm-find-files "helm-find-files" nil t)
+(autoload #'helm-show-kill-ring "helm-show-kill-ring" nil t)
+(autoload #'helm-imenu "helm-imenu" nil t)
 
 (when (and my-use-helm-p
            ;; helm is a little slow on a raspberry pi.
@@ -2986,7 +2994,7 @@ To make it human readable."
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
     (when my-use-evil-p
-     (evil-leader/set-key "i" #'helm-imenu))
+      (evil-leader/set-key "i" #'helm-imenu))
     ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from
     ;;       finding candidates. The standard emacs `dabbrev-expand' works
     ;;       fine. `hippie-expand' works too.

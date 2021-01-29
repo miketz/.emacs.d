@@ -1112,14 +1112,14 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                      (my-use-fancy-ido-p #'swiper-isearch)
                      (my-use-grid-ido-p #'swiper-isearch)
                      (my-use-bare-ido-p #'my-occur-wild-spaces)
-                     (my-use-helm-p #'helm-swoop)
+                     (my-use-helm-p #'helm-occur)
                      (my-use-mish-mash-p #'swiper-isearch)
                      ;; `sallet-occur' is unusably slow. Don't use it.
                      ;; `icicle-occur' is unusably slow. Don't use it.
                      (t #'my-occur-wild-spaces))
   "Function for searching with an overview.
-Choices: helm-swoop swiper swiper-isearch ido-occur sallet-occur icicle-occur
-occur my-occur-wild-spaces")
+Choices: helm-swoop helm-occur swiper swiper-isearch ido-occur sallet-occur
+icicle-occur occur my-occur-wild-spaces")
 (when my-use-evil-p
   (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
@@ -2975,6 +2975,7 @@ To make it human readable."
 (autoload #'helm-find-files "helm-find-files" nil t)
 (autoload #'helm-show-kill-ring "helm-show-kill-ring" nil t)
 (autoload #'helm-imenu "helm-imenu" nil t)
+(autoload #'helm-occur "helm-occur" nil t)
 
 (when (and my-use-helm-p
            ;; helm is a little slow on a raspberry pi.
@@ -3152,7 +3153,7 @@ To make it human readable."
 ;;   (evil-leader/set-key "g" #'my-grep-dwim))
 
 ;;;----------------------------------------------------------------------------
-;;; helm-swoop
+;;; helm-swoop. No longer using as the built-in `helm-occur' is faster.
 ;;;----------------------------------------------------------------------------
 ;; (autoload 'helm-swoop "helm-swoop" nil t)
 

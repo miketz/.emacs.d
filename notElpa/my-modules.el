@@ -383,6 +383,22 @@ mode itself. External language servers are required to use it of course."
       :depend-soft '((undercover)) ; undercover is used for tests.
       :depend-bundled '())
     ,(make-module
+      :name 'helm
+      :comment nil
+      :folder (concat my-module-folder "helm")
+      :remote-mine-url "https://github.com/miketz/helm"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/emacs-helm/helm"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1")
+                     (async "1.9.4")
+                     (popup "0.5.3"))
+      :depend-soft '()
+      :depend-bundled '((helm-core)))
+    ,(make-module
       :name 'rg
       :comment "Has a UI that more closely resembles the built-in emacs grep
 style. More importantly it avoids spamming rg as you type or prematurely."

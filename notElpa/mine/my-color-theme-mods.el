@@ -172,6 +172,7 @@ those faces."
   (custom-theme-set-faces
    'deeper-blue
 
+   '(fill-column-indicator ((t :foreground "#202025")))
 
    '(leerzeichen ((t (:foreground "gray40"           ;"#A8A800"
                                   :background "black" ;"#D4D4C8"

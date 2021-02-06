@@ -8223,7 +8223,7 @@ load during init, or wait with autoloads."
     ;;(setq-default display-time-day-and-date t)
     ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
     ;; (setq display-time-format "%-I:%M%#p")
-    (setq display-time-format "%-m/%-d %a %-I:%M%#p"))
+    (setq display-time-format "%-m-%-d %a %-I:%M%#p"))
   (display-time-mode 1))
 
 ;; show lambdas with the Greek symbol

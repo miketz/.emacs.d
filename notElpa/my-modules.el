@@ -464,7 +464,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                            (s-ends-with-p "FlamesOfFreedom" (cl-first f))
                            (s-ends-with-p "markup-faces" (cl-first f))
                            (s-ends-with-p "sicp-info" (cl-first f))
-                           (s-ends-with-p "sallet" (cl-first f))))
+                           (s-ends-with-p "sallet" (cl-first f))
+                           (s-ends-with-p "libegit2" (cl-first f))))
                      (directory-files-and-attributes my-module-folder
                                                      t "^[^.]" t)))
          (dir-names (mapcar #'cl-first dir-infos)))

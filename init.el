@@ -1015,7 +1015,8 @@ in case that file does not provide any feature."
     a-laptop-faster
     leyna-laptop
     hp-tower-2009
-    wild-dog)
+    wild-dog
+    mac-mini-2021)
   "The computers I use Emacs on.
 Specific configurations may be made for some computers.")
 
@@ -1067,6 +1068,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
+        ((eq my-curr-computer 'mac-mini-2021) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
@@ -1749,6 +1751,12 @@ This prevents overlapping themes; something I would rarely want."
 ;; (when my-graphic-p ;; this isn't true for emacs daemon!
 ;;   (my-color-zenburn))
 (cond
+ ((eq my-curr-computer 'mac-mini-2021)
+  (load-theme 'charcoal t)
+  (push
+   '(font . "-*-Menlo-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+   default-frame-alist))
+
  ((eq my-curr-computer 'wild-dog)
   (load-theme 'charcoal t)
 

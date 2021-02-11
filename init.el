@@ -553,6 +553,11 @@ in case that file does not provide any feature."
 (defvar cookie-file)
 (defvar rust-mode-map)
 (defvar inferior-lisp-program)
+(defvar icomplete-tidy-shadowed-file-names) ; buffer-local
+(defvar icomplete-show-matches-on-no-input) ; buffer-local
+(defvar icomplete-hide-common-prefix)       ; buffer-local
+
+
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -1414,6 +1419,8 @@ Currently available on git branch: feature/native-comp.")
   ;; dependency on undo-tree was removed recently from evil. do not require.
   ;; (require 'undo-tree) ; stored in /notElpa/evil/lib
 
+
+  (declare-function undo-redo 'suppress) ; silence byte-compiler on emacs<28
   (when (fboundp #'undo-redo) ; emacs 28+
     ;; (setq evil-undo-system 'undo-redo)
 

@@ -1754,7 +1754,7 @@ This prevents overlapping themes; something I would rarely want."
  ((eq my-curr-computer 'mac-mini-2021)
   (load-theme 'charcoal t)
   (push
-   '(font . "-*-Menlo-normal-normal-normal-*-14-*-*-*-m-0-iso10646-1")
+   '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
    default-frame-alist))
 
  ((eq my-curr-computer 'wild-dog)

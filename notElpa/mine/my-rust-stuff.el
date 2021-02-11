@@ -9,14 +9,10 @@
 
 (defvar my-rust-doc-dir
   (cond ((eq my-curr-computer 'wild-dog)
-         "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/"))
+         "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/")
+        ((eq my-curr-computer 'mac-mini-2021)
+         "~/.rustup/toolchains/stable-aarch64-apple-darwin/share/doc/"))
   "Root folder of local rust docs.")
-
-
-(defvar my-rust-the-book-dir (concat my-rust-doc-dir
-                                     "rust/html/book/"))
-(defvar my-rust-the-book-index (concat my-rust-the-book-dir
-                                       "index.html"))
 
 ;;;###autoload
 (defun my-rust-open-top-level-docs ()
@@ -34,8 +30,8 @@
   ;;   (delete-other-windows)
   ;;   (split-window-horizontally)
   ;;   (shrink-window-horizontally 10)
-  ;;   (eww-open-file my-rust-the-book-index))
-  (browse-url my-rust-the-book-index))
+  ;;   (eww-open-file (concat my-rust-doc-dir "rust/html/book/index.html")))
+  (browse-url (concat my-rust-doc-dir "rust/html/book/index.html")))
 
 
 (provide 'my-rust-stuff)

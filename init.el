@@ -7971,6 +7971,18 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'my-rust-open-the-book "my-rust-stuff" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; compile.  built-in mode in emacs.
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'compile
+  ;; swiper keybind in compilation buffer
+  (define-key compilation-mode-map (kbd "s") my-swoop-fn)
+  ;; TODO: figure out why `evil-define-key' is not working.
+  ;; (when my-use-evil-p
+  ;;   (evil-define-key 'normal compilation-mode-map
+  ;;     (kbd "s") my-swoop-fn))
+  )
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

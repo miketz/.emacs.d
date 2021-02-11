@@ -7933,6 +7933,11 @@ TODO: delete this fn and replace with hooks, etc."
 (declare-function my-setup-rust-mode 'suppress)
 
 (with-eval-after-load 'rust-mode
+  ;; get `rust-format-buffer' to work on mac. it uses `executable-find' to
+  ;; look for rstfmt. Which expects the path to be in elisp var `exec-path'.
+  (when (eq my-curr-computer 'mac-mini-2021)
+    (add-to-list 'exec-path "~/.cargo/bin"))
+
   ;; keybinds
   (define-key rust-mode-map (kbd "C-c C-c") #'compile)
   (define-key rust-mode-map (kbd "C-c c") #'compile)

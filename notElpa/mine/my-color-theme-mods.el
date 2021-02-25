@@ -1166,10 +1166,11 @@ those faces."
 (defun my-color-overcast ()
   (interactive)
   (load-theme 'overcast t)
+  (my-rainbow-parens-dark-bg-bold)
   (custom-theme-set-faces
    'overcast
 
-   (my-rainbow-parens-dark-bg-bold)
+   `(fill-column-indicator ((t :foreground "#3F3F35")))
    ;; (color-comment "#005353") "#70C3C3"
    `(font-lock-comment-face ((t (:foreground "#50A3A3"))))
    `(font-lock-doc-face ((t (:inherit font-lock-string-face))))))

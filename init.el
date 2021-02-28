@@ -7951,6 +7951,7 @@ TODO: delete this fn and replace with hooks, etc."
 
   ;; hook
   (defun my-setup-rust-mode ()
+    (setq compile-command "cargo check")
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)

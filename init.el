@@ -7633,7 +7633,13 @@ vanilla javascript buffers."
          "~/proj/ctags/ctags" ; universal
          ;; "/usr/bin/ctags-exuberant"
          )
+        ((eq my-curr-computer 'mac-mini-2021) "/opt/homebrew/bin/ctags")
         (t nil)))
+
+(defvar my-universal-ctags-p (memq my-curr-computer '(work-laptop-2019
+                                                      wild-dog
+                                                      mac-mini-2021))
+  "Non-nil if the ctags used on this computer is universial ctags.")
 
 (cl-defun my-create-ctags (dir-name)
   "Create tags file using DIR-NAME as project root."
@@ -7643,24 +7649,27 @@ vanilla javascript buffers."
     (message "Set path to ctags in my-ctags-exe.")
     (cl-return-from my-create-ctags))
 
-  (require 's) ; for `s-split'
-  (let* ((lang-str (shell-command-to-string (format "%s --list-languages"
-                                                    my-ctags-exe)))
-         (supported-langs (s-split "\n" lang-str))
-         (lang (completing-read "Lang: " supported-langs)))
-    ;; TODO: the --lanauges option works for universal ctags. verify for
-    ;;       exuberant ctags.
-    ;; create tags.
+  (cond
+   ;; select the lang if universal-ctags
+   (my-universal-ctags-p
+    (require 's) ; for `s-split'
+    (let* ((lang-str (shell-command-to-string (format "%s --list-languages"
+                                                      my-ctags-exe)))
+           (supported-langs (s-split "\n" lang-str))
+           (lang (completing-read "Lang: " supported-langs)))
+      ;; create tags.
+      (shell-command
+       (format "%s --languages=%s -f TAGS -e -R %s"
+               my-ctags-exe
+               lang
+               (directory-file-name dir-name)))))
+   ;; not unviersal-ctags. explicit language selection not supported?
+   (t
+    ;; create tags
     (shell-command
-     (format "%s --languages=%s -f TAGS -e -R %s"
+     (format "%s -f TAGS -e -R %s"
              my-ctags-exe
-             lang
-             (directory-file-name dir-name)))
-    ;; (shell-command
-    ;;  (format "%s -f TAGS -e -R %s"
-    ;;          my-ctags-exe
-    ;;          (directory-file-name dir-name)))
-    )
+             (directory-file-name dir-name)))))
 
   ;; `xref' stores TAGS file in global variable `tags-file-name'. Set it as
   ;; that's usually what I want.

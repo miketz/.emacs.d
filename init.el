@@ -1021,7 +1021,7 @@ in case that file does not provide any feature."
     leyna-laptop
     hp-tower-2009
     wild-dog
-    mac-mini-2021)
+    mac-mini-m1-2021)
   "The computers I use Emacs on.
 Specific configurations may be made for some computers.")
 
@@ -1073,7 +1073,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
-        ((eq my-curr-computer 'mac-mini-2021) 'grid-ido)
+        ((eq my-curr-computer 'mac-mini-m1-2021) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
@@ -1132,7 +1132,7 @@ icicle-occur occur my-occur-wild-spaces")
 
 (defvar my-use-lispy-p (memq my-curr-computer '(wild-dog
                                                 work-laptop-2019
-                                                mac-mini-2021))
+                                                mac-mini-m1-2021))
   "Whether to use lispy or not.
 Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 
@@ -1759,7 +1759,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; (when my-graphic-p ;; this isn't true for emacs daemon!
 ;;   (my-color-zenburn))
 (cond
- ((eq my-curr-computer 'mac-mini-2021)
+ ((eq my-curr-computer 'mac-mini-m1-2021)
   (load-theme 'charcoal t)
   (push
    '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
@@ -7634,12 +7634,12 @@ vanilla javascript buffers."
          "~/proj/ctags/ctags" ; universal
          ;; "/usr/bin/ctags-exuberant"
          )
-        ((eq my-curr-computer 'mac-mini-2021) "/opt/homebrew/bin/ctags")
+        ((eq my-curr-computer 'mac-mini-m1-2021) "/opt/homebrew/bin/ctags")
         (t nil)))
 
 (defvar my-universal-ctags-p (memq my-curr-computer '(work-laptop-2019
                                                       wild-dog
-                                                      mac-mini-2021))
+                                                      mac-mini-m1-2021))
   "Non-nil if the ctags used on this computer is universial ctags.")
 
 (cl-defun my-create-ctags (dir-name)
@@ -7952,7 +7952,7 @@ TODO: delete this fn and replace with hooks, etc."
 (with-eval-after-load 'rust-mode
   ;; get `rust-format-buffer' to work on mac. it uses `executable-find' to
   ;; look for rstfmt. Which expects the path to be in elisp var `exec-path'.
-  (when (eq my-curr-computer 'mac-mini-2021)
+  (when (eq my-curr-computer 'mac-mini-m1-2021)
     (add-to-list 'exec-path "~/.cargo/bin"))
 
   ;; keybinds

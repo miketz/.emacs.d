@@ -187,8 +187,7 @@
   )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-(when (or (version< emacs-version "27.0") ; in early-init.el for emacs 27+
-          (eq system-type 'windows-nt))
+(when (version< emacs-version "27.0") ; in early-init.el for emacs 27+
   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -7870,9 +7869,11 @@ vanilla javascript buffers."
   (progn ;; handle issue where tree-sitter goes crazy during yasnippet
          ;; expansion. Just turn it off temporarily.
     (defun my-turn-off-tree-sitter-hl ()
+      (interactive)
       (tree-sitter-hl-mode -1)
       (tree-sitter-mode -1))
     (defun my-turn-on-tree-sitter-hl ()
+      (interactive)
       (tree-sitter-mode 1)
       (tree-sitter-hl-mode 1))
 

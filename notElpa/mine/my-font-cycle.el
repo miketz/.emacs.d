@@ -56,7 +56,14 @@
           "-outline-Ubuntu Mono-normal-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
           "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
           "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"
-          "-outline-Envy Code R-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"])
+          "-outline-Envy Code R-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL Thin-thin-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL ExtraLight-extralight-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL Light-light-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL Medium-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL-bold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+          "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"])
        (t nil)))
      (i 0)
      (len (length my-fonts))

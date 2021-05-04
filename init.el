@@ -1786,7 +1786,8 @@ This prevents overlapping themes; something I would rarely want."
        ;; "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
        ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
        ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
-       "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+       "-outline-JetBrains Mono ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
        )
      default-frame-alist)
     ;; (set-frame-font

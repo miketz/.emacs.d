@@ -31,6 +31,12 @@
 (let*
     ((my-fonts
       (cond
+       ((eq my-curr-computer 'mac-mini-m1-2021)
+        ["-*-JetBrains Mono NL-thin-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-JetBrains Mono NL-light-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-JetBrains Mono NL-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-JetBrains Mono NL-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-JetBrains Mono NL-ultrabold-normal-normal-*-*-*-*-*-m-0-iso10646-1"])
        ((eq my-curr-computer 'wild-dog)
         '["-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9"
           "-misc-fixed-bold-r-normal--18-*-100-100-c-90-iso10646-1"

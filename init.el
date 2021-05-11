@@ -4459,6 +4459,10 @@ statement generated my SqlServer."
     ;; try to warp to generally the same area you were in the eww buffer.
     (goto-char curr-pos)))
 
+(when (eq my-curr-computer 'mac-mini-m1-2021)
+  (let ((lisp-file "my-proj-mac-mini-m1-2021"))
+    (autoload #'my-proj-pcl lisp-file nil t)))
+
 (when (eq my-curr-computer 'wild-dog)
   (let ((lisp-file "my-proj-wild-dog"))
     (autoload #'my-proj-dive-python lisp-file nil t)

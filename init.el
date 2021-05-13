@@ -2007,6 +2007,10 @@ with duplicate bundled libs in Sly and SLIME.")
   ;;         (insert welcome)))))
 
   (cond
+   ((eq my-curr-computer 'mac-mini-m1-2021)
+    (setq slime-default-lisp 'sbcl
+          slime-lisp-implementations '((sbcl ("/usr/local/bin/sbcl")))))
+
    ((eq my-curr-computer 'wild-dog)
     (setq slime-default-lisp 'sbcl
           slime-lisp-implementations '((ccl ("~/proj/ccl/lx86cl64"))

@@ -1176,8 +1176,12 @@ Currently available on git branch: feature/native-comp.")
                                hp-tower-2009)))
 
 (defvar my-install-slime-p (memq my-curr-computer
-                                 '(wild-dog utilite hp-tower-2009
-                                   a-laptop-faster work-laptop-2019)))
+                                 '(wild-dog
+                                   utilite
+                                   hp-tower-2009
+                                   a-laptop-faster
+                                   work-laptop-2019
+                                   mac-mini-m1-2021)))
 
 (defvar my-install-slime-company-p (and my-install-slime-p
                                         (not (version< emacs-version

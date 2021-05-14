@@ -128,21 +128,22 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'magit
+      :comment nil
       :folder (concat my-module-folder "magit")
       :remote-mine-url "https://github.com/miketz/magit"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/magit/magit"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '((emacs "25.1")
                      ;; async not used anymore? (async "20180527")
                      (dash "20200524")
-                     ;; git-commit is a file within magit! not really a
-                     ;; dependency, but it is a separate melp package so
-                     ;; keep it here for doc purposes.
-                     (git-commit "20200516")
                      (transient "20200601")
                      (with-editor "20200522"))
-      :depend-soft '((libgit "0")))
+      :depend-soft '((libgit "0"))
+      :depend-bundled '((git-commit "20200516")))
     ,(make-module
       :name 'libgit
       :folder (concat my-module-folder "libegit2")

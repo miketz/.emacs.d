@@ -45,6 +45,7 @@ Some info may be purely for informational/doc purposes."
 (defvar my-modules
   `(,(make-module
       :name 'paredit
+      :comment nil
       :folder (concat my-module-folder "paredit")
       :remote-mine-url "https://github.com/miketz/paredit"
       :remote-mine-alias "origin"
@@ -58,6 +59,7 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'swiper
+      :comment nil
       :folder (concat my-module-folder "swiper")
       :remote-mine-url "https://github.com/miketz/swiper"
       :remote-mine-alias "origin"
@@ -71,11 +73,15 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'lispy
+      :comment nil
       :folder (concat my-module-folder "lispy")
       :remote-mine-url "https://github.com/miketz/lispy"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/abo-abo/lispy"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '((emacs "24.3")
                      (ace-window "0.9.0")
                      (iedit "0.9.9")
@@ -86,11 +92,15 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'evil
+      :comment nil
       :folder (concat my-module-folder "evil")
       :remote-mine-url "https://github.com/miketz/evil"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/emacs-evil/evil"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '((emacs "24.1")
                      (cl-lib "0.5"))
       :depend-soft '()
@@ -98,31 +108,43 @@ Some info may be purely for informational/doc purposes."
                          goto-chg "1.6")))
     ,(make-module
       :name 'evil-leader
+      :comment nil
       :folder (concat my-module-folder "evil-leader")
       :remote-mine-url "https://github.com/miketz/evil-leader"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/cofi/evil-leader"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '((evil "0"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 'expand-region
+      :comment nil
       :folder (concat my-module-folder "expand-region.el")
       :remote-mine-url "https://github.com/miketz/expand-region.el"
+      :remote-mine-alias "orign"
       :remote-upstream-url "https://github.com/magnars/expand-region.el"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 's
+      :comment nil
       :folder (concat my-module-folder "s.el")
       :remote-mine-url "https://github.com/miketz/s.el"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/magnars/s.el"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
@@ -155,7 +177,7 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
-      :name with-editor
+      :name 'with-editor
       :comment nil
       :folder (concat my-module-folder "with-editor")
       :remote-mine-url "https://github.com/miketz/with-editor"
@@ -204,56 +226,77 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'csharp-mode
+      :comment nil
       :folder (concat my-module-folder "csharp-mode")
       :remote-mine-url "https://github.com/miketz/csharp-mode"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/josteink/csharp-mode"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 'spinner
+      :comment nil
       :folder (concat my-module-folder "spinner.el")
       :remote-mine-url "https://github.com/miketz/spinner.el"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/Malabarba/spinner.el"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 'ggtags
+      :comment nil
       :folder (concat my-module-folder "ggtags")
       :remote-mine-url "https://github.com/miketz/ggtags"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/leoliu/ggtags"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 'mode-on-region
+      :comment nil
       :folder (concat my-module-folder "mine/mor")
       :remote-mine-url "https://github.com/miketz/mor"
+      :remote-mine-alias "origin"
       :remote-upstream-url nil ; my own project, so no 3rd party upstream
+      :remote-upstream-alias nil
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '((emacs "24.1"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 'iedit
+      :comment nil
       :folder (concat my-module-folder "iedit")
       :remote-mine-url "https://github.com/miketz/iedit"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/victorhge/iedit"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
       :name 'ido-grid
+      :comment nil
       :folder (concat my-module-folder "ido-grid.el")
       :remote-mine-url "https://github.com/miketz/ido-grid.el"
       :remote-mine-alias "origin"
@@ -267,6 +310,7 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'ov
+      :comment nil
       :folder (concat my-module-folder "ov")
       :remote-mine-url "https://github.com/miketz/ov"
       :remote-mine-alias "origin"
@@ -280,6 +324,7 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '())
     ,(make-module
       :name 'deferred
+      :comment nil
       :folder (concat my-module-folder "emacs-deferred")
       :remote-mine-url "https://github.com/miketz/emacs-deferred"
       :remote-mine-alias "origin"
@@ -292,6 +337,7 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '((undercover)))
     ,(make-module
       :name 'sallet
+      :comment nil
       :folder (concat my-module-folder "sallet")
       :remote-mine-url "https://github.com/miketz/sallet"
       :remote-mine-alias "origin"
@@ -453,9 +499,12 @@ mode itself. External language servers are required to use it of course."
 style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "rg.el")
       :remote-mine-url "https://github.com/miketz/rg.el"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/dajva/rg.el"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
+      :use-branch "master"
       :depend-hard '((emacs "25.1")
                      (transient "0.1.0")
                      (wgrep "2.1.10"))
@@ -546,11 +595,15 @@ Saves me from typing a lot of module stuff."
              do
              (insert (format ",(make-module
   :name '%s
+  :comment nil
   :folder (concat my-module-folder \"%s\")
   :remote-mine-url \"https://github.com/miketz/%s\"
+  :remote-mine-alias \"origin\"
   :remote-upstream-url nil
+  :remote-upstream-alias \"upstream\"
   :source-control 'git
   :submodule-p t
+  :use-branch \"master\"
   :depend-hard '()
   :depend-soft '()
   :depend-bundled '())\n"

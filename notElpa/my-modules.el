@@ -134,13 +134,13 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :depend-hard '((emacs "25.1")
-                     (async "20180527")
-                     (dash "20180910")
+                     ;; async not used anymore? (async "20180527")
+                     (dash "20200524")
                      ;; git-commit is a file within magit! not really a
                      ;; dependency, but it is a separate melp package so
                      ;; keep it here for doc purposes.
-                     (git-commit "20181104")
-                     (transient "20190812")
+                     (git-commit "20200516")
+                     (transient "20200601")
                      (with-editor "20200522"))
       :depend-soft '((libgit "0")))
     ,(make-module

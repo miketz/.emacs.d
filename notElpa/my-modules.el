@@ -190,12 +190,16 @@ Some info may be purely for informational/doc purposes."
       :depend-bundled '((git-commit "20200516")))
     ,(make-module
       :name 'libgit
+      :comment "An elisp package with C code bunbled."
       :folder (concat my-module-folder "libegit2")
       :remote-mine-url "https://github.com/miketz/libegit2"
+      :remote-mine-alias "origin"
       :remote-upstream-url "https://github.com/magit/libegit2"
+      :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
-      :depend-hard '()
+      :use-branch "master"
+      :depend-hard '((emacs "25.1"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

@@ -141,8 +141,8 @@ Some info may be purely for informational/doc purposes."
                      ;; keep it here for doc purposes.
                      (git-commit "20181104")
                      (transient "20190812")
-                     (with-editor "20181103"))
-      :depend-soft '((libgit "???")))
+                     (with-editor "20200522"))
+      :depend-soft '((libgit "0")))
     ,(make-module
       :name 'libgit
       :folder (concat my-module-folder "libegit2")

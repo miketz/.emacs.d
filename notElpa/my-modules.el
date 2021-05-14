@@ -141,6 +141,20 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'transient
+      :comment nil
+      :folder (concat my-module-folder "transient")
+      :remote-mine-url "https://github.com/miketz/transient"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/magit/transient"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'magit
       :comment nil
       :folder (concat my-module-folder "magit")

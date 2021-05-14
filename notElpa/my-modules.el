@@ -156,7 +156,9 @@ Some info may be purely for informational/doc purposes."
                      (dash "20200524")
                      (transient "20200601")
                      (with-editor "20200522"))
-      :depend-soft '((libgit "0"))
+      :depend-soft '((libgit "0")
+                     ;; magit-libgit needs emacs 26.1
+                     (emacs "26.1"))
       :depend-bundled '((git-commit "20200516")))
     ,(make-module
       :name 'libgit

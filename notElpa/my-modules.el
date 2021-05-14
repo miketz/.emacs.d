@@ -139,7 +139,7 @@ Some info may be purely for informational/doc purposes."
       :use-branch "master"
       :depend-hard '((emacs "24"))
       :depend-soft '()
-      :depend-bundled '()))
+      :depend-bundled '())
     ,(make-module
       :name 'magit
       :comment nil

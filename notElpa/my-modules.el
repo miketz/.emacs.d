@@ -155,6 +155,20 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name with-editor
+      :comment nil
+      :folder (concat my-module-folder "with-editor")
+      :remote-mine-url "https://github.com/miketz/with-editor"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/magit/with-editor"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "24.4"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'magit
       :comment nil
       :folder (concat my-module-folder "magit")

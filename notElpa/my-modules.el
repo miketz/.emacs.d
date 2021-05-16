@@ -509,6 +509,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                      (transient "0.1.0")
                      (wgrep "2.1.10"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'rainbow-delimiters
+      :comment nil
+      :folder (concat my-module-folder "rainbow-delimiters")
+      :remote-mine-url "https://github.com/miketz/rainbow-delimiters"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/Fanael/rainbow-delimiters"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

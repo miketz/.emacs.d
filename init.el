@@ -5297,6 +5297,8 @@ TODO: call this function when it works."
 ;;; erc
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'erc
+  (setq erc-default-server "irc.libera.chat") ; formerly "irc.freenode.net"
+
   (let ((format "%-I:%M%#p")) ;; use 12 hour format. am/pm
     (setq erc-timestamp-format       format
           erc-timestamp-format-right format))

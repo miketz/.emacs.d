@@ -555,6 +555,7 @@ in case that file does not provide any feature."
 (defvar icomplete-tidy-shadowed-file-names) ; buffer-local
 (defvar icomplete-show-matches-on-no-input) ; buffer-local
 (defvar icomplete-hide-common-prefix)       ; buffer-local
+(defvar erc-default-server)
 
 
 

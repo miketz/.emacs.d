@@ -102,7 +102,10 @@
     (let* ((pair (aref colors i))
            (bg (car pair))
            (descr (cdr pair)))
-      (set-background-color bg)
+      ;; (set-background-color bg)
+      (custom-theme-set-faces
+       (my-get-theme)
+       `(default ((t :background ,bg))))
       (message (format "color %d/%d. %s, %s"
                        (1+ i) len bg descr))))
 

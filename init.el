@@ -1783,7 +1783,9 @@ This prevents overlapping themes; something I would rarely want."
  ((eq my-curr-computer 'work-laptop-2019)
   (load-theme 'ultimate t)
   ;; (set-background-color "#E5E1C3")
-  (set-background-color "ivory3")
+  (custom-theme-set-faces
+   'ultimate
+   `(default ((t :background "ivory3"))))
   (when my-graphic-p
     (push
      '(font

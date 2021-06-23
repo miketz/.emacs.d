@@ -523,6 +523,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'js2-mode
+      :comment nil
+      :folder (concat my-module-folder "js2-mode")
+      :remote-mine-url "https://github.com/miketz/js2-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/mooz/js2-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

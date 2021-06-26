@@ -4533,7 +4533,8 @@ statement generated my SqlServer."
     (evil-leader/set-key "4" #'my-open-dev-folder)))
 
 
-(when (eq system-type 'gnu/linux)
+(when (or (eq system-type 'gnu/linux)
+          (eq system-type 'darwin))
   (when my-use-evil-p
     (defun my-open-user-folder ()
       (interactive)

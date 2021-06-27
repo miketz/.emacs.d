@@ -7713,6 +7713,19 @@ vanilla javascript buffers."
   ;; jump to TAG definition in a new window
   (global-set-key (kbd "M-.") #'xref-find-definitions-other-window))
 
+
+;;;----------------------------------------------------------------------------
+;;; citre. ctags/readtags IDE
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/citre" load-path)
+(autoload 'citre-mode "citre-basic-tools" nil t nil)
+
+(with-eval-after-load 'citre-core
+  (setq citre-readtags-program
+        (cond ((eq my-curr-computer 'mac-mini-m1-2021)
+               "/opt/homebrew/bin/readtags"))))
+
+
 ;;;----------------------------------------------------------------------------
 ;;; libvterm
 ;;;----------------------------------------------------------------------------

@@ -551,6 +551,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'citre
+      :comment "ctags IDE"
+      :folder (concat my-module-folder "citre")
+      :remote-mine-url "https://github.com/miketz/citre"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/universal-ctags/citre"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '((company) (clue))
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

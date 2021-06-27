@@ -289,3 +289,6 @@
 [submodule "notElpa/helm"]
 	path = notElpa/helm
 	url = https://github.com/miketz/helm
+[submodule "notElpa/citre"]
+	path = notElpa/citre
+	url = https://github.com/miketz/citre

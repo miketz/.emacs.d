@@ -7721,6 +7721,7 @@ vanilla javascript buffers."
 (autoload 'citre-mode "citre-basic-tools" nil t nil)
 
 (with-eval-after-load 'citre-core
+  (setq citre-ctags-program my-ctags-exe)
   (setq citre-readtags-program
         (cond ((eq my-curr-computer 'mac-mini-m1-2021)
                "/opt/homebrew/bin/readtags"))))

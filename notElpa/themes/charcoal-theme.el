@@ -396,7 +396,11 @@ Example:
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
 
    ;; js2
-   `(js2-function-call ((,class (:inherit font-lock-function-name-face))))
+   `(js2-function-call ((,class :foreground "#EFB0BB"
+                                :background "#232319"
+                                ;;:inherit tree-sitter-hl-face:function.call
+                                ;;:inherit font-lock-function-name-face
+                         )))
    `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
    `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
    `(js2-warning ((,class :underline (:color "yellow" :style wave))))
@@ -413,6 +417,7 @@ Example:
    ;; web-mode
    `(web-mode-current-element-highlight-face ((,class (:background ,faint))))
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
+   `(web-mode-function-call-face ((,class :inherit js2-function-call)))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
@@ -548,9 +553,10 @@ Example:
 
    ;; tree-sitter-hl
    `(tree-sitter-hl-face:function.call
-     ((,class ;;:inherit font-lock-function-name-face
-              :foreground "#EFB0BB"
-              :background "#232319")))
+     ((,class :inherit js2-function-call
+              ;; :foreground "#EFB0BB"
+              ;; :background "#232319"
+              )))
    `(tree-sitter-hl-face:operator
      ((,class :inherit font-lock-keyword-face
               :weight normal)))

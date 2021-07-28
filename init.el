@@ -556,6 +556,8 @@ in case that file does not provide any feature."
 (defvar icomplete-show-matches-on-no-input) ; buffer-local
 (defvar icomplete-hide-common-prefix)       ; buffer-local
 (defvar erc-default-server)
+(defvar citre-ctags-program)
+(defvar citre-readtags-program)
 
 
 

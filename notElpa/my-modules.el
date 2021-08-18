@@ -565,6 +565,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '((company) (clue))
+      :depend-bundled '())
+    ,(make-module
+      :name 'wgrep
+      :comment nil
+      :folder (concat my-module-folder "Emacs-wgrep")
+      :remote-mine-url "https://github.com/miketz/Emacs-wgrep"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/mhayashi1120/Emacs-wgrep"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

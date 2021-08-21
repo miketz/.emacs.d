@@ -5310,7 +5310,9 @@ TODO: call this function when it works."
           erc-timestamp-format-right format))
 
   (setq erc-autojoin-channels-alist
-        '(("freenode.net" "#emacs")))
+        '(("libera.chat" "#emacs")
+          ;; ("freenode.net" "#emacs")
+          ))
 
   (progn
     ;;from finster on irc #emacs. switch erc buffers

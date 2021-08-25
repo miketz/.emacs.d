@@ -970,6 +970,7 @@ in case that file does not provide any feature."
 (declare-function my-turn-off-tree-sitter-hl 'suppress)
 (declare-function my-turn-on-tree-sitter-hl 'suppress)
 (declare-function my-add-yas-tree-sitter-hooks 'suppress)
+(declare-function wgrep-setup "wgrep" ())
 
 
 ;; silence more byte compiler warnings.
@@ -7568,6 +7569,10 @@ vanilla javascript buffers."
 ;;; wgrep. dependency of rg
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/Emacs-wgrep" load-path)
+(autoload #'wgrep-setup "wgrep" nil nil)
+
+;; allows wgrep to work in *grep* buffers.
+(add-hook 'grep-setup-hook #'wgrep-setup)
 
 ;;;----------------------------------------------------------------------------
 ;;; rg

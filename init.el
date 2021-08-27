@@ -8055,6 +8055,34 @@ TODO: delete this fn and replace with hooks, etc."
   )
 
 ;;;----------------------------------------------------------------------------
+;;; text-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'text-mode
+
+  ;; from chen bin on https://emacs.stackexchange.com/questions/18304/optimal-s
+  ;; ettings-for-auto-complete-for-writing-papers-prose-in-natural-languag/1852
+  ;; 2#18522
+  ;; TODO: look into predictive-mode.
+  (defun my-setup-prose-completion ()
+    ;; make `company-backends' local is critcal or else, you will have completion
+    ;; in every major mode, that's very annoying!
+    (make-local-variable 'company-backends)
+    ;; company-ispell is the plugin to complete words
+    (add-to-list 'company-backends 'company-ispell)
+
+
+    (make-local-variable 'company-idle-delay)
+    (setq company-idle-delay 0.3)
+    (make-local-variable 'company-minimum-prefix-length)
+    (setq company-minimum-prefix-length 3)
+
+    ;; (setq company-ispell-dictionary
+    ;;       (file-truename "~/.emacs.d/misc/english-words.txt"))
+    )
+
+  (add-hook 'text-mode-hook #'my-setup-prose-completion))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

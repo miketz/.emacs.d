@@ -8072,7 +8072,7 @@ TODO: delete this fn and replace with hooks, etc."
 
 
     (make-local-variable 'company-idle-delay)
-    (setq company-idle-delay 0.3)
+    (setq company-idle-delay 0.5)
     (make-local-variable 'company-minimum-prefix-length)
     (setq company-minimum-prefix-length 3)
 

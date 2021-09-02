@@ -7613,17 +7613,12 @@ vanilla javascript buffers."
     (define-key rg-mode-map (kbd "C-c S") #'rg-save-search)))
 
 (when my-use-evil-p
-  ;; for now use `my-grep-dwim'. I'm having isuses getting `rg' to search meta
-  ;; folders in some projects.
-  (evil-leader/set-key "g" #'my-grep-dwim)
-
-  ;; (let ((search-fn (if (and my-has-rg-exe-p my-install-rg-p)
-  ;;                      #'rg
-  ;;                    ;; i use git to control the emacs config so git grep is
-  ;;                    ;; always available.
-  ;;                    #'my-grep-dwim)))
-  ;;   (evil-leader/set-key "g" search-fn))
-  )
+  (let ((search-fn (if (and my-has-rg-exe-p my-install-rg-p)
+                       #'rg
+                     ;; i use git to control the emacs config so git grep is
+                     ;; always available.
+                     #'my-grep-dwim)))
+    (evil-leader/set-key "g" search-fn)))
 
 
 ;;;----------------------------------------------------------------------------

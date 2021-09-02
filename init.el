@@ -7105,6 +7105,7 @@ Closure over `preceding-sexp-fn'."
 (push "~/.emacs.d/notElpa/adoc-mode" load-path)
 (autoload #'adoc-mode "adoc-mode" nil t)
 (push '("\\.asc\\'" . adoc-mode) auto-mode-alist)
+(push '("\\.adoc\\'" . adoc-mode) auto-mode-alist)
 
 (with-eval-after-load 'adoc-mode
   (defun my-setup-adoc-mode ()

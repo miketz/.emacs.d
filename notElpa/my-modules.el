@@ -591,8 +591,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :use-branch "master"
-      :depend-hard '((emacs "25.1")
-                     (pkg-info "0.4"))
+      :depend-hard '((emacs "25.1"))
       :depend-soft '()
       :depend-bundled '())))
 

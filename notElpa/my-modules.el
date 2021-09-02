@@ -579,6 +579,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'projectile
+      :comment nil
+      :folder (concat my-module-folder "projectile")
+      :remote-mine-url "https://github.com/miketz/projectile"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/bbatsov/projectile"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1")
+                     (pkg-info "0.4"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

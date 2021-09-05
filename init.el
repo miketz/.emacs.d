@@ -6791,6 +6791,10 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; swift-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/swift-mode" load-path)
+;; use swift-mode for .swift files
+(push '("\\.swift\\'" . swift-mode) auto-mode-alist)
+
 (with-eval-after-load 'swift-mode
   (defun my-setup-swift-mode ()
     (rainbow-delimiters-mode 1)
@@ -8078,11 +8082,6 @@ TODO: delete this fn and replace with hooks, etc."
 
   (add-hook 'text-mode-hook #'my-setup-prose-completion))
 
-
-;;;----------------------------------------------------------------------------
-;;; swift-mode
-;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/swift-mode" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

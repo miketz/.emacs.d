@@ -7087,6 +7087,10 @@ Closure over `preceding-sexp-fn'."
 ;;; autorevert (built into emacs)
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'autorevert
+  ;; try to use native OS file nodifications if possible
+  (setq auto-revert-use-notify t
+        auto-revert-avoid-polling t)
+
   ;; increase the timestamp ping a little.
   (setq auto-revert-interval 7)
   ;; default is t, but set anyway to guarantee

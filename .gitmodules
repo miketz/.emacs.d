@@ -292,3 +292,6 @@
 [submodule "notElpa/citre"]
 	path = notElpa/citre
 	url = https://github.com/miketz/citre
+[submodule "notElpa/swift-mode"]
+	path = notElpa/swift-mode
+	url = https://github.com/miketz/swift-mode

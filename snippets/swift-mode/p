@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# -*- anonymous function -*-
+# name: p
+# key: p
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+${1:_} ${2:arg}:${3:Int}

@@ -6792,6 +6792,7 @@ Closure over `preceding-sexp-fn'."
 ;;; swift-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/swift-mode" load-path)
+(autoload #'swift-mode "swift-mode" nil t)
 ;; use swift-mode for .swift files
 (push '("\\.swift\\'" . swift-mode) auto-mode-alist)
 

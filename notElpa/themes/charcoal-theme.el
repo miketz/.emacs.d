@@ -565,6 +565,11 @@ Example:
               :background "#232319"
               :weight bold)))
 
+   ;; swift-mode
+   ;; TODO: dont' rely on js2-function-call face as it requires js2 be loaded
+   ;; first.
+   ;; `(swift-mode:function-call-face ((t :inherit js2-function-call)))
+
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))

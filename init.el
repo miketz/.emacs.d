@@ -1113,8 +1113,11 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-swoop-fn (cond
-                     ;; NOTE: fido breaks swiper.
+                     ;; NOTE: fido breaks swiper. Keep this at the top
                      ((eq my-narrow-type 'fido) #'my-occur-wild-spaces)
+                     ;; per computer. keep this above "per completion type".
+                     ((eq my-curr-computer 'mac-mini-m1-2021) #'swiper-isearch)
+                     ;; per completion type
                      (my-use-ivy-p #'swiper-isearch)
                      ;; `ido-occur' is fast but does not split inputs on
                      ;; spaces. use swiper with ido for now.

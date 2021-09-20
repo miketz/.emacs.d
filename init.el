@@ -1784,11 +1784,11 @@ This prevents overlapping themes; something I would rarely want."
    default-frame-alist))
 
  ((eq my-curr-computer 'work-laptop-2019)
-  (load-theme 'ultimate t)
+  (load-theme 'charcoal t)
   ;; (set-background-color "#E5E1C3")
-  (custom-theme-set-faces
-   'ultimate
-   `(default ((t :background "ivory3"))))
+  ;; (custom-theme-set-faces
+  ;;  'ultimate
+  ;;  `(default ((t :background "ivory3"))))
   (when my-graphic-p
     (push
      '(font
@@ -1797,7 +1797,8 @@ This prevents overlapping themes; something I would rarely want."
        ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
        ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
        ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
-       "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+       ;; "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+       "-outline-JetBrains Mono NL-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
        )
      default-frame-alist)
     ;; (set-frame-font

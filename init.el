@@ -3679,6 +3679,10 @@ cases."
     (define-key c-mode-map key #'ff-find-other-file)
     (define-key c++-mode-map key #'ff-find-other-file))
 
+  ;; compile
+  (define-key c-mode-map (kbd "C-c C-c") #'compile)
+  (define-key c++-mode-map (kbd "C-c C-c") #'compile)
+
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.
 The variables set are buffer local.

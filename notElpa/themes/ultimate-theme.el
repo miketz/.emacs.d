@@ -504,17 +504,15 @@
                                  :background ,bg-green
                                  :foreground ,fg-green)))
 
-   `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight bold))))
-   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight bold))))
-   `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
-                                                      :weight bold))))
-   `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight bold))))
-   `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50" ;:background "#fff7ca"
-                                                      :weight bold))))
+   `(rainbow-delimiters-depth-1-face ((t (:foreground ,fg :background "#FF6520" :weight bold))))
+   `(rainbow-delimiters-depth-2-face ((t (:foreground ,fg :background "#75FFFF" :weight bold))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground ,fg :background "yellow" :weight bold))))
+   `(rainbow-delimiters-depth-4-face ((t (:foreground ,fg :background "MediumPurple1" :weight bold))))
+   `(rainbow-delimiters-depth-5-face ((t (:foreground ,fg :background "#7CFC00" :weight bold))))
+   `(rainbow-delimiters-depth-6-face ((t (:foreground ,fg :background "orange" :weight bold))))
+   `(rainbow-delimiters-depth-7-face ((t (:foreground ,fg :background "pink" :weight bold))))
+   `(rainbow-delimiters-depth-8-face ((t (:foreground ,fg :background "dodger blue" :weight bold))))
+   `(rainbow-delimiters-depth-9-face ((t (:foreground ,fg :background "#CDAA7D" :weight bold))))
    `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))
 
    ;; custom faces for my config

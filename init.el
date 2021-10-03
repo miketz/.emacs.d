@@ -8095,6 +8095,11 @@ TODO: delete this fn and replace with hooks, etc."
 
   (add-hook 'text-mode-hook #'my-setup-prose-completion))
 
+;;;----------------------------------------------------------------------------
+;;; dank-mode. reddit browser
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/dank-mode/lisp" load-path)
+(autoload #'dank-mode "dank-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

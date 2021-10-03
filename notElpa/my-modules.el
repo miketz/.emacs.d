@@ -618,7 +618,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-upstream-alias "upstream"
       :source-control 'git
       :submodule-p t
-      :use-branch "master"
+      :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())))

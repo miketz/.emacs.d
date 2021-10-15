@@ -8093,7 +8093,8 @@ TODO: delete this fn and replace with hooks, etc."
     ;;       (file-truename "~/.emacs.d/misc/english-words.txt"))
     )
 
-  (add-hook 'text-mode-hook #'my-setup-prose-completion))
+  ;; (add-hook 'text-mode-hook #'my-setup-prose-completion)
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; dank-mode. reddit browser

@@ -8077,6 +8077,7 @@ TODO: delete this fn and replace with hooks, etc."
   ;; 2#18522
   ;; TODO: look into predictive-mode.
   (defun my-setup-prose-completion ()
+    (interactive)
     ;; make `company-backends' local is critcal or else, you will have completion
     ;; in every major mode, that's very annoying!
     (make-local-variable 'company-backends)

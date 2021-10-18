@@ -100,6 +100,42 @@ those faces."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "#fff7ca" :bold t))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :bold t))))))
 
+(defun my-rainbow-parens-light-bg4 ()
+  "Colored parens. Uses black fg. Rainbow bg."
+  (interactive)
+  (custom-theme-set-faces
+   (my-get-theme)
+   `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background "#FF6520" :weight bold))))
+   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#75FFFF" :weight bold))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground "black" :background "yellow" :weight bold))))
+   `(rainbow-delimiters-depth-4-face ((t (:foreground "black" :background "MediumPurple1" :weight bold))))
+   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#7CFC00" :weight bold))))
+   `(rainbow-delimiters-depth-6-face ((t (:foreground "black" :background "orange" :weight bold))))
+   `(rainbow-delimiters-depth-7-face ((t (:foreground "black" :background "pink" :weight bold))))
+   `(rainbow-delimiters-depth-8-face ((t (:foreground "black" :background "dodger blue" :weight bold))))
+   `(rainbow-delimiters-depth-9-face ((t (:foreground "black" :background "#CDAA7D" :weight bold))))
+   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))))
+
+(defun my-rainbow-parens-light-bg5-old-ultimate ()
+  "Specific colors once used in ulitmate theme.
+At the moment it intentionally breaks with variables only available on ultimate theme.
+This is just a historical preservation."
+  (interactive)
+  (custom-theme-set-faces
+   (my-get-theme)
+   `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))
+   `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight bold))))
+   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight bold))))
+   `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
+                                                      :weight bold))))
+   `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight bold))))
+   `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
+   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))))
+
+
 (defun my-cursor-light-bg ()
   "Set cursor colors and styles for a typical light background."
   (interactive)

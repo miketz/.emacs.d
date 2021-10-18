@@ -607,6 +607,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'dank-mode
+      :comment "reddit viewer"
+      :folder (concat my-module-folder "dank-mode")
+      :remote-mine-url "https://github.com/miketz/dank-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/john2x/dank-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

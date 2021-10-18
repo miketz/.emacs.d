@@ -3680,6 +3680,10 @@ cases."
     (define-key c-mode-map key #'ff-find-other-file)
     (define-key c++-mode-map key #'ff-find-other-file))
 
+  ;; compile
+  (define-key c-mode-map (kbd "C-c C-c") #'compile)
+  (define-key c++-mode-map (kbd "C-c C-c") #'compile)
+
   (defun my-linux-tabs-toggle ()
     "Choose a tabbing style.
 The variables set are buffer local.
@@ -8074,6 +8078,7 @@ TODO: delete this fn and replace with hooks, etc."
   ;; 2#18522
   ;; TODO: look into predictive-mode.
   (defun my-setup-prose-completion ()
+    (interactive)
     ;; make `company-backends' local is critcal or else, you will have completion
     ;; in every major mode, that's very annoying!
     (make-local-variable 'company-backends)
@@ -8090,8 +8095,14 @@ TODO: delete this fn and replace with hooks, etc."
     ;;       (file-truename "~/.emacs.d/misc/english-words.txt"))
     )
 
-  (add-hook 'text-mode-hook #'my-setup-prose-completion))
+  ;; (add-hook 'text-mode-hook #'my-setup-prose-completion)
+  )
 
+;;;----------------------------------------------------------------------------
+;;; dank-mode. reddit browser
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/dank-mode/lisp" load-path)
+(autoload #'dank-mode "dank-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

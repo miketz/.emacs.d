@@ -295,3 +295,6 @@
 [submodule "notElpa/swift-mode"]
 	path = notElpa/swift-mode
 	url = https://github.com/miketz/swift-mode
+[submodule "notElpa/dank-mode"]
+	path = notElpa/dank-mode
+	url = https://github.com/miketz/dank-mode

@@ -40,3 +40,4 @@ package-quickstart.el
 # var folder used by prescient package
 /var/
 /dank-mode/
+network-security.data

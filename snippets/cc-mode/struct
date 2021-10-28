@@ -2,7 +2,7 @@
 #name : struct ... { ... }
 # key: struct
 # --
-struct ${1:name}
-{
+typedef struct $1 $1;
+struct ${1:name} {
     $0
 };

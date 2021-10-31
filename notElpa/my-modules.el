@@ -621,6 +621,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'smex
+      :comment nil
+      :folder (concat my-module-folder "smex")
+      :remote-mine-url "https://github.com/miketz/smex"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/nonsequitur/smex"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

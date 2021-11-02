@@ -118,22 +118,23 @@ those faces."
 
 (defun my-rainbow-parens-light-bg5-old-ultimate ()
   "Specific colors once used in ulitmate theme.
-At the moment it intentionally breaks with variables only available on ultimate theme.
-This is just a historical preservation."
+Historical preservation."
   (interactive)
-  (custom-theme-set-faces
-   (my-get-theme)
-   `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight bold))))
-   `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight bold))))
-   `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
-                                                      :weight bold))))
-   `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight bold))))
-   `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight bold))))
-   `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
-   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))))
+  (let ((bg           "#D5D1B3")
+        (bg-highlight "#C5C1A3"))
+    (custom-theme-set-faces
+     (my-get-theme)
+     `(rainbow-delimiters-depth-1-face ((t (:foreground "black" :background ,bg-highlight :weight bold))))
+     `(rainbow-delimiters-depth-2-face ((t (:foreground "black" :background "#C0DfDf" :weight bold))))
+     `(rainbow-delimiters-depth-3-face ((t (:foreground "red" :background ,bg-highlight :weight bold))))
+     `(rainbow-delimiters-depth-4-face ((t (:foreground "purple" :background "#DfD0D5" :weight bold))))
+     `(rainbow-delimiters-depth-5-face ((t (:foreground "black" :background "#EfEaBd" :weight bold))))
+     `(rainbow-delimiters-depth-6-face ((t (:foreground "magenta" :background ,bg ;"#EEEEFF"
+                                                        :weight bold))))
+     `(rainbow-delimiters-depth-7-face ((t (:foreground "gray52" :weight bold))))
+     `(rainbow-delimiters-depth-8-face ((t (:foreground "indianred3" :background ,bg-highlight :weight bold))))
+     `(rainbow-delimiters-depth-9-face ((t (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
+     `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold)))))))
 
 
 (defun my-cursor-light-bg ()

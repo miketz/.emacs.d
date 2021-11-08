@@ -6085,6 +6085,9 @@ When ARG isn't nil, try to pretty print the sexp."
     (define-key Info-mode-map (kbd "b") #'evil-backward-word-begin)
     (define-key Info-mode-map (kbd "g") #'evil-goto-first-line)
     (define-key Info-mode-map (kbd "s") my-swoop-fn)
+    ;; With the latest version of evil, return no longer follows the nodes.
+    ;; So map it explicitly.
+    (define-key Info-mode-map (kbd "<return>") #'Info-follow-nearest-node)
     ;; can't get SPC keybind to work so using remap on Info-scroll-up.
     (define-key Info-mode-map [remap Info-scroll-up] #'avy-goto-word-1))
   ;;TODO: figure out how to bind gg for top.

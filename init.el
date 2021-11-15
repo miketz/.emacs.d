@@ -971,7 +971,7 @@ in case that file does not provide any feature."
 (declare-function my-turn-on-tree-sitter-hl 'suppress)
 (declare-function my-add-yas-tree-sitter-hooks 'suppress)
 (declare-function wgrep-setup "wgrep" ())
-
+(declare-function Info-follow-nearest-node "info")
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

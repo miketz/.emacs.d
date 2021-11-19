@@ -649,6 +649,24 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'flycheck
+      :comment nil
+      :folder (concat my-module-folder "flycheck")
+      :remote-mine-url "https://github.com/miketz/flycheck"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/flycheck/flycheck"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((dash "2.12.1")
+                     (pkg-info "0.4")
+                     (let-alist "1.0.4")
+                     (seq "1.11")
+                     (emacs "24.3"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

@@ -651,6 +651,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'epl
+      :comment nil
+      :folder (concat my-module-folder "epl")
+      :remote-mine-url "https://github.com/miketz/epl"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/cask/epl"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'flycheck
       :comment nil
       :folder (concat my-module-folder "flycheck")

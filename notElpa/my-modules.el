@@ -647,7 +647,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :use-branch "master"
-      :depend-hard '()
+      :depend-hard '((epl "0.8"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

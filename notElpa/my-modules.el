@@ -695,7 +695,24 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
-      :depend-bundled '())))
+      :depend-bundled '())
+    ,(make-module
+      :name 'web-mode
+      :comment nil
+      :folder (concat my-module-folder "web-mode")
+      :remote-mine-url "https://github.com/miketz/web-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/fxbois/web-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+
+
+    ))
 
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."

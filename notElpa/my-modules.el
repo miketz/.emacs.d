@@ -709,10 +709,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
-      :depend-bundled '())
-
-
-    ))
+      :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."

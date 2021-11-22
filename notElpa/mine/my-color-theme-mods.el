@@ -211,7 +211,7 @@ Historical preservation."
 
    '(fill-column-indicator ((t :foreground "#202025")))
 
-   '(leerzeichen ((t (:foreground "gray40"           ;"#A8A800"
+   '(leerzeichen ((t (:foreground "gray40" ;"#A8A800"
                                   :background "black" ;"#D4D4C8"
                                   :italic nil
                                   :bold nil))))
@@ -229,18 +229,18 @@ Historical preservation."
    ;;                              :box (:line-width -1
    ;;                                                :style released-button)))))
    `(mode-line ((t (:background "black"
-                                              :foreground "slategray"
-                                              :box (:line-width -1
-                                                                :color "gray20"
-                                                                :style released-button)))))
+                                :foreground "slategray"
+                                :box (:line-width -1
+                                                  :color "gray20"
+                                                  :style released-button)))))
    `(mode-line-buffer-id ((t (:weight bold
-                                           :background nil
-                                           :foreground "slategray"))))
+                                      :background nil
+                                      :foreground "slategray"))))
    `(mode-line-inactive ((t (:background "black"
-                                              :foreground "gray30"
-                                              :box (:line-width -1
-                                                                :color "black"
-                                                                :style released-button)))))
+                                         :foreground "gray30"
+                                         :box (:line-width -1
+                                                           :color "black"
+                                                           :style released-button)))))
 
 
    `(show-paren-match ((t (:slant italic

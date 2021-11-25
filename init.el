@@ -2623,7 +2623,19 @@ Inserts a new line and the beginning and end with text values:
 (push '("\\.cs$" . csharp-mode) auto-mode-alist)
 
 (with-eval-after-load 'csharp-mode
+
+  ;; keybinds
+  (define-key csharp-mode-map (kbd "C-c C-c") #'compile)
+
+  ;; hook
   (defun my-setup-csharp-mode ()
+    ;; set compile-command. Assumes dotnet core
+    (let* ((dotnet (cond ((eq system-type 'darwin)
+                          "/usr/local/bin/dotnet")))
+           (cmd (concat dotnet " build")))
+      (set (make-local-variable 'compile-command)
+           cmd))
+
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
 
@@ -8106,6 +8118,16 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/dank-mode/lisp" load-path)
 (autoload #'dank-mode "dank-mode" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; .NET dotnet core stuff
+;;;----------------------------------------------------------------------------
+
+;; make sure emacs can find the dotnet command. from eshell, etc.
+(cond ((eq system-type 'darwin)
+       (push "/usr/local/share/dotnet" exec-path)
+       (push "/usr/local/bin" exec-path)))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

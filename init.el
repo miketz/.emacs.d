@@ -8128,6 +8128,10 @@ TODO: delete this fn and replace with hooks, etc."
        (push "/usr/local/share/dotnet" exec-path)
        (push "/usr/local/bin" exec-path)))
 
+;;;----------------------------------------------------------------------------
+;;; csv stuff
+;;;----------------------------------------------------------------------------
+(autoload #'csv-highlight "csv-stuff" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

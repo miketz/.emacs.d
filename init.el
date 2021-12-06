@@ -1773,7 +1773,8 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'charcoal t)
   (push
    ;; '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-   '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+   '(font . "-*-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
    default-frame-alist))
 
  ((eq my-curr-computer 'wild-dog)

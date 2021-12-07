@@ -558,6 +558,7 @@ in case that file does not provide any feature."
 (defvar erc-default-server)
 (defvar citre-ctags-program)
 (defvar citre-readtags-program)
+(defvar csharp-mode-map)
 
 
 

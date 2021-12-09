@@ -44,32 +44,37 @@
 
 (deftheme material
   "A UI Theme for Emacs based on material design colors")
+(display-color-cells (selected-frame))
+(let* ((class '((class color) (min-colors 89)))
+       (256color  (eq (display-color-cells (selected-frame)) 256))
+       (truecolor (eq (display-color-cells (selected-frame)) 16777216))
 
-(let* ((class               '((class color) (min-colors 89)))
-       (color-count         (display-color-cells))
-       (truecolor-p         (= color-count 16777216))
-       (fancy-color-p       (or truecolor-p
-                                (if (fboundp #'display-graphic-p)
-                                    (display-graphic-p)
-                                  window-system)))
-
-       (background          (if fancy-color-p "#263238" "#262626")) ;; sidebar-container
-       (current-line        (if fancy-color-p "#37474f" "#3a3a3a")) ;; tree-row
-       (far-background      (if fancy-color-p "#1c1f26" "#121212")) ;; panel-control
-       (inactive-gray       (if fancy-color-p "#78909c" "#8a8a8a"))
-       (header-color        (if fancy-color-p "#455A64" "#5f5f5f"))
-       (subtle              "#a7adba") ;; tree-row-hover-disclosure-button-control
-       (selection           "#555555") ;; tab-control-dirty-tab-close-button
+       (background (if (or window-system truecolor) "#263238" "#262626")) ;; sidebar-container
+       (current-line (if (or window-system truecolor)  "#37474f" "#3a3a3a")) ;; tree-row
+       (far-background (if (or window-system truecolor)  "#1c1f26" "#121212")) ;; panel-control
+       (diff-nonactive-bg "#2F3D41")
+       (diff-current-A-bg "#40393D")
+       (diff-fine-A-bg "#784948")
+       (diff-current-B-bg "#203B4A")
+       (diff-fine-B-bg "#155378")
+       (diff-current-C-bg "#33453A")
+       (diff-fine-C-bg "#4F6C3F")
+       (diff-current-ancestor-bg "#203B4A")
+       (diff-fine-ancestor-bg "#155378")
+       (inactive-gray (if (or window-system truecolor) "#78909c" "#8a8a8a"))
+       (header-color (if (or window-system truecolor) "#455A64" "#5f5f5f"))
+       (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
+       (selection "#555555") ;; tab-control-dirty-tab-close-button
        (secondary-selection "#bf616a") ;; tab-control-hover-tab-close-button
-       (foreground          "#ffffff")
-       (comment             "#b0bec5") ;; table-row
-       (red                 "#f36c60") ;; tab-control-hover-tab-close-button
-       (orange              "#ff9800") ;; darker tab-control-dirty-tab-close-butto
-       (yellow              "#fff59d") ;; tab-control-dirty-tab-close-button
-       (green               "#8bc34a") ;; complement tab-control-dirty-tab-close-button
-       (aqua                "#81d4fa") ;; lighter complement tab-control-dirty-tab-close-button
-       (blue                "#4dd0e1") ;; complement tab-control-dirty-tab-close-button
-       (purple              "#b39ddb")) ;; complement tab-control-dirty-tab-close-button
+       (foreground "#ffffff")
+       (comment "#b0bec5") ;; table-row
+       (red "#f36c60") ;; tab-control-hover-tab-close-button
+       (orange "#ff9800") ;; darker tab-control-dirty-tab-close-butto
+       (yellow "#fff59d") ;; tab-control-dirty-tab-close-button
+       (green "#8bc34a") ;; complement tab-control-dirty-tab-close-button
+       (aqua "#81d4fa") ;; lighter complement tab-control-dirty-tab-close-button
+       (blue "#4dd0e1") ;; complement tab-control-dirty-tab-close-button
+       (purple "#b39ddb")) ;; complement tab-control-dirty-tab-close-button
 
   (custom-theme-set-faces
    'material
@@ -181,8 +186,7 @@
    ;; Search
    `(match ((,class (:foreground ,background :background ,green :inverse-video nil))))
    `(isearch ((,class (:foreground ,foreground :background ,green))))
-   `(isearch-lazy-highlight-face ((,class (:foreground ,background :background ,green :inverse-video nil))))
-   `(lazy-highlight-face ((,class (:foreground ,background :background ,green :inverse-video nil))))
+   `(lazy-highlight ((,class (:foreground ,background :background ,green :inverse-video nil))))
    `(isearch-fail ((,class (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
    ;; Evil
@@ -197,7 +201,7 @@
 
    ;; Anzu
    `(anzu-mode-line ((,class (:foreground ,orange))))
-   `(anzu-replace-highlight ((,class (:inherit isearch-lazy-highlight-face))))
+   `(anzu-replace-highlight ((,class (:inherit lazy-highlight))))
    `(anzu-replace-to ((,class (:inherit isearch))))
 
    ;; IDO
@@ -219,6 +223,7 @@
    `(linum ((,class (:background ,background :foreground ,subtle))))
    `(linum-highlight-face ((,class (:background ,current-line :foreground ,foreground))))
    `(border ((,class (:background ,current-line))))
+   `(internal-border ((,class (:background ,current-line))))
    `(vertical-border ((,class (:background ,selection
                                :foreground, selection))))
    `(border-glyph ((,class (nil))))
@@ -290,10 +295,23 @@
    `(diff-refine-added ((,class (:inherit diff-added :inverse-video t))))
    `(diff-refine-removed ((,class (:inherit diff-removed :inverse-video t))))
 
-   `(ediff-even-diff-A ((,class (:foreground nil :background nil :inverse-video t))))
-   `(ediff-even-diff-B ((,class (:foreground nil :background nil :inverse-video t))))
-   `(ediff-odd-diff-A  ((,class (:foreground ,comment :background nil :inverse-video t))))
-   `(ediff-odd-diff-B  ((,class (:foreground ,comment :background nil :inverse-video t))))
+   ;; ediff
+   `(ediff-even-diff-A ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-even-diff-B ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-even-diff-C ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-even-diff-Ancestor ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-odd-diff-A ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-odd-diff-B ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-odd-diff-C ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-odd-diff-Ancestor ((,class (:background ,diff-nonactive-bg))))
+   `(ediff-current-diff-A ((,class (:background ,diff-current-A-bg))))
+   `(ediff-current-diff-B ((,class (:background ,diff-current-B-bg))))
+   `(ediff-current-diff-C ((,class (:background ,diff-current-C-bg))))
+   `(ediff-current-diff-Ancestor ((,class (:background ,diff-current-ancestor-bg))))
+   `(ediff-fine-diff-A ((,class (:background ,diff-fine-A-bg))))
+   `(ediff-fine-diff-B ((,class (:background ,diff-fine-B-bg))))
+   `(ediff-fine-diff-C ((,class (:background ,diff-fine-C-bg))))
+   `(ediff-fine-diff-Ancestor ((,class (:background ,diff-fine-ancestor-bg))))
 
    `(eldoc-highlight-function-argument ((,class (:foreground ,green :weight bold))))
 
@@ -329,6 +347,28 @@
    `(diredp-read-priv ((,class (:foreground ,green :background nil))))
    `(diredp-symlink ((,class (:foreground ,purple))))
    `(diredp-write-priv ((,class (:foreground ,yellow :background nil))))
+
+   ;; diredfl
+   `(diredfl-compressed-file-suffix ((,class (:foreground ,blue))))
+   `(diredfl-compressed-file-name ((,class (:foreground ,blue))))
+   `(diredfl-ignored-file-name ((,class (:foreground ,comment))))
+   `(diredfl-date-time ((,class (:foreground ,green))))
+   `(diredfl-file-name ((,class (:foreground ,foreground))))
+   `(diredfl-read-priv ((,class (:foreground ,green :background nil))))
+   `(diredfl-write-priv ((,class (:foreground ,yellow :background nil))))
+   `(diredfl-exec-priv ((,class (:foreground ,red :background nil))))
+   `(diredfl-rare-priv ((,class (:foreground ,orange :background nil))))
+   `(diredfl-no-priv ((,class (:background nil))))
+   `(diredfl-deletion ((,class (:inherit error :inverse-video t))))
+   `(diredfl-deletion-file-name ((,class (:inherit error))))
+   `(diredfl-dir-heading ((,class (:foreground ,green :weight bold))))
+   `(diredfl-symlink ((,class (:foreground ,purple))))
+   `(diredfl-dir-priv ((,class (:foreground ,blue :background nil))))
+   `(diredfl-dir-name ((,class (:foreground ,blue :background nil))))
+   `(diredfl-number ((,class (:foreground ,yellow :background nil))))
+   `(diredfl-flag-mark ((,class (:foreground ,orange :background nil))))
+   `(diredfl-flag-mark-line ((,class (:foreground ,nil :background ,selection))))
+   `(diredfl-file-suffix ((,class (:foreground ,aqua :background nil))))
 
    ;; Magit
    `(magit-branch ((,class (:foreground ,green))))
@@ -412,9 +452,10 @@
    `(helm-match ((,class (:foreground ,"gold1"))))
    `(helm-selection ((,class (:background ,current-line))))
    `(helm-ff-file ((,class (:foreground ,foreground ))))
-   `(helm-ff-directory ((,class (:foreground ,aqua ))))
+   `(helm-ff-directory ((,class (:foreground ,blue ))))
+   `(helm-ff-symlink ((,class (:foreground ,purple ))))
    `(helm-ff-executable ((,class (:foreground ,green ))))
-   `(helm-buffer-directory ((,class (:foreground ,aqua))))
+   `(helm-buffer-directory ((,class (:foreground ,blue))))
    `(helm-buffer-file ((,class (:foreground ,foreground))))
    `(helm-grep-file ((,class (:foreground ,aqua :underline t))))
    `(helm-buffer-process ((,class (:foreground ,red))))
@@ -442,8 +483,8 @@
    `(org-agenda-date ((,class (:foreground ,blue :underline nil))))
    `(org-agenda-done ((,class (:foreground ,green))))
    `(org-agenda-dimmed-todo-face ((,class (:foreground ,comment))))
-   `(org-block ((,class (:foreground ,green :background ,far-background))))
-   `(org-block-background ((,t (:background ,far-background))))
+   `(org-block ((,class (:foreground ,green :background ,far-background :extend t))))
+   `(org-block-background ((,t (:background ,far-background :extend t))))
    `(org-code ((,class (:foreground ,green :background ,far-background))))
    `(org-column ((,class (:background ,current-line))))
    `(org-column-title ((,class (:inherit org-column :weight bold :underline t))))
@@ -466,9 +507,9 @@
    `(org-upcoming-deadline ((,class (:foreground ,orange))))
    `(org-warning ((,class (:weight bold :foreground ,red))))
    `(org-block-begin-line ((,class (:foreground ,"#b3e5fc" :background "#1e2930"
-                                                :box (:style released-button)))))
+                                                :box (:style released-button) :extend t))))
    `(org-block-end-line ((,class (:foreground ,"#b3e5fc" :background "#1e2930"
-                                              :box (:style released-button)))))
+                                              :box (:style released-button) :extend t))))
    `(org-kbd ((,class (:background ,inactive-gray :foreground ,foreground
                                    :box (:line-width 1 :color nil :style pressed-button)))))
 

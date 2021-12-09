@@ -1266,6 +1266,8 @@ Historical preservation."
    ;;                    :weight bold
    ;;                    :box (:line-width -1 :style released-button)))))
 
+   `(fill-column-indicator ((t :foreground "#4e4e4e")))
+
 
    '(completions-common-part ((t (:foreground "gray60"))))
    '(completions-first-difference ((t (:foreground "spring green"))))

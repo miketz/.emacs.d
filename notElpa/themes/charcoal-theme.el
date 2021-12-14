@@ -199,11 +199,13 @@ Example:
 
    `(line-number ((,class ,@(cond ((= charcoal-color-cnt 16)
                                      `(:inherit mode-line))
-                                  (t '(:background "black"
-                                       :foreground "gray50"))))))
+                                  (t `(:background "#231808";"#251510"
+                                       :foreground "gray35" ;"gray50"
+                                       ))))))
    `(line-number-current-line ((,class (:inherit line-number
                                                  :foreground "#77AA55"
-                                                 :background "#171717"))))
+                                                 :background "#231808";"#171717"
+                                                 ))))
 
    `(region
      ((,class (:background ,highlight))))     ;69685E

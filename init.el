@@ -8206,7 +8206,10 @@ load during init, or wait with autoloads."
 
 (cond ((memq my-curr-computer '(work-laptop-2019))
        (setq find-function-C-source-directory
-             "c:/users/mtz/scratch/emacs/src")))
+             "c:/users/mtz/scratch/emacs/src"))
+      ((eq my-curr-computer 'mac-mini-m1-2021)
+       (setq find-function-C-source-directory
+             "~/proj/emacs/src")))
 
 (autoload #'my-win-count "my-misc" nil t)
 

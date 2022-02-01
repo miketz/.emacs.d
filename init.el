@@ -8161,8 +8161,12 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'puni-mode "puni" nil t)
 
 (with-eval-after-load 'puni
-  ;; TODO: set up keybinds similar to paredit
-  )
+  ;; mimic my paredit key binds
+  (define-key puni-mode-map (kbd "C-9") #'puni-barf-forward)
+  (define-key puni-mode-map (kbd "C-0") #'puni-slurp-forward)
+  (define-key puni-mode-map (kbd "C-M-9") #'puni-slurp-backward)
+  (define-key puni-mode-map (kbd "C-M-0") #'puni-barf-backward)
+  (define-key puni-mode-map (kbd "C-M-r") #'puni-raise))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

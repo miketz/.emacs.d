@@ -8179,7 +8179,12 @@ TODO: delete this fn and replace with hooks, etc."
   (define-key puni-mode-map (kbd "C-0") #'puni-slurp-forward)
   (define-key puni-mode-map (kbd "C-M-9") #'puni-slurp-backward)
   (define-key puni-mode-map (kbd "C-M-0") #'puni-barf-backward)
-  (define-key puni-mode-map (kbd "C-M-r") #'puni-raise))
+  (define-key puni-mode-map (kbd "C-M-r") #'puni-raise)
+  (define-key puni-mode-map (kbd "M-S") #'puni-split)
+  ;; NOTE: there is no join fn to match `puni-split'
+  (define-key puni-mode-map (kbd "M-s") #'puni-splice)
+  ;; (define-key puni-mode-map (kbd "M-t") #'puni-transpose)
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

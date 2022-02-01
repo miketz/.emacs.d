@@ -8160,6 +8160,19 @@ TODO: delete this fn and replace with hooks, etc."
 (push "~/.emacs.d/notElpa/puni" load-path)
 (autoload #'puni-mode "puni" nil t)
 
+;; use `puni-mode' for the following modes (hooks).
+(dolist (hook '(web-mode-hook
+                ;; NOTE: puni doesn't work in html-mode
+                nxml-mode-hook
+                csharp-mode-hook
+                c-mode-hook
+                c++-mode-hook
+                java-mode-hook
+                sql-mode-hook
+                js-mode-hook
+                js2-mode-hook))
+  (add-hook hook #'puni-mode))
+
 (with-eval-after-load 'puni
   ;; mimic my paredit key binds
   (define-key puni-mode-map (kbd "C-9") #'puni-barf-forward)

@@ -8142,6 +8142,18 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'csv-highlight "csv-stuff" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; ruby-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'ruby-mode
+  (defun my-setup-ruby-mode ()
+    ;; set to 1 so comments on the same line are kept close to the code.
+    (setq comment-column 1) ; buffer local
+
+    (rainbow-delimiters-mode 1)
+    (my-turn-on-electric-pair-local-mode))
+  (add-hook 'ruby-mode-hook #'my-setup-ruby-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

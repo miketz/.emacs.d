@@ -298,3 +298,6 @@
 [submodule "notElpa/dank-mode"]
 	path = notElpa/dank-mode
 	url = https://github.com/miketz/dank-mode
+[submodule "notElpa/puni"]
+	path = notElpa/puni
+	url = https://github.com/miketz/puni

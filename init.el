@@ -8153,6 +8153,17 @@ TODO: delete this fn and replace with hooks, etc."
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'ruby-mode-hook #'my-setup-ruby-mode))
 
+
+;;;----------------------------------------------------------------------------
+;;; puni. Structural editing similar to paredit but for any language.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/puni" load-path)
+(autoload #'puni-mode "puni" nil t)
+
+(with-eval-after-load 'puni
+  ;; TODO: set up keybinds similar to paredit
+  )
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

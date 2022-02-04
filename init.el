@@ -559,7 +559,7 @@ in case that file does not provide any feature."
 (defvar citre-ctags-program)
 (defvar citre-readtags-program)
 (defvar csharp-mode-map)
-
+(defvar puni-mode-map)
 
 
 ;; suppress warnings on functions from files not yet loaded.
@@ -973,6 +973,14 @@ in case that file does not provide any feature."
 (declare-function my-add-yas-tree-sitter-hooks 'suppress)
 (declare-function wgrep-setup "wgrep" ())
 (declare-function Info-follow-nearest-node "info")
+(declare-function my-setup-ruby-mode "puni")
+(declare-function puni-barf-forward "puni")
+(declare-function puni-slurp-forward "puni")
+(declare-function puni-slurp-backward "puni")
+(declare-function puni-barf-backward "puni")
+(declare-function puni-raise "puni")
+(declare-function puni-split "puni")
+(declare-function puni-splice "puni")
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

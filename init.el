@@ -1771,10 +1771,10 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (my-color-zenburn))
 (cond
  ((eq my-curr-computer 'mac-mini-m1-2021)
-  (load-theme 'ultimate t)
-  (custom-theme-set-faces
-   'ultimate
-   `(default ((t :background "ivory3"))))
+  (load-theme 'charcoal t)
+  ;; (custom-theme-set-faces
+  ;;  'ultimate
+  ;;  `(default ((t :background "ivory3"))))
   (push
    ;; '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
    ;; '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")

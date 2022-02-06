@@ -8156,7 +8156,7 @@ TODO: delete this fn and replace with hooks, etc."
   (defun my-setup-ruby-mode ()
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
-
+    (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'ruby-mode-hook #'my-setup-ruby-mode))

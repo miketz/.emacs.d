@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+#contributor : Alejandro Espinoza Esparza <aespinoza@structum.com.mx>
+#name : class ... { ... }
+# key: class
+# --
+class ${1:Name}
+
+    def initialize($0)
+    end # initialize
+
+end # class $1

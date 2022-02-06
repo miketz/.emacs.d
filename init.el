@@ -8178,7 +8178,8 @@ TODO: delete this fn and replace with hooks, etc."
                 java-mode-hook
                 sql-mode-hook
                 js-mode-hook
-                js2-mode-hook))
+                js2-mode-hook
+                ruby-mode-hook))
   (add-hook hook #'puni-mode))
 
 (with-eval-after-load 'puni

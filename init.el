@@ -8153,6 +8153,10 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; ruby-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'ruby-mode
+  ;; keybinds
+  (define-key ruby-mode-map (kbd "C-c C-c") #'compile)
+  (define-key ruby-mode-map (kbd "C-c c") #'compile)
+
   (defun my-setup-ruby-mode ()
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local

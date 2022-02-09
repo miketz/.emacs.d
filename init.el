@@ -560,6 +560,7 @@ in case that file does not provide any feature."
 (defvar citre-readtags-program)
 (defvar csharp-mode-map)
 (defvar puni-mode-map)
+(defvar ruby-mode-map)
 
 
 ;; suppress warnings on functions from files not yet loaded.

@@ -1055,6 +1055,10 @@ nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
 
+(when (eq my-curr-computer 'mac-mini-m1-2021)
+  ;; so rg is found. and other homebrew programs.
+  (push "/opt/homebrew/bin" exec-path))
+
 ;;;----------------------------------------------------------------------------
 ;;; globals
 ;;;----------------------------------------------------------------------------
@@ -1205,7 +1209,8 @@ Currently available on git branch: feature/native-comp.")
                                                        "24.4"))))
 
 (defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog
-                                                 work-laptop-2019))
+                                                 work-laptop-2019
+                                                 mac-mini-m1-2021))
   "Non-nil if rg executable is installed.")
 (defvar my-install-rg-p (not (version< emacs-version "24.4"))
   "Whether to install the `rg' package from melpa.")

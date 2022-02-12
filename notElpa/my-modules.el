@@ -431,6 +431,21 @@ mode itself. External language servers are required to use it of course."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'f
+      :comment nil
+      :folder (concat my-module-folder "f.el")
+      :remote-mine-url "https://github.com/miketz/f.el"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/rejeep/f.el"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((s "1.7.0")
+                     (dash "2.2.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'avy
       :comment "Jump to positions in buffers."
       :folder (concat my-module-folder "avy")

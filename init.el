@@ -5052,7 +5052,7 @@ statement generated my SqlServer."
 ;;;----------------------------------------------------------------------------
 ;;; with-editor. dependency of magit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/with-editor" load-path)
+(push "~/.emacs.d/notElpa/with-editor/lisp" load-path)
 (autoload #'with-editor-export-editor "with-editor" nil t)
 (autoload #'with-editor-export-git-editor "with-editor" nil t)
 (autoload #'with-editor-export-hg-editor "with-editor" nil t)

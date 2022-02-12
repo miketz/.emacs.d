@@ -460,6 +460,20 @@ mode itself. External language servers are required to use it of course."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'markdown-mode
+      :comment nil
+      :folder (concat my-module-folder "markdown-mode")
+      :remote-mine-url "https://github.com/miketz/markdown-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/jrblevin/markdown-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1"))
+      :depend-soft '((edit-indirect))
+      :depend-bundled '())
+    ,(make-module
       :name 'avy
       :comment "Jump to positions in buffers."
       :folder (concat my-module-folder "avy")

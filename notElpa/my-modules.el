@@ -422,7 +422,7 @@ mode itself. External language servers are required to use it of course."
       :use-branch "master"
       :depend-hard '((emacs "26.1")
                      (dash "2.14.1")
-                     (dash-functional "2.14.1")
+                     (dash-functional "2.14.1") ; bundled in dash pacakge
                      (f "0.20.0")
                      (ht "2.0")
                      (spinner "1.7.3")

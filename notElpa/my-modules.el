@@ -751,7 +751,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '((avy "0.5.0"))
       :depend-soft '()
-      :depend-bundled '())))
+      :depend-bundled '())
+    ,(make-module
+      :name 'hydra
+      :comment nil
+      :folder (concat my-module-folder "hydra")
+      :remote-mine-url "https://github.com/miketz/hydra"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/abo-abo/hydra"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '((lv "0")))))
 
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."

@@ -427,7 +427,7 @@ mode itself. External language servers are required to use it of course."
                      (ht "2.0")
                      (spinner "1.7.3")
                      (markdown-mode "2.3")
-                     (lv "0"))
+                     (lv "0")) ; lv is in the hydra package
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

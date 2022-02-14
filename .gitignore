@@ -41,3 +41,5 @@ package-quickstart.el
 /var/
 /dank-mode/
 network-security.data
+/projects
+/eln-cache/

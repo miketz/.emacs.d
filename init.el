@@ -2549,6 +2549,11 @@ In that case, insert the number."
     (evil-leader/set-key "a" #'org-agenda-list)))
 
 (with-eval-after-load 'org
+  (when my-use-evil-p
+    ;; `evil-define-key' isn't working?
+    ;; (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
+    (define-key org-mode-map (kbd "<tab>") #'org-cycle))
+
   (setq org-startup-indented t)
   ;; show the leading stars. But it's set to t again by `org-indent-mode'?
   ;; TODO: try setting in a hook.

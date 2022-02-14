@@ -422,13 +422,56 @@ mode itself. External language servers are required to use it of course."
       :use-branch "master"
       :depend-hard '((emacs "26.1")
                      (dash "2.14.1")
-                     (dash-functional "2.14.1")
+                     (dash-functional "2.14.1") ; bundled in dash pacakge
                      (f "0.20.0")
                      (ht "2.0")
                      (spinner "1.7.3")
                      (markdown-mode "2.3")
-                     (lv "0"))
+                     (lv "0")) ; lv is in the hydra package
+      :depend-soft '((use-package))
+      :depend-bundled '())
+    ,(make-module
+      :name 'f
+      :comment nil
+      :folder (concat my-module-folder "f.el")
+      :remote-mine-url "https://github.com/miketz/f.el"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/rejeep/f.el"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((s "1.7.0")
+                     (dash "2.2.0"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'ht
+      :comment nil
+      :folder (concat my-module-folder "ht.el")
+      :remote-mine-url "https://github.com/miketz/ht.el"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/Wilfred/ht.el"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((dash "2.12.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'markdown-mode
+      :comment nil
+      :folder (concat my-module-folder "markdown-mode")
+      :remote-mine-url "https://github.com/miketz/markdown-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/jrblevin/markdown-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1"))
+      :depend-soft '((edit-indirect))
       :depend-bundled '())
     ,(make-module
       :name 'avy
@@ -723,7 +766,49 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '((emacs "26.1"))
       :depend-soft '()
-      :depend-bundled '())))
+      :depend-bundled '())
+    ,(make-module
+      :name 'ace-link
+      :comment nil
+      :folder (concat my-module-folder "ace-link")
+      :remote-mine-url "https://github.com/miketz/ace-link"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/abo-abo/ace-link"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((avy "0.4.0"))
+      :depend-soft '((counsel) (w3m))
+      :depend-bundled '())
+    ,(make-module
+      :name 'ace-window
+      :comment nil
+      :folder (concat my-module-folder "ace-window")
+      :remote-mine-url "https://github.com/miketz/ace-window"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/abo-abo/ace-window"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((avy "0.5.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'hydra
+      :comment nil
+      :folder (concat my-module-folder "hydra")
+      :remote-mine-url "https://github.com/miketz/hydra"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/abo-abo/hydra"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '((lv "0")))))
 
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."

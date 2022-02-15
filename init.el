@@ -2658,7 +2658,9 @@ Inserts a new line and the beginning and end with text values:
   (defun my-setup-csharp-mode ()
     ;; set compile-command. Assumes dotnet core
     (let* ((dotnet (cond ((eq system-type 'darwin)
-                          "/usr/local/bin/dotnet")))
+                          "/usr/local/bin/dotnet")
+                         ((eq system-type 'windows-nt)
+                          "\"C:\\Program Files\\dotnet\\dotnet\"")))
            (cmd (concat dotnet " build")))
       (set (make-local-variable 'compile-command)
            cmd))

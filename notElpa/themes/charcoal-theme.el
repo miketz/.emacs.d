@@ -555,9 +555,9 @@ Example:
 
    ;; tree-sitter-hl
    `(tree-sitter-hl-face:function.call
-     ((,class :inherit js2-function-call
-              ;; :foreground "#EFB0BB"
-              ;; :background "#232319"
+     ((,class ;; :inherit js2-function-call
+              :foreground "#EFB0BB"
+              :background "#232319"
               )))
    `(tree-sitter-hl-face:operator
      ((,class :inherit font-lock-keyword-face

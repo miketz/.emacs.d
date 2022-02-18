@@ -808,7 +808,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
-      :depend-bundled '((lv "0")))))
+      :depend-bundled '((lv "0")))
+    ,(make-module
+      :name 'flames-of-freedom
+      :comment nil
+      :folder (concat my-module-folder "hydra")
+      :remote-mine-url nil ; just a fun pacakge so no fork.
+      :remote-mine-alias nil
+      :remote-upstream-url "https://github.com/wiz21b/FlamesOfFreedom"
+      :remote-upstream-alias "origin"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1"))
+      :depend-soft '()
+      :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."

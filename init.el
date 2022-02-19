@@ -793,7 +793,7 @@ in case that file does not provide any feature."
 (declare-function dired-sort-toggle-or-edit 'suppress)
 (declare-function dired-do-chgrp 'suppress)
 (declare-function er/contract-region 'suppress)
-(declare-function hydra-expand-region/body 'my-hydras)
+(declare-function hydra-expand-region/body "my-hydras")
 (declare-function paredit-forward-barf-sexp 'paredit)
 (declare-function paredit-forward-slurp-sexp 'paredit)
 (declare-function paredit-backward-slurp-sexp 'paredit)
@@ -826,8 +826,8 @@ in case that file does not provide any feature."
 (declare-function my-current-file-path 'suppress)
 (declare-function my-current-folder-path 'suppress)
 (declare-function my-folder-nav 'suppress)
-(declare-function my-choose-hydra 'my-hydras)
-(declare-function hydra-easyscroll/body 'my-hydras)
+(declare-function my-choose-hydra "my-hydras")
+(declare-function hydra-easyscroll/body "my-hydras")
 (declare-function mor-prev-mode-on-region 'suppress)
 (declare-function my-window-search 'suppress)
 (declare-function lispy-kill 'suppress)
@@ -5326,6 +5326,7 @@ TODO: call this function when it works."
 
 (autoload #'my-choose-hydra "my-hydras" nil t)
 (autoload #'hydra-easyscroll/body "my-hydras" nil t)
+(autoload #'hydra-smerge/body "my-hydras" nil t)
 
 (when my-use-evil-p
   (define-key evil-normal-state-map (kbd "z s") #'hydra-easyscroll/body)
@@ -5340,6 +5341,14 @@ TODO: call this function when it works."
   (setq hydra-hint-display-type 'message) ;; (setq hydra-lv nil)
   )
 
+;;;----------------------------------------------------------------------------
+;;; smerge-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'smerge-mode
+  (defun my-setup-smerge-mode ()
+    ;; keybind to turn on my custom hydra for smerge-mode.
+    (define-key smerge-mode-map (kbd "C-c h") #'hydra-smerge/body))
+  (add-hook 'smerge-mode-hook #'my-setup-smerge-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; lv. This is a file in hydra that lsp-mode depends on.

@@ -103,6 +103,20 @@
   ("C-g" nil nil)
   ("q" nil))
 
+(defhydra hydra-smerge (:color amaranth)
+  "Hydra for smerge-mode."
+  ("n" smerge-next)
+  ("p" smerge-prev)
+  ("u" smerge-keep-upper)
+  ("l" smerge-keep-lower)
+  ("b" smerge-keep-base)
+  ("a" smerge-keep-all)
+
+  ("," delete-other-windows) ; make 1 window so i can see the conflicts.
+
+  ("C-g" nil nil)
+  ("q" nil))
+
 
 (defhydra my-hydra-font (:color amaranth)
   "Hydra for changing font size/style."
@@ -304,6 +318,7 @@
                                #'hydra-window/body
                                #'my-hydra-font/body
                                #'hydra-expand-region/body
+                               #'hydra-smerge/body
                                ;;trying paredit #'hydra-paredit/body
                                ))))
   (defun my-choose-hydra ()

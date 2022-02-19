@@ -8216,6 +8216,10 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+;; new emacs 29 feature. show matching start of delimiter if off screen.
+(setq show-paren-context-when-offscreen 'overlay)
+
+
 ;; make fn `display-buffer' behave like it did in XEmacs, as JWZ expects.
 ;; see blog:
 ;; https://www.jwz.org/blog/2021/01/very-much-do-not-have-my-emacs-setup-just-h

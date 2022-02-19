@@ -279,3 +279,22 @@ in `my-packages'.  Useful for cleaning out unwanted packages."
                               (not (package-built-in-p x))
                               (package-installed-p x)))
                        (mapcar 'car package-archive-contents)))))
+
+
+;; copied from Nordlöw at:
+;; https://stackoverflow.com/questions/24725778/how-to-rebuild-elpa-packages-after-upgrade-of-emacs
+;; reinstalls elpa packages. Useful to do after upgrading emacs to remove stale .elc files.
+(defun my-package-reinstall-all-activated-packages ()
+  "Refresh and reinstall all activated packages.
+Copied from Nordlöw at:
+https://stackoverflow.com/questions/24725778/how-to-rebuild-elpa-packages-after-upgrade-of-emacs
+
+Reinstalls elpa packages.
+Useful to run after upgrading emacs to remove old .elc files."
+  (interactive)
+  (package-refresh-contents)
+  (dolist (package-name package-activated-list)
+    (when (package-installed-p package-name)
+      (unless (ignore-errors ;; some packages may fail to install
+                (package-reinstall package-name))
+        (warn "Package %s failed to reinstall" package-name)))))

@@ -8227,6 +8227,13 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+(defun my-paste-below ()
+  "Paste to line below.  Preserve indentation of current line."
+  (interactive)
+  (move-end-of-line 1)
+  (newline)
+  (yank)
+  (indent-region (mark) (point)))
 
 ;; new emacs 29 feature. show matching start of delimiter if off screen.
 (setq show-paren-context-when-offscreen 'overlay)

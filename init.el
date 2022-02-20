@@ -8223,6 +8223,12 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; posframe
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/posframe" load-path)
+(autoload #'posframe-workable-p "posframe" nil nil)
+(autoload #'posframe-show "posframe" nil nil)
+(autoload #'posframe-hide-all "posframe" nil t)
+(autoload #'posframe-delete-all "posframe" nil t)
+(autoload #'posframe-benchmark "posframe" nil t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

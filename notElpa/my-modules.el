@@ -822,6 +822,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '((emacs "25.1"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'posframe
+      :comment nil
+      :folder (concat my-module-folder "posframe")
+      :remote-mine-url "https://github.com/miketz/posframe"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/tumashu/posframe"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "26.1"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

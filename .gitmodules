@@ -301,3 +301,6 @@
 [submodule "notElpa/puni"]
 	path = notElpa/puni
 	url = https://github.com/miketz/puni
+[submodule "notElpa/posframe"]
+	path = notElpa/posframe
+	url = https://github.com/miketz/posframe

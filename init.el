@@ -5345,10 +5345,8 @@ TODO: call this function when it works."
 ;;; smerge-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'smerge-mode
-  (defun my-setup-smerge-mode ()
-    ;; keybind to turn on my custom hydra for smerge-mode.
-    (define-key smerge-mode-map (kbd "C-c h") #'hydra-smerge/body))
-  (add-hook 'smerge-mode-hook #'my-setup-smerge-mode))
+  ;; keybind to turn on my custom hydra for smerge-mode.
+  (define-key smerge-mode-map (kbd "C-c h") #'hydra-smerge/body))
 
 ;;;----------------------------------------------------------------------------
 ;;; lv. This is a file in hydra that lsp-mode depends on.

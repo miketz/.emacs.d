@@ -836,6 +836,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine"
       :depend-hard '((emacs "26.1"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'ivy-posframe
+      :comment nil
+      :folder (concat my-module-folder "ivy-posframe")
+      :remote-mine-url "https://github.com/miketz/ivy-posframe"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/tumashu/ivy-posframe"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "26.0") (posframe "1.0.0") (ivy "0.13.0"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

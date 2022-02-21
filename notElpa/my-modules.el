@@ -40,7 +40,9 @@ Some info may be purely for informational/doc purposes."
   (use-branch nil) ; master, mine
   (depend-hard '()) ; requried or important dependencies.
   (depend-soft '()) ; optional dependencies. Or only needed for the tests.
-  (depend-bundled '())) ; note when packages bundle dependencies.
+  ;; Note when packages bundle dependencies. For informational purposes so I
+  ;; don't try to install something when I dont' need to.
+  (depend-bundled '()))
 
 (defvar my-modules
   `(,(make-module

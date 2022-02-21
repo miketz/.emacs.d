@@ -899,7 +899,23 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :use-branch "mine"
-      :depend-hard '((emacs "24.3"))
+      :depend-hard '((company "0.8.0") (dash "2.8.0") (cl-lib "0.5.0")
+                     (web-completion-data "0.1.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'company-lsp
+      :comment nil
+      :folder (concat my-module-folder "company-lsp")
+      :remote-mine-url "https://github.com/miketz/company-lsp"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/tigersoldier/company-lsp"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1") (lsp-mode "6.0")
+                     (company "0.9.0") (s "1.2.0") (dash "2.11.0"))
       :depend-soft '()
       :depend-bundled '())))
 

@@ -1705,6 +1705,7 @@ This prevents overlapping themes; something I would rarely want."
 
 (progn ; theme changing stuff.
   (autoload #'my-cycle-theme "my-load-theme" nil t)
+  (autoload #'my-force-light-bg "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-backward "my-load-theme" nil t)

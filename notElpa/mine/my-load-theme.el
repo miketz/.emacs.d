@@ -23,6 +23,14 @@
             (setq i 0)))))))
 
 
+(defun my-force-light-bg ()
+  "Force Emacs to think the bg is light. Affects some faces that are different
+when Emacs thinks the bg is light. By default Emacs treats Ivory4 as dark, but
+I want it to be considered light."
+  (interactive)
+  (let ((frame-background-mode 'light))
+    (mapc 'frame-set-background-mode (frame-list))))
+
 
 (declare-function my-cycle-light-bg-set-index 'my-load-theme)
 (defvar mayan-smoke)
@@ -66,6 +74,7 @@
       (custom-theme-set-faces
        (my-get-theme)
        `(default ((t :background ,bg))))
+      (my-force-light-bg)
       (message (format "color %d/%d. %s, %s"
                        (1+ i) len bg descr))))
 

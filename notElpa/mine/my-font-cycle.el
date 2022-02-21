@@ -32,7 +32,9 @@
     ((my-fonts
       (cond
        ((eq my-curr-computer 'mac-mini-m1-2021)
-        ["-*-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+        ["-*-PT Mono-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1"
+         "-*-PT Mono-bold-normal-normal-*-18-*-*-*-m-0-iso10646-1"
+         "-*-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-JetBrains Mono NL-thin-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-JetBrains Mono NL-light-normal-normal-*-*-*-*-*-m-0-iso10646-1"

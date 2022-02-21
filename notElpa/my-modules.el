@@ -917,6 +917,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '((emacs "25.1") (lsp-mode "6.0")
                      (company "0.9.0") (s "1.2.0") (dash "2.11.0"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'web-completion-data
+      :comment nil
+      :folder (concat my-module-folder "web-completion-data")
+      :remote-mine-url "https://github.com/miketz/web-completion-data"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/osv/web-completion-data"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

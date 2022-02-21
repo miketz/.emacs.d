@@ -304,3 +304,6 @@
 [submodule "notElpa/posframe"]
 	path = notElpa/posframe
 	url = https://github.com/miketz/posframe
+[submodule "notElpa/ivy-posframe"]
+	path = notElpa/ivy-posframe
+	url = https://github.com/miketz/ivy-posframe

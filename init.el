@@ -8230,6 +8230,33 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'posframe-delete-all "posframe" nil t)
 (autoload #'posframe-benchmark "posframe" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; ivy-posframe
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ivy-posframe" load-path)
+(autoload #'ivy-posframe-mode "ivy-posframe" nil t)
+
+(with-eval-after-load 'ivy-posframe
+  ;; (setq ivy-posframe-height-alist '((swiper-isearch . 20)
+  ;;                                   (t . 40)))
+
+  ;; (setq ivy-posframe-parameters
+  ;;     '((left-fringe . 8)
+  ;;       (right-fringe . 8)))
+
+
+  (setq ivy-posframe-display-functions-alist
+        '((swiper-isearch . ivy-display-function-fallback)
+          (complete-symbol . ivy-posframe-display-at-point)
+          (counsel-M-x . ivy-posframe-display-at-point
+                       ;;ivy-posframe-display-at-window-bottom-left
+                       )
+          (t . ivy-posframe-display))))
+
+(when nil ;; Don't turn on automatically. Want to expiriment first.
+  (ivy-posframe-mode 1))
+
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

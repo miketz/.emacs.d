@@ -850,6 +850,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine"
       :depend-hard '((emacs "26.0") (posframe "1.0.0") (ivy "0.13.0"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'autothemer
+      :comment nil
+      :folder (concat my-module-folder "autothemer")
+      :remote-mine-url "https://github.com/miketz/autothemer"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/jasonm23/autothemer"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((dash "2.10.0") (emacs "24") (cl-lib "0.5"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

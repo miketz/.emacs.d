@@ -38,6 +38,13 @@ Some info may be purely for informational/doc purposes."
   ;; nil if using a repo outside of /.emacs.d/
   (submodule-p nil)
   (use-branch nil) ; master, mine
+  ;; git SHA (or other vc equiv) to use. Alternative to branch as branch means
+  ;; you are following latest tip of that branch. A specific commit is more
+  ;; exact. However this will be rarely used as the moment I start developing
+  ;; my own code I'll need a branch to avoid a detached HEAD state. This is
+  ;; more for if I want *this* config to control the state of the package
+  ;; rather than the git branch itself.
+  (use-commit nil)
   (depend-hard '()) ; requried or important dependencies.
   (depend-soft '()) ; optional dependencies. Or only needed for the tests.
   ;; Note when packages bundle dependencies. For informational purposes so I
@@ -865,6 +872,34 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :submodule-p t
       :use-branch "mine"
       :depend-hard '((dash "2.10.0") (emacs "24") (cl-lib "0.5"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'company
+      :comment nil
+      :folder (concat my-module-folder "company-mode")
+      :remote-mine-url "https://github.com/miketz/company-mode"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/company-mode/company-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "24.3"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'company-web
+      :comment nil
+      :folder (concat my-module-folder "company-web")
+      :remote-mine-url "https://github.com/miketz/company-web"
+      :remote-mine-alias "origin"
+      :remote-upstream-url "https://github.com/osv/company-web"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "24.3"))
       :depend-soft '()
       :depend-bundled '())))
 

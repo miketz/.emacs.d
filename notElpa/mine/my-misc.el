@@ -281,6 +281,9 @@ between > and <."
       (call-interactively #'compile)))
 
 ;; (require 'my-grep) ; for `my-is-in-gitrepo'
+(defvar completing-read-function)
+(defvar ivy-re-builders-alist)
+(defvar ivy-height)
 (defun my-find-file-omni ()
   "Find files by name."
   (interactive)

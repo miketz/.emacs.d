@@ -8257,6 +8257,11 @@ TODO: delete this fn and replace with hooks, etc."
   (ivy-posframe-mode 1))
 
 
+;;;----------------------------------------------------------------------------
+;;; visual-indentation-mode. alternative to highlight-indent-guides
+;;;----------------------------------------------------------------------------
+(autoload #'visual-indentation-mode "visual-indentation-mode" nil t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

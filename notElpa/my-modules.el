@@ -931,6 +931,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'visual-indentation-mode
+      :comment nil
+      :folder my-module-folder
+      :remote-mine-url nil
+      :remote-mine-alias nil
+      :remote-upstream-url "https://github.com/skeeto/visual-indentation-mode"
+      :remote-upstream-alias "upstream"
+      :source-control 'git
+      :submodule-p nil
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

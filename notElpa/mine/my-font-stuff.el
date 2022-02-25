@@ -5,7 +5,9 @@
 
 ;;; Code:
 
+(defvar completing-read-function)
 (defvar ivy-re-builders-alist)
+(defvar ivy-height)
 
 (defun my-set-frame-font-ivy ()
   "Select the font with ivy's out of order matching."

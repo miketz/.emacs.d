@@ -561,7 +561,8 @@ in case that file does not provide any feature."
 (defvar csharp-mode-map)
 (defvar puni-mode-map)
 (defvar ruby-mode-map)
-
+(defvar ivy-posframe-display-functions-alist)
+(defvar smerge-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -982,6 +983,7 @@ in case that file does not provide any feature."
 (declare-function puni-raise "puni")
 (declare-function puni-split "puni")
 (declare-function puni-splice "puni")
+(declare-function visual-indentation-mode "visual-indentation-mode")
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

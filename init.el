@@ -21,6 +21,8 @@
 ;;; Get latest changes from github:
 ;;;     git pull origin master
 ;;;     git submodule update --init --recursive
+;;; Alternatively, to avoid a manual git pull in each submodule folder?
+;;;     git submodule update --remote --merge
 ;;;
 ;;; Push local changes up to github:
 ;;;     git push origin master

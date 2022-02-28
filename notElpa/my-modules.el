@@ -877,7 +877,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "hydra")
       :remotes '((upstream :url "https://github.com/wiz21b/FlamesOfFreedom" ; just a fun pacakge so no fork.
                            :alias "origin"))
-      :remote-default 'mine
+      :remote-default 'upstream
       :source-control 'git
       :submodule-p t
       :use-branch "master"
@@ -997,7 +997,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :folder my-module-folder
       :remotes '((upstream :url "https://github.com/skeeto/visual-indentation-mode"
                            :alias "upstream"))
-      :remote-default 'mine
+      :remote-default 'upstream
       :source-control 'git
       :submodule-p nil
       :use-branch nil

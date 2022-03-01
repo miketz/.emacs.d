@@ -1003,6 +1003,23 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'fennel-mode
+      :comment nil
+      :folder (concat my-module-folder "fennel-mode")
+      :remotes '((mine :url "https://github.com/miketz/fennel-mode"
+                       :alias "origin")
+                 (upstream :url "https://gitlab.com/technomancy/fennel-mode"
+                           :alias "upstream")
+                 (mirror :url "https://github.com/emacsmirror/fennel-mode"
+                         :alias "mirror"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "26.1"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

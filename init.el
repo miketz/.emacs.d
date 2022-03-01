@@ -8279,7 +8279,7 @@ TODO: delete this fn and replace with hooks, etc."
   (indent-region (mark) (point)))
 
 ;; new emacs 29 feature. show matching start of delimiter if off screen.
-(setq show-paren-context-when-offscreen 'overlay)
+(setq show-paren-context-when-offscreen nil)
 
 
 ;; make fn `display-buffer' behave like it did in XEmacs, as JWZ expects.

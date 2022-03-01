@@ -307,3 +307,6 @@
 [submodule "notElpa/ivy-posframe"]
 	path = notElpa/ivy-posframe
 	url = https://github.com/miketz/ivy-posframe
+[submodule "notElpa/fennel-mode"]
+	path = notElpa/fennel-mode
+	url = https://github.com/miketz/fennel-mode

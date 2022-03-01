@@ -8268,6 +8268,26 @@ TODO: delete this fn and replace with hooks, etc."
 
 
 ;;;----------------------------------------------------------------------------
+;;; fennel-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/fennel-mode" load-path)
+(autoload #'fennel-repl-mode "fennel-mode" nil t)
+(autoload #'fennel-mode "fennel-mode" nil t)
+(autoload #'fennel-repl "fennel-mode" nil t)
+(autoload #'fennel-scratch "fennel-scratch" nil t)
+
+(push '("\\.fnl\\'" . fennel-mode) auto-mode-alist)
+
+(with-eval-after-load 'fennel-mode
+  (defun my-setup-fennel-mode ()
+    (rainbow-delimiters-mode-enable)
+    (enable-paredit-mode)
+    (when my-use-lispy-p
+      (lispy-mode 1)))
+  (add-hook 'fennel-mode-hook #'my-setup-fennel-mode))
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-paste-below ()

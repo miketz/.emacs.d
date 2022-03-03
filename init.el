@@ -8281,10 +8281,10 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.fnl\\'" . fennel-mode) auto-mode-alist)
 
 (with-eval-after-load 'fennel-mode
-  (when (eq my-curr-computer 'mac-mini-m1-2021)
-    (setq lua-default-application "/opt/homebrew/bin/lua")
-    ;; (setq inferior-lisp-program "/opt/homebrew/bin/fennel --repl")
-    (setq fennel-program "/opt/homebrew/bin/fennel --repl"))
+  ;; (when (eq my-curr-computer 'mac-mini-m1-2021)
+  ;;   (setq lua-default-application "/opt/homebrew/bin/lua")
+  ;;   ;; (setq inferior-lisp-program "/opt/homebrew/bin/fennel --repl")
+  ;;   (setq fennel-program "/opt/homebrew/bin/fennel --repl"))
 
   (defun my-setup-fennel-mode ()
     (rainbow-delimiters-mode-enable)

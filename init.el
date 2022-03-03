@@ -6842,8 +6842,10 @@ Closure over `preceding-sexp-fn'."
 (push '("lua" . lua-mode) auto-mode-alist)
 
 (with-eval-after-load 'lua-mode
-  (setq lua-indent-level 2
-        lua-default-application "luajit")
+  (setq lua-indent-level 2)
+
+  ;; TODO: set to "luajit" on case by case basis, per computer.
+  ;; (setq lua-default-application "luajit")
 
   (defun my-setup-lua-mode ()
     (yas-minor-mode 1)
@@ -8279,12 +8281,18 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.fnl\\'" . fennel-mode) auto-mode-alist)
 
 (with-eval-after-load 'fennel-mode
+  (when (eq my-curr-computer 'mac-mini-m1-2021)
+    (setq lua-default-application "/opt/homebrew/bin/lua")
+    ;; (setq inferior-lisp-program "/opt/homebrew/bin/fennel --repl")
+    (setq fennel-program "/opt/homebrew/bin/fennel --repl"))
+
   (defun my-setup-fennel-mode ()
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p
       (lispy-mode 1)))
-  (add-hook 'fennel-mode-hook #'my-setup-fennel-mode))
+  (add-hook 'fennel-mode-hook #'my-setup-fennel-mode)
+  (add-hook 'fennel-repl-mode-hook #'my-setup-fennel-mode))
 
 
 ;;;----------------------------------------------------------------------------

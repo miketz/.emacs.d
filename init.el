@@ -6839,7 +6839,7 @@ Closure over `preceding-sexp-fn'."
 (autoload #'lua-mode "lua-mode" nil t nil)
 (autoload #'lua-start-process "lua-mode" nil t)
 (push '("\\.lua\\'" . lua-mode) auto-mode-alist)
-(push '("lua" . lua-mode) auto-mode-alist)
+;; (push '("lua" . lua-mode) auto-mode-alist)
 
 (with-eval-after-load 'lua-mode
   (setq lua-indent-level 2)

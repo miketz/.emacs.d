@@ -6842,12 +6842,27 @@ Closure over `preceding-sexp-fn'."
 ;; (push '("lua" . lua-mode) auto-mode-alist)
 
 (with-eval-after-load 'lua-mode
-  (setq lua-indent-level 2)
+  (setq lua-indent-level 4)
 
   ;; TODO: set to "luajit" on case by case basis, per computer.
   ;; (setq lua-default-application "luajit")
 
   (defun my-setup-lua-mode ()
+    (when t ;; coment out this `when' to use spaces for indentation.
+      (setq indent-tabs-mode t)
+      ;; NOTE: `tab-width' and `lua-indent-level' must be the same.
+      (setq tab-width lua-indent-level)
+      (progn ;; smart-tabs-mode
+        (smart-tabs-advice lua-indent-line lua-indent-level)
+        (smart-tabs-mode-enable)))
+
+    ;; set to 1 so comments on the same line are kept close to the code
+    (setq comment-column 1) ;; buffer local
+
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1))
+
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     ;; (electric-spacing-mode 1)

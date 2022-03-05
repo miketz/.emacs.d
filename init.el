@@ -8302,6 +8302,10 @@ TODO: delete this fn and replace with hooks, etc."
   ;;   (setq fennel-program "/opt/homebrew/bin/fennel --repl"))
 
   (defun my-setup-fennel-mode ()
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1))
+
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p

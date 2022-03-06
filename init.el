@@ -8313,6 +8313,18 @@ TODO: delete this fn and replace with hooks, etc."
   (add-hook 'fennel-mode-hook #'my-setup-fennel-mode)
   (add-hook 'fennel-repl-mode-hook #'my-setup-fennel-mode))
 
+;;;----------------------------------------------------------------------------
+;;; exec-path-from-shell
+;;;----------------------------------------------------------------------------
+;; this gets environemtn variabels to work on mac. So things like fennel-repl
+;; will work when it tries to find the "lua" program.
+(autoload #'exec-path-from-shell-copy-envs "exec-path-from-shell" nil nil)
+(autoload #'exec-path-from-shell-copy-env "exec-path-from-shell" nil t)
+(autoload #'exec-path-from-shell-initialize "exec-path-from-shell" nil t)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

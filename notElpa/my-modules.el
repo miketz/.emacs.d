@@ -1005,6 +1005,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'exec-path-from-shell
+      :comment "Set environemnt vars on mac."
+      :folder my-module-folder
+      :remotes '((upstream :url "https://github.com/purcell/exec-path-from-shell"
+                           :alias "upstream"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p nil
+      :use-branch nil
+      :depend-hard '((emacs "24.1") (cl-lib "0.6"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'fennel-mode
       :comment nil
       :folder (concat my-module-folder "fennel-mode")

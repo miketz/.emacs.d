@@ -6847,6 +6847,10 @@ Closure over `preceding-sexp-fn'."
   ;; TODO: set to "luajit" on case by case basis, per computer.
   ;; (setq lua-default-application "luajit")
 
+  (cond ((eq my-curr-computer 'work-laptop-2019)
+         (setq lua-default-application
+               "C:/Users/mtz/programs/lua-5.3.6_Win32_bin/lua53.exe")))
+
   (defun my-setup-lua-mode ()
     (when t ;; coment out this `when' to use spaces for indentation.
       (setq indent-tabs-mode t)

@@ -6850,13 +6850,34 @@ Closure over `preceding-sexp-fn'."
 (autoload #'lua-mode "lua-mode" nil t nil)
 (autoload #'lua-start-process "lua-mode" nil t)
 (push '("\\.lua\\'" . lua-mode) auto-mode-alist)
-(push '("lua" . lua-mode) auto-mode-alist)
+;; (push '("lua" . lua-mode) auto-mode-alist)
 
 (with-eval-after-load 'lua-mode
-  (setq lua-indent-level 2
-        lua-default-application "luajit")
+  (setq lua-indent-level 4)
+
+  ;; TODO: set to "luajit" on case by case basis, per computer.
+  ;; (setq lua-default-application "luajit")
+
+  (cond ((eq my-curr-computer 'work-laptop-2019)
+         (setq lua-default-application
+               "C:/Users/mtz/programs/lua-5.3.6_Win32_bin/lua53.exe")))
 
   (defun my-setup-lua-mode ()
+    (when t ;; coment out this `when' to use spaces for indentation.
+      (setq indent-tabs-mode t)
+      ;; NOTE: `tab-width' and `lua-indent-level' must be the same.
+      (setq tab-width lua-indent-level)
+      (progn ;; smart-tabs-mode
+        (smart-tabs-advice lua-indent-line lua-indent-level)
+        (smart-tabs-mode-enable)))
+
+    ;; set to 1 so comments on the same line are kept close to the code
+    (setq comment-column 1) ;; buffer local
+
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1))
+
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     ;; (electric-spacing-mode 1)
@@ -8292,12 +8313,34 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.fnl\\'" . fennel-mode) auto-mode-alist)
 
 (with-eval-after-load 'fennel-mode
+  ;; (when (eq my-curr-computer 'mac-mini-m1-2021)
+  ;;   (setq lua-default-application "/opt/homebrew/bin/lua")
+  ;;   ;; (setq inferior-lisp-program "/opt/homebrew/bin/fennel --repl")
+  ;;   (setq fennel-program "/opt/homebrew/bin/fennel --repl"))
+
   (defun my-setup-fennel-mode ()
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1))
+
     (rainbow-delimiters-mode-enable)
     (enable-paredit-mode)
     (when my-use-lispy-p
       (lispy-mode 1)))
-  (add-hook 'fennel-mode-hook #'my-setup-fennel-mode))
+  (add-hook 'fennel-mode-hook #'my-setup-fennel-mode)
+  (add-hook 'fennel-repl-mode-hook #'my-setup-fennel-mode))
+
+;;;----------------------------------------------------------------------------
+;;; exec-path-from-shell
+;;;----------------------------------------------------------------------------
+;; this gets environemtn variabels to work on mac. So things like fennel-repl
+;; will work when it tries to find the "lua" program.
+(autoload #'exec-path-from-shell-copy-envs "exec-path-from-shell" nil nil)
+(autoload #'exec-path-from-shell-copy-env "exec-path-from-shell" nil t)
+(autoload #'exec-path-from-shell-initialize "exec-path-from-shell" nil t)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 
 ;;;----------------------------------------------------------------------------

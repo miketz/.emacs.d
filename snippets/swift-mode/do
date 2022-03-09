@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: rep
-# key: rep
+# name: do
+# key: do
 # --
 repeat {
     $0

@@ -1029,6 +1029,7 @@ in case that file does not provide any feature."
   '(work-laptop
     work-laptop-bash
     work-laptop-2019
+    work-laptop-mac
     raspberry-pi
     utilite
     old-sony-vaio
@@ -1058,8 +1059,8 @@ Specific configurations may be made for some computers.")
 nil if computer is unknown.
 Specific configs may be made based on the computer.")
 
-
-(when (eq my-curr-computer 'mac-mini-m1-2021)
+(when (memq my-curr-computer '(mac-mini-m1-2021
+                               work-laptop-mac))
   ;; so rg is found. and other homebrew programs.
   (push "/opt/homebrew/bin" exec-path))
 
@@ -1095,6 +1096,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
         ((eq my-curr-computer 'mac-mini-m1-2021) 'grid-ido)
+        ((eq my-curr-computer 'work-laptop-mac) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
@@ -1135,6 +1137,7 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                      ((eq my-narrow-type 'fido) #'my-occur-wild-spaces)
                      ;; per computer. keep this above "per completion type".
                      ((eq my-curr-computer 'mac-mini-m1-2021) #'swiper-isearch)
+                     ((eq my-curr-computer 'work-laptop-mac) #'swiper-isearch)
                      ;; per completion type
                      (my-use-ivy-p #'swiper-isearch)
                      ;; `ido-occur' is fast but does not split inputs on
@@ -1156,7 +1159,8 @@ icicle-occur occur my-occur-wild-spaces")
 
 (defvar my-use-lispy-p (memq my-curr-computer '(wild-dog
                                                 work-laptop-2019
-                                                mac-mini-m1-2021))
+                                                mac-mini-m1-2021
+                                                work-laptop-mac))
   "Whether to use lispy or not.
 Lispy pulls in ivy as a dependency so avoiding on slow computers.")
 
@@ -1214,7 +1218,8 @@ Currently available on git branch: feature/native-comp.")
 
 (defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog
                                                  work-laptop-2019
-                                                 mac-mini-m1-2021))
+                                                 mac-mini-m1-2021
+                                                 work-laptop-mac))
   "Non-nil if rg executable is installed.")
 (defvar my-install-rg-p (not (version< emacs-version "24.4"))
   "Whether to install the `rg' package from melpa.")
@@ -1789,6 +1794,12 @@ This prevents overlapping themes; something I would rarely want."
 ;; (when my-graphic-p ;; this isn't true for emacs daemon!
 ;;   (my-color-zenburn))
 (cond
+ ((eq my-curr-computer 'work-laptop-mac)
+  (load-theme 'charcoal t)
+  (push
+   '(font . "-*-Menlo-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+   default-frame-alist))
+
  ((eq my-curr-computer 'mac-mini-m1-2021)
   (load-theme 'charcoal t)
   ;; (custom-theme-set-faces
@@ -7738,11 +7749,13 @@ vanilla javascript buffers."
          ;; "/usr/bin/ctags-exuberant"
          )
         ((eq my-curr-computer 'mac-mini-m1-2021) "/opt/homebrew/bin/ctags")
+        ((eq my-curr-computer 'work-laptop-mac) "/opt/homebrew/bin/ctags")
         (t nil)))
 
 (defvar my-universal-ctags-p (memq my-curr-computer '(work-laptop-2019
                                                       wild-dog
-                                                      mac-mini-m1-2021))
+                                                      mac-mini-m1-2021
+                                                      work-laptop-mac))
   "Non-nil if the ctags used on this computer is universial ctags.")
 
 (cl-defun my-create-ctags (dir-name)
@@ -8333,7 +8346,8 @@ load during init, or wait with autoloads."
 
 (when (memq my-curr-computer '(mac-mini-m1-2021
                                wild-dog
-                               work-laptop-2019))
+                               work-laptop-2019
+                               work-laptop-mac))
   (my-load-common))
 
 

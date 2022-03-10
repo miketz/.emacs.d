@@ -1018,6 +1018,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'vc-fossil
+      :comment nil
+      :folder my-module-folder
+      :remotes '((upstream :url "https://chiselapp.com/user/venks/repository/emacs-fossil"
+                           :alias "upstream"
+                           :type fossil?)
+                 (mirror :url "https://github.com/venks1/emacs-fossil/"
+                           :alias "mirror"))
+      :remote-default 'mirror
+      :source-control 'git
+      :submodule-p nil
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'fennel-mode
       :comment nil
       :folder (concat my-module-folder "fennel-mode")

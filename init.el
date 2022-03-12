@@ -6857,7 +6857,7 @@ Closure over `preceding-sexp-fn'."
   (define-key lua-mode-map (kbd "C-x C-e") #'lua-send-current-line)
   (define-key lua-mode-map (kbd "C-M-x") #'lua-send-defun)
   (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
-  (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-lua-region)
+  (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-region)
 
   (setq lua-indent-level 4)
 

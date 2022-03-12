@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: rep
+# key: rep
+# --
+repeat
+    $0
+until ${1:cond}

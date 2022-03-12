@@ -6853,6 +6853,12 @@ Closure over `preceding-sexp-fn'."
 ;; (push '("lua" . lua-mode) auto-mode-alist)
 
 (with-eval-after-load 'lua-mode
+  ;; key binds
+  (define-key lua-mode-map (kbd "C-x C-e") #'lua-send-current-line)
+  (define-key lua-mode-map (kbd "C-M-x") #'lua-send-defun)
+  (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
+  (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-lua-region)
+
   (setq lua-indent-level 4)
 
   ;; TODO: set to "luajit" on case by case basis, per computer.

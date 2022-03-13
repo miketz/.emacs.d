@@ -986,6 +986,9 @@ in case that file does not provide any feature."
 (declare-function puni-split "puni")
 (declare-function puni-splice "puni")
 (declare-function visual-indentation-mode "visual-indentation-mode")
+(declare-function my-setup-fennel-mode "init")
+;; TODO: fix wrong use of declare-function above. Replace the symbols with
+;; string filenames of lisp files in the `load-path'.
 
 ;; silence more byte compiler warnings.
 ;; NOTE: it shoudln't matter if lib has not be added to `load-path' yet as

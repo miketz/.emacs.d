@@ -8354,12 +8354,19 @@ TODO: delete this fn and replace with hooks, etc."
 
 
 ;;;----------------------------------------------------------------------------
-;;; comint
+;;; comint.  emacs built-in repl mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'comint
   ;; Don't echo passwords when dealing with interactive programs
   (add-hook 'comint-output-filter-functions
-            #'comint-watch-for-password-prompt))
+            #'comint-watch-for-password-prompt)
+
+  (defun my-setup-comint ()
+    (rainbow-delimiters-mode-enable)
+    ;; TODO: detect if this comint is for a lisp lang and use `paredit' instead
+    ;; of `electric-pair-mode'.
+    (my-turn-on-electric-pair-local-mode))
+  (add-hook 'comint-mode-hook #'my-setup-comint))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

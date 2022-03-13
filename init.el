@@ -6859,6 +6859,10 @@ Closure over `preceding-sexp-fn'."
   (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
   (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-region)
 
+  (when my-use-evil-p
+    ;; use emacs bindings in lua REPL
+    (push '("^*lua*" . emacs) evil-buffer-regexps))
+
   (setq lua-indent-level 4)
 
   ;; TODO: set to "luajit" on case by case basis, per computer.

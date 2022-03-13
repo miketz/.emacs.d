@@ -6866,7 +6866,7 @@ Closure over `preceding-sexp-fn'."
     ;; use emacs bindings in lua REPL
     (push '("^*lua*" . emacs) evil-buffer-regexps))
 
-  (setq lua-indent-level 4)
+  (setq lua-indent-level 3) ; defualt is 3 but set anyway
 
   ;; TODO: set to "luajit" on case by case basis, per computer.
   ;; (setq lua-default-application "luajit")

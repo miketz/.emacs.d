@@ -8354,6 +8354,14 @@ TODO: delete this fn and replace with hooks, etc."
 
 
 ;;;----------------------------------------------------------------------------
+;;; comint
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'comint
+  ;; Don't echo passwords when dealing with interactive programs
+  (add-hook 'comint-output-filter-functions
+            #'comint-watch-for-password-prompt))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-paste-below ()
@@ -8715,9 +8723,6 @@ load during init, or wait with autoloads."
   (setq auto-save-default nil)          ;No annoying auto-save files
   )
 
-;; Don't echo passwords when dealing with interactive programs
-(add-hook 'comint-output-filter-functions
-          'comint-watch-for-password-prompt)
 
 
 

@@ -6859,8 +6859,11 @@ Closure over `preceding-sexp-fn'."
   ;; key binds
   (define-key lua-mode-map (kbd "C-x C-e") #'lua-send-current-line)
   (define-key lua-mode-map (kbd "C-M-x") #'lua-send-defun)
-  (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
+  ;; (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
   (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-region)
+
+  (define-key lua-mode-map (kbd "C-c C-c") #'compile)
+  (define-key lua-mode-map (kbd "C-c c") #'compile)
 
   (when my-use-evil-p
     ;; use emacs bindings in lua REPL

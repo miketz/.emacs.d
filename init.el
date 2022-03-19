@@ -565,6 +565,7 @@ in case that file does not provide any feature."
 (defvar ruby-mode-map)
 (defvar ivy-posframe-display-functions-alist)
 (defvar smerge-mode-map)
+(defvar lua-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -987,6 +988,11 @@ in case that file does not provide any feature."
 (declare-function puni-splice "puni")
 (declare-function visual-indentation-mode "visual-indentation-mode")
 (declare-function my-setup-fennel-mode "init")
+(declare-function lua-send-region "lua-mode")
+(declare-function lua-send-buffer "lua-mode")
+(declare-function lua-send-defun "lua-mode")
+(declare-function lua-send-current-line "lua-mode")
+
 ;; TODO: fix wrong use of declare-function above. Replace the symbols with
 ;; string filenames of lisp files in the `load-path'.
 

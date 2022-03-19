@@ -6859,7 +6859,7 @@ Closure over `preceding-sexp-fn'."
   ;; key binds
   (define-key lua-mode-map (kbd "C-x C-e") #'lua-send-current-line)
   (define-key lua-mode-map (kbd "C-M-x") #'lua-send-defun)
-  ;; (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
+  (define-key lua-mode-map (kbd "C-c C-k") #'lua-send-buffer)
   (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-region)
 
   (define-key lua-mode-map (kbd "C-c C-c") #'compile)

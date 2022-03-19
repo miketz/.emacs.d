@@ -6878,8 +6878,9 @@ Closure over `preceding-sexp-fn'."
          (setq lua-default-application
                "C:/Users/mtz/programs/lua-5.3.6_Win32_bin/lua53.exe"))
         ((eq my-curr-computer 'work-laptop-mac)
-         (setq lua-default-application
-               "/opt/homebrew/bin/lua")))
+         (setq lua-default-application "/opt/homebrew/bin/lua"))
+        ((eq my-curr-computer 'wild-dog)
+         (setq lua-default-application "luajit")))
 
   (defun my-setup-lua-mode ()
     (when t ;; coment out this `when' to use spaces for indentation.

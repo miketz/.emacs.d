@@ -565,6 +565,7 @@ in case that file does not provide any feature."
 (defvar ruby-mode-map)
 (defvar ivy-posframe-display-functions-alist)
 (defvar smerge-mode-map)
+(defvar lua-mode-map)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -987,6 +988,11 @@ in case that file does not provide any feature."
 (declare-function puni-splice "puni")
 (declare-function visual-indentation-mode "visual-indentation-mode")
 (declare-function my-setup-fennel-mode "init")
+(declare-function lua-send-region "lua-mode")
+(declare-function lua-send-buffer "lua-mode")
+(declare-function lua-send-defun "lua-mode")
+(declare-function lua-send-current-line "lua-mode")
+
 ;; TODO: fix wrong use of declare-function above. Replace the symbols with
 ;; string filenames of lisp files in the `load-path'.
 
@@ -6859,7 +6865,7 @@ Closure over `preceding-sexp-fn'."
   ;; key binds
   (define-key lua-mode-map (kbd "C-x C-e") #'lua-send-current-line)
   (define-key lua-mode-map (kbd "C-M-x") #'lua-send-defun)
-  ;; (define-key lua-mode-map (kbd "C-c C-c") #'lua-send-buffer)
+  (define-key lua-mode-map (kbd "C-c C-k") #'lua-send-buffer)
   (define-key lua-mode-map (kbd "C-c C-r") #'lua-send-region)
 
   (define-key lua-mode-map (kbd "C-c C-c") #'compile)
@@ -6878,8 +6884,9 @@ Closure over `preceding-sexp-fn'."
          (setq lua-default-application
                "C:/Users/mtz/programs/lua-5.3.6_Win32_bin/lua53.exe"))
         ((eq my-curr-computer 'work-laptop-mac)
-         (setq lua-default-application
-               "/opt/homebrew/bin/lua")))
+         (setq lua-default-application "/opt/homebrew/bin/lua"))
+        ((eq my-curr-computer 'wild-dog)
+         (setq lua-default-application "luajit")))
 
   (defun my-setup-lua-mode ()
     (when t ;; coment out this `when' to use spaces for indentation.

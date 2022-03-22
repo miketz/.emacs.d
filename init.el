@@ -8385,6 +8385,11 @@ TODO: delete this fn and replace with hooks, etc."
   (add-hook 'comint-mode-hook #'my-setup-comint))
 
 ;;;----------------------------------------------------------------------------
+;;; key binds for terminals. Where the meta key doesn't work. (ie M-x)
+;;;----------------------------------------------------------------------------
+(global-set-key (kbd "C-c x") #'execute-extended-command)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-paste-below ()

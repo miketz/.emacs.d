@@ -7853,9 +7853,8 @@ vanilla javascript buffers."
     ;; use emacs bindings (not evil)
     (push '("^*xref" . emacs) evil-buffer-regexps)))
 
-(when my-use-evil-p
-  ;; jump to TAG definition in a new window
-  (global-set-key (kbd "M-.") #'xref-find-definitions-other-window))
+;; jump to TAG definition in a new window
+(global-set-key (kbd "M-.") #'xref-find-definitions-other-window)
 
 
 ;;;----------------------------------------------------------------------------

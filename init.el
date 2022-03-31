@@ -1192,6 +1192,9 @@ Currently available on git branch: feature/native-comp.")
                                        ; not "packages".
 (push "~/.emacs.d/notElpa/mine/" load-path)
 (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
+;; some themes require helper files so add themes dir to load-path.
+(push custom-theme-directory load-path)
+
 (push "~/.emacs.d/notElpa/themes/replace-colorthemes/" custom-theme-load-path)
 
 ;; (setq package-quickstart t) ; pre-generates a giant autoloads file

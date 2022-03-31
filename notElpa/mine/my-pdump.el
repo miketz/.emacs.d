@@ -6,9 +6,9 @@
 ;;; Code:
 
 
-;; Function `my-handle-weird-theme-setups' lives in init.el.
-;; That may change soon.
-(declare-function my-handle-weird-theme-setups 'suppress)
+;; ;; Function `my-handle-weird-theme-setups' lives in init.el.
+;; ;; That may change soon.
+;; (declare-function my-handle-weird-theme-setups 'suppress)
 (defvar my-install-slime-p) ; from init.el
 
 
@@ -30,7 +30,7 @@ For faster subsequent start up."
         ;; again to be compatible.
 
     ;; my libs
-    (my-handle-weird-theme-setups)
+    ;; (my-handle-weird-theme-setups)
     (require 'mode-on-region)
     (require 'my-hydras)
     (require 'my-rand)

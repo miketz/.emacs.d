@@ -716,7 +716,7 @@ in case that file does not provide any feature."
 (declare-function my-cycle-light-bg 'my-load-theme)
 (declare-function my-cycle-light-bg-forward 'my-load-theme)
 (declare-function my-cycle-light-bg-backward 'my-load-theme)
-(declare-function my-handle-weird-theme-setups 'suppress)
+;; (declare-function my-handle-weird-theme-setups 'suppress)
 (declare-function my-load-theme-wrapper 'my-load-theme)
 (declare-function my-toggle-inverse-video 'my-load-theme)
 (declare-function my-rainbow-parens-dark-bg 'my-color-theme-mods)
@@ -1731,7 +1731,7 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-backward "my-load-theme" nil t)
 
-  (autoload #'my-handle-weird-theme-setups "my-load-theme" nil t)
+  ;; (autoload #'my-handle-weird-theme-setups "my-load-theme" nil t)
   (autoload #'my-load-theme-wrapper "my-load-theme" nil t)
   (autoload #'my-counsel-load-theme "my-load-theme" nil t)
   (if my-use-ivy-p

@@ -135,6 +135,9 @@ I want it to be considered light."
 
 
 (let ((executed-p nil))
+  ;; this fn might not be needed anymore. It seems adding the theme folder
+  ;; to the load-path fixed all the issues where weird themes require a bunch
+  ;; of helper files.
   (defun my-handle-weird-theme-setups ()
     "Some themes work in a special way with custom code to initialize them.
 Originally this code would be run in the autoloads when the themes were melpa
@@ -174,14 +177,14 @@ Closure over executed-p."
 
 (defun my-load-theme-wrapper ()
   (interactive)
-  (my-handle-weird-theme-setups)
+  ;; (my-handle-weird-theme-setups)
   ;; nil for no candidate limit. I want to scroll through all the themes.
   (let ((helm-candidate-number-limit nil))
     (call-interactively #'load-theme)))
 
 (defun my-counsel-load-theme ()
   (interactive)
-  (my-handle-weird-theme-setups)
+  ;; (my-handle-weird-theme-setups)
   ;; (let ((ivy-height 100)) ;; taller ivy window for viewing themes.
   ;;   (call-interactively #'counsel-load-theme))
   (counsel-load-theme))

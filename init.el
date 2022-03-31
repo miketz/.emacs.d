@@ -8361,7 +8361,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; exec-path-from-shell
 ;;;----------------------------------------------------------------------------
-;; this gets environemtn variabels to work on mac. So things like fennel-repl
+;; this gets environment variables to work on mac. So things like fennel-repl
 ;; will work when it tries to find the "lua" program.
 (autoload #'exec-path-from-shell-copy-envs "exec-path-from-shell" nil nil)
 (autoload #'exec-path-from-shell-copy-env "exec-path-from-shell" nil t)

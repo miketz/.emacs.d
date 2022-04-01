@@ -3794,6 +3794,11 @@ and indent."
     (setq c-hanging-semi&comma-criteria '(my-add-newline-automatically-p)))
 
   (defun my-setup-c-mode-common ()
+    ;; highlight escape characters in strings
+    ;; see https://emacs.stackexchange.com/questions/2508/highlight-n-and-s-ins
+    ;; ide-strings
+    (highlight-regexp "[%\\][[:alpha:]]" 'font-lock-builtin-face)
+
     (yas-minor-mode 1)
     ;; (which-function-mode) ; displays function at cursor in the
     ;;                       ; mode-line. But can be annoying.

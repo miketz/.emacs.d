@@ -1034,6 +1034,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'lusty-explorer
+      :comment nil
+      :folder my-module-folder
+      :remotes '((upstream :url "https://github.com/sjbach/lusty-emacs"
+                           :alias "upstream"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p nil
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'fennel-mode
       :comment nil
       :folder (concat my-module-folder "fennel-mode")

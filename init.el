@@ -8399,6 +8399,14 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+
+;; for emacs default completion style.
+;; The advantage of vertical is it's easier to scan consecutive items with your
+;; eyes. The disadvantage is not as many items of the same prefix can fit on
+;; the screen as they are in 1 column consecutively. So more scrolling via tab
+;; is needed.
+(setq completions-format 'horizontal)
+
 (defun my-paste-below ()
   "Paste to line below.  Preserve indentation of current line."
   (interactive)

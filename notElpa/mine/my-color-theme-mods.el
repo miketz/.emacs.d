@@ -646,11 +646,7 @@ Historical preservation."
      `(mode-line-inactive ((t (:background ,kosmos-bg-inactive :foreground ,kosmos-gray
                                            :box (:line-width -1
                                                              :color ,kosmos-gray
-                                                             :sytle pressed-button)))))
-     `(show-paren-match ((t (:slant italic
-                                    :bold t
-                                    :strike-through t
-                                    :background nil)))))))
+                                                             :sytle pressed-button))))))))
 
 (defun my-color-leuven ()
   (interactive)

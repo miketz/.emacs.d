@@ -1014,7 +1014,7 @@ Historical preservation."
                                   :background nil))))))
 
 (defun my-color-niflheim ()
-  "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
+  "Load the niflheim theme.  Make a few extra mods too."
   (interactive)
   (load-theme 'niflheim t)
 

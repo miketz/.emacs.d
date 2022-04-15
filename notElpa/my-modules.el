@@ -175,7 +175,7 @@ Some info may be purely for informational/doc purposes."
                        :alias "origin")
                  (upstream :url "https://github.com/magnars/dash.el"
                            :alias "upstream"))
-      :remote-default 'mine
+      :remote-default 'master
       :source-control 'git
       :submodule-p t
       :use-branch "master"

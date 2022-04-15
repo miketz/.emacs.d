@@ -226,13 +226,14 @@ Some info may be purely for informational/doc purposes."
       :use-branch "master"
       :depend-hard '((emacs "25.1")
                      ;; async not used anymore? (async "20180527")
-                     (dash "20200524")
-                     (transient "20200601")
-                     (with-editor "20200522"))
+                     (dash "2.19.1")
+                     (transient "0.3.6")
+                     (with-editor "3.0.5"))
       :depend-soft '((libgit "0")
                      ;; magit-libgit needs emacs 26.1
                      (emacs "26.1"))
-      :depend-bundled '((git-commit "20200516")))
+      :depend-bundled '((git-commit "3.3.0")
+                        (magit-section "3.3.0")))
     ,(make-module
       :name 'libgit
       :comment "An elisp package with C code bundled."

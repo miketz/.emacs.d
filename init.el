@@ -3223,9 +3223,15 @@ To make it human readable."
 ;;;----------------------------------------------------------------------------
 ;;; evil-escape
 ;;;----------------------------------------------------------------------------
-;;(evil-escape-mode 1)
+(autoload #'evil-escape-mode "evil-escape" nil t)
 
+(with-eval-after-load 'evil-escape
+  (setq evil-escape-key-sequence (kbd "fj"))
+  (setq evil-escape-delay 0.2))
 
+;; NOTE: Don't use evil-escape. Using `key-chord' instead becuase it doesn't
+;; care about the order of the keys in the chord. ie "fj" and "jf" both work.
+;; (evil-escape-mode 1)
 
 ;;;----------------------------------------------------------------------------
 ;;; helm-git-grep (makes emacs crash on windows)

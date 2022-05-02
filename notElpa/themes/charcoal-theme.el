@@ -392,6 +392,7 @@ Example:
                            :box (:line-width -1 :style released-button)))))
 
    ;; magit
+   `(magit-reflog-checkout ((,class (:foreground "orangered"))))
    `(magit-section-highlight ((,class (:background ,faint))))
 
    ;; tooltip

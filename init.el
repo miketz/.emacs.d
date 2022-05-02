@@ -8271,18 +8271,21 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'puni-mode "puni" nil t)
 
 ;; use `puni-mode' for the following modes (hooks).
-(dolist (hook '(web-mode-hook
-                ;; NOTE: puni doesn't work in html-mode
-                nxml-mode-hook
-                csharp-mode-hook
-                c-mode-hook
-                c++-mode-hook
-                java-mode-hook
-                sql-mode-hook
-                js-mode-hook
-                js2-mode-hook
-                ruby-mode-hook))
-  (add-hook hook #'puni-mode))
+;; NOTE: temporarily don't use puni. It messes up C-M-a, C-M-e.
+;; TODO: rebind C-M-a and C-M-e keys to default for puni.
+(when nil
+  (dolist (hook '(web-mode-hook
+                  ;; NOTE: puni doesn't work in html-mode
+                  nxml-mode-hook
+                  csharp-mode-hook
+                  c-mode-hook
+                  c++-mode-hook
+                  java-mode-hook
+                  sql-mode-hook
+                  js-mode-hook
+                  js2-mode-hook
+                  ruby-mode-hook))
+    (add-hook hook #'puni-mode)))
 
 (with-eval-after-load 'puni
   ;; mimic my paredit key binds

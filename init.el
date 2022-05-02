@@ -566,6 +566,8 @@ in case that file does not provide any feature."
 (defvar ivy-posframe-display-functions-alist)
 (defvar smerge-mode-map)
 (defvar lua-mode-map)
+(defvar evil-escape-key-sequence)
+(defvar evil-escape-delay)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

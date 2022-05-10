@@ -7769,6 +7769,13 @@ vanilla javascript buffers."
     (evil-leader/set-key "g" search-fn)))
 
 
+;; INFO: alterantive using ripgrep with built-in emacs commands
+;; (with-eval-after-load 'grep
+;;   (grep-apply-setting
+;;    'grep-find-command
+;;    '("rg --no-heading --with-filename '' --glob='' " . 34)))
+
+
 ;;;----------------------------------------------------------------------------
 ;;; tramp
 ;;;----------------------------------------------------------------------------

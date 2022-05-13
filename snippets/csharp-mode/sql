@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: sql access example
+# key: sql
+# --
+using (var conn = new SqlConnection(connStr)) {
+    using (var cmd = conn.CreateCommand()) {
+        cmd.CommandType = CommandType.Text;
+        cmd.CommandText = "select top 3 null from foo";
+        conn.Open(); // open late
+        using (var dtr = cmd.ExecuteReader()) {
+            while (dtr.Read()) {
+                if (dtr["0"] != DBNull.Value) Console.WriteLine(Convert.ToInt32(dtr["0"]));
+                if (dtr["1"] != DBNull.Value) Console.WriteLine(Convert.ToInt32(dtr["1"]));
+            }
+        }
+    }
+}

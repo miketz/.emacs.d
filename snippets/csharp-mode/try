@@ -8,8 +8,8 @@ try {
     $0
 }
 catch(Exception ex) {
-    //log
+    // log
 }
 finally {
-    //clean up
+    // clean up
 }

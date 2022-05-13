@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+#name : prop full
+# key: propf
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+private $2 _$3;
+
+${1:public} ${2:int} ${3:name}
+{
+    get {
+        return _$3;
+    }
+    set {
+        _$3 = value;
+    }
+}

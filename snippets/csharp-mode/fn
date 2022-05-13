@@ -1,6 +1,9 @@
 # -*- mode: snippet -*-
-#name : prop
-# key: prop
+# -*- function -*-
+# name: fn
+# key: fn
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-${1:public} ${2:int} ${3:name} { get; set; }
+${1:public} ${2:void} ${3:name}($0)
+{
+}

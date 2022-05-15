@@ -5,10 +5,8 @@
 # --
 ${4:public} class ${1:Name}
 {
-    /// <summary>
-    /// ${3:Standard Constructor}
-    /// </summary>
     public $1($2)
     {
     }
-}$0
+
+} // class $1$0

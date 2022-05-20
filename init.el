@@ -8417,6 +8417,23 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+(defun my-set-tab-width (width)
+  "Set `tab-width' to WIDTH.
+For most programming modes you need to change an additional variable as well.
+Such as `c-basic-offset' for cc-mode. Or `lua-indent-level' for lua-mode.
+This function will try to set the additional variable for a variety of
+programming modes."
+  (interactive "nindent width: ")
+
+  (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode
+                            idl-mode pike-mode awk-mode))
+         (print "cc-mode detcted")
+         (setq c-basic-offset width))
+        ((eq major-mode 'lua-mode)
+         (print "lua mode detcted")
+         (setq lua-indent-level width)))
+
+  (setq tab-width width))
 
 ;; for emacs default completion style.
 ;; The advantage of vertical is it's easier to scan consecutive items with your

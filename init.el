@@ -8425,12 +8425,10 @@ This function will try to set the additional variable for a variety of
 programming modes."
   (interactive "nindent width: ")
 
-  (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode
-                            idl-mode pike-mode awk-mode))
-         (print "cc-mode detcted")
+  (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode idl-mode
+                                   pike-mode awk-mode))
          (setq c-basic-offset width))
         ((eq major-mode 'lua-mode)
-         (print "lua mode detcted")
          (setq lua-indent-level width)))
 
   (setq tab-width width))

@@ -55,6 +55,7 @@
   (chocolate-hue-9-4          "#46BB83")
   (chocolate-hue-9-5          "#41AE7A")
   (chocolate-syntax-light     "#4B393E")
+  (chocolate-syntax-bg-light  "#3E2F33")
   (chocolate-syntax-bg        "#33272A")
   (chocolate-syntax-bg-dark   "#261D1F")
   (chocolate-syntax-accent    "#F88425")
@@ -73,13 +74,13 @@
   (cursor (:background chocolate-hue-4))
   (link (:foreground chocolate-hue-1 :underline t))
   (link-visited (:foreground chocolate-hue-1 :underline nil))
-  (mode-line (:foreground chocolate-hue-6 :background chocolate-syntax-bg :box nil))
-  (mode-line-inactive (:foreground chocolate-hue-6-3 :background chocolate-hue-6 :box nil))
+  (mode-line (:foreground chocolate-hue-6 :background chocolate-syntax-light :box nil))
+  (mode-line-inactive (:foreground chocolate-hue-6-3 :background chocolate-syntax-bg-light :box nil))
   (fringe (:background chocolate-syntax-bg))
   (linum (:foreground chocolate-hue-4-2))
   (region (:background chocolate-syntax-light :distant-foreground chocolate-hue-4))
   (secondary-selection (:background chocolate-syntax-light))
-  (hl-line (:background chocolate-syntax-light))
+  (hl-line (:background chocolate-syntax-bg-light))
 
   ;; Built-in syntax
   (font-lock-builtin-face (:foreground chocolate-syntax-accent))
@@ -174,6 +175,7 @@
   (ivy-subdir (:inherit 'dired-directory))
   (ivy-match-required-face (:foreground chocolate-syntax-accent :inherit 'minibuffer-prompt))
   (ivy-confirm-face (:foreground chocolate-syntax-bg-dark :inherit 'minibuffer-prompt))
+  (ivy-org (:foreground chocolate-hue-1-5))
   (ivy-minibuffer-match-face-4 (:foreground chocolate-hue-6-2 :inherit 'ivy-minibuffer-match-face-1))
   (ivy-minibuffer-match-face-3 (:foreground chocolate-syntax-added :inherit 'ivy-minibuffer-match-face-1))
   (ivy-minibuffer-match-face-2 (:foreground chocolate-hue-6 :inherit 'ivy-minibuffer-match-face-1))
@@ -181,6 +183,9 @@
   (ivy-minibuffer-match-highlight (:inherit 'highlight))
   (ivy-current-match (:weight 'bold :background chocolate-mono-3))
   (ivy-cursor (:foreground chocolate-hue-2 :background chocolate-syntax-bg-dark))
+
+  ;; MODE SUPPORT: selectrum
+  (selectrum-current-candidate (:background chocolate-syntax-light))
 
   ;; MODE support: js2
   (js2-function-param (:foreground chocolate-hue-1))
@@ -196,10 +201,10 @@
   (ediff-current-diff-Ancestor (:inherit 'ediff-current-diff-A))
   (ediff-current-diff-B (:background chocolate-darker-green))
   (ediff-current-diff-C (:background chocolate-darker-yellow))
-  (ediff-even-diff-A (:background chocolate-syntax-light))
+  (ediff-even-diff-A (:background chocolate-syntax-bg-light))
   (ediff-even-diff-Ancestor (:inherit 'ediff-even-diff-A))
-  (ediff-even-diff-B (:background chocolate-syntax-light))
-  (ediff-even-diff-C (:background chocolate-syntax-light))
+  (ediff-even-diff-B (:background chocolate-syntax-bg-light))
+  (ediff-even-diff-C (:background chocolate-syntax-bg-light))
   (ediff-fine-diff-A (:background chocolate-dark-red))
   (ediff-fine-diff-Ancestor (:inherit 'ediff-fine-diff-A))
   (ediff-fine-diff-B (:background chocolate-dark-green))
@@ -208,6 +213,11 @@
   (ediff-odd-diff-Ancestor (:inherit 'ediff-odd-diff-A))
   (ediff-odd-diff-B (:inherit 'ediff-even-diff-B))
   (ediff-odd-diff-C (:inherit 'ediff-even-diff-C))
+
+  ;; MODE SUPPORT: diff-hl
+  (diff-hl-change (:background chocolate-dark-yellow :foreground chocolate-syntax-modified))
+  (diff-hl-insert (:background chocolate-dark-green :foreground chocolate-syntax-added))
+  (diff-hl-delete (:background chocolate-dark-red :foreground chocolate-syntax-removed))
 
   ;; MODE SUPPORT: org
   (org-table (:foreground chocolate-hue-1-5))
@@ -239,14 +249,33 @@
 
   ;; MODE SUPPORT: powerline
   (powerline-active1 (:background chocolate-syntax-light :foreground chocolate-hue-4 :inherit 'mode-line))
-  (powerline-active2 (:background chocolate-syntax-light :inherit 'mode-line))
+  (powerline-active2 (:background chocolate-syntax-bg))
   (powerline-inactive1 (:background chocolate-syntax-bg-dark :inherit 'mode-line-inactive))
   (powerline-inactive2 (:background chocolate-syntax-bg-dark :inherit 'mode-line-inactive))
   (spaceline-highlight-face (:background chocolate-hue-6 :foreground chocolate-syntax-bg-dark))
+  
+    ;; MODE SUPPORT tab-bar-mode
+  (tab-bar (:foreground chocolate-hue-4 :background chocolate-syntax-bg-dark))
+  (tab-bar-tab (:foreground chocolate-hue-4 :background chocolate-syntax-bg-dark))
+
+  ;; MODE SUPPORT tab-line-mode
+  (tab-line (:foreground chocolate-hue-4 :background chocolate-syntax-bg-dark))
+  (tab-bar-tab-inactive (:foreground chocolate-hue-4 :background chocolate-syntax-bg-dark))
+
+  ;; MODE SUPPORT: centaur tabs
+  (centaur-tabs-default (:background chocolate-syntax-bg-dark :foreground chocolate-hue-4))
+  (centaur-tabs-selected (:background chocolate-syntax-bg :foreground chocolate-hue-4 :weight 'bold))
+  (centaur-tabs-unselected (:background chocolate-syntax-bg-dark :foreground chocolate-mono-3 :weight 'light))
+  (centaur-tabs-selected-modified (:background chocolate-syntax-bg :foreground chocolate-hue-6 :weight 'bold))
+  (centaur-tabs-unselected-modified (:background chocolate-syntax-bg-dark :foreground chocolate-hue-6-3 :weight 'light))
+  (centaur-tabs-active-bar-face (:background chocolate-hue-7))
+  (centaur-tabs-modified-marker-selected (:inherit 'centaur-tabs-selected-modified :foreground chocolate-hue-6-2))
+  (centaur-tabs-modified-marker-unselected (:inherit 'centaur-tabs-unselected-modified))
 
   ;; MODE SUPPORT: latex
   (font-latex-sectioning-5-face (:foreground chocolate-hue-6-2))
   (font-latex-italic-face (:foreground chocolate-hue-9-5 :inherit 'italic))
+  (font-latex-bold-face (:foreground chocolate-hue-7 :inherit 'bold))
 
   (ffap
    (:inherit 'highlight))
@@ -971,7 +1000,7 @@
   (magit-log-graph
    (:foreground chocolate-mono-3))
   (magit-diffstat-removed
-   (:foreground chocolate-hue-5))
+   (:foreground chocolate-syntax-removed))
   (magit-diffstat-added
    (:foreground chocolate-syntax-added))
   (magit-diff-whitespace-warning
@@ -985,7 +1014,7 @@
   (magit-diff-our-highlight
    (:inherit 'magit-diff-removed-highlight))
   (magit-diff-removed-highlight
-   (:weight 'bold :foreground chocolate-hue-5 :background chocolate-syntax-bg))
+   (:weight 'bold :foreground chocolate-syntax-removed :background chocolate-syntax-bg))
   (magit-diff-added-highlight
    (:weight 'bold :foreground chocolate-syntax-added :background chocolate-syntax-light))
   (magit-diff-context
@@ -999,7 +1028,7 @@
   (magit-diff-removed
    (:foreground chocolate-hue-5-2 :background chocolate-syntax-bg))
   (magit-diff-added
-   (:foreground chocolate-mono-3 :background chocolate-syntax-bg))
+   (:foreground chocolate-hue-9-5 :background chocolate-syntax-bg))
   (magit-diff-conflict-heading
    (:inherit 'magit-diff-hunk-heading))
   (magit-diff-lines-boundary
@@ -1105,7 +1134,7 @@
   (magit-section-heading
    (:weight 'bold :foreground chocolate-hue-1))
   (magit-section-highlight
-   (:background chocolate-syntax-light))
+   (:background chocolate-syntax-bg-light))
   (magit-popup-option-value
    (:inherit 'font-lock-string-face))
   (magit-popup-disabled-argument
@@ -1360,6 +1389,8 @@
    (:foreground chocolate-hue-5-2))
   (w3m-haddock-heading-face
    (:inherit 'highlight))
+
+  ;; MODE SUPPORT: haskell
   (haskell-hole-face
    (:underline
     (:style 'wave :color chocolate-hue-1)))
@@ -1389,10 +1420,8 @@
    (:inherit 'font-lock-preprocessor-face))
   (haskell-operator-face
    (:inherit 'font-lock-variable-name-face))
-  (haskell-constructor-face
-   (:inherit 'font-lock-type-face))
-  (haskell-type-face
-   (:inherit 'font-lock-type-face))
+  (haskell-type-face (:foreground chocolate-hue-6))
+  (haskell-constructor-face (:foreground chocolate-hue-6-2))
   (haskell-keyword-face
    (:inherit 'font-lock-keyword-face))
   (haskell-debug-muted-face
@@ -1468,7 +1497,7 @@
    (:inherit
     ('bold 'font-lock-function-name-face)))
   (tooltip
-   (:foreground chocolate-mono-1 :background chocolate-syntax-bg))
+   (:foreground chocolate-mono-1 :background chocolate-syntax-bg-light))
   (eldoc-highlight-function-argument
    (:inherit 'bold))
   (vc-edited-state
@@ -1638,7 +1667,6 @@
 
 ;;;###autoload
 (and load-file-name
-     (boundp 'custom-theme-load-path)
      (add-to-list 'custom-theme-load-path
                   (file-name-as-directory
                    (file-name-directory load-file-name))))

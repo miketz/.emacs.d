@@ -8424,9 +8424,14 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'vertico-mode "vertico" nil t)
 (autoload #'vertico-grid-mode "vertico-grid" nil t)
 
+(with-eval-after-load 'vertico
+  (setq vertico-count 25))
+
 (when (eq my-narrow-type 'vertico)
   (vertico-mode 1)
-  (vertico-grid-mode 1))
+  (vertico-grid-mode 1)
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'switch-to-buffer)))
 
 
 ;;;----------------------------------------------------------------------------

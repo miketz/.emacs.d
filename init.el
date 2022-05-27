@@ -1106,14 +1106,14 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
-        ((eq my-curr-computer 'mac-mini-m1-2021) 'grid-ido)
+        ((eq my-curr-computer 'mac-mini-m1-2021) 'vertico)
         ((eq my-curr-computer 'work-laptop-mac) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
 Choices: ivy fancy-ido grid-ido bare-ido helm icicles sallet selectrum fido
-icomplete mish-mash nil")
+icomplete mish-mash vertico nil")
 
 ;;TODO: make ivy pop-up it's window on the Linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -8413,6 +8413,20 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; key binds for terminals. Where the meta key doesn't work. (ie M-x)
 ;;;----------------------------------------------------------------------------
 (global-set-key (kbd "C-c x") #'execute-extended-command)
+
+
+;;;----------------------------------------------------------------------------
+;;; vertico
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/vertico" load-path)
+(push "~/.emacs.d/notElpa/vertico/extensions" load-path)
+(autoload #'vertico-mode "vertico" nil t)
+(autoload #'vertico-grid-mode "vertico-grid" nil t)
+
+(when (eq my-narrow-type 'vertico)
+  (vertico-mode 1)
+  (vertico-grid-mode 1))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

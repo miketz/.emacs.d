@@ -310,3 +310,6 @@
 [submodule "notElpa/fennel-mode"]
 	path = notElpa/fennel-mode
 	url = https://github.com/miketz/fennel-mode
+[submodule "notElpa/vertico"]
+	path = notElpa/vertico
+	url = https://github.com/miketz/vertico

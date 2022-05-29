@@ -353,6 +353,7 @@ in case that file does not provide any feature."
 (defvar ido-use-faces)
 (defvar ido-vertical-define-keys)
 (defvar ido-vertical-show-count)
+(defvar ido-show-dot-for-dired)
 (defvar yas-triggers-in-field)
 (defvar c-default-style)
 (defvar c-mode-map)
@@ -574,6 +575,7 @@ in case that file does not provide any feature."
 (defvar ido-grid-start-small)
 (defvar ido-grid--rows)
 (defvar ido-grid--cols)
+(defvar ido-completion-map)
 (defvar vertico-count)
 
 ;; suppress warnings on functions from files not yet loaded.

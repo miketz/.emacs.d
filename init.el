@@ -569,6 +569,7 @@ in case that file does not provide any feature."
 (defvar evil-escape-key-sequence)
 (defvar evil-escape-delay)
 (defvar ido-grid-rows)
+(defvar vertico-count)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

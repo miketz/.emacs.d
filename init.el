@@ -569,6 +569,11 @@ in case that file does not provide any feature."
 (defvar evil-escape-key-sequence)
 (defvar evil-escape-delay)
 (defvar ido-grid-rows)
+(defvar ido-grid-bind-keys)
+(defvar ido-grid-max-columns)
+(defvar ido-grid-start-small)
+(defvar ido-grid--rows)
+(defvar ido-grid--cols)
 (defvar vertico-count)
 
 ;; suppress warnings on functions from files not yet loaded.
@@ -996,6 +1001,17 @@ in case that file does not provide any feature."
 (declare-function lua-send-buffer "lua-mode")
 (declare-function lua-send-defun "lua-mode")
 (declare-function lua-send-current-line "lua-mode")
+(declare-function my-ido-grid-keybinds-hook "init")
+(declare-function my-ido-grid-page-up "init")
+(declare-function my-ido-grid-page-down "init")
+(declare-function ido-grid-down "ido-grid")
+(declare-function ido-grid-up "ido-grid")
+(declare-function ido-grid-display-more-rows "ido-grid")
+(declare-function ido-grid-down-or-expand "ido-grid")
+(declare-function ido-grid-up-or-expand "ido-grid")
+(declare-function ido-grid-left "ido-grid")
+(declare-function ido-grid-right "ido-grid")
+(declare-function ido-grid--shift "ido-grid")
 
 ;; TODO: fix wrong use of declare-function above. Replace the symbols with
 ;; string filenames of lisp files in the `load-path'.

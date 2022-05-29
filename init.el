@@ -5556,7 +5556,7 @@ TODO: call this function when it works."
 (push "~/.emacs.d/notElpa/ivy-explorer" load-path)
 (autoload #'ivy-explorer-mode "ivy-explorer" nil t)
 
-(defvar my-use-ivy-explorer t)
+(defvar my-use-ivy-explorer nil)
 ;; NOTE: will turn on this mode later in (with-eval-after-load 'ivy) below.
 
 ;;;----------------------------------------------------------------------------

@@ -313,3 +313,6 @@
 [submodule "notElpa/vertico"]
 	path = notElpa/vertico
 	url = https://github.com/miketz/vertico
+[submodule "notElpa/ivy-explorer"]
+	path = notElpa/ivy-explorer
+	url = https://github.com/miketz/ivy-explorer

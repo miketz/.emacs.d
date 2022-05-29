@@ -86,6 +86,21 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'ivy-explorer
+      :comment nil
+      :folder (concat my-module-folder "ivy-explorer")
+      :remotes '((mine :url "https://github.com/miketz/ivy-explorer"
+                       :alias "origin")
+                 (upstream :url "https://github.com/clemera/ivy-explorer"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25") (ivy "0.10.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'lispy
       :comment nil
       :folder (concat my-module-folder "lispy")

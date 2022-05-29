@@ -5547,6 +5547,16 @@ TODO: call this function when it works."
 ;;           (my-search-bookmarks (rest bookmarks) tags)))
 ;;    (t (my-search-bookmarks (rest bookmarks) tags))))
 
+
+;;;----------------------------------------------------------------------------
+;;; ivy-explorer. grid style display of ivy candidates
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/ivy-explorer" load-path)
+(autoload #'ivy-explorer-mode "ivy-explorer" nil t)
+
+(defvar my-use-ivy-explorer t)
+;; NOTE: will turn on this mode later in (with-eval-after-load 'ivy) below.
+
 ;;;----------------------------------------------------------------------------
 ;;; swiper. ivy is (or at least was) bundled with swiper. git submodule
 ;;; ivy
@@ -5590,7 +5600,9 @@ TODO: call this function when it works."
     ;; (global-set-key (kbd "C-c m") #'my-counsel-tmm)
 
     (global-set-key (kbd "M-x") #'counsel-M-x)
-    (global-set-key (kbd "C-x C-f") #'counsel-find-file)
+    ;; ivy-explorer doesn't seemt to work with `counsel-find-file'.
+    (unless my-use-ivy-explorer
+      (global-set-key (kbd "C-x C-f") #'counsel-find-file))
 
     (global-set-key (kbd "C-h v") #'counsel-describe-variable)
     (global-set-key (kbd "C-h f") #'counsel-describe-function)
@@ -5610,6 +5622,10 @@ TODO: call this function when it works."
   (define-key swiper-all-map (kbd "C-SPC") #'swiper-avy))
 
 (with-eval-after-load 'ivy
+  (when my-use-ivy-explorer
+    ;; turn on grid-style display for find-file
+    (ivy-explorer-mode 1))
+
   (when nil
     ;; an optional 3rd party sorting/filtering for ivy.
     ;; will remember remember past selections during find-file, etc.

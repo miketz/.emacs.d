@@ -8511,6 +8511,11 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'zone-pgm-rainbow "zone-rainbow" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; white-christmas
+;;;----------------------------------------------------------------------------
+(autoload #'white-christmas "white-christmas" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-set-tab-width (width)

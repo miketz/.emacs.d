@@ -8473,6 +8473,22 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; zone-sl
 ;;;----------------------------------------------------------------------------
 (autoload #'zone-sl "zone-sl" nil t)
+(autoload #'zone-pgm-sl "zone-sl" nil nil)
+
+(with-eval-after-load 'zone
+  ;; since zone-programs is a fixed length array, adding an item to it is a bit
+  ;; complex.
+  (let* ((len (length zone-programs))
+         (arr (make-vector (1+ len) nil)))
+    ;; copy to new array with 1 empty slot at the end.
+    (cl-loop for i from 0 to (1- len)
+             do
+             (aset arr i (aref zone-programs i))
+             (print i))
+    ;; add zone-pgm-sl to the last index
+    (aset arr len #'zone-pgm-sl)
+    (setq zone-programs arr)))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

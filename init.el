@@ -8504,6 +8504,11 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'zone-nyan-preview "zone-nyan" nil t)
 (autoload #'zone-nyan "zone-nyan" nil)
 
+;;;----------------------------------------------------------------------------
+;;; zone-rainbow
+;;;----------------------------------------------------------------------------
+(autoload #'zone-rainbow "zone-rainbow" nil t)
+(autoload #'zone-pgm-rainbow "zone-rainbow" nil nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

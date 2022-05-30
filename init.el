@@ -8489,6 +8489,14 @@ TODO: delete this fn and replace with hooks, etc."
     (aset arr len #'zone-pgm-sl)
     (setq zone-programs arr)))
 
+;;;----------------------------------------------------------------------------
+;;; lolcat
+;;;----------------------------------------------------------------------------
+(autoload #'lolcat-this-buffer "lolcat" nil t)
+(autoload #'lolcat-view-file "lolcat" nil t)
+(autoload #'lolcat-view-buffer "lolcat" nil t)
+(autoload #'lolcat-message "lolcat" nil t)
+(autoload #'eshell/lolcat "lolcat" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

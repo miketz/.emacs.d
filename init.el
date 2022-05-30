@@ -8499,6 +8499,13 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'eshell/lolcat "lolcat" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; zone-nyan
+;;;----------------------------------------------------------------------------
+(autoload #'zone-nyan-preview "zone-nyan" nil t)
+(autoload #'zone-nyan "zone-nyan" nil)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-set-tab-width (width)

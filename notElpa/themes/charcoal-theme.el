@@ -508,6 +508,9 @@ Example:
                                                  :weight bold))))
 
 
+   ;; inherited by face hl-line in hl-line-mode
+   `(highlight ((,class :background ,fainter)))
+
    ;; ediff. temporarily borrowing from zenburn.
    ;; TODO: customize colors for charcoal
    `(ediff-current-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))

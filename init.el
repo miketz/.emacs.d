@@ -4642,7 +4642,8 @@ statement generated my SqlServer."
     ;; quick load of SafeteWebysite TFS folder \Development
     (defun my-open-dev-folder ()
       (interactive)
-      (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development"))
+      ;; (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")
+      (dired "c:/Users/mtz/proj/safety/SafetyWebsite"))
     (evil-leader/set-key "4" #'my-open-dev-folder)))
 
 

@@ -8520,6 +8520,12 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+
+;; INFO: elpa mirrors to get around situations where package manager cannot be
+;; reached.
+;; https://github.com/d12frosted/elpa-mirror
+
+
 (defun my-set-tab-width (width)
   "Set `tab-width' to WIDTH.
 For most programming modes you need to change an additional variable as well.

@@ -8518,6 +8518,11 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'white-christmas "white-christmas" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; jsonian. performance oriented alternative to json-mode
+;;;----------------------------------------------------------------------------
+(autoload #'jsonian-mode "jsonian" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

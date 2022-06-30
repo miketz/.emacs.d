@@ -8522,6 +8522,16 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 (autoload #'jsonian-mode "jsonian" nil t)
 
+(with-eval-after-load 'jsonian
+  (setq jsonian-indentation my-indent-width)
+
+  (defun my-setup-jsonian ()
+    (setq tab-width jsonian-indentation)
+    (rainbow-delimiters-mode 1)
+    (my-turn-on-electric-pair-local-mode))
+
+  (add-hook 'jsonian-mode-hook #'my-setup-jsonian))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

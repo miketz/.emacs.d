@@ -1094,6 +1094,26 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "main"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'tide
+      :comment nil
+      :folder (concat my-module-folder "tide")
+      :remotes '((mine :url "https://github.com/miketz/tide"
+                       :alias "origin")
+                 (upstream :url "https://github.com/ananthakumaran/tide"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25.1")
+                     (dash "2.10.0")
+                     (s "1.11.0")
+                     (flycheck "27")
+                     (typescript-mode "0.1")
+                     (cl-lib "0.5"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

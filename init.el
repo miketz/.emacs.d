@@ -7362,9 +7362,7 @@ Closure over `preceding-sexp-fn'."
   ;; aligns annotation to the right hand side
   (setq company-tooltip-align-annotations t)
 
-  ;; for now, do not automatically turn on tide mode.
-  ;; (add-hook 'typescript-mode-hook #'my-setup-tide-for-ts)
-  )
+  (add-hook 'typescript-mode-hook #'my-setup-tide-for-ts))
 
 
 

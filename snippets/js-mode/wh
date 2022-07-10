@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# -*- for loop -*-
+# name: while
+# key: wh
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+while (${1:cond}) {
+    $0
+}

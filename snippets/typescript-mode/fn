@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: fn
+# key: fn
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+function ${1:name}($0): ${2:void} {
+}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : object variable
+# --
+let ${1:objName} = {
+    $0
+};

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# -*- else -*-
+# name: el
+# key: el
+# expand-env: ((yas-indent-line 'auto) (yas-wrap-around-region 'nil))
+# --
+else {
+    $0
+}

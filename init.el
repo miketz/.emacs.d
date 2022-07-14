@@ -7329,7 +7329,7 @@ Closure over `preceding-sexp-fn'."
   (setq typescript-indent-level my-indent-width)
 
   (defun my-setup-typescript-mode ()
-    ;; (yas-minor-mode 1)
+    (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'typescript-mode-hook #'my-setup-typescript-mode))

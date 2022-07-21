@@ -8530,6 +8530,17 @@ TODO: delete this fn and replace with hooks, etc."
 
   (add-hook 'jsonian-mode-hook #'my-setup-jsonian))
 
+
+;;;----------------------------------------------------------------------------
+;;; repeat
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'repeat
+  (setq repeat-exit-timeout nil) ;; don't timeout
+  )
+
+(when (fboundp #'repeat-mode) ;; emacs 28+
+  (repeat-mode))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

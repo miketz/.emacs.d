@@ -59,6 +59,12 @@
           "-Bits-Bitstream Vera Sans Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"])
        ((memq my-curr-computer '(work-laptop-2019 work-laptop))
         '["-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-bold-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-bold-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
           "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"

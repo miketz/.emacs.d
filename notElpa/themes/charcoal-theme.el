@@ -509,7 +509,10 @@ Example:
 
 
    ;; inherited by face hl-line in hl-line-mode
-   `(highlight ((,class :background ,fainter)))
+   `(highlight ((,class :background ,faint)))
+
+   ;; hl-line. normally inheris highlight face, but override.
+   `(hl-line ((,class :background ,fainter)))
 
    ;; ediff. temporarily borrowing from zenburn.
    ;; TODO: customize colors for charcoal

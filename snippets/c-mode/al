@@ -1,5 +1,7 @@
 # -*- mode: snippet -*-
 # name: al
 # key: al
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 ${1:type} *${2:var} = malloc(sizeof(*$2));$0
+// TODO: free($2);

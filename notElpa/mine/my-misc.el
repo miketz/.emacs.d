@@ -354,7 +354,11 @@ SHELL-ONLY will be documented later."
 This deletes the space if there is only 1 space.  Otherwise it would do nothing
 on the first call."
   (interactive)
-  (cycle-spacing current-prefix-arg nil 'fast))
+  (if (version< emacs-version "29.0")
+      ;; old method had 3 args
+      (cycle-spacing current-prefix-arg nil 'fast)
+    ;; Else: new method has 1 arg and seems to do what I want with 0 args.
+    (cycle-spacing)))
 
 
 (progn

@@ -245,6 +245,7 @@ Some info may be purely for informational/doc purposes."
                      (transient "0.3.6")
                      (with-editor "3.0.5"))
       :depend-soft '((libgit "0")
+                     (compat "28.1.1.2")
                      ;; magit-libgit needs emacs 26.1
                      (emacs "26.1"))
       :depend-bundled '((git-commit "3.3.0")
@@ -1113,6 +1114,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                      (flycheck "27")
                      (typescript-mode "0.1")
                      (cl-lib "0.5"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'compat
+      :comment nil
+      :folder (concat my-module-folder "compat.el")
+      :remotes '((mine :url "https://github.com/miketz/compat.el"
+                       :alias "origin")
+                 (mirror :url "https://github.com/phikal/compat.el"
+                         :alias "mirror"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
       :depend-soft '()
       :depend-bundled '())))
 

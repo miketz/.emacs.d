@@ -316,3 +316,6 @@
 [submodule "notElpa/ivy-explorer"]
 	path = notElpa/ivy-explorer
 	url = https://github.com/miketz/ivy-explorer
+[submodule "notElpa/compat.el"]
+	path = notElpa/compat.el
+	url = https://github.com/miketz/compat.el

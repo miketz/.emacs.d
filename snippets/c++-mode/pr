@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pr
+# key: pr
+# --
+cout << ${1:} << endl;$0

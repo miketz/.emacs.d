@@ -1728,7 +1728,7 @@ This prevents overlapping themes; something I would rarely want."
 (ad-activate 'load-theme)
 
 
-(defvar my-themes '(charcoal dark-bright cmd ultimate)
+(defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
   "Themes I created.")
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*

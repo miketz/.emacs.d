@@ -1071,7 +1071,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                        :alias "origin")
                  (upstream :url "https://git.sr.ht/~technomancy/fennel-mode"
                            :alias "upstream")
-                 ;; used this mirror for my "mine" fork on github
+                 ;; used this mirror for my "mine" fork on github. But
+                 ;; completly unused.
                  (mirror :url "https://github.com/emacsmirror/fennel-mode"
                          :alias "mirror"))
       :remote-default 'mine

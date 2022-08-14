@@ -1069,8 +1069,10 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "fennel-mode")
       :remotes '((mine :url "https://github.com/miketz/fennel-mode"
                        :alias "origin")
-                 (upstream :url "https://gitlab.com/technomancy/fennel-mode"
+                 (upstream :url "https://git.sr.ht/~technomancy/fennel-mode"
                            :alias "upstream")
+                 (oldUpstream :url "https://gitlab.com/technomancy/fennel-mode"
+                              :alias "oldUpstream")
                  ;; used this mirror for my "mine" fork on github
                  (mirror :url "https://github.com/emacsmirror/fennel-mode"
                          :alias "mirror"))

@@ -8555,6 +8555,20 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+(defun my-unbreak-emacs-29 ()
+  "Emacs 29, built 2022-07-18 has some features not working on windows.
+Do things to unbreak it.
+Hopefully this fn is only needed temporarily."
+  (interactive)
+  ;; this unbreaks the `rg' package
+  (require 'files-x)
+  ;; this unbreaks `list-packages' by loading `header-line-indent-mode'.
+  (require 'display-line-numbers))
+
+(when (and (eq my-curr-computer 'work-laptop-2019)
+           (= emacs-major-version 29))
+  (my-unbreak-emacs-29))
+
 ;; INFO: elpa mirrors to get around situations where package manager cannot be
 ;; reached.
 ;; https://github.com/d12frosted/elpa-mirror

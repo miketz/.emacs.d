@@ -2,8 +2,8 @@
 
 ;;; Author: Kang-min Liu <gugod@gugod.org>
 ;;; Version: 1.0.0
-;; Package-Version: 20220711.2241
-;; Package-Commit: fa20051b6c7c1ac837f72ea2d7414f4594074d11
+;; Package-Version: 20220811.2301
+;; Package-Commit: 760e8d26f5b2aeaa56b91bf435e42b1e5d6f69d7
 ;;; Keywords: faces
 ;;; URL: https://github.com/gugod/grey-paper-theme
 ;;; Package-Requires: ((emacs "24.1"))
@@ -33,6 +33,21 @@
    `(fringe ((t (:background ,bg :foreground ,fg))))
    `(region ((t (:background ,bg-dark :distant-foreground "ns_selection_,fg_color"))))
    `(link ((t (:foreground ,fg-alt :underline t))))
+   `(error ((t (:foreground ,fg-dark :bold t))))
+   `(highlight ((t (:foreground ,fg-alt))))
+
+   `(message-header-name ((t (:foreground ,fg-alt))))
+   `(message-header-cc ((t (:foreground ,fg-light))))
+   `(message-header-to ((t (:foreground ,fg :bold t))))
+   `(message-header-newsgroups ((t (:foreground ,fg :bold t))))
+   `(message-header-subject ((t (:foreground ,fg :bold t))))
+   `(message-header-other ((t (:foreground ,fg-alt))))
+   `(message-header-xheader ((t (:foreground ,fg-alt))))
+
+   `(gnus-header-name ((t (:foreground ,fg))))
+   `(gnus-header-content ((t (:foreground ,fg))))
+   `(gnus-header-from ((t (:foreground ,fg-dark))))
+   `(gnus-header-subject ((t (:foreground ,fg-dark))))
 
    `(font-lock-builtin-face ((t (:foreground ,fg))))
    `(font-lock-comment-face ((t (:foreground ,fg-light))))

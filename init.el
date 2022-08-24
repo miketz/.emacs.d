@@ -8587,7 +8587,7 @@ programming modes."
   (interactive "nindent width: ")
 
   (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode idl-mode
-                                   pike-mode awk-mode))
+                                   pike-mode awk-mode csharp-mode))
          (setq c-basic-offset width))
         ((eq major-mode 'lua-mode)
          (setq lua-indent-level width)))

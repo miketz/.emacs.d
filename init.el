@@ -2121,7 +2121,7 @@ with duplicate bundled libs in Sly and SLIME.")
     (setq slime-default-lisp 'sbcl)
     (setq slime-lisp-implementations
           '((ccl
-             ("C:/Users/mtz/programs/ccl-1.12-windowsx86/ccl/wx86cl64"))
+             ("c:/Users/mtz/programs/ccl-1.12.1-windowsx86/ccl/wx86cl64.exe"))
             (sbcl ("sbcl")))))
 
 

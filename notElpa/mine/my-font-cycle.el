@@ -73,6 +73,7 @@
           "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
           "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+          "-outline-Iosevka Medium-medium-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
           "-raster-r_ansi-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
           "-raster-r_ansi-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"

@@ -8554,6 +8554,28 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+(cl-defun my-proj-c-intro-and-ref ()
+  (interactive)
+  ;; GUARD: make sure book is set up on this computer.
+  (let ((has-book-p (memq my-curr-computer '(mac-mini-m1-2021
+                                             work-laptop-2019))))
+    (unless has-book-p
+      (message "Book not set up on this computer.")
+      (cl-return-from my-proj-c-intro-and-ref)))
+
+  ;; set up window splits
+  (delete-other-windows)
+  (switch-to-buffer "c-test")
+  (c-mode)
+  (split-window-horizontally)
+  (shrink-window-horizontally 10)
+
+  ;; open the book.
+  (let ((book (cond ((eq my-curr-computer 'mac-mini-m1-2021)
+                     "~/books/c-intro-and-ref.html")
+                    ((eq my-curr-computer 'work-laptop-2019)
+                     "c:/users/mtz/books/c-intro-and-ref.html"))))
+    (eww-open-file book)))
 
 (defun my-unbreak-emacs-29 ()
   "Emacs 29, built 2022-07-18 has some features not working on windows.

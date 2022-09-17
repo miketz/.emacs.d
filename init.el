@@ -8554,6 +8554,21 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+(defun my-bookmark-save ()
+  (interactive)
+  (require 'f)
+  (let ((file "~/.emacs.d/my-bookmark.txt"))
+    (when (and (not (null file))
+               (file-exists-p file))
+      (delete-file file))
+    (f-write-text (number-to-string (line-number-at-pos)) 'utf-8 file)))
+
+(defun my-bookmark-get-line-num ()
+  (require 'f)
+  (let ((file "~/.emacs.d/my-bookmark.txt"))
+    (when (file-exists-p file)
+      (string-to-number (f-read file 'utf-8)))))
+
 (cl-defun my-proj-c-intro-and-ref ()
   (interactive)
   ;; GUARD: make sure book is set up on this computer.
@@ -8575,7 +8590,22 @@ TODO: delete this fn and replace with hooks, etc."
                      "~/books/c-intro-and-ref.html")
                     ((eq my-curr-computer 'work-laptop-2019)
                      "c:/users/mtz/books/c-intro-and-ref.html"))))
-    (eww-open-file book)))
+    (eww-open-file book))
+
+  ;; show line numbers to facilitate an ad-hoc bookmarking system.
+  (setq display-line-numbers t)
+  ;; make window larger to account for the line numbers
+  (enlarge-window-horizontally 7)
+
+  ;; jump to bookmark if it has one.
+  (let ((line (my-bookmark-get-line-num)))
+    (when line
+      (goto-line line))))
+
+
+(when (and (eq my-curr-computer 'work-laptop-2019)
+           (= emacs-major-version 29))
+  (my-unbreak-emacs-29))
 
 (defun my-unbreak-emacs-29 ()
   "Emacs 29, built 2022-07-18 has some features not working on windows.

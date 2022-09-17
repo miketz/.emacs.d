@@ -8550,59 +8550,17 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/compat.el" load-path)
 
+;;;----------------------------------------------------------------------------
+;;; my-proj-c-intro-and-ref
+;;;----------------------------------------------------------------------------
+(autoload #'my-bookmark-save "my-proj-c-intro-and-ref" nil t)
+(autoload #'my-bookmark-get-line-num "my-proj-c-intro-and-ref" nil t)
+(autoload #'my-proj-c-intro-and-ref "my-proj-c-intro-and-ref" nil t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
-(defun my-bookmark-save ()
-  (interactive)
-  (require 'f)
-  (let ((file "~/.emacs.d/my-bookmark.txt"))
-    (when (and (not (null file))
-               (file-exists-p file))
-      (delete-file file))
-    (f-write-text (number-to-string (line-number-at-pos)) 'utf-8 file)))
-
-(defun my-bookmark-get-line-num ()
-  (require 'f)
-  (let ((file "~/.emacs.d/my-bookmark.txt"))
-    (when (file-exists-p file)
-      (string-to-number (f-read file 'utf-8)))))
-
-(cl-defun my-proj-c-intro-and-ref ()
-  (interactive)
-  ;; GUARD: make sure book is set up on this computer.
-  (let ((has-book-p (memq my-curr-computer '(mac-mini-m1-2021
-                                             work-laptop-2019))))
-    (unless has-book-p
-      (message "Book not set up on this computer.")
-      (cl-return-from my-proj-c-intro-and-ref)))
-
-  ;; set up window splits
-  (delete-other-windows)
-  (switch-to-buffer "c-test")
-  (c-mode)
-  (split-window-horizontally)
-  (shrink-window-horizontally 10)
-
-  ;; open the book.
-  (let ((book (cond ((eq my-curr-computer 'mac-mini-m1-2021)
-                     "~/books/c-intro-and-ref.html")
-                    ((eq my-curr-computer 'work-laptop-2019)
-                     "c:/users/mtz/books/c-intro-and-ref.html"))))
-    (eww-open-file book))
-
-  ;; show line numbers to facilitate an ad-hoc bookmarking system.
-  (setq display-line-numbers t)
-  ;; make window larger to account for the line numbers
-  (enlarge-window-horizontally 7)
-
-  ;; jump to bookmark if it has one.
-  (let ((line (my-bookmark-get-line-num)))
-    (when line
-      (goto-line line))))
-
-
 (when (and (eq my-curr-computer 'work-laptop-2019)
            (= emacs-major-version 29))
   (my-unbreak-emacs-29))

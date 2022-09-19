@@ -8561,10 +8561,6 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
-(when (and (eq my-curr-computer 'work-laptop-2019)
-           (= emacs-major-version 29))
-  (my-unbreak-emacs-29))
-
 (defun my-unbreak-emacs-29 ()
   "Emacs 29, built 2022-07-18 has some features not working on windows.
 Do things to unbreak it.

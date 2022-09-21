@@ -60,10 +60,11 @@
   ;; open the book
   (eww-open-file c-intro-book-filepath)
 
-  ;; show line numbers to facilitate an ad-hoc bookmarking system.
-  (setq display-line-numbers t)
-  ;; make window larger to account for the line numbers
-  (enlarge-window-horizontally 7)
+  (when nil
+   ;; show line numbers to facilitate an ad-hoc bookmarking system.
+    (setq display-line-numbers t)
+    ;; make window larger to account for the line numbers
+    (enlarge-window-horizontally 7))
 
   ;; jump to bookmark if it has one.
   (let ((line (my-bookmark-get-line-num)))

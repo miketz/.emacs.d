@@ -3,60 +3,59 @@
 ;;; Commentary:
 ;;; helper functions to view the book c-intro-and-ref.html
 ;;; Also support booksmarks tailored for `eww'.  Line number based.
+;;; Using namespace prefix "cir" short for "c intro and ref".
 
 ;;; Code:
 (require 'f)
-(defvar my-curr-computer) ; defined in my init.el
+(defvar my-curr-computer) ; defined in init.el
 
 ;; folder where the book lives
-(defvar c-intro-book-folder (cond ((eq my-curr-computer 'mac-mini-m1-2021)
-                                   "~/books/")
-                                  ((eq my-curr-computer 'work-laptop-2019)
-                                   "c:/users/mtz/books/")
-                                  (t nil)))
+(defvar cir-folder (cond ((eq my-curr-computer 'mac-mini-m1-2021)
+                          "~/books/")
+                         ((eq my-curr-computer 'work-laptop-2019)
+                          "c:/users/mtz/books/")
+                         (t nil)))
 
 
 ;; filename of the book
-(defvar c-intro-book-filename "c-intro-and-ref.html")
+(defvar cir-filename "c-intro-and-ref.html")
 
-(defvar c-intro-book-filepath (concat c-intro-book-folder
-                                      c-intro-book-filename))
+(defvar cir-filepath (concat cir-folder
+                             cir-filename))
 
 
 ;; put the bookmark file in the same folder as the html book.
-(defvar c-intro-bookmark-filepath (when c-intro-book-folder
-                                    (concat c-intro-book-folder
-                                            "c-intro-and-ref-bookmark.txt")))
+(defvar cir-bookmark (when cir-folder
+                       (concat cir-folder
+                               "c-intro-and-ref-bookmark.txt")))
 
-;;;###autoload
-(defun my-bookmark-save ()
+(defun cir-bookmark-save ()
   "Create a bookmark for c intro and ref book."
   (interactive)
   ;; delete existing file
-  (when (and (not (null c-intro-bookmark-filepath))
-             (file-exists-p c-intro-bookmark-filepath))
-    (delete-file c-intro-bookmark-filepath))
+  (when (and (not (null cir-bookmark))
+             (file-exists-p cir-bookmark))
+    (delete-file cir-bookmark))
 
   ;; replace with new file and line number
   (f-write-text (number-to-string (line-number-at-pos))
                 'utf-8
-                c-intro-bookmark-filepath))
+                cir-bookmark))
 
-;;;###autoload
-(defun my-bookmark-get-line-num ()
+(defun cir-bookmark-get-line-num ()
   "Get the linenumber of the book mark for c intro and ref book."
   (interactive)
-  (let ((file c-intro-bookmark-filepath))
+  (let ((file cir-bookmark))
     (when (file-exists-p file)
       (string-to-number (f-read file 'utf-8)))))
 
 ;;;###autoload
-(cl-defun my-proj-c-intro-and-ref ()
+(cl-defun cir-open-book ()
   "Open the book c intro and ref.
 And jump to a saved bookmark if it is found."
   (interactive)
   ;; GUARD: make sure book is set up on this computer.
-  (unless (file-exists-p c-intro-book-filepath)
+  (unless (file-exists-p cir-filepath)
     (message "Book not set up on this computer.")
     (cl-return-from my-proj-c-intro-and-ref))
 
@@ -68,18 +67,20 @@ And jump to a saved bookmark if it is found."
   (shrink-window-horizontally 10)
 
   ;; open the book
-  (eww-open-file c-intro-book-filepath)
+  (eww-open-file cir-filepath)
 
   (when nil
-   ;; show line numbers to facilitate an ad-hoc bookmarking system.
+    ;; show line numbers to facilitate an ad-hoc bookmarking system.
     (setq display-line-numbers t)
     ;; make window larger to account for the line numbers
     (enlarge-window-horizontally 7))
 
   ;; jump to bookmark if it has one.
-  (let ((line (my-bookmark-get-line-num)))
+  (let ((line (cir-bookmark-get-line-num)))
     (when line
       (forward-line (1- line)))))
+
+(defalias 'my-proj-c-intro-and-ref 'cir-open-book)
 
 (provide 'my-proj-c-intro-and-ref)
 

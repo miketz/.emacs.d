@@ -1,9 +1,9 @@
-;;; my-proj-c-intro-and-ref.el --- View C book from rms -*- lexical-binding: t -*-
+;;; my-c-intro-and-ref.el --- View C book from rms -*- lexical-binding: t -*-
 
 ;;; Commentary:
-;;; helper functions to view the book c-intro-and-ref.html
+;;; Helper functions to view the book c-intro-and-ref.html
 ;;; Also support booksmarks tailored for `eww'.  Line number based.
-;;; Using namespace prefix "cir" short for "c intro and ref".
+;;; Using namespace prefix "cir" short for "C Intro and Ref".
 
 ;;; Code:
 (require 'f)
@@ -57,7 +57,7 @@ And jump to a saved bookmark if it is found."
   ;; GUARD: make sure book is set up on this computer.
   (unless (file-exists-p cir-filepath)
     (message "Book not set up on this computer.")
-    (cl-return-from my-proj-c-intro-and-ref))
+    (cl-return-from cir-open-book))
 
   ;; set up window splits
   (delete-other-windows)
@@ -84,6 +84,6 @@ And jump to a saved bookmark if it is found."
 ;; Maintain that here with an alias.
 (defalias 'my-proj-c-intro-and-ref 'cir-open-book)
 
-(provide 'my-proj-c-intro-and-ref)
+(provide 'my-c-intro-and-ref)
 
-;;; my-proj-c-intro-and-ref.el ends here
+;;; my-c-intro-and-ref.el ends here

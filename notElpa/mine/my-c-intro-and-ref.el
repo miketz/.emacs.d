@@ -42,9 +42,8 @@
                 'utf-8
                 cir-bookmark))
 
-(defun cir-bookmark-get-line-num ()
+(defun cir--bookmark-get-line-num ()
   "Get the linenumber of the book mark for c intro and ref book."
-  (interactive)
   (let ((file cir-bookmark))
     (when (file-exists-p file)
       (string-to-number (f-read file 'utf-8)))))
@@ -76,7 +75,7 @@ And jump to a saved bookmark if it is found."
     (enlarge-window-horizontally 7))
 
   ;; jump to bookmark if it has one.
-  (let ((line (cir-bookmark-get-line-num)))
+  (let ((line (cir--bookmark-get-line-num)))
     (when line
       (forward-line (1- line)))))
 

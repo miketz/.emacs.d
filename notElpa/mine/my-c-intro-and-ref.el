@@ -86,12 +86,6 @@ And jump to a saved bookmark if it is found."
   ;; open the book
   (eww-open-file cir-filepath)
 
-  (when nil
-    ;; show line numbers to facilitate an ad-hoc bookmarking system.
-    (setq display-line-numbers t)
-    ;; make window larger to account for the line numbers
-    (enlarge-window-horizontally 7))
-
   ;; jump to bookmark if it has one.
   (cir--goto-bookark))
 

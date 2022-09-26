@@ -56,7 +56,7 @@
       (forward-line (1- line)))))
 
 (cl-defun cir-goto-bookmark ()
-  "Jump to he bookmark.
+  "Jump to the bookmark.
 Assumes the book is already open in an eww buffer."
   (interactive)
   (unless (string-equal "*eww*"

@@ -8574,6 +8574,8 @@ See `describe-repeat-maps' for a list of all repeatable commands."
 ;;;----------------------------------------------------------------------------
 ;;; my-proj-c-intro-and-ref
 ;;;----------------------------------------------------------------------------
+(autoload #'cir-open-book "my-c-intro-and-ref" nil t)
+;; `my-proj-c-intro-and-ref' is an alias for `cir-open-book'
 (autoload #'my-proj-c-intro-and-ref "my-c-intro-and-ref" nil t)
 
 

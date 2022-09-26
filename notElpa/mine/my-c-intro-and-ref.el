@@ -49,7 +49,7 @@
       (string-to-number (f-read file 'utf-8)))))
 
 (defun cir--goto-bookark ()
-  ;; jump to bookmark if it has one.
+  "Jump to the bookmark."
   (let ((line (cir--bookmark-get-line-num)))
     (when line
       (goto-char (point-min))

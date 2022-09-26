@@ -8574,8 +8574,6 @@ See `describe-repeat-maps' for a list of all repeatable commands."
 ;;;----------------------------------------------------------------------------
 ;;; my-proj-c-intro-and-ref
 ;;;----------------------------------------------------------------------------
-(autoload #'my-bookmark-save "my-proj-c-intro-and-ref" nil t)
-(autoload #'my-bookmark-get-line-num "my-proj-c-intro-and-ref" nil t)
 (autoload #'my-proj-c-intro-and-ref "my-proj-c-intro-and-ref" nil t)
 
 

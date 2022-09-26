@@ -1,6 +1,12 @@
-;;; helper functions to view the book c-intro-and-ref.html
+;;; my-proj-c-intro-and-ref.el --- View C book from rms -*- lexical-binding: t -*-
 
+;;; Commentary:
+;;; helper functions to view the book c-intro-and-ref.html
+;;; Also support booksmarks tailored for `eww'.  Line number based.
+
+;;; Code:
 (require 'f)
+(defvar my-curr-computer) ; defined in my init.el
 
 ;; folder where the book lives
 (defvar c-intro-book-folder (cond ((eq my-curr-computer 'mac-mini-m1-2021)
@@ -24,6 +30,7 @@
 
 ;;;###autoload
 (defun my-bookmark-save ()
+  "Create a bookmark for c intro and ref book."
   (interactive)
   ;; delete existing file
   (when (and (not (null c-intro-bookmark-filepath))
@@ -37,6 +44,7 @@
 
 ;;;###autoload
 (defun my-bookmark-get-line-num ()
+  "Get the linenumber of the book mark for c intro and ref book."
   (interactive)
   (let ((file c-intro-bookmark-filepath))
     (when (file-exists-p file)
@@ -44,6 +52,8 @@
 
 ;;;###autoload
 (cl-defun my-proj-c-intro-and-ref ()
+  "Open the book c intro and ref.
+And jump to a saved bookmark if it is found."
   (interactive)
   ;; GUARD: make sure book is set up on this computer.
   (unless (file-exists-p c-intro-book-filepath)
@@ -69,6 +79,8 @@
   ;; jump to bookmark if it has one.
   (let ((line (my-bookmark-get-line-num)))
     (when line
-      (goto-line line))))
+      (forward-line (1- line)))))
 
 (provide 'my-proj-c-intro-and-ref)
+
+;;; my-proj-c-intro-and-ref.el ends here

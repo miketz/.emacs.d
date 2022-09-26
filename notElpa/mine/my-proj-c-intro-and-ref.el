@@ -80,6 +80,8 @@ And jump to a saved bookmark if it is found."
     (when line
       (forward-line (1- line)))))
 
+;; I have a lot of helper functions that open books with a "my-proj" prefix.
+;; Maintain that here with an alias.
 (defalias 'my-proj-c-intro-and-ref 'cir-open-book)
 
 (provide 'my-proj-c-intro-and-ref)

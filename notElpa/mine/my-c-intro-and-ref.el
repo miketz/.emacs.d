@@ -48,6 +48,24 @@
     (when (file-exists-p file)
       (string-to-number (f-read file 'utf-8)))))
 
+(defun cir--goto-bookark ()
+  ;; jump to bookmark if it has one.
+  (let ((line (cir--bookmark-get-line-num)))
+    (when line
+      (goto-char (point-min))
+      (forward-line (1- line)))))
+
+(cl-defun cir-goto-bookmark ()
+  "Jump to he bookmark.
+Assumes the book is already open in an eww buffer."
+  (interactive)
+  (unless (string-equal "*eww*"
+                        (buffer-name (current-buffer)))
+    (message "You must be in an *eww* buffer viewing c-intro-and-ref.html.")
+    (cl-return-from cir-goto-bookmark))
+
+  (cir--goto-bookark))
+
 ;;;###autoload
 (cl-defun cir-open-book ()
   "Open the book c intro and ref.
@@ -75,9 +93,7 @@ And jump to a saved bookmark if it is found."
     (enlarge-window-horizontally 7))
 
   ;; jump to bookmark if it has one.
-  (let ((line (cir--bookmark-get-line-num)))
-    (when line
-      (forward-line (1- line)))))
+  (cir--goto-bookark))
 
 ;; I have a lot of helper functions that open books with a "my-proj" prefix.
 ;; Maintain that here with an alias.

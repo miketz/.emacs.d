@@ -7916,7 +7916,8 @@ vanilla javascript buffers."
     (push '("^*xref" . emacs) evil-buffer-regexps)))
 
 ;; jump to TAG definition in a new window
-(global-set-key (kbd "M-.") #'xref-find-definitions-other-window)
+(global-set-key (kbd "M-.") #'xref-find-definitions)
+;; (global-set-key (kbd "M-.") #'xref-find-definitions-other-window)
 
 
 ;;;----------------------------------------------------------------------------

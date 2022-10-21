@@ -161,7 +161,7 @@
 											   :background ,bg-red))))
 
    ;; avy
-   `(avy-lead-face ((,class :background "yellow"
+   `(avy-lead-face ((,class :background "orange";"yellow"
                             :foreground "black")))
    `(avy-lead-face-0 ((,class :background "cyan"
                               :foreground "black")))

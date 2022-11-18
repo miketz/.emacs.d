@@ -1131,6 +1131,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'slime-volleyball
+      :comment nil
+      :folder (concat my-module-folder "slime-volleyball")
+      :remotes '((mine :url "https://github.com/miketz/slime-volleyball"
+                       :alias "origin")
+                 (upstream :url "https://github.com/fitzsim/slime-volleyball"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine" ;; ignores .elc files
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

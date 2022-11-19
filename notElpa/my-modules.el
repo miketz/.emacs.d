@@ -1161,6 +1161,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "mine" ;; ignores .elc files
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'macrostep
+      :comment nil
+      :folder (concat my-module-folder "macrostep")
+      :remotes '((mine :url "https://github.com/miketz/macrostep"
+                       :alias "origin")
+                 (upstream :url "https://github.com/joddie/macrostep"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

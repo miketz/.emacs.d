@@ -101,6 +101,21 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'iedit
+      :comment nil
+      :folder (concat my-module-folder "iedit")
+      :remotes '((mine :url "https://github.com/miketz/iedit"
+                       :alias "origin")
+                 (upstream :url "https://github.com/victorhge/iedit"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'lispy
       :comment nil
       :folder (concat my-module-folder "lispy")

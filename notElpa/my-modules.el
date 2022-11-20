@@ -1191,6 +1191,25 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'sx
+      :comment nil
+      :folder (concat my-module-folder "sx.el")
+      :remotes '((mine :url "https://github.com/miketz/sx.el"
+                       :alias "origin")
+                 (upstream :url "https://github.com/vermiculus/sx.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "24.1")
+                     (cl-lib "0.5")
+                     (json "1.3")
+                     (markdown-mode "2.0")
+                     (let-alist "1.0.3"))
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

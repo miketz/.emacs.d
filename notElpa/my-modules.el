@@ -1113,6 +1113,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'typescript-mode
+      :comment nil
+      :folder (concat my-module-folder "typescript.el")
+      :remotes '((mine :url "https://github.com/miketz/typescript.el"
+                       :alias "origin")
+                 (upstream :url "https://github.com/emacs-typescript/typescript.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'tide
       :comment nil
       :folder (concat my-module-folder "tide")

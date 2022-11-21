@@ -1253,6 +1253,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'bug-hunter
+      :comment nil
+      :folder (concat my-module-folder "elisp-bug-hunter")
+      :remotes '((mine :url "https://github.com/miketz/elisp-bug-hunter"
+                       :alias "origin")
+                 (upstream :url "https://github.com/Malabarba/elisp-bug-hunter"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'typescript-mode
       :comment nil
       :folder (concat my-module-folder "typescript.el")

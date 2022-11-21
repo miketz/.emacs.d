@@ -1254,6 +1254,25 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'key-chord
+      :comment nil
+      :folder my-module-folder
+      :file-single "key-chord.el"
+      :remotes '((wiki :url "https://www.emacswiki.org/emacs/KeyChord"
+                       :alias "wiki")
+                 ;; orphanage is used by MELPA
+                 (orphanage :url "https://github.com/emacsorphanage/key-chord"
+                            :alias "orphanage")
+                 (mirror :url "https://github.com/emacsmirror/emacswiki.org/blob/master/key-chord.el"
+                         :alias "mirror"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

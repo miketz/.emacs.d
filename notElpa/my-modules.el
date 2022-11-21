@@ -307,7 +307,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
-      :use-branch "master"
+      :use-branch "main"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

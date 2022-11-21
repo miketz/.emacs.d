@@ -1210,6 +1210,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                      (markdown-mode "2.0")
                      (let-alist "1.0.3"))
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'sunrise
+      :comment nil
+      :folder my-module-folder
+      :remotes '((upstream :url "https://github.com/sunrise-commander/sunrise-commander"
+                           :alias "upstream"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p t
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

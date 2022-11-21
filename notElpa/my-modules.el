@@ -1023,7 +1023,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :use-branch "mine"
-      :depend-hard '((dash "2.10.0") (emacs "24") (cl-lib "0.5"))
+      :depend-hard '((dash "2.10.0") (emacs "26.1"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

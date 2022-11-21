@@ -282,6 +282,8 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      ;; NOTE: as of 11-19-2022 this is moved into emacs core. But keep this
+      ;; submodule to support older Emacs versions.
       :name 'csharp-mode
       :comment nil
       :folder (concat my-module-folder "csharp-mode")

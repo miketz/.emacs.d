@@ -1238,6 +1238,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'highlight-tail
+      :comment nil
+      :folder my-module-folder
+      :file-single "highlight-tail.el"
+      :remotes '((upstream :url "https://www.emacswiki.org/emacs/highlight-tail.el"
+                           :alias "upstream")
+                 (mirror :url "https://github.com/ahungry/emacswiki-mirror/blob/master/highlight-tail.el"
+                         :alias "mirror"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

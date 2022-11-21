@@ -6658,7 +6658,7 @@ Closure over `preceding-sexp-fn'."
 ;;; sunrise-commander. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/sunrise-commander" load-path)
-(autoload #'sunrise-cd "sunrise-commander" nil t)
+(autoload #'sunrise-cd "sunrise" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; winner-mode

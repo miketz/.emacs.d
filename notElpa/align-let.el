@@ -1,9 +1,9 @@
 ;;; align-let.el --- align expressions in a lisp "let"
 
-;; Copyright 2005, 2006, 2007, 2009, 2010, 2011, 2012 Kevin Ryde
+;; Copyright 2005, 2006, 2007, 2009, 2010, 2011, 2012, 2015, 2016 Kevin Ryde
 
-;; Author: Kevin Ryde <user42@zip.com.au>
-;; Version: 12
+;; Author: Kevin Ryde <user42_kevin@yahoo.com.au>
+;; Version: 14
 ;; Keywords: languages, lisp, align
 ;; URL: http://user42.tuxfamily.org/align-let/index.html
 ;; EmacsWiki: AlignLet
@@ -26,7 +26,7 @@
 
 ;; `M-x align-let' aligns the value parts of bindings in a "let" form or a
 ;; multi-variable "setq".  It's designed for elisp and scheme but should
-;; work with other lisp variants.  Eg.
+;; work with other Lisp variants.  Eg..
 ;;
 ;;     (let ((x       1)
 ;;           (counter 2)
@@ -43,7 +43,7 @@
 ;; than align.el's regexps.
 ;;
 ;; `M-x align-let-region' can act on all `let' and `setq' forms in the
-;; region from point to mark (or any region if called from lisp code).  It
+;; region from point to mark (or any region if called from Lisp code).  It
 ;; might help you clean up a whole file of code.
 
 ;;; Emacsen:
@@ -97,11 +97,14 @@
 ;;            - don't be tricked by point within a comment
 ;; Version 11 - align multi-variable setqs too
 ;; Version 12 - use ignore-errors
+;; Version 13 - cl macros only when needed
+;; Version 14 - an unused variable
 
 ;;; Code:
 
 (eval-when-compile
-  (require 'cl)) ;; for `ignore-errors'
+  (unless (fboundp 'ignore-errors)
+    (require 'cl))) ;; for `ignore-errors'
 
 ;;;###autoload
 (defgroup align-let nil
@@ -153,21 +156,28 @@ A value 3 would instead give 3 spaces after the longest variable,
   ;; at all.
   (forward-comment (- (point-max) (point))))
 
+(eval-when-compile
+  (put 'align-let-symbol-string-p 'side-effect-free t))
 (defun align-let-symbol-string-p (str)
   "Return non-nil if STR looks like a symbol.
 This means STR is entirely word or symbol syntax characters."
   (string-match "\\`\\(\\sw\\|\\s_\\)+\\'" str))
 
-(defmacro align-let-save-point (&rest body)
-  "Evaluate BODY with point saved by an `unwind-protect'.
+(eval-when-compile
+  (defmacro align-let-save-point (&rest body)
+    "An internal part of align-let.el.
+This macro doesn't exist when running byte compiled.
+Evaluate BODY with point saved by an `unwind-protect'.
+
 Point is held in a marker in variable
 `align-let-save-point-marker'.  BODY can change it with
 `set-marker' to go to a different place, for both normal and
 error exits."
-  `(let ((align-let-save-point-marker (point-marker)))
-     (unwind-protect
-         (progn ,@body)
-       (goto-char align-let-save-point-marker))))
+
+    `(let ((align-let-save-point-marker (point-marker)))
+       (unwind-protect
+           (progn ,@body)
+         (goto-char align-let-save-point-marker)))))
 
 (defun align-let-looking-at-nest ()
   "Return non-nil if point is at a nested parens \"((...\".
@@ -244,7 +254,7 @@ See `align-let' for how `let' and `setq' forms are identified.
 The return is t for a let, symbol setq for a setq, or nil if neither."
 
   (align-let-save-point
-   (let (end name prop count)
+   (let (end name prop)
      (and (progn
             (align-let-forward-comments)
             (looking-at "\\s("))  ;; must be a "(..." form
@@ -330,6 +340,7 @@ level)."
     type))
 
 (defun align-let-doelems (type func)
+  ;; checkdoc-params: (type func)
   "Call FUNC for each align-able element following point.
 TYPE is symbol setq to traverse a `setq' form, otherwise `let'
 bindings.
@@ -555,6 +566,9 @@ indent and align-let will both insert or delete characters."
              (condition-case nil
                  (forward-sexp)
                (error (goto-char end))))))))
+
+;; LocalWords: elisp eg Eg abc xyzzy el el's whitespace parens sexps regexps
+;; LocalWords: foo
 
 (provide 'align-let)
 

@@ -917,6 +917,24 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '((emacs "25.1"))
       :depend-soft '()
       :depend-bundled '())
+    ,(make-module ;; not using this. delete git submodule later
+      :name 'indium
+      :comment nil
+      :folder (concat my-module-folder "Indium")
+      :remotes '((upstream :url "https://github.com/NicolasPetton/Indium"
+                           :alias "origin"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "25")
+                     (seq "2.16")
+                     (js2-mode "20140114")
+                     (js2-refactor "0.9.0")
+                     (company "0.9.0")
+                     (json-process-client "0.2.0"))
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'posframe
       :comment nil

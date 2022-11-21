@@ -935,6 +935,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
+    ,(make-module ;; NOTE: see the "eros" package which was inspired by this.
+      :name 'cider-style-overlays
+      :comment "Eval overlay expiriment. Scrapping code from a blog."
+      :folder my-module-folder
+      :file-single "cider-style-overlays.el"
+      :remotes '((blog :url "endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html"
+                       :alias "blog"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'hydra
       :comment nil

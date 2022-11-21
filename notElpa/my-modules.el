@@ -1223,6 +1223,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'jsonian
+      :comment nil
+      :folder my-module-folder
+      :remotes '((upstream :url "https://github.com/iwahbe/jsonian"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

@@ -23,6 +23,7 @@ Some info may be purely for informational/doc purposes."
   (name nil)
   (comment nil)
   (folder nil)
+  (file-single nil) ;; for single file elisp packages embdedded into my git repo.
   ;; remote format '(name :url "foo.com/package-name"
   ;;                      :alias "origin")
   ;; The names 'mine and 'upstream have special meaning. Where 'upstream is the

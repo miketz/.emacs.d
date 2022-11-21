@@ -1412,6 +1412,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      ;; NOTE: equivalent functionality is part of core Emacs starting with
+      ;; version 24.4. Only using this on older Emacs versions.
+      :name 'dired-details
+      :comment nil
+      :folder my-module-folder
+      :file-single "dired-details.el"
+      :remotes '((wiki :url "https://www.emacswiki.org/emacs/DiredDetails"
+                       :alias "wiki"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
       :depend-bundled '())))
 
 (defun my-byte-compile-all-modules ()

@@ -1214,7 +1214,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
     ,(make-module
       :name 'sunrise
       :comment nil
-      :folder my-module-folder
+      :folder (concat my-module-folder "sunrise-commander")
       :remotes '((upstream :url "https://github.com/sunrise-commander/sunrise-commander"
                            :alias "upstream"))
       :remote-default 'upstream

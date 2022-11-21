@@ -1229,6 +1229,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'jsonian
       :comment nil
       :folder my-module-folder
+      :file-single "jsonian.el"
       :remotes '((upstream :url "https://github.com/iwahbe/jsonian"
                            :alias "upstream"))
       :remote-default nil

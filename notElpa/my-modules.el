@@ -937,6 +937,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
+    ,(make-module
+      :name 'csv-stuff
+      :comment nil
+      :folder my-module-folder
+      :file-single "csv-stuff.el"
+      :remotes nil ;; single fn copied from reddit.
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module ;; NOTE: not using this. Just for info
       :name 'color-mode
       :comment nil

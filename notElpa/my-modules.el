@@ -1028,6 +1028,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'visual-indentation-mode
       :comment "Alternative to highlight-indent-guides."
       :folder my-module-folder
+      :file-single "visual-indentation-mode.el"
       :remotes '((upstream :url "https://github.com/skeeto/visual-indentation-mode"
                            :alias "upstream"))
       :remote-default 'upstream
@@ -1041,6 +1042,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'exec-path-from-shell
       :comment "Set environemnt vars on mac."
       :folder my-module-folder
+      :file-single "exec-path-from-shell.el"
       :remotes '((upstream :url "https://github.com/purcell/exec-path-from-shell"
                            :alias "upstream"))
       :remote-default 'upstream
@@ -1054,6 +1056,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'vc-fossil
       :comment nil
       :folder my-module-folder
+      :file-single "vc-fossil.el"
       :remotes '((upstream :url "https://chiselapp.com/user/venks/repository/emacs-fossil"
                            :alias "upstream"
                            :type fossil?)
@@ -1070,6 +1073,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'lusty-explorer
       :comment nil
       :folder my-module-folder
+      :file-single "lusty-explorer.el"
       :remotes '((upstream :url "https://github.com/sjbach/lusty-emacs"
                            :alias "upstream"))
       :remote-default 'upstream

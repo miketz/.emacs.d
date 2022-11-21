@@ -915,7 +915,23 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :use-branch "master"
+      :use-branch "master" ;; TODO: use branch to ignore .elc files
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'align-let
+      :comment nil
+      :folder my-module-folder
+      :file-single "align-let.el"
+      :remotes '((upstream :url "http://user42.tuxfamily.org/align-let/index.html"
+                           :alias "upstream")
+                 (wiki :url "https://www.emacswiki.org/emacs/AlignLet"
+                            :alias "wiki"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

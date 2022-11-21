@@ -1220,7 +1220,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
-      :use-branch nil
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())))

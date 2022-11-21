@@ -446,6 +446,21 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'elisp-slime-nav
+      :comment nil
+      :folder (concat my-module-folder "elisp-slime-nav")
+      :remotes '((mine :url "https://github.com/miketz/elisp-slime-nav"
+                       :alias "origin")
+                 (upstream :url "https://github.com/purcell/elisp-slime-nav"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'slime
       :comment "Interactive mode for common lisp."
       :folder (concat my-module-folder "slime")

@@ -907,7 +907,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
     ,(make-module
       :name 'flames-of-freedom
       :comment nil
-      :folder (concat my-module-folder "hydra")
+      :folder (concat my-module-folder "FlamesOfFreedom")
       :remotes '((upstream :url "https://github.com/wiz21b/FlamesOfFreedom" ; just a fun pacakge so no fork.
                            :alias "origin"))
       :remote-default 'upstream

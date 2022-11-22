@@ -523,6 +523,21 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'lua-mode
+      :comment nil
+      :folder (concat my-module-folder "lua-mode")
+      :remotes '((mine :url "https://github.com/miketz/lua-mode"
+                       :alias "origin")
+                 (upstream :url "https://github.com/immerrr/lua-mode"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'slime
       :comment "Interactive mode for common lisp."
       :folder (concat my-module-folder "slime")

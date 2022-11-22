@@ -368,7 +368,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :use-branch "mine"
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

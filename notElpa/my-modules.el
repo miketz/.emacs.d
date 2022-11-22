@@ -871,6 +871,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'esxml
+      :comment nil
+      :folder (concat my-module-folder "esxml")
+      :remotes '((mine :url "https://github.com/miketz/esxml"
+                       :alias "origin")
+                 (upstream :url "https://github.com/tali713/esxml"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'flycheck
       :comment nil
       :folder (concat my-module-folder "flycheck")

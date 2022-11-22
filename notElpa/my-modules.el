@@ -426,7 +426,23 @@ Some info may be purely for informational/doc purposes."
       :submodule-p t
       :use-branch "master"
       :depend-hard '()
-      :depend-soft '((undercover)))
+      :depend-soft '((undercover))
+      :depend-bundled '())
+    ,(make-module
+      :name 'flx
+      :comment nil
+      :folder (concat my-module-folder "flx")
+      :remotes '((mine :url "https://github.com/miketz/flx"
+                       :alias "origin")
+                 (upstream :url "https://github.com/lewang/flx"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module
       :name 'sallet
       :comment nil

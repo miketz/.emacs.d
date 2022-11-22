@@ -1292,7 +1292,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
-    ,(make-module
+    ,(make-module ;; TODO: fork this and make it a submodule becuase I already made a modification.
       :name 'feebleline
       :comment nil
       :folder my-module-folder

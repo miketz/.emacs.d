@@ -768,6 +768,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'json-mode
+      :comment nil
+      :folder (concat my-module-folder "json-mode")
+      :remotes '((mine :url "https://github.com/miketz/json-mode"
+                       :alias "origin")
+                 (upstream :url "https://github.com/joshwnj/json-mode"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((json-reformat "0.0.5") (json-snatcher "1.0.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'leerzeichen
       :comment nil
       :folder (concat my-module-folder "leerzeichen.el")

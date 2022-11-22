@@ -356,6 +356,23 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      ;; NOTE: this is bundled with evil so maybe this is not needed? Unless
+      ;; other packages need a version more recent than the one bundled in evil.
+      :name 'goto-chg
+      :comment nil
+      :folder (concat my-module-folder "goto-chg")
+      :remotes '((mine :url "https://github.com/miketz/goto-chg"
+                       :alias "origin")
+                 (upstream :url "https://github.com/emacs-evil/goto-chg"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'mode-on-region
       :comment nil
       :folder (concat my-module-folder "mine/mor")

@@ -1191,6 +1191,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      ;; NOTE: random code from #emacs irc.
+      :name 'keramida
+      :comment "window behavior"
+      :folder my-module-folder
+      :file-single "keramida.el"
+      :remotes nil
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

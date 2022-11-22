@@ -1192,7 +1192,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-bundled '())
     ,(make-module
       :name 'lolcat
-      :comment nil
+      :comment "Applies rainbow colors to the fonts in a buffer."
       :folder my-module-folder
       :file-single "lolcat.el"
       :remotes '((upstream :url "https://github.com/xuchunyang/lolcat.el"

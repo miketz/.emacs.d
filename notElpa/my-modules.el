@@ -881,7 +881,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :use-branch "master"
+      :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

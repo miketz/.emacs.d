@@ -1234,6 +1234,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'malyon
+      :comment "Z-machine interpreter for playing text-based adventure games."
+      :folder my-module-folder
+      :file-single "malyon.el"
+      :remotes '((upstream :url "https://github.com/speedenator/malyon"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

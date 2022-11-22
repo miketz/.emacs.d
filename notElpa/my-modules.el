@@ -1161,6 +1161,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '((lv "0")))
     ,(make-module
+      :name 'highlight-indent-guides
+      :comment nil
+      :folder (concat my-module-folder "highlight-indent-guides")
+      :remotes '((mine :url "https://github.com/miketz/highlight-indent-guides"
+                       :alias "origin")
+                 (upstream :url "https://github.com/DarthFennec/highlight-indent-guides"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'flames-of-freedom
       :comment nil
       :folder (concat my-module-folder "FlamesOfFreedom")

@@ -1293,6 +1293,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'feebleline
+      :comment nil
+      :folder my-module-folder
+      :file-single "feebleline.el"
+      :remotes '((upstream :url "https://github.com/tautologyclub/feebleline"
+                           :alias "upstream"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p nil
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'fennel-mode
       :comment nil
       :folder (concat my-module-folder "fennel-mode")

@@ -779,7 +779,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :use-branch "mine"
-      :depend-hard '((json-reformat "0.0.5") (json-snatcher "1.0.0"))
+      :depend-hard '((json-snatcher "1.0.0") (emacs "24.4"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

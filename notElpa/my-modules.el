@@ -1129,6 +1129,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      ;; NOTE: not currently used
+      ;; NOTE: also see blog https://amitp.blogspot.com/2013/05/emacs-highlight-active-buffer.html
+      :name 'highlight-focus
+      :comment nil
+      :folder my-module-folder
+      :file-single "highlight-focus.el"
+      :remotes '((upstream :url "https://github.com/kriyative/highlight-focus"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

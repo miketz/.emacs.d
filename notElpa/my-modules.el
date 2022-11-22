@@ -753,6 +753,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'js2-highlight-vars
+      :comment nil
+      :folder (concat my-module-folder "js2-highlight-vars.el")
+      :remotes '((mine :url "https://github.com/miketz/js2-highlight-vars.el"
+                       :alias "origin")
+                 (upstream :url "https://github.com/unhammer/js2-highlight-vars.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "24.4") (js2-mode "20150908"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'leerzeichen
       :comment nil
       :folder (concat my-module-folder "leerzeichen.el")

@@ -1130,7 +1130,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-bundled '())
     ,(make-module
       ;; NOTE: not currently used
-      ;; NOTE: also see blog https://amitp.blogspot.com/2013/05/emacs-highlight-active-buffer.html
+      ;; NOTE: See blog https://amitp.blogspot.com/2013/05/emacs-highlight-active-buffer.html
+      ;; NOTE: author reccomends using https://github.com/mina86/auto-dim-other-buffers.el instead.
       :name 'highlight-focus
       :comment nil
       :folder my-module-folder

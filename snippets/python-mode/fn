@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: fn
+# key: fn
+# --
+def ${1:name}($0):

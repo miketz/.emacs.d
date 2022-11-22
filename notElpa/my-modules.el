@@ -1291,6 +1291,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '((lv "0")))
     ,(make-module
+      :name 'nov
+      :comment "epub reader"
+      :folder (concat my-module-folder "nov.el")
+      :remotes '((mine :url "https://github.com/miketz/nov.el"
+                       :alias "origin")
+                 (upstream :url "https://github.com/wasamasa/nov.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((dash "2.12.0") (esxml "0.3.3") (emacs "24.4"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'highlight-indent-guides
       :comment nil
       :folder (concat my-module-folder "highlight-indent-guides")

@@ -1291,6 +1291,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '((lv "0")))
     ,(make-module
+      ;; see webpage https://depp.brause.cc/nov.el/
+      ;; TODO: point to the new upstream.
       :name 'nov
       :comment "epub reader"
       :folder (concat my-module-folder "nov.el")

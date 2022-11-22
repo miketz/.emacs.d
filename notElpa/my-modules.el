@@ -1176,6 +1176,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'icicles
+      :comment nil
+      :folder (concat my-module-folder "icicles")
+      :remotes '((mine :url "https://github.com/miketz/icicles"
+                       :alias "origin")
+                 (mirror :url "https://github.com/emacsmirror/icicles"
+                         :alias "mirror"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       ;; NOTE: not an elisp package. documentation package for common lisp from
       ;; NOTE: Cannot modify this package due to license. Must be kept in it's full unmodified form.
       :name 'hyperspec

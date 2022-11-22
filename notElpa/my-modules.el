@@ -1248,6 +1248,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'minesweeper
+      :comment nil
+      :folder my-module-folder
+      :file-single "minesweeper.el"
+      :remotes '((upstream :url "https://hg.sr.ht/~zck/minesweeper"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git ;; upstream uses hg (mercurial)
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

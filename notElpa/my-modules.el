@@ -856,6 +856,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'erc-hl-nicks
+      :comment nil
+      :folder (concat my-module-folder "erc-hl-nicks")
+      :remotes '((mine :url "https://github.com/miketz/erc-hl-nicks"
+                       :alias "origin")
+                 (upstream :url "https://github.com/leathekd/erc-hl-nicks"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'flycheck
       :comment nil
       :folder (concat my-module-folder "flycheck")

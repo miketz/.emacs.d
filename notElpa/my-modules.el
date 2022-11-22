@@ -1221,6 +1221,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-bundled '())
     ,(make-module
       ;; NOTE: random code from #emacs irc.
+      :name 'mosue-stuff
+      :comment nil
+      :folder my-module-folder
+      :file-single "mouse-stuff.el"
+      :remotes nil
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      ;; NOTE: random code from #emacs irc.
       :name 'keramida
       :comment "window behavior"
       :folder my-module-folder

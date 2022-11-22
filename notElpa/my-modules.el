@@ -783,6 +783,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '((company) (clue))
       :depend-bundled '())
     ,(make-module
+      :name 'haskell-mode
+      :comment nil
+      :folder (concat my-module-folder "haskell-mode")
+      :remotes '((mine :url "https://github.com/miketz/haskell-mode"
+                       :alias "origin")
+                 (upstream :url "https://github.com/haskell/haskell-mode"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'wgrep
       :comment nil
       :folder (concat my-module-folder "Emacs-wgrep")

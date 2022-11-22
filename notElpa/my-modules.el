@@ -169,6 +169,20 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'evil-escape
+      :comment nil
+      :folder my-module-folder
+      :file-single "evil-escape.el"
+      :remotes '((upstream :url "https://github.com/syl20bnr/evil-escape"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '((emacs "24") (evil "1.0.9") (cl-lib "0.5"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'expand-region
       :comment nil
       :folder (concat my-module-folder "expand-region.el")

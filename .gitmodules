@@ -184,9 +184,6 @@
 [submodule "notElpa/json-mode"]
 	path = notElpa/json-mode
 	url = https://github.com/miketz/json-mode
-[submodule "notElpa/json-reformat"]
-	path = notElpa/json-reformat
-	url = https://github.com/miketz/json-reformat
 [submodule "notElpa/json-snatcher"]
 	path = notElpa/json-snatcher
 	url = https://github.com/miketz/json-snatcher

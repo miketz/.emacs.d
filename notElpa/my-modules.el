@@ -1351,6 +1351,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'pos-tip
+      :comment nil
+      :folder (concat my-module-folder "pos-tip")
+      :remotes '((mine :url "https://github.com/miketz/pos-tip"
+                       :alias "origin")
+                 (upstream :url "https://github.com/pitkali/pos-tip"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'highlight-indent-guides
       :comment nil
       :folder (concat my-module-folder "highlight-indent-guides")

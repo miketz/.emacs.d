@@ -1366,6 +1366,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'powershell
+      :comment nil
+      :folder (concat my-module-folder "powershell.el")
+      :remotes '((mine :url "https://github.com/miketz/powershell.el"
+                       :alias "origin")
+                 (upstream :url "https://github.com/jschaf/powershell.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'highlight-indent-guides
       :comment nil
       :folder (concat my-module-folder "highlight-indent-guides")

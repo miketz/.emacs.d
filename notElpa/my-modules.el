@@ -1308,6 +1308,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'num3-mode
+      :comment nil
+      :folder (concat my-module-folder "num3-mode")
+      :remotes '((mine :url "https://github.com/miketz/num3-mode"
+                       :alias "origin"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'highlight-indent-guides
       :comment nil
       :folder (concat my-module-folder "highlight-indent-guides")

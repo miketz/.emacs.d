@@ -1479,6 +1479,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'zoutline
+      :comment nil
+      :folder (concat my-module-folder "zoutline")
+      :remotes '((mine :url "https://github.com/miketz/zoutline"
+                       :alias "origin")
+                 (upstream :url "https://github.com/abo-abo/zoutline"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'yasnippet
       :comment nil
       :folder (concat my-module-folder "yasnippet")

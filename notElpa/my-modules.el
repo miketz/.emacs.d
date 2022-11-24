@@ -461,6 +461,19 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'selectrum
+      :comment nil
+      :folder (concat my-module-folder "selectrum")
+      :remotes '((upstream :url "https://github.com/radian-software/selectrum"
+                           :alias "upstream"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'sallet
       :comment nil
       :folder (concat my-module-folder "sallet")

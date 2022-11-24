@@ -1318,6 +1318,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'white-christmas
+      :comment "Fun snow scene package."
+      :folder my-module-folder
+      :file-single "white-christmas.el"
+      :remotes '((blog :url "https://with-emacs.com/posts/fun/white-christmas-in-emacs/"
+                       :alias "blog"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       ;; code found of stackoverflow.
       :name 'twelve-m-calendar
       :comment nil

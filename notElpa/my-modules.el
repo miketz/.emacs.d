@@ -1423,6 +1423,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'unkillable-scratch
+      :comment nil
+      :folder (concat my-module-folder "unkillable-scratch")
+      :remotes '((mine :url "https://github.com/miketz/unkillable-scratch"
+                       :alias "origin")
+                 (upstream :url "https://github.com/EricCrosson/unkillable-scratch"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'sicp
       :comment "The SICP book in emacs info format."
       :folder (concat my-module-folder "sicp-info")

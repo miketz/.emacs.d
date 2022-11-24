@@ -1379,6 +1379,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'sicp
+      :comment "The SICP book in emacs info format."
+      :folder (concat my-module-folder "sicp-info")
+      :remotes '((mine :url "https://github.com/miketz/sicp-info"
+                       :alias "origin")
+                 (upstream :url "https://github.com/webframp/sicp-info"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'prescient
       :comment nil
       :folder (concat my-module-folder "prescient.el")

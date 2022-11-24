@@ -1318,6 +1318,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      ;; code found of stackoverflow.
+      :name 'twelve-m-calendar
+      :comment nil
+      :folder my-module-folder
+      :file-single "twelve-m-calendar.el"
+      :remotes '((upstream :url "https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

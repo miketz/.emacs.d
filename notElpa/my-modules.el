@@ -566,6 +566,21 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :depend-soft '()
       :depend-bundled '((macrostep)))
     ,(make-module
+      :name 'slime-company
+      :comment nil
+      :folder (concat my-module-folder "slime-company")
+      :remotes '((mine :url "https://github.com/miketz/slime-company"
+                       :alias "origin")
+                 (upstream :url "https://github.com/anwyn/slime-company"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "mine"
+      :depend-hard '((emacs "24.4") (slime "2.13") (company "0.9.0"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'sly
       :comment "Fork of SLIME. Seems to make text entry in a lisp file
 sluggish. Not currently using."

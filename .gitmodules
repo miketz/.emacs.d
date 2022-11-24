@@ -316,3 +316,6 @@
 [submodule "notElpa/compat.el"]
 	path = notElpa/compat.el
 	url = https://github.com/miketz/compat.el
+[submodule "notElpa/zig-mode"]
+	path = notElpa/zig-mode
+	url = https://github.com/miketz/zig-mode

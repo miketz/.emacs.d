@@ -1351,6 +1351,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'zig-mode
+      :comment nil
+      :folder (concat my-module-folder "zig-mode")
+      :remotes '((mine :url "https://github.com/miketz/zig-mode"
+                       :alias "origin")
+                 (upstream :url "https://github.com/ziglang/zig-mode"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '((emacs "24.3"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'pos-tip
       :comment nil
       :folder (concat my-module-folder "pos-tip")

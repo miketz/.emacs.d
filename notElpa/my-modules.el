@@ -1374,7 +1374,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
-      :use-branch "master"
+      :use-branch "main"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

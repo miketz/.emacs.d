@@ -8581,6 +8581,26 @@ See `describe-repeat-maps' for a list of all repeatable commands."
 
 
 ;;;----------------------------------------------------------------------------
+;;; zig-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/zig-mode" load-path)
+(autoload 'zig-mode "zig-mode" nil t)
+(push '("\\.zig\\'" . zig-mode) auto-mode-alist)
+
+(with-eval-after-load 'zig-mode
+  ;; hook
+  (defun my-setup-zig-mode ()
+    (yas-minor-mode 1)
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode-enable)
+    ;; set to 1 so comments on the same line are kept close to the code.
+    (setq comment-column 1) ; buffer local
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1)))
+  (add-hook 'zig-mode-hook #'my-setup-zig-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-unbreak-emacs-29 ()

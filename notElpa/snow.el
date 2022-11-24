@@ -1,11 +1,14 @@
 ;;; snow.el --- Let it snow in Emacs!         -*- lexical-binding: t; -*-
 
-;; https://github.com/alphapapa/snow.el/blob/master/snow.el
-
-;; Copyright (C) 2019  Adam Porter
+;; Copyright (C) 2018-2020  Adam Porter
 
 ;; Author: Adam Porter <adam@alphapapa.net>
+;; URL: https://github.com/alphapapa/snow.el
+;; Version: 0.1-pre
+;; Package-Requires: ((emacs "26.3"))
 ;; Keywords: games
+
+;;;; License:
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,14 +23,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-;;; Commentary:
-
-;; Displays a buffer in which it snows.
-
-;; NOTE: Be sure to preserve whitespace in the `snow-background'
-;; string, otherwise the text-properties will become corrupted and
-;; cause an error on load.
-
 ;;; Notes:
 
 ;; TODO: Add a fireplace and window panes looking out on the snowy
@@ -41,6 +36,16 @@
 
 ;; FIXME: Change buffer height/width back to use the full window
 ;; (changed it to use 1- while debugging).
+
+;; NOTE: Be sure to preserve whitespace in the `snow-background'
+;; string, otherwise the text-properties will become corrupted and
+;; cause an error on load.
+
+;;; Commentary:
+
+;; Let it snow in Emacs!  Command `snow' displays a buffer in which it
+;; snows.  The storm varies in intensity, a gentle breeze blows at
+;; times, and snow accumulates on the terrain in the scene.
 
 ;;; Code:
 
@@ -72,7 +77,8 @@
 
 (defgroup snow nil
   "Let it snow!"
-  :group 'games)
+  :group 'games
+  :link '(url-link "https://github.com/alphapapa/snow.el"))
 
 (defcustom snow-debug nil
   "Show debug info in mode line."
@@ -98,8 +104,8 @@ The lower the number, the faster snow will accumulate."
       /    \\   /    \\              |       |  )),`   (   .  )                                                                         
        `||`     `||`               ==========='`       '--`-`                                                                         
 " 39 41 (face (:foreground "black")) 172 178 (face (:foreground "black")) 190 193 (face (:foreground "black")) 278 280 (face (:foreground "green")) 287 289 (face (:foreground "green")) 308 309 (face (:foreground "white")) 309 311 (face (:foreground "black")) 311 312 (face (:foreground "white")) 324 330 (face (:foreground "black")) 412 413 (face (:foreground "green")) 413 416 (face (:foreground "green")) 421 425 (face (:foreground "green")) 441 442 (face (:foreground "brown")) 442 443 (face (:foreground "white")) 444 445 (face (:foreground "black")) 446 447 (face (:foreground "white")) 447 448 (face (:foreground "brown")) 460 461 (face (:foreground "white")) 461 463 (face (:foreground "black")) 463 464 (face (:foreground "white")) 547 560 (face (:foreground "green")) 576 579 (face (:foreground "white")) 579 580 (face (:foreground "black")) 580 583 (face (:foreground "white")) 586 587 (face (:foreground "black")) 590 593 (face (:foreground "brown")) 593 594 (face (:foreground "brown")) 594 595 (face (:foreground "white")) 597 598 (face (:foreground "black")) 599 600 (face (:foreground "white")) 600 601 (face (:foreground "brown")) 681 696 (face (:foreground "green")) 721 723 (face (:foreground "black")) 723 724 (face (:foreground "brown")) 724 725 (face (:foreground "brown")) 728 729 (face (:foreground "white")) 732 733 (face (:foreground "black")) 735 736 (face (:foreground "white")) 818 820 (face (:foreground "brown")) 827 829 (face (:foreground "brown")) 845 856 (face (:foreground "black")) 856 858 (face (:foreground "brown")) 865 871 (face (:foreground "gray"))))
-   (cons 90
-	 #("         v         
+   (cons 130
+         #("         v         
         >X<        
          A         
         d$b        
@@ -116,7 +122,23 @@ The lower the number, the faster snow will accumulate."
         ###        
         ###        
         ###        
-" 0 9 (fontified t face (:foreground "gold")) 9 10 (fontified t face (:foreground "gold")) 19 20 (fontified t face (:foreground "gold")) 20 28 (fontified t face (:foreground "gold")) 28 30 (fontified t face (:foreground "gold")) 30 31 (fontified t face (:foreground "gold")) 39 40 (fontified t) 40 49 (fontified t face (:foreground "forest green")) 49 50 (fontified t face (:foreground "forest green")) 59 60 (fontified t face (:foreground "forest green")) 60 68 (fontified t face (:foreground "forest green")) 68 71 (fontified t face (:foreground "forest green")) 79 80 (fontified t face (:foreground "forest green")) 80 86 (fontified t face (:foreground "forest green")) 86 93 (fontified t face (:foreground "forest green")) 99 100 (fontified t face (:foreground "forest green")) 100 104 (fontified t face (:foreground "forest green")) 104 115 (fontified t face (:foreground "forest green")) 119 120 (fontified t face (:foreground "forest green")) 120 127 (fontified t face (:foreground "forest green")) 127 132 (fontified t face (:foreground "forest green")) 139 140 (fontified t face (:foreground "forest green")) 140 146 (fontified t face (:foreground "forest green")) 146 153 (fontified t face (:foreground "forest green")) 159 160 (fontified t face (:foreground "forest green")) 160 164 (fontified t face (:foreground "forest green")) 164 174 (fontified t face (:foreground "forest green")) 179 180 (fontified t face (:foreground "forest green")) 180 182 (fontified t face (:foreground "forest green")) 182 197 (fontified t face (:foreground "forest green")) 199 200 (fontified t face (:foreground "forest green")) 200 206 (fontified t face (:foreground "forest green")) 206 213 (fontified t face (:foreground "forest green")) 219 220 (fontified t face (:foreground "forest green")) 220 225 (fontified t face (:foreground "forest green")) 225 234 (fontified t face (:foreground "forest green")) 239 240 (fontified t face (:foreground "forest green")) 240 242 (fontified t face (:foreground "forest green")) 242 257 (fontified t face (:foreground "forest green")) 259 260 (fontified t face (:foreground "forest green")) 260 279 (fontified t face (:foreground "forest green")) 279 280 (fontified t) 280 288 (fontified t) 288 291 (fontified t face (:foreground "brown")) 299 300 (fontified t face (:foreground "brown")) 300 308 (fontified t face (:foreground "brown")) 308 311 (fontified t face (:foreground "brown")) 319 320 (fontified t face (:foreground "brown")) 320 328 (fontified t face (:foreground "brown")) 328 331 (fontified t face (:foreground "brown")))))
+" 0 9 (fontified t face (:foreground "gold")) 9 10 (fontified t face (:foreground "gold")) 19 20 (fontified t face (:foreground "gold")) 20 28 (fontified t face (:foreground "gold")) 28 30 (fontified t face (:foreground "gold")) 30 31 (fontified t face (:foreground "gold")) 39 40 (fontified t) 40 49 (fontified t face (:foreground "forest green")) 49 50 (fontified t face (:foreground "forest green")) 59 60 (fontified t face (:foreground "forest green")) 60 68 (fontified t face (:foreground "forest green")) 68 71 (fontified t face (:foreground "forest green")) 79 80 (fontified t face (:foreground "forest green")) 80 86 (fontified t face (:foreground "forest green")) 86 93 (fontified t face (:foreground "forest green")) 99 100 (fontified t face (:foreground "forest green")) 100 104 (fontified t face (:foreground "forest green")) 104 115 (fontified t face (:foreground "forest green")) 119 120 (fontified t face (:foreground "forest green")) 120 127 (fontified t face (:foreground "forest green")) 127 132 (fontified t face (:foreground "forest green")) 139 140 (fontified t face (:foreground "forest green")) 140 146 (fontified t face (:foreground "forest green")) 146 153 (fontified t face (:foreground "forest green")) 159 160 (fontified t face (:foreground "forest green")) 160 164 (fontified t face (:foreground "forest green")) 164 174 (fontified t face (:foreground "forest green")) 179 180 (fontified t face (:foreground "forest green")) 180 182 (fontified t face (:foreground "forest green")) 182 197 (fontified t face (:foreground "forest green")) 199 200 (fontified t face (:foreground "forest green")) 200 206 (fontified t face (:foreground "forest green")) 206 213 (fontified t face (:foreground "forest green")) 219 220 (fontified t face (:foreground "forest green")) 220 225 (fontified t face (:foreground "forest green")) 225 234 (fontified t face (:foreground "forest green")) 239 240 (fontified t face (:foreground "forest green")) 240 242 (fontified t face (:foreground "forest green")) 242 257 (fontified t face (:foreground "forest green")) 259 260 (fontified t face (:foreground "forest green")) 260 279 (fontified t face (:foreground "forest green")) 279 280 (fontified t) 280 288 (fontified t) 288 291 (fontified t face (:foreground "brown")) 299 300 (fontified t face (:foreground "brown")) 300 308 (fontified t face (:foreground "brown")) 308 311 (fontified t face (:foreground "brown")) 319 320 (fontified t face (:foreground "brown")) 320 328 (fontified t face (:foreground "brown")) 328 331 (fontified t face (:foreground "brown"))))
+   (cons 80
+         #("                              
+                 _            
+        ________|_|________   
+       /\\        ______    \\  
+      //_\\       \\    /\\    \\ 
+     //___\\       \\__/  \\    \\
+    //_____\\       \\ |[]|     \\
+   //_______\\       \\|__|      \\
+  /XXXXXXXXXX\\                  \\
+ /_I_II  I__I_\\__________________\\
+   I_I|  I__I_____[]_|_[]_____I
+   I_II  I__I_____[]_|_[]_____I
+   I II__I  I     XXXXXXX     I
+~~~~~\"   \"~~~~~~~~~~~~~~~~~~~~~~~~
+" 132 133 (face (:foreground "brown")) 162 165 (face (:foreground "brown")) 192 197 (face (:foreground "brown")) 208 210 (face (:foreground "cornflower blue")) 223 230 (face (:foreground "brown")) 254 264 (face (:foreground "saddle brown")) 288 289 (face (:foreground "saddle brown")) 289 290 (face (:foreground "brown")) 290 292 (face (:foreground "saddle brown")) 294 295 (face (:foreground "saddle brown")) 295 297 (face (:foreground "brown")) 297 298 (face (:foreground "saddle brown")) 300 318 (face (:foreground "gray50")) 323 324 (face (:foreground "saddle brown")) 324 325 (face (:foreground "brown")) 325 327 (face (:foreground "saddle brown")) 329 330 (face (:foreground "saddle brown")) 330 332 (face (:foreground "brown")) 332 333 (face (:foreground "saddle brown")) 333 338 (face (:foreground "brown")) 338 340 (face (:foreground "cornflower blue")) 343 345 (face (:foreground "cornflower blue")) 345 350 (face (:foreground "brown")) 350 351 (face (:foreground "saddle brown")) 355 356 (face (:foreground "saddle brown")) 356 357 (face (:foreground "brown")) 357 359 (face (:foreground "saddle brown")) 361 362 (face (:foreground "saddle brown")) 362 364 (face (:foreground "brown")) 364 365 (face (:foreground "saddle brown")) 365 370 (face (:foreground "brown")) 370 372 (face (:foreground "cornflower blue")) 375 377 (face (:foreground "cornflower blue")) 377 382 (face (:foreground "brown")) 382 383 (face (:foreground "saddle brown")) 387 388 (face (:foreground "saddle brown")) 388 389 (face (:foreground "brown")) 389 391 (face (:foreground "saddle brown")) 393 394 (face (:foreground "saddle brown")) 394 396 (face (:foreground "brown")) 396 397 (face (:foreground "saddle brown")) 397 402 (face (:foreground "brown")) 402 409 (face (:foreground "saddle brown")) 409 414 (face (:foreground "brown")) 414 415 (face (:foreground "saddle brown")) 416 421 (face (:foreground "DarkOliveGreen4")) 426 450 (face (:foreground "DarkOliveGreen4")))))
   "Background strings."
   :type '(repeat (alist :key-type (integer :tag "Offset from left window edge")
                         :value-type (string :tag "String"))))
@@ -157,7 +179,11 @@ snow, displayed with these characters."
 
 ;;;; Commands
 
-(defun let-it-snow (&optional manual)
+;;;###autoload
+(defun snow (&optional manual)
+  "Let it snow!
+If already snowing, stop.  If MANUAL (interactively, with
+prefix), advance snow frames manually by pressing \"SPC\"."
   (interactive "P")
   (with-current-buffer (get-buffer-create "*snow*")
     (if snow-timer
@@ -170,8 +196,19 @@ snow, displayed with these characters."
       (erase-buffer)
       (remove-overlays)
       (toggle-truncate-lines 1)
+      (use-local-map (make-sparse-keymap))
+      (local-set-key (kbd "SPC") (lambda ()
+                                   (interactive)
+                                   (snow--update-buffer (current-buffer))))
       (setq-local cursor-type nil)
-      (setf snow-window-width (window-text-width (get-buffer-window (current-buffer) t))
+      (setf snow-window-width (if snow-show-background
+                                  (max (window-text-width (get-buffer-window (current-buffer) t))
+                                       (cl-loop for (offset . background) in snow-backgrounds
+                                                maximizing (+ (cl-loop for line in (split-string background "\n")
+                                                                       maximizing (string-width line))
+                                                              offset)))
+                                (window-text-width (get-buffer-window (current-buffer) t)))
+            ;; FIXME: Assumes that the backgrounds are less than the window height.
             snow-window-height (window-text-height (get-buffer-window (current-buffer) t))
             snow-flakes nil
             snow-storm-factor (cl-etypecase snow-storm-initial-factor
@@ -198,10 +235,6 @@ snow, displayed with these characters."
         (when snow-show-background
           (pcase-dolist (`(,col . ,string) snow-backgrounds)
 	    (snow-insert-background :start-line -1 :start-col col :string string))))
-      (use-local-map (make-sparse-keymap))
-      (local-set-key (kbd "SPC") (lambda ()
-                                   (interactive)
-                                   (snow--update-buffer (current-buffer))))
       (unless manual
         (setq snow-timer
               (run-at-time nil snow-rate (apply-partially #'snow--update-buffer (get-buffer-create "*snow*"))))
@@ -217,34 +250,19 @@ snow, displayed with these characters."
   (max min (min max number)))
 
 (defsubst snow-flake-color (mass)
+  "Return color name for a flake having MASS."
   (setf mass (snow-clamp 0 mass 100))
   (let ((raw (/ (+ mass 155) 255)))
     (color-rgb-to-hex raw raw raw 2)))
 
 (defsubst snow-flake-mass-string (mass)
   "Return string for flake having MASS."
-  (pcase mass
-    ((pred (< 90)) (propertize "❄" 'face (list :foreground (snow-flake-color mass))))
-    ((pred (< 50)) (propertize "*" 'face (list :foreground (snow-flake-color mass))))
-    ((pred (< 10)) (propertize "." 'face (list :foreground (snow-flake-color mass))))
-    (_ (propertize "." 'face (list :foreground (snow-flake-color mass))))))
-
-(defsubst snow-flake-landed-at (flake)
-  "Return buffer position FLAKE landed at, or t if outside buffer."
-  ;; FIXME: Eventually use full height rather than one less.
-  (or (when (>= (snow-flake-y flake) (1- snow-window-height))
-        ;; Flake hit bottom of buffer.
-        (if (snow-flake-within-sides-p flake)
-            ;; Flake within horizontal limit of buffer: return buffer position.
-            (snow-flake-pos flake)
-          ;; Flake outside horizontal limit of buffer: return t.
-          t))
-      (when-let ((pos-below (when (snow-flake-within-sides-p flake)
-                              (snow-flake-pos-below flake))))
-        ;; A position exists below the flake and within the buffer.
-        (when (not (equal ?  (char-after pos-below)))
-          ;; That position is not empty (i.e. not a space): return that position.
-          pos-below))))
+  (propertize (pcase mass
+                ((pred (< 90)) "❄")
+                ((pred (< 50)) "*")
+                ((pred (< 10)) ".")
+                (_ "."))
+              'face (list :foreground (snow-flake-color mass))))
 
 (defsubst snow-flake-within-sides-p (flake)
   "Return non-nil if FLAKE is within window's sides."
@@ -269,6 +287,23 @@ snow, displayed with these characters."
         (forward-line 1)
         (forward-char col)
         (point)))))
+
+(defsubst snow-flake-landed-at (flake)
+  "Return buffer position FLAKE landed at, or t if outside buffer."
+  ;; FIXME: Eventually use full height rather than one less.
+  (or (when (>= (snow-flake-y flake) (1- snow-window-height))
+        ;; Flake hit bottom of buffer.
+        (if (snow-flake-within-sides-p flake)
+            ;; Flake within horizontal limit of buffer: return buffer position.
+            (snow-flake-pos flake)
+          ;; Flake outside horizontal limit of buffer: return t.
+          t))
+      (when-let ((pos-below (when (snow-flake-within-sides-p flake)
+                              (snow-flake-pos-below flake))))
+        ;; A position exists below the flake and within the buffer.
+        (when (not (equal ?  (char-after pos-below)))
+          ;; That position is not empty (i.e. not a space): return that position.
+          pos-below))))
 
 (defun snow--update-buffer (buffer)
   "Update snow in BUFFER."
@@ -331,9 +366,9 @@ Piles flake if it lands within the buffer."
     (cl-incf (snow-flake-y flake)))
   (if-let ((landed-at (snow-flake-landed-at flake)))
       (progn
-        ;; Flake hit end of buffer.
+        ;; Flake hit bottom of window.
         (when (numberp landed-at)
-          ;; Landed at position within buffer: add to pile.
+          ;; Landed at position within window: add to pile.
           (snow-pile flake landed-at))
         (when (snow-flake-overlay flake)
           (delete-overlay (snow-flake-overlay flake)))
@@ -352,16 +387,12 @@ Piles flake if it lands within the buffer."
                              ((pred (< 100))
                               ;; Position has more than 100 mass: land
                               ;; above it and return 0 mass.
-                              (list (snow-flake-pos flake) 0))
-                             (_ (list pos-below mass-at-pos))))))
-    (pcase-let* ((`(,pos ,ground-snow-mass) (landed-at flake pos-below))
+                              (cons (snow-flake-pos flake) 0))
+                             (_ (cons pos-below mass-at-pos))))))
+    (pcase-let* ((`(,pos . ,ground-snow-mass) (landed-at flake pos-below))
 		 (ground-snow-mass (+ ground-snow-mass (/ (snow-flake-mass flake) snow-pile-factor)))
-		 (char (alist-get (/ ground-snow-mass 100) snow-pile-strings
-				  (alist-get 1.0 snow-pile-strings nil nil
-					     (lambda (char-cell mass)
-					       (<= mass char-cell)))
-				  nil (lambda (char-cell mass)
-					(<= mass char-cell))))
+		 (char (or (alist-get (/ ground-snow-mass 100) snow-pile-strings nil nil #'>)
+                           (alist-get 1.0 snow-pile-strings nil nil #'eql)))
 		 (color (pcase ground-snow-mass
 			  ((pred (<= 100)) (snow-flake-color 100))
 			  (_ (snow-flake-color ground-snow-mass))))

@@ -1304,6 +1304,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'snow
+      :comment "Fun snow scene package."
+      :folder my-module-folder
+      :file-single "snow.el"
+      :remotes '((upstream :url "https://github.com/alphapapa/snow.el"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

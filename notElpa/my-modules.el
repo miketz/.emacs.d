@@ -1437,6 +1437,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'yasnippet
+      :comment nil
+      :folder (concat my-module-folder "yasnippet")
+      :remotes '((mine :url "https://github.com/miketz/yasnippet"
+                       :alias "origin")
+                 (upstream :url "https://github.com/joaotavora/yasnippet"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'yaml-mode
       :comment nil
       :folder (concat my-module-folder "yaml-mode")

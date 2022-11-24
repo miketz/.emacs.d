@@ -1366,6 +1366,19 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'prescient
+      :comment nil
+      :folder (concat my-module-folder "prescient.el")
+      :remotes '((upstream :url "https://github.com/radian-software/prescient.el"
+                           :alias "origin"))
+      :remote-default 'upstream
+      :source-control 'git
+      :submodule-p t
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'pos-tip
       :comment nil
       :folder (concat my-module-folder "pos-tip")

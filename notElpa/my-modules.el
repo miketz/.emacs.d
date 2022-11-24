@@ -1347,6 +1347,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'zone-nyan
+      :comment nil
+      :folder my-module-folder
+      :file-single "zone-nyan.el"
+      :remotes '((upstream :url "https://depp.brause.cc/zone-nyan/"
+                           :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :use-branch nil
+      :depend-hard '((emacs "24.3") (esxml "0.3.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")

@@ -8638,7 +8638,9 @@ programming modes."
                                    pike-mode awk-mode csharp-mode))
          (setq c-basic-offset width))
         ((eq major-mode 'lua-mode)
-         (setq lua-indent-level width)))
+         (setq lua-indent-level width))
+        ((eq major-mode 'python-mode)
+         (setq python-indent-offset width)))
 
   (setq tab-width width))
 

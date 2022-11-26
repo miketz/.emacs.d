@@ -8555,25 +8555,26 @@ TODO: delete this fn and replace with hooks, etc."
 
   ;; redefine `repeat-mode' to avoid the startup message. I find it annoying.
   ;; TODO: contribute a patch upstream with a config var?
-  (define-minor-mode repeat-mode
-    "Toggle Repeat mode.
-When Repeat mode is enabled, and the command symbol has the property named
-`repeat-map', this map is activated temporarily for the next command.
-See `describe-repeat-maps' for a list of all repeatable commands."
-    :global t :group 'convenience
-    (if (not repeat-mode)
-        (remove-hook 'post-command-hook 'repeat-post-hook)
-      (add-hook 'post-command-hook 'repeat-post-hook)
-      (let* ((keymaps nil)
-             (commands (all-completions
-                        "" obarray (lambda (s)
-                                     (and (commandp s)
-                                          (get s 'repeat-map)
-                                          (push (get s 'repeat-map) keymaps))))))
-        ;; (message "Repeat mode is enabled for %d commands and %d keymaps; see `describe-repeat-maps'."
-        ;;          (length commands)
-        ;;          (length (delete-dups keymaps)))
-        ))))
+  ;; (define-minor-mode repeat-mode
+;;     "Toggle Repeat mode.
+;; When Repeat mode is enabled, and the command symbol has the property named
+;; `repeat-map', this map is activated temporarily for the next command.
+;; See `describe-repeat-maps' for a list of all repeatable commands."
+;;     :global t :group 'convenience
+;;     (if (not repeat-mode)
+;;         (remove-hook 'post-command-hook 'repeat-post-hook)
+;;       (add-hook 'post-command-hook 'repeat-post-hook)
+;;       (let* ((keymaps nil)
+;;              (commands (all-completions
+;;                         "" obarray (lambda (s)
+;;                                      (and (commandp s)
+;;                                           (get s 'repeat-map)
+;;                                           (push (get s 'repeat-map) keymaps))))))
+;;         ;; (message "Repeat mode is enabled for %d commands and %d keymaps; see `describe-repeat-maps'."
+;;         ;;          (length commands)
+;;         ;;          (length (delete-dups keymaps)))
+;;         )))
+  )
 
 (when (fboundp #'repeat-mode) ;; emacs 28+
   (repeat-mode))

@@ -577,6 +577,8 @@ in case that file does not provide any feature."
 (defvar ido-grid--cols)
 (defvar ido-completion-map)
 (defvar vertico-count)
+(defvar python-indent-offset)
+(defvar jsonian-indentation)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -706,6 +708,9 @@ in case that file does not provide any feature."
 (declare-function my-setup-typescript-mode 'suppress)
 (declare-function my-setup-powershell-mode 'suppress)
 (declare-function my-setup-css-mode 'suppress)
+(declare-function my-setup-zig-mode 'suppress)
+(declare-function my-setup-jsonian 'suppress)
+(declare-function my-setup-tide-for-ts 'suppress)
 
 (declare-function my-occur-wild-spaces 'suppress)
 (declare-function my-w32-get-code 'suppress)

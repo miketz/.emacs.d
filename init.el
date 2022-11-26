@@ -2461,32 +2461,34 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;;----------------------------------------------------------------------------
 ;;; select numbered completions. from https://oremacs.com/
 ;;;----------------------------------------------------------------------------
-(setq company-show-quick-access t)
+(when nil ;; don't do this for now. It's messing up alignment of the
+           ;; numbers on the right?
+  (setq company-show-quick-access t)
 
-(with-eval-after-load 'company
-  (defun ora-company-number ()
-    "Forward to `company-complete-number'.
+  (with-eval-after-load 'company
+    (defun ora-company-number ()
+      "Forward to `company-complete-number'.
 
 Unless the number is potentially part of the candidate.
 In that case, insert the number."
-    (interactive)
-    (let* ((k (this-command-keys))
-           (re (concat "^" company-prefix k)))
-      (if (cl-find-if (lambda (s) (string-match re s))
-                      company-candidates)
-          (self-insert-command 1)
-        (company-complete-tooltip-row (string-to-number k)))))
+      (interactive)
+      (let* ((k (this-command-keys))
+             (re (concat "^" company-prefix k)))
+        (if (cl-find-if (lambda (s) (string-match re s))
+                        company-candidates)
+            (self-insert-command 1)
+          (company-complete-tooltip-row (string-to-number k)))))
 
-  (let ((map company-active-map))
-    (mapc
-     (lambda (x)
-       (define-key map (format "%d" x) 'ora-company-number))
-     (number-sequence 0 9))
-    (define-key map " " (lambda ()
-                          (interactive)
-                          (company-abort)
-                          (self-insert-command 1)))
-    (define-key map (kbd "<return>") nil)))
+    (let ((map company-active-map))
+      (mapc
+       (lambda (x)
+         (define-key map (format "%d" x) 'ora-company-number))
+       (number-sequence 0 9))
+      (define-key map " " (lambda ()
+                            (interactive)
+                            (company-abort)
+                            (self-insert-command 1)))
+      (define-key map (kbd "<return>") nil))))
 
 
 ;;;----------------------------------------------------------------------------

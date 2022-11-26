@@ -6848,6 +6848,7 @@ Closure over `preceding-sexp-fn'."
     (setq comment-column 1) ; buffer local
 
     (setq tab-width my-indent-width) ; buffer local
+    (setq python-indent-offset my-indent-width)
     (setq indent-tabs-mode t) ; buffer local
 
     (smart-tabs-advice python-indent-line python-indent-offset)
@@ -6863,6 +6864,8 @@ Closure over `preceding-sexp-fn'."
     (add-hook 'python-mode-hook #'my-setup-python-smart-tabs-mode))
 
   (defun my-setup-python ()
+    (setq tab-width my-indent-width) ; python.el sets this to 8, so make sure to overwrite here
+    (setq python-indent-offset my-indent-width)
     (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
     (my-turn-on-electric-pair-local-mode)

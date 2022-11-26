@@ -6859,7 +6859,10 @@ Closure over `preceding-sexp-fn'."
       (smart-tabs-advice py-indent-region py-indent-offset))
     (smart-tabs-mode-enable))
 
-  (when nil ; for now don't use tabs as PEP 8 says use 4 spaces.
+  ;; INFO: when working with a "spaces ident" code base switch this "when" to
+  ;; nil. I prefer "smart tabs" where tabs are used for indent, spaces for
+  ;; alignment. But most people follow PEP 8 which says use 4 spaces.
+  (when t
     ;; hook for smart-tabs-mode
     (add-hook 'python-mode-hook #'my-setup-python-smart-tabs-mode))
 

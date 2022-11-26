@@ -424,8 +424,12 @@ Example:
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
-   `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
-   `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
+   `(company-tooltip-scrollbar-track ((,class (:background ,scrollb-bg))))
+   `(company-tooltip-scrollbar-thumb ((,class (:background ,scrollb-fg))))
+   ;; obsolete comapny scrollbar faces. comment out.
+   ;; `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
+   ;; `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
+
    `(company-tooltip-common ((,class (:foreground ,faint-less))))
    `(company-tooltip-selection ((,class (:background ,highlight))))
    ;; company-echo

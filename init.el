@@ -2890,16 +2890,17 @@ Inserts a new line and the beginning and end with text values:
   ;; (evil-define-key 'normal js2-mode-map (kbd "C-c l")
   ;;   #'hydra-js2-flycheck/body)
 
-  (defhydra my-hydra-js2-flymake (:color amaranth)
-    "jslint:flymake: "
-    ("n" flymake-goto-next-error)
-    ("p" flymake-goto-prev-error)
-    ("v" flymake-popup-current-error-menu)
-    ("C-g" nil nil)
-    ("q" nil))
-  (when my-use-evil-p
-    (evil-define-key 'normal js2-mode-map (kbd "C-c l")
-      #'my-hydra-js2-flymake/body))
+  ;; TODO: this hydra isn't working? look into it later.
+  ;; (defhydra my-hydra-js2-flymake (:color amaranth)
+  ;;   "jslint:flymake: "
+  ;;   ("n" flymake-goto-next-error)
+  ;;   ("p" flymake-goto-prev-error)
+  ;;   ("v" flymake-popup-current-error-menu)
+  ;;   ("C-g" nil nil)
+  ;;   ("q" nil))
+  ;; (when my-use-evil-p
+  ;;   (evil-define-key 'normal js2-mode-map (kbd "C-c l")
+  ;;     #'my-hydra-js2-flymake/body))
 
   ;; (evil-define-key 'normal js2-mode-map (kbd "C-c h") #'my-hydra-hs/body)
 

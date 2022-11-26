@@ -2456,7 +2456,7 @@ This avoids changing pop-up width while scrolling through candidates."
 ;;;----------------------------------------------------------------------------
 ;;; select numbered completions. from https://oremacs.com/
 ;;;----------------------------------------------------------------------------
-(setq company-show-numbers t)
+(setq company-show-quick-access t)
 
 (with-eval-after-load 'company
   (defun ora-company-number ()

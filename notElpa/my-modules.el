@@ -2145,6 +2145,14 @@ style. More importantly it avoids spamming rg as you type or prematurely."
 (defun my-folder-p (f)
   (cl-second f))
 
+;; (let* ((mod (cl-first my-modules))
+;;        (upstream-remote (cl-remove-if (lambda (remote)
+;;                                         (not (eq (car remote) 'upstream)))
+;;                                       (module-remotes mod)))
+;;        (upstream-url (caddar upstream-remote))
+;;        (upstream-alias (nth 4 (car upstream-remote))))
+;;   upstream-alias)
+
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."
   (interactive)

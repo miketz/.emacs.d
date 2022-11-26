@@ -2470,7 +2470,7 @@ In that case, insert the number."
       (if (cl-find-if (lambda (s) (string-match re s))
                       company-candidates)
           (self-insert-command 1)
-        (company-complete-number (string-to-number k)))))
+        (company-complete-tooltip-row (string-to-number k)))))
 
   (let ((map company-active-map))
     (mapc

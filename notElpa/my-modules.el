@@ -2176,7 +2176,8 @@ As a list of strings of the form (URL GIT-ALIAS). "
 
 (cl-defun my-git-remote-setup-p (mod remote-sym)
   "Return T if the git remote is wired up on the git side.
-This means a matching alias and url."
+This means a matching alias and url.
+REMOTE-SYM will usually be `mine' or `upstream'."
   ;; GUARD: must pass in a good module
   (when (null mod)
     (cl-return-from my-git-remote-setup-p nil))

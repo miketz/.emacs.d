@@ -2154,20 +2154,23 @@ This is usualy (always?) the symbol the package uses for (provide) and (require)
   (cl-find mod-symbol my-modules :test (lambda (sym mod)
                                          (eq (module-name mod) sym))))
 
-(defun my-get-remote-info (mod remote-sym)
+(defun my-get-remote (mod remote-sym)
   "For module struct MOD, return the git remote info via REMOTE-SYM.
-As a list of strings of the form (URL GIT-ALIAS).
 A module can have multiple remotes.
 REMOTE-SYM will most often be `mine' or `upstream' by convention."
-  (let* ((upstream-remote
-          (cl-remove-if (lambda (remote)
-                          (not (eq (car remote) remote-sym)))
-                        (module-remotes mod)))
-         ;; TODO: Find a better way to extract the info. Rather than relying on position.
-         ;;       Maybe use a struct for remotes.
-         (upstream-url (caddar upstream-remote))
-         (upstream-alias (nth 4 (car upstream-remote))))
-    `(,upstream-url ,upstream-alias)))
+  (let* ((remote (cl-remove-if (lambda (remote)
+                                 (not (eq (car remote) remote-sym)))
+                               (module-remotes mod))))
+    remote))
+
+(defun my-get-remote-info (remote)
+  "For REMOTE extract the git remote info.
+As a list of strings of the form (URL GIT-ALIAS). "
+  ;; TODO: Find a better way to extract the info. Rather than relying on position.
+  ;;       Maybe use a struct for remotes.
+  (let ((url (caddar remote))
+        (alias (nth 4 (car remote))))
+    `(,url ,alias)))
 
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."

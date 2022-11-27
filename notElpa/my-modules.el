@@ -2211,6 +2211,23 @@ REMOTE-SYM will usually be `mine' or `upstream'."
                              (shell-command-to-string (concat "git remote get-url " alias)))))
           (string-equal url (s-trim output-url)))))))
 
+(cl-defun my-git-remote-create (mod remote-sym)
+  ;; GUARD: mod must be provided
+  (when (null mod)
+    (cl-return-from my-git-remote-create nil))
+
+  (let* ((remote (my-get-remote mod remote-sym)))
+    ;; GUARD: remote-sym must be configured in `my-modules'
+    (when (null remote)
+      (cl-return-from my-git-remote-create 'remote-not-configured-in-my-modules))
+
+    ;; GUARD: don't create the remote if it's already setup
+    (when (my-git-remote-setup-p mod remote-sym)
+      (cl-return-from my-git-remote-create 'already-created))
+
+    ;; TODO: implement this for real
+    'ok-now-creating-git-remote))
+
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."
   (interactive)

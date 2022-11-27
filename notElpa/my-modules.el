@@ -2145,13 +2145,28 @@ style. More importantly it avoids spamming rg as you type or prematurely."
 (defun my-folder-p (f)
   (cl-second f))
 
-;; (let* ((mod (cl-first my-modules))
-;;        (upstream-remote (cl-remove-if (lambda (remote)
-;;                                         (not (eq (car remote) 'upstream)))
-;;                                       (module-remotes mod)))
-;;        (upstream-url (caddar upstream-remote))
-;;        (upstream-alias (nth 4 (car upstream-remote))))
-;;   upstream-alias)
+
+
+
+(defun my-get-module-by-symbol (mod-symbol)
+  "Return module by MOD-SYMBOL.
+This is usualy (always?) the symbol the package uses for (provide) and (require)."
+  (cl-find mod-symbol my-modules :test (lambda (sym mod)
+                                         (eq (module-name mod) sym))))
+
+(defun my-get-upstream-remote-info (mod)
+  "For module MOD, return the upstream git remote.
+As a list of strings of the form (URL GIT-ALIAS)"
+  (let* ((upstream-remote
+          (cl-remove-if (lambda (remote)
+                          ;; upstream remote labled iwth `upstream' symbol by convention
+                          (not (eq (car remote) 'upstream)))
+                        (module-remotes mod)))
+         ;; TODO: Find a better way to extract the info. Rather than relying on position.
+         ;;       Maybe use a struct for remotes.
+         (upstream-url (caddar upstream-remote))
+         (upstream-alias (nth 4 (car upstream-remote))))
+    `(,upstream-url ,upstream-alias)))
 
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."

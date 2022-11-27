@@ -2154,13 +2154,13 @@ This is usualy (always?) the symbol the package uses for (provide) and (require)
   (cl-find mod-symbol my-modules :test (lambda (sym mod)
                                          (eq (module-name mod) sym))))
 
-(defun my-get-upstream-remote-info (mod)
-  "For module MOD, return the upstream git remote.
-As a list of strings of the form (URL GIT-ALIAS)"
+(defun my-get-remote-info (mod remote-sym)
+  "For module struct MOD, return the git remote info via REMOTE-SYM.
+As a list of strings of the form (URL GIT-ALIAS).
+REMOTE-SYM will most often be `mine' or `upstream'."
   (let* ((upstream-remote
           (cl-remove-if (lambda (remote)
-                          ;; upstream remote labled iwth `upstream' symbol by convention
-                          (not (eq (car remote) 'upstream)))
+                          (not (eq (car remote) remote-sym)))
                         (module-remotes mod)))
          ;; TODO: Find a better way to extract the info. Rather than relying on position.
          ;;       Maybe use a struct for remotes.

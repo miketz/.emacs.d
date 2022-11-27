@@ -2167,8 +2167,6 @@ REMOTE-SYM will most often be `mine' or `upstream' by convention."
 (defun my-get-remote-info (remote)
   "For REMOTE extract the git remote info.
 As a list of strings of the form (URL GIT-ALIAS). "
-  ;; DONE: Find a better way to extract the info. Rather than relying on position.
-  ;;       Maybe use a struct for remotes. Or plists with cl-getf
   (let ((url (cl-getf remote :url))
         (alias (cl-getf remote :alias)))
     `(,url ,alias)))

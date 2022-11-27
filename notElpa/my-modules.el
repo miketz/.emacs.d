@@ -2165,6 +2165,8 @@ REMOTE-SYM will most often be `mine' or `upstream' by convention."
              :test (lambda (sym rem)
                      (eq (cl-getf rem :sym) sym)))))
 
+;; NOTE: now that remotes are using plists there may not be much value in this
+;; "info-extraction" fn as plists are already easy to extrat info from.
 (defun my-get-remote-info (remote)
   "For REMOTE extract the git remote info.
 As a list of strings of the form (URL GIT-ALIAS). "

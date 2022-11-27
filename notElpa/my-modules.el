@@ -2157,7 +2157,8 @@ This is usualy (always?) the symbol the package uses for (provide) and (require)
 (defun my-get-remote-info (mod remote-sym)
   "For module struct MOD, return the git remote info via REMOTE-SYM.
 As a list of strings of the form (URL GIT-ALIAS).
-REMOTE-SYM will most often be `mine' or `upstream'."
+A module can have multiple remotes.
+REMOTE-SYM will most often be `mine' or `upstream' by convention."
   (let* ((upstream-remote
           (cl-remove-if (lambda (remote)
                           (not (eq (car remote) remote-sym)))

@@ -28,7 +28,8 @@ Some info may be purely for informational/doc purposes."
   ;;                      :alias "origin")
   ;; The names 'mine and 'upstream have special meaning. Where 'upstream is the
   ;; official repo of the package. And 'mine is my fork. Other names can be
-  ;; anything but shoudl be descriptive.
+  ;; anything but shoudl be descriptive. Each remote will be a plist of the
+  ;; form '(:sym mine :url "https://someurl" :alias "origin")
   (remotes '())
   (remote-default nil) ; default remote to pull/push
   ;; Choices: git svn file
@@ -60,9 +61,9 @@ Some info may be purely for informational/doc purposes."
       :name 'paredit
       :comment nil
       :folder (concat my-module-folder "paredit")
-      :remotes '((mine :url "https://github.com/miketz/paredit"
+      :remotes '((:sym mine :url "https://github.com/miketz/paredit"
                        :alias "origin")
-                 (upstream :url "https://mumble.net/~campbell/git/paredit.git"
+                 (:sym upstream :url "https://mumble.net/~campbell/git/paredit.git"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -75,9 +76,9 @@ Some info may be purely for informational/doc purposes."
       :name 'swiper
       :comment nil
       :folder (concat my-module-folder "swiper")
-      :remotes '((mine :url "https://github.com/miketz/swiper"
+      :remotes '((:sym mine :url "https://github.com/miketz/swiper"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/swiper"
+                 (:sym upstream :url "https://github.com/abo-abo/swiper"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -90,9 +91,9 @@ Some info may be purely for informational/doc purposes."
       :name 'ivy-explorer
       :comment nil
       :folder (concat my-module-folder "ivy-explorer")
-      :remotes '((mine :url "https://github.com/miketz/ivy-explorer"
+      :remotes '((:sym mine :url "https://github.com/miketz/ivy-explorer"
                        :alias "origin")
-                 (upstream :url "https://github.com/clemera/ivy-explorer"
+                 (:sym upstream :url "https://github.com/clemera/ivy-explorer"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -105,9 +106,9 @@ Some info may be purely for informational/doc purposes."
       :name 'iedit
       :comment nil
       :folder (concat my-module-folder "iedit")
-      :remotes '((mine :url "https://github.com/miketz/iedit"
+      :remotes '((:sym mine :url "https://github.com/miketz/iedit"
                        :alias "origin")
-                 (upstream :url "https://github.com/victorhge/iedit"
+                 (:sym upstream :url "https://github.com/victorhge/iedit"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -120,9 +121,9 @@ Some info may be purely for informational/doc purposes."
       :name 'lispy
       :comment nil
       :folder (concat my-module-folder "lispy")
-      :remotes '((mine :url "https://https://github.com/miketz/lispy"
+      :remotes '((:sym mine :url "https://https://github.com/miketz/lispy"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/lispy"
+                 (:sym upstream :url "https://github.com/abo-abo/lispy"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -140,9 +141,9 @@ Some info may be purely for informational/doc purposes."
       :name 'evil
       :comment nil
       :folder (concat my-module-folder "evil")
-      :remotes '((mine :url "https://github.com/miketz/evil"
+      :remotes '((:sym mine :url "https://github.com/miketz/evil"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacs-evil/evil"
+                 (:sym upstream :url "https://github.com/emacs-evil/evil"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -157,9 +158,9 @@ Some info may be purely for informational/doc purposes."
       :name 'evil-leader
       :comment nil
       :folder (concat my-module-folder "evil-leader")
-      :remotes '((mine :url "https://github.com/miketz/evil-leader"
+      :remotes '((:sym mine :url "https://github.com/miketz/evil-leader"
                        :alias "origin")
-                 (upstream :url "https://github.com/cofi/evil-leader"
+                 (:sym upstream :url "https://github.com/cofi/evil-leader"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -173,7 +174,7 @@ Some info may be purely for informational/doc purposes."
       :comment nil
       :folder my-module-folder
       :file-single "evil-escape.el"
-      :remotes '((upstream :url "https://github.com/syl20bnr/evil-escape"
+      :remotes '((:sym upstream :url "https://github.com/syl20bnr/evil-escape"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -186,9 +187,9 @@ Some info may be purely for informational/doc purposes."
       :name 'expand-region
       :comment nil
       :folder (concat my-module-folder "expand-region.el")
-      :remotes '((mine :url "https://github.com/miketz/expand-region.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/expand-region.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/magnars/expand-region.el"
+                 (:sym upstream :url "https://github.com/magnars/expand-region.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -201,9 +202,9 @@ Some info may be purely for informational/doc purposes."
       :name 's
       :comment nil
       :folder (concat my-module-folder "s.el")
-      :remotes '((mine :url "https://github.com/miketz/s.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/s.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/magnars/s.el"
+                 (:sym upstream :url "https://github.com/magnars/s.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -216,9 +217,9 @@ Some info may be purely for informational/doc purposes."
       :name 'dash
       :comment nil
       :folder (concat my-module-folder "dash.el")
-      :remotes '((mine :url "https://github.com/miketz/dash.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/dash.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/magnars/dash.el"
+                 (:sym upstream :url "https://github.com/magnars/dash.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -231,9 +232,9 @@ Some info may be purely for informational/doc purposes."
       :name 'transient
       :comment nil
       :folder (concat my-module-folder "transient")
-      :remotes '((mine :url "https://github.com/miketz/transient"
+      :remotes '((:sym mine :url "https://github.com/miketz/transient"
                        :alias "origin")
-                 (upstream :url "https://github.com/magit/transient"
+                 (:sym upstream :url "https://github.com/magit/transient"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -246,9 +247,9 @@ Some info may be purely for informational/doc purposes."
       :name 'with-editor
       :comment nil
       :folder (concat my-module-folder "with-editor")
-      :remotes '((mine :url "https://https://github.com/miketz/with-editor"
+      :remotes '((:sym mine :url "https://https://github.com/miketz/with-editor"
                        :alias "origin")
-                 (upstream :url "https://github.com/magit/with-editor"
+                 (:sym upstream :url "https://github.com/magit/with-editor"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -261,9 +262,9 @@ Some info may be purely for informational/doc purposes."
       :name 'magit
       :comment nil
       :folder (concat my-module-folder "magit")
-      :remotes '((mine :url "https://github.com/miketz/magit"
+      :remotes '((:sym mine :url "https://github.com/miketz/magit"
                        :alias "origin")
-                 (upstream :url "https://github.com/magit/magit"
+                 (:sym upstream :url "https://github.com/magit/magit"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -284,9 +285,9 @@ Some info may be purely for informational/doc purposes."
       :name 'libgit
       :comment "An elisp package with C code bundled."
       :folder (concat my-module-folder "libegit2")
-      :remotes '((mine :url "https://github.com/miketz/libegit2"
+      :remotes '((:sym mine :url "https://github.com/miketz/libegit2"
                        :alias "origin")
-                 (upstream :url "https://github.com/magit/libegit2"
+                 (:sym upstream :url "https://github.com/magit/libegit2"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -301,9 +302,9 @@ Some info may be purely for informational/doc purposes."
       :name 'csharp-mode
       :comment nil
       :folder (concat my-module-folder "csharp-mode")
-      :remotes '((mine :url "https://github.com/miketz/csharp-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/csharp-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/josteink/csharp-mode"
+                 (:sym upstream :url "https://github.com/josteink/csharp-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -316,7 +317,7 @@ Some info may be purely for informational/doc purposes."
       :name 'ctrlf
       :comment nil
       :folder (concat my-module-folder "ctrlf")
-      :remotes '((upstream :url "https://github.com/radian-software/ctrlf"
+      :remotes '((:sym upstream :url "https://github.com/radian-software/ctrlf"
                            :alias "origin"))
       :remote-default 'upstream
       :source-control 'git
@@ -329,9 +330,9 @@ Some info may be purely for informational/doc purposes."
       :name 'spinner
       :comment nil
       :folder (concat my-module-folder "spinner.el")
-      :remotes '((mine :url "https://github.com/miketz/spinner.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/spinner.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/Malabarba/spinner.el"
+                 (:sym upstream :url "https://github.com/Malabarba/spinner.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -344,9 +345,9 @@ Some info may be purely for informational/doc purposes."
       :name 'ggtags
       :comment nil
       :folder (concat my-module-folder "ggtags")
-      :remotes '((mine :url "https://https://github.com/miketz/ggtags"
+      :remotes '((:sym mine :url "https://https://github.com/miketz/ggtags"
                        :alias "origin")
-                 (upstream :url "https://github.com/leoliu/ggtags"
+                 (:sym upstream :url "https://github.com/leoliu/ggtags"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -361,9 +362,9 @@ Some info may be purely for informational/doc purposes."
       :name 'goto-chg
       :comment nil
       :folder (concat my-module-folder "goto-chg")
-      :remotes '((mine :url "https://github.com/miketz/goto-chg"
+      :remotes '((:sym mine :url "https://github.com/miketz/goto-chg"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacs-evil/goto-chg"
+                 (:sym upstream :url "https://github.com/emacs-evil/goto-chg"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -376,7 +377,7 @@ Some info may be purely for informational/doc purposes."
       :name 'mode-on-region
       :comment nil
       :folder (concat my-module-folder "mine/mor")
-      :remotes '((mine :url "https://github.com/miketz/mor"
+      :remotes '((:sym mine :url "https://github.com/miketz/mor"
                        :alias "origin")) ; my own project, so no 3rd party upstream
       :remote-default 'mine
       :source-control 'git
@@ -389,9 +390,9 @@ Some info may be purely for informational/doc purposes."
       :name 'iedit
       :comment nil
       :folder (concat my-module-folder "iedit")
-      :remotes '((mine :url "https://github.com/miketz/iedit"
+      :remotes '((:sym mine :url "https://github.com/miketz/iedit"
                        :alias "origin")
-                 (upstream :url "https://github.com/victorhge/iedit"
+                 (:sym upstream :url "https://github.com/victorhge/iedit"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -404,9 +405,9 @@ Some info may be purely for informational/doc purposes."
       :name 'ido-grid
       :comment nil
       :folder (concat my-module-folder "ido-grid.el")
-      :remotes '((mine :url "https://github.com/miketz/ido-grid.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/ido-grid.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/larkery/ido-grid.el"
+                 (:sym upstream :url "https://github.com/larkery/ido-grid.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -419,9 +420,9 @@ Some info may be purely for informational/doc purposes."
       :name 'ov
       :comment nil
       :folder (concat my-module-folder "ov")
-      :remotes '((mine :url "https://github.com/miketz/ov"
+      :remotes '((:sym mine :url "https://github.com/miketz/ov"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacsorphanage/ov"
+                 (:sym upstream :url "https://github.com/emacsorphanage/ov"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -434,9 +435,9 @@ Some info may be purely for informational/doc purposes."
       :name 'deferred
       :comment nil
       :folder (concat my-module-folder "emacs-deferred")
-      :remotes '((mine :url "https://github.com/miketz/emacs-deferred"
+      :remotes '((:sym mine :url "https://github.com/miketz/emacs-deferred"
                        :alias "origin")
-                 (upstream :url "https://github.com/kiwanami/emacs-deferred"
+                 (:sym upstream :url "https://github.com/kiwanami/emacs-deferred"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -449,9 +450,9 @@ Some info may be purely for informational/doc purposes."
       :name 'flx
       :comment nil
       :folder (concat my-module-folder "flx")
-      :remotes '((mine :url "https://github.com/miketz/flx"
+      :remotes '((:sym mine :url "https://github.com/miketz/flx"
                        :alias "origin")
-                 (upstream :url "https://github.com/lewang/flx"
+                 (:sym upstream :url "https://github.com/lewang/flx"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -464,7 +465,7 @@ Some info may be purely for informational/doc purposes."
       :name 'selectrum
       :comment nil
       :folder (concat my-module-folder "selectrum")
-      :remotes '((upstream :url "https://github.com/radian-software/selectrum"
+      :remotes '((:sym upstream :url "https://github.com/radian-software/selectrum"
                            :alias "upstream"))
       :remote-default 'upstream
       :source-control 'git
@@ -477,10 +478,10 @@ Some info may be purely for informational/doc purposes."
       :name 'sallet
       :comment nil
       :folder (concat my-module-folder "sallet")
-      :remotes '((mine :url "https://github.com/miketz/sallet"
+      :remotes '((:sym mine :url "https://github.com/miketz/sallet"
                        :alias "origin")
                  ;; NOTE: original upstream url was https://github.com/tetracat/sallet
-                 (upstream :url "https://github.com/Fuco1/sallet"
+                 (:sym upstream :url "https://github.com/Fuco1/sallet"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -494,9 +495,9 @@ Some info may be purely for informational/doc purposes."
       :comment "Package to display eval'd results in an overlay. Implementation
 scraped out of cider. I was able to make eros work for common lisp evals."
       :folder (concat my-module-folder "eros")
-      :remotes '((mine :url "https://github.com/miketz/eros"
+      :remotes '((:sym mine :url "https://github.com/miketz/eros"
                        :alias "origin")
-                 (upstream :url "https://github.com/xiongtx/eros"
+                 (:sym upstream :url "https://github.com/xiongtx/eros"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -509,9 +510,9 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :name 'elisp-slime-nav
       :comment nil
       :folder (concat my-module-folder "elisp-slime-nav")
-      :remotes '((mine :url "https://github.com/miketz/elisp-slime-nav"
+      :remotes '((:sym mine :url "https://github.com/miketz/elisp-slime-nav"
                        :alias "origin")
-                 (upstream :url "https://github.com/purcell/elisp-slime-nav"
+                 (:sym upstream :url "https://github.com/purcell/elisp-slime-nav"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -524,9 +525,9 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :name 'async
       :comment nil
       :folder (concat my-module-folder "emacs-async")
-      :remotes '((mine :url "https://github.com/miketz/emacs-async"
+      :remotes '((:sym mine :url "https://github.com/miketz/emacs-async"
                        :alias "origin")
-                 (upstream :url "https://github.com/jwiegley/emacs-async"
+                 (:sym upstream :url "https://github.com/jwiegley/emacs-async"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -539,9 +540,9 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :name 'lua-mode
       :comment nil
       :folder (concat my-module-folder "lua-mode")
-      :remotes '((mine :url "https://github.com/miketz/lua-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/lua-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/immerrr/lua-mode"
+                 (:sym upstream :url "https://github.com/immerrr/lua-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -554,9 +555,9 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :name 'slime
       :comment "Interactive mode for common lisp."
       :folder (concat my-module-folder "slime")
-      :remotes '((mine :url "https://github.com/miketz/slime"
+      :remotes '((:sym mine :url "https://github.com/miketz/slime"
                        :alias "origin")
-                 (upstream :url "https://github.com/slime/slime"
+                 (:sym upstream :url "https://github.com/slime/slime"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -569,9 +570,9 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :name 'slime-company
       :comment nil
       :folder (concat my-module-folder "slime-company")
-      :remotes '((mine :url "https://github.com/miketz/slime-company"
+      :remotes '((:sym mine :url "https://github.com/miketz/slime-company"
                        :alias "origin")
-                 (upstream :url "https://github.com/anwyn/slime-company"
+                 (:sym upstream :url "https://github.com/anwyn/slime-company"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -585,9 +586,9 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :comment "Fork of SLIME. Seems to make text entry in a lisp file
 sluggish. Not currently using."
       :folder (concat my-module-folder "sly")
-      :remotes '((mine :url "https://github.com/miketz/sly"
+      :remotes '((:sym mine :url "https://github.com/miketz/sly"
                        :alias "origin")
-                 (upstream :url "https://github.com/joaotavora/sly"
+                 (:sym upstream :url "https://github.com/joaotavora/sly"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -601,9 +602,9 @@ sluggish. Not currently using."
       :comment "A mode for LSP. Nice due to no external dependencies for the
 mode itself. External language servers are required to use it of course."
       :folder (concat my-module-folder "eglot")
-      :remotes '((mine :url "https://github.com/miketz/eglot"
+      :remotes '((:sym mine :url "https://github.com/miketz/eglot"
                        :alias "origin")
-                 (upstream :url "https://github.com/joaotavora/eglot"
+                 (:sym upstream :url "https://github.com/joaotavora/eglot"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -616,9 +617,9 @@ mode itself. External language servers are required to use it of course."
       :name 'lsp-mode
       :comment "A mode for LSP. More fancy features?"
       :folder (concat my-module-folder "lsp-mode")
-      :remotes '((mine :url "https://github.com/miketz/lsp-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/lsp-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacs-lsp/lsp-mode"
+                 (:sym upstream :url "https://github.com/emacs-lsp/lsp-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -638,9 +639,9 @@ mode itself. External language servers are required to use it of course."
       :name 'f
       :comment nil
       :folder (concat my-module-folder "f.el")
-      :remotes '((mine :url "https://github.com/miketz/f.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/f.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/rejeep/f.el"
+                 (:sym upstream :url "https://github.com/rejeep/f.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -654,9 +655,9 @@ mode itself. External language servers are required to use it of course."
       :name 'ht
       :comment nil
       :folder (concat my-module-folder "ht.el")
-      :remotes '((mine :url "https://github.com/miketz/ht.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/ht.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/Wilfred/ht.el"
+                 (:sym upstream :url "https://github.com/Wilfred/ht.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -669,9 +670,9 @@ mode itself. External language servers are required to use it of course."
       :name 'markdown-mode
       :comment nil
       :folder (concat my-module-folder "markdown-mode")
-      :remotes '((mine :url "https://github.com/miketz/markdown-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/markdown-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/jrblevin/markdown-mode"
+                 (:sym upstream :url "https://github.com/jrblevin/markdown-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -684,9 +685,9 @@ mode itself. External language servers are required to use it of course."
       :name 'avy
       :comment "Jump to positions in buffers."
       :folder (concat my-module-folder "avy")
-      :remotes '((mine :url "https://github.com/miketz/avy"
+      :remotes '((:sym mine :url "https://github.com/miketz/avy"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/avy"
+                 (:sym upstream :url "https://github.com/abo-abo/avy"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -699,9 +700,9 @@ mode itself. External language servers are required to use it of course."
       :name 'rust-mode
       :comment nil
       :folder (concat my-module-folder "rust-mode")
-      :remotes '((mine :url "https://github.com/miketz/rust-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/rust-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/rust-lang/rust-mode"
+                 (:sym upstream :url "https://github.com/rust-lang/rust-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -714,9 +715,9 @@ mode itself. External language servers are required to use it of course."
       :name 'racer
       :comment nil
       :folder (concat my-module-folder "emacs-racer")
-      :remotes '((mine :url "https://github.com/miketz/emacs-racer"
+      :remotes '((:sym mine :url "https://github.com/miketz/emacs-racer"
                        :alias "origin")
-                 (upstream :url "https://github.com/racer-rust/emacs-racer"
+                 (:sym upstream :url "https://github.com/racer-rust/emacs-racer"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -734,9 +735,9 @@ mode itself. External language servers are required to use it of course."
       :name 'helm
       :comment nil
       :folder (concat my-module-folder "helm")
-      :remotes '((mine :url "https://github.com/miketz/helm"
+      :remotes '((:sym mine :url "https://github.com/miketz/helm"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacs-helm/helm"
+                 (:sym upstream :url "https://github.com/emacs-helm/helm"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -752,9 +753,9 @@ mode itself. External language servers are required to use it of course."
       :comment "Has a UI that more closely resembles the built-in emacs grep
 style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "rg.el")
-      :remotes '((mine :url "https://github.com/miketz/rg.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/rg.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/dajva/rg.el"
+                 (:sym upstream :url "https://github.com/dajva/rg.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -769,9 +770,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'rainbow-delimiters
       :comment nil
       :folder (concat my-module-folder "rainbow-delimiters")
-      :remotes '((mine :url "https://github.com/miketz/rainbow-delimiters"
+      :remotes '((:sym mine :url "https://github.com/miketz/rainbow-delimiters"
                        :alias "origin")
-                 (upstream :url "https://github.com/Fanael/rainbow-delimiters"
+                 (:sym upstream :url "https://github.com/Fanael/rainbow-delimiters"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -784,9 +785,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'js2-mode
       :comment nil
       :folder (concat my-module-folder "js2-mode")
-      :remotes '((mine :url "https://github.com/miketz/js2-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/js2-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/mooz/js2-mode"
+                 (:sym upstream :url "https://github.com/mooz/js2-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -799,9 +800,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'js2-highlight-vars
       :comment nil
       :folder (concat my-module-folder "js2-highlight-vars.el")
-      :remotes '((mine :url "https://github.com/miketz/js2-highlight-vars.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/js2-highlight-vars.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/unhammer/js2-highlight-vars.el"
+                 (:sym upstream :url "https://github.com/unhammer/js2-highlight-vars.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -814,9 +815,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'json-mode
       :comment nil
       :folder (concat my-module-folder "json-mode")
-      :remotes '((mine :url "https://github.com/miketz/json-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/json-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/joshwnj/json-mode"
+                 (:sym upstream :url "https://github.com/joshwnj/json-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -829,9 +830,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'json-snatcher
       :comment nil
       :folder (concat my-module-folder "json-snatcher")
-      :remotes '((mine :url "https://github.com/miketz/json-snatcher"
+      :remotes '((:sym mine :url "https://github.com/miketz/json-snatcher"
                        :alias "origin")
-                 (upstream :url "https://github.com/Sterlingg/json-snatcher"
+                 (:sym upstream :url "https://github.com/Sterlingg/json-snatcher"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -844,9 +845,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'leerzeichen
       :comment nil
       :folder (concat my-module-folder "leerzeichen.el")
-      :remotes '((mine :url "https://github.com/miketz/leerzeichen.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/leerzeichen.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/fgeller/leerzeichen.el"
+                 (:sym upstream :url "https://github.com/fgeller/leerzeichen.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -859,9 +860,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'citre
       :comment "ctags IDE"
       :folder (concat my-module-folder "citre")
-      :remotes '((mine :url "https://github.com/miketz/citre"
+      :remotes '((:sym mine :url "https://github.com/miketz/citre"
                        :alias "origin")
-                 (upstream :url "https://github.com/universal-ctags/citre"
+                 (:sym upstream :url "https://github.com/universal-ctags/citre"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -874,9 +875,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'haskell-mode
       :comment nil
       :folder (concat my-module-folder "haskell-mode")
-      :remotes '((mine :url "https://github.com/miketz/haskell-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/haskell-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/haskell/haskell-mode"
+                 (:sym upstream :url "https://github.com/haskell/haskell-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -889,9 +890,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'wgrep
       :comment nil
       :folder (concat my-module-folder "Emacs-wgrep")
-      :remotes '((mine :url "https://github.com/miketz/Emacs-wgrep"
+      :remotes '((:sym mine :url "https://github.com/miketz/Emacs-wgrep"
                        :alias "origin")
-                 (upstream :url "https://github.com/mhayashi1120/Emacs-wgrep"
+                 (:sym upstream :url "https://github.com/mhayashi1120/Emacs-wgrep"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -904,9 +905,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'projectile
       :comment nil
       :folder (concat my-module-folder "projectile")
-      :remotes '((mine :url "https://github.com/miketz/projectile"
+      :remotes '((:sym mine :url "https://github.com/miketz/projectile"
                        :alias "origin")
-                 (upstream :url "https://github.com/bbatsov/projectile"
+                 (:sym upstream :url "https://github.com/bbatsov/projectile"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -919,9 +920,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'swift-mode
       :comment nil
       :folder (concat my-module-folder "swift-mode")
-      :remotes '((mine :url "https://github.com/miketz/swift-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/swift-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/swift-emacs/swift-mode"
+                 (:sym upstream :url "https://github.com/swift-emacs/swift-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -934,9 +935,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'dank-mode
       :comment "reddit viewer"
       :folder (concat my-module-folder "dank-mode")
-      :remotes '((mine :url "https://github.com/miketz/dank-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/dank-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/john2x/dank-mode"
+                 (:sym upstream :url "https://github.com/john2x/dank-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -949,9 +950,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'darkroom
       :comment nil
       :folder (concat my-module-folder "darkroom")
-      :remotes '((mine :url "https://github.com/miketz/darkroom"
+      :remotes '((:sym mine :url "https://github.com/miketz/darkroom"
                        :alias "origin")
-                 (upstream :url "https://github.com/joaotavora/darkroom"
+                 (:sym upstream :url "https://github.com/joaotavora/darkroom"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -964,9 +965,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'smex
       :comment nil
       :folder (concat my-module-folder "smex")
-      :remotes '((mine :url "https://github.com/miketz/smex"
+      :remotes '((:sym mine :url "https://github.com/miketz/smex"
                        :alias "origin")
-                 (upstream :url "https://github.com/nonsequitur/smex"
+                 (:sym upstream :url "https://github.com/nonsequitur/smex"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -979,9 +980,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'pkg-info
       :comment nil
       :folder (concat my-module-folder "pkg-info")
-      :remotes '((mine :url "https://github.com/miketz/pkg-info"
+      :remotes '((:sym mine :url "https://github.com/miketz/pkg-info"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacsorphanage/pkg-info"
+                 (:sym upstream :url "https://github.com/emacsorphanage/pkg-info"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -994,9 +995,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'epl
       :comment nil
       :folder (concat my-module-folder "epl")
-      :remotes '((mine :url "https://github.com/miketz/epl"
+      :remotes '((:sym mine :url "https://github.com/miketz/epl"
                        :alias "origin")
-                 (upstream :url "https://github.com/cask/epl"
+                 (:sym upstream :url "https://github.com/cask/epl"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1009,9 +1010,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'erc-hl-nicks
       :comment nil
       :folder (concat my-module-folder "erc-hl-nicks")
-      :remotes '((mine :url "https://github.com/miketz/erc-hl-nicks"
+      :remotes '((:sym mine :url "https://github.com/miketz/erc-hl-nicks"
                        :alias "origin")
-                 (upstream :url "https://github.com/leathekd/erc-hl-nicks"
+                 (:sym upstream :url "https://github.com/leathekd/erc-hl-nicks"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1024,9 +1025,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'esxml
       :comment nil
       :folder (concat my-module-folder "esxml")
-      :remotes '((mine :url "https://github.com/miketz/esxml"
+      :remotes '((:sym mine :url "https://github.com/miketz/esxml"
                        :alias "origin")
-                 (upstream :url "https://github.com/tali713/esxml"
+                 (:sym upstream :url "https://github.com/tali713/esxml"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1039,9 +1040,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'flycheck
       :comment nil
       :folder (concat my-module-folder "flycheck")
-      :remotes '((mine :url "https://github.com/miketz/flycheck"
+      :remotes '((:sym mine :url "https://github.com/miketz/flycheck"
                        :alias "origin")
-                 (upstream :url "https://github.com/flycheck/flycheck"
+                 (:sym upstream :url "https://github.com/flycheck/flycheck"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1058,9 +1059,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'smart-tabs-mode
       :comment nil
       :folder (concat my-module-folder "smarttabs")
-      :remotes '((mine :url "https://github.com/miketz/smarttabs"
+      :remotes '((:sym mine :url "https://github.com/miketz/smarttabs"
                        :alias "origin")
-                 (upstream :url "https://github.com/jcsalomon/smarttabs"
+                 (:sym upstream :url "https://github.com/jcsalomon/smarttabs"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1073,9 +1074,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'web-mode
       :comment nil
       :folder (concat my-module-folder "web-mode")
-      :remotes '((mine :url "https://github.com/miketz/web-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/web-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/fxbois/web-mode"
+                 (:sym upstream :url "https://github.com/fxbois/web-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1088,9 +1089,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'puni
       :comment "Structural editing for any lang. Similar to paredit."
       :folder (concat my-module-folder "puni")
-      :remotes '((mine :url "https://github.com/miketz/puni"
+      :remotes '((:sym mine :url "https://github.com/miketz/puni"
                        :alias "origin")
-                 (upstream :url "https://github.com/AmaiKinono/puni"
+                 (:sym upstream :url "https://github.com/AmaiKinono/puni"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1103,9 +1104,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'ace-link
       :comment nil
       :folder (concat my-module-folder "ace-link")
-      :remotes '((mine :url "https://github.com/miketz/ace-link"
+      :remotes '((:sym mine :url "https://github.com/miketz/ace-link"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/ace-link"
+                 (:sym upstream :url "https://github.com/abo-abo/ace-link"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1118,9 +1119,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'ace-window
       :comment nil
       :folder (concat my-module-folder "ace-window")
-      :remotes '((mine :url "https://github.com/miketz/ace-window"
+      :remotes '((:sym mine :url "https://github.com/miketz/ace-window"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/ace-window"
+                 (:sym upstream :url "https://github.com/abo-abo/ace-window"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1133,9 +1134,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'adoc-mode
       :comment nil
       :folder (concat my-module-folder "adoc-mode")
-      :remotes '((mine :url "https://github.com/miketz/adoc-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/adoc-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/sensorflo/adoc-mode"
+                 (:sym upstream :url "https://github.com/sensorflo/adoc-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1148,9 +1149,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'markup-faces
       :comment nil
       :folder (concat my-module-folder "markup-faces")
-      :remotes '((mine :url "https://github.com/miketz/markup-faces"
+      :remotes '((:sym mine :url "https://github.com/miketz/markup-faces"
                        :alias "origin")
-                 (upstream :url "https://github.com/sensorflo/markup-faces"
+                 (:sym upstream :url "https://github.com/sensorflo/markup-faces"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1164,9 +1165,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "align-let.el"
-      :remotes '((upstream :url "http://user42.tuxfamily.org/align-let/index.html"
+      :remotes '((:sym upstream :url "http://user42.tuxfamily.org/align-let/index.html"
                            :alias "upstream")
-                 (wiki :url "https://www.emacswiki.org/emacs/AlignLet"
+                 (:sym wiki :url "https://www.emacswiki.org/emacs/AlignLet"
                             :alias "wiki"))
       :remote-default nil
       :source-control 'git
@@ -1193,7 +1194,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "color-mode.el"
-      :remotes '((upstream :url "https://www-cs-faculty.stanford.edu/~knuth/programs/color-mode.el"
+      :remotes '((:sym upstream :url "https://www-cs-faculty.stanford.edu/~knuth/programs/color-mode.el"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1224,7 +1225,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "highlight-focus.el"
-      :remotes '((upstream :url "https://github.com/kriyative/highlight-focus"
+      :remotes '((:sym upstream :url "https://github.com/kriyative/highlight-focus"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1238,7 +1239,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Applies rainbow colors to the fonts in a buffer."
       :folder my-module-folder
       :file-single "lolcat.el"
-      :remotes '((upstream :url "https://github.com/xuchunyang/lolcat.el"
+      :remotes '((:sym upstream :url "https://github.com/xuchunyang/lolcat.el"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1280,7 +1281,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Z-machine interpreter for playing text-based adventure games."
       :folder my-module-folder
       :file-single "malyon.el"
-      :remotes '((upstream :url "https://github.com/speedenator/malyon"
+      :remotes '((:sym upstream :url "https://github.com/speedenator/malyon"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1294,7 +1295,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "minesweeper.el"
-      :remotes '((upstream :url "https://hg.sr.ht/~zck/minesweeper"
+      :remotes '((:sym upstream :url "https://hg.sr.ht/~zck/minesweeper"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git ;; upstream uses hg (mercurial)
@@ -1308,7 +1309,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Fun snow scene package."
       :folder my-module-folder
       :file-single "snow.el"
-      :remotes '((upstream :url "https://github.com/alphapapa/snow.el"
+      :remotes '((:sym upstream :url "https://github.com/alphapapa/snow.el"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1337,7 +1338,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "twelve-m-calendar.el"
-      :remotes '((upstream :url "https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months"
+      :remotes '((:sym upstream :url "https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1351,7 +1352,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "zone-nyan.el"
-      :remotes '((upstream :url "https://depp.brause.cc/zone-nyan/"
+      :remotes '((:sym upstream :url "https://depp.brause.cc/zone-nyan/"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1365,7 +1366,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "zone-rainbow.el"
-      :remotes '((upstream :url "https://github.com/kawabata/zone-rainbow"
+      :remotes '((:sym upstream :url "https://github.com/kawabata/zone-rainbow"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1379,7 +1380,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "zone-sl.el"
-      :remotes '((upstream :url "https://github.com/kawabata/zone-sl"
+      :remotes '((:sym upstream :url "https://github.com/kawabata/zone-sl"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -1392,9 +1393,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'hydra
       :comment nil
       :folder (concat my-module-folder "hydra")
-      :remotes '((mine :url "https://github.com/miketz/hydra"
+      :remotes '((:sym mine :url "https://github.com/miketz/hydra"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/hydra"
+                 (:sym upstream :url "https://github.com/abo-abo/hydra"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1409,9 +1410,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'nov
       :comment "epub reader"
       :folder (concat my-module-folder "nov.el")
-      :remotes '((mine :url "https://github.com/miketz/nov.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/nov.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/wasamasa/nov.el"
+                 (:sym upstream :url "https://github.com/wasamasa/nov.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1424,7 +1425,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'num3-mode
       :comment nil
       :folder (concat my-module-folder "num3-mode")
-      :remotes '((mine :url "https://github.com/miketz/num3-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/num3-mode"
                        :alias "origin"))
       :remote-default 'mine
       :source-control 'git
@@ -1437,9 +1438,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'nyan-mode
       :comment nil
       :folder (concat my-module-folder "nyan-mode")
-      :remotes '((mine :url "https://github.com/miketz/nyan-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/nyan-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/TeMPOraL/nyan-mode"
+                 (:sym upstream :url "https://github.com/TeMPOraL/nyan-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1452,9 +1453,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'php-mode
       :comment nil
       :folder (concat my-module-folder "php-mode")
-      :remotes '((mine :url "https://github.com/miketz/php-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/php-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacs-php/php-mode"
+                 (:sym upstream :url "https://github.com/emacs-php/php-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1467,9 +1468,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'zig-mode
       :comment nil
       :folder (concat my-module-folder "zig-mode")
-      :remotes '((mine :url "https://github.com/miketz/zig-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/zig-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/ziglang/zig-mode"
+                 (:sym upstream :url "https://github.com/ziglang/zig-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1482,9 +1483,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'zoutline
       :comment nil
       :folder (concat my-module-folder "zoutline")
-      :remotes '((mine :url "https://github.com/miketz/zoutline"
+      :remotes '((:sym mine :url "https://github.com/miketz/zoutline"
                        :alias "origin")
-                 (upstream :url "https://github.com/abo-abo/zoutline"
+                 (:sym upstream :url "https://github.com/abo-abo/zoutline"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1497,9 +1498,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'yasnippet
       :comment nil
       :folder (concat my-module-folder "yasnippet")
-      :remotes '((mine :url "https://github.com/miketz/yasnippet"
+      :remotes '((:sym mine :url "https://github.com/miketz/yasnippet"
                        :alias "origin")
-                 (upstream :url "https://github.com/joaotavora/yasnippet"
+                 (:sym upstream :url "https://github.com/joaotavora/yasnippet"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1512,9 +1513,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'yaml-mode
       :comment nil
       :folder (concat my-module-folder "yaml-mode")
-      :remotes '((mine :url "https://github.com/miketz/yaml-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/yaml-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/yoshiki/yaml-mode"
+                 (:sym upstream :url "https://github.com/yoshiki/yaml-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1527,9 +1528,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'vimrc-mode
       :comment nil
       :folder (concat my-module-folder "vimrc-mode")
-      :remotes '((mine :url "https://github.com/miketz/vimrc-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/vimrc-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/mcandre/vimrc-mode"
+                 (:sym upstream :url "https://github.com/mcandre/vimrc-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1542,9 +1543,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'unkillable-scratch
       :comment nil
       :folder (concat my-module-folder "unkillable-scratch")
-      :remotes '((mine :url "https://github.com/miketz/unkillable-scratch"
+      :remotes '((:sym mine :url "https://github.com/miketz/unkillable-scratch"
                        :alias "origin")
-                 (upstream :url "https://github.com/EricCrosson/unkillable-scratch"
+                 (:sym upstream :url "https://github.com/EricCrosson/unkillable-scratch"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1557,9 +1558,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'sicp
       :comment "The SICP book in emacs info format."
       :folder (concat my-module-folder "sicp-info")
-      :remotes '((mine :url "https://github.com/miketz/sicp-info"
+      :remotes '((:sym mine :url "https://github.com/miketz/sicp-info"
                        :alias "origin")
-                 (upstream :url "https://github.com/webframp/sicp-info"
+                 (:sym upstream :url "https://github.com/webframp/sicp-info"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1572,7 +1573,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'prescient
       :comment nil
       :folder (concat my-module-folder "prescient.el")
-      :remotes '((upstream :url "https://github.com/radian-software/prescient.el"
+      :remotes '((:sym upstream :url "https://github.com/radian-software/prescient.el"
                            :alias "origin"))
       :remote-default 'upstream
       :source-control 'git
@@ -1585,9 +1586,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'pos-tip
       :comment nil
       :folder (concat my-module-folder "pos-tip")
-      :remotes '((mine :url "https://github.com/miketz/pos-tip"
+      :remotes '((:sym mine :url "https://github.com/miketz/pos-tip"
                        :alias "origin")
-                 (upstream :url "https://github.com/pitkali/pos-tip"
+                 (:sym upstream :url "https://github.com/pitkali/pos-tip"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1600,9 +1601,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'powershell
       :comment nil
       :folder (concat my-module-folder "powershell.el")
-      :remotes '((mine :url "https://github.com/miketz/powershell.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/powershell.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/jschaf/powershell.el"
+                 (:sym upstream :url "https://github.com/jschaf/powershell.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1615,9 +1616,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'highlight-indent-guides
       :comment nil
       :folder (concat my-module-folder "highlight-indent-guides")
-      :remotes '((mine :url "https://github.com/miketz/highlight-indent-guides"
+      :remotes '((:sym mine :url "https://github.com/miketz/highlight-indent-guides"
                        :alias "origin")
-                 (upstream :url "https://github.com/DarthFennec/highlight-indent-guides"
+                 (:sym upstream :url "https://github.com/DarthFennec/highlight-indent-guides"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1630,9 +1631,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'icicles
       :comment nil
       :folder (concat my-module-folder "icicles")
-      :remotes '((mine :url "https://github.com/miketz/icicles"
+      :remotes '((:sym mine :url "https://github.com/miketz/icicles"
                        :alias "origin")
-                 (mirror :url "https://github.com/emacsmirror/icicles"
+                 (:sym mirror :url "https://github.com/emacsmirror/icicles"
                          :alias "mirror"))
       :remote-default 'mine
       :source-control 'git
@@ -1647,7 +1648,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'hyperspec
       :comment nil
       :folder (concat my-module-folder "hyperspec")
-      :remotes '((mine :url "https://github.com/miketz/hyperspec"
+      :remotes '((:sym mine :url "https://github.com/miketz/hyperspec"
                        :alias "origin"))
       :remote-default 'mine
       :source-control 'git
@@ -1660,7 +1661,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'flames-of-freedom
       :comment nil
       :folder (concat my-module-folder "FlamesOfFreedom")
-      :remotes '((upstream :url "https://github.com/wiz21b/FlamesOfFreedom" ; just a fun pacakge so no fork.
+      :remotes '((:sym upstream :url "https://github.com/wiz21b/FlamesOfFreedom" ; just a fun pacakge so no fork.
                            :alias "origin"))
       :remote-default 'upstream
       :source-control 'git
@@ -1673,7 +1674,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'indium
       :comment nil
       :folder (concat my-module-folder "Indium")
-      :remotes '((upstream :url "https://github.com/NicolasPetton/Indium"
+      :remotes '((:sym upstream :url "https://github.com/NicolasPetton/Indium"
                            :alias "origin"))
       :remote-default 'upstream
       :source-control 'git
@@ -1691,9 +1692,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'posframe
       :comment nil
       :folder (concat my-module-folder "posframe")
-      :remotes '((mine :url "https://github.com/miketz/posframe"
+      :remotes '((:sym mine :url "https://github.com/miketz/posframe"
                        :alias "origin")
-                 (upstream :url "https://github.com/tumashu/posframe"
+                 (:sym upstream :url "https://github.com/tumashu/posframe"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1706,9 +1707,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'ivy-posframe
       :comment nil
       :folder (concat my-module-folder "ivy-posframe")
-      :remotes '((mine :url "https://github.com/miketz/ivy-posframe"
+      :remotes '((:sym mine :url "https://github.com/miketz/ivy-posframe"
                        :alias "origin")
-                 (upstream :url "https://github.com/tumashu/ivy-posframe"
+                 (:sym upstream :url "https://github.com/tumashu/ivy-posframe"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1721,9 +1722,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'autothemer
       :comment nil
       :folder (concat my-module-folder "autothemer")
-      :remotes '((mine :url "https://github.com/miketz/autothemer"
+      :remotes '((:sym mine :url "https://github.com/miketz/autothemer"
                        :alias "origin")
-                 (upstream :url "https://github.com/jasonm23/autothemer"
+                 (:sym upstream :url "https://github.com/jasonm23/autothemer"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1736,9 +1737,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'company
       :comment nil
       :folder (concat my-module-folder "company-mode")
-      :remotes '((mine :url "https://github.com/miketz/company-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/company-mode"
                        :alias "origin")
-                 (upstream :url "https://github.com/company-mode/company-mode"
+                 (:sym upstream :url "https://github.com/company-mode/company-mode"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1751,9 +1752,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'company-web
       :comment nil
       :folder (concat my-module-folder "company-web")
-      :remotes '((mine :url "https://github.com/miketz/company-web"
+      :remotes '((:sym mine :url "https://github.com/miketz/company-web"
                        :alias "origin")
-                 (upstream :url "https://github.com/osv/company-web"
+                 (:sym upstream :url "https://github.com/osv/company-web"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1767,9 +1768,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'company-lsp
       :comment nil
       :folder (concat my-module-folder "company-lsp")
-      :remotes '((mine :url "https://github.com/miketz/company-lsp"
+      :remotes '((:sym mine :url "https://github.com/miketz/company-lsp"
                        :alias "origin")
-                 (upstream :url "https://github.com/tigersoldier/company-lsp"
+                 (:sym upstream :url "https://github.com/tigersoldier/company-lsp"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1783,9 +1784,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'web-completion-data
       :comment nil
       :folder (concat my-module-folder "web-completion-data")
-      :remotes '((mine :url "https://github.com/miketz/web-completion-data"
+      :remotes '((:sym mine :url "https://github.com/miketz/web-completion-data"
                        :alias "origin")
-                 (upstream :url "https://github.com/osv/web-completion-data"
+                 (:sym upstream :url "https://github.com/osv/web-completion-data"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1799,7 +1800,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Alternative to highlight-indent-guides."
       :folder my-module-folder
       :file-single "visual-indentation-mode.el"
-      :remotes '((upstream :url "https://github.com/skeeto/visual-indentation-mode"
+      :remotes '((:sym upstream :url "https://github.com/skeeto/visual-indentation-mode"
                            :alias "upstream"))
       :remote-default 'upstream
       :source-control 'git
@@ -1813,7 +1814,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Set environemnt vars on mac."
       :folder my-module-folder
       :file-single "exec-path-from-shell.el"
-      :remotes '((upstream :url "https://github.com/purcell/exec-path-from-shell"
+      :remotes '((:sym upstream :url "https://github.com/purcell/exec-path-from-shell"
                            :alias "upstream"))
       :remote-default 'upstream
       :source-control 'git
@@ -1827,10 +1828,10 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "vc-fossil.el"
-      :remotes '((upstream :url "https://chiselapp.com/user/venks/repository/emacs-fossil"
+      :remotes '((:sym upstream :url "https://chiselapp.com/user/venks/repository/emacs-fossil"
                            :alias "upstream"
                            :type fossil?)
-                 (mirror :url "https://github.com/venks1/emacs-fossil/"
+                 (:sym mirror :url "https://github.com/venks1/emacs-fossil/"
                            :alias "mirror"))
       :remote-default 'mirror
       :source-control 'git
@@ -1844,7 +1845,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "lusty-explorer.el"
-      :remotes '((upstream :url "https://github.com/sjbach/lusty-emacs"
+      :remotes '((:sym upstream :url "https://github.com/sjbach/lusty-emacs"
                            :alias "upstream"))
       :remote-default 'upstream
       :source-control 'git
@@ -1858,7 +1859,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "feebleline.el"
-      :remotes '((upstream :url "https://github.com/tautologyclub/feebleline"
+      :remotes '((:sym upstream :url "https://github.com/tautologyclub/feebleline"
                            :alias "upstream"))
       :remote-default 'upstream
       :source-control 'git
@@ -1871,13 +1872,13 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'fennel-mode
       :comment nil
       :folder (concat my-module-folder "fennel-mode")
-      :remotes '((mine :url "https://github.com/miketz/fennel-mode"
+      :remotes '((:sym mine :url "https://github.com/miketz/fennel-mode"
                        :alias "origin")
-                 (upstream :url "https://git.sr.ht/~technomancy/fennel-mode"
+                 (:sym upstream :url "https://git.sr.ht/~technomancy/fennel-mode"
                            :alias "upstream")
                  ;; used this mirror for my "mine" fork on github. But
                  ;; completly unused.
-                 (mirror :url "https://github.com/emacsmirror/fennel-mode"
+                 (:sym mirror :url "https://github.com/emacsmirror/fennel-mode"
                          :alias "mirror"))
       :remote-default 'mine
       :source-control 'git
@@ -1890,9 +1891,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'vertico
       :comment nil
       :folder (concat my-module-folder "vertico")
-      :remotes '((mine :url "https://github.com/miketz/vertico"
+      :remotes '((:sym mine :url "https://github.com/miketz/vertico"
                        :alias "origin")
-                 (upstream :url "https://github.com/minad/vertico"
+                 (:sym upstream :url "https://github.com/minad/vertico"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1905,9 +1906,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'bug-hunter
       :comment nil
       :folder (concat my-module-folder "elisp-bug-hunter")
-      :remotes '((mine :url "https://github.com/miketz/elisp-bug-hunter"
+      :remotes '((:sym mine :url "https://github.com/miketz/elisp-bug-hunter"
                        :alias "origin")
-                 (upstream :url "https://github.com/Malabarba/elisp-bug-hunter"
+                 (:sym upstream :url "https://github.com/Malabarba/elisp-bug-hunter"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1920,9 +1921,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'typescript-mode
       :comment nil
       :folder (concat my-module-folder "typescript.el")
-      :remotes '((mine :url "https://github.com/miketz/typescript.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/typescript.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/emacs-typescript/typescript.el"
+                 (:sym upstream :url "https://github.com/emacs-typescript/typescript.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1935,9 +1936,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'tide
       :comment nil
       :folder (concat my-module-folder "tide")
-      :remotes '((mine :url "https://github.com/miketz/tide"
+      :remotes '((:sym mine :url "https://github.com/miketz/tide"
                        :alias "origin")
-                 (upstream :url "https://github.com/ananthakumaran/tide"
+                 (:sym upstream :url "https://github.com/ananthakumaran/tide"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1955,9 +1956,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'compat
       :comment nil
       :folder (concat my-module-folder "compat.el")
-      :remotes '((mine :url "https://github.com/miketz/compat.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/compat.el"
                        :alias "origin")
-                 (mirror :url "https://github.com/phikal/compat.el"
+                 (:sym mirror :url "https://github.com/phikal/compat.el"
                          :alias "mirror"))
       :remote-default 'mine
       :source-control 'git
@@ -1970,9 +1971,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'slime-volleyball
       :comment nil
       :folder (concat my-module-folder "slime-volleyball")
-      :remotes '((mine :url "https://github.com/miketz/slime-volleyball"
+      :remotes '((:sym mine :url "https://github.com/miketz/slime-volleyball"
                        :alias "origin")
-                 (upstream :url "https://github.com/fitzsim/slime-volleyball"
+                 (:sym upstream :url "https://github.com/fitzsim/slime-volleyball"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -1985,9 +1986,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'macrostep
       :comment nil
       :folder (concat my-module-folder "macrostep")
-      :remotes '((mine :url "https://github.com/miketz/macrostep"
+      :remotes '((:sym mine :url "https://github.com/miketz/macrostep"
                        :alias "origin")
-                 (upstream :url "https://github.com/joddie/macrostep"
+                 (:sym upstream :url "https://github.com/joddie/macrostep"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -2000,9 +2001,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'sx
       :comment nil
       :folder (concat my-module-folder "sx.el")
-      :remotes '((mine :url "https://github.com/miketz/sx.el"
+      :remotes '((:sym mine :url "https://github.com/miketz/sx.el"
                        :alias "origin")
-                 (upstream :url "https://github.com/vermiculus/sx.el"
+                 (:sym upstream :url "https://github.com/vermiculus/sx.el"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
@@ -2019,7 +2020,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'sunrise
       :comment nil
       :folder (concat my-module-folder "sunrise-commander")
-      :remotes '((upstream :url "https://github.com/sunrise-commander/sunrise-commander"
+      :remotes '((:sym upstream :url "https://github.com/sunrise-commander/sunrise-commander"
                            :alias "upstream"))
       :remote-default 'upstream
       :source-control 'git
@@ -2033,7 +2034,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "jsonian.el"
-      :remotes '((upstream :url "https://github.com/iwahbe/jsonian"
+      :remotes '((:sym upstream :url "https://github.com/iwahbe/jsonian"
                            :alias "upstream"))
       :remote-default nil
       :source-control 'git
@@ -2047,9 +2048,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "highlight-tail.el"
-      :remotes '((upstream :url "https://www.emacswiki.org/emacs/highlight-tail.el"
+      :remotes '((:sym upstream :url "https://www.emacswiki.org/emacs/highlight-tail.el"
                            :alias "upstream")
-                 (mirror :url "https://github.com/ahungry/emacswiki-mirror/blob/master/highlight-tail.el"
+                 (:sym mirror :url "https://github.com/ahungry/emacswiki-mirror/blob/master/highlight-tail.el"
                          :alias "mirror"))
       :remote-default nil
       :source-control 'git
@@ -2063,12 +2064,12 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "key-chord.el"
-      :remotes '((wiki :url "https://www.emacswiki.org/emacs/KeyChord"
+      :remotes '((:sym wiki :url "https://www.emacswiki.org/emacs/KeyChord"
                        :alias "wiki")
                  ;; orphanage is used by MELPA
                  (orphanage :url "https://github.com/emacsorphanage/key-chord"
                             :alias "orphanage")
-                 (mirror :url "https://github.com/emacsmirror/emacswiki.org/blob/master/key-chord.el"
+                 (:sym mirror :url "https://github.com/emacsmirror/emacswiki.org/blob/master/key-chord.el"
                          :alias "mirror"))
       :remote-default nil
       :source-control 'git
@@ -2082,7 +2083,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "profile-dotemacs.el"
-      :remotes '((wiki :url "https://www.emacswiki.org/emacs/ProfileDotEmacs"
+      :remotes '((:sym wiki :url "https://www.emacswiki.org/emacs/ProfileDotEmacs"
                        :alias "wiki"))
       :remote-default nil
       :source-control 'git
@@ -2098,7 +2099,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "dired-details.el"
-      :remotes '((wiki :url "https://www.emacswiki.org/emacs/DiredDetails"
+      :remotes '((:sym wiki :url "https://www.emacswiki.org/emacs/DiredDetails"
                        :alias "wiki"))
       :remote-default nil
       :source-control 'git
@@ -2159,17 +2160,17 @@ This is usualy (always?) the symbol the package uses for (provide) and (require)
 A module can have multiple remotes.
 REMOTE-SYM will most often be `mine' or `upstream' by convention."
   (let* ((remote (cl-remove-if (lambda (remote)
-                                 (not (eq (car remote) remote-sym)))
+                                 (not (eq (cl-getf remote :sym) remote-sym)))
                                (module-remotes mod))))
     remote))
 
 (defun my-get-remote-info (remote)
   "For REMOTE extract the git remote info.
 As a list of strings of the form (URL GIT-ALIAS). "
-  ;; TODO: Find a better way to extract the info. Rather than relying on position.
+  ;; DONE: Find a better way to extract the info. Rather than relying on position.
   ;;       Maybe use a struct for remotes. Or plists with cl-getf
-  (let ((url (caddar remote))
-        (alias (nth 4 (car remote))))
+  (let ((url (cl-getf remote :url))
+        (alias (cl-getf remote :alias)))
     `(,url ,alias)))
 
 (defun my-byte-compile-all-notElpa-folders ()

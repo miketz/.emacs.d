@@ -2174,6 +2174,42 @@ As a list of strings of the form (URL GIT-ALIAS). "
         (alias (cl-getf remote :alias)))
     `(,url ,alias)))
 
+(cl-defun my-git-remote-setup-p (mod remote-sym)
+  "Return T if the git remote is wired up on the git side.
+This means a matching alias and url."
+  ;; GUARD: must pass in a good module
+  (when (null mod)
+    (cl-return-from my-git-remote-setup-p nil))
+
+  (let* ((remote (my-get-remote mod remote-sym)))
+    ;; GUARD: remote must be configured in `my-modules'
+    (when (null remote)
+      (cl-return-from my-git-remote-setup-p nil))
+
+    (let* ((url (cl-getf remote :url))
+           (alias (cl-getf remote :alias))
+           ;; important that we shadow `default-directory' so the git command
+           ;; runs against the correct git folder
+           (output (let ((default-directory (module-folder mod)))
+                     (shell-command-to-string "git remote"))))
+      ;; GUARD: if 0 remotes from "git remote" command return nil
+      (when (or (null output)
+                (= 0 (length (s-trim output))))
+        (cl-return-from my-git-remote-setup-p nil))
+
+      ;; split the raw shelloutput to a list of alias strings
+      (let* ((git-remote-aliases (s-split-words (s-trim output)))
+             (output2 (let ((default-directory (module-folder mod)))
+                        (shell-command-to-string (concat "git remote get-url " alias)))))
+        ;; GUARD: the alias we are looking for must be in the git output
+        (when (null (cl-find alias git-remote-aliases :test #'string-equal))
+          (cl-return-from my-git-remote-setup-p nil))
+
+        ;; finally, check the url for this alias.
+        (let* ((output-url (let ((default-directory (module-folder mod)))
+                             (shell-command-to-string (concat "git remote get-url " alias)))))
+          (string-equal url (s-trim output-url)))))))
+
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."
   (interactive)

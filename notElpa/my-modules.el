@@ -2266,6 +2266,50 @@ Some operations only make sense for git submodules."
     ;; return the results for informational purposes.
     statuses))
 
+(defun my-fetch-all-upstream-remotes ()
+  "Run git fetch for each upstream remote.
+Collect status info for each so I'll know which to merge.
+Merge will be done manually after this."
+  (interactive)
+  (let ((git-submodules (my-get-all-git-submodules))
+        (statuses '()))
+    (cl-loop for m in git-submodules
+             do
+             (cl-block 'loop
+               (let ((rem (my-get-remote m 'upstream)))
+                 ;; GUARD: upstream must be configured in `my-modules'
+                 (when (null rem)
+                   (push `(,(module-name m) 'upstream-not-configured-in-my-modules) statuses)
+                   (cl-return-from 'loop)) ;; continue
+
+                 ;; GUARD: don't attempt a fetch if the upstream remote is not set up on the git side
+                 (when (not (my-git-remote-setup-p m 'upstream))
+                   (push `(,(module-name m) 'upstream-remote-not-created-on-git-side) statuses)
+                   (cl-return-from 'loop)) ;; continue
+
+                 ;; fetch
+                 (let* ((default-directory (module-folder m))
+                        ;; actual git fetch run is here
+                        (shell-output (s-trim (shell-command-to-string
+                                               (concat "git fetch " (cl-getf rem :alias))))))
+                   ;; TODO: find a better way of detecting error. They could change the error message to
+                   ;; not start with "error" and that would break this code.
+                   (if (s-starts-with-p "error" shell-output)
+                       ;; just return the error msg itself. This string is inconsitent with
+                       ;; the symbol return types, but it should be OK as it's just a report
+                       ;; of what happened. No real processing on it.
+                       (push `(,(module-name m) shell-output) statuses)
+                     ;; else SUCCESS
+                     (if (= (length shell-output) 0)
+                         ;; New code fetched
+                         (push `(,(module-name m) 'fetch-success-no-new-code) statuses)
+                       ;; No new code fetched. Although this doesn't mean there isn't upstream code that
+                       ;; still needs to be merged into the local branch from a previous fetch.
+                       ;; It just means this particlar latest fetch did not download any new code.
+                       (push `(,(module-name m) 'fetch-success-new-code) statuses)))))))
+    ;; return the results for informational purposes.
+    statuses))
+
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."
   (interactive)

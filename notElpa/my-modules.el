@@ -2230,7 +2230,31 @@ REMOTE-SYM will usually be `mine' or `upstream'."
           (remote (my-get-remote mod remote-sym)))
       (shell-command-to-string (concat "git remote add "
                                        (cl-getf remote :alias) " "
-                                       (cl-getf remote :url))))))
+                                       (cl-getf remote :url)))
+      'remote-created)))
+
+(defun my-get-all-git-submodules ()
+  "Return the subset of `my-modules' that are git submodules.
+Some operations only make sense for git submodules."
+  (cl-remove-if (lambda (m)
+                  (not (module-submodule-p m)))
+                my-modules))
+
+(defun my-setup-all-upstream-remotes-if-missing ()
+  "For all git submodules set the upstream remote if it is misisng."
+  (interactive)
+  (let ((git-submodules (my-get-all-git-submodules))
+        (statuses '()))
+    (cl-loop for m in git-submodules
+             do
+             ;; by convention the upstream remote is called "upstream".
+             ;; when we first clone from git it is from my fork. Git does not track remotes, so the
+             ;; upstream remotes are "lost". We are creating them now from the info in `my-modules'.
+             (let ((result (my-git-remote-create m 'upstream)))
+               ;; track the results
+               (push `(,(module-name m) ,result) statuses)))
+    ;; return the results for informational purposes.
+    statuses))
 
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."

@@ -2518,17 +2518,27 @@ latest upstream code."
                            (s-ends-with-p "libegit2" (cl-first f))))
                      (directory-files-and-attributes my-module-folder
                                                      t "^[^.]" t)))
-         (dir-names (mapcar #'cl-first dir-infos)))
+         (dir-names (mapcar #'cl-first dir-infos))
+         (statuses '()))
     (cl-loop for dir in dir-names
              do
-             (my-delete-elc-files dir)
-             (byte-recompile-directory
-              dir
-              0 ;; 0 means compile .el files if .elc is missing.
-              t) ;; t means force re-compile even if the .elc is up-to-date. May
-             ;; be useful if the Emacs version changed and should have an
-             ;; .elc compiled again to be compatible.
-             )))
+             (if (eq 'success
+                     (ignore-errors ;; dont' stop if 1 package is bad
+                       (my-delete-elc-files dir)
+                       (byte-recompile-directory
+                        dir
+                        0 ;; 0 means compile .el files if .elc is missing.
+                        t) ;; t means force re-compile even if the .elc is up-to-date. May
+                       ;; be useful if the Emacs version changed and should have an
+                       ;; .elc compiled again to be compatible.
+                       'success))
+                 ;; NOTE: this doesn't mean byte compliation was sucessful for all files
+                 ;; just that no elisp-level errors were thrown.
+                 (push `(,dir success) statuses)
+               ;; else exception during byt complilation
+               (push `(,dir error) statuses)))
+    ;; return the results for informational purposes.
+    statuses))
 
 (defun my--scrape-module-info ()
   "This is is for dev-time use only.

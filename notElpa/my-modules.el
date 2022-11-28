@@ -2236,7 +2236,9 @@ REMOTE-SYM will usually be `mine' or `upstream'."
       ;; TODO: find a better way of detecting error. They could change the error message to
       ;; not start with "error" and that would break this code.
       (if (s-starts-with-p "error" shell-output)
-          ;; just return the error msg itsel
+          ;; just return the error msg itself. This string is inconsitent with
+          ;; the symbol return types, but it should be OK as it's just a report
+          ;; of what happened. No real processing on it.
           (s-trim shell-output)
           ;; else SUCCESS
           'remote-created))))

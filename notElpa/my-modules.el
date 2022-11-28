@@ -2226,12 +2226,19 @@ REMOTE-SYM will usually be `mine' or `upstream'."
       (cl-return-from my-git-remote-create 'already-created))
 
     ;; OK, now it's safe to create the remote.
-    (let ((default-directory (module-folder mod))
-          (remote (my-get-remote mod remote-sym)))
-      (shell-command-to-string (concat "git remote add "
-                                       (cl-getf remote :alias) " "
-                                       (cl-getf remote :url)))
-      'remote-created)))
+    (let* ((default-directory (module-folder mod))
+           (remote (my-get-remote mod remote-sym))
+           ;; creating the remote here
+           (shell-output (shell-command-to-string (concat "git remote add "
+                                                          (cl-getf remote :alias) " "
+                                                          (cl-getf remote :url)))))
+      ;; TODO: find a better way of detectijng error. They could change the error message to
+      ;; not start with "error" and that would break this code.
+      (if (s-starts-with-p "error" shell-output)
+          ;; just return the error msg itsel
+          (s-trim shell-output)
+          ;; else SUCCESS
+          'remote-created))))
 
 (defun my-get-all-git-submodules ()
   "Return the subset of `my-modules' that are git submodules.

@@ -2225,8 +2225,12 @@ REMOTE-SYM will usually be `mine' or `upstream'."
     (when (my-git-remote-setup-p mod remote-sym)
       (cl-return-from my-git-remote-create 'already-created))
 
-    ;; TODO: implement this for real
-    'ok-now-creating-git-remote))
+    ;; OK, now it's safe to create the remote.
+    (let ((default-directory (module-folder mod))
+          (remote (my-get-remote mod remote-sym)))
+      (shell-command-to-string (concat "git remote add "
+                                       (cl-getf remote :alias) " "
+                                       (cl-getf remote :url))))))
 
 (defun my-byte-compile-all-notElpa-folders ()
   "Byte compile .el files in every folder under /notElpa."

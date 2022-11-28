@@ -6,8 +6,8 @@
 ;;; Avoiding the pacakge manager package.el and elpa/melpa/etc.
 ;;;
 ;;; This file is more about documenting info about pacakges than handling the
-;;; packages. Using git features to manually handle packages. This file is just
-;;; info that may be useful. Maybe a few automated things will be added like
+;;; packages.  Using git features to manually handle packages.  This file is
+;;; just info that may be useful.  Maybe a few automated things will be added like
 ;;; byte compiling elisp files.
 
 ;;; Code:
@@ -2144,6 +2144,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
 
 
 (defun my-folder-p (f)
+  "Quick function to determine if F is a folder.
+Where F is from fn `directory-files-and-attributes'."
   (cl-second f))
 
 
@@ -2151,7 +2153,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
 
 (defun my-get-module-by-symbol (mod-symbol)
   "Return module by MOD-SYMBOL.
-This is usualy (always?) the symbol the package uses for (provide) and (require)."
+This is usually the symbol the package uses for (provide) and (require)."
   (cl-find mod-symbol my-modules :test (lambda (sym mod)
                                          (eq (module-name mod) sym))))
 
@@ -2169,13 +2171,13 @@ REMOTE-SYM will most often be `mine' or `upstream' by convention."
 ;; "info-extraction" fn as plists are already easy to extrat info from.
 (defun my-get-remote-info (remote)
   "For REMOTE extract the git remote info.
-As a list of strings of the form (URL GIT-ALIAS). "
+As a list of strings of the form (URL GIT-ALIAS)."
   (let ((url (cl-getf remote :url))
         (alias (cl-getf remote :alias)))
     `(,url ,alias)))
 
 (cl-defun my-git-remote-setup-p (mod remote-sym)
-  "Return T if the git remote is wired up on the git side.
+  "Return T if the git remote for MOD is wired up on the git side.
 This means a matching alias and url.
 REMOTE-SYM will usually be `mine' or `upstream'."
   ;; GUARD: must pass in a good module
@@ -2199,9 +2201,7 @@ REMOTE-SYM will usually be `mine' or `upstream'."
         (cl-return-from my-git-remote-setup-p nil))
 
       ;; split the raw shelloutput to a list of alias strings
-      (let* ((git-remote-aliases (s-split-words (s-trim output)))
-             (output2 (let ((default-directory (module-folder mod)))
-                        (shell-command-to-string (concat "git remote get-url " alias)))))
+      (let* ((git-remote-aliases (s-split-words (s-trim output))))
         ;; GUARD: the alias we are looking for must be in the git output
         (when (null (cl-find alias git-remote-aliases :test #'string-equal))
           (cl-return-from my-git-remote-setup-p nil))
@@ -2212,6 +2212,7 @@ REMOTE-SYM will usually be `mine' or `upstream'."
           (string-equal url (s-trim output-url)))))))
 
 (cl-defun my-git-remote-create (mod remote-sym)
+  "For MOD, create the configured REMOTE-SYM as a remote on the git side."
   ;; GUARD: mod must be provided
   (when (null mod)
     (cl-return-from my-git-remote-create nil))
@@ -2295,7 +2296,7 @@ Some operations only make sense for git submodules."
 
 (defun my--scrape-module-info ()
   "This is is for dev-time use only.
-Generates a skeleton list for `my-modules'. With possilbly incorrect and
+Generates a skeleton list for `my-modules'.  With possilbly incorrect and
 imcomplete info about the modules.
 Saves me from typing a lot of module stuff."
   (let* ((dir-infos (cl-remove-if

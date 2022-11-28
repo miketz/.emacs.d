@@ -42,6 +42,10 @@ Some info may be purely for informational/doc purposes."
   ;; t if using a submodule within /.emacs.d/
   ;; nil if using a repo outside of /.emacs.d/
   (submodule-p nil)
+  ;; The canocial branch used by the upstream. Usually "master" or "main".
+  (main-branch nil) ; master
+  ;; Usually the same as `main-branch' but sometimes a private "mine" branch
+  ;; with a few odd tweaks. This is the branch I use locally on my side.
   (use-branch nil) ; master, mine
   ;; git SHA (or other vc equiv) to use. Alternative to branch as branch means
   ;; you are following latest tip of that branch. A specific commit is more
@@ -68,6 +72,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -83,6 +88,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -98,6 +104,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25") (ivy "0.10.0"))
       :depend-soft '()
@@ -113,6 +120,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -128,6 +136,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.3")
                      (ace-window "0.9.0")
@@ -148,6 +157,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.1")
                      (cl-lib "0.5"))
@@ -165,6 +175,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((evil "0"))
       :depend-soft '()
@@ -179,6 +190,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '((emacs "24") (evil "1.0.9") (cl-lib "0.5"))
       :depend-soft '()
@@ -194,6 +206,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -209,6 +222,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -224,6 +238,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24"))
       :depend-soft '()
@@ -239,6 +254,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1"))
       :depend-soft '()
@@ -254,6 +270,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.4"))
       :depend-soft '()
@@ -269,6 +286,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1")
                      ;; async not used anymore? (async "20180527")
@@ -292,6 +310,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1"))
       :depend-soft '()
@@ -309,6 +328,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -322,6 +342,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
+      :main-branch "main"
       :use-branch "main"
       :depend-hard '()
       :depend-soft '()
@@ -337,6 +358,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -352,6 +374,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -369,6 +392,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -382,6 +406,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.1"))
       :depend-soft '()
@@ -397,6 +422,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -412,6 +438,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -427,6 +454,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -442,6 +470,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '((undercover))
@@ -457,6 +486,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -470,6 +500,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -486,6 +517,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((dash) (s) (async) (flx) (ov) (f) (shut-up) (deferred))
       :depend-soft '()
@@ -502,6 +534,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -517,6 +550,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -532,6 +566,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -547,6 +582,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -562,6 +598,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -577,6 +614,7 @@ scraped out of cider. I was able to make eros work for common lisp evals."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((emacs "24.4") (slime "2.13") (company "0.9.0"))
       :depend-soft '()
@@ -593,6 +631,7 @@ sluggish. Not currently using."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -609,6 +648,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -624,6 +664,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "26.1")
                      (dash "2.14.1")
@@ -646,6 +687,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((s "1.7.0")
                      (dash "2.2.0"))
@@ -662,6 +704,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((dash "2.12.0"))
       :depend-soft '()
@@ -677,6 +720,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1"))
       :depend-soft '((edit-indirect))
@@ -692,6 +736,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -707,6 +752,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -722,6 +768,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((emacs "25.1")
                      (rust-mode "0.2.0")
@@ -742,6 +789,7 @@ mode itself. External language servers are required to use it of course."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1")
                      (async "1.9.4")
@@ -760,6 +808,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1")
                      (transient "0.1.0")
@@ -777,6 +826,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -792,6 +842,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -807,6 +858,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((emacs "24.4") (js2-mode "20150908"))
       :depend-soft '()
@@ -822,6 +874,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((json-snatcher "1.0.0") (emacs "24.4"))
       :depend-soft '()
@@ -837,6 +890,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -852,6 +906,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -867,6 +922,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '((company) (clue))
@@ -882,6 +938,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -897,6 +954,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -912,6 +970,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1"))
       :depend-soft '()
@@ -927,6 +986,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -942,6 +1002,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -957,6 +1018,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -972,6 +1034,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -987,6 +1050,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((epl "0.8"))
       :depend-soft '()
@@ -1002,6 +1066,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1017,6 +1082,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1032,6 +1098,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1047,6 +1114,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((dash "2.12.1")
                      (pkg-info "0.4")
@@ -1066,6 +1134,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1081,6 +1150,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1096,6 +1166,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "26.1"))
       :depend-soft '()
@@ -1111,6 +1182,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((avy "0.4.0"))
       :depend-soft '((counsel) (w3m))
@@ -1126,6 +1198,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((avy "0.5.0"))
       :depend-soft '()
@@ -1141,6 +1214,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((markup-faces "1.0.0"))
       :depend-soft '()
@@ -1156,6 +1230,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master" ;; TODO: use branch to ignore .elc files
       :depend-hard '()
       :depend-soft '()
@@ -1172,6 +1247,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1185,6 +1261,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1199,6 +1276,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1213,6 +1291,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1230,6 +1309,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1244,6 +1324,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1258,6 +1339,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1272,6 +1354,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1286,6 +1369,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1300,6 +1384,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git ;; upstream uses hg (mercurial)
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1314,6 +1399,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1328,6 +1414,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1343,6 +1430,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1357,6 +1445,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '((emacs "24.3") (esxml "0.3.1"))
       :depend-soft '()
@@ -1371,6 +1460,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '((emacs "24.3"))
       :depend-soft '()
@@ -1385,6 +1475,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '((emacs "24.3"))
       :depend-soft '()
@@ -1400,6 +1491,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1417,6 +1509,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((dash "2.12.0") (esxml "0.3.3") (emacs "24.4"))
       :depend-soft '()
@@ -1430,6 +1523,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1445,6 +1539,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1460,6 +1555,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1475,6 +1571,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.3"))
       :depend-soft '()
@@ -1490,6 +1587,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1505,6 +1603,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1520,6 +1619,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1535,6 +1635,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1550,6 +1651,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1565,6 +1667,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1578,6 +1681,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
+      :main-branch "main"
       :use-branch "main"
       :depend-hard '()
       :depend-soft '()
@@ -1593,6 +1697,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1608,6 +1713,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1623,6 +1729,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1638,6 +1745,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1653,6 +1761,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1666,6 +1775,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1"))
       :depend-soft '()
@@ -1679,6 +1789,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25")
                      (seq "2.16")
@@ -1699,6 +1810,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((emacs "26.1"))
       :depend-soft '()
@@ -1714,6 +1826,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((emacs "26.0") (posframe "1.0.0") (ivy "0.13.0"))
       :depend-soft '()
@@ -1729,6 +1842,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((dash "2.10.0") (emacs "26.1"))
       :depend-soft '()
@@ -1744,6 +1858,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.3"))
       :depend-soft '()
@@ -1759,6 +1874,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '((company "0.8.0") (dash "2.8.0") (cl-lib "0.5.0")
                      (web-completion-data "0.1.0"))
@@ -1775,6 +1891,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1") (lsp-mode "6.0")
                      (company "0.9.0") (s "1.2.0") (dash "2.11.0"))
@@ -1791,6 +1908,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
@@ -1805,6 +1923,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p nil
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1819,6 +1938,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p nil
+      :main-branch nil
       :use-branch nil
       :depend-hard '((emacs "24.1") (cl-lib "0.6"))
       :depend-soft '()
@@ -1836,6 +1956,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mirror
       :source-control 'git
       :submodule-p nil
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1850,6 +1971,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p nil
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1864,6 +1986,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p nil
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -1883,6 +2006,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "main"
       :use-branch "mine"
       :depend-hard '((emacs "26.1"))
       :depend-soft '()
@@ -1898,6 +2022,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "main"
       :use-branch "main"
       :depend-hard '()
       :depend-soft '()
@@ -1913,6 +2038,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1928,6 +2054,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1943,6 +2070,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1")
                      (dash "2.10.0")
@@ -1963,6 +2091,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -1978,6 +2107,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "mine" ;; ignores .elc files
       :depend-hard '()
       :depend-soft '()
@@ -1993,6 +2123,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -2008,6 +2139,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "24.1")
                      (cl-lib "0.5")
@@ -2025,6 +2157,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'upstream
       :source-control 'git
       :submodule-p t
+      :main-branch "master"
       :use-branch "master"
       :depend-hard '()
       :depend-soft '()
@@ -2039,6 +2172,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -2055,6 +2189,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -2074,6 +2209,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -2088,6 +2224,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()
@@ -2104,6 +2241,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default nil
       :source-control 'git
       :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
       :use-branch nil
       :depend-hard '()
       :depend-soft '()

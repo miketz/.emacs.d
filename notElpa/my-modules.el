@@ -2473,13 +2473,16 @@ latest upstream code."
                  ;; run a diff so we know if there is code to merge in.
                  (let* ((default-directory (module-folder m))
                         ;; TODO: handle case where I use private branch "mine" with irrelvent
-                        ;; changes (like .gitignore). This causes the diff to always hit. Need
-                        ;; to start tracking the main branch of the project in addition to the branch
-                        ;; I use on my side
-                        (branch (module-use-branch m))
+                        ;; changes (like .gitignore). This causes the diff to always hit.
+                        ;; For now just compare the local "main" branch to the upstream "main".
+                        ;; This will work as long as keep both the "main" and "mine" branches
+                        ;; updated.
+                        (branch-main (module-main-branch m))
+                        (branch-i-use (module-use-branch m))
                         (cmd (concat "git diff "
-                                     branch " "
-                                     (cl-getf rem :alias) "/" branch))
+                                     ;; branch-i-use " " ;; TODO: incorporate branch-i-use
+                                     branch-main " "
+                                     (cl-getf rem :alias) "/" branch-main))
                         ;; actual git diff run is here
                         (shell-output (s-trim (shell-command-to-string cmd))))
                    ;; TODO: find a better way of detecting error. They could change the error message to

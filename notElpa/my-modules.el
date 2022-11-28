@@ -2232,7 +2232,7 @@ REMOTE-SYM will usually be `mine' or `upstream'."
            (shell-output (shell-command-to-string (concat "git remote add "
                                                           (cl-getf remote :alias) " "
                                                           (cl-getf remote :url)))))
-      ;; TODO: find a better way of detectijng error. They could change the error message to
+      ;; TODO: find a better way of detecting error. They could change the error message to
       ;; not start with "error" and that would break this code.
       (if (s-starts-with-p "error" shell-output)
           ;; just return the error msg itsel

@@ -2067,8 +2067,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remotes '((:sym wiki :url "https://www.emacswiki.org/emacs/KeyChord"
                        :alias "wiki")
                  ;; orphanage is used by MELPA
-                 (orphanage :url "https://github.com/emacsorphanage/key-chord"
-                            :alias "orphanage")
+                 (:sym orphanage :url "https://github.com/emacsorphanage/key-chord"
+                       :alias "orphanage")
                  (:sym mirror :url "https://github.com/emacsmirror/emacswiki.org/blob/master/key-chord.el"
                          :alias "mirror"))
       :remote-default nil

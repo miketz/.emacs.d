@@ -256,7 +256,7 @@ Some info may be purely for informational/doc purposes."
       :submodule-p t
       :main-branch "master"
       :use-branch "master"
-      :depend-hard '((emacs "25.1"))
+      :depend-hard '((emacs "25.1") (compat "28.1.1.0"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

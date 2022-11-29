@@ -811,7 +811,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :main-branch "master"
       :use-branch "master"
       :depend-hard '((emacs "25.1")
-                     (transient "0.1.0")
+                     (transient "0.3.0")
                      (wgrep "2.1.10"))
       :depend-soft '()
       :depend-bundled '())

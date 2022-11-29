@@ -2705,7 +2705,12 @@ Inserts a new line and the beginning and end with text values:
 ;;;----------------------------------------------------------------------------
 ;;; csharp-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/csharp-mode" load-path)
+(unless (fboundp #'csharp-mode)
+  ;; csharp-mode was added to core emacs in version 29. So avoid loading the
+  ;; separate pacakge if on emacs 29+. NOTE: check for the fn itself rather
+  ;; than the Emacs version becuase older Emacs 29's in package managers (brew)
+  ;; still don't have csharp-mode yet!!!
+  (push "~/.emacs.d/notElpa/csharp-mode" load-path))
 (autoload #'csharp-mode "csharp-mode" nil t)
 
 (push '("\\.cs$" . csharp-mode) auto-mode-alist)

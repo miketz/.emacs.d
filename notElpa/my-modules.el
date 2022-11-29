@@ -73,7 +73,7 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "mine"
+      :use-branch "master"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

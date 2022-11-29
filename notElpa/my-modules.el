@@ -287,7 +287,7 @@ Some info may be purely for informational/doc purposes."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "master"
+      :use-branch "mine" ;; ignore *.elc files
       :depend-hard '((emacs "25.1")
                      ;; async not used anymore? (async "20180527")
                      (dash "2.19.1")

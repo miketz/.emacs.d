@@ -688,7 +688,7 @@ mode itself. External language servers are required to use it of course."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "mine"
+      :use-branch "master"
       :depend-hard '((s "1.7.0")
                      (dash "2.2.0"))
       :depend-soft '()

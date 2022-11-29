@@ -2023,7 +2023,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "main"
-      :use-branch "main"
+      :use-branch "mine"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

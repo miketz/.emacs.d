@@ -2086,7 +2086,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "compat.el")
       :remotes '((:sym mine :url "https://github.com/miketz/compat.el"
                        :alias "origin")
-                 (:sym mirror :url "https://github.com/phikal/compat.el"
+                 ;; this is really a mirror, the the root upstream
+                 (:sym upstream :url "https://github.com/phikal/compat.el"
                          :alias "mirror"))
       :remote-default 'mine
       :source-control 'git

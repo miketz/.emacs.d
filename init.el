@@ -8483,23 +8483,23 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'vertico-grid-mode "vertico-grid" nil t)
 
 (with-eval-after-load 'vertico
-  ;; TODO: find a better way to implement SPC->hyphen behavior.
-  ;; Creating/destroying a keybind on the fly for each M-x key press seems
-  ;; wasteful.
-  (defun my-vertico-M-x ()
-    (interactive)
-    ;; insert "-" when you type " " like in default emacs M-x
-    (define-key vertico-map
-                (kbd "<SPC>")
-                (lambda ()
-                  (interactive)
-                  (insert ?-)))
-    ;; do the M-x
-    (call-interactively #'execute-extended-command)
-    ;; unbind the key as I don't want SPC -> hypen translation everywhere.
-    (define-key vertico-map (kbd "<SPC>") nil))
+  ;; ;; TODO: find a better way to implement SPC->hyphen behavior.
+  ;; ;; Creating/destroying a keybind on the fly for each M-x key press seems
+  ;; ;; wasteful.
+  ;; (defun my-vertico-M-x ()
+  ;;   (interactive)
+  ;;   ;; insert "-" when you type " " like in default emacs M-x
+  ;;   (define-key vertico-map
+  ;;               (kbd "<SPC>")
+  ;;               (lambda ()
+  ;;                 (interactive)
+  ;;                 (insert ?-)))
+  ;;   ;; do the M-x
+  ;;   (call-interactively #'execute-extended-command)
+  ;;   ;; unbind the key as I don't want SPC -> hypen translation everywhere.
+  ;;   (define-key vertico-map (kbd "<SPC>") nil))
 
-  (global-set-key (kbd "M-x") #'my-vertico-M-x)
+  ;; (global-set-key (kbd "M-x") #'my-vertico-M-x)
 
 
   (setq vertico-count 25))

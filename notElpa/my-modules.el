@@ -1502,6 +1502,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'num3-mode
       :comment nil
       :folder (concat my-module-folder "num3-mode")
+      ;; Upstream not wired up becuase it's in elpa. I think elpa combines
+      ;; multiple projects in 1 repo so it's difficutl to use an an "upstream".
+      ;; The "mine" fork is just a copy/paste of the code then upload to github.
       :remotes '((:sym mine :url "https://github.com/miketz/num3-mode"
                        :alias "origin"))
       :remote-default 'mine

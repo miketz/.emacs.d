@@ -1137,7 +1137,8 @@ Just a convenience to avoid checks against `my-ui-type'.")
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
-Choices: ivy fancy-ido grid-ido bare-ido helm icicles sallet selectrum fido
+`selectrum' has been removed as an option as it is relaced by vertico.
+Choices: ivy fancy-ido grid-ido bare-ido helm icicles sallet fido
 icomplete mish-mash vertico nil")
 
 ;;TODO: make ivy pop-up it's window on the Linux tty.
@@ -6655,22 +6656,23 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; selectrum. by raxod502. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/selectrum" load-path)
-;; add an autoload so I can use selectrum even if it's not `my-narrow-type'.
-(autoload #'selectrum-mode "selectrum" nil t)
+;; NOTE: selectrum git submodule removed. It has been replaced by vertico.
+;; (push "~/.emacs.d/notElpa/selectrum" load-path)
+;; ;; add an autoload so I can use selectrum even if it's not `my-narrow-type'.
+;; (autoload #'selectrum-mode "selectrum" nil t)
 
-(with-eval-after-load 'selectrum
-  (when my-use-evil-p
-    (evil-leader/set-key "b" #'switch-to-buffer))
+;; (with-eval-after-load 'selectrum
+;;   (when my-use-evil-p
+;;     (evil-leader/set-key "b" #'switch-to-buffer))
 
-  ;; NOTE: the selecturm author reccomends using his prescient for sorting.
-  (selectrum-prescient-mode 1)
-  (prescient-persist-mode))
+;;   ;; NOTE: the selecturm author reccomends using his prescient for sorting.
+;;   (selectrum-prescient-mode 1)
+;;   (prescient-persist-mode))
 
-(when (eq my-narrow-type 'selectrum)
-  (selectrum-mode 1)
-  ;; swiper-like search by the same author raxod502
-  (ctrlf-mode))
+;; (when (eq my-narrow-type 'selectrum)
+;;   (selectrum-mode 1)
+;;   ;; swiper-like search by the same author raxod502
+;;   (ctrlf-mode))
 
 
 ;;;----------------------------------------------------------------------------

@@ -1183,7 +1183,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "master"
+      :use-branch "mine"
       :depend-hard '((avy "0.5.0"))
       :depend-soft '()
       :depend-bundled '())

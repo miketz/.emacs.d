@@ -1724,8 +1724,9 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "icicles")
       :remotes '((:sym mine :url "https://github.com/miketz/icicles"
                        :alias "origin")
-                 (:sym mirror :url "https://github.com/emacsmirror/icicles"
-                         :alias "mirror"))
+                 ;; this is actually a mirror. The real upstream is emacs wiki.
+                 (:sym upstream :url "https://github.com/emacsmirror/icicles"
+                       :alias "mirror"))
       :remote-default 'mine
       :source-control 'git
       :submodule-p t

@@ -2263,23 +2263,25 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                                  (module-file-single mod))))
                (byte-compile-file file)))))
 
-(defun my-byte-compile-module ()
-  "Byte compile .el files for the selected module."
-  (interactive)
-  (let* ((mod-name (intern (completing-read "module: "
-                                            (mapcar (lambda (m)
-                                                      (module-name m))
-                                                    my-modules))))
-         (mod (car (cl-member mod-name
-                              my-modules
-                              :test (lambda (sym mod)
-                                      (eq sym (module-name mod)))))))
-    (my-delete-elc-files (module-folder mod))
+;; TODO: take module as fn arg or interactively entered by user. And correctly
+;;       handle single file packages. comment out until fixed.
+;; (defun my-byte-compile-module ()
+;;   "Byte compile .el files for the selected module."
+;;   (interactive)
+;;   (let* ((mod-name (intern (completing-read "module: "
+;;                                             (mapcar (lambda (m)
+;;                                                       (module-name m))
+;;                                                     my-modules))))
+;;          (mod (car (cl-member mod-name
+;;                               my-modules
+;;                               :test (lambda (sym mod)
+;;                                       (eq sym (module-name mod)))))))
+;;     (my-delete-elc-files (module-folder mod))
 
-    (byte-recompile-directory
-     (module-folder mod)
-     0 ;; 0 means compile .el files if .elc is missing.
-     t)))
+;;     (byte-recompile-directory
+;;      (module-folder mod)
+;;      0 ;; 0 means compile .el files if .elc is missing.
+;;      t)))
 
 
 (defun my-folder-p (f)

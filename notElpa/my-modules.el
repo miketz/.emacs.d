@@ -2239,17 +2239,29 @@ style. More importantly it avoids spamming rg as you type or prematurely."
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."
   (interactive)
-  (cl-loop for mod in my-modules
-           do
-           (my-delete-elc-files (module-folder mod))
 
-           (byte-recompile-directory
-            (module-folder mod)
-            0  ;; 0 means compile .el files if .elc is missing.
-            t) ;; t means force re-compile even if the .elc is up-to-date. May
-               ;; be useful if the Emacs version changed and should have an
-               ;; .elc compiled again to be compatible.
-           ))
+  ;; first compile git submodules. They ahve a dedicated folder so it makes
+  ;; sense to delete all the elc files in it.
+  (cl-loop for mod in (my-get-all-git-submodules)
+           do
+           (ignore-errors ;; dont' stop if 1 package is bad
+             (my-delete-elc-files (module-folder mod))
+
+             (byte-recompile-directory
+              (module-folder mod)
+              0 ;; 0 means compile .el files if .elc is missing.
+              t) ;; t means force re-compile even if the .elc is up-to-date. May
+             ;; be useful if the Emacs version changed and should have an
+             ;; .elc compiled again to be compatible.
+             ))
+
+  ;; now compile the "single file" modules.
+  (cl-loop for mod in (my-get-all-single-file-modules)
+           do
+           (ignore-errors ;; dont' stop if 1 package is bad
+             (let ((file (concat (module-folder mod)
+                                 (module-file-single mod))))
+               (byte-compile-file file)))))
 
 (defun my-byte-compile-module ()
   "Byte compile .el files for the selected module."
@@ -2375,6 +2387,15 @@ REMOTE-SYM will usually be `mine' or `upstream'."
 Some operations only make sense for git submodules."
   (cl-remove-if (lambda (m)
                   (not (module-submodule-p m)))
+                my-modules))
+
+(defun my-get-all-single-file-modules ()
+  "Return the subset of `my-modules' that are single files.
+Embedded into my .emacs.d/ config.  Not git submodules.
+Some operations only make sense for these single-file packages."
+  (cl-remove-if (lambda (m)
+                  (or (module-submodule-p m)
+                      (null (module-file-single m))))
                 my-modules))
 
 (defun my-setup-all-upstream-remotes-if-missing ()

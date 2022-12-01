@@ -1282,7 +1282,7 @@ Currently available on git branch: feature/native-comp.")
 ;;; my-modules
 ;;;----------------------------------------------------------------------------
 (autoload #'my-byte-compile-all-modules "my-modules" nil t)
-(autoload #'my-byte-compile-module "my-modules" nil t)
+;; (autoload #'my-byte-compile-module "my-modules" nil t)
 (autoload #'my-byte-compile-all-notElpa-folders "my-modules" nil t)
 (autoload #'my-setup-all-upstream-remotes-if-missing "my-modules" nil t)
 (autoload #'my-fetch-all-upstream-remotes "my-modules" nil t)

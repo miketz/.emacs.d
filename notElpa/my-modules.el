@@ -2261,7 +2261,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
            (ignore-errors ;; dont' stop if 1 package is bad
              (let ((file (concat (module-folder mod)
                                  (module-file-single mod))))
-               (byte-compile-file file)))))
+               (byte-compile-file file))))
+  'done)
 
 ;; TODO: take module as fn arg or interactively entered by user. And correctly
 ;;       handle single file packages. comment out until fixed.

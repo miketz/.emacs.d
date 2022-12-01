@@ -1228,8 +1228,8 @@ Currently available on git branch: feature/native-comp.")
 ;; (setq package-quickstart t) ; pre-generates a giant autoloads file
 
 
-(defvar my-modules-p (and (functionp 'module-load) ; should be t
-                          module-file-suffix)      ; should be non-nil
+(defvar my-dyn-modules-p (and (functionp 'module-load) ; should be t
+                              module-file-suffix)      ; should be non-nil
   "Non-nil if Emacs supports dynamic modules.")
 
 (defvar native-line-numbers-p (boundp 'display-line-numbers)
@@ -8166,7 +8166,7 @@ expansion in cases where you aren't even using tree-sitter."
 TODO: delete this fn and replace with hooks, etc."
   (interactive)
   ;; GUARD
-  (unless my-modules-p
+  (unless my-dyn-modules-p
     (cl-return-from my-start-tree-sitter-hl))
 
   ;; init

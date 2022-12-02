@@ -19,8 +19,6 @@
 (require 'ert)
 
 (ert-deftest my-modules-git-remote-create-test ()
-  "Make sure region overlap detection is correct."
-
   ;; shadow `my-modules' to have a dummy helm module for the tests
   (let ((my-modules `(,(make-module
                         :name 'helm

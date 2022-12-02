@@ -1655,7 +1655,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "master"
+      :use-branch "mine" ;; ignore *.elc files
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
@@ -2530,7 +2530,7 @@ latest upstream code."
                            (s-ends-with-p "sunrise-commander" (cl-first f))
                            (s-ends-with-p "FlamesOfFreedom" (cl-first f))
                            (s-ends-with-p "markup-faces" (cl-first f))
-                           (s-ends-with-p "sicp-info" (cl-first f))
+                           ;; (s-ends-with-p "sicp-info" (cl-first f))
                            ;; (s-ends-with-p "sallet" (cl-first f))
                            ;; (s-ends-with-p "libegit2" (cl-first f))
                            ))

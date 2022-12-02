@@ -1215,7 +1215,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "master" ;; TODO: use branch to ignore .elc files
+      :use-branch "mine" ;; ignore .elc files
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

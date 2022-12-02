@@ -1936,8 +1936,12 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment nil
       :folder my-module-folder
       :file-single "vc-fossil.el"
-      :remotes '((:sym upstream :url "https://chiselapp.com/user/venks/repository/emacs-fossil"
+                                     ;; new upstream referenced in mirror readme
+      :remotes '((:sym upstream :url "https://tumbleweed.nu/r/vc-fossil/doc/tip/README.md"
                            :alias "upstream"
+                           :type fossil?)
+                 (:sym upstream-old :url "https://chiselapp.com/user/venks/repository/emacs-fossil"
+                           :alias "upstream-old"
                            :type fossil?)
                  (:sym mirror :url "https://github.com/venks1/emacs-fossil/"
                            :alias "mirror"))

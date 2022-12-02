@@ -8648,6 +8648,14 @@ TODO: delete this fn and replace with hooks, etc."
   (add-hook 'zig-mode-hook #'my-setup-zig-mode))
 
 ;;;----------------------------------------------------------------------------
+;;; vc-fossil
+;;;----------------------------------------------------------------------------
+;; ~/.emacs.d/notElpa already on load-path
+(push 'Fossil vc-handled-backends)
+(autoload #'vc-fossil-registered "vc-fossil" nil nil)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-unbreak-emacs-29 ()

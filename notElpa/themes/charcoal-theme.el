@@ -537,6 +537,58 @@ Example:
    `(ediff-odd-diff-B ((,class (:background ,zenburn-bg+2))))
    `(ediff-odd-diff-C ((,class (:background ,zenburn-bg+2))))
 
+
+   ;; helm. temporarily borrowing from zenburn.
+   `(helm-header
+     ((t (:foreground ,zenburn-green
+                      :background ,zenburn-bg
+                      :underline nil
+                      :box nil
+                      :extend t))))
+   `(helm-source-header
+     ((t (:foreground ,zenburn-yellow
+                      :background ,zenburn-bg-1
+                      :underline nil
+                      :weight bold
+                      :box (:line-width -1 :style released-button)
+                      :extend t))))
+   `(helm-selection ((t (:background ,zenburn-bg+1 :underline nil))))
+   `(helm-selection-line ((t (:background ,zenburn-bg+1))))
+   `(helm-visible-mark ((t (:foreground ,zenburn-bg :background ,zenburn-yellow-2))))
+   `(helm-candidate-number ((t (:foreground ,zenburn-green+4 :background ,zenburn-bg-1))))
+   `(helm-separator ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-time-zone-current ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
+   `(helm-time-zone-home ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-bookmark-addressbook ((t (:foreground ,zenburn-orange :background ,zenburn-bg))))
+   `(helm-bookmark-directory ((t (:foreground nil :background nil :inherit helm-ff-directory))))
+   `(helm-bookmark-file ((t (:foreground nil :background nil :inherit helm-ff-file))))
+   `(helm-bookmark-gnus ((t (:foreground ,zenburn-magenta :background ,zenburn-bg))))
+   `(helm-bookmark-info ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
+   `(helm-bookmark-man ((t (:foreground ,zenburn-yellow :background ,zenburn-bg))))
+   `(helm-bookmark-w3m ((t (:foreground ,zenburn-magenta :background ,zenburn-bg))))
+   `(helm-buffer-not-saved ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-buffer-process ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
+   `(helm-buffer-saved-out ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
+   `(helm-buffer-size ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
+   `(helm-ff-directory ((t (:foreground ,zenburn-cyan :background ,zenburn-bg :weight bold))))
+   `(helm-ff-file ((t (:foreground ,zenburn-fg :background ,zenburn-bg :weight normal))))
+   `(helm-ff-file-extension ((t (:foreground ,zenburn-fg :background ,zenburn-bg :weight normal))))
+   `(helm-ff-executable ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg :weight normal))))
+   `(helm-ff-invalid-symlink ((t (:foreground ,zenburn-red :background ,zenburn-bg :weight bold))))
+   `(helm-ff-symlink ((t (:foreground ,zenburn-yellow :background ,zenburn-bg :weight bold))))
+   `(helm-ff-prefix ((t (:foreground ,zenburn-bg :background ,zenburn-yellow :weight normal))))
+   `(helm-grep-cmd-line ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
+   `(helm-grep-file ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
+   `(helm-grep-finish ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
+   `(helm-grep-lineno ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
+   `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
+   `(helm-grep-running ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-match ((t (:foreground ,zenburn-orange :background ,zenburn-bg-1 :weight bold))))
+   `(helm-moccur-buffer ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
+   `(helm-mu-contacts-address-face ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
+   `(helm-mu-contacts-name-face ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
+
+
    ;; smerge-mode
    `(smerge-base ((,class (:background "#404000"))))
 

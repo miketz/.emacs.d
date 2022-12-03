@@ -4165,11 +4165,20 @@ statement generated my SqlServer."
 
 
 (with-eval-after-load 'paredit
+  (defun my-setup-paredit ()
+    ;; Paredit and electric-indent are incompatible. So turn off electric-ident
+    ;; when turning on paredit.
+    (when (and (boundp 'electric-indent-mode)
+               (fboundp #'electric-indent-local-mode)
+               electric-indent-mode)
+      (electric-indent-local-mode -1)))
+  (add-hook 'paredit-mode-hook #'my-setup-paredit)
+
   ;; Stop SLIME's REPL from grabbing DEL,
   ;; which is annoying when backspacing over a '('
   (defun override-slime-repl-bindings-with-paredit ()
     (define-key slime-repl-mode-map
-      (read-kbd-macro paredit-backward-delete-key) nil))
+                (read-kbd-macro paredit-backward-delete-key) nil))
   (add-hook 'slime-repl-mode-hook 'override-slime-repl-bindings-with-paredit)
 
   ;; barf/slurp keybinds

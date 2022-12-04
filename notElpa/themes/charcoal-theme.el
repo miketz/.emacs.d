@@ -426,9 +426,9 @@ Example:
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
    `(company-tooltip-scrollbar-track ((,class (:background ,scrollb-bg))))
    `(company-tooltip-scrollbar-thumb ((,class (:background ,scrollb-fg))))
-   ;; obsolete comapny scrollbar faces. comment out.
-   ;; `(company-scrollbar-bg ((,class (:background ,scrollb-bg))))
-   ;; `(company-scrollbar-fg ((,class (:background ,scrollb-fg))))
+   ;; obsolete company scrollbar faces. Keep them in case of older company versions
+   `(company-scrollbar-bg ((,class (:inherit company-tooltip-scrollbar-track))))
+   `(company-scrollbar-fg ((,class (:inherit company-tooltip-scrollbar-thumb))))
 
    `(company-tooltip-common ((,class (:foreground ,faint-less))))
    `(company-tooltip-selection ((,class (:background ,highlight))))

@@ -4154,7 +4154,12 @@ statement generated my SqlServer."
 (autoload 'enable-paredit-mode "paredit"
   "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(if nil ;; temporarily dont' use paredit as the new behavior eats the return
+        ;; key so I can't press <RET> in the mini buffer to eval.
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  ;; else temporary alterantive to paredit in minibuffer: electric-pair
+  (add-hook 'eval-expression-minibuffer-setup-hook
+            #'my-turn-on-electric-pair-local-mode))
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)

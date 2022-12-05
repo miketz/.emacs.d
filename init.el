@@ -8713,6 +8713,35 @@ programming modes."
 
   (setq tab-width width))
 
+(cl-defun my-tabify-buffer ()
+  (interactive)
+
+  ;; GUARD: don't allow this to run in a python-mode buffer
+  (when (eq major-mode 'python-mode)
+    (message "don't use this for python as indentation can't be inferred.")
+    (cl-return-from my-tabify-buffer))
+
+  (setq indent-tabs-mode t) ;; buffer local
+  (tabify (point-min) (point-max))
+  ;; assumes smart-tabs-mode is configured for current mode. If not this may
+  ;; inject tabs to handle alignments *after* the indentation level is reached
+  ;; which would be "wrong".
+  (indent-region (point-min) (point-max)))
+
+(cl-defun my-untabify-buffer ()
+  (interactive)
+
+  ;; GUARD: don't allow this to run in a python-mode buffer
+  (when (eq major-mode 'python-mode)
+    (message "don't use this for python as indentation can't be inferred.")
+    (cl-return-from my-tabify-buffer))
+
+  (setq indent-tabs-mode nil) ;; buffer local
+  (untabify (point-min) (point-max))
+  ;; this should be OK with or without smart-tabs-mode.
+  (indent-region (point-min) (point-max)))
+
+
 ;; for emacs default completion style.
 ;; The advantage of vertical is it's easier to scan consecutive items with your
 ;; eyes. The disadvantage is not as many items of the same prefix can fit on

@@ -2512,7 +2512,7 @@ latest upstream code."
                        (push `(,(module-name m) shell-output) statuses)
                      ;; else SUCCESSful diff
                      (when (> (length shell-output) 0)
-                       ;; changes detected for merging!
+                       ;; changes detected! but it may be code in a branch we don't use for merging.
                        (push `(,(module-name m) 'new-code-in-upstream ,cmd) statuses)))))))
     ;; return the results for informational purposes.
     statuses))

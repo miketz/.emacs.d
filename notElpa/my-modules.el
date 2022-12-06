@@ -2469,7 +2469,11 @@ Merge will be done manually after this."
   "List modules with new upstream code not yet merged into the local branch.
 This does not actually fetch, only looks at the local contents on on the disk.
 So you may want to run `my-fetch-all-upstream-remotes' first to fetch the
-latest upstream code."
+latest upstream code.
+
+NOTE: This fn only works properly when the moule's `use-branch' is checked out.
+When you first pull the git submodules they are in a detached-head state with
+no branch checked out and you will get false results."
   (interactive)
   (let ((git-submodules (my-get-all-git-submodules))
         (statuses '()))

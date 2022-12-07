@@ -8628,8 +8628,9 @@ TODO: delete this fn and replace with hooks, etc."
 ;;         )))
   )
 
-(when (fboundp #'repeat-mode) ;; emacs 28+
-  (repeat-mode))
+;; For now don't turn on repeat mode.
+;; (when (fboundp #'repeat-mode) ;; emacs 28+
+;;   (repeat-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; compat

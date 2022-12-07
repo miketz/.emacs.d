@@ -2456,11 +2456,12 @@ Merge will be done manually after this."
                        (push `(,(module-name m) shell-output) statuses)
                      ;; else SUCCESS
                      (if (= (length shell-output) 0)
-                         ;; New code fetched. for now don't push into the report as it spams it up.
+                         ;; No new code fetched. Although this doesn't mean there isn't upstream code that
+                         ;; still needs to be merged into the local branch from a previous fetch.
+                         ;; It just means this particlar fetch did not download any new code.
+                         ;; for now don't push into the report as it spams it up.
                          'no-op-do-nothing ;;(push `(,(module-name m) 'fetch-success-no-new-code) statuses)
-                       ;; No new code fetched. Although this doesn't mean there isn't upstream code that
-                       ;; still needs to be merged into the local branch from a previous fetch.
-                       ;; It just means this particlar latest fetch did not download any new code.
+                       ;; New code fetched.
                        (push `(,(module-name m) 'fetch-success-new-code) statuses)))))))
     ;; return the results for informational purposes.
     statuses))

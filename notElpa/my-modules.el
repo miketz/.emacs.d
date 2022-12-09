@@ -2461,7 +2461,7 @@ Merge will be done manually after this."
                          ;; It just means this particlar fetch did not download any new code.
                          ;; for now don't push into the report as it spams it up.
                          'no-op-do-nothing ;;(push `(,(module-name m) 'fetch-success-no-new-code) statuses)
-                       ;; New code fetched.
+                       ;; New code fetched. Although it may only be new code in a branch we are not interested in.
                        (push `(,(module-name m) 'fetch-success-new-code) statuses)))))))
     ;; return the results for informational purposes.
     statuses))

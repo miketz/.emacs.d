@@ -3919,7 +3919,18 @@ and indent."
       (smart-tabs-mode-enable)))
   (add-hook 'c++-mode-hook #'my-setup-c++-mode)
 
+  (defvar my-use-tabs-java-p nil)
   (defun my-setup-java-mode ()
+    (progn ;; tab/indent stuff
+      (setq indent-tabs-mode my-use-tabs-java-p)
+      ;; NOTE: `tab-width' and `c-basic-offset' must be the same.
+      (setq c-basic-offset my-indent-width-c
+            tab-width      my-indent-width-c)
+      (when my-use-tabs-java-p ;; smart-tabs-mode
+        (smart-tabs-advice c-indent-line c-basic-offset)
+        (smart-tabs-advice c-indent-region c-basic-offset)
+        (smart-tabs-mode-enable)))
+
     (when (fboundp #'display-fill-column-indicator-mode)
       (setq display-fill-column-indicator-column 110) ; long lines in java.
       (display-fill-column-indicator-mode 1)))

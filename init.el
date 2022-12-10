@@ -7981,9 +7981,9 @@ vanilla javascript buffers."
 ;;; citre. ctags/readtags IDE
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/citre" load-path)
-(autoload 'citre-mode "citre-basic-tools" nil t nil)
+(autoload 'citre-mode "citre" nil t nil)
 
-(with-eval-after-load 'citre-core
+(with-eval-after-load 'citre
   (setq citre-ctags-program my-ctags-exe)
   (setq citre-readtags-program
         (cond ((eq my-curr-computer 'mac-mini-m1-2021)

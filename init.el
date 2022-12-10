@@ -579,6 +579,8 @@ in case that file does not provide any feature."
 (defvar vertico-count)
 (defvar python-indent-offset)
 (defvar jsonian-indentation)
+(defvar repeat-exit-timeout)
+
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

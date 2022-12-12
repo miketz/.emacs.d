@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: fn
+# key: fn
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+func ${1:fnName}($0) {
+}

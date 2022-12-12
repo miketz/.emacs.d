@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# -*- foreach -*-
+# name: fe
+# key: fe
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+for ${1:_}, ${2:item} := range ${3:lst} {
+	$0
+}

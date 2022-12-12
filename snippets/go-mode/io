@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# -*- like io snippet for C -*-
+# name: io
+# key: io
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+import "fmt"

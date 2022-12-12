@@ -1564,6 +1564,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'go-mode
+      :comment nil
+      :folder (concat my-module-folder "go-mode.el")
+      :remotes '((:sym mine :url "https://github.com/miketz/go-mode.el"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/dominikh/go-mode.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '((emacs "26.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'zoutline
       :comment nil
       :folder (concat my-module-folder "zoutline")

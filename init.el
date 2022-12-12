@@ -8685,6 +8685,16 @@ TODO: delete this fn and replace with hooks, etc."
 (push 'Fossil vc-handled-backends)
 (autoload #'vc-fossil-registered "vc-fossil" nil nil)
 
+;;;----------------------------------------------------------------------------
+;;; go-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/go-mode.el" load-path)
+(autoload #'go-mode "go-mode" nil t)
+(autoload #'go-dot-mod-mode "go-mode" nil t)
+(autoload #'go-dot-work-mode "go-mode" nil t)
+(push '("\\.go\\'" . go-mode) auto-mode-alist)
+(push '("go\\.work\\'" . go-dot-work-mode) auto-mode-alist)
+(push '("go\\.mod\\'" . go-dot-mod-mode) auto-mode-alist)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

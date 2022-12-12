@@ -8707,6 +8707,8 @@ TODO: delete this fn and replace with hooks, etc."
     ;; wireup M-x compile. TODO: revisit this
     (set (make-local-variable 'compile-command)
          (concat "go run " (shell-quote-argument buffer-file-name)))
+    ;; Run gofmt on save. Use "local" buffer hook to avoid polluting the
+    ;; save-hook for non-go files.
     (add-hook 'before-save-hook #'gofmt-before-save 0 'local)
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)

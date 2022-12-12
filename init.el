@@ -8696,6 +8696,12 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("go\\.work\\'" . go-dot-work-mode) auto-mode-alist)
 (push '("go\\.mod\\'" . go-dot-mod-mode) auto-mode-alist)
 
+(with-eval-after-load 'go-mode
+  (defun my-setup-go-mode ()
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode))
+  (add-hook 'go-mode-hook #'my-setup-go-mode))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

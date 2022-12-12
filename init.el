@@ -8699,7 +8699,14 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("go\\.mod\\'" . go-dot-mod-mode) auto-mode-alist)
 
 (with-eval-after-load 'go-mode
+  ;; key binds
+  (define-key go-mode-map (kbd "C-c C-c") #'compile)
+  (define-key go-mode-map (kbd "C-c c") #'compile)
+
   (defun my-setup-go-mode ()
+    ;; wireup M-x compile. TODO: revisit this
+    (set (make-local-variable 'compile-command)
+         (concat "go run " (shell-quote-argument buffer-file-name)))
     (add-hook 'before-save-hook #'gofmt-before-save 0 'local)
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)

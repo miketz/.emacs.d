@@ -8698,6 +8698,7 @@ TODO: delete this fn and replace with hooks, etc."
 
 (with-eval-after-load 'go-mode
   (defun my-setup-go-mode ()
+    (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))
   (add-hook 'go-mode-hook #'my-setup-go-mode))

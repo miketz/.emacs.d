@@ -8692,12 +8692,14 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'go-mode "go-mode" nil t)
 (autoload #'go-dot-mod-mode "go-mode" nil t)
 (autoload #'go-dot-work-mode "go-mode" nil t)
+(autoload #'gofmt-before-save "go-mode" nil t)
 (push '("\\.go\\'" . go-mode) auto-mode-alist)
 (push '("go\\.work\\'" . go-dot-work-mode) auto-mode-alist)
 (push '("go\\.mod\\'" . go-dot-mod-mode) auto-mode-alist)
 
 (with-eval-after-load 'go-mode
   (defun my-setup-go-mode ()
+    (add-hook 'before-save-hook #'gofmt-before-save 0 'local)
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))

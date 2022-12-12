@@ -7984,6 +7984,7 @@ vanilla javascript buffers."
 (autoload 'citre-mode "citre" nil t nil)
 
 (with-eval-after-load 'citre
+  (define-key citre-mode-map (kbd "C-c p") #'citre-peek)
   (setq citre-ctags-program my-ctags-exe)
   (setq citre-readtags-program
         (cond ((eq my-curr-computer 'mac-mini-m1-2021)

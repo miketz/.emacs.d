@@ -8706,9 +8706,10 @@ TODO: delete this fn and replace with hooks, etc."
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
   (defun my-setup-go-mode ()
-    ;; wireup M-x compile. TODO: revisit this
-    (set (make-local-variable 'compile-command)
-         (concat "go run " (shell-quote-argument buffer-file-name)))
+    (when buffer-file-name ;; if buffer has a file on disk.
+      ;; wireup M-x compile. TODO: revisit this
+      (set (make-local-variable 'compile-command)
+           (concat "go run " (shell-quote-argument buffer-file-name))))
     ;; Run gofmt on save. Use "local" buffer hook to avoid polluting the
     ;; save-hook for non-go files.
     (when my-gofmt-installed-p

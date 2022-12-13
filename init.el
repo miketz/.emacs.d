@@ -8703,13 +8703,16 @@ TODO: delete this fn and replace with hooks, etc."
   (define-key go-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-mode-map (kbd "C-c c") #'compile)
 
+  (defvar my-gofmt-installed-p (executable-find "gofmt"))
+
   (defun my-setup-go-mode ()
     ;; wireup M-x compile. TODO: revisit this
     (set (make-local-variable 'compile-command)
          (concat "go run " (shell-quote-argument buffer-file-name)))
     ;; Run gofmt on save. Use "local" buffer hook to avoid polluting the
     ;; save-hook for non-go files.
-    (add-hook 'before-save-hook #'gofmt-before-save 0 'local)
+    (when my-gofmt-installed-p
+      (add-hook 'before-save-hook #'gofmt-before-save 0 'local))
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ;; buffer local
     (yas-minor-mode 1)

@@ -580,6 +580,8 @@ in case that file does not provide any feature."
 (defvar python-indent-offset)
 (defvar jsonian-indentation)
 (defvar repeat-exit-timeout)
+(defvar citre-mode-map)
+(defvar go-mode-map)
 
 
 ;; suppress warnings on functions from files not yet loaded.
@@ -1021,6 +1023,7 @@ in case that file does not provide any feature."
 (declare-function ido-grid-left "ido-grid")
 (declare-function ido-grid-right "ido-grid")
 (declare-function ido-grid--shift "ido-grid")
+(declare-function citre-peek 'suppress)
 
 ;; TODO: fix wrong use of declare-function above. Replace the symbols with
 ;; string filenames of lisp files in the `load-path'.
@@ -8697,6 +8700,9 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.go\\'" . go-mode) auto-mode-alist)
 (push '("go\\.work\\'" . go-dot-work-mode) auto-mode-alist)
 (push '("go\\.mod\\'" . go-dot-mod-mode) auto-mode-alist)
+
+
+(declare-function my-setup-go-mode 'suppress) ;; silence byte compiler
 
 (with-eval-after-load 'go-mode
   ;; key binds

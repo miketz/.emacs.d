@@ -26,6 +26,7 @@
 ;;; Place `my-which-func.el' in folder `/your/chosen/folder'.
 ;;; Add the following text to your .emacs or init.el file:
 ;;;
+;;; (add-to-list 'load-path "/your/chosen/folder")
 ;;; (autoload #'my-which-func "my-which-func" nil t)
 ;;; ;; reccomened key binds
 ;;; (global-set-key (kbd "C-c w") #'my-which-func)

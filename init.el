@@ -8736,8 +8736,8 @@ TODO: delete this fn and replace with hooks, etc."
 ;; My alternative to `which-function-mode'.
 (autoload #'my-which-func "my-which-func" nil t)
 
-(global-set-key (kbd "C-c w") #'my-which-func)
-(global-set-key (kbd "C-c C-w") #'my-which-func)
+(define-key prog-mode-map (kbd "C-c w") #'my-which-func)
+(define-key prog-mode-map (kbd "C-c C-w") #'my-which-func)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

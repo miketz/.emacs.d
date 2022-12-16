@@ -29,8 +29,8 @@
 ;;; (add-to-list 'load-path "/your/chosen/folder")
 ;;; (autoload #'my-which-func "my-which-func" nil t)
 ;;; ;; reccomened key binds
-;;; (global-set-key (kbd "C-c w") #'my-which-func)
-;;; (global-set-key (kbd "C-c C-w") #'my-which-func)
+;;; (define-key prog-mode-map (kbd "C-c w") #'my-which-func)
+;;; (define-key prog-mode-map (kbd "C-c C-w") #'my-which-func)
 
 
 ;;; Code:

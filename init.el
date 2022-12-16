@@ -8734,24 +8734,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; my-which-func
 ;;;----------------------------------------------------------------------------
 ;; My alternative to `which-function-mode'.
-;; `which-function-mode' is OK, but it turns on the mode globally for all
-;; buffers which is annoying. And if the function fits on screen then it's
-;; just wasted modeline space. It also seems to be constantly polling and slow?
-
-;; This is an alternative fn which jumps to the function header via C-M-a then
-;; prints that line of text.
-
-(defun my-which-func ()
-  "Print the name of the function the cursor is currently in."
-  (interactive)
-  (save-excursion
-    ;; jump to function's first line. This approach is flawed as sometimes
-    ;; fn defintions are split across lines such as in the GNU C style. But
-    ;; should work OK most of the time.
-    (beginning-of-defun)
-    (let ((fn-first-line-txt (buffer-substring (line-beginning-position)
-                                               (line-end-position))))
-      (message fn-first-line-txt))))
+(autoload #'my-which-func "my-which-func" nil t)
 
 (global-set-key (kbd "C-c w") #'my-which-func)
 (global-set-key (kbd "C-c C-w") #'my-which-func)

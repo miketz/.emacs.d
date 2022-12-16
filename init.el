@@ -8754,6 +8754,7 @@ TODO: delete this fn and replace with hooks, etc."
       (message fn-first-line-txt))))
 
 (global-set-key (kbd "C-c w") #'my-which-func)
+(global-set-key (kbd "C-c C-w") #'my-which-func)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

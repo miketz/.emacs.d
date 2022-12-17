@@ -475,6 +475,8 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
+    ;; NOTE: selectrum author has chosen to deprecate the pacage in favor of
+    ;;       vertico
     ;; ,(make-module
     ;;   :name 'selectrum
     ;;   :comment nil

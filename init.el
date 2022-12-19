@@ -8722,7 +8722,7 @@ TODO: delete this fn and replace with hooks, etc."
       (add-hook 'before-save-hook #'gofmt-before-save 0 'local))
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ;; buffer local
-    (setq tab-width 4) ;; buffer local
+    (setq tab-width 3) ;; buffer local
     (yas-minor-mode 1)
     (citre-mode 1)
     (my-turn-on-electric-pair-local-mode)

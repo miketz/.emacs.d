@@ -5337,8 +5337,11 @@ TODO: call this function when it works."
 
 (with-eval-after-load 'darkroom
   (setq darkroom-margins 0.15)
-  ;;nil keeps margins close to the centered text.
-  (setq darkroom-fringes-outside-margins nil))
+  ;; nil keeps margins close to the centered text.
+  (setq darkroom-fringes-outside-margins nil)
+  ;; 0 to keep text the same size. Usually what i wnat when coding. But if
+  ;; presenting my screen to others it would make sense to increase font size.
+  (setq darkroom-text-scale-increase 0))
 
 ;;;----------------------------------------------------------------------------
 ;;; vim-empty-lines-mode

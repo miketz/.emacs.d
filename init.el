@@ -4599,7 +4599,8 @@ statement generated my SqlServer."
 
 
 ;; Only needed on Windows
-(when (eq system-type 'windows-nt)
+(when (and (eq system-type 'windows-nt)
+           (boundp 'w32-pipe-read-delay))
   (setq w32-pipe-read-delay 0))
 
 ;;See also:

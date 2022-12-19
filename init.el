@@ -410,6 +410,7 @@ in case that file does not provide any feature."
 (defvar ediff-diff3-program)
 (defvar darkroom-margins)
 (defvar darkroom-fringes-outside-margins)
+(defvar darkroom-text-scale-increase)
 (defvar fci-rule-column)
 (defvar fci-rule-width)
 (defvar fci-always-use-textual-rule)

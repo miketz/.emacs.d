@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : error guard
+# key: e
+# --
+if ${1:err} != nil { // handle $1
+	$0
+}

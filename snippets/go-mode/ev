@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : error guard, initialize err var
+# key: ev
+# --
+if ${1:err} := ${2:action()}; err != nil { // handle $1
+	$0
+}

@@ -36,8 +36,7 @@
 
 
 ;;; Code:
-(when (featurep 'pos-tip) ;; optional dependency for display popup sugar
-  (require 'pos-tip))
+(require 'pos-tip "pos-tip" 'noerror) ; optional dependency for popup
 
 (defvar my-which-func-use-postip (featurep 'pos-tip)
   "When t use pos-tip to display text in a popup. A popup is nice becuase your

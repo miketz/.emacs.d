@@ -3,7 +3,7 @@
 ;;; License: GPL version 3
 
 ;;; Keywords: convenience
-;;; Package-Requires: ()
+;;; Package-Requires: ((pos-tip "0.4.6"))
 ;;; Version: 0.1.0
 ;;; URL: n/a
 
@@ -34,18 +34,27 @@
 
 
 ;;; Code:
+(when (featurep 'pos-tip) ;; optional depenecy for display sugar
+  (require 'pos-tip))
+
+(defvar my-which-func-use-postip (featurep 'pos-tip)
+  "When t use pos-tip to display text in a popup.
+Otherwise display text in the echo area.")
 
 (defun my-which-func ()
   "Print the name of the function the cursor is currently in."
   (interactive)
-  (save-excursion
-    ;; jump to function's first line. This approach is flawed as sometimes
-    ;; fn defintions are split across lines such as in the GNU C style. But
-    ;; should work OK most of the time.
-    (beginning-of-defun)
-    (let ((fn-first-line-txt (buffer-substring (line-beginning-position)
-                                               (line-end-position))))
-      (message fn-first-line-txt))))
+  (let ((txt (save-excursion
+               ;; jump to function's first line. This approach is flawed as sometimes
+               ;; fn defintions are split across lines such as in the GNU C style. But
+               ;; should work OK most of the time.
+               (beginning-of-defun)
+               (buffer-substring (line-beginning-position)
+                                 (line-end-position)))))
+    (cond (my-which-func-use-postip
+           (pos-tip-show txt))
+          (t ;; default
+           (message txt)))))
 
 
 

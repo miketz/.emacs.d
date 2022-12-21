@@ -8976,6 +8976,8 @@ load during init, or wait with autoloads."
 
 (progn ;;window navigation.
   (when my-use-evil-p
+    (evil-leader/set-key "2" #'split-window-below)
+    (evil-leader/set-key "3" #'split-window-right)
     (global-set-key (kbd "M-h") #'evil-window-left)
     (global-set-key (kbd "M-j") #'evil-window-down)
     (global-set-key (kbd "M-k") #'evil-window-up)

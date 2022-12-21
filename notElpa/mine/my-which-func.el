@@ -53,10 +53,11 @@ eyes don't have to travel to a different location on the screen.")
                (beginning-of-defun)
                (buffer-substring (line-beginning-position)
                                  (line-end-position)))))
+    ;; extra sugar popup display. Could use one of several popup implmenetations.
     (cond ((and my-which-func-use-postip (fboundp #'pos-tip-show))
-           (pos-tip-show txt))
-          (t ;; default
-           (message txt)))))
+           (pos-tip-show txt)))
+    ;; always display in echo area. even if popups are enabled.
+    (message txt)))
 
 
 

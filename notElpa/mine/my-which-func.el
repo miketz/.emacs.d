@@ -51,7 +51,7 @@ eyes don't have to travel to a different location on the screen.")
                (beginning-of-defun)
                (buffer-substring (line-beginning-position)
                                  (line-end-position)))))
-    (cond (my-which-func-use-postip
+    (cond ((and my-which-func-use-postip (fboundp #'pos-tip-show))
            (pos-tip-show txt))
           (t ;; default
            (message txt)))))

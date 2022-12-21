@@ -8744,6 +8744,9 @@ TODO: delete this fn and replace with hooks, etc."
 (define-key prog-mode-map (kbd "C-c w") #'my-which-func)
 (define-key prog-mode-map (kbd "C-c C-w") #'my-which-func)
 
+(with-eval-after-load 'my-which-func
+  (setq my-which-func-use-postip t))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

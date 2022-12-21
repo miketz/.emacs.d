@@ -28,6 +28,8 @@
 ;;;
 ;;; (add-to-list 'load-path "/your/chosen/folder")
 ;;; (autoload #'my-which-func "my-which-func" nil t)
+;;; ;; prefer popup display if pos-tip is installed.
+;;; (setq my-which-func-use-postip t)
 ;;; ;; reccomended key binds
 ;;; (define-key prog-mode-map (kbd "C-c w") #'my-which-func)
 ;;; (define-key prog-mode-map (kbd "C-c C-w") #'my-which-func)

@@ -1216,7 +1216,7 @@ This should speed up lsp related modes.")
                               (native-comp-available-p))
   "True if Emacs is using native elsip compliation.
 aka gccemacs.
-Currently available on git branch: feature/native-comp.")
+In master branch now. Was on git branch: feature/native-comp.")
 
 ;;;----------------------------------------------------------------------------
 ;;; Packages. NOTE: with the conversion to git submodules, most of the old

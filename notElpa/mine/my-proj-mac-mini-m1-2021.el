@@ -11,4 +11,4 @@
   (split-window-horizontally)
   (shrink-window-horizontally 10)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
-  (eww-open-file "~/books/PracticalCommonLisp_ePub/html/index.html"))
+  (eww-open-file "~/books/lisp/PracticalCommonLisp_ePub/html/index.html"))

@@ -39,13 +39,14 @@
 (require 'pos-tip "pos-tip" 'noerror) ; optional dependency for popup
 
 (defvar my-which-func-use-postip (featurep 'pos-tip)
-  "When t use pos-tip to display text in a popup. A popup is nice becuase your
+  "When t use pos-tip to display text in a popup.
+A popup is nice becuase your
 eyes don't have to travel to a different location on the screen.")
 
 (defun my-which-func ()
   "Print the name of the function the cursor is currently in.
-Type C-u before calling this fn to provide a prefix arg. If a prefix arg is
-found it will insert the text into the buffer."
+Type \\[universal-argument] before calling this fn to provide a `prefix-arg'.
+If a prefix arg is found it will insert the text into the buffer."
   (interactive)
   (let ((txt (save-excursion
                ;; jump to function's first line. This approach is flawed as sometimes

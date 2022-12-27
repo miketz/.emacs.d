@@ -583,6 +583,7 @@ in case that file does not provide any feature."
 (defvar repeat-exit-timeout)
 (defvar citre-mode-map)
 (defvar go-mode-map)
+(defvar my-which-func-use-postip)
 
 
 ;; suppress warnings on functions from files not yet loaded.

@@ -163,10 +163,12 @@ Possible values: `local', `website'"
                                     ;; types like int will not have a package name in the source.
                                     ;; use "builtin" for the doc lookup in this case.
                                     "builtin"))))
+    ;; display in the specifed view
     (cond ((eq view-type 'local)
            (my-go-doc--open-local pack txt))
           ((eq view-type 'website)
            (my-go-doc--open-website pack txt))
+          ;; whoops!
           (t (message (format "Unsupported view-type %s"
                               (symbol-name (or view-type 'unspecified))))))))
 

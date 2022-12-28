@@ -76,12 +76,6 @@ Returns nil if go version is not working."
                       "1.19.4")) ;; default. latest version at time of writing.
 
 
-(defun my-thing-at-point ()
-  "Return the text at point."
-  (interactive)
-  (let ((str (thing-at-point 'symbol 'no-properties)))
-    str))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; package name scraping
@@ -160,7 +154,7 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
   "Show doc for thing at point.
 Displays the doc in a view defined by VIEW-TYPE.
 Possible values: `local', `website'"
-  (let* ((txt (my-thing-at-point))
+  (let* ((txt (thing-at-point 'symbol 'no-properties))
          (pack (completing-read "package: "
                                 '() nil nil
                                 (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text

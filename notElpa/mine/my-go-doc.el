@@ -19,6 +19,10 @@
 ;;; cases.
 ;;; Function `my-go-doc-local' requires the go tooling "go doc" to be installed.
 ;;; Function `my-go-doc-website' requires a web browser and internet connection.
+;;;
+;;; NOTE: lexical binding is used as a potential micro-optimization for
+;;; variable look-ups.  This package *should* work the same whether lexical or
+;;; dynamic binding is used.  (ie no closures capturing variables)
 
 
 ;;; Installation:

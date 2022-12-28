@@ -37,6 +37,7 @@
 
 ;;; Code:
 (require 'thingatpt)
+(require 'cl-lib)
 (require 's)
 
 

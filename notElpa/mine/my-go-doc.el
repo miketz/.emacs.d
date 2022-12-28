@@ -91,10 +91,9 @@ Returns nil if no package found."
 Uses command line tool [go doc]."
   (interactive)
   (let* ((txt (my-thing-at-point))
-         ;; TODO: scrap package out of text. Could be hard with aliases.
          (pack (completing-read "package: "
                                 '() nil nil
-                                (or (my-go-doc-scrape-package)
+                                (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text
                                     "builtin")))
          (doc (shell-command-to-string (concat "go doc --all "
                                                (if (and pack (> (length pack) 0))
@@ -114,8 +113,10 @@ Uses command line tool [go doc]."
 Uses website https://pkg.go.dev"
   (interactive)
   (let* ((txt (my-thing-at-point))
-         ;; TODO: scrap package out of text. Could be hard with aliases.
-         (pack (completing-read "package: " '() nil nil "builtin"))
+         (pack (completing-read "package: "
+                                '() nil nil
+                                (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text
+                                    "builtin")))
          ;; url format: https://pkg.go.dev/builtin@go1.19.4#make
          (full-url (concat my-go-doc-base-url
                            "/" pack "@go" my-go-ver "#" txt)))

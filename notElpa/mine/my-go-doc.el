@@ -18,13 +18,13 @@
 ;;; Add the following text to your .emacs or init.el file:
 ;;;
 ;;; (add-to-list 'load-path "/your/chosen/folder")
-;;; (autoload #'my-go-doc "my-go-doc" nil t)
+;;; (autoload #'my-go-doc-local "my-go-doc" nil t)
 ;;; (autoload #'my-go-doc-website "my-go-doc" nil t)
 ;;; (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 ;;; (with-eval-after-load 'go-mode
 ;;;   ;; reccomended key binds
-;;;   (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc)
-;;;   (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc))
+;;;   (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
+;;;   (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local))
 
 
 ;;; Code:

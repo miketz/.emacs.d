@@ -80,12 +80,22 @@ Returns nil if no package found."
         ;; GUARD: dot not found
         (when (null dot)
           (cl-return-from my-go-doc-scrape-package nil))
-        (let ((pack (save-excursion
-                      (search-backward " " bol t)))) ;; space
-          (when (null pack) ;; try search again using tab
-            (setq pack (search-backward "	" bol t))) ;; tab
-          (when (and pack dot) ;; found both
-            (setq pack (+ 1 pack)) ;; +1 to go forward past the space.
+        ;; now point is on the dot ".". Search backwards for the begging of package name.
+        (let ((pack nil))
+          (when (null pack) ;; try (
+            (setq pack (save-excursion (search-backward "(" bol t))))
+          (when (null pack) ;; try [
+            (setq pack (save-excursion (search-backward "[" bol t))))
+          (when (null pack) ;; try {
+            (setq pack (save-excursion (search-backward "{" bol t))))
+          (when (null pack) ;; try space
+            (setq pack (save-excursion (search-backward " " bol t))))
+          (when (null pack) ;; try tab
+            (setq pack (save-excursion (search-backward "	" bol t))))
+
+          ;; get the substring that is package name.
+          (when (and pack dot) ;; found both start/end
+            (setq pack (+ 1 pack)) ;; +1 to go forward past the delimiter we matched on.
             (buffer-substring-no-properties pack dot)))))))
 
 ;;;###autoload

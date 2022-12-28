@@ -68,10 +68,12 @@ Returns nil if go version is not working."
     (print str)))
 
 (cl-defun my-go-doc-scrape-package ()
-  "Try to scrape out the package name.
-Basically searching backwards for a peroid (.).
-Then grabs the text before the (.).
-Returns nil if no package found."
+  "Scrape out the package name for the thing at point.
+Basically searching backwards for a dot (.)
+Then grab the text before the dot.
+Returns nil if no package found.
+The implpementation is imperfect and may grab a package alias instead of the
+acutal package name."
   (let* ((bol (save-excursion
                 (beginning-of-line)
                 (point))))

@@ -3,7 +3,7 @@
 ;;; License: GPL version 3
 
 ;;; Keywords: docs, hypermedia
-;;; Package-Requires: ((s "1.13.1"))
+;;; Package-Requires: ()
 ;;; Version: 0.1.0
 ;;; URL: n/a
 
@@ -42,8 +42,6 @@
 ;;; Code:
 (require 'thingatpt)
 (require 'cl-lib)
-(require 's)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; helper functions
@@ -68,10 +66,10 @@ Returns nil if go version is not working."
   (require 's)
   (require 'cl-lib)
   (let ((str (shell-command-to-string "go version")))
-    (when (s-contains-p "command not found" str)
+    (when (string-match-p "command not found" str)
       (cl-return-from my-go-get-version nil))
     ;; custom string parsing to extract version num.
-    (seq-subseq (cl-third (s-split " " str))
+    (seq-subseq (cl-third (split-string str " "))
                 2)))
 
 ;; NOTE: `my-go-get-version' will break if [go version] changes the format of

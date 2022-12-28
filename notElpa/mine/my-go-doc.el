@@ -9,7 +9,7 @@
 
 ;;; Commentary:
 ;;; Show doc for thing at point.
-;;; It will attempt to guess or scrape the text for the package name. You must
+;;; It will attempt to guess or scrape the text for the package name.  You must
 ;;; then manually confirm or fix the "guessed" package name.
 
 

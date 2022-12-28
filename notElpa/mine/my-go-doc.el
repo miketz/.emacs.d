@@ -177,14 +177,14 @@ Uses command line tool [go doc]."
 ;;;###autoload
 (defun my-go-doc-website ()
   "Show doc for thing at point in in a browser.
-Uses website https://pkg.go.dev"
+Uses URL 'https://pkg.go.dev'."
   (interactive)
   (my-go-doc 'website))
 
 ;;;###autoload
 (defun my-go-doc-website-overview ()
   "Show top level docs in a browser.
-Uses website https://pkg.go.dev"
+Uses URL 'https://pkg.go.dev'."
   (interactive)
   (browse-url (concat my-go-doc-base-url "/std")))
 

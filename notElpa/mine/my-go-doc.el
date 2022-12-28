@@ -8,7 +8,9 @@
 ;;; URL: n/a
 
 ;;; Commentary:
-;;; Show doc for thing at point
+;;; Show doc for thing at point.
+;;; It will attempt to guess or scrape the text for the package name. You must
+;;; then manually confirm or fix the "guessed" package name.
 
 
 ;;; Installation:
@@ -55,7 +57,8 @@ Returns nil if go version is not working."
     (seq-subseq (cl-third (s-split " " str))
                 2)))
 
-(defvar my-go-ver (or (my-go-get-version) "1.19.4"))
+(defvar my-go-ver (or (my-go-get-version)
+                      "1.19.4")) ;; default. latest version at time of writing.
 
 
 (defun my-thing-at-point ()

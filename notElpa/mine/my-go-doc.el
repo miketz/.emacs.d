@@ -9,7 +9,10 @@
 
 ;;; Commentary:
 ;;; Show go documentation for thing at point.
-;;; It will attempt to guess or scrape the text for the package name.  You must
+;;; Not a mode, just some elisp functions that can be bound to keys.
+;;; Typically used while in a go source buffer with `go-mode'.
+
+;;; Funcs will attempt to guess or scrape the text for the package name.  You must
 ;;; then manually confirm or fix the "guessed" package name.
 ;;; Function `my-go-doc-local' requires the go tooling "go doc" to be installed.
 ;;; Function `my-go-doc-website' requires a web browser and internet connection.
@@ -24,7 +27,7 @@
 ;;; (autoload #'my-go-doc-website "my-go-doc" nil t)
 ;;; (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 ;;; (with-eval-after-load 'go-mode
-;;;   ;; reccomended key binds
+;;;   ;; reccomended key binds. Using SLIME's doc key binds
 ;;;   (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
 ;;;   (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local))
 

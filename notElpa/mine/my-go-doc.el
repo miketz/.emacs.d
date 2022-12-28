@@ -146,7 +146,7 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Central X-roads fn.
+;;; Central X-roads fn.  Ties everything together.
 ;;; Sits between the user entry point funcs and view-doc funcs.
 ;;; Gets text at point. Scrapes package name.
 ;;; Then shows the doc via the specified view-type.
@@ -158,7 +158,10 @@ Possible values: `local', `website'"
   (let* ((txt (thing-at-point 'symbol 'no-properties))
          (pack (completing-read "package: "
                                 '() nil nil
-                                (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text
+                                ;; imperfect attempt to scrape package name from text
+                                (or (my-go-doc-scrape-package)
+                                    ;; types like int will not have a package name in the source.
+                                    ;; use "builtin" for the doc lookup in this case.
                                     "builtin"))))
     (cond ((eq view-type 'local)
            (my-go-doc--open-local pack txt))

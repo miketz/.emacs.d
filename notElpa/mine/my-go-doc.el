@@ -31,6 +31,10 @@
 (require 'thingatpt)
 (require 's)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; helper functions
+
 (defun my-go-doc-assert-dependencies ()
   "Check for required dependencies.  Warn the user if any are missing."
   (unless (executable-find "go")
@@ -67,6 +71,10 @@ Returns nil if go version is not working."
   (let ((str (thing-at-point 'symbol 'no-properties)))
     (print str)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; package name scraping
+
 (cl-defun my-go-doc-scrape-package ()
   "Scrape out the package name for the thing at point.
 Basically searching backwards for a dot (.)
@@ -100,42 +108,76 @@ acutal package name."
             (setq pack (+ 1 pack)) ;; +1 to go forward past the delimiter we matched on.
             (buffer-substring-no-properties pack dot)))))))
 
-;;;###autoload
-(defun my-go-doc ()
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; functions to display the documentation.
+
+(defun my-go-doc--open-local (pack txt)
   "Show doc for thing at point in an Emacs buffer.
-Uses command line tool [go doc]."
-  (interactive)
-  (let* ((txt (my-thing-at-point))
-         (pack (completing-read "package: "
-                                '() nil nil
-                                (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text
-                                    "builtin")))
-         (doc (shell-command-to-string (concat "go doc --all "
-                                               (if (and pack (> (length pack) 0))
-                                                   (concat pack ".")
-                                                 "")
-                                               txt))))
+Uses command line tool [go doc].  Passsing in PACK and TXT."
+  (let ((doc (shell-command-to-string (concat "go doc --all "
+                                              (if (and pack (> (length pack) 0))
+                                                  (concat pack ".")
+                                                "")
+                                              txt))))
     (switch-to-buffer-other-window (get-buffer-create "*go-doc*"))
     (erase-buffer)
     (insert doc)))
 
+;; NOTE: if the format/layout of this website changes then the logic of constructing
+;; the url with anchors will need to change.
+(defvar my-go-doc-base-url "https://pkg.go.dev"
+  "Website for go documentation.")
 
-(defvar my-go-doc-base-url "https://pkg.go.dev")
+(defun my-go-doc--open-website (pack txt)
+  "Show doc for thing at point in in a browser.
+Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
+
+  ;; full-url sample: https://pkg.go.dev/builtin@go1.19.4#make
+  (let ((full-url (concat my-go-doc-base-url
+                          "/" pack "@go" my-go-ver "#" txt)))
+    (browse-url full-url)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Central X-roads fn.
+;;; Sits between the user entry point funcs and view-doc funcs.
+;;; Gets text at point. Scrapes package name.
+;;; Then shows the doc via the specified view-type.
+
+(defun my-go-doc (view-type)
+  "Show doc for thing at point.
+Displays the doc in a view defined by VIEW-TYPE.
+Possible values: `local', `website'"
+  (let* ((txt (my-thing-at-point))
+         (pack (completing-read "package: "
+                                '() nil nil
+                                (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text
+                                    "builtin"))))
+    (cond ((eq view-type 'local)
+           (my-go-doc--open-local pack txt))
+          ((eq view-type 'website)
+           (my-go-doc--open-website pack txt))
+          (t (message (format "Unsupported view-type %s"
+                              (symbol-name (or view-type 'unspecified))))))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Entry point functions used by the user.
+
+;;;###autoload
+(defun my-go-doc-local ()
+  "Show doc for thing at point in an Emacs buffer.
+Uses command line tool [go doc]."
+  (interactive)
+  (my-go-doc 'local))
 
 ;;;###autoload
 (defun my-go-doc-website ()
   "Show doc for thing at point in in a browser.
 Uses website https://pkg.go.dev"
   (interactive)
-  (let* ((txt (my-thing-at-point))
-         (pack (completing-read "package: "
-                                '() nil nil
-                                (or (my-go-doc-scrape-package) ;; imperfect attempt to scrape package from text
-                                    "builtin")))
-         ;; url format: https://pkg.go.dev/builtin@go1.19.4#make
-         (full-url (concat my-go-doc-base-url
-                           "/" pack "@go" my-go-ver "#" txt)))
-    (browse-url full-url)))
+  (my-go-doc 'website))
 
 ;;;###autoload
 (defun my-go-doc-website-overview ()

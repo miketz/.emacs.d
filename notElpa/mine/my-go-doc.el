@@ -63,6 +63,9 @@ Returns nil if go version is not working."
     (seq-subseq (cl-third (s-split " " str))
                 2)))
 
+;; NOTE: `my-go-get-version' will break if [go version] changes the format of
+;; its output string. If it becomes a problem then just change this to use a
+;; hard coded version.
 (defvar my-go-ver (or (my-go-get-version)
                       "1.19.4")) ;; default. latest version at time of writing.
 

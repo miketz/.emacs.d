@@ -112,7 +112,7 @@ acutal package name."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; functions to display the documentation.
+;;; display functions. local or web
 
 (defun my-go-doc--open-local (pack txt)
   "Show doc for thing at point in an Emacs buffer.

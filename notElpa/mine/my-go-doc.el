@@ -2,7 +2,7 @@
 
 ;;; License: GPL version 3
 
-;;; Keywords: convenience
+;;; Keywords: docs, hypermedia
 ;;; Package-Requires: ((s "1.13.1"))
 ;;; Version: 0.1.0
 ;;; URL: n/a

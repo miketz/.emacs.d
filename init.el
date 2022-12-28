@@ -8698,7 +8698,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; my-go-doc. custom doc lookup functions
 ;;;----------------------------------------------------------------------------
-(autoload #'my-go-doc "my-go-doc" nil t)
+(autoload #'my-go-doc-local "my-go-doc" nil t)
 (autoload #'my-go-doc-website "my-go-doc" nil t)
 (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 
@@ -8724,8 +8724,8 @@ TODO: delete this fn and replace with hooks, etc."
   ;; unbind `godef-describe' so I cna use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)
 
-  (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc)
-  (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc)
+  (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
+  (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 

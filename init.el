@@ -8696,6 +8696,13 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'vc-fossil-registered "vc-fossil" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; my-go-doc. custom doc lookup functions
+;;;----------------------------------------------------------------------------
+(autoload #'my-go-doc "my-go-doc" nil t)
+(autoload #'my-go-doc-website "my-go-doc" nil t)
+(autoload #'my-go-doc-website-overview "my-go-doc" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; go-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/go-mode.el" load-path)
@@ -8711,52 +8718,14 @@ TODO: delete this fn and replace with hooks, etc."
 (declare-function my-setup-go-mode 'suppress) ;; silence byte compiler
 
 (with-eval-after-load 'go-mode
-  (progn ;; doc lookup stuff
-    (cl-defun my-go-get-version ()
-      "Get go version by parsing the string returned from [go version].
-Returns nil if go version is not working."
-      (interactive)
-      (require 's)
-      (require 'cl-lib)
-      (let ((str (shell-command-to-string "go version")))
-        (when (s-contains-p "command not found" str)
-          (cl-return-from my-go-get-version nil))
-        ;; custom string parsing to extract version num.
-        (seq-subseq (cl-third (s-split " " str))
-                    2)))
-
-    (defvar my-go-ver (or (my-go-get-version) "1.19.4"))
-
-    (require 'thingatpt)
-
-    (defun my-thing-at-point ()
-      (interactive)
-      (let ((str (thing-at-point 'symbol 'no-properties)))
-        (print str)))
-
-    (defun my-go-docs ()
-      (interactive)
-      (let* ((base-url "https://pkg.go.dev")
-             (txt (my-thing-at-point))
-             ;; TODO: scrap package out of text. Could be hard with aliases.
-             (pack (completing-read "package: " '() nil nil "builtin"))
-             ;; url format: https://pkg.go.dev/builtin@go1.19.4#make
-             (full-url (concat base-url
-                               "/" pack "@go" my-go-ver "#" txt)))
-        (browse-url full-url)))
-
-    (defun my-go-docs-overview ()
-      (interactive)
-      (browse-url "https://pkg.go.dev/std")))
-
   ;; key binds
   (define-key go-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-mode-map (kbd "C-c c") #'compile)
   ;; unbind `godef-describe' so I cna use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)
 
-  (define-key go-mode-map (kbd "C-c C-d d") #'my-go-docs)
-  (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-docs)
+  (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc)
+  (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 

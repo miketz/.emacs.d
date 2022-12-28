@@ -8,9 +8,11 @@
 ;;; URL: n/a
 
 ;;; Commentary:
-;;; Show doc for thing at point.
+;;; Show go documentation for thing at point.
 ;;; It will attempt to guess or scrape the text for the package name.  You must
 ;;; then manually confirm or fix the "guessed" package name.
+;;; Function `my-go-doc-local' requires the go tooling "go doc" to be installed.
+;;; Function `my-go-doc-website' requires a web browser and internet connection.
 
 
 ;;; Installation:

@@ -165,7 +165,7 @@ Possible values: `local', `website'"
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Entry point functions used by the user.
+;;; Entry point functions for the user.
 
 ;;;###autoload
 (defun my-go-doc-local ()

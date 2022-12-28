@@ -80,7 +80,7 @@ Returns nil if go version is not working."
   "Return the text at point."
   (interactive)
   (let ((str (thing-at-point 'symbol 'no-properties)))
-    (print str)))
+    str))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

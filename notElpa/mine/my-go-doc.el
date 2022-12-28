@@ -37,18 +37,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; helper functions
 
-(defun my-go-doc-assert-dependencies ()
-  "Check for required dependencies.  Warn the user if any are missing."
-  (unless (executable-find "go")
-    (display-warning
-     'my-go-doc
-     "my-go-doc requires go to be installed."
-     :error)))
+;; (defun my-go-doc-assert-dependencies ()
+;;   "Check for required dependencies.  Warn the user if any are missing."
+;;   (unless (executable-find "go")
+;;     (display-warning
+;;      'my-go-doc
+;;      "my-go-doc requires go to be installed."
+;;      :error)))
 
-;; Invoke dependency check at load time of my-go-doc.
-;; Only one check.  Don't prevent use of the feature.  Just warn then let the
-;; chips fall where they may.
-(my-go-doc-assert-dependencies)
+;; ;; Invoke dependency check at load time of my-go-doc.
+;; ;; Only one check.  Don't prevent use of the feature.  Just warn then let the
+;; ;; chips fall where they may.
+;; (my-go-doc-assert-dependencies) ;; don't check for now.
 
 (cl-defun my-go-get-version ()
   "Get go version by parsing the string returned from [go version].

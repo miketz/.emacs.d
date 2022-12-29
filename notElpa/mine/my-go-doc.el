@@ -63,7 +63,7 @@
 (defgroup my-go-doc nil
   "Group for my-go-doc."
   :prefix "my-go-doc-"
-  :group 'tools)
+  :group 'docs)
 
 (defcustom my-go-doc-use-installed-go-ver-p t
   "When true use the locally installed [go version] for website docs.

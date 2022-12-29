@@ -9,7 +9,8 @@
 
 
 ;;; Commentary:
-;;; Show go documentation for thing at point.
+;;; Show go documentation for thing at point.  Works for built-in functions
+;;; and data types.
 ;;; Not a mode, just some elisp functions that can be bound to keys.
 ;;; Typically used while in a go source buffer with `go-mode'.
 ;;;

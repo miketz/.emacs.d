@@ -16,10 +16,23 @@
 ;;;
 ;;; Funcs will attempt to guess or scrape the package name text.  You must then
 ;;; manually confirm or fix the "guessed" package name.
-;;; Overall this package is flawed and hacky.  But it gets the job done for
-;;; many cases.
 ;;; Function `my-go-doc-local' requires the go tooling "go doc" to be installed.
 ;;; Function `my-go-doc-website' requires a web browser and internet connection.
+;;;
+;;; This package is flawed and hacky.  It has trouble finding the package name
+;;; for the thing at point. But it may be good enough if you don't mind
+;;; manually typing in the package name sometimes. There are other packages
+;;; that likely provide documentation technically superior way:
+;;;     `go-eldoc', `eglot', 'lsp-mode'
+;;; But you may still choose to use this package despite the flaws.
+;;; `go-eldoc' requires installing a program "gocode".  I don't have that
+;;; program and wasn't sure how to install it.
+;;; `eglot' and `lsp-mode' are likely the best options for doc lookup. They
+;;; should solve the "package name" scraping problem as they won't rely on raw
+;;; text searching. But they require installing/using an lsp server for Go.
+;;; Which may drain more laptop battery.
+;;; This package only relies on [go doc] which is installed alongside Go
+;;; itself. Nothing runs in the background.  You manually invoke a doc lookup.
 ;;;
 ;;; NOTE: lexical binding is used as a potential micro-optimization for
 ;;; variable look-ups.  This package *should* work the same whether lexical or

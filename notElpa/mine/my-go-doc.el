@@ -76,7 +76,7 @@
 ;; (my-go-doc-assert-dependencies) ;; don't check for now.
 
 (defgroup my-go-doc nil
-  "Group for my-go-doc."
+  "Group for `my-go-doc'."
   :prefix "my-go-doc-"
   :group 'docs)
 

@@ -3,7 +3,7 @@
 ;;; License: GPL version 3
 
 ;;; Keywords: docs
-;;; Package-Requires: ()
+;;; Package-Requires: ((emacs "25.1"))
 ;;; Version: 0.1.0
 ;;; URL: n/a
 

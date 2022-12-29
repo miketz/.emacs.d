@@ -66,6 +66,7 @@ Returns nil if go version is not working."
   (require 's)
   (require 'cl-lib)
   (let ((str (shell-command-to-string "go version")))
+    ;; GUARD: go version is not installed.
     (when (string-match-p "command not found" str)
       (cl-return-from my-go-get-version nil))
     ;; custom string parsing to extract version num.

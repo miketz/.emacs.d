@@ -42,6 +42,7 @@
 ;;; Code:
 (require 'thingatpt)
 (require 'cl-lib)
+(require 'seq)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; helper functions

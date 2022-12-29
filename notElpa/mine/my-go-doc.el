@@ -60,6 +60,22 @@
 ;; ;; chips fall where they may.
 ;; (my-go-doc-assert-dependencies) ;; don't check for now.
 
+(defgroup my-go-doc nil
+  "Group for my-go-doc."
+  :prefix "my-go-doc-"
+  :group 'tools)
+
+(defcustom my-go-doc-use-installed-go-ver-p t
+  "When true use the locally installed [go version] for website docs.
+When viewing docs on website the go version can be specified.
+Otherwise the website docs defualt to the most recent version of Go.
+
+In general it's a good idea to keep this set to true.  But you may view Go code
+written for a more recent version than you have installed. In this case set
+this var to nil."
+  :type 'boolean
+  :group 'my-go-doc)
+
 (cl-defun my-go-doc-get-version ()
   "Get go version by parsing the string returned from [go version].
 Returns nil if go version is not working."
@@ -77,8 +93,7 @@ Returns nil if go version is not working."
 ;; NOTE: `my-go-doc-get-version' will break if [go version] changes the format of
 ;; its output string. If it becomes a problem then just change this to use a
 ;; hard coded version.
-(defvar my-go-doc-ver (or (my-go-doc-get-version)
-                      "1.19.4") ;; default. latest version at time of writing.
+(defvar my-go-doc-ver (my-go-doc-get-version)
   "Go version used to construct the URL to web docs.")
 
 
@@ -142,9 +157,15 @@ Uses command line tool [go doc].  Passsing in PACK and TXT."
   "Show doc for thing at point in in a browser.
 Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 
-  ;; full-url sample: https://pkg.go.dev/builtin@go1.19.4#make
+  ;; full-url sample with ver: https://pkg.go.dev/builtin@go1.19.4#make
+  ;; full-url sample no ver:   https://pkg.go.dev/builtin#make
   (let ((full-url (concat my-go-doc-base-url
-                          "/" pack "@go" my-go-doc-ver "#" txt)))
+                          "/" pack
+                          ;; add extra section to URL if using specific go version
+                          (when (and my-go-doc-use-installed-go-ver-p
+                                     my-go-doc-ver)
+                            (concat "@go" my-go-doc-ver))
+                          "#" txt)))
     (browse-url full-url)))
 
 

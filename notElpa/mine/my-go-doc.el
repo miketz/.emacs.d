@@ -90,9 +90,7 @@ Then grab the text before the dot.
 Returns nil if no package found.
 The implpementation is imperfect and may grab a package alias instead of the
 acutal package name."
-  (let* ((bol (save-excursion
-                (beginning-of-line)
-                (point))))
+  (let ((bol (line-beginning-position)))
     (save-excursion
       (let ((dot (search-backward "." bol t)))
         ;; GUARD: dot not found

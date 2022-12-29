@@ -159,7 +159,9 @@ Uses command line tool [go doc].  Passsing in PACK and TXT."
                                               txt))))
     (switch-to-buffer-other-window (get-buffer-create "*go-doc*"))
     (erase-buffer)
-    (insert doc)))
+    (insert doc)
+    ;; go to top of buffer
+    (goto-char (point-min))))
 
 ;; NOTE: if the format/layout of this website changes then the logic of constructing
 ;; the url with anchors will need to change.

@@ -20,7 +20,7 @@
 ;;; Function `my-go-doc-website' requires a web browser and internet connection.
 ;;;
 ;;; This package is flawed and hacky.  It has trouble finding the package name
-;;; for the thing at point. But it may be good enough if you don't mind
+;;; for the thing at point.  But it may be good enough if you don't mind
 ;;; manually typing in the package name sometimes.  Alternative packages likely
 ;;; implement doc lookups in a technically superior way:
 ;;;     `go-eldoc', `eglot', 'lsp-mode'
@@ -85,7 +85,7 @@ When viewing docs on website the go version can be specified.
 Otherwise the website docs defualt to the most recent version of Go.
 
 In general it's a good idea to keep this set to true.  But you may view Go code
-written for a more recent version than you have installed. In this case set
+written for a more recent version than you have installed.  In this case set
 this var to nil."
   :type 'boolean
   :group 'my-go-doc)

@@ -5,7 +5,7 @@
 ;;; Keywords: docs
 ;;; Package-Requires: ((emacs "25.1"))
 ;;; Version: 0.1.0
-;;; URL: n/a
+;;; URL: https://www.github.com/miketz/TODOuploadThis
 
 
 ;;; Commentary:
@@ -59,7 +59,7 @@
 ;; ;; chips fall where they may.
 ;; (my-go-doc-assert-dependencies) ;; don't check for now.
 
-(cl-defun my-go-get-version ()
+(cl-defun my-go-doc-get-version ()
   "Get go version by parsing the string returned from [go version].
 Returns nil if go version is not working."
   (interactive)
@@ -68,15 +68,15 @@ Returns nil if go version is not working."
   (let ((str (shell-command-to-string "go version")))
     ;; GUARD: go version is not installed.
     (when (string-match-p "command not found" str)
-      (cl-return-from my-go-get-version nil))
+      (cl-return-from my-go-doc-get-version nil))
     ;; custom string parsing to extract version num.
     (seq-subseq (cl-third (split-string str " "))
                 2)))
 
-;; NOTE: `my-go-get-version' will break if [go version] changes the format of
+;; NOTE: `my-go-doc-get-version' will break if [go version] changes the format of
 ;; its output string. If it becomes a problem then just change this to use a
 ;; hard coded version.
-(defvar my-go-ver (or (my-go-get-version)
+(defvar my-go-doc-ver (or (my-go-doc-get-version)
                       "1.19.4") ;; default. latest version at time of writing.
   "Go version used to construct the URL to web docs.")
 
@@ -143,7 +143,7 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 
   ;; full-url sample: https://pkg.go.dev/builtin@go1.19.4#make
   (let ((full-url (concat my-go-doc-base-url
-                          "/" pack "@go" my-go-ver "#" txt)))
+                          "/" pack "@go" my-go-doc-ver "#" txt)))
     (browse-url full-url)))
 
 

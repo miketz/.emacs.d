@@ -118,8 +118,9 @@ Returns nil if go version is not working."
 Basically searching backwards for a dot (.)
 Then grab the text before the dot.
 Returns nil if no package found.
+WARNING:
 The implpementation is imperfect and may grab a package alias instead of the
-acutal package name."
+acutal package name.  Or it may grab something completely incorrect."
   (let ((bol (line-beginning-position)))
     (save-excursion
       (let ((dot (search-backward "." bol t)))

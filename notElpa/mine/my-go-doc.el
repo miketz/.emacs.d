@@ -146,7 +146,7 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Central X-roads fn.  Ties everything together.
+;;; Central cross roads fn.  Ties everything together.
 ;;; Sits between the user entry point funcs and view-doc funcs.
 ;;; Gets text at point. Scrapes package name.
 ;;; Then shows the doc via the specified view-type.

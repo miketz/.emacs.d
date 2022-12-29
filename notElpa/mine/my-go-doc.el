@@ -2,7 +2,7 @@
 
 ;;; License: GPL version 3
 
-;;; Keywords: docs, hypermedia
+;;; Keywords: docs
 ;;; Package-Requires: ()
 ;;; Version: 0.1.0
 ;;; URL: n/a

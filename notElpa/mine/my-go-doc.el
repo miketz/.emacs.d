@@ -170,16 +170,16 @@ Uses command line tool [go doc].  Passsing in PACK and TXT."
   "Show doc for thing at point in in a browser.
 Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 
-  ;; full-url sample with ver: https://pkg.go.dev/builtin@go1.19.4#make
-  ;; full-url sample no ver:   https://pkg.go.dev/builtin#make
-  (let ((full-url (concat my-go-doc-base-url
-                          "/" pack
-                          ;; add extra section to URL if using specific go version
-                          (when (and my-go-doc-use-installed-go-ver-p
-                                     my-go-doc-ver)
-                            (concat "@go" my-go-doc-ver))
-                          "#" txt)))
-    (browse-url full-url)))
+  ;; url sample with ver: https://pkg.go.dev/builtin@go1.19.4#make
+  ;; url sample no ver:   https://pkg.go.dev/builtin#make
+  (let ((url (concat my-go-doc-base-url
+                     "/" pack
+                     ;; add extra section to URL if using specific go version
+                     (when (and my-go-doc-use-installed-go-ver-p
+                                my-go-doc-ver)
+                       (concat "@go" my-go-doc-ver))
+                     "#" txt)))
+    (browse-url url)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

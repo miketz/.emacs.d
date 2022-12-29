@@ -9,20 +9,21 @@
 
 
 ;;; Commentary:
-;;; Show go documentation for thing at point.  Works for built-in functions
-;;; and data types.
+;;; Show go documentation for thing at point.  Works for built-in functions,
+;;; data types, and packages.
 ;;; Not a mode, just some elisp functions that can be bound to keys.
 ;;; Typically used while in a go source buffer with `go-mode'.
 ;;;
 ;;; Funcs will attempt to guess or scrape the package name.  You must then
-;;; manually confirm or fix the "guessed" package name.
+;;; manually confirm or fix the "guessed" package name.  If your are looking up
+;;; docs for the package itself then leave the package entry blank.
 ;;; Function `my-go-doc-local' requires the go tooling "go doc" to be installed.
 ;;; Function `my-go-doc-website' requires a web browser and internet connection.
 ;;;
 ;;; This package is flawed and hacky.  It has trouble finding the package name
 ;;; for the thing at point.  But it may be good enough if you don't mind
-;;; manually typing in the package name sometimes.  Alternative packages likely
-;;; implement doc lookups in a technically superior way:
+;;; manually correcting the package name sometimes.  Alternative packages
+;;; likely implement doc lookups in a technically superior way:
 ;;;     `go-eldoc', `eglot', 'lsp-mode'
 ;;; But you may still choose to use this package despite the flaws.
 ;;; `go-eldoc' requires installing a program "gocode".  I don't have that

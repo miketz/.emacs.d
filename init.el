@@ -4130,8 +4130,11 @@ statement generated my SqlServer."
 (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode-enable)
-(add-hook 'eval-expression-minibuffer-setup-hook
-          #'rainbow-delimiters-mode-enable)
+
+;; this doesn't work for mini buffer? TODO: look into it.
+;; (add-hook 'eval-expression-minibuffer-setup-hook
+;;           #'rainbow-delimiters-mode-enable)
+
 ;; (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'sql-mode-hook #'rainbow-delimiters-mode-enable)
 (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode-enable)

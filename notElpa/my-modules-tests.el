@@ -4,8 +4,8 @@
 ;;; Tests for package `my-modules'.
 ;;;
 ;;; NOTE: These are not "good" unit tests.  They assume specific git repo
-;;; states that only exist on my machine.  They are for my personal testing
-;;; only.
+;;; states that only exist on my machine.  (ie depdencies are not properly
+;;; mocked).j  They are for my personal testing only.
 ;;;
 ;;; Naming convention:
 ;;;  - prefix all test names with "my-modules-".

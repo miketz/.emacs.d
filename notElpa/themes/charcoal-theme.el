@@ -417,6 +417,13 @@ Example:
    `(js2-highlight-vars-face ((,class (:foreground ,fg-green :background ,bg-green))))
    `(js2-highlight-vars-second-face ((,class (:foreground ,fg-purple :background ,bg-purple))))
 
+   ;; eglot
+   `(eglot-highlight-symbol-face
+     ((,class (:inherit js2-highlight-vars-second-face
+                        ;; :weight bold
+                           ;; :box (:line-width -1 :color "purple")
+                           ))))
+
    ;; web-mode
    `(web-mode-current-element-highlight-face ((,class (:background ,faint))))
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))

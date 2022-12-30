@@ -22,7 +22,7 @@
 ;;;
 ;;; This package is flawed and hacky.  It has trouble finding the package name
 ;;; for the thing at point.  But it may be good enough if you don't mind
-;;; manually correcting the package name sometimes.  Alternative packages
+;;; manually correcting the package name sometimes.  These alternative packages
 ;;; likely implement doc lookups in a technically superior way:
 ;;;     `go-eldoc', `eglot', 'lsp-mode'
 ;;; But you may still choose to use this package despite the flaws.

@@ -4175,12 +4175,7 @@ statement generated my SqlServer."
 (autoload 'enable-paredit-mode "paredit"
   "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(if nil ;; temporarily dont' use paredit as the new behavior eats the return
-        ;; key so I can't press <RET> in the mini buffer to eval.
-  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-  ;; else temporary alterantive to paredit in minibuffer: electric-pair
-  (add-hook 'eval-expression-minibuffer-setup-hook
-            #'my-turn-on-electric-pair-local-mode))
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
@@ -4191,13 +4186,21 @@ statement generated my SqlServer."
 
 
 (with-eval-after-load 'paredit
+  ;; remove the new "RET" key behavior added to paredit. Seems to break indent and
+  ;; in the minibuffer it eats the return key so I can't press RET to eval.
+  ;; TODO: look into the "proper" way to fix this.
+  (define-key paredit-mode-map (kbd "RET") nil)
+  (define-key paredit-mode-map (kbd "C-j") nil)
+
   (defun my-setup-paredit ()
-    ;; Paredit and electric-indent are incompatible. So turn off electric-ident
-    ;; when turning on paredit.
-    (when (and (boundp 'electric-indent-mode)
-               (fboundp #'electric-indent-local-mode)
-               electric-indent-mode)
-      (electric-indent-local-mode -1)))
+    ;; Don't disalbe electric-indent for now
+    ;; ;; Paredit and electric-indent are incompatible. So turn off electric-ident
+    ;; ;; when turning on paredit.
+    ;; (when (and (boundp 'electric-indent-mode)
+    ;;            (fboundp #'electric-indent-local-mode)
+    ;;            electric-indent-mode)
+    ;;   (electric-indent-local-mode -1))
+    )
   (add-hook 'paredit-mode-hook #'my-setup-paredit)
 
   ;; Stop SLIME's REPL from grabbing DEL,

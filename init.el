@@ -8742,7 +8742,7 @@ TODO: delete this fn and replace with hooks, etc."
     (setq comment-column 1) ;; buffer local
     (setq tab-width 3) ;; buffer local
     (yas-minor-mode 1)
-    (citre-mode 1)
+    ;; (citre-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))
   (add-hook 'go-mode-hook #'my-setup-go-mode))

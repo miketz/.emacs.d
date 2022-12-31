@@ -1863,7 +1863,8 @@ This prevents overlapping themes; something I would rarely want."
    ;; '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")
    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-   '(font . "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+   '(font . "-*-Iosevka-light-normal-normal-*-17-*-*-*-m-0-iso10646-1")
    default-frame-alist))
 
  ((eq my-curr-computer 'wild-dog)

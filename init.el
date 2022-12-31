@@ -7680,6 +7680,29 @@ vanilla javascript buffers."
 (autoload #'eglot "eglot" nil t)
 (autoload #'eglot-ensure "eglot" nil t)
 
+(with-eval-after-load 'eglot
+  ;; ;; Show all of the available eldoc information when we want it. This way Flymake errors
+  ;; ;; don't just get clobbered by docstrings.
+  ;; (add-hook 'eglot-managed-mode-hook
+  ;;           (lambda ()
+  ;;             "Make sure Eldoc will show us all of the feedback at point."
+  ;;             (setq-local eldoc-documentation-strategy
+  ;;                         #'eldoc-documentation-compose)))
+
+  ;; is the event buffer needed for anything? disable until I find a use.
+  (setq eglot-events-buffer-size 0)
+  (setq eglot-autoshutdown t) ; kill eglot if all managed buffers are closed
+  (setq eglot-ignored-server-capabilities
+        '(
+          ;; Instead I will access docs on demand via <C-h .> or <C-c C-d d>
+          ;; TODO: eldoc doesn't work at all with this disabled? look into it.
+          :hoverProvider
+
+          ;; Disable variable highlight as it seems overkill to constantly send
+          ;; messages to a server for that.
+          ;; TODO: use a tree-sitter imp for variable highlight.
+          :documentHighlightProvider)))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; ht. dependency of lsp-mode.

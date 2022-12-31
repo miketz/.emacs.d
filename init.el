@@ -7306,6 +7306,10 @@ Closure over `preceding-sexp-fn'."
            global-eldoc-mode)
   (global-eldoc-mode 0))
 
+(with-eval-after-load 'eldoc
+  ;; avoid spamming the echo area when the *eldoc* buffer is visible
+  (setq eldoc-echo-area-prefer-doc-buffer t))
+
 ;;;----------------------------------------------------------------------------
 ;;; scheme-mode
 ;;;----------------------------------------------------------------------------

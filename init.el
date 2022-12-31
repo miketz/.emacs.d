@@ -5447,6 +5447,18 @@ TODO: call this function when it works."
   )
 
 ;;;----------------------------------------------------------------------------
+;;; flymake
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'flymake
+  ;; key binds
+  (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
+  (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)
+
+  (when my-use-evil-p
+    ;; use emacs key binds (not evil)
+    (push '("\\*flymake diagnostics" . emacs) evil-buffer-regexps)))
+
+;;;----------------------------------------------------------------------------
 ;;; hydra
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/hydra" load-path)

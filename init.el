@@ -6144,7 +6144,15 @@ buffer instead of narrowing."
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load "isearch"
   ;; start highlighting a little faster than the default 0.25
-  (setq lazy-highlight-initial-delay 0.2))
+  (setq lazy-highlight-initial-delay 0.2)
+
+  ;; similar to "*" key in evil.
+  (defun my-isearch-forward-symbol-at-point ()
+    (interactive)
+    (let ((case-fold-search nil)) ;; case sensitive
+      (isearch-forward-symbol-at-point)))
+  (global-set-key (kbd "C-c v") #'my-isearch-forward-symbol-at-point)
+  (global-set-key (kbd "C-c C-v") #'my-isearch-forward-symbol-at-point))
 
 ;;;----------------------------------------------------------------------------
 ;;; my-window-search.  Limit isearch to the visible buffer.

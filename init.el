@@ -584,7 +584,10 @@ in case that file does not provide any feature."
 (defvar citre-mode-map)
 (defvar go-mode-map)
 (defvar my-which-func-use-postip)
-
+(defvar flymake-mode-map)
+(defvar eglot-events-buffer-size)
+(defvar eglot-autoshutdown)
+(defvar eglot-ignored-server-capabilities)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)

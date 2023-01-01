@@ -8799,6 +8799,8 @@ TODO: delete this fn and replace with hooks, etc."
     (setq comment-column 1) ;; buffer local
     (setq tab-width 3) ;; buffer local
     (yas-minor-mode 1)
+    (when buffer-file-name ;; eglot gets weird if the buffer is not visiting a file.
+      (eglot-ensure))
     ;; (citre-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))

@@ -319,3 +319,6 @@
 [submodule "notElpa/go-mode.el"]
 	path = notElpa/go-mode.el
 	url = https://github.com/miketz/go-mode.el
+[submodule "notElpa/emacs-reformatter"]
+	path = notElpa/emacs-reformatter
+	url = https://github.com/miketz/emacs-reformatter

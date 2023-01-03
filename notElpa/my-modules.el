@@ -1550,6 +1550,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'reformatter
+      :comment nil
+      :folder (concat my-module-folder "emacs-reformatter")
+      :remotes '((:sym mine :url "https://github.com/miketz/emacs-reformatter"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/purcell/emacs-reformatter"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '((emacs "24.3"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'zig-mode
       :comment nil
       :folder (concat my-module-folder "zig-mode")

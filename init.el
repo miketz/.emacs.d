@@ -8820,6 +8820,12 @@ TODO: delete this fn and replace with hooks, etc."
   (setq my-which-func-use-postip t))
 
 ;;;----------------------------------------------------------------------------
+;;; reformatter
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/emacs-reformatter" load-path)
+(autoload #'reformatter-define "reeformatter" nil nil)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-unbreak-emacs-29 ()

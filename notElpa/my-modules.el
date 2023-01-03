@@ -1578,7 +1578,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :submodule-p t
       :main-branch "master"
       :use-branch "master"
-      :depend-hard '((emacs "24.3"))
+      :depend-hard '((emacs "24.3") (reformatter "0.6"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

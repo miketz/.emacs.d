@@ -2548,7 +2548,7 @@ no branch checked out and you will get false results."
                        ;; just return the error msg itself. This string is inconsitent with
                        ;; the symbol return types, but it should be OK as it's just a report
                        ;; of what happened. No real processing on it.
-                       (push `(,(module-name m) shell-output) statuses)
+                       (push `(,(module-name m) ,shell-output) statuses)
                      ;; else SUCCESSful diff
                      (when (> (length shell-output) 0)
                        ;; changes detected! but it may be code in a branch we don't use for merging.

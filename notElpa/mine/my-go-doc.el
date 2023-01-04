@@ -111,6 +111,14 @@ Returns nil if go version is not working."
   "Go version used to construct the URL to web docs.")
 
 
+(defvar my-go-doc--built-in-types
+  '("string" "bool" "int8" "uint8" "byte" "int16" "uint16" "int32" "rune"
+    "uint32" "int64" "uint64" "int" "uint" "uintptr" "float32" "float64"
+    "complex64" "complex128"))
+
+(defun my-go-doc--built-in-type-p (txt)
+  "Return non-nil if TXT is a built in go type."
+  (member txt my-go-doc--built-in-types))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; package name scraping
@@ -176,14 +184,6 @@ BOUNDS is the boundry of TXT.  A cons cell of format (start . end)."
       ;; else thing-at-point is itself a package. So blank out pack.
       ""))
 
-(defvar my-go-doc--built-in-types
-  '("string" "bool" "int8" "uint8" "byte" "int16" "uint16" "int32" "rune"
-    "uint32" "int64" "uint64" "int" "uint" "uintptr" "float32" "float64"
-    "complex64" "complex128"))
-
-(defun my-go-doc--built-in-type-p (txt)
-  "Return non-nil if TXT is a built in go type."
-  (member txt my-go-doc--built-in-types))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

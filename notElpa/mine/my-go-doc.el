@@ -166,7 +166,8 @@ incorrect."
                    (let ((tmp-begin (save-excursion (search-backward c bol t))))
                      ;; only set pack-begin if it's the nearst match so far.
                      (when (or (null pack-begin) ;; if not set yet
-                               (> tmp-begin pack-begin))
+                               (and (not (null tmp-begin))
+                                    (> tmp-begin pack-begin)))
                        (setq pack-begin tmp-begin))))
 
           ;; get the substring that is package name.

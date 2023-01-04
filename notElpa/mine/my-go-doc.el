@@ -5,7 +5,7 @@
 ;;; Keywords: docs
 ;;; Package-Requires: ((emacs "25.1"))
 ;;; Version: 0.1.0
-;;; URL: https://www.github.com/miketz/TODOuploadThis
+;;; URL: https://www.github.com/miketz/TODOuploadThisToSeparateRepo
 
 
 ;;; Commentary:

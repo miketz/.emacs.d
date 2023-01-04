@@ -85,9 +85,8 @@
 When viewing docs on website the go version can be specified.
 Otherwise the website docs defualt to the most recent version of Go.
 
-In general it's a good idea to keep this set to true.  But you may view Go code
-written for a more recent version than you have installed.  In this case set
-this var to nil."
+In general it's a good idea to keep this set to true.  Usually you will want
+the docs to match your installed Go version."
   :type 'boolean
   :group 'my-go-doc)
 

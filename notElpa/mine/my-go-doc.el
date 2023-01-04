@@ -180,7 +180,7 @@ incorrect."
 TXT is the thing at point.
 BOUNDS is the boundry of TXT.  A cons cell of format (start . end)."
 
-  ;; search against a hard coded list for build in types.
+  ;; search against a hard coded list for built in types.
   (when (my-go-doc--built-in-type-p txt)
     (cl-return-from my-go-doc-guess-package "builtin"))
 

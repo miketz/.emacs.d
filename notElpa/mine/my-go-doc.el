@@ -113,50 +113,64 @@ Returns nil if go version is not working."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; package name scraping
 
-(cl-defun my-go-doc-scrape-package ()
+(defun my-go-doc-get-dot-loc (bounds)
+  "Return location of previous dot (.) relative to the thing at point.
+Searches exactly 1 character before thing at point.  No big search backwards as
+that can find the wrong dot, not related to thing at point.
+BOUNDS represents thing at point.
+Return nil if dot is not found at previous character."
+  (let* ((start (car bounds))
+         (prev (1- start))
+         (prev-char (buffer-substring-no-properties prev start)))
+    (if (string-equal prev-char ".")
+        prev
+      nil)))
+
+(cl-defun my-go-doc-scrape-package (bounds)
   "Scrape out the package name for the thing at point.
 Basically searching backwards for a dot (.)
+Only search 1 char back for the dot using BOUNDS of thing at point.
 Then grab the text before the dot.
 Returns nil if no package found.
 WARNING:
-The implpementation is imperfect and may grab a package alias instead of the
-acutal package name.  Or it may grab something completely incorrect."
+The implpementation is imperfect and may grab a package alias or class name
+instead of the acutal package name.  Or it may grab something completely
+incorrect."
   (let ((bol (line-beginning-position)))
     (save-excursion
-      (let ((dot (search-backward "." bol t)))
-        ;; GUARD: dot not found
+      (let ((dot (my-go-doc-get-dot-loc bounds)))
         (when (null dot)
           (cl-return-from my-go-doc-scrape-package nil))
-        ;; now point is on the dot ".". Search backwards for the begging of package name.
-        ;; TODO: search backward for all of these sympbols (ie don't stop after first match)
-        ;;       then use the point closest to the dot.
-        (let ((pack nil))
-          (when (null pack) ;; try (
-            (setq pack (save-excursion (search-backward "(" bol t))))
-          (when (null pack) ;; try [
-            (setq pack (save-excursion (search-backward "[" bol t))))
-          (when (null pack) ;; try {
-            (setq pack (save-excursion (search-backward "{" bol t))))
-          (when (null pack) ;; try space
-            (setq pack (save-excursion (search-backward " " bol t))))
-          (when (null pack) ;; try tab
-            (setq pack (save-excursion (search-backward "	" bol t))))
+        (goto-char dot)
+        ;; now point is on the dot ".". Now find begging of package name.
+        ;; Search backward for all of these sympbols (ie don't stop after first match)
+        ;; then use the point of the match closest to the dot.
+        (let ((pack-begin nil)
+              (begin-chars '("(" "[" "{" " " "	"))) ;; tab
+          (cl-loop for c in begin-chars
+                   do
+                   (let ((tmp-begin (save-excursion (search-backward c bol t))))
+                     ;; only set pack-begin if it's the nearst match so far.
+                     (when (or (null pack-begin) ;; if not set yet
+                               (> tmp-begin pack-begin))
+                       (setq pack-begin tmp-begin))))
 
           ;; get the substring that is package name.
-          (when (and pack dot) ;; found both start/end
-            (setq pack (+ 1 pack)) ;; +1 to go forward past the delimiter we matched on.
-            (buffer-substring-no-properties pack dot)))))))
+          (when (and pack-begin dot) ;; found both start/end
+            (cl-incf pack-begin) ;; +1 to go forward past the delimiter we matched on.
+            (buffer-substring-no-properties pack-begin dot)))))))
 
-(cl-defun my-go-doc-guess-package (txt)
+(cl-defun my-go-doc-guess-package (txt bounds)
   "Guess the package based on some heuriestics and text searching.
-TXT is the thing at point."
+TXT is the thing at point.
+BOUNDS is the boundry of TXT.  A cons cell of format (start . end)."
 
   ;; search against a hard coded list for build in types.
   (when (my-go-doc--built-in-type-p txt)
     (cl-return-from my-go-doc-guess-package "builtin"))
 
   ;; scrape out package name by searching backwards for a "."
-  (or (my-go-doc-scrape-package)
+  (or (my-go-doc-scrape-package bounds)
       ;; else thing-at-point is itself a package. So blank out pack.
       ""))
 
@@ -219,8 +233,9 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 Displays the doc in a view defined by VIEW-TYPE.
 Possible values: `local', `website'"
   (let* ((txt (thing-at-point 'symbol 'no-properties))
+         (bounds (bounds-of-thing-at-point 'symbol))
          ;; imperfect attempt to scrape package name from text
-         (pack (my-go-doc-guess-package txt)))
+         (pack (my-go-doc-guess-package txt bounds)))
 
     ;; if thing-at-point is a builtin type then pack is "builtin".
     ;; if thing-at-point is a package, then pack is "". This is usually

@@ -5,7 +5,9 @@
 ;;; Keywords: docs
 ;;; Package-Requires: ((emacs "25.1"))
 ;;; Version: 0.1.0
-;;; URL: https://www.github.com/miketz/TODOuploadThisToSeparateRepo
+;;; URL: https://github.com/miketz/.emacs.d/blob/master/notElpa/mine/my-go-doc.el
+;;;      TODO: use a separate repo for this package. Currently bundled in my
+;;;      emacs config.
 
 
 ;;; Commentary:

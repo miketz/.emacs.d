@@ -152,9 +152,9 @@ incorrect."
         (when (null dot)
           (cl-return-from my-go-doc-scrape-package nil))
         (goto-char dot)
-        ;; now point is on the dot ".". Now find begging of package name.
+        ;; Now point is on the dot ".". Find begging of package name.
         ;; Search backward for all of these sympbols (ie don't stop after first match)
-        ;; then use the point of the match closest to the dot.
+        ;; Use point of match closest to the dot as `pack-begin'.
         (let ((pack-begin nil)
               (begin-chars '("(" "[" "{" " " "	"))) ;; tab
           (cl-loop for c in begin-chars

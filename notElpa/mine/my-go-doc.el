@@ -158,7 +158,7 @@ incorrect."
         (goto-char dot)
         ;; Now point is on the dot ".". Find begging of package name.
         ;; Search backward for all of these sympbols (ie don't stop after first match)
-        ;; Use point of match closest to the dot as `pack-begin'.
+        ;; Use the match closest to the dot as `pack-begin'.
         (let ((pack-begin nil)
               (begin-chars '("(" "[" "{" " " "	"))) ;; tab
           (cl-loop for c in begin-chars

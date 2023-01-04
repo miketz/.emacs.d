@@ -201,12 +201,15 @@ Uses command line tool [go doc].  Passsing in PACK and TXT."
                                               (if (and pack (> (length pack) 0))
                                                   (concat pack ".")
                                                 "")
-                                              txt))))
+                                              txt)))
+        (orig-window (get-buffer-window (current-buffer))))
     (switch-to-buffer-other-window (get-buffer-create "*go-doc*"))
     (erase-buffer)
     (insert doc)
-    ;; go to top of buffer
-    (goto-char (point-min))))
+    ;; go to top of doc buffer
+    (goto-char (point-min))
+    ;; remain in the original buffer window
+    (select-window orig-window)))
 
 ;; NOTE: if the format/layout of this website changes then the logic of constructing
 ;; the url with anchors will need to change.

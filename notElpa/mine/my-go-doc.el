@@ -128,6 +128,8 @@ acutal package name.  Or it may grab something completely incorrect."
         (when (null dot)
           (cl-return-from my-go-doc-scrape-package nil))
         ;; now point is on the dot ".". Search backwards for the begging of package name.
+        ;; TODO: search backward for all of these sympbols (ie don't stop after first match)
+        ;;       then use the point closest to the dot.
         (let ((pack nil))
           (when (null pack) ;; try (
             (setq pack (save-excursion (search-backward "(" bol t))))
@@ -144,6 +146,28 @@ acutal package name.  Or it may grab something completely incorrect."
           (when (and pack dot) ;; found both start/end
             (setq pack (+ 1 pack)) ;; +1 to go forward past the delimiter we matched on.
             (buffer-substring-no-properties pack dot)))))))
+
+(cl-defun my-go-doc-guess-package (txt)
+  "Guess the package based on some heuriestics and text searching.
+TXT is the thing at point."
+
+  ;; search against a hard coded list for build in types.
+  (when (my-go-doc--built-in-type-p txt)
+    (cl-return-from my-go-doc-guess-package "builtin"))
+
+  ;; scrape out package name by searching backwards for a "."
+  (or (my-go-doc-scrape-package)
+      ;; else thing-at-point is itself a package. So blank out pack.
+      ""))
+
+(defvar my-go-doc--built-in-types
+  '("string" "bool" "int8" "uint8" "byte" "int16" "uint16" "int32" "rune"
+    "uint32" "int64" "uint64" "int" "uint" "uintptr" "float32" "float64"
+    "complex64" "complex128"))
+
+(defun my-go-doc--built-in-type-p (txt)
+  "Return non-nil if TXT is a built in go type."
+  (member txt my-go-doc--built-in-types))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -195,13 +219,19 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
 Displays the doc in a view defined by VIEW-TYPE.
 Possible values: `local', `website'"
   (let* ((txt (thing-at-point 'symbol 'no-properties))
-         (pack (completing-read "package: "
-                                '() nil nil
-                                ;; imperfect attempt to scrape package name from text
-                                (or (my-go-doc-scrape-package)
-                                    ;; types like int will not have a package name in the source.
-                                    ;; use "builtin" for the doc lookup in this case.
-                                    "builtin"))))
+         ;; imperfect attempt to scrape package name from text
+         (pack (my-go-doc-guess-package txt)))
+
+    ;; if thing-at-point is a builtin type then pack is "builtin".
+    ;; if thing-at-point is a package, then pack is "". This is usually
+    ;; a correct guess so we can skip the manual correction.
+    (when (and (not (string-equal pack ""))
+               (not (string-equal pack "builtin")))
+      ;; manual correction
+      (setq pack (completing-read
+                  "package: "
+                  '() nil nil pack)))
+
     ;; display in the specifed view
     (cond ((eq view-type 'local)
            (my-go-doc--open-local pack txt))

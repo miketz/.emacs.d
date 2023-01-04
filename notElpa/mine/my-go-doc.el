@@ -34,10 +34,11 @@
 ;;; external program "godef" is not installed.
 ;;; --`eglot' and `lsp-mode' are likely the best options for doc lookup. They
 ;;; should solve the "package name" scraping problem as they won't rely on raw
-;;; text searching. In addition they work on non-built-in objects.  But they
+;;; text searching. In addition they work on non-built-in things.  But they
 ;;; require installing/using an lsp server for Go.  Which may drain more laptop
-;;; battery.
-;;; This package only relies on [go doc] which is installed alongside Go
+;;; battery. Also when funcalls are nested outer(inner(a,b,c)) you only get
+;;; the docs for the "outer" in eglot!
+;;; --This package only relies on [go doc] which is installed alongside Go
 ;;; itself. Nothing runs in the background.  You manually invoke a doc lookup.
 ;;;
 ;;; NOTE: lexical binding is used as a potential micro-optimization for

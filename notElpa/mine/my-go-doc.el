@@ -268,11 +268,14 @@ Possible values: `local', `website'"
          ;; imperfect attempt to scrape package name from text
          (pack (my-go-doc-guess-package txt bounds)))
 
-    ;; if thing-at-point is a builtin type then pack is "builtin".
-    ;; if thing-at-point is a package, then pack is "". This is usually
-    ;; a correct guess so we can skip the manual correction.
-    (when (and (not (string-equal pack ""))
-               (not (string-equal pack "builtin")))
+    ;; If thing-at-point is a builtin type then pack is "builtin". This is
+    ;; pretty much always correct (not guessed) so skip the manual correction.
+    (unless (or (string-equal pack "builtin")
+                ;; If thing-at-point is a package, then pack is "". Free functions also
+                ;; have "" so don't skip manual correction until i get a better
+                ;; detection.
+                ;; (string-equal pack "")
+                )
       ;; manual correction
       (setq pack (completing-read
                   "package: "

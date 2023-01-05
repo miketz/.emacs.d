@@ -216,19 +216,29 @@ Uses command line tool [go doc].  Passsing in PACK and TXT."
 (defvar my-go-doc-base-url "https://pkg.go.dev"
   "Website for go documentation.")
 
-(defun my-go-doc--open-website (pack txt)
+(defun my-go-doc--open-website (pack thingatpoing-txt)
   "Show doc for thing at point in in a browser.
-Uses URL 'https://pkg.go.dev'.  Passsing in PACK and TXT."
+Uses URL 'https://pkg.go.dev'.  Passsing in PACK and THINGATPOING-TXT."
+
+  ;; when the "thing at point" itself is a package, then we need to juggle some
+  ;; values around
+  (when (or (null pack) (string-equal pack ""))
+    (setq pack thingatpoing-txt)
+    (setq thingatpoing-txt nil))
 
   ;; url sample with ver: https://pkg.go.dev/builtin@go1.19.4#make
   ;; url sample no ver:   https://pkg.go.dev/builtin#make
   (let ((url (concat my-go-doc-base-url
                      "/" pack
                      ;; add extra section to URL if using specific go version
-                     (when (and my-go-doc-use-installed-go-ver-p
-                                my-go-doc-ver)
-                       (concat "@go" my-go-doc-ver))
-                     "#" txt)))
+                     (if (and my-go-doc-use-installed-go-ver-p
+                              my-go-doc-ver)
+                         (concat "@go" my-go-doc-ver)
+                       ;; else
+                       "")
+                     (if thingatpoing-txt
+                         (concat "#" thingatpoing-txt)
+                       ""))))
     (browse-url url)))
 
 

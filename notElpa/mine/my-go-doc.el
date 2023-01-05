@@ -120,7 +120,16 @@ If go is not installed defaults to nil.")
 (defvar my-go-doc--built-in-types
   '("string" "bool" "int8" "uint8" "byte" "int16" "uint16" "int32" "rune"
     "uint32" "int64" "uint64" "int" "uint" "uintptr" "float32" "float64"
-    "complex64" "complex128"))
+    "complex64" "complex128" "nil" "Type" "IntegerType" "FloatType"
+    "ComplexType"
+    ;; var
+    "iota"
+    ;; interfaces
+    "any" "comparable" "error"
+    ;; ???
+    ;; function names
+    "append" "copy" "delete" "len" "cap" "make" "new" "complex"
+    "real" "imag" "close" "panic" "recover" "print" "println"))
 
 (defun my-go-doc--built-in-type-p (txt)
   "Return non-nil if TXT is a built in go type."

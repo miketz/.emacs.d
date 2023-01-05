@@ -86,7 +86,7 @@
   :prefix "my-go-doc-"
   :group 'docs)
 
-(defcustom my-go-doc-use-installed-go-ver-p t
+(defcustom my-go-doc-specify-go-ver-p t
   "When true use the locally installed [go version] for website docs.
 When viewing docs on website the go version can be specified.
 Otherwise the website docs defualt to the most recent version of Go.
@@ -233,7 +233,7 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and THINGATPOING-TXT."
   (let ((url (concat my-go-doc-base-url
                      "/" pack
                      ;; add extra section to URL if using specific go version
-                     (if (and my-go-doc-use-installed-go-ver-p
+                     (if (and my-go-doc-specify-go-ver-p
                               my-go-doc-ver)
                          (concat "@go" my-go-doc-ver)
                        ;; else

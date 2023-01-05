@@ -96,6 +96,9 @@ the website docs to match your installed Go version."
   :type 'boolean
   :group 'my-go-doc)
 
+
+;; NOTE: `my-go-doc-get-version' will break if [go version] changes the format
+;; of its output string.
 (cl-defun my-go-doc-get-version ()
   "Get go version by parsing the string returned from [go version].
 Returns nil if go version is not working."
@@ -108,11 +111,10 @@ Returns nil if go version is not working."
     (seq-subseq (cl-third (split-string str " "))
                 2)))
 
-;; NOTE: `my-go-doc-get-version' will break if [go version] changes the format of
-;; its output string. If it becomes a problem then just change this to use a
-;; hard coded version.
 (defvar my-go-doc-ver (my-go-doc-get-version)
-  "Go version used to construct the URL to web docs.")
+  "Go version used to construct the URL to web docs.
+By default this is your installed version of Go.
+If go is not installed defaults to nil.")
 
 
 (defvar my-go-doc--built-in-types

@@ -7708,12 +7708,21 @@ vanilla javascript buffers."
         '(
           ;; Instead I will access docs on demand via <C-h .> or <C-c C-d d>
           ;; TODO: eldoc doesn't work at all with this disabled? look into it.
-          :hoverProvider
+          ;; :hoverProvider
 
           ;; Disable variable highlight as it seems overkill to constantly send
           ;; messages to a server for that.
           ;; TODO: use a tree-sitter imp for variable highlight.
-          :documentHighlightProvider)))
+          :documentHighlightProvider))
+
+  (defun my-eglot-toggle-eldoc ()
+    (interactive)
+    (if (memq :hoverProvider eglot-ignored-server-capabilities)
+        ;; remove
+        (setq eglot-ignored-server-capabilities
+              (delq :hoverProvider eglot-ignored-server-capabilities))
+      ;; else add
+      (push :hoverProvider eglot-ignored-server-capabilities))))
 
 
 ;;;----------------------------------------------------------------------------

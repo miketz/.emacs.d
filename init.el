@@ -6150,10 +6150,13 @@ buffer instead of narrowing."
   ;; start highlighting a little faster than the default 0.25
   (setq lazy-highlight-initial-delay 0.2)
 
-  ;; similar to "*" key in evil.
   (defun my-isearch-forward-symbol-at-point ()
+    "Similar to * key in Vim.
+Useful for highlighting variables.  Unlike Vim * (which jumps to next match
+after point) this remains on the variable your cursor started at. Enters
+isearch-mode so you can <C-s> or <C-r> to navigate through the matches."
     (interactive)
-    (let ((case-fold-search nil)) ;; case sensitive
+    (let ((case-fold-search nil)) ;; case sensitive to match Vim * behavior.
       (isearch-forward-symbol-at-point)))
   (global-set-key (kbd "C-c v") #'my-isearch-forward-symbol-at-point)
   (global-set-key (kbd "C-c C-v") #'my-isearch-forward-symbol-at-point))

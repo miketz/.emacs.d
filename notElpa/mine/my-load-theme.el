@@ -55,9 +55,10 @@ I want it to be considered light."
                  ("#F5F1D3" . "my-ultimate4")
                  ("ivory" . "ivory")
                  ("ivory2" . "ivory2")
-                 ("ivory3" . "ivory3")
-                 ("#adada1" . "ivory3.5")
-                 ("ivory4" . "ivory4")])
+                 ("ivory3" . "ivory3")     ; #cdcdc1
+                 ("#adada1" . "ivory3.5")  ; #adada1
+                 ("#9d9d91" . "ivory3.75") ; #9d9d91
+                 ("ivory4" . "ivory4")])   ; #8b8b83
        (len (length colors))
        (i 0))
 

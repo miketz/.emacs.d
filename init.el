@@ -8814,7 +8814,15 @@ TODO: delete this fn and replace with hooks, etc."
     (setq tab-width 3) ;; buffer local
     (yas-minor-mode 1)
     (when buffer-file-name ;; eglot gets weird if the buffer is not visiting a file.
-      (eglot-ensure))
+      (eglot-ensure)
+      ;; turn off mode to avoid spam. will call eldoc via keybind instead.
+      ;; I'd prefer not to use a timer, but it eglot might not turn on eldoc
+      ;; immediately so I need to give it time. TODO: figure out how to prevent
+      ;; eglot from turning on eldoc-mode in the first place.
+      (run-with-timer 0.25 nil (lambda () (eldoc-mode -1)))
+      ;; (when eldoc-mode
+      ;;   (eldoc-mode -1))
+      )
     ;; (citre-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))

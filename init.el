@@ -8793,8 +8793,10 @@ TODO: delete this fn and replace with hooks, etc."
   ;; unbind `godef-describe' so I cna use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)
 
-  (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
-  (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
+  ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
+  ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
+  (define-key go-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
+  (define-key go-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 

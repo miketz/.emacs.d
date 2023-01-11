@@ -7,7 +7,7 @@
 
 ;;; Code:
 
-(let ((positions '(mid bot top))
+(let ((positions '(mid top bot))
       (curr-pos nil) ; cache values for repeated M-r presses.
       (page-top nil)
       (page-bot nil)

@@ -21,10 +21,9 @@ smaller than the window height."
       (unless repeatp
         ;; calculate line numbers.
         (setq page-top (line-number-at-pos (window-start)))
-        ;; TODO: figure out how much to subtract. 2 is needed most often.
-        (setq page-bot (- (line-number-at-pos (window-end)) 2))
+        (setq page-bot (line-number-at-pos (window-end)))
         (setq page-mid (+ page-top
-                          (/ (1+ (- page-bot page-top)) 2))))
+                          (/ (- page-bot page-top) 2))))
       (setq curr-pos (car (or (cdr (memq (if repeatp curr-pos nil)
                                          positions))
                               positions)))

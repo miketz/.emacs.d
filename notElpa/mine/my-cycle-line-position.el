@@ -6,6 +6,7 @@
 ;;; sizes smaller than the window height.
 
 ;;; Code:
+(require 'array) ; for #'current-line
 
 (let ((positions '(mid top bot))
       (curr-pos nil) ; cache values for repeated M-r presses.
@@ -21,7 +22,14 @@ smaller than the window height."
       (unless repeatp
         ;; calculate line numbers.
         (setq page-top (line-number-at-pos (window-start)))
-        (setq page-bot (1- (line-number-at-pos (window-end))))
+        (setq page-bot (save-excursion
+                         ;; (move-to-window -1) goes to the last fully visible
+                         ;; line. This avoids scrolling when jumping to
+                         ;; partially visible bottom line.
+                         (move-to-window-line -1)
+                         ;; Incriment 1 becuase #'current-line is 0-based.
+                         ;; But #'line-number-at-pos is 1-based.
+                         (1+ (current-line))))
         (setq page-mid (+ page-top
                           (/ (- page-bot page-top) 2))))
       (setq curr-pos (car (or (cdr (memq (if repeatp curr-pos nil)

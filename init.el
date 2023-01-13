@@ -8819,7 +8819,10 @@ TODO: delete this fn and replace with hooks, etc."
       ;; I'd prefer not to use a timer, but eglot doens't turn on eldoc
       ;; immediately so I need to give it time. TODO: figure out how to prevent
       ;; eglot from turning on eldoc-mode in the first place.
-      (run-with-timer 0.25 nil (lambda () (eldoc-mode -1)))
+      (when (eq system-type 'darwin)
+        ;; this timer solution doesn't work on windows but does on mac
+        (run-with-timer 0.25 nil (lambda () (eldoc-mode -1))))
+
       ;; (when eldoc-mode
       ;;   (eldoc-mode -1))
       )

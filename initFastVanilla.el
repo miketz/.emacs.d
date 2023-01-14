@@ -66,3 +66,61 @@ This prevents overlapping themes; something I would rarely want."
 ;; (add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode-enable)
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode-enable)
 ;;(global-rainbow-delimiters-mode)
+
+;;;----------------------------------------------------------------------------
+;;; font
+;;;----------------------------------------------------------------------------
+(push
+   ;; '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+   '(font . "-*-Iosevka-light-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+   default-frame-alist)
+
+(load-theme 'charcoal t)
+
+;;;----------------------------------------------------------------------------
+;;; ido
+;;;----------------------------------------------------------------------------
+(ido-mode 1)
+
+;;;----------------------------------------------------------------------------
+;;; Paredit
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/paredit" load-path)
+(autoload 'enable-paredit-mode "paredit"
+  "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'slime-repl-mode-hook #'enable-paredit-mode)
+;;(add-hook 'sly-mrepl-mode-hook (lambda () (paredit-mode +1)))
+;;(add-hook 'sql-mode-hook #'enable-paredit-mode)
+
+
+(with-eval-after-load 'paredit
+  ;; remove the new "RET" key behavior added to paredit. Seems to break indent and
+  ;; in the minibuffer it eats the return key so I can't press RET to eval.
+  ;; TODO: look into the "proper" way to fix this.
+  (define-key paredit-mode-map (kbd "RET") nil)
+  (define-key paredit-mode-map (kbd "C-j") nil)
+
+  ;; barf/slurp keybinds
+  (define-key paredit-mode-map (kbd "C-9") #'paredit-forward-barf-sexp)
+  (define-key paredit-mode-map (kbd "C-0") #'paredit-forward-slurp-sexp)
+  (define-key paredit-mode-map (kbd "C-M-9") #'paredit-backward-slurp-sexp)
+  (define-key paredit-mode-map (kbd "C-M-0") #'paredit-backward-barf-sexp)
+  ;; don't allow paredit to steal the M-r keybind.
+  (define-key paredit-mode-map (kbd "M-r") #'move-to-window-line-top-bottom)
+  ;; rebind `paredit-raise-sexp' to C-M-r
+  (define-key paredit-mode-map (kbd "C-M-r") #'paredit-raise-sexp))
+
+
+;;;----------------------------------------------------------------------------
+;;; MISC
+;;;----------------------------------------------------------------------------

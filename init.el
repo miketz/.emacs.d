@@ -8890,7 +8890,9 @@ programming modes."
         ((eq major-mode 'lua-mode)
          (setq lua-indent-level width))
         ((eq major-mode 'python-mode)
-         (setq python-indent-offset width)))
+         (setq python-indent-offset width))
+        ((eq major-mode 'ruby-mode)
+         (setq ruby-indent-level width)))
 
   (setq tab-width width))
 

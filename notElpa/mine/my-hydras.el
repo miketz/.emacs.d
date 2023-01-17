@@ -103,7 +103,7 @@
   ("C-g" nil nil)
   ("q" nil))
 
-(defhydra hydra-smerge (:color amaranth)
+(defhydra my-hydra-smerge (:color amaranth)
   "Hydra for smerge-mode."
   ("n" smerge-next)
   ("p" smerge-prev)

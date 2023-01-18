@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: headerGuard
+# key: g
+# --
+#ifndef ${1:`(if buffer-file-name
+    (upcase (concat (file-name-sans-extension (file-name-nondirectory buffer-file-name))
+                    "_"
+                    (file-name-extension buffer-file-name)))
+  "MACRO")`}
+#define $1
+
+$0
+
+#endif /* $1 */

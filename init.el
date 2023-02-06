@@ -1246,8 +1246,8 @@ In master branch now. Was on git branch: feature/native-comp.")
   "Non-nil if Emacs supports native line number display.")
 
 
-(defvar has-nodejs-p
-  (memq my-curr-computer '(wild-dog)))
+;; (defvar has-nodejs-p
+;;   (memq my-curr-computer '(wild-dog)))
 
 ;; TODO: set up clang on more machines.
 (defvar my-has-clang-p (memq my-curr-computer

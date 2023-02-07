@@ -1551,6 +1551,12 @@ In master branch now. Was on git branch: feature/native-comp.")
   (define-key evil-visual-state-map (kbd "<tab>") #'indent-region)
   ;; TODO: rebind evil-jump-forward from <tab> to something else.
 
+
+  ;; replace teh default "M" behavior which no longer goes to the middle of the
+  ;; lines. TODO: get "M" to work with visual line mode via uppercase "V".
+  ;; (define-key evil-normal-state-map (kbd "M") #'my-evil-goto-page-mid)
+  ;; (define-key evil-visual-state-map (kbd "M") #'my-evil-goto-page-mid)
+
   (when my-graphic-p
     ;;prevent minibuffer spam when switching modes.
     ;;Cursor style/color is sufficient to determine mode.
@@ -7707,6 +7713,7 @@ vanilla javascript buffers."
 ;;; my-cycle-line-position
 ;;;----------------------------------------------------------------------------
 (autoload #'my-cycle-line-position "my-cycle-line-position" nil t)
+(autoload #'my-evil-goto-page-mid "my-cycle-line-position" nil t)
 (global-set-key (kbd "M-r") #'my-cycle-line-position)
 
 ;;;----------------------------------------------------------------------------

@@ -8930,7 +8930,9 @@ programming modes."
         ((eq major-mode 'python-mode)
          (setq python-indent-offset width))
         ((eq major-mode 'ruby-mode)
-         (setq ruby-indent-level width)))
+         (setq ruby-indent-level width))
+        ((eq major-mode 'rust-mode)
+         (setq rust-indent-offset width)))
 
   (setq tab-width width))
 

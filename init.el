@@ -8939,7 +8939,9 @@ programming modes."
         ((eq major-mode 'ruby-mode)
          (setq ruby-indent-level width))
         ((eq major-mode 'rust-mode)
-         (setq rust-indent-offset width)))
+         (setq rust-indent-offset width))
+        ((eq major-mode 'zig-mode)
+         (setq zig-indent-offset width)))
 
   (setq tab-width width))
 

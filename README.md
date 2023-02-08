@@ -1,10 +1,8 @@
-.emacs.d
-========
+# .emacs.d
 
 Storing my .emacs.d folder online to sync across computers.
 
-Git incantations
-========
+# Git incantations
 Create a new github repo from an existing local repo:
 
     git remote add origin https://github.com/miketz/.emacs.d.git

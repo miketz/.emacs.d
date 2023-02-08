@@ -5,25 +5,37 @@ Storing my .emacs.d folder online to sync across computers.
 # Git incantations
 Create a new github repo from an existing local repo:
 
-    git remote add origin https://github.com/miketz/.emacs.d.git
-    git push -u origin master
+```bash
+git remote add origin https://github.com/miketz/.emacs.d.git
+git push -u origin master
+```
 
 Download from github to a new computer:
 
-    git clone https://github.com/miketz/.emacs.d.git
+```bash
+git clone https://github.com/miketz/.emacs.d.git
+```
 
 Get latest changes from github:
 
-    git pull origin master
+```bash
+git pull origin master
+```
 
 Push local changes up to github:
 
-    git push origin master
+```bash
+git push origin master
+```
 
 Revert changes to modified files.
 
-    git reset --hard
+```bash
+git reset --hard
+```
 
 Remove all untracked files and directories.
 
-    git clean -fd
+```bash
+git clean -fd
+```

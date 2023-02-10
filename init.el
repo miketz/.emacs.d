@@ -9023,7 +9023,7 @@ load during init, or wait with autoloads."
   (require 'company)
   (require 'expand-region)
   (require 'hydra)
-  (require 'my-hydras)
+  ;; (require 'my-hydras)
   (require 'swiper)
   (require 'ivy)
   (require 'counsel)

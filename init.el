@@ -8896,6 +8896,16 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'reformatter-define "reeformatter" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; browse-kill-ring
+;;;----------------------------------------------------------------------------
+(autoload #'browse-kill-ring "browse-kill-ring" nil t)
+(autoload #'browse-kill-ring-default-keybindings "browse-kill-ring" nil t)
+
+(browse-kill-ring-default-keybindings)
+
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (defun my-unbreak-emacs-29 ()

@@ -519,4 +519,19 @@ Example use:
 
 
 
+;;;----------------------------------------------------------------------------
+;;; increment numbers. like Vims C-a, C-x key binds.
+;;;----------------------------------------------------------------------------
+(require 'thingatpt)
+(defun my-inc ()
+  "Increment number at point."
+  (interactive)
+  (let ((num (number-at-point)))
+    (when num ;; GUARD: thing must be a number
+      (let ((b (bounds-of-thing-at-point 'word)))
+        (delete-region (car b) (cdr b)))
+      (insert (number-to-string (+ 1 num))))))
+
+
+
 (provide 'my-misc)

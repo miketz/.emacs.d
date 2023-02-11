@@ -4,7 +4,8 @@
 
 (defmacro do-n-times (n &rest body)
   "Just like `dotimes', but without specifying the current index variable.
-Use if you need to do something N times, but don't need to know the current index."
+Use if you need to do something N times, but don't need to know the current
+index."
   (declare (indent 1)) ;;indent it like a normal let.
   `(dotimes (,(cl-gensym) ,n)
      ,@body))

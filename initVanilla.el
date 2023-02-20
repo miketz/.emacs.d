@@ -43,6 +43,12 @@ This prevents overlapping themes; something I would rarely want."
 (ad-activate 'load-theme)
 
 ;;;----------------------------------------------------------------------------
+;;; cursor
+;;;----------------------------------------------------------------------------
+(setq-default cursor-type '(bar . 2))
+(blink-cursor-mode 1)
+
+;;;----------------------------------------------------------------------------
 ;;; rainbow-delimiters
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/rainbow-delimiters" load-path)
@@ -84,7 +90,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; ido
 ;;;----------------------------------------------------------------------------
-(ido-mode 1)
+;; (ido-mode 1)
 
 ;;;----------------------------------------------------------------------------
 ;;; Paredit
@@ -119,6 +125,16 @@ This prevents overlapping themes; something I would rarely want."
   (define-key paredit-mode-map (kbd "M-r") #'move-to-window-line-top-bottom)
   ;; rebind `paredit-raise-sexp' to C-M-r
   (define-key paredit-mode-map (kbd "C-M-r") #'paredit-raise-sexp))
+
+
+;;;----------------------------------------------------------------------------
+;;; repeat
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'repeat
+  (setq repeat-exit-timeout nil)) ;; don't timeout
+
+(when (fboundp #'repeat-mode) ;; emacs 28+
+  (repeat-mode))
 
 
 ;;;----------------------------------------------------------------------------

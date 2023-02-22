@@ -307,6 +307,7 @@ in case that file does not provide any feature."
 (defvar slime-startup-animation)
 (defvar slime-default-lisp)
 (defvar slime-lisp-implementations)
+(defvar slime-words-of-encouragement)
 (defvar common-lisp-hyperspec-root)
 (defvar slime-macroexpansion-minor-mode-map)
 (defvar company-mode-map)
@@ -2124,6 +2125,10 @@ with duplicate bundled libs in Sly and SLIME.")
   ;;       (if slime-startup-animation
   ;;           (animate-string welcome 0 0)
   ;;         (insert welcome)))))
+
+  ;; restore deleted phrase. Also make it the only one.
+  (setq slime-words-of-encouragement
+        '("Take this REPL, brother, and may it serve you well."))
 
   (cond
    ((eq my-curr-computer 'mac-mini-m1-2021)

@@ -556,6 +556,7 @@ in case that file does not provide any feature."
 (defvar package-archives)
 (defvar cookie-file)
 (defvar rust-mode-map)
+(defvar rust-indent-offset)
 (defvar inferior-lisp-program)
 (defvar icomplete-tidy-shadowed-file-names) ; buffer-local
 (defvar icomplete-show-matches-on-no-input) ; buffer-local
@@ -566,6 +567,7 @@ in case that file does not provide any feature."
 (defvar csharp-mode-map)
 (defvar puni-mode-map)
 (defvar ruby-mode-map)
+(defvar ruby-indent-level)
 (defvar ivy-posframe-display-functions-alist)
 (defvar smerge-mode-map)
 (defvar lua-mode-map)
@@ -589,6 +591,7 @@ in case that file does not provide any feature."
 (defvar eglot-events-buffer-size)
 (defvar eglot-autoshutdown)
 (defvar eglot-ignored-server-capabilities)
+(defvar zig-indent-offset)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -800,6 +803,7 @@ in case that file does not provide any feature."
 (declare-function evil-window-down 'suppress)
 (declare-function my-js2-prev-error 'suppress)
 (declare-function my-hydra-js2-flymake/body 'suppress)
+(declare-function hydra-smerge/body 'suppress)
 (declare-function my-grep-dwim 'suppress)
 (declare-function evil-window-up 'suppress)
 (declare-function dired-hide-details-mode 'suppress)
@@ -1030,6 +1034,22 @@ in case that file does not provide any feature."
 (declare-function ido-grid-right "ido-grid")
 (declare-function ido-grid--shift "ido-grid")
 (declare-function citre-peek 'suppress)
+
+(declare-function smerge-kill-current "smerge-mode")
+(declare-function smerge-resolve "smerge-mode")
+(declare-function smerge-combine-with-next "smerge-mode")
+(declare-function smerge-refine "smerge-mode")
+(declare-function smerge-diff-base-lower "smerge-mode")
+(declare-function smerge-diff-upper-lower "smerge-mode")
+(declare-function smerge-diff-base-upper "smerge-mode")
+(declare-function smerge-keep-current "smerge-mode")
+(declare-function smerge-keep-all "smerge-mode")
+(declare-function smerge-keep-lower "smerge-mode")
+(declare-function smerge-keep-upper "smerge-mode")
+(declare-function smerge-keep-base "smerge-mode")
+(declare-function smerge-prev "smerge-mode")
+(declare-function smerge-auto-leave "smerge-mode")
+(declare-function smerge-next "smerge-mode")
 
 ;; TODO: fix wrong use of declare-function above. Replace the symbols with
 ;; string filenames of lisp files in the `load-path'.

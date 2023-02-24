@@ -8692,8 +8692,19 @@ TODO: delete this fn and replace with hooks, etc."
 
   ;; (global-set-key (kbd "M-x") #'my-vertico-M-x)
 
+  (define-key vertico-map (kbd "C-j") #'vertico-next)
+  (define-key vertico-map (kbd "C-k") #'vertico-previous)
 
   (setq vertico-count 25))
+
+(with-eval-after-load 'vertico-grid
+  ;; key binds
+  (define-key vertico-grid-map (kbd "C-h") #'vertico-grid-left)
+  (define-key vertico-grid-map (kbd "C-l") #'vertico-grid-right)
+  (define-key vertico-grid-map (kbd "C-v") #'vertico-grid-scroll-up)
+  (define-key vertico-grid-map (kbd "M-v") #'vertico-grid-scroll-down))
+
+
 
 (when (eq my-narrow-type 'vertico)
   (vertico-mode 1)

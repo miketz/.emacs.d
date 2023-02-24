@@ -8682,6 +8682,7 @@ TODO: delete this fn and replace with hooks, etc."
   (define-key vertico-map (kbd "C-j") #'vertico-next)
   (define-key vertico-map (kbd "C-k") #'vertico-previous)
 
+  ;; this is max window hieght
   (setq vertico-count 25))
 
 (with-eval-after-load 'vertico-grid

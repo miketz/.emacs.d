@@ -8698,6 +8698,7 @@ TODO: delete this fn and replace with hooks, etc."
   (setq vertico-count 25))
 
 (with-eval-after-load 'vertico-grid
+  (setq vertico-grid-max-columns 12)
   ;; key binds
   (define-key vertico-grid-map (kbd "C-h") #'vertico-grid-left)
   (define-key vertico-grid-map (kbd "C-l") #'vertico-grid-right)

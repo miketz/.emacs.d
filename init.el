@@ -1320,6 +1320,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 (autoload #'my-list-modules-with-upstream-code-to-merge "my-modules" nil t)
 
 
+;;;----------------------------------------------------------------------------
+;;; compat
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/compat.el" load-path)
 
 
 ;;;----------------------------------------------------------------------------
@@ -8794,10 +8798,6 @@ TODO: delete this fn and replace with hooks, etc."
 ;; (when (fboundp #'repeat-mode) ;; emacs 28+
 ;;   (repeat-mode))
 
-;;;----------------------------------------------------------------------------
-;;; compat
-;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/compat.el" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; my-proj-c-intro-and-ref

@@ -1162,7 +1162,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
-        ((eq my-curr-computer 'mac-mini-m1-2021) 'grid-ido)
+        ((eq my-curr-computer 'mac-mini-m1-2021) 'vertico)
         ((eq my-curr-computer 'work-laptop-mac) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.

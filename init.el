@@ -8690,10 +8690,7 @@ TODO: delete this fn and replace with hooks, etc."
   (define-key vertico-map (kbd "C-k") #'vertico-previous)
 
   ;; set max window height for vertico buffer.
-  (let* ((ideal-height (round (* 0.75 (window-height))))
-         (min-height 30)
-         (height (max ideal-height min-height)))
-    (setq vertico-count height)))
+  (setq vertico-count 40))
 
 (with-eval-after-load 'vertico-grid
   (setq vertico-grid-max-columns 12)

@@ -322,3 +322,6 @@
 [submodule "notElpa/emacs-reformatter"]
 	path = notElpa/emacs-reformatter
 	url = https://github.com/miketz/emacs-reformatter
+[submodule "notElpa/consult"]
+	path = notElpa/consult
+	url = https://github.com/miketz/consult

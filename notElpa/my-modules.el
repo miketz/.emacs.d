@@ -2054,6 +2054,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'consult
+      :comment "Specialized completion modes. Similar to counsel in the swiper/ivy package. But used with vertico."
+      :folder (concat my-module-folder "consult")
+      :remotes '((:sym mine :url "https://github.com/miketz/consult"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/minad/consult"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "main"
+      :use-branch "mine"
+      :depend-hard '((emacs "27.1") (compat "29.1.3.4"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'bug-hunter
       :comment nil
       :folder (concat my-module-folder "elisp-bug-hunter")

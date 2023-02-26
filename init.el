@@ -8671,6 +8671,16 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; consult
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/consult" load-path)
+(autoload #'consult-buffer "consult" nil t)
+
+;; temporarily defining this macro so consult.el will byte compile.
+;; TODO: properly include this dependency. it's not in 'cl-macs in emacs 28.2
+(defmacro cl-with-gensyms (names &rest body)
+  "Bind each of NAMES to an uninterned symbol and evaluate BODY."
+  (declare (debug (sexp body)) (indent 1))
+  `(let ,(cl-loop for name in names collect
+                  `(,name (gensym (symbol-name ',name))))
+     ,@body))
 
 ;;;----------------------------------------------------------------------------
 ;;; vertico
@@ -8688,6 +8698,9 @@ TODO: delete this fn and replace with hooks, etc."
 
   (define-key vertico-map (kbd "C-j") #'vertico-next)
   (define-key vertico-map (kbd "C-k") #'vertico-previous)
+
+  ;; (when my-use-evil-p
+  ;;   (evil-leader/set-key "b" #'consult-buffer))
 
   ;; set max window height for vertico buffer.
   (setq vertico-count 40))

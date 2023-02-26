@@ -8671,7 +8671,28 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; consult
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/consult" load-path)
+(autoload #'consult-compile-error "consult-compile" nil t)
+(autoload #'consult-flymake "consult-flymake" nil t)
+(autoload #'consult-imenu "consult-imenu" nil t)
+(autoload #'consult-imenu-multi "consult-imenu" nil t)
+(autoload #'consult-info "consult-info" nil t)
+(autoload #'consult-kmacro "consult-kmacro" nil t)
+(autoload #'consult-org-heading "consult-org" nil t)
+(autoload #'consult-org-agenda "consult-org" nil t)
+(autoload #'consult-register-window "consult-register" nil nil)
+(autoload #'consult-register-format "consult-register" nil nil)
+(autoload #'consult-register "consult-register" nil t)
+(autoload #'consult-register-load "consult-register" nil t)
+(autoload #'consult-register-store "consult-register" nil t)
+(autoload #'consult-xref "consult-xref" nil nil)
+
 (autoload #'consult-buffer "consult" nil t)
+(autoload #'consult-theme "consult" nil t)
+(autoload #'consult-mark "consult" nil t)
+(autoload #'consult-global-mark "consult" nil t)
+(autoload #'consult-goto-line "consult" nil t)
+(autoload #'consult-recent-file "consult" nil t)
+(autoload #'consult-minor-mode-menu "consult" nil t)
 
 ;; temporarily defining this macro so consult.el will byte compile.
 ;; TODO: properly include this dependency. it's not in 'cl-macs in emacs 28.2

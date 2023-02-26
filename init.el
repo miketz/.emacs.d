@@ -9031,6 +9031,9 @@ This function will try to set the additional variable for a variety of
 programming modes."
   (interactive "nindent width: ")
 
+  ;; NOTE: at time of writing it seems `go-mode' does not have it's own indent
+  ;; width var. Might be something to do with the standardization on tabs for
+  ;; that langauge.
   (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode idl-mode
                                    pike-mode awk-mode csharp-mode))
          (setq c-basic-offset width))

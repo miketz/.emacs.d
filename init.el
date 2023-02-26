@@ -9043,7 +9043,9 @@ programming modes."
         ((eq major-mode 'rust-mode)
          (setq rust-indent-offset width))
         ((eq major-mode 'zig-mode)
-         (setq zig-indent-offset width)))
+         (setq zig-indent-offset width))
+        ((eq major-mode 'perl-mode)
+         (setq perl-indent-level width)))
 
   (setq tab-width width))
 

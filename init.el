@@ -8987,6 +8987,14 @@ TODO: delete this fn and replace with hooks, etc."
       ad-do-it))
   (ad-activate 'evil-paste-pop))
 
+;;;----------------------------------------------------------------------------
+;;; perl-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'perl-mode
+  (defun my-setup-perl-mode ()
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode-enable))
+  (add-hook 'perl-mode-hook #'my-setup-perl-mode))
 
 
 ;;;----------------------------------------------------------------------------

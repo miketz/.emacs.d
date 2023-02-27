@@ -286,7 +286,7 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :main-branch "master"
+      :main-branch "main"
       :use-branch "mine" ;; ignore *.elc files
       :depend-hard '((emacs "25.1")
                      ;; async not used anymore? (async "20180527")

@@ -270,8 +270,8 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :main-branch "master"
-      :use-branch "master"
+      :main-branch "main"
+      :use-branch "main"
       :depend-hard '((emacs "24.4"))
       :depend-soft '()
       :depend-bundled '())

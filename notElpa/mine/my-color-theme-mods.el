@@ -1482,4 +1482,16 @@ Historical preservation."
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((t (:foreground "#FCDCDC"))))))
 
+(defun my-color-moe-light ()
+  (interactive)
+  (load-theme 'moe-light t)
+  (custom-theme-set-faces
+   'moe-light
+
+   `(default ((t (:foreground "#3a3a3a"))))
+
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((t (:foreground "#FCDCDC"))))))
+
 (provide 'my-color-theme-mods)

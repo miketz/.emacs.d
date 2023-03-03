@@ -1527,6 +1527,11 @@ Historical preservation."
        `(font-lock-function-name-face
          ((,class (:foreground ,yellow-2 :background "#000000"))))
 
+       ;; verticla line separateing buffer windows. It was invisiblt against the fringe!!!
+       `(vertical-border ((,class (:foreground "#000000" :background ,black-3))))
+
+       ;; darker modeline
+       `(mode-line ((,class (:box nil :background "#7fa7cf" :foreground "black"))))
 
 
        ;; Emacs built-in display-fill-column-indicator.

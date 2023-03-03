@@ -1533,6 +1533,12 @@ Historical preservation."
        ;; darker modeline
        `(mode-line ((,class (:box nil :background "#7fa7cf" :foreground "black"))))
 
+       ;; remove itallic from comments.
+       `(font-lock-comment-delimiter-face
+         ((,class (:background unspecified :foreground ,moe-dark-comment-delimiter))))
+       `(font-lock-comment-face
+         ((,class (:background unspecified :foreground ,moe-dark-comment))))
+
 
        ;; Emacs built-in display-fill-column-indicator.
        ;; replaces `fci-mode' and it's color variable `fci-rule-color'

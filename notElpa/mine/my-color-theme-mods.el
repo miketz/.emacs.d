@@ -1544,6 +1544,11 @@ Historical preservation."
        `(avy-lead-face-1 ((,class (:background "black" :foreground ,white-2))))
        `(avy-lead-face-2 ((,class (:background "black" :foreground ,green-2))))
 
+       `(tree-sitter-hl-face:label
+         ((,class (;;:background "black"
+                   :foreground "#FF5F5F";"#C2C200"
+                   :weight bold))))
+
        ;; Emacs built-in display-fill-column-indicator.
        ;; replaces `fci-mode' and it's color variable `fci-rule-color'
        `(fill-column-indicator ((,class (:foreground "#606060")))))))

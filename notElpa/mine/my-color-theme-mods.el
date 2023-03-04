@@ -1539,6 +1539,10 @@ Historical preservation."
        `(font-lock-comment-face
          ((,class (:background unspecified :foreground ,moe-dark-comment))))
 
+       `(avy-lead-face ((,class (:background "black" :foreground ,cyan-1))))
+       `(avy-lead-face-0 ((,class (:background "black" :foreground ,purple-00))))
+       `(avy-lead-face-1 ((,class (:background "black" :foreground ,white-2))))
+       `(avy-lead-face-2 ((,class (:background "black" :foreground ,green-2))))
 
        ;; Emacs built-in display-fill-column-indicator.
        ;; replaces `fci-mode' and it's color variable `fci-rule-color'

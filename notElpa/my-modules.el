@@ -2134,8 +2134,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :main-branch "master"
-      :use-branch "master"
+      :main-branch "main"
+      :use-branch "main"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

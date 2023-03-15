@@ -636,7 +636,14 @@ mode itself. External language servers are required to use it of course."
       :submodule-p t
       :main-branch "master"
       :use-branch "master"
-      :depend-hard '()
+      :depend-hard '((emacs "26.3")
+                     (jsonrpc "1.0.16")
+                     (flymake "1.2.1")
+                     (project "0.9.8")
+                     (xref "1.6.2")
+                     (eldoc "1.11.0")
+                     (seq "2.23")
+                     (external-completion "0.1"))
       :depend-soft '()
       :depend-bundled '())
     ,(make-module

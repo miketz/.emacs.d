@@ -635,7 +635,7 @@ mode itself. External language servers are required to use it of course."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "master"
+      :use-branch "works" ;; using an old version of elgot that works with Emacs 28.2. naming branch "works".
       :depend-hard '((emacs "26.3")
                      (jsonrpc "1.0.16")
                      (flymake "1.2.1")

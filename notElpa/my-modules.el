@@ -659,14 +659,14 @@ mode itself. External language servers are required to use it of course."
       :submodule-p t
       :main-branch "master"
       :use-branch "master"
-      :depend-hard '((emacs "26.1")
-                     (dash "2.14.1")
-                     (dash-functional "2.14.1") ; bundled in dash pacakge
+      :depend-hard '((emacs "26.3")
+                     (dash "2.18.0")
                      (f "0.20.0")
-                     (ht "2.0")
+                     (ht "2.3")
                      (spinner "1.7.3")
                      (markdown-mode "2.3")
-                     (lv "0")) ; lv is in the hydra package
+                     (lv "0") ; lv is in the hydra package
+                     (eldoc "1.11"))
       :depend-soft '((use-package))
       :depend-bundled '())
     ,(make-module

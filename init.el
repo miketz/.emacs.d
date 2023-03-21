@@ -4006,6 +4006,16 @@ and indent."
       (dired-hide-details-mode 1)))
   (add-hook 'dired-mode-hook #'my-setup-dired)
 
+  (defun my-dired-create-directory ()
+    "Same as `dired-create-directory' but prevent ido from giving junk."
+    (interactive)
+    ;; shadow `ido-work-directory-list' so ido doesn't pull in suggestions
+    ;; from irrelevant folders.
+    (let ((ido-work-directory-list '()))
+      (call-interactively #'dired-create-directory)))
+
+  (define-key dired-mode-map (kbd "+") #'my-dired-create-directory)
+
   (define-key dired-mode-map (kbd "C-o") #'dired-up-directory)
   (when my-use-evil-p
     ;; vimify the keybinds.

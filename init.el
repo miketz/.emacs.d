@@ -1160,10 +1160,10 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-use-js2-highlight-vars-p (not (version< emacs-version "24.4")))
 
 (defvar my-narrow-type
-  (cond ((eq my-curr-computer 'wild-dog) 'bare-ido)
-        ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
-        ((eq my-curr-computer 'mac-mini-m1-2021) 'bare-ido)
-        ((eq my-curr-computer 'work-laptop-mac) 'bare-ido)
+  (cond ((eq my-curr-computer 'wild-dog) 'grid-idoj)
+        ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
+        ((eq my-curr-computer 'mac-mini-m1-2021) 'grid-ido)
+        ((eq my-curr-computer 'work-laptop-mac) 'grid-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
 Use nil for the Emacs default.

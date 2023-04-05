@@ -9060,7 +9060,9 @@ programming modes."
         ((eq major-mode 'zig-mode)
          (setq zig-indent-offset width))
         ((eq major-mode 'perl-mode)
-         (setq perl-indent-level width)))
+         (setq perl-indent-level width))
+        ((memq major-mode '(js2-mode js-mode))
+         (setq js-indent-level width)))
 
   (setq tab-width width))
 

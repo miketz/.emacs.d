@@ -2826,6 +2826,8 @@ Inserts a new line and the beginning and end with text values:
 ;;; js-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'js
+  (define-key js-mode-map (kbd "C-c C-c") #'compile)
+
   (defun my-setup-js ()
     ;; set explicitly because shorter width in json mode corrupts it.
     (setq js-indent-level my-indent-width)

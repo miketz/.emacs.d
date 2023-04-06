@@ -2828,6 +2828,18 @@ Inserts a new line and the beginning and end with text values:
 (with-eval-after-load 'js
   (define-key js-mode-map (kbd "C-c C-c") #'compile)
 
+  (defun my-command-jslint ()
+    "Return jslint command.
+With options so the output is friendly to the Emacs compile buffer."
+    (concat "jslint --terse "
+            (shell-quote-argument buffer-file-name)))
+
+  (defun my-command-eslint ()
+    "Return eslint command.
+With options so the output is friendly to the Emacs compile buffer."
+    (concat "eslint -f unix "
+            (shell-quote-argument buffer-file-name)))
+
   (defun my-setup-js ()
     ;; set explicitly because shorter width in json mode corrupts it.
     (setq js-indent-level my-indent-width)
@@ -2841,8 +2853,7 @@ Inserts a new line and the beginning and end with text values:
                (my-str-ends-with-p buffer-file-name ".js"))
       ;; wireup M-x compile
       (set (make-local-variable 'compile-command)
-           (concat "jslint --terse "
-                   (shell-quote-argument buffer-file-name)))))
+           (my-command-eslint))))
 
   (add-hook 'js-mode-hook #'my-setup-js))
 
@@ -2988,7 +2999,7 @@ Inserts a new line and the beginning and end with text values:
     ;; NOTE: if a tmp file is created after js2-mode loads, this won't set
     ;; the `compile-command'. But `my-set-jslint-compile-command' can be
     ;; called manually in that case.
-    (my-set-jslint-compile-command)
+    ;; (my-set-jslint-compile-command)
 
     (js2-highlight-unused-variables-mode t)
     ;; replace ambiguous name "Javascript-IDE" with "js2"

@@ -7094,6 +7094,7 @@ Closure over `preceding-sexp-fn'."
 
 ;; NOTE: just setting up hooks manually in eval-after-load for specific langs.
 ;; (smart-tabs-insinuate 'c)
+(smart-tabs-insinuate 'javascript)
 
 ;;;----------------------------------------------------------------------------
 ;;; lua-mode

@@ -2,7 +2,6 @@
 # -*- try/catch/finally -*-
 # name: try
 # key: try
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 try {
     $0

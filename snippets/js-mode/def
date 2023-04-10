@@ -2,7 +2,6 @@
 # -*- def -*-
 # name: def
 # key: def
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 ${1:name}: function($2) {
     $0

@@ -2,7 +2,6 @@
 # -*- for loop -*-
 # name: do
 # key: do
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 do {
     $0

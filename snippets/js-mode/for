@@ -2,7 +2,6 @@
 # -*- for loop -*-
 # name: for
 # key: for
-# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 var $1 = $2,
     len = ${3:collection}.length;

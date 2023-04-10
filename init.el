@@ -2828,17 +2828,38 @@ Inserts a new line and the beginning and end with text values:
 (with-eval-after-load 'js
   (define-key js-mode-map (kbd "C-c C-c") #'compile)
 
-  (defun my-command-jslint ()
-    "Return jslint command.
-With options so the output is friendly to the Emacs compile buffer."
-    (concat "jslint --terse "
-            (shell-quote-argument buffer-file-name)))
+  (progn ;; Add parsing of jshint output in compilation mode
+    (add-to-list 'compilation-error-regexp-alist-alist
+                 '(jshint "^\\(.*\\): line \\([0-9]+\\), col \\([0-9]+\\), "
+                          1 2 3))
+    (add-to-list 'compilation-error-regexp-alist 'jshint))
 
-  (defun my-command-eslint ()
-    "Return eslint command.
-With options so the output is friendly to the Emacs compile buffer."
-    (concat "eslint -f unix "
-            (shell-quote-argument buffer-file-name)))
+  (defvar my-js-inter-cmds '(:jslint "jslint --terse "
+                                     :jshint "jshint "
+                                     :eslint "eslint -f unix ")
+    "Property list of commands to invoke linter.
+With option flags so the output is friendly to the Emacs compile buffer.
+For :jshint, the parsing of output is done via
+`compilation-error-regexp-alist-alist' to make the output friendly to the
+Emacs compile buffer.")
+
+  (cl-defun my-js-set-compile-command (&optional linter-sym)
+    "Set js compile command.
+LINTER values: :jslint :jshint :eslint"
+    (interactive)
+    ;; for now require a file
+    (unless (and buffer-file-name
+                 (my-str-ends-with-p buffer-file-name ".js"))
+      (message "No js file found for buffer.")
+      (cl-return-from my-js-set-compile-command))
+
+    (let* ((linter (or linter-sym
+                       (intern (completing-read "linter: "
+                                                '(:jslint :jshint :eslint)))))
+           (cmd (cl-getf my-js-inter-cmds linter)))
+      ;; wireup M-x compile
+      (set (make-local-variable 'compile-command)
+           (concat cmd (shell-quote-argument buffer-file-name)))))
 
   (defun my-setup-js ()
     ;; set explicitly because shorter width in json mode corrupts it.
@@ -2849,11 +2870,7 @@ With options so the output is friendly to the Emacs compile buffer."
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)
     ;; (electric-spacing-mode 1)
-    (when (and buffer-file-name
-               (my-str-ends-with-p buffer-file-name ".js"))
-      ;; wireup M-x compile
-      (set (make-local-variable 'compile-command)
-           (my-command-eslint))))
+    (my-js-set-compile-command :jshint))
 
   (add-hook 'js-mode-hook #'my-setup-js))
 

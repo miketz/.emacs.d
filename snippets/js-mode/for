@@ -3,8 +3,7 @@
 # name: for
 # key: for
 # --
-var $1 = $2,
-    len = ${3:collection}.length;
-for (${1:i} = ${2:0}; $1 < len; $1 += 1) {
+const ${4:len} = ${3:collection}.length;
+for (let ${1:i} = ${2:0}; $1 < $4; $1 += 1) {
     $0
 }

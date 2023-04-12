@@ -9043,6 +9043,15 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+;; blink effect on current line when switching windows or buffers.
+(when nil
+  (defun my-pulse-line-on-window-selection-change (frame)
+    (when (eq frame (selected-frame))
+      (pulse-momentary-highlight-one-line)))
+
+  (add-hook 'window-selection-change-functions
+            #'my-pulse-line-on-window-selection-change))
+
 (defun my-unbreak-emacs-29 ()
   "Emacs 29, built 2022-07-18 has some features not working on windows.
 Do things to unbreak it.

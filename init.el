@@ -5644,7 +5644,7 @@ TODO: call this function when it works."
       ;; TODO: use ivy, ido, helm specific buffer switch fn.
       (switch-to-buffer
        (completing-read ;; ido-completing-read
-        "Channel:"
+        "Channel: "
         (save-excursion
           (delq
            nil

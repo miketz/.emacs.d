@@ -639,6 +639,12 @@ Example:
               :background "#232319"
               :weight bold)))
 
+   ;; menu bar faces. Only relevant in terminal mode?
+   `(menu ((,class :background ,faint-less :foreground "black")))
+   `(tty-menu-enabled-face ((,class :background "black")))
+   `(tty-menu-disabled-face ((,class :background "black" :foreground "red")))
+   `(tty-menu-selected-face ((,class :background ,fainter)))
+
    ;; swift-mode
    ;; TODO: dont' rely on js2-function-call face as it requires js2 be loaded
    ;; first.

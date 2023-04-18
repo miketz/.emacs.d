@@ -2834,7 +2834,7 @@ Inserts a new line and the beginning and end with text values:
                           1 2 3))
     (add-to-list 'compilation-error-regexp-alist 'jshint))
 
-  (defvar my-js-inter-cmds '(:jslint "jslint --terse "
+  (defvar my-js-linter-cmds '(:jslint "jslint --terse "
                                      :jshint "jshint "
                                      :eslint "eslint -f unix ")
     "Property list of commands to invoke linter.
@@ -2856,7 +2856,7 @@ LINTER values: :jslint :jshint :eslint"
     (let* ((linter (or linter-sym
                        (intern (completing-read "linter: "
                                                 '(:jslint :jshint :eslint)))))
-           (cmd (cl-getf my-js-inter-cmds linter)))
+           (cmd (cl-getf my-js-linter-cmds linter)))
       ;; wireup M-x compile
       (set (make-local-variable 'compile-command)
            (concat cmd (shell-quote-argument buffer-file-name)))))

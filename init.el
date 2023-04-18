@@ -2868,6 +2868,7 @@ LINTER values: :jslint :jshint :eslint"
       (setq display-fill-column-indicator-column 79)
       (display-fill-column-indicator-mode 1))
     (my-turn-on-electric-pair-local-mode)
+    (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
     ;; (electric-spacing-mode 1)
     (my-js-set-compile-command :jshint))
@@ -3034,7 +3035,7 @@ LINTER values: :jslint :jshint :eslint"
     ;; (smartparens-mode 1)
 
 
-    (yas-minor-mode 1)
+    ;; (yas-minor-mode 1)
     ;; (rainbow-delimiters-mode-enable)
     ;; (electric-spacing-mode 1)
 

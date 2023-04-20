@@ -66,6 +66,8 @@ Example:
        (ivy-line-bg  (aref `["#000000" ,todo--bg "#0000CD" ,todo--bg] i))
        (isearch-fg   (aref `["#FFFF00" ,fg-yellow ,fg-yellow ,fg-yellow] i))
        (isearch-bg   (aref `["#000000" ,bg-yellow ,bg-yellow ,bg-yellow] i))
+       (fn-call-fg   (aref `["#EFB0BB" "#ff5f87" ,todo--fg ,todo--fg] i))
+       (fn-call-bg   (aref `["#232319" "#000000" ,todo--bg ,todo--bg] i))
        (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
        (rain-2       (aref `["#00FFFF" "#00FFFF" "#00FFFF" "#00FFFF"] i))
@@ -399,8 +401,8 @@ Example:
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
 
    ;; js2
-   `(js2-function-call ((,class :foreground "#EFB0BB"
-                                :background "#232319"
+   `(js2-function-call ((,class :foreground ,fn-call-fg ;;"#EFB0BB"
+                                :background ,fn-call-bg ;;"#232319"
                                 ;;:inherit tree-sitter-hl-face:function.call
                                 ;;:inherit font-lock-function-name-face
                          )))
@@ -628,8 +630,8 @@ Example:
    ;; tree-sitter-hl
    `(tree-sitter-hl-face:function.call
      ((,class ;; :inherit js2-function-call
-              :foreground "#EFB0BB"
-              :background "#232319"
+              :foreground ,fn-call-fg ;;"#EFB0BB"
+              :background ,fn-call-bg ;;"#232319"
               )))
    `(tree-sitter-hl-face:operator
      ((,class :inherit font-lock-keyword-face

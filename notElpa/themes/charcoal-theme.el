@@ -650,9 +650,8 @@ Example:
    `(tty-menu-selected-face ((,class :background ,fainter)))
 
    ;; swift-mode
-   ;; TODO: dont' rely on js2-function-call face as it requires js2 be loaded
-   ;; first.
-   ;; `(swift-mode:function-call-face ((t :inherit js2-function-call)))
+   `(swift-mode:function-call-face ((,class :foreground ,fn-call-fg
+                                            :background ,fn-call-bg)))
 
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face

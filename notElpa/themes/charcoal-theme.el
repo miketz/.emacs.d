@@ -68,7 +68,7 @@ Example:
        (isearch-bg   (aref `["#000000" ,bg-yellow ,bg-yellow ,bg-yellow] i))
        (fn-def-fg    (aref `["#AFEEEE" "#AFFFFF" ,todo--fg ,todo--fg] i))
        (fn-def-bg    (aref `["#000000" "#000000" ,todo--fg ,todo--fg] i))
-       (fn-call-fg   (aref `["#EFB0BB" "#ff5f87" ,todo--fg ,todo--fg] i))
+       (fn-call-fg   (aref `["#EFB0BB" "#ffafd7" ,todo--fg ,todo--fg] i))
        (fn-call-bg   (aref `["#232319" "#000000" ,todo--bg ,todo--bg] i))
        (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))

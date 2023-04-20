@@ -72,7 +72,7 @@ Example:
        (fn-call-bg   (aref `["#232319" "#000000" ,todo--bg ,todo--bg] i))
        (linenum-fg   (aref `["#595959" "#626262" ,todo--bg ,todo--bg] i))
        (linenum-bg   (aref `["#231808" "#000000" ,todo--bg ,todo--bg] i))
-       (linenumcur-fg (aref `["#77AA55" "#77AA55" ,todo--bg ,todo--bg] i))
+       (linenumcur-fg (aref `["#77AA55" "#77AA55" ,todo--fg ,todo--fg] i))
        (linenumcur-bg (aref `["#231808" "#000000" ,todo--bg ,todo--bg] i))
        (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))

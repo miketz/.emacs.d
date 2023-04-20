@@ -430,7 +430,8 @@ Example:
    ;; web-mode
    `(web-mode-current-element-highlight-face ((,class (:background ,faint))))
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
-   `(web-mode-function-call-face ((,class :inherit js2-function-call)))
+   `(web-mode-function-call-face ((,class :foreground ,fn-call-fg
+                                          :background ,fn-call-bg)))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

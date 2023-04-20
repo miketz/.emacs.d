@@ -66,6 +66,8 @@ Example:
        (ivy-line-bg  (aref `["#000000" ,todo--bg "#0000CD" ,todo--bg] i))
        (isearch-fg   (aref `["#FFFF00" ,fg-yellow ,fg-yellow ,fg-yellow] i))
        (isearch-bg   (aref `["#000000" ,bg-yellow ,bg-yellow ,bg-yellow] i))
+       (fn-def-fg    (aref `["#AFEEEE" "#AFFFFF" ,todo--fg ,todo--fg] i))
+       (fn-def-bg    (aref `["#000000" "#000000" ,todo--fg ,todo--fg] i))
        (fn-call-fg   (aref `["#EFB0BB" "#ff5f87" ,todo--fg ,todo--fg] i))
        (fn-call-bg   (aref `["#232319" "#000000" ,todo--bg ,todo--bg] i))
        (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
@@ -221,8 +223,8 @@ Example:
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
-   `(font-lock-function-name-face ((,class :foreground "pale turquoise"
-                                           :background "black"
+   `(font-lock-function-name-face ((,class :foreground ,fn-def-fg ;;"pale turquoise"
+                                           :background ,fn-def-bg ;;"black"
 										   :weight normal
 										   ;; :box (:line-width -1 :color ,faint-less)
                                            )))

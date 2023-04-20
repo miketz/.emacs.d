@@ -403,11 +403,8 @@ Example:
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))
 
    ;; js2
-   `(js2-function-call ((,class :foreground ,fn-call-fg ;;"#EFB0BB"
-                                :background ,fn-call-bg ;;"#232319"
-                                ;;:inherit tree-sitter-hl-face:function.call
-                                ;;:inherit font-lock-function-name-face
-                         )))
+   `(js2-function-call ((,class :foreground ,fn-call-fg
+                                :background ,fn-call-bg)))
    `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
    `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
    `(js2-warning ((,class :underline (:color "yellow" :style wave))))
@@ -632,10 +629,8 @@ Example:
 
    ;; tree-sitter-hl
    `(tree-sitter-hl-face:function.call
-     ((,class ;; :inherit js2-function-call
-              :foreground ,fn-call-fg ;;"#EFB0BB"
-              :background ,fn-call-bg ;;"#232319"
-              )))
+     ((,class :foreground ,fn-call-fg
+              :background ,fn-call-bg)))
    `(tree-sitter-hl-face:operator
      ((,class :inherit font-lock-keyword-face
               :weight normal)))

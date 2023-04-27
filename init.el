@@ -8906,7 +8906,8 @@ TODO: delete this fn and replace with hooks, etc."
   (setq zig-indent-offset 4)
   ;; but when temporarily changing to tabs, i might change `zig-indent-offset'
   ;; to a non-4 value matching `tab-width'. I'll need to roll it back to 4
-  ;; when spaces are enabled again.
+  ;; when spaces are enabled again. I do this with hook
+  ;; `my-zig-untabify-buffer-hook' after saving the file.
 
   (defun my-zig-tabify-buffer ()
     "Convert space indentation to tabs. And turn on smart tabs mode.
@@ -8922,8 +8923,26 @@ have the autoformater revert things back to spaces when you save."
     ;; assumes smart-tabs-mode is configured for current mode. If not this may
     ;; inject tabs to handle alignments *after* the indentation level is reached
     ;; which would be "wrong".
-    (indent-region (point-min) (point-max)))
+    (indent-region (point-min) (point-max))
+    ;; finally, view things in my prefered width
+    (let ((width 3))
+      (setq zig-indent-offset width
+            tab-width width)))
 
+  (defun my-zig-untabify-buffer-hook ()
+    "Hook fn to run after saving file.
+Acutally doesn't untabify the buffer. zig fmt does that on before-save-hook.
+But restores `zig-indent-offset' and `tab-width' to 4.
+And turns off `indent-tabs-mode'."
+    ;; GUARD: in theory this is only needed when I have been viewing the zig
+    ;; buffer with tabs.
+    (when indent-tabs-mode
+      ;; may have been changed to match `tab-width' earlier.
+      (setq zig-indent-offset 4)
+      (setq tab-width 4) ;; tab-width and ident offsets need stay in sync.
+      (indent-tabs-mode -1)))
+
+  ;; key binds
   (define-key zig-mode-map (kbd "C-c t") #'my-zig-tabify-buffer)
   (define-key zig-mode-map (kbd "C-c C-c") #'compile)
   (define-key zig-mode-map (kbd "C-c c") #'compile)
@@ -8931,7 +8950,7 @@ have the autoformater revert things back to spaces when you save."
   ;; hook
   (defun my-setup-zig-mode ()
     ;; At the moment spaces are the blessed way to indent via "zig fmt".
-    (indent-tabs-mode 0) ;; turn off tab indent
+    (indent-tabs-mode -1) ;; turn off tab indent
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)
@@ -8939,7 +8958,12 @@ have the autoformater revert things back to spaces when you save."
     (setq comment-column 1) ; buffer local
     (when (fboundp #'display-fill-column-indicator-mode)
       (setq display-fill-column-indicator-column 79) ; buffer local
-      (display-fill-column-indicator-mode 1)))
+      (display-fill-column-indicator-mode 1))
+    ;; NOTE: hook is "after" saving. zig fmt will have run by the time this
+    ;; hook executes. If I was temporarily viewing the zig buffer with tabs,
+    ;; this hook will restore some settings to be space friendly again.
+    (add-hook 'after-save-hook #'my-zig-untabify-buffer-hook 0 'local))
+
   (add-hook 'zig-mode-hook #'my-setup-zig-mode))
 
 ;;;----------------------------------------------------------------------------

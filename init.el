@@ -8949,6 +8949,11 @@ And turns off `indent-tabs-mode'."
 
   ;; hook
   (defun my-setup-zig-mode ()
+    (when buffer-file-name ;; if buffer has a file on disk.
+      ;; wireup M-x compile.
+      (set (make-local-variable 'compile-command)
+           "zig build run"))
+
     ;; At the moment spaces are the blessed way to indent via "zig fmt".
     (indent-tabs-mode -1) ;; turn off tab indent
     (yas-minor-mode 1)

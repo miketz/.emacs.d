@@ -8902,6 +8902,8 @@ TODO: delete this fn and replace with hooks, etc."
 (with-eval-after-load 'zig-mode
   ;; hook
   (defun my-setup-zig-mode ()
+    ;; At the moment spaces are the blessed way to indent via "zig fmt".
+    (indent-tabs-mode 0) ;; turn off tab indent
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)

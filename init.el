@@ -8900,6 +8900,14 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.zig\\'" . zig-mode) auto-mode-alist)
 
 (with-eval-after-load 'zig-mode
+  ;; 4 is the blessed indent width used by "zig fmt".
+  ;; `zig-indent-offset' is already 4 by default but set it explictily just
+  ;; to document the fact it needs to be 4 to conform with "zig fmt".
+  (setq zig-indent-offset 4)
+  ;; but when temporarily changing to tabs, i might change `zig-indent-offset'
+  ;; to a non-4 value matching `tab-width'. I'll need to roll it back to 4
+  ;; when spaces are enabled again.
+
   (defun my-zig-tabify-buffer ()
     "Convert space indentation to tabs. And turn on smart tabs mode.
 Meant to be a temporary state while you are editing a buffer. As zig only

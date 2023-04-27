@@ -8900,6 +8900,26 @@ TODO: delete this fn and replace with hooks, etc."
 (push '("\\.zig\\'" . zig-mode) auto-mode-alist)
 
 (with-eval-after-load 'zig-mode
+  (defun my-zig-tabify-buffer ()
+    "Convert space indentation to tabs. And turn on smart tabs mode.
+Meant to be a temporary state while you are editing a buffer. As zig only
+allows spaces. But this way you can temporarily view things with tabs, then
+have the autoformater revert things back to spaces when you save."
+    (interactive)
+    (indent-tabs-mode 1)
+    (progn ;; smart-tabs-mode
+      (smart-tabs-advice zig-mode-indent-line zig-indent-offset) ;; 4
+      (smart-tabs-mode-enable))
+    (tabify (point-min) (point-max))
+    ;; assumes smart-tabs-mode is configured for current mode. If not this may
+    ;; inject tabs to handle alignments *after* the indentation level is reached
+    ;; which would be "wrong".
+    (indent-region (point-min) (point-max)))
+
+  (define-key zig-mode-map (kbd "C-c t") #'my-zig-tabify-buffer)
+  (define-key zig-mode-map (kbd "C-c C-c") #'compile)
+  (define-key zig-mode-map (kbd "C-c c") #'compile)
+
   ;; hook
   (defun my-setup-zig-mode ()
     ;; At the moment spaces are the blessed way to indent via "zig fmt".

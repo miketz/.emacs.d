@@ -2,6 +2,6 @@
 # name: main
 # key: main
 # --
-pub fn main() !void {
+pub fn main() void {
     $0
 }

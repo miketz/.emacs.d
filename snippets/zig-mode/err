@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: err
+# key: err
+# --
+const ${1:errName} = error{
+    $0
+};

@@ -2297,6 +2297,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())))
 
+;; TODO: make jinx spell checker a module
+
 (defun my-byte-compile-all-modules ()
   "Byte compile .el files of all modules."
   (interactive)

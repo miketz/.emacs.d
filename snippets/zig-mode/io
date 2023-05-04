@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: io
+# key: io
+# --
+const stdout = std.io.getStdOut().writer();

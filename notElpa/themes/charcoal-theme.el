@@ -647,7 +647,9 @@ Example:
    `(menu ((,class :background ,faint-less :foreground "black")))
    `(tty-menu-enabled-face ((,class :background "black")))
    `(tty-menu-disabled-face ((,class :background "black" :foreground "red")))
-   `(tty-menu-selected-face ((,class :background ,fainter)))
+   `(tty-menu-selected-face ((,class :background ,(if (<= charcoal-color-cnt 256)
+                                                      "blue"
+                                                    fainter))))
 
    ;; swift-mode
    `(swift-mode:function-call-face ((,class :foreground ,fn-call-fg

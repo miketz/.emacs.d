@@ -32,7 +32,9 @@
     ((my-fonts
       (cond
        ((eq my-curr-computer 'mac-mini-m1-2021)
-        ["-*-PT Mono-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+        ["-*-Unifont-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
+         "-*-Unifont-bold-normal-normal-*-*-*-*-*-p-0-iso10646-1"
+         "-*-PT Mono-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-PT Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          ;; "-*-PT Mono-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1"
          ;; "-*-PT Mono-bold-normal-normal-*-18-*-*-*-m-0-iso10646-1"

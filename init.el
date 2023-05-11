@@ -1160,7 +1160,7 @@ Just a convenience to avoid checks against `my-ui-type'.")
 (defvar my-use-js2-highlight-vars-p (not (version< emacs-version "24.4")))
 
 (defvar my-narrow-type
-  (cond ((eq my-curr-computer 'wild-dog) 'grid-idoj)
+  (cond ((eq my-curr-computer 'wild-dog) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'grid-ido)
         ((eq my-curr-computer 'mac-mini-m1-2021) 'grid-ido)
         ((eq my-curr-computer 'work-laptop-mac) 'grid-ido)

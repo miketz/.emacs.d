@@ -8962,8 +8962,12 @@ And turns off `indent-tabs-mode'."
       (set (make-local-variable 'compile-command)
            "zig build run"))
 
-    (when my-zls-installed-p
-      (eglot-ensure))
+    (when (and buffer-file-name
+               my-zls-installed-p)
+      (eglot-ensure)
+      (when (eq system-type 'darwin)
+        ;; this timer solution doesn't work on windows but does on mac
+        (run-with-timer 0.25 nil (lambda () (eldoc-mode -1)))))
 
     ;; At the moment spaces are the blessed way to indent via "zig fmt".
     (indent-tabs-mode -1) ;; turn off tab indent

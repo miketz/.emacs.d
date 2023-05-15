@@ -7813,9 +7813,10 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; eglot
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/eglot" load-path)
-(autoload #'eglot "eglot" nil t)
-(autoload #'eglot-ensure "eglot" nil t)
+(unless (fboundp #'eglot) ;; on emacs-29+ use built-in eglot
+  (push "~/.emacs.d/notElpa/eglot" load-path)
+  (autoload #'eglot "eglot" nil t)
+  (autoload #'eglot-ensure "eglot" nil t))
 
 (with-eval-after-load 'eglot
   ;; ;; Show all of the available eldoc information when we want it. This way Flymake errors

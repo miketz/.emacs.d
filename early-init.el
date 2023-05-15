@@ -3,6 +3,9 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode 0))
 
+;; remove title bar. to fit more lines of code on the screen
+(add-to-list 'default-frame-alist '(undecorated . t))
+
 ;; on mac thius makes the window a fixed size!!! Rectangle plugin can't resize emacs.
 ;; (progn
 ;;   (add-to-list 'default-frame-alist '(undecorated . t))

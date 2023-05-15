@@ -1128,7 +1128,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "master"
+      :use-branch "mine" ;; eagre macro expansion bug fix on emacs 29+
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

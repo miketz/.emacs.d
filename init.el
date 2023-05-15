@@ -8950,12 +8950,20 @@ And turns off `indent-tabs-mode'."
   (define-key zig-mode-map (kbd "C-c C-c") #'compile)
   (define-key zig-mode-map (kbd "C-c c") #'compile)
 
+  (define-key zig-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
+  (define-key zig-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
+
+  (defvar my-zls-installed-p (executable-find "zls"))
+
   ;; hook
   (defun my-setup-zig-mode ()
     (when buffer-file-name ;; if buffer has a file on disk.
       ;; wireup M-x compile.
       (set (make-local-variable 'compile-command)
            "zig build run"))
+
+    (when my-zls-installed-p
+      (eglot-ensure))
 
     ;; At the moment spaces are the blessed way to indent via "zig fmt".
     (indent-tabs-mode -1) ;; turn off tab indent

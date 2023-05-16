@@ -8957,17 +8957,11 @@ And turns off `indent-tabs-mode'."
 
   ;; hook
   (defun my-setup-zig-mode ()
+    ;; M-x compile
     (when buffer-file-name ;; if buffer has a file on disk.
       ;; wireup M-x compile.
       (set (make-local-variable 'compile-command)
            "zig build run"))
-
-    (when (and buffer-file-name
-               my-zls-installed-p)
-      (eglot-ensure)
-      (when (eq system-type 'darwin)
-        ;; this timer solution doesn't work on windows but does on mac
-        (run-with-timer 0.25 nil (lambda () (eldoc-mode -1)))))
 
     ;; At the moment spaces are the blessed way to indent via "zig fmt".
     (indent-tabs-mode -1) ;; turn off tab indent
@@ -8982,7 +8976,15 @@ And turns off `indent-tabs-mode'."
     ;; NOTE: hook is "after" saving. zig fmt will have run by the time this
     ;; hook executes. If I was temporarily viewing the zig buffer with tabs,
     ;; this hook will restore some settings to be space friendly again.
-    (add-hook 'after-save-hook #'my-zig-untabify-buffer-hook 0 'local))
+    (add-hook 'after-save-hook #'my-zig-untabify-buffer-hook 0 'local)
+
+    ;; eglot. keep this at the end to reduce chance of weird timer issues?
+    (when (and buffer-file-name
+               my-zls-installed-p)
+      (eglot-ensure)
+      (when (eq system-type 'darwin)
+        ;; this timer solution doesn't work on windows but does on mac
+        (run-with-timer 0.25 nil (lambda () (eldoc-mode -1))))))
 
   (add-hook 'zig-mode-hook #'my-setup-zig-mode))
 

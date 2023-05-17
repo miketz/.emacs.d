@@ -1900,8 +1900,8 @@ This prevents overlapping themes; something I would rarely want."
    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
    ;; '(font . "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-Iosevka-light-normal-normal-*-17-*-*-*-m-0-iso10646-1")
-   '(font . "-*-Unifont-normal-normal-normal-*-19-*-*-*-p-0-iso10646-1")
+   '(font . "-*-Iosevka-light-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+   ;; '(font . "-*-Unifont-normal-normal-normal-*-19-*-*-*-p-0-iso10646-1")
    ;; '(font . "-*-Unifont-bold-normal-normal-*-19-*-*-*-p-0-iso10646-1")
    default-frame-alist))
 
@@ -2257,7 +2257,9 @@ with duplicate bundled libs in Sly and SLIME.")
   ;; (add-hook 'slime-repl-mode-hook #'lispy-mode)
   (defun my-setup-slime-repl ()
     ;; Turn off line numbers in the repl
-    (linum-mode 0)
+    ;; (linum-mode 0) ;; linum-mode obsolete and not loaded by default on
+                      ;; emacs 29+
+
     ;; There's always a trailing space at repl prompt. Don't highlight it.
     (setq show-trailing-whitespace nil)
     ;; Aggressive-indent moves SLIME's comments in the REPL. Turn it off.
@@ -5044,7 +5046,9 @@ statement generated my SqlServer."
 
   (defun my-setup-skewer-mode ()
     ;;turn off line numbers in the repl
-    (linum-mode 0)
+    ;; (linum-mode 0) ;; linum-mode obsolete and not loaded by default on
+    ;;                ;; emacs 29+
+
     ;;there's always a trailing space at repl prompt. Don't highlight it.
     (setq show-trailing-whitespace nil))
   (add-hook 'skewer-repl-mode-hook #'my-setup-skewer-mode)

@@ -4030,6 +4030,20 @@ and indent."
   ;; (add-hook 'c-initialization-hook 'my-make-CR-do-indent)
   )
 
+;;;----------------------------------------------------------------------------
+;;; c-ts-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'c-ts-mode
+  (setq c-ts-mode-indent-offset 4)
+  (setq c-ts-mode-indent-style 'linux)
+
+  (defun my-setup-c-ts-mode ()
+    (yas-minor-mode 1)
+    (my-turn-on-electric-pair-local-mode)
+    (setq comment-column 1) ;; buffer local
+    (indent-tabs-mode 1)
+    (rainbow-delimiters-mode-enable))
+  (add-hook 'c-ts-mode-hook #'my-setup-c-ts-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; Dired

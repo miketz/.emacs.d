@@ -4037,6 +4037,10 @@ and indent."
   (setq c-ts-mode-indent-offset 4)
   (setq c-ts-mode-indent-style 'linux)
 
+  ;; key binds
+  (define-key c-ts-mode-map (kbd "C-c C-c") #'compile)
+  (define-key c-ts-mode-map (kbd "C-c c") #'compile)
+
   (defun my-setup-c-ts-mode ()
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)

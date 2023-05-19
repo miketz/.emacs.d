@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: forEachI
+# key: fei
+# --
+for (${1:arr}) |${2:val}, ${3:i}| {
+    $0
+}

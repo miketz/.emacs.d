@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for each
+# key: fe
+# --
+for (${1:arr}) |${2:val}| {
+    $0
+}

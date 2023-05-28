@@ -9200,6 +9200,8 @@ programming modes."
   (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode idl-mode
                                    pike-mode awk-mode csharp-mode))
          (setq c-basic-offset width))
+        ((eq major-mode 'c-ts-mode)
+         (setq c-ts-mode-indent-offset width))
         ((eq major-mode 'lua-mode)
          (setq lua-indent-level width))
         ((eq major-mode 'python-mode)

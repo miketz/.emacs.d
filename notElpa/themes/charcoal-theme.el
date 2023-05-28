@@ -232,6 +232,10 @@ Example:
 										   :weight normal
 										   ;; :box (:line-width -1 :color ,faint-less)
                                            )))
+   ;; supported with treesit
+   `(font-lock-function-call-face ((,class :foreground ,fn-call-fg
+                                            :background ,fn-call-bg)))
+
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))

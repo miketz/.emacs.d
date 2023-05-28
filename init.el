@@ -8386,7 +8386,14 @@ vanilla javascript buffers."
   (add-hook 'prog-mode-hook #'my-setup-prog-mode-indent))
 
 ;;;----------------------------------------------------------------------------
-;;; tree-sitter, tree-sitter-langs
+;;; treesit. Emacs 29+ built-in.
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'treesit
+  (setq treesit-font-lock-level 4) ;; color more things
+  )
+
+;;;----------------------------------------------------------------------------
+;;; tree-sitter, tree-sitter-langs. 3rd party tree-sitter integration.
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'tree-sitter
   (progn ;; handle issue where tree-sitter goes crazy during yasnippet

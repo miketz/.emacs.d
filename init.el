@@ -8393,7 +8393,7 @@ vanilla javascript buffers."
   )
 
 ;;;----------------------------------------------------------------------------
-;;; tree-sitter, tree-sitter-langs. 3rd party tree-sitter integration.
+;;; tree-sitter, tree-sitter-langs. 3rd party package. works for pre-Emacs 29
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'tree-sitter
   (progn ;; handle issue where tree-sitter goes crazy during yasnippet

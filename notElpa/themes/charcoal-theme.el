@@ -225,16 +225,30 @@ Example:
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
    `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
-   ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
+   `(font-lock-constant-face ((,class :foreground ,fg
+              :background "#232319"
+              :weight bold)))
    `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
    `(font-lock-function-name-face ((,class :foreground ,fn-def-fg ;;"pale turquoise"
                                            :background ,fn-def-bg ;;"black"
 										   :weight normal
 										   ;; :box (:line-width -1 :color ,faint-less)
                                            )))
-   ;; supported with treesit
+   ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   ;; ~ START faces supported with treesit
+   ;; ~ Maybe not intended to be treesit only, but it seems that way.
    `(font-lock-function-call-face ((,class :foreground ,fn-call-fg
                                             :background ,fn-call-bg)))
+   `(font-lock-variable-use-face ((,class :foreground ,var)))
+   `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
+                                      :weight normal)))
+   `(font-lock-property-use-face ((,class
+                                   :inherit font-lock-property-name-face
+                                   :background ,fn-call-bg
+                                   ;; :slant italic
+                                   )))
+   ;; ~ END treesit faces
+   ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
    `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))

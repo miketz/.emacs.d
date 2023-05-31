@@ -242,11 +242,20 @@ Example:
    `(font-lock-variable-use-face ((,class :inherit font-lock-variable-name-face)))
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
                                       :weight normal)))
+   `(font-lock-property-name-face ((,class
+                                    :inherit font-lock-variable-name-face
+                                    :background ,fn-call-bg)))
    `(font-lock-property-use-face ((,class
                                    :inherit font-lock-property-name-face
-                                   :background ,fn-call-bg
                                    ;; :slant italic
                                    )))
+   ;; `(font-lock-punctuation-face ((,class nil)))
+   ;; `(font-lock-bracket-face)
+   ;; `(font-lock-delimiter-face)
+   `(font-lock-escape-face ((,class :foreground "hot pink")))
+   ;; `(font-lock-misc-punctuation-face)
+   ;; `(font-lock-number-face)
+   ;; `(font-lock-regexp-face)
    ;; ~ END treesit faces
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

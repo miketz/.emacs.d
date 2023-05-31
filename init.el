@@ -4035,6 +4035,10 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; c-ts-mode
 ;;;----------------------------------------------------------------------------
+;; prefer c-ts-mode if it's available.
+(when (treesit-language-available-p 'c)
+  (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode)))
+
 (with-eval-after-load 'c-ts-mode
   (setq c-ts-mode-indent-offset 4)
   (setq c-ts-mode-indent-style 'linux)

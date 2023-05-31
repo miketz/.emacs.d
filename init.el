@@ -9071,6 +9071,8 @@ And turns off `indent-tabs-mode'."
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 
+  (defvar my-gofmt-installed-p (executable-find "gofmt"))
+
   (defun my-setup-go-ts-mode ()
     (when buffer-file-name ;; if buffer has a file on disk.
       ;; wireup M-x compile. TODO: revisit this

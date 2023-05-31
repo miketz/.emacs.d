@@ -78,6 +78,22 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'combobulate
+      :comment nil
+      :folder (concat my-module-folder "combobulate")
+      :remotes '((:sym mine :url "https://github.com/miketz/combobulate"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/mickeynp/combobulate"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'swiper
       :comment nil
       :folder (concat my-module-folder "swiper")

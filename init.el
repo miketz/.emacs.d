@@ -4046,11 +4046,14 @@ and indent."
   ;; key binds
   (define-key c-ts-mode-map (kbd "C-c C-c") #'compile)
   (define-key c-ts-mode-map (kbd "C-c c") #'compile)
+  ;; switch between .c/.h file.
+  (define-key c-ts-mode-map (kbd "C-c f") #'ff-find-other-file)
 
   (defun my-setup-c-ts-mode ()
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (setq comment-column 1) ;; buffer local
+    (setq tab-width 4) ;; buffer local
     (indent-tabs-mode 1)
     (rainbow-delimiters-mode-enable))
   (add-hook 'c-ts-mode-hook #'my-setup-c-ts-mode))

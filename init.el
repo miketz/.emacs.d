@@ -9057,8 +9057,11 @@ And turns off `indent-tabs-mode'."
 ;;;----------------------------------------------------------------------------
 ;;; go-ts-mode
 ;;;----------------------------------------------------------------------------
-(with-eval-after-load 'go-ts-mode
+;; prefer go-ts-mode for ".go" files. But only if it's available.
+(when (treesit-language-available-p 'go)
+  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode)))
 
+(with-eval-after-load 'go-ts-mode
   ;; key binds
   (define-key go-ts-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-ts-mode-map (kbd "C-c c") #'compile)

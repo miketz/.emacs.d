@@ -9052,7 +9052,7 @@ And turns off `indent-tabs-mode'."
   ;; key binds
   (define-key go-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-mode-map (kbd "C-c c") #'compile)
-  ;; unbind `godef-describe' so I cna use "C-c C-d" as a prefix.
+  ;; unbind `godef-describe' so I can use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)
 
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)

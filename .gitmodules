@@ -325,3 +325,6 @@
 [submodule "notElpa/consult"]
 	path = notElpa/consult
 	url = https://github.com/miketz/consult
+[submodule "notElpa/combobulate"]
+	path = notElpa/combobulate
+	url = https://github.com/miketz/combobulate

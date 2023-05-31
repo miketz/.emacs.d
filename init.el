@@ -9088,7 +9088,9 @@ And turns off `indent-tabs-mode'."
     ;; Run gofmt on save. Use "local" buffer hook to avoid polluting the
     ;; save-hook for non-go files.
     (when my-gofmt-installed-p
-      (add-hook 'before-save-hook #'gofmt-before-save 0 'local))
+      (require 'go-mode) ;; for `gofmt'. Not using `gofmt-before-save' becuase
+                         ;; it checks for go-mode but we are in go-ts-mode
+      (add-hook 'before-save-hook #'gofmt 0 'local))
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ;; buffer local
 

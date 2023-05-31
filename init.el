@@ -9055,6 +9055,55 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; go-ts-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'go-ts-mode
+
+  ;; key binds
+  (define-key go-ts-mode-map (kbd "C-c C-c") #'compile)
+  (define-key go-ts-mode-map (kbd "C-c c") #'compile)
+
+  ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
+  ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
+  (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
+  (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
+
+  (defun my-setup-go-ts-mode ()
+    (when buffer-file-name ;; if buffer has a file on disk.
+      ;; wireup M-x compile. TODO: revisit this
+      (set (make-local-variable 'compile-command)
+           (concat "go run " (shell-quote-argument buffer-file-name))))
+    ;; Run gofmt on save. Use "local" buffer hook to avoid polluting the
+    ;; save-hook for non-go files.
+    (when my-gofmt-installed-p
+      (add-hook 'before-save-hook #'gofmt-before-save 0 'local))
+    ;; set to 1 so comments on the same line are kept close to the code
+    (setq comment-column 1) ;; buffer local
+
+    (setq tab-width 3)      ;; buffer local
+    (setq go-ts-mode-indent-offset 3)
+    (indent-tabs-mode 1)
+
+    (yas-minor-mode 1)
+    (when buffer-file-name ;; eglot gets weird if the buffer is not visiting a file.
+      (eglot-ensure)
+      ;; turn off mode to avoid spam. will call eldoc via keybind instead.
+      ;; I'd prefer not to use a timer, but eglot doens't turn on eldoc
+      ;; immediately so I need to give it time. TODO: figure out how to prevent
+      ;; eglot from turning on eldoc-mode in the first place.
+      (when (eq system-type 'darwin)
+        ;; this timer solution doesn't work on windows but does on mac
+        (run-with-timer 0.25 nil (lambda () (eldoc-mode -1))))
+
+      ;; (when eldoc-mode
+      ;;   (eldoc-mode -1))
+      )
+    ;; (citre-mode 1)
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode))
+  (add-hook 'go-ts-mode-hook #'my-setup-go-ts-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; go-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/go-mode.el" load-path)
@@ -9223,6 +9272,8 @@ programming modes."
          (setq c-basic-offset width))
         ((eq major-mode 'c-ts-mode)
          (setq c-ts-mode-indent-offset width))
+        ((eq major-mode 'go-ts-mode)
+         (setq go-ts-mode-indent-offset width))
         ((eq major-mode 'lua-mode)
          (setq lua-indent-level width))
         ((eq major-mode 'python-mode)

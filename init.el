@@ -9225,6 +9225,10 @@ And turns off `indent-tabs-mode'."
     (rainbow-delimiters-mode-enable))
   (add-hook 'perl-mode-hook #'my-setup-perl-mode))
 
+;;;----------------------------------------------------------------------------
+;;; combobulate
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/combobulate" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

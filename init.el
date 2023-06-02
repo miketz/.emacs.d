@@ -1206,6 +1206,9 @@ Just a convenience to avoid checks against `my-narrow-type'.")
                      ;; per computer. keep this above "per completion type".
                      ((eq my-curr-computer 'mac-mini-m1-2021) #'swiper-isearch)
                      ((eq my-curr-computer 'work-laptop-mac) #'swiper-isearch)
+                     ;; for now prefer #'swiper-isearch. keeping old logic
+                     ;; below just for informational purposes.
+                     (t #'swiper-isearch)
                      ;; per completion type
                      (my-use-ivy-p #'swiper-isearch)
                      ;; `ido-occur' is fast but does not split inputs on

@@ -9241,6 +9241,7 @@ And turns off `indent-tabs-mode'."
 ;;; combobulate
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/combobulate" load-path)
+(autoload #'combobulate-mode "combobulate" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

@@ -9070,6 +9070,11 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-errcheck "my-go-errcheck" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; my-go-ineffassign. helper fn to call ineffassign
+;;;----------------------------------------------------------------------------
+(autoload #'my-go-ineffassign "my-go-ineffassign" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; go-ts-mode
 ;;;----------------------------------------------------------------------------
 ;; prefer go-ts-mode for ".go" files. But only if it's available.
@@ -9084,6 +9089,8 @@ And turns off `indent-tabs-mode'."
 
   (define-key go-ts-mode-map (kbd "C-c C-e") #'my-go-errcheck)
   (define-key go-ts-mode-map (kbd "C-c e") #'my-go-errcheck)
+  (define-key go-ts-mode-map (kbd "C-c C-a") #'my-go-ineffassign)
+  (define-key go-ts-mode-map (kbd "C-c a") #'my-go-ineffassign)
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
@@ -9152,6 +9159,8 @@ And turns off `indent-tabs-mode'."
 
   (define-key go-mode-map (kbd "C-c C-e") #'my-go-errcheck)
   (define-key go-mode-map (kbd "C-c e") #'my-go-errcheck)
+  (define-key go-mode-map (kbd "C-c C-a") #'my-go-ineffassign)
+  (define-key go-mode-map (kbd "C-c a") #'my-go-ineffassign)
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)

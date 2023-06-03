@@ -9065,6 +9065,11 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; my-go-errcheck. helper fn to call errcheck
+;;;----------------------------------------------------------------------------
+(autoload #'my-go-errcheck "my-go-errcheck" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; go-ts-mode
 ;;;----------------------------------------------------------------------------
 ;; prefer go-ts-mode for ".go" files. But only if it's available.
@@ -9076,6 +9081,9 @@ And turns off `indent-tabs-mode'."
   (define-key go-ts-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-ts-mode-map (kbd "C-c c") #'compile)
 
+
+  (define-key go-ts-mode-map (kbd "C-c C-e") #'my-go-errcheck)
+  (define-key go-ts-mode-map (kbd "C-c e") #'my-go-errcheck)
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
@@ -9142,6 +9150,8 @@ And turns off `indent-tabs-mode'."
   ;; unbind `godef-describe' so I can use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)
 
+  (define-key go-mode-map (kbd "C-c C-e") #'my-go-errcheck)
+  (define-key go-mode-map (kbd "C-c e") #'my-go-errcheck)
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)

@@ -266,8 +266,10 @@ Example:
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
    ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
-   `(font-lock-variable-name-face ((,class (:foreground "#BBAA99";,var
-                                            ))))
+   `(font-lock-variable-name-face ((,class (:foreground
+                                            "burlywood3"
+                                        ;"#BBAA99";,var
+                                                        ))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
    `(minibuffer-prompt ((,class (:foreground ,fg-purple))))

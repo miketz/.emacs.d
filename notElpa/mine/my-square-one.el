@@ -58,7 +58,8 @@ edge cases not covered by buffer killing."
                                      (memq (my-buffer-mode b) keep-modes))))
                     (mini? (and (not keep?) (minibufferp b))))
                (unless (or keep? mode? mini?)
-                 (kill-buffer b))))))
+                 (ignore-errors
+                   (kill-buffer b)))))))
 
 (provide 'my-square-one)
 

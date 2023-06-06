@@ -2,6 +2,6 @@
 # name : error guard, initialize err var
 # key: ev
 # --
-if ${1:err} := ${2:action()}; $1 != nil { // handle $1
+if ${1:err} := ${2:action()}; $1 != nil {
 	$0
 }

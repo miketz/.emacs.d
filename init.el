@@ -1250,6 +1250,14 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;; Packages. NOTE: with the conversion to git submodules, most of the old
 ;;; package code is moved to ~/.emacs.d/notElpa/mine/my-package-stuff.el
 ;;;----------------------------------------------------------------------------
+
+;; not using package.el, but just in case I do...
+(with-eval-after-load 'package
+  ;; enable the quickstart feature. concats all the autoload.el files for
+  ;; faster load.  May need to manually call `package-quickstart-refresh'
+  ;; to generate the concatenated file.
+  (setq package-quickstart t))
+
 (push "~/.emacs.d/notElpa/" load-path) ; stores elisp files that are
                                        ; not "packages".
 (push "~/.emacs.d/notElpa/mine/" load-path)

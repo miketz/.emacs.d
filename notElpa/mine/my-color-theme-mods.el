@@ -1482,6 +1482,20 @@ Historical preservation."
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((t (:foreground "#FCDCDC"))))))
 
+(defun my-color-doom-outrun-electric ()
+  (interactive)
+  (load-theme 'doom-outrun-electric t)
+  (custom-theme-set-faces
+   'doom-outrun-electric
+
+   `(font-lock-property-name-face ((t :inherit font-lock-variable-name-face
+                                      :foreground "hot pink"
+                                      :background "black")))
+
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((t (:foreground "#3c3a50"))))))
+
 (defun my-color-moe-light ()
   (interactive)
   (load-theme 'moe-light t)

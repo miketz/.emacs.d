@@ -1262,6 +1262,9 @@ Historical preservation."
    ;;                    :weight bold
    ;;                    :box (:line-width -1 :style released-button)))))
 
+   `(font-lock-property-name-face ((t :inherit font-lock-variable-name-face
+                                      :background "#252525")))
+
    `(fill-column-indicator ((t :foreground "#4e4e4e")))
 
 

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name : defer
+# key: defer
+# --
+defer func() {
+    errTmp := ${1:cleanUpAction}
+    if errTmp != nil {
+        err = errTmp // only overwrite err if an error occured
+    }
+}()

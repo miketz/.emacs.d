@@ -1,7 +1,7 @@
 ;; base16-pico-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: PICO-8 (http://www.lexaloffle.com/pico-8.php)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-pico-colors
+(defvar base16-pico-theme-colors
   '(:base00 "#000000"
     :base01 "#1d2b53"
     :base02 "#7e2553"
@@ -34,7 +34,7 @@
 (deftheme base16-pico)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-pico base16-pico-colors)
+(base16-theme-define 'base16-pico base16-pico-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-pico)

@@ -1,7 +1,7 @@
 ;; base16-eighties-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Chris Kempson (http://chriskempson.com)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-eighties-colors
+(defvar base16-eighties-theme-colors
   '(:base00 "#2d2d2d"
     :base01 "#393939"
     :base02 "#515151"
@@ -34,7 +34,7 @@
 (deftheme base16-eighties)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-eighties base16-eighties-colors)
+(base16-theme-define 'base16-eighties base16-eighties-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-eighties)

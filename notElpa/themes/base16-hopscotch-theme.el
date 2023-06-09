@@ -1,7 +1,7 @@
 ;; base16-hopscotch-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Jan T. Sott
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-hopscotch-colors
+(defvar base16-hopscotch-theme-colors
   '(:base00 "#322931"
     :base01 "#433b42"
     :base02 "#5c545b"
@@ -34,7 +34,7 @@
 (deftheme base16-hopscotch)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-hopscotch base16-hopscotch-colors)
+(base16-theme-define 'base16-hopscotch base16-hopscotch-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-hopscotch)

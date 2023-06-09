@@ -1,7 +1,7 @@
 ;; base16-atelier-sulphurpool-light-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-sulphurpool-light-colors
+(defvar base16-atelier-sulphurpool-light-theme-colors
   '(:base00 "#f5f7ff"
     :base01 "#dfe2f1"
     :base02 "#979db4"
@@ -28,13 +28,13 @@
     :base0D "#3d8fd1"
     :base0E "#6679cc"
     :base0F "#9c637a")
-  "All colors for Base16 Atelier Sulphurpool are defined here.")
+  "All colors for Base16 Atelier Sulphurpool Light are defined here.")
 
 ;; Define the theme
 (deftheme base16-atelier-sulphurpool-light)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-sulphurpool-light base16-atelier-sulphurpool-light-colors)
+(base16-theme-define 'base16-atelier-sulphurpool-light base16-atelier-sulphurpool-light-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-sulphurpool-light)

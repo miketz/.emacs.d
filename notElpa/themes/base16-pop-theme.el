@@ -1,7 +1,7 @@
 ;; base16-pop-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Chris Kempson (http://chriskempson.com)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-pop-colors
+(defvar base16-pop-theme-colors
   '(:base00 "#000000"
     :base01 "#202020"
     :base02 "#303030"
@@ -34,7 +34,7 @@
 (deftheme base16-pop)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-pop base16-pop-colors)
+(base16-theme-define 'base16-pop base16-pop-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-pop)

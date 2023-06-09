@@ -1,7 +1,7 @@
 ;; base16-rebecca-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Victor Borja (http://github.com/vic) based on Rebecca Theme (http://github.com/vic/rebecca-theme)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-rebecca-colors
+(defvar base16-rebecca-theme-colors
   '(:base00 "#292a44"
     :base01 "#663399"
     :base02 "#383a62"
@@ -34,7 +34,7 @@
 (deftheme base16-rebecca)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-rebecca base16-rebecca-colors)
+(base16-theme-define 'base16-rebecca base16-rebecca-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-rebecca)

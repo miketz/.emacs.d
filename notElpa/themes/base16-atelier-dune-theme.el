@@ -1,7 +1,7 @@
 ;; base16-atelier-dune-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-dune-colors
+(defvar base16-atelier-dune-theme-colors
   '(:base00 "#20201d"
     :base01 "#292824"
     :base02 "#6e6b5e"
@@ -34,7 +34,7 @@
 (deftheme base16-atelier-dune)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-dune base16-atelier-dune-colors)
+(base16-theme-define 'base16-atelier-dune base16-atelier-dune-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-dune)

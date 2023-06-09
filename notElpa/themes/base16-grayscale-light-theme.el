@@ -1,7 +1,7 @@
 ;; base16-grayscale-light-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Alexandre Gavioli (https://github.com/Alexx2/)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-grayscale-light-colors
+(defvar base16-grayscale-light-theme-colors
   '(:base00 "#f7f7f7"
     :base01 "#e3e3e3"
     :base02 "#b9b9b9"
@@ -34,7 +34,7 @@
 (deftheme base16-grayscale-light)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-grayscale-light base16-grayscale-light-colors)
+(base16-theme-define 'base16-grayscale-light base16-grayscale-light-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-grayscale-light)

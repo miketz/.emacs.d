@@ -1,7 +1,7 @@
 ;; base16-3024-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Jan T. Sott (http://github.com/idleberg)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-3024-colors
+(defvar base16-3024-theme-colors
   '(:base00 "#090300"
     :base01 "#3a3432"
     :base02 "#4a4543"
@@ -34,7 +34,7 @@
 (deftheme base16-3024)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-3024 base16-3024-colors)
+(base16-theme-define 'base16-3024 base16-3024-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-3024)

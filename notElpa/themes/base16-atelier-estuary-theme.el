@@ -1,7 +1,7 @@
 ;; base16-atelier-estuary-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-estuary-colors
+(defvar base16-atelier-estuary-theme-colors
   '(:base00 "#22221b"
     :base01 "#302f27"
     :base02 "#5f5e4e"
@@ -34,7 +34,7 @@
 (deftheme base16-atelier-estuary)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-estuary base16-atelier-estuary-colors)
+(base16-theme-define 'base16-atelier-estuary base16-atelier-estuary-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-estuary)

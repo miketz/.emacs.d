@@ -1,7 +1,7 @@
 ;; base16-shapeshifter-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Tyler Benziger (http://tybenz.com)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-shapeshifter-colors
+(defvar base16-shapeshifter-theme-colors
   '(:base00 "#f9f9f9"
     :base01 "#e0e0e0"
     :base02 "#ababab"
@@ -34,7 +34,7 @@
 (deftheme base16-shapeshifter)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-shapeshifter base16-shapeshifter-colors)
+(base16-theme-define 'base16-shapeshifter base16-shapeshifter-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-shapeshifter)

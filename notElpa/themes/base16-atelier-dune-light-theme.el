@@ -1,7 +1,7 @@
 ;; base16-atelier-dune-light-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-dune-light-colors
+(defvar base16-atelier-dune-light-theme-colors
   '(:base00 "#fefbec"
     :base01 "#e8e4cf"
     :base02 "#a6a28c"
@@ -28,13 +28,13 @@
     :base0D "#6684e1"
     :base0E "#b854d4"
     :base0F "#d43552")
-  "All colors for Base16 Atelier Dune are defined here.")
+  "All colors for Base16 Atelier Dune Light are defined here.")
 
 ;; Define the theme
 (deftheme base16-atelier-dune-light)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-dune-light base16-atelier-dune-light-colors)
+(base16-theme-define 'base16-atelier-dune-light base16-atelier-dune-light-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-dune-light)

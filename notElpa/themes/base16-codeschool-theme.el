@@ -1,17 +1,17 @@
 ;; base16-codeschool-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
-;; Scheme: brettof86
+;; Scheme: blockloop
 ;; Template: Kaleb Elwert <belak@coded.io>
 
 ;;; Code:
 
 (require 'base16-theme)
 
-(defvar base16-codeschool-colors
+(defvar base16-codeschool-theme-colors
   '(:base00 "#232c31"
     :base01 "#1c3657"
     :base02 "#2a343a"
@@ -34,7 +34,7 @@
 (deftheme base16-codeschool)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-codeschool base16-codeschool-colors)
+(base16-theme-define 'base16-codeschool base16-codeschool-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-codeschool)

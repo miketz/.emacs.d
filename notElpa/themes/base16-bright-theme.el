@@ -1,7 +1,7 @@
 ;; base16-bright-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Chris Kempson (http://chriskempson.com)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-bright-colors
+(defvar base16-bright-theme-colors
   '(:base00 "#000000"
     :base01 "#303030"
     :base02 "#505050"
@@ -34,7 +34,7 @@
 (deftheme base16-bright)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-bright base16-bright-colors)
+(base16-theme-define 'base16-bright base16-bright-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-bright)

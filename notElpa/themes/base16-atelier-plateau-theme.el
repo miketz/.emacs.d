@@ -1,7 +1,7 @@
 ;; base16-atelier-plateau-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-plateau-colors
+(defvar base16-atelier-plateau-theme-colors
   '(:base00 "#1b1818"
     :base01 "#292424"
     :base02 "#585050"
@@ -34,7 +34,7 @@
 (deftheme base16-atelier-plateau)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-plateau base16-atelier-plateau-colors)
+(base16-theme-define 'base16-atelier-plateau base16-atelier-plateau-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-plateau)

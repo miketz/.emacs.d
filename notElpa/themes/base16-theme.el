@@ -1,27 +1,54 @@
-;; base16-theme.el -- base16 themes for emacs
+;;; base16-theme.el --- A set of base16 themes for your favorite editor
 
 ;; Author: Kaleb Elwert <belak@coded.io>
 ;;         Neil Bhakta
 ;; Maintainer: Kaleb Elwert <belak@coded.io>
-;; Version: 1.1
-;; Homepage: https://github.com/belak/base16-emacs
+;; Version: 3.0
+;; Homepage: https://github.com/tinted-theming/base16-emacs
 
 ;;; Commentary:
 ;; base16-theme is a collection of themes built around the base16
-;; concept (https://github.com/chriskempson/base16).  All themes are
+;; concept (https://github.com/tinted-theming/base16).  All themes are
 ;; generated from the official set of color schemes and the templates
 ;; which are included in this repo.
 
 ;;; Code:
 
-(defvar base16-theme-use-shell-colors nil
-  "Enable support for base16-shell.
+(defcustom base16-theme-256-color-source 'terminal
+  "Where to get the colors in a 256-color terminal.
 
-Because base16-shell mangles the color space, we need to use a
-different color translation.  This needs to be specified manually
-before the themes are loaded.")
+In a 256-color terminal, it's not clear where the colors should come from.
+There are 3 possible values: terminal (which was taken from the xresources
+theme), base16-shell (which was taken from a combination of base16-shell and
+the xresources theme) and colors (which will be converted from the actual
+html color codes to the closest color).
 
-(defvar base16-shell-colors
+Note that this needs to be set before themes are loaded or it will not work."
+  :type '(radio (const :tag "Terminal" terminal)
+                (const :tag "Base16 shell" base16-shell)
+                (const :tag "Colors" colors))
+  :group 'base16)
+
+(defcustom base16-theme-distinct-fringe-background t
+  "Make the fringe background different from the normal background color.
+Also affects `linum-mode' background."
+  :type 'boolean
+  :group 'base16)
+
+(defcustom base16-theme-highlight-mode-line nil
+  "Make the active mode line stand out more.
+
+There are two choices for applying the emphasis:
+  box:      Draws a thin border around the active
+            mode line.
+  contrast: Use the \"default\" face's foreground
+            which should result in more contrast."
+  :type '(radio (const :tag "Off" nil)
+                (const :tag "Draw box around" box)
+                (const :tag "Contrast" contrast))
+  :group 'base16)
+
+(defvar base16-theme-shell-colors
   '(:base00 "black"
     :base01 "brightgreen"
     :base02 "brightyellow"
@@ -44,7 +71,7 @@ These mappings are based on the xresources themes.  If you're
 using a different terminal color scheme, you may want to look for
 an alternate theme for use in the terminal.")
 
-(defvar base16-shell-colors-256
+(defvar base16-theme-shell-colors-256
   '(:base00 "black"
     :base01 "color-18"
     :base02 "color-19"
@@ -68,21 +95,50 @@ the base16-shell code.  If you're using a different terminal
 color scheme, you may want to look for an alternate theme for use
 in the terminal.")
 
-(defun base16-transform-spec (spec colors)
+(defun base16-theme-transform-color-key (key colors)
+  "Transform a given color `KEY' into a theme color using `COLORS'.
+
+This function is meant for transforming symbols to valid colors.
+If the value refers to a setting then return whatever is appropriate.
+If not a setting but is found in the valid list of colors then
+return the actual color value.  Otherwise return the value unchanged."
+  (if (symbolp key)
+      (cond
+
+       ((string= (symbol-name key) "base16-settings-fringe-bg")
+        (if base16-theme-distinct-fringe-background
+            (plist-get colors :base01)
+		  (plist-get colors :base00)))
+
+	   ((string= (symbol-name key) "base16-settings-mode-line-box")
+		(if (eq base16-theme-highlight-mode-line 'box)
+			(list :line-width 1 :color (plist-get colors :base04))
+		  nil))
+
+	   ((string= (symbol-name key) "base16-settings-mode-line-fg")
+		(if (eq base16-theme-highlight-mode-line 'contrast)
+			(plist-get colors :base05)
+		  (plist-get colors :base04)))
+
+	   (t
+		(let ((maybe-color (plist-get colors (intern (concat ":" (symbol-name key))))))
+		  (if maybe-color
+			  maybe-color
+			key))))
+    key))
+
+
+(defun base16-theme-transform-spec (spec colors)
   "Transform a theme `SPEC' into a face spec using `COLORS'."
   (let ((output))
     (while spec
-      (let* ((key       (car  spec))
-             (value     (cadr spec))
-             (color-key (if (symbolp value) (intern (concat ":" (symbol-name value))) nil))
-             (color     (plist-get colors color-key)))
+      (let* ((key (car spec))
+             (value (base16-theme-transform-color-key (cadr spec) colors)))
 
         ;; Append the transformed element
         (cond
          ((and (memq key '(:box :underline)) (listp value))
-          (setq output (append output (list key (base16-transform-spec value colors)))))
-         (color
-          (setq output (append output (list key color))))
+          (setq output (append output (list key (base16-theme-transform-spec value colors)))))
          (t
           (setq output (append output (list key value))))))
 
@@ -92,25 +148,38 @@ in the terminal.")
     ;; Return the transformed spec
     output))
 
-(defun base16-transform-face (spec colors)
+(defun base16-theme-transform-face (spec colors)
   "Transform a face `SPEC' into an Emacs theme face definition using `COLORS'."
-  (let* ((face         (car spec))
-         (definition   (cdr spec))
-         (shell-colors (if base16-theme-use-shell-colors base16-shell-colors-256 base16-shell-colors)))
+  (let* ((face             (car spec))
+         (definition       (cdr spec))
+         (shell-colors-256 (pcase base16-theme-256-color-source
+                             ('terminal      base16-theme-shell-colors)
+                             ("terminal"     base16-theme-shell-colors)
+                             ('base16-shell  base16-theme-shell-colors-256)
+                             ("base16-shell" base16-theme-shell-colors-256)
+                             ('colors        colors)
+                             ("colors"       colors)
+                             (_              base16-theme-shell-colors))))
 
-    (list face `((((type graphic)) ,(base16-transform-spec definition colors))
-                 (t                ,(base16-transform-spec definition shell-colors))))))
+    ;; This is a list of fallbacks to make us select the sanest option possible.
+    ;; If there's a graphical terminal, we use the actual colors. If it's not
+    ;; graphical, the terminal supports 256 colors, and the user enables it, we
+    ;; use the base16-shell colors. Otherwise, we fall back to the basic
+    ;; xresources colors.
+    (list face `((((type graphic))   ,(base16-theme-transform-spec definition colors))
+                 (((min-colors 256)) ,(base16-theme-transform-spec definition shell-colors-256))
+                 (t                  ,(base16-theme-transform-spec definition base16-theme-shell-colors))))))
 
-(defun base16-set-faces (theme-name colors faces)
-  "Define the important part of `THEME-NAME' using `COLORS' to map the `FACES' to actual colors."
+(defun base16-theme-set-faces (theme-name colors faces)
+  "Define `THEME-NAME' using `COLORS' to map the `FACES' to actual colors."
   (apply 'custom-theme-set-faces theme-name
          (mapcar #'(lambda (face)
-                     (base16-transform-face face colors))
+                     (base16-theme-transform-face face colors))
                  faces)))
 
 (defun base16-theme-define (theme-name theme-colors)
-  "Define the faces for a base16 colorscheme given a `THEME-NAME' and a plist of `THEME-COLORS'."
-  (base16-set-faces
+  "Define colorscheme faces given a `THEME-NAME' and a plist of `THEME-COLORS'."
+  (base16-theme-set-faces
    theme-name
    theme-colors
 
@@ -120,22 +189,24 @@ in the terminal.")
      (border                                       :background base03)
      (cursor                                       :background base08)
      (default                                      :foreground base05 :background base00)
-     (fringe                                       :background base02)
+     (fringe                                       :background base16-settings-fringe-bg)
      (gui-element                                  :background base01)
      (header-line                                  :foreground base0E :background nil :inherit mode-line)
      (highlight                                    :background base01)
      (link                                         :foreground base0D :underline t)
      (link-visited                                 :foreground base0E :underline t)
      (minibuffer-prompt                            :foreground base0D)
-     (region                                       :background base02)
-     (secondary-selection                          :background base03)
+     (region                                       :background base02 :distant-foreground base05)
+     (secondary-selection                          :background base03 :distant-foreground base05)
      (trailing-whitespace                          :foreground base0A :background base0C)
+     (vertical-border                              :foreground base02)
      (widget-button                                :underline t)
      (widget-field                                 :background base03 :box (:line-width 1 :color base06))
 
      (error                                        :foreground base08 :weight bold)
      (warning                                      :foreground base09 :weight bold)
      (success                                      :foreground base0B :weight bold)
+     (shadow                                       :foreground base03)
 
 ;;;; compilation
      (compilation-column-number                    :foreground base0A)
@@ -152,7 +223,7 @@ in the terminal.")
 
 ;;;; font-lock
      (font-lock-builtin-face                       :foreground base0C)
-     (font-lock-comment-delimiter-face             :foreground base02)
+     (font-lock-comment-delimiter-face             :foreground base03)
      (font-lock-comment-face                       :foreground base03)
      (font-lock-constant-face                      :foreground base09)
      (font-lock-doc-face                           :foreground base04)
@@ -171,15 +242,34 @@ in the terminal.")
 ;;;; isearch
      (match                                        :foreground base0D :background base01 :inverse-video t)
      (isearch                                      :foreground base0A :background base01 :inverse-video t)
-     (isearch-lazy-highlight-face                  :foreground base0C :background base01 :inverse-video t)
+     (lazy-highlight                               :foreground base0C :background base01 :inverse-video t)
+     (isearch-lazy-highlight-face                  :inherit lazy-highlight) ;; was replaced with 'lazy-highlight in emacs 22
      (isearch-fail                                 :background base01 :inverse-video t :inherit font-lock-warning-face)
 
+;;;; line-numbers
+     (line-number                                  :foreground base03 :background base16-settings-fringe-bg)
+     (line-number-current-line                     :inherit fringe)
+
 ;;;; mode-line
-     (mode-line                                    :foreground base04 :background base02 :box nil)
+     (mode-line                                    :foreground base16-settings-mode-line-fg :background base02 :box base16-settings-mode-line-box)
      (mode-line-buffer-id                          :foreground base0B :background nil)
      (mode-line-emphasis                           :foreground base06 :slant italic)
      (mode-line-highlight                          :foreground base0E :box nil :weight bold)
      (mode-line-inactive                           :foreground base03 :background base01 :box nil)
+
+;;;; tab-bar
+    (tab-bar                                       :background base16-settings-fringe-bg)
+    (tab-bar-tab                                   :foreground base09 :background base01)
+    (tab-bar-tab-inactive                          :foreground base06 :background base01)
+    (tab-bar-tab-group-current                     :foreground base05 :background base00)
+    (tab-bar-tab-group-inactive                    :background base16-settings-fringe-bg)
+
+;;;; tab-line
+     (tab-line                                     :background base16-settings-fringe-bg)
+     (tab-line-tab                                 :background base16-settings-fringe-bg)
+     (tab-line-tab-inactive                        :background base16-settings-fringe-bg)
+     (tab-line-tab-current                         :foreground base05 :background base00)
+     (tab-line-highlight                           :distant-foreground base05 :background base02)
 
 ;;; Third-party
 
@@ -202,17 +292,52 @@ in the terminal.")
      (font-latex-verbatim-face                     :foreground base09)
      (font-latex-warning-face                      :foreground base08)
 
+     (TeX-error-description-error                  :inherit error)
+     (TeX-error-description-tex-said               :inherit font-lock-function-name-face)
+     (TeX-error-description-warning                :inherit warning)
+
+;;;; centaur-tabs
+     (centaur-tabs-default                         :background base01 :foreground base01)
+     (centaur-tabs-selected                        :background base00 :foreground base06)
+     (centaur-tabs-unselected                      :background base01 :foreground base05)
+     (centaur-tabs-selected-modified               :background base00 :foreground base0D)
+     (centaur-tabs-unselected-modified             :background base01 :foreground base0D)
+     (centaur-tabs-active-bar-face                 :background base0D)
+     (centaur-tabs-modified-marker-selected        :inherit 'centaur-tabs-selected :foreground base0D)
+     (centaur-tabs-modified-marker-unselected      :inherit 'centaur-tabs-unselected :foreground base0D)
+
+;;;; circe-mode
+     (circe-fool-face                              :foreground base02)
+     (circe-my-message-face                        :foreground base0B)
+     (circe-highlight-nick-face                    :foreground base0A)
+     (circe-originator-face                        :foreground base0E)
+     (circe-prompt-face                            :foreground base0D)
+     (circe-server-face                            :foreground base03)
+
+;;;; avy
+     (avy-lead-face-0                              :foreground base00 :background base0C)
+     (avy-lead-face-1                              :foreground base00 :background base05)
+     (avy-lead-face-2                              :foreground base00 :background base0E)
+     (avy-lead-face                                :foreground base00 :background base09)
+     (avy-background-face                          :foreground base03)
+     (avy-goto-char-timer-face                     :inherit highlight)
+
 ;;;; clojure-mode
      (clojure-keyword-face                         :foreground base0E)
 
 ;;;; company-mode
-     (company-tooltip                              :background base01 :inherit default)
+     (company-tooltip                              :inherit tooltip)
      (company-scrollbar-bg                         :background base07)
      (company-scrollbar-fg                         :background base04)
      (company-tooltip-annotation                   :foreground base08)
      (company-tooltip-common                       :inherit font-lock-constant-face)
      (company-tooltip-selection                    :background base02 :inherit font-lock-function-name-face)
+     (company-tooltip-search                       :inherit match)
+     (company-tooltip-search-selection             :inherit match)
      (company-preview-common                       :inherit secondary-selection)
+     (company-preview                              :foreground base04)
+     (company-preview-search                       :inherit match)
+     (company-echo-common                          :inherit secondary-selection)
 
 ;;;; cperl-mode
      (cperl-array-face                             :weight bold :inherit font-lock-variable-name-face)
@@ -242,6 +367,9 @@ in the terminal.")
      (diff-file-header                             :background base02)
      (diff-hunk-header                             :foreground base0E :background base01)
 
+;;;; dired
+     (dired-filetype-plain                         :foreground base05 :background base00)
+
 ;;;; dired+
      (diredp-compressed-file-suffix                :foreground base0D)
      (diredp-dir-heading                           :foreground nil :background nil :inherit heading)
@@ -263,11 +391,45 @@ in the terminal.")
      (diredp-symlink                               :foreground base0E)
      (diredp-write-priv                            :foreground base0A :background nil)
 
+;;;; diredfl
+     (diredfl-autofile-name                        :foreground base0E)
+     (diredfl-compressed-file-name                 :foreground base0A)
+     (diredfl-compressed-file-suffix               :foreground base0D)
+     (diredfl-date-time                            :foreground base0C :weight light)
+     (diredfl-deletion                             :foreground nil :background base08)
+     (diredfl-deletion-file-name                   :foreground base00 :background base08 :weight bold)
+     (diredfl-dir-heading                          :foreground nil :background nil :inherit heading :weight bold)
+     (diredfl-dir-name                             :foreground base0D)
+     (diredfl-dir-priv                             :foreground base0D :background nil)
+     (diredfl-exec-priv                            :foreground base08 :background nil)
+     (diredfl-executable-tag                       :foreground base08 :background nil)
+     (diredfl-file-name                            :foreground base0A)
+     (diredfl-file-suffix                          :foreground base0B)
+     (diredfl-flag-mark                            :foreground base09 :weight bold)
+     (diredfl-flag-mark-line                       :background nil :inherit highlight)
+     (diredfl-ignored-file-name                    :foreground base04)
+     (diredfl-link-priv                            :foreground base0E :background nil)
+     (diredfl-no-priv                              :background nil)
+     (diredfl-number                               :foreground base0A)
+     (diredfl-other-priv                           :foreground base0E :background nil)
+     (diredfl-rare-priv                            :foreground base0F :background nil)
+     (diredfl-read-priv                            :foreground base0B :background nil)
+     (diredfl-symlink                              :foreground base0E)
+     (diredfl-tagged-autofile-name                 :foreground base05)
+     (diredfl-write-priv                           :foreground base0A :background nil)
+
+;;;; doom-modeline
+     (doom-modeline-eldoc-bar                      :background base0B)
+     (doom-modeline-inactive-bar                   :background nil) ; transparent
+     (doom-modeline-bar                            :background base0D)
+
 ;;;; ediff-mode
-     (ediff-even-diff-A                            :foreground nil :background nil :inverse-video t)
-     (ediff-even-diff-B                            :foreground nil :background nil :inverse-video t)
-     (ediff-odd-diff-A                             :foreground base04 :background nil :inverse-video t)
-     (ediff-odd-diff-B                             :foreground base04 :background nil :inverse-video t)
+     (ediff-even-diff-A                            :inverse-video t)
+     (ediff-even-diff-B                            :inverse-video t)
+     (ediff-even-diff-C                            :inverse-video t)
+     (ediff-odd-diff-A                             :foreground base04 :inverse-video t)
+     (ediff-odd-diff-B                             :foreground base04 :inverse-video t)
+     (ediff-odd-diff-C                             :foreground base04 :inverse-video t)
 
 ;;;; eldoc-mode
      (eldoc-highlight-function-argument            :foreground base0B :weight bold)
@@ -304,6 +466,10 @@ in the terminal.")
 ;;;; evil-mode
      (evil-search-highlight-persist-highlight-face :background base01 :inverse-video t :inherit font-lock-warning-face)
 
+;;;; fic-mode
+     (fic-author-face                              :foreground base09 :underline t)
+     (fic-face                                     :foreground base08 :weight bold)
+
 ;;;; flycheck-mode
      (flycheck-error                               :underline (:style wave :color base08))
      (flycheck-info                                :underline (:style wave :color base0B))
@@ -312,6 +478,8 @@ in the terminal.")
 ;;;; flymake-mode
      (flymake-warnline                             :background base01 :underline base09)
      (flymake-errline                              :background base01 :underline base08)
+     (flymake-warning                              :background base01 :underline base09)
+     (flymake-error                                :background base01 :underline base08)
 
 ;;;; flyspell-mode
      (flyspell-duplicate                           :underline (:style wave :color base09))
@@ -411,12 +579,23 @@ in the terminal.")
      (helm-buffer-saved-out                        :foreground base0F)
      (helm-buffer-size                             :foreground base09)
      (helm-candidate-number                        :foreground base00 :background base09)
-     (helm-ff-directory                            :foreground base04 :background nil :weight bold)
+     (helm-ff-directory                            :inherit dired-directory)
+     (helm-ff-dotted-directory                     :inherit dired-ignored)
      (helm-ff-executable                           :foreground base0B)
-     (helm-ff-file                                 :foreground base0C)
-     (helm-ff-invalid-symlink                      :foreground base00 :background base08)
+     (helm-ff-file                                 :inherit default)
+     (helm-ff-invalid-symlink                      :inherit dired-warning)
      (helm-ff-prefix                               :foreground nil :background nil)
-     (helm-ff-symlink                              :foreground base00 :background base0C)
+     (helm-ff-symlink                              :inherit dired-symlink)
+     (helm-ff-suid                                 :foreground base08)
+     (helm-ff-dotted-symlink-directory             :foreground base09 :background base03)
+     (helm-ff-denied                               :foreground base08 :background base03)
+;     (helm-ff-truename) ;; already inherited
+;     (helm-ff-dirs) ;; already inherited
+     (helm-ff-socket                               :foreground base0E)
+     (helm-ff-pipe                                 :foreground base0A :background base03)
+     (helm-ff-file-extension                       :foreground base03)
+     (helm-ff-backup-file                          :inherit dired-ignored)
+
      (helm-grep-cmd-line                           :foreground base0B)
      (helm-grep-file                               :foreground base0C)
      (helm-grep-finish                             :foreground base00 :background base09)
@@ -432,12 +611,22 @@ in the terminal.")
      (helm-source-header                           :foreground base05 :background base01 :weight bold)
      (helm-visible-mark                            :foreground base00 :background base0B)
 
+;;;; highlight-indentation minor mode
+     (highlight-indentation-face                   :background base01)
+
+;;;; highlight-thing mode
+     (highlight-thing                              :inherit highlight)
+
 ;;;; hl-line-mode
      (hl-line                                      :background base01)
      (col-highlight                                :background base01)
 
 ;;;; hl-sexp-mode
      (hl-sexp-face                                 :background base03)
+
+;;;; hydra
+     (hydra-face-red                               :foreground base09)
+     (hydra-face-blue                              :foreground base0D)
 
 ;;;; ido-mode
      (ido-subdir                                   :foreground base04)
@@ -457,6 +646,12 @@ in the terminal.")
      (idris-colon-face                             :inherit font-lock-keyword-face)
      (idris-equals-face                            :inherit font-lock-keyword-face)
      (idris-operator-face                          :inherit font-lock-keyword-face)
+
+;;;; imenu-list
+     (imenu-list-entry-face-0                      :foreground base0A)
+     (imenu-list-entry-face-1                      :foreground base0B)
+     (imenu-list-entry-face-2                      :foreground base0D)
+     (imenu-list-entry-face-3                      :foreground base0F)
 
 ;;;; ivy-mode
      (ivy-current-match                            :foreground base09 :background base01)
@@ -511,8 +706,55 @@ in the terminal.")
      (js3-private-function-call-face               :foreground base08)
 
 ;;;; linum-mode
-     (linum                                        :foreground base03 :background base01)
+     (linum                                        :foreground base03 :background base16-settings-fringe-bg)
 
+;;;; lsp-ui-doc
+     (lsp-ui-doc-header                            :inherit org-document-title)
+     (lsp-ui-doc-background                        :background base01)
+
+;;;; lui-mode
+     (lui-button-face                              :foreground base0D)
+     (lui-highlight-face                           :background base01)
+     (lui-time-stamp-face                          :foreground base0C)
+
+;;;; magit
+     (magit-blame-culprit                          :background base01)
+     (magit-blame-heading                          :background base01 :foreground base05)
+     (magit-branch                                 :foreground base04 :weight bold)
+     (magit-branch-current                         :foreground base0C :weight bold :box t)
+     (magit-branch-local                           :foreground base0C :weight bold)
+     (magit-branch-remote                          :foreground base0B :weight bold)
+     (magit-cherry-equivalent                      :foreground base0E)
+     (magit-cherry-unmatched                       :foreground base0C)
+     (magit-diff-context-highlight                 :background base01 :foreground base05)
+     (magit-diff-file-header                       :background base01 :foreground base05)
+     (magit-hash                                   :foreground base0D)
+     (magit-header-line                            :background base02 :foreground base05 :weight bold)
+     (magit-hunk-heading                           :background base03)
+     (magit-hunk-heading-highlight                 :background base03)
+     (magit-diff-hunk-heading                      :background base01)
+     (magit-diff-hunk-heading-highlight            :background base01)
+     (magit-item-highlight                         :background base01)
+     (magit-log-author                             :foreground base0D)
+     (magit-process-ng                             :foreground base08 :inherit magit-section-heading)
+     (magit-process-ok                             :foreground base0B :inherit magit-section-heading)
+     (magit-reflog-amend                           :foreground base0E)
+     (magit-reflog-checkout                        :foreground base0D)
+     (magit-reflog-cherry-pick                     :foreground base0B)
+     (magit-reflog-commit                          :foreground base0B)
+     (magit-reflog-merge                           :foreground base0B)
+     (magit-reflog-other                           :foreground base0C)
+     (magit-reflog-rebase                          :foreground base0E)
+     (magit-reflog-remote                          :foreground base0C)
+     (magit-reflog-reset                           :foreground base08)
+     (magit-section-highlight                      :background base01)
+     (magit-signature-bad                          :foreground base08 :weight bold)
+     (magit-signature-error                        :foreground base08)
+     (magit-signature-expired                      :foreground base09)
+     (magit-signature-good                         :foreground base0B)
+     (magit-signature-revoked                      :foreground base0E)
+     (magit-signature-untrusted                    :foreground base0C)
+     (magit-tag                                    :foreground base05)
 ;;;; mark-multiple
      (mm/master-face                               :foreground nil :background nil :inherit region)
      (mm/mirror-face                               :foreground nil :background nil :inherit region)
@@ -540,6 +782,35 @@ in the terminal.")
      (mmm-comment-submode-face                     :inherit font-lock-comment-face)
      (mmm-output-submode-face                      :background base03)
 
+;;;; notmuch
+	 (notmuch-message-summary-face                 :foreground base04 :background nil)
+	 (notmuch-search-count                         :foreground base04)
+	 (notmuch-search-date                          :foreground base04)
+	 (notmuch-search-flagged-face                  :foreground base08)
+	 (notmuch-search-matching-authors              :foreground base0D)
+	 (notmuch-search-non-matching-authors          :foreground base05)
+	 (notmuch-search-subject                       :foreground base05)
+	 (notmuch-search-unread-face                   :weight bold)
+	 (notmuch-tag-added                            :foreground base0B :weight normal)
+	 (notmuch-tag-deleted                          :foreground base08 :weight normal)
+	 (notmuch-tag-face                             :foreground base0A :weight normal)
+	 (notmuch-tag-flagged                          :foreground base0A :weight normal)
+	 (notmuch-tag-unread                           :foreground base0A :weight normal)
+	 (notmuch-tree-match-author-face               :foreground base0D :weight bold)
+	 (notmuch-tree-match-date-face                 :foreground base04 :weight bold)
+	 (notmuch-tree-match-face                      :foreground base05)
+	 (notmuch-tree-match-subject-face              :foreground base05)
+	 (notmuch-tree-match-tag-face                  :foreground base0A)
+	 (notmuch-tree-match-tree-face                 :foreground base08)
+	 (notmuch-tree-no-match-author-face            :foreground base0D)
+	 (notmuch-tree-no-match-date-face              :foreground base04)
+	 (notmuch-tree-no-match-face                   :foreground base04)
+	 (notmuch-tree-no-match-subject-face           :foreground base04)
+	 (notmuch-tree-no-match-tag-face               :foreground base0A)
+	 (notmuch-tree-no-match-tree-face              :foreground base0A)
+	 (notmuch-wash-cited-text                      :foreground base04)
+	 (notmuch-wash-toggle-button                   :foreground base04)
+
 ;;;; nxml-mode
      (nxml-name-face                               :foreground unspecified :inherit font-lock-constant-face)
      (nxml-attribute-local-name-face               :foreground unspecified :inherit font-lock-variable-name-face)
@@ -553,7 +824,8 @@ in the terminal.")
      (org-agenda-date                              :foreground base0D :underline nil)
      (org-agenda-done                              :foreground base0B)
      (org-agenda-dimmed-todo-face                  :foreground base04)
-     (org-block                                    :foreground base09)
+     (org-block                                    :foreground base05 :background base01)
+     (org-block-begin-line                         :foreground base03 :background base01)
      (org-code                                     :foreground base0A)
      (org-column                                   :background base01)
      (org-column-title                             :weight bold :underline t :inherit org-column)
@@ -561,7 +833,7 @@ in the terminal.")
      (org-document-info                            :foreground base0C)
      (org-document-info-keyword                    :foreground base0B)
      (org-document-title                           :foreground base09 :weight bold :height 1.44)
-     (org-done                                     :foreground base0B)
+     (org-done                                     :foreground base0B :background base01)
      (org-ellipsis                                 :foreground base04)
      (org-footnote                                 :foreground base0C)
      (org-formula                                  :foreground base08)
@@ -572,12 +844,15 @@ in the terminal.")
      (org-scheduled-today                          :foreground base0B)
      (org-special-keyword                          :foreground base09)
      (org-table                                    :foreground base0E)
-     (org-todo                                     :foreground base08)
+     (org-todo                                     :foreground base08 :background base01)
      (org-upcoming-deadline                        :foreground base09)
      (org-warning                                  :foreground base08 :weight bold)
 
 ;;;; paren-face-mode
      (paren-face                                   :foreground base04 :background nil)
+
+;;;; perspective-mode
+     (persp-selected-face                          :foreground base0C)
 
 ;;;; popup
      (popup-face                                   :foreground base05 :background base02)
@@ -636,6 +911,17 @@ in the terminal.")
      (slime-repl-result-face                       :foreground base0B)
      (slime-repl-output-face                       :foreground base0D :background base01)
 
+;;;; smart-mode-line
+     (sml/charging                                 :inherit sml/global :foreground base0B)
+     (sml/discharging                              :inherit sml/global :foreground base08)
+     (sml/filename                                 :inherit sml/global :foreground base0A :weight bold)
+     (sml/global                                   :foreground base16-settings-mode-line-fg)
+     (sml/modes                                    :inherit sml/global :foreground base07)
+     (sml/modified                                 :inherit sml/not-modified :foreground base08 :weight bold)
+     (sml/outside-modified                         :inherit sml/not-modified :background base08)
+     (sml/prefix                                   :inherit sml/global :foreground base09)
+     (sml/read-only                                :inherit sml/not-modified :foreground base0C)
+
 ;;;; spaceline
      (spaceline-evil-emacs                         :foreground base01 :background base0D)
      (spaceline-evil-insert                        :foreground base01 :background base0D)
@@ -644,9 +930,32 @@ in the terminal.")
      (spaceline-evil-replace                       :foreground base01 :background base08)
      (spaceline-evil-visual                        :foreground base01 :background base09)
 
+;;;; spacemacs
+     (spacemacs-emacs-face                        :foreground base01 :background base0D)
+     (spacemacs-hybrid-face                       :foreground base01 :background base0D)
+     (spacemacs-insert-face                       :foreground base01 :background base0C)
+     (spacemacs-motion-face                       :foreground base01 :background base0E)
+     (spacemacs-lisp-face                         :foreground base01 :background base0E)
+     (spacemacs-normal-face                       :foreground base01 :background base0B)
+     (spacemacs-replace-face                      :foreground base01 :background base08)
+     (spacemacs-visual-face                       :foreground base01 :background base09)
+
 ;;;; structured-haskell-mode
      (shm-current-face                             :inherit region)
      (shm-quarantine-face                          :underline (:style wave :color base08))
+
+;; telephone-line
+     (telephone-line-accent-active                 :foreground base00 :background base05)
+     (telephone-line-accent-inactive               :foreground base01 :background base03)
+     (telephone-line-evil-normal                   :foreground base01 :background base0B :weight bold)
+     (telephone-line-evil-insert                   :foreground base01 :background base0D :weight bold)
+     (telephone-line-evil-visual                   :foreground base06 :background base0E :weight bold)
+     (telephone-line-evil-replace                  :foreground base01 :background base08 :weight bold)
+     (telephone-line-evil-operator                 :foreground base0B :background base01 :weight bold)
+     (telephone-line-evil-motion                   :foreground base00 :background base0C :weight bold)
+     (telephone-line-evil-emacs                    :foreground base07 :background base0E :weight bold)
+     (telephone-line-warning                       :foreground base09 :weight bold)
+     (telephone-line-error                         :foreground base08 :weight bold)
 
 ;;;; term and ansi-term
      (term                                         :foreground base05 :background base00)
@@ -658,6 +967,19 @@ in the terminal.")
      (term-color-cyan                              :foreground base0C :background base0C)
      (term-color-blue                              :foreground base0D :background base0D)
      (term-color-magenta                           :foreground base0E :background base0E)
+
+;;;; ansi-colors
+     (ansi-color-black                             :foreground base02 :background base00)
+     (ansi-color-white                             :foreground base05 :background base07)
+     (ansi-color-red                               :foreground base08 :background base08)
+     (ansi-color-yellow                            :foreground base0A :background base0A)
+     (ansi-color-green                             :foreground base0B :background base0B)
+     (ansi-color-cyan                              :foreground base0C :background base0C)
+     (ansi-color-blue                              :foreground base0D :background base0D)
+     (ansi-color-magenta                           :foreground base0E :background base0E)
+
+;;;; tooltip
+     (tooltip                                      :background base01 :inherit default)
 
 ;;;; tuareg-mode
      (tuareg-font-lock-governing-face              :weight bold :inherit font-lock-keyword-face)
@@ -671,6 +993,21 @@ in the terminal.")
 ;;;; utop-mode
      (utop-prompt                                  :foreground base0E)
      (utop-error                                   :underline (:style wave :color base08) :inherit error)
+
+;;;; w3m-mode
+     (w3m-anchor                                   :underline nil :inherit link)
+     (w3m-anchor-visited                           :underline nil :inherit link-visited)
+     (w3m-form                                     :foreground base09 :underline t)
+     (w3m-image                                    :foreground base05 :background base03)
+     (w3m-image-anchor                             :foreground base05 :background base03 :underline t)
+     (w3m-header-line-location-content             :foreground base0D :background base00)
+     (w3m-header-line-location-title               :foreground base0D :background base00)
+     (w3m-tab-background                           :foreground base05 :background base01)
+     (w3m-tab-selected                             :foreground base05 :background base00)
+     (w3m-tab-selected-retrieving                  :foreground base05 :background base00)
+     (w3m-tab-unselected                           :foreground base03 :background base01)
+     (w3m-tab-unselected-unseen                    :foreground base03 :background base01)
+     (w3m-tab-unselected-retrieving                :foreground base03 :background base01)
 
 ;;;; which-func-mode
      (which-func                                   :foreground base0D :background nil :weight bold)
@@ -708,10 +1045,16 @@ in the terminal.")
      theme-name
      `(ansi-color-names-vector
        ;; black, base08, base0B, base0A, base0D, magenta, cyan, white
-       [,base00 ,base08 ,base0B ,base0A ,base0D ,base0E ,base0D ,base05])
-     `(ansi-term-color-vector
-       ;; black, base08, base0B, base0A, base0D, magenta, cyan, white
-       [unspecified ,base00 ,base08 ,base0B ,base0A ,base0D ,base0E ,base0D ,base05]))))
+       [,base00 ,base08 ,base0B ,base0A ,base0D ,base0E ,base0D ,base05]))
+
+    ;; Emacs 24.3 changed ’ansi-term-color-vector’ from a vector of colors
+    ;; to a vector of faces.
+    (when (version< emacs-version "24.3")
+      (custom-theme-set-variables
+       theme-name
+       `(ansi-term-color-vector
+         ;; black, base08, base0B, base0A, base0D, magenta, cyan, white
+         [unspecified ,base00 ,base08 ,base0B ,base0A ,base0D ,base0E ,base0D ,base05])))))
 
 ;;;###autoload
 (and load-file-name

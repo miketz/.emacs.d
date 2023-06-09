@@ -1,7 +1,7 @@
 ;; base16-gruvbox-dark-hard-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-gruvbox-dark-hard-colors
+(defvar base16-gruvbox-dark-hard-theme-colors
   '(:base00 "#1d2021"
     :base01 "#3c3836"
     :base02 "#504945"
@@ -34,7 +34,7 @@
 (deftheme base16-gruvbox-dark-hard)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-gruvbox-dark-hard base16-gruvbox-dark-hard-colors)
+(base16-theme-define 'base16-gruvbox-dark-hard base16-gruvbox-dark-hard-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-gruvbox-dark-hard)

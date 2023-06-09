@@ -1,7 +1,7 @@
 ;; base16-twilight-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: David Hart (https://github.com/hartbit)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-twilight-colors
+(defvar base16-twilight-theme-colors
   '(:base00 "#1e1e1e"
     :base01 "#323537"
     :base02 "#464b50"
@@ -34,7 +34,7 @@
 (deftheme base16-twilight)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-twilight base16-twilight-colors)
+(base16-theme-define 'base16-twilight base16-twilight-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-twilight)

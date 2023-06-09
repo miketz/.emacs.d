@@ -1,7 +1,7 @@
 ;; base16-atelier-savanna-light-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-savanna-light-colors
+(defvar base16-atelier-savanna-light-theme-colors
   '(:base00 "#ecf4ee"
     :base01 "#dfe7e2"
     :base02 "#87928a"
@@ -28,13 +28,13 @@
     :base0D "#478c90"
     :base0E "#55859b"
     :base0F "#867469")
-  "All colors for Base16 Atelier Savanna are defined here.")
+  "All colors for Base16 Atelier Savanna Light are defined here.")
 
 ;; Define the theme
 (deftheme base16-atelier-savanna-light)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-savanna-light base16-atelier-savanna-light-colors)
+(base16-theme-define 'base16-atelier-savanna-light base16-atelier-savanna-light-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-savanna-light)

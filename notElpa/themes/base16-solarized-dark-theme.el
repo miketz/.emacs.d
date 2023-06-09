@@ -1,17 +1,17 @@
 ;; base16-solarized-dark-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
-;; Scheme: Ethan Schoonover (http://ethanschoonover.com/solarized)
+;; Scheme: Ethan Schoonover (modified by aramisgithub)
 ;; Template: Kaleb Elwert <belak@coded.io>
 
 ;;; Code:
 
 (require 'base16-theme)
 
-(defvar base16-solarized-dark-colors
+(defvar base16-solarized-dark-theme-colors
   '(:base00 "#002b36"
     :base01 "#073642"
     :base02 "#586e75"
@@ -34,7 +34,7 @@
 (deftheme base16-solarized-dark)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-solarized-dark base16-solarized-dark-colors)
+(base16-theme-define 'base16-solarized-dark base16-solarized-dark-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-solarized-dark)

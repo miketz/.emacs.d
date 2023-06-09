@@ -1,7 +1,7 @@
 ;; base16-tomorrow-night-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Chris Kempson (http://chriskempson.com)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-tomorrow-night-colors
+(defvar base16-tomorrow-night-theme-colors
   '(:base00 "#1d1f21"
     :base01 "#282a2e"
     :base02 "#373b41"
@@ -34,7 +34,7 @@
 (deftheme base16-tomorrow-night)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-tomorrow-night base16-tomorrow-night-colors)
+(base16-theme-define 'base16-tomorrow-night base16-tomorrow-night-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-tomorrow-night)

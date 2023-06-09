@@ -1,7 +1,7 @@
 ;; base16-atelier-estuary-light-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-estuary-light-colors
+(defvar base16-atelier-estuary-light-theme-colors
   '(:base00 "#f4f3ec"
     :base01 "#e7e6df"
     :base02 "#929181"
@@ -28,13 +28,13 @@
     :base0D "#36a166"
     :base0E "#5f9182"
     :base0F "#9d6c7c")
-  "All colors for Base16 Atelier Estuary are defined here.")
+  "All colors for Base16 Atelier Estuary Light are defined here.")
 
 ;; Define the theme
 (deftheme base16-atelier-estuary-light)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-estuary-light base16-atelier-estuary-light-colors)
+(base16-theme-define 'base16-atelier-estuary-light base16-atelier-estuary-light-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-estuary-light)

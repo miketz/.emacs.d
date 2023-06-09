@@ -1,7 +1,7 @@
 ;; base16-atelier-cave-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-cave-colors
+(defvar base16-atelier-cave-theme-colors
   '(:base00 "#19171c"
     :base01 "#26232a"
     :base02 "#585260"
@@ -34,7 +34,7 @@
 (deftheme base16-atelier-cave)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-cave base16-atelier-cave-colors)
+(base16-theme-define 'base16-atelier-cave base16-atelier-cave-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-cave)

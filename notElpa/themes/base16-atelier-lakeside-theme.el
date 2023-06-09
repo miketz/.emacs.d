@@ -1,7 +1,7 @@
 ;; base16-atelier-lakeside-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-lakeside-colors
+(defvar base16-atelier-lakeside-theme-colors
   '(:base00 "#161b1d"
     :base01 "#1f292e"
     :base02 "#516d7b"
@@ -34,7 +34,7 @@
 (deftheme base16-atelier-lakeside)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-lakeside base16-atelier-lakeside-colors)
+(base16-theme-define 'base16-atelier-lakeside base16-atelier-lakeside-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-lakeside)

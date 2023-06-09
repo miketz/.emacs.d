@@ -1,7 +1,7 @@
 ;; base16-materia-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Defman21
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-materia-colors
+(defvar base16-materia-theme-colors
   '(:base00 "#263238"
     :base01 "#2c393f"
     :base02 "#37474f"
@@ -34,7 +34,7 @@
 (deftheme base16-materia)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-materia base16-materia-colors)
+(base16-theme-define 'base16-materia base16-materia-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-materia)

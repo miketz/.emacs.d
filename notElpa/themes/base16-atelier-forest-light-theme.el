@@ -1,7 +1,7 @@
 ;; base16-atelier-forest-light-theme.el -- A base16 colorscheme
 
 ;;; Commentary:
-;; Base16: (https://github.com/chriskempson/base16)
+;; Base16: (https://github.com/tinted-theming/home)
 
 ;;; Authors:
 ;; Scheme: Bram de Haan (http://atelierbramdehaan.nl)
@@ -11,7 +11,7 @@
 
 (require 'base16-theme)
 
-(defvar base16-atelier-forest-light-colors
+(defvar base16-atelier-forest-light-theme-colors
   '(:base00 "#f1efee"
     :base01 "#e6e2e0"
     :base02 "#a8a19f"
@@ -28,13 +28,13 @@
     :base0D "#407ee7"
     :base0E "#6666ea"
     :base0F "#c33ff3")
-  "All colors for Base16 Atelier Forest are defined here.")
+  "All colors for Base16 Atelier Forest Light are defined here.")
 
 ;; Define the theme
 (deftheme base16-atelier-forest-light)
 
 ;; Add all the faces to the theme
-(base16-theme-define 'base16-atelier-forest-light base16-atelier-forest-light-colors)
+(base16-theme-define 'base16-atelier-forest-light base16-atelier-forest-light-theme-colors)
 
 ;; Mark the theme as provided
 (provide-theme 'base16-atelier-forest-light)

@@ -1502,9 +1502,11 @@ Historical preservation."
 (defun my-color-base16-decaf ()
   (interactive)
   (load-theme 'base16-decaf t)
+
+  (my-rainbow-parens-dark-bg)
+
   (custom-theme-set-faces
    'base16-decaf
-
    `(font-lock-function-name-face ((t :foreground "#90bee1"
                                       :background "black"
                                       ;; :weight normal
@@ -1515,7 +1517,6 @@ Historical preservation."
    `(font-lock-property-name-face ((t :inherit font-lock-variable-name-face
                                       ;; :foreground "hot pink"
                                       :background "#404010")))
-
    ;; Emacs built-in display-fill-column-indicator.
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((t (:foreground "#4c4a60"))))))

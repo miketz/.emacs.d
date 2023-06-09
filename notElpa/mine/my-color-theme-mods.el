@@ -1507,6 +1507,7 @@ Historical preservation."
 
   (custom-theme-set-faces
    'base16-decaf
+   `(erc-notice-face ((t :foreground "#656565")))
    `(font-lock-function-name-face ((t :foreground "#90bee1"
                                       :background "black"
                                       ;; :weight normal

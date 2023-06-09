@@ -1505,9 +1505,16 @@ Historical preservation."
   (custom-theme-set-faces
    'base16-decaf
 
+   `(font-lock-function-name-face ((t :foreground "#90bee1"
+                                      :background "black"
+                                      ;; :weight normal
+                                      )))
+   `(font-lock-function-call-face ((t :inherit font-lock-function-name-face
+                                      :foreground "hot pink"
+                                      :background "black")))
    `(font-lock-property-name-face ((t :inherit font-lock-variable-name-face
                                       ;; :foreground "hot pink"
-                                      :background "black")))
+                                      :background "#404010")))
 
    ;; Emacs built-in display-fill-column-indicator.
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'

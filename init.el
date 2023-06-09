@@ -9271,6 +9271,11 @@ And turns off `indent-tabs-mode'."
 (autoload #'combobulate-mode "combobulate" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; look into these packages later, TODO
+;;;----------------------------------------------------------------------------
+;; dwim-coder-mode, treesitter based mode that does stuff as you type
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 ;; blink effect on current line when switching windows or buffers.

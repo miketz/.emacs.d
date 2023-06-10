@@ -8845,6 +8845,9 @@ TODO: delete this fn and replace with hooks, etc."
 
 (with-eval-after-load 'vertico-grid
   (setq vertico-grid-max-columns 12)
+  ;; allows annoations next to the item to work in grid mode
+  (setq vertico-grid-annotate 20)
+
   ;; key binds
   (define-key vertico-grid-map (kbd "C-h") #'vertico-grid-left)
   (define-key vertico-grid-map (kbd "C-l") #'vertico-grid-right)

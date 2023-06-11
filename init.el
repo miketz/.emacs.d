@@ -9279,6 +9279,8 @@ And turns off `indent-tabs-mode'."
 ;;; look into these packages later, TODO
 ;;;----------------------------------------------------------------------------
 ;; dwim-coder-mode, treesitter based mode that does stuff as you type
+;; eldev. emacs build tool needed for a few packages like lsp-mode
+;; undercover. test lib a few packages rely on. test build breaks without
 
 
 ;;;----------------------------------------------------------------------------

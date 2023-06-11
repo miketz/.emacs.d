@@ -172,6 +172,52 @@ Historical preservation."
   (evil-visual-char)
   (evil-exit-visual-state))
 
+(defun my-treesit-faces ()
+  "Set some of the new treesit faces."
+  (interactive)
+
+  ;; light or dark theme? use differnt colors for each
+  (let* ((dark? (eq 'dark (frame-parameter nil 'background-mode))))
+    (if dark?
+        (my-treesit-faces-dark-bg)
+      (my-treesit-faces-light-bg))))
+
+(defun my-treesit-faces-dark-bg ()
+  (interactive)
+
+  (custom-theme-set-faces
+   (my-get-theme)
+   ;; `font-lock-function-name-face' is not a treesit face but makes sense to
+   ;; set it paired with `font-lock-function-call-face'.
+   `(font-lock-function-name-face ((t :foreground "#AFEEEE"
+                                      :background "black")))
+   `(font-lock-function-call-face ((t :inherit font-lock-function-name-face
+                                      :foreground "#EFB0BB"
+                                      :background "black")))
+   `(font-lock-property-name-face ((t :inherit font-lock-variable-name-face
+                                      ;; :foreground "hot pink"
+                                      :background "black")))
+
+   `(font-lock-escape-face ((t :foreground "hot pink")))))
+
+(defun my-treesit-faces-light-bg ()
+  (interactive)
+
+  (custom-theme-set-faces
+   (my-get-theme)
+   ;; `font-lock-function-name-face' is not a treesit face but makes sense to
+   ;; set it paired with `font-lock-function-call-face'.
+   `(font-lock-function-name-face ((t :foreground "black"
+                                      :background "lightsteelblue1")))
+   `(font-lock-function-call-face ((t :inherit font-lock-function-name-face
+                                      :foreground "black"
+                                      :background "pink")))
+   `(font-lock-property-name-face ((t :inherit font-lock-variable-name-face
+                                      :background "lightsteelblue1")))
+
+   `(font-lock-escape-face ((t :foreground "black"
+                               :background "lightsteelblue1")))))
+
 
 (defun my-color-badger ()
   (interactive)

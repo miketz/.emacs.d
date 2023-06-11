@@ -3,8 +3,9 @@
 # key: defer
 # --
 defer func() {
-    errTmp := ${1:cleanUpAction}
-    if errTmp != nil {
-        err = errTmp // only overwrite err if an error occured
+    ${2:errTmp} := ${3:cleanUpAction}$0
+    hasPrevErr := ${1:err} != nil
+    if $2 != nil && !hasPrevErr {
+        $1 = $2 // avoid clobbering previous err
     }
 }()

@@ -1496,6 +1496,8 @@ Historical preservation."
   (interactive)
   (load-theme 'warm-night t)
   (my-rainbow-parens-dark-bg)
+  (my-cursor-dark-bg)
+  (my-treesit-faces-dark-bg)
 
   (custom-theme-set-faces
    'warm-night

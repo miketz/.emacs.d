@@ -9279,6 +9279,18 @@ And turns off `indent-tabs-mode'."
 ;;;----------------------------------------------------------------------------
 ;; dwim-coder-mode, treesitter based mode that does stuff as you type
 
+
+;;;----------------------------------------------------------------------------
+;;; buttercup. testing library used by several packages
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/emacs-buttercup" load-path)
+(autoload #'buttercup-run-at-point "buttercup" nil t)
+(autoload #'buttercup-run-discover "buttercup" nil nil)
+(autoload #'buttercup-run-markdown-buffer "buttercup" nil t)
+(autoload #'buttercup-run-markdown "buttercup" nil nil)
+(autoload #'buttercup-run-markdown-file "buttercup" nil t)
+(autoload #'buttercup-minor-mode "buttercup" nil t)
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

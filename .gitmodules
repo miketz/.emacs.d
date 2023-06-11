@@ -328,3 +328,6 @@
 [submodule "notElpa/combobulate"]
 	path = notElpa/combobulate
 	url = https://github.com/miketz/combobulate
+[submodule "notElpa/emacs-buttercup"]
+	path = notElpa/emacs-buttercup
+	url = https://github.com/miketz/emacs-buttercup

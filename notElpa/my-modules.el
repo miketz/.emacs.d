@@ -84,7 +84,23 @@ Some info may be purely for informational/doc purposes."
       :remotes '((:sym mine :url "https://github.com/miketz/combobulate"
                        :alias "origin")
                  (:sym upstream :url "https://github.com/mickeynp/combobulate"
-                           :alias "upstream"))
+                       :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
+      :name 'buttercup
+      :comment "Testing library. Used by several packages."
+      :folder (concat my-module-folder "emacs-buttercup")
+      :remotes '((:sym mine :url "https://github.com/miketz/emacs-buttercup"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/jorgenschaefer/emacs-buttercup"
+                       :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
       :submodule-p t

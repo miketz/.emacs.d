@@ -2776,7 +2776,7 @@ Inserts a new line and the beginning and end with text values:
 
 
 ;;;----------------------------------------------------------------------------
-;;; csharp-mode
+;;; csharp-mode. C#
 ;;;----------------------------------------------------------------------------
 (unless (fboundp #'csharp-mode)
   ;; csharp-mode was added to core emacs in version 29. So avoid loading the

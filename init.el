@@ -9338,6 +9338,26 @@ Hopefully this fn is only needed temporarily."
 ;; https://github.com/d12frosted/elpa-mirror
 
 
+;; NOTE: at time of writing it seems `go-mode' does not have it's own indent
+;; width var. Might be something to do with the standardization on tabs for
+;; that langauge.
+(defvar my-mode-indent-var-map
+  '((c-mode c-basic-offset) (c++-mode c-basic-offset)
+    (objc-mode c-basic-offset) (java-mode c-basic-offset)
+    (idl-mode c-basic-offset) (pike-mode c-basic-offset)
+    (awk-mode c-basic-offset) (csharp-mode c-basic-offset)
+
+    (js2-mode js-indent-level) (js-mode js-indent-level)
+
+    (c-ts-mode c-ts-mode-indent-offset)
+    (go-ts-mode go-ts-mode-indent-offset)
+    (lua-mode lua-indent-level)
+    (python-mode python-indent-offset)
+    (ruby-mode ruby-indent-level)
+    (rust-mode rust-indent-offset)
+    (zig-mode zig-indent-offset)
+    (perl-mode perl-indent-level)))
+
 (defun my-set-tab-width (width)
   "Set `tab-width' to WIDTH.
 For most programming modes you need to change an additional variable as well.
@@ -9346,32 +9366,11 @@ This function will try to set the additional variable for a variety of
 programming modes."
   (interactive "nindent width: ")
 
-  ;; NOTE: at time of writing it seems `go-mode' does not have it's own indent
-  ;; width var. Might be something to do with the standardization on tabs for
-  ;; that langauge.
-  (cond ((memq major-mode '(c-mode c++-mode objc-mode java-mode idl-mode
-                                   pike-mode awk-mode csharp-mode))
-         (setq c-basic-offset width))
-        ((eq major-mode 'c-ts-mode)
-         (setq c-ts-mode-indent-offset width))
-        ((eq major-mode 'go-ts-mode)
-         (setq go-ts-mode-indent-offset width))
-        ((eq major-mode 'lua-mode)
-         (setq lua-indent-level width))
-        ((eq major-mode 'python-mode)
-         (setq python-indent-offset width))
-        ((eq major-mode 'ruby-mode)
-         (setq ruby-indent-level width))
-        ((eq major-mode 'rust-mode)
-         (setq rust-indent-offset width))
-        ((eq major-mode 'zig-mode)
-         (setq zig-indent-offset width))
-        ((eq major-mode 'perl-mode)
-         (setq perl-indent-level width))
-        ((memq major-mode '(js2-mode js-mode))
-         (setq js-indent-level width)))
-
+  ;; get "indent-width-var" for the current `major-mode'
+  (let ((indent-var-sym (cadr (assoc major-mode my-mode-indent-var-map))))
+    (set indent-var-sym width))
   (setq tab-width width))
+
 
 (cl-defun my-tabify-buffer ()
   (interactive)

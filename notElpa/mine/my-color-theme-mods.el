@@ -1502,6 +1502,10 @@ Historical preservation."
   (custom-theme-set-faces
    'warm-night
 
+   `(mode-line ((t (;;:bold t
+                          :foreground "#838383" :background "#373333"))))
+   `(mode-line-inactive ((t (:foreground "#847f54" :background "#292424" ;:weight normal
+                                         ))))
 
    `(region ((t (:background "#69685E"))))
 

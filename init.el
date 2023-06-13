@@ -9107,8 +9107,8 @@ And turns off `indent-tabs-mode'."
   (define-key go-ts-mode-map (kbd "C-c h") #'my-go-heap-escape)
   (define-key go-ts-mode-map (kbd "C-c C-t") #'my-go-insert-type)
   (define-key go-ts-mode-map (kbd "C-c t") #'my-go-insert-type)
-  ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
-  ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
+  ;; (define-key go-ts-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
+  ;; (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 

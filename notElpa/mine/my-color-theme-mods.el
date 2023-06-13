@@ -1511,6 +1511,8 @@ Historical preservation."
                                         ;:weight normal
                             )))
 
+   `(shadow ((t :foreground "#707070"))) ;; inherited by dired-ignored face
+   `(font-lock-comment-face ((t :foreground "#6d6a68")))
    `(region ((t (:background "#69685E"))))
 
    '(completions-common-part ((t (:foreground "gray60"))))

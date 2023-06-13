@@ -57,7 +57,12 @@ the standard lib, like struct time.Time.")
 (defun my-go-insert-type ()
   "Select and insert a go type with completing-read."
   (interactive)
-  (insert (completing-read "type: " my-go-types)))
+  (let ((completing-read-function #'ivy-completing-read)
+        ;; dynamically shadow ivy completion style to ignore order.
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window. -4 so scrolling doens't go off screen.
+        (ivy-height (- (window-height) 4)))
+    (insert (completing-read "type: " my-go-types))))
 
 
 ;;; my-go-helpers.el ends here

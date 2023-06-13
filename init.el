@@ -9078,19 +9078,13 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 
 ;;;----------------------------------------------------------------------------
-;;; my-go-errcheck. helper fn to call errcheck
+;;; my-go-helpers. helper fns for go
 ;;;----------------------------------------------------------------------------
-(autoload #'my-go-errcheck "my-go-errcheck" nil t)
+(autoload #'my-go-errcheck "my-go-helpers" nil t)
+(autoload #'my-go-ineffassign "my-go-helpers" nil t)
+(autoload #'my-go-heap-escape "my-go-helpers" nil t)
+(autoload #'my-go-insert-type "my-go-helpers" nil t)
 
-;;;----------------------------------------------------------------------------
-;;; my-go-ineffassign. helper fn to call ineffassign
-;;;----------------------------------------------------------------------------
-(autoload #'my-go-ineffassign "my-go-ineffassign" nil t)
-
-;;;----------------------------------------------------------------------------
-;;; my-go-heap-escape. helper fn to call go build -gcflags="-m"
-;;;----------------------------------------------------------------------------
-(autoload #'my-go-heap-escape "my-go-heap-escape" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; go-ts-mode
@@ -9111,6 +9105,8 @@ And turns off `indent-tabs-mode'."
   (define-key go-ts-mode-map (kbd "C-c a") #'my-go-ineffassign)
   (define-key go-ts-mode-map (kbd "C-c C-h") #'my-go-heap-escape)
   (define-key go-ts-mode-map (kbd "C-c h") #'my-go-heap-escape)
+  (define-key go-ts-mode-map (kbd "C-c C-t") #'my-go-insert-type)
+  (define-key go-ts-mode-map (kbd "C-c t") #'my-go-insert-type)
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
@@ -9181,8 +9177,10 @@ And turns off `indent-tabs-mode'."
   (define-key go-mode-map (kbd "C-c e") #'my-go-errcheck)
   (define-key go-mode-map (kbd "C-c C-a") #'my-go-ineffassign)
   (define-key go-mode-map (kbd "C-c a") #'my-go-ineffassign)
-  (define-key go-ts-mode-map (kbd "C-c C-h") #'my-go-heap-escape)
-  (define-key go-ts-mode-map (kbd "C-c h") #'my-go-heap-escape)
+  (define-key go-mode-map (kbd "C-c C-h") #'my-go-heap-escape)
+  (define-key go-mode-map (kbd "C-c h") #'my-go-heap-escape)
+  (define-key go-mode-map (kbd "C-c C-t") #'my-go-insert-type)
+  (define-key go-mode-map (kbd "C-c t") #'my-go-insert-type)
   ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)

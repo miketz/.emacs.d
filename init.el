@@ -9301,6 +9301,16 @@ And turns off `indent-tabs-mode'."
 (autoload #'buttercup-run-markdown-file "buttercup" nil t)
 (autoload #'buttercup-minor-mode "buttercup" nil t)
 
+
+;;;----------------------------------------------------------------------------
+;;; klondike
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'klondike
+  ;; use emacs key binds
+  (push '("^Klondike" . emacs) evil-buffer-regexps))
+
+
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

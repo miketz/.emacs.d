@@ -233,7 +233,7 @@ Uses command line tool [go doc].  Passing in PACK and TXT."
 
 (defun my-go-doc--open-website (pack thingatpoing-txt)
   "Show doc for thing at point in in a browser.
-Uses URL 'https://pkg.go.dev'.  Passing in PACK and THINGATPOING-TXT."
+Uses URL `https://pkg.go.dev'.  Passing in PACK and THINGATPOING-TXT."
 
   ;; when the "thing at point" itself is a package, then we need to juggle some
   ;; values around
@@ -309,14 +309,14 @@ Uses command line tool [go doc]."
 ;;;###autoload
 (defun my-go-doc-website ()
   "Show doc for thing at point in in a browser.
-Uses URL 'https://pkg.go.dev'."
+Uses URL `https://pkg.go.dev'."
   (interactive)
   (my-go-doc 'website))
 
 ;;;###autoload
 (defun my-go-doc-website-overview ()
   "Show top level docs in a browser.
-Uses URL 'https://pkg.go.dev'."
+Uses URL `https://pkg.go.dev'."
   (interactive)
   (browse-url (concat my-go-doc-base-url "/std")))
 

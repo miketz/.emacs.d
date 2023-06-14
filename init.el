@@ -7079,6 +7079,34 @@ Closure over `preceding-sexp-fn'."
 
 
 ;;;----------------------------------------------------------------------------
+;;; python-ts-mdoe
+;;;----------------------------------------------------------------------------
+(when (treesit-language-available-p 'python)
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
+
+;; python-ts-mode lives in the same file as python-mode. So it may not need
+;; to duplicate every part of the old python config below. just set the hook
+;; stuff?
+(with-eval-after-load 'python
+  (defun my-setup-python-ts-mode ()
+    (setq tab-width 4) ; python.el sets this to 8, so make sure to overwrite here
+    (setq python-indent-offset 4)
+    ;; (setq indent-tabs-mode my-use-tabs-python-p) ; buffer local
+
+    (yas-minor-mode 1)
+    ;; (rainbow-delimiters-mode-enable)
+    (my-turn-on-electric-pair-local-mode)
+    (when (fboundp #'display-fill-column-indicator-mode)
+      (setq display-fill-column-indicator-column 79) ; PEP 8
+      (display-fill-column-indicator-mode 1))
+
+    ;; lsp stuff
+    ;; (require 'lsp-python-ms)
+    ;; ;; (add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
+    )
+  (add-hook 'python-ts-mode-hook #'my-setup-python-ts-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; python-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'python

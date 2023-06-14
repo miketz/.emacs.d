@@ -1846,6 +1846,7 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-rainbow-parens-light-bg2 file nil t)
   (autoload #'my-rainbow-parens-light-bg3 file nil t)
 
+  (autoload #'my-color-tao-yin file nil t)
   (autoload #'my-color-base16-decaf file nil t)
   (autoload #'my-color-grandshell file nil t)
   (autoload #'my-color-zenburn file nil t)

@@ -96,6 +96,10 @@ the website docs to match your installed Go version."
   :type 'boolean
   :group 'my-go-doc)
 
+(defcustom my-go-doc-assume-pkg-correct-p nil
+  "Immediately jump to the docs without manually verifying the package name."
+  :type 'boolean
+  :group 'my-go-doc)
 
 ;; NOTE: `my-go-doc-get-version' will break if [go version] changes the format
 ;; of its output string.
@@ -268,18 +272,19 @@ Possible values: `local', `website'"
          ;; imperfect attempt to scrape package name from text
          (pack (my-go-doc-guess-package txt bounds)))
 
-    ;; If thing-at-point is a builtin type then pack is "builtin". This is
-    ;; pretty much always correct (not guessed) so skip the manual correction.
-    (unless (or (string-equal pack "builtin")
-                ;; If thing-at-point is a package, then pack is "". Free functions also
-                ;; have "" so don't skip manual correction until i get a better
-                ;; detection.
-                ;; (string-equal pack "")
-                )
-      ;; manual correction
-      (setq pack (completing-read
-                  "package: "
-                  '() nil nil pack)))
+    (unless my-go-doc-assume-pkg-correct-p
+      ;; If thing-at-point is a builtin type then pack is "builtin". This is
+      ;; pretty much always correct (not guessed) so skip the manual correction.
+      (unless (or (string-equal pack "builtin")
+                  ;; If thing-at-point is a package, then pack is "". Free functions also
+                  ;; have "" so don't skip manual correction until i get a better
+                  ;; detection.
+                  ;; (string-equal pack "")
+                  )
+        ;; manual correction
+        (setq pack (completing-read
+                    "package: "
+                    '() nil nil pack))))
 
     ;; display in the specifed view
     (cond ((eq view-type 'local)

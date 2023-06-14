@@ -1510,9 +1510,15 @@ Historical preservation."
 
    `(shadow ((t :foreground "#707070"))) ;; inherited by dired-ignored face
    `(font-lock-comment-face ((t :foreground "#6d6a68")))
+   `(font-lock-keyword-face ((t :foreground "#CCCCCC"
+                                :weight bold)))
+   `(font-lock-builtin-face ((t :foreground "#808090"
+                                :weight bold)))
    `(erc-notice-face ((t :inherit font-lock-comment-face)))
    `(erc-nick-default-face ((t :inherit font-lock-comment-face)))
    `(erc-timestamp-face ((t :inherit font-lock-comment-face)))
+   `(whitespace-trailing ((t :background "tomato")))
+   `(whitespace-space-before-tab ((t :background "DarkOrange")))
 
    ;; '(completions-common-part ((t (:foreground "gray60"))))
    ;; '(completions-first-difference ((t (:foreground "yellow"))))

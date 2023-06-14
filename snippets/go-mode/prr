@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: prr
+# key: prr
+# --
+b := xfmt.Buffer{}
+b.S("$0").C('\n')
+os.Stdout.Write(b.Bytes())

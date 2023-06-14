@@ -9077,6 +9077,9 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-doc-website "my-go-doc" nil t)
 (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 
+(with-eval-after-load 'my-go-doc
+  (setq my-go-doc-assume-pkg-correct-p t))
+
 ;;;----------------------------------------------------------------------------
 ;;; my-go-helpers. helper fns for go
 ;;;----------------------------------------------------------------------------

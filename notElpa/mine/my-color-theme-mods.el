@@ -1504,6 +1504,9 @@ Historical preservation."
 
    `(shadow ((t :foreground "#707070"))) ;; inherited by dired-ignored face
    `(font-lock-comment-face ((t :foreground "#6d6a68")))
+   `(erc-notice-face ((t :inherit font-lock-comment-face)))
+   `(erc-nick-default-face ((t :inherit font-lock-comment-face)))
+   `(erc-timestamp-face ((t :inherit font-lock-comment-face)))
 
    ;; '(completions-common-part ((t (:foreground "gray60"))))
    ;; '(completions-first-difference ((t (:foreground "yellow"))))

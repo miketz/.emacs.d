@@ -1,5 +1,7 @@
 ;;; my-go-helpers.el --- helper funcs for go code -*- lexical-binding: t -*-
 
+(require 'cl-lib)
+
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
 ;;;###autoload
@@ -64,5 +66,23 @@ the standard lib, like struct time.Time.")
         (ivy-height (- (window-height) 4)))
     (insert (completing-read "type: " my-go-types))))
 
+
+(defvar my-go-useful-libs
+  '((xfmt "zero alloc printing" "go get lab.nexedi.com/kirr/go123")
+    (zerolog "zero alloc logging" "go get -u github.com/rs/zerolog/log")))
+
+;;;###autoload
+(defun my-go-install-lib ()
+  "Install go library from `my-go-useful-libs'."
+  (interactive)
+  (let* ((completing-read-function #'ivy-completing-read)
+         ;; dynamically shadow ivy completion style to ignore order.
+         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+         ;; taller ivy window. -4 so scrolling doens't go off screen.
+         (ivy-height (- (window-height) 4))
+         (syms (mapcar #'car my-go-useful-libs))
+         (lib-key (completing-read "lib: " syms))
+         (install-cmd (cl-third (assoc (intern lib-key) my-go-useful-libs))))
+    (shell-command install-cmd)))
 
 ;;; my-go-helpers.el ends here

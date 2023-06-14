@@ -9116,7 +9116,7 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-ineffassign "my-go-helpers" nil t)
 (autoload #'my-go-heap-escape "my-go-helpers" nil t)
 (autoload #'my-go-insert-type "my-go-helpers" nil t)
-
+(autoload #'my-go-install-lib "my-go-helpers" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; go-ts-mode

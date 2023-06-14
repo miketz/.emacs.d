@@ -55,7 +55,7 @@
 ;;; (autoload #'my-go-doc-website "my-go-doc" nil t)
 ;;; (autoload #'my-go-doc-website-overview "my-go-doc" nil t)
 ;;; (with-eval-after-load 'go-mode
-;;;   ;; reccomended key binds.  Mimic SLIME key binds.
+;;;   ;; recommended key binds.  Mimic SLIME key binds.
 ;;;   (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
 ;;;   (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local))
 
@@ -89,7 +89,7 @@
 (defcustom my-go-doc-specify-go-ver-p t
   "When true use the locally installed [go version] for website docs.
 When viewing docs on website the go version can be specified.
-Otherwise the website docs defualt to the most recent version of Go.
+Otherwise the website docs default to the most recent version of Go.
 
 In general it's a good idea to keep this set to true.  Usually you will want
 the website docs to match your installed Go version."
@@ -162,8 +162,8 @@ Only search 1 char back for the dot using BOUNDS of thing at point.
 Then grab the text before the dot.
 Returns nil if no package found.
 WARNING:
-The implpementation is imperfect and may grab a package alias or class name
-instead of the acutal package name.  Or it may grab something completely
+The implementation is imperfect and may grab a package alias or class name
+instead of the actual package name.  Or it may grab something completely
 incorrect."
   (let ((bol (line-beginning-position)))
     (save-excursion
@@ -172,28 +172,28 @@ incorrect."
           (cl-return-from my-go-doc-scrape-package nil))
         (goto-char dot)
         ;; Now point is on the dot ".". Find begging of package name.
-        ;; Search backward for all of these sympbols (ie don't stop after first match)
+        ;; Search backward for all of these symbols (ie don't stop after first match)
         ;; Use the match closest to the dot as `pack-begin'.
         (let ((pack-begin nil)
               (begin-chars '("(" "[" "{" " " "	"))) ;; tab
           (cl-loop for c in begin-chars
                    do
                    (let ((tmp-begin (save-excursion (search-backward c bol t))))
-                     ;; only set pack-begin if it's the nearst match so far.
+                     ;; only set pack-begin if it's the nearest match so far.
                      (when (or (null pack-begin) ;; if not set yet
                                (and (not (null tmp-begin))
                                     (> tmp-begin pack-begin)))
                        (setq pack-begin tmp-begin))))
 
-          ;; get the substring that is package name.
+          ;; get the sub-string that is package name.
           (when (and pack-begin dot) ;; found both start/end
             (cl-incf pack-begin) ;; +1 to go forward past the delimiter we matched on.
             (buffer-substring-no-properties pack-begin dot)))))))
 
 (cl-defun my-go-doc-guess-package (txt bounds)
-  "Guess the package based on some heuriestics and text searching.
+  "Guess the package based on some heuristics and text searching.
 TXT is the thing at point.
-BOUNDS is the boundry of TXT.  A cons cell of format (start . end)."
+BOUNDS is the boundary of TXT.  A cons cell of format (start . end)."
 
   ;; search against a hard coded list for built in types.
   (when (my-go-doc--built-in-type-p txt)
@@ -211,7 +211,7 @@ BOUNDS is the boundry of TXT.  A cons cell of format (start . end)."
 
 (defun my-go-doc--open-local (pack txt)
   "Show doc for thing at point in an Emacs buffer.
-Uses command line tool [go doc].  Passsing in PACK and TXT."
+Uses command line tool [go doc].  Passing in PACK and TXT."
   (let ((doc (shell-command-to-string (concat "go doc --all "
                                               (if (and pack (> (length pack) 0))
                                                   (concat pack ".")
@@ -227,13 +227,13 @@ Uses command line tool [go doc].  Passsing in PACK and TXT."
     (select-window orig-window)))
 
 ;; NOTE: if the format/layout of this website changes then the logic of constructing
-;; the url with anchors will need to change.
+;; the URL with anchors will need to change.
 (defvar my-go-doc-base-url "https://pkg.go.dev"
   "Website for go documentation.")
 
 (defun my-go-doc--open-website (pack thingatpoing-txt)
   "Show doc for thing at point in in a browser.
-Uses URL 'https://pkg.go.dev'.  Passsing in PACK and THINGATPOING-TXT."
+Uses URL 'https://pkg.go.dev'.  Passing in PACK and THINGATPOING-TXT."
 
   ;; when the "thing at point" itself is a package, then we need to juggle some
   ;; values around
@@ -241,8 +241,8 @@ Uses URL 'https://pkg.go.dev'.  Passsing in PACK and THINGATPOING-TXT."
     (setq pack thingatpoing-txt)
     (setq thingatpoing-txt nil))
 
-  ;; url sample with ver: https://pkg.go.dev/builtin@go1.19.4#make
-  ;; url sample no ver:   https://pkg.go.dev/builtin#make
+  ;; URL sample with ver: https://pkg.go.dev/builtin@go1.19.4#make
+  ;; URL sample no ver:   https://pkg.go.dev/builtin#make
   (let ((url (concat my-go-doc-base-url
                      "/" pack
                      ;; add extra section to URL if using specific go version
@@ -286,7 +286,7 @@ Possible values: `local', `website'"
                     "package: "
                     '() nil nil pack))))
 
-    ;; display in the specifed view
+    ;; display in the specified view
     (cond ((eq view-type 'local)
            (my-go-doc--open-local pack txt))
           ((eq view-type 'website)

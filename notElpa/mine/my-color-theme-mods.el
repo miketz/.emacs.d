@@ -1501,6 +1501,7 @@ Historical preservation."
   (custom-theme-set-faces
    'tao-yin
 
+   `(fringe ((t :background "#303030")))
    `(mode-line ((t :foreground "#838383"
                    :background "#000000")))
    `(mode-line-inactive ((t :foreground "#847f54"
@@ -1518,9 +1519,7 @@ Historical preservation."
 
    ;; Emacs built-in display-fill-column-indicator.
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
-   `(fill-column-indicator ((t (:foreground "#303030")))))
-
-  )
+   `(fill-column-indicator ((t (:foreground "#303030"))))))
 
 (defun my-color-warm-night ()
   (interactive)

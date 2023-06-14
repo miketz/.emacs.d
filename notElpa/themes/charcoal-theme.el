@@ -239,11 +239,14 @@ Example:
    ;; ~ Maybe not intended to be treesit only, but it seems that way.
    `(font-lock-function-call-face ((,class :foreground ,fn-call-fg
                                             :background ,fn-call-bg)))
-   `(font-lock-variable-use-face ((,class :inherit font-lock-variable-name-face)))
+   `(font-lock-variable-use-face ((,class :inherit font-lock-variable-name-face
+                                          :foreground ,fg
+                                          :background ,bg)))
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
                                       :weight normal)))
    `(font-lock-property-name-face ((,class
                                     :inherit font-lock-variable-name-face
+                                    :foreground "burlywood3"
                                     :background ,fn-call-bg)))
    `(font-lock-property-use-face ((,class
                                    :inherit font-lock-property-name-face
@@ -267,8 +270,12 @@ Example:
    ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
    `(font-lock-variable-name-face ((,class (:foreground
-                                            "burlywood3"
-                                        ;"#BBAA99";,var
+                                            ,fg
+                                            ;; ,fn-def-fg
+                                            ;; "burlywood3"
+                                            ;; "#BBAA99"
+                                            ;; ,var
+                                            :background ,bg ;;"#202020"
                                                         ))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 

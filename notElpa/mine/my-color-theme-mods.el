@@ -1492,6 +1492,28 @@ Historical preservation."
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
    '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
 
+(defun my-color-tao-yin ()
+  (interactive)
+  (load-theme 'tao-yin t)
+  (my-rainbow-parens-dark-bg)
+  (my-treesit-faces-dark-bg)
+
+  (custom-theme-set-faces
+   'tao-yin
+
+
+   `(shadow ((t :foreground "#707070"))) ;; inherited by dired-ignored face
+   `(font-lock-comment-face ((t :foreground "#6d6a68")))
+
+   ;; '(completions-common-part ((t (:foreground "gray60"))))
+   ;; '(completions-first-difference ((t (:foreground "yellow"))))
+
+   ;; Emacs built-in display-fill-column-indicator.
+   ;; replaces `fci-mode' and it's color variable `fci-rule-color'
+   `(fill-column-indicator ((t (:foreground "#303030")))))
+
+  )
+
 (defun my-color-warm-night ()
   (interactive)
   (load-theme 'warm-night t)

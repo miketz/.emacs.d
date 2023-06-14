@@ -1501,6 +1501,11 @@ Historical preservation."
   (custom-theme-set-faces
    'tao-yin
 
+   `(mode-line ((t :foreground "#838383"
+                   :background "#000000")))
+   `(mode-line-inactive ((t :foreground "#847f54"
+                            :background "#292424")))
+   `(mode-line-buffer-id ((t :foreground "#AAAAAA")))
 
    `(shadow ((t :foreground "#707070"))) ;; inherited by dired-ignored face
    `(font-lock-comment-face ((t :foreground "#6d6a68")))

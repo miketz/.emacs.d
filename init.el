@@ -8657,6 +8657,27 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'csv-highlight "csv-stuff" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; ruby-ts-mode
+;;;----------------------------------------------------------------------------
+(when (treesit-language-available-p 'ruby)
+  (add-to-list 'major-mode-remap-alist '(ruby-mode . ruby-ts-mode)))
+
+;; NOTE: ruby-ts-mode loads ruby-mode so any variables there will be available.
+(with-eval-after-load 'ruby-ts-mode
+  ;; keybinds
+  (define-key ruby-ts-mode-map (kbd "C-c C-c") #'compile)
+  (define-key ruby-ts-mode-map (kbd "C-c c") #'compile)
+
+  (defun my-setup-ruby-ts-mode ()
+    ;; set to 1 so comments on the same line are kept close to the code.
+    (setq comment-column 1) ; buffer local
+    (yas-minor-mode 1)
+    (rainbow-delimiters-mode 1)
+    (my-turn-on-electric-pair-local-mode))
+  (add-hook 'ruby-ts-mode-hook #'my-setup-ruby-ts-mode))
+
+
+;;;----------------------------------------------------------------------------
 ;;; ruby-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'ruby-mode
@@ -9394,7 +9415,9 @@ Hopefully this fn is only needed temporarily."
     (go-ts-mode go-ts-mode-indent-offset)
     (lua-mode lua-indent-level)
     (python-mode python-indent-offset)
-    (ruby-mode ruby-indent-level)
+
+    (ruby-mode ruby-indent-level) (ruby-ts-mode ruby-indent-level)
+
     (rust-mode rust-indent-offset)
     (zig-mode zig-indent-offset)
     (perl-mode perl-indent-level)))

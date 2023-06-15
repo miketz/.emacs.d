@@ -4,4 +4,4 @@
 # --
 b := xfmt.Buffer{}
 b.S("$0").C('\n')
-os.Stdout.Write(b.Bytes())
+_, _ = os.Stdout.Write(b.Bytes())

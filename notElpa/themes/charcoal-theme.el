@@ -446,7 +446,9 @@ Example:
    ;; js2
    `(js2-function-call ((,class :foreground ,fn-call-fg
                                 :background ,fn-call-bg)))
-   `(js2-object-property ((,class (:inherit font-lock-variable-name-face))))
+   `(js2-object-property ((,class :inherit font-lock-variable-name-face
+                                  :foreground "burlywood3"
+                                  :background ,fn-call-bg)))
    `(js2-function-param ((,class (:inherit font-lock-variable-name-face))))
    `(js2-warning ((,class :underline (:color "yellow" :style wave))))
    `(js2-error ((,class :underline (:color "red" :style wave))))

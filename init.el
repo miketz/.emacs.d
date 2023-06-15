@@ -8460,7 +8460,8 @@ vanilla javascript buffers."
                "master" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript"
                       "master" "typescript/src")
-          (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod"))))
 
 ;;;----------------------------------------------------------------------------
 ;;; tree-sitter, tree-sitter-langs. 3rd party package. works for pre-Emacs 29
@@ -9138,6 +9139,12 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-heap-escape "my-go-helpers" nil t)
 (autoload #'my-go-insert-type "my-go-helpers" nil t)
 (autoload #'my-go-install-lib "my-go-helpers" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; go-mod-ts-mode
+;;;----------------------------------------------------------------------------
+(when (treesit-language-available-p 'gomod)
+  (add-to-list 'major-mode-remap-alist '(go-dot-mod-mode . go-mod-ts-mode)))
 
 ;;;----------------------------------------------------------------------------
 ;;; go-ts-mode

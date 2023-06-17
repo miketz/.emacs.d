@@ -257,7 +257,9 @@ Example:
    ;; `(font-lock-delimiter-face)
    `(font-lock-escape-face ((,class :foreground "hot pink")))
    ;; `(font-lock-misc-punctuation-face)
-   ;; `(font-lock-number-face)
+   `(font-lock-number-face ((,class :foreground "#50b5b5" ;"#BEBEA1"
+                                    ;; :background ,fn-def-bg
+                                    )))
    ;; `(font-lock-regexp-face)
    ;; ~ END treesit faces
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

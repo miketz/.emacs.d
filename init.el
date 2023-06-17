@@ -7074,7 +7074,7 @@ Closure over `preceding-sexp-fn'."
 (autoload #'highlight-indent-guides-mode "highlight-indent-guides" nil t)
 
 (with-eval-after-load 'highlight-indent-guides
-  (setq highlight-indent-guides-method 'character
+  (setq highlight-indent-guides-method 'fill ;;'character
         highlight-indent-guides-character ?\|))
 
 

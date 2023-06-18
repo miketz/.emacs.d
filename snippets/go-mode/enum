@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: enum
+# key: enum
+# --
+type ${1:EnumName} ${2:int}
+
+const (
+	${3:Entry1} $1 = iota
+)
+
+func (e $1) String() string {
+	switch e {
+	case $3:
+		return "$3"
+	default:
+		return ""
+	}
+}

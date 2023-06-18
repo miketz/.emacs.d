@@ -247,7 +247,8 @@ Example:
    `(font-lock-property-name-face ((,class
                                     :inherit font-lock-variable-name-face
                                     :foreground "burlywood3"
-                                    :background ,fn-call-bg)))
+                                    ;; :background ,fn-call-bg
+                                    )))
    `(font-lock-property-use-face ((,class
                                    :inherit font-lock-property-name-face
                                    ;; :slant italic

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: enum
+# key: enum
+# --
+enum ${1:enumName} {
+    ${2:type1} = 0, ${3:type2}$0
+};

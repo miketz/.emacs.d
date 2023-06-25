@@ -9172,6 +9172,9 @@ And turns off `indent-tabs-mode'."
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 
+  (define-key go-ts-mode-map (kbd "C-c g") #'my-go-commands-hydra/body)
+  (define-key go-ts-mode-map (kbd "C-c C-g") #'my-go-commands-hydra/body)
+
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
   (defun my-setup-go-ts-mode ()
@@ -9245,6 +9248,9 @@ And turns off `indent-tabs-mode'."
   ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
+
+  (define-key go-mode-map (kbd "C-c g") #'my-go-commands-hydra/body)
+  (define-key go-mode-map (kbd "C-c C-g") #'my-go-commands-hydra/body)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 

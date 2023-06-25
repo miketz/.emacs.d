@@ -1,6 +1,7 @@
 ;;; my-go-helpers.el --- helper funcs for go code -*- lexical-binding: t -*-
 
 (require 'cl-lib)
+(require 'hydra)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
@@ -84,5 +85,35 @@ the standard lib, like struct time.Time.")
          (lib-key (completing-read "lib: " syms))
          (install-cmd (cl-third (assoc (intern lib-key) my-go-useful-libs))))
     (shell-command install-cmd)))
+
+
+;; List several go helper functions.
+(defhydra my-go-commands-hydra (:hint nil) ;;(:color blue)
+  "
+_c_: compile
+_e_: errcheck
+_a_: ineffassign
+_h_: heap
+_t_: types
+_d_: doc
+_q_, _C-g_: quit"
+
+  ("c" compile)
+  ("e" my-go-errcheck)
+  ("a" my-go-ineffassign)
+  ("h" my-go-heap-escape)
+  ("t" my-go-insert-type)
+  ("d" my-go-doc-local)
+
+  ;; don't use the hint text as it makes (:hint nil) not work?
+  ;; ("c" compile "compile")
+  ;; ("e" my-go-errcheck "errcheck")
+  ;; ("a" my-go-ineffassign "ineffassign")
+  ;; ("h" my-go-heap-escape "heap")
+  ;; ("t" my-go-insert-type "types")
+  ;; ("d" my-go-doc-local "doc")
+
+  ("C-g" nil nil)
+  ("q" nil))
 
 ;;; my-go-helpers.el ends here

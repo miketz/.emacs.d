@@ -9160,17 +9160,6 @@ And turns off `indent-tabs-mode'."
   (define-key go-ts-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-ts-mode-map (kbd "C-c c") #'compile)
 
-
-  (define-key go-ts-mode-map (kbd "C-c C-e") #'my-go-errcheck)
-  (define-key go-ts-mode-map (kbd "C-c e") #'my-go-errcheck)
-  (define-key go-ts-mode-map (kbd "C-c C-a") #'my-go-ineffassign)
-  (define-key go-ts-mode-map (kbd "C-c a") #'my-go-ineffassign)
-  (define-key go-ts-mode-map (kbd "C-c C-h") #'my-go-heap-escape)
-  (define-key go-ts-mode-map (kbd "C-c h") #'my-go-heap-escape)
-  (define-key go-ts-mode-map (kbd "C-c C-t") #'my-go-insert-type)
-  (define-key go-ts-mode-map (kbd "C-c t") #'my-go-insert-type)
-  ;; (define-key go-ts-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
-  ;; (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 
@@ -9235,19 +9224,9 @@ And turns off `indent-tabs-mode'."
   ;; key binds
   (define-key go-mode-map (kbd "C-c C-c") #'compile)
   (define-key go-mode-map (kbd "C-c c") #'compile)
+
   ;; unbind `godef-describe' so I can use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)
-
-  (define-key go-mode-map (kbd "C-c C-e") #'my-go-errcheck)
-  (define-key go-mode-map (kbd "C-c e") #'my-go-errcheck)
-  (define-key go-mode-map (kbd "C-c C-a") #'my-go-ineffassign)
-  (define-key go-mode-map (kbd "C-c a") #'my-go-ineffassign)
-  (define-key go-mode-map (kbd "C-c C-h") #'my-go-heap-escape)
-  (define-key go-mode-map (kbd "C-c h") #'my-go-heap-escape)
-  (define-key go-mode-map (kbd "C-c C-t") #'my-go-insert-type)
-  (define-key go-mode-map (kbd "C-c t") #'my-go-insert-type)
-  ;; (define-key go-mode-map (kbd "C-c C-d d") #'my-go-doc-local)
-  ;; (define-key go-mode-map (kbd "C-c C-d C-d") #'my-go-doc-local)
   (define-key go-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 

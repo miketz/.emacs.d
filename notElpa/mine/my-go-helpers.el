@@ -88,7 +88,7 @@ the standard lib, like struct time.Time.")
 
 
 ;; List several go helper functions.
-(defhydra my-go-commands-hydra (:hint nil) ;;(:color blue)
+(defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)
   "
 _c_: compile
 _e_: errcheck

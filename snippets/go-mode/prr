@@ -2,6 +2,8 @@
 # name: prr
 # key: prr
 # --
-b := xfmt.Buffer{}
-b.S("$0").C('\n')
-_, _ = os.Stdout.Write(b.Bytes())
+{ // scope
+	b := xfmt.Buffer{}
+	b.S("$0").C('\n')
+	_, _ = os.Stdout.Write(b.Bytes())
+}

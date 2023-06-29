@@ -46,6 +46,17 @@
   (let ((compile-command "go build -gcflags=\"-m\""))
     (call-interactively #'compile)))
 
+;;;###autoload
+(cl-defun my-go-lint ()
+  "Run golangci-lint.
+It is 1 umbrella command that runs many other linters and combines their
+results."
+  (interactive)
+  ;; shadow `compile-command'. it will automatically rollback to the original
+  ;; value without corruption.
+  (let ((compile-command "golangci-lint run"))
+    (call-interactively #'compile)))
+
 
 
 (defvar my-go-types
@@ -90,6 +101,7 @@ the standard lib, like struct time.Time.")
 ;; List several go helper functions.
 (defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)
   "
+_l_: golangci-lint
 _c_: compile
 _e_: errcheck
 _a_: ineffassign
@@ -104,6 +116,7 @@ _q_, _C-g_: quit"
   ("h" my-go-heap-escape)
   ("t" my-go-insert-type)
   ("d" my-go-doc-local)
+  ("l" my-go-lint)
 
   ;; don't use the hint text as it makes (:hint nil) not work?
   ;; ("c" compile "compile")

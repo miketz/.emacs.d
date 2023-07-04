@@ -54,7 +54,7 @@ results."
   (interactive)
   ;; shadow `compile-command'. it will automatically rollback to the original
   ;; value without corruption.
-  (let ((compile-command "golangci-lint run"))
+  (let ((compile-command "golangci-lint run -E gosec"))
     (call-interactively #'compile)))
 
 

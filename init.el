@@ -8390,8 +8390,7 @@ vanilla javascript buffers."
 (push "~/.emacs.d/notElpa/yaml-mode" load-path)
 (autoload 'yaml-mode "yaml-mode" nil t nil)
 
-;; I don't use yaml-mode regularly, so don't slow down mode selection.
-;; (push '("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode) auto-mode-alist)
+(push '("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode) auto-mode-alist)
 
 ;;;----------------------------------------------------------------------------
 ;;; sicp

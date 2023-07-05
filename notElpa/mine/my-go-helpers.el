@@ -59,6 +59,17 @@ results."
         )
     (call-interactively #'compile)))
 
+(cl-defun my-go-lint-and-fix ()
+  "Run golangci-lint.
+Then actually fix the files with the suggested fixes.
+Be careful to use if there are many lints. Can be useful if there is a lint
+where you are not sure exactly how to fix."
+  (interactive)
+  ;; shadow `compile-command'. it will automatically rollback to the original
+  ;; value without corruption.
+  (let ((compile-command "golangci-lint run --fix"))
+    (call-interactively #'compile)))
+
 
 
 (defvar my-go-types

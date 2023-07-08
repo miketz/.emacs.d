@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: getObjFn
+# key: getObjFn
+# --
+(*${1:StructName}).${2:fnName}

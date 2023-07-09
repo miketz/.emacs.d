@@ -3837,6 +3837,8 @@ Also only return t if the } is relatively close to (point)."
 ;;;----------------------------------------------------------------------------
 ;;; cc-mode
 ;;;----------------------------------------------------------------------------
+;; TODO: wire up static analyzer and ASAN, UBSAN, TSAN
+
 ;; This fn is useful for aligning trailing comments when using tabs for
 ;; indentation.  It won't work if different numbers of tabs are used within the
 ;; aligned set of comments. But that case (different tab level) should be rare

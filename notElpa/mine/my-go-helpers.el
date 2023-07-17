@@ -38,7 +38,7 @@
 
 
 ;;;###autoload
-(cl-defun my-go-heap-escape ()
+(defun my-go-heap-escape ()
   "Run go's heap escape analysis."
   (interactive)
   ;; shadow `compile-command'. it will automatically rollback to the original
@@ -51,7 +51,7 @@
     (call-interactively #'compile)))
 
 ;;;###autoload
-(cl-defun my-go-lint ()
+(defun my-go-lint ()
   "Run golangci-lint.
 It is 1 umbrella command that runs many other linters and combines their
 results."
@@ -65,7 +65,7 @@ results."
         )
     (call-interactively #'compile)))
 
-(cl-defun my-go-lint-and-fix ()
+(defun my-go-lint-and-fix ()
   "Run golangci-lint.
 Then actually fix the files with the suggested fixes.
 Be careful to use if there are many lints. Can be useful if there is a lint

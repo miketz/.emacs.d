@@ -43,7 +43,11 @@
   (interactive)
   ;; shadow `compile-command'. it will automatically rollback to the original
   ;; value without corruption.
-  (let ((compile-command "go build -gcflags=\"-m\""))
+  ;; TODO: grep may not work on windows. try ripgrep which i usually have
+  ;;       installed.
+  (let ((compile-command "go build -gcflags='-m=3' . |& grep escapes")
+        ;; (compile-command "go build -gcflags=\"-m\"")
+        )
     (call-interactively #'compile)))
 
 ;;;###autoload

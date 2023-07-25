@@ -8608,6 +8608,17 @@ TODO: delete this fn and replace with hooks, etc."
   ;;     (kbd "s") my-swoop-fn))
   )
 
+(defun my-compile-at-root-dir ()
+  "Shadow `default-directory' with project root.  Then call `compile'.
+This is needed if you are in a sub-dir of the project and want to invoke make
+via M-x compile."
+  (interactive)
+  (require 'project)
+  (let* ((ask-for-root? t) ;; if project root cannot be auto detected, get it
+                           ;; via user input.
+         (default-directory (project-root (project-current ask-for-root?))))
+    (call-interactively #'compile)))
+
 ;;;----------------------------------------------------------------------------
 ;;; text-mode
 ;;;----------------------------------------------------------------------------

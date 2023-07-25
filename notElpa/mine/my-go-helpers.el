@@ -2,6 +2,7 @@
 
 (require 'cl-lib)
 (require 'hydra)
+(require 'project)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
@@ -62,7 +63,9 @@ results."
         ;;(compile-command "golangci-lint run -E gosec")
         ;;(compile-command "golangci-lint run --enable-all")
         ;;(compile-command "golangci-lint run --fix")
-        )
+
+        ;; run lint at project root dir. `compile' uses `default-directory'.
+        (default-directory (project-root (project-current t))))
     (call-interactively #'compile)))
 
 (defun my-go-lint-and-fix ()

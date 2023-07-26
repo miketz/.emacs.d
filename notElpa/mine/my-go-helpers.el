@@ -59,13 +59,19 @@ results."
   (interactive)
   ;; shadow `compile-command'. it will automatically rollback to the original
   ;; value without corruption.
-  (let ((compile-command "golangci-lint run")
-        ;;(compile-command "golangci-lint run -E gosec")
-        ;;(compile-command "golangci-lint run --enable-all")
-        ;;(compile-command "golangci-lint run --fix")
+  (let* ((compile-command "golangci-lint run")
+         ;;(compile-command "golangci-lint run -E gosec")
+         ;;(compile-command "golangci-lint run --enable-all")
+         ;;(compile-command "golangci-lint run --fix")
 
-        ;; run lint at project root dir. `compile' uses `default-directory'.
-        (default-directory (project-root (project-current t))))
+         (root-obj (project-current nil))
+         (root-folder (if (not (null root-obj))
+                          ;; extract folder field out of obj.
+                          (project-root root-obj)
+                        ;; else get root folder manually from user
+                        (read-directory-name "proj root: " nil nil t)))
+         ;; run lint at project root dir. `compile' uses `default-directory'.
+         (default-directory root-folder))
     (call-interactively #'compile)))
 
 (defun my-go-lint-and-fix ()

@@ -1537,8 +1537,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/evil" load-path)
 ;; NOTE: goto-chg and undo-tree are under /evil/lib/. They are separate
-;; packages in melpa.
-(push "~/.emacs.d/notElpa/evil/lib/" load-path)
+;; packages in melpa. UPDATE: goto-chg and undo-tree are no longer bundled with
+;; evil! So no longer a need to push /evil/lib/
+;; (push "~/.emacs.d/notElpa/evil/lib/" load-path)
+
 (autoload #'evil-mode "evil-core" nil t)
 (autoload #'evil-define-key "evil-core" nil t)
 

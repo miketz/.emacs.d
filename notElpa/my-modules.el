@@ -194,8 +194,9 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '((emacs "24.1")
                      (cl-lib "0.5"))
       :depend-soft '()
-      :depend-bundled '((;; (undo-tree "0.7.4") ; no longer a dependency
-                         goto-chg "1.6")))
+      :depend-bundled '(;; (undo-tree "0.7.4") ;; no longer a dependency
+                        ;; (goto-chg "1.6") ;; no longer a dependency
+                        ))
     ,(make-module
       :name 'evil-leader
       :comment nil
@@ -412,8 +413,7 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
-      ;; NOTE: this is bundled with evil so maybe this is not needed? Unless
-      ;; other packages need a version more recent than the one bundled in evil.
+      ;; NOTE: this package is is no longer bundled/vendored with evil.
       :name 'goto-chg
       :comment nil
       :folder (concat my-module-folder "goto-chg")

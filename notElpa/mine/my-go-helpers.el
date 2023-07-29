@@ -125,6 +125,14 @@ the standard lib, like struct time.Time.")
          (install-cmd (cl-third (assoc (intern lib-key) my-go-useful-libs))))
     (shell-command install-cmd)))
 
+;;;###autoload
+(defun my-go-run-performance-tests ()
+  "This is more of a documentation to help me remember how to run perf tests."
+  (interactive)
+  ;; shadow `compile-command'
+  (let ((compile-command "go test -bench=."))
+    (call-interactively #'compile)))
+
 
 ;; List several go helper functions.
 (defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)

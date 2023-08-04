@@ -273,11 +273,11 @@ Example:
    ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
    `(font-lock-variable-name-face ((,class (:foreground
-                                            ,fg
+                                            ;; ,fg
                                             ;; ,fn-def-fg
                                             ;; "burlywood3"
                                             ;; "#BBAA99"
-                                            ;; ,var
+                                            ,var
                                             :background ,bg ;;"#202020"
                                                         ))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))

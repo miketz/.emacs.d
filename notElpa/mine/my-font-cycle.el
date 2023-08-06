@@ -4,7 +4,7 @@
 ;;; Cycle through good fonts for the current computer.
 
 ;;; Code:
-
+(require 'ivy)
 (require 'cl-lib)
 
 (defvar my-curr-computer)

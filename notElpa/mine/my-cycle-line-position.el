@@ -8,6 +8,10 @@
 ;;; Code:
 (require 'array) ; for #'current-line
 
+;; older emacs. before 29
+(when (not (fboundp #'array-current-line))
+  (defalias 'array-current-line 'current-line))
+
 (let ((positions '(mid top bot))
       (curr-pos nil) ; cache values for repeated M-r presses.
       (page-top nil)
@@ -29,7 +33,7 @@ smaller than the window height."
                          (move-to-window-line -1)
                          ;; Incriment 1 becuase #'current-line is 0-based.
                          ;; But #'line-number-at-pos is 1-based.
-                         (1+ (current-line))))
+                         (1+ (array-current-line))))
         (setq page-mid (+ page-top
                           (/ (- page-bot page-top) 2))))
       (setq curr-pos (car (or (cdr (memq (if repeatp curr-pos nil)
@@ -56,7 +60,7 @@ of the window showing the void after the end-of-file."
                      (move-to-window-line -1)
                      ;; Incriment 1 becuase #'current-line is 0-based.
                      ;; But #'line-number-at-pos is 1-based.
-                     (1+ (current-line))))
+                     (1+ (array-current-line))))
          (page-mid (+ page-top
                       (/ (- page-bot page-top) 2))))
     ;; (goto-line page-mid)

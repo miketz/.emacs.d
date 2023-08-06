@@ -3,6 +3,7 @@
 (require 'cl-lib)
 (require 'hydra)
 (require 'project)
+(require 'ivy)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 

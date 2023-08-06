@@ -4,6 +4,7 @@
 ;;; Font helper functions.
 
 ;;; Code:
+(require 'ivy)
 
 (defvar completing-read-function)
 (defvar ivy-re-builders-alist)

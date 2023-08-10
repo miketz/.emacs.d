@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ap
+# key: ap
+# --
+${1:slice} = append($1, $0)

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sl
+# key: sl
+# --
+${1:sliceName} := make([]${2:int}, ${3:0}, ${4:256})

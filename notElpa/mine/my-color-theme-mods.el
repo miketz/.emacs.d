@@ -1537,6 +1537,8 @@ Historical preservation."
   (custom-theme-set-faces
    'warm-night
 
+   `(font-lock-variable-use-face ((t :foreground "#b1b1b1"
+                                     :background "#292424")))
    `(mode-line ((t ;;:bold t
                  :foreground "#838383"
                  :background "black";;"#373333"

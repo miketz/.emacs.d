@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: switcht
+# key: switcht
+# --
+switch ${1:val} := ${2:foo}.(type) {
+case ${3:int}:
+	$0
+default:
+}

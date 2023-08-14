@@ -5676,6 +5676,8 @@ TODO: call this function when it works."
     (setq erc-timestamp-format       format
           erc-timestamp-format-right format))
 
+  (defvar my-erc-observe-client "/ctcp Username version")
+
   (setq erc-autojoin-channels-alist
         '(("libera.chat" "#emacs")
           ;; ("freenode.net" "#emacs")

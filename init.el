@@ -9391,6 +9391,18 @@ And turns off `indent-tabs-mode'."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+
+;; code sample from:
+;; https://old.reddit.com/r/emacs/comments/1v0jl1/convert_string_to_ascii_code_sequence/
+(defun charcode-region (start end)
+  "Convert the characters between START and END in current buffer
+to their character codes.  Move the unconverted text to the kill
+ring."
+  (interactive "r")
+  (let ((characters (string-to-list (buffer-substring start end))))
+    (kill-region start end)
+    (insert (mapconcat 'number-to-string characters " "))))
+
 ;; blink effect on current line when switching windows or buffers.
 (when nil
   (defun my-pulse-line-on-window-selection-change (frame)

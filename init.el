@@ -592,6 +592,14 @@ in case that file does not provide any feature."
 (defvar eglot-autoshutdown)
 (defvar eglot-ignored-server-capabilities)
 (defvar zig-indent-offset)
+(defvar js-mode-map)
+(defvar package-quickstart)
+(defvar compilation-error-regexp-alist-alist)
+(defvar c-ts-mode-indent-offset)
+(defvar c-ts-mode-indent-style)
+(defvar c-ts-mode-map)
+(defvar hydra-is-helpful)
+(defvar hydra-hint-display-type)
 
 ;; suppress warnings on functions from files not yet loaded.
 (declare-function swiper 'swiper)
@@ -1050,6 +1058,9 @@ in case that file does not provide any feature."
 (declare-function smerge-prev "smerge-mode")
 (declare-function smerge-auto-leave "smerge-mode")
 (declare-function smerge-next "smerge-mode")
+
+(declare-function c-indent-line "cc-cmds")
+(declare-function c-indent-region "cc-cmds")
 
 ;; TODO: fix wrong use of declare-function above. Replace the symbols with
 ;; string filenames of lisp files in the `load-path'.
@@ -4175,39 +4186,39 @@ and indent."
 
   (setq sql-product 'ms) ; using sql server at the moment.
 
-  (progn
-    ;; some SqlServer related keyboard macros to help prepare a generated insert
-    ;; statement. Just textual manipulations. Ad hoc.
-    (fset 'my-kbd-sql-delete-brackets
-          (kmacro-lambda-form [?/ ?i ?n ?s ?e ?r ?t return ?v ?/ ?\) return ?\M-x ?m ?y ?- ?d ?e ?l ?e ?t ?e ?- ?b ?r ?e backspace ?a ?c ?k ?e ?t ?s return] 0 "%d"))
+;;   (progn
+;;     ;; some SqlServer related keyboard macros to help prepare a generated insert
+;;     ;; statement. Just textual manipulations. Ad hoc.
+;;     (fset 'my-kbd-sql-delete-brackets
+;;           (kmacro-lambda-form [?/ ?i ?n ?s ?e ?r ?t return ?v ?/ ?\) return ?\M-x ?m ?y ?- ?d ?e ?l ?e ?t ?e ?- ?b ?r ?e backspace ?a ?c ?k ?e ?t ?s return] 0 "%d"))
 
-    (fset 'my-kbd-sql-move-stuff-left
-          (kmacro-lambda-form [?/ ?v ?a ?l ?u ?e ?s return ?0 ?D ?i ?s ?e ?l ?e ?c ?t escape ?j ?w ?v ?% ?3 ?< ?% ?x ?? ?s ?e ?l ?e ?c ?t return ?j ?x] 0 "%d"))
+;;     (fset 'my-kbd-sql-move-stuff-left
+;;           (kmacro-lambda-form [?/ ?v ?a ?l ?u ?e ?s return ?0 ?D ?i ?s ?e ?l ?e ?c ?t escape ?j ?w ?v ?% ?3 ?< ?% ?x ?? ?s ?e ?l ?e ?c ?t return ?j ?x] 0 "%d"))
 
-    (fset 'my-kbd-sql-fix-col-1
-          (kmacro-lambda-form [?x ?i ?\C-q ?\[ escape ?/ ?, return ?i ?\C-q ?\] escape ?l ?l ?D ?j ?0] 0 "%d"))
+;;     (fset 'my-kbd-sql-fix-col-1
+;;           (kmacro-lambda-form [?x ?i ?\C-q ?\[ escape ?/ ?, return ?i ?\C-q ?\] escape ?l ?l ?D ?j ?0] 0 "%d"))
 
-    (fset 'my-kbd-sql-fix-col-n
-          (kmacro-lambda-form [?x ?x ?i ?\C-q ?\[ escape ?/ ?, return ?i ?\C-q ?\] escape ?l ?l ?D ?j ?0] 0 "%d"))
+;;     (fset 'my-kbd-sql-fix-col-n
+;;           (kmacro-lambda-form [?x ?x ?i ?\C-q ?\[ escape ?/ ?, return ?i ?\C-q ?\] escape ?l ?l ?D ?j ?0] 0 "%d"))
 
 
-    (defun my-prepare-sql-insert ()
-      (interactive)
-      "Run several pre-recorded keyboard macros to prepare a sql insert
-statement generated my SqlServer."
-      (my-kbd-sql-delete-brackets)
-      (my-kbd-sql-move-stuff-left)
-      (my-kbd-sql-fix-col-1)
-      (cl-loop repeat 3 do
-               (my-kbd-sql-fix-col-n)))
+;;     (defun my-prepare-sql-insert ()
+;;       (interactive)
+;;       "Run several pre-recorded keyboard macros to prepare a sql insert
+;; statement generated my SqlServer."
+;;       (my-kbd-sql-delete-brackets)
+;;       (my-kbd-sql-move-stuff-left)
+;;       (my-kbd-sql-fix-col-1)
+;;       (cl-loop repeat 3 do
+;;                (my-kbd-sql-fix-col-n)))
 
-    (defun my-sql-fix-n ()
-      (interactive)
-      (let ((reps (if (null current-prefix-arg)
-                      1
-                    current-prefix-arg)))
-        (cl-loop repeat reps do
-                 (my-kbd-sql-fix-col-n)))))
+;;     (defun my-sql-fix-n ()
+;;       (interactive)
+;;       (let ((reps (if (null current-prefix-arg)
+;;                       1
+;;                     current-prefix-arg)))
+;;         (cl-loop repeat reps do
+;;                  (my-kbd-sql-fix-col-n)))))
 
 
 

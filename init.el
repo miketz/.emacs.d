@@ -1168,6 +1168,12 @@ Choices: `evil' `emacs' `cua'")
   "Whether I'm using evil at the moment or not.
 Just a convenience to avoid checks against `my-ui-type'.")
 
+(defvar my-use-display-fill-column-indicator
+  (and nil ;; dont' use it for now
+       (fboundp #'display-fill-column-indicator-mode))
+  "Whether I'm using display-fill-column-indicator-mode.
+To show reccomended max line length.")
+
 (defvar my-use-js2-highlight-vars-p (not (version< emacs-version "24.4")))
 
 (defvar my-narrow-type
@@ -2821,7 +2827,7 @@ Inserts a new line and the beginning and end with text values:
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
 
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 110) ; long lines in C#
       (display-fill-column-indicator-mode 1))
 
@@ -2896,7 +2902,7 @@ LINTER values: :jslint :jshint :eslint"
   (defun my-setup-js ()
     ;; set explicitly because shorter width in json mode corrupts it.
     (setq js-indent-level my-indent-width)
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79)
       (display-fill-column-indicator-mode 1))
     (my-turn-on-electric-pair-local-mode)
@@ -3993,7 +3999,7 @@ and indent."
 
     ;; (when (fboundp #'fci-mode) ; NOTE: using the new native alternative.
     ;;   (fci-mode 1))
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79)
       (display-fill-column-indicator-mode 1)))
   (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
@@ -4042,7 +4048,7 @@ and indent."
         (smart-tabs-advice c-indent-region c-basic-offset)
         (smart-tabs-mode-enable)))
 
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 110) ; long lines in java.
       (display-fill-column-indicator-mode 1)))
   (add-hook 'java-mode-hook #'my-setup-java-mode)
@@ -4233,7 +4239,7 @@ and indent."
     (when my-use-evil-p
       (setq evil-auto-indent nil))
     ;; (sqlind-minor-mode 1)
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 100)
       (display-fill-column-indicator-mode 1)))
 
@@ -7113,7 +7119,7 @@ Closure over `preceding-sexp-fn'."
     (yas-minor-mode 1)
     ;; (rainbow-delimiters-mode-enable)
     (my-turn-on-electric-pair-local-mode)
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; PEP 8
       (display-fill-column-indicator-mode 1))
 
@@ -7174,7 +7180,7 @@ Closure over `preceding-sexp-fn'."
     (yas-minor-mode 1)
     (rainbow-delimiters-mode-enable)
     (my-turn-on-electric-pair-local-mode)
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; PEP 8
       (display-fill-column-indicator-mode 1))
 
@@ -7266,7 +7272,7 @@ Closure over `preceding-sexp-fn'."
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ;; buffer local
 
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; buffer local
       (display-fill-column-indicator-mode 1))
 
@@ -8350,7 +8356,7 @@ vanilla javascript buffers."
 (global-set-key (kbd "<f7>") #'my-cycle-col-line)
 
 ;; use it for lisps
-(when (fboundp #'display-fill-column-indicator-mode)
+(when my-use-display-fill-column-indicator
   (add-hook 'emacs-lisp-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'lisp-mode-hook #'display-fill-column-indicator-mode)
   (add-hook 'scheme-mode-hook #'display-fill-column-indicator-mode)
@@ -8562,7 +8568,7 @@ TODO: delete this fn and replace with hooks, etc."
     (rainbow-delimiters-mode-enable)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; buffer local
       (display-fill-column-indicator-mode 1)))
   (add-hook 'rust-mode-hook #'my-setup-rust-mode))
@@ -8805,7 +8811,7 @@ via M-x compile."
   ;;   (setq fennel-program "/opt/homebrew/bin/fennel --repl"))
 
   (defun my-setup-fennel-mode ()
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; buffer local
       (display-fill-column-indicator-mode 1))
 
@@ -9109,7 +9115,7 @@ And turns off `indent-tabs-mode'."
     (rainbow-delimiters-mode-enable)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
-    (when (fboundp #'display-fill-column-indicator-mode)
+    (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; buffer local
       (display-fill-column-indicator-mode 1))
     ;; NOTE: hook is "after" saving. zig fmt will have run by the time this

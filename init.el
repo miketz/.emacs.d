@@ -8346,30 +8346,7 @@ vanilla javascript buffers."
   ;; pipe | (ascii 124). Unicode alternative ?\u2502
   (setq-default display-fill-column-indicator-character ?\|))
 
-(let ((cols '(nil 79 80 100 110))
-      (curr nil))
-  (defun my-cycle-col-line ()
-    (interactive)
-    ;; TODO: remove this require. move fn to it's own lib where the require
-    ;; occurs during initial load of lib.
-    (require 'display-fill-column-indicator)
-
-    (setq curr (car (or (cdr (memq curr cols))
-                        cols)))
-    (cond
-     ;; if mode on and cycled to nil col.
-     ((and display-fill-column-indicator-mode
-           (eq curr nil))
-      (display-fill-column-indicator-mode 0))
-     ;; if mode off and cycled to integer col.
-     ((and (not display-fill-column-indicator-mode)
-           (integerp curr))
-      (display-fill-column-indicator-mode 1)))
-
-    (setq display-fill-column-indicator-column curr)
-    (message "display-fill-column-indicator-column: %s" curr)))
-
-(declare-function my-cycle-col-line 'suppress)
+(autoload #'my-cycle-col-line "my-display-fill-column-indicator" nil t)
 (global-set-key (kbd "<f7>") #'my-cycle-col-line)
 
 ;; use it for lisps

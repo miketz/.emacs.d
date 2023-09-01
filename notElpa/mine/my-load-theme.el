@@ -32,7 +32,7 @@ I want it to be considered light."
     (mapc 'frame-set-background-mode (frame-list))))
 
 
-(declare-function my-cycle-light-bg-set-index 'my-load-theme)
+(declare-function my-cycle-light-bg-set-index "my-load-theme")
 (defvar mayan-smoke)
 (defvar my-ultimate)
 ;; (defvar cycle-colors2 '("papaya whip" "old lace" "floral white" "ivory2"
@@ -94,6 +94,9 @@ I want it to be considered light."
 
 
 
+(declare-function my-cycle-dark-bg "my-load-theme")
+(declare-function my-cycle-dark-bg-set-index "my-load-theme")
+(declare-function my-cycle-light-bg "my-load-theme")
 (let* ((colors [("#35352B" . "charcoal")
                 ("#262626" . "charcoal256")
                 ("#3F3F3F" . "zenburn")
@@ -183,6 +186,7 @@ Closure over executed-p."
   (let ((helm-candidate-number-limit nil))
     (call-interactively #'load-theme)))
 
+(declare-function counsel-load-theme "counsel")
 (defun my-counsel-load-theme ()
   (interactive)
   ;; (my-handle-weird-theme-setups)
@@ -239,6 +243,7 @@ Closure over `inverse-video-p'"
           (set-face-attribute f nil :inverse-video nil) ; (not inverse-video-p)
         (set-face-attribute f nil :inverse-video inverse-video-p)))))
 
+(declare-function my-toggle-inverse-video "my-load-theme")
 (defun my-load-theme-inverse (&optional theme)
   "Set THEME to inverse of itself."
   (interactive)

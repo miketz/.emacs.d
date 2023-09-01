@@ -8383,6 +8383,8 @@ vanilla javascript buffers."
 ;; looks like they moved the elisp files to a sub folder
 (push "~/.emacs.d/notElpa/php-mode/lisp" load-path)
 (autoload #'php-mode "php-mode" nil t)
+(push '("\\.php$" . php-mode) auto-mode-alist)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; yaml-mode

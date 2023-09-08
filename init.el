@@ -173,7 +173,7 @@
   ;; tricks to improve startup time.
   ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_st
   ;; eps_to_speed_up_emacs_start/
-  ;; TODO: verify exactly how much these help.
+  ;; on mac-mini-m1-2021 this improves start up from 1.3s to 0.62s
 
   (defvar gc-cons-threshold-backup gc-cons-threshold)
   (setq gc-cons-threshold (if (version< emacs-version "24.4")

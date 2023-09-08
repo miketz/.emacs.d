@@ -697,6 +697,12 @@ Example:
    `(swift-mode:function-call-face ((,class :foreground ,fn-call-fg
                                             :background ,fn-call-bg)))
 
+
+   ;; profile-dotemacs.el
+   ;; `(profile-dotemacs-time-face ((,class :background "OrangeRed1")))
+   `(profile-dotemacs-low-percentage-face ((,class :foreground ,faint)))
+   ;; `(profile-dotemacs-highlight-face ((,class :background "blue")))
+
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1 :background ,rain-1-bg))))

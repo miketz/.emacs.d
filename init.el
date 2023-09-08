@@ -1433,6 +1433,14 @@ In master branch now. Was on git branch: feature/native-comp.")
         (w32-send-sys-command code)))))
 
 ;;;----------------------------------------------------------------------------
+;;; my-window-stuff
+;;;----------------------------------------------------------------------------
+(autoload #'my-quit-window "my-window-stuff" nil t)
+(autoload #'my-shrink-window-horizontally "my-window-stuff" nil t)
+(autoload #'my-enlarge-window-horizontally "my-window-stuff" nil t)
+(autoload #'my-toggle-frame-max-MS-Windows "my-window-stuff" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; key-chord
 ;;;----------------------------------------------------------------------------
 (autoload #'key-chord-mode "key-chord" nil t)
@@ -1684,19 +1692,8 @@ Minus the newline char."
   (evil-leader/set-key "x" #'maximize-window)
   (evil-leader/set-key "," #'delete-other-windows)
   (evil-leader/set-key "d" #'delete-window)
-  (defun my-quit-window ()
-    "Kill the buffer and close the window if one was opened specifically for
-that buffer."
-    (interactive)
-    (quit-window t))
   (evil-leader/set-key "k" #'my-quit-window) ;; #'kill-this-buffer
   (evil-leader/set-key "c" #'quit-window) ; buffer left alive
-  (defun my-shrink-window-horizontally ()
-    (interactive)
-    (shrink-window-horizontally 15))
-  (defun my-enlarge-window-horizontally ()
-    (interactive)
-    (enlarge-window-horizontally 15))
   (evil-leader/set-key "<" #'my-shrink-window-horizontally)
   (evil-leader/set-key ">" #'my-enlarge-window-horizontally)
   (evil-leader/set-key "v" #'evil-visual-block)
@@ -1709,18 +1706,6 @@ that buffer."
 
   ;;TODO: look into equivalent resizing for non-Windows machines.
   (when (eq system-type 'windows-nt)
-    ;;`maxp' can get out of sync. Hit <Leader>f a 2nd time to re-sync.
-    (let ((maxp nil))
-      (defun my-toggle-frame-max ()
-        "Closure over `maxp'."
-        (interactive)
-        (let ((flag (if maxp
-                        'restore-curr-frame
-                      'max)))
-          (my-w32-run flag)
-          ;; toggle bool flag
-          (setq maxp (not maxp)))))
-
     (evil-leader/set-key "f" #'my-toggle-frame-max)))
 
 ;; keeping evil turned off by default now.

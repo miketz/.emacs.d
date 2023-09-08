@@ -9462,13 +9462,8 @@ programming modes."
 ;; is needed.
 (setq completions-format 'horizontal)
 
-(defun my-paste-below ()
-  "Paste to line below.  Preserve indentation of current line."
-  (interactive)
-  (move-end-of-line 1)
-  (newline)
-  (yank)
-  (indent-region (mark) (point)))
+
+(autoload #'my-paste-below "my-misc" nil t)
 
 ;; new emacs 29 feature. show matching start of delimiter if off screen.
 (setq show-paren-context-when-offscreen nil)

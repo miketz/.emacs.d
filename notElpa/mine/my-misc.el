@@ -532,6 +532,16 @@ Example use:
         (delete-region (car b) (cdr b)))
       (insert (number-to-string (+ 1 num))))))
 
+;;;----------------------------------------------------------------------------
+;;; my-paste-below. I think I made this for someone on irc #emacs
+;;;----------------------------------------------------------------------------
+(defun my-paste-below ()
+  "Paste to line below.  Preserve indentation of current line."
+  (interactive)
+  (move-end-of-line 1)
+  (newline)
+  (yank)
+  (indent-region (mark) (point)))
 
 
 (provide 'my-misc)

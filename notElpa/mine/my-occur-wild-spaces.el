@@ -34,6 +34,7 @@
     (funcall my-blink-fn)))
 
 ;; turn off the line highlight when jumping back to the buffer.
+;; close the occur window when jumping back to the buffer.
 (defadvice occur-mode-goto-occurrence (after turn-off-highlight)
   ;; (hl-line-mode 0)
   ;; close occur window.

@@ -733,7 +733,6 @@ in case that file does not provide any feature."
 (declare-function my-setup-jsonian 'suppress)
 (declare-function my-setup-tide-for-ts 'suppress)
 
-(declare-function my-occur-wild-spaces 'suppress)
 (declare-function my-w32-get-code 'suppress)
 (declare-function evil-normal-state "evil-states")
 (declare-function evil-exit-visual-state "evil-states")
@@ -7411,7 +7410,7 @@ Closure over `preceding-sexp-fn'."
     (load custom-file)))
 
 ;;;----------------------------------------------------------------------------
-;;; occur
+;;; my-occur-wild-spaces
 ;;;----------------------------------------------------------------------------
 ;; (defun my-occur ()
 ;;   (interactive)
@@ -7421,72 +7420,22 @@ Closure over `preceding-sexp-fn'."
 ;;   ;; add 2 context lines to occur
 ;;   (occur (read-string "search: ") 2))
 
-(with-eval-after-load "replace" ;; `occur' lives in replace.el
-  ;; ;; automatically scroll buffer to matches like `swiper' or `helm-swoop'.
-  ;; (add-hook 'occur-mode-hook #'next-error-follow-minor-mode)
+(autoload #'my-occur-wild-spaces "my-occur-wild-spaces" nil t)
+(autoload #'my-occur-next "my-occur-wild-spaces" nil t)
+(autoload #'my-occur-prev "my-occur-wild-spaces" nil t)
+(autoload #'my-occur-mode-goto-occurrence "my-occur-wild-spaces" nil t)
 
-  (defvar my-blink-fn
-    (if (>= emacs-major-version 25)
-        (progn
-          (require 'xref) ;; for fn `xref-pulse-momentarily'. to flash match.
-          #'xref-pulse-momentarily)
-      #'hl-line-flash) ;; TODO: avoid hl-line+ dependency ;; (hl-line-mode 1)
-    "Function to blink the matching line in the buffer from occur-buffer.")
-
-  (progn ;; functions copied from https://github.com/emacsfodder/occur-follow
-    (defun my--occur-move (move-fn)
-      (funcall move-fn)
-      (occur-mode-goto-occurrence-other-window)
-      (recenter)
-      (funcall my-blink-fn)
-      (switch-to-buffer-other-window "*Occur*"))
-    (defun my-occur-next ()
-      (interactive)
-      (my--occur-move #'occur-next))
-    (defun my-occur-prev ()
-      (interactive)
-      (my--occur-move #'occur-prev))
-    (defun my-occur-mode-goto-occurrence ()
-      "Same as the built in `occur-mode-goto-occurrence', but add a blink."
-      (interactive)
-      (occur-mode-goto-occurrence)
-      (funcall my-blink-fn))
-    (define-key occur-mode-map (kbd "n") #'my-occur-next)
-    (define-key occur-mode-map (kbd "p") #'my-occur-prev)
-    ;; NOTE: purposely not binding C-n, C-p. To navigate without the jump.
-    (define-key occur-mode-map (kbd "M-n") #'my-occur-next)
-    (define-key occur-mode-map (kbd "M-p") #'my-occur-prev)
-    (define-key occur-mode-map (kbd "RET") #'my-occur-mode-goto-occurrence))
-
-  ;; turn off the line highlight when jumping back to the buffer.
-  (defadvice occur-mode-goto-occurrence (after turn-off-highlight)
-    ;; (hl-line-mode 0)
-    ;; close occur window.
-    (quit-window nil (get-buffer-window "*Occur*")))
-  (ad-activate 'occur-mode-goto-occurrence)
-
-  (defun my-occur-wild-spaces (regexp &optional nlines)
-    "Same as `occur'.  But treat spaces as wild cards like in `swiper'."
-    (interactive (occur-read-primary-args))
-    (occur-1 (replace-regexp-in-string " " ".*" regexp)
-             nlines
-             (list (current-buffer))))
-  ;; ;; treat spaces as wild cards. Like in `swiper'.
-  ;; (defadvice occur (around space-to-wild activate compile)
-  ;;   (let* ((new-regexp (replace-regexp-in-string " " ".*" regexp))
-  ;;          (regexp new-regexp))
-  ;;     ad-do-it))
-
-  (defun my--occur-jump-to-first-match ()
-    ;; switch to the results window immediately.
-    (switch-to-buffer-other-window "*Occur*")
-    ;; jump to the first match.
-    (my-occur-next))
-  (add-hook 'occur-hook #'my--occur-jump-to-first-match))
-
-;; NOTE: replace.el seems to load during init, so `my-occur-wild-spaces' is
-;;       defined despite being in eval-after-load.
+;; TODO: some of the fn's below may not be "wild spaces" specific, and for
+;;       more general occur use. maybe scrap them out of the mini package
+;;       later.
 (global-set-key (kbd "C-c o") #'my-occur-wild-spaces)
+(define-key occur-mode-map (kbd "n") #'my-occur-next)
+(define-key occur-mode-map (kbd "p") #'my-occur-prev)
+;; NOTE: purposely not binding C-n, C-p. To navigate without the jump.
+(define-key occur-mode-map (kbd "M-n") #'my-occur-next)
+(define-key occur-mode-map (kbd "M-p") #'my-occur-prev)
+(define-key occur-mode-map (kbd "RET") #'my-occur-mode-goto-occurrence)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; eldoc

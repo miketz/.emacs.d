@@ -4,7 +4,7 @@
 key-chord ; 11%
 evil ; 22%
 cider-style-overlays ; 3%
-my-occur-wild-spaces ; 3%
+;; my-occur-wild-spaces ; 3%
 show time in mode line (display-time-mode 1) ; 4%
 GC at end ; 34%
   total time: 0.23s, 0.18s

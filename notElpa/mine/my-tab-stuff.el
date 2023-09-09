@@ -43,7 +43,7 @@ programming modes."
   (interactive)
 
   ;; GUARD: don't allow this to run in a python-mode buffer
-  (when (eq major-mode 'python-mode)
+  (when (memq major-mode '(python-mode python-ts-mode))
     (message "don't use this for python as indentation can't be inferred.")
     (cl-return-from my-tabify-buffer))
 
@@ -58,7 +58,7 @@ programming modes."
   (interactive)
 
   ;; GUARD: don't allow this to run in a python-mode buffer
-  (when (eq major-mode 'python-mode)
+  (when (memq major-mode '(python-mode python-ts-mode))
     (message "don't use this for python as indentation can't be inferred.")
     (cl-return-from my-tabify-buffer))
 

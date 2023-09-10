@@ -9362,7 +9362,7 @@ load during init, or wait with autoloads."
     (unless (eq major-mode #'emacs-lisp-mode)
       (emacs-lisp-mode))))
 
-(when (memq my-curr-computer '(mac-mini-m1-2021
+(when (memq my-curr-computer '(;; mac-mini-m1-2021
                                wild-dog
                                work-laptop-2019
                                work-laptop-mac))

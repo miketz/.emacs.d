@@ -4705,22 +4705,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Load projects
 ;;;----------------------------------------------------------------------------
-;; TODO: move `my-proj-pcl-fancy-modes' to another file and autoload it.
-;; TODO: limit fn visibility to buffer were pcl is being viewed.
-(defun my-proj-pcl-fancy-modes ()
-  "Call this while in the eww buffer."
-  (interactive)
-  (let ((curr-pos (point))) ; remember position in eww buffer.
-    (eww-reload) ; causes images to load that may have failed previously.
-    ;; dynamically override default mor settings
-    (let ((mor-readonly-for-extra-protection-p nil) ; eww is already readonly.
-          (mor-format-automatically-p nil) ; non-lisp text is present.
-          (mor-switch-buff-fn #'switch-to-buffer) ; use same window.
-          (mor-mode-fn #'common-lisp-mode))
-      (mor-mode-on-region (point-min) (point-max)))
-    (whitespace-cleanup)
-    ;; try to warp to generally the same area you were in the eww buffer.
-    (goto-char curr-pos)))
+(autoload #'my-proj-pcl-fancy-modes "my-book-stuff" nil t)
 
 (when (eq my-curr-computer 'mac-mini-m1-2021)
   (let ((lisp-file "my-proj-mac-mini-m1-2021"))

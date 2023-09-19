@@ -2,6 +2,7 @@
 
 (require 'project)
 
+;;;###autoload
 (defun my-compile-at-root-dir ()
   "Shadow `default-directory' with project root.  Then call `compile'.
 This is needed if you are in a sub-dir of the project and want to invoke make

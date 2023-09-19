@@ -25,6 +25,7 @@
     (zig-mode zig-indent-offset)
     (perl-mode perl-indent-level)))
 
+;;;###autoload
 (defun my-set-tab-width (width)
   "Set `tab-width' to WIDTH.
 For most programming modes you need to change an additional variable as well.
@@ -39,6 +40,7 @@ programming modes."
   (setq tab-width width))
 
 
+;;;###autoload
 (cl-defun my-tabify-buffer ()
   (interactive)
 
@@ -54,6 +56,7 @@ programming modes."
   ;; which would be "wrong".
   (indent-region (point-min) (point-max)))
 
+;;;###autoload
 (cl-defun my-untabify-buffer ()
   (interactive)
 
@@ -73,6 +76,7 @@ programming modes."
 ;; aligned set of comments. But that case (different tab level) should be rare
 ;; as a different tab level is a different block of logic, so you wouldn't have
 ;; a set of comments span across it.
+;;;###autoload
 (defun my-comment-dwim-align-with-spaces ()
   "Temporarily use spaces while making the comments.
 It will still use tabs for left-side indentation.

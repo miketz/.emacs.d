@@ -2,6 +2,7 @@
 
 ;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
+;;;###autoload
 (defun my-delete-elc-files (dir-str)
   "Delete all elc files in folder DIR-STR."
   (let ((elc-files (directory-files-recursively
@@ -15,6 +16,7 @@
              do
              (delete-file f))))
 
+;;;###autoload
 (defun my-byte-compile-curr-dir ()
   "Byte compile all elisp files in the current directory."
   (interactive)

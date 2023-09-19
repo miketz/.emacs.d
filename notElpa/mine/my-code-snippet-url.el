@@ -12,12 +12,14 @@
 (defvar default-paste-site 'debian
   "Website to use.")
 
+;;;###autoload
 (defun my-get-paste-url ()
   "Get the url for the current paste site."
   (cdr (assoc default-paste-site paste-sites)))
 
 ;; TODO: find a way to automatically paste a selected region of code into
 ;;       the text box in the browser..
+;;;###autoload
 (defun my-code-snippet-url ()
   "Open the paste site in a browser."
   (interactive)

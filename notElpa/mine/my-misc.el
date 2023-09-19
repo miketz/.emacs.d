@@ -549,6 +549,7 @@ Example use:
 
 ;; code sample from:
 ;; https://old.reddit.com/r/emacs/comments/1v0jl1/convert_string_to_ascii_code_sequence/
+;;;###autoload
 (defun charcode-region (start end)
   "Convert the characters between START and END in current buffer
 to their character codes.  Move the unconverted text to the kill

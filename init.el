@@ -3787,21 +3787,7 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
 ;;;----------------------------------------------------------------------------
 ;; TODO: wire up static analyzer and ASAN, UBSAN, TSAN
 
-;; This fn is useful for aligning trailing comments when using tabs for
-;; indentation.  It won't work if different numbers of tabs are used within the
-;; aligned set of comments. But that case (different tab level) should be rare
-;; as a different tab level is a different block of logic, so you wouldn't have
-;; a set of comments span across it.
-(defun my-comment-dwim-align-with-spaces ()
-  "Temporarily use spaces while making the comments.
-It will still use tabs for left-side indentation.
-Useful for aligning trailing comments when using tabs for indentation, spaces
-for alignment.  Doesn't solve all comment alignment issues but helps in a few
-cases."
-  (interactive)
-  (let ((indent-tabs-mode nil)) ; spaces
-    (call-interactively #'comment-dwim)))
-
+(autoload #'my-comment-dwim-align-with-spaces "my-tab-stuff" nil t)
 
 ;; TODO: incorpate ref docs from:
 ;; https://en.cppreference.com/w/

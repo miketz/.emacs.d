@@ -93,8 +93,8 @@
   ;; see https://github.com/sabof/org-bullets/issues/11
   (setq inhibit-compacting-font-caches t))
 
-(defun my-load-full-init ()
-  (interactive)
-  (load "~/.emacs.d/init.el"))
+;; (defun my-load-full-init ()
+;;   (interactive)
+;;   (load "~/.emacs.d/init.el"))
 
 ;; to access packages run (package-initialize)

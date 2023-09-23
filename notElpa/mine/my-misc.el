@@ -560,4 +560,10 @@ ring."
     (insert (mapconcat 'number-to-string characters " "))))
 
 
+;;; quick open of the .emacs (or init.el) file.
+(defun my-open-init ()
+  "Open my Emacs init file."
+  (interactive)
+  (find-file-existing "~/.emacs.d/init.el"))
+
 (provide 'my-misc)

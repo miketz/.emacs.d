@@ -4767,10 +4767,7 @@ and indent."
 
 
 ;;; quick open of the .emacs (or init.el) file.
-(defun my-open-init ()
-  "Open my Emacs init file."
-  (interactive)
-  (find-file-existing "~/.emacs.d/init.el"))
+(autoload #'my-open-init "my-misc" nil t)
 
 (when my-use-evil-p
   (evil-leader/set-key "`" #'my-open-init)

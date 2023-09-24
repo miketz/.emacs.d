@@ -573,4 +573,11 @@ ring."
   (when (eq frame (selected-frame))
     (pulse-momentary-highlight-one-line)))
 
+;; I use this fn with `lisp-mode-shared-map'.
+(defun my-eval-region (start end)
+  "Call `eval-region' with t flag to display the result in the echo area.
+START and END define the region."
+  (interactive "r")
+  (eval-region start end t))
+
 (provide 'my-misc)

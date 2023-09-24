@@ -6415,11 +6415,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (setq eval-expression-print-length 12000
       eval-expression-print-level   4000)
 
-(defun my-eval-region (start end)
-  "Call `eval-region' with t flag to display the result in the echo area.
-START and END define the region."
-  (interactive "r")
-  (eval-region start end t))
+(autoload #'my-eval-region "my-misc" nil t)
 (define-key lisp-mode-shared-map (kbd "C-c C-r") #'my-eval-region)
 
 (when my-use-ivy-p

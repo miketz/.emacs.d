@@ -561,9 +561,16 @@ ring."
 
 
 ;;; quick open of the .emacs (or init.el) file.
+;;;###autoload
 (defun my-open-init ()
   "Open my Emacs init file."
   (interactive)
   (find-file-existing "~/.emacs.d/init.el"))
+
+;; blink effect on current line when switching windows or buffers.
+;;;###autoload
+(defun my-pulse-line-on-window-selection-change (frame)
+  (when (eq frame (selected-frame))
+    (pulse-momentary-highlight-one-line)))
 
 (provide 'my-misc)

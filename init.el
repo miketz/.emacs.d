@@ -9227,11 +9227,8 @@ And turns off `indent-tabs-mode'."
 (autoload #'charcode-region "my-misc" nil t)
 
 ;; blink effect on current line when switching windows or buffers.
+(autoload #'my-pulse-line-on-window-selection-change "my-misc" nil nil)
 (when nil
-  (defun my-pulse-line-on-window-selection-change (frame)
-    (when (eq frame (selected-frame))
-      (pulse-momentary-highlight-one-line)))
-
   (add-hook 'window-selection-change-functions
             #'my-pulse-line-on-window-selection-change))
 

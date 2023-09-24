@@ -9232,20 +9232,10 @@ And turns off `indent-tabs-mode'."
   (add-hook 'window-selection-change-functions
             #'my-pulse-line-on-window-selection-change))
 
-(defun my-unbreak-emacs-29 ()
-  "Emacs 29, built 2022-07-18 has some features not working on windows.
-Do things to unbreak it.
-Hopefully this fn is only needed temporarily."
-  (interactive)
-  ;; this unbreaks the `rg' package
-  (require 'files-x)
-
-  ;; this unbreaks `list-packages' by loading `header-line-indent-mode'.
-  (require 'display-line-numbers)
-  ;; unbreaks package update
-  (with-eval-after-load 'package
-    (load "c:/Users/mtz/scratch/emacs/lisp/emacs-lisp/loaddefs-gen.el")))
-
+;; Emacs 29, built 2022-07-18 has some features not working on windows.
+;; Do things to unbreak it.
+;; Hopefully this fn is only needed temporarily.
+(autoload #'my-unbreak-emacs-29 "my-proj-work-laptop" nil t)
 (when (and (eq my-curr-computer 'work-laptop-2019)
            (= emacs-major-version 29))
   (my-unbreak-emacs-29))

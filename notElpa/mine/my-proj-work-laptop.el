@@ -321,6 +321,20 @@
   ;;(start-process-shell-command "makingCtags" nil "ctags -R -e *.cpp")
   )
 
+(defun my-unbreak-emacs-29 ()
+  "Emacs 29, built 2022-07-18 has some features not working on windows.
+Do things to unbreak it.
+Hopefully this fn is only needed temporarily."
+  (interactive)
+  ;; this unbreaks the `rg' package
+  (require 'files-x)
+
+  ;; this unbreaks `list-packages' by loading `header-line-indent-mode'.
+  (require 'display-line-numbers)
+  ;; unbreaks package update
+  (with-eval-after-load 'package
+    (load "c:/Users/mtz/scratch/emacs/lisp/emacs-lisp/loaddefs-gen.el")))
+
 (provide 'my-proj-work-laptop)
 
 ;;; my-proj-work-laptop.el ends here

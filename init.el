@@ -9230,11 +9230,11 @@ And turns off `indent-tabs-mode'."
 
 ;; Emacs 29, built 2022-07-18 has some features not working on windows.
 ;; Do things to unbreak it.
-;; Hopefully this fn is only needed temporarily.
-(autoload #'my-unbreak-emacs-29 "my-proj-work-laptop" nil t)
-(when (and (eq my-curr-computer 'work-laptop-2019)
-           (= emacs-major-version 29))
-  (my-unbreak-emacs-29))
+;; Things seem to be working now on the released Emacs 29.1
+;; (autoload #'my-unbreak-emacs-29 "my-proj-work-laptop" nil t)
+;; (when (and (eq my-curr-computer 'work-laptop-2019)
+;;            (= emacs-major-version 29))
+;;   (my-unbreak-emacs-29))
 
 ;; INFO: elpa mirrors to get around situations where package manager cannot be
 ;; reached.

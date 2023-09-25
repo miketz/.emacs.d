@@ -574,10 +574,22 @@ ring."
     (pulse-momentary-highlight-one-line)))
 
 ;; I use this fn with `lisp-mode-shared-map'.
+;;;###autoload
 (defun my-eval-region (start end)
   "Call `eval-region' with t flag to display the result in the echo area.
 START and END define the region."
   (interactive "r")
   (eval-region start end t))
+
+;; This turns on info mode with the user-friendly GUI.
+;; see https://stackoverflow.com/questions/1921049/how-to-open-info-file-in-ema
+;; cs-in-info-mode
+;;;###autoload
+(defun my-info-mode ()
+  "Turn on info mode with the user-friendly GUI."
+  (interactive)
+  (let ((file-name (buffer-file-name)))
+    (kill-buffer (current-buffer))
+    (info file-name)))
 
 (provide 'my-misc)

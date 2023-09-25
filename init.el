@@ -6351,12 +6351,7 @@ When ARG isn't nil, try to pretty print the sexp."
 ;; This turns on info mode with the user-friendly GUI.
 ;; see https://stackoverflow.com/questions/1921049/how-to-open-info-file-in-ema
 ;; cs-in-info-mode
-(defun my-info-mode ()
-  "Turn on info mode with the user-friendly GUI."
-  (interactive)
-  (let ((file-name (buffer-file-name)))
-    (kill-buffer (current-buffer))
-    (info file-name)))
+(autoload #'my-info-mode "my-misc" nil t)
 (push '("\\.info\\'" . my-info-mode) auto-mode-alist)
 
 (with-eval-after-load 'info

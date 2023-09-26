@@ -9185,22 +9185,7 @@ And turns off `indent-tabs-mode'."
 ;;          '((".*" display-buffer-use-least-recent-window)))))
 
 
-(defun my-load-common ()
-  "Load some commonly used features.  Where it's a gray area whether I should
-load during init, or wait with autoloads."
-  (interactive)
-  (require 'company)
-  (require 'expand-region)
-  (require 'hydra)
-  ;; (require 'my-hydras)
-  (require 'swiper)
-  (require 'ivy)
-  (require 'counsel)
-  (require 'lispy)
-  (with-current-buffer (get-buffer-create "*scratch*")
-    (unless (eq major-mode #'emacs-lisp-mode)
-      (emacs-lisp-mode))))
-
+(autoload #'my-load-common "my-init-stuff" nil t)
 (when (memq my-curr-computer '(;; mac-mini-m1-2021
                                wild-dog
                                work-laptop-2019

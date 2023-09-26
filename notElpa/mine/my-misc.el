@@ -592,4 +592,11 @@ START and END define the region."
     (kill-buffer (current-buffer))
     (info file-name)))
 
+;;;###autoload
+(defun my-get-string-from-file (filePath)
+  "Return FILEPATH's file content."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+
 (provide 'my-misc)

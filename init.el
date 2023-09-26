@@ -1074,13 +1074,7 @@ in case that file does not provide any feature."
 (autoload #'my-time-task "my-misc" nil t)
 (autoload #'my-str-starts-with-p "my-misc" nil t)
 (autoload #'my-str-ends-with-p "my-misc" nil t)
-;; for some reason this breaks if it's autoloaded. When setting
-;; `my-curr-computer' So defun it right here.
-(defun my-get-string-from-file (filePath)
-  "Return FILEPATH's file content."
-  (with-temp-buffer
-    (insert-file-contents filePath)
-    (buffer-string)))
+(autoload #'my-get-string-from-file "my-misc" nil nil)
 (autoload #'my-turn-on-electric-pair-local-mode "my-misc" nil t)
 
 ;;;----------------------------------------------------------------------------
@@ -1119,7 +1113,9 @@ Specific configurations may be made for some computers.")
   (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
     (ignore-errors
       (when (file-exists-p curr-comp-file)
-        (intern (my-get-string-from-file curr-comp-file)))))
+        (intern (with-temp-buffer
+                  (insert-file-contents curr-comp-file)
+                  (buffer-string))))))
   "The computer running this Emacs.  Identified by a flag file.
 nil if computer is unknown.
 Specific configs may be made based on the computer.")

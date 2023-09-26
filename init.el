@@ -198,25 +198,13 @@
 
 
 ;;;----------------------------------------------------------------------------
-;;; minimum emacs version
+;;; minimum emacs version 24.1 (lexical binding support)
 ;;;----------------------------------------------------------------------------
-(defconst my-minimal-emacs "24.1"
-  "Minimum Emacs version needed to run this init.el.
-This version introduced lexical binding.")
-
-(defun my-assert-dependencies ()
-  "Check for required dependencies.  Warn the user if any are missing."
-  (when (version< emacs-version
-                  my-minimal-emacs)
-    (display-warning
-     'my-init
-     (format "my init.el requires Emacs >= %s, you are using %s."
-             my-minimal-emacs emacs-version)
-     :error)))
-
+(autoload #'my-assert-dependencies "my-init-stuff" nil t)
 ;; Don't prevent use of the init.
 ;; Just warn then let the chips fall where they may.
-(my-assert-dependencies)
+;; for now don't check.
+;; (my-assert-dependencies)
 
 
 

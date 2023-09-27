@@ -130,6 +130,8 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; repeat
 ;;;----------------------------------------------------------------------------
+(defvar repeat-exit-timeout) ;; silence byte computer warning
+
 (with-eval-after-load 'repeat
   (setq repeat-exit-timeout nil)) ;; don't timeout
 

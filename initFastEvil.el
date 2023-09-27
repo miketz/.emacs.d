@@ -1,4 +1,4 @@
-(load "~/.emacs.d/initFast.el")
+(load "~/.emacs.d/initFast") ;; .el or .elc if available
 
 (add-to-list 'load-path "~/.emacs.d/notElpa/evil")
 (require 'evil)

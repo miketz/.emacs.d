@@ -24,6 +24,14 @@
 ;; _fast/
 (setq frame-inhibit-implied-resize t)
 
+
+(setq fast-but-imprecise-scrolling t)
+;; scrolling performance increase?
+;; see https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-moveme
+;; nt-lag/28746
+(setq auto-window-vscroll nil)
+
+
 (when (eq system-type 'windows-nt)
   ;; (set-frame-font "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")
 

@@ -42,6 +42,7 @@
     (quit-window nil (get-buffer-window "*Occur*")))
   (ad-activate 'occur-mode-goto-occurrence))
 
+;;;###autoload
 (defun my-occur-wild-spaces (regexp &optional nlines)
   "Same as `occur'.  But treat spaces as wild cards like in `swiper'."
   (interactive (occur-read-primary-args))

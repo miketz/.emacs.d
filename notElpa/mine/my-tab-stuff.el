@@ -13,6 +13,8 @@
 
     (js2-mode js-indent-level) (js-mode js-indent-level)
     (js-ts-mode js-indent-level)
+    (jsonian-mode jsonian-indentation)
+    (json-mode js-indent-level)
 
     (c-ts-mode c-ts-mode-indent-offset)
     (go-ts-mode go-ts-mode-indent-offset)

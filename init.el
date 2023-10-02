@@ -8713,6 +8713,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; jsonian. performance oriented alternative to json-mode
 ;;;----------------------------------------------------------------------------
 (autoload #'jsonian-mode "jsonian" nil t)
+(push '("\\.json\\'" . jsonian-mode) auto-mode-alist)
 
 (with-eval-after-load 'jsonian
   (setq jsonian-indentation my-indent-width)

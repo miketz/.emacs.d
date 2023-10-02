@@ -188,7 +188,8 @@ Example:
    `(show-paren-match ((,class (:slant italic
                                        :bold t
                                        :strike-through t
-                                       :background nil))))
+                                       ;; :background nil
+                                       ))))
 
    ;; line that separates vertically split windows.
    `(vertical-border ((,class (:foreground "gray25"))))

@@ -1528,6 +1528,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;; evil-leader
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/evil-leader" load-path)
+;; evil-leader needs to be able to to find evil. So add to load-path now.
 (push "~/.emacs.d/notElpa/evil" load-path)
 (autoload #'global-evil-leader-mode "evil-leader" nil t)
 (autoload #'evil-leader-mode "evil-leader" nil t)

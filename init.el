@@ -1528,10 +1528,42 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;; evil-leader
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/evil-leader" load-path)
+(push "~/.emacs.d/notElpa/evil" load-path)
 (autoload #'global-evil-leader-mode "evil-leader" nil t)
 (autoload #'evil-leader-mode "evil-leader" nil t)
 (autoload #'evil-leader/set-key "evil-leader" nil t)
 (autoload #'evil-leader/set-key-for-mode "evil-leader" nil t)
+
+;; TODO: look into replacing evil-leader with 1 of the following:
+;;       https://github.com/justbur/emacs-bind-map
+;;       https://github.com/noctuid/general.el
+(when my-use-evil-p
+  ;; NOTE: per docs, evil-leader must be enabled before evil mode.
+  (require 'evil-leader)
+  (global-evil-leader-mode)
+
+  ;;leader keys
+  (evil-leader/set-leader ",")
+  ;; (evil-leader/set-key "w" #'other-window)
+  (evil-leader/set-key "q" #'balance-windows)
+  (evil-leader/set-key "x" #'maximize-window)
+  (evil-leader/set-key "," #'delete-other-windows)
+  (evil-leader/set-key "d" #'delete-window)
+  (evil-leader/set-key "k" #'my-quit-window) ;; #'kill-this-buffer
+  (evil-leader/set-key "c" #'quit-window) ; buffer left alive
+  (evil-leader/set-key "<" #'my-shrink-window-horizontally)
+  (evil-leader/set-key ">" #'my-enlarge-window-horizontally)
+  (evil-leader/set-key "v" #'evil-visual-block)
+  ;; (evil-leader/set-key "j" (lambda ()
+  ;;                            (interactive)
+  ;;                            (shrink-window 10)))
+  ;; (evil-leader/set-key "k" (lambda ()
+  ;;                            (interactive)
+  ;;                            (enlarge-window 10)))
+
+  ;;TODO: look into equivalent resizing for non-Windows machines.
+  (when (eq system-type 'windows-nt)
+    (evil-leader/set-key "f" #'my-toggle-frame-max)))
 
 ;;;----------------------------------------------------------------------------
 ;;; goto-chg. dependency of evil.
@@ -1543,7 +1575,6 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; evil
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/evil" load-path)
 ;; NOTE: goto-chg and undo-tree are under /evil/lib/. They are separate
 ;; packages in melpa. UPDATE: goto-chg and undo-tree are no longer bundled with
 ;; evil! So no longer a need to push /evil/lib/
@@ -1622,19 +1653,6 @@ In master branch now. Was on git branch: feature/native-comp.")
 
   (setq evil-default-cursor t)
 
-  ;;(add-to-list 'load-path "~/.emacs.d/evil") ; only without ELPA/el-get
-  ;; (require 'evil)
-
-  ;; TODO: look into replacing evil-leader with 1 of the following:
-  ;;       https://github.com/justbur/emacs-bind-map
-  ;;       https://github.com/noctuid/general.el
-  (require 'evil-leader)
-  (global-evil-leader-mode)
-  ;; (evil-mode 1)
-
-
-  ;;(define-key <keymap> key 'function)
-
 
   ;; Make j/k movement keys go up/down across wrapped lines.
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>")
@@ -1668,28 +1686,7 @@ Minus the newline char."
   (ad-activate 'evil-end-of-line)
 
 
-  ;;leader keys
-  (evil-leader/set-leader ",")
-  ;; (evil-leader/set-key "w" #'other-window)
-  (evil-leader/set-key "q" #'balance-windows)
-  (evil-leader/set-key "x" #'maximize-window)
-  (evil-leader/set-key "," #'delete-other-windows)
-  (evil-leader/set-key "d" #'delete-window)
-  (evil-leader/set-key "k" #'my-quit-window) ;; #'kill-this-buffer
-  (evil-leader/set-key "c" #'quit-window) ; buffer left alive
-  (evil-leader/set-key "<" #'my-shrink-window-horizontally)
-  (evil-leader/set-key ">" #'my-enlarge-window-horizontally)
-  (evil-leader/set-key "v" #'evil-visual-block)
-  ;; (evil-leader/set-key "j" (lambda ()
-  ;;                            (interactive)
-  ;;                            (shrink-window 10)))
-  ;; (evil-leader/set-key "k" (lambda ()
-  ;;                            (interactive)
-  ;;                            (enlarge-window 10)))
-
-  ;;TODO: look into equivalent resizing for non-Windows machines.
-  (when (eq system-type 'windows-nt)
-    (evil-leader/set-key "f" #'my-toggle-frame-max)))
+)
 
 ;; keeping evil turned off by default now.
 ;; Enable evil explicitly for certain modes or file types.

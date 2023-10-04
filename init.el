@@ -2895,7 +2895,8 @@ LINTER values: :jslint :jshint :eslint"
      "setInterval" "setTimeout" "status" "statusbar" "stop" "sun"
      "switch" "taint" "this" "toString" "toolbar" "top" "typeof"
      "unescape" "untaint" "unwatch" "valueOf" "var" "void" "watch"
-     "while" "window" "with"))
+     "while" "window" "with"
+     "tempusDominus"))
   (setq js2-highlight-level 3) ;;maximum highlighting
 
   (setq js2-bounce-indent-p nil) ;; set t to have tab toggle indents

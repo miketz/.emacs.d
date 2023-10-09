@@ -4,6 +4,7 @@
 # key: fn
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-${2:void} ${1:name}($0)
+static ${2:void}
+${1:name}($0)
 {
 }

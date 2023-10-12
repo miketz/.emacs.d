@@ -9120,6 +9120,14 @@ And turns off `indent-tabs-mode'."
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+;; JWZ preferred behavior for M-x display-buffer
+;; see https://www.jwz.org/blog/2021/01/very-much-do-not-have-my-emacs-setup-just-how-i-like-it/
+;; see https://lists.gnu.org/archive/html/bug-gnu-emacs/2021-01/msg00380.html
+;; If 3+ windows are opened it cycles through the non-active windows to display
+;; a buffer.
+(setq display-buffer-base-action '(display-buffer-use-least-recent-window))
+
+
 (autoload #'charcode-region "my-misc" nil t)
 
 ;; blink effect on current line when switching windows or buffers.

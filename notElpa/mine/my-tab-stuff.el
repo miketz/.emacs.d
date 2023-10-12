@@ -38,7 +38,12 @@ programming modes."
 
   ;; get "indent-width-var" for the current `major-mode'
   (let ((indent-var-sym (cadr (assoc major-mode my-mode-indent-var-map))))
-    (set indent-var-sym width))
+    (if (not (null indent-var-sym))
+        (set indent-var-sym width)
+      ;; else
+      (message "Extra indent var not configured in my-mode-indent-var-map for %s.
+Do not expect my-tabify-buffer to work correctly."
+               major-mode)))
   (setq tab-width width))
 
 

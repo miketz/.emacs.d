@@ -9117,6 +9117,14 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-untabify-buffer "my-tab-stuff" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; devil
+;;;----------------------------------------------------------------------------
+;; stored in ~/.emacs.d/notElpa which is already in load-path
+(autoload #'devil-mode "devil" nil t)
+(autoload #'devil-mode "global-devil-mode" nil t)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

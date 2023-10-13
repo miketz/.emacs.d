@@ -9120,6 +9120,8 @@ And turns off `indent-tabs-mode'."
 ;;; devil
 ;;;----------------------------------------------------------------------------
 ;; stored in ~/.emacs.d/notElpa which is already in load-path
+;; NOTE: this mode doesn't seem to play well with evil. look into it getting
+;; both to work simultaneously.
 (autoload #'devil-mode "devil" nil t)
 (autoload #'global-devil-mode "devil" nil t)
 

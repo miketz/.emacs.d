@@ -1311,7 +1311,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Eval overlay expiriment. Scrapping code from a blog."
       :folder my-module-folder
       :file-single "cider-style-overlays.el"
-      :remotes '((blog :url "endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html"
+      :remotes '((:sym blog :url "endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html"
                        :alias "blog"))
       :remote-default nil
       :source-control 'git
@@ -1434,7 +1434,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :comment "Fun snow scene package."
       :folder my-module-folder
       :file-single "white-christmas.el"
-      :remotes '((blog :url "https://with-emacs.com/posts/fun/white-christmas-in-emacs/"
+      :remotes '((:sym blog :url "https://with-emacs.com/posts/fun/white-christmas-in-emacs/"
                        :alias "blog"))
       :remote-default nil
       :source-control 'git

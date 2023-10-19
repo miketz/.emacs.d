@@ -38,14 +38,25 @@ programming modes."
   (interactive "nindent width: ")
 
   ;; get "indent-width-var" for the current `major-mode'
-  (let ((indent-var-sym (cadr (assoc major-mode my-mode-indent-var-map))))
+  (let ((indent-var-sym (cadr (assoc major-mode my-mode-indent-var-map)))
+        (msg ""))
+
+    ;; set indent-var-sym
     (if (not (null indent-var-sym))
-        (set indent-var-sym width)
+        (progn
+          (set indent-var-sym width)
+          (setq msg (concat msg (format "%s = %d" (symbol-name indent-var-sym) width))))
       ;; else
-      (message "Extra indent var not configured in my-mode-indent-var-map for %s.
+      (setq msg (format "Extra indent var not configured in my-mode-indent-var-map for %s.
 Do not expect my-tabify-buffer to work correctly."
-               major-mode)))
-  (setq tab-width width))
+                        major-mode)))
+
+    ;; set tab-width
+    (setq tab-width width)
+    (setq msg (concat msg (format "\ntab-width = %d" width)))
+
+    ;; display "indent-var-sym" and tab-width
+    (message msg)))
 
 
 ;;;###autoload

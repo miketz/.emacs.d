@@ -8890,6 +8890,7 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-lint-and-fix "my-go-helpers" nil t)
 (autoload #'my-go-insert-type "my-go-helpers" nil t)
 (autoload #'my-go-install-lib "my-go-helpers" nil t)
+(autoload #'my-go-rg "my-go-helpers" nil t)
 (autoload #'my-go-commands-hydra/body "my-go-helpers" nil t)
 
 ;;;----------------------------------------------------------------------------

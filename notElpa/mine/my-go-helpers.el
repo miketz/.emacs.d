@@ -135,6 +135,19 @@ the standard lib, like struct time.Time.")
   (let ((compile-command "go test -bench=."))
     (call-interactively #'compile)))
 
+;;;###autoload
+(defun my-go-rg ()
+  "Run rg but with with a custom file ignore.
+Ignoring test files.
+This is more a documentation of how to ignore files in rg."
+  (interactive)
+  (require 'rg)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let ((rg-command-line-flags rg-command-line-flags))
+    ;; ignore test files
+    (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
+    (call-interactively #'rg)))
+
 
 ;; List several go helper functions.
 (defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)

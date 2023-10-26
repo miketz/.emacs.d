@@ -9131,14 +9131,6 @@ And turns off `indent-tabs-mode'."
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
-;; JWZ preferred behavior for M-x display-buffer
-;; see https://www.jwz.org/blog/2021/01/very-much-do-not-have-my-emacs-setup-just-how-i-like-it/
-;; see https://lists.gnu.org/archive/html/bug-gnu-emacs/2021-01/msg00380.html
-;; If 3+ windows are opened it cycles through the non-active windows to display
-;; a buffer.
-(setq display-buffer-base-action '(display-buffer-use-least-recent-window))
-
-
 (autoload #'charcode-region "my-misc" nil t)
 
 ;; blink effect on current line when switching windows or buffers.
@@ -9176,16 +9168,20 @@ And turns off `indent-tabs-mode'."
 
 
 ;; make fn `display-buffer' behave like it did in XEmacs, as JWZ expects.
+;; If 3+ windows are opened it cycles through the non-active windows to display a buffer.
 ;; see blog:
-;; https://www.jwz.org/blog/2021/01/very-much-do-not-have-my-emacs-setup-just-h
-;; ow-i-like-it/
-;; https://old.reddit.com/r/emacs/comments/kr8mg2/jwz_very_much_do_not_have_my_
-;; emacs_setup_just_how/
-;; (when nil ; don't do this for now, it's switching buffers in multiple windows
-;;           ; at once!
-;;  (when (fboundp #'display-buffer-use-least-recent-window)
-;;    (setq display-buffer-alist
-;;          '((".*" display-buffer-use-least-recent-window)))))
+;; https://www.jwz.org/blog/2021/01/very-much-do-not-have-my-emacs-setup-just-how-i-like-it/
+;; https://old.reddit.com/r/emacs/comments/kr8mg2/jwz_very_much_do_not_have_my_emacs_setup_just_how/
+;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2021-01/msg00380.html
+(when nil ;; don't do this for now, it's switching buffers in multiple windows
+          ;; at once!
+  (when (fboundp #'display-buffer-use-least-recent-window)
+    (setq display-buffer-alist
+          '((".*" display-buffer-use-least-recent-window))))
+
+  ;; or possibly do this instead?
+  ;; (setq display-buffer-base-action '(display-buffer-use-least-recent-window))
+  )
 
 
 (autoload #'my-load-common "my-init-stuff" nil t)

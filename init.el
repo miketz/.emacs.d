@@ -6668,14 +6668,13 @@ Closure over `preceding-sexp-fn'."
 ;;       test run.
 (when (eq my-narrow-type 'sallet)
   ;; install packages sallet depends on.
-  ;; TODO: look into a way to make this happen without code for a specific
-  ;; case. (sallet is from git, not package manager). Maybe scrape out the
-  ;; require symbols?
-  (when nil ; no longer using package.el but keep this code for doc purposes.
-    (require 'package)
-    (dolist (pkg '(dash s async flx ov f))
-      (unless (package-installed-p pkg)
-        (package-install pkg))))
+  ;; The dependencies are now git submodules so this code is not needed.
+  ;; but keep this code for doc purposes.
+  ;; (when nil
+  ;;   (require 'package)
+  ;;   (dolist (pkg '(dash s async flx ov f))
+  ;;     (unless (package-installed-p pkg)
+  ;;       (package-install pkg))))
 
   ;; keybinds
   (when my-use-evil-p

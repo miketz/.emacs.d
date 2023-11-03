@@ -2812,8 +2812,8 @@ Inserts a new line and the beginning and end with text values:
     (add-to-list 'compilation-error-regexp-alist 'jshint))
 
   (defvar my-js-linter-cmds '(:jslint "jslint --terse "
-                                     :jshint "jshint "
-                                     :eslint "eslint -f unix ")
+                                      :jshint "jshint "
+                                      :eslint "eslint -f unix ")
     "Property list of commands to invoke linter.
 With option flags so the output is friendly to the Emacs compile buffer.
 For :jshint, the parsing of output is done via

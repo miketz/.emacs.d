@@ -11,6 +11,8 @@
 (push "~/.emacs.d/notElpa/evil-leader" load-path)
 (push "~/.emacs.d/notElpa/rainbow-delimiters" load-path)
 (push "~/.emacs.d/notElpa/paredit" load-path)
+(push "~/.emacs.d/notElpa/avy" load-path)
+(push "~/.emacs.d/notElpa/swiper" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; Color theme stuff.
@@ -150,3 +152,206 @@ This prevents overlapping themes; something I would rarely want."
 (key-chord-define evil-insert-state-map "fj" #'evil-normal-state)
 (key-chord-define evil-visual-state-map "fj" #'evil-exit-visual-state)
 (key-chord-mode 1)
+
+;;;----------------------------------------------------------------------------
+;;; avy
+;;;----------------------------------------------------------------------------
+(autoload #'avy-goto-line "avy" nil t)
+(autoload #'avy-isearch "avy" nil t)
+(autoload #'avy-goto-word-1 "avy" nil t)
+(autoload #'avy-goto-char-timer "avy" nil t)
+;; TODO: Add more autoloads. Only making autoloads for what i'm currently using
+;;       at the moment.
+
+(global-set-key (kbd "M-g g") #'avy-goto-line)
+(global-set-key (kbd "M-g M-g") #'avy-goto-line)
+;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
+;; work with evil "/" command. But it does work with evil's "?".
+(define-key isearch-mode-map (kbd "C-SPC") #'avy-isearch)
+(define-key isearch-mode-map (kbd "C-'") #'avy-isearch) ; swiper convention
+;; (define-key evil-normal-state-map (kbd "s") ; like vim sneak.
+;;   #'avy-goto-char-2)
+;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
+(define-key evil-normal-state-map (kbd "SPC") #'avy-goto-word-1)
+(define-key evil-motion-state-map (kbd "SPC") #'avy-goto-word-1)
+(evil-leader/set-key "s" #'avy-goto-char-timer)
+
+(with-eval-after-load 'avy
+  ;; make keys like ace-jump. Lots of letters means more likely to need only 1
+  ;; overlay char.
+  (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
+                        (cl-loop for i from ?A to ?Z collect i)))
+  (setq avy-style 'at-full) ;; options (pre at at-full post)
+  (setq avy-background nil) ;; eye is already focused on the jump point so no
+                            ;; need to gray-out the background.
+  (setq avy-all-windows t)       ;; allow jumps between windows.
+  (setq avy-case-fold-search t)  ;; case insensitive
+  (setq avy-timeout-seconds 0.5) ;; delay for `avy-goto-char-timer'
+  )
+
+
+;;;----------------------------------------------------------------------------
+;;; swiper. ivy is (or at least was) bundled with swiper. git submodule
+;;; ivy
+;;; counsel -> provides extra features for completing some things.
+;;;----------------------------------------------------------------------------
+(autoload #'swiper-isearch "swiper" nil t)
+(autoload #'swiper-avy "swiper" nil t)
+(autoload #'ivy-switch-buffer "ivy" nil t)
+(autoload #'ivy-completing-read "ivy" nil nil)
+(autoload #'counsel-find-file "counsel" nil t)
+(autoload #'counsel-switch-buffer "counsel" nil t)
+(autoload #'counsel-load-theme "counsel" nil t)
+(autoload #'counsel-M-x "counsel" nil t)
+(autoload #'counsel-tmm "counsel" nil t)
+(autoload #'counsel-describe-function "counsel" nil t)
+(autoload #'counsel-describe-variable "counsel" nil t)
+(autoload #'counsel-yank-pop "counsel" nil t)
+(autoload #'counsel-git "counsel" nil t)
+(autoload #'counsel-file-jump "counsel" nil t)
+(autoload #'counsel-file-register "counsel" nil t)
+
+;; TODO: set up more autoloads
+
+(when nil ;;my-use-ivy-p
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'ivy-switch-buffer))
+
+  (when (eq my-ui-type 'emacs)
+    (global-set-key (kbd "C-c C-s") #'swiper-isearch)
+    (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
+
+  (progn ;; counsel completion augmentation
+
+    (autoload #'counsel-tmm "counsel" nil t) ;; not autoloaded by default.
+    (defun my-counsel-tmm ()
+      "Same as `counsel-tmm' but with a taller window."
+      (interactive)
+      (let ((ivy-height 1000))
+        (call-interactively #'counsel-tmm)))
+    ;; (global-set-key (kbd "C-c m") #'my-counsel-tmm)
+
+    (global-set-key (kbd "M-x") #'counsel-M-x)
+    ;; ivy-explorer doesn't seemt to work with `counsel-find-file'.
+    (unless my-use-ivy-explorer
+      (global-set-key (kbd "C-x C-f") #'counsel-find-file))
+
+    (global-set-key (kbd "C-h v") #'counsel-describe-variable)
+    (global-set-key (kbd "C-h f") #'counsel-describe-function)
+    ;; ;; replace keybind for `bookmark-bmenu-list'
+    ;; (global-set-key (kbd "C-x r l") #'counsel-bookmark)
+    (when my-use-evil-p
+      (evil-leader/set-key "w" #'counsel-yank-pop)
+      ;; (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
+      )))
+
+(with-eval-after-load 'swiper
+  ;; performance tweak to avoid visual-line-mode
+  (setq swiper-use-visual-line-p #'ignore)
+
+  (setq swiper-isearch-highlight-delay '(2 0.8))
+  (define-key swiper-map (kbd "C-SPC") #'swiper-avy)
+  (define-key swiper-all-map (kbd "C-SPC") #'swiper-avy))
+
+(with-eval-after-load 'ivy
+  (setq ivy-height 35)
+
+  (when nil ;; my-use-ivy-explorer
+    ;; turn on grid-style display for find-file
+    (ivy-explorer-mode 1))
+
+  (when nil
+    ;; an optional 3rd party sorting/filtering for ivy.
+    ;; will remember remember past selections during find-file, etc.
+    (ivy-prescient-mode 1)
+    (prescient-persist-mode))
+
+  ;; use emacs bindings (not evil) in ivy-occur buffer
+  (push '("^*ivy-occur" . emacs) evil-buffer-regexps)
+
+  (define-key ivy-occur-mode-map (kbd "n") #'ivy-occur-next-line)
+  (define-key ivy-occur-mode-map (kbd "p") #'ivy-occur-previous-line)
+
+  ;; redefine `ivy-help' to use outline mode. To avoid a long wait loading org.
+  (defun ivy-help ()
+    "Help for `ivy'."
+    (interactive)
+    (let ((buf (get-buffer "*Ivy Help*")))
+      (unless buf
+        (setq buf (get-buffer-create "*Ivy Help*"))
+        (with-current-buffer buf
+          (insert-file-contents ivy-help-file)
+          (if (memq 'org features)
+              (org-mode)
+            (outline-mode))
+          (view-mode)
+          (goto-char (point-min))))
+      (if (eq this-command 'ivy-help)
+          (switch-to-buffer buf)
+        (with-ivy-window
+          (pop-to-buffer buf)))
+      (view-mode)
+      (goto-char (point-min))))
+
+  ;; TODO: fix keybind to `ivy-avy'. It seems to be triggering outside of
+  ;;       ivy-mode-map. Commenting keybind for now.
+  ;; (define-key ivy-mode-map (kbd "C-SPC") #'ivy-avy)
+
+  ;; remove the default ^ prefix used by `counsel-M-x' and a few others.
+  (cl-loop for pair in ivy-initial-inputs-alist
+           do
+           (setcdr pair ""))
+  ;; NOTE: no longer using `set-alist' to disable the ^ prefix. Because it
+  ;;       pulled in a new package dependency `apel'. And maybe `flim'?
+  ;; (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
+
+  ;; turn on ivy completion. turned on when an autoloaded fn is used with a
+  ;; keybind to slightly improve emacs init time. (discovered with
+  ;; profile-dotemacs.el)
+  (when nil ;; my-use-ivy-p ;; GUARD. I use swiper even when using ido, so guard
+    (ivy-mode 1))    ;; against ivy-mode turning on.
+
+  ;; ;; allow out of order matching.
+  ;; (setq ivy-re-builders-alist
+  ;;       '((t . ivy--regex-ignore-order)))
+
+  ;; helper function to cycle the ivy matching styles.
+  ;; NOTE: periodically look for new supported styles in ivy and add them to
+  ;;       the local styles to cycle.
+  (let ((styles '(ivy--regex-plus
+                  ivy--regex-ignore-order
+                  ivy--regex-fuzzy
+                  ivy--regex
+                  regexp-quote))
+        (curr 'ivy--regex-plus))
+    (defun my-cycle-ivy-match-style ()
+      (interactive)
+      (setq curr (car (or (cdr (memq curr styles))
+                          styles)))
+      (setq ivy-re-builders-alist `((t . ,curr)))
+      (message "swiper match style: %s" (symbol-name curr))))
+
+  ;; (global-set-key (kbd "<f7>") #'my-cycle-ivy-match-style)
+
+  ;; use fancy highlights in the popup window
+  (setq ivy-display-style 'fancy))
+
+(with-eval-after-load 'counsel
+  ;; (setq counsel-grep-base-command
+  ;;       "rg -i -M 120 --no-heading --line-number --color never %s %s")
+
+  ;; redefine `counsel--load-theme-action' to not require confirmation
+  ;; TODO: find an alternative to redefine so I don't have to manually
+  ;;       merge with the latest version of `counsel--load-theme-action'
+  ;;       on package updates.
+  (defun counsel--load-theme-action (x)
+    "Disable current themes and load theme X."
+    (condition-case nil
+        (progn
+          (mapc #'disable-theme custom-enabled-themes)
+          (load-theme (intern x) t)
+          (when (fboundp 'powerline-reset)
+            (powerline-reset)))
+      (error "Problem loading theme %s" x))))
+
+(define-key evil-normal-state-map (kbd "s") #'swiper-isearch)

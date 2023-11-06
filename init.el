@@ -2992,6 +2992,7 @@ LINTER values: :jslint :jshint :eslint"
                    (shell-quote-argument buffer-file-name)))))
 
   (defun my-js2-init ()
+    (indent-tabs-mode 0)
     ;; NOTE: if a tmp file is created after js2-mode loads, this won't set
     ;; the `compile-command'. But `my-set-jslint-compile-command' can be
     ;; called manually in that case.

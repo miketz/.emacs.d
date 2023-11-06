@@ -8,7 +8,7 @@
 (deftheme bluey "Blue bg theme")
 
 (custom-theme-set-faces
-   'charcoal
+   'bluey
 
    `(default ((t (:foreground "yellow" :background "dark blue"))))
 

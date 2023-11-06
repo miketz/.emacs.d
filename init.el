@@ -3987,7 +3987,16 @@ and indent."
     (setq comment-column 1) ;; buffer local
     (setq tab-width 4) ;; buffer local
     (indent-tabs-mode 1)
-    (rainbow-delimiters-mode-enable))
+    (rainbow-delimiters-mode-enable)
+    (when nil ;; don't use smart-tab-mode until it's working
+      (progn  ;; smart-tabs-mode
+        ;; this seems to successfully apply smarts tabs when pressting TAB on a
+        ;; single line of code.
+        (smart-tabs-advice indent-for-tab-command c-ts-mode-indent-offset)
+
+        ;; This doesn't seem to do anything
+        ;; (smart-tabs-advice c-ts-mode-indent-defun c-ts-mode-indent-offset)
+        (smart-tabs-mode-enable))))
   (add-hook 'c-ts-mode-hook #'my-setup-c-ts-mode))
 
 ;;;----------------------------------------------------------------------------

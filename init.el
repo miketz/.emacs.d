@@ -9195,10 +9195,14 @@ And turns off `indent-tabs-mode'."
 
 
 (autoload #'my-load-common "my-init-stuff" nil t)
-(when (memq my-curr-computer '(;; mac-mini-m1-2021
-                               wild-dog
-                               work-laptop-2019
-                               work-laptop-mac))
+(when (or (memq my-curr-computer '(;; mac-mini-m1-2021
+                                   wild-dog
+                                   work-laptop-2019
+                                   work-laptop-mac))
+          ;; on mac-mini load everything when GUI mode.
+          ;; but not in terminal. I usually want a faster init there.
+          (and (eq my-curr-computer 'mac-mini-m1-2021)
+               my-graphic-p))
   (my-load-common))
 
 

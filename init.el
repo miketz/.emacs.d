@@ -9136,6 +9136,12 @@ And turns off `indent-tabs-mode'."
 (autoload #'devil-mode "devil" nil t)
 (autoload #'global-devil-mode "devil" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; counsel-fd
+;;;----------------------------------------------------------------------------
+;; search file/folder names. similar to `counsel-git'.
+(autoload #'counsel-fd-dired-jump "counsel-fd" nil t)
+(autoload #'counsel-fd-file-jump "counsel-fd" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

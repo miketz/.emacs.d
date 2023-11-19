@@ -1460,6 +1460,21 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'counsel-fd
+      :comment nil
+      :folder my-module-folder
+      :file-single "counsel-fd.el"
+      :remotes '((:sym upstream :url "https://github.com/CsBigDataHub/counsel-fd"
+                       :alias "upstream"))
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
+      :use-branch nil
+      :depend-hard '(counsel)
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       ;; code found of stackoverflow.
       :name 'twelve-m-calendar
       :comment nil

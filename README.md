@@ -2,6 +2,14 @@
 
 Storing my .emacs.d folder online to sync across computers.
 
+# External dependencies
+
+Maybe optional but nice to have.
+
+- git
+- ripgrep, rg
+- fd
+
 # Git incantations
 Create a new github repo from an existing local repo:
 

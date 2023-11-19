@@ -9,6 +9,7 @@ Maybe optional but nice to have.
 - git
 - ripgrep, rg
 - fd
+- enchant spell checker (*used by jinx*)
 
 # Git incantations
 Create a new github repo from an existing local repo:

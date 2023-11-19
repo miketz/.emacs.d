@@ -1,5 +1,6 @@
 ;;; my-find-file.el --- find file by name in dir -*- lexical-binding: t -*-
 
+(defvar my-fd-installed-p (executable-find "fd"))
 
 ;; MS windows specific command. Doesn't seem to work well.
 (defun my-find-file-by-name-windows ()
@@ -27,6 +28,7 @@
     ;; than checking for presence of a git repo first on ms-win.
     (unless (ignore-errors (counsel-git))
       (let ((fn (cond
+                 (my-fd-installed-p #'counsel-fd-file-jump)
                  ((eq system-type 'windows-nt) #'my-find-file-by-name-windows)
                  ((eq system-type 'gnu/linux) #'counsel-file-jump
                   ;; (lambda ()

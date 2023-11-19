@@ -9139,7 +9139,8 @@ And turns off `indent-tabs-mode'."
 ;;;----------------------------------------------------------------------------
 ;;; counsel-fd
 ;;;----------------------------------------------------------------------------
-;; search file/folder names. similar to `counsel-git'.
+;; search file/folder names. similar to `counsel-git' but with fd external
+;; dependency instead of git ls-files.
 (autoload #'counsel-fd-dired-jump "counsel-fd" nil t)
 (autoload #'counsel-fd-file-jump "counsel-fd" nil t)
 

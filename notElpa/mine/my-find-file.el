@@ -16,7 +16,11 @@
 (defvar ivy-re-builders-alist)
 (defvar ivy-height)
 (defun my-find-file-omni ()
-  "Find files by name."
+  "Find files by name.
+First try `counsel-git', powered by git ls-files.
+Fall back to `counsel-fd-file-jump' if fd is installed.
+Fall back to `my-find-file-by-name-windows' if on MS-Windows.
+Fall back to `counsel-file-jump' if on GNU/linux."
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
         ;; dynamically shadow ivy completion style to ignore order.

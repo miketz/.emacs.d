@@ -8965,7 +8965,17 @@ And turns off `indent-tabs-mode'."
     ;; (citre-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))
-  (add-hook 'go-ts-mode-hook #'my-setup-go-ts-mode))
+  (add-hook 'go-ts-mode-hook #'my-setup-go-ts-mode)
+
+
+  ;; for go.mod files
+  (defun my-setup-go-mod-ts-mode ()
+    (setq tab-width 3 ;; buffer local
+          go-ts-mode-indent-offset 3)
+    (indent-tabs-mode 1)
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode))
+  (add-hook 'go-mod-ts-mode-hook #'my-setup-go-mod-ts-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; go-mode

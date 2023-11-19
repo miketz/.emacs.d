@@ -954,7 +954,7 @@ in case that file does not provide any feature."
 (declare-function wgrep-change-to-wgrep-mode 'wgrep)
 (declare-function rg-save-search-as-name 'rg)
 (declare-function rg-save-search 'rg)
-(declare-function my-find-file-omni 'my-misc)
+(declare-function my-find-file-omni 'my-find-file)
 (declare-function eros--eval-overlay 'eros)
 (declare-function slime-eval 'slime)
 (declare-function -contains-p 'dash)
@@ -9224,7 +9224,7 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-delete-brackets "my-misc" nil t)
 (autoload #'my-list-holidays "my-misc" nil t)
 
-(autoload #'my-find-file-omni "my-misc" nil t)
+(autoload #'my-find-file-omni "my-find-file" nil t)
 (when my-use-evil-p
   (evil-leader/set-key "h" #'my-find-file-omni))
 

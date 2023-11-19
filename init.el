@@ -2134,7 +2134,7 @@ with duplicate bundled libs in Sly and SLIME.")
   (cond
    ((eq my-curr-computer 'mac-mini-m1-2021)
     (setq slime-default-lisp 'sbcl
-          slime-lisp-implementations '((sbcl ("/usr/local/bin/sbcl")))))
+          slime-lisp-implementations '((sbcl ("/opt/homebrew/bin/sbcl")))))
 
    ((eq my-curr-computer 'wild-dog)
     (setq slime-default-lisp 'sbcl

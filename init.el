@@ -8903,6 +8903,10 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-rg "my-go-helpers" nil t)
 (autoload #'my-go-commands-hydra/body "my-go-helpers" nil t)
 
+(defvar my-go-ide-type 'lsp
+  "Which tooling to use for IDE-like features.
+Values: lsp, citre, nil")
+
 ;;;----------------------------------------------------------------------------
 ;;; go-mod-ts-mode
 ;;;----------------------------------------------------------------------------
@@ -8949,7 +8953,8 @@ And turns off `indent-tabs-mode'."
     (indent-tabs-mode 1)
 
     (yas-minor-mode 1)
-    (when buffer-file-name ;; eglot gets weird if the buffer is not visiting a file.
+    (when (and (eq my-go-ide-type 'lsp)
+               buffer-file-name) ;; eglot gets weird if the buffer is not visiting a file.
       (eglot-ensure)
       ;; turn off mode to avoid spam. will call eldoc via keybind instead.
       ;; I'd prefer not to use a timer, but eglot doens't turn on eldoc
@@ -8962,7 +8967,8 @@ And turns off `indent-tabs-mode'."
       ;; (when eldoc-mode
       ;;   (eldoc-mode -1))
       )
-    ;; (citre-mode 1)
+    (when (eq my-go-ide-type 'citre)
+      (citre-mode 1))
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))
   (add-hook 'go-ts-mode-hook #'my-setup-go-ts-mode)
@@ -9021,7 +9027,8 @@ And turns off `indent-tabs-mode'."
     (setq comment-column 1) ;; buffer local
     (setq tab-width 3) ;; buffer local
     (yas-minor-mode 1)
-    (when buffer-file-name ;; eglot gets weird if the buffer is not visiting a file.
+    (when (and (eq my-go-ide-type 'lsp)
+               buffer-file-name) ;; eglot gets weird if the buffer is not visiting a file.
       (eglot-ensure)
       ;; turn off mode to avoid spam. will call eldoc via keybind instead.
       ;; I'd prefer not to use a timer, but eglot doens't turn on eldoc
@@ -9034,7 +9041,8 @@ And turns off `indent-tabs-mode'."
       ;; (when eldoc-mode
       ;;   (eldoc-mode -1))
       )
-    ;; (citre-mode 1)
+    (when (eq my-go-ide-type 'citre)
+      (citre-mode 1))
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))
   (add-hook 'go-mode-hook #'my-setup-go-mode))

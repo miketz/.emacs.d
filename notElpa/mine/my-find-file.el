@@ -15,6 +15,7 @@
 (defvar completing-read-function)
 (defvar ivy-re-builders-alist)
 (defvar ivy-height)
+;;;###autoload
 (defun my-find-file-omni ()
   "Find files by name.
 First try `counsel-git', powered by git ls-files.

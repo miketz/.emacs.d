@@ -154,6 +154,35 @@
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
+
+   ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   ;; ~ START faces supported with treesit
+   ;; ~ Maybe not intended to be treesit only, but it seems that way.
+   `(font-lock-function-call-face ((,class :inherit font-lock-function-name-face
+                                           :foreground "black"
+                                           :background "#ffd7e2")))
+   `(font-lock-variable-use-face ((,class :inherit default)))
+   ;; `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
+   ;;                                    :weight normal)))
+   `(font-lock-property-name-face ((,class :inherit font-lock-variable-name-face
+                                   :background "lightsteelblue1")))
+
+   ;; font-lock-property-use-face
+   ;; `(font-lock-punctuation-face ((,class nil)))
+   ;; `(font-lock-bracket-face)
+   ;; `(font-lock-delimiter-face)
+   `(font-lock-escape-face ((t :foreground "black"
+                               :background "lightsteelblue1")))
+
+   ;; `(font-lock-misc-punctuation-face)
+   ;; `(font-lock-number-face ((,class :foreground "#50b5b5" ;"#BEBEA1"
+   ;;                                  ;; :background ,fn-def-bg
+   ;;                                  )))
+   ;; `(font-lock-regexp-face)
+
+   ;; ~ END treesit faces
+   ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
    `(minibuffer-prompt ((,class (:foreground ,fg :background ,bg-highlight))))
 
    ;; hl-fill-column

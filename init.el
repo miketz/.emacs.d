@@ -1806,6 +1806,10 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-cycle-dark-bg "my-load-theme" nil t)
   (autoload #'my-cycle-dark-bg-forward "my-load-theme" nil t)
   (autoload #'my-cycle-dark-bg-backward "my-load-theme" nil t)
+  ;; cycle bg with auto detect of bg shade
+  (autoload #'my-cycle-bg-forward "my-load-theme" nil t)
+  (autoload #'my-cycle-bg-backward "my-load-theme" nil t)
+
 
   ;; (autoload #'my-handle-weird-theme-setups "my-load-theme" nil t)
   (autoload #'my-load-theme-wrapper "my-load-theme" nil t)
@@ -1972,15 +1976,11 @@ This prevents overlapping themes; something I would rarely want."
   (set-frame-font
    "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
 
-(let ((dark? (eq 'dark (frame-parameter nil 'background-mode))))
-  (if dark?
-      (progn
-        (global-set-key (kbd "<f12>") #'my-cycle-dark-bg-forward)
-        (global-set-key (kbd "S-<f12>") #'my-cycle-dark-bg-backward))
-    ;; else light bg
-    (progn
-      (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
-      (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))))
+;; now that this is auto detect bg the keybind doesn't need to be set
+;; after theme load. But do it after anyway in case i use a shade
+;; specific cycle later.
+(global-set-key (kbd "<f12>") #'my-cycle-bg-forward)
+(global-set-key (kbd "S-<f12>") #'my-cycle-bg-backward)
 
 
 ;;;----------------------------------------------------------------------------

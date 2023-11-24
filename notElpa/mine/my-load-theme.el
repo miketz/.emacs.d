@@ -137,6 +137,24 @@ I want it to be considered light."
     (my-cycle-dark-bg -1)))
 
 
+(defun my-cycle-bg-forward ()
+  "Auto-detect light or dark bg.
+Then cycle bg forward with appropriate color list."
+  (interactive)
+  (let ((dark? (eq 'dark (frame-parameter nil 'background-mode))))
+    (if dark?
+        (my-cycle-dark-bg 1)
+      ;; else light bg
+      (my-cycle-light-bg 1))))
+
+(defun my-cycle-bg-backward ()
+  "Same as `my-cycle-bg-forward' but go backwards."
+  (interactive)
+  (let ((dark? (eq 'dark (frame-parameter nil 'background-mode))))
+    (if dark?
+        (my-cycle-dark-bg -1)
+      ;; else light bg
+      (my-cycle-light-bg -1))))
 
 
 

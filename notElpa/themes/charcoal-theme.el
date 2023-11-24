@@ -240,9 +240,7 @@ Example:
    ;; ~ Maybe not intended to be treesit only, but it seems that way.
    `(font-lock-function-call-face ((,class :foreground ,fn-call-fg
                                            :background ,fn-call-bg)))
-   `(font-lock-variable-use-face ((,class :inherit font-lock-variable-name-face
-                                          :foreground ,fg
-                                          :background ,bg)))
+   `(font-lock-variable-use-face ((,class :inherit default)))
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
                                       :weight normal)))
    `(font-lock-property-name-face ((,class

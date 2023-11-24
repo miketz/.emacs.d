@@ -1140,6 +1140,7 @@ Historical preservation."
     (custom-theme-set-faces
      'niflheim
 
+     `(fringe ((,class (:background "#000000"))))
      `(mode-line ((,class (:background ,purple-darker
                                        :foreground ,light
                                        :box (:line-width -1 :color ,grey-light)))))

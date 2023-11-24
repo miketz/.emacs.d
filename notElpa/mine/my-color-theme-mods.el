@@ -236,6 +236,7 @@ Historical preservation."
 (defun my-color-badger ()
   (interactive)
   (load-theme 'badger t)
+  (my-disable-var-use-face-treesit)
   (custom-theme-set-faces
    'badger
    ;; separates windows.
@@ -264,6 +265,7 @@ Historical preservation."
   ;;   (my-cursor-stuff-darkBg)) ;;TODO: move into `custom-set-faces'
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -402,6 +404,7 @@ Historical preservation."
   ;; (my-cursor-stuff :color-emacs "red" :color-evil "blue")
 
   (my-rainbow-parens-light-bg2)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'dichromacy
@@ -435,6 +438,7 @@ Historical preservation."
    `(fci-rule-color "#343434"))
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'firebelly
@@ -495,6 +499,7 @@ Historical preservation."
   ;;   (setq evil-operator-state-cursor cur))
 
   (my-rainbow-parens-light-bg2)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'gandalf
@@ -540,6 +545,7 @@ Historical preservation."
   ;;   (setq evil-operator-state-cursor cur))
 
   (my-rainbow-parens-light-bg2)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'github
@@ -586,6 +592,7 @@ Historical preservation."
   "Grandshell with a few mode-specific additoins."
   (interactive)
   (load-theme 'grandshell t)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'grandshell
@@ -623,6 +630,7 @@ Historical preservation."
 (defun my-color-gruvbox-dark ()
   (interactive)
   (load-theme 'gruvbox-dark t)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-variables
    'gruvbox-dark
@@ -650,6 +658,7 @@ Historical preservation."
   (load-theme 'gruvbox t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'gruvbox
@@ -670,6 +679,8 @@ Historical preservation."
   (load-theme 'kosmos t)
 
   (my-rainbow-parens-dark-bg)
+  ;; has no effect in kosmos but call anyway for intent.
+  (my-disable-var-use-face-treesit)
 
   (let (;; (kosmos-fg "#bdbdbd")
         ;; (kosmos-bg "#000000")
@@ -688,7 +699,7 @@ Historical preservation."
 
     (custom-theme-set-faces
      'kosmos
-
+     `(font-lock-variable-name-face ((t :foreground "#9492FF")))
       ;; default emacs completion.
      `(completions-common-part ((t (:foreground "#656565"))))
      `(completions-first-difference ((t (:foreground "green"))))
@@ -716,6 +727,9 @@ Historical preservation."
   ;;   (setq evil-normal-state-cursor cur)
   ;;   (setq evil-visual-state-cursor '(hollow "blue"))
   ;;   (setq evil-operator-state-cursor cur))
+
+
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-variables
    'leuven
@@ -838,6 +852,7 @@ Historical preservation."
   (load-theme 'majapahit-dark t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -953,6 +968,7 @@ Historical preservation."
   (load-theme 'molokai t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'molokai
@@ -1015,6 +1031,7 @@ Historical preservation."
   (load-theme 'monokai t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'monokai
@@ -1075,6 +1092,7 @@ Historical preservation."
   (load-theme 'niflheim t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (let ((class '((class color) (min-colors 89)))
         ;; (background "#303030")
@@ -1145,6 +1163,7 @@ Historical preservation."
    `(fci-rule-color "#4d4d4d"))
 
   (my-rainbow-parens-light-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'spacemacs-light
@@ -1182,6 +1201,7 @@ Historical preservation."
   (interactive)
   (load-theme 'sunburn t)
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-variables
    'sunburn
@@ -1209,6 +1229,7 @@ Historical preservation."
   (load-theme 'tango-dark t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -1240,6 +1261,7 @@ Historical preservation."
   (load-theme 'tommyh t)
 
   (my-rainbow-parens-light-bg2)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'tommyh
@@ -1260,6 +1282,7 @@ Historical preservation."
   (interactive)
   (load-theme 'overcast t)
   (my-rainbow-parens-dark-bg-bold)
+  (my-disable-var-use-face-treesit)
   (custom-theme-set-faces
    'overcast
 
@@ -1272,6 +1295,8 @@ Historical preservation."
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
   (load-theme 'zenburn t)
+
+  (my-disable-var-use-face-treesit)
 
   ;; set variables (that are not faces) using `custom-theme-set-variables'. It
   ;; will allow them to be rolled back automatically when the theme is later
@@ -1511,6 +1536,7 @@ Historical preservation."
   (load-theme 'tao-yin t)
   (my-rainbow-parens-dark-bg)
   (my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'tao-yin
@@ -1547,12 +1573,11 @@ Historical preservation."
   (my-rainbow-parens-dark-bg)
   (my-cursor-dark-bg)
   (my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'warm-night
 
-   `(font-lock-variable-use-face ((t :foreground "#b1b1b1"
-                                     :background "#292424")))
    `(mode-line ((t ;;:bold t
                  :foreground "#838383"
                  :background "black";;"#373333"
@@ -1578,6 +1603,7 @@ Historical preservation."
   (interactive)
   (load-theme 'avk-daylight t)
   (my-rainbow-parens-light-bg3)
+  (my-disable-var-use-face-treesit)
   (custom-theme-set-faces
    'avk-daylight
 
@@ -1597,6 +1623,7 @@ Historical preservation."
 (defun my-color-doom-outrun-electric ()
   (interactive)
   (load-theme 'doom-outrun-electric t)
+  (my-disable-var-use-face-treesit)
   (custom-theme-set-faces
    'doom-outrun-electric
 
@@ -1613,6 +1640,7 @@ Historical preservation."
   (load-theme 'base16-decaf t)
 
   (my-rainbow-parens-dark-bg)
+  (my-disable-var-use-face-treesit)
 
   (custom-theme-set-faces
    'base16-decaf
@@ -1634,6 +1662,7 @@ Historical preservation."
 (defun my-color-moe-light ()
   (interactive)
   (load-theme 'moe-light t)
+  (my-disable-var-use-face-treesit)
   (custom-theme-set-faces
    'moe-light
 
@@ -1646,6 +1675,8 @@ Historical preservation."
 (defun my-color-moe-dark ()
   (interactive)
   (load-theme 'moe-dark t)
+
+  (my-disable-var-use-face-treesit)
 
   ;; copy the color vars of moe-dark
   (let ((class '((class color) (min-colors 89)))

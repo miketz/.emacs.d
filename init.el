@@ -1795,12 +1795,17 @@ This prevents overlapping themes; something I would rarely want."
 ;;   (call-interactively #'next-line))
 
 
-(progn ; theme changing stuff.
+(progn                                  ; theme changing stuff.
   (autoload #'my-cycle-theme "my-load-theme" nil t)
   (autoload #'my-force-light-bg "my-load-theme" nil t)
+  ;; light bg cycle
   (autoload #'my-cycle-light-bg "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-forward "my-load-theme" nil t)
   (autoload #'my-cycle-light-bg-backward "my-load-theme" nil t)
+  ;; dark bg cycle
+  (autoload #'my-cycle-dark-bg "my-load-theme" nil t)
+  (autoload #'my-cycle-dark-bg-forward "my-load-theme" nil t)
+  (autoload #'my-cycle-dark-bg-backward "my-load-theme" nil t)
 
   ;; (autoload #'my-handle-weird-theme-setups "my-load-theme" nil t)
   (autoload #'my-load-theme-wrapper "my-load-theme" nil t)
@@ -1813,9 +1818,7 @@ This prevents overlapping themes; something I would rarely want."
   ;; for theme selection. This is better than `my-cycle-theme' becuase it
   ;; does not redunantly call (custom-available-themes) and you can skip
   ;; around.
-  (global-set-key (kbd "<f10>") #'my-counsel-load-theme)
-  (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
-  (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))
+  (global-set-key (kbd "<f10>") #'my-counsel-load-theme))
 
 
 (autoload #'my-load-theme-make-bold-like-zenburn "my-load-theme" nil t)
@@ -1968,6 +1971,16 @@ This prevents overlapping themes; something I would rarely want."
   (load-theme 'charcoal t)
   (set-frame-font
    "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
+
+(let ((dark? (eq 'dark (frame-parameter nil 'background-mode))))
+  (if dark?
+      (progn
+        (global-set-key (kbd "<f12>") #'my-cycle-dark-bg-forward)
+        (global-set-key (kbd "S-<f12>") #'my-cycle-dark-bg-backward))
+    ;; else light bg
+    (progn
+      (global-set-key (kbd "<f12>") #'my-cycle-light-bg-forward)
+      (global-set-key (kbd "S-<f12>") #'my-cycle-light-bg-backward))))
 
 
 ;;;----------------------------------------------------------------------------

@@ -98,9 +98,11 @@ I want it to be considered light."
 (declare-function my-cycle-dark-bg-set-index "my-load-theme")
 (declare-function my-cycle-light-bg "my-load-theme")
 (let* ((colors [("#35352B" . "charcoal")
+                ("#25251B" . "charcoal2")
+                ("#15150B" . "charcoal3")
+                ("#000000" . "black")
                 ("#262626" . "charcoal256")
                 ("#3F3F3F" . "zenburn")
-                ("black" . "black")
                 ("#24221c" . "desert-night") ; vim
                 ("#282828" . "gruvbox")]) ; vim
        (len (length colors))

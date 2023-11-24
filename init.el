@@ -1825,6 +1825,8 @@ This prevents overlapping themes; something I would rarely want."
 
 
 (let ((file "my-color-theme-mods"))
+  (autoload #'my-disable-var-use-face-treesit file nil t)
+
   (autoload #'my-rainbow-parens-dark-bg file nil t)
   (autoload #'my-rainbow-parens-dark-bg-bold file nil t)
   (autoload #'my-rainbow-parens-light-bg file nil t)

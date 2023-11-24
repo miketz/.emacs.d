@@ -13,6 +13,20 @@ those faces."
   (or (car custom-enabled-themes)
       'user))
 
+(defun my-disable-var-use-face-treesit ()
+  "Use default face for `font-lock-variable-use-face'.
+Avoids the situation where all text in a code file has a special color.
+New treesit face."
+  (interactive)
+  (custom-theme-set-faces
+   (or (car custom-enabled-themes) 'user) ; current theme
+
+   ;; attention drawing color for var definitions.
+   ;; `(font-lock-variable-name-face ((t (:foreground "cyan" :background "black"))))
+
+   ;; normal color for var-use. To avoid color spaghetti. (new treesit face)
+   `(font-lock-variable-use-face ((t :inherit default)))))
+
 (defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)

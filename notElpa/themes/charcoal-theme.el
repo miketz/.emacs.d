@@ -704,23 +704,23 @@ Example:
 
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face
-     ((,class (:foreground ,rain-1 :background ,rain-1-bg))))
+     ((,class (:foreground ,rain-1))))
    `(rainbow-delimiters-depth-2-face
-     ((,class (:foreground ,rain-2 :background ,rain-2-bg))))
+     ((,class (:foreground ,rain-2))))
    `(rainbow-delimiters-depth-3-face
-     ((,class (:foreground ,rain-3 :background ,rain-3-bg))))
+     ((,class (:foreground ,rain-3))))
    `(rainbow-delimiters-depth-4-face
-     ((,class (:foreground ,rain-4 :background ,rain-4-bg))))
+     ((,class (:foreground ,rain-4))))
    `(rainbow-delimiters-depth-5-face
-     ((,class (:foreground ,rain-5 :background ,rain-5-bg))))
+     ((,class (:foreground ,rain-5))))
    `(rainbow-delimiters-depth-6-face
-     ((,class (:foreground ,rain-6 :background ,rain-6-bg))))
+     ((,class (:foreground ,rain-6))))
    `(rainbow-delimiters-depth-7-face
-     ((,class (:foreground ,rain-7 :background ,rain-7-bg))))
+     ((,class (:foreground ,rain-7))))
    `(rainbow-delimiters-depth-8-face
      ((,class (:foreground ,rain-8 :background ,rain-8-bg))))
    `(rainbow-delimiters-depth-9-face
-     ((,class (:foreground ,rain-9 :background ,rain-9-bg))))
+     ((,class (:foreground ,rain-9))))
    `(rainbow-delimiters-unmatched-face
      ((,class (:foreground ,rain-fg-u :background ,rain-bg-u))))))
 

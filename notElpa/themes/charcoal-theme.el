@@ -279,7 +279,7 @@ Example:
                                             ;; "burlywood3"
                                             ;; "#BBAA99"
                                             ,var
-                                            :background ,bg ;;"#202020"
+                                            ;; :background ,bg ;;"#202020"
                                                         ))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 

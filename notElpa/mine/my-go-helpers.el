@@ -4,7 +4,7 @@
 (require 'hydra)
 (require 'project)
 (require 'ivy)
-(provide 'my-go-doc)
+(require 'my-go-doc)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 

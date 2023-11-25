@@ -8074,6 +8074,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (autoload #'minesweeper "minesweeper" nil t)
 (with-eval-after-load 'minesweeper
+  ;; use emacs bindings (not evil)
+  (push '("minesweeper" . emacs) evil-buffer-regexps)
+
   (setq *minesweeper-board-width* 30)
   (setq *minesweeper-board-height* 10)
   (setq *minesweeper-mines* 75))

@@ -135,6 +135,8 @@ the standard lib, like struct time.Time.")
   (let ((compile-command "go test -bench=."))
     (call-interactively #'compile)))
 
+;; silence byte compiler when `rg' is not loaded yet
+(defvar rg-command-line-flags)
 ;;;###autoload
 (defun my-go-rg ()
   "Run rg but with with a custom file ignore.

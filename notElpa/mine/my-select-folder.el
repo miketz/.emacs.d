@@ -30,11 +30,11 @@ Provide current dir and project root dir as quick options."
         ;; taller ivy window. -4 so scrolling doens't go off screen.
         ;; (ivy-height (- (window-height) 4))
         )
-    (let ((folder (completing-read "type: " (my-common-folders-list) nil t)))
+    (let ((folder (completing-read "dir: " (my-common-folders-list) nil t)))
       (unless (string-equal folder "CUSTOM")
         (cl-return-from my-select-folder folder))
       ;; they chose custom
-      (read-directory-name "proj root: " nil nil t))))
+      (read-directory-name "dir: " nil nil t))))
 
 
 

@@ -6,6 +6,11 @@
 (require 'ivy)
 
 (defun my-common-folders-list ()
+  "List of common folders you usually want when running a program.
+    (such as a linter)
+1. The current folder.
+2. The project root folder, if in a project.
+3. Custom manually chosen folder."
   (let* ((folders '())
          (proj (project-current nil))
          (in-proj-p (not (null proj))))
@@ -22,12 +27,15 @@
 ;;;###autoload
 (cl-defun my-select-folder ()
   "Select a folder.
-Provide current dir and project root dir as quick options."
+Provide current dir and project root dir as quick options.
+
+Presumably the folder selected will be passed to another program such as a
+linter."
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-        ;; taller ivy window. -4 so scrolling doens't go off screen.
+        ;; taller ivy window. -4 so scrolling doesn't go off screen.
         ;; (ivy-height (- (window-height) 4))
         )
     (let ((folder (completing-read "dir: " (my-common-folders-list) nil t)))

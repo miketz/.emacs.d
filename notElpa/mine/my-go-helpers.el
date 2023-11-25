@@ -5,6 +5,7 @@
 (require 'project)
 (require 'ivy)
 (require 'my-go-doc)
+(require 'my-select-folder)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
@@ -66,14 +67,15 @@ results."
          ;;(compile-command "golangci-lint run --enable-all")
          ;;(compile-command "golangci-lint run --fix")
 
-         (root-obj (project-current nil))
-         (root-folder (if (not (null root-obj))
-                          ;; extract folder field out of obj.
-                          (project-root root-obj)
-                        ;; else get root folder manually from user
-                        (read-directory-name "proj root: " nil nil t)))
-         ;; run lint at project root dir. `compile' uses `default-directory'.
-         (default-directory root-folder))
+         ;; (root-obj (project-current nil))
+         ;; (root-folder (if (not (null root-obj))
+         ;;                  ;; extract folder field out of obj.
+         ;;                  (project-root root-obj)
+         ;;                ;; else get root folder manually from user
+         ;;                (read-directory-name "proj root: " nil nil t)))
+
+         ;; `compile' uses `default-directory'.
+         (default-directory (my-select-folder)))
     (call-interactively #'compile)))
 
 (defun my-go-lint-and-fix ()

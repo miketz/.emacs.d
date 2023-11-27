@@ -4,6 +4,10 @@
 (require 'hydra)
 (require 'project)
 (require 'ivy)
+;; counsel mini buffer completion not highlighting current selection when
+;; running emacs in the terminal. TODO: troubleshoot.
+;; try requiring ivy-faces.
+(require 'ivy-faces)
 (require 'my-go-doc)
 (require 'my-select-folder)
 

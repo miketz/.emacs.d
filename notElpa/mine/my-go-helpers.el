@@ -5,9 +5,9 @@
 (require 'project)
 (require 'ivy)
 ;; counsel mini buffer completion not highlighting current selection when
-;; running emacs in the terminal. TODO: troubleshoot.
-;; try requiring ivy-faces.
-(require 'ivy-faces)
+;; running emacs in the terminal. requiring `swiper' seems to fix it.
+;; TODO: find/fix root cause.
+(require 'swiper)
 (require 'my-go-doc)
 (require 'my-select-folder)
 

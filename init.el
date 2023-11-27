@@ -8920,6 +8920,7 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-install-lib "my-go-helpers" nil t)
 (autoload #'my-go-rg "my-go-helpers" nil t)
 (autoload #'my-go-commands-hydra/body "my-go-helpers" nil t)
+(autoload #'my-go-compile "my-go-helpers" nil t)
 
 (defvar my-go-ide-type 'lsp
   "Which tooling to use for IDE-like features.
@@ -8940,8 +8941,8 @@ Values: lsp, citre, nil")
 
 (with-eval-after-load 'go-ts-mode
   ;; key binds
-  (define-key go-ts-mode-map (kbd "C-c C-c") #'compile)
-  (define-key go-ts-mode-map (kbd "C-c c") #'compile)
+  (define-key go-ts-mode-map (kbd "C-c C-c") #'my-go-compile)
+  (define-key go-ts-mode-map (kbd "C-c c") #'my-go-compile)
 
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
@@ -9018,8 +9019,8 @@ Values: lsp, citre, nil")
 
 (with-eval-after-load 'go-mode
   ;; key binds
-  (define-key go-mode-map (kbd "C-c C-c") #'compile)
-  (define-key go-mode-map (kbd "C-c c") #'compile)
+  (define-key go-mode-map (kbd "C-c C-c") #'my-go-compile)
+  (define-key go-mode-map (kbd "C-c c") #'my-go-compile)
 
   ;; unbind `godef-describe' so I can use "C-c C-d" as a prefix.
   (define-key go-mode-map (kbd "C-c C-d") nil)

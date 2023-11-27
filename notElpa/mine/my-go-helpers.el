@@ -78,6 +78,22 @@ results."
          (default-directory (my-select-folder)))
     (call-interactively #'compile)))
 
+;;;###autoload
+(defun my-go-compile ()
+  "Call `compile' at the project root directory if found.
+If root dir not found, have user select via completing-read."
+  (interactive)
+  (let* ((proj (project-current nil))
+         (root-folder (if (not (null proj))
+                          ;; extract folder field out of obj.
+                          (project-root proj)
+                        ;; else get root folder manually from user
+                        (read-directory-name "proj root: " nil nil t)))
+
+         ;; `compile' uses `default-directory'.
+         (default-directory root-folder))
+    (call-interactively #'compile)))
+
 (defun my-go-lint-and-fix ()
   "Run golangci-lint.
 Then actually fix the files with the suggested fixes.

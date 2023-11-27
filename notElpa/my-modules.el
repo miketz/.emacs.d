@@ -2715,6 +2715,19 @@ Saves me from typing a lot of module stuff."
   :depend-bundled '())\n"
                              dir dir dir)))))
 
+(defun my-gen-go-code-for-submodules ()
+  "Helper fn to generate Golang code.
+Saving to a function for reference purposes.
+Was doing an expiriment of go to concurrently fetch the latest upstream code
+for each submodule."
+  (let ((git-submodules (my-get-all-git-submodules))
+        (lines '()))
+    (cl-loop for m in git-submodules
+             do
+             (insert (format "{Folder: \"%s\", UpstreamAlias: \"%s\"},\n"
+                             (module-folder m)
+                             (cl-getf (my-get-remote m 'upstream) :alias))))))
+
 (provide 'my-modules)
 
 ;;; my-modules.el ends here

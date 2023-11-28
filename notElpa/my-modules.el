@@ -2563,7 +2563,7 @@ Merge will be done manually after this."
                    (push `(,(module-name m) 'upstream-remote-not-created-on-git-side) statuses)
                    (cl-return-from 'loop)) ;; continue
 
-                 ;; fetch
+                 ;; fetch. TODO: look into using `async-shell-command' or`start-process' instead of `shell-command-to-string'. for async.
                  (let* ((default-directory (module-folder m))
                         ;; actual git fetch run is here
                         (shell-output (s-trim (shell-command-to-string

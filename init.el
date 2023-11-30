@@ -9186,6 +9186,22 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 (autoload #'my-select-folder "my-select-folder" nil t)
 
+
+;;;----------------------------------------------------------------------------
+;;; vterm
+;;;----------------------------------------------------------------------------
+;; installing via melpa for now.
+
+(with-eval-after-load 'vterm
+  ;; unset keys. seems like unsetting recovers the original keybind.
+  (define-key vterm-mode-map (kbd "M-h") nil)
+  (define-key vterm-mode-map (kbd "M-l") nil)
+  (define-key vterm-mode-map (kbd "M-j") nil)
+  (define-key vterm-mode-map (kbd "M-k") nil)
+  (define-key vterm-mode-map (kbd "C-k") nil)
+  (define-key vterm-mode-map (kbd "C-a") nil)
+  (define-key vterm-mode-map (kbd "C-e") nil))
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

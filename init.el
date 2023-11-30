@@ -9200,7 +9200,8 @@ Values: lsp, citre, nil")
   (define-key vterm-mode-map (kbd "M-k") nil)
   (define-key vterm-mode-map (kbd "C-k") nil)
   (define-key vterm-mode-map (kbd "C-a") nil)
-  (define-key vterm-mode-map (kbd "C-e") nil))
+  (define-key vterm-mode-map (kbd "C-e") nil)
+  (define-key vterm-mode-map (kbd "<f12>") nil))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

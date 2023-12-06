@@ -13,6 +13,27 @@ those faces."
   (or (car custom-enabled-themes)
       'user))
 
+(let ((highlight-on t))
+  (defun my-whitespace-trailing-hl-toggle ()
+    "Toggle highlight for trailing whitespace.
+For my own stuff I like it on.
+But for 3rd party code where I don't want to pollute the git history I'd rather ignore
+the whitespace."
+    (interactive)
+    (let ((curr-theme (my-get-theme)))
+      (if highlight-on
+          (progn ;; turn off highlight
+            (custom-theme-set-faces
+             (my-get-theme)
+             `(whitespace-trailing ((t (:inherit default)))))
+            (setq highlight-on nil))
+        ;; else turn on highlight. Via reloading the entire theme.
+        ;; Heavy technique and causes a screen flash.
+        ;; But it avoides the need to cache the original whitespace-trailing face.
+        (progn
+          (load-theme (my-get-theme) t)
+          (setq highlight-on t))))))
+
 (defun my-disable-var-use-face-treesit ()
   "Use default face for `font-lock-variable-use-face'.
 Avoids the situation where all text in a code file has a special color.

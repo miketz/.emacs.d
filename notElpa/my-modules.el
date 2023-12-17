@@ -2547,7 +2547,11 @@ Some operations only make sense for these single-file packages."
   "Call an external Go program to fetch each upstream remote.
 Concurrently fetches all upstream remotes at once for increased speed.
 
-Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper."
+Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+
+Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
+to set upstream remotes. Git does not keep track of multiple remotes
+so I track this in `my-modules'."
   (interactive)
   (let (;; run the Go program
         (output-str (shell-command-to-string "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper"))

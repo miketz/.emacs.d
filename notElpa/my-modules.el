@@ -2557,7 +2557,7 @@ Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper."
       (switch-to-buffer-other-window buff))
     (goto-char (point-max)) ;; end of buffer
     (insert output-str)
-    (insert "\n\n--------------------------\n")))
+    (insert "\n--------------------------\n")))
 
 (defun my-fetch-all-upstream-remotes ()
   "Run git fetch for each upstream remote.

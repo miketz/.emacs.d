@@ -2542,6 +2542,23 @@ Some operations only make sense for these single-file packages."
     ;; return the results for informational purposes.
     statuses))
 
+
+(defun my-fetch-all-upstream-remotes-golang ()
+  "Call an external Go program to fetch each upstream remote.
+Concurrently fetches all upstream remotes at once for increased speed.
+
+Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper."
+  (interactive)
+  (let (;; run the Go program
+        (output-str (shell-command-to-string "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper"))
+        (buff (get-buffer-create "*gitFetchHelper*")))
+
+    (unless (eq buff (current-buffer))
+      (switch-to-buffer-other-window buff))
+    (goto-char (point-max)) ;; end of buffer
+    (insert output-str)
+    (insert "\n\n--------------------------\n")))
+
 (defun my-fetch-all-upstream-remotes ()
   "Run git fetch for each upstream remote.
 Collect status info for each so I'll know which to merge.

@@ -331,3 +331,6 @@
 [submodule "notElpa/emacs-buttercup"]
 	path = notElpa/emacs-buttercup
 	url = https://github.com/miketz/emacs-buttercup
+[submodule "notElpa/gitFetchHelper"]
+	path = notElpa/gitFetchHelper
+	url = https://github.com/miketz/gitFetchHelper

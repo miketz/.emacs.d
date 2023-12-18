@@ -2554,7 +2554,7 @@ to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
   (let (;; run the Go program
-        (output-str (shell-command-to-string "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper"))
+        (output-str (shell-command-to-string (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")))
         (buff (get-buffer-create "*gitFetchHelper*")))
 
     (unless (eq buff (current-buffer))

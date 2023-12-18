@@ -7984,7 +7984,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 (defvar my-ctags-exe
   (cond ((eq my-curr-computer 'work-laptop-2019)
-         "C:/Users/mtz/programs/ctags-2019-12-04_2ebf5b1b-x64/ctags.exe")
+         "ctags.exe")
         ((eq my-curr-computer 'wild-dog)
          "~/proj/ctags/ctags" ; universal
          ;; "/usr/bin/ctags-exuberant"

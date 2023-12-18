@@ -3,12 +3,8 @@
 (require 'vc-git)
 (require 'grep)
 (require 'cl-lib)
+(require 'my-git-helpers) ;; for my-is-in-gitrepo
 
-(defun my-is-in-gitrepo ()
-  "Returns t if the current directory is in a git repo."
-  (interactive)
-  (string= "true\n" ;there seems to be a newline char so include it
-           (shell-command-to-string "git rev-parse --is-inside-work-tree")))
 
 (defun my-git-grep-make-param (pat)
   "Make git-grep work with helm patters of ^, !, $"

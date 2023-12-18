@@ -10,6 +10,7 @@
 (require 'swiper)
 (require 'my-go-doc)
 (require 'my-select-folder)
+(require 'my-git-helpers)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
@@ -88,7 +89,9 @@ results."
 If root dir not found, have user select via completing-read."
   (interactive)
   (let* ((proj (project-current nil))
-         (root-folder (if (not (null proj))
+         (root-folder (if (and (not (null proj))
+                               ;; if in a submodule `project' gets the root dir of parent proejct!
+                               (not (my-is-in-git-submodule)))
                           ;; extract folder field out of obj.
                           (project-root proj)
                         ;; else get root folder manually from user

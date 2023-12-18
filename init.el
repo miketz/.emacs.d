@@ -24,6 +24,14 @@
 ;;; Alternatively, to avoid a manual git pull in each submodule folder?
 ;;;     git submodule update --remote --merge
 ;;;
+;;; Set name and email for this .emacs.d project
+;;;     git config user.name "mike"
+;;;     git config user.email "miketz@users.noreply.github.com"
+;;;
+;;; Set name and email for submodules
+;;;     git submodule foreach git config user.name  "mike"
+;;;     git submodule foreach git config user.email "miketz@users.noreply.github.com"
+;;;
 ;;; Push local changes up to github:
 ;;;     git push origin master
 ;;;

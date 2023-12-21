@@ -1789,6 +1789,10 @@ This prevents overlapping themes; something I would rarely want."
 (defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
   "Themes I created.")
 
+(defvar my-themes-shortlist
+  '(kosmos wildcharm base16-decaf)
+  "Keeping track of interesting themes so they are not forgotten.")
+
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
 (defvar mayan-smoke "#F4F4E8" "Background color from the Vim theme.")
 (defvar my-charcoal "#35352B" "Experimental dark background color.")

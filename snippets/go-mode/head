@@ -2,8 +2,6 @@
 # name: head
 # key: head
 # --
-// +build prod, dev, test
-
 package ${1:main}
 
 import (

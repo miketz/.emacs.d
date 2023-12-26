@@ -2,7 +2,7 @@
 # name: full
 # key: full
 # --
-package ${1:main}
+package main
 
 import (
 	"fmt"

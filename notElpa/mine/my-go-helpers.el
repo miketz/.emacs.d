@@ -154,10 +154,11 @@ the standard lib, like struct time.Time.")
 
 ;;;###autoload
 (defun my-go-run-performance-tests ()
-  "This is more of a documentation to help me remember how to run perf tests."
+  "This is more of a documentation to help me remember how to run perf tests.
+-run=^# skips unit tests."
   (interactive)
   ;; shadow `compile-command'
-  (let ((compile-command "go test -bench=."))
+  (let ((compile-command "go test -bench=. -run=^#"))
     (call-interactively #'compile)))
 
 ;; silence byte compiler when `rg' is not loaded yet

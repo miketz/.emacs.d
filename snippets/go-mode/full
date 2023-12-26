@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: full
+# key: full
+# --
+package ${1:main}
+
+import (
+	"fmt"
+)
+
+func main() {
+	fmt.Printf("hi\n")$0
+}

@@ -11,6 +11,7 @@
 (require 'my-go-doc)
 (require 'my-select-folder)
 (require 'my-git-helpers)
+(require 's)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
@@ -153,13 +154,56 @@ the standard lib, like struct time.Time.")
     (shell-command install-cmd)))
 
 ;;;###autoload
-(defun my-go-run-performance-tests ()
+(defun my-go-run-benchmarks ()
   "This is more of a documentation to help me remember how to run perf tests.
 -run=^# skips unit tests."
   (interactive)
   ;; shadow `compile-command'
   (let ((compile-command "go test -bench=. -run=^#"))
     (call-interactively #'compile)))
+
+;;;###autoload
+(defun my-go-run-tests ()
+  "This is more of a documentation to help me remember how to run perf tests.
+-run=^# skips unit tests."
+  (interactive)
+  ;; shadow `compile-command'
+  (let ((compile-command "go test"))
+    (call-interactively #'compile)))
+
+;;;###autoload
+(cl-defun my-go-gen-test-file ()
+  "Create a _test.go file for the current go buffer."
+  (interactive)
+
+  ;; GUARD: current buffer must be visitng a Go file.
+  (unless (and buffer-file-name
+               (s-ends-with-p ".go" buffer-file-name))
+    (message "Must be visiting a Go file.")
+    (cl-return-from my-go-gen-test-file))
+
+  (let* ((prefix (car (s-split (regexp-quote ".go") buffer-file-name)))
+         (new-file-name (concat prefix "_test.go")))
+    (make-empty-file new-file-name)
+    (find-file new-file-name)
+    ;; TODO: dynamically scrape package name from go buffer.
+    (let ((txt "package main
+
+import (
+	\"testing\"
+)
+
+func BenchmarkFoo(b *testing.B) {
+	b.ReportAllocs()
+	// TODO: write benchmark
+}
+
+func TestFoo(t *testing.T) {
+	t.Parallel()
+	// TODO: write test
+}
+"))
+      (insert txt))))
 
 ;; silence byte compiler when `rg' is not loaded yet
 (defvar rg-command-line-flags)

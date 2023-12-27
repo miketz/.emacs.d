@@ -8941,6 +8941,10 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-rg "my-go-helpers" nil t)
 (autoload #'my-go-commands-hydra/body "my-go-helpers" nil t)
 (autoload #'my-go-compile "my-go-helpers" nil t)
+(autoload #'my-go-run-benchmarks "my-go-helpers" nil t)
+(autoload #'my-go-run-tests "my-go-helpers" nil t)
+(autoload #'my-go-gen-test-file "my-go-helpers" nil t)
+
 
 (defvar my-go-ide-type
   (if (eq system-type 'windows-nt) ;; eglot is freezing on windows

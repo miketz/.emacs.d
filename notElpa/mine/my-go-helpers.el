@@ -203,7 +203,8 @@ func TestFoo(t *testing.T) {
 	// TODO: write test
 }
 "))
-      (insert txt))))
+      (insert txt)
+      (save-buffer))))
 
 ;; silence byte compiler when `rg' is not loaded yet
 (defvar rg-command-line-flags)

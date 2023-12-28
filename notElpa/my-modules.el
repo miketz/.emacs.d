@@ -42,7 +42,7 @@ Some info may be purely for informational/doc purposes."
   ;; t if using a submodule within /.emacs.d/
   ;; nil if using a repo outside of /.emacs.d/
   (submodule-p nil)
-  ;; The canocial branch used by the upstream. Usually "master" or "main".
+  ;; The canonical branch used by the upstream. Usually "master" or "main".
   (main-branch nil) ; master
   ;; Usually the same as `main-branch' but sometimes a private "mine" branch
   ;; with a few odd tweaks. This is the branch I use locally on my side.

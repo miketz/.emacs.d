@@ -2553,9 +2553,11 @@ Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
-  (let (;; run the Go program
-        (output-str (shell-command-to-string (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")))
-        (buff (get-buffer-create "*gitFetchHelper*")))
+  (let* (;; run the Go program
+         (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+                      " fetch"))
+         (output-str (shell-command-to-string cmd))
+         (buff (get-buffer-create "*gitFetchHelper*")))
 
     (unless (eq buff (current-buffer))
       (switch-to-buffer-other-window buff))

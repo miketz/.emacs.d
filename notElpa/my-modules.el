@@ -2610,6 +2610,28 @@ Merge will be done manually after this."
     ;; return the results for informational purposes.
     statuses))
 
+(defun my-list-modules-with-upstream-code-to-merge-golang ()
+  "Call an external Go program to diff  remote.
+Concurrently fetches all upstream remotes at once for increased speed.
+
+Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+
+Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
+to set upstream remotes. Git does not keep track of multiple remotes
+so I track this in `my-modules'."
+  (interactive)
+  (let* (;; run the Go program
+         (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+                      " diff"))
+         (output-str (shell-command-to-string cmd))
+         (buff (get-buffer-create "*gitFetchHelper*")))
+
+    (unless (eq buff (current-buffer))
+      (switch-to-buffer-other-window buff))
+    (goto-char (point-max)) ;; end of buffer
+    (insert output-str)
+    (insert "\n--------------------------\n")))
+
 (defun my-list-modules-with-upstream-code-to-merge ()
   "List modules with new upstream code not yet merged into the local branch.
 This does not actually fetch, only looks at the local contents on on the disk.

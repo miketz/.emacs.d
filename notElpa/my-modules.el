@@ -3,9 +3,9 @@
 ;;; Commentary:
 ;;; Tracking elisp packages.  Mostly as git submodules, but other
 ;;; ways too if the package is not a git repo.
-;;; Avoiding the pacakge manager package.el and elpa/melpa/etc.
+;;; Avoiding the package manager package.el and elpa/melpa/etc.
 ;;;
-;;; This file is more about documenting info about pacakges than handling the
+;;; This file is more about documenting info about packages than handling the
 ;;; packages.  Using git features to manually handle packages.  This file is
 ;;; just info that may be useful.  Maybe a few automated things will be added like
 ;;; byte compiling elisp files.
@@ -23,12 +23,12 @@ Some info may be purely for informational/doc purposes."
   (name nil)
   (comment nil)
   (folder nil)
-  (file-single nil) ;; for single file elisp packages embdedded into my git repo.
+  (file-single nil) ;; for single file elisp packages embedded into my git repo.
   ;; remote format '(name :url "foo.com/package-name"
   ;;                      :alias "origin")
   ;; The names 'mine and 'upstream have special meaning. Where 'upstream is the
   ;; official repo of the package. And 'mine is my fork. Other names can be
-  ;; anything but shoudl be descriptive. Each remote will be a plist of the
+  ;; anything but should be descriptive. Each remote will be a plist of the
   ;; form '(:sym mine :url "https://someurl" :alias "origin")
   (remotes '())
   (remote-default nil) ; default remote to pull/push
@@ -57,7 +57,7 @@ Some info may be purely for informational/doc purposes."
   (depend-hard '()) ; required or important dependencies.
   (depend-soft '()) ; optional dependencies. Or only needed for the tests.
   ;; Note when packages bundle dependencies. For informational purposes so I
-  ;; don't try to install something when I dont' need to.
+  ;; don't try to install something when I don't need to.
   (depend-bundled '()))
 
 (defvar my-modules
@@ -507,7 +507,7 @@ Some info may be purely for informational/doc purposes."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
-    ;; NOTE: selectrum author has chosen to deprecate the pacage in favor of
+    ;; NOTE: selectrum author has chosen to deprecate the package in favor of
     ;;       vertico
     ;; ,(make-module
     ;;   :name 'selectrum
@@ -667,7 +667,7 @@ mode itself. External language servers are required to use it of course."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "works" ;; using an old version of elgot that works with Emacs 28.2. naming branch "works".
+      :use-branch "works" ;; using an old version of eglot that works with Emacs 28.2. naming branch "works".
       :depend-hard '((emacs "26.3")
                      (jsonrpc "1.0.16")
                      (flymake "1.2.1")
@@ -1160,7 +1160,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "mine" ;; eagre macro expansion bug fix on emacs 29+
+      :use-branch "mine" ;; eager macro expansion bug fix on emacs 29+
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
@@ -1308,7 +1308,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-bundled '())
     ,(make-module ;; NOTE: see the "eros" package which was inspired by this.
       :name 'cider-style-overlays
-      :comment "Eval overlay expiriment. Scrapping code from a blog."
+      :comment "Eval overlay experiment. Scrapping code from a blog."
       :folder my-module-folder
       :file-single "cider-style-overlays.el"
       :remotes '((:sym blog :url "endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html"
@@ -1324,7 +1324,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
     ,(make-module
       ;; NOTE: not currently used
       ;; NOTE: See blog https://amitp.blogspot.com/2013/05/emacs-highlight-active-buffer.html
-      ;; NOTE: author reccomends using https://github.com/mina86/auto-dim-other-buffers.el instead.
+      ;; NOTE: author recommends using https://github.com/mina86/auto-dim-other-buffers.el instead.
       :name 'highlight-focus
       :comment nil
       :folder my-module-folder
@@ -1552,7 +1552,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '((lv "0")))
     ,(make-module
-      ;; see webpage https://depp.brause.cc/nov.el/
+      ;; see web page https://depp.brause.cc/nov.el/
       ;; TODO: point to the new upstream.
       :name 'nov
       :comment "epub reader"
@@ -1573,8 +1573,8 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'num3-mode
       :comment nil
       :folder (concat my-module-folder "num3-mode")
-      ;; Upstream not wired up becuase it's in elpa. I think elpa combines
-      ;; multiple projects in 1 repo so it's difficutl to use an an "upstream".
+      ;; Upstream not wired up because it's in elpa. I think elpa combines
+      ;; multiple projects in 1 repo so it's difficult to use an an "upstream".
       ;; The "mine" fork is just a copy/paste of the code then upload to github.
       :remotes '((:sym mine :url "https://github.com/miketz/num3-mode"
                        :alias "origin"))
@@ -1861,7 +1861,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :name 'flames-of-freedom
       :comment nil
       :folder (concat my-module-folder "FlamesOfFreedom")
-      :remotes '((:sym upstream :url "https://github.com/wiz21b/FlamesOfFreedom" ; just a fun pacakge so no fork.
+      :remotes '((:sym upstream :url "https://github.com/wiz21b/FlamesOfFreedom" ; just a fun package so no fork.
                            :alias "origin"))
       :remote-default 'upstream
       :source-control 'git
@@ -2021,7 +2021,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-bundled '())
     ,(make-module
       :name 'exec-path-from-shell
-      :comment "Set environemnt vars on mac."
+      :comment "Set environment vars on mac."
       :folder my-module-folder
       :file-single "exec-path-from-shell.el"
       :remotes '((:sym upstream :url "https://github.com/purcell/exec-path-from-shell"
@@ -2071,7 +2071,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
-    ,(make-module ;; TODO: fork this and make it a submodule becuase I already made a modification.
+    ,(make-module ;; TODO: fork this and make it a submodule because I already made a modification.
       :name 'feebleline
       :comment nil
       :folder my-module-folder
@@ -2095,7 +2095,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
                  (:sym upstream :url "https://git.sr.ht/~technomancy/fennel-mode"
                            :alias "upstream")
                  ;; used this mirror for my "mine" fork on github. But
-                 ;; completly unused.
+                 ;; completely unused.
                  (:sym mirror :url "https://github.com/emacsmirror/fennel-mode"
                          :alias "mirror"))
       :remote-default 'mine
@@ -2365,11 +2365,11 @@ style. More importantly it avoids spamming rg as you type or prematurely."
   "Byte compile .el files of all modules."
   (interactive)
 
-  ;; first compile git submodules. They ahve a dedicated folder so it makes
+  ;; first compile git submodules. They have a dedicated folder so it makes
   ;; sense to delete all the elc files in it.
   (cl-loop for mod in (my-get-all-git-submodules)
            do
-           (ignore-errors ;; dont' stop if 1 package is bad
+           (ignore-errors ;; don't stop if 1 package is bad
              (my-delete-elc-files (module-folder mod))
 
              (byte-recompile-directory
@@ -2383,7 +2383,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
   ;; now compile the "single file" modules.
   (cl-loop for mod in (my-get-all-single-file-modules)
            do
-           (ignore-errors ;; dont' stop if 1 package is bad
+           (ignore-errors ;; don't stop if 1 package is bad
              (let ((file (concat (module-folder mod)
                                  (module-file-single mod))))
                (byte-compile-file file))))
@@ -2435,7 +2435,7 @@ REMOTE-SYM will most often be `mine' or `upstream' by convention."
                      (eq (cl-getf rem :sym) sym)))))
 
 ;; NOTE: now that remotes are using plists there may not be much value in this
-;; "info-extraction" fn as plists are already easy to extrat info from.
+;; "info-extraction" fn as plists are already easy to extract info from.
 (defun my-get-remote-info (remote)
   "For REMOTE extract the git remote info.
 As a list of strings of the form (URL GIT-ALIAS)."
@@ -2467,7 +2467,7 @@ REMOTE-SYM will usually be `mine' or `upstream'."
                 (= 0 (length (s-trim output))))
         (cl-return-from my-git-remote-setup-p nil))
 
-      ;; split the raw shelloutput to a list of alias strings
+      ;; split the raw shell output to a list of alias strings
       (let* ((git-remote-aliases (s-split-words (s-trim output))))
         ;; GUARD: the alias we are looking for must be in the git output
         (when (null (cl-find alias git-remote-aliases :test #'string-equal))
@@ -2503,7 +2503,7 @@ REMOTE-SYM will usually be `mine' or `upstream'."
       ;; TODO: find a better way of detecting error. They could change the error message to
       ;; not start with "error" and that would break this code.
       (if (s-starts-with-p "error" shell-output)
-          ;; just return the error msg itself. This string is inconsitent with
+          ;; just return the error msg itself. This string is inconsistent with
           ;; the symbol return types, but it should be OK as it's just a report
           ;; of what happened. No real processing on it.
           (s-trim shell-output)
@@ -2527,7 +2527,7 @@ Some operations only make sense for these single-file packages."
                 my-modules))
 
 (defun my-setup-all-upstream-remotes-if-missing ()
-  "For all git submodules set the upstream remote if it is misisng."
+  "For all git submodules set the upstream remote if it is missing."
   (interactive)
   (let ((git-submodules (my-get-all-git-submodules))
         (statuses '()))
@@ -2592,7 +2592,7 @@ Merge will be done manually after this."
                    ;; TODO: find a better way of detecting error. They could change the error message to
                    ;; not start with "error" and that would break this code.
                    (if (s-starts-with-p "error" shell-output)
-                       ;; just return the error msg itself. This string is inconsitent with
+                       ;; just return the error msg itself. This string is inconsistent with
                        ;; the symbol return types, but it should be OK as it's just a report
                        ;; of what happened. No real processing on it.
                        (push `(,(module-name m) shell-output) statuses)
@@ -2600,7 +2600,7 @@ Merge will be done manually after this."
                      (if (= (length shell-output) 0)
                          ;; No new code fetched. Although this doesn't mean there isn't upstream code that
                          ;; still needs to be merged into the local branch from a previous fetch.
-                         ;; It just means this particlar fetch did not download any new code.
+                         ;; It just means this particular fetch did not download any new code.
                          ;; for now don't push into the report as it spams it up.
                          'no-op-do-nothing ;;(push `(,(module-name m) 'fetch-success-no-new-code) statuses)
                        ;; New code fetched. Although it may only be new code in a branch we are not interested in.
@@ -2614,7 +2614,7 @@ This does not actually fetch, only looks at the local contents on on the disk.
 So you may want to run `my-fetch-all-upstream-remotes' first to fetch the
 latest upstream code.
 
-NOTE: This fn only works properly when the moule's `use-branch' is checked out.
+NOTE: This fn only works properly when the module's `use-branch' is checked out.
 When you first pull the git submodules they are in a detached-head state with
 no branch checked out and you will get false results."
   (interactive)
@@ -2636,7 +2636,7 @@ no branch checked out and you will get false results."
 
                  ;; run a diff so we know if there is code to merge in.
                  (let* ((default-directory (module-folder m))
-                        ;; TODO: handle case where I use private branch "mine" with irrelvent
+                        ;; TODO: handle case where I use private branch "mine" with irrelevant
                         ;; changes (like .gitignore). This causes the diff to always hit.
                         ;; For now just compare the local "main" branch to the upstream "main".
                         ;; This will work as long as keep both the "main" and "mine" branches
@@ -2653,11 +2653,11 @@ no branch checked out and you will get false results."
                    ;; not start with "error" and that would break this code.
                    (if (or (s-starts-with-p "error" shell-output)
                            (s-starts-with-p "fatal" shell-output))
-                       ;; just return the error msg itself. This string is inconsitent with
+                       ;; just return the error msg itself. This string is inconsistent with
                        ;; the symbol return types, but it should be OK as it's just a report
                        ;; of what happened. No real processing on it.
                        (push `(,(module-name m) ,shell-output) statuses)
-                     ;; else SUCCESSful diff
+                     ;; else SUCCESSFUL diff
                      (when (> (length shell-output) 0)
                        ;; changes detected! but it may be code in a branch we don't use for merging.
                        (push `(,(module-name m) 'new-code-in-upstream ,cmd) statuses)))))))
@@ -2669,11 +2669,11 @@ no branch checked out and you will get false results."
   (interactive)
   (let* ((dir-infos (cl-remove-if
                      (lambda (f)
-                       (or (not (my-folder-p f)) ;; skip indiviudal files
+                       (or (not (my-folder-p f)) ;; skip individual files
                            ;; skip themes
                            (s-ends-with-p "themes" (cl-first f))
                            ;; Skip specific projects that don't ignore .elc files.
-                           ;; Revist this after I fork the projects, and use a personal branch.
+                           ;; Revisit this after I fork the projects, and use a personal branch.
                            ;; (s-ends-with-p "sunrise-commander" (cl-first f))
                            (s-ends-with-p "FlamesOfFreedom" (cl-first f))
                            ;; (s-ends-with-p "markup-faces" (cl-first f))
@@ -2688,7 +2688,7 @@ no branch checked out and you will get false results."
     (cl-loop for dir in dir-names
              do
              (if (eq 'success
-                     (ignore-errors ;; dont' stop if 1 package is bad
+                     (ignore-errors ;; don't stop if 1 package is bad
                        (my-delete-elc-files dir)
                        (byte-recompile-directory
                         dir
@@ -2697,22 +2697,22 @@ no branch checked out and you will get false results."
                        ;; be useful if the Emacs version changed and should have an
                        ;; .elc compiled again to be compatible.
                        'success))
-                 ;; NOTE: this doesn't mean byte compliation was sucessful for all files
+                 ;; NOTE: this doesn't mean byte compilation was successful for all files
                  ;; just that no elisp-level errors were thrown.
                  (push `(,dir success) statuses)
-               ;; else exception during byt complilation
+               ;; else exception during byte compilation
                (push `(,dir error) statuses)))
     ;; return the results for informational purposes.
     statuses))
 
 (defun my--scrape-module-info ()
   "This is is for dev-time use only.
-Generates a skeleton list for `my-modules'.  With possilbly incorrect and
-imcomplete info about the modules.
+Generates a skeleton list for `my-modules'.  With possibly incorrect and
+incomplete info about the modules.
 Saves me from typing a lot of module stuff."
   (let* ((dir-infos (cl-remove-if
                      (lambda (f)
-                       (or (not (my-folder-p f)) ;; skip indiviudal files
+                       (or (not (my-folder-p f)) ;; skip individual files
                            ;; skip themes
                            (s-ends-with-p "themes" (cl-first f))))
                      (directory-files-and-attributes my-module-folder
@@ -2739,7 +2739,7 @@ Saves me from typing a lot of module stuff."
 (defun my-gen-go-code-for-submodules ()
   "Helper fn to generate Golang code.
 Saving to a function for reference purposes.
-Was doing an expiriment of go to concurrently fetch the latest upstream code
+Was doing an experiment of go to concurrently fetch the latest upstream code
 for each submodule."
   (let ((git-submodules (my-get-all-git-submodules))
         (lines '()))

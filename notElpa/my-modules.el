@@ -2611,8 +2611,8 @@ Merge will be done manually after this."
     statuses))
 
 (defun my-list-modules-with-upstream-code-to-merge-golang ()
-  "Call an external Go program to diff  remote.
-Concurrently fetches all upstream remotes at once for increased speed.
+  "Call an external Go program to see which modules have new code for review/merging.
+Calls git diff concurrently.
 
 Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
 

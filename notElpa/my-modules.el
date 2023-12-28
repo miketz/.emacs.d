@@ -54,7 +54,7 @@ Some info may be purely for informational/doc purposes."
   ;; more for if I want *this* config to control the state of the package
   ;; rather than the git branch itself.
   (use-commit nil)
-  (depend-hard '()) ; requried or important dependencies.
+  (depend-hard '()) ; required or important dependencies.
   (depend-soft '()) ; optional dependencies. Or only needed for the tests.
   ;; Note when packages bundle dependencies. For informational purposes so I
   ;; don't try to install something when I dont' need to.

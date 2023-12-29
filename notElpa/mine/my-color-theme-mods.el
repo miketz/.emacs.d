@@ -1681,6 +1681,18 @@ Historical preservation."
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((t (:foreground "#4c4a60"))))))
 
+(defun my-color-wildcharm-light ()
+  (interactive)
+  (load-theme 'wildcharm-light t)
+
+  (my-disable-var-use-face-treesit)
+  (my-rainbow-parens-light-bg5-old-ultimate)
+
+  (custom-theme-set-faces
+   'wildcharm-light
+   '(fringe ((t (:foreground "#9B9B9B" :background "light blue";"alice blue"
+                             ))))))
+
 (defun my-color-moe-light ()
   (interactive)
   (load-theme 'moe-light t)

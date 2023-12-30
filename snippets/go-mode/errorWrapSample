@@ -1,0 +1,56 @@
+# -*- mode: snippet -*-
+# name: errorWrapSample
+# key: errorWrapSample
+# --
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+// ### 1. define constant errors relevant to the domain
+var ErrNotFound error = errors.New("not found")
+var ErrDivdeBy0 error = errors.New("divide by zero")
+var ErrInvalidFormat error = errors.New("bad csv format")
+
+func three() (int, error) {
+	return 0, ErrNotFound
+	// return 0, ErrDivdeBy0
+	// return 3, nil
+}
+func two() (int, error) {
+	row := 4
+	col := 39
+
+	n, err := three()
+	if err != nil {
+		//### 2. wrap errors up before passing up. Include values of local state.
+		return 0, fmt.Errorf("%w: row %d col: %d: calling three: %w", ErrInvalidFormat, row, col, err)
+	}
+	return n, nil
+}
+func one() (int, error) {
+	n, err := two()
+	if err != nil {
+		//### 2. wrap errors up before passing up
+		return 0, fmt.Errorf("calling two: %w", err)
+	}
+	return n, nil
+}
+
+func main() {
+	n, err := one()
+	if err != nil {
+		//### 3. at point of handlling, check error types.
+		if errors.Is(err, ErrDivdeBy0) {
+			fmt.Printf("calling one(): %v\n", err)
+			return
+		}
+		if errors.Is(err, ErrNotFound) {
+			fmt.Printf("calling one(): %v\n", err)
+			panic(404)
+		}
+	}
+	fmt.Printf("n: %d\n", n)
+}

@@ -192,7 +192,10 @@ Example:
                                        ))))
 
    ;; line that separates vertically split windows.
-   `(vertical-border ((,class (:foreground "gray25"))))
+   `(vertical-border ((,class (:foreground ,(if (display-graphic-p)
+                                               "gray25"
+                                             "gray30")))))
+
 
    `(mode-line
      ((,class (:foreground ,mode-line-fg ;"#8FB28F"

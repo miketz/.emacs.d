@@ -74,7 +74,10 @@ I want it to be considered light."
       ;; (set-background-color bg)
       (custom-theme-set-faces
        (my-get-theme)
-       `(default ((t :background ,bg))))
+       ;; TODO: hardcoding :foreground "black" a temporary fix for iterm2
+       ;; where foreground becomes a messed up super light color. look into proper
+       ;; fix later, just getting it to work on iterm2 for now.
+       `(default ((t :foreground "black" :background ,bg))))
       (my-force-light-bg)
       (message (format "color %d/%d. %s, %s"
                        (1+ i) len bg descr))))

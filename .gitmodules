@@ -334,3 +334,6 @@
 [submodule "notElpa/gitFetchHelper"]
 	path = notElpa/gitFetchHelper
 	url = https://github.com/miketz/gitFetchHelper
+[submodule "notElpa/visual-fill-column"]
+	path = notElpa/visual-fill-column
+	url = https://codeberg.org/joostkremers/visual-fill-column

@@ -142,6 +142,22 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'visual-fill-column
+      :comment nil
+      :folder (concat my-module-folder "visual-fill-column")
+      :remotes '((:sym mine :url "https://github.com/miketz/visual-fill-column"
+                       :alias "origin")
+                 (:sym upstream :url "https://codeberg.org/joostkremers/visual-fill-column"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "main"
+      :use-branch "main"
+      :depend-hard '((emacs "25.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'iedit
       :comment nil
       :folder (concat my-module-folder "iedit")

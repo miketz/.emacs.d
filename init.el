@@ -9264,6 +9264,14 @@ Values: lsp, citre, nil")
 
 
 ;;;----------------------------------------------------------------------------
+;;; visual-fill-column
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/visual-fill-column" load-path)
+(autoload #'visual-fill-column-mode "visual-fill-column" nil t)
+(autoload #'global-visual-fill-column-mode "visual-fill-column" nil t)
+(autoload #'visual-fill-column-split-window-sensibly "visual-fill-column" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

@@ -9242,10 +9242,18 @@ Values: lsp, citre, nil")
 ;; By default Emacs wraps with a hard break mid-word at edge of screen.
 
 
-;; Wrap at word boundries with visual-line-mode.
+;; Wrap at word boundries with visual-line-mode. When edge of window is
+;; reached.
 ;; Does not inject newlines, just a visual effect.
 ;; (visual-line-mode)
 ;; (global-visual-line-mode)
+
+
+;; Wrap after `fill-column' is reached.
+;; Does not inject newlines, just a visual effect.
+;; Usually you want to use this in combo with (visual-line-mode) above so it
+;; wraps at word boundires instead of hard breaks mid-word.
+;; (visual-fill-column-mode)
 
 
 ;; Wrap at word boundries after `fill-column' is reached. DOES inject newlines!

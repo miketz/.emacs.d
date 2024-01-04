@@ -9235,6 +9235,35 @@ Values: lsp, citre, nil")
   (define-key vterm-mode-map (kbd "<f12>") nil))
 
 ;;;----------------------------------------------------------------------------
+;;; word wrap. toggle-truncate-lines, visual-line-mode
+;;;----------------------------------------------------------------------------
+;; just documenting how to turn on the various wrapping styles.
+;; for an overview of options see: https://www.emacswiki.org/emacs/LineWrap
+;; By default Emacs wraps with a hard break mid-word at edge of screen.
+
+
+;; Wrap at word boundries with visual-line-mode.
+;; Does not inject newlines, just a visual effect.
+;; (visual-line-mode)
+;; (global-visual-line-mode)
+
+
+;; Wrap at word boundries after `fill-column' is reached. DOES inject newlines!
+;; Useful when writing prose, git commit messages, etc.
+;; Might want to turn this on in a hook function for a specialized mode.
+;;   (setq fill-column 72)
+;;   (auto-fill-mode)
+;;   (turn-on-auto-fill)
+;;   (turn-off-auto-fill)
+;; To autofill in comments only:
+;;   (setq-local comment-auto-fill-only-comments t)
+
+
+;; truncate lines if they reach the edge. Just a visual effect.
+;; (toggle-truncate-lines)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

@@ -1,0 +1,29 @@
+;;; -*- lexical-binding: t -*-
+;;; for _0x4aV on #emacs irc
+
+(require 'cl-lib)
+
+(defvar my-buff-name "*serial-reader*")
+
+(defvar my-delay-seconds 1)
+
+(defun my-serial-reader ()
+  (interactive)
+  (let* ((buffer-txt (buffer-substring-no-properties (point-min) (point-max)))
+         (words (split-string buffer-txt))
+         (next-fn-delay 0))
+
+    (switch-to-buffer-other-window (get-buffer-create my-buff-name))
+
+    (cl-loop for w in words
+             do
+             (let* ((word w)
+                    (fn (lambda ()
+                          (with-current-buffer (get-buffer-create my-buff-name)
+                            (erase-buffer)
+                            (insert word)))))
+               (run-with-timer next-fn-delay 0 fn))
+             (cl-incf next-fn-delay my-delay-seconds))))
+
+
+(provide 'my-serial-reader)

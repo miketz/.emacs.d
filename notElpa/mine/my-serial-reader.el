@@ -14,6 +14,7 @@
 This makes it easier to cancel them and clean things up.")
 
 
+;;;###autoload
 (defun my-serial-reader ()
   "Entry point function.
 Display current buffer text 1 word at a time in new buffer `my-buff-name'."

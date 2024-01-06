@@ -7,7 +7,7 @@
 
 (defvar my-buff-name "*serial-reader*")
 
-(defvar my-delay-seconds 1)
+(defvar my-delay-seconds 0.4)
 
 (defun my-serial-reader ()
   (interactive)

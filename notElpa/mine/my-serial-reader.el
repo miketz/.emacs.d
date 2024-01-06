@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 ;;; for _0x4aV on #emacs irc
+;;; wanted something like https://accelareader.com/ in Emacs.
+;;; Display some text only 1 word at a time. Show the next word after a delay.
 
 (require 'cl-lib)
 

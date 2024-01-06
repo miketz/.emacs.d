@@ -24,7 +24,12 @@ Display text in current buffer 1 word at a time."
 
     (switch-to-buffer-other-window (get-buffer-create my-buff-name))
 
-    ;; stop any currently running serial reader.
+    ;; add a fancy header to the buffer. With info on how to abort.
+    (set (make-local-variable 'header-line-format)
+         (substitute-command-keys
+          "serial reader     [Abort]: \\[my-stop-serial-reader]"))
+
+    ;; stop any running serial reader from a previous invocation.
     (my-stop-serial-reader)
 
     (cl-loop for w in words
@@ -34,6 +39,9 @@ Display text in current buffer 1 word at a time."
                           (with-current-buffer (get-buffer-create my-buff-name)
                             (erase-buffer)
                             (insert word))))
+                    ;; TODO: maybe find a better way than an increasing delay?
+                    ;; i'm not familiar with elsip timers so just doing the first
+                    ;; thing that works.
                     (timer (run-with-timer next-fn-delay 0 fn)))
                ;; keep track of the timer in my-timers so we can cancel it
                ;; later if needed.

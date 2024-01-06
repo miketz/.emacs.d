@@ -3,6 +3,9 @@
 ;;; wanted something like https://accelareader.com/ in Emacs.
 ;;; Display some text only 1 word at a time. Show the next word after a delay.
 
+;;; TODO: bigger font option?
+;;; TODO: centered view option? something like darkroom-mode?
+
 (require 'cl-lib)
 
 (defvar my-buff-name "*serial-reader*")

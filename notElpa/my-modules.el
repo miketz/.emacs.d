@@ -158,6 +158,22 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'klondike
+      :comment nil
+      :folder (concat my-module-folder "Emacs-Klondike")
+      :remotes '((:sym mine :url "https://github.com/miketz/Emacs-Klondike"
+                       :alias "origin")
+                 (:sym upstream :url "https://codeberg.org/WammKD/Emacs-Klondike"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "primary"
+      :use-branch "primary"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'iedit
       :comment nil
       :folder (concat my-module-folder "iedit")

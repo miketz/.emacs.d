@@ -337,3 +337,6 @@
 [submodule "notElpa/visual-fill-column"]
 	path = notElpa/visual-fill-column
 	url = https://codeberg.org/joostkremers/visual-fill-column
+[submodule "notElpa/Emacs-Klondike"]
+	path = notElpa/Emacs-Klondike
+	url = https://codeberg.org/WammKD/Emacs-Klondike

@@ -16,8 +16,9 @@ This makes it easier to cancel them and clean things up.")
 
 (defun my-serial-reader ()
   "Entry point function.
-Display text in current buffer 1 word at a time."
+Display current buffer text 1 word at a time in new buffer `my-buff-name'."
   (interactive)
+  ;; TODO: find a way to get the words as a "stream" instead of a giant list
   (let* ((buffer-txt (buffer-substring-no-properties (point-min) (point-max)))
          (words (split-string buffer-txt))
          (next-fn-delay 0))

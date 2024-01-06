@@ -41,7 +41,8 @@ Display current buffer text 1 word at a time in new buffer `my-buff-name'."
                           (with-current-buffer (get-buffer-create my-buff-name)
                             (erase-buffer)
                             (insert word))))
-                    ;; TODO: maybe find a better way than an increasing delay?
+                    ;; TODO: find a better way than an increasing delay?
+                    ;; it may not be guaranteed to execute in the correct order.
                     ;; i'm not familiar with elsip timers so just doing the first
                     ;; thing that works.
                     (timer (run-with-timer next-fn-delay 0 fn)))

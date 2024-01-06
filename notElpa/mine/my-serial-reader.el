@@ -15,12 +15,20 @@ This makes it easier to cancel them and clean things up.")
 
 
 ;;;###autoload
-(defun my-serial-reader ()
+(defun my-serial-reader (start end)
   "Entry point function.
-Display current buffer text 1 word at a time in new buffer `my-buff-name'."
-  (interactive)
+Display current buffer text 1 word at a time in new buffer `my-buff-name'.
+Uses selected region if available, otherwise the entire buffer text."
+  (interactive "r")
+
+  ;; use selected region by default. otherwise use entire buffer text.
+  (unless (use-region-p)
+    (setq start (point-min))
+    (setq end (point-max)))
+
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
-  (let* ((buffer-txt (buffer-substring-no-properties (point-min) (point-max)))
+  ;;       split-string is slow on huge buffers.
+  (let* ((buffer-txt (buffer-substring-no-properties start end))
          (words (split-string buffer-txt))
          (next-fn-delay 0))
 

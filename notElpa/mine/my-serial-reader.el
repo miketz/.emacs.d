@@ -10,6 +10,8 @@
 (defvar my-delay-seconds 0.4)
 
 (defun my-serial-reader ()
+  "Entry point function.
+Display text in current buffer 1 word at a time."
   (interactive)
   (let* ((buffer-txt (buffer-substring-no-properties (point-min) (point-max)))
          (words (split-string buffer-txt))

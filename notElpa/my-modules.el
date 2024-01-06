@@ -179,7 +179,7 @@ Some info may be purely for informational/doc purposes."
       :folder (concat my-module-folder "stem-reading-mode.el")
       :remotes '((:sym mine :url "https://github.com/miketz/stem-reading-mode.el"
                        :alias "origin")
-                 (:sym upstream :url "https://gitlab.com/wavexx/stem-reading-mode.el"
+                 (:sym upstream :url "https://gitlab.com/wavexx/stem-reading-mode.el.git"
                            :alias "upstream"))
       :remote-default 'mine
       :source-control 'git

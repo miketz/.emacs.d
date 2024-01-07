@@ -33,7 +33,9 @@ load during init, or wait with autoloads."
   (require 'lispy)
   (with-current-buffer (get-buffer-create "*scratch*")
     (unless (eq major-mode #'emacs-lisp-mode)
-      (emacs-lisp-mode))))
+      (emacs-lisp-mode)
+      ;; use lexical binding! buffer local var.
+      (setq lexical-binding t))))
 
 (provide 'my-init-stuff)
 

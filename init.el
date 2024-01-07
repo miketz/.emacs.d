@@ -7574,7 +7574,11 @@ vanilla javascript buffers."
   (autoload #'my-line-numbers-off "my-line-nums" nil t)
 
   (autoload #'my-line-numbers-cycle "my-line-nums" nil t)
-  (global-set-key (kbd "<f6>") #'my-line-numbers-cycle))
+  (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
+
+  (progn ;; turn on globally, with type 'relative
+    (setq display-line-numbers-type 'relative)
+    (global-display-line-numbers-mode)))
 
 ;;;----------------------------------------------------------------------------
 ;;; powershell

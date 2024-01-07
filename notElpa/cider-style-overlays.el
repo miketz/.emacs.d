@@ -178,8 +178,21 @@ overlay."
 
 (autoload 'cider--make-result-overlay "cider-overlays")
 
+(require 's)
+
+;; tested maxes on mac-mini-m1-2021
+;; TODO: see if these max vals work well on other computers.
+(defvar my-popup-max-len
+  (if my-graphic-p
+      ;; overlay popup is slower in GUI mode! use a smaller max.
+      1000
+    ;; else use a bigger max, but still have a limit.
+    2500))
+
 (defun endless/eval-overlay (value point)
-  (cider--make-result-overlay (format "%S" value)
+  ;; using s-left to prevent extremely long eval out put from taking
+  ;; forever to display.
+  (cider--make-result-overlay  (s-left my-popup-max-len (format "%S" value))
     :where point
     :duration 'command)
   ;; Preserve the return value.

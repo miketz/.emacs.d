@@ -15,6 +15,11 @@
   (interactive)
   (setq display-line-numbers 'relative))
 
+(defun my-line-numbers-visual-on ()
+  "Same as relative, but give a number for wrapped lines too."
+  (interactive)
+  (setq display-line-numbers 'visual))
+
 (defun my-line-numbers-off ()
   "Turn off line numbers."
   (interactive)
@@ -28,7 +33,7 @@
 Possible values: `relative', `absolute', `off'.")
 
 ;; line number display styles. lexically bound.
-(let ((styles '(relative absolute off)))
+(let ((styles '(relative visual absolute off)))
   (defun my-line-numbers-cycle ()
     "Cycle line number display styles. relative, absolute, off.
 Closure over `styles'."
@@ -37,6 +42,7 @@ Closure over `styles'."
                                       styles)))
     (setq display-line-numbers (cond
                                 ((eq my-curr-line-style 'relative) 'relative)
+                                ((eq my-curr-line-style 'visual) 'visual)
                                 ((eq my-curr-line-style 'absolute) t)
                                 ((eq my-curr-line-style 'off) nil)))
     (message "line numbers: %s" my-curr-line-style)))

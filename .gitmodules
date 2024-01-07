@@ -343,3 +343,6 @@
 [submodule "notElpa/stem-reading-mode.el"]
 	path = notElpa/stem-reading-mode.el
 	url = https://gitlab.com/wavexx/stem-reading-mode.el
+[submodule "notElpa/clojure-mode"]
+	path = notElpa/clojure-mode
+	url = https://github.com/miketz/clojure-mode

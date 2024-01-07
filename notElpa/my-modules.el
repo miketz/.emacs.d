@@ -190,6 +190,22 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'clojure-mode
+      :comment nil
+      :folder (concat my-module-folder "clojure-mode")
+      :remotes '((:sym mine :url "https://github.com/miketz/clojure-mode"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/clojure-emacs/clojure-mode"
+                       :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '((emacs "25.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'iedit
       :comment nil
       :folder (concat my-module-folder "iedit")

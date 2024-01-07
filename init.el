@@ -7198,6 +7198,22 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; clojure-mode
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/clojure-mode" load-path)
+(autoload #'clojure-mode "clojure-mode" nil t)
+(autoload #'clojurec-mode "clojure-mode" nil t)
+(autoload #'clojurescript-mode "clojure-mode" nil t)
+(progn
+  (add-to-list 'auto-mode-alist
+               '("\\.\\(clj\\|cljd\\|dtm\\|edn\\)\\'" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.cljc\\'" . clojurec-mode))
+  (add-to-list 'auto-mode-alist '("\\.cljs\\'" . clojurescript-mode))
+  ;; boot build scripts are Clojure source files
+  (add-to-list 'auto-mode-alist '("\\(?:build\\|profile\\)\\.boot\\'" . clojure-mode))
+  ;; babashka scripts are Clojure source files
+  (add-to-list 'interpreter-mode-alist '("bb" . clojure-mode))
+  ;; nbb scripts are ClojureScript source files
+  (add-to-list 'interpreter-mode-alist '("nbb" . clojurescript-mode)))
+
 (with-eval-after-load 'clojure-mode
   (defun my-setup-clojure-mode ()
     (rainbow-delimiters-mode-enable)

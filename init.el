@@ -6374,6 +6374,22 @@ When ARG isn't nil, try to pretty print the sexp."
 ;;             (lambda ()
 ;;               (push '("lambda" . ?f) prettify-symbols-alist))))
 
+
+;; This is not working. warning is going off even wehn lexical-binding is t!
+;; also hook is not adding in the with-eval-after-load.
+;; (progn
+;;   (defun my-warn-no-lexical-binding ()
+;;     (with-current-buffer (current-buffer)
+;;       (unless lexical-binding
+;;         (display-warning
+;;          'yikes!
+;;          (format "lexical-binding is not on in buffer %s" (current-buffer))
+;;          :warning))))
+;;   (add-hook 'emacs-lisp-mode-hook #'my-warn-no-lexical-binding)
+;;   ;; (with-eval-after-load 'emacs-lisp-mode
+;;   ;;   (add-hook 'emacs-lisp-mode-hook #'my-warn-no-lexical-binding))
+;;   )
+
 ;;;----------------------------------------------------------------------------
 ;;; cider-style-overlays. file in /notElpa/
 ;;;----------------------------------------------------------------------------

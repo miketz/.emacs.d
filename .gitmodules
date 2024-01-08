@@ -336,13 +336,13 @@
 	url = https://github.com/miketz/gitFetchHelper
 [submodule "notElpa/visual-fill-column"]
 	path = notElpa/visual-fill-column
-	url = https://codeberg.org/joostkremers/visual-fill-column
+	url = https://github.com/miketz/visual-fill-column
 [submodule "notElpa/Emacs-Klondike"]
 	path = notElpa/Emacs-Klondike
-	url = https://codeberg.org/WammKD/Emacs-Klondike
+	url = https://github.com/miketz/Emacs-Klondike
 [submodule "notElpa/stem-reading-mode.el"]
 	path = notElpa/stem-reading-mode.el
-	url = https://gitlab.com/wavexx/stem-reading-mode.el
+	url = https://github.com/miketz/stem-reading-mode.el
 [submodule "notElpa/clojure-mode"]
 	path = notElpa/clojure-mode
 	url = https://github.com/miketz/clojure-mode

@@ -467,7 +467,7 @@ in case that file does not provide any feature."
 (defvar typescript-indent-level)
 (defvar flycheck-check-syntax-automatically)
 (defvar company-tooltip-align-annotations)
-(defvar display-line-number-width)
+(defvar display-line-numbers-width)
 (defvar display-line-numbers-current-absolute)
 (defvar display-line-numbers)
 (defvar grep-highlight-matches)
@@ -7565,7 +7565,7 @@ vanilla javascript buffers."
   ;;  ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
   ;;  )
 
-  (setq display-line-number-width 1) ;; 1 seemed to behave like 2.
+  (setq display-line-numbers-width 1) ;; 1 seemed to behave like 2.
   (setq display-line-numbers-current-absolute nil)
 
 

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: do
+# key: do
+# --
+for ${1:do} := true; do; do = ${2:condition} {
+	$0
+}

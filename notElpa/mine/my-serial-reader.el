@@ -17,10 +17,10 @@
 (defvar my-timer nil)
 
 (define-minor-mode my-serial-reader-mode
-  "This minor mode is just to support keybinds."
+  "This minor mode is just to support key binds."
   :lighter " serial-reader"
-  ;; Ideally users should choose their own key binds. But it is imporant they
-  ;; be able to STOP the serial reader easily. So I'm taking the libery of
+  ;; Ideally users should choose their own key binds. But it is important they
+  ;; be able to STOP the serial reader easily. So I'm taking the liberty of
   ;; binding a key for them. This binding will be shown to the user in the
   ;; header of the output buffer.
   :keymap (let ((map (make-sparse-keymap)))
@@ -33,7 +33,7 @@
 Display current buffer text 1 word at a time in new buffer `my-buff-name'.
 Uses selected region if available, otherwise the entire buffer text."
 
-  ;; NOTE: avoiding (interacitve "r"). It breaks in the case where Emacs has
+  ;; NOTE: avoiding (interactive "r"). It breaks in the case where Emacs has
   ;; just started up with no mark set yet.
   (interactive (if (use-region-p)
                    ;; use selected region for `start' and `end'

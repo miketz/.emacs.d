@@ -5,8 +5,6 @@
 
 ;;; TODO: bigger font option?
 ;;; TODO: centered view option? something like darkroom-mode?
-;;; TODO: stop timer if user forcefully kills the output buffer. buffer kill hook?
-;;; TODO: use hook to cancel the timer if the output buffer is killed.
 
 (require 'cl-lib)
 
@@ -44,7 +42,8 @@ Uses selected region if available, otherwise the entire buffer text."
   ;; stop any running serial reader from a previous invocation.
   ;; for this style of display users can only read 1 buffer at a time, so
   ;; there is little reason to allow multiple serial readers to run at the same time.
-  (my-stop-serial-reader)
+  (unless (null my-timer)
+    (my-stop-serial-reader))
 
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
   (let* ((txt (buffer-substring-no-properties start end))
@@ -89,8 +88,27 @@ Uses selected region if available, otherwise the entire buffer text."
 Cancels `my-timer'.
 Call this if the serial display is taking too long."
   (interactive)
-  (when (timerp my-timer)
-    (cancel-timer my-timer)))
+  (message "attempting to stop serial reader")
+  (if (timerp my-timer)
+      (progn
+        (cancel-timer my-timer)
+        ;; Set to nil to make the timer object "extra canceled" and eligible for garbage collection.
+        (setq my-timer nil)
+        (message "stopped serial reader!"))
+    ;; else
+    (message "serial reader was already stopped.")))
+
+
+;; use a hook to cancel the timer if output buffer is killed
+(add-hook 'my-serial-reader-mode-hook
+          (lambda ()
+            (message (format "adding clean up hook to buffer %s"
+                             (buffer-name (current-buffer))))
+            (add-hook 'kill-buffer-hook
+                      #'my-stop-serial-reader
+                      nil
+                      ;; only add hook to the output buffer, not all buffers!
+                      'make-it-local)))
 
 
 (provide 'my-serial-reader)

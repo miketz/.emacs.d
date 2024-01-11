@@ -90,11 +90,7 @@ Uses selected region if available, otherwise the entire buffer text."
                     0 my-delay-seconds
                     (let ((i 0))
                       (lambda ()
-                        ;; NOTE: use (get-buffer-create) not the cached `buff' var.
-                        ;; In case user kills the buffer it will be re-created so
-                        ;; we still have an output target. Although in theory we should
-                        ;; cancel the timer if the target buffer is killed.
-                        (with-current-buffer (get-buffer-create my-buff-name)
+                        (with-current-buffer buff
                           (erase-buffer)
                           ;; add padding
                           (cl-loop repeat my-sr-pad-above do (insert "\n"))

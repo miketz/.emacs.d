@@ -6,9 +6,7 @@
 ;;; TODO: bigger font option?
 ;;; TODO: centered view option? something like darkroom-mode?
 ;;; TODO: stop timer if user forcefully kills the output buffer. buffer kill hook?
-;;; TODO: define a mode for use in the output buffer.
-;;;       should allow keybinds in the output buffer.
-;;;       As well as hooks to cancel the timer if the output buffer is killed.
+;;; TODO: use hook to cancel the timer if the output buffer is killed.
 
 (require 'cl-lib)
 
@@ -17,6 +15,17 @@
 (defvar my-delay-seconds 0.4)
 
 (defvar my-timer nil)
+
+(define-minor-mode my-serial-reader-mode
+  "This minor mode is just to support keybinds."
+  :lighter " serial-reader"
+  ;; Ideally users should choose their own key binds. But it is imporant they
+  ;; be able to STOP the serial reader easily. So I'm taking the libery of
+  ;; binding a key for them. This binding will be shown to the user in the
+  ;; header of the output buffer.
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c q") #'my-stop-serial-reader)
+            map))
 
 ;;;###autoload
 (cl-defun my-serial-reader (&optional start end)
@@ -49,8 +58,10 @@ Uses selected region if available, otherwise the entire buffer text."
 
     (switch-to-buffer-other-window buff)
 
-    ;; add a fancy header to the buffer. With info on how to abort.
     (with-current-buffer buff
+      (my-serial-reader-mode) ;; for key binds.
+
+      ;; add a fancy header to the buffer. With info on how to abort.
       (set (make-local-variable 'header-line-format)
            (substitute-command-keys
             "serial reader     [Abort]: \\[my-stop-serial-reader]")))

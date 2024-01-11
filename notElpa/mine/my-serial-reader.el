@@ -108,7 +108,6 @@ Uses selected region if available, otherwise the entire buffer text."
 Cancels `my-timer'.
 Call this if the serial display is taking too long."
   (interactive)
-  (message "attempting to stop serial reader")
   (if (timerp my-timer)
       (progn
         (cancel-timer my-timer)

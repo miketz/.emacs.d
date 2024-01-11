@@ -5,7 +5,8 @@
 
 ;;; URL: https://raw.githubusercontent.com/miketz/.emacs.d/master/notElpa/mine/my-serial-reader.el
 
-;;; TODO: centered view option? something like darkroom-mode?
+;;; TODO: centered view option? something like darkroom-mode? look into how to handle
+;;;       width/height with regards to font scaling.
 
 (require 'cl-lib)
 
@@ -18,6 +19,14 @@
 Positive numbers will increase font size.
 0 will have no effect on font size.
 Negative numbers will decrease font size which you probably don't want.")
+
+;; For now use just add padding to achive a slightly more centered look.
+;; although truly centering the text can be achived via `window-height'
+;; and `window-width', these functions do not account for font scaling.
+(defvar my-sr-pad-above 5
+  "New line padding above the text.")
+(defvar my-sr-pad-left 10
+  "Space padding left of the text.")
 
 (defvar my-timer nil)
 
@@ -87,7 +96,12 @@ Uses selected region if available, otherwise the entire buffer text."
                         ;; cancel the timer if the target buffer is killed.
                         (with-current-buffer (get-buffer-create my-buff-name)
                           (erase-buffer)
+                          ;; add padding
+                          (cl-loop repeat my-sr-pad-above do (insert "\n"))
+                          (cl-loop repeat my-sr-pad-left do (insert " "))
+                          ;; insert word
                           (insert (nth i words))
+                          ;; book keeping on index
                           (cl-incf i)
                           (when (and (>= i (length words))
                                      (timerp my-timer))

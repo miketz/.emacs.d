@@ -12,10 +12,7 @@
 
 (defvar my-delay-seconds 0.4)
 
-(defvar my-timers '()
-  "All timers we create will be stored in this list.
-This makes it easier to cancel them and clean things up.")
-
+(defvar my-timer nil)
 
 ;;;###autoload
 (defun my-serial-reader (start end)
@@ -31,9 +28,8 @@ Uses selected region if available, otherwise the entire buffer text."
 
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
   ;;       split-string is slow on huge buffers.
-  (let* ((buffer-txt (buffer-substring-no-properties start end))
-         (words (split-string buffer-txt))
-         (next-fn-delay 0))
+  (let* ((txt (buffer-substring-no-properties start end))
+         (words (split-string txt)))
 
     (switch-to-buffer-other-window (get-buffer-create my-buff-name))
 
@@ -45,33 +41,26 @@ Uses selected region if available, otherwise the entire buffer text."
     ;; stop any running serial reader from a previous invocation.
     (my-stop-serial-reader)
 
-    (cl-loop for w in words
-             do
-             (let* ((word w)
-                    (fn (lambda ()
-                          (with-current-buffer (get-buffer-create my-buff-name)
-                            (erase-buffer)
-                            (insert word))))
-                    ;; TODO: find a better way than an increasing delay?
-                    ;; it may not be guaranteed to execute in the correct order.
-                    ;; i'm not familiar with elsip timers so just doing the first
-                    ;; thing that works.
-                    (timer (run-with-timer next-fn-delay 0 fn)))
-               ;; keep track of the timer in my-timers so we can cancel it
-               ;; later if needed.
-               (push timer my-timers))
-             (cl-incf next-fn-delay my-delay-seconds))))
+    (setq my-timer (run-with-timer
+                    0 my-delay-seconds
+                    (let ((i 0))
+                      (lambda ()
+                        (with-current-buffer (get-buffer-create my-buff-name)
+                          (erase-buffer)
+                          (insert (nth i words))
+                          (cl-incf i)
+                          (when (and (>= i (length words))
+                                     (timerp my-timer))
+                            (cancel-timer my-timer)))))))))
 
 
 (defun my-stop-serial-reader ()
   "Stop the display of text into buffer `my-buff-name'.
-Cancels all the timers.
+Cancels `my-timer'.
 Call this if the serial display is taking too long."
   (interactive)
-  (cl-loop for timer in my-timers
-           do
-           (cancel-timer timer))
-  (setq my-timers '()))
+  (when (timerp my-timer)
+    (cancel-timer my-timer)))
 
 
 (provide 'my-serial-reader)

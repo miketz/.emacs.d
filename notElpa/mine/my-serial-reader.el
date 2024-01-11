@@ -5,6 +5,7 @@
 
 ;;; TODO: bigger font option?
 ;;; TODO: centered view option? something like darkroom-mode?
+;;; TODO: stop timer if user forcefully kills the output buffer. buffer kill hook?
 
 (require 'cl-lib)
 

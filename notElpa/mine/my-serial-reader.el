@@ -99,9 +99,8 @@ Uses selected region if available, otherwise the entire buffer text."
                           (insert (nth i words))
                           ;; book keeping on index
                           (cl-incf i)
-                          (when (and (>= i (length words))
-                                     (timerp my-timer))
-                            (cancel-timer my-timer)))))))))
+                          (when (>= i (length words))
+                            (my-stop-serial-reader)))))))))
 
 
 (defun my-stop-serial-reader ()

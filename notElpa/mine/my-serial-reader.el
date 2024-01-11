@@ -3,7 +3,6 @@
 ;;; wanted something like https://accelareader.com/ in Emacs.
 ;;; Display some text only 1 word at a time. Show the next word after a delay.
 
-;;; TODO: bigger font option?
 ;;; TODO: centered view option? something like darkroom-mode?
 
 (require 'cl-lib)
@@ -11,6 +10,12 @@
 (defvar my-buff-name "*serial-reader*")
 
 (defvar my-delay-seconds 0.4)
+
+(defvar my-sr-font-scale-level 4
+  "Number of steps to scale font size.
+Positive numbers will increase font size.
+0 will have no effect on font size.
+Negative numbers will decrease font size which you probably don't want.")
 
 (defvar my-timer nil)
 
@@ -58,14 +63,18 @@ Uses selected region if available, otherwise the entire buffer text."
     (switch-to-buffer-other-window buff)
 
     (with-current-buffer buff
-      (my-serial-reader-mode) ;; for key binds.
+      ;; scale font size to configured value
+      (text-scale-set my-sr-font-scale-level)
+
+      ;; turn on mode. supports key binds, and the kill-buffer-hook
+      (my-serial-reader-mode)
 
       ;; add a fancy header to the buffer. With info on how to abort.
       (set (make-local-variable 'header-line-format)
            (substitute-command-keys
             "serial reader     [Abort]: \\[my-stop-serial-reader]")))
 
-
+    ;; show a word every `my-delay-seconds' via a timer.
     (setq my-timer (run-with-timer
                     0 my-delay-seconds
                     (let ((i 0))

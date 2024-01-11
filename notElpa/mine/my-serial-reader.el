@@ -31,7 +31,7 @@ Negative numbers will decrease font size which you probably don't want.")
 (defvar my-timer nil)
 
 (define-minor-mode my-serial-reader-mode
-  "This minor mode is just to support key binds."
+  "Minor mode to support key binds and kill-buffer-hook."
   :lighter " serial-reader"
   ;; Ideally users should choose their own key binds. But it is important they
   ;; be able to STOP the serial reader easily. So I'm taking the liberty of

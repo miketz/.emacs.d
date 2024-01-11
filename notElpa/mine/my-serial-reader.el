@@ -29,14 +29,16 @@ Uses selected region if available, otherwise the entire buffer text."
 
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
   (let* ((txt (buffer-substring-no-properties start end))
-         (words (split-string txt)))
+         (words (split-string txt))
+         (buff (get-buffer-create my-buff-name)))
 
-    (switch-to-buffer-other-window (get-buffer-create my-buff-name))
+    (switch-to-buffer-other-window buff)
 
     ;; add a fancy header to the buffer. With info on how to abort.
-    (set (make-local-variable 'header-line-format)
-         (substitute-command-keys
-          "serial reader     [Abort]: \\[my-stop-serial-reader]"))
+    (with-current-buffer buff
+      (set (make-local-variable 'header-line-format)
+           (substitute-command-keys
+            "serial reader     [Abort]: \\[my-stop-serial-reader]")))
 
     ;; stop any running serial reader from a previous invocation.
     (my-stop-serial-reader)

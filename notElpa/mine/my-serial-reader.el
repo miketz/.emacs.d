@@ -19,7 +19,7 @@
 (defvar my-timer nil)
 
 ;;;###autoload
-(defun my-serial-reader (&optional start end)
+(cl-defun my-serial-reader (&optional start end)
   "Entry point function.
 Display current buffer text 1 word at a time in new buffer `my-buff-name'.
 Uses selected region if available, otherwise the entire buffer text."
@@ -32,10 +32,20 @@ Uses selected region if available, otherwise the entire buffer text."
                  ;; else use entire buffer
                  (list (point-min) (point-max))))
 
+  ;; stop any running serial reader from a previous invocation.
+  ;; for this style of display users can only read 1 buffer at a time, so
+  ;; there is little reason to allow multiple serial readers to run at the same time.
+  (my-stop-serial-reader)
+
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
   (let* ((txt (buffer-substring-no-properties start end))
          (words (split-string txt))
          (buff (get-buffer-create my-buff-name)))
+
+    ;; GAURD: there must be at least 1 word to display.
+    (when (= (length words) 0)
+      (message "No words to display.")
+      (cl-return-from my-serial-reader))
 
     (switch-to-buffer-other-window buff)
 
@@ -45,8 +55,6 @@ Uses selected region if available, otherwise the entire buffer text."
            (substitute-command-keys
             "serial reader     [Abort]: \\[my-stop-serial-reader]")))
 
-    ;; stop any running serial reader from a previous invocation.
-    (my-stop-serial-reader)
 
     (setq my-timer (run-with-timer
                     0 my-delay-seconds

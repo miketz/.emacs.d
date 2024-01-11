@@ -51,7 +51,7 @@ Uses selected region if available, otherwise the entire buffer text."
          (words (split-string txt))
          (buff (get-buffer-create my-buff-name)))
 
-    ;; GAURD: there must be at least 1 word to display.
+    ;; GUARD: there must be at least 1 word to display.
     (when (= (length words) 0)
       (message "No words to display.")
       (cl-return-from my-serial-reader))

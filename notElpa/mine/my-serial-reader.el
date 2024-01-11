@@ -3,6 +3,8 @@
 ;;; wanted something like https://accelareader.com/ in Emacs.
 ;;; Display some text only 1 word at a time. Show the next word after a delay.
 
+;;; URL: https://raw.githubusercontent.com/miketz/.emacs.d/master/notElpa/mine/my-serial-reader.el
+
 ;;; TODO: centered view option? something like darkroom-mode?
 
 (require 'cl-lib)

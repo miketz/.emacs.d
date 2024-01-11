@@ -6,6 +6,9 @@
 ;;; TODO: bigger font option?
 ;;; TODO: centered view option? something like darkroom-mode?
 ;;; TODO: stop timer if user forcefully kills the output buffer. buffer kill hook?
+;;; TODO: define a mode for use in the output buffer.
+;;;       should allow keybinds in the output buffer.
+;;;       As well as hooks to cancel the timer if the output buffer is killed.
 
 (require 'cl-lib)
 

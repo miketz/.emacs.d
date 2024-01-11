@@ -7577,12 +7577,13 @@ vanilla javascript buffers."
   (autoload #'my-line-numbers-cycle "my-line-nums" nil t)
   (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
 
-  (let ((mac-terminal-p (and (eq system-type 'darwin)
-                             (not my-graphic-p))))
-    ;; line numbers helps to find the cursor in the mac terminal
-    (when mac-terminal-p
-      (setq display-line-numbers-type 'relative)
-      (global-display-line-numbers-mode))))
+  ;; (let ((mac-terminal-p (and (eq system-type 'darwin)
+  ;;                            (not my-graphic-p))))
+  ;;   ;; line numbers helps to find the cursor in the mac terminal
+  ;;   (when mac-terminal-p
+  ;;     (setq display-line-numbers-type 'relative)
+  ;;     (global-display-line-numbers-mode)))
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; powershell

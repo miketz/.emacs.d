@@ -27,7 +27,6 @@ Uses selected region if available, otherwise the entire buffer text."
     (setq end (point-max)))
 
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
-  ;;       split-string is slow on huge buffers.
   (let* ((txt (buffer-substring-no-properties start end))
          (words (split-string txt)))
 

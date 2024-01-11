@@ -19,16 +19,18 @@
 (defvar my-timer nil)
 
 ;;;###autoload
-(defun my-serial-reader (start end)
+(defun my-serial-reader (&optional start end)
   "Entry point function.
 Display current buffer text 1 word at a time in new buffer `my-buff-name'.
 Uses selected region if available, otherwise the entire buffer text."
-  (interactive "r")
 
-  ;; use selected region by default. otherwise use entire buffer text.
-  (unless (use-region-p)
-    (setq start (point-min))
-    (setq end (point-max)))
+  ;; NOTE: avoiding (interacitve "r"). It breaks in the case where Emacs has
+  ;; just started up with no mark set yet.
+  (interactive (if (use-region-p)
+                   ;; use selected region for `start' and `end'
+                   (list (region-beginning) (region-end))
+                 ;; else use entire buffer
+                 (list (point-min) (point-max))))
 
   ;; TODO: find a way to get the words as a "stream" instead of a giant list
   (let* ((txt (buffer-substring-no-properties start end))

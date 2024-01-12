@@ -1,5 +1,5 @@
 ;;; -*- lexical-binding: t -*-
-;;; for _0x4aV on #emacs irc
+;;; for _0x4aV on #emacs IRC
 ;;; wanted something like https://accelareader.com/ in Emacs.
 ;;; Display some text only 1 word at a time. Show the next word after a delay.
 
@@ -20,8 +20,8 @@ Positive numbers will increase font size.
 0 will have no effect on font size.
 Negative numbers will decrease font size which you probably don't want.")
 
-;; For now just add padding to achive a more centered look.
-;; although truly centering the text can be achived via `window-height'
+;; For now just add padding to achieve a more centered look.
+;; although truly centering the text can be achieved via `window-height'
 ;; and `window-width', these functions do not account for font scaling.
 (defvar my-sr-pad-above 5
   "New line padding above the text.")

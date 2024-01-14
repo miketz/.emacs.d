@@ -9355,8 +9355,6 @@ Values: lsp, citre, nil")
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
-(autoload #'my-serial-reader "my-serial-reader" nil t)
-
 (autoload #'charcode-region "my-misc" nil t)
 
 ;; blink effect on current line when switching windows or buffers.

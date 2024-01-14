@@ -9343,13 +9343,13 @@ Values: lsp, citre, nil")
 (setq rsvp-pad-above 5
       rsvp-pad-left 2)
 (custom-set-faces `(rsvp-focal-point-face ((t :foreground "red"))))
-;; Sample key binds for vanilla Emacs.  Press "C-c r" with text
-;; highlighted (or not for full buffer text).
+;; Sample key binds.
+;; Press "C-c r" with text highlighted (or not for full buffer text).
 (global-set-key (kbd "C-c r") #'rsvp-start-reader)
 (with-eval-after-load 'rapid-serial-visual-presentation
-  ;; Recommended key binds for the output buffer.
-  (define-key rapid-serial-visual-presentation-mode-map (kbd "C-c q")
-              #'rsvp-stop-reader))
+  ;; Sample key binds for the output buffer.
+  (define-key rapid-serial-visual-presentation-mode-map (kbd "C-c q") #'rsvp-stop-reader)
+  (define-key rapid-serial-visual-presentation-mode-map (kbd "C-c r") #'rsvp-rewind-reader))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

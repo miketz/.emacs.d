@@ -9338,10 +9338,10 @@ Values: lsp, citre, nil")
 (push "~/proj/elisp/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rapid-serial-visual-presentation" nil t)
 ;; Config vars
-(setq rsvp-delay-seconds 0.4)
-(setq rsvp-font-scale-level 4)
+(setq rsvp-delay-seconds 0.17)
+(setq rsvp-font-scale-level 2)
 (setq rsvp-pad-above 5
-      rsvp-pad-left 10)
+      rsvp-pad-left 2)
 (custom-set-faces `(rsvp-focal-point-face ((t :foreground "red"))))
 ;; Sample key binds for vanilla Emacs.  Press "C-c r" with text
 ;; highlighted (or not for full buffer text).

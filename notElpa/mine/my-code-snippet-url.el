@@ -6,7 +6,8 @@
 ;;; Code:
 
 (defvar paste-sites '((debian . "http://paste.debian.net/")
-                      (mozilla . "https://pastebin.mozilla.org/"))
+                      (mozilla . "https://pastebin.mozilla.org/")
+                      (bpa . "https://bpa.st/"))
   "Websites that provide code snippet hosting.")
 
 (defvar default-paste-site 'debian

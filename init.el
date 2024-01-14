@@ -9333,15 +9333,15 @@ Values: lsp, citre, nil")
 (autoload #'stem-reading-mode "stem-reading-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
-;;; rapid-serial-visual-presentation rsvp
+;;; rsvp.  rapid serial visual presentation.  speed reader.
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/mine/rapid-serial-visual-presentation" load-path)
-(autoload #'rsvp-start-reader "rapid-serial-visual-presentation" nil t)
+(autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
-(setq rsvp-delay-seconds 0.17)
-(setq rsvp-font-scale-level 2)
+(setq rsvp-delay-seconds 0.2)
+(setq rsvp-font-scale-level 3)
 (setq rsvp-pad-above 5
-      rsvp-pad-left 2)
+      rsvp-pad-left  2)
 (custom-set-faces `(rsvp-focal-point-face ((t :foreground "red"))))
 ;; Sample key binds.
 ;; Press "C-c r" with text highlighted (or not for full buffer text).
@@ -9350,6 +9350,7 @@ Values: lsp, citre, nil")
   ;; Sample key binds for the output buffer.
   (define-key rsvp-mode-map (kbd "C-c q") #'rsvp-stop-reader)
   (define-key rsvp-mode-map (kbd "C-c r") #'rsvp-rewind-reader))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

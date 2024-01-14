@@ -9346,10 +9346,10 @@ Values: lsp, citre, nil")
 ;; Sample key binds.
 ;; Press "C-c r" with text highlighted (or not for full buffer text).
 (global-set-key (kbd "C-c r") #'rsvp-start-reader)
-(with-eval-after-load 'rapid-serial-visual-presentation
+(with-eval-after-load 'rsvp
   ;; Sample key binds for the output buffer.
-  (define-key rapid-serial-visual-presentation-mode-map (kbd "C-c q") #'rsvp-stop-reader)
-  (define-key rapid-serial-visual-presentation-mode-map (kbd "C-c r") #'rsvp-rewind-reader))
+  (define-key rsvp-mode-map (kbd "C-c q") #'rsvp-stop-reader)
+  (define-key rsvp-mode-map (kbd "C-c r") #'rsvp-rewind-reader))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

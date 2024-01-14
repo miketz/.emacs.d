@@ -346,3 +346,6 @@
 [submodule "notElpa/clojure-mode"]
 	path = notElpa/clojure-mode
 	url = https://github.com/miketz/clojure-mode
+[submodule "notElpa/mine/rapid-serial-visual-presentation"]
+	path = notElpa/mine/rapid-serial-visual-presentation
+	url = https://github.com/miketz/rapid-serial-visual-presentation

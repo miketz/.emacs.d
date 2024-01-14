@@ -508,6 +508,23 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'rsvp
+      :comment nil
+      :folder (concat my-module-folder "mine/rapid-serial-visual-presentation")
+      :remotes '((:sym mine :url "https://github.com/miketz/rapid-serial-visual-presentation"
+                       :alias "origin")
+                 ;; my own project, so no 3rd party upstream
+                 (:sym upstream :url "https://github.com/miketz/rapid-serial-visual-presentation"
+                       :alias "origin"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '((emacs "24.4"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'ido-grid
       :comment nil
       :folder (concat my-module-folder "ido-grid.el")

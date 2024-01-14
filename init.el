@@ -9332,6 +9332,24 @@ Values: lsp, citre, nil")
 (push "~/.emacs.d/notElpa/stem-reading-mode.el" load-path)
 (autoload #'stem-reading-mode "stem-reading-mode" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; rapid-serial-visual-presentation
+;;;----------------------------------------------------------------------------
+(push "~/proj/elisp/rapid-serial-visual-presentation" load-path)
+(autoload #'rsvp-start-reader "rapid-serial-visual-presentation" nil t)
+;; Config vars
+(setq rsvp-delay-seconds 0.4)
+(setq rsvp-font-scale-level 4)
+(setq rsvp-pad-above 5
+      rsvp-pad-left 10)
+(custom-set-faces `(rsvp-focal-point-face ((t :foreground "red"))))
+;; Sample key binds for vanilla Emacs.  Press "C-c r" with text
+;; highlighted (or not for full buffer text).
+(global-set-key (kbd "C-c r") #'rsvp-start-reader)
+(with-eval-after-load 'rapid-serial-visual-presentation
+  ;; Recommended key binds for the output buffer.
+  (define-key rapid-serial-visual-presentation-mode-map (kbd "C-c q")
+              #'rsvp-stop-reader))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

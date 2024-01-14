@@ -6029,7 +6029,7 @@ TODO: call this function when it works."
 ;; highlighted.
 (global-set-key (kbd "C-c m") #'mor-mode-on-region)
 (global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
-(global-set-key (kbd "C-c r") #'mor-curr-mode-on-region)
+;; (global-set-key (kbd "C-c r") #'mor-curr-mode-on-region)
 (with-eval-after-load 'evil
   ;; Recommended key binds for evil users.  Press "m" in visual mode.
   (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)

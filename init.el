@@ -9333,7 +9333,7 @@ Values: lsp, citre, nil")
 (autoload #'stem-reading-mode "stem-reading-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
-;;; rapid-serial-visual-presentation
+;;; rapid-serial-visual-presentation rsvp
 ;;;----------------------------------------------------------------------------
 (push "~/proj/elisp/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rapid-serial-visual-presentation" nil t)

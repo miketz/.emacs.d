@@ -9339,12 +9339,12 @@ Values: lsp, citre, nil")
 (push "~/.emacs.d/notElpa/mine/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
-(setq rsvp-delay-seconds 0.22)
+(setq rsvp-delay-seconds 0.18)
 (setq rsvp-initial-delay-seconds 0.5)
 (setq rsvp-font-scale-level 3)
 (setq rsvp-pad-above 5
       rsvp-pad-left  2)
-(setq rsvp-skip-words-p t)
+(setq rsvp-skip-words-p nil)
 (custom-set-faces `(rsvp-focal-point-face ((t :foreground "red"))))
 ;; Sample key binds.
 ;; Press "C-c r" with text highlighted (or not for full buffer text).

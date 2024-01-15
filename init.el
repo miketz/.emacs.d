@@ -9353,10 +9353,9 @@ Values: lsp, citre, nil")
   ;; Sample key binds for the output buffer.
   (define-key rsvp-mode-map (kbd "<SPC>") #'rsvp-toggle-start-stop)
   (define-key rsvp-mode-map (kbd "r") #'rsvp-rewind-reader)
-  ;; Sample evil key binds
   (with-eval-after-load 'evil
-    (define-key evil-normal-state-map (kbd "<SPC>") #'rsvp-toggle-start-stop)
-    (define-key evil-normal-state-map (kbd "r") #'rsvp-rewind-reader)))
+    ;; weird key bind issues with evil mode, so avoid it for now.
+    (push `(,rsvp-buff-name . emacs) evil-buffer-regexps)))
 
 
 ;;;----------------------------------------------------------------------------

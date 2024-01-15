@@ -4528,8 +4528,9 @@ and indent."
 ;;   #'avy-goto-char-2)
 ;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
 (when my-use-evil-p
-  (define-key evil-normal-state-map (kbd "<SPC>") #'avy-goto-word-1)
-  (define-key evil-motion-state-map (kbd "<SPC>") #'avy-goto-word-1)
+  ;; (define-key evil-normal-state-map (kbd "<SPC>") #'avy-goto-word-1)
+  ;; (define-key evil-motion-state-map (kbd "<SPC>") #'avy-goto-word-1)
+  (evil-define-key '(normal motion) global-map (kbd "<SPC>") #'avy-goto-word-1)
   (evil-leader/set-key "s" #'avy-goto-char-timer))
 
 (with-eval-after-load 'avy

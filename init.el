@@ -9339,7 +9339,7 @@ Values: lsp, citre, nil")
 (push "~/.emacs.d/notElpa/mine/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
-(setq rsvp-delay-seconds 0.18)
+(setq rsvp-delay-seconds 0.15)
 (setq rsvp-initial-delay-seconds 0.5)
 (setq rsvp-font-scale-level 3)
 (setq rsvp-pad-above 5

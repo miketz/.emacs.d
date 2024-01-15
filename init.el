@@ -9338,19 +9338,24 @@ Values: lsp, citre, nil")
 (push "~/.emacs.d/notElpa/mine/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
-(setq rsvp-delay-seconds 0.17)
-(setq rsvp-initial-delay-seconds 1.0)
+(setq rsvp-delay-seconds 0.22)
+(setq rsvp-initial-delay-seconds 0.8)
 (setq rsvp-font-scale-level 3)
 (setq rsvp-pad-above 5
       rsvp-pad-left  2)
+(setq rsvp-skip-words-p t)
 (custom-set-faces `(rsvp-focal-point-face ((t :foreground "red"))))
 ;; Sample key binds.
 ;; Press "C-c r" with text highlighted (or not for full buffer text).
 (global-set-key (kbd "C-c r") #'rsvp-start-reader)
 (with-eval-after-load 'rsvp
   ;; Sample key binds for the output buffer.
-  (define-key rsvp-mode-map (kbd "C-c q") #'rsvp-stop-reader)
-  (define-key rsvp-mode-map (kbd "C-c r") #'rsvp-rewind-reader))
+  (define-key rsvp-mode-map (kbd "q") #'rsvp-stop-reader)
+  (define-key rsvp-mode-map (kbd "r") #'rsvp-rewind-reader)
+  ;; Sample evil key binds
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "q") #'rsvp-stop-reader)
+    (define-key evil-normal-state-map (kbd "r") #'rsvp-rewind-reader)))
 
 
 ;;;----------------------------------------------------------------------------

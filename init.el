@@ -9340,6 +9340,11 @@ Values: lsp, citre, nil")
 (autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
 (setq rsvp-delay-seconds 0.15)
+(setq rsvp-pause-comma-p t
+      rsvp-pause-comma-% 0.3)
+(setq rsvp-pause-end-of-sentence-p t
+      rsvp-pause-end-of-sentence-% 2.0)
+(setq rsvp-scale-delay-to-word-length-p t)
 (setq rsvp-initial-delay-seconds 0.5)
 (setq rsvp-font-scale-level 3)
 (setq rsvp-pad-above 5

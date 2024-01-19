@@ -4828,6 +4828,9 @@ and indent."
   (remove-hook hook fn))
 
 (with-eval-after-load 'vc
+  ;; avoid creating junk file when using `vc-revision-other-window'. C-x v ~
+  (setopt vc-find-revision-no-save t)
+
   (push "bin" vc-directory-exclusion-list)
   (push "obj" vc-directory-exclusion-list)
   (when my-use-evil-p

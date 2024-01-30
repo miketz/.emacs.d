@@ -2623,6 +2623,27 @@ Some operations only make sense for these single-file packages."
     ;; return the results for informational purposes.
     statuses))
 
+(defun my-setup-all-upstream-remotes-if-missing-golang ()
+  "Call an external Go program to set upstream remotes.
+Calls git commands concurrently for each git submodule.
+
+Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+
+Git does not keep track of multiple remotes so I track this in `my-modules' and
+also in gitFetchHelper."
+  (interactive)
+  (let* (;; run the Go program
+         (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+                      " init"))
+         (output-str (shell-command-to-string cmd))
+         (buff (get-buffer-create "*gitFetchHelper*")))
+
+    (unless (eq buff (current-buffer))
+      (switch-to-buffer-other-window buff))
+    (goto-char (point-max)) ;; end of buffer
+    (insert output-str)
+    (insert "\n--------------------------\n")))
+
 
 (defun my-fetch-all-upstream-remotes-golang ()
   "Call an external Go program to fetch each upstream remote.

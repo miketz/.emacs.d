@@ -234,7 +234,7 @@ _t_: types
 _d_: doc
 _q_, _C-g_: quit"
 
-  ("c" compile)
+  ("c" my-go-compile)
   ("e" my-go-errcheck)
   ("a" my-go-ineffassign)
   ("h" my-go-heap-escape)
@@ -243,7 +243,7 @@ _q_, _C-g_: quit"
   ("l" my-go-lint)
 
   ;; don't use the hint text as it makes (:hint nil) not work?
-  ;; ("c" compile "compile")
+  ;; ("c" my-go-compile "compile")
   ;; ("e" my-go-errcheck "errcheck")
   ;; ("a" my-go-ineffassign "ineffassign")
   ;; ("h" my-go-heap-escape "heap")

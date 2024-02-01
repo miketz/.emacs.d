@@ -9376,6 +9376,16 @@ Values: lsp, citre, nil")
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+
+;; various log warning control variables.
+;; hide the anoying native-comp warnings
+(setq native-comp-async-report-warnings-errors 'silent)
+;; still log warnings, but don't popup window unless it's an error.
+(setq  warning-minimum-level :error)
+;; warning-suppress-log-types
+;; warning-suppress-types
+
+
 (autoload #'charcode-region "my-misc" nil t)
 
 ;; blink effect on current line when switching windows or buffers.

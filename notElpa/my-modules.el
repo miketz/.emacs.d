@@ -2645,6 +2645,17 @@ also in gitFetchHelper."
     (insert "\n--------------------------\n")))
 
 
+(defun my--fetch-complete (p msg)
+  (when (memq (process-status p) '(exit signal))
+    ;;(message (concat (process-name p) " - " msg))
+    (let ((buff (process-buffer p)))
+      (unless (eq buff (current-buffer))
+        (switch-to-buffer-other-window buff))
+      (goto-char (point-max)) ;; end of buffer
+      ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+      (insert "\n--------------------------\n"))
+    (message "fetch complete")))
+
 (defun my-fetch-all-upstream-remotes-golang ()
   "Call an external Go program to fetch each upstream remote.
 Concurrently fetches all upstream remotes at once for increased speed.
@@ -2655,17 +2666,24 @@ Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
-  (let* (;; run the Go program
-         (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
-                      " fetch"))
-         (output-str (shell-command-to-string cmd))
-         (buff (get-buffer-create "*gitFetchHelper*")))
+  ;; (let* (;; run the Go program
+  ;;        (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  ;;                     " fetch"))
+  ;;        (output-str (shell-command-to-string cmd))
+  ;;        (buff (get-buffer-create "*gitFetchHelper*")))
 
-    (unless (eq buff (current-buffer))
-      (switch-to-buffer-other-window buff))
-    (goto-char (point-max)) ;; end of buffer
-    (insert output-str)
-    (insert "\n--------------------------\n")))
+  ;;   (unless (eq buff (current-buffer))
+  ;;     (switch-to-buffer-other-window buff))
+  ;;   (goto-char (point-max)) ;; end of buffer
+  ;;   (insert output-str)
+  ;;   (insert "\n--------------------------\n"))
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+                      " fetch"))
+         (buff (get-buffer-create "*gitFetchHelper*")))
+    (message "fetching each submodule...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--fetch-complete)))
 
 (defun my-fetch-all-upstream-remotes ()
   "Run git fetch for each upstream remote.

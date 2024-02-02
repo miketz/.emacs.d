@@ -2623,6 +2623,17 @@ Some operations only make sense for these single-file packages."
     ;; return the results for informational purposes.
     statuses))
 
+(defun my--remote-complete (p msg)
+  (when (memq (process-status p) '(exit signal))
+    ;;(message (concat (process-name p) " - " msg))
+    (let ((buff (process-buffer p)))
+      (unless (eq buff (current-buffer))
+        (switch-to-buffer-other-window buff))
+      (goto-char (point-max)) ;; end of buffer
+      ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+      (insert "\n--------------------------\n"))
+    (message "upstream remote setup complete")))
+
 (defun my-setup-all-upstream-remotes-if-missing-golang ()
   "Call an external Go program to set upstream remotes.
 Calls git commands concurrently for each git submodule.
@@ -2632,17 +2643,13 @@ Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
 Git does not keep track of multiple remotes so I track this in `my-modules' and
 also in gitFetchHelper."
   (interactive)
-  (let* (;; run the Go program
-         (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " init"))
-         (output-str (shell-command-to-string cmd))
          (buff (get-buffer-create "*gitFetchHelper*")))
-
-    (unless (eq buff (current-buffer))
-      (switch-to-buffer-other-window buff))
-    (goto-char (point-max)) ;; end of buffer
-    (insert output-str)
-    (insert "\n--------------------------\n")))
+    (message "setting up missing upstream remotes...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--remote-complete)))
 
 
 (defun my--fetch-complete (p msg)
@@ -2730,6 +2737,17 @@ Merge will be done manually after this."
     ;; return the results for informational purposes.
     statuses))
 
+(defun my--list-merges-complete (p msg)
+  (when (memq (process-status p) '(exit signal))
+    ;;(message (concat (process-name p) " - " msg))
+    (let ((buff (process-buffer p)))
+      (unless (eq buff (current-buffer))
+        (switch-to-buffer-other-window buff))
+      (goto-char (point-max)) ;; end of buffer
+      ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+      (insert "\n--------------------------\n"))
+    (message "merge detection complete")))
+
 (defun my-list-modules-with-upstream-code-to-merge-golang ()
   "Call an external Go program to see which modules have new code for review/merging.
 Calls git diff concurrently.
@@ -2740,17 +2758,13 @@ Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
-  (let* (;; run the Go program
-         (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " diff"))
-         (output-str (shell-command-to-string cmd))
          (buff (get-buffer-create "*gitFetchHelper*")))
-
-    (unless (eq buff (current-buffer))
-      (switch-to-buffer-other-window buff))
-    (goto-char (point-max)) ;; end of buffer
-    (insert output-str)
-    (insert "\n--------------------------\n")))
+    (message "finding submodules with new upstream code to merge...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--list-merges-complete)))
 
 (defun my-list-modules-with-upstream-code-to-merge ()
   "List modules with new upstream code not yet merged into the local branch.

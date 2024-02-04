@@ -705,6 +705,11 @@ Example:
    `(profile-dotemacs-low-percentage-face ((,class :foreground ,faint)))
    ;; `(profile-dotemacs-highlight-face ((,class :background "blue")))
 
+   ;; klondike solitaire
+   `(klondike-heart-diamond-color ((,class :foreground "orange")))
+   `(klondike-stack-numbering ((,class :foreground "green")))
+   `(klondike-stack-selecting ((,class :foreground "red" :background "black")))
+
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face
      ((,class (:foreground ,rain-1))))

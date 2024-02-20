@@ -1693,6 +1693,12 @@ Historical preservation."
    '(fringe ((t (:foreground "#9B9B9B" :background "light blue";"alice blue"
                              ))))))
 
+(defun my-color-ample-flat ()
+  "A good 256 color theme."
+  (interactive)
+  (load-theme 'ample-flat t)
+  (my-disable-var-use-face-treesit))
+
 (defun my-color-moe-light ()
   (interactive)
   (load-theme 'moe-light t)

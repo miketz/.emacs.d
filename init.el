@@ -1887,7 +1887,8 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-color-avk-daylight file nil t)
   (autoload #'my-color-moe-light file nil t)
   (autoload #'my-color-moe-dark file nil t)
-  (autoload #'my-color-wildcharm-light file nil t))
+  (autoload #'my-color-wildcharm-light file nil t)
+  (autoload #'my-color-ample-flat file nil t))
 
 
 (when my-graphic-p ;; transparency stuff

@@ -1694,6 +1694,11 @@ Historical preservation."
                              ))))
    `(vertical-border ((t :foreground "#000000")))))
 
+(defun my-color-wildcharm ()
+  (interactive)
+  (load-theme 'wildcharm t)
+  (my-disable-var-use-face-treesit))
+
 (defun my-color-ample-flat ()
   "A good 256 color theme."
   (interactive)

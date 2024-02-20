@@ -1691,7 +1691,8 @@ Historical preservation."
   (custom-theme-set-faces
    'wildcharm-light
    '(fringe ((t (:foreground "#9B9B9B" :background "light blue";"alice blue"
-                             ))))))
+                             ))))
+   `(vertical-border ((t :foreground "#000000")))))
 
 (defun my-color-ample-flat ()
   "A good 256 color theme."

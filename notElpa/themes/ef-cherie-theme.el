@@ -1,4 +1,4 @@
-;;; ef-winter-theme.el --- Legible dark theme with magenta, purple, fawn, teal colors -*- lexical-binding:t -*-
+;;; ef-cherie-theme.el --- Legible dark theme with warm colors (mostly pink, magenta, gold) -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2022-2024  Free Software Foundation, Inc.
 
@@ -37,60 +37,60 @@
   (require 'ef-themes)
 
 ;;;###theme-autoload
-  (deftheme ef-winter
-    "Legible dark theme with magenta, purple, fawn, teal colors."
+  (deftheme ef-cherie
+    "Legible dark theme with warm colors (mostly pink, magenta, gold)"
     :background-mode 'dark
     :kind 'color-scheme
     :family 'ef)
 
-  (defconst ef-winter-palette
+  (defconst ef-cherie-palette
     '(
 ;;; Basic values
 
-      (bg-main      "#0f0b15")
-      (fg-main      "#b8c6d5")
-      (bg-dim       "#1d202f")
-      (fg-dim       "#807c9f")
-      (bg-alt       "#2a2f42")
-      (fg-alt       "#bf8f8f")
+      (bg-main      "#190a0f")
+      (fg-main      "#d3cfcf")
+      (bg-dim       "#291f26")
+      (fg-dim       "#808898")
+      (bg-alt       "#392a2f")
+      (fg-alt       "#bf9cdf")
 
-      (bg-active    "#4a4f62")
-      (bg-inactive  "#19181f")
+      (bg-active    "#594a4f")
+      (bg-inactive  "#1e1216")
 
 ;;; Basic hues for foreground values
 
-      (red             "#f47359")
-      (red-warmer      "#ef6560")
-      (red-cooler      "#ff6a7a")
-      (red-faint       "#d56f72")
-      (green           "#29a444")
-      (green-warmer    "#6aad0f")
-      (green-cooler    "#00a392")
+      (red             "#ff7359")
+      (red-warmer      "#ff656f")
+      (red-cooler      "#ff78aa")
+      (red-faint       "#e47f72")
+      (green           "#60b444")
+      (green-warmer    "#80b25f")
+      (green-cooler    "#60bf88")
       (green-faint     "#61a06c")
-      (yellow          "#b58a52")
-      (yellow-warmer   "#d1803f")
-      (yellow-cooler   "#df9080")
-      (yellow-faint    "#c0a38a")
-      (blue            "#3f95f6")
-      (blue-warmer     "#6a9fff")
-      (blue-cooler     "#029fff")
-      (blue-faint      "#7a94df")
-      (magenta         "#d369af")
-      (magenta-warmer  "#e580e0")
-      (magenta-cooler  "#af85ea")
-      (magenta-faint   "#c57faf")
-      (cyan            "#4fbaef")
-      (cyan-warmer     "#6fafdf")
-      (cyan-cooler     "#35afbf")
-      (cyan-faint      "#8aa0df")
+      (yellow          "#e5b76f")
+      (yellow-warmer   "#ea9955")
+      (yellow-cooler   "#f59280")
+      (yellow-faint    "#bf9f8f")
+      (blue            "#8fa5f6")
+      (blue-warmer     "#a897ef")
+      (blue-cooler     "#7fa5ff")
+      (blue-faint      "#7f9ab4")
+      (magenta         "#ef80bf")
+      (magenta-warmer  "#f470df")
+      (magenta-cooler  "#df7fff")
+      (magenta-faint   "#cc9bcf")
+      (cyan            "#8fbaef")
+      (cyan-warmer     "#9ac0e4")
+      (cyan-cooler     "#8fcfdf")
+      (cyan-faint      "#aac0cf")
 
 ;;; Basic hues for background values
 
       (bg-red-intense     "#b02930")
-      (bg-green-intense   "#0a7040")
+      (bg-green-intense   "#2a7140")
       (bg-yellow-intense  "#8f5040")
       (bg-blue-intense    "#4648d0")
-      (bg-magenta-intense "#a04fc5")
+      (bg-magenta-intense "#804fd5")
       (bg-cyan-intense    "#2270cf")
 
       (bg-red-subtle      "#72002a")
@@ -102,9 +102,9 @@
 
 ;;; Diffs
 
-      (bg-added          "#00371f")
-      (bg-added-faint    "#002918")
-      (bg-added-refine   "#004c2f")
+      (bg-added          "#00351f")
+      (bg-added-faint    "#002410")
+      (bg-added-refine   "#034d2f")
       (fg-added          "#a0e0a0")
 
       (bg-changed        "#363300")
@@ -112,9 +112,9 @@
       (bg-changed-refine "#4a4a00")
       (fg-changed        "#efef80")
 
-      (bg-removed        "#450f1f")
-      (bg-removed-faint  "#2f060f")
-      (bg-removed-refine "#641426")
+      (bg-removed        "#510c28")
+      (bg-removed-faint  "#340a14")
+      (bg-removed-refine "#701a35")
       (fg-removed        "#ffbfbf")
 
 ;;; Graphs
@@ -134,24 +134,24 @@
 
 ;;; Special hues
 
-      (bg-mode-line       "#5f1f5f")
-      (fg-mode-line       "#dedeff")
-      (bg-completion      "#2f2a7a")
-      (bg-hover           "#00474f")
-      (bg-hover-secondary "#44196f")
-      (bg-hl-line         "#003045")
-      (bg-paren           "#2f608e")
-      (bg-err             "#44101a") ; check with err
-      (bg-warning         "#393312") ; check with warning
-      (bg-info            "#0f3518") ; check with info
+      (bg-mode-line       "#771a4f")
+      (fg-mode-line       "#ffcfdf")
+      (bg-completion      "#4a1937")
+      (bg-hover           "#303f6f")
+      (bg-hover-secondary "#66364f")
+      (bg-hl-line         "#401f33")
+      (bg-paren           "#3f5f75")
+      (bg-err             "#461017") ; check with err
+      (bg-warning         "#3a3004") ; check with warning
+      (bg-info            "#00352a") ; check with info
 
-      (border        "#4a4955")
-      (cursor        "#ff6ff0")
+      (border        "#695960")
+      (cursor        "#ff5aaf")
       (fg-intense    "#ffffff")
 
-      (modeline-err     "#ff9fbf")
-      (modeline-warning "#ddb300")
-      (modeline-info    "#40e0af")
+      (modeline-err     "#ff9f1f")
+      (modeline-warning "#c0bf30")
+      (modeline-info    "#6fefaf")
 
       (underline-err     "#df2f2f")
       (underline-warning "#c0b000")
@@ -169,50 +169,50 @@
       (fg-fringe unspecified)
 
       (err red-warmer)
-      (warning yellow)
+      (warning yellow-warmer)
       (info green)
 
-      (link magenta)
-      (link-alt cyan-warmer)
-      (name magenta)
-      (keybind cyan-cooler)
+      (link magenta-cooler)
+      (link-alt yellow)
+      (name yellow-cooler)
+      (keybind yellow-warmer)
       (identifier magenta-faint)
       (prompt magenta-warmer)
 
-      (bg-region "#342464")
+      (bg-region "#232f3f")
       (fg-region unspecified)
 
 ;;;; Code mappings
 
-      (builtin magenta-warmer)
+      (builtin blue-warmer)
       (comment yellow-faint)
-      (constant magenta)
-      (fnname cyan-cooler)
-      (keyword magenta-cooler)
-      (preprocessor red-cooler)
-      (docstring cyan-faint)
-      (string yellow-cooler)
-      (type cyan)
-      (variable blue-warmer)
-      (rx-escape green) ; compare with `string'
-      (rx-construct blue)
+      (constant red-cooler)
+      (fnname yellow-cooler)
+      (keyword magenta)
+      (preprocessor cyan)
+      (docstring magenta-faint)
+      (string yellow)
+      (type magenta-warmer)
+      (variable magenta-cooler)
+      (rx-escape cyan-warmer) ; compare with `string'
+      (rx-construct red)
 
 ;;;; Accent mappings
 
-      (accent-0 magenta-cooler)
+      (accent-0 magenta-warmer)
       (accent-1 yellow)
-      (accent-2 green-cooler)
-      (accent-3 magenta-warmer)
+      (accent-2 blue-warmer)
+      (accent-3 red)
 
 ;;;; Date mappings
 
-      (date-common cyan-cooler)
+      (date-common magenta)
       (date-deadline red-warmer)
       (date-event fg-alt)
-      (date-holiday magenta)
+      (date-holiday blue-warmer)
       (date-now fg-main)
       (date-range fg-alt)
-      (date-scheduled yellow)
+      (date-scheduled yellow-warmer)
       (date-weekday cyan)
       (date-weekend red-faint)
 
@@ -220,25 +220,25 @@
 
       (prose-code yellow)
       (prose-done green)
-      (prose-macro green-cooler)
+      (prose-macro blue-warmer)
       (prose-metadata fg-dim)
       (prose-metadata-value fg-alt)
       (prose-table fg-alt)
-      (prose-table-formula info)
-      (prose-tag cyan-faint)
+      (prose-table-formula warning)
+      (prose-tag yellow-faint)
       (prose-todo red-warmer)
-      (prose-verbatim magenta-cooler)
+      (prose-verbatim magenta-warmer)
 
 ;;;; Mail mappings
 
-      (mail-cite-0 magenta-cooler)
-      (mail-cite-1 yellow-cooler)
-      (mail-cite-2 cyan-cooler)
-      (mail-cite-3 magenta)
-      (mail-part magenta-faint)
-      (mail-recipient magenta)
-      (mail-subject blue-warmer)
-      (mail-other magenta-cooler)
+      (mail-cite-0 magenta)
+      (mail-cite-1 yellow)
+      (mail-cite-2 blue-warmer)
+      (mail-cite-3 magenta-warmer)
+      (mail-part magenta-cooler)
+      (mail-recipient yellow-cooler)
+      (mail-subject red)
+      (mail-other yellow-warmer)
 
 ;;;; Search mappings
 
@@ -265,16 +265,16 @@
 
 ;;;; Rainbow mappings
 
-      (rainbow-0 magenta)
-      (rainbow-1 cyan-cooler)
-      (rainbow-2 magenta-cooler)
-      (rainbow-3 yellow)
-      (rainbow-4 blue-warmer)
-      (rainbow-5 magenta-warmer)
-      (rainbow-6 green-cooler)
-      (rainbow-7 yellow-cooler)
-      (rainbow-8 cyan-warmer))
-    "The `ef-winter' palette.
+      (rainbow-0 magenta-warmer)
+      (rainbow-1 yellow)
+      (rainbow-2 magenta)
+      (rainbow-3 cyan)
+      (rainbow-4 yellow-cooler)
+      (rainbow-5 blue-warmer)
+      (rainbow-6 red-cooler)
+      (rainbow-7 cyan-warmer)
+      (rainbow-8 magenta-cooler))
+    "The `ef-cherie' palette.
 Color values have the form (COLOR-NAME HEX-VALUE) with the former
 as a symbol and the latter as a string.
 
@@ -282,8 +282,8 @@ Semantic color mappings have the form (MAPPING-NAME COLOR-NAME)
 with both as symbols.  The latter is a color that already exists
 in the palette and is associated with a HEX-VALUE.")
 
-  (defcustom ef-winter-palette-overrides nil
-    "Overrides for `ef-winter-palette'.
+  (defcustom ef-cherie-palette-overrides nil
+    "Overrides for `ef-cherie-palette'.
 
 Mirror the elements of the aforementioned palette, overriding
 their value.
@@ -299,8 +299,8 @@ further details)."
   :type '(repeat (list symbol (choice symbol string)))
   :link '(info-link "(ef-themes) Palette overrides"))
 
-  (ef-themes-theme ef-winter ef-winter-palette ef-winter-palette-overrides)
+  (ef-themes-theme ef-cherie ef-cherie-palette ef-cherie-palette-overrides)
 
-  (provide-theme 'ef-winter))
+  (provide-theme 'ef-cherie))
 
-;;; ef-winter-theme.el ends here
+;;; ef-cherie-theme.el ends here

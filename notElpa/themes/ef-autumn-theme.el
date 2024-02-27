@@ -1,14 +1,13 @@
-;;; ef-autumn-theme.el --- Legible dark theme -*- lexical-binding:t -*-
+;;; ef-autumn-theme.el --- Legible dark theme with warm, varied colors (red, yellow, green, teal) -*- lexical-binding:t -*-
 
-;; Copyright (C) 2022  Free Software Foundation, Inc.
+;; Copyright (C) 2022-2024  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Ef-Themes Development <~protesilaos/ef-themes@lists.sr.ht>
-;; URL: https://git.sr.ht/~protesilaos/ef-themes
-;; Mailing-List: https://lists.sr.ht/~protesilaos/ef-themes
+;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/ef-themes
 ;; Keywords: faces, theme, accessibility
 
-;; This file is part of GNU Emacs.
+;; This file is NOT part of GNU Emacs.
 
 ;; GNU Emacs is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -37,31 +36,39 @@
 (eval-and-compile
   (require 'ef-themes)
 
-  (deftheme ef-autumn "Legible dark theme.")
+;;;###theme-autoload
+  (deftheme ef-autumn
+    "Legible dark theme with warm, varied colors (red, yellow, green, teal)."
+    :background-mode 'dark
+    :kind 'color-scheme
+    :family 'ef)
 
   (defconst ef-autumn-palette
-    '(;; Basic tones
+    '(
+;;; Basic values
+
       (bg-main     "#0f0e06")
       (fg-main     "#cfbcba")
-      (bg-dim      "#1f1b19")
+      (bg-dim      "#26211d")
       (fg-dim      "#887c8a")
       (bg-alt      "#36322f")
       (fg-alt      "#70a89f")
 
-      (bg-active   "#46423f")
-      (bg-inactive "#14130a")
+      (bg-active   "#56524f")
+      (bg-inactive "#15140d")
 
-      ;; Basic hues for foreground values
+;;; Basic hues for foreground values
+
       (red             "#ef656a")
       (red-warmer      "#f06a3f")
       (red-cooler      "#ff7a7f")
-      (red-faint       "#d08f72")
+      (red-faint       "#df7f7f")
       (green           "#2fa526")
       (green-warmer    "#64aa0f")
-      (green-cooler    "#00b672")
-      (green-faint     "#519068")
-      (yellow          "#c48502")
-      (yellow-warmer   "#e0832f")
+      (green-cooler    "#00b066")
+      (green-faint     "#5f9f6f")
+      (yellow          "#c48702")
+      (yellow-warmer   "#d0730f")
       (yellow-cooler   "#df8f6f")
       (yellow-faint    "#cf9f7f")
       (blue            "#379cf6")
@@ -77,53 +84,105 @@
       (cyan-cooler     "#3dbbb0")
       (cyan-faint      "#82a0af")
 
-      ;; Basic hues for background values
-      (bg-red      "#cd2f30")
-      (bg-green    "#20a020")
-      (bg-yellow   "#9a4f20")
-      (bg-blue     "#3f43af")
-      (bg-magenta  "#c040cf")
-      (bg-cyan     "#027080")
+;;; Basic hues for background values
 
-      ;; Diffs
-      (bg-added          "#172c0f")
-      (bg-added-faint    "#0a1f00")
-      (bg-added-refine   "#203f10")
+      (bg-red-intense     "#b02930")
+      (bg-green-intense   "#4a7000")
+      (bg-yellow-intense  "#8f5040")
+      (bg-blue-intense    "#4648d0")
+      (bg-magenta-intense "#804fd5")
+      (bg-cyan-intense    "#2270be")
 
-      (bg-changed        "#323200")
-      (bg-changed-faint  "#281a00")
-      (bg-changed-refine "#484800")
+      (bg-red-subtle      "#72002a")
+      (bg-green-subtle    "#00422a")
+      (bg-yellow-subtle   "#603000")
+      (bg-blue-subtle     "#242679")
+      (bg-magenta-subtle  "#501f72")
+      (bg-cyan-subtle     "#004065")
 
-      (bg-removed        "#46120a")
-      (bg-removed-faint  "#330a00")
-      (bg-removed-refine "#6a1a16")
+;;; Diffs
 
-      ;; Special hues
-      (bg-mode-line  "#692a12") (fg-mode-line  "#feeeca")
-      (bg-accent     "#ffa200") (fg-accent     "#000000")
-      (bg-completion "#36213a")
-      (bg-hover      "#265f4a")
-      (bg-hover-alt  "#6f345a")
-      (bg-hl-line    "#302a3a")
-      (bg-region     "#3f1020")
-      (bg-paren      "#7f2d40")
-      (bg-err        "#361400") ; check with err
-      (bg-info       "#152800") ; check with info
+      (bg-added          "#17360f")
+      (bg-added-faint    "#0a2900")
+      (bg-added-refine   "#204810")
+      (fg-added          "#a0e0a0")
 
-      (border        "#54444a")
+      (bg-changed        "#363300")
+      (bg-changed-faint  "#2a1f00")
+      (bg-changed-refine "#4a4a00")
+      (fg-changed        "#efef80")
+
+      (bg-removed        "#4b120a")
+      (bg-removed-faint  "#3a0a00")
+      (bg-removed-refine "#6f1a16")
+      (fg-removed        "#ffbfbf")
+
+;;; Graphs
+
+      (bg-graph-red-0     "#b52c2c")
+      (bg-graph-red-1     "#702020")
+      (bg-graph-green-0   "#0fed00")
+      (bg-graph-green-1   "#007800")
+      (bg-graph-yellow-0  "#f1e00a")
+      (bg-graph-yellow-1  "#b08940")
+      (bg-graph-blue-0    "#2fafef")
+      (bg-graph-blue-1    "#1f2f8f")
+      (bg-graph-magenta-0 "#bf94fe")
+      (bg-graph-magenta-1 "#5f509f")
+      (bg-graph-cyan-0    "#47dfea")
+      (bg-graph-cyan-1    "#00808f")
+
+;;; Special hues
+
+      (bg-mode-line       "#692a12")
+      (fg-mode-line       "#feeeca")
+      (bg-completion      "#36213a")
+      (bg-hover           "#265f4a")
+      (bg-hover-secondary "#55345a")
+      (bg-hl-line         "#302a3a")
+      (bg-paren           "#2f6c4a")
+      (bg-err             "#461204") ; check with err
+      (bg-warning         "#353504") ; check with warning
+      (bg-info            "#1f3b0a") ; check with info
+
+      (border        "#58514f")
       (cursor        "#ffaa33")
       (fg-intense    "#ffffff")
 
-      ;; Mappings
+      (modeline-err     "#ff9fbf")
+      (modeline-warning "#dfcf33")
+      (modeline-info    "#4fdf5f")
+
+      (underline-err     "#df2f2f")
+      (underline-warning "#c0b000")
+      (underline-info    "#22b022")
+
+      (bg-char-0 "#0050af")
+      (bg-char-1 "#7f1f7f")
+      (bg-char-2 "#625a00")
+
+;;; Mappings
+
+;;;; General mappings
+
+      (bg-fringe unspecified)
+      (fg-fringe unspecified)
+
       (err red-warmer)
-      (warning yellow-warmer)
+      (warning yellow)
       (info green-cooler)
 
       (link yellow)
-      (link-alt red-cooler)
-      (date yellow-cooler)
+      (link-alt cyan-cooler)
       (name green-warmer)
-      (keybind red)
+      (keybind red-warmer)
+      (identifier magenta-faint)
+      (prompt cyan-cooler)
+
+      (bg-region "#3f1324")
+      (fg-region unspecified)
+
+;;;; Code mappings
 
       (builtin red-cooler)
       (comment yellow-faint)
@@ -135,30 +194,112 @@
       (string red-warmer)
       (type green)
       (variable cyan-warmer)
+      (rx-escape green-cooler) ; compare with `string'
+      (rx-construct magenta-cooler)
+
+;;;; Accent mappings
 
       (accent-0 green-cooler)
       (accent-1 yellow-warmer)
       (accent-2 cyan-cooler)
       (accent-3 magenta-cooler)
 
-      (mail-0 yellow-warmer)
-      (mail-1 green-cooler)
-      (mail-2 red-warmer)
-      (mail-3 magenta)
-      (mail-4 green-warmer)
+;;;; Date mappings
+
+      (date-common yellow-cooler)
+      (date-deadline red-warmer)
+      (date-event fg-alt)
+      (date-holiday cyan-cooler)
+      (date-now fg-main)
+      (date-range fg-alt)
+      (date-scheduled yellow)
+      (date-weekday cyan)
+      (date-weekend red-faint)
+
+;;;; Prose mappings
+
+      (prose-code yellow-warmer)
+      (prose-done green-cooler)
+      (prose-macro cyan-cooler)
+      (prose-metadata fg-dim)
+      (prose-metadata-value fg-alt)
+      (prose-table fg-alt)
+      (prose-table-formula err)
+      (prose-tag fg-alt)
+      (prose-todo red-warmer)
+      (prose-verbatim green-cooler)
+
+;;;; Mail mappings
+
+      (mail-cite-0 yellow-warmer)
+      (mail-cite-1 green-warmer)
+      (mail-cite-2 red)
+      (mail-cite-3 yellow-cooler)
+      (mail-part green-faint)
+      (mail-recipient green-warmer)
+      (mail-subject green-cooler)
+      (mail-other yellow)
+
+;;;; Search mappings
+
+      (bg-search-current bg-yellow-intense)
+      (bg-search-lazy bg-blue-intense)
+      (bg-search-replace bg-red-intense)
+
+      (bg-search-rx-group-0 bg-magenta-intense)
+      (bg-search-rx-group-1 bg-green-intense)
+      (bg-search-rx-group-2 bg-red-subtle)
+      (bg-search-rx-group-3 bg-cyan-subtle)
+
+;;;; Space mappings
+
+      (bg-space unspecified)
+      (fg-space border)
+      (bg-space-err bg-yellow-intense)
+
+;;;; Tab mappings
+
+      (bg-tab-bar      bg-alt)
+      (bg-tab-current  bg-main)
+      (bg-tab-other    bg-active)
+
+;;;; Rainbow mappings
 
       (rainbow-0 yellow-warmer)
       (rainbow-1 green-warmer)
-      (rainbow-2 magenta)
-      (rainbow-3 blue-warmer)
-      (rainbow-4 red)
-      (rainbow-5 green-cooler)
-      (rainbow-6 magenta-warmer)
-      (rainbow-7 cyan)
+      (rainbow-2 red)
+      (rainbow-3 cyan-cooler)
+      (rainbow-4 yellow-cooler)
+      (rainbow-5 blue)
+      (rainbow-6 red-cooler)
+      (rainbow-7 green)
       (rainbow-8 yellow))
-    "The `ef-autumn' palette.")
+    "The `ef-autumn' palette.
+Color values have the form (COLOR-NAME HEX-VALUE) with the former
+as a symbol and the latter as a string.
 
-  (ef-themes-theme ef-autumn ef-autumn-palette)
+Semantic color mappings have the form (MAPPING-NAME COLOR-NAME)
+with both as symbols.  The latter is a color that already exists
+in the palette and is associated with a HEX-VALUE.")
+
+  (defcustom ef-autumn-palette-overrides nil
+    "Overrides for `ef-autumn-palette'.
+
+Mirror the elements of the aforementioned palette, overriding
+their value.
+
+For overrides that are shared across all of the Ef themes,
+refer to `ef-themes-common-palette-overrides'.
+
+To preview the palette entries, use `ef-themes-preview-colors' or
+`ef-themes-preview-colors-current' (read the documentation for
+further details)."
+  :group 'ef-themes
+  :package-version '(ef-themes . "1.0.0")
+  :type '(repeat (list symbol (choice symbol string)))
+  :link '(info-link "(ef-themes) Palette overrides"))
+
+  (ef-themes-theme ef-autumn ef-autumn-palette ef-autumn-palette-overrides)
 
   (provide-theme 'ef-autumn))
 

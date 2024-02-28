@@ -2623,6 +2623,14 @@ Some operations only make sense for these single-file packages."
     ;; return the results for informational purposes.
     statuses))
 
+
+(defun my--create-buff-gitFetchHelper ()
+  (let ((buff (get-buffer-create "*gitFetchHelper*")))
+    (with-current-buffer buff
+      ;; turn on sh-mode for # comment support.
+      (sh-mode))
+    buff))
+
 (defun my--remote-complete (p msg)
   (when (memq (process-status p) '(exit signal))
     ;;(message (concat (process-name p) " - " msg))
@@ -2633,6 +2641,7 @@ Some operations only make sense for these single-file packages."
       ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
       (insert "\n--------------------------\n"))
     (message "upstream remote setup complete")))
+
 
 (defun my-setup-all-upstream-remotes-if-missing-golang ()
   "Call an external Go program to set upstream remotes.
@@ -2645,7 +2654,7 @@ also in gitFetchHelper."
   (interactive)
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " init"))
-         (buff (get-buffer-create "*gitFetchHelper*")))
+         (buff (my--create-buff-gitFetchHelper)))
     (message "setting up missing upstream remotes...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2686,7 +2695,7 @@ so I track this in `my-modules'."
   ;;   (insert "\n--------------------------\n"))
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " fetch"))
-         (buff (get-buffer-create "*gitFetchHelper*")))
+         (buff (my--create-buff-gitFetchHelper)))
     (message "fetching each submodule...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2760,7 +2769,7 @@ so I track this in `my-modules'."
   (interactive)
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " diff"))
-         (buff (get-buffer-create "*gitFetchHelper*")))
+         (buff (my--create-buff-gitFetchHelper)))
     (message "finding submodules with new upstream code to merge...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)

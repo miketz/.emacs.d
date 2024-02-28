@@ -9246,8 +9246,8 @@ Values: lsp, citre, nil")
 ;;; devil
 ;;;----------------------------------------------------------------------------
 ;; stored in ~/.emacs.d/notElpa which is already in load-path
-;; NOTE: this mode doesn't seem to play well with evil. look into it getting
-;; both to work simultaneously.
+;; NOTE: this mode doesn't seem to play well with evil. Only works in insert
+;; mode, not normal mode. look into it getting both to work simultaneously.
 (autoload #'devil-mode "devil" nil t)
 (autoload #'global-devil-mode "devil" nil t)
 

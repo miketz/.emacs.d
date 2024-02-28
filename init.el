@@ -7755,6 +7755,8 @@ vanilla javascript buffers."
   ;;             (setq-local eldoc-documentation-strategy
   ;;                         #'eldoc-documentation-compose)))
 
+  ;; performacne tweak?
+  (fset #'jsonrpc--log-event #'ignore)
   ;; is the event buffer needed for anything? disable until I find a use.
   (setq eglot-events-buffer-size 0)
   (setq eglot-autoshutdown t) ; kill eglot if all managed buffers are closed

@@ -138,6 +138,12 @@ This prevents overlapping themes; something I would rarely want."
 (when (fboundp #'repeat-mode) ;; emacs 28+
   (repeat-mode))
 
+;;;----------------------------------------------------------------------------
+;;; devil
+;;;----------------------------------------------------------------------------
+(autoload #'devil-mode "devil" nil t)
+(autoload #'global-devil-mode "devil" nil t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC

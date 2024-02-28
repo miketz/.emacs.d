@@ -9378,6 +9378,8 @@ Values: lsp, citre, nil")
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+;; TODO: look into the various input modes:
+;; evil, devil, god-mode, meow, boon, xah-fly-keys
 
 ;; various log warning control variables.
 ;; hide the anoying native-comp warnings

@@ -7747,6 +7747,19 @@ vanilla javascript buffers."
   (autoload #'eglot-ensure "eglot" nil t))
 
 (with-eval-after-load 'eglot
+
+  ;; wire up emacs-lsp-booster executable. Would be used by `eglot-booster-mode'.
+  (cond ((eq my-curr-computer 'mac-mini-m1-2021)
+         (add-to-list 'exec-path "~/proj/emacs-lsp-booster-exe")))
+  ;; TODO: add eglot-booster-mode to git submodules. currently installed via
+  ;;       package-vc-install.
+  (when (and nil ;; don't use for now as exe is unsinged.
+             (eq my-curr-computer 'mac-mini-m1-2021))
+    (package-initialize) ;; TODO: remove this when in add pack to git submodules.
+    (when (fboundp #'eglot-booster-mode)
+      (eglot-booster-mode)))
+
+
   ;; ;; Show all of the available eldoc information when we want it. This way Flymake errors
   ;; ;; don't just get clobbered by docstrings.
   ;; (add-hook 'eglot-managed-mode-hook

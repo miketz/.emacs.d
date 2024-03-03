@@ -48,6 +48,32 @@ New treesit face."
    ;; normal color for var-use. To avoid color spaghetti. (new treesit face)
    `(font-lock-variable-use-face ((t :inherit default)))))
 
+(defun my-ido-dark-bg ()
+  "Ido mode colors for a dark background."
+  (interactive)
+  (let ((fg-yellow "#FFFF00")
+        (fg-green "#98FB98")
+        (bg-green "#004400")
+        (fg-purple "#FFC0CB")
+        (bg-purple "#440033"))
+
+    (custom-theme-set-faces
+     (or (car custom-enabled-themes) 'user) ; current theme
+
+     ;; ido
+     `(ido-first-match ((t (:foreground ,fg-yellow :background "#000000" ;,bg-yellow
+                                        ))))
+     `(ido-only-match ((t (:foreground ,fg-green :background ,bg-green))))
+     `(ido-subdir ((t (:foreground ,fg-purple :background ,bg-purple))))
+
+     ;; ido-grid
+     `(ido-grid-common-match ((t :foreground ,fg-green)))
+     ;; `(ido-grid-match ((t :foreground "pink")))
+     `(ido-grid-match-1 ((t :inherit completions-common-part)))
+     ;; `(ido-grid-match-2 ((t :foreground "purple" :background "yellow")))
+     ;; `(ido-grid-match-3 ((t :foreground "black" :background "white")))
+     )))
+
 (defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)

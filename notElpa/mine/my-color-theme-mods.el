@@ -1699,6 +1699,17 @@ Historical preservation."
   (load-theme 'wildcharm t)
   (my-disable-var-use-face-treesit))
 
+(defun my-color-ef-autumn ()
+  (interactive)
+  (load-theme 'ef-autumn t)
+  (my-disable-var-use-face-treesit)
+  (custom-theme-set-faces
+   'ef-autumn
+   ;; ido
+   `(ido-first-match ((t (:foreground "yellow" :background "#000000"))))
+   `(ido-only-match ((t (:foreground "green" :background "#000000"))))
+   `(ido-subdir ((t (:foreground "purple" :background "#000000"))))))
+
 (defun my-color-ample-flat ()
   "A good 256 color theme."
   (interactive)

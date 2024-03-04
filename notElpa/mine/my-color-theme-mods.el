@@ -1616,6 +1616,21 @@ Historical preservation."
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((t (:foreground "#303030"))))))
 
+(defun my-color-app-monochrome-themes-dark-theme ()
+  (interactive)
+  (load-theme 'app-monochrome-themes-dark-theme t)
+
+  (my-rainbow-parens-dark-bg)
+  (my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg)
+
+  ;; (custom-theme-set-faces
+  ;;  'app-monochrome-themes-dark-theme
+
+  ;;  '(font-lock-variable-name-face ((t :foreground "springgreen"))))
+  )
+
 (defun my-color-warm-night ()
   (interactive)
   (load-theme 'warm-night t)

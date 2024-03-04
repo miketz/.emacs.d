@@ -1585,6 +1585,7 @@ Historical preservation."
   (my-rainbow-parens-dark-bg)
   (my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg)
 
   (custom-theme-set-faces
    'tao-yin
@@ -1723,7 +1724,8 @@ Historical preservation."
 (defun my-color-wildcharm ()
   (interactive)
   (load-theme 'wildcharm t)
-  (my-disable-var-use-face-treesit))
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg))
 
 (defun my-color-ef-autumn ()
   (interactive)

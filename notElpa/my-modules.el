@@ -2311,8 +2311,10 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :folder (concat my-module-folder "macrostep")
       :remotes '((:sym mine :url "https://github.com/miketz/macrostep"
                        :alias "origin")
-                 (:sym upstream :url "https://github.com/joddie/macrostep"
-                           :alias "upstream"))
+                 (:sym upstream :url "https://github.com/emacsorphanage/macrostep"
+                           :alias "upstream")
+                 (:sym upstreamOrig :url "https://github.com/joddie/macrostep"
+                           :alias "upstreamOrig"))
       :remote-default 'mine
       :source-control 'git
       :submodule-p t

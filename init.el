@@ -1345,6 +1345,18 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
+;;; steps to get emacs config set up on a new computer.
+;;;----------------------------------------------------------------------------
+;; git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
+;; git pull origin master
+;; git submodule update --init --recursive
+;; (my-setup-all-upstream-remotes-if-missing-golang)
+;; (my-checkout-branches-golang)
+;; (my-fetch-all-upstream-remotes-golang)
+;; (my-list-modules-with-upstream-code-to-merge-golang)
+
+
+;;;----------------------------------------------------------------------------
 ;;; compat
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/compat.el" load-path)

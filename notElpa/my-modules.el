@@ -2633,6 +2633,35 @@ Some operations only make sense for these single-file packages."
       (sh-mode))
     buff))
 
+
+(defun my--branch-checkout-complete (p msg)
+  (when (memq (process-status p) '(exit signal))
+    ;;(message (concat (process-name p) " - " msg))
+    (let ((buff (process-buffer p)))
+      (unless (eq buff (current-buffer))
+        (switch-to-buffer-other-window buff))
+      (goto-char (point-max)) ;; end of buffer
+      ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+      (insert "\n--------------------------\n"))
+    (message "branch switching complete")))
+
+(defun my-checkout-branches-golang ()
+  "Call an external Go program to checkout the UseBranch for each git submodule.
+Calls git commands concurrently for each git submodule.
+
+Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+
+Git does not keep track of multiple remotes so I track this in `my-modules' and
+also in gitFetchHelper."
+  (interactive)
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+                      " init2"))
+         (buff (my--create-buff-gitFetchHelper)))
+    (message "checking out target branches...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--branch-checkout-complete)))
+
 (defun my--remote-complete (p msg)
   (when (memq (process-status p) '(exit signal))
     ;;(message (concat (process-name p) " - " msg))

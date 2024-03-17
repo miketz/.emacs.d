@@ -2656,7 +2656,9 @@ also in gitFetchHelper."
   (interactive)
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " init2"))
-         (buff (my--create-buff-gitFetchHelper)))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
     (message "checking out target branches...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2685,7 +2687,9 @@ also in gitFetchHelper."
   (interactive)
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " init"))
-         (buff (my--create-buff-gitFetchHelper)))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
     (message "setting up missing upstream remotes...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2726,7 +2730,9 @@ so I track this in `my-modules'."
   ;;   (insert "\n--------------------------\n"))
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " fetch"))
-         (buff (my--create-buff-gitFetchHelper)))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
     (message "fetching each submodule...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2800,7 +2806,9 @@ so I track this in `my-modules'."
   (interactive)
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
                       " diff"))
-         (buff (my--create-buff-gitFetchHelper)))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
     (message "finding submodules with new upstream code to merge...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)

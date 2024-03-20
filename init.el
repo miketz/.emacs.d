@@ -4543,6 +4543,8 @@ and indent."
 ;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
 ;; work with evil "/" command. But it does work with evil's "?".
 (define-key isearch-mode-map (kbd "C-SPC") #'avy-isearch)
+;; C-SPC doesn't work in some terminals, so bind an alternative key.
+(define-key isearch-mode-map (kbd "C-o") #'avy-isearch)
 (define-key isearch-mode-map (kbd "C-'") #'avy-isearch) ; swiper convention
 ;; (define-key evil-normal-state-map (kbd "s") ; like vim sneak.
 ;;   #'avy-goto-char-2)

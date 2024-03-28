@@ -424,8 +424,8 @@ Example:
 								   :weight bold
 								   :underline nil))))
    ;; the non-selected matches from isearch
-   `(lazy-highlight ((,class (:background ,bg-purple
-										  :foreground ,fg-purple
+   `(lazy-highlight ((,class (:background ,isearch-fg ;,bg-purple
+										  :foreground ,isearch-bg ;,fg-purple
 										  :weight normal
 										  :underline t))))
 

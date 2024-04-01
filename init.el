@@ -7752,11 +7752,6 @@ vanilla javascript buffers."
 ;;   (when has-nodejs-p
 ;;     (push 'company-tern company-backends)))
 
-;;;----------------------------------------------------------------------------
-;;; browse-kill-ring
-;;;----------------------------------------------------------------------------
-;; (global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
-
 
 ;;;----------------------------------------------------------------------------
 ;;; eglot
@@ -9203,6 +9198,8 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 (autoload #'browse-kill-ring "browse-kill-ring" nil t)
 (autoload #'browse-kill-ring-default-keybindings "browse-kill-ring" nil t)
+
+;; (global-set-key (kbd "M-y") #'browse-kill-ring) ; autoloaded fn
 
 (when nil ;; don't use browse-kill-ring until i figure out some issues with
           ;; evil-mode

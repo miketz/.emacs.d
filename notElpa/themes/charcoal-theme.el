@@ -419,8 +419,8 @@ Example:
 
 
    ;; isearch
-   `(isearch ((,class (:background ,isearch-bg
-								   :foreground ,isearch-fg
+   `(isearch ((,class (:background "orange";,isearch-bg
+								   :foreground "black";,isearch-fg
 								   :weight bold
 								   :underline nil))))
    ;; the non-selected matches from isearch

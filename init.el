@@ -4559,8 +4559,8 @@ and indent."
 (with-eval-after-load 'avy
   ;; make keys like ace-jump. Lots of letters means more likely to need only 1
   ;; overlay char.
-  (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
-                        (cl-loop for i from ?A to ?Z collect i)))
+  (setq avy-keys (nconc (cl-loop for i from ?A to ?Z collect i)
+                        (cl-loop for i from ?z downto ?a collect i)))
   (setq avy-style 'at-full) ;; options (pre at at-full post)
   (setq avy-background nil) ;; eye is already focused on the jump point so no
                             ;; need to gray-out the background.

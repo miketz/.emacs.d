@@ -144,7 +144,47 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'devil-mode "devil" nil t)
 (autoload #'global-devil-mode "devil" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; Avy
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/avy" load-path)
+(autoload #'avy-goto-line "avy" nil t)
+(autoload #'avy-isearch "avy" nil t)
+(autoload #'avy-goto-word-1 "avy" nil t)
+(autoload #'avy-goto-char-timer "avy" nil t)
+;; TODO: Add more autoloads. Only making autoloads for what i'm currently using
+;;       at the moment.
+
+(global-set-key (kbd "M-g g") #'avy-goto-line)
+(global-set-key (kbd "M-g M-g") #'avy-goto-line)
+;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
+;; work with evil "/" command. But it does work with evil's "?".
+(define-key isearch-mode-map (kbd "C-SPC") #'avy-isearch)
+;; C-SPC doesn't work in some terminals, so bind an alternative key.
+(define-key isearch-mode-map (kbd "C-o") #'avy-isearch)
+(define-key isearch-mode-map (kbd "C-'") #'avy-isearch) ; swiper convention
+;; (define-key evil-normal-state-map (kbd "s") ; like vim sneak.
+;;   #'avy-goto-char-2)
+;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
+
+(global-set-key (kbd "C-c a") #'avy-goto-word-1)
+(global-set-key (kbd "C-c s") #'avy-goto-char-timer)
+
+
+(with-eval-after-load 'avy
+  ;; make keys like ace-jump. Lots of letters means more likely to need only 1
+  ;; overlay char.
+  (setq avy-keys (nconc (cl-loop for i from ?a to ?z collect i)
+                        (cl-loop for i from ?A to ?Z collect i)))
+  (setq avy-style 'at-full) ;; options (pre at at-full post)
+  (setq avy-background nil) ;; eye is already focused on the jump point so no
+                            ;; need to gray-out the background.
+  (setq avy-all-windows t)       ;; allow jumps between windows.
+  (setq avy-case-fold-search t)  ;; case insensitive
+  (setq avy-timeout-seconds 0.5) ;; delay for `avy-goto-char-timer'
+  )
+
 
 ;;;----------------------------------------------------------------------------
-;;; MISC
+;;; misc
 ;;;----------------------------------------------------------------------------

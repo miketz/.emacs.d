@@ -4543,10 +4543,10 @@ and indent."
 (global-set-key (kbd "M-g M-g") #'avy-goto-line)
 ;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
 ;; work with evil "/" command. But it does work with evil's "?".
-(define-key isearch-mode-map (kbd "C-SPC") #'avy-isearch)
+(define-key isearch-mode-map (kbd "C-SPC") #'my-avy-isearch)
 ;; C-SPC doesn't work in some terminals, so bind an alternative key.
-(define-key isearch-mode-map (kbd "C-o") #'avy-isearch)
-(define-key isearch-mode-map (kbd "C-'") #'avy-isearch) ; swiper convention
+(define-key isearch-mode-map (kbd "C-o") #'my-avy-isearch)
+(define-key isearch-mode-map (kbd "C-'") #'my-avy-isearch) ; swiper convention
 ;; (define-key evil-normal-state-map (kbd "s") ; like vim sneak.
 ;;   #'avy-goto-char-2)
 ;; (define-key evil-motion-state-map (kbd "s") #'avy-goto-char-2)
@@ -4567,6 +4567,15 @@ and indent."
   (setq avy-all-windows t)       ;; allow jumps between windows.
   (setq avy-case-fold-search t)  ;; case insensitive
   (setq avy-timeout-seconds 0.5) ;; delay for `avy-goto-char-timer'
+
+  (defun my-avy-isearch ()
+    (interactive)
+    ;; use the more limited by easier to type keys for isearch jumps
+    ;; becuase isearch jumps tend to have fewer matches so less likely to need 2 keys.
+    (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l
+                         ?w ?e ?i ?o
+                         ?v ?c ?m ?,)))
+      (avy-isearch)))
 
   ;; (defun my-avy-goto-line ()
   ;;   (interactive)

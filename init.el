@@ -9416,6 +9416,20 @@ Values: lsp, citre, nil")
 
 
 ;;;----------------------------------------------------------------------------
+;;; dumb-jump
+;;;----------------------------------------------------------------------------
+(defun my-dumb-jump-enable ()
+  (interactive)
+  ;; TODO: install this without package.el to avoid `package-initialize'
+  (package-initialize)
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
+(with-eval-after-load 'dumb-jump
+  (setq dumb-jump-prefer-searcher 'rg)
+  (setq dumb-jump-force-searcher 'rg))
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

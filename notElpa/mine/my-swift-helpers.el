@@ -5,7 +5,7 @@
 
 (defvar my-swift-types
   '("Int" "Int64" "Int32" "Int16" "Int8" "UInt64" "UInt32" "UInt16" "UInt8"
-    "Float" "Bool" "Character" "String")
+    "Float" "Double" "Bool" "Character" "String")
   "Built in types.")
 
 ;;;###autoload

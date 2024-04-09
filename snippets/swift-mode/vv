@@ -2,4 +2,4 @@
 # name : long var
 # key: vv
 # --
-${1:let} ${2:name}: ${2:Int} = ${3:val}
+${1:let} ${2:name}: ${3:Int} = ${4:val}

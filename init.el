@@ -7171,6 +7171,12 @@ Closure over `preceding-sexp-fn'."
   (add-hook 'lua-mode-hook #'my-setup-lua-mode))
 
 ;;;----------------------------------------------------------------------------
+;;; my-swift-helpers. helper fns for swift
+;;;----------------------------------------------------------------------------
+(autoload #'my-swift-insert-type "my-swift-helpers" nil t)
+(autoload #'my-swift-commands-hydra/body "my-swift-helpers" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; swift-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/swift-mode" load-path)
@@ -7179,6 +7185,12 @@ Closure over `preceding-sexp-fn'."
 (push '("\\.swift\\'" . swift-mode) auto-mode-alist)
 
 (with-eval-after-load 'swift-mode
+  ;; key binds
+  (define-key swift-mode-map (kbd "C-c C-c") #'compile)
+
+  (define-key swift-mode-map (kbd "C-c g") #'my-swift-commands-hydra/body)
+  (define-key swift-mode-map (kbd "C-c C-g") #'my-swift-commands-hydra/body)
+
   (defun my-setup-swift-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)

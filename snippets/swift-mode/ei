@@ -2,6 +2,5 @@
 # name : else if
 # key: ei
 # --
-else if ${1:cond} {
-    $0
+else if $0 {
 }

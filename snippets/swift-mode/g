@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : guard
+# key: g
+# --
+guard ${2:shouldBe} else {
+    $0// handle case not met
+}

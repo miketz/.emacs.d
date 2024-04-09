@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : guard let
+# key: gl
+# --
+guard ${1:let} ${2:name} = ${3:getVal} else {
+    $0// handle nil
+}

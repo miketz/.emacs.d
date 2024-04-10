@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: struct
+# key: struct
+# --
+${1:struct} ${2:Name} {
+
+    init($0) {
+    }
+
+} // $1 $2

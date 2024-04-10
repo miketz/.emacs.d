@@ -2,9 +2,9 @@
 # name: class
 # key: class
 # --
-class ${1:Name} {
+${1:class} ${2:Name} {
 
-    init() {
+    init($0) {
     }
 
-} // class $1$0
+} // $1 $2

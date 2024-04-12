@@ -1372,6 +1372,20 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())
+    ,(make-module
+      :name 'obvious
+      :comment nil
+      :folder my-module-folder
+      :file-single "obvious.el"
+      :remotes nil
+      :remote-default nil
+      :source-control 'git
+      :submodule-p nil ;; embedded file into my .emacs.d
+      :main-branch nil
+      :use-branch nil
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
     ,(make-module ;; NOTE: not using this. Just for info
       :name 'color-mode
       :comment nil

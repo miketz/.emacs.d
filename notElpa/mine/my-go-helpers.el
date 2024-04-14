@@ -227,7 +227,8 @@ This is more a documentation of how to ignore files in rg."
 (defvar my-go-handling-hidden-p nil)
 ;;;###autoload
 (defun my-go-hide-err-handling ()
-  (interactive) (save-excursion
+  (interactive)
+  (save-excursion
     (goto-char (point-min)) ;; goto beginning of buffer
     (while (re-search-forward "if err != nil {"
                               nil ;; no bounds on search

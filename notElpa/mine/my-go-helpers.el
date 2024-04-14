@@ -225,28 +225,28 @@ This is more a documentation of how to ignore files in rg."
 
 
 (defvar my-go-handling-hidden-p nil)
-;;;###autoload
-(defun my-go-hide-err-handling ()
-  (interactive)
+
+(defun my--go-show-hide (regex show-or-hide-fn)
   (save-excursion
     (goto-char (point-min)) ;; goto beginning of buffer
-    (while (re-search-forward "if.+err != nil {"
+    (while (re-search-forward regex
                               nil ;; no bounds on search
                               t ;; do not trigger an error if no search match
                               )
-      (hs-hide-block)))
+      (funcall show-or-hide-fn))))
+
+;;;###autoload
+(defun my-go-hide-err-handling ()
+  (interactive)
+  (my--go-show-hide "if.+err != nil.+{" #'hs-hide-block)
+  (my--go-show-hide "if.+err == nil.+{" #'hs-hide-block)
   (setq my-go-handling-hidden-p t))
 
 ;;;###autoload
 (defun my-go-show-err-handling ()
   (interactive)
-  (save-excursion
-    (goto-char (point-min)) ;; goto beginning of buffer
-    (while (re-search-forward "if.+err != nil {"
-                              nil ;; no bounds on search
-                              t ;; do not trigger an error if no search match
-                              )
-      (hs-show-block)))
+  (my--go-show-hide "if.+err != nil.+{" #'hs-show-block)
+  (my--go-show-hide "if.+err == nil.+{" #'hs-show-block)
   (setq my-go-handling-hidden-p nil))
 
 ;;;###autoload

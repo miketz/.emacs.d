@@ -9047,6 +9047,9 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-run-benchmarks "my-go-helpers" nil t)
 (autoload #'my-go-run-tests "my-go-helpers" nil t)
 (autoload #'my-go-gen-test-file "my-go-helpers" nil t)
+(autoload #'my-go-hide-err-handling "my-go-helpers" nil t)
+(autoload #'my-go-show-err-handling "my-go-helpers" nil t)
+(autoload #'my-go-toggle-err-handling "my-go-helpers" nil t)
 
 
 (defvar my-go-ide-type

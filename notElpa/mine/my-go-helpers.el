@@ -12,6 +12,7 @@
 (require 'my-select-folder)
 (require 'my-git-helpers)
 (require 's)
+(require 'hideshow)
 
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
@@ -222,6 +223,41 @@ This is more a documentation of how to ignore files in rg."
     (call-interactively #'rg)))
 
 
+
+(defvar my-go-handling-hidden-p nil)
+;;;###autoload
+(defun my-go-hide-err-handling ()
+  (interactive) (save-excursion
+    (goto-char (point-min)) ;; goto beginning of buffer
+    (while (re-search-forward "if err != nil {"
+                              nil ;; no bounds on search
+                              t ;; do not trigger an error if no search match
+                              )
+      (hs-hide-block)))
+  (setq my-go-handling-hidden-p t))
+
+;;;###autoload
+(defun my-go-show-err-handling ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min)) ;; goto beginning of buffer
+    (while (re-search-forward "if err != nil {"
+                              nil ;; no bounds on search
+                              t ;; do not trigger an error if no search match
+                              )
+      (hs-show-block)))
+  (setq my-go-handling-hidden-p nil))
+
+;;;###autoload
+(defun my-go-toggle-err-handling ()
+  (interactive)
+  (if my-go-handling-hidden-p
+      (my-go-show-err-handling)
+    (my-go-hide-err-handling)))
+
+
+
+
 ;; List several go helper functions.
 (defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)
   "
@@ -232,6 +268,7 @@ _a_: ineffassign
 _h_: heap
 _t_: types
 _d_: doc
+_s_: toggle err handling visibility
 _q_, _C-g_: quit"
 
   ("c" my-go-compile)
@@ -241,6 +278,7 @@ _q_, _C-g_: quit"
   ("t" my-go-insert-type)
   ("d" my-go-doc-local)
   ("l" my-go-lint)
+  ("s" my-go-toggle-err-handling)
 
   ;; don't use the hint text as it makes (:hint nil) not work?
   ;; ("c" my-go-compile "compile")

@@ -224,7 +224,7 @@ This is more a documentation of how to ignore files in rg."
 
 
 
-(defvar my-go-handling-hidden-p nil)
+(defvar-local my--go-handling-hidden-p nil)
 
 (defun my--go-show-hide (regex show-or-hide-fn)
   (save-excursion
@@ -240,19 +240,19 @@ This is more a documentation of how to ignore files in rg."
   (interactive)
   (my--go-show-hide "if.+err != nil.+{" #'hs-hide-block)
   (my--go-show-hide "if.+err == nil.+{" #'hs-hide-block)
-  (setq my-go-handling-hidden-p t))
+  (setq my--go-handling-hidden-p t))
 
 ;;;###autoload
 (defun my-go-show-err-handling ()
   (interactive)
   (my--go-show-hide "if.+err != nil.+{" #'hs-show-block)
   (my--go-show-hide "if.+err == nil.+{" #'hs-show-block)
-  (setq my-go-handling-hidden-p nil))
+  (setq my--go-handling-hidden-p nil))
 
 ;;;###autoload
 (defun my-go-toggle-err-handling ()
   (interactive)
-  (if my-go-handling-hidden-p
+  (if my--go-handling-hidden-p
       (my-go-show-err-handling)
     (my-go-hide-err-handling)))
 

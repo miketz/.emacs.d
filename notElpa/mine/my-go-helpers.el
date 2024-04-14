@@ -230,7 +230,7 @@ This is more a documentation of how to ignore files in rg."
   (interactive)
   (save-excursion
     (goto-char (point-min)) ;; goto beginning of buffer
-    (while (re-search-forward "if err != nil {"
+    (while (re-search-forward "if.+err != nil {"
                               nil ;; no bounds on search
                               t ;; do not trigger an error if no search match
                               )
@@ -242,7 +242,7 @@ This is more a documentation of how to ignore files in rg."
   (interactive)
   (save-excursion
     (goto-char (point-min)) ;; goto beginning of buffer
-    (while (re-search-forward "if err != nil {"
+    (while (re-search-forward "if.+err != nil {"
                               nil ;; no bounds on search
                               t ;; do not trigger an error if no search match
                               )

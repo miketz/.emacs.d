@@ -14,6 +14,11 @@
 (require 's)
 (require 'hideshow)
 
+
+
+;;;----------------------------------------------------------------------------
+;;; lint and compile stuff
+;;;----------------------------------------------------------------------------
 (defvar my-go-errcheck-installed-p (executable-find "errcheck"))
 
 ;;;###autoload
@@ -116,6 +121,9 @@ where you are not sure exactly how to fix."
 
 
 
+;;;----------------------------------------------------------------------------
+;;; insert go types
+;;;----------------------------------------------------------------------------
 (defvar my-go-types
   '("ComplexType" "FloatType" "IntegerType" "Type" "Type1" "any" "bool" "byte"
     "comparable" "complex128" "complex64" "error" "float32" "float64" "int"
@@ -136,6 +144,9 @@ the standard lib, like struct time.Time.")
     (insert (completing-read "type: " my-go-types))))
 
 
+;;;----------------------------------------------------------------------------
+;;; library instalation
+;;;----------------------------------------------------------------------------
 (defvar my-go-useful-libs
   '((xfmt "zero alloc printing" "go get lab.nexedi.com/kirr/go123")
     (zerolog "zero alloc logging" "go get -u github.com/rs/zerolog/log")))
@@ -154,6 +165,9 @@ the standard lib, like struct time.Time.")
          (install-cmd (cl-third (assoc (intern lib-key) my-go-useful-libs))))
     (shell-command install-cmd)))
 
+;;;----------------------------------------------------------------------------
+;;; benchmarks
+;;;----------------------------------------------------------------------------
 ;;;###autoload
 (defun my-go-run-benchmarks ()
   "This is more of a documentation to help me remember how to run perf tests.
@@ -163,6 +177,9 @@ the standard lib, like struct time.Time.")
   (let ((compile-command "go test -bench=. -run=^#"))
     (call-interactively #'compile)))
 
+;;;----------------------------------------------------------------------------
+;;; testing stuff.
+;;;----------------------------------------------------------------------------
 ;;;###autoload
 (defun my-go-run-tests ()
   "This is more of a documentation to help me remember how to run perf tests.
@@ -207,6 +224,10 @@ func TestFoo(t *testing.T) {
       (insert txt)
       (save-buffer))))
 
+
+;;;----------------------------------------------------------------------------
+;;; rg stuff
+;;;----------------------------------------------------------------------------
 ;; silence byte compiler when `rg' is not loaded yet
 (defvar rg-command-line-flags)
 ;;;###autoload
@@ -224,6 +245,10 @@ This is more a documentation of how to ignore files in rg."
 
 
 
+
+;;;----------------------------------------------------------------------------
+;;; show/hide err handling sections
+;;;----------------------------------------------------------------------------
 (defvar-local my--go-handling-hidden-p nil)
 
 (defun my--go-show-hide (regex show-or-hide-fn)
@@ -259,7 +284,9 @@ This is more a documentation of how to ignore files in rg."
 
 
 
-;; List several go helper functions.
+;;;----------------------------------------------------------------------------
+;;; hydra. List several go helper functions.
+;;;----------------------------------------------------------------------------
 (defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)
   "
 _l_: golangci-lint

@@ -258,6 +258,7 @@ This is more a documentation of how to ignore files in rg."
                               nil ;; no bounds on search
                               t ;; do not trigger an error if no search match
                               )
+      (backward-char) ;; solves issue on trailing comment after {
       (funcall show-or-hide-fn))))
 
 ;;;###autoload

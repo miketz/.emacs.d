@@ -4538,18 +4538,15 @@ and indent."
 (autoload #'avy-goto-char-timer "avy" nil t)
 ;; TODO: Add more autoloads. Only making autoloads for what i'm currently using
 ;;       at the moment.
+(autoload #'my-avy-isearch "my-avy-stuff" nil t)
+
+(defvar my-avy-keys-long) ;; lots of letters
+(defvar my-avy-keys-short) ;; fewer letters, but close to home row.
 
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 (global-set-key (kbd "M-g M-g") #'avy-goto-line)
 
-(defun my-avy-isearch ()
-  (interactive)
-  ;; use more limited but easier to type keys for isearch jumps
-  ;; becuase isearch jumps tend to have fewer matches so less likely to need 2 keys.
-  (let ((avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l
-                       ?w ?e ?i ?o
-                       ?v ?c ?m ?,)))
-    (avy-isearch)))
+
 ;; TODO: fix issue (maybe upstream too?) where `avy-isearch' doesn't
 ;; work with evil "/" command. But it does work with evil's "?".
 (define-key isearch-mode-map (kbd "C-SPC") #'my-avy-isearch)
@@ -4566,10 +4563,15 @@ and indent."
   (evil-leader/set-key "s" #'avy-goto-char-timer))
 
 (with-eval-after-load 'avy
+  (setq my-avy-keys-long (nconc (cl-loop for i from ?A to ?Z collect i)
+                                (cl-loop for i from ?z downto ?a collect i)))
+  (setq my-avy-keys-short '(?a ?s ?d ?f ?g ?h ?j ?k ?l
+                               ?w ?e ?i ?o
+                               ?v ?c ?m ?,))
+
   ;; make keys like ace-jump. Lots of letters means more likely to need only 1
   ;; overlay char.
-  (setq avy-keys (nconc (cl-loop for i from ?A to ?Z collect i)
-                        (cl-loop for i from ?z downto ?a collect i)))
+  (setq avy-keys my-avy-keys-short)
   (setq avy-style 'at-full) ;; options (pre at at-full post)
   (setq avy-background nil) ;; eye is already focused on the jump point so no
                             ;; need to gray-out the background.

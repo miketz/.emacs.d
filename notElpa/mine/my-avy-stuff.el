@@ -2,6 +2,8 @@
 
 (require 'avy)
 
+(defvar my-avy-keys-short)
+
 ;;;###autoload
 (defun my-avy-isearch ()
   (interactive)

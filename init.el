@@ -9079,6 +9079,8 @@ Values: lsp, citre, nil")
   (define-key go-ts-mode-map (kbd "C-c C-c") #'my-go-compile)
   (define-key go-ts-mode-map (kbd "C-c c") #'my-go-compile)
 
+  ;; unbind `godef-describe' so I can use "C-c C-d" as a prefix.
+  (define-key go-ts-mode-map (kbd "C-c C-d") nil)
   (define-key go-ts-mode-map (kbd "C-c C-d d") #'eldoc-print-current-symbol-info)
   (define-key go-ts-mode-map (kbd "C-c C-d C-d") #'eldoc-print-current-symbol-info)
 

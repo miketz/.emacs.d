@@ -5563,6 +5563,10 @@ TODO: call this function when it works."
 ;;; flymake
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'flymake
+
+  ;; advoid introducing a margin area in terminal mode.
+  (setq flymake-indicator-type 'fringes)
+
   ;; key binds
   (define-key flymake-mode-map (kbd "M-n") 'flymake-goto-next-error)
   (define-key flymake-mode-map (kbd "M-p") 'flymake-goto-prev-error)

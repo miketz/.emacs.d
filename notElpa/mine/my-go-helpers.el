@@ -244,6 +244,27 @@ This is more a documentation of how to ignore files in rg."
     (call-interactively #'rg)))
 
 
+(defun my-go-find-methods ()
+  "Find methods of a struct."
+  (interactive)
+  (require 'thingatpt)
+  (require 'rg)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (guess-struct-name (thing-at-point 'symbol 'no-properties))
+         (struct (completing-read "struct: " '() nil nil
+                                  ;; default input to guess.
+                                  guess-struct-name))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat "^func \\(.+" struct "\\)")))
+    ;; ignore test files
+    (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
+
 
 
 ;;;----------------------------------------------------------------------------

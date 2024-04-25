@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: method
+# key: me
+# --
+func (${1:o} ${2:*}${3:Obj}) ${4:fnName}($0) {
+}

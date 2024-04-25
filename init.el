@@ -8026,6 +8026,10 @@ vanilla javascript buffers."
                "-g \"!.git/\""
              "-g '!.git/'")))
 
+  (when my-use-evil-p
+    ;; use emacs bindings (not evil) in *rg* results buffer
+    (push '("\\*rg*" . emacs) evil-buffer-regexps))
+
   (setq rg-show-columns nil)
   (setq rg-group-result nil)
   (setq rg-align-position-numbers nil)

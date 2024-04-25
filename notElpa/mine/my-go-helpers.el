@@ -244,6 +244,7 @@ This is more a documentation of how to ignore files in rg."
     (call-interactively #'rg)))
 
 
+;;;###autoload
 (defun my-go-find-methods ()
   "Find methods of a struct."
   (interactive)

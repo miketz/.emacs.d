@@ -252,10 +252,10 @@ This is more a documentation of how to ignore files in rg."
   (require 'rg)
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
-         (guess-struct-name (thing-at-point 'symbol 'no-properties))
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
          (struct (completing-read "struct: " '() nil nil
-                                  ;; default input to guess.
-                                  guess-struct-name))
+                                  ;; default to text under cursor
+                                  cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
          (regex (concat "^func \\(.+" struct "\\)")))
     ;; ignore test files

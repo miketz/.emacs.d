@@ -6331,7 +6331,16 @@ When ARG isn't nil, try to pretty print the sexp."
   (define-key lispy-mode-map (kbd "C-j") #'lispy-newline-and-indent-plain)
   ;; fn `kill-line' was bound to evil-insert C-k earlier. Override for lispy.
   (when my-use-evil-p
-    (evil-define-key 'insert lispy-mode-map (kbd "C-k") #'lispy-kill)))
+    (evil-define-key 'insert lispy-mode-map (kbd "C-k") #'lispy-kill))
+
+  ;; Avoid messing up trailing ; comment indents when formatting via "i".
+  (defun my-special-lispy-tab ()
+    "Avoid messing up trailing ; comment indents."
+    (interactive)
+    (let ((comment-fill-column 1))
+      (special-lispy-tab)))
+  (lispy-define-key lispy-mode-map-special
+      (kbd "i") #'my-special-lispy-tab))
 
 
 

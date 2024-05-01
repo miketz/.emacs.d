@@ -8841,7 +8841,7 @@ TODO: delete this fn and replace with hooks, etc."
     (setq zone-programs arr)))
 
 ;;;----------------------------------------------------------------------------
-;;; lolcat
+;;; lolcat. applies rainbow colors to the text.
 ;;;----------------------------------------------------------------------------
 (autoload #'lolcat-this-buffer "lolcat" nil t)
 (autoload #'lolcat-view-file "lolcat" nil t)

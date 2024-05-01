@@ -9477,6 +9477,9 @@ Values: lsp, citre, nil")
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+;; set to 1 so comments on the same line are kept close to the code
+(setq-default comment-column 1) ;; buffer local
+
 ;; TODO: look into the various input modes:
 ;; evil, devil, god-mode, meow, boon, xah-fly-keys
 

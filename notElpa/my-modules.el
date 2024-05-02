@@ -1997,7 +1997,7 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :source-control 'git
       :submodule-p t
       :main-branch "master"
-      :use-branch "mine"
+      :use-branch "master"
       :depend-hard '((emacs "26.1"))
       :depend-soft '()
       :depend-bundled '())

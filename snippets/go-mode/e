@@ -2,6 +2,6 @@
 # name : error guard
 # key: e
 # --
-if ${1:err} != nil {
-	$0
+if ${1:err} != nil {$0
+	return fmt.Errorf("what I was trying to do: %w", $1)
 }

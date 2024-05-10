@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+#name : struct of array table
+# key: soa
+# --
+type ${1:FooTable} struct {
+	${2:Col1} []${3:int}
+	isInitialized bool
+}
+
+func (t *$1) Init(len, cap int) error {
+	if t.isInitialized {
+		return fmt.Errorf("error: $1 already initilized")
+	}
+	t.$2 = make([]$3, len, cap)
+	t.isInitialized = true
+	return nil
+}
+
+func (t *$1) Insert($2 $3) {
+	t.$2 = append(t.$2, $2)
+}
+
+func (t *$1) Len() int {
+	// just look at the first column for length.
+	return len(t.$2)
+}

@@ -1936,6 +1936,8 @@ This prevents overlapping themes; something I would rarely want."
 
  ((eq my-curr-computer 'mac-mini-m1-2021)
   (load-theme 'charcoal t)
+  (when (not my-graphic-p)
+    (my-color-transparent-bg))
   ;; (custom-theme-set-faces
   ;;  'ultimate
   ;;  `(default ((t :background "ivory3"))))

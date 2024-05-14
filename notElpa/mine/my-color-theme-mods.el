@@ -305,6 +305,14 @@ Historical preservation."
                       :background  "#090202";"#051515"
                       :box (:line-width -1 :style pressed-button)))))))
 
+(defun my-color-transparent-bg ()
+  "Transparent bg.  Works in iterm on MacOS."
+  (interactive)
+  (load-theme 'charcoal t)
+  (custom-theme-set-faces
+   (my-get-theme)
+   '(default ((t)))))
+
 (defun my-color-deeper-blue ()
   (interactive)
   (load-theme 'deeper-blue t)

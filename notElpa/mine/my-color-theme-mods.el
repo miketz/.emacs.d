@@ -308,10 +308,12 @@ Historical preservation."
 (defun my-color-transparent-bg ()
   "Transparent bg.  Works in iterm on MacOS."
   (interactive)
-  (load-theme 'charcoal t)
-  (custom-theme-set-faces
-   (my-get-theme)
-   '(default ((t)))))
+  (let ((theme (my-get-theme))
+        ;; preserve the foreground color
+        (fg (face-attribute 'default :foreground)))
+   (custom-theme-set-faces
+    theme
+    `(default ((t :foreground ,fg))))))
 
 (defun my-color-deeper-blue ()
   (interactive)

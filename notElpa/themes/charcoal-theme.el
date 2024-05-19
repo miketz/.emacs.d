@@ -272,7 +272,7 @@ Example:
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
-   ;; `(font-lock-string-face ((,class (:foreground ,zenburn-red))))
+   `(font-lock-string-face ((,class (:foreground "LightSalmon"))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
    `(font-lock-variable-name-face ((,class (:foreground
                                             ;; ,fg

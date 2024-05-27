@@ -306,7 +306,7 @@ Historical preservation."
                       :box (:line-width -1 :style pressed-button)))))))
 
 (defun my-color-transparent-bg ()
-  "Transparent bg.  Works in iterm on MacOS."
+  "Transparent bg.  Works in iterm2 on MacOS."
   (interactive)
   (let ((theme (my-get-theme))
         ;; preserve the foreground color

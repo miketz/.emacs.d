@@ -21,6 +21,8 @@
 ;;; Get latest changes from github:
 ;;;     git pull origin master
 ;;;     git submodule update --init --recursive
+;;; If submodules are empty try this:
+;;;     git submodule update --init --force --remote
 ;;; Alternatively, to avoid a manual git pull in each submodule folder?
 ;;;     git submodule update --remote --merge
 ;;;

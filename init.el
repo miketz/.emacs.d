@@ -1938,6 +1938,7 @@ This prevents overlapping themes; something I would rarely want."
 
  ((eq my-curr-computer 'mac-mini-m1-2021)
   (load-theme 'charcoal t)
+  ;; transparent bg on mac, iterm2. see the picture set as bg image in iterm2.
   (when (not my-graphic-p)
     (my-color-transparent-bg))
   ;; (custom-theme-set-faces

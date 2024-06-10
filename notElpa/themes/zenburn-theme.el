@@ -1,10 +1,10 @@
 ;;; zenburn-theme.el --- A low contrast color theme for Emacs.
 
-;; Copyright (C) 2011-2022 Bozhidar Batsov
+;; Copyright (C) 2011-2024 Bozhidar Batsov
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://github.com/bbatsov/zenburn-emacs
-;; Version: 2.8.0
+;; Version: 2.9.0-snapshot
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -412,6 +412,11 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(company-scrollbar-bg ((t (:background ,zenburn-bg+2))))
    `(company-preview ((t (:background ,zenburn-green+2))))
    `(company-preview-common ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg-1))))
+;;;;; corfu
+   `(corfu-default ((t (:foreground ,zenburn-fg :background ,zenburn-bg+1))))
+   `(corfu-current ((t (:foreground ,zenburn-fg :background ,zenburn-bg-1))))
+   `(corfu-bar ((t (:background ,zenburn-bg-1))))
+   `(corfu-bar ((t (:background ,zenburn-bg-2))))
 ;;;;; bm
    `(bm-face ((t (:background ,zenburn-yellow-1 :foreground ,zenburn-bg))))
    `(bm-fringe-face ((t (:background ,zenburn-yellow-1 :foreground ,zenburn-bg))))

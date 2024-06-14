@@ -67,8 +67,9 @@ Some info may be purely for informational/doc purposes."
       :folder (concat my-module-folder "paredit")
       :remotes '((:sym mine :url "https://github.com/miketz/paredit"
                        :alias "origin")
-                 (:sym upstream :url "https://mumble.net/~campbell/git/paredit.git"
-                           :alias "upstream"))
+                 (:sym upstream :url "https://paredit.org/paredit.git"
+                       ;;:url "https://mumble.net/~campbell/git/paredit.git"
+                       :alias "upstream"))
       :remote-default 'mine
       :source-control 'git
       :submodule-p t

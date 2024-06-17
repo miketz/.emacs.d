@@ -123,7 +123,10 @@ I want it to be considered light."
       ;; (set-background-color bg)
       (custom-theme-set-faces
        (my-get-theme)
-       `(default ((t :background ,bg))))
+       ;; TODO: hardcoding :foreground as temporary fix for iterm2
+       ;; where foreground gets messed up. look into proper
+       ;; fix later, just getting it to work on iterm2 for now.
+       `(default ((t :foreground "#EEEED1" :background ,bg))))
       (message (format "color %d/%d. %s, %s"
                        (1+ i) len bg descr))))
 

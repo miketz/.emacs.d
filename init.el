@@ -9046,6 +9046,23 @@ And turns off `indent-tabs-mode'."
 (autoload #'vc-fossil-registered "vc-fossil" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; java-ts-mode
+;;;----------------------------------------------------------------------------
+;; prefer java-ts-mode for ".java" files. But only if it's available.
+(when (treesit-language-available-p 'java)
+  (add-to-list 'major-mode-remap-alist '(java-mode . java-ts-mode)))
+
+(with-eval-after-load 'java-ts-mode
+  (defun my-setup-java-ts-mode ()
+    ;; set to 1 so comments on the same line are kept close to the code
+    (setq comment-column 1) ; buffer local
+    (yas-minor-mode 1)
+    (citre-mode 1) ; ctags mode
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode))
+  (add-hook 'java-ts-mode-hook #'my-setup-java-ts-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; my-go-doc. custom doc lookup functions
 ;;;----------------------------------------------------------------------------
 (autoload #'my-go-doc-local "my-go-doc" nil t)

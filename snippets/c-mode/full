@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: full
+# key: full
+# --
+/* cc `(if buffer-file-name
+    (file-name-nondirectory (buffer-file-name))
+  "foo.c")` && ./a.out */
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+    printf("hi\n");$0
+    return 0;
+}

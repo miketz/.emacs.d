@@ -3,5 +3,4 @@
 # key: if
 # group : control structure
 # --
-if ${1:cond}:
-    $0
+if $0:

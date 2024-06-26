@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+#name : class
+# key: class
+# --
+public class ${1:Name}$0
+{
+    public $1() {
+    }
+
+} // class $1

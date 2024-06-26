@@ -4051,6 +4051,7 @@ and indent."
     (setq tab-width 4) ;; buffer local
     (indent-tabs-mode 1)
     (rainbow-delimiters-mode-enable)
+    (citre-mode 1) ; ctags mode
     (when nil ;; don't use smart-tab-mode until it's working
       (progn  ;; smart-tabs-mode
         ;; this seems to successfully apply smarts tabs when pressting TAB on a

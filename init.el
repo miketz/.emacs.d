@@ -3107,6 +3107,22 @@ LINTER values: :jslint :jshint :eslint"
   (add-hook 'js2-mode-hook #'my-js2-init))
 
 ;;;----------------------------------------------------------------------------
+;;; js-ts-mode
+;;;----------------------------------------------------------------------------
+;; prefer js2-mode. it provides more features beyond just syntax highlights.
+;; (when (treesit-language-available-p 'javascript)
+;;   (add-to-list 'major-mode-remap-alist '(java-mode . java-ts-mode)))
+
+(with-eval-after-load 'js ; js-ts-mode is stored in the "js" feature file
+  (defun my-setup-js-ts-mode ()
+    ;; set to 1 so comments on the same line are kept close to the code
+    (setq comment-column 1) ; buffer local
+    (yas-minor-mode 1)
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode))
+  (add-hook 'js-ts-mode-hook #'my-setup-js-ts-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; json-snatcher. dependency of json-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/json-snatcher" load-path)

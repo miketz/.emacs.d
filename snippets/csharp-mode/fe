@@ -4,6 +4,5 @@
 # key: fe
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-foreach(var ${1:x} in ${2:lst}) {
-    $0
+foreach(var ${1:x} in $0) {
 }

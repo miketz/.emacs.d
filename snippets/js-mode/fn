@@ -3,6 +3,5 @@
 # name: fn
 # key: fn
 # --
-function ${1:name}($2) {
-    $0
+function ${1:name}($0) {
 }

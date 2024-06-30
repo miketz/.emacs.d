@@ -4,7 +4,6 @@
 # key: class
 # --
 var ${1:name} = new Class({
-    initialize: function($2) {
-        $0
+    initialize: function($0) {
     }
 });

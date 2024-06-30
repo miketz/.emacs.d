@@ -3,6 +3,5 @@
 # name: ff
 # key: ff
 # --
-function($1) {
-    $0
+function($0) {
 };

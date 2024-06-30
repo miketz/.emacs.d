@@ -3,6 +3,5 @@
 # name: while
 # key: wh
 # --
-while (${1:cond}) {
-    $0
+while ($0) {
 }

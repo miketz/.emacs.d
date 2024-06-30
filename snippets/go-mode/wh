@@ -2,6 +2,5 @@
 # name: wh
 # key: wh
 # --
-for ${1:cond} {
-	$0
+for $0 {
 }

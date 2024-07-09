@@ -247,7 +247,7 @@ Example:
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
                                       :weight normal)))
    `(font-lock-property-name-face ((,class
-                                    :inherit font-lock-variable-name-face
+                                    ;; :inherit font-lock-variable-name-face
                                     :foreground "burlywood3"
                                     ;; :background ,fn-call-bg
                                     )))

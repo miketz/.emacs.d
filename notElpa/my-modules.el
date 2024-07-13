@@ -89,8 +89,8 @@ Some info may be purely for informational/doc purposes."
       :remote-default 'mine
       :source-control 'git
       :submodule-p t
-      :main-branch "master"
-      :use-branch "master"
+      :main-branch "development" ; all the action seems to be going on here so treat it as the main branch.
+      :use-branch "development"
       :depend-hard '()
       :depend-soft '()
       :depend-bundled '())

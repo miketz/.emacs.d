@@ -143,6 +143,22 @@ the standard lib, like struct time.Time.")
         (ivy-height (- (window-height) 4)))
     (insert (completing-read "type: " my-go-types))))
 
+(defvar my-go-builtin-funcs
+  '("append" "copy" "delete" "len" "cap" "make" "max" "min" "new" "complex"
+    "real" "imag" "clear" "close" "panic" "recover" "print" "println")
+  "Built in functions.")
+
+;;;###autoload
+(defun my-go-insert-builtin-func ()
+  "Select and insert a built-in go function with completing-read."
+  (interactive)
+  (let ((completing-read-function #'ivy-completing-read)
+        ;; dynamically shadow ivy completion style to ignore order.
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window. -4 so scrolling doens't go off screen.
+        (ivy-height (- (window-height) 4)))
+    (insert (completing-read "type: " my-go-builtin-funcs))))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; library instalation
@@ -318,6 +334,7 @@ _e_: errcheck
 _a_: ineffassign
 _h_: heap
 _t_: types
+_f_: built-in funcs
 _d_: doc
 _s_: toggle err handling visibility
 _q_, _C-g_: quit"
@@ -327,6 +344,7 @@ _q_, _C-g_: quit"
   ("a" my-go-ineffassign)
   ("h" my-go-heap-escape)
   ("t" my-go-insert-type)
+  ("f" my-go-insert-builtin-func)
   ("d" my-go-doc-local)
   ("l" my-go-lint)
   ("s" my-go-toggle-err-handling)

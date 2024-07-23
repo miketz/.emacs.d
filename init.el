@@ -8721,7 +8721,7 @@ TODO: delete this fn and replace with hooks, etc."
 (with-eval-after-load 'treesitter-context
   (require 'posframe) ; dependency
   (setq treesitter-context-idle-time 1.0)
-  (setq treesitter-context-show-context-always nil)
+  (setq treesitter-context-show-context-always t)
   ;; more persistent display
   (setq treesitter-context-frame-autohide-timeout (* 60 30)))
 

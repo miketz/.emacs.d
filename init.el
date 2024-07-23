@@ -8704,6 +8704,29 @@ TODO: delete this fn and replace with hooks, etc."
 
 
 ;;;----------------------------------------------------------------------------
+;;; treesitter-context
+;;;----------------------------------------------------------------------------
+;; NOTE: depends on posframe so put this after posframe.
+(push "~/.emacs.d/notElpa/treesitter-context.el" load-path)
+(autoload #'treesitter-context-which-func-mode "treesitter-context-which-func" nil t)
+(autoload #'treesitter-context-fold-hide "treesitter-context-fold" nil t)
+(autoload #'treesitter-context-fold-show "treesitter-context-fold" nil t)
+(autoload #'treesitter-context-fold-toggle "treesitter-context-fold" nil t)
+(autoload #'treesitter-context-fold-debug "treesitter-context-fold" nil t)
+(autoload #'treesitter-context-fold-mode "treesitter-context-fold" nil t)
+(autoload #'treesitter-context-mode "treesitter-context" nil t)
+(autoload #'treesitter-context-toggle-show "treesitter-context-utils" nil t)
+(autoload #'treesitter-context-focus-mode "treesitter-context-focus" nil t)
+
+(with-eval-after-load 'treesitter-context
+  (require 'posframe) ; dependency
+  (setq treesitter-context-idle-time 1.0)
+  (setq treesitter-context-show-context-always nil)
+  ;; more persistent display
+  (setq treesitter-context-frame-autohide-timeout (* 60 30)))
+
+
+;;;----------------------------------------------------------------------------
 ;;; visual-indentation-mode. alternative to highlight-indent-guides
 ;;;----------------------------------------------------------------------------
 (autoload #'visual-indentation-mode "visual-indentation-mode" nil t)

@@ -349,3 +349,6 @@
 [submodule "notElpa/mine/rapid-serial-visual-presentation"]
 	path = notElpa/mine/rapid-serial-visual-presentation
 	url = https://github.com/miketz/rapid-serial-visual-presentation
+[submodule "notElpa/treesitter-context.el"]
+	path = notElpa/treesitter-context.el
+	url = https://github.com/miketz/treesitter-context.el

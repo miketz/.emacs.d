@@ -95,6 +95,23 @@ Some info may be purely for informational/doc purposes."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'treesitter-context
+      :comment nil
+      :folder (concat my-module-folder "treesitter-context.el")
+      :remotes '((:sym mine :url "https://github.com/miketz/treesitter-context.el"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/zbelial/treesitter-context.el"
+                       :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '((emacs "29.1")
+                     (posframe "1.4.2"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'buttercup
       :comment "Testing library. Used by several packages."
       :folder (concat my-module-folder "emacs-buttercup")

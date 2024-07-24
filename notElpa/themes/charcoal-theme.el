@@ -174,6 +174,10 @@ Example:
                              (360 . "MediumOrchid2"))) ;"#3F3FFF"
    `(vc-annotate-very-old-color "DarkOrchid2")
 
+   ;; popup box of treesitter-context package
+   `(treesitter-context-background-color "#000000")
+   `(treesitter-context-border-color "#337744")
+
    ;; pos-tip. Helper package for tooltip
    `(pos-tip-foreground-color ,fg-green)
    `(pos-tip-background-color ,bg-green))

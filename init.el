@@ -8723,7 +8723,10 @@ TODO: delete this fn and replace with hooks, etc."
   (setq treesitter-context-idle-time 1.0)
   (setq treesitter-context-show-context-always t)
   ;; more persistent display
-  (setq treesitter-context-frame-autohide-timeout (* 60 30)))
+  (setq treesitter-context-frame-autohide-timeout (* 60 30))
+  (setq treesitter-context-frame-min-height 1)
+  (setq treesitter-context-frame-min-width 10)
+  (setq treesitter-context-border-width 1))
 
 
 ;;;----------------------------------------------------------------------------

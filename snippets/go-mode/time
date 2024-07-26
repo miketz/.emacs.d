@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: time
+# key: time
+# --
+start := time.Now()
+// do stuff $0
+duration := time.Since(start)
+fmt.Printf("duration: %v\n", duration)

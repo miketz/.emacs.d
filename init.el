@@ -9213,8 +9213,9 @@ Values: lsp, citre, nil")
     (hs-minor-mode 1) ;; collapse/show sections of code
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode)
-    (when my-graphic-p ; relies on posframe which is gui only
-      (treesitter-context-mode 1)))
+    ;; (when my-graphic-p ; relies on posframe which is gui only
+    ;;   (treesitter-context-mode 1))
+    )
   (add-hook 'go-ts-mode-hook #'my-setup-go-ts-mode)
 
 

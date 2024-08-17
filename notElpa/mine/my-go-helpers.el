@@ -187,10 +187,12 @@ the standard lib, like struct time.Time.")
 ;;;###autoload
 (defun my-go-run-benchmarks ()
   "This is more of a documentation to help me remember how to run perf tests.
--run=^# skips unit tests."
+-run=^# skips unit tests.
+-test.benchmem includes allocations. Like adding b.ReportAllocs in the benchmark fn."
   (interactive)
   ;; shadow `compile-command'
-  (let ((compile-command "go test -bench=. -run=^#"))
+
+  (let ((compile-command "go test -bench=. -test.benchmem -run=^#"))
     (call-interactively #'compile)))
 
 ;;;----------------------------------------------------------------------------

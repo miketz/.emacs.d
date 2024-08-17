@@ -187,6 +187,7 @@ the standard lib, like struct time.Time.")
 ;;;###autoload
 (defun my-go-run-benchmarks ()
   "This is more of a documentation to help me remember how to run perf tests.
+-bench=. means run all benchmarks. Use -bench=Foo for BenchmarkFoo.
 -run=^# skips unit tests.
 -test.benchmem includes allocations. Like adding b.ReportAllocs in the benchmark fn."
   (interactive)

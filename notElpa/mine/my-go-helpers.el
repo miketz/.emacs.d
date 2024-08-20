@@ -201,11 +201,11 @@ the standard lib, like struct time.Time.")
 ;;;----------------------------------------------------------------------------
 ;;;###autoload
 (defun my-go-run-tests ()
-  "This is more of a documentation to help me remember how to run perf tests.
--run=^# skips unit tests."
+  "This is more of a documentation to help me remember how to run tests.
+-v means verbose, show PASS status of tests."
   (interactive)
   ;; shadow `compile-command'
-  (let ((compile-command "go test"))
+  (let ((compile-command "go test -v"))
     (call-interactively #'compile)))
 
 ;;;###autoload

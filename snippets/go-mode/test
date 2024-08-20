@@ -4,11 +4,11 @@
 # --
 func Test${1:Name}(t *testing.T) {
 	want := 1
-	val, err := $1()
+	got, err := $1()
 	if err != nil {
 		t.Fatalf("err during test: %v", err)
 	}
-	if val != want {
-		t.Fatalf("val: %d. wanted %d", val, want)
+	if got != want {
+		t.Fatalf("got: %d. wanted %d", got, want)
 	}
 }

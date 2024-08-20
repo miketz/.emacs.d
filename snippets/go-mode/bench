@@ -2,7 +2,7 @@
 # name: bench
 # key: bench
 # --
-func Benchmark_${1:Name}(b *testing.B) {
+func Benchmark${1:Name}(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		$1()
 	}

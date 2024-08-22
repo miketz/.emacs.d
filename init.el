@@ -5418,9 +5418,9 @@ and indent."
 `find-file-hook' does not fix the performance issue.
 TODO: call this function when it works."
     (interactive)
-    (let ((file-hook (if (version< emacs-version "22.1")
-                         'find-file-hooks
-                       'find-file-hook)))
+    (let ((file-hook (if (boundp 'find-file-hook)
+                         'find-file-hook   ; use new hook var if available
+                       'find-file-hooks))) ; else older emacs-version < 22.1
       (remove-hook file-hook 'magit-edit-branch*description-check-buffers)
       (remove-hook file-hook 'global-magit-file-mode-check-buffers)
       (remove-hook file-hook 'magit-auto-revert-mode-check-buffers)

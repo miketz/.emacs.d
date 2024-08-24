@@ -7488,7 +7488,7 @@ Closure over `preceding-sexp-fn'."
 
 
 ;;;----------------------------------------------------------------------------
-;;; autorevert (built into emacs)
+;;; autorevert (built into emacs). refresh buffer as files change externally.
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'autorevert
   ;; try to use native OS file nodifications if possible

@@ -202,10 +202,11 @@ the standard lib, like struct time.Time.")
 ;;;###autoload
 (defun my-go-run-tests ()
   "This is more of a documentation to help me remember how to run tests.
--v means verbose, show PASS status of tests."
+-v means verbose, show PASS status of tests.
+-cover shows test coverage percentage."
   (interactive)
   ;; shadow `compile-command'
-  (let ((compile-command "go test -v"))
+  (let ((compile-command "go test -v -cover"))
     (call-interactively #'compile)))
 
 ;;;###autoload

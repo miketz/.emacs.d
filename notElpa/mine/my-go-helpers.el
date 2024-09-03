@@ -228,8 +228,19 @@ the standard lib, like struct time.Time.")
     (let ((txt "package main
 
 import (
+	\"os\"
 	\"testing\"
 )
+
+func TestMain(m *testing.M) {
+	// setup code here
+
+	exitCode := m.Run()
+
+	// teardown code here
+
+	os.Exit(exitCode)
+}
 
 func BenchmarkFoo(b *testing.B) {
 	b.ReportAllocs()

@@ -3,4 +3,4 @@
 # key: cb
 # --
 <input id="${1:id}" name="$1" type="checkbox" value="${2:1}" ${3:checked}>
-<label for="$1">${4:descr}</label><br>
+<label for="$1">${4:label}</label><br>

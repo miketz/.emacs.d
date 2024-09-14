@@ -5020,6 +5020,14 @@ and indent."
   (icicle-mode 1))
 
 ;;;----------------------------------------------------------------------------
+;;; html-mode
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'html-mode
+  (defun my-setup-html-mode ()
+    (yas-minor-mode 1))
+  (add-hook 'html-mode-hook #'my-setup-html-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; web-mode
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpa/web-mode" load-path)
@@ -5051,6 +5059,7 @@ and indent."
   (defun my-setup-web-mode ()
     ;; useful for embedded javascript or css
     (rainbow-delimiters-mode 1)
+    (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'web-mode-hook #'my-setup-web-mode))
 

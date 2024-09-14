@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: table
+# key: tab
+# --
+<table>
+  <thead>
+    <tr>
+      <td>${1:col1}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$0val1</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: radio
+# key: radio
+# --
+<input id="${1:id}" type="radio" name="${2:sharedGroupName}" value="${3:1}" ${4:checked}>
+<label for="$1">${5:label}</label><br>

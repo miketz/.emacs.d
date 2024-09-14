@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: radioClear
+# key: radioClear
+# --
+<input id="${1:btnClear}" type="button" onclick="document.querySelector('input[name=${2:sharedGroupName}]:checked').checked = false" value="${3:Clear}">

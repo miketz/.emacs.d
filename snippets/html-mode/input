@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: input
+# key: input
+# --
+<input id="${1:id}" type="$0">

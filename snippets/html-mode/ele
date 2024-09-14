@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ele
+# key: ele
+# --
+<${1:tag} id="${2:id}" name="$2">$0</$1>

@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <td>${1:col1}</td>
+      <th>${1:col1}</th>
     </tr>
   </thead>
   <tbody>

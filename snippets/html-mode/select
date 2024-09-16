@@ -4,5 +4,5 @@
 # --
 <label for="$2">${1:label}</label>
 <select id="${2:id}" name="$2">
-  <option value="${3:1}">${4:descr}</option>
+  <option value="${3:1}" ${4:selected}>${5:descr}</option>
 </select>

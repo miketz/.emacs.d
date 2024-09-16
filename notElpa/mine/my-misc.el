@@ -567,4 +567,12 @@ START and END define the region."
     (insert-file-contents filePath)
     (buffer-string)))
 
+;;;###autoload
+(defun my-ms-to-minute-sec (ms)
+  (let* ((min (/ ms 1000 60)) ; want truncation in minute calc
+         (sec-float (/ ms 1000.0))
+         (sec (mod sec-float 60)))
+    `(:min ,min :sec ,sec)))
+
+
 (provide 'my-misc)

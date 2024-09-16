@@ -1086,6 +1086,7 @@ in case that file does not provide any feature."
 (autoload #'my-str-ends-with-p "my-misc" nil t)
 (autoload #'my-get-string-from-file "my-misc" nil nil)
 (autoload #'my-turn-on-electric-pair-local-mode "my-misc" nil t)
+(autoload #'my-ms-to-minute-sec "my-misc" nil nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; flags used for conditional execution

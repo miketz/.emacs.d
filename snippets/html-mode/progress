@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: progress
+# key: progress
+# --
+<label for="$2">${1:label}</label>
+<progress id="${2:id}" value="${3:0}" max="${4:100}">$0</progress>

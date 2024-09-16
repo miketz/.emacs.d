@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fieldset
+# key: fieldset
+# --
+<fieldset>
+  <legend>${1:seciton text}</legend>$0
+</fieldset>

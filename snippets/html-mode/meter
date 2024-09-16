@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: meter
+# key: meter
+# --
+<label for="$2">${1:label}</label>
+<meter id="${2:id}" value="${3:2}" min="${4:0}" max="${5:10}">${6:text}</meter>

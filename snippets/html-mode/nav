@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: nav
+# key: nav
+# --
+<nav>
+  <a href="/back/">Back</a> |
+  <a href="/back/">Forward</a>
+</nav>

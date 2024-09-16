@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: iframe
+# key: iframe
+# --
+<iframe src="${1:url}"></iframe>

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ul
+# key: ul
+# --
+<ul style="type="list-style-type:${1:disc}">
+  <li>$0</li>
+</ul>

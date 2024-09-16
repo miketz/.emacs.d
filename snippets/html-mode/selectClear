@@ -2,4 +2,4 @@
 # name: selectClear
 # key: selectClear
 # --
-<input id="${1:btnClear}" type="button" onclick="document.getElementById('${2:idSelect}').value = ''" value="${3:Clear}">
+<input id="${1:btnClear}" type="button" onclick="document.getElementById('${2:idSelect}').selectedIndex=-1" value="${3:Clear}">

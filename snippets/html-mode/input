@@ -2,5 +2,5 @@
 # name: input
 # key: input
 # --
-<label for="$1">${2:label}</label>
-<input id="${1:id}" type="$0">
+<label for="$2">${1:label}</label>
+<input id="${2:id}" type="$0">

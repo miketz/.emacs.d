@@ -2,5 +2,5 @@
 # name: form
 # key: form
 # --
-<form id="${1:form1}" method="POST" action="$0">
+<form id="${1:form1}" name="$1" method="POST" action="$0">
 </form>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: aemail
+# key: aemail
+# --
+<a href="mailto:${1:email}@${2:gmail.com}">$0</a>

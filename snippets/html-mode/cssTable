@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: cssTable
+# key: cssTable
+# --
+<style>
+  /* simulate table alignment via CSS */
+  form  { display: table;      }
+  p     { display: table-row;  }
+  label { display: table-cell; text-align: right;}
+  input { display: table-cell; }
+</style>
+
+<form>
+  <p>
+    <label for="txtName">Name:</label>
+    <input id="txtName" type="text">
+    <label id="valiTxtName" class="vali">Required</label>
+  </p>
+  <p>
+    <label for="txtAge">Age:</label>
+    <input id="txtAge" type="number" min="0" max="250" step="5" >
+  </p>
+</form>

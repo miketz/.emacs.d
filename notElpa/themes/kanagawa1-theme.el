@@ -14,7 +14,7 @@
 
 
 (autothemer-deftheme
-	kanagawa "A theme based on kanagawa color scheme"
+	kanagawa1 "A theme based on kanagawa color scheme"
 
  ((((class color) (min-colors #xFFFFFF))        ; col 1 GUI/24bit
    ((class color) (min-colors #xFF)))           ; col 2 Xterm/256
@@ -419,5 +419,5 @@
                   (file-name-as-directory
                    (file-name-directory load-file-name))))
 
-(provide-theme 'kanagawa)
-;;; kanagawa-theme.el ends here
+(provide-theme 'kanagawa1)
+;;; kanagawa1-theme.el ends here

@@ -3,3 +3,4 @@
 # key: script
 # --
 <script type="text/javascript" src="$0"></script>
+<noscript>Your browser does not support JavaScript.</noscript>

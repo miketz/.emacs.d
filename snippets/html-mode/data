@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: data
+# key: data
+# --
+<data value="${1:123}">${2:text}</data>

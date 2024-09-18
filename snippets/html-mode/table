@@ -1,16 +1,17 @@
 # -*- mode: snippet -*-
 # name: table
-# key: tab
+# key: table
 # --
 <table>
+  <caption>${1:title}</caption>
   <thead>
     <tr>
-      <th>${1:col1}</th>
+      <th>${2:col1}</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>$0val1</td>
+      <td>$0${3:val1}</td>
     </tr>
   </tbody>
 </table>

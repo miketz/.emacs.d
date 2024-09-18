@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: colgroup
+# key: colgroup
+# --
+<colgroup>
+  <col span="2" style="background-color:red">
+  <col style="background-color:yellow">
+</colgroup>

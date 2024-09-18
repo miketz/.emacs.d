@@ -4,6 +4,9 @@
 # --
 <table>
   <caption>${1:title}</caption>
+  <colgroup>
+    <col span="1" style="">
+  </colgroup>
   <thead>
     <tr>
       <th>${2:col1}</th>

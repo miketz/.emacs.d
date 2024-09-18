@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: col
+# key: col
+# --
+<col span="${1:1}" style="${2:background-color:yellow}">

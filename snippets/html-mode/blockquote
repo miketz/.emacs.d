@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: blockquote
+# key: blockquote
+# --
+<blockquote cite="${1:url}">
+  ${2:quote}
+</blockquote>

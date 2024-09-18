@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: canvas
+# key: canvas
+# --
+<canvas id="${1:id}" height="${2:150}" width="${3:300}">
+Your browser does not support the canvas tag.
+</canvas>

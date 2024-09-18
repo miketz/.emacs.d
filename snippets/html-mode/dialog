@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dialog
+# key: dialog
+# --
+<dialog ${1:open}>$0
+</dialog>

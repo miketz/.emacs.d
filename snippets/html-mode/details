@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: details
+# key: details
+# --
+<details ${1:open}>
+  <summary>${2:header}</summary>
+  <p>${3:details}</p>
+</details>

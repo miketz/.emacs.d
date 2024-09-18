@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: thead
+# key: thead
+# --
+<thead>
+  <tr>
+    <th>${1:col1}</th>
+  </tr>
+</thead>

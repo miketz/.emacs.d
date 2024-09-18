@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: tfoot
+# key: tfoot
+# --
+<tfoot>
+  <tr>
+    <td>${1:text}</td>
+  </tr>
+</tfoot>

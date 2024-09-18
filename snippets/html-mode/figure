@@ -3,6 +3,6 @@
 # key: figure
 # --
 <figure>
-  <img src="${1:img}" alt="${2:descr}" width="${3:50}" height="${4:50}">
+  <img src="${1:img.jpg}" alt="${2:descr}" width="${3:50}" height="${4:50}">
   <figcaption>${5:Fig.1 - descr}</figcaption>
 </figure>

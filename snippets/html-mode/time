@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: time
+# key: time
+# --
+<time>${1:00}:${2:00}$0</time>

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: dl
+# key: dl
+# --
+<dl>
+  <dt>${1:term}</dt>
+  <dd>$0${2:descr}</dd>
+</dl>

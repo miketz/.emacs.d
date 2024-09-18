@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: datalist
+# key: datalist
+# --
+<input list="$1" id="${3:id}" name="$3">
+<datalist id="${1:id}">
+  <option value="${2:val}">
+</datalist>

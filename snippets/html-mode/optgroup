@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: optgroup
+# key: optgroup
+# --
+<optgroup label="${1:group name}">
+  <option value="${2:1}" ${3:selected}>${4:descr}</option>
+</optgroup>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: noscript
+# key: noscript
+# --
+<noscript>$0${1:Your browser does not support JavaScript.}</noscript>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: meta
+# key: meta
+# --
+<meta name="${1:keywords}" content="${2:foo, bar, baz}">

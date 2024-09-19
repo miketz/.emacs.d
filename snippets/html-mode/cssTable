@@ -3,7 +3,7 @@
 # key: cssTable
 # --
 <style>
-  /* simulate table alignment via CSS */
+  /* simulate table alignment via CSS. form is like table. p is like row. */
   form  { display: table;      }
   p     { display: table-row;  }
   label { display: table-cell; text-align: right;}

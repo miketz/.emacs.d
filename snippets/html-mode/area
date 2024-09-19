@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: area
+# key: area
+# --
+<area shape="${1:rect}" coords="${2:34,44,270,350}" alt="${3:descr}" href="${4:page.html}">

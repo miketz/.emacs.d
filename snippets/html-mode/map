@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: map
+# key: map
+# --
+<img src="${1:img.jpg}" alt="${2:descr}" usemap="$5" width="${3:50}" height="${4:50}">
+<map name="${5:mapname}">
+  <area shape="rect" coords="34,44,270,350" alt="Computer" href="page1.html">
+  <area shape="rect" coords="290,172,333,250" alt="Phone" href="page2.html">
+  <area shape="circle" coords="337,300,44" alt="Cup of coffee" href="page3.html">
+</map>

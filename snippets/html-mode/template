@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: template
+# key: template
+# --
+<button onclick="showContent()">Show hidden content</button>
+
+<template>
+  <h2>Some image</h2>
+  <img src="file.jpg" width="214" height="204">
+</template>
+
+<script>
+function showContent() {
+    let temp = document.getElementsByTagName("template")[0];
+    let clon = temp.content.cloneNode(true);
+    document.body.appendChild(clon);
+}
+</script>

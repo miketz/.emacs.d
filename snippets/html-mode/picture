@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: picture
+# key: picture
+# --
+<picture>
+  <source media="(min-width:650px)" srcset="big.jpg">
+  <source media="(min-width:465px)" srcset="medium.jpg">
+  <img src="small.jpg" alt="small img" style="width:auto;">
+</picture>

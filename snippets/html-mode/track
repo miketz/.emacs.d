@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: track
+# key: track
+# --
+<track src="${1:subtitles_en.vtt}" kind="${2:subtitles}" srclang="${3:en}" label="${4:English}">

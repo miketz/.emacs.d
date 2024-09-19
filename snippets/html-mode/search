@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: search
+# key: search
+# --
+<search>$0
+</search>

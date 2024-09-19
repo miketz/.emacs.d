@@ -2,6 +2,6 @@
 # name: ul
 # key: ul
 # --
-<ul style="type="list-style-type:${1:disc}">
+<ul style="list-style-type:${1:disc}">
   <li>$0</li>
 </ul>

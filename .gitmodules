@@ -352,3 +352,6 @@
 [submodule "notElpa/treesitter-context.el"]
 	path = notElpa/treesitter-context.el
 	url = https://github.com/miketz/treesitter-context.el
+[submodule "notElpa/indent-bars"]
+	path = notElpa/indent-bars
+	url = https://github.com/miketz/indent-bars

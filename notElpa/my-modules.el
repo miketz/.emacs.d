@@ -2376,6 +2376,23 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'indent-bars
+      :comment nil
+      :folder (concat my-module-folder "indent-bars")
+      :remotes '((:sym mine :url "https://github.com/miketz/indent-bars"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/jdtsmith/indent-bars"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "main"
+      :use-branch "main"
+      :depend-hard '((emacs "27.1")
+                     (compat "29.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'sunrise
       :comment nil
       :folder (concat my-module-folder "sunrise-commander")

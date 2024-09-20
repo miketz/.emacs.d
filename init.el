@@ -9561,9 +9561,13 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; indent-bars
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpa/indent-bars" load-path)
+(autoload #'indent-bars-mode "indent-bars" nil t)
+(autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)
 (with-eval-after-load 'indent-bars
   ;; don't highlight current depth
   ;; (setq indent-bars-highlight-current-depth nil)
+
   (setq indent-bars-color-by-depth
         ;; match with `rainbow-delimiters' faces.
         '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.

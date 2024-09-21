@@ -9588,7 +9588,7 @@ Values: lsp, citre, nil")
                     "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
                     "#FF4500" ; red last to match rainbow-delimiters after wrap around
                     )
-                   :blend 0.5)))
+                   :blend 0.8)))
 
 
 ;;;----------------------------------------------------------------------------

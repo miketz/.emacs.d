@@ -56,6 +56,10 @@ Do not expect my-tabify-buffer to work correctly."
     (setq tab-width width)
     (setq msg (concat msg (format "\ntab-width = %d" width)))
 
+    ;; refresh indent-bars-mode if it's currently on.
+    (when (and (boundp 'indent-bars-mode) indent-bars-mode)
+      (indent-bars-reset))
+
     ;; display "indent-var-sym" and tab-width
     (message msg)))
 

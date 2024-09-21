@@ -9588,7 +9588,24 @@ Values: lsp, citre, nil")
                     "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
                     "#FF4500" ; red last to match rainbow-delimiters after wrap around
                     )
-                   :blend 0.8)))
+                   :blend 0.8))
+
+  (defun my-indent-bars-1-color ()
+    (interactive)
+    (setq indent-bars-color-by-depth nil)
+    (setq indent-bars-color '("gray" :blend 0.4))
+    (indent-bars-reset))
+
+  (defun my-indent-bars-multi-color ()
+    (interactive)
+    (setq indent-bars-color-by-depth
+          ;; match with `rainbow-delimiters' faces.
+          '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
+                      "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
+                      "#FF4500" ; red last to match rainbow-delimiters after wrap around
+                      )
+                     :blend 0.8))
+    (indent-bars-reset)))
 
 
 ;;;----------------------------------------------------------------------------

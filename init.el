@@ -9567,8 +9567,20 @@ Values: lsp, citre, nil")
 (autoload #'indent-bars-mode "indent-bars" nil t)
 (autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)
 (with-eval-after-load 'indent-bars
+  ;; stipples dont' work on emacs-plus in GUI mode?
+  (when (or (and my-graphic-p (eq my-curr-computer 'mac-mini-m1-2021))
+            (not my-graphic-p))
+    (setq indent-bars-prefer-character "│") ; unicode 9474 (string-to-char "│")
+    )
+
   ;; don't highlight current depth
-  ;; (setq indent-bars-highlight-current-depth nil)
+  (setq indent-bars-highlight-current-Kdepth nil)
+  ;; but if we do highlight curr depth, delay the calculation a bit
+  (setq indent-bars-depth-update-delay 0.1)
+
+  (setq indent-bars-no-stipple-char ?│) ; unicode 9474 (string-to-char "│")
+  (setq indent-bars-starting-column nil) ; default
+  (setq indent-bars-no-descend-lists t)
 
   (setq indent-bars-color-by-depth
         ;; match with `rainbow-delimiters' faces.
@@ -9576,7 +9588,7 @@ Values: lsp, citre, nil")
                     "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
                     "#FF4500" ; red last to match rainbow-delimiters after wrap around
                     )
-                   :blend 0.8)))
+                   :blend 0.5)))
 
 
 ;;;----------------------------------------------------------------------------

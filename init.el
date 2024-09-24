@@ -9573,7 +9573,7 @@ Values: lsp, citre, nil")
     )
 
   ;; don't highlight current depth
-  (setq indent-bars-highlight-current-Kdepth nil)
+  (setq indent-bars-highlight-current-depth nil)
   ;; but if we do highlight curr depth, delay the calculation a bit
   (setq indent-bars-depth-update-delay 0.1)
 

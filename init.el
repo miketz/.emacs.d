@@ -9568,8 +9568,9 @@ Values: lsp, citre, nil")
 (with-eval-after-load 'indent-bars
   ;; stipples dont' work on emacs-plus in GUI mode?
   (when (or (and my-graphic-p (eq my-curr-computer 'mac-mini-m1-2021))
+            (eq my-curr-computer 'work-laptop-2019)
             (not my-graphic-p))
-    (setq indent-bars-prefer-character "│") ; unicode 9474 (string-to-char "│")
+    (setq indent-bars-prefer-character "|")
     )
 
   ;; don't highlight current depth
@@ -9577,7 +9578,8 @@ Values: lsp, citre, nil")
   ;; but if we do highlight curr depth, delay the calculation a bit
   (setq indent-bars-depth-update-delay 0.1)
 
-  (setq indent-bars-no-stipple-char ?│) ; unicode 9474 (string-to-char "│")
+  ;; (setq indent-bars-no-stipple-char ?│) ; unicode 9474 (string-to-char "│")
+  (setq indent-bars-no-stipple-char ?|) ; unicode 124 (string-to-char "|")
   (setq indent-bars-starting-column nil) ; default
   (setq indent-bars-no-descend-lists t)
 

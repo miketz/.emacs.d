@@ -3962,6 +3962,8 @@ and indent."
     ;; code by default.
     (setq comment-column 1)             ; buffer local
 
+    (indent-bars-mode 1)
+
     (when nil ; don't turn on flycheck for now.
       (unless (eq system-type 'windows-nt)
         ;; sometime in early March 2016, flycheck became very slow on
@@ -4028,6 +4030,8 @@ and indent."
         (smart-tabs-advice c-indent-line c-basic-offset)
         (smart-tabs-advice c-indent-region c-basic-offset)
         (smart-tabs-mode-enable)))
+
+    (indent-bars-mode 1)
 
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 110) ; long lines in java.
@@ -9117,6 +9121,7 @@ And turns off `indent-tabs-mode'."
     (setq comment-column 1) ; buffer local
     (yas-minor-mode 1)
     (citre-mode 1) ; ctags mode
+    (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode))
   (add-hook 'java-ts-mode-hook #'my-setup-java-ts-mode))

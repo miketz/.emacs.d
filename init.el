@@ -9570,6 +9570,8 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; indent-bars
 ;;;----------------------------------------------------------------------------
+;; NOTE: if bars are messed up in a "tab indent" file, make sure
+;;       `indent-tabs-mode' is on.
 (push "~/.emacs.d/notElpa/indent-bars" load-path)
 (autoload #'indent-bars-mode "indent-bars" nil t)
 (autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)

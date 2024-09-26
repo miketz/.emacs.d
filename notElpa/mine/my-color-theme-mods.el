@@ -92,7 +92,18 @@ New treesit face."
    '(rainbow-delimiters-depth-7-face ((t (:foreground "white"))))
    '(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1"))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3"))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black"))))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black")))))
+
+
+  (custom-theme-set-variables
+   (my-get-theme)
+   ;; match indent-bars with `rainbow-delimiters' faces.
+   `(indent-bars-color-by-depth
+     '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
+                 "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
+                 "#FF4500" ; red last to match rainbow-delimiters after wrap around
+                 )
+                :blend 0.8))))
 
 (defun my-rainbow-parens-dark-bg-bold ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg. "
@@ -112,7 +123,17 @@ New treesit face."
    '(rainbow-delimiters-depth-7-face ((t (:foreground "white" :bold t))))
    '(rainbow-delimiters-depth-8-face ((t (:foreground "seagreen1" :bold t))))
    '(rainbow-delimiters-depth-9-face ((t (:foreground "burlywood3" :bold t))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black" :bold t))))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "sienna" :background "black" :bold t)))))
+
+  (custom-theme-set-variables
+   (my-get-theme)
+   ;; match indent-bars with `rainbow-delimiters' faces.
+   `(indent-bars-color-by-depth
+     '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
+                 "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
+                 "#FF4500" ; red last to match rainbow-delimiters after wrap around
+                 )
+                :blend 0.8))))
 
 (defun my-rainbow-parens-light-bg ()
   (interactive)

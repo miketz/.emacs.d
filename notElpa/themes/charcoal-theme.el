@@ -152,6 +152,19 @@ Example:
                                               :foreground ,fg
                                               :background "black")))
 
+   ;; indent-bars
+   ;; This is hard to configure in a considerate way in a theme. Becuase
+   ;; `indent-bars-color-by-depth' mixes several things in 1 var. A boolean
+   ;; feature toggle (ie non-nil), color settings, and blend.
+   ;; since this is my personal theme, just do it how i want it.
+   `(indent-bars-color-by-depth
+     ;; match with `rainbow-delimiters' faces.
+     '(:palette (,rain-2 ; 2nd color first as first level is 0 and not drawn.
+                 ,rain-3 ,rain-4 ,rain-5 ,rain-6 ,rain-7 ,rain-8 ,rain-9
+                 ,rain-1 ; red last to match rainbow-delimiters after wrap around
+                 )
+                :blend 0.8))
+
    ;; Duplicating the default vc-annotate colors for now.
    ;; TODO: tailor them for the bg.
    `(vc-annotate-color-map '((20 . "#FF3F3F")

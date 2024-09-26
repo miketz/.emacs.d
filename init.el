@@ -9583,13 +9583,15 @@ Values: lsp, citre, nil")
   (setq indent-bars-starting-column nil) ; default
   (setq indent-bars-no-descend-lists t)
 
-  (setq indent-bars-color-by-depth
-        ;; match with `rainbow-delimiters' faces.
-        '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
-                    "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
-                    "#FF4500" ; red last to match rainbow-delimiters after wrap around
-                    )
-                   :blend 0.8))
+  ;; `indent-bars-color-by-depth' moved to charcoal-theme.el.
+  ;; TODO: configure it for each theme I use in the my-color-* functions.
+  ;; (setq indent-bars-color-by-depth
+  ;;       ;; match with `rainbow-delimiters' faces.
+  ;;       '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
+  ;;                   "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
+  ;;                   "#FF4500" ; red last to match rainbow-delimiters after wrap around
+  ;;                   )
+  ;;                  :blend 0.8))
 
   (defun my-indent-bars-1-color ()
     (interactive)

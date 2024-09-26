@@ -163,7 +163,7 @@ Example:
                  ,rain-3 ,rain-4 ,rain-5 ,rain-6 ,rain-7 ,rain-8 ,rain-9
                  ,rain-1 ; red last to match rainbow-delimiters after wrap around
                  )
-                :blend 0.8))
+                :blend 0.3))
 
    ;; Duplicating the default vc-annotate colors for now.
    ;; TODO: tailor them for the bg.

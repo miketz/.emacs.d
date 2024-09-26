@@ -3995,6 +3995,8 @@ and indent."
       ;;       tabs for C.
       (setq indent-tabs-mode t))
 
+    (indent-bars-mode 1)
+
     (progn ;; smart-tabs-mode
       (smart-tabs-advice c-indent-line c-basic-offset)
       (smart-tabs-advice c-indent-region c-basic-offset)
@@ -4068,6 +4070,7 @@ and indent."
     (setq comment-column 1) ;; buffer local
     (setq tab-width 4) ;; buffer local
     (indent-tabs-mode 1)
+    (indent-bars-mode 1)
     (rainbow-delimiters-mode-enable)
     (citre-mode 1) ; ctags mode
     (when nil ;; don't use smart-tab-mode until it's working

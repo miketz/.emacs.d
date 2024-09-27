@@ -8340,6 +8340,18 @@ vanilla javascript buffers."
 (autoload #'php-mode "php-mode" nil t)
 (push '("\\.php$" . php-mode) auto-mode-alist)
 
+(with-eval-after-load 'php-mode
+  (defun my-setup-php-mode ()
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode-enable)
+    (indent-bars-mode 1)
+    ;; set to 1 so comments on the same line are kept close to the code.
+    (setq comment-column 1) ; buffer local
+    (when my-use-display-fill-column-indicator
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1)))
+  (add-hook 'php-mode-hook #'my-setup-php-mode))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; yaml-mode

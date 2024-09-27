@@ -9607,7 +9607,7 @@ Values: lsp, citre, nil")
   (defun my-indent-bars-1-color ()
     (interactive)
     (setq indent-bars-color-by-depth nil)
-    (setq indent-bars-color '("gray" :blend 0.4))
+    (setq indent-bars-color '("gray" :blend 0.2))
     (indent-bars-reset))
 
   (defun my-indent-bars-multi-color ()
@@ -9618,7 +9618,7 @@ Values: lsp, citre, nil")
                       "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
                       "#FF4500" ; red last to match rainbow-delimiters after wrap around
                       )
-                     :blend 0.8))
+                     :blend 0.3))
     (indent-bars-reset)))
 
 

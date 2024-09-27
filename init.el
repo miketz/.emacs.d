@@ -1742,6 +1742,32 @@ Minus the newline char."
 ;; (require 'evil-snipe)
 ;; (global-evil-snipe-mode 1)
 
+(defun my-turn-on-evil-snipe ()
+  "Temorary fn while i use package.el for installion."
+  (interactive)
+
+  (package-initialize) ; trying stuff with package.el for now
+
+  (require 'evil-snipe)
+  (evil-snipe-mode 1)
+  (evil-snipe-override-mode 1)
+
+  (setq evil-snipe-enable-highlight t)
+  ;; avoid tmp highlight when only 1 search char entered
+  (setq evil-snipe-enable-incremental-highlight nil)
+  (setq evil-snipe-scope 'whole-visible) ; highlight in both directions
+  (setq evil-snipe-repeat-scope 'whole-visible)
+
+  ;; evil-easymotion itegration sample
+  (require 'evil-easymotion)
+  (define-key evil-snipe-parent-transient-map
+              (kbd "C-o")
+              (evilem-create
+               (list 'evil-snipe-repeat
+                     'evil-snipe-repeat-reverse) ; target in both directions
+               :bind ((evil-snipe-scope 'buffer)
+                      (evil-snipe-enable-highlight)
+                      (evil-snipe-enable-incremental-highlight)))))
 
 ;;;----------------------------------------------------------------------------
 ;;; evil-god-state

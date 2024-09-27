@@ -3063,6 +3063,8 @@ LINTER values: :jslint :jshint :eslint"
     ;; called manually in that case.
     ;; (my-set-jslint-compile-command)
 
+    (indent-bars-mode 1)
+
     (js2-highlight-unused-variables-mode t)
     ;; replace ambiguous name "Javascript-IDE" with "js2"
     (setq mode-name "js2")

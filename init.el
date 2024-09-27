@@ -2862,7 +2862,7 @@ Inserts a new line and the beginning and end with text values:
 
 
 ;;;----------------------------------------------------------------------------
-;;; javascript-mode
+;;; javascript-mode (alias for js-mode)
 ;;; js-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'js

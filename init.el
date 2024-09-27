@@ -9596,7 +9596,10 @@ Values: lsp, citre, nil")
 ;;; indent-bars
 ;;;----------------------------------------------------------------------------
 ;; NOTE: if bars are messed up in a "tab indent" file, make sure
-;;       `indent-tabs-mode' is on.
+;; `indent-tabs-mode' is on.
+;; NOTE: if bars are messed up in a space-indented file make sure the mode's
+;; ident-level var is set to match the number of spaces in that file.
+;; (ie lua-indent-level, ruby-indent-level, etc)
 (push "~/.emacs.d/notElpa/indent-bars" load-path)
 (autoload #'indent-bars-mode "indent-bars" nil t)
 (autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)

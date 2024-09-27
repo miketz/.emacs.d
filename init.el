@@ -7070,6 +7070,7 @@ Closure over `preceding-sexp-fn'."
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; PEP 8
       (display-fill-column-indicator-mode 1))
+    ;; (indent-bars-mode 1) ; breaks with python-ts-mode. TODO: look into a fix
 
     ;; lsp stuff
     ;; (require 'lsp-python-ms)
@@ -7131,6 +7132,7 @@ Closure over `preceding-sexp-fn'."
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; PEP 8
       (display-fill-column-indicator-mode 1))
+    (indent-bars-mode 1)
 
     ;; lsp stuff
     ;; (require 'lsp-python-ms)

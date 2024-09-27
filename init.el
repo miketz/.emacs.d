@@ -7052,8 +7052,10 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; python-ts-mdoe
 ;;;----------------------------------------------------------------------------
-(when (treesit-language-available-p 'python)
-  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
+;; temporarily use the original python-mode as indent-bars breaks with python-ts-mode
+(when nil
+  (when (treesit-language-available-p 'python)
+    (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))))
 
 ;; python-ts-mode lives in the same file as python-mode. So it may not need
 ;; to duplicate every part of the old python config below. just set the hook

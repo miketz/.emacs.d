@@ -7585,6 +7585,7 @@ Closure over `preceding-sexp-fn'."
   (defun my-setup-typescript-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
+    (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'typescript-mode-hook #'my-setup-typescript-mode))
 

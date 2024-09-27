@@ -9397,6 +9397,7 @@ Values: lsp, citre, nil")
 (with-eval-after-load 'perl-mode
   (defun my-setup-perl-mode ()
     (my-turn-on-electric-pair-local-mode)
+    (indent-bars-mode 1)
     (rainbow-delimiters-mode-enable))
   (add-hook 'perl-mode-hook #'my-setup-perl-mode))
 

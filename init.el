@@ -9104,6 +9104,7 @@ And turns off `indent-tabs-mode'."
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)
+    (indent-bars-mode 1)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
     (when my-use-display-fill-column-indicator

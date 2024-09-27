@@ -2910,6 +2910,7 @@ LINTER values: :jslint :jshint :eslint"
       (display-fill-column-indicator-mode 1))
     (my-turn-on-electric-pair-local-mode)
     (yas-minor-mode 1)
+    (indent-bars-mode 1)
     (rainbow-delimiters-mode-enable)
     ;; (electric-spacing-mode 1)
     (my-js-set-compile-command :jshint))

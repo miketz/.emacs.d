@@ -7258,6 +7258,7 @@ Closure over `preceding-sexp-fn'."
   (defun my-setup-swift-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
+    (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'swift-mode-hook #'my-setup-swift-mode))
 

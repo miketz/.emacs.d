@@ -8647,6 +8647,7 @@ TODO: delete this fn and replace with hooks, etc."
     (setq comment-column 1) ; buffer local
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
+    (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'ruby-ts-mode-hook #'my-setup-ruby-ts-mode))
 
@@ -8664,6 +8665,7 @@ TODO: delete this fn and replace with hooks, etc."
     (setq comment-column 1) ; buffer local
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
+    (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'ruby-mode-hook #'my-setup-ruby-mode))
 

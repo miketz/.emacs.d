@@ -9660,13 +9660,31 @@ Values: lsp, citre, nil")
 
 
   (cl-defun my-indent-bars-set-blend (blend)
+    "Set the :blend value for indent-bars to BLEND.
+A bit tricky as :blend is configured in 1 of 2 variables!
+Also one of the vars is not a proper plist, only the tail cdr is."
     (interactive "nblend [0-1]: ")
     ;; GUARD
     (when (or (> blend 1) (< blend 0))
       (message "blend must be between 0 and 1.0")
       (cl-return-from my-indent-bars-set-blend))
-    ;; set
-    (setf (cl-getf indent-bars-color-by-depth :blend) blend)
+    ;; set blend.
+    ;; there are 2 vars that store :blend, which may be null.
+    ;; so check null before setting
+    (if (not (null indent-bars-color-by-depth))
+        (setf (cl-getf indent-bars-color-by-depth :blend) blend)
+      ;; else. try setting the other variable `indent-bars-color'.
+      ;; for now just return early as indent-bars-color is not a proper
+      ;; plist and can't be set via getf/setf
+      (if (not (null indent-bars-color))
+          ;; cdr on `indent-bars-color' becuase the first ele is not a key/val pair?
+          ;; TODO: confirm if this is always true, otherwise cdr may sometimes be a bug
+          (setf (cl-getf (cdr indent-bars-color) :blend) blend)
+        ;; else. both vars were null. abort
+        (progn
+          (message "both vars were null and can't be set via plist methods. aborting")
+          (cl-return-from my-indent-bars-set-blend))))
+    ;; make colors take effect
     (indent-bars-reset))
 
   (defun my-indent-bars-1-color ()

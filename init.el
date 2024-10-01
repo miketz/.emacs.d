@@ -9658,6 +9658,17 @@ Values: lsp, citre, nil")
   ;;                   )
   ;;                  :blend 0.8))
 
+
+  (cl-defun my-indent-bars-set-blend (blend)
+    (interactive "nblend [0-1]: ")
+    ;; GUARD
+    (when (or (> blend 1) (< blend 0))
+      (message "blend must be between 0 and 1.0")
+      (cl-return-from my-indent-bars-set-blend))
+    ;; set
+    (setf (cl-getf indent-bars-color-by-depth :blend) blend)
+    (indent-bars-reset))
+
   (defun my-indent-bars-1-color ()
     (interactive)
     (setq indent-bars-color-by-depth nil)

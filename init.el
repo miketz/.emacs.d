@@ -9664,7 +9664,7 @@ Values: lsp, citre, nil")
 A bit tricky as :blend is configured in 1 of 2 variables!
 Also one of the vars is not a proper plist, only the tail cdr is."
     (interactive "nblend [0-1]: ")
-    ;; GUARD
+    ;; GUARD: blend in range of 0 to 1.0
     (when (or (> blend 1) (< blend 0))
       (message "blend must be between 0 and 1.0")
       (cl-return-from my-indent-bars-set-blend))
@@ -9674,11 +9674,9 @@ Also one of the vars is not a proper plist, only the tail cdr is."
     (if (not (null indent-bars-color-by-depth))
         (setf (cl-getf indent-bars-color-by-depth :blend) blend)
       ;; else. try setting the other variable `indent-bars-color'.
-      ;; for now just return early as indent-bars-color is not a proper
-      ;; plist and can't be set via getf/setf
       (if (not (null indent-bars-color))
           ;; cdr on `indent-bars-color' becuase the first ele is not a key/val pair?
-          ;; TODO: confirm if this is always true, otherwise cdr may sometimes be a bug
+          ;; TODO: confirm if this is always the case, otherwise cdr may sometimes be a bug
           (setf (cl-getf (cdr indent-bars-color) :blend) blend)
         ;; else. both vars were null. abort
         (progn

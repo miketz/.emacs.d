@@ -5093,11 +5093,15 @@ and indent."
         web-mode-code-indent-offset   4
         web-mode-sql-indent-offset    4)
 
+  (define-key web-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key web-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (defun my-setup-web-mode ()
     ;; useful for embedded javascript or css
     (rainbow-delimiters-mode 1)
     (yas-minor-mode 1)
-    (my-turn-on-electric-pair-local-mode))
+    (my-turn-on-electric-pair-local-mode)
+    (setq-local devdocs-current-docs '("html")))
   (add-hook 'web-mode-hook #'my-setup-web-mode))
 
 

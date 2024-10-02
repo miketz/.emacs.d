@@ -9713,6 +9713,12 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 ;;; devdocs
 ;;;----------------------------------------------------------------------------
 ;; temporarily installed via MELPA
+(defun my-devdocs-lookup ()
+  "Wrapper over `devdocs-lookup'. Default input to `thing-at-point'."
+  (interactive)
+  (require 'thingatpt)
+  (let ((txt (thing-at-point 'symbol 'no-properties)))
+    (devdocs-lookup nil txt)))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

@@ -9440,6 +9440,7 @@ Values: lsp, citre, nil")
 ;; eldev. emacs build tool needed for a few packages like lsp-mode
 ;; undercover. test lib a few packages rely on. test build breaks without
 ;; emacs-gc-stats
+;; devdocs: https://github.com/astoff/devdocs.el
 
 
 ;;;----------------------------------------------------------------------------

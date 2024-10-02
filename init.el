@@ -9721,8 +9721,18 @@ Also one of the vars is not a proper plist, only the tail cdr is."
   "Wrapper over `devdocs-lookup'. Default input to `thing-at-point'."
   (interactive)
   (require 'thingatpt)
+  (require 'devdocs)
   (let ((txt (thing-at-point 'symbol 'no-properties)))
     (devdocs-lookup nil txt)))
+
+(defun my-devdocs-install-docs ()
+  "Install docs for languages I use."
+  (interactive)
+  (require 'devdocs)
+  (let ((docs '("c" "go" "bash" "html" "javascript" "css")))
+    (cl-loop for d in docs
+             do
+             (devdocs-install d))))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

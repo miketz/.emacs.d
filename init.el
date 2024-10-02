@@ -9678,10 +9678,10 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 
     ;; set blend. there are 2 vars that store :blend, which may be null.
     ;; so check null before setting
-    (if (not (null indent-bars-color-by-depth))
+    (if indent-bars-color-by-depth ; not null
         (setf (cl-getf indent-bars-color-by-depth :blend) blend)
       ;; else. try setting the other variable `indent-bars-color'.
-      (if (not (null indent-bars-color))
+      (if indent-bars-color ; not null
           ;; cdr on `indent-bars-color' becuase the first ele is not a key/val pair?
           ;; TODO: confirm if this is always the case, otherwise cdr may sometimes be a bug
           (setf (cl-getf (cdr indent-bars-color) :blend) blend)))

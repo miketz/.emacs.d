@@ -9457,6 +9457,7 @@ Values: lsp, citre, nil")
     (my-turn-on-electric-pair-local-mode)
     (indent-bars-mode 1)
     (rainbow-delimiters-mode-enable)
+    (yas-minor-mode 1)
     (setq-local devdocs-current-docs '("perl~5.38")))
   (add-hook 'perl-mode-hook #'my-setup-perl-mode))
 

@@ -2894,6 +2894,9 @@ Inserts a new line and the beginning and end with text values:
 (with-eval-after-load 'js
   (define-key js-mode-map (kbd "C-c C-c") #'compile)
 
+  (define-key js-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key js-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (progn ;; Add parsing of jshint output in compilation mode
     (require 'compile)
     (add-to-list 'compilation-error-regexp-alist-alist
@@ -2939,7 +2942,8 @@ LINTER values: :jslint :jshint :eslint"
     (indent-bars-mode 1)
     (rainbow-delimiters-mode-enable)
     ;; (electric-spacing-mode 1)
-    (my-js-set-compile-command :jshint))
+    (my-js-set-compile-command :jshint)
+    (setq-local devdocs-current-docs '("javascript")))
 
   (add-hook 'js-mode-hook #'my-setup-js))
 
@@ -2958,6 +2962,9 @@ LINTER values: :jslint :jshint :eslint"
 (push '("\\.js$" . js2-mode) auto-mode-alist)
 
 (with-eval-after-load 'js2-mode
+  (define-key js2-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key js2-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (setq-default
    js2-global-externs
    '("$" "module" "require" "buster" "sinon" "assert" "refute"
@@ -3133,7 +3140,8 @@ LINTER values: :jslint :jshint :eslint"
     ;; show a Greek lambda for function
     (setq prettify-symbols-alist '(("function" . 955)))
     ;; collapse/show sections of code
-    (hs-minor-mode 1))
+    (hs-minor-mode 1)
+    (setq-local devdocs-current-docs '("javascript")))
 
   (add-hook 'js2-mode-hook #'my-js2-init))
 

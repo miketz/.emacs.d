@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: say
+# key: say
+# --
+say("$0");

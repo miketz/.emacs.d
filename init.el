@@ -9716,19 +9716,24 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 ;;;----------------------------------------------------------------------------
 ;;; devdocs
 ;;;----------------------------------------------------------------------------
-;; temporarily installed via MELPA
+(push "~/.emacs.d/notElpa/devdocs.el" load-path)
+(autoload #'devdocs-delete "devdocs" nil t)
+(autoload #'devdocs-install "devdocs" nil t)
+(autoload #'devdocs-update-all "devdocs" nil t)
+(autoload #'devdocs-lookup "devdocs" nil t)
+(autoload #'devdocs-peruse "devdocs" nil t)
+(autoload #'devdocs-search "devdocs" nil t)
+
 (defun my-devdocs-lookup ()
   "Wrapper over `devdocs-lookup'. Default input to `thing-at-point'."
   (interactive)
   (require 'thingatpt)
-  (require 'devdocs)
   (let ((txt (thing-at-point 'symbol 'no-properties)))
     (devdocs-lookup nil txt)))
 
 (defun my-devdocs-install-docs ()
   "Install docs for languages I use."
   (interactive)
-  (require 'devdocs)
   (let ((docs '("c" "go" "bash" "html" "javascript" "css")))
     (cl-loop for d in docs
              do

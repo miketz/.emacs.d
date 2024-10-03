@@ -2393,6 +2393,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'devdocs
+      :comment nil
+      :folder (concat my-module-folder "devdocs.el")
+      :remotes '((:sym mine :url "https://github.com/miketz/devdocs.el"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/astoff/devdocs.el"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "main"
+      :use-branch "main"
+      :depend-hard '((emacs "27.1"))
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'sunrise
       :comment nil
       :folder (concat my-module-folder "sunrise-commander")

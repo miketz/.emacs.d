@@ -355,3 +355,6 @@
 [submodule "notElpa/indent-bars"]
 	path = notElpa/indent-bars
 	url = https://github.com/miketz/indent-bars
+[submodule "notElpa/devdocs.el"]
+	path = notElpa/devdocs.el
+	url = https://github.com/miketz/devdocs.el

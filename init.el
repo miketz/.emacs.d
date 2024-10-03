@@ -7250,6 +7250,9 @@ Closure over `preceding-sexp-fn'."
   (define-key lua-mode-map (kbd "C-c C-c") #'compile)
   (define-key lua-mode-map (kbd "C-c c") #'compile)
 
+  (define-key lua-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key lua-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (when my-use-evil-p
     ;; use emacs bindings in lua REPL
     (push '("^*lua*" . emacs) evil-buffer-regexps))
@@ -7286,7 +7289,8 @@ Closure over `preceding-sexp-fn'."
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
     ;; (electric-spacing-mode 1)
-    (my-turn-on-electric-pair-local-mode))
+    (my-turn-on-electric-pair-local-mode)
+    (setq-local devdocs-current-docs '("lua~5.4")))
   (add-hook 'lua-mode-hook #'my-setup-lua-mode))
 
 ;;;----------------------------------------------------------------------------

@@ -7780,9 +7780,14 @@ vanilla javascript buffers."
 ;;; css-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'css-mode
+
+  (define-key css-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key css-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (defun my-setup-css-mode ()
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode-enable))
+    (rainbow-delimiters-mode-enable)
+    (setq-local devdocs-current-docs '("css")))
   (add-hook 'css-mode-hook #'my-setup-css-mode))
 
 ;;;----------------------------------------------------------------------------

@@ -9774,7 +9774,8 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 (defun my-devdocs-install-docs ()
   "Install docs for languages I use."
   (interactive)
-  (let ((docs '("c" "go" "bash" "html" "javascript" "css" "perl~5.38")))
+  (let ((docs '("c" "go" "bash" "html" "javascript" "css" "perl~5.38"
+                "lua~5.4")))
     (cl-loop for d in docs
              do
              (devdocs-install d))))

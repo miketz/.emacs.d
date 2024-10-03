@@ -9449,10 +9449,15 @@ Values: lsp, citre, nil")
 ;;; perl-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'perl-mode
+
+  (define-key perl-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key perl-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (defun my-setup-perl-mode ()
     (my-turn-on-electric-pair-local-mode)
     (indent-bars-mode 1)
-    (rainbow-delimiters-mode-enable))
+    (rainbow-delimiters-mode-enable)
+    (setq-local devdocs-current-docs '("perl~5.38")))
   (add-hook 'perl-mode-hook #'my-setup-perl-mode))
 
 ;;;----------------------------------------------------------------------------
@@ -9756,7 +9761,7 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 (defun my-devdocs-install-docs ()
   "Install docs for languages I use."
   (interactive)
-  (let ((docs '("c" "go" "bash" "html" "javascript" "css")))
+  (let ((docs '("c" "go" "bash" "html" "javascript" "css" "perl~5.38")))
     (cl-loop for d in docs
              do
              (devdocs-install d))))

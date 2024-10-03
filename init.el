@@ -6794,6 +6794,15 @@ Closure over `preceding-sexp-fn'."
 (push '("\\.gitignore$" . shell-script-mode) auto-mode-alist)
 ;; (add-to-list 'auto-mode-alist '("\\.ratpoisonrc$" . sh-mode))
 
+(with-eval-after-load 'sh-script
+  ;; unbind `sh-cd-here' so I can use "C-c C-d" as a prefix.
+  (define-key sh-mode-map (kbd "C-c C-d") nil)
+  (define-key sh-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key sh-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
+  (defun my-setup-sh-mode ()
+    (setq-local devdocs-current-docs '("bash")))
+  (add-hook 'sh-mode-hook #'my-setup-sh-mode))
 
 
 ;;;----------------------------------------------------------------------------

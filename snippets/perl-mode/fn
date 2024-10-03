@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fn
+# key: fn
+# --
+sub ${1:fnName}$0 {
+    # my ($p1, $p2) = @_;
+}

@@ -4022,7 +4022,11 @@ and indent."
       (display-fill-column-indicator-mode 1)))
   (add-hook 'c-mode-common-hook #'my-setup-c-mode-common)
 
+  (define-key c-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key c-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (defun my-setup-c-mode ()
+    (setq-local devdocs-current-docs '("c"))
     ;; (when my-graphic-p
     ;;   (highlight-indent-guides-mode 1))
 
@@ -4105,7 +4109,11 @@ and indent."
   ;; switch between .c/.h file.
   (define-key c-ts-mode-map (kbd "C-c f") #'ff-find-other-file)
 
+  (define-key c-ts-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
+  (define-key c-ts-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
   (defun my-setup-c-ts-mode ()
+    (setq-local devdocs-current-docs '("c"))
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (setq comment-column 1) ;; buffer local

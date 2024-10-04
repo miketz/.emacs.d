@@ -9764,6 +9764,7 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 (autoload #'devdocs-peruse "devdocs" nil t)
 (autoload #'devdocs-search "devdocs" nil t)
 
+;; helper fns
 (autoload #'my-devdocs-lookup "my-devdocs-helpers" nil t)
 (autoload #'my-devdocs-install-docs "my-devdocs-helpers" nil t)
 

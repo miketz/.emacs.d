@@ -5109,8 +5109,8 @@ and indent."
         web-mode-code-indent-offset   4
         web-mode-sql-indent-offset    4)
 
-  (define-key web-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
-  (define-key web-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+  (define-key web-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup-browser)
+  (define-key web-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup-browser)
 
   (defun my-setup-web-mode ()
     ;; useful for embedded javascript or css

@@ -1,5 +1,7 @@
 ;;; my-devdocs-helpers.el --- helper funcs for devdocs pkg -*- lexical-binding: t -*-
 
+(require 'devdocs)
+;; (require 'browse-url) ; `browse-url' is autoloaded
 
 ;;;###autoload
 (defun my-devdocs-lookup ()

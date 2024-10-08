@@ -9693,7 +9693,7 @@ Values: lsp, citre, nil")
   ;; (setq indent-bars-no-stipple-char ?│) ; unicode 9474 (string-to-char "│")
   (setq indent-bars-no-stipple-char ?|) ; unicode 124 (string-to-char "|")
   (setq indent-bars-starting-column nil) ; default
-  (setq indent-bars-no-descend-lists t)
+  (setq indent-bars-no-descend-lists t) ; author reccomends setting this nil for lisps
 
   ;; `indent-bars-color-by-depth' moved to charcoal-theme.el.
   ;; TODO: configure it for each theme I use in the my-color-* functions.

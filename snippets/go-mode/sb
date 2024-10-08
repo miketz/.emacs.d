@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: strings.Builder
+# key: sb
+# --
+var ${1:sb} strings.Builder
+$1.Grow(${2:1024}) // allocate enough space up front

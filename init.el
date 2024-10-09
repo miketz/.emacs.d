@@ -9586,6 +9586,12 @@ Values: lsp, citre, nil")
 ;;   (turn-off-auto-fill)
 ;; To autofill in comments only:
 ;;   (setq-local comment-auto-fill-only-comments t)
+;; To autofill comments only in all programming modes
+;;   (with-eval-after-load 'prog-mode
+;;     (defun my-auto-fill-comments-only ()
+;;       (turn-on-auto-fill)
+;;       (setq-local comment-auto-fill-only-comments t))
+;;     (add-hook 'prog-mode-hook #'my-auto-fill-comments-only))
 
 
 ;; truncate lines if they reach the edge. Just a visual effect.

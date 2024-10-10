@@ -2959,7 +2959,8 @@ LINTER values: :jslint :jshint :eslint"
 (autoload 'js2-mode "js2-mode" nil t nil)
 (autoload 'js2-jsx-mode "js2-mode" nil t nil)
 
-(push '("\\.js$" . js2-mode) auto-mode-alist)
+(unless (eq my-curr-computer 'mac-mini-m1-2021) ; js2 broken on mac mini, emacs 31
+  (push '("\\.js$" . js2-mode) auto-mode-alist))
 
 (with-eval-after-load 'js2-mode
   (define-key js2-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)

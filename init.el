@@ -9695,12 +9695,17 @@ Values: lsp, citre, nil")
 (autoload #'indent-bars-mode "indent-bars" nil t)
 (autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)
 (with-eval-after-load 'indent-bars
-  ;; stipples dont' work on emacs-plus in GUI mode?
-  (when (or (and my-graphic-p (eq my-curr-computer 'mac-mini-m1-2021))
-            (eq my-curr-computer 'work-laptop-2019)
-            (not my-graphic-p))
-    (setq indent-bars-prefer-character "|")
-    )
+  ;; ;; stipples dont' work on emacs-plus in GUI mode?
+  ;; (when (or (and my-graphic-p (eq my-curr-computer 'mac-mini-m1-2021))
+  ;;           (eq my-curr-computer 'work-laptop-2019)
+  ;;           (not my-graphic-p))
+  ;;   (setq indent-bars-prefer-character "|")
+  ;;   )
+
+  ;; for now just always use a pipe char as stipples are not supported in most
+  ;; emacs versions i use at the moment. I will do the reverse and add checks
+  ;; for when i *can* use stipples instead of checking for when I can't.
+  (setq indent-bars-prefer-character "|")
 
   ;; don't highlight current depth
   (setq indent-bars-highlight-current-depth nil)

@@ -1,6 +1,7 @@
 ;;; my-auto-fill-helpers.el --- helper funcs for auto-fill -*- lexical-binding: t -*-
 
 (require 'simple)
+(require 'cl-lib)
 
 
 ;;;###autoload
@@ -8,7 +9,10 @@
   "Turn on auto-fill-mode. And affect comments only, not code."
   ;; populate `fc' in interactive block. using this instead of the "n"
   ;; flag so i can put in a default value.
-  (interactive (list (completing-read "fill-column: " nil nil nil "90")))
+  (interactive
+   (list (completing-read "fill-column: " nil nil nil
+                          ;; default input to current `fill-column'
+                          (number-to-string fill-column))))
 
   ;; GUARD: fc must be a positive integer
   (unless (string-match-p "^[0-9]+$" fc)

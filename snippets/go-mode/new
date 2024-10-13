@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name : new
+# key: new
+# --
+${1:o} := new(${2:Object})

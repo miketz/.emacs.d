@@ -4954,6 +4954,13 @@ and indent."
 
 
 ;;;----------------------------------------------------------------------------
+;;; auto-fill-mode. built-in emacs mode
+;;;----------------------------------------------------------------------------
+;; helper fns to run on/off a "comments only" auto fill mode
+(autoload #'my-auto-fill-turn-on-comments-only "my-auto-fill-helpers" nil t)
+(autoload #'my-auto-fill-turn-off-comments-only "my-auto-fill-helpers" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; log-edit-mode. used by vc for the commit msg buffer.
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'log-edit

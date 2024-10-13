@@ -11,7 +11,7 @@
 
 ;; folder where the book lives
 (defvar cir-folder (cond ((eq my-curr-computer 'mac-mini-m1-2021)
-                          "~/books/")
+                          "~/books/C/")
                          ((eq my-curr-computer 'work-laptop-2019)
                           "c:/users/mtz/books/")
                          (t nil)))

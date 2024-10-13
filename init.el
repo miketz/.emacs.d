@@ -9293,11 +9293,6 @@ Values: lsp, citre, nil")
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
   (defun my-setup-go-ts-mode ()
-    (progn ; auto-fill-mode in comments only, not code
-      (setq fill-column 90) ; buffer local
-      (turn-on-auto-fill)
-      (setq-local comment-auto-fill-only-comments t) ; force buffer local
-      )
     ;; (when buffer-file-name ;; if buffer has a file on disk.
     ;;   ;; wireup M-x compile. TODO: revisit this
     ;;   (set (make-local-variable 'compile-command)
@@ -9384,11 +9379,6 @@ Values: lsp, citre, nil")
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
   (defun my-setup-go-mode ()
-    (progn ; auto-fill-mode in comments only, not code
-      (setq fill-column 90) ; buffer local
-      (turn-on-auto-fill)
-      (setq-local comment-auto-fill-only-comments t) ; force buffer local
-      )
     ;; (when buffer-file-name ;; if buffer has a file on disk.
     ;;   ;; wireup M-x compile. TODO: revisit this
     ;;   (set (make-local-variable 'compile-command)

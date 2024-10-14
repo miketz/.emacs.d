@@ -4956,7 +4956,8 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; auto-fill-mode. built-in emacs mode
 ;;;----------------------------------------------------------------------------
-;; helper fns to run on/off a "comments only" auto fill mode
+;; helper funcs to turn on/off "comments only" auto fill mode.
+;; useful for code buffers where i dont' want auto fill messing up the code
 (autoload #'my-auto-fill-turn-on-comments-only "my-auto-fill-helpers" nil t)
 (autoload #'my-auto-fill-turn-off-comments-only "my-auto-fill-helpers" nil t)
 

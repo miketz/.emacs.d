@@ -25,6 +25,9 @@
 
     (ruby-mode ruby-indent-level) (ruby-ts-mode ruby-indent-level)
 
+    ;; snippet-mode used tab-width alone? no separate indentation var?
+    ;; (snippet-mode ???)
+
     (rust-mode rust-indent-offset)
     (zig-mode zig-indent-offset)
     (perl-mode perl-indent-level)))

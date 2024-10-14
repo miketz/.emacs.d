@@ -9564,6 +9564,22 @@ Values: lsp, citre, nil")
   (define-key vterm-mode-map (kbd "<f12>") nil))
 
 ;;;----------------------------------------------------------------------------
+;;; find/replace with search/grep
+;;;----------------------------------------------------------------------------
+;; see: https://ict4g.net/adolfo/notes/emacs/multi-file-search-and-replace.html
+;; 1. Get a Dired-like listing of the files to perform the search on, using one of these commands:
+;;     find-name-dired, which searches for all the files matching a pattern from a given dir
+;;     find-grep-dired, which searches for a regular expression in all files from a given dir
+;; 2. Mark all the files using either one of these Dired commands:
+;;     % m and then a regular expression matching the name of the files to perform the search on
+;;     % g and then the string/regular expression being searched
+;; 3. Use dired-do-query-replace-regexp to perform the actual search and replace
+;; Thus, for instance:
+;;     M-x find-name-dired ~/Sources/rails_app .*\.rb
+;;     % m .*\.rb
+;;     M-x dired-do-query-replace-regexp
+
+;;;----------------------------------------------------------------------------
 ;;; word wrap. toggle-truncate-lines, visual-line-mode
 ;;;----------------------------------------------------------------------------
 ;; just documenting how to turn on the various wrapping styles.

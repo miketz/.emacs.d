@@ -3809,23 +3809,21 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
 ;;;----------------------------------------------------------------------------
 ;; ;;(add-to-list 'load-path "~/.emacs.d/yasnippet")
 
+;; an older copy of yasnippet before it caused unwanted indentation on
+;; each keystroke.
+;; (push "~/.emacs.d/yasnippet-20160416.831_correctIndent" load-path)
+
+;; using a recent version of yasnippet again. Things seem to work now.
+(push "~/.emacs.d/notElpa/yasnippet" load-path)
 
 (progn
-  ;; an older copy of yasnippet before it caused unwanted indentation on
-  ;; each keystroke.
-  ;; (push "~/.emacs.d/yasnippet-20160416.831_correctIndent" load-path)
-
-  ;; using a recent version of yasnippet again. Things seem to work now.
-  (push "~/.emacs.d/notElpa/yasnippet" load-path)
-
-  (progn
-    ;; manually add the autoloads because I'm not using the package manager
-    ;; for yasnippet anymore.
-    (autoload 'yas-minor-mode "yasnippet" nil t nil)
-    (defvar yas-global-mode nil)
-    (custom-autoload 'yas-global-mode "yasnippet" nil)
-    (autoload 'yas-global-mode "yasnippet" nil t nil)
-    (autoload 'snippet-mode "yasnippet" nil t nil)))
+  ;; manually add the autoloads because I'm not using the package manager
+  ;; for yasnippet anymore.
+  (autoload 'yas-minor-mode "yasnippet" nil t nil)
+  (defvar yas-global-mode nil)
+  (custom-autoload 'yas-global-mode "yasnippet" nil)
+  (autoload 'yas-global-mode "yasnippet" nil t nil)
+  (autoload 'snippet-mode "yasnippet" nil t nil))
 
 
 

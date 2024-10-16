@@ -5,13 +5,16 @@
 type ${1:EnumName} ${2:int}
 
 const (
-	${3:Entry1} $1 = iota
+	${3:Entry1} $1 = iota + ${4:1}
+    ${5:Entry2}
 )
 
-func (e $1) String() string {
-	switch e {
+func (${6:e} $1) String() string {
+	switch $6 {
 	case $3:
 		return "$3"
+	case $5:
+		return "$5"
 	default:
 		return ""
 	}

@@ -1,6 +1,7 @@
 ;;; my-devdocs-helpers.el --- helper funcs for devdocs pkg -*- lexical-binding: t -*-
 
 (require 'devdocs)
+(require 'thingatpt)
 ;; (require 'browse-url) ; `browse-url' is autoloaded
 
 ;;;###autoload
@@ -8,7 +9,6 @@
   "Wrapper over `devdocs-lookup'.
 Default input to `thing-at-point'."
   (interactive)
-  (require 'thingatpt)
   (let ((txt (thing-at-point 'symbol 'no-properties)))
     (devdocs-lookup nil txt)))
 
@@ -19,7 +19,6 @@ Default input to `thing-at-point'."
 Default input to `thing-at-point'.
 Open in browser as some docs have content that won't render in emacs."
   (interactive)
-  (require 'thingatpt)
   (let ((txt (thing-at-point 'symbol 'no-properties)))
     ;; (devdocs-lookup nil txt)
     (let* ((entry (devdocs--read-entry "Go to documentation: "

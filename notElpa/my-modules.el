@@ -2976,6 +2976,57 @@ no branch checked out and you will get false results."
     ;; return the results for informational purposes.
     statuses))
 
+
+(defun my-byte-compile-all-notElpa ()
+  "Byte compile all .el files in ~/.emacs.d/notElpa and sub dirs.
+Does inlcude individual files.
+Skip themes.
+Possibly skip some packages that don't like to be byte compiled."
+  (interactive)
+  (let* ((dir-infos (cl-remove-if
+                     (lambda (f)
+                       (or
+                        ;; skip non ".el" files in top level notElpa/ folder
+                        (and (not (my-folder-p f))
+                             (not (string-suffix-p ".el" (cl-first f) t)))
+                        ;; skip themes
+                        (s-ends-with-p "themes" (cl-first f))
+                        ;; Skip specific projects that don't ignore .elc files.
+                        ;; Revisit this after I fork the projects, and use a personal branch.
+                        (s-ends-with-p "FlamesOfFreedom" (cl-first f))))
+                     ;; files and folders
+                     (directory-files-and-attributes my-module-folder
+                                                     t "^[^.]" t)))
+         (statuses '()))
+    (cl-loop for obj in dir-infos
+             do
+             (if (my-folder-p obj)
+                 ;; compile folder
+                 (let ((dir (cl-first obj)))
+                   (if (eq 'success
+                           (ignore-errors ;; don't stop if 1 package is bad
+                             (my-delete-elc-files dir)
+                             (byte-recompile-directory
+                              dir
+                              0 ;; 0 means compile .el files if .elc is missing.
+                              t) ;; t means force re-compile even if the .elc is up-to-date. May
+                             ;; be useful if the Emacs version changed and should have an
+                             ;; .elc compiled again to be compatible.
+                             'success))
+                       ;; NOTE: this doesn't mean byte compilation was successful for all files
+                       ;; just that no elisp-level errors were thrown.
+                       (push `(,dir success) statuses)
+                     ;; else exception during byte compilation
+                     (push `(,dir error) statuses)))
+               ;; else compile single file
+               (let ((file (cl-first obj)))
+                 (if (byte-compile-file file) ; returns t if succesful. keeps going on err
+                     (push `(,file success) statuses)
+                   ;; else exception during byte compilation
+                   (push `(,file error) statuses)))))
+    ;; return the results for informational purposes.
+    statuses))
+
 (defun my--scrape-module-info ()
   "This is is for dev-time use only.
 Generates a skeleton list for `my-modules'.  With possibly incorrect and

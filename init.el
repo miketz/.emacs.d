@@ -9494,6 +9494,7 @@ Values: lsp, citre, nil")
 ;; undercover. test lib a few packages rely on. test build breaks without
 ;; emacs-gc-stats
 ;; devdocs: https://github.com/astoff/devdocs.el
+;; https://github.com/8dcc/plumber.el
 
 
 ;;;----------------------------------------------------------------------------

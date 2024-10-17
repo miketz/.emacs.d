@@ -9487,7 +9487,7 @@ Values: lsp, citre, nil")
 (autoload #'combobulate-mode "combobulate" nil t)
 
 ;;;----------------------------------------------------------------------------
-;;; look into these packages later, TODO
+;;; TODO: look into these packages later
 ;;;----------------------------------------------------------------------------
 ;; dwim-coder-mode, treesitter based mode that does stuff as you type
 ;; eldev. emacs build tool needed for a few packages like lsp-mode

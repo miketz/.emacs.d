@@ -16,11 +16,11 @@
              do
              (delete-file f))))
 
-;;;###autoload
-(defun my-byte-compile-curr-dir ()
-  "Byte compile all elisp files in the current directory."
-  (interactive)
-  (my-byte-compile-dir default-directory))
+;; ;;;###autoload
+;; (defun my-byte-compile-curr-dir ()
+;;   "Byte compile all elisp files in the current directory."
+;;   (interactive)
+;;   (my-byte-compile-dir default-directory))
 
 ;;;###autoload
 (defun my-byte-compile-dir (dir)

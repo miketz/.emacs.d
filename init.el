@@ -2074,7 +2074,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 (autoload #'my-delete-elc-files "my-byte-compile-stuff" nil nil)
 (autoload #'my-byte-compile-dir "my-byte-compile-stuff" nil t)
-(autoload #'my-byte-compile-curr-dir "my-byte-compile-stuff" nil t)
+;; (autoload #'my-byte-compile-curr-dir "my-byte-compile-stuff" nil t)
 
 
 

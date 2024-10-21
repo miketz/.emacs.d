@@ -1662,6 +1662,22 @@ Historical preservation."
   ;;  '(font-lock-variable-name-face ((t :foreground "springgreen"))))
   )
 
+(defun my-color-birds-of-paradise-plus ()
+  "Custom mods to birds-of-paradise-plus theme."
+  (interactive)
+  (load-theme 'birds-of-paradise-plus t)
+
+  (my-rainbow-parens-dark-bg)
+  (my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg)
+
+  (custom-theme-set-faces
+   'birds-of-paradise-plus
+
+   `(font-lock-comment-face ((t :foreground "darkorange3")))
+   `(font-lock-doc-face ((t :foreground "#cd8500")))))
+
 (defun my-color-warm-night ()
   (interactive)
   (load-theme 'warm-night t)

@@ -9592,6 +9592,7 @@ Values: lsp, citre, nil")
 ;;   C-u M-x projectile-replace-regexp
 ;; helper fn `my-find-replace' will use the prefix arg for you.
 (autoload #'my-find-replace "my-find-replace" nil t)
+(autoload #'my-find-replace-folder "my-find-replace" nil t)
 
 
 

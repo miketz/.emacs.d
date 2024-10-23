@@ -9590,16 +9590,9 @@ Values: lsp, citre, nil")
 ;;   M-x projectile-replace-regexp
 ;; use prefix arg to manually select starting folder instead of proj root
 ;;   C-u M-x projectile-replace-regexp
+;; helper fn `my-find-replace' will use the prefix arg for you.
+(autoload #'my-find-replace "my-find-replace" nil t)
 
-(defun my-find-replace ()
-  "Find/replace in selected dir and sub-dirs.
-Calls `projectile-replace-regexp' with a prefix arg to force manual folder
-selection."
-  (interactive)
-  ;; set `current-prefix-arg' to trigger manual folder selection.
-  ;; ie don't assume project root.
-  (let ((current-prefix-arg '(4)))
-    (call-interactively #'projectile-replace-regexp)))
 
 
 

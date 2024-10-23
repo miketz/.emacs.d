@@ -2,6 +2,7 @@
 
 (require 'projectile)
 
+;;;###autoload
 (defun my-find-replace ()
   "Find/replace in selected dir and sub-dirs.
 Calls `projectile-replace-regexp' with a prefix arg to force manual folder

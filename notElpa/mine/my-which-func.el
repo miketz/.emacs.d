@@ -56,7 +56,10 @@ If a prefix arg is found it will insert the text into the buffer."
                (buffer-substring (line-beginning-position)
                                  (line-end-position)))))
     ;; extra sugar popup display. Could use one of several popup implmenetations.
-    (cond ((and my-which-func-use-postip (fboundp #'pos-tip-show))
+    (cond ((and my-which-func-use-postip
+                (fboundp #'pos-tip-show)
+                ;; pos-tip breaks in terminal on mac. maybe breaks on other terms too?
+                (display-graphic-p))
            (pos-tip-show txt)))
     ;; always display in echo area. even if popups are enabled.
     (message txt)

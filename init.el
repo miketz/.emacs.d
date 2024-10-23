@@ -8151,7 +8151,11 @@ vanilla javascript buffers."
 (with-eval-after-load 'rg
   (require 'wgrep)
   (setq rg-command-line-flags
-        `("-M 250" ; truncate long lines in display.
+        `(
+          ;; for now don't truncate lines. It messes up the ability to
+          ;; find/replace in the results buffer with wgrep.
+          ;; "-M 250" ; truncate long lines in display.
+
           ;; search dot files/folders but not .git
           ;; TODO: figure out how to get it to searh .classpath
           "--hidden"

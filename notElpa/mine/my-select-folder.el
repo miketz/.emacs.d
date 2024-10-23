@@ -5,23 +5,30 @@
 (require 'project)
 (require 'ivy)
 (require 'my-git-helpers)
+(require 'projectile)
 
 (defun my-common-folders-list ()
   "List of common folders you usually want when running a program.
     (such as a linter)
-1. The current folder.
-2. The project root folder, if in a project.
+1. Current folder.
+2-a. Project root folder, if in a project.
+2-b. Project root folder of current git-submodule.
 3. Custom manually chosen folder."
   (let* ((folders '())
          (proj (project-current nil))
          (in-non-submodule-proj-p (and (not (null proj))
                                        ;; if in a submodule `project' gets the root dir of parent proejct!
-                                       (not (my-is-in-git-submodule)))))
+                                       (not (my-is-in-git-submodule))))
+         (in-submodule-proj-p (and (not (null proj))
+                                   (my-is-in-git-submodule))))
     ;; custom is a special flag which means user will need to manually input a folder
     (push "CUSTOM" folders)
     ;; project root folder. (ie git projects)
     (when in-non-submodule-proj-p
       (push (project-root proj) folders))
+    (when in-submodule-proj-p
+      ;; `projectile-acquire-root' gets the root of the submodule project, not the parent container project
+      (push (projectile-acquire-root) folders))
     ;; current folder
     (push default-directory folders)
     folders))

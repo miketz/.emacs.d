@@ -9582,6 +9582,15 @@ Values: lsp, citre, nil")
 ;;     % m .*\.rb
 ;;     M-x dired-do-query-replace-regexp
 
+
+;; or try M-x dired-do-find-regexp-and-replace
+;; requires marking the files in dired first.
+
+;; or try projectile
+;;   M-x projectile-replace-regexp
+;; use prefix arg to manually select starting folder instead of proj root
+;;   C-u M-x projectile-replace-regexp
+
 ;;;----------------------------------------------------------------------------
 ;;; word wrap. toggle-truncate-lines, visual-line-mode
 ;;;----------------------------------------------------------------------------

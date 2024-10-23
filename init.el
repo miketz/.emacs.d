@@ -9592,9 +9592,9 @@ Values: lsp, citre, nil")
 ;;   C-u M-x projectile-replace-regexp
 
 (defun my-find-replace ()
-  "Find/replace in folder.
+  "Find/replace in selected dir and sub-dirs.
 Calls `projectile-replace-regexp' with a prefix arg to force manual folder
-selectionf."
+selection."
   (interactive)
   ;; set `current-prefix-arg' to trigger manual folder selection.
   ;; ie don't assume project root.

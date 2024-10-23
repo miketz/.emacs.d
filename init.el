@@ -9594,6 +9594,14 @@ Values: lsp, citre, nil")
 (autoload #'my-find-replace "my-find-replace" nil t)
 (autoload #'my-find-replace-folder "my-find-replace" nil t)
 
+;; or try rg.el
+;; M-x rg
+;; press e (bound to `wgrep-change-to-wgrep-mode')
+;; edit the results buffer itself! can use evil mode's :%s/find/replace/gc
+;; press C-x C-s to update the buffers
+;; use evil to save all buffers :wall
+
+
 
 
 

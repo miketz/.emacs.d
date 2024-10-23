@@ -9591,6 +9591,18 @@ Values: lsp, citre, nil")
 ;; use prefix arg to manually select starting folder instead of proj root
 ;;   C-u M-x projectile-replace-regexp
 
+(defun my-find-replace ()
+  "Find/replace in folder.
+Calls `projectile-replace-regexp' with a prefix arg to force manual folder
+selectionf."
+  (interactive)
+  ;; set `current-prefix-arg' to trigger manual folder selection.
+  ;; ie don't assume project root.
+  (let ((current-prefix-arg '(4)))
+    (call-interactively #'projectile-replace-regexp)))
+
+
+
 ;;;----------------------------------------------------------------------------
 ;;; word wrap. toggle-truncate-lines, visual-line-mode
 ;;;----------------------------------------------------------------------------

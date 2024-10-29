@@ -9852,6 +9852,23 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 
 
 ;;;----------------------------------------------------------------------------
+;;; binky
+;;;----------------------------------------------------------------------------
+(when nil
+  ;; cd ~/.emacs.d/notElpaYolo
+  ;; git clone --depth 1 --branch master https://github.com/liuyinz/binky.el
+  ;;     for full history later: git fetch --unshallow
+  ;; (package-generate-autoloads "binky" "~/.emacs.d/notElpaYolo/binky.el")
+  (push "~/.emacs.d/notElpaYolo/binky.el" load-path)
+  (load "~/.emacs.d/notElpaYolo/binky.el/binky-autoloads.el")
+  ;; (require 'binky-autoloads)
+
+  (binky-mode)
+  ;; (binky-margin-mode) ; TODO: figure out what this margin mode does
+  )
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

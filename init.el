@@ -165,6 +165,22 @@
 ;;;     git branch master -f
 ;;;     git checkout master
 
+;;;----------------------------------------------------------------------------
+;;; how to clone a git rebo into notElpaYolo
+;;;----------------------------------------------------------------------------
+;; using the binky package as an example
+;; 1. download package
+;;   cd ~/.emacs.d/notElpaYolo
+;;   git clone --depth 1 --branch master https://github.com/liuyinz/binky.el
+;;     for full history later: git fetch --unshallow
+;; 2. generate autoloads
+;;   (package-generate-autoloads "binky" "~/.emacs.d/notElpaYolo/binky.el")
+;; 3. in init.el add the typical configuration.
+;;   (push "~/.emacs.d/notElpaYolo/binky.el" load-path)
+;;   ;; load may be marginally faster than require as it skips search of load-path
+;;   (load "~/.emacs.d/notElpaYolo/binky.el/binky-autoloads.el")
+;;   ;; (require 'binky-autoloads) ; this may be a bit slower as it must search load-path
+
 
 ;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.

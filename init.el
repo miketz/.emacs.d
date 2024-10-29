@@ -9869,6 +9869,19 @@ Also one of the vars is not a proper plist, only the tail cdr is."
   ;; (binky-margin-mode) ; TODO: figure out what this margin mode does
   )
 
+;;;----------------------------------------------------------------------------
+;;; el-typing-game
+;;;----------------------------------------------------------------------------
+(when nil
+  ;; cd ~/.emacs.d/notElpaYolo
+  ;; git clone --depth 1 --branch master https://github.com/lujun9972/el-typing-game
+  ;;     for full history later: git fetch --unshallow
+  ;; (package-generate-autoloads "typing-game" "~/.emacs.d/notElpaYolo/el-typing-game")
+  (push "~/.emacs.d/notElpaYolo/el-typing-game" load-path)
+  (load "~/.emacs.d/notElpaYolo/el-typing-game/typing-game-autoloads.el"))
+
+
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

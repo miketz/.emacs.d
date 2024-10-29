@@ -9509,16 +9509,6 @@ Values: lsp, citre, nil")
 (push "~/.emacs.d/notElpa/combobulate" load-path)
 (autoload #'combobulate-mode "combobulate" nil t)
 
-;;;----------------------------------------------------------------------------
-;;; TODO: look into these packages later
-;;;----------------------------------------------------------------------------
-;; dwim-coder-mode, treesitter based mode that does stuff as you type
-;; eldev. emacs build tool needed for a few packages like lsp-mode
-;; undercover. test lib a few packages rely on. test build breaks without
-;; emacs-gc-stats
-;; https://github.com/8dcc/plumber.el
-;; binky
-
 
 ;;;----------------------------------------------------------------------------
 ;;; buttercup. testing library used by several packages
@@ -9585,6 +9575,18 @@ Values: lsp, citre, nil")
   (define-key vterm-mode-map (kbd "C-e") nil)
   (define-key vterm-mode-map (kbd "<f8>") nil)
   (define-key vterm-mode-map (kbd "<f12>") nil))
+
+
+;;;----------------------------------------------------------------------------
+;;; TODO: look into these packages later
+;;;----------------------------------------------------------------------------
+;; dwim-coder-mode, treesitter based mode that does stuff as you type
+;; eldev. emacs build tool needed for a few packages like lsp-mode
+;; undercover. test lib a few packages rely on. test build breaks without
+;; emacs-gc-stats
+;; https://github.com/8dcc/plumber.el
+;; binky
+
 
 ;;;----------------------------------------------------------------------------
 ;;; find/replace with search/grep

@@ -50,3 +50,5 @@ network-security.data
 /tutorial/
 /devdocs/
 /elpaca/
+# git clone projects. not tracking commit id via git submodules
+/notElpaYolo/

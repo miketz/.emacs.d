@@ -166,7 +166,7 @@
 ;;;     git checkout master
 
 ;;;----------------------------------------------------------------------------
-;;; how to clone a git rebo into notElpaYolo
+;;; how to clone a git repo into notElpaYolo
 ;;;----------------------------------------------------------------------------
 ;; using the binky package as an example
 ;; 1. download package

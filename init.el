@@ -9892,7 +9892,11 @@ Also one of the vars is not a proper plist, only the tail cdr is."
   (load "~/.emacs.d/notElpaYolo/el-typing-game/typing-game-autoloads.el"))
 
 
-
+;;;----------------------------------------------------------------------------
+;;; embark
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/embark" load-path)
+(autoload #'embark-dwim "embark" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

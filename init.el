@@ -1383,8 +1383,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; cd ~/.emacs.d/notElpa/gitFetchHelper
 ;; go build
 ;; (my-clone-git-yolo-repos-golang)
+;;   for repos where I care about history: git fetch --unshallow
+;; (my-byte-compile-all-notElpa)
 ;; (my-setup-all-upstream-remotes-if-missing-golang)
-;; (my-checkout-branches-golang)
+;; (my-checkout-branches-golang) ; git submodule hiccup. at detatched commit
 ;; (my-fetch-all-upstream-remotes-golang)
 ;; (my-list-modules-with-upstream-code-to-merge-golang)
 

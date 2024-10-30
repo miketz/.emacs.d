@@ -9896,7 +9896,44 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 ;;; embark
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/embark" load-path)
+(autoload #'avy-embark-collect-choose "embark" nil t)
+(autoload #'avy-embark-collect-act "embark" nil t)
+;; this progn would be run during init via autoloads! maybe it really is needed
+;; before embark is loaded, but I'd like to avoid that.
+;; moving to with-eval-after-load for now
+;; (progn
+;;   (defun embark--record-this-command ()
+;;     "Record command which opened the minibuffer.
+;; We record this because it will be the default action.
+;; This function is meant to be added to `minibuffer-setup-hook'."
+;;     (setq-local embark--command this-command))
+;;   (add-hook 'minibuffer-setup-hook #'embark--record-this-command))
+(autoload #'embark-eldoc-first-target "embark" nil nil)
+(autoload #'embark-eldoc-target-types "embark" nil nil)
+(autoload #'embark-bindings-in-keymap "embark" nil t)
+(autoload #'embark-bindings "embark" nil t)
+(autoload #'embark-bindings-at-point "embark" nil t)
+(autoload #'embark-prefix-help-command "embark" nil t)
+(autoload #'embark-act "embark" nil t)
+(autoload #'embark-act-all "embark" nil t)
 (autoload #'embark-dwim "embark" nil t)
+(autoload #'embark-become "embark" nil t)
+(autoload #'embark-collect "embark" nil t)
+(autoload #'embark-live "embark" nil t)
+(autoload #'embark-export "embark" nil t)
+(autoload #'embark-select "embark" nil t)
+
+(with-eval-after-load 'embark
+  ;; this code would normally be run during init via autoloads. moving to after
+  ;; load of embark.
+  (progn
+    (defun embark--record-this-command ()
+      "Record command which opened the minibuffer.
+We record this because it will be the default action.
+This function is meant to be added to `minibuffer-setup-hook'."
+      (setq-local embark--command this-command))
+    (add-hook 'minibuffer-setup-hook #'embark--record-this-command)))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

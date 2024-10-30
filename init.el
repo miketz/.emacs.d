@@ -1370,8 +1370,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
 ;; git pull origin master
 ;; git submodule update --init --recursive
+;; create file: ~/.emacs.d/my-curr-computer.txt
 ;; cd ~/.emacs.d/notElpa/gitFetchHelper
 ;; go build
+;; (my-clone-git-yolo-repos-golang)
 ;; (my-setup-all-upstream-remotes-if-missing-golang)
 ;; (my-checkout-branches-golang)
 ;; (my-fetch-all-upstream-remotes-golang)

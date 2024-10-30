@@ -2977,6 +2977,7 @@ no branch checked out and you will get false results."
     statuses))
 
 
+;; TODO: byte compile ~/.emacs.d/notElpaYolo
 (defun my-byte-compile-all-notElpa ()
   "Byte compile all .el files in ~/.emacs.d/notElpa and sub dirs.
 Does inlcude individual files.

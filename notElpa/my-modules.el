@@ -3008,6 +3008,7 @@ no branch checked out and you will get false results."
 ;; TODO: byte compile ~/.emacs.d/notElpaYolo
 (defun my-byte-compile-all-notElpa ()
   "Byte compile all .el files in ~/.emacs.d/notElpa and sub dirs.
+Also byte compile all .el files in ~/.emacs.d/notElpaYolo and sub dirs.
 Does inlcude individual files.
 Skip themes.
 Possibly skip some packages that don't like to be byte compiled."
@@ -3026,8 +3027,23 @@ Possibly skip some packages that don't like to be byte compiled."
                      ;; files and folders
                      (directory-files-and-attributes my-module-folder
                                                      t "^[^.]" t)))
+         (dir-infos-yolo (cl-remove-if
+                          (lambda (f)
+                            (or
+                             ;; skip non ".el" files in top level notElpaYolo/ folder
+                             (and (not (my-folder-p f))
+                                  (not (string-suffix-p ".el" (cl-first f) t)))
+                             ;; skip themes
+                             (s-ends-with-p "themes" (cl-first f))
+                             ;; Skip specific projects that don't ignore .elc files.
+                             ;; Revisit this after I fork the projects, and use a personal branch.
+                             (s-ends-with-p "FlamesOfFreedom" (cl-first f))))
+                          ;; files and folders
+                          (directory-files-and-attributes "~/.emacs.d/notElpaYolo/"
+                                                          t "^[^.]" t)))
+         (dir-infos-all (nconc dir-infos dir-infos-yolo))
          (statuses '()))
-    (cl-loop for obj in dir-infos
+    (cl-loop for obj in dir-infos-all
              do
              (if (my-folder-p obj)
                  ;; compile folder

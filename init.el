@@ -181,6 +181,14 @@
 ;;   (load "~/.emacs.d/notElpaYolo/binky.el/binky-autoloads.el")
 ;;   ;; (require 'binky-autoloads) ; this may be a bit slower as it must search load-path
 
+;;;----------------------------------------------------------------------------
+;;; how to clone a git repo into notElpaYolo. (alternative)
+;;;----------------------------------------------------------------------------
+;; or you can
+;; 1. configure the new repo in ~/.emacs.d/notElpa/gitFetchHelper/repos.jsonc
+;; 2. M-x my-clone-git-yolo-repos-golang
+;; 3. do the usual configuration in init.el. autoloads, load-path, etc.
+
 
 ;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.

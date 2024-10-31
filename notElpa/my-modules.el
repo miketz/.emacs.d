@@ -2730,16 +2730,16 @@ Some operations only make sense for these single-file packages."
   "Call an external Go program to checkout the UseBranch for each git submodule.
 Calls git commands concurrently for each git submodule.
 
-Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper.
 
 Git does not keep track of multiple remotes so I track this in `my-modules' and
 also in gitFetchHelper."
   (interactive)
-  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
                       " init2"))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
-         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
     (message "checking out target branches...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2761,16 +2761,16 @@ also in gitFetchHelper."
   "Call an external Go program to set upstream remotes.
 Calls git commands concurrently for each git submodule.
 
-Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper.
 
 Git does not keep track of multiple remotes so I track this in `my-modules' and
 also in gitFetchHelper."
   (interactive)
-  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
                       " init"))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
-         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
     (message "setting up missing upstream remotes...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2792,14 +2792,14 @@ also in gitFetchHelper."
   "Call an external Go program to fetch each upstream remote.
 Concurrently fetches all upstream remotes at once for increased speed.
 
-Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper.
 
 Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
   ;; (let* (;; run the Go program
-  ;;        (cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  ;;        (cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
   ;;                     " fetch"))
   ;;        (output-str (shell-command-to-string cmd))
   ;;        (buff (get-buffer-create "*gitFetchHelper*")))
@@ -2809,11 +2809,11 @@ so I track this in `my-modules'."
   ;;   (goto-char (point-max)) ;; end of buffer
   ;;   (insert output-str)
   ;;   (insert "\n--------------------------\n"))
-  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
                       " fetch"))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
-         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
     (message "fetching each submodule...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2835,13 +2835,13 @@ so I track this in `my-modules'."
   "Call an external Go program to clone my YOLO (ie not git submodules) repos.
 Concurrently clones the YOLO repos at once for increased speed.
 
-Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper."
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
   (interactive)
-  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
                       " init3"))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
-         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
     (message "cloning git YOLO repos...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
@@ -2907,17 +2907,17 @@ Merge will be done manually after this."
   "Call an external Go program to see which modules have new code for review/merging.
 Calls git diff concurrently.
 
-Assumes go build has been run on ~/.emacs.d/notElpa/gitFetchHelper.
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper.
 
 Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
-  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpa/gitFetchHelper/gitFetchHelper")
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
                       " diff"))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
-         (default-directory "~/.emacs.d/notElpa/gitFetchHelper"))
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
     (message "finding submodules with new upstream code to merge...")
     ;; use process to avoid freezing emacs.
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)

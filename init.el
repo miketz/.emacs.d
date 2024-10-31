@@ -192,7 +192,7 @@
 ;;; how to clone a git repo into notElpaYolo. (alternative)
 ;;;----------------------------------------------------------------------------
 ;; or you can
-;; 1. configure the new repo in ~/.emacs.d/notElpa/gitFetchHelper/repos.jsonc
+;; 1. configure the new repo in ~/.emacs.d/notElpaYolo/gitFetchHelper/repos.jsonc
 ;; 2. M-x my-clone-git-yolo-repos-golang
 ;; 3. do the usual configuration in init.el. autoloads, load-path, etc.
 

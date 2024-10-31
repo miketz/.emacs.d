@@ -1387,8 +1387,11 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; git pull origin master
 ;; git submodule update --init --recursive
 ;; create file: ~/.emacs.d/my-curr-computer.txt
-;; cd ~/.emacs.d/notElpa/gitFetchHelper
-;; go build
+;; # set up gitFetchHelper
+;;     cd ~/.emacs.d/notElpaYolo
+;;     git clone https://github.com/miketz/gitFetchHelper
+;;     cd ~/.emacs.d/notElpaYolo/gitFetchHelper
+;;     go build
 ;; (my-clone-git-yolo-repos-golang)
 ;;     for repos where I care about history:
 ;;     # get history

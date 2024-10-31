@@ -956,6 +956,22 @@ style. More importantly it avoids spamming rg as you type or prematurely."
       :depend-soft '()
       :depend-bundled '())
     ,(make-module
+      :name 'rainbow-mode
+      :comment nil
+      :folder (concat my-module-folder "rainbow-mode")
+      :remotes '((:sym mine :url "https://github.com/miketz/rainbow-mode"
+                       :alias "origin")
+                 (:sym upstream :url "https://github.com/ruediger/rainbow-mode"
+                           :alias "upstream"))
+      :remote-default 'mine
+      :source-control 'git
+      :submodule-p t
+      :main-branch "master"
+      :use-branch "master"
+      :depend-hard '()
+      :depend-soft '()
+      :depend-bundled '())
+    ,(make-module
       :name 'js2-mode
       :comment nil
       :folder (concat my-module-folder "js2-mode")

@@ -172,7 +172,14 @@
 ;; 1. download package
 ;;   cd ~/.emacs.d/notElpaYolo
 ;;   git clone --depth 1 --branch master https://github.com/liuyinz/binky.el
-;;     for full history later: git fetch --unshallow
+;;       for full history later:
+;;       # get history
+;;         git fetch --unshallow
+;;       # get remote branches
+;;         git remote set-branches origin '*'
+;;         git fetch -v
+;;       # to make local version of a remote branch
+;;         git checkout --track origin/master
 ;; 2. generate autoloads
 ;;   (package-generate-autoloads "binky" "~/.emacs.d/notElpaYolo/binky.el")
 ;; 3. in init.el add the typical configuration.
@@ -1383,7 +1390,14 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; cd ~/.emacs.d/notElpa/gitFetchHelper
 ;; go build
 ;; (my-clone-git-yolo-repos-golang)
-;;   for repos where I care about history: git fetch --unshallow
+;;     for repos where I care about history:
+;;     # get history
+;;       git fetch --unshallow
+;;     # get remote branches
+;;       git remote set-branches origin '*'
+;;       git fetch -v
+;;     # to make local version of a remote branch
+;;       git checkout --track origin/master
 ;; (my-byte-compile-all-notElpa)
 ;; (my-setup-all-upstream-remotes-if-missing-golang)
 ;; (my-checkout-branches-golang) ; git submodule hiccup. at detatched commit
@@ -1394,13 +1408,13 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; compat
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/compat.el" load-path)
+(push "~/.emacs.d/notElpaYolo/compat.el" load-path)
 
 
 ;;;----------------------------------------------------------------------------
 ;;; async
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/emacs-async" load-path)
+(push "~/.emacs.d/notElpaYolo/emacs-async" load-path)
 (autoload #'async-start-process "async" nil t)
 (autoload #'async-start "async" nil t)
 (autoload #'dired-async-mode "dired-async" nil t)
@@ -1416,30 +1430,30 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; dash
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/dash.el" load-path)
+(push "~/.emacs.d/notElpaYolo/dash.el" load-path)
 ;; NOTE: contains dash-functional.el which is a separate pacakge on melpa.
 
 ;;;----------------------------------------------------------------------------
 ;; bug-hunter
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/elisp-bug-hunter" load-path)
+(push "~/.emacs.d/notElpaYolo/elisp-bug-hunter" load-path)
 (autoload #'bug-hunter-file "bug-hunter" nil t)
 (autoload #'bug-hunter-init-file "bug-hunter" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; s
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/s.el" load-path)
+(push "~/.emacs.d/notElpaYolo/s.el" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; f
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/f.el" load-path)
+(push "~/.emacs.d/notElpaYolo/f.el" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; num3-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/num3-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/num3-mode" load-path)
 (autoload #'num3-mode "num3-mode" nil t)
 (autoload #'global-num3-mode "num3-mode" nil t)
 
@@ -1587,9 +1601,9 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; evil-leader
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/evil-leader" load-path)
+(push "~/.emacs.d/notElpaYolo/evil-leader" load-path)
 ;; evil-leader needs to be able to to find evil. So add to load-path now.
-(push "~/.emacs.d/notElpa/evil" load-path)
+(push "~/.emacs.d/notElpaYolo/evil" load-path)
 (autoload #'global-evil-leader-mode "evil-leader" nil t)
 (autoload #'evil-leader-mode "evil-leader" nil t)
 (autoload #'evil-leader/set-key "evil-leader" nil t)
@@ -1629,7 +1643,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; goto-chg. dependency of evil.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/goto-chg" load-path)
+(push "~/.emacs.d/notElpaYolo/goto-chg" load-path)
 (autoload #'goto-last-change "goto-chg" nil t)
 (autoload #'goto-last-change-reverse "goto-chg" nil t)
 
@@ -2116,9 +2130,9 @@ This prevents overlapping themes; something I would rarely want."
 with duplicate bundled libs in Sly and SLIME.")
 
 (when my-use-sly ; avoid duplicate bundled libraries also in SLIME.
-  (push "~/.emacs.d/notElpa/sly" load-path)
-  (push "~/.emacs.d/notElpa/sly/contrib" load-path)
-  (push "~/.emacs.d/notElpa/sly/lib" load-path))
+  (push "~/.emacs.d/notElpaYolo/sly" load-path)
+  (push "~/.emacs.d/notElpaYolo/sly/contrib" load-path)
+  (push "~/.emacs.d/notElpaYolo/sly/lib" load-path))
 
 
 (when my-use-sly
@@ -2133,13 +2147,13 @@ with duplicate bundled libs in Sly and SLIME.")
 ;;;----------------------------------------------------------------------------
 ;;; pos-tip
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/pos-tip" load-path)
+(push "~/.emacs.d/notElpaYolo/pos-tip" load-path)
 (autoload #'pos-tip-show "pos-tip" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; macrostep
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/macrostep" load-path)
+(push "~/.emacs.d/notElpaYolo/macrostep" load-path)
 (autoload #'macrostep-c-mode-hook "macrostep-c" nil t)
 (autoload #'macrostep-mode "macrostep" nil t)
 (autoload #'macrostep-expand "macrostep" nil t)
@@ -2148,10 +2162,10 @@ with duplicate bundled libs in Sly and SLIME.")
 ;;; SLIME
 ;;;----------------------------------------------------------------------------
 (unless my-use-sly ; avoid conflicts with SLIME when testing out sly.
-  (push "~/.emacs.d/notElpa/slime" load-path)
-  (push "~/.emacs.d/notElpa/slime/contrib" load-path)
+  (push "~/.emacs.d/notElpaYolo/slime" load-path)
+  (push "~/.emacs.d/notElpaYolo/slime/contrib" load-path)
   ;; don't add /slime/lib/. it's added conditonally in slime.el if needed.
-  ;; (push "~/.emacs.d/notElpa/slime/lib" load-path)
+  ;; (push "~/.emacs.d/notElpaYolo/slime/lib" load-path)
 
   (autoload #'slime "slime" nil t)
   (autoload #'slime-mode "slime" nil t)
@@ -2465,7 +2479,7 @@ with duplicate bundled libs in Sly and SLIME.")
 ;;;----------------------------------------------------------------------------
 ;;; company
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/company-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/company-mode" load-path)
 (autoload #'company-mode "company" nil t)
 (autoload #'global-company-mode "company" nil t)
 (autoload #'company-manual-begin "company" nil t)
@@ -2647,12 +2661,12 @@ In that case, insert the number."
 ;;;----------------------------------------------------------------------------
 ;;; web-completion-data. dependency of company-web
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/web-completion-data" load-path)
+(push "~/.emacs.d/notElpaYolo/web-completion-data" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; company-web
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/company-web" load-path)
+(push "~/.emacs.d/notElpaYolo/company-web" load-path)
 (autoload #'company-web-html "company-web-html" nil t)
 
 (with-eval-after-load 'web-mode
@@ -2679,7 +2693,7 @@ In that case, insert the number."
 ;;;----------------------------------------------------------------------------
 ;;; slime-company
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/slime-company" load-path)
+(push "~/.emacs.d/notElpaYolo/slime-company" load-path)
 ;; this is set in the slime section
 
 ;;;----------------------------------------------------------------------------
@@ -2863,7 +2877,7 @@ Inserts a new line and the beginning and end with text values:
   ;; separate pacakge if on emacs 29+. NOTE: check for the fn itself rather
   ;; than the Emacs version becuase older Emacs 29's in package managers (brew)
   ;; still don't have csharp-mode yet!!!
-  (push "~/.emacs.d/notElpa/csharp-mode" load-path))
+  (push "~/.emacs.d/notElpaYolo/csharp-mode" load-path))
 (autoload #'csharp-mode "csharp-mode" nil t)
 
 (push '("\\.cs$" . csharp-mode) auto-mode-alist)
@@ -2983,7 +2997,7 @@ LINTER values: :jslint :jshint :eslint"
 ;;;----------------------------------------------------------------------------
 ;;; js2-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/js2-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/js2-mode" load-path)
 (autoload 'js2-imenu-extras-setup "js2-imenu-extras" nil nil nil)
 (autoload 'js2-imenu-extras-mode "js2-imenu-extras" nil t nil)
 (autoload 'js2-highlight-unused-variables-mode "js2-mode" nil t nil)
@@ -3197,19 +3211,19 @@ LINTER values: :jslint :jshint :eslint"
 ;;;----------------------------------------------------------------------------
 ;;; json-snatcher. dependency of json-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/json-snatcher" load-path)
+(push "~/.emacs.d/notElpaYolo/json-snatcher" load-path)
 (autoload #'jsons-print-path "json-snatcher" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; json-reformat. dependency of json-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/json-reformat" load-path)
+(push "~/.emacs.d/notElpaYolo/json-reformat" load-path)
 (autoload #'json-reformat-region "json-reformat" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; json-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/json-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/json-mode" load-path)
 (autoload #'json-mode "json-mode" nil t nil)
 (autoload #'json-mode-show-path "json-mode" nil t nil)
 (autoload #'json-mode-kill-path "json-mode" nil t nil)
@@ -3324,7 +3338,7 @@ To make it human readable."
 ;;; Helm
 ;;;----------------------------------------------------------------------------
 ;;(add-to-list 'load-path "~/.emacs.d/helm")
-(push "~/.emacs.d/notElpa/helm" load-path)
+(push "~/.emacs.d/notElpaYolo/helm" load-path)
 (autoload #'helm "helm" nil nil)
 (autoload #'helm-mode "helm-mode" nil t)
 (autoload #'helm-buffers-list "helm-buffers" nil t)
@@ -3640,7 +3654,7 @@ To make it human readable."
 ;;;----------------------------------------------------------------------------
 ;;; smex. used by ido, ivy
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/smex" load-path)
+(push "~/.emacs.d/notElpaYolo/smex" load-path)
 (autoload #'smex "smex" nil t)
 (autoload #'smex-major-mode-commands "smex" nil t)
 (autoload #'smex-initialize "smex" nil t)
@@ -3663,7 +3677,7 @@ To make it human readable."
 ;;;----------------------------------------------------------------------------
 ;;; flx
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/flx" load-path)
+(push "~/.emacs.d/notElpaYolo/flx" load-path)
 (autoload #'flx-ido-mode "flx-ido" nil t)
 
 ;;;----------------------------------------------------------------------------
@@ -3771,7 +3785,7 @@ completions from folders other than the current one."
 ;;;----------------------------------------------------------------------------
 ;;; ido-grid. The successor to ido-grid-mode (same author?)
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ido-grid.el" load-path)
+(push "~/.emacs.d/notElpaYolo/ido-grid.el" load-path)
 (autoload #'ido-grid-enable "ido-grid" nil t)
 
 (with-eval-after-load 'ido-grid
@@ -3846,7 +3860,7 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
 ;; (push "~/.emacs.d/yasnippet-20160416.831_correctIndent" load-path)
 
 ;; using a recent version of yasnippet again. Things seem to work now.
-(push "~/.emacs.d/notElpa/yasnippet" load-path)
+(push "~/.emacs.d/notElpaYolo/yasnippet" load-path)
 
 (progn
   ;; manually add the autoloads because I'm not using the package manager
@@ -4339,7 +4353,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; rainbow-delimiters
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/rainbow-delimiters" load-path)
+(push "~/.emacs.d/notElpaYolo/rainbow-delimiters" load-path)
 (autoload #'rainbow-delimiters-mode "rainbow-delimiters" nil t)
 (autoload #'rainbow-delimiters-mode-enable "rainbow-delimiters" nil t)
 (autoload #'rainbow-delimiters-mode-disable "rainbow-delimiters" nil t)
@@ -4364,14 +4378,14 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; rainbow-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/rainbow-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/rainbow-mode" load-path)
 (autoload #'rainbow-mode "rainbow-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; expand-region
 ;;; https://github.com/magnars/expand-region.el
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/expand-region.el" load-path)
+(push "~/.emacs.d/notElpaYolo/expand-region.el" load-path)
 (autoload #'er/expand-region "expand-region" nil t)
 (autoload #'er/contract-region "expand-region-core" nil t)
 (global-set-key (kbd "C-=") #'er/expand-region)
@@ -4390,7 +4404,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Paredit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/paredit" load-path)
+(push "~/.emacs.d/notElpaYolo/paredit" load-path)
 (autoload 'enable-paredit-mode "paredit"
   "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
@@ -4616,7 +4630,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; nyan-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/nyan-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/nyan-mode" load-path)
 (autoload #'nyan-mode "nyan-mode" nil t)
 ;;(nyan-mode)
 ;;(setq nyan-wavy-trail nil)
@@ -4639,7 +4653,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Avy
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/avy" load-path)
+(push "~/.emacs.d/notElpaYolo/avy" load-path)
 (autoload #'avy-goto-line "avy" nil t)
 (autoload #'avy-isearch "avy" nil t)
 (autoload #'avy-goto-word-1 "avy" nil t)
@@ -4714,7 +4728,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; ace-link
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ace-link" load-path)
+(push "~/.emacs.d/notElpaYolo/ace-link" load-path)
 (autoload #'ace-link "ace-link" nil t)
 (autoload #'ace-link-info "ace-link" nil t)
 (autoload #'ace-link-help "ace-link" nil t)
@@ -4780,7 +4794,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; ace-window
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ace-window" load-path)
+(push "~/.emacs.d/notElpaYolo/ace-window" load-path)
 (autoload #'ace-select-window "ace-window" nil t)
 (autoload #'ace-delete-window "ace-window" nil t)
 (autoload #'ace-swap-window "ace-window" nil t)
@@ -5009,7 +5023,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Projectile
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/projectile" load-path)
+(push "~/.emacs.d/notElpaYolo/projectile" load-path)
 (autoload 'projectile-version "projectile" nil t nil)
 (autoload 'projectile-invalidate-cache "projectile" nil t nil)
 (autoload 'projectile-purge-file-from-cache "projectile" nil t nil)
@@ -5106,7 +5120,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; icicles
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/icicles" load-path)
+(push "~/.emacs.d/notElpaYolo/icicles" load-path)
 (when (eq my-narrow-type 'icicles)
   (require 'icicles)
   (icicle-mode 1))
@@ -5122,7 +5136,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; web-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/web-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/web-mode" load-path)
 (autoload #'web-mode "web-mode" nil t)
 (push '("\\.phtml\\'" . web-mode) auto-mode-alist)
 (push '("\\.tpl\\.php\\'" . web-mode) auto-mode-alist)
@@ -5163,7 +5177,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; vimrc-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/vimrc-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/vimrc-mode" load-path)
 (autoload #'vimrc-mode "vimrc-mode" nil t)
 (push '(".vim\\(rc\\)?$" . vimrc-mode) auto-mode-alist)
 
@@ -5426,7 +5440,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; with-editor. dependency of magit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/with-editor/lisp" load-path)
+(push "~/.emacs.d/notElpaYolo/with-editor/lisp" load-path)
 (autoload #'with-editor-export-editor "with-editor" nil t)
 (autoload #'with-editor-export-git-editor "with-editor" nil t)
 (autoload #'with-editor-export-hg-editor "with-editor" nil t)
@@ -5443,7 +5457,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; transient. dependency of magit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/transient/lisp" load-path)
+(push "~/.emacs.d/notElpaYolo/transient/lisp" load-path)
 (autoload #'transient-define-prefix "transient" nil nil 'macro)
 (autoload #'transient-insert-suffix "transient" nil nil nil)
 (autoload #'transient-append-suffix "transient" nil nil nil)
@@ -5454,12 +5468,12 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; libgit. dependency of magit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/libegit2" load-path)
+(push "~/.emacs.d/notElpaYolo/libegit2" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; magit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/magit/lisp" load-path)
+(push "~/.emacs.d/notElpaYolo/magit/lisp" load-path)
 (autoload #'magit-status "magit-status" nil t)
 (autoload #'magit-init "magit-status" nil t)
 (autoload 'magit-show-refs "magit-refs" nil t)
@@ -5567,7 +5581,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; leerzeichen. Displays symbols for tab, space, and newline.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/leerzeichen.el" load-path)
+(push "~/.emacs.d/notElpaYolo/leerzeichen.el" load-path)
 (autoload #'leerzeichen-mode "leerzeichen" nil t)
 ;;(leerzeichen-mode)
 ;; (custom-set-faces
@@ -5582,7 +5596,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; darkroom
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/darkroom" load-path)
+(push "~/.emacs.d/notElpaYolo/darkroom" load-path)
 (autoload 'darkroom-mode "darkroom" nil t)
 (autoload 'darkroom-tentative-mode "darkroom" nil t)
 
@@ -5644,12 +5658,12 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; epl. dependency of pkg-info.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/epl" load-path)
+(push "~/.emacs.d/notElpaYolo/epl" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; pkg-info. dependency of flycheck.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/pkg-info" load-path)
+(push "~/.emacs.d/notElpaYolo/pkg-info" load-path)
 (autoload #'pkg-info-library-original-version "pkg-info" nil t)
 (autoload #'pkg-info-library-version "pkg-info" nil t)
 (autoload #'pkg-info-defining-library-original-version "pkg-info" nil t)
@@ -5660,7 +5674,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; flycheck
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/flycheck" load-path)
+(push "~/.emacs.d/notElpaYolo/flycheck" load-path)
 (autoload #'flycheck-manual "flycheck" nil t)
 (autoload #'flycheck-mode "flycheck" nil t)
 (autoload #'global-flycheck-mode "flycheck" nil t)
@@ -5707,7 +5721,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; hydra
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/hydra" load-path)
+(push "~/.emacs.d/notElpaYolo/hydra" load-path)
 (autoload #'defhydra "hydra" nil t)
 
 (autoload #'my-choose-hydra "my-hydras" nil t)
@@ -5835,7 +5849,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; erc-hl-nicks
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/erc-hl-nicks" load-path)
+(push "~/.emacs.d/notElpaYolo/erc-hl-nicks" load-path)
 (autoload #'erc-hl-nicks-force-nick-face "erc-hl-nicks" nil nil)
 (autoload #'erc-hl-nicks-alias-nick "erc-hl-nicks" nil nil)
 (autoload #'erc-hl-nicks "erc-hl-nicks" nil nil)
@@ -5879,7 +5893,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; unkillable-scratch
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/unkillable-scratch" load-path)
+(push "~/.emacs.d/notElpaYolo/unkillable-scratch" load-path)
 (autoload #'unkillable-scratch "unkillable-scratch" nil t)
 
 (with-eval-after-load 'unkillable-scratch
@@ -5918,7 +5932,7 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; ivy-explorer. grid style display of ivy candidates
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ivy-explorer" load-path)
+(push "~/.emacs.d/notElpaYolo/ivy-explorer" load-path)
 (autoload #'ivy-explorer-mode "ivy-explorer" nil t)
 
 (defvar my-use-ivy-explorer nil)
@@ -5929,7 +5943,7 @@ TODO: call this function when it works."
 ;;; ivy
 ;;; counsel -> provides extra features for completing some things.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/swiper" load-path)
+(push "~/.emacs.d/notElpaYolo/swiper" load-path)
 (autoload #'swiper-isearch "swiper" nil t)
 (autoload #'swiper-avy "swiper" nil t)
 (autoload #'ivy-switch-buffer "ivy" nil t)
@@ -6177,7 +6191,7 @@ TODO: call this function when it works."
 ;;; mode-on-region.el in ~/.emacs.d/notElpa/mine/mor/
 ;;; Create a new buffer, stuff text in it, turn on mode.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/mine/mor" load-path)
+(push "~/.emacs.d/notElpaYolo/mine/mor" load-path)
 (autoload #'mor-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-curr-mode-on-region "mode-on-region" nil t)
@@ -6379,12 +6393,12 @@ isearch-mode so you can <C-s> or <C-r> to navigate through the matches."
 ;;;----------------------------------------------------------------------------
 ;;; zoutline. depency of lispy.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/zoutline" load-path)
+(push "~/.emacs.d/notElpaYolo/zoutline" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; lispy. git submodle
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/lispy" load-path)
+(push "~/.emacs.d/notElpaYolo/lispy" load-path)
 (autoload #'lispy-mode "lispy" nil t)
 
 (when my-use-lispy-p
@@ -6634,7 +6648,7 @@ Closure over `preceding-sexp-fn'."
 ;;; elisp-slime-nav
 ;;; TODO: look into lispy's navigation. Maybe remove this section.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/elisp-slime-nav" load-path)
+(push "~/.emacs.d/notElpaYolo/elisp-slime-nav" load-path)
 ;; `elisp-slime-nav-mode' replaces `turn-on-elisp-slime-nav-mode'
 (autoload #'elisp-slime-nav-mode "elisp-slime-nav" nil t)
 (autoload #'elisp-slime-nav-find-elisp-thing-at-point "elisp-slime-nav" nil t)
@@ -6724,7 +6738,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; sx
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/sx.el" load-path)
+(push "~/.emacs.d/notElpaYolo/sx.el" load-path)
 (autoload #'sx-tab-all-questions "sx-tab" nil t)
 (autoload #'sx-tab-unanswered "sx-tab" nil t)
 (autoload #'sx-tab-unanswered-my-tags "sx-tab" nil t)
@@ -6791,7 +6805,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; iedit. dependency from lispy.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/iedit" load-path)
+(push "~/.emacs.d/notElpaYolo/iedit" load-path)
 (autoload #'iedit-mode "iedit" nil t)
 (autoload #'iedit-mode-toggle-on-function "iedit" nil t)
 (autoload #'iedit-rectangle-mode "iedit-rect" nil t)
@@ -6899,20 +6913,20 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; ov
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ov" load-path)
+(push "~/.emacs.d/notElpaYolo/ov" load-path)
 (autoload #'ov-clear "ov" nil t)
 ;; at the moment ov is just used as a dependency for sallet.
 
 ;;;----------------------------------------------------------------------------
 ;;; deferred
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/emacs-deferred" load-path)
+(push "~/.emacs.d/notElpaYolo/emacs-deferred" load-path)
 ;; at the moment deferred is just used as a dependency for sallet.
 
 ;;;----------------------------------------------------------------------------
 ;;; sallet. from fuco. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/sallet" load-path)
+(push "~/.emacs.d/notElpaYolo/sallet" load-path)
 (autoload #'sallet-buffer "sallet" nil t)
 
 ;; NOTE: the sallet package is not ready yet. Just configuring to give it a
@@ -6935,7 +6949,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; ctrlf. by raxod502. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ctrlf" load-path)
+(push "~/.emacs.d/notElpaYolo/ctrlf" load-path)
 ;; NOTE: ctrlf-mode sets up keybindings on (C-s, C-r, C-M-s, C-M-r, M-s w,
 ;; M-s _, M-s .)
 (autoload #'ctrlf-mode "ctrlf" nil t)
@@ -6946,7 +6960,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;; the author names the base git repo folder "prescient.el". It's a folder,
 ;; not an elisp file
-(push "~/.emacs.d/notElpa/prescient.el" load-path)
+(push "~/.emacs.d/notElpaYolo/prescient.el" load-path)
 (autoload #'selectrum-prescient-mode "selectrum-prescient" nil t)
 (autoload #'ivy-prescient-mode "ivy-prescient" nil t)
 (autoload #'prescient-persist-mode "prescient" nil t)
@@ -6955,7 +6969,7 @@ Closure over `preceding-sexp-fn'."
 ;;; selectrum. by raxod502. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
 ;; NOTE: selectrum git submodule removed. It has been replaced by vertico.
-;; (push "~/.emacs.d/notElpa/selectrum" load-path)
+;; (push "~/.emacs.d/notElpaYolo/selectrum" load-path)
 ;; ;; add an autoload so I can use selectrum even if it's not `my-narrow-type'.
 ;; (autoload #'selectrum-mode "selectrum" nil t)
 
@@ -6976,7 +6990,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; sunrise-commander. saved to notElpa folder as a git submodule.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/sunrise-commander" load-path)
+(push "~/.emacs.d/notElpaYolo/sunrise-commander" load-path)
 (autoload #'sunrise-cd "sunrise" nil t)
 
 ;;;----------------------------------------------------------------------------
@@ -6995,7 +7009,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; js2-highlight-vars
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/js2-highlight-vars.el" load-path)
+(push "~/.emacs.d/notElpaYolo/js2-highlight-vars.el" load-path)
 (autoload #'js2-highlight-vars-mode "js2-highlight-vars" nil t)
 
 (with-eval-after-load 'js2-highlight-vars
@@ -7133,7 +7147,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; highlight-indent-guides
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/highlight-indent-guides" load-path)
+(push "~/.emacs.d/notElpaYolo/highlight-indent-guides" load-path)
 (autoload #'highlight-indent-guides-auto-set-faces "highlight-indent-guides"
   nil t)
 (autoload #'highlight-indent-guides-mode "highlight-indent-guides" nil t)
@@ -7256,7 +7270,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; smart-tabs-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/smarttabs" load-path)
+(push "~/.emacs.d/notElpaYolo/smarttabs" load-path)
 (autoload 'smart-tabs-when "smart-tabs-mode" nil nil t)
 (autoload 'smart-tabs-create-advice-list "smart-tabs-mode" nil nil t)
 (autoload 'smart-tabs-create-language-advice "smart-tabs-mode" nil nil t)
@@ -7273,7 +7287,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; lua-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/lua-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/lua-mode" load-path)
 (autoload #'lua-mode "lua-mode" nil t nil)
 (autoload #'lua-start-process "lua-mode" nil t)
 (push '("\\.lua\\'" . lua-mode) auto-mode-alist)
@@ -7341,7 +7355,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; swift-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/swift-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/swift-mode" load-path)
 (autoload #'swift-mode "swift-mode" nil t)
 ;; use swift-mode for .swift files
 (push '("\\.swift\\'" . swift-mode) auto-mode-alist)
@@ -7363,7 +7377,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; ggtags
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ggtags" load-path)
+(push "~/.emacs.d/notElpaYolo/ggtags" load-path)
 (autoload #'ggtags-find-project "ggtags" nil nil nil)
 (autoload #'ggtags-find-tag-dwim "ggtags" nil t nil)
 (autoload #'ggtags-mode "ggtags" nil t nil)
@@ -7426,7 +7440,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; clojure-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/clojure-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/clojure-mode" load-path)
 (autoload #'clojure-mode "clojure-mode" nil t)
 (autoload #'clojurec-mode "clojure-mode" nil t)
 (autoload #'clojurescript-mode "clojure-mode" nil t)
@@ -7634,12 +7648,12 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; markup-faces. dependency for adoc-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/markup-faces" load-path)
+(push "~/.emacs.d/notElpaYolo/markup-faces" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; adoc-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/adoc-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/adoc-mode" load-path)
 (autoload #'adoc-mode "adoc-mode" nil t)
 (push '("\\.asc\\'" . adoc-mode) auto-mode-alist)
 (push '("\\.adoc\\'" . adoc-mode) auto-mode-alist)
@@ -7653,7 +7667,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; markdown-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/markdown-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/markdown-mode" load-path)
 (autoload #'markdown-mode "markdown-mode" nil t)
 (autoload #'gfm-mode "markdown-mode" nil t)
 (autoload #'markdown-view-mode "markdown-mode" nil t)
@@ -7672,7 +7686,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; typescript-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/typescript.el" load-path)
+(push "~/.emacs.d/notElpaYolo/typescript.el" load-path)
 (autoload #'typescript-mode "typescript-mode" nil t)
 (push '("\\.ts$" . typescript-mode) auto-mode-alist)
 
@@ -7690,7 +7704,7 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; tide
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/tide" load-path)
+(push "~/.emacs.d/notElpaYolo/tide" load-path)
 (autoload #'company-tide "tide" nil t)
 (autoload #'tide-format-before-save "tide" nil t)
 (autoload #'tide-format "tide" nil t)
@@ -7800,7 +7814,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; powershell
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/powershell.el" load-path)
+(push "~/.emacs.d/notElpaYolo/powershell.el" load-path)
 (autoload #'powershell-mode "powershell" nil t)
 (autoload #'powershell "powershell" nil t)
 (push '("\\.ps[dm]?1\\'" . powershell-mode) auto-mode-alist)
@@ -7947,7 +7961,7 @@ vanilla javascript buffers."
 ;;; eglot
 ;;;----------------------------------------------------------------------------
 (unless (fboundp #'eglot) ;; on emacs-29+ use built-in eglot
-  (push "~/.emacs.d/notElpa/eglot" load-path)
+  (push "~/.emacs.d/notElpaYolo/eglot" load-path)
   (autoload #'eglot "eglot" nil t)
   (autoload #'eglot-ensure "eglot" nil t))
 
@@ -8002,14 +8016,14 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; ht. dependency of lsp-mode.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ht.el" load-path)
+(push "~/.emacs.d/notElpaYolo/ht.el" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; lsp-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/lsp-mode" load-path)
-(push "~/.emacs.d/notElpa/lsp-mode/clients" load-path)
-(push "~/.emacs.d/notElpa/lsp-mode/test" load-path)
+(push "~/.emacs.d/notElpaYolo/lsp-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/lsp-mode/clients" load-path)
+(push "~/.emacs.d/notElpaYolo/lsp-mode/test" load-path)
 (autoload #'lsp "lsp-mode" nil t)
 
 ;; (with-eval-after-load 'lsp-pwsh ; powershell
@@ -8024,7 +8038,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; company-lsp
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/company-lsp" load-path)
+(push "~/.emacs.d/notElpaYolo/company-lsp" load-path)
 
 (with-eval-after-load 'lsp-mode
   (require 'company-lsp)
@@ -8097,7 +8111,7 @@ vanilla javascript buffers."
 ;;       npm install -g indium
 ;; NOTE: must install package dependency `websocket'. Currently getting it from
 ;;       melpa.
-(push "~/.emacs.d/notElpa/Indium" load-path) ; git submodule
+(push "~/.emacs.d/notElpaYolo/Indium" load-path) ; git submodule
 (autoload 'indium-connect "indium-interaction" nil t)
 ;; (with-eval-after-load 'indium
 ;;   )
@@ -8163,7 +8177,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; wgrep. dependency of rg
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/Emacs-wgrep" load-path)
+(push "~/.emacs.d/notElpaYolo/Emacs-wgrep" load-path)
 (autoload #'wgrep-setup "wgrep" nil nil)
 
 ;; allows wgrep to work in *grep* buffers.
@@ -8172,9 +8186,9 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; rg
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/rg.el" load-path)
+(push "~/.emacs.d/notElpaYolo/rg.el" load-path)
 ;; adding /test/ folder helps with byte compiler errors
-(push "~/.emacs.d/notElpa/rg.el/test" load-path)
+(push "~/.emacs.d/notElpaYolo/rg.el/test" load-path)
 (autoload #'rg "rg" nil t)
 
 (with-eval-after-load 'rg
@@ -8249,7 +8263,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; eros
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/eros" load-path)
+(push "~/.emacs.d/notElpaYolo/eros" load-path)
 (autoload #'eros-mode "eros" nil t)
 
 (with-eval-after-load 'eros
@@ -8338,7 +8352,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; citre. ctags/readtags IDE
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/citre" load-path)
+(push "~/.emacs.d/notElpaYolo/citre" load-path)
 (autoload 'citre-mode "citre" nil t nil)
 
 (with-eval-after-load 'citre
@@ -8378,12 +8392,12 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; esxml. dependency of nov
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/esxml" load-path)
+(push "~/.emacs.d/notElpaYolo/esxml" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; nov
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/nov.el" load-path)
+(push "~/.emacs.d/notElpaYolo/nov.el" load-path)
 (autoload #'nov-mode "nov" nil t)
 
 ;; Make sure you have an unzip executable on PATH, otherwise the extraction of
@@ -8429,23 +8443,23 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; slime-volleyball
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/slime-volleyball" load-path)
+(push "~/.emacs.d/notElpaYolo/slime-volleyball" load-path)
 (autoload #'slime-volleyball "slime-volleyball" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; autothemer
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/autothemer" load-path)
+(push "~/.emacs.d/notElpaYolo/autothemer" load-path)
 (autoload #'autothemer-deftheme "autothemer" nil nil)
 (autoload #'autothemer-generate-templates "autothemer" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; php-mode
 ;;;----------------------------------------------------------------------------
-;; (push "~/.emacs.d/notElpa/php-mode" load-path)
+;; (push "~/.emacs.d/notElpaYolo/php-mode" load-path)
 
 ;; looks like they moved the elisp files to a sub folder
-(push "~/.emacs.d/notElpa/php-mode/lisp" load-path)
+(push "~/.emacs.d/notElpaYolo/php-mode/lisp" load-path)
 (autoload #'php-mode "php-mode" nil t)
 (push '("\\.php$" . php-mode) auto-mode-alist)
 
@@ -8465,7 +8479,7 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; yaml-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/yaml-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/yaml-mode" load-path)
 (autoload 'yaml-mode "yaml-mode" nil t nil)
 
 (push '("\\.\\(e?ya?\\|ra\\)ml\\'" . yaml-mode) auto-mode-alist)
@@ -8473,17 +8487,17 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; sicp
 ;;;----------------------------------------------------------------------------
-;; (push "~/.emacs.d/notElpa/sicp-info" load-path)
+;; (push "~/.emacs.d/notElpaYolo/sicp-info" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; haskell-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/haskell-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/haskell-mode" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; spinner
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/spinner.el" load-path)
+(push "~/.emacs.d/notElpaYolo/spinner.el" load-path)
 (autoload #'spinner-create "spinner" nil nil)
 (autoload #'spinner-start "spinner" nil nil)
 
@@ -8619,7 +8633,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; rust-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/rust-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/rust-mode" load-path)
 (push '("\\.rs\\'" . rust-mode) auto-mode-alist) ; use rust-mode for .rs files
 (push '("\\.lock\\'" . conf-toml-mode) auto-mode-alist)
 (autoload #'rust-mode "rust-mode" nil t)
@@ -8656,7 +8670,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; racer
 ;;;----------------------------------------------------------------------------
 ;; having issues with racer. Dont' use for now.
-;; (push "~/.emacs.d/notElpa/emacs-racer" load-path)
+;; (push "~/.emacs.d/notElpaYolo/emacs-racer" load-path)
 ;; (autoload #'racer-find-definition "racer" nil t)
 ;; (autoload #'racer-find-definition-other-window "racer" nil t)
 ;; (autoload #'racer-find-definition-other-frame "racer" nil t)
@@ -8722,7 +8736,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; dank-mode. reddit browser
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/dank-mode/lisp" load-path)
+(push "~/.emacs.d/notElpaYolo/dank-mode/lisp" load-path)
 (autoload #'dank-mode "dank-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
@@ -8782,7 +8796,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; puni. Structural editing similar to paredit but for any language.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/puni" load-path)
+(push "~/.emacs.d/notElpaYolo/puni" load-path)
 (autoload #'puni-mode "puni" nil t)
 
 ;; use `puni-mode' for the following modes (hooks).
@@ -8818,7 +8832,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; posframe
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/posframe" load-path)
+(push "~/.emacs.d/notElpaYolo/posframe" load-path)
 (autoload #'posframe-workable-p "posframe" nil nil)
 (autoload #'posframe-show "posframe" nil nil)
 (autoload #'posframe-hide-all "posframe" nil t)
@@ -8828,7 +8842,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; ivy-posframe
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/ivy-posframe" load-path)
+(push "~/.emacs.d/notElpaYolo/ivy-posframe" load-path)
 (autoload #'ivy-posframe-mode "ivy-posframe" nil t)
 
 (with-eval-after-load 'ivy-posframe
@@ -8856,7 +8870,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;; treesitter-context
 ;;;----------------------------------------------------------------------------
 ;; NOTE: depends on posframe so put this after posframe.
-(push "~/.emacs.d/notElpa/treesitter-context.el" load-path)
+(push "~/.emacs.d/notElpaYolo/treesitter-context.el" load-path)
 (autoload #'treesitter-context-which-func-mode "treesitter-context-which-func" nil t)
 (autoload #'treesitter-context-fold-hide "treesitter-context-fold" nil t)
 (autoload #'treesitter-context-fold-show "treesitter-context-fold" nil t)
@@ -8887,7 +8901,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; fennel-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/fennel-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/fennel-mode" load-path)
 (autoload #'fennel-repl-mode "fennel-mode" nil t)
 (autoload #'fennel-mode "fennel-mode" nil t)
 (autoload #'fennel-repl "fennel-mode" nil t)
@@ -8950,7 +8964,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; consult
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/consult" load-path)
+(push "~/.emacs.d/notElpaYolo/consult" load-path)
 (autoload #'consult-compile-error "consult-compile" nil t)
 (autoload #'consult-flymake "consult-flymake" nil t)
 (autoload #'consult-imenu "consult-imenu" nil t)
@@ -8986,8 +9000,8 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; vertico
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/vertico" load-path)
-(push "~/.emacs.d/notElpa/vertico/extensions" load-path)
+(push "~/.emacs.d/notElpaYolo/vertico" load-path)
+(push "~/.emacs.d/notElpaYolo/vertico/extensions" load-path)
 (autoload #'vertico-mode "vertico" nil t)
 (autoload #'vertico-grid-mode "vertico-grid" nil t)
 
@@ -9142,7 +9156,7 @@ TODO: delete this fn and replace with hooks, etc."
 ;;;----------------------------------------------------------------------------
 ;;; zig-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/zig-mode" load-path)
+(push "~/.emacs.d/notElpaYolo/zig-mode" load-path)
 (autoload 'zig-mode "zig-mode" nil t)
 (push '("\\.zig\\'" . zig-mode) auto-mode-alist)
 
@@ -9386,7 +9400,7 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; go-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/go-mode.el" load-path)
+(push "~/.emacs.d/notElpaYolo/go-mode.el" load-path)
 (autoload #'go-mode "go-mode" nil t)
 (autoload #'go-dot-mod-mode "go-mode" nil t)
 (autoload #'go-dot-work-mode "go-mode" nil t)
@@ -9466,7 +9480,7 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; reformatter
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/emacs-reformatter" load-path)
+(push "~/.emacs.d/notElpaYolo/emacs-reformatter" load-path)
 (autoload #'reformatter-define "reeformatter" nil nil)
 
 ;;;----------------------------------------------------------------------------
@@ -9519,14 +9533,14 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; combobulate
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/combobulate" load-path)
+(push "~/.emacs.d/notElpaYolo/combobulate" load-path)
 (autoload #'combobulate-mode "combobulate" nil t)
 
 
 ;;;----------------------------------------------------------------------------
 ;;; buttercup. testing library used by several packages
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/emacs-buttercup" load-path)
+(push "~/.emacs.d/notElpaYolo/emacs-buttercup" load-path)
 (autoload #'buttercup-run-at-point "buttercup" nil t)
 (autoload #'buttercup-run-discover "buttercup" nil nil)
 (autoload #'buttercup-run-markdown-buffer "buttercup" nil t)
@@ -9686,7 +9700,7 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; visual-fill-column
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/visual-fill-column" load-path)
+(push "~/.emacs.d/notElpaYolo/visual-fill-column" load-path)
 (autoload #'visual-fill-column-mode "visual-fill-column" nil t)
 (autoload #'global-visual-fill-column-mode "visual-fill-column" nil t)
 (autoload #'visual-fill-column-split-window-sensibly "visual-fill-column" nil t)
@@ -9694,19 +9708,19 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; klondike
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/Emacs-Klondike" load-path)
+(push "~/.emacs.d/notElpaYolo/Emacs-Klondike" load-path)
 (autoload #'klondike "klondike" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; stem-reading-mode
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/stem-reading-mode.el" load-path)
+(push "~/.emacs.d/notElpaYolo/stem-reading-mode.el" load-path)
 (autoload #'stem-reading-mode "stem-reading-mode" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; rsvp.  rapid serial visual presentation.  speed reader.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/mine/rapid-serial-visual-presentation" load-path)
+(push "~/.emacs.d/notElpaYolo/mine/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
 (setq rsvp-delay-seconds 0.15)
@@ -9765,7 +9779,7 @@ Values: lsp, citre, nil")
 ;; NOTE: if bars are messed up in a space-indented file make sure the mode's
 ;; ident-level var is set to match the number of spaces in that file.
 ;; (ie lua-indent-level, ruby-indent-level, etc)
-(push "~/.emacs.d/notElpa/indent-bars" load-path)
+(push "~/.emacs.d/notElpaYolo/indent-bars" load-path)
 (autoload #'indent-bars-mode "indent-bars" nil t)
 (autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)
 (with-eval-after-load 'indent-bars
@@ -9852,7 +9866,7 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 ;;;----------------------------------------------------------------------------
 ;;; devdocs
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/devdocs.el" load-path)
+(push "~/.emacs.d/notElpaYolo/devdocs.el" load-path)
 (autoload #'devdocs-delete "devdocs" nil t)
 (autoload #'devdocs-install "devdocs" nil t)
 (autoload #'devdocs-update-all "devdocs" nil t)

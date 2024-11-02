@@ -1378,6 +1378,7 @@ In master branch now. Was on git branch: feature/native-comp.")
   nil t)
 (autoload #'my-checkout-branches-golang "my-modules" nil t)
 (autoload #'my-clone-git-yolo-repos-golang "my-modules" nil t)
+(autoload #'my-create-local-branches-golang "my-modules" nil t)
 
 
 ;;;----------------------------------------------------------------------------
@@ -1405,6 +1406,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; (my-setup-all-upstream-remotes-if-missing-golang)
 ;; (my-checkout-branches-golang) ; git submodule hiccup. at detatched commit
 ;; (my-fetch-all-upstream-remotes-golang)
+;; (my-create-local-branches-golang)
 ;; (my-list-modules-with-upstream-code-to-merge-golang)
 
 

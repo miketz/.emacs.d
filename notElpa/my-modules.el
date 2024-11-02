@@ -2847,6 +2847,35 @@ Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
                           #'my--clone-complete)))
 
+
+(defun my--branch-create-complete (p msg)
+  (when (memq (process-status p) '(exit signal))
+    ;;(message (concat (process-name p) " - " msg))
+    (let ((buff (process-buffer p)))
+      (unless (eq buff (current-buffer))
+        (switch-to-buffer-other-window buff))
+      (goto-char (point-max)) ;; end of buffer
+      ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+      (insert "\n--------------------------\n"))
+    (message "missing local branch create complete")))
+
+(defun my-create-local-branches-golang ()
+  "Call an external Go program to create missing local branches.
+Concurrently checks each repo for missing local brnaches for increased speed.
+
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
+  (interactive)
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
+                      " init4"))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
+    (message "creating missing local branches...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--branch-create-complete)))
+
+
 (defun my-fetch-all-upstream-remotes ()
   "Run git fetch for each upstream remote.
 Collect status info for each so I'll know which to merge.

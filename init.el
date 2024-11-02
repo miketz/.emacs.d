@@ -1386,9 +1386,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;; git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
 ;; git pull origin master
-;; git submodule update --init --recursive
+;; # this step no longer needed. moved away form submodules due to performance issues on Windows
+;;     # git submodule update --init --recursive
 ;; create file: ~/.emacs.d/my-curr-computer.txt
-;; # set up gitFetchHelper
+;; # set up gitFetchHelper, NOTE: install Go tooling first.
 ;;     cd ~/.emacs.d/notElpaYolo
 ;;     git clone https://github.com/miketz/gitFetchHelper
 ;;     cd ~/.emacs.d/notElpaYolo/gitFetchHelper

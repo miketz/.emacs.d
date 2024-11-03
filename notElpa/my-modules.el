@@ -3029,7 +3029,8 @@ Possibly skip some packages that don't like to be byte compiled."
                         (s-ends-with-p "themes" (cl-first f))
                         ;; Skip specific projects that don't ignore .elc files.
                         ;; Revisit this after I fork the projects, and use a personal branch.
-                        (s-ends-with-p "FlamesOfFreedom" (cl-first f))))
+                        ;; (s-ends-with-p "FlamesOfFreedom" (cl-first f))
+                        ))
                      ;; files and folders
                      (directory-files-and-attributes my-module-folder
                                                      t "^[^.]" t)))
@@ -3043,7 +3044,8 @@ Possibly skip some packages that don't like to be byte compiled."
                              (s-ends-with-p "themes" (cl-first f))
                              ;; Skip specific projects that don't ignore .elc files.
                              ;; Revisit this after I fork the projects, and use a personal branch.
-                             (s-ends-with-p "FlamesOfFreedom" (cl-first f))))
+                             ;; (s-ends-with-p "FlamesOfFreedom" (cl-first f))
+                             ))
                           ;; files and folders
                           (directory-files-and-attributes "~/.emacs.d/notElpaYolo/"
                                                           t "^[^.]" t)))

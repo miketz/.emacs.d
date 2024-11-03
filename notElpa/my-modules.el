@@ -2525,33 +2525,33 @@ style. More importantly it avoids spamming rg as you type or prematurely."
 
 ;; TODO: make jinx spell checker a module
 
-(defun my-byte-compile-all-modules ()
-  "Byte compile .el files of all modules."
-  (interactive)
+;; (defun my-byte-compile-all-modules ()
+;;   "Byte compile .el files of all modules."
+;;   (interactive)
 
-  ;; first compile git submodules. They have a dedicated folder so it makes
-  ;; sense to delete all the elc files in it.
-  (cl-loop for mod in (my-get-all-git-submodules)
-           do
-           (ignore-errors ;; don't stop if 1 package is bad
-             (my-delete-elc-files (module-folder mod))
+;;   ;; first compile git submodules. They have a dedicated folder so it makes
+;;   ;; sense to delete all the elc files in it.
+;;   (cl-loop for mod in (my-get-all-git-submodules)
+;;            do
+;;            (ignore-errors ;; don't stop if 1 package is bad
+;;              (my-delete-elc-files (module-folder mod))
 
-             (byte-recompile-directory
-              (module-folder mod)
-              0 ;; 0 means compile .el files if .elc is missing.
-              t) ;; t means force re-compile even if the .elc is up-to-date. May
-             ;; be useful if the Emacs version changed and should have an
-             ;; .elc compiled again to be compatible.
-             ))
+;;              (byte-recompile-directory
+;;               (module-folder mod)
+;;               0 ;; 0 means compile .el files if .elc is missing.
+;;               t) ;; t means force re-compile even if the .elc is up-to-date. May
+;;              ;; be useful if the Emacs version changed and should have an
+;;              ;; .elc compiled again to be compatible.
+;;              ))
 
-  ;; now compile the "single file" modules.
-  (cl-loop for mod in (my-get-all-single-file-modules)
-           do
-           (ignore-errors ;; don't stop if 1 package is bad
-             (let ((file (concat (module-folder mod)
-                                 (module-file-single mod))))
-               (byte-compile-file file))))
-  'done)
+;;   ;; now compile the "single file" modules.
+;;   (cl-loop for mod in (my-get-all-single-file-modules)
+;;            do
+;;            (ignore-errors ;; don't stop if 1 package is bad
+;;              (let ((file (concat (module-folder mod)
+;;                                  (module-file-single mod))))
+;;                (byte-compile-file file))))
+;;   'done)
 
 ;; TODO: take module as fn arg or interactively entered by user. And correctly
 ;;       handle single file packages. comment out until fixed.

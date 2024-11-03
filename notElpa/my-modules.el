@@ -3008,46 +3008,7 @@ no branch checked out and you will get false results."
     ;; return the results for informational purposes.
     statuses))
 
-(defun my-byte-compile-all-notElpa-folders ()
-  "Byte compile .el files in every folder under /notElpa."
-  (interactive)
-  (let* ((dir-infos (cl-remove-if
-                     (lambda (f)
-                       (or (not (my-folder-p f)) ;; skip individual files
-                           ;; skip themes
-                           (s-ends-with-p "themes" (cl-first f))
-                           ;; Skip specific projects that don't ignore .elc files.
-                           ;; Revisit this after I fork the projects, and use a personal branch.
-                           ;; (s-ends-with-p "sunrise-commander" (cl-first f))
-                           (s-ends-with-p "FlamesOfFreedom" (cl-first f))
-                           ;; (s-ends-with-p "markup-faces" (cl-first f))
-                           ;; (s-ends-with-p "sicp-info" (cl-first f))
-                           ;; (s-ends-with-p "sallet" (cl-first f))
-                           ;; (s-ends-with-p "libegit2" (cl-first f))
-                           ))
-                     (directory-files-and-attributes my-module-folder
-                                                     t "^[^.]" t)))
-         (dir-names (mapcar #'cl-first dir-infos))
-         (statuses '()))
-    (cl-loop for dir in dir-names
-             do
-             (if (eq 'success
-                     (ignore-errors ;; don't stop if 1 package is bad
-                       (my-delete-elc-files dir)
-                       (byte-recompile-directory
-                        dir
-                        0 ;; 0 means compile .el files if .elc is missing.
-                        t) ;; t means force re-compile even if the .elc is up-to-date. May
-                       ;; be useful if the Emacs version changed and should have an
-                       ;; .elc compiled again to be compatible.
-                       'success))
-                 ;; NOTE: this doesn't mean byte compilation was successful for all files
-                 ;; just that no elisp-level errors were thrown.
-                 (push `(,dir success) statuses)
-               ;; else exception during byte compilation
-               (push `(,dir error) statuses)))
-    ;; return the results for informational purposes.
-    statuses))
+
 
 
 ;; TODO: byte compile ~/.emacs.d/notElpaYolo

@@ -1365,9 +1365,9 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; my-modules
 ;;;----------------------------------------------------------------------------
-(autoload #'my-byte-compile-all-modules "my-modules" nil t)
+;; (autoload #'my-byte-compile-all-modules "my-modules" nil t)
 ;; (autoload #'my-byte-compile-module "my-modules" nil t)
-(autoload #'my-byte-compile-all-notElpa-folders "my-modules" nil t)
+;; (autoload #'my-byte-compile-all-notElpa-folders "my-modules" nil t)
 (autoload #'my-byte-compile-all-notElpa "my-modules" nil t)
 (autoload #'my-setup-all-upstream-remotes-if-missing "my-modules" nil t)
 (autoload #'my-setup-all-upstream-remotes-if-missing-golang "my-modules" nil t)

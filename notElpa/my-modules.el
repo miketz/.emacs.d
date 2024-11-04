@@ -2690,21 +2690,21 @@ Some operations only make sense for these single-file packages."
                       (null (module-file-single m))))
                 my-modules))
 
-(defun my-setup-all-upstream-remotes-if-missing ()
-  "For all git submodules set the upstream remote if it is missing."
-  (interactive)
-  (let ((git-submodules (my-get-all-git-submodules))
-        (statuses '()))
-    (cl-loop for m in git-submodules
-             do
-             ;; by convention the upstream remote is called "upstream".
-             ;; when we first clone from git it is from my fork. Git does not track remotes, so the
-             ;; upstream remotes are "lost". We are creating them now from the info in `my-modules'.
-             (let ((result (my-git-remote-create m 'upstream)))
-               ;; track the results
-               (push `(,(module-name m) ,result) statuses)))
-    ;; return the results for informational purposes.
-    statuses))
+;; (defun my-setup-all-upstream-remotes-if-missing ()
+;;   "For all git submodules set the upstream remote if it is missing."
+;;   (interactive)
+;;   (let ((git-submodules (my-get-all-git-submodules))
+;;         (statuses '()))
+;;     (cl-loop for m in git-submodules
+;;              do
+;;              ;; by convention the upstream remote is called "upstream".
+;;              ;; when we first clone from git it is from my fork. Git does not track remotes, so the
+;;              ;; upstream remotes are "lost". We are creating them now from the info in `my-modules'.
+;;              (let ((result (my-git-remote-create m 'upstream)))
+;;                ;; track the results
+;;                (push `(,(module-name m) ,result) statuses)))
+;;     ;; return the results for informational purposes.
+;;     statuses))
 
 
 (defun my--create-buff-gitFetchHelper ()
@@ -2893,50 +2893,50 @@ Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
                           #'my--branch-create-complete)))
 
 
-(defun my-fetch-all-upstream-remotes ()
-  "Run git fetch for each upstream remote.
-Collect status info for each so I'll know which to merge.
-Merge will be done manually after this."
-  (interactive)
-  (let ((git-submodules (my-get-all-git-submodules))
-        (statuses '()))
-    (cl-loop for m in git-submodules
-             do
-             (cl-block 'loop
-               (let ((rem (my-get-remote m 'upstream)))
-                 ;; GUARD: upstream must be configured in `my-modules'
-                 (when (null rem)
-                   (push `(,(module-name m) 'upstream-not-configured-in-my-modules) statuses)
-                   (cl-return-from 'loop)) ;; continue
+;; (defun my-fetch-all-upstream-remotes ()
+;;   "Run git fetch for each upstream remote.
+;; Collect status info for each so I'll know which to merge.
+;; Merge will be done manually after this."
+;;   (interactive)
+;;   (let ((git-submodules (my-get-all-git-submodules))
+;;         (statuses '()))
+;;     (cl-loop for m in git-submodules
+;;              do
+;;              (cl-block 'loop
+;;                (let ((rem (my-get-remote m 'upstream)))
+;;                  ;; GUARD: upstream must be configured in `my-modules'
+;;                  (when (null rem)
+;;                    (push `(,(module-name m) 'upstream-not-configured-in-my-modules) statuses)
+;;                    (cl-return-from 'loop)) ;; continue
 
-                 ;; GUARD: don't attempt a fetch if the upstream remote is not set up on the git side
-                 (when (not (my-git-remote-setup-p m 'upstream))
-                   (push `(,(module-name m) 'upstream-remote-not-created-on-git-side) statuses)
-                   (cl-return-from 'loop)) ;; continue
+;;                  ;; GUARD: don't attempt a fetch if the upstream remote is not set up on the git side
+;;                  (when (not (my-git-remote-setup-p m 'upstream))
+;;                    (push `(,(module-name m) 'upstream-remote-not-created-on-git-side) statuses)
+;;                    (cl-return-from 'loop)) ;; continue
 
-                 ;; fetch. TODO: look into using `async-shell-command' or`start-process' instead of `shell-command-to-string'. for async.
-                 (let* ((default-directory (module-folder m))
-                        ;; actual git fetch run is here
-                        (shell-output (s-trim (shell-command-to-string
-                                               (concat "git fetch " (cl-getf rem :alias))))))
-                   ;; TODO: find a better way of detecting error. They could change the error message to
-                   ;; not start with "error" and that would break this code.
-                   (if (s-starts-with-p "error" shell-output)
-                       ;; just return the error msg itself. This string is inconsistent with
-                       ;; the symbol return types, but it should be OK as it's just a report
-                       ;; of what happened. No real processing on it.
-                       (push `(,(module-name m) shell-output) statuses)
-                     ;; else SUCCESS
-                     (if (= (length shell-output) 0)
-                         ;; No new code fetched. Although this doesn't mean there isn't upstream code that
-                         ;; still needs to be merged into the local branch from a previous fetch.
-                         ;; It just means this particular fetch did not download any new code.
-                         ;; for now don't push into the report as it spams it up.
-                         'no-op-do-nothing ;;(push `(,(module-name m) 'fetch-success-no-new-code) statuses)
-                       ;; New code fetched. Although it may only be new code in a branch we are not interested in.
-                       (push `(,(module-name m) 'fetch-success-new-code) statuses)))))))
-    ;; return the results for informational purposes.
-    statuses))
+;;                  ;; fetch. TODO: look into using `async-shell-command' or`start-process' instead of `shell-command-to-string'. for async.
+;;                  (let* ((default-directory (module-folder m))
+;;                         ;; actual git fetch run is here
+;;                         (shell-output (s-trim (shell-command-to-string
+;;                                                (concat "git fetch " (cl-getf rem :alias))))))
+;;                    ;; TODO: find a better way of detecting error. They could change the error message to
+;;                    ;; not start with "error" and that would break this code.
+;;                    (if (s-starts-with-p "error" shell-output)
+;;                        ;; just return the error msg itself. This string is inconsistent with
+;;                        ;; the symbol return types, but it should be OK as it's just a report
+;;                        ;; of what happened. No real processing on it.
+;;                        (push `(,(module-name m) shell-output) statuses)
+;;                      ;; else SUCCESS
+;;                      (if (= (length shell-output) 0)
+;;                          ;; No new code fetched. Although this doesn't mean there isn't upstream code that
+;;                          ;; still needs to be merged into the local branch from a previous fetch.
+;;                          ;; It just means this particular fetch did not download any new code.
+;;                          ;; for now don't push into the report as it spams it up.
+;;                          'no-op-do-nothing ;;(push `(,(module-name m) 'fetch-success-no-new-code) statuses)
+;;                        ;; New code fetched. Although it may only be new code in a branch we are not interested in.
+;;                        (push `(,(module-name m) 'fetch-success-new-code) statuses)))))))
+;;     ;; return the results for informational purposes.
+;;     statuses))
 
 (defun my--list-merges-complete (p msg)
   (when (memq (process-status p) '(exit signal))
@@ -2969,61 +2969,61 @@ so I track this in `my-modules'."
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
                           #'my--list-merges-complete)))
 
-(defun my-list-modules-with-upstream-code-to-merge ()
-  "List modules with new upstream code not yet merged into the local branch.
-This does not actually fetch, only looks at the local contents on on the disk.
-So you may want to run `my-fetch-all-upstream-remotes' first to fetch the
-latest upstream code.
+;; (defun my-list-modules-with-upstream-code-to-merge ()
+;;   "List modules with new upstream code not yet merged into the local branch.
+;; This does not actually fetch, only looks at the local contents on on the disk.
+;; So you may want to run `my-fetch-all-upstream-remotes' first to fetch the
+;; latest upstream code.
 
-NOTE: This fn only works properly when the module's `use-branch' is checked out.
-When you first pull the git submodules they are in a detached-head state with
-no branch checked out and you will get false results."
-  (interactive)
-  (let ((git-submodules (my-get-all-git-submodules))
-        (statuses '()))
-    (cl-loop for m in git-submodules
-             do
-             (cl-block 'loop
-               (let ((rem (my-get-remote m 'upstream)))
-                 ;; GUARD: upstream must be configured in `my-modules'
-                 (when (null rem)
-                   (push `(,(module-name m) 'upstream-not-configured-in-my-modules) statuses)
-                   (cl-return-from 'loop)) ;; continue
+;; NOTE: This fn only works properly when the module's `use-branch' is checked out.
+;; When you first pull the git submodules they are in a detached-head state with
+;; no branch checked out and you will get false results."
+;;   (interactive)
+;;   (let ((git-submodules (my-get-all-git-submodules))
+;;         (statuses '()))
+;;     (cl-loop for m in git-submodules
+;;              do
+;;              (cl-block 'loop
+;;                (let ((rem (my-get-remote m 'upstream)))
+;;                  ;; GUARD: upstream must be configured in `my-modules'
+;;                  (when (null rem)
+;;                    (push `(,(module-name m) 'upstream-not-configured-in-my-modules) statuses)
+;;                    (cl-return-from 'loop)) ;; continue
 
-                 ;; GUARD: don't attempt a diff if the upstream remote is not set up on the git side
-                 (when (not (my-git-remote-setup-p m 'upstream))
-                   (push `(,(module-name m) 'upstream-remote-not-created-on-git-side) statuses)
-                   (cl-return-from 'loop)) ;; continue
+;;                  ;; GUARD: don't attempt a diff if the upstream remote is not set up on the git side
+;;                  (when (not (my-git-remote-setup-p m 'upstream))
+;;                    (push `(,(module-name m) 'upstream-remote-not-created-on-git-side) statuses)
+;;                    (cl-return-from 'loop)) ;; continue
 
-                 ;; run a diff so we know if there is code to merge in.
-                 (let* ((default-directory (module-folder m))
-                        ;; TODO: handle case where I use private branch "mine" with irrelevant
-                        ;; changes (like .gitignore). This causes the diff to always hit.
-                        ;; For now just compare the local "main" branch to the upstream "main".
-                        ;; This will work as long as keep both the "main" and "mine" branches
-                        ;; updated.
-                        (branch-main (module-main-branch m))
-                        (branch-i-use (module-use-branch m))
-                        (cmd (concat "git diff "
-                                     ;; branch-i-use " " ;; TODO: incorporate branch-i-use
-                                     branch-main " "
-                                     (cl-getf rem :alias) "/" branch-main))
-                        ;; actual git diff run is here
-                        (shell-output (s-trim (shell-command-to-string cmd))))
-                   ;; TODO: find a better way of detecting error. They could change the error message to
-                   ;; not start with "error" and that would break this code.
-                   (if (or (s-starts-with-p "error" shell-output)
-                           (s-starts-with-p "fatal" shell-output))
-                       ;; just return the error msg itself. This string is inconsistent with
-                       ;; the symbol return types, but it should be OK as it's just a report
-                       ;; of what happened. No real processing on it.
-                       (push `(,(module-name m) ,shell-output) statuses)
-                     ;; else SUCCESSFUL diff
-                     (when (> (length shell-output) 0)
-                       ;; changes detected! but it may be code in a branch we don't use for merging.
-                       (push `(,(module-name m) 'new-code-in-upstream ,cmd) statuses)))))))
-    ;; return the results for informational purposes.
-    statuses))
+;;                  ;; run a diff so we know if there is code to merge in.
+;;                  (let* ((default-directory (module-folder m))
+;;                         ;; TODO: handle case where I use private branch "mine" with irrelevant
+;;                         ;; changes (like .gitignore). This causes the diff to always hit.
+;;                         ;; For now just compare the local "main" branch to the upstream "main".
+;;                         ;; This will work as long as keep both the "main" and "mine" branches
+;;                         ;; updated.
+;;                         (branch-main (module-main-branch m))
+;;                         (branch-i-use (module-use-branch m))
+;;                         (cmd (concat "git diff "
+;;                                      ;; branch-i-use " " ;; TODO: incorporate branch-i-use
+;;                                      branch-main " "
+;;                                      (cl-getf rem :alias) "/" branch-main))
+;;                         ;; actual git diff run is here
+;;                         (shell-output (s-trim (shell-command-to-string cmd))))
+;;                    ;; TODO: find a better way of detecting error. They could change the error message to
+;;                    ;; not start with "error" and that would break this code.
+;;                    (if (or (s-starts-with-p "error" shell-output)
+;;                            (s-starts-with-p "fatal" shell-output))
+;;                        ;; just return the error msg itself. This string is inconsistent with
+;;                        ;; the symbol return types, but it should be OK as it's just a report
+;;                        ;; of what happened. No real processing on it.
+;;                        (push `(,(module-name m) ,shell-output) statuses)
+;;                      ;; else SUCCESSFUL diff
+;;                      (when (> (length shell-output) 0)
+;;                        ;; changes detected! but it may be code in a branch we don't use for merging.
+;;                        (push `(,(module-name m) 'new-code-in-upstream ,cmd) statuses)))))))
+;;     ;; return the results for informational purposes.
+;;     statuses))
 
 
 

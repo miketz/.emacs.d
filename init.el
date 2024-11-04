@@ -1369,15 +1369,15 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; (autoload #'my-byte-compile-module "my-modules" nil t)
 ;; (autoload #'my-byte-compile-all-notElpa-folders "my-modules" nil t)
 (autoload #'my-byte-compile-all-notElpa "my-modules" nil t)
-(autoload #'my-setup-all-upstream-remotes-if-missing "my-modules" nil t)
+;; (autoload #'my-setup-all-upstream-remotes-if-missing "my-modules" nil t)
 (autoload #'my-setup-all-upstream-remotes-if-missing-golang "my-modules" nil t)
-(autoload #'my-fetch-all-upstream-remotes "my-modules" nil t)
+;; (autoload #'my-fetch-all-upstream-remotes "my-modules" nil t)
 
 (autoload #'my-fetch-all-upstream-remotes-golang "my-modules" nil t)
 (autoload #'my-fetch-all-mine-remotes-golang "my-modules" nil t)
 (autoload #'my-fetch-all-default-remotes-golang "my-modules" nil t)
 
-(autoload #'my-list-modules-with-upstream-code-to-merge "my-modules" nil t)
+;; (autoload #'my-list-modules-with-upstream-code-to-merge "my-modules" nil t)
 (autoload #'my-list-modules-with-upstream-code-to-merge-golang "my-modules"
   nil t)
 (autoload #'my-checkout-branches-golang "my-modules" nil t)

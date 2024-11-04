@@ -2798,6 +2798,23 @@ Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
   (interactive)
+  (my-fetch-remotes-golang "fetchUpstream"))
+
+(defun my-fetch-all-mine-remotes-golang ()
+  "Call an external Go program to fetch each mine remote.
+(ie my fork)
+Ditto docs of `my-fetch-all-upstream-remotes-golang'"
+  (interactive)
+  (my-fetch-remotes-golang "fetchMine"))
+
+(defun my-fetch-all-default-remotes-golang ()
+  "Call an external Go program to fetch each default remote.
+(usually my fork, sometimes upstream)
+Ditto docs of `my-fetch-all-upstream-remotes-golang'"
+  (interactive)
+  (my-fetch-remotes-golang "fetchDefault"))
+
+(defun my-fetch-remotes-golang (fetch-arg)
   ;; (let* (;; run the Go program
   ;;        (cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
   ;;                     " fetch"))
@@ -2810,7 +2827,7 @@ so I track this in `my-modules'."
   ;;   (insert output-str)
   ;;   (insert "\n--------------------------\n"))
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
-                      " fetch"))
+                      " " fetch-arg))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
          (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))

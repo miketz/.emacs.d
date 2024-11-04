@@ -1416,6 +1416,20 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
+;;; steps to get latest on yolo packages after git pull on .emacs.d/
+;;;----------------------------------------------------------------------------
+;; now that i've moved away from git submoduels a git pull on .emacs.d/ no
+;; longer includes the latest package versions. need some extra steps.
+
+;; 1. (my-fetch-all-default-remotes-golang)
+;; 2. for each repo with new data fetched go inside and do the usual management
+;;    git log master..origin/master | tig
+;;    git merge origin/master
+;; TODO: make an auto pull function in golang for the "mine" remotes. These
+;; remotes are my fork or my project and the commits are already vetted, so
+;; can be safely pulled without a manual fetch/log review session.
+
+;;;----------------------------------------------------------------------------
 ;;; compat
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/compat.el" load-path)

@@ -2865,6 +2865,44 @@ Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
                           #'my--clone-complete)))
 
 
+(defun my--merge-complete (p msg)
+  (when (memq (process-status p) '(exit signal))
+    ;;(message (concat (process-name p) " - " msg))
+    (let ((buff (process-buffer p)))
+      (unless (eq buff (current-buffer))
+        (switch-to-buffer-other-window buff))
+      (goto-char (point-max)) ;; end of buffer
+      ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+      (insert "\n--------------------------\n"))
+    (message "merging complete")))
+
+(defun my-merge-mine-git-yolo-repos-golang ()
+  "Call an external Go program to merge my YOLO (ie not git submodules) repos.
+This is roughly equivalent to the submodule operation of
+    cd ~/.emacs.d
+    git pull
+    git submodule update --init
+ie simply getting latest. But one caveat is I only do this auto merge against the `mine'
+repos which are my forks or personal projects. So it's safe to merge in the code
+without further review.
+Concurrently merges YOLO repos at once for increased speed.
+
+Carefully review the `failure' output as it will include repos that had conflicts and need
+manual resolution or rollback.
+
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
+  (interactive)
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
+                      " mergeMine"))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
+    (message "merging `mine' git YOLO repos...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--merge-complete)))
+
+
 (defun my--branch-create-complete (p msg)
   (when (memq (process-status p) '(exit signal))
     ;;(message (concat (process-name p) " - " msg))

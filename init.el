@@ -1376,6 +1376,8 @@ In master branch now. Was on git branch: feature/native-comp.")
 (autoload #'my-fetch-all-upstream-remotes-golang "my-modules" nil t)
 (autoload #'my-fetch-all-mine-remotes-golang "my-modules" nil t)
 (autoload #'my-fetch-all-default-remotes-golang "my-modules" nil t)
+(autoload #'my-merge-mine-git-yolo-repos-golang "my-modules" nil t)
+
 
 ;; (autoload #'my-list-modules-with-upstream-code-to-merge "my-modules" nil t)
 (autoload #'my-list-modules-with-upstream-code-to-merge-golang "my-modules"

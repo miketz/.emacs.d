@@ -172,7 +172,7 @@
 ;; 1. download package
 ;;   cd ~/.emacs.d/notElpaYolo
 ;;   git clone --depth 1 --branch master https://github.com/liuyinz/binky.el
-;;       for full history later:
+;;       # for full history later:
 ;;       # get history
 ;;         git fetch --unshallow
 ;;       # get remote branches
@@ -1402,6 +1402,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;     go build
 ;; (my-clone-git-yolo-repos-golang)
 ;;     for repos where I care about history:
+;;     # NOTE: i'm not using shallow clone anymore but keep this info just in case.
 ;;     # get history
 ;;       git fetch --unshallow
 ;;     # get remote branches
@@ -1424,9 +1425,11 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; longer includes the latest package versions. need some extra steps.
 
 ;; 1. (my-fetch-all-default-remotes-golang)
+;;
 ;; 2. for merges/rebases to work properly, may need to manually unshallow each repo
 ;;        git fetch --unshallow
-;;    TODO: either stop using shallwo clone or make an mass unshallow feature in gitFetchHelper
+;;    NOTE: i'm not using shallow clone anymore in gitFetchHelper but keep unshallow step just in case.
+;;
 ;; OLD Step 3. for each repo with new data fetched go inside and do the usual management
 ;;    git log master..origin/master | tig
 ;;    git merge origin/master
@@ -1434,6 +1437,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; remotes are my fork or my project and the commits are already vetted, so
 ;; can be safely pulled without a manual fetch/log review session.
 ;;     (my-merge-mine-git-yolo-repos-golang)
+;;
 ;; 4. observe failure output. look for any conflicts, manually resolve or rollback.
 
 ;;;----------------------------------------------------------------------------

@@ -2987,7 +2987,19 @@ Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
       (insert "\n--------------------------\n"))
     (message "merge detection complete")))
 
-(defun my-list-modules-with-upstream-code-to-merge-golang ()
+(defun my-list-remote-upstream-code-to-merge-golang ()
+  (interactive)
+  (my-list-remote-code-to-merge-golang "diffUpstream"))
+
+(defun my-list-remote-mine-code-to-merge-golang ()
+  (interactive)
+  (my-list-remote-code-to-merge-golang "diffMine"))
+
+(defun my-list-remote-default-code-to-merge-golang ()
+  (interactive)
+  (my-list-remote-code-to-merge-golang "diffMine"))
+
+(defun my-list-remote-code-to-merge-golang (diff-arg)
   "Call an external Go program to see which modules have new code for review/merging.
 Calls git diff concurrently.
 
@@ -2996,9 +3008,8 @@ Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper.
 Assumes fn `my-setup-all-upstream-remotes-if-missing' has been called
 to set upstream remotes. Git does not keep track of multiple remotes
 so I track this in `my-modules'."
-  (interactive)
   (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
-                      " diff"))
+                      " " diff-arg))
          (buff (my--create-buff-gitFetchHelper))
          ;; shadow so repos.json can be found
          (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))

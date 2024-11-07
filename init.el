@@ -1380,8 +1380,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;; (autoload #'my-list-modules-with-upstream-code-to-merge "my-modules" nil t)
-(autoload #'my-list-modules-with-upstream-code-to-merge-golang "my-modules"
-  nil t)
+(autoload #'my-list-remote-upstream-code-to-merge-golang "my-modules" nil t)
+(autoload #'my-list-remote-mine-code-to-merge-golang "my-modules" nil t)
+(autoload #'my-list-remote-default-code-to-merge-golang "my-modules" nil t)
+
 (autoload #'my-checkout-branches-golang "my-modules" nil t)
 (autoload #'my-clone-git-yolo-repos-golang "my-modules" nil t)
 (autoload #'my-create-local-branches-golang "my-modules" nil t)
@@ -1415,7 +1417,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; (my-checkout-branches-golang) ; git submodule hiccup. at detatched commit
 ;; (my-fetch-all-upstream-remotes-golang)
 ;; (my-create-local-branches-golang)
-;; (my-list-modules-with-upstream-code-to-merge-golang)
+;; (my-list-remote-upstream-code-to-merge-golang)
 
 
 ;;;----------------------------------------------------------------------------
@@ -1430,15 +1432,20 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;        git fetch --unshallow
 ;;    NOTE: i'm not using shallow clone anymore in gitFetchHelper but keep unshallow step just in case.
 ;;
-;; OLD Step 3. for each repo with new data fetched go inside and do the usual management
-;;    git log master..origin/master | tig
-;;    git merge origin/master
-;; NEW Step 3. run auto pull function in golang for the "mine" remotes. These
+;; 3. run auto pull function in golang for the "mine" remotes. These
 ;; remotes are my fork or my project and the commits are already vetted, so
 ;; can be safely pulled without a manual fetch/log review session.
 ;;     (my-merge-mine-git-yolo-repos-golang)
 ;;
 ;; 4. observe failure output. look for any conflicts, manually resolve or rollback.
+;;
+;; 5. observe repos that still need latest merged in. when I use the upstream
+;; remote direclty (no fork) it's not safe to auto-merge code in step 3.
+;;     (my-list-remote-default-code-to-merge-golang)
+;; for each repo listed (likely upstream)
+;;    cd ~/.emacs.d/notElpaYolo/{PROJECT_NAME_HERE}
+;;    git log master..origin/master | tig
+;;    git merge origin/master
 
 ;;;----------------------------------------------------------------------------
 ;;; compat

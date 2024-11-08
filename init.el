@@ -1422,6 +1422,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 ;;;----------------------------------------------------------------------------
 ;;; steps to get latest on yolo packages after git pull on .emacs.d/
+;;; (ie not upstream package code)
 ;;;----------------------------------------------------------------------------
 ;; now that i've moved away from git submodules a git pull on .emacs.d/ no
 ;; longer includes the latest package versions. need some extra steps.
@@ -1444,8 +1445,28 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;     (my-list-remote-default-code-to-merge-golang)
 ;; for each repo listed (likely upstream)
 ;;    cd ~/.emacs.d/notElpaYolo/{PROJECT_NAME_HERE}
-;;    git log master..origin/master | tig
+;;    git log master..REMOTENAME/master | tig
 ;;    git merge origin/master
+;;    # push to my fork
+;;    git push
+
+
+;;;----------------------------------------------------------------------------
+;;; steps to get latest upstream code for packages
+;;;----------------------------------------------------------------------------
+;; 1. fetch
+;;   (my-fetch-all-upstream-remotes-golang)
+;; 2. list packages with new upstream code
+;;   (my-list-remote-upstream-code-to-merge-golang)
+;; 3. for each listed package, review code, merge in, push up to my fork if relevant
+;;    cd ~/.emacs.d/notElpaYolo/{PROJECT_NAME_HERE}
+;;    # review
+;;    git log master..upstream/master | tig
+;;    # merge
+;;    git merge upstream/master
+;;    # push to my fork which should be tracked by default
+;;    git push
+
 
 ;;;----------------------------------------------------------------------------
 ;;; compat

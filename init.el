@@ -917,7 +917,7 @@ in case that file does not provide any feature."
 (declare-function my-delete-process-at-point 'suppress)
 (declare-function my-setup-prog-mode 'suppress)
 (declare-function sallet-buffer 'suppress)
-(declare-function sunrise-cd 'suppress)
+(declare-function sunrise-cd "sunrise")
 (declare-function winner-undo 'suppress)
 (declare-function winner-redo 'suppress)
 (declare-function xref-pulse-momentarily 'suppress)

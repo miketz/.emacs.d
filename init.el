@@ -1438,7 +1438,11 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; can be safely pulled without a manual fetch/log review session.
 ;;     (my-merge-mine-git-yolo-repos-golang)
 ;;
+;; 3-A: observe success output. byte compile these folders.
+;;  (my-byte-compile-dir)
+;;
 ;; 4. observe failure output. look for any conflicts, manually resolve or rollback.
+;;   byte compile if fixed: (my-byte-compile-dir)
 ;;
 ;; 5. observe repos that still need latest merged in. when I use the upstream
 ;; remote direclty (no fork) it's not safe to auto-merge code in step 3.
@@ -1449,6 +1453,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;    git merge origin/master
 ;;    # push to my fork
 ;;    git push
+;; 6. (my-byte-compile-dir)
 
 
 ;;;----------------------------------------------------------------------------
@@ -1466,7 +1471,8 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;    git merge upstream/master
 ;;    # push to my fork which should be tracked by default
 ;;    git push
-
+;; 4. byte compile folder
+;;   (my-byte-compile-dir)
 
 ;;;----------------------------------------------------------------------------
 ;;; compat

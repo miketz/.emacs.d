@@ -3077,7 +3077,6 @@ so I track this in `my-modules'."
 
 
 
-;; TODO: byte compile ~/.emacs.d/notElpaYolo
 (defun my-byte-compile-all-notElpa ()
   "Byte compile all .el files in ~/.emacs.d/notElpa and sub dirs.
 Also byte compile all .el files in ~/.emacs.d/notElpaYolo and sub dirs.

@@ -6248,6 +6248,7 @@ TODO: call this function when it works."
 (with-eval-after-load 'color-identifiers-mode
   (defun my-color-identifiers-mode-disable-other-faces ()
     "Adjust other faces to be less prominent. So variable colors stand out more."
+    (interactive)
     (let ((faces '(font-lock-comment-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-string-face font-lock-builtin-face font-lock-preprocessor-face font-lock-warning-face font-lock-doc-face font-lock-negation-char-face font-lock-regexp-grouping-construct font-lock-regexp-grouping-backslash)))
       (dolist (face faces)
         (face-remap-add-relative face '(:inherit default))))

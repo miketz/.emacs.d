@@ -6260,7 +6260,7 @@ TODO: call this function when it works."
 ;;; mode-on-region.el in ~/.emacs.d/notElpa/mine/mor/
 ;;; Create a new buffer, stuff text in it, turn on mode.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/mine/mor" load-path)
+(push "~/.emacs.d/notElpaYolo/mor" load-path)
 (autoload #'mor-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-prev-mode-on-region "mode-on-region" nil t)
 (autoload #'mor-curr-mode-on-region "mode-on-region" nil t)

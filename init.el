@@ -1427,7 +1427,8 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; now that i've moved away from git submodules a git pull on .emacs.d/ no
 ;; longer includes the latest package versions. need some extra steps.
 
-;; 1. (my-fetch-all-default-remotes-golang)
+;; 1. (my-clone-git-yolo-repos-golang)
+;;    (my-fetch-all-default-remotes-golang)
 ;;
 ;; 2. for merges/rebases to work properly, may need to manually unshallow each repo
 ;;        git fetch --unshallow

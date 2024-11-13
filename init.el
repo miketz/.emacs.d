@@ -6241,6 +6241,28 @@ TODO: call this function when it works."
 ;;;----------------------------------------------------------------------------
 ;;; color-identifiers-mode. gives each variable it's own color.
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/color-identifiers-mode" load-path)
+(autoload #'color-identifiers-mode "color-identifiers-mode" nil t)
+(autoload #'global-color-identifiers-mode "color-identifiers-mode" nil t)
+
+(with-eval-after-load 'color-identifiers-mode
+  (defun my-color-identifiers-mode-disable-other-faces ()
+    "Adjust other faces to be less prominent. So variable colors stand out more."
+    (let ((faces '(font-lock-comment-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-string-face font-lock-builtin-face font-lock-preprocessor-face font-lock-warning-face font-lock-doc-face font-lock-negation-char-face font-lock-regexp-grouping-construct font-lock-regexp-grouping-backslash)))
+      (dolist (face faces)
+        (face-remap-add-relative face '(:inherit default))))
+    (face-remap-add-relative 'font-lock-keyword-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-comment-face '((:slant italic)))
+    (face-remap-add-relative 'font-lock-builtin-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
+    (face-remap-add-relative 'font-lock-function-name-face '((:slant italic)))
+    (face-remap-add-relative 'font-lock-string-face '((:slant italic)))
+    (face-remap-add-relative 'font-lock-constant-face '((:weight bold))))
+
+  ;; call `my-color-identifiers-mode-disable-other-faces' manually for now
+  ;; (add-hook 'color-identifiers-mode-hook 'my-color-identifiers-mode-disable-other-faces)
+  )
+
 ;; (when nil ;sample to test variable colors
 ;;   (let ((a 0) (b 1) (c 2)
 ;;         (d 2) (e 4) (f 4) (g 4))

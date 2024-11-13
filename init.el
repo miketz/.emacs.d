@@ -9812,7 +9812,7 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; rsvp.  rapid serial visual presentation.  speed reader.
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/mine/rapid-serial-visual-presentation" load-path)
+(push "~/.emacs.d/notElpaYolo/rapid-serial-visual-presentation" load-path)
 (autoload #'rsvp-start-reader "rsvp" nil t)
 ;; Config vars
 (setq rsvp-delay-seconds 0.15)

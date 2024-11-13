@@ -6239,7 +6239,7 @@ TODO: call this function when it works."
   )
 
 ;;;----------------------------------------------------------------------------
-;;; color-identifiers-mode
+;;; color-identifiers-mode. gives each variable it's own color.
 ;;;----------------------------------------------------------------------------
 ;; (when nil ;sample to test variable colors
 ;;   (let ((a 0) (b 1) (c 2)

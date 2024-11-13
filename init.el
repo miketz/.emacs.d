@@ -1950,7 +1950,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;   "Themes I created.")
 
 ;; (defvar my-themes-shortlist
-;;   '(kosmos wildcharm base16-decaf)
+;;   '(kosmos wildcharm base16-decaf miasma)
 ;;   "Keeping track of interesting themes so they are not forgotten.")
 
 ;; vim charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*

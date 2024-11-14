@@ -1678,6 +1678,20 @@ Historical preservation."
    `(font-lock-comment-face ((t :foreground "darkorange3")))
    `(font-lock-doc-face ((t :foreground "#cd8500")))))
 
+(defun my-color-miasma ()
+  "Custom mods to miasma theme."
+  (interactive)
+  (load-theme 'miasma t)
+
+  (my-rainbow-parens-dark-bg)
+  ;; (my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg)
+
+  (custom-theme-set-faces
+   'miasma
+   `(fringe ((t :background "black")))))
+
 (defun my-color-warm-night ()
   (interactive)
   (load-theme 'warm-night t)

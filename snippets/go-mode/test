@@ -3,6 +3,7 @@
 # key: test
 # --
 func Test${1:Name}(t *testing.T) {
+	t.Parallel()
 	want := 1
 	got, err := $1()
 	if err != nil {

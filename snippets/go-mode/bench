@@ -3,8 +3,8 @@
 # key: bench
 # --
 func Benchmark${1:Name}(b *testing.B) {
+	b.ReportAllocs() // include alloc info in report
 	for i := 0; i < b.N; i++ {
 		$1()
 	}
-	b.ReportAllocs() // include alloc info in report
 }

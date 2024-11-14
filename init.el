@@ -10043,6 +10043,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
       (setq-local embark--command this-command))
     (add-hook 'minibuffer-setup-hook #'embark--record-this-command)))
 
+;;;----------------------------------------------------------------------------
+;;; my personal emacs packages
+;;;----------------------------------------------------------------------------
+;; mode-on-region
+;; rapid-serial-visual-presentation
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

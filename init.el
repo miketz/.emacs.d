@@ -10049,7 +10049,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;; fugitive
 ;;;----------------------------------------------------------------------------
 (autoload #'fugitive-shell-command "fugitive" nil t)
-(autoload #'fugitive-find-local-only-branches "fugitive" nil t)
+(autoload #'fugitive-find-local-only-branches-ediff "fugitive" nil t)
+(autoload #'fugitive-find-local-only-branches-direct "fugitive" nil t)
 
 (when my-use-evil-p
   (evil-leader/set-key "f" #'fugitive-shell-command))

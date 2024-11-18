@@ -10045,10 +10045,18 @@ This function is meant to be added to `minibuffer-setup-hook'."
     (add-hook 'minibuffer-setup-hook #'embark--record-this-command)))
 
 ;;;----------------------------------------------------------------------------
+;;; fugitive
+;;;----------------------------------------------------------------------------
+(autoload #'fugitive-shell-command "fugitive" nil t)
+(autoload #'fugitive-find-local-only-branches "fugitive" nil t)
+
+
+;;;----------------------------------------------------------------------------
 ;;; my personal emacs packages
 ;;;----------------------------------------------------------------------------
 ;; mode-on-region
 ;; rapid-serial-visual-presentation
+;; fugitive
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: benchManual
+# key: benchManual
+# --
+start := time.Now()
+res, err := theFn()
+duration := time.Since(start) // before err check for accurate measurement

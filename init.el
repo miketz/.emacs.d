@@ -1707,8 +1707,9 @@ In master branch now. Was on git branch: feature/native-comp.")
   ;;                            (enlarge-window 10)))
 
   ;;TODO: look into equivalent resizing for non-Windows machines.
-  (when (eq system-type 'windows-nt)
-    (evil-leader/set-key "f" #'my-toggle-frame-max)))
+  ;; (when (eq system-type 'windows-nt)
+  ;;   (evil-leader/set-key "f" #'my-toggle-frame-max))
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; goto-chg. dependency of evil.
@@ -10049,6 +10050,9 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 (autoload #'fugitive-shell-command "fugitive" nil t)
 (autoload #'fugitive-find-local-only-branches "fugitive" nil t)
+
+(when my-use-evil-p
+  (evil-leader/set-key "f" #'fugitive-shell-command))
 
 
 ;;;----------------------------------------------------------------------------

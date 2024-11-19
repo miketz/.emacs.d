@@ -10064,6 +10064,22 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; fugitive
 
 ;;;----------------------------------------------------------------------------
+;;; native comp stuff.
+;;;----------------------------------------------------------------------------
+(setq load-prefer-newer t)
+(setq native-comp-jit-compilation t)
+(setq native-comp-deferred-compilation t) ; Deprecated in Emacs > 29.1
+
+;; various log warning control variables.
+;; hide the anoying native-comp warnings
+(setq native-comp-async-report-warnings-errors 'silent)
+;; still log warnings, but don't popup window unless it's an error.
+(setq  warning-minimum-level :error)
+;; warning-suppress-log-types
+;; warning-suppress-types
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
@@ -10073,13 +10089,6 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; TODO: look into the various input modes:
 ;; evil, devil, god-mode, meow, boon, xah-fly-keys
 
-;; various log warning control variables.
-;; hide the anoying native-comp warnings
-(setq native-comp-async-report-warnings-errors 'silent)
-;; still log warnings, but don't popup window unless it's an error.
-(setq  warning-minimum-level :error)
-;; warning-suppress-log-types
-;; warning-suppress-types
 
 
 (autoload #'charcode-region "my-misc" nil t)

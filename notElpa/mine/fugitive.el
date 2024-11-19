@@ -95,6 +95,14 @@ Flawed implementation:
                           (get-buffer-create fugitive-buff-name)))
 
 
+(defun fugitive-get-remote-aliases ()
+  "Return a list of remote alias names."
+  (interactive)
+  (let* ((output (string-trim-right
+                  (shell-command-to-string "git remote")))
+         (remotes (string-split output "\n")))
+    remotes))
+
 
 ;; (defun fugitive-log ()
 ;;   "View git log output in an Emacs buffer."

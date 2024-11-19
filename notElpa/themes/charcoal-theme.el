@@ -444,7 +444,7 @@ Example:
    `(lazy-highlight ((,class (:background ,isearch-fg ;,bg-purple
 										  :foreground ,isearch-bg ;,fg-purple
 										  :weight normal
-										  :underline t))))
+										  :underline nil))))
 
    `(cider-result-overlay-face ((,class (:background ,bg-green
                                                      :foreground ,fg-green

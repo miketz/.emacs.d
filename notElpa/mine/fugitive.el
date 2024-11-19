@@ -53,7 +53,8 @@
          (max-mini-window-height 0)
          (log-p (fugitive-str-starts-with-p cmd "git log"))
          (diff-p (and (not log-p)
-                      (fugitive-str-starts-with-p cmd "git diff"))))
+                      (or (fugitive-str-starts-with-p cmd "git diff")
+                          (fugitive-str-starts-with-p cmd "git show")))))
 
     ;; run command
     (shell-command cmd buff)

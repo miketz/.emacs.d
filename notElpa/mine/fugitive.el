@@ -64,8 +64,9 @@
 
     ;; turn on a specialized mode for the output type
     (with-current-buffer buff
-      (cond (log-p (log-view-mode) ; TODO: fix. doesn't work right.
-                   ;; (vc-git-log-view-mode)
+      (cond (log-p
+             ;; (log-view-mode) ; TODO: fix. doesn't work right.
+             ;; (vc-git-log-view-mode)
                    )
             (diff-p (diff-mode))))
 

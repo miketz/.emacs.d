@@ -83,7 +83,7 @@
 
 ;;;###autoload
 (defun fugitive-find-local-only-branches-direct ()
-  "Use an ediff session to help find branches without a remote tracking branch."
+  "Find branches without a remote tracking branch by grepping remote data."
   (interactive)
   ;; this command works on mac. maybe not windows
   ;; { git branch -vv | grep -v origin & git branch -vv | grep ": gone]"; }

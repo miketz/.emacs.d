@@ -83,7 +83,11 @@
 
 ;;;###autoload
 (defun fugitive-find-local-only-branches-direct ()
-  "Find branches without a remote tracking branch by grepping remote data."
+  "Find branches without a remote tracking branch by grepping remote data.
+Flawed implementation:
+   Doesn't handle multiple remotes.
+   Assumes alias name origin.
+   Depends on grep. It may not be available on windows."
   (interactive)
   ;; this command works on mac. maybe not windows
   ;; { git branch -vv | grep -v origin & git branch -vv | grep ": gone]"; }

@@ -24,6 +24,7 @@
 
 (let ((seq 0))
   (defun fugitive-new-output-buffer ()
+    "Create a new output buffer with a unique name."
     (setq seq (+ 1 seq))
     (get-buffer-create (concat "*fugitive-"
                                (int-to-string seq)

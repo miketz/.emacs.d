@@ -10071,6 +10071,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;; native comp stuff.
 ;;;----------------------------------------------------------------------------
 (setq load-prefer-newer t)
+(setq native-comp-speed 3) ; dangerous. revert back to 2 if issues occur.
 (setq native-comp-jit-compilation t)
 (setq native-comp-deferred-compilation t) ; Deprecated in Emacs > 29.1
 

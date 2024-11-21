@@ -10052,9 +10052,14 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; fugitive
 ;;;----------------------------------------------------------------------------
+;; Inspried by vim fugitive. just runs git commands via `shell-command'.
+;; But with tweaks to force output into a buffer (not minibuffer).
+;; And a few specialized helper functions.
 (autoload #'fugitive-shell-command "fugitive" nil t)
 (autoload #'fugitive-find-local-only-branches-ediff "fugitive" nil t)
 (autoload #'fugitive-find-local-only-branches-direct "fugitive" nil t)
+(autoload #'fugitive-log-between "fugitive" nil t)
+(autoload #'fugitive-diff-between "fugitive" nil t)
 
 (when my-use-evil-p
   (evil-leader/set-key "f" #'fugitive-shell-command))

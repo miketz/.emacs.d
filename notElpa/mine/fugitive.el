@@ -140,7 +140,9 @@ Flawed implementation:
 Convert the string-list to an elisp list."
   (let* ((str (shell-command-to-string cmd))
          (trimmed (string-trim-right str))
-         (lst (string-split trimmed "\n")))
+         ;; apostrophe's added on windows?
+         (cleaned (string-replace "'" "" trimmed))
+         (lst (string-split cleaned "\n")))
     lst))
 
 (defun fugitive-get-remote-aliases ()

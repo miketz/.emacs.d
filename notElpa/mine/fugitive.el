@@ -143,7 +143,10 @@ Convert the string-list to an elisp list."
          ;; apostrophe's added on windows?
          (cleaned (string-replace "'" "" trimmed))
          (lst (string-split cleaned "\n")))
-    lst))
+    ;; remove empty strings. the case when command produces no output.
+    (cl-delete-if (lambda (str)
+                    (string-equal str ""))
+                  lst)))
 
 (defun fugitive-get-remote-aliases ()
   "Return a list of remote alias names."

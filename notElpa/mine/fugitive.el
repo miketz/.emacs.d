@@ -97,7 +97,6 @@ Flawed implementation:
 
 (defun fugitive-get-remote-aliases ()
   "Return a list of remote alias names."
-  (interactive)
   (let* ((output (string-trim-right
                   (shell-command-to-string "git remote")))
          (remotes (string-split output "\n")))

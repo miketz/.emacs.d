@@ -5569,6 +5569,9 @@ and indent."
   (evil-leader/set-key "m" #'magit-status)) ; autoloaded
 
 (with-eval-after-load 'magit
+  ;; magit-delta seems to break commit and collapse behavior in magit
+  ;; (add-hook 'magit-mode-hook (lambda () (magit-delta-mode +1)))
+
   ;; Magit stole my M-h binding, take it back.
   ;; TODO: rebind magit-show-only-files, which was on M-h
   (when my-use-evil-p
@@ -10063,6 +10066,24 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 (when my-use-evil-p
   (evil-leader/set-key "f" #'fugitive-shell-command))
+
+;;;----------------------------------------------------------------------------
+;;; xterm-color
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/xterm-color" load-path)
+(autoload #'xterm-color-filter-strip "xterm-color" nil nil)
+(autoload #'xterm-color-filter "xterm-color" nil nil)
+(autoload #'xterm-color-256 "xterm-color" nil nil)
+(autoload #'xterm-color-colorize-buffer "xterm-color" nil t)
+(autoload #'xterm-color-clear-cache "xterm-color" nil nil)
+(autoload #'xterm-color-test "xterm-color" nil t)
+(autoload #'xterm-color-test-raw "xterm-color" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; magit-delta
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/magit-delta" load-path)
+(autoload #'magit-delta-mode "magit-delta" nil t)
 
 
 ;;;----------------------------------------------------------------------------

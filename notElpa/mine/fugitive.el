@@ -97,7 +97,6 @@ Just logs for now.")
       (progn ; inject a newline at the end to separate cmd outputs
         (goto-char (point-max)) ; should already be at end, but make sure
         (insert "\n"))
-      (message "new-buff-p %s" new-buff-p)
       ;; TURN on a specialized mode for specific output types
       ;; but only if it a new buffer. doesn't work for mixed otuput buffer
       (when new-buff-p

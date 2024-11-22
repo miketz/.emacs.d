@@ -315,14 +315,19 @@
   "
 _f_: shell-command (most used)
 _l_: log graph
+_;_: log between revs
 _b_: blame
 _d_: diff between revs
+_e_: local branches, no remote
+_c_: delete fugitive buffers
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
   ("l" fugitive-log-graph)
   (";" fugitive-log-between)
   ("b" fugitive-blame)
   ("d" fugitive-diff-between)
+  ("e" fugitive-find-local-only-branches-ediff)
+  ("c" fugitive-delete-buffers)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

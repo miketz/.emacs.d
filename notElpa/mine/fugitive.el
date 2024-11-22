@@ -81,7 +81,14 @@ edit/supply it, even if cmd has a value."
     ;; force colors for logs. For diffs, the emacs diff-mode does a good job with colors
     (when (and fugitive-auto-inject-color-flag
                log-p)
-      (setq cmd (concat cmd " --color")))
+      (let* ((parts (string-split cmd "--"))
+             (has-dashes-p (> (length parts) 1)))
+        (if has-dashes-p
+            (setq cmd (concat (cl-first parts)
+                              "--color --"
+                              (cl-second parts))))
+        ;; else, no double dashes --. append at end
+        (setq cmd (concat cmd " --color"))))
 
     ;; run command
     (shell-command cmd buff)

@@ -1,7 +1,7 @@
 ;;; fugitive.el --- Clone of vim fugitive -*- lexical-binding: t -*-
 
 ;;; License: GPL version 3
-;;; Package-Requires: ((emacs "24.4"))
+;;; Package-Requires: ((emacs "24.4") (xterm-color "2.0"))
 ;;; Version: 0.0.0
 ;;; URL: todo
 
@@ -12,10 +12,15 @@
 ;;; Code:
 (require 'vc)
 (require 'cl-lib)
+(require 'xterm-color)
 
 (defcustom fugitive-new-buffer-per-cmd-p t
   "If t, spawn a new output buffer for each command.
 Otherwise dump output into the same *fugitive* buffer.")
+
+(defcustom fugitive-auto-inject-color-flag t
+  "If t, inject --color flag to some git commands.
+Just logs for now.")
 
 
 (defvar fugitive-buff-name "*fugitive*")
@@ -54,6 +59,7 @@ Otherwise dump output into the same *fugitive* buffer.")
     ;; (setq cmd (read-string "cmd: " "git "))
     )
 
+
   (let* ((buff (or buff ; buff passed in
                    (if fugitive-new-buffer-per-cmd-p
                        (fugitive-new-output-buffer) ; new buff
@@ -68,6 +74,11 @@ Otherwise dump output into the same *fugitive* buffer.")
                       (or (fugitive-str-starts-with-p cmd "git diff")
                           (fugitive-str-starts-with-p cmd "git show")))))
 
+
+    ;; force colors for logs. For diffs, the emacs diff-mode does a good job with colors
+    (when (and fugitive-auto-inject-color-flag
+               log-p)
+      (setq cmd (concat cmd " --color")))
 
     ;; ensure output is appeneded to the end of the buffer. by default it inserts at
     ;; point!
@@ -91,6 +102,7 @@ Otherwise dump output into the same *fugitive* buffer.")
       ;; but only if it a new buffer. doesn't work for mixed otuput buffer
       (when new-buff-p
         (cond (log-p
+               (xterm-color-colorize-buffer)
                ;; (log-view-mode) ; TODO: fix. doesn't work right.
                ;; (vc-git-log-view-mode)
                )

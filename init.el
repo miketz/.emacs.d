@@ -10066,7 +10066,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-diff-between "fugitive" nil t)
 
 (when my-use-evil-p
-  (evil-leader/set-key "f" #'fugitive-shell-command))
+  (evil-leader/set-key "f" #'fugitive-shell-command)
+  (evil-leader/set-key "l" #'fugitive-log-graph))
 
 ;;;----------------------------------------------------------------------------
 ;;; xterm-color

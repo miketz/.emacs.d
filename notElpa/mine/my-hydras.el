@@ -311,6 +311,23 @@
                       initial-expand)))) ; default to current val.
 
 
+(defhydra my-fugitive-hydra (:color blue :hint nil) ;;(:color blue)
+  "
+_f_: shell-command (most used)
+_l_: log graph
+_b_: blame
+_d_: diff between revs
+_q_, _C-g_: quit"
+  ("f" fugitive-shell-command)
+  ("l" fugitive-log-graph)
+  (";" fugitive-log-between)
+  ("b" fugitive-blame)
+  ("d" fugitive-diff-between)
+  ;; don't use the hint text as it makes (:hint nil) not work?
+  ("C-g" nil nil)
+  ("q" nil))
+
+
 
 ;; spawn hydras from a single binding. A hydra of hydras.
 (let ((my-hydras (mapcar #'symbol-name

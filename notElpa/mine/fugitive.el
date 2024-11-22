@@ -28,7 +28,7 @@ Just logs for now.")
        t))
 
 
-(let ((seq 0))
+(let ((seq 0)) ; private var. requires lexical binding
   (defun fugitive-new-output-buffer ()
     "Create a new output buffer with a unique name."
     (setq seq (+ 1 seq))

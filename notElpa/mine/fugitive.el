@@ -75,7 +75,9 @@ edit/supply it, even if cmd has a value."
          (log-p (fugitive-str-starts-with-p cmd "git log"))
          (diff-p (and (not log-p)
                       (or (fugitive-str-starts-with-p cmd "git diff")
-                          (fugitive-str-starts-with-p cmd "git show")))))
+                          (fugitive-str-starts-with-p cmd "git show"))))
+         (blame-p (and (not diff-p)
+                       (fugitive-str-starts-with-p cmd "git blame"))))
     ;; force colors for logs. For diffs, the emacs diff-mode does a good job with colors
     (when (and fugitive-auto-inject-color-flag
                log-p)
@@ -94,7 +96,8 @@ edit/supply it, even if cmd has a value."
              ;; (log-view-mode) ; TODO: fix. doesn't work right.
              ;; (vc-git-log-view-mode)
              )
-            (diff-p (diff-mode))))
+            (diff-p (diff-mode))
+            (blame-p (xterm-color-colorize-buffer))))
 
     buff ; return output buffer
     ))
@@ -119,6 +122,26 @@ Flawed implementation:
   ;; { git branch -vv | grep -v origin & git branch -vv | grep ": gone]"; }
   (fugitive-shell-command "{ git branch -vv | grep -v origin & git branch -vv | grep \": gone]\"; }"
                           (get-buffer-create fugitive-buff-name)))
+
+(defun fugitive-curr-filename ()
+  "Get file name of current buffer.
+Empty string if buffer does not visit a file."
+  (let ((filename (buffer-file-name)))
+    (if (null filename)
+        ""
+      ;; else
+      (file-name-nondirectory filename))))
+
+;;;###autoload
+(defun fugitive-blame ()
+  "Prepare the git command with common options for blame."
+  (interactive)
+  ;; git blame --color-lines --color-by-age -- init.el
+  (let ((cmd (concat
+              "git blame --color-lines --color-by-age -- "
+              (fugitive-curr-filename)
+              " ")))
+    (fugitive-shell-command cmd nil t)))
 
 ;;;###autoload
 (defun fugitive-log-graph ()

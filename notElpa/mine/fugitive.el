@@ -98,7 +98,7 @@ Just logs for now.")
         (goto-char (point-max)) ; should already be at end, but make sure
         (insert "\n"))
       ;; TURN on a specialized mode for specific output types
-      ;; but only if it a new buffer. doesn't work for mixed otuput buffer
+      ;; but only if it a new buffer. doesn't work for mixed output buffer
       (when new-buff-p
         (cond (log-p
                (xterm-color-colorize-buffer)

@@ -194,7 +194,7 @@ Empty string if buffer does not visit a file."
     (message "rev1 and rev2 are required.")
     (cl-return-from fugitive-diff-between))
   ;; run command
-  (fugitive-shell-command (format "git diff %s %s" rev1 rev2)))
+  (fugitive-shell-command (format "git diff %s %s" rev1 rev2) nil t))
 
 
 (defun fugitive-cmd-to-list (cmd)

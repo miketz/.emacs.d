@@ -72,22 +72,13 @@ Just logs for now.")
                log-p)
       (setq cmd (concat cmd " --color")))
 
-    ;; ensure output is appeneded to the end of the buffer. by default it inserts at
-    ;; point!
-    (with-current-buffer buff
-      (goto-char (point-max)))
-    ;; append text to buffer, not overwrite. no effect if new buffer.
-    (let ((shell-command-dont-erase-buffer t))
-      ;; run command
-      (shell-command cmd buff))
+    ;; run command
+    (shell-command cmd buff)
     ;; show output
     (display-buffer buff)
     ;; (switch-to-buffer-other-window buff)
 
     (with-current-buffer buff
-      (progn ; inject a newline at the end to separate cmd outputs
-        (goto-char (point-max)) ; should already be at end, but make sure
-        (insert "\n"))
       ;; TURN on a specialized mode for specific output types
       (cond (log-p
              (xterm-color-colorize-buffer)

@@ -123,6 +123,11 @@ Flawed implementation:
   (fugitive-shell-command "{ git branch -vv | grep -v origin & git branch -vv | grep \": gone]\"; }"
                           (get-buffer-create fugitive-buff-name)))
 
+(defun fugitive-log-graph ()
+  "Prepare the git command with common options for graph view."
+  (interactive)
+  (fugitive-shell-command "git log --oneline --graph " nil t))
+
 ;;;###autoload
 (cl-defun fugitive-log-between (&optional rev1 rev2)
   (interactive)

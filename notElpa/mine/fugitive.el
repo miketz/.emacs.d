@@ -157,7 +157,7 @@ Empty string if buffer does not visit a file."
 (defun fugitive-log-graph ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --oneline --graph -n 2000" nil t))
+  (fugitive-shell-command "git log --oneline --graph -n 2000 " nil t))
 
 ;;;###autoload
 (cl-defun fugitive-log-between (&optional rev1 rev2)

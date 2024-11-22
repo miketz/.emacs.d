@@ -147,8 +147,7 @@ Empty string if buffer does not visit a file."
   ;; git blame --color-lines --color-by-age -- init.el
   (let ((cmd (concat
               "git blame --color-lines --color-by-age -- "
-              (fugitive-curr-filename)
-              " ")))
+              (fugitive-curr-filename))))
     (fugitive-shell-command cmd nil t)))
 
 ;;;###autoload

@@ -10,7 +10,6 @@
 ;;; Installation:
 
 ;;; Code:
-(require 'vc)
 (require 'cl-lib)
 (require 'xterm-color)
 

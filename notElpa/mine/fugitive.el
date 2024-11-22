@@ -92,6 +92,7 @@ edit/supply it, even if cmd has a value."
 
     ;; run command
     (shell-command cmd buff)
+    (message cmd) ; echo final cmd actually run. may have --color injected.
     ;; show output
     (display-buffer buff)
     ;; (switch-to-buffer-other-window buff)

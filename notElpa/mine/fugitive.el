@@ -47,11 +47,24 @@ Just logs for now.")
 
 
 ;;;###autoload
-(defun fugitive-shell-command (&optional cmd buff)
+(defun fugitive-shell-command (&optional cmd buff force-read-p)
+  "Run a git command.
+Display output in an Emacs buffer.
+Attempt to detect output type: log, diff, etc.
+Possibly turn on a mode or colorize buffer depending on output type.
+
+CMD is the command. Intended to be a git command but it doesn't have to be.
+If nil, the user will be prompted for a command.
+
+BUFF is the buffer to dispaly output in. A new buffer is automatcially created
+if nil.
+
+FORCE-READ-P will delay execution of the git command and allow the user to
+edit/supply it, even if cmd has a value."
   (interactive)
-  (when (null cmd)
+  (when (or (null cmd) force-read-p)
     ;; read-shell-command supports command line completion
-    (setq cmd (read-shell-command "cmd: " "git "))
+    (setq cmd (read-shell-command "cmd: " (or cmd "git ")))
     ;; (setq cmd (read-string "cmd: " "git "))
     )
 

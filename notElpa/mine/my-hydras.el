@@ -318,7 +318,7 @@ _l_: log graph
 _;_: log between revs
 _b_: blame
 _d_: diff between revs
-_e_: local branches, no remote
+_e_: find local-only branches you may want to delete
 _c_: delete fugitive buffers
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)

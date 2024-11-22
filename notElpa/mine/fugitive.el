@@ -14,9 +14,6 @@
 (require 'cl-lib)
 (require 'xterm-color)
 
-(defcustom fugitive-new-buffer-per-cmd-p t
-  "If t, spawn a new output buffer for each command.
-Otherwise dump output into the same *fugitive* buffer.")
 
 (defcustom fugitive-auto-inject-color-flag t
   "If t, inject --color flag to some git commands.
@@ -61,12 +58,7 @@ Just logs for now.")
 
 
   (let* ((buff (or buff ; buff passed in
-                   (if fugitive-new-buffer-per-cmd-p
-                       (fugitive-new-output-buffer) ; new buff
-                     (get-buffer-create fugitive-buff-name) ; shared buff
-                     )))
-         (new-buff-p (and (= 0 (buffer-size buff))
-                          (not (string-equal fugitive-buff-name (buffer-name buff)))))
+                   (fugitive-new-output-buffer)))
          ;; shadow var to prevent mini buffer display
          (max-mini-window-height 0)
          (log-p (fugitive-str-starts-with-p cmd "git log"))
@@ -92,20 +84,17 @@ Just logs for now.")
     (display-buffer buff)
     ;; (switch-to-buffer-other-window buff)
 
-    ;; turn on a specialized mode for the output type
     (with-current-buffer buff
       (progn ; inject a newline at the end to separate cmd outputs
         (goto-char (point-max)) ; should already be at end, but make sure
         (insert "\n"))
       ;; TURN on a specialized mode for specific output types
-      ;; but only if it a new buffer. doesn't work for mixed output buffer
-      (when new-buff-p
-        (cond (log-p
-               (xterm-color-colorize-buffer)
-               ;; (log-view-mode) ; TODO: fix. doesn't work right.
-               ;; (vc-git-log-view-mode)
-               )
-              (diff-p (diff-mode)))))
+      (cond (log-p
+             (xterm-color-colorize-buffer)
+             ;; (log-view-mode) ; TODO: fix. doesn't work right.
+             ;; (vc-git-log-view-mode)
+             )
+            (diff-p (diff-mode))))
 
     buff ; return output buffer
     ))

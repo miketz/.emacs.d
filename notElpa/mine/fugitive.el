@@ -13,6 +13,11 @@
 (require 'vc)
 (require 'cl-lib)
 
+(defcustom fugitive-new-buffer-per-cmd-p t
+  "If t, spawn a new output buffer for each command.
+Otherwise dump output into the same *fugitive* buffer.")
+
+
 (defvar fugitive-buff-name "*fugitive*")
 
 (defun fugitive-str-starts-with-p (string prefix)
@@ -49,7 +54,13 @@
     ;; (setq cmd (read-string "cmd: " "git "))
     )
 
-  (let* ((buff (or buff (fugitive-new-output-buffer)))
+  (let* ((buff (or buff ; buff passed in
+                   (if fugitive-new-buffer-per-cmd-p
+                       (fugitive-new-output-buffer) ; new buff
+                     (get-buffer-create fugitive-buff-name) ; shared buff
+                     )))
+         (new-buff-p (and (= 0 (buffer-size buff))
+                          (not (string-equal fugitive-buff-name (buffer-name buff)))))
          ;; shadow var to prevent mini buffer display
          (max-mini-window-height 0)
          (log-p (fugitive-str-starts-with-p cmd "git log"))
@@ -57,18 +68,33 @@
                       (or (fugitive-str-starts-with-p cmd "git diff")
                           (fugitive-str-starts-with-p cmd "git show")))))
 
-    ;; run command
-    (shell-command cmd buff)
+
+    ;; ensure output is appeneded to the end of the buffer. by default it inserts at
+    ;; point!
+    (with-current-buffer buff
+      (goto-char (point-max)))
+    ;; append text to buffer, not overwrite. no effect if new buffer.
+    (let ((shell-command-dont-erase-buffer t))
+      ;; run command
+      (shell-command cmd buff))
     ;; show output
-    (switch-to-buffer-other-window buff)
+    (display-buffer buff)
+    ;; (switch-to-buffer-other-window buff)
 
     ;; turn on a specialized mode for the output type
     (with-current-buffer buff
-      (cond (log-p
-             ;; (log-view-mode) ; TODO: fix. doesn't work right.
-             ;; (vc-git-log-view-mode)
-                   )
-            (diff-p (diff-mode))))
+      (progn ; inject a newline at the end to separate cmd outputs
+        (goto-char (point-max)) ; should already be at end, but make sure
+        (insert "\n"))
+      (message "new-buff-p %s" new-buff-p)
+      ;; TURN on a specialized mode for specific output types
+      ;; but only if it a new buffer. doesn't work for mixed otuput buffer
+      (when new-buff-p
+        (cond (log-p
+               ;; (log-view-mode) ; TODO: fix. doesn't work right.
+               ;; (vc-git-log-view-mode)
+               )
+              (diff-p (diff-mode)))))
 
     buff ; return output buffer
     ))

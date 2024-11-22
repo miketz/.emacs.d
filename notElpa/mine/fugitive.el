@@ -56,7 +56,7 @@ Possibly turn on a mode or colorize buffer depending on output type.
 CMD is the command. Intended to be a git command but it doesn't have to be.
 If nil, the user will be prompted for a command.
 
-BUFF is the buffer to dispaly output in. A new buffer is automatcially created
+BUFF is the buffer to display output in. A new buffer is automatcially created
 if nil.
 
 FORCE-READ-P will delay execution of the git command and allow the user to

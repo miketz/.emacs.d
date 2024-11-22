@@ -68,7 +68,6 @@ edit/supply it, even if cmd has a value."
     ;; (setq cmd (read-string "cmd: " "git "))
     )
 
-
   (let* ((buff (or buff ; buff passed in
                    (fugitive-new-output-buffer)))
          ;; shadow var to prevent mini buffer display
@@ -77,8 +76,6 @@ edit/supply it, even if cmd has a value."
          (diff-p (and (not log-p)
                       (or (fugitive-str-starts-with-p cmd "git diff")
                           (fugitive-str-starts-with-p cmd "git show")))))
-
-
     ;; force colors for logs. For diffs, the emacs diff-mode does a good job with colors
     (when (and fugitive-auto-inject-color-flag
                log-p)

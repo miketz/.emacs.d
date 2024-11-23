@@ -10069,7 +10069,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'my-fugitive-hydra/body "my-hydras" nil t)
 
 (when my-use-evil-p
-  (evil-leader/set-key "f" #'my-fugitive-hydra/body))
+  (evil-leader/set-key "f" #'fugitive-shell-command)
+  (evil-leader/set-key "l" #'my-fugitive-hydra/body))
 
 
 

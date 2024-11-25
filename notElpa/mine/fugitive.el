@@ -275,14 +275,20 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
                                 action parents string pred))))
          ;; (par (completing-read "parent: " parents nil t))
          (par (completing-read "parent: " completion-table nil t))
-         ;; some log outputs only show 9 chars of the hash. which would mess up
+         ;; some log outputs only show 8 chars of the hash. which would mess up
          ;; searching on the complete hash.
-         (par-short (substring-no-properties par 0 9)))
-    (re-search-forward par-short
-                       nil ; no bounds on search
-                       t ; do not trigger an error if no search match
-                       )
-    (backward-word)))
+         ;; TODO: hash display length appears to be dynamic. someitmes 8 or 9. will break
+         ;;       if 7. handle this.
+         (par-short (substring-no-properties par 0 8))
+         (found-p (re-search-forward par-short
+                                     nil ; no bounds on search
+                                     t ; do not trigger an error if no search match
+                                     )))
+    (if found-p
+        ;; go to start of hash
+        (backward-word)
+      ;; else, failure message
+      (message "failed to find hash %s" par-short))))
 
 ;; (length "f2db9fa3f") 9
 

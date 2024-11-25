@@ -234,7 +234,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
   (interactive)
   (let* ((commit (or commit
                      (read-string "commit: " (thing-at-point 'symbol 'no-properties))))
-         (cmd (format "git rev-parse %s^@" commit) ))
+         (cmd (read-shell-command "cmd: " (format "git rev-parse %s^@" commit)) ))
     (fugitive-shell-command cmd)))
 ;; first parent: git rev-parse commit^
 ;; nth parent: git rev-parse commit^1

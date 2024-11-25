@@ -10065,6 +10065,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-log-graph "fugitive" nil t)
 (autoload #'fugitive-log-between "fugitive" nil t)
 (autoload #'fugitive-diff-between "fugitive" nil t)
+(autoload #'fugitive-parent-commits "fugitive" nil t)
 ;; hydra
 (autoload #'my-fugitive-hydra/body "my-hydras" nil t)
 

@@ -12,7 +12,7 @@
 ;;; Code:
 (require 'cl-lib)
 (require 'xterm-color)
-
+(require 'thingatpt)
 
 (defcustom fugitive-auto-inject-color-flag t
   "If t, inject --color flag to some git commands.
@@ -226,6 +226,19 @@ Convert the string-list to an elisp list."
   "Return a list of tags."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/tags/"))
 
+
+;;;###autoload
+(defun fugitive-parent-commits (&optional commit)
+  "Get the parent commit(s) of the specified commit.
+You may want to call this fn while in a log buffer, with point on a commit hash."
+  (interactive)
+  (let* ((commit (or commit
+                     (read-string "commit: " (thing-at-point 'symbol 'no-properties))))
+         (cmd (format "git rev-parse %s^@" commit) ))
+    (fugitive-shell-command cmd)))
+;; first parent: git rev-parse commit^
+;; nth parent: git rev-parse commit^1
+;; all parents: git rev-parse commit^@
 
 
 ;; ;; test

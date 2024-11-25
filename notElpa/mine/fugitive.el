@@ -250,6 +250,42 @@ Convert the string-list to an elisp list."
   "Return a list of tags."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/tags/"))
 
+(defun fugitive-get-parent-commits-list (commit)
+  "Return a list of parent commit hashes for COMMIT."
+  (interactive)
+  (fugitive-cmd-to-list (format "git rev-parse %s^@" commit)))
+
+
+
+;;;###autoload
+(defun fugitive-parent-commits-jump-to (&optional commit)
+  "Get the parent commit(s) of the specified COMMIT.
+You may want to call this fn while in a log buffer, with point on a commit hash."
+  (interactive)
+  (let* ((commit (or commit
+                     (thing-at-point 'symbol 'no-properties)))
+         (parents (fugitive-get-parent-commits-list commit))
+         ;; stop completing-read from sorting hashes.
+         ;; from stack overflow post: https://emacs.stackexchange.com/questions/41801/how-to-stop-completing-read-ivy-completing-read-from-sorting
+         (completion-table (lambda (string pred action)
+                             (if (eq action 'metadata)
+                                 '(metadata (display-sort-function . identity)
+                                            (cycle-sort-function . identity))
+                               (complete-with-action
+                                action parents string pred))))
+         ;; (par (completing-read "parent: " parents nil t))
+         (par (completing-read "parent: " completion-table nil t))
+         ;; some log outputs only show 9 chars of the hash. which would mess up
+         ;; searching on the complete hash.
+         (par-short (substring-no-properties par 0 9)))
+    (re-search-forward par-short
+                       nil ; no bounds on search
+                       t ; do not trigger an error if no search match
+                       )
+    (backward-word)))
+
+;; (length "f2db9fa3f") 9
+
 
 ;;;###autoload
 (defun fugitive-parent-commits (&optional commit)

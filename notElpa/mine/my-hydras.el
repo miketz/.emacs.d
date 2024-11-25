@@ -320,7 +320,7 @@ _b_: blame
 _d_: diff between revs
 _e_: find local-only branches you may want to delete
 _s_: show commit at point
-_p_: list parent commits
+_p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
@@ -330,7 +330,7 @@ _q_, _C-g_: quit"
   ("d" fugitive-diff-between)
   ("e" fugitive-find-local-only-branches-ediff)
   ("s" fugitive-show)
-  ("p" fugitive-parent-commits)
+  ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)

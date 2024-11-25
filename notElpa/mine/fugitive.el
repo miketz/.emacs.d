@@ -233,8 +233,10 @@ Convert the string-list to an elisp list."
 You may want to call this fn while in a log buffer, with point on a commit hash."
   (interactive)
   (let* ((commit (or commit
-                     (read-string "commit: " (thing-at-point 'symbol 'no-properties))))
-         (cmd (read-shell-command "cmd: " (format "git rev-parse %s^@" commit)) ))
+                     (thing-at-point 'symbol 'no-properties)))
+         (cmd (read-shell-command "cmd: " (format "git rev-parse %s^@" commit))))
+    ;; TODO: doesn't work on windows. fix.
+    ;; maybe issue with shell-command itself as the same cmd from git bash works
     (fugitive-shell-command cmd)))
 ;; first parent: git rev-parse commit^
 ;; nth parent: git rev-parse commit^1

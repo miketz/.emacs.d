@@ -18,6 +18,15 @@
   "If t, inject --color flag to some git commands.
 Just logs for now.")
 
+;; making this limit quite large by default. Should feel like there is no limit
+;; for typical use, but small enough to prevent Emacs from crashing.
+(defcustom fugitive-auto-inject-n-log-limit 8000
+  "Integer for auto inection of -n NUM to git log commands.
+Nil for no injection.
+
+Needed because paging is not used with `shell-commmand'.
+KLarge --graph logs can crash Emacs.")
+
 
 (defvar fugitive-buff-name "*fugitive*")
 
@@ -89,6 +98,21 @@ edit/supply it, even if cmd has a value."
         (setq cmd str))
       ;; (setq cmd (concat cmd " --color"))
       )
+
+    (when (and log-p
+               fugitive-auto-inject-n-log-limit
+               ;; only inject if -n filter was not already supplied
+               (null (string-search "-n" cmd)))
+      ;; inject -n 4000 immediately after "git log"
+      (let* ((i (length "git log")))
+        (setq str (concat (substring-no-properties cmd 0 i)
+                          " -n "
+                          (int-to-string fugitive-auto-inject-n-log-limit)
+                          " "
+                          (substring-no-properties cmd i nil)))
+        (setq cmd str)))
+
+
 
     ;; run command
     (shell-command cmd buff)

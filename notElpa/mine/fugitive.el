@@ -229,7 +229,7 @@ Convert the string-list to an elisp list."
 
 ;;;###autoload
 (defun fugitive-parent-commits (&optional commit)
-  "Get the parent commit(s) of the specified commit.
+  "Get the parent commit(s) of the specified COMMIT.
 You may want to call this fn while in a log buffer, with point on a commit hash."
   (interactive)
   (let* ((commit (or commit

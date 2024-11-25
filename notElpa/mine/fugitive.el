@@ -25,7 +25,7 @@ Just logs for now.")
 Nil for no injection.
 
 Needed because paging is not used with `shell-commmand'.
-KLarge --graph logs can crash Emacs.")
+Large --graph logs can crash Emacs.")
 
 
 (defvar fugitive-buff-name "*fugitive*")

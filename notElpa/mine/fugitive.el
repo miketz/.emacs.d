@@ -243,6 +243,20 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 ;; all parents: git rev-parse commit^@
 
 
+;;;###autoload
+(defun fugitive-show (&optional commit)
+  "Show the specified COMMIT.
+You may want to call this fn while in a log buffer, with point on a commit hash."
+  (interactive)
+  (let* ((commit (or commit
+                     (thing-at-point 'symbol 'no-properties)))
+         ;; (cmd (read-shell-command "cmd: " (format "git show %s" commit)))
+         (cmd (format "git show %s" commit)))
+    ;; TODO: doesn't work on windows. fix.
+    ;; maybe issue with shell-command itself as the same cmd from git bash works
+    (fugitive-shell-command cmd)))
+
+
 ;; ;; test
 ;; (let* ((default-directory "~/.emacs.d/notElpaYolo/magit"))
 ;;   (fugitive-get-branches))

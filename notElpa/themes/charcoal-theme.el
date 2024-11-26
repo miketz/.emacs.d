@@ -461,6 +461,8 @@ Example:
    ;; magit
    `(magit-reflog-checkout ((,class (:foreground "orangered"))))
    `(magit-section-highlight ((,class (:background ,faint))))
+   `(magit-hash ((,class :foreground "orange")))
+   `(magit-dimmed ((,class :foreground ,faint)))
 
    ;; tooltip
    `(tooltip ((,class (:background ,popup-bg :foreground ,fg))))

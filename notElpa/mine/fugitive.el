@@ -27,6 +27,10 @@ Nil for no injection.
 Needed because paging is not used with `shell-commmand'.
 Large --graph logs can crash Emacs.")
 
+(defcustom fugitive-auto-jump-to-first-parent t
+  "When t auto jump the the first parent.
+When nil allow the user to select a parent via `completing-read'.")
+
 
 (defvar fugitive-buff-name "*fugitive*")
 
@@ -276,8 +280,9 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
                                (complete-with-action
                                 action parents string pred))))
          ;; (par (completing-read "parent: " parents nil t))
-         (par (if (= 1 (length parents))
-                  (car parents) ; skip completion if only 1 parent
+         (par (if (or fugitive-auto-jump-to-first-parent
+                      (= 1 (length parents)))
+                  (car parents) ; skip completion
                 (completing-read "parent: " completion-table nil t)))
          ;; some log outputs only show 7 chars of the hash. which would mess up
          ;; searching on the complete hash.

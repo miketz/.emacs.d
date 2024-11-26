@@ -13,6 +13,7 @@
 (require 'cl-lib)
 (require 'xterm-color)
 (require 'thingatpt)
+(require 'xref) ; for `xref-pulse-momentarily'
 
 (defcustom fugitive-auto-inject-color-flag t
   "If t, inject --color flag to some git commands.
@@ -294,8 +295,9 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
                                      t ; do not trigger an error if no search match
                                      )))
     (if found-p
-        ;; go to start of hash
-        (backward-word)
+        (progn
+          (backward-word) ; go to start of hash
+          (xref-pulse-momentarily))
       ;; else, failure message
       (message "failed to find hash %s" par-short))))
 

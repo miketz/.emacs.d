@@ -276,7 +276,9 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
                                (complete-with-action
                                 action parents string pred))))
          ;; (par (completing-read "parent: " parents nil t))
-         (par (completing-read "parent: " completion-table nil t))
+         (par (if (= 1 (length parents))
+                  (car parents) ; skip completion if only 1 parent
+                (completing-read "parent: " completion-table nil t)))
          ;; some log outputs only show 7 chars of the hash. which would mess up
          ;; searching on the complete hash.
          ;; TODO: hash display length appears to be dynamic. someitmes 8 or 9. will break

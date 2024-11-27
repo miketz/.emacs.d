@@ -10066,6 +10066,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-log-between "fugitive" nil t)
 (autoload #'fugitive-diff-between "fugitive" nil t)
 (autoload #'fugitive-parent-commits-jump-to "fugitive" nil t)
+(autoload #'fugitive-parent-commits-jump-to-first "fugitive" nil t)
 (autoload #'fugitive-parent-commits "fugitive" nil t)
 (autoload #'fugitive-show "fugitive" nil t)
 ;; hydra
@@ -10079,7 +10080,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
   ;; config vars
   (setq fugitive-auto-jump-to-first-parent nil)
   ;; keybinds
-  (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to))
+  (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to-first))
 
 
 

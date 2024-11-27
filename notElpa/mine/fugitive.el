@@ -54,10 +54,18 @@ When nil allow the user to select a parent via `completing-read'.")
 (defun fugitive-delete-buffers ()
   "Delete fugitive related buffers."
   (interactive)
-  (cl-loop for b in (buffer-list)
-           do
-           (when (fugitive-str-starts-with-p (buffer-name b) "*fugitive-")
-             (kill-buffer b))))
+  (let ((del-cnt 0))
+    (cl-loop for b in (buffer-list)
+             do
+             (when (fugitive-str-starts-with-p (buffer-name b) "*fugitive-")
+               (kill-buffer b)
+               (cl-incf del-cnt))
+             finally
+             (message "%d fugitive buffer%s deleted."
+                      del-cnt
+                      (if (or (>= del-cnt 2)
+                              (= del-cnt 0))
+                          "s" "")))))
 
 
 ;;;###autoload

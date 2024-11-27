@@ -2513,7 +2513,7 @@ with duplicate bundled libs in Sly and SLIME.")
         (concat "file://"
                 (if (eq system-type 'windows-nt) "/" "") ; extra / on windows.
                 (expand-file-name "~/")
-                ".emacs.d/notElpa/hyperspec/HyperSpec/")
+                ".emacs.d/notElpaYolo/hyperspec/HyperSpec/")
         ;; (cond
         ;;  ((eq my-curr-computer 'work-laptop)
         ;;   "file:///C:/users/mtz/CommonLispHyperSpec/HyperSpec/")

@@ -10075,7 +10075,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (evil-leader/set-key "f" #'fugitive-shell-command)
   (evil-leader/set-key "l" #'my-fugitive-hydra/body))
 
-(setq fugitive-auto-jump-to-first-parent nil)
+(with-eval-after-load 'fugitive
+  ;; config vars
+  (setq fugitive-auto-jump-to-first-parent nil)
+  ;; keybinds
+  (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to))
 
 
 

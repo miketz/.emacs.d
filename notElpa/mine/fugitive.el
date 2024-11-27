@@ -137,7 +137,9 @@ edit/supply it, even if cmd has a value."
     (with-current-buffer buff
       ;; TURN on a specialized mode for specific output types
       (cond (log-p
+             ;; turn on this first before buffer becomes read-only via fugitive-log-mode
              (xterm-color-colorize-buffer)
+             (fugitive-log-mode) ; mode tailored for logs
              ;; (log-view-mode) ; TODO: fix. doesn't work right.
              ;; (vc-git-log-view-mode)
              )
@@ -342,6 +344,21 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
     ;; TODO: doesn't work on windows. fix.
     ;; maybe issue with shell-command itself as the same cmd from git bash works
     (fugitive-shell-command cmd)))
+
+(defvar fugitive-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to)
+    map))
+
+(define-derived-mode fugitive-log-mode special-mode "fugitive-log"
+  "Mode for the log results buffer.
+Mostly just to support key binds."
+  :lighter " fugi-log"
+  :keymap (let ((map (make-sparse-keymap)))
+            ;; No default bindings for now. User will choose them.
+            map)
+  ;; (read-only-mode 1) ; inherit this from special-mode
+  )
 
 
 ;; ;; test

@@ -313,6 +313,18 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 
 ;; (length "f2db9fa3f") 9
 
+;;;###autoload
+(defun fugitive-parent-commits-jump-to-first (&optional commit)
+  "Jump to the parent commit of the specified COMMIT.
+You may want to call this fn while in a log buffer, with point on a commit hash.
+
+Same as `fugitive-parent-commits-jump-to' but always choose the first parent
+regardless of config var `fugitive-auto-jump-to-first-parent'."
+  (interactive)
+  ;; shadow var to t.
+  (let ((fugitive-auto-jump-to-first-parent t))
+    (fugitive-parent-commits-jump-to commit)))
+
 
 ;;;###autoload
 (defun fugitive-parent-commits (&optional commit)

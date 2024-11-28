@@ -10081,6 +10081,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (setq fugitive-auto-jump-to-first-parent nil)
   ;; keybinds
   (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to-first)
+  (define-key fugitive-log-mode-map (kbd "C-c n") #'fugitive-parent-commits-jump-to-first)
   (define-key fugitive-log-mode-map (kbd "C-c s") #'fugitive-show))
 
 

@@ -219,7 +219,12 @@ Empty string if buffer does not visit a file."
   ;; %ad = author date (format respects --date= option)
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
-  (fugitive-shell-command "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=format:\"%-m-%-d-%Y %I:%M%p\" " nil t))
+  (let* ((date-arg (if (eq system-type 'windows-nt)
+                       "--date=short"
+                     ;; TODO: find a date format that works in windwos
+                     "--date=format:\"%-m-%-d-%Y %I:%M%p\""))
+         (cmd (concat "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" " date-arg " ")))
+    (fugitive-shell-command cmd nil t)))
 
 
 (defvar fugitive-log-graph-fn #'fugitive-log-graph-compact

@@ -219,7 +219,7 @@ Empty string if buffer does not visit a file."
   (fugitive-shell-command "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=format:\"%-m-%-d-%Y %I:%M%p\" " nil t))
 
 
-(defvar fugitive-log-graph-fn #'fugitive-log-graph-long
+(defvar fugitive-log-graph-fn #'fugitive-log-graph-compact
   "Default fn to use for graph in my hydra.")
 
 ;;;###autoload

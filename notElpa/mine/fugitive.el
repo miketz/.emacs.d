@@ -196,6 +196,9 @@ Empty string if buffer does not visit a file."
   (interactive)
   (fugitive-shell-command "git log --oneline --graph -n 2000 " nil t))
 
+
+;; TODO: look into why medium and long graph logs don't colorize the hash.
+
 ;;;###autoload
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."

@@ -129,7 +129,8 @@ edit/supply it, even if cmd has a value."
 
     ;; run command
     (shell-command cmd buff)
-    (message cmd) ; echo final cmd actually run. may have --color injected.
+    ;; escape % characters as `message' thinks they are message params!!!
+    (message (string-replace "%" "%%" cmd)) ; echo final cmd actually run. may have --color injected.
     ;; show output
     (display-buffer buff)
     ;; (switch-to-buffer-other-window buff)
@@ -190,10 +191,45 @@ Empty string if buffer does not visit a file."
     (fugitive-shell-command cmd nil t)))
 
 ;;;###autoload
-(defun fugitive-log-graph ()
+(defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."
   (interactive)
   (fugitive-shell-command "git log --oneline --graph -n 2000 " nil t))
+
+;;;###autoload
+(defun fugitive-log-graph-medium ()
+  "Prepare the git command with common options for graph view."
+  (interactive)
+  (fugitive-shell-command "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%s\" " nil t))
+
+;;;###autoload
+(defun fugitive-log-graph-long ()
+  "Prepare the git command with common options for graph view."
+  (interactive)
+  ;; (fugitive-shell-command "git log --oneline --graph -n 2000 " nil t)
+
+  ;; format output to include author, date/time.
+  ;; git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --graph --date=format:"%-m-%-d-%Y %-I:%M%p"
+  ;; %h = abbreviated commit hash
+  ;; %x09 = tab (character for code 9)
+  ;; %an = author name
+  ;; %ad = author date (format respects --date= option)
+  ;; %s = subject
+  ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
+  (fugitive-shell-command "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=format:\"%-m-%-d-%Y %I:%M%p\" " nil t))
+
+
+(defvar fugitive-log-graph-fn #'fugitive-log-graph-long
+  "Default fn to use for graph in my hydra.")
+
+;;;###autoload
+(defun fugitive-log-graph ()
+  "Prepare the git command with common options for graph view.
+Use the default fn configured in `fugitive-log-graph-fn'."
+  (interactive)
+  (funcall fugitive-log-graph-fn))
+
+
 
 ;;;###autoload
 (cl-defun fugitive-log-between (&optional rev1 rev2)

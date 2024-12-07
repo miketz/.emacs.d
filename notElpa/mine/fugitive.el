@@ -110,6 +110,7 @@ edit/supply it, even if cmd has a value."
                           (substring-no-properties cmd i nil)))
         (setq cmd str)))
 
+    ;; inject limit to # of logs returned. Emacs chokes on massive graph logs.
     (when (and log-p
                fugitive-auto-inject-n-log-limit
                ;; only inject if -n filter was not already supplied

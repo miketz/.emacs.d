@@ -100,7 +100,7 @@ edit/supply it, even if cmd has a value."
                           (fugitive-str-starts-with-p cmd "git show"))))
          (blame-p (and (not diff-p)
                        (fugitive-str-starts-with-p cmd "git blame"))))
-    ;; force colors for logs. For diffs, the emacs diff-mode does a good job with colors
+    ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors
     (when (and fugitive-auto-inject-color-flag
                log-p)
       ;; inject --color immediately after "git log"
@@ -108,9 +108,7 @@ edit/supply it, even if cmd has a value."
         (setq str (concat (substring-no-properties cmd 0 i)
                           " --color "
                           (substring-no-properties cmd i nil)))
-        (setq cmd str))
-      ;; (setq cmd (concat cmd " --color"))
-      )
+        (setq cmd str)))
 
     (when (and log-p
                fugitive-auto-inject-n-log-limit

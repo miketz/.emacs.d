@@ -126,25 +126,66 @@ edit/supply it, even if cmd has a value."
 
 
 
-    ;; run command
-    (shell-command cmd buff)
+    ;; ;; run command
+    ;; (shell-command cmd buff)
+
+    ;; run cmd. use process to avoid freezing emacs.
+    ;; make cmd-complete-fn a closure to capture variables: log-p, diff-p, blame-p
+    (let ((cmd-complete-fn (lambda (p msg)
+                             ;; GUARD
+                             (unless (memq (process-status p) '(exit signal))
+                               (cl-return-from fugitive--cmd-complete))
+
+                             ;;(message (concat (process-name p) " - " msg))
+                             (let ((buff (process-buffer p)))
+                               (with-current-buffer buff
+                                 ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p))
+
+                                 ;; alwyas call (xterm-color-colorize-buffer) now that i'm using the process sentinel more commands
+                                 ;; seem to have speical colors, and diff is using git-delta colors!
+                                 ;; (xterm-color-colorize-buffer)
+                                 ;; TURN on a specialized mode for specific output types
+                                 (cond (log-p
+                                        ;; turn on this first before buffer becomes read-only via fugitive-log-mode
+                                        (xterm-color-colorize-buffer)
+                                        (fugitive-log-mode) ; mode tailored for logs
+                                        ;; (log-view-mode) ; TODO: fix. doesn't work right.
+                                        ;; (vc-git-log-view-mode)
+                                        )
+                                       (diff-p (diff-mode)
+                                               ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
+                                               (xterm-color-colorize-buffer))
+                                       (blame-p (xterm-color-colorize-buffer)
+                                        )))
+
+                               ;; show output
+                               (display-buffer buff)
+
+                               ;; (goto-char (point-max)) ;; end of buffer
+                               ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+                               (message "cmd complete")
+                               ;; return otuput buffer
+                               buff))))
+     (set-process-sentinel (start-process-shell-command "fugitive-proc" buff cmd)
+                           cmd-complete-fn))
+
     ;; escape % characters as `message' thinks they are message params!!!
     (message (string-replace "%" "%%" cmd)) ; echo final cmd actually run. may have --color injected.
     ;; show output
-    (display-buffer buff)
+    ;; (display-buffer buff)
     ;; (switch-to-buffer-other-window buff)
 
-    (with-current-buffer buff
-      ;; TURN on a specialized mode for specific output types
-      (cond (log-p
-             ;; turn on this first before buffer becomes read-only via fugitive-log-mode
-             (xterm-color-colorize-buffer)
-             (fugitive-log-mode) ; mode tailored for logs
-             ;; (log-view-mode) ; TODO: fix. doesn't work right.
-             ;; (vc-git-log-view-mode)
-             )
-            (diff-p (diff-mode))
-            (blame-p (xterm-color-colorize-buffer))))
+    ;; (with-current-buffer buff
+    ;;   ;; TURN on a specialized mode for specific output types
+    ;;   (cond (log-p
+    ;;          ;; turn on this first before buffer becomes read-only via fugitive-log-mode
+    ;;          (xterm-color-colorize-buffer)
+    ;;          (fugitive-log-mode) ; mode tailored for logs
+    ;;          ;; (log-view-mode) ; TODO: fix. doesn't work right.
+    ;;          ;; (vc-git-log-view-mode)
+    ;;          )
+    ;;         (diff-p (diff-mode))
+    ;;         (blame-p (xterm-color-colorize-buffer))))
 
     buff ; return output buffer
     ))
@@ -155,6 +196,10 @@ edit/supply it, even if cmd has a value."
   (interactive)
   (let ((buff-local (fugitive-shell-command "git branch"))
         (buff-remote (fugitive-shell-command "git branch -r")))
+    ;; now that fugitive-shell-command works in an aync way it's returning buff
+    ;; before the cmd is complete! For now just sleep as a ham-fisted way to make
+    ;; it work. Branch commands should complete within a fraction of a second for sure.
+    (sleep-for 0.25)
     (ediff-buffers buff-local buff-remote)))
 
 ;;;###autoload

@@ -199,7 +199,10 @@ edit/supply it, even if cmd has a value."
     ;; now that fugitive-shell-command works in an aync way it's returning buff
     ;; before the cmd is complete! For now just sleep as a ham-fisted way to make
     ;; it work. Branch commands should complete within a fraction of a second for sure.
-    (sleep-for 0.25)
+    (let ((duration (if (eq system-type 'windows-nt)
+                        1.0 ; TODO: test to find out how much time windwos needs.
+                      0.2)))
+      (sleep-for duration))
     (ediff-buffers buff-local buff-remote)))
 
 ;;;###autoload

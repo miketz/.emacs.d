@@ -200,7 +200,7 @@ edit/supply it, even if cmd has a value."
     ;; before the cmd is complete! For now just sleep as a ham-fisted way to make
     ;; it work. Branch commands should complete within a fraction of a second for sure.
     (let ((duration (if (eq system-type 'windows-nt)
-                        1.0 ; TODO: test to find out how much time windwos needs.
+                        1.0 ; TODO: test to find out how much time windows needs.
                       0.2)))
       (sleep-for duration))
     (ediff-buffers buff-local buff-remote)))

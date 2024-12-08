@@ -187,7 +187,10 @@ edit/supply it, even if cmd has a value."
     ;;         (diff-p (diff-mode))
     ;;         (blame-p (xterm-color-colorize-buffer))))
 
-    buff ; return output buffer
+    ;; return output buffer. Likely nil due to the new async stuff. Must sleep if you
+    ;; want to capture this. TODO: look into hwo to wait (ie WaitGroups) in the calling
+    ;; code in elisp.
+    buff
     ))
 
 ;;;###autoload

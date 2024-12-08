@@ -163,7 +163,8 @@ edit/supply it, even if cmd has a value."
 
                                ;; (goto-char (point-max)) ;; end of buffer
                                ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
-                               (message "cmd complete")
+                               ;; don't message complete for now. it wipes out command output
+                               ;; (message "cmd complete")
                                ;; return otuput buffer
                                buff))))
      (set-process-sentinel (start-process-shell-command "fugitive-proc" buff cmd)

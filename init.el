@@ -10081,6 +10081,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 (with-eval-after-load 'fugitive
   ;; config vars
+  (setq fugitive-turn-on-diff-mode-p nil)
   (setq fugitive-auto-jump-to-first-parent nil)
   (setq fugitive-log-graph-fn #'fugitive-log-graph-compact)
   ;; keybinds

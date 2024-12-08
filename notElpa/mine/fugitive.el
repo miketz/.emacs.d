@@ -15,6 +15,11 @@
 (require 'thingatpt)
 (require 'xref) ; for `xref-pulse-momentarily'
 
+(defcustom fugitive-turn-on-diff-mode-p t
+  "When t, turn on `diff-mode' for git diff/show commands.
+You may want to configure this to nil if you already have diff coloring from
+git-delta or other git output modifiers.")
+
 (defcustom fugitive-auto-inject-color-flag t
   "If t, inject --color flag to some git commands.
 Just logs for now.")
@@ -152,7 +157,8 @@ edit/supply it, even if cmd has a value."
                                         ;; (log-view-mode) ; TODO: fix. doesn't work right.
                                         ;; (vc-git-log-view-mode)
                                         )
-                                       (diff-p (diff-mode)
+                                       (diff-p (when fugitive-turn-on-diff-mode-p
+                                                 (diff-mode))
                                                ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
                                                (xterm-color-colorize-buffer))
                                        (blame-p (xterm-color-colorize-buffer)

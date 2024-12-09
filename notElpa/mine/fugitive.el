@@ -9,6 +9,11 @@
 
 ;;; Installation:
 
+
+;;; TODO:
+;;; -- log performance seems worse since moving to async style code. look into
+;;; it.
+
 ;;; Code:
 (require 'cl-lib)
 (require 'xterm-color)

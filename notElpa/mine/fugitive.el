@@ -24,14 +24,13 @@ git-delta or other git output modifiers.")
   "If t, inject --color flag to some git commands.
 Just logs for now.")
 
-;; making this limit quite large by default. Should feel like there is no limit
-;; for typical use, but small enough to prevent Emacs from crashing.
-(defcustom fugitive-auto-inject-n-log-limit 8000
+(defcustom fugitive-auto-inject-n-log-limit 1000
   "Integer for auto inection of -n NUM to git log commands.
 Nil for no injection.
 
 Needed because paging is not used with `shell-commmand'.
-Large --graph logs can crash Emacs.")
+Large --graph logs can crash Emacs.
+Or large logs can just be slow and you typically only need recent logs.")
 
 (defcustom fugitive-auto-jump-to-first-parent t
   "When t auto jump the the first parent.
@@ -251,7 +250,7 @@ Empty string if buffer does not visit a file."
 (defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --oneline --graph -n 2000 " nil t))
+  (fugitive-shell-command "git log --oneline --graph -n 1000 " nil t))
 
 
 ;; TODO: look into why medium and long graph logs don't colorize the hash.
@@ -260,13 +259,13 @@ Empty string if buffer does not visit a file."
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%s\" " nil t))
+  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%s\" " nil t))
 
 ;;;###autoload
 (defun fugitive-log-graph-long ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  ;; (fugitive-shell-command "git log --oneline --graph -n 2000 " nil t)
+  ;; (fugitive-shell-command "git log --oneline --graph -n 1000 " nil t)
 
   ;; format output to include author, date/time.
   ;; git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --graph --date=format:"%-m-%-d-%Y %-I:%M%p"
@@ -280,7 +279,7 @@ Empty string if buffer does not visit a file."
                        "--date=short"
                      ;; TODO: find a date format that works in windwos
                      "--date=format:\"%-m-%-d-%Y %I:%M%p\""))
-         (cmd (concat "git log --graph -n 2000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" " date-arg " ")))
+         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
 

@@ -10081,7 +10081,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 (with-eval-after-load 'fugitive
   ;; config vars
-  (setq fugitive-turn-on-diff-mode-p nil)
+  ;; git delta output not captured on windows, so turn on diff-mode
+  (setq fugitive-turn-on-diff-mode-p (eq system-type 'windows-nt))
   (setq fugitive-auto-jump-to-first-parent nil)
   (setq fugitive-log-graph-fn #'fugitive-log-graph-compact)
   ;; keybinds

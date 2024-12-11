@@ -1444,6 +1444,9 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;
 ;; 4. observe failure output. look for any conflicts, manually resolve or rollback.
 ;;   byte compile if fixed: (my-byte-compile-dir)
+;;   NOTE: file name restirctions on windwos can be bypassed via:
+;;             git config core.protectNTFS false
+;;         in the yolo repo.
 ;;
 ;; 5. observe repos that still need latest merged in. when I use the upstream
 ;; remote direclty (no fork) it's not safe to auto-merge code in step 3.

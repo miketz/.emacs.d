@@ -1386,6 +1386,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 (autoload #'my-checkout-branches-golang "my-modules" nil t)
 (autoload #'my-clone-git-yolo-repos-golang "my-modules" nil t)
+(autoload #'my-clone-shallow-git-yolo-repos-golang "my-modules" nil t)
 (autoload #'my-create-local-branches-golang "my-modules" nil t)
 
 

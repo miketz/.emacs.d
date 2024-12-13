@@ -2865,6 +2865,28 @@ Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
                           #'my--clone-complete)))
 
 
+(defun my-clone-shallow-git-yolo-repos-golang ()
+  "Call an external Go program to clone my YOLO (ie not git submodules) repos.
+Concurrently clones the YOLO repos at once for increased speed.
+
+Uses shallow clone. Not reccomended for normal Emacs on local machine as the
+shallow clone can have issues with future package updates. But on a remote
+machine it may be desired as you just want to get things set up quickly and don't
+care as much about updates.
+
+Assumes go build has been run on ~/.emacs.d/notElpaYolo/gitFetchHelper."
+  (interactive)
+  (let* ((cmd (concat (expand-file-name "~/.emacs.d/notElpaYolo/gitFetchHelper/gitFetchHelper")
+                      " init3Shallow"))
+         (buff (my--create-buff-gitFetchHelper))
+         ;; shadow so repos.json can be found
+         (default-directory "~/.emacs.d/notElpaYolo/gitFetchHelper"))
+    (message "shallow cloning git YOLO repos...")
+    ;; use process to avoid freezing emacs.
+    (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
+                          #'my--clone-complete)))
+
+
 (defun my--merge-complete (p msg)
   (when (memq (process-status p) '(exit signal))
     ;;(message (concat (process-name p) " - " msg))

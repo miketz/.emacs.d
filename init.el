@@ -1404,6 +1404,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;     cd ~/.emacs.d/notElpaYolo/gitFetchHelper
 ;;     go build
 ;; (my-clone-git-yolo-repos-golang)
+;; OR (my-clone-shallow-git-yolo-repos-golang) ; if on a remote machine where i want to set up fast at the cost of future update issues
 ;;     for repos where I care about history:
 ;;     # NOTE: i'm not using shallow clone anymore but keep this info just in case.
 ;;     # get history
@@ -1429,6 +1430,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; longer includes the latest package versions. need some extra steps.
 
 ;; 1. (my-clone-git-yolo-repos-golang)
+;;    OR (my-clone-shallow-git-yolo-repos-golang) ; if on a remote machine where i want to set up fast at the cost of future update issues
 ;;    (my-fetch-all-default-remotes-golang)
 ;;
 ;; 2. for merges/rebases to work properly, may need to manually unshallow each repo

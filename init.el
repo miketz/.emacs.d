@@ -9727,6 +9727,7 @@ Values: lsp, citre, nil")
 ;; emacs-gc-stats
 ;; https://github.com/8dcc/plumber.el
 ;; binky
+;; hl-printf. highlight format specifiers (ie %d) like vim does
 
 
 ;;;----------------------------------------------------------------------------

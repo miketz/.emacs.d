@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: testt
+# key: testt
+# --
+if got, want := ${1:theGot}, ${2:theWant}; got != want {
+	t.Fatalf("got=%v, want=%v", got, want)
+}

@@ -9980,6 +9980,12 @@ Also one of the vars is not a proper plist, only the tail cdr is."
     (indent-bars-reset)))
 
 ;;;----------------------------------------------------------------------------
+;;; mathjax. library for devdocs.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/mathjax.el" load-path)
+(autoload #'mathjax-shr-setup "mathjax" nil nil)
+
+;;;----------------------------------------------------------------------------
 ;;; devdocs
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/devdocs.el" load-path)

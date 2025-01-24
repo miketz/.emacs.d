@@ -9910,7 +9910,7 @@ Values: lsp, citre, nil")
   ;; for now just always use a pipe char as stipples are not supported in most
   ;; emacs versions i use at the moment. I will do the reverse and add checks
   ;; for when i *can* use stipples instead of checking for when I can't.
-  (setq indent-bars-prefer-character "|")
+  (setq indent-bars-prefer-character ?|)
 
   ;; don't highlight current depth
   (setq indent-bars-highlight-current-depth nil)

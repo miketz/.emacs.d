@@ -8105,7 +8105,7 @@ vanilla javascript buffers."
     ;; obsolete but set anyway
     (setq eglot-events-buffer-size 0))
 
-  (setq eglot-autoshutdown nil) ; kill eglot if all managed buffers are closed
+  (setq eglot-autoshutdown t) ; kill eglot if all managed buffers are closed
   (setq eglot-ignored-server-capabilities
         '(
           ;; Instead I will access docs on demand via <C-h .> or <C-c C-d d>

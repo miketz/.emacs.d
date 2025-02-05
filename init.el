@@ -1956,6 +1956,7 @@ This prevents overlapping themes; something I would rarely want."
 
 ;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
 ;;   "Themes I created.")
+;; TODO: make green/yellow, not the yellow/orange color theme
 
 ;; (defvar my-themes-shortlist
 ;;   '(kosmos wildcharm base16-decaf miasma)

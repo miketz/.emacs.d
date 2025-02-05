@@ -51,7 +51,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; rainbow-delimiters
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/rainbow-delimiters" load-path)
+(push "~/.emacs.d/notElpaYolo/rainbow-delimiters" load-path)
 (autoload #'rainbow-delimiters-mode "rainbow-delimiters" nil t)
 (autoload #'rainbow-delimiters-mode-enable "rainbow-delimiters" nil t)
 (autoload #'rainbow-delimiters-mode-disable "rainbow-delimiters" nil t)
@@ -95,7 +95,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; Paredit
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/paredit" load-path)
+(push "~/.emacs.d/notElpaYolo/paredit" load-path)
 (autoload 'enable-paredit-mode "paredit"
   "Turn on pseudo-structural editing of Lisp code." t)
 (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
@@ -147,7 +147,7 @@ This prevents overlapping themes; something I would rarely want."
 ;;;----------------------------------------------------------------------------
 ;;; Avy
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpa/avy" load-path)
+(push "~/.emacs.d/notElpaYolo/avy" load-path)
 (autoload #'avy-goto-line "avy" nil t)
 (autoload #'avy-isearch "avy" nil t)
 (autoload #'avy-goto-word-1 "avy" nil t)

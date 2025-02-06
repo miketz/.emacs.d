@@ -41,6 +41,10 @@ Or large logs can just be slow and you typically only need recent logs.")
   "When t auto jump the the first parent.
 When nil allow the user to select a parent via `completing-read'.")
 
+(defcustom fugitive-warn-quick-commit-p t
+  "When t warn about the dangers of `fugitive-quick-commit'.
+Prompt user before proceeding.")
+
 
 (defvar fugitive-buff-name "*fugitive*")
 
@@ -246,7 +250,7 @@ Empty string if buffer does not visit a file."
       (file-name-nondirectory filename))))
 
 ;;;###autoload
-(defun fugitive-quick-commit ()
+(cl-defun fugitive-quick-commit ()
   "Save, stage, and commit the current buffer/file.
 
 This is similar in spirit to `vc-next-action' in that it is focused on the current file.
@@ -261,6 +265,22 @@ It is reccomended to only call this fn while working in a feature branch where y
 will squash away all the junk commits later. Or in your personal files where you
 don't care about a narrative history and just want to make roll back points."
   (interactive)
+
+  ;; GUARD: warn user of potential issues of rapid fire quick commits
+  (when fugitive-warn-quick-commit-p
+    (if (yes-or-no-p "WARNING: Ensure your staging area is empty as this command will commit
+all staged changes.
+
+It is reccomended to only run this command in feature branches where you plan to squash junk
+commits later. Or in your personal files where you don't care about a narrative history and
+just want to generate save points.
+
+Proceed?")
+        ;; avoid subsequent warning prompts after user confirms.
+        (setq fugitive-warn-quick-commit-p nil)
+      ;; else abort
+      (cl-return-from fugitive-quick-commit)))
+
   ;; save the current buffer
   (basic-save-buffer)
   (let ((buff (fugitive-new-output-buffer))

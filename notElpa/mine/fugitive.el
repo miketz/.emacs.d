@@ -242,7 +242,7 @@ Empty string if buffer does not visit a file."
       (file-name-nondirectory filename))))
 
 ;;;###autoload
-(cl-defun fugitive-quick-commit ()
+(defun fugitive-quick-commit ()
   "Save, stage, and commit the current buffer/file.
 
 This is similar in spirit to `vc-next-action' in that it is focused on the current file.

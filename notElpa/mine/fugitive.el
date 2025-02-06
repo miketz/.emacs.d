@@ -78,7 +78,7 @@ When nil allow the user to select a parent via `completing-read'.")
 
 
 ;;;###autoload
-(defun fugitive-shell-command (&optional cmd buff force-read-p)
+(defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p)
   "Run a git command.
 Display output in an Emacs buffer.
 Attempt to detect output type: log, diff, etc.
@@ -91,7 +91,10 @@ BUFF is the buffer to display output in. A new buffer is automatcially created
 if nil.
 
 FORCE-READ-P will delay execution of the git command and allow the user to
-edit/supply it, even if cmd has a value."
+edit/supply it, even if cmd has a value.
+
+HIDE-OUTPUT-P will avoid popping up the output buffer BUFF. Useful for quick
+rapid fire commands like `fugitive-quick-commit'."
   (interactive)
   (when (or (null cmd) force-read-p)
     ;; read-shell-command supports command line completion
@@ -169,7 +172,8 @@ edit/supply it, even if cmd has a value."
                                         )))
 
                                ;; show output
-                               (display-buffer buff)
+                               (unless hide-output-p
+                                 (display-buffer buff))
 
                                ;; (goto-char (point-max)) ;; end of buffer
                                ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
@@ -265,7 +269,7 @@ don't care about a narrative history and just want to make roll back points."
                            (fugitive-curr-filename))
                    buff)
     ;; commit
-    (fugitive-shell-command "git commit -m \"WIP\"" buff)))
+    (fugitive-shell-command "git commit -m \"WIP\"" buff nil t)))
 
 ;;;###autoload
 (defun fugitive-blame ()

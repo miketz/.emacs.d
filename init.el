@@ -10083,6 +10083,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-shell-command "fugitive" nil t)
 (autoload #'fugitive-find-local-only-branches-ediff "fugitive" nil t)
 (autoload #'fugitive-find-local-only-branches-direct "fugitive" nil t)
+(autoload #'fugitive-quick-commit "fugitive" nil t)
 (autoload #'fugitive-blame "fugitive" nil t)
 (autoload #'fugitive-log-graph-compact "fugitive" nil t)
 (autoload #'fugitive-log-graph-medium "fugitive" nil t)

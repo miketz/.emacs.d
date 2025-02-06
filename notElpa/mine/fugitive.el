@@ -242,6 +242,32 @@ Empty string if buffer does not visit a file."
       (file-name-nondirectory filename))))
 
 ;;;###autoload
+(cl-defun fugitive-quick-commit ()
+  "Save, stage, and commit the current buffer/file.
+
+This is similar in spirit to `vc-next-action' in that it is focused on the current file.
+But this fn does not assume the goal, it has 1 goal: make a save point commit for
+the current file.
+
+The commit message defaults to WIP (work in progress) to emphasize the quick save.
+
+WARNING: If the staging area has chagnes those will be commited too!
+
+It is reccomended to only call this fn while working in a feature branch where you
+will squash away all the junk commits later. Or in your personal files where you
+don't care about a narrative history and just want to make roll back points."
+  (interactive)
+  ;; save the current buffer
+  (basic-save-buffer)
+  (let ((buff (fugitive-new-output-buffer)))
+    ;; stage. not async as we need this to complete before proceeding.
+    (shell-command (concat "git add "
+                           (fugitive-curr-filename))
+                   buff)
+    ;; commit
+    (fugitive-shell-command "git commit -m \"WIP\"" buff)))
+
+;;;###autoload
 (defun fugitive-blame ()
   "Prepare the git command with common options for blame."
   (interactive)

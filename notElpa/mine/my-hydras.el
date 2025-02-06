@@ -316,6 +316,7 @@
 _f_: shell-command (most used)
 _l_: log graph
 _;_: log between revs
+_a_: quick-commit
 _b_: blame
 _d_: diff between revs
 _e_: find local-only branches you may want to delete
@@ -326,6 +327,7 @@ _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
   ("l" fugitive-log-graph)
   (";" fugitive-log-between)
+  ("a" fugitive-quick-commit)
   ("b" fugitive-blame)
   ("d" fugitive-diff-between)
   ("e" fugitive-find-local-only-branches-ediff)

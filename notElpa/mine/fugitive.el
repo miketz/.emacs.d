@@ -263,13 +263,14 @@ don't care about a narrative history and just want to make roll back points."
   (interactive)
   ;; save the current buffer
   (basic-save-buffer)
-  (let ((buff (fugitive-new-output-buffer)))
+  (let ((buff (fugitive-new-output-buffer))
+        (filename (fugitive-curr-filename)))
     ;; stage. not async as we need this to complete before proceeding.
-    (shell-command (concat "git add "
-                           (fugitive-curr-filename))
+    (shell-command (concat "git add " filename)
                    buff)
     ;; commit
-    (fugitive-shell-command "git commit -m \"WIP\"" buff nil t)))
+    (fugitive-shell-command (concat "git commit -m \"WIP: " filename "\"")
+                            buff nil t)))
 
 ;;;###autoload
 (defun fugitive-blame ()

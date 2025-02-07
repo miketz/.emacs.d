@@ -262,7 +262,7 @@ the current file.
 
 The commit message defaults to WIP (work in progress) to emphasize the quick save.
 
-WARNING: If the staging area has chagnes those will be commited too!
+WARNING: If the staging area has changes those will be commited too!
 
 It is reccomended to only call this fn while working in a feature branch where you
 will squash away all the junk commits later. Or in your personal files where you

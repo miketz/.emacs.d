@@ -276,6 +276,10 @@ This prevents overlapping themes; something I would rarely want."
   (require 'erc-hl-nicks)
   (add-to-list 'erc-modules 'hl-nicks t))
 
+;;;----------------------------------------------------------------------------
+;;; electric-pair
+;;;----------------------------------------------------------------------------
+(electric-pair-mode 1) ; global
 
 ;;;----------------------------------------------------------------------------
 ;;; misc

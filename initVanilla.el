@@ -93,6 +93,34 @@ This prevents overlapping themes; something I would rarely want."
 (ido-mode 1)
 
 ;;;----------------------------------------------------------------------------
+;;; smex. used by ido, ivy
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/smex" load-path)
+(autoload #'smex "smex" nil t)
+(autoload #'smex-major-mode-commands "smex" nil t)
+(autoload #'smex-initialize "smex" nil t)
+
+(with-eval-after-load 'smex
+  ;; NOTE: smex is used for `counsel-M-x' too where this advice is not needed.
+  ;; insert a hyphen - on space like in normal M-x
+  (defadvice smex (around space-inserts-hyphen activate compile)
+    (let ((ido-cannot-complete-command
+           `(lambda ()
+              (interactive)
+              (if (string= " " (this-command-keys))
+                  (insert ?-)
+                (funcall ,ido-cannot-complete-command)))))
+      ad-do-it)))
+
+;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+;;                   ; when Smex is auto-initialized on its first run.
+(global-set-key (kbd "M-x") #'smex)
+(global-set-key (kbd "M-X") #'smex-major-mode-commands)
+(global-set-key (kbd "C-c M-x")
+                #'execute-extended-command) ; rebind the original M-x command
+
+
+;;;----------------------------------------------------------------------------
 ;;; Paredit
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/paredit" load-path)
@@ -183,6 +211,70 @@ This prevents overlapping themes; something I would rarely want."
   (setq avy-case-fold-search t)  ;; case insensitive
   (setq avy-timeout-seconds 0.5) ;; delay for `avy-goto-char-timer'
   )
+
+;;;----------------------------------------------------------------------------
+;;; erc
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'erc
+  (setq erc-default-server "irc.libera.chat") ; formerly "irc.freenode.net"
+
+  (let ((format "%-I:%M%#p")) ;; use 12 hour format. am/pm
+    (setq erc-timestamp-format       format
+          erc-timestamp-format-right format))
+
+  (defvar my-erc-observe-client "/ctcp Username version")
+
+  (setq erc-autojoin-channels-alist
+        '(("libera.chat" "#emacs")
+          ;; ("freenode.net" "#emacs")
+          ))
+
+  (progn
+    ;;from finster on irc #emacs. switch erc buffers
+    ;; TODO; make it neutral to ido so i can use helm, swiper, default, etc.
+    (defvar x/chatbuffer-types '(erc-mode
+                                 circe-channel-mode
+                                 circe-query-mode))
+
+    ;; TODO: rename function since it's no longer ido specific.
+    (defun x/ido-chat-buffer ()
+      "Switch to erc/circe buffer, completed by ido."
+      (interactive)
+      ;; TODO: use ivy, ido, helm specific buffer switch fn.
+      (switch-to-buffer
+       (completing-read ;; ido-completing-read
+        "Channel: "
+        (save-excursion
+          (delq
+           nil
+           (mapcar (lambda (buf)
+                     (when (buffer-live-p buf)
+                       (with-current-buffer buf
+                         (and (memq major-mode x/chatbuffer-types)
+                              (buffer-name buf)))))
+                   (buffer-list)))))))
+    (define-key erc-mode-map (kbd "C-c b") #'x/ido-chat-buffer))
+
+  (if nil ;;(eq my-curr-computer 'wild-dog)
+      (my-erc-set-data))
+
+  (setq erc-header-line-format nil) ; hide header for more screen space.
+
+  (defun my-setup-erc ()
+    (setq show-trailing-whitespace nil))
+  (add-hook 'erc-mode-hook #'my-setup-erc))
+
+;;;----------------------------------------------------------------------------
+;;; erc-hl-nicks
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/erc-hl-nicks" load-path)
+(autoload #'erc-hl-nicks-force-nick-face "erc-hl-nicks" nil nil)
+(autoload #'erc-hl-nicks-alias-nick "erc-hl-nicks" nil nil)
+(autoload #'erc-hl-nicks "erc-hl-nicks" nil nil)
+
+(with-eval-after-load 'erc
+  (require 'erc-hl-nicks)
+  (add-to-list 'erc-modules 'hl-nicks t))
 
 
 ;;;----------------------------------------------------------------------------

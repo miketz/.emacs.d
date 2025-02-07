@@ -317,6 +317,13 @@ Proceed?")
   (interactive)
   (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%s\" " nil t))
 
+;; just documenting some possible date formats.
+(defvar fugitive-date-formats
+  '("--date=short"
+    "--date=format:\"%-Y-%-m-%d\""
+    "--date=format:\"%-m-%-d-%Y %I:%M%p\""
+    "--date=format:\"%-Y-%-m-%d %I:%M%p\""))
+
 ;;;###autoload
 (defun fugitive-log-graph-long ()
   "Prepare the git command with common options for graph view."
@@ -334,7 +341,7 @@ Proceed?")
   (let* ((date-arg (if (eq system-type 'windows-nt)
                        "--date=short"
                      ;; TODO: find a date format that works in windwos
-                     "--date=format:\"%-m-%-d-%Y %I:%M%p\""))
+                     "--date=format:\"%-Y-%-m-%d %I:%M%p\""))
          (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 

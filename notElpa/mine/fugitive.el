@@ -249,6 +249,9 @@ Empty string if buffer does not visit a file."
       ;; else
       (file-name-nondirectory filename))))
 
+;; Overall i prefer `vc-next-action' over `fugitive-quick-commit'. Becuase vc is fast
+;; enough and gives more time to review the diff, write a commit message, abort, etc.
+;; But this quick fn is good as an expiriment for truly rapid fire commits.
 ;;;###autoload
 (cl-defun fugitive-quick-commit ()
   "Save, stage, and commit the current buffer/file.

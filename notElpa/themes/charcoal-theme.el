@@ -226,6 +226,7 @@ Example:
                            :background ,ml-inact-bg ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
+   ;; display-line-numbers. native implementation
    `(line-number ((,class ,@(cond ((= charcoal-color-cnt 16)
                                      `(:inherit mode-line))
                                   (t `(:background ,linenum-bg
@@ -235,6 +236,11 @@ Example:
                                                  :foreground ,linenumcur-fg
                                                  :background ,linenumcur-bg
                                                  ))))
+
+   `(line-number-major-tick ((,class :foreground ,linenum-fg
+                                     :background "#3b0000")))
+   `(line-number-minor-tick ((,class :foreground ,linenum-fg
+                                     :background "black")))
 
    `(region
      ((,class (:background ,highlight))))     ;69685E

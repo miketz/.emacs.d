@@ -172,8 +172,12 @@ rapid fire commands like `fugitive-quick-commit'."
                                                  (diff-mode))
                                                ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
                                                (xterm-color-colorize-buffer))
-                                       (blame-p (xterm-color-colorize-buffer)
-                                        )))
+                                       (blame-p (xterm-color-colorize-buffer)))
+
+                                 ;; disable native line numbers.
+                                 ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
+                                 ;; major modes wipe out buffer local vars.
+                                 (setq display-line-numbers nil))
 
                                ;; show output
                                (unless hide-output-p

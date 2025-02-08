@@ -7909,6 +7909,8 @@ vanilla javascript buffers."
   ;; sized monitors.
   (setq display-line-numbers-current-absolute nil)
 
+  ;; (setq display-line-numbers-minor-tick 10)
+
 
   (autoload #'my-line-numbers-on "my-line-nums" nil t)
   (autoload #'my-line-numbers-relative-on "my-line-nums" nil t)

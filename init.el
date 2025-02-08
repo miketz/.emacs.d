@@ -7911,6 +7911,10 @@ vanilla javascript buffers."
 
   ;; (setq display-line-numbers-minor-tick 10)
 
+  ;; non buffer-local way to set line number type
+  (setq display-line-numbers-type 'relative)
+  ;; enable globally
+  (global-display-line-numbers-mode)
 
   (autoload #'my-line-numbers-on "my-line-nums" nil t)
   (autoload #'my-line-numbers-relative-on "my-line-nums" nil t)

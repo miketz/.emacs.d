@@ -7904,6 +7904,9 @@ vanilla javascript buffers."
   ;;  )
 
   (setq display-line-numbers-width 1) ; 1 seemed to behave like 2.
+  ;; show 0 for current line with relative numbers. Minimizes the horizontal
+  ;; space needed by the line number bar. Usually no more htan 2 digits normal
+  ;; sized monitors.
   (setq display-line-numbers-current-absolute nil)
 
 

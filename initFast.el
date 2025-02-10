@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;; NOTE: keep this init basic so it works with older Emacs versions.
 ;;; Oldest emacs verified: 22.3.1
 

@@ -1,3 +1,4 @@
+;;; initVanilla.el --- My emacs config. -*- lexical-binding: t -*-
 (load "~/.emacs.d/initFast") ;; .el or .elc if available
 
 

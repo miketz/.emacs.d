@@ -9760,7 +9760,7 @@ Values: lsp, citre, nil")
 ;; or try M-x dired-do-find-regexp-and-replace
 ;; requires marking the files in dired first.
 
-;; ####### 2. 2nd best way.
+;; ####### 2. 2nd best way. "serial" way, replacing one match at a time.
 ;; or try projectile
 ;;   M-x projectile-replace-regexp
 ;; use prefix arg to manually select starting folder instead of proj root
@@ -9769,7 +9769,7 @@ Values: lsp, citre, nil")
 (autoload #'my-find-replace "my-find-replace" nil t)
 (autoload #'my-find-replace-folder "my-find-replace" nil t)
 
-;; ####### 1. Best way!
+;; ####### 1. Best way! "overview" way, giving a birds eye view of matches
 ;; or try rg.el
 ;; M-x rg
 ;; press e (bound to `wgrep-change-to-wgrep-mode')

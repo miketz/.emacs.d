@@ -7911,10 +7911,11 @@ vanilla javascript buffers."
 
   ;; (setq display-line-numbers-minor-tick 10)
 
-  ;; non buffer-local (global) way to set line number type
-  (setq display-line-numbers-type 'relative)
-  ;; enable globally
-  (global-display-line-numbers-mode)
+  ;; ;; non buffer-local (global) way to set line number type
+  ;; (setq display-line-numbers-type 'relative)
+  ;; ;; enable globally
+  ;; (global-display-line-numbers-mode)
+
 
   ;; buffer-local cycle of line number types
   (autoload #'my-line-numbers-on "my-line-nums" nil t)
@@ -7922,6 +7923,10 @@ vanilla javascript buffers."
   (autoload #'my-line-numbers-off "my-line-nums" nil t)
   (autoload #'my-line-numbers-cycle "my-line-nums" nil t)
   (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
+
+  ;; ;; enable for all programming modes
+  ;; (with-eval-after-load 'prog-mode
+  ;;   (add-hook 'prog-mode-hook #'my-line-numbers-relative-on))
 
   ;; (let ((mac-terminal-p (and (eq system-type 'darwin)
   ;;                            (not my-graphic-p))))

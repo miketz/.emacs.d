@@ -10127,7 +10127,13 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to-first)
   (define-key fugitive-log-mode-map (kbd "C-c n") #'fugitive-parent-commits-jump-to-first)
   (define-key fugitive-log-mode-map (kbd "C-c s") #'fugitive-show)
-  (define-key fugitive-log-mode-map (kbd "<return>") #'fugitive-find-hash-show))
+  (if (eq system-type 'windows-nt)
+      (define-key fugitive-log-mode-map (kbd "<return>") #'fugitive-find-hash-show)
+    ;; else
+    (progn
+      (define-key fugitive-log-mode-map (kbd "<RET>") #'fugitive-find-hash-show)
+      (when my-use-evil-p
+        (define-key evil-normal-state-map (kbd "<RET>") #'fugitive-find-hash-show)))))
 
 
 

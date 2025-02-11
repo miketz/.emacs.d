@@ -527,6 +527,28 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
     ;; maybe issue with shell-command itself as the same cmd from git bash works
     (fugitive-shell-command cmd)))
 
+;;;###autoload
+(defun fugitive-find-hash-show ()
+  "Similar to `fugitive-show' but search the current line for a commit hash.
+Move to the next line if no hash found."
+  (interactive)
+  (let* ((case-fold-search t) ; case insensitive search
+         (line-end (progn
+                     (move-end-of-line 1)
+                     (point)))
+         (line-start (move-beginning-of-line 1))
+         ;; assumes hash is the first thing after the star *
+         (found-hash-p (re-search-forward "[0-9a-fA-F]+"
+                                          line-end
+                                          t ; don't error on no match
+                                          )))
+    (if found-hash-p
+        (progn
+          (backward-word)
+          (fugitive-show))
+      ;; else, not on a hash line. go down to the next line
+      (next-line))))
+
 (defvar fugitive-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to)

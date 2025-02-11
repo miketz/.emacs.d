@@ -554,8 +554,8 @@ If no hash found return nil."
                                                    (+ line-start (length "commit"))
                                                    t ; don't error on no match
                                                    )
-                                   (re-search-forward "\*"
-                                                   (+ line-start (length "commit"))
+                                   (re-search-forward "\* "
+                                                   line-end
                                                    t ; don't error on no match
                                                    )
                                    ))

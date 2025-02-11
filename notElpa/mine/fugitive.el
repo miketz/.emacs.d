@@ -502,18 +502,24 @@ regardless of config var `fugitive-auto-jump-to-first-parent'."
 
 
 ;;;###autoload
-(defun fugitive-parent-commits (&optional commit)
+(cl-defun fugitive-parent-commits (&optional commit)
   "Get the parent commit(s) of the specified COMMIT.
 You may want to call this fn while in a log buffer, with point on a commit hash."
   (interactive)
   (let* ((commit (or commit
-                     (thing-at-point 'symbol 'no-properties)))
-         ;; need double quotes around hash to avoid breaker on Windows.
-         ;; it doesn't like ^@ characters?
-         (cmd (read-shell-command "cmd: " (format "git rev-parse \"%s^@\"" commit))))
-    ;; TODO: doesn't work on windows. fix.
-    ;; maybe issue with shell-command itself as the same cmd from git bash works
-    (fugitive-shell-command cmd)))
+                     (fugitive-hash))))
+
+    ;; GUARD: no commit hash found on current line
+    (when (null commit)
+      (message "commit hash is required.")
+      (cl-return-from fugitive-parent-commits))
+
+    ;; need double quotes around hash to avoid breaker on Windows.
+    ;; it doesn't like ^@ characters?
+    (let ((cmd (read-shell-command "cmd: " (format "git rev-parse \"%s^@\"" commit))))
+      ;; TODO: doesn't work on windows. fix.
+      ;; maybe issue with shell-command itself as the same cmd from git bash works
+      (fugitive-shell-command cmd))))
 ;; first parent: git rev-parse commit^
 ;; nth parent: git rev-parse commit^1
 ;; all parents: git rev-parse commit^@

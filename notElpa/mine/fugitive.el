@@ -445,41 +445,46 @@ Convert the string-list to an elisp list."
 
 
 ;;;###autoload
-(defun fugitive-parent-commits-jump-to (&optional commit)
+(cl-defun fugitive-parent-commits-jump-to (&optional commit)
   "Jump to the parent commit of the specified COMMIT.
 You may want to call this fn while in a log buffer, with point on a commit hash."
   (interactive)
-  (let* ((commit (or commit
-                     (thing-at-point 'symbol 'no-properties)))
-         (parents (fugitive-get-parent-commits-list commit))
-         ;; stop completing-read from sorting hashes.
-         ;; from stack overflow post: https://emacs.stackexchange.com/questions/41801/how-to-stop-completing-read-ivy-completing-read-from-sorting
-         (completion-table (lambda (string pred action)
-                             (if (eq action 'metadata)
-                                 '(metadata (display-sort-function . identity)
-                                            (cycle-sort-function . identity))
-                               (complete-with-action
-                                action parents string pred))))
-         ;; (par (completing-read "parent: " parents nil t))
-         (par (if (or fugitive-auto-jump-to-first-parent
-                      (= 1 (length parents)))
-                  (car parents) ; skip completion
-                (completing-read "parent: " completion-table nil t)))
-         ;; some log outputs only show 7 chars of the hash. which would mess up
-         ;; searching on the complete hash.
-         ;; TODO: hash display length appears to be dynamic. someitmes 8 or 9. will break
-         ;;       if 7. handle this.
-         (par-short (substring-no-properties par 0 7))
-         (found-p (re-search-forward par-short
-                                     nil ; no bounds on search
-                                     t ; do not trigger an error if no search match
-                                     )))
-    (if found-p
-        (progn
-          (backward-word) ; go to start of hash
-          (xref-pulse-momentarily))
-      ;; else, failure message
-      (message "failed to find hash %s" par-short))))
+  (let ((commit (or commit
+                    (fugitive-hash-or-next-line))))
+
+    ;; GUARD: no commit hash found on current line
+    (when (null commit)
+      (cl-return-from fugitive-parent-commits-jump-to))
+
+    (let* ((parents (fugitive-get-parent-commits-list commit))
+           ;; stop completing-read from sorting hashes.
+           ;; from stack overflow post: https://emacs.stackexchange.com/questions/41801/how-to-stop-completing-read-ivy-completing-read-from-sorting
+           (completion-table (lambda (string pred action)
+                               (if (eq action 'metadata)
+                                   '(metadata (display-sort-function . identity)
+                                              (cycle-sort-function . identity))
+                                 (complete-with-action
+                                  action parents string pred))))
+           ;; (par (completing-read "parent: " parents nil t))
+           (par (if (or fugitive-auto-jump-to-first-parent
+                        (= 1 (length parents)))
+                    (car parents) ; skip completion
+                  (completing-read "parent: " completion-table nil t)))
+           ;; some log outputs only show 7 chars of the hash. which would mess up
+           ;; searching on the complete hash.
+           ;; TODO: hash display length appears to be dynamic. someitmes 8 or 9. will break
+           ;;       if 7. handle this.
+           (par-short (substring-no-properties par 0 7))
+           (found-p (re-search-forward par-short
+                                       nil ; no bounds on search
+                                       t ; do not trigger an error if no search match
+                                       )))
+      (if found-p
+          (progn
+            (backward-word) ; go to start of hash
+            (xref-pulse-momentarily))
+        ;; else, failure message
+        (message "failed to find hash %s" par-short)))))
 
 ;; (length "f2db9fa3f") 9
 
@@ -528,28 +533,36 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
       (fugitive-shell-command (format "git show %s" commit)))))
 
 
-(defun fugitive-hash-or-next-line ()
+(defun fugitive-hash ()
   "In a log buffer, search for commit hash on current line, return hash.
-If no hash found move to the next line, return nil."
+If no hash found return nil."
   (interactive)
-  (let* ((case-fold-search t) ; case insensitive search
-         (line-end (progn
-                     (move-end-of-line 1)
-                     (point)))
-         (line-start (move-beginning-of-line 1))
-         ;; assumes hash is the first thing after the star *
-         (found-hash-p (re-search-forward "[0-9a-fA-F]+"
-                                          line-end
-                                          t ; don't error on no match
-                                          )))
-    (if found-hash-p
-        (progn
-          (backward-word)
-          (thing-at-point 'symbol 'no-properties))
-      ;; else, not on a hash line. go down to the next line
-      (progn
-        (next-line)
+  (save-excursion
+    (let* ((case-fold-search t) ; case insensitive search
+           (line-end (progn
+                       (move-end-of-line 1)
+                       (point)))
+           (line-start (move-beginning-of-line 1))
+           ;; assumes hash is the first thing after the star *
+           (found-hash-p (re-search-forward "[0-9a-fA-F]+"
+                                            line-end
+                                            t ; don't error on no match
+                                            )))
+      (if found-hash-p
+          (progn
+            (backward-word)
+            (thing-at-point 'symbol 'no-properties))
+        ;; else
         nil))))
+
+(defun fugitive-hash-or-next-line ()
+  "Same as `fugitive-hash'.
+But if no hash found on current line, goto `next-line' as a side effect."
+  (interactive)
+  (let ((hash (fugitive-hash)))
+    (when (null hash)
+      (next-line))
+    hash))
 
 
 

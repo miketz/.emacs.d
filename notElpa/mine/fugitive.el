@@ -539,7 +539,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
       (fugitive-shell-command (format "git show %s" commit)))))
 
 
-(defun fugitive-hash ()
+(cl-defun fugitive-hash ()
   "In a log buffer, search for commit hash on current line, return hash.
 If no hash found return nil."
   (interactive)
@@ -549,11 +549,23 @@ If no hash found return nil."
                        (move-end-of-line 1)
                        (point)))
            (line-start (move-beginning-of-line 1))
-           ;; assumes hash is the first thing after the star *
+           ;; handle both graph and traditioanl log formats
+           (found-log-header-p (or (re-search-forward "commit"
+                                                   (+ line-start (length "commit"))
+                                                   t ; don't error on no match
+                                                   )
+                                   (re-search-forward "\*"
+                                                   (+ line-start (length "commit"))
+                                                   t ; don't error on no match
+                                                   )
+                                   ))
+           ;; assumes hash is the first thing after the star "*" or "commit"
            (found-hash-p (re-search-forward "[0-9a-fA-F]+"
                                             line-end
                                             t ; don't error on no match
                                             )))
+      (unless found-log-header-p
+        (cl-return-from fugitive-hash nil))
       (if found-hash-p
           (progn
             (backward-word)

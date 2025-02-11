@@ -519,18 +519,18 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
   "Show the specified COMMIT.
 You may want to call this fn while in a log buffer, with point on a commit hash."
   (interactive)
-  (let* ((commit (or commit
-                     (thing-at-point 'symbol 'no-properties)))
-         ;; (cmd (read-shell-command "cmd: " (format "git show %s" commit)))
-         (cmd (format "git show %s" commit)))
-    ;; TODO: doesn't work on windows. fix.
-    ;; maybe issue with shell-command itself as the same cmd from git bash works
-    (fugitive-shell-command cmd)))
+  (let ((commit (or commit
+                    (fugitive-hash-or-next-line)))
+        ;; (cmd (read-shell-command "cmd: " (format "git show %s" commit)))
+        ;; (cmd (format "git show %s" commit))
+        )
+    (when (not (null commit))
+      (fugitive-shell-command (format "git show %s" commit)))))
 
-;;;###autoload
-(defun fugitive-find-hash-show ()
-  "Similar to `fugitive-show' but search the current line for a commit hash.
-Move to the next line if no hash found."
+
+(defun fugitive-hash-or-next-line ()
+  "In a log buffer, search for commit hash on current line, return hash.
+If no hash found move to the next line, return nil."
   (interactive)
   (let* ((case-fold-search t) ; case insensitive search
          (line-end (progn
@@ -545,9 +545,13 @@ Move to the next line if no hash found."
     (if found-hash-p
         (progn
           (backward-word)
-          (fugitive-show))
+          (thing-at-point 'symbol 'no-properties))
       ;; else, not on a hash line. go down to the next line
-      (next-line))))
+      (progn
+        (next-line)
+        nil))))
+
+
 
 (defvar fugitive-mode-map
   (let ((map (make-sparse-keymap)))

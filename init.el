@@ -10130,12 +10130,12 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (define-key fugitive-log-mode-map (kbd "n") #'next-line)
   (define-key fugitive-log-mode-map (kbd "p") #'previous-line)
   (if (eq system-type 'windows-nt)
-      (define-key fugitive-log-mode-map (kbd "<return>") #'fugitive-find-hash-show)
+      (define-key fugitive-log-mode-map (kbd "<return>") #'fugitive-show)
     ;; else
     (progn
-      (define-key fugitive-log-mode-map (kbd "<RET>") #'fugitive-find-hash-show)
+      (define-key fugitive-log-mode-map (kbd "<RET>") #'fugitive-show)
       (when my-use-evil-p
-        (define-key evil-normal-state-map (kbd "<RET>") #'fugitive-find-hash-show)))))
+        (define-key evil-normal-state-map (kbd "<RET>") #'fugitive-show)))))
 
 
 

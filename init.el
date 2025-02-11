@@ -10135,8 +10135,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
     (progn
       (define-key fugitive-log-mode-map (kbd "<RET>") #'fugitive-show)
       (when my-use-evil-p
-        (define-key evil-normal-state-map (kbd "<RET>") #'fugitive-show)))))
-
+        ;; (define-key evil-normal-state-map (kbd "<RET>") #'fugitive-show)
+        (evil-define-key 'normal fugitive-log-mode-map (kbd "<RET>") #'fugitive-show)))))
 
 
 

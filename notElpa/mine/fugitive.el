@@ -484,7 +484,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
             (backward-word) ; go to start of hash
             (xref-pulse-momentarily))
         ;; else, failure message
-        (message "failed to find hash %s" par-short)))))
+        (message "Failed to find hash %s. If your log was filtered to single file or folder that may be the reason the parent commit is not listed in the log buffer." par-short)))))
 
 ;; (length "f2db9fa3f") 9
 

@@ -313,7 +313,7 @@ Proceed?")
 (defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --oneline --graph -n 1000 " nil t))
+  (fugitive-shell-command "git log --oneline --decorate=short --graph -n 1000 " nil t))
 
 
 ;; TODO: look into why medium and long graph logs don't colorize the hash.
@@ -322,7 +322,7 @@ Proceed?")
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%s\" " nil t))
+  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%h%x09%an%d%x09%s\" " nil t))
 
 ;; just documenting some possible date formats.
 (defvar fugitive-date-formats
@@ -343,13 +343,14 @@ Proceed?")
   ;; %x09 = tab (character for code 9)
   ;; %an = author name
   ;; %ad = author date (format respects --date= option)
+  ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
   (let* ((date-arg (if (eq system-type 'windows-nt)
                        "--date=short"
                      ;; TODO: find a date format that works in windwos
                      "--date=format:\"%-Y-%-m-%d %I:%M%p\""))
-         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%ad%x09%s\" " date-arg " ")))
+         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%ad%d%x09%s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
 

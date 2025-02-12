@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name : map
 # key: map
-# ${1:name} := map[${2:int}]${3:int}{}
 # --
 ${1:name} := make(map[${2:int}]${3:int}, ${4:32})

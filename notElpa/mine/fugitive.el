@@ -538,6 +538,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
         )
     (when (not (null commit))
       (if (fugitive-merge-commit-p commit)
+          ;; show output tailored for "merge" commit
           (fugitive-show-merge-commit commit)
         ;; else, normal show
         (fugitive-shell-command (format "git show %s" commit))))))

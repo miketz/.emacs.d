@@ -299,6 +299,33 @@ Proceed?")
     (fugitive-shell-command (concat "git commit -m \"WIP: " filename "\"")
                             buff nil t)))
 
+;;; TODO: make this fn more general. with prefix arg allow user to
+;;;       choose branch other than current and remote other than default
+;;;       to fetch and log against.
+;;;###autoload
+(cl-defun fugitive-fetch-n-log ()
+  "Fetch from default remote.
+Then show a delta log between current local branch..remote/branch. "
+  (interactive)
+  (let ((buff (fugitive-new-output-buffer)))
+    ;; fetch. not async as we need this to complete before proceeding.
+    (shell-command "git fetch" buff)
+    ;; show delta log. branch..remote/branch
+    (let* ((curr-branch (fugitive-get-curr-branch))
+           ;; git config branch.<name>.remote
+           (remote (fugitive-get-remote-for-branch curr-branch)))
+
+      ;; GUARD: can't delta curr branch if it's a local only brnach (ie no remote)
+      (when (string-equal remote "")
+        (message "No corresponding remote branch for %s. Abort delta log."
+                 curr-branch)
+        (cl-return-from fugitive-fetch-n-log))
+
+      ;; delta log. branch..remote/branch
+      (fugitive-log-between curr-branch
+                            (concat remote "/" curr-branch)
+                            buff))))
+
 ;;;###autoload
 (defun fugitive-blame ()
   "Prepare the git command with common options for blame."
@@ -367,7 +394,7 @@ Use the default fn configured in `fugitive-log-graph-fn'."
 
 
 ;;;###autoload
-(cl-defun fugitive-log-between (&optional rev1 rev2)
+(cl-defun fugitive-log-between (&optional rev1 rev2 buff)
   (interactive)
   ;; get rev1, rev2 from user if needed
   (when (or (null rev1) (null rev2))
@@ -384,7 +411,7 @@ Use the default fn configured in `fugitive-log-graph-fn'."
     (message "rev1 and rev2 are required.")
     (cl-return-from fugitive-log-between))
   ;; run command
-  (fugitive-shell-command (format "git log %s..%s" rev1 rev2) nil t))
+  (fugitive-shell-command (format "git log %s..%s" rev1 rev2) buff t))
 
 ;;;###autoload
 (cl-defun fugitive-diff-between (&optional rev1 rev2)
@@ -431,6 +458,25 @@ Convert the string-list to an elisp list."
 (defun fugitive-get-branches ()
   "Return a list of branches."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/heads/ refs/remotes/"))
+
+(defun fugitive-get-curr-branch ()
+  "Return the currently checked out branch name.
+Returns \"HEAD\" if in a detached HEAD state."
+  (interactive)
+  (string-trim-right
+   (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
+  ;; for git ver 2.22+. Will return "" instead of "HEAD" on detatched head state.
+  ;; (string-trim-right
+  ;;  (shell-command-to-string "git branch --show-current"))
+  )
+
+(defun fugitive-get-remote-for-branch (branch)
+  "Return the configured remote for BRANCH.
+Returns emtpy string if no remote (ie local only branch)."
+  (string-trim-right
+   (shell-command-to-string
+    (format "git config branch.%s.remote"
+            branch))))
 
 (defun fugitive-get-tags ()
   "Return a list of tags."

@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: bench
-# key: bench
+# name: benchOld
+# key: benchOld
 # --
 func Benchmark${1:Name}(b *testing.B) {
 	b.ReportAllocs() // include alloc info in report
-	for b.Loop() {
+	for i := 0; i < b.N; i++ {
 		$1()
 	}
 }

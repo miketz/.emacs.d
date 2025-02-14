@@ -80,6 +80,24 @@ Prompt user before proceeding.")
                               (= del-cnt 0))
                           "s" "")))))
 
+(defun fugitive-delete-buffers-except-current ()
+  "Like `fugitive-delete-buffers' but skip active visited fugitive buffer."
+  (interactive)
+  (let ((del-cnt 0)
+        (curr-buff (current-buffer)))
+    (cl-loop for b in (buffer-list)
+             do
+             (when (and (not (eq curr-buff b))
+                        (fugitive-str-starts-with-p (buffer-name b) "*fugitive-"))
+               (kill-buffer b)
+               (cl-incf del-cnt))
+             finally
+             (message "%d fugitive buffer%s deleted."
+                      del-cnt
+                      (if (or (>= del-cnt 2)
+                              (= del-cnt 0))
+                          "s" "")))))
+
 
 ;;;###autoload
 (defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p)

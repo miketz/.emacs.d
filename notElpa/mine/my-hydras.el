@@ -335,7 +335,7 @@ _q_, _C-g_: quit"
   ("e" fugitive-find-local-only-branches-ediff)
   ("s" fugitive-show)
   ("p" fugitive-parent-commits-jump-to)
-  ("c" fugitive-delete-buffers)
+  ("c" fugitive-delete-buffers-except-current)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

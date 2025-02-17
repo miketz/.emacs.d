@@ -336,7 +336,26 @@ This is more a documentation of how to ignore files in rg."
     (my-go-hide-err-handling)))
 
 
-
+;;;----------------------------------------------------------------------------
+;;; text scraping. useful for advanced yasnippet expansions.
+;;;----------------------------------------------------------------------------
+;;;###autoload
+(defun my-go-curr-fn-name ()
+  "Get name of the current fn.
+Seaches backwards for regex ^func. Then gets the follwing text after that.
+Returns nil if not found.
+Mostly intened for yasnippet expansions."
+  (interactive)
+  (save-excursion
+    (let ((found-p (re-search-backward "^func"
+                                       nil ; no bounds on search
+                                       t ; do not trigger an error if no search match
+                                       )))
+      (when found-p
+        (forward-word)
+        (forward-word)
+        (backward-word)
+        (thing-at-point 'symbol 'no-properties)))))
 
 ;;;----------------------------------------------------------------------------
 ;;; hydra. List several go helper functions.

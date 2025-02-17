@@ -3,5 +3,5 @@
 # key: ev
 # --
 if ${1:err} := ${2:action()}; $1 != nil {
-	$0
+	return fmt.Errorf("in ${3:`(my-go-curr-fn-name)`}:$0 what I was trying to do: %w", $1)
 }

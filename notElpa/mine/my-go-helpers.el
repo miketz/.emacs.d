@@ -342,7 +342,7 @@ This is more a documentation of how to ignore files in rg."
 ;;;###autoload
 (defun my-go-curr-fn-name ()
   "Get name of the current fn.
-Seaches backwards for regex ^func. Then gets the follwing text after that.
+Seaches backwards for regex ^func. Then gets the following text after that.
 Returns nil if not found.
 Mostly intened for yasnippet expansions."
   (interactive)

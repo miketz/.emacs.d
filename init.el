@@ -5556,6 +5556,14 @@ and indent."
 (push "~/.emacs.d/notElpaYolo/libegit2" load-path)
 
 ;;;----------------------------------------------------------------------------
+;;; llama. dependency of magit
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/llama/" load-path)
+(autoload #'llama "llama" nil nil 'macro)
+(autoload #'llama-fontify-mode "llama" nil t)
+(autoload #'global-llama-fontify-mode "llama" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; magit
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/magit/lisp" load-path)

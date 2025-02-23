@@ -1,6 +1,8 @@
 # -*- mode: snippet -*-
-#name : struct
+# name : struct
 # key: struct
 # --
 type ${1:Name}$0 struct {
+	A int
+	B int
 }

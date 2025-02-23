@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name : struct anonymous
+# key: structa
+# --
+struct {
+	A int
+	B int
+}

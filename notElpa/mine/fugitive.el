@@ -622,7 +622,8 @@ Inlcude affected files, no diffs."
          (merge-p (> (length parents) 1))) ; if more than 1 parent
     merge-p))
 
-
+;; TODO: verify this works as expected when git-delta is not installed.
+;;       I have git-delta installed which may affect the log output.
 (defun fugitive-guess-log-output-type (cmd)
   "Attempt to guess the log output type of a git log CMD.
 Once the log output type is known it's easier to search for the commit hash

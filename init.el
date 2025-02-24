@@ -10198,6 +10198,14 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 
 ;;;----------------------------------------------------------------------------
+;;; completion-preview-mode. new in Emacs 30.1
+;;;----------------------------------------------------------------------------
+;; ;; seems to not quite work how I expect. sticking with company for now.
+;; (when (fboundp #'global-completion-preview-mode)
+;;   (global-completion-preview-mode))
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

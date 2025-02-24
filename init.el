@@ -9839,6 +9839,8 @@ Values: lsp, citre, nil")
 ;; truncate lines if they reach the edge. Just a visual effect.
 ;; (toggle-truncate-lines)
 
+;; New minor mode in Emacs 30.1. 'visual-wrap-prefix-mode'. look into it.
+
 
 ;;;----------------------------------------------------------------------------
 ;;; visual-fill-column

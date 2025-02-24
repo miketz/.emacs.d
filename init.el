@@ -9791,6 +9791,8 @@ Values: lsp, citre, nil")
 ;; press C-x C-s to update the buffers
 ;; use evil to save all buffers :wall
 
+;; New command in emacs 30.1 'replace-regexp-as-diff'.
+
 
 
 

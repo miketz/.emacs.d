@@ -622,6 +622,34 @@ Inlcude affected files, no diffs."
          (merge-p (> (length parents) 1))) ; if more than 1 parent
     merge-p))
 
+
+(defun fugitive-guess-log-output-type (cmd)
+  "Attempt to guess the log output type of a git log CMD.
+Once the log output type is known it's easier to search for the commit hash
+via a regex.
+
+There are a few types of log output:
+
+`normal' via: git log.
+Commit hashes are prefixed by \"^commit \".
+
+`normal-one-line' via: git log --oneline
+Commit hashes are are the first item on each line, no prefix.
+
+`graph' via: git log --graph
+Commit hashes are prefixed by \"*.+commit \".
+
+`graph-one-line' via: git log --graph --oneline
+Commit hashes are prefixed by a star, wild card range, then the hash (no commit text).
+  \"*.+ \"
+"
+  (let* ((one-oneline-p (string-match "--oneline" cmd))
+         (graph-p (string-match "--graph" cmd)))
+    (cond ((and one-oneline-p graph-p) 'graph-one-line)
+          (graph-p 'graph)
+          (one-oneline-p 'normal-one-line)
+          (t 'normal))))
+
 (cl-defun fugitive-hash ()
   "In a log buffer, search for commit hash on current line, return hash.
 If no hash found return nil."

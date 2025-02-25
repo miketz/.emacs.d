@@ -10200,8 +10200,14 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; completion-preview-mode. new in Emacs 30.1
 ;;;----------------------------------------------------------------------------
-;; ;; seems to not quite work how I expect. sticking with company for now.
+;; seems like this is as it's name implies. It's not a completion package per
+;; say, but a "preview" of the first completion option. You still use the
+;; normal C-M-i way of doing things. But this seems to mess things up in Go
+;; buffers a bit so not using for now.
+
 ;; (when (fboundp #'global-completion-preview-mode)
+;;   ;; complete sooner, even after punctuation.
+;;   (setq completion-preview-minimum-symbol-length nil)
 ;;   (global-completion-preview-mode))
 
 

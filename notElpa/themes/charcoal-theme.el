@@ -383,6 +383,11 @@ Example:
    ;; default emacs completion.
    `(completions-common-part ((,class (:foreground ,faint-less))))
    `(completions-first-difference ((,class (:foreground ,fg-green))))
+   ;; completion-preview. emacs 30.1+
+   `(completion-preview ((,class :foreground ,faint-less)))
+   `(completion-preview-common ((,class :foreground ,faint-less :background "black")))
+   `(completion-preview-exact ((,class :foreground "green")))
+   `(completion-preview-highlight ((,class :foreground "yellow")))
 
    ;; swiper, ivy, counsel
    `(swiper-line-face ((,class (:background ,(if (= charcoal-color-cnt 16)

@@ -10205,10 +10205,18 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; normal C-M-i way of doing things. But this seems to mess things up in Go
 ;; buffers a bit so not using for now.
 
-;; (when (fboundp #'global-completion-preview-mode)
-;;   ;; complete sooner, even after punctuation.
-;;   (setq completion-preview-minimum-symbol-length nil)
-;;   (global-completion-preview-mode))
+(when (fboundp #'global-completion-preview-mode)
+  (require 'completion-preview)
+
+  ;; complete sooner, even after punctuation.
+  (setq completion-preview-minimum-symbol-length nil)
+  (setq completion-preview-idle-delay nil)
+  (setq completion-preview-adapt-background-color nil)
+
+  (define-key completion-preview-active-mode-map (kbd "M-n") #'completion-preview-next-candidate)
+  (define-key completion-preview-active-mode-map (kbd "M-p") #'completion-preview-prev-candidate)
+
+  (global-completion-preview-mode))
 
 
 ;;;----------------------------------------------------------------------------

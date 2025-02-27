@@ -9135,6 +9135,14 @@ TODO: delete this fn and replace with hooks, etc."
      ,@body))
 
 ;;;----------------------------------------------------------------------------
+;;; marginalia
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/marginalia" load-path)
+(autoload #'marginalia-mode "marginalia" nil t)
+(autoload #'marginalia-cycle "marginalia" nil t)
+
+
+;;;----------------------------------------------------------------------------
 ;;; vertico
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/vertico" load-path)

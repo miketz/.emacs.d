@@ -9178,6 +9178,14 @@ TODO: delete this fn and replace with hooks, etc."
 
 
 ;;;----------------------------------------------------------------------------
+;;; comparison of ivy and veritco (and helper packages)
+;;;----------------------------------------------------------------------------
+;; vertico -> ivy
+;; consult -> counsel
+;; marginalia -> ivy-rich
+;; embark ->  ivy actions, ivy-occur
+
+;;;----------------------------------------------------------------------------
 ;;; zone-sl
 ;;;----------------------------------------------------------------------------
 (autoload #'zone-sl "zone-sl" nil t)

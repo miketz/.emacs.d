@@ -9186,7 +9186,7 @@ TODO: delete this fn and replace with hooks, etc."
 
 
 ;;;----------------------------------------------------------------------------
-;;; comparison of ivy and veritco (and helper packages)
+;;; comparison of ivy and vertico (and helper packages)
 ;;;----------------------------------------------------------------------------
 ;; vertico -> ivy
 ;; consult -> counsel

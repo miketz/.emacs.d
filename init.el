@@ -9180,7 +9180,8 @@ TODO: delete this fn and replace with hooks, etc."
 
 (when (eq my-narrow-type 'vertico)
   (vertico-mode 1)
-  (vertico-grid-mode 1)
+  ;; grid seems to have issues scrolling pages of candidates and doesn't work well with marginalia
+  ;; (vertico-grid-mode 1)
   (when my-use-evil-p
     (evil-leader/set-key "b" #'switch-to-buffer)))
 

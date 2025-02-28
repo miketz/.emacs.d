@@ -644,11 +644,11 @@ Commit hashes are prefixed by \"*.+commit \".
 Commit hashes are prefixed by a star, wild card range, then the hash (no commit text).
   \"*.+ \"
 "
-  (let* ((one-oneline-p (string-match "--oneline" cmd))
+  (let* ((oneline-p (string-match "--oneline" cmd))
          (graph-p (string-match "--graph" cmd)))
-    (cond ((and one-oneline-p graph-p) 'graph-one-line)
+    (cond ((and oneline-p graph-p) 'graph-one-line)
           (graph-p 'graph)
-          (one-oneline-p 'normal-one-line)
+          (oneline-p 'normal-one-line)
           (t 'normal))))
 
 (cl-defun fugitive-hash ()

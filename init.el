@@ -3815,7 +3815,10 @@ completions from folders other than the current one."
 
   (when my-use-fancy-ido-p ;; GUARD against calling ido-ubiquitous-mode.
 
-    (ido-ubiquitous-mode 1)
+    ;; NOTE: ido-ubiquitous-mode no longer exists. it has been merged into
+    ;;     `ido-completing-read+'
+    ;; (ido-ubiquitous-mode 1)
+
     ;; NOTE: i removed some un-wanted advice code from the autoloads file of
     ;; `ido-completing-read+' (a dependency of `ido-ubiquitous-mode'). Because
     ;; it forced a load of ido automatically at start up, even when I'm not
@@ -3829,6 +3832,7 @@ completions from folders other than the current one."
       (cond ((eq my-ido-display 'vertical)
              ;; 3rd party extension to ido. Display vertically like swiper.
              ;; invokes with-eval-after-load "ido-vertical-mode"
+	     (package-initialize) ; TODO: move ido-veritcal-mode into notElpaYolo
              (ido-vertical-mode 1))
             ((eq my-ido-display 'grid)
              ;; TODO: prevent grid mode from messing up the "space-as-dash"

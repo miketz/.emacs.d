@@ -9141,6 +9141,9 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'marginalia-mode "marginalia" nil t)
 (autoload #'marginalia-cycle "marginalia" nil t)
 
+(with-eval-after-load 'marginalia
+  (define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; vertico

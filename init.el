@@ -198,6 +198,36 @@
 
 
 ;;;----------------------------------------------------------------------------
+;;; enable native comp on windows
+;;;----------------------------------------------------------------------------
+;; # 1. install msys2 (64 bit)
+
+;; # 2. install libgccjit from within the msys2 command prompt
+;; pacman -S mingw-w64-x86_64-libgccjit
+
+;; # 3. find real windows path to libccjit
+;; which gcc # just finding any binary
+;; #/mingw64/bin
+;; # pass msys folder name into cygpath to get windows real path
+;; cygpath -w /mingw64/bin
+;; # C:\Users\mtz\programs\msys64\mingw64\bin
+
+;; # 4. add real path to windows PATH
+;; # open start menu, type "env", click button in the GUI
+;; # add to path: C:\Users\mtz\programs\msys64\mingw64\bin
+
+;; # 5. restart Eamcs.
+;; # (native-comp-available-p) should return true
+;; # elc files should automatically trigger eln compilation when first loaded.
+
+;; # 6. optional: compile libs upfront. instead of waiting for first load.
+;; (native-compile-async '("~/.emacs.d/notElpa/"
+;;                         "~/.emacs.d/notElpaYolo/")
+;;                       t ; compile files in  all sub dirs
+;;                       )
+
+
+;;;----------------------------------------------------------------------------
 ;;; To keep init files in Local instead of Roaming on ms-windows.
 ;;;----------------------------------------------------------------------------
 ;;; Create a "stub" init file at C:/Users/???/AppData/Roaming/.emacs.d/init.el

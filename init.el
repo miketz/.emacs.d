@@ -5268,6 +5268,13 @@ and indent."
 (push '("\\.cshtml\\'" . web-mode) auto-mode-alist)
 
 (with-eval-after-load 'web-mode
+  (setq web-mode-comment-formats
+        '(("java" . "/*")
+          ("javascript" . "//")
+          ("typescript" . "//")
+          ("php" . "/*")
+          ("css" . "/*")))
+
   ;; Auto-close on > and </
   (setq web-mode-auto-close-style 2)
 

@@ -8531,7 +8531,9 @@ vanilla javascript buffers."
 ;;; citre. ctags/readtags IDE
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/citre" load-path)
-(autoload 'citre-mode "citre" nil t nil)
+(autoload #'citre-mode "citre" nil t nil)
+(autoload #'citre-create-tags-file "citre-ctags" nil t nil)
+
 
 (with-eval-after-load 'citre
   (define-key citre-mode-map (kbd "C-c p") #'citre-peek)

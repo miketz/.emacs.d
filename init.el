@@ -4294,6 +4294,8 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; Dired
 ;;;----------------------------------------------------------------------------
+(declare-function my-dired-create-directory "init")
+
 (with-eval-after-load 'dired ; dired -> dired.el in `load-path'
   (setq-default dired-isearch-filenames t) ;search file names only in Dired.
   (defun my-setup-dired ()
@@ -9360,6 +9362,9 @@ TODO: delete this fn and replace with hooks, etc."
 (push "~/.emacs.d/notElpaYolo/zig-mode" load-path)
 (autoload 'zig-mode "zig-mode" nil t)
 (push '("\\.zig\\'" . zig-mode) auto-mode-alist)
+
+(declare-function my-zig-tabify-buffer "init")
+(declare-function my-zig-untabify-buffer-hook "init")
 
 (with-eval-after-load 'zig-mode
   ;; 4 is the blessed indent width used by "zig fmt".

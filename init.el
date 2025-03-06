@@ -1893,6 +1893,9 @@ Minus the newline char."
 ;; (require 'evil-snipe)
 ;; (global-evil-snipe-mode 1)
 
+(declare-function evil-snipe-mode "evil-snipe")
+(declare-function evil-snipe-override-mode "evil-snipe")
+
 (defun my-turn-on-evil-snipe ()
   "Temorary fn while i use package.el for installion."
   (interactive)

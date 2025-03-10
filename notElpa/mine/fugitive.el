@@ -29,6 +29,9 @@ git-delta or other git output modifiers.")
   "If t, inject --color flag to some git commands.
 Just logs for now.")
 
+(defcustom fugitive-colorize-buffer-p t
+  "If t, colorize the buffer via `xterm-color-colorize-buffer'.")
+
 (defcustom fugitive-auto-inject-n-log-limit 1000
   "Integer for auto inection of -n NUM to git log commands.
 Nil for no injection.
@@ -181,7 +184,8 @@ rapid fire commands like `fugitive-quick-commit'."
                                  ;; TURN on a specialized mode for specific output types
                                  (cond (log-p
                                         ;; turn on this first before buffer becomes read-only via fugitive-log-mode
-                                        (xterm-color-colorize-buffer)
+                                        (when fugitive-colorize-buffer-p
+                                          (xterm-color-colorize-buffer))
                                         (fugitive-log-mode) ; mode tailored for logs
                                         ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
                                         (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
@@ -191,8 +195,10 @@ rapid fire commands like `fugitive-quick-commit'."
                                        (diff-p (when fugitive-turn-on-diff-mode-p
                                                  (diff-mode))
                                                ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
-                                               (xterm-color-colorize-buffer))
-                                       (blame-p (xterm-color-colorize-buffer)))
+                                               (when fugitive-colorize-buffer-p
+                                                 (xterm-color-colorize-buffer)))
+                                       (blame-p (when fugitive-colorize-buffer-p
+                                                  (xterm-color-colorize-buffer))))
 
                                  ;; disable native line numbers.
                                  ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
@@ -364,6 +370,14 @@ A normal log with no --graph or --first-parent.
 It should finsih relatively quickly even for larger logs."
   (interactive)
   (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t))
+
+
+(defun fugitive-log-faster ()
+  "Like `fugitive-log-fast' but also disable colorization for even more speed."
+  (interactive)
+  (let ((fugitive-auto-inject-color-flag nil)
+        (fugitive-colorize-buffer-p nil))
+    (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t)))
 
 ;;;###autoload
 (defun fugitive-log-first-parent ()

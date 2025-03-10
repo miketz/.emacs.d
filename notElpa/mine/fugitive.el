@@ -356,6 +356,24 @@ Then show a delta log between current local branch..remote/branch. "
               (fugitive-curr-filename))))
     (fugitive-shell-command cmd nil t)))
 
+
+;;;###autoload
+(defun fugitive-log-fast ()
+  "Prepare the git log command with common options for speed.
+A normal log with no --graph or --first-parent.
+It should finsih relatively quickly even for larger logs."
+  (interactive)
+  (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t))
+
+;;;###autoload
+(defun fugitive-log-first-parent ()
+  "Prepare the git command with common options for a first-parent log.
+This might be a bit faster than --graph logs as it doesn't need to render branches
+as they are collapsed under the parent merge commit.
+But likely still slower than normal logs with no --graph or --first-parent."
+  (interactive)
+  (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t))
+
 ;;;###autoload
 (defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."

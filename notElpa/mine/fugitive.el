@@ -674,7 +674,7 @@ Commit hashes are prefixed by a star, wild card range, then the hash (no commit 
           (oneline-p 'normal-one-line)
           (t 'normal))))
 
-;; TODO: use buffer local var `fugitive-log-type' to find hash in different types of log outputs
+;; TODO: clean up the logic/flow. it's a bit convoluted and grew from trial/error
 (cl-defun fugitive-hash ()
   "In a log buffer, search for commit hash on current line, return hash.
 If no hash found return nil."
@@ -700,6 +700,22 @@ If no hash found return nil."
                                             line-end
                                             t ; don't error on no match
                                             )))
+
+      ;; special handling for `normal-one-line' log outputs
+      (when (eq fugitive-log-type 'normal-one-line)
+        ;; hash is very first thing on line, no prefix.
+        (move-beginning-of-line 1)
+        (let ((found-hash-p (re-search-forward "[0-9a-fA-F]+"
+                                               (+ line-start 7) ; 7 digit hash minimum
+                                               t ; don't error on no match
+                                               )))
+          (if found-hash-p
+              (progn
+                (backward-word)
+                (cl-return-from fugitive-hash (thing-at-point 'symbol 'no-properties)))
+            ;; else
+            (cl-return-from fugitive-hash nil))))
+
       (unless found-log-header-p
         (cl-return-from fugitive-hash nil))
       (if found-hash-p

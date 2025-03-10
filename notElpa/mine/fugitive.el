@@ -674,6 +674,7 @@ Commit hashes are prefixed by a star, wild card range, then the hash (no commit 
           (oneline-p 'normal-one-line)
           (t 'normal))))
 
+;; TODO: use buffer local var `fugitive-log-type' to find hash in different types of log outputs
 (cl-defun fugitive-hash ()
   "In a log buffer, search for commit hash on current line, return hash.
 If no hash found return nil."

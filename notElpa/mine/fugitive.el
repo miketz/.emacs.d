@@ -183,6 +183,8 @@ rapid fire commands like `fugitive-quick-commit'."
                                         ;; turn on this first before buffer becomes read-only via fugitive-log-mode
                                         (xterm-color-colorize-buffer)
                                         (fugitive-log-mode) ; mode tailored for logs
+                                        ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
+                                        (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
                                         ;; (log-view-mode) ; TODO: fix. doesn't work right.
                                         ;; (vc-git-log-view-mode)
                                         )
@@ -398,6 +400,27 @@ Then show a delta log between current local branch..remote/branch. "
          (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%ad%d%x09%s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
+
+(defvar-local fugitive-log-type nil
+  "Buffer local in git log output buffers.
+Calculated by `fugitive-guess-log-output-type'.
+Used by `fugitive-hash' to assist in finding the commit hash on curr line.
+
+The log output types are:
+
+`normal' via: git log.
+Commit hashes are prefixed by \"^commit \".
+
+`normal-one-line' via: git log --oneline
+Commit hashes are are the first item on each line, no prefix.
+
+`graph' via: git log --graph
+Commit hashes are prefixed by \"*.+commit \".
+
+`graph-one-line' via: git log --graph --oneline
+Commit hashes are prefixed by a star, wild card range, then the hash (no commit text).
+  \"*.+ \
+")
 
 (defvar fugitive-log-graph-fn #'fugitive-log-graph-compact
   "Default fn to use for graph in my hydra.")

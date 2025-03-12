@@ -10201,6 +10201,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-fetch-n-log "fugitive" nil t)
 ;; hydra
 (autoload #'my-fugitive-hydra/body "my-hydras" nil t)
+(autoload #'my-fugitive-log-hydra/body "my-hydras" nil t)
 
 (when my-use-evil-p
   (evil-leader/set-key "f" #'fugitive-shell-command)

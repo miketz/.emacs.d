@@ -324,6 +324,7 @@ _e_: find local-only branches you may want to delete
 _s_: show commit at point
 _p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
+_L_: enter log Hydra
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
   ("l" fugitive-log-graph)
@@ -336,6 +337,28 @@ _q_, _C-g_: quit"
   ("s" fugitive-show)
   ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers-except-current)
+  ("L" my-fugitive-log-hydra/body)
+  ;; don't use the hint text as it makes (:hint nil) not work?
+  ("C-g" nil nil)
+  ("q" nil))
+
+(defhydra my-fugitive-log-hydra (:color blue :hint nil) ;;(:color blue)
+  "
+_f_: single file
+_p_: first parent commits only
+_c_: graph compact
+_m_: graph medium
+_l_: graph long
+_s_: fast
+_a_: faster, no colors
+_q_, _C-g_: quit"
+  ("f" fugitive-log-file)
+  ("p" fugitive-log-first-parent)
+  ("c" fugitive-log-graph-compact)
+  ("m" fugitive-log-graph-medium)
+  ("l" fugitive-log-graph-long)
+  ("s" fugitive-log-fast)
+  ("a" fugitive-log-faster)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

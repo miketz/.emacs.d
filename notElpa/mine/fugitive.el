@@ -389,6 +389,16 @@ But likely still slower than normal logs with no --graph or --first-parent."
   (interactive)
   (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t))
 
+
+;;;###autoload
+(defun fugitive-log-file ()
+  "Prepare the git command with for a log of a single file.
+Uses the file of the current buffer."
+  (interactive)
+  (fugitive-shell-command (concat "git log --oneline --decorate=short -n 1000 -- "
+                                  (fugitive-curr-filename))
+                          nil t))
+
 ;;;###autoload
 (defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."

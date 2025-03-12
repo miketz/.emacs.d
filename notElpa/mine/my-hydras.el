@@ -351,6 +351,7 @@ _m_: graph medium
 _l_: graph long
 _s_: fast
 _a_: faster, no colors
+_;_: log between revs
 _q_, _C-g_: quit"
   ("f" fugitive-log-file)
   ("p" fugitive-log-first-parent)
@@ -359,6 +360,7 @@ _q_, _C-g_: quit"
   ("l" fugitive-log-graph-long)
   ("s" fugitive-log-fast)
   ("a" fugitive-log-faster)
+  (";" fugitive-log-between)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

@@ -372,6 +372,7 @@ It should finsih relatively quickly even for larger logs."
   (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t))
 
 
+;;;###autoload
 (defun fugitive-log-faster ()
   "Like `fugitive-log-fast' but also disable colorization for even more speed."
   (interactive)

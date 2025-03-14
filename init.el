@@ -8484,35 +8484,53 @@ vanilla javascript buffers."
 
 (cl-defun my-create-ctags (dir-name)
   "Create tags file using DIR-NAME as project root."
-  (interactive "DDirectory: ")
+  (interactive "DSrc Directory: ")
   ;; GUARD: must have ctags program configured in `my-ctags-exe'.
   (when (null my-ctags-exe)
     (message "Set path to ctags in my-ctags-exe.")
     (cl-return-from my-create-ctags))
+  ;; GUARD: must be using universal ctags.
+  (unless my-universal-ctags-p
+    (message "Universal ctags is required.")
+    (cl-return-from my-create-ctags))
 
-  (cond
-   ;; select the lang if universal-ctags
-   (my-universal-ctags-p
-    (require 's) ; for `s-split'
-    (let* ((lang-str (shell-command-to-string (format "%s --list-languages"
-                                                      my-ctags-exe)))
-           (supported-langs (s-split "\n" lang-str))
-           (lang (completing-read "Lang: " supported-langs)))
-      ;; create tags.
-      (shell-command
-       (read-shell-command "cmd: "
-                           (format "%s --languages=%s --sort=yes -f TAGS -e -R %s"
-                                   my-ctags-exe
-                                   lang
-                                   (directory-file-name dir-name))))))
-   ;; not unviersal-ctags. explicit language selection not supported?
-   (t
-    ;; create tags
+  (require 's) ; for `s-split'
+  (let* (;; specify filename and dir to write TAGS file
+         (file-name (read-string "tags file name: " "TAGS"))
+         (dir (read-directory-name "save tags to folder: " nil nil t))
+         (tags-file-path (concat dir file-name))
+
+         (lang-str (shell-command-to-string (format "%s --list-languages"
+                                                    my-ctags-exe)))
+         (supported-langs (s-split "\n" lang-str))
+         (lang (completing-read "Lang: " supported-langs)))
+    ;; create tags.
     (shell-command
-     (format "%s -f TAGS -e -R %s"
-             my-ctags-exe
-             (directory-file-name dir-name)))))
+     (read-shell-command "cmd: "
+                         (format "%s --languages=%s --sort=yes -f %s -e -R %s"
+                                 my-ctags-exe
+                                 lang
+                                 tags-file-path
+                                 (directory-file-name dir-name))))
+    ;; `xref' stores TAGS file in global variable `tags-file-name'. Set it as
+    ;; that's usually what I want.
+    ;; NOTE: when switching to a new project, must manually set `tags-file-name'
+    ;; or regenrate the TAGS file with this fn.
+    ;; NOTE: look into `tags-table-list' for multiple TAGS files
+    (visit-tags-table tags-file-path)
+    ;; (setq tags-file-name (concat (directory-file-name dir-name)
+    ;;                              "/TAGS"))
+    ))
 
+(defun my-create-old-ctags (dir-name)
+  "Old ctags, not the new universal ctags fork.
+Explicit language selection not supported?"
+  (interactive "DDirectory: ")
+  ;; create tags
+  (shell-command
+   (format "%s -f TAGS -e -R %s"
+           my-ctags-exe
+           (directory-file-name dir-name)))
   ;; `xref' stores TAGS file in global variable `tags-file-name'. Set it as
   ;; that's usually what I want.
   ;; NOTE: when switching to a new project, must manually set `tags-file-name'

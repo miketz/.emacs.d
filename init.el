@@ -8497,10 +8497,11 @@ vanilla javascript buffers."
            (lang (completing-read "Lang: " supported-langs)))
       ;; create tags.
       (shell-command
-       (format "%s --languages=%s -f TAGS -e -R %s"
-               my-ctags-exe
-               lang
-               (directory-file-name dir-name)))))
+       (read-shell-command "cmd: "
+                           (format "%s --languages=%s --sort=yes -f TAGS -e -R %s"
+                                   my-ctags-exe
+                                   lang
+                                   (directory-file-name dir-name))))))
    ;; not unviersal-ctags. explicit language selection not supported?
    (t
     ;; create tags

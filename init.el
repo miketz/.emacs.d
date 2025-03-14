@@ -9547,6 +9547,14 @@ And turns off `indent-tabs-mode'."
 Values: lsp, citre, nil")
 
 ;;;----------------------------------------------------------------------------
+;;; info on setting up ctags files for go standard lib and 3rd party libs.
+;;;----------------------------------------------------------------------------
+;; 1. go std lib path on mac: /usr/local/go/src
+;; 2. 3rd party libs on mac: ~/go/pkg/mod
+;; 3. for each project: (my-create-ctags)
+
+
+;;;----------------------------------------------------------------------------
 ;;; go-mod-ts-mode
 ;;;----------------------------------------------------------------------------
 (when (treesit-language-available-p 'gomod)

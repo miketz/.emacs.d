@@ -8514,6 +8514,7 @@ vanilla javascript buffers."
   ;; that's usually what I want.
   ;; NOTE: when switching to a new project, must manually set `tags-file-name'
   ;; or regenrate the TAGS file with this fn.
+  ;; NOTE: look into `tags-table-list' for multiple TAGS files
   (visit-tags-table (concat (directory-file-name dir-name)
                             "/TAGS"))
   ;; (setq tags-file-name (concat (directory-file-name dir-name)

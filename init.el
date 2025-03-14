@@ -1550,6 +1550,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;; s
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/s.el" load-path)
+(autoload #'s-split "bug-hunter" nil nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; f
@@ -8494,7 +8495,6 @@ vanilla javascript buffers."
     (message "Universal ctags is required.")
     (cl-return-from my-create-ctags))
 
-  (require 's) ; for `s-split'
   (let* (;; specify filename and dir to write TAGS file
          (file-name (read-string "tags file name: " "TAGS"))
          (dir (read-directory-name "save tags to folder: " nil nil t))

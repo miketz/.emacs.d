@@ -8479,6 +8479,9 @@ vanilla javascript buffers."
                                                       work-laptop-mac))
   "Non-nil if the ctags used on this computer is universial ctags.")
 
+;; sample cmd to make TAGS for Go std lib in a project dir
+;; /opt/homebrew/bin/ctags --languages=Go --sort=yes --exclude=.git/ -f "/Users/mike/go_test/minesweeper/TAGSstdLib" -e -R /usr/local/go/src
+
 (cl-defun my-create-ctags (dir-name)
   "Create tags file using DIR-NAME as project root."
   (interactive "DDirectory: ")

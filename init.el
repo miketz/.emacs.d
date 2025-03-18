@@ -703,7 +703,7 @@ in case that file does not provide any feature."
 (declare-function my-setup-c-mode 'suppress)
 (declare-function my-setup-c++-mode 'suppress)
 (declare-function dired-man 'suppress)
-(declare-function s-trim 'suppress)
+;; (declare-function s-trim 'suppress)
 (declare-function my-setup-sql 'suppress)
 (declare-function omnisharp-go-to-definition 'suppress)
 (declare-function eww-reload 'suppress)
@@ -1550,7 +1550,8 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;; s
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/s.el" load-path)
-(autoload #'s-split "bug-hunter" nil nil)
+(autoload #'s-split "s" nil nil)
+(autoload #'s-trim "s" nil nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; f
@@ -4393,7 +4394,8 @@ and indent."
 ;;; sql-mode
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'sql
-  (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
+  ;; no need for this autoload to dupe. properly importing s.el library now.
+  ;; (autoload #'s-trim "my-misc" nil nil) ; used by snippet "ins"
 
   (setq sql-product 'ms) ; using sql server at the moment.
 

@@ -1894,4 +1894,11 @@ Historical preservation."
        ;; replaces `fci-mode' and it's color variable `fci-rule-color'
        `(fill-column-indicator ((,class (:foreground "#606060")))))))
 
+(defun my-iosevka-big ()
+  "Big isoevka font, but skinny. Intended for dark backgrounds."
+  (interactive)
+  (load-theme 'charcoal t)
+  (set-background-color "#15150B")
+  (set-frame-font "-*-Iosevka-thin-normal-normal-*-20-*-*-*-m-0-iso10646-1"))
+
 (provide 'my-color-theme-mods)

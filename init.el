@@ -2094,7 +2094,9 @@ This prevents overlapping themes; something I would rarely want."
   (autoload #'my-color-app-monochrome-themes-dark-theme file nil t)
   (autoload #'my-color-birds-of-paradise-plus file nil t)
   (autoload #'my-color-miasma file nil t)
-  (autoload #'my-color-transparent-bg file nil t))
+  (autoload #'my-color-transparent-bg file nil t)
+
+  (autoload #'my-iosevka-big file nil t))
 
 
 (when my-graphic-p ;; transparency stuff

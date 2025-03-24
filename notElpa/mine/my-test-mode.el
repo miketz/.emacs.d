@@ -299,6 +299,7 @@ Nil if not found."
 
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
+    ;; TODO: search forward too to handle clase of alias in select statement
     (let ((alias-def (or (re-search-backward (concat " " alias " ") nil t)
                          (re-search-backward (concat " " alias "\n") nil t))))
       (when (null alias-def)

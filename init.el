@@ -4441,6 +4441,8 @@ and indent."
   ;; sql completion
   (when my-use-evil-p
     (evil-leader/set-key-for-mode 'sql-mode "s" #'my-sql-comp-hydra/body))
+  ;; issues overriding comapny C-o keybind. use alteratnive for now
+  (define-key sql-mode-map (kbd "C-i") #'my-sql-complete-guess-work)
 
 
   (defun my-setup-sql ()

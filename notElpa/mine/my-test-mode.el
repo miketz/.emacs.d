@@ -292,6 +292,11 @@ Nil if not found."
   (save-excursion
     (re-search-backward "\\." (line-beginning-position) t)))
 
+(defun my-sql-txt-before-dot (dot-loc)
+  (save-excursion
+    (goto-char dot-loc)
+    (thing-at-point 'symbol 'no-properties)))
+
 (cl-defun my-sql-complete-guess-work ()
   (interactive)
   (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))
@@ -302,9 +307,13 @@ Nil if not found."
       (my-sql-complete-schema txt)
       (cl-return-from my-sql-complete-guess-work))
 
-    (let ((before-dot (thing-at-point 'symbol 'no-properties)))
-      
-      (print `(,txt ,dot-loc ,before-dot)))))
+    (let* ((txt-before-dot (my-sql-txt-before-dot dot-loc))
+           (schema-p (member-ignore-case txt-before-dot my-sql-schemas)))
+      ;; (print `(,txt ,dot-loc ,txt-before-dot ,schema-p))
+      (if schema-p
+          (my-sql-compelete-table-or-view txt-before-dot txt)
+        ;; else, maybe an alias. TODO: do more work to derive table from alias by text search
+        (my-sql-complete-col)))))
 
 (defun my-sql-complete-guess-work-BAK ()
   (interactive)

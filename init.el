@@ -9545,10 +9545,10 @@ And turns off `indent-tabs-mode'."
 
 
 
-(defvar my-go-ide-type
-  (if (eq system-type 'windows-nt) ;; eglot is freezing on windows
-      'citre
-    'lsp)
+(defvar my-go-ide-type 'lsp
+  ;; (if (eq system-type 'windows-nt) ;; eglot is freezing on windows
+  ;;     'citre
+  ;;   'lsp)
   "Which tooling to use for IDE-like features.
 Values: lsp, citre, nil")
 

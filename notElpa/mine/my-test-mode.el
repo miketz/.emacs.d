@@ -297,6 +297,19 @@ Nil if not found."
     (goto-char dot-loc)
     (thing-at-point 'symbol 'no-properties)))
 
+(cl-defun my-sql-alias-def-info (alias)
+  (save-excursion
+    (let ((alias-def (or (re-search-backward (concat " " alias " ") nil t)
+                         (re-search-backward (concat " " alias "\n") nil t))))
+      (when (null alias-def)
+        (cl-return-from my-sql-alias-def-info nil))
+
+      (let ((table (thing-at-point 'symbol 'no-properties)))
+        ;; (print table)
+        (re-search-backward "\\." (line-beginning-position) t)
+        (let ((schema (thing-at-point 'symbol 'no-properties)))
+          `(:schema ,schema :table ,table))))))
+
 (cl-defun my-sql-complete-guess-work ()
   (interactive)
   (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))
@@ -309,43 +322,17 @@ Nil if not found."
 
     (let* ((txt-before-dot (my-sql-txt-before-dot dot-loc))
            (schema-p (member-ignore-case txt-before-dot my-sql-schemas)))
-      ;; (print `(,txt ,dot-loc ,txt-before-dot ,schema-p))
       (if schema-p
+          ;; table/view completion
           (my-sql-compelete-table-or-view txt-before-dot txt)
-        ;; else, maybe an alias. TODO: do more work to derive table from alias by text search
-        (my-sql-complete-col)))))
+        ;; else, maybe a table alias. TODO: do more work to derive table from alias by text search
+        (let ((info (my-sql-alias-def-info "u")))
+          (when (null info)
+            (cl-return-from my-sql-complete-guess-work))
+          ;; TODO: fill in only the remaining chars of col excluding prefix.
+          (insert (my-sql-complete-col (cl-getf info :schema)
+                                       (cl-getf info :table)
+                                       txt)))))))
 
-(defun my-sql-complete-guess-work-BAK ()
-  (interactive)
-  (save-excursion
-    (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))
-           (bounds (bounds-of-thing-at-point 'symbol))
-           (before-dot (let ((bol (line-beginning-position)))
-                         (let ((dot (my-sql-get-dot-loc bounds)))
-                           (when (null dot)
-                             (cl-return-from my-sql-complete-guess-work nil))
-                           (goto-char dot)
-                           ;; Now point is on the dot ".". Find begging of schema name.
-                           ;; Search backward for all of these symbols (ie don't stop after first match)
-                           ;; Use the match closest to the dot as `pack-begin'.
-                           (let ((pack-begin nil)
-                                 (begin-chars '("(" "[" "{" " " "	"))) ;; tab
-                             (cl-loop for c in begin-chars
-                                      do
-                                      (let ((tmp-begin (save-excursion (search-backward c bol t))))
-                                        ;; only set pack-begin if it's the nearest match so far.
-                                        (when (or (null pack-begin) ;; if not set yet
-                                                  (and (not (null tmp-begin))
-                                                       (> tmp-begin pack-begin)))
-                                          (setq pack-begin tmp-begin))))
-
-                             ;; get the sub-string that is package name.
-                             (when (and pack-begin dot) ;; found both start/end
-                               (cl-incf pack-begin) ;; +1 to go forward past the delimiter we matched on.
-                               (buffer-substring-no-properties pack-begin dot)))))))
-
-      ;; compelete table/view
-      (when (member before-dot my-sql-schemas)
-        (my-sql-complete-table before-dot txt)))))
 
 ;;; my-test-mode.el ends here

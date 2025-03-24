@@ -41,12 +41,12 @@
   "Options that apply to all themes in the rg collection."
   :group 'faces)
 
-(defcustom rg-themes-modeline-padding 6
+(defcustom rg-themes-modeline-padding -1 ;;6
   "Amount of pixels to apply as padding to the modeline."
   :group 'rg-themes
   :type 'integer)
 
-(defcustom rg-themes-spacious-frame t
+(defcustom rg-themes-spacious-frame nil ;;t
   "Whether or not to apply extra margin to the Emacs frame."
   :group 'rg-themes
   :type 'boolean)

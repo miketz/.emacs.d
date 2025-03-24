@@ -326,7 +326,7 @@ Nil if not found."
           ;; table/view completion
           (my-sql-compelete-table-or-view txt-before-dot txt)
         ;; else, maybe a table alias. TODO: do more work to derive table from alias by text search
-        (let ((info (my-sql-alias-def-info "u")))
+        (let* ((info (my-sql-alias-def-info txt-before-dot)))
           (when (null info)
             (cl-return-from my-sql-complete-guess-work))
           ;; TODO: fill in only the remaining chars of col excluding prefix.

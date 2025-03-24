@@ -4,6 +4,7 @@
 (require 'posframe)
 (require 'ivy)
 (require 'ivy-posframe)
+(require 'cl-lib)
 
 (define-minor-mode my-test-mode
   "testing mode for keybinds."
@@ -34,6 +35,7 @@
 
 
 
+
 (cl-defun prev-char ()
   ;; GUARD: if at beginning of line return nil
   (when (= (point) (line-beginning-position))
@@ -56,5 +58,175 @@
      (t 'wha?))))
 ;; zzz
 ;; thisi sa test.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar my-sql-schemas '())
+(defvar my-sql-tables '())
+(defvar my-sql-views '())
+(defvar my-sql-tables-and-views '())
+(defvar my-sql-cols '())
+
+;; will reuse this struct for views too
+(cl-defstruct my-sql-table
+  "Struct to hold info about a table meta data."
+  (schema nil)
+  (name nil))
+
+
+(cl-defstruct my-sql-col-data
+  "Struct to hold info about a table meta data."
+  (table-schema nil)
+  (table-name nil)
+  (col-name nil)
+  (data-type nil)
+  (character-max-len nil) ; int, nullable
+  (ordinal-position nil) ; int
+  )
+
+(defun my-sql-fill-completion-data ()
+  "Fill the sql shema data for completion.
+Overwrite any existing data."
+  (interactive)
+  (message "Filling sql completion data. Wait a bit...")
+  (let* ((prog (expand-file-name "~/.emacs.d/notElpaYolo/dbQueryHelper/dbQueryHelper"))
+         (cmd-schemas (concat prog " schemas"))
+         (cmd-tables (concat prog " tables"))
+         (cmd-views (concat prog " views"))
+         (cmd-cols (concat prog " cols"))
+
+         ;; csv: schema|...
+         (csv-schemas (shell-command-to-string cmd-schemas))
+         ;; csv: schema|table, ...
+         (csv-tables (shell-command-to-string cmd-tables))
+         ;; csv: schema|view, ...
+         (csv-views (shell-command-to-string cmd-views))
+         ;; csv: schema|table|col|dataType|maxLen|ordPos, ...
+         (csv-cols (shell-command-to-string cmd-cols))
+         (csv-sep "|")
+         (csv-sep-outer ",")
+
+         (table-recs (string-split csv-tables csv-sep-outer))
+         (view-recs (string-split csv-views csv-sep-outer))
+         (col-recs (string-split csv-cols csv-sep-outer)))
+
+    ;; schemas
+    (setq my-sql-schemas (string-split csv-schemas csv-sep))
+
+    ;; tables
+    (setq my-sql-tables '()) ; reset
+    (cl-loop for csv in table-recs
+             do
+             (let* ((parts (string-split csv csv-sep))
+                    (tab (make-my-sql-table :schema (nth 0 parts)
+                                            :name (nth 1 parts))))
+               (push tab my-sql-tables)))
+
+    ;; views. made with same struct as tables above.
+    (setq my-sql-views '()) ; reset
+    (cl-loop for csv in view-recs
+             do
+             (let* ((parts (string-split csv csv-sep))
+                    (view (make-my-sql-table :schema (nth 0 parts)
+                                             :name (nth 1 parts))))
+               (push view my-sql-views)))
+
+    ;; tables and views. useful for col completion later
+    (setq my-sql-tables-and-views (append my-sql-tables
+                                          my-sql-views))
+    ;; cols
+    (setq my-sql-cols '()) ; reset
+    (cl-loop for csv in col-recs
+             do
+             (let* ((parts (string-split csv csv-sep))
+                    (col (make-my-sql-col-data :table-schema (nth 0 parts)
+                                               :table-name (nth 1 parts) ; might be view name
+                                               :col-name (nth 2 parts)
+                                               :data-type (nth 3 parts)
+                                               :character-max-len (nth 4 parts)
+                                               :ordinal-position (nth 5 parts))))
+
+               (push col my-sql-cols))))
+  (message "Sql completion data is ready!"))
+
+
+(defun my-sql-complete-schema ()
+  (interactive)
+  (insert (completing-read "schema: " my-sql-schemas)))
+
+(defun my-sql-complete-table (&optional schema tab-prefix)
+  (interactive)
+  ;; prepare schema filter
+  (when (null schema)
+    (setq schema (completing-read "schema: " my-sql-schemas)))
+
+  (let* ((tabs-in-schema (cl-remove-if-not (lambda (tab)
+                                             (string-equal (my-sql-table-schema tab)
+                                                           schema))
+                                           my-sql-tables))
+         (tab-names-in-schema (mapcar (lambda (tab) ; just the string name field
+                                        (my-sql-table-name tab))
+                                      tabs-in-schema)))
+    (insert (completing-read "table: " tab-names-in-schema
+                             nil nil
+                             (or tab-prefix "")))))
+
+
+(defun my-sql-complete-view (&optional schema view-prefix)
+  (interactive)
+  ;; prepare schema filter
+  (when (null schema)
+    (setq schema (completing-read "schema: " my-sql-schemas)))
+
+  (let* ((views-in-schema (cl-remove-if-not (lambda (view)
+                                              (string-equal (my-sql-table-schema view)
+                                                            schema))
+                                            my-sql-views))
+         (view-names-in-schema (mapcar (lambda (view) ; just the string name field
+                                        (my-sql-table-name view))
+                                      views-in-schema)))
+    (insert (completing-read "view: " view-names-in-schema
+                             nil nil
+                             (or view-prefix "")))))
+
+
+(defun my-sql-complete-col (&optional schema table-or-view col-prefix)
+  (interactive)
+  (let ((completing-read-function #'ivy-completing-read)
+        ;; dynamically shadow ivy completion style to ignore order.
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window
+        (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
+                                        ; doens't go off screen.
+
+    ;; prepare schema filter
+    (when (null schema)
+      (setq schema (completing-read "schema: " my-sql-schemas)))
+
+    ;; prepare table/view filter
+    (when (null table-or-view)
+      (let* ((tabs-in-schema (cl-remove-if-not (lambda (tab)
+                                                 (string-equal (my-sql-table-schema tab)
+                                                               schema))
+                                               my-sql-tables-and-views))
+             (tab-names-in-schema (mapcar (lambda (tab) ; just the string name field
+                                            (my-sql-table-name tab))
+                                          tabs-in-schema)))
+        (setq table-or-view (completing-read "table: " tab-names-in-schema))))
+
+    (let* ((cols-in-schema (cl-remove-if-not (lambda (col)
+                                               (string-equal (my-sql-col-data-table-schema col)
+                                                             schema))
+                                             my-sql-cols))
+           (cols-in-table (cl-remove-if-not (lambda (col)
+                                              (string-equal (my-sql-col-data-table-name col)
+                                                            table-or-view))
+                                            cols-in-schema))
+           (col-names (mapcar (lambda (col)
+                                (my-sql-col-data-col-name col))
+                              cols-in-table)))
+      (insert (completing-read "col: " col-names
+                               nil nil
+                               (or col-prefix ""))))))
+
 
 ;;; my-test-mode.el ends here

@@ -4437,6 +4437,9 @@ and indent."
 ;;         (cl-loop repeat reps do
 ;;                  (my-kbd-sql-fix-col-n)))))
 
+  ;; sql completion
+  (when my-use-evil-p
+    (evil-leader/set-key-for-mode 'sql-mode "s" #'my-sql-comp-hydra/body))
 
 
   (defun my-setup-sql ()
@@ -10332,6 +10335,12 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 ;;   (global-completion-preview-mode))
 
+
+;;;----------------------------------------------------------------------------
+;;; my sql completion. MS Sql Server only for now.
+;;;----------------------------------------------------------------------------
+;; hydra
+(autoload #'my-sql-comp-hydra/body "my-hydras" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

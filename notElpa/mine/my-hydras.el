@@ -366,6 +366,25 @@ _q_, _C-g_: quit"
   ("q" nil))
 
 
+(load "my-test-mode") ;; TODO: move this into a proper mode file
+(defhydra my-sql-comp-hydra (:color blue :hint nil) ;;(:color blue)
+  "
+_i_: init schema data
+_s_: schema
+_t_: table
+_v_: view
+_c_: col
+_q_, _C-g_: quit"
+  ("i" my-sql-fill-completion-data)
+  ("s" my-sql-complete-schema)
+  ("t" my-sql-complete-table)
+  ("v" my-sql-complete-view)
+  ("c" my-sql-complete-col)
+  ;; don't use the hint text as it makes (:hint nil) not work?
+  ("C-g" nil nil)
+  ("q" nil))
+
+
 
 ;; spawn hydras from a single binding. A hydra of hydras.
 (let ((my-hydras (mapcar #'symbol-name

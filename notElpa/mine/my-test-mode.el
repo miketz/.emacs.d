@@ -149,7 +149,7 @@ Overwrite any existing data."
   (message "Sql completion data is ready!"))
 
 
-(defun my-sql-complete-schema ()
+(defun my-sql-complete-schema (&optional schema-prefix)
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
         ;; dynamically shadow ivy completion style to ignore order.
@@ -157,7 +157,9 @@ Overwrite any existing data."
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
                                         ; doens't go off screen.
-    (insert (completing-read "schema: " my-sql-schemas))))
+    (insert (completing-read "schema: " my-sql-schemas
+                             nil nil
+                             (or schema-prefix "")))))
 
 (defun my-sql-complete-table (&optional schema tab-prefix)
   (interactive)
@@ -284,14 +286,25 @@ Return nil if dot is not found at previous character."
         prev
       nil)))
 
-(defun my-sql-complete-guess-work ()
+(defun my-sql-dot-loc ()
+  "Location of dot . on currnet line.
+Nil if not found."
+  (save-excursion
+    (re-search-backward "\\." (line-beginning-position) t)))
+
+(cl-defun my-sql-complete-guess-work ()
   (interactive)
   (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))
-         (dot-loc (re-search-backward "\\." (line-beginning-position) nil))
-         (dot-txt (thing-at-point 'symbol 'no-properties))
-         (before-dot (thing-at-point 'symbol 'no-properties)))
-    (print `(,txt ,dot-loc ,dot-txt ,before-dot))
-    ))
+         (dot-loc (my-sql-dot-loc)))
+    ;; no dot "." found
+    (when (null dot-loc)
+      ;; TODO: append to shcema text already typed.
+      (my-sql-complete-schema txt)
+      (cl-return-from my-sql-complete-guess-work))
+
+    (let ((before-dot (thing-at-point 'symbol 'no-properties)))
+      
+      (print `(,txt ,dot-loc ,before-dot)))))
 
 (defun my-sql-complete-guess-work-BAK ()
   (interactive)

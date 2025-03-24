@@ -325,7 +325,7 @@ Nil if not found."
       (if schema-p
           ;; table/view completion
           (my-sql-compelete-table-or-view txt-before-dot txt)
-        ;; else, maybe a table alias. TODO: do more work to derive table from alias by text search
+        ;; else, maybe a table alias.
         (let* ((info (my-sql-alias-def-info txt-before-dot)))
           (when (null info)
             (cl-return-from my-sql-complete-guess-work))

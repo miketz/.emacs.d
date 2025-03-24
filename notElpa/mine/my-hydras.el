@@ -371,12 +371,14 @@ _q_, _C-g_: quit"
   "
 _i_: init schema data
 _s_: schema
+_a_: tables and views
 _t_: table
 _v_: view
 _c_: col
 _q_, _C-g_: quit"
   ("i" my-sql-fill-completion-data)
   ("s" my-sql-complete-schema)
+  ("a" my-sql-compelete-table-or-view)
   ("t" my-sql-complete-table)
   ("v" my-sql-complete-view)
   ("c" my-sql-complete-col)

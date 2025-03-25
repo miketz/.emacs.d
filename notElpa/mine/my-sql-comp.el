@@ -292,10 +292,18 @@ Nil if not found."
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
     ;; TODO: search forward too to handle clase of alias in select statement
-    (let ((alias-def (or (re-search-backward (concat " " alias " ") nil t)
-                         (re-search-backward (concat " " alias "\n") nil t))))
-      (when (null alias-def)
+    (let* ((alias-def-backward (or (re-search-backward (concat " " alias " ") nil t)
+                                   (re-search-backward (concat " " alias "\n") nil t)))
+           (alias-def-forward (and (null alias-def-backward) ; not found backward
+                                   (or (re-search-forward (concat " " alias " ") (+ (point) 120) t)
+                                       (re-search-forward (concat " " alias "\n") (+ (point) 120) t)))))
+      (when (and (null alias-def-forward)
+                 (null alias-def-backward))
         (cl-return-from my-sql-alias-def-info nil))
+
+      (when alias-def-forward
+        ;; adjust for forward search putting cursor at the end of the match.
+        (backward-word 2))
 
       (let ((table (thing-at-point 'symbol 'no-properties)))
         ;; (print table)

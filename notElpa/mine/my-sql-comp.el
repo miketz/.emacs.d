@@ -278,6 +278,14 @@ Return nil if dot is not found at previous character."
         prev
       nil)))
 
+(defun my-sql-guess-select-bounds ()
+  "Get start and end locations of current select query.
+Imperfect guess, assumes certain formatting."
+  (save-excursion
+    (let ((start (re-search-backward "select" nil t))
+          (end (re-search-forward "\n\n" nil t)))
+      `(,start . ,end))))
+
 (defun my-sql-dot-loc ()
   "Location of dot . on currnet line.
 Nil if not found."
@@ -294,24 +302,25 @@ Nil if not found."
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
     ;; TODO: search forward too to handle clase of alias in select statement
-    (let* ((alias-def-backward (or (re-search-backward (concat " " alias " ") nil t)
-                                   (re-search-backward (concat " " alias "\n") nil t)))
-           (alias-def-forward (and (null alias-def-backward) ; not found backward
-                                   (or (re-search-forward (concat " " alias " ") (+ (point) 120) t)
-                                       (re-search-forward (concat " " alias "\n") (+ (point) 120) t)))))
-      (when (and (null alias-def-forward)
-                 (null alias-def-backward))
-        (cl-return-from my-sql-alias-def-info nil))
+    (let ((select-bounds (my-sql-guess-select-bounds)))
+      (let* ((alias-def-backward (or (re-search-backward (concat " " alias " ") (car select-bounds) t)
+                                     (re-search-backward (concat " " alias "\n") (car select-bounds) t)))
+             (alias-def-forward (and (null alias-def-backward) ; not found backward
+                                     (or (re-search-forward (concat " " alias " ") (cdr select-bounds) t)
+                                         (re-search-forward (concat " " alias "\n") (cdr select-bounds) t)))))
+        (when (and (null alias-def-forward)
+                   (null alias-def-backward))
+          (cl-return-from my-sql-alias-def-info nil))
 
-      (when alias-def-forward
-        ;; adjust for forward search putting cursor at the end of the match.
-        (backward-word 2))
+        (when alias-def-forward
+          ;; adjust for forward search putting cursor at the end of the match.
+          (backward-word 2))
 
-      (let ((table (thing-at-point 'symbol 'no-properties)))
-        ;; (print table)
-        (re-search-backward "\\." (line-beginning-position) t)
-        (let ((schema (thing-at-point 'symbol 'no-properties)))
-          `(:schema ,schema :table ,table))))))
+        (let ((table (thing-at-point 'symbol 'no-properties)))
+          ;; (print table)
+          (re-search-backward "\\." (line-beginning-position) t)
+          (let ((schema (thing-at-point 'symbol 'no-properties)))
+            `(:schema ,schema :table ,table)))))))
 
 ;;;###autoload
 (cl-defun my-sql-complete-guess-work ()

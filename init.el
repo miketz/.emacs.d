@@ -1988,6 +1988,14 @@ This prevents overlapping themes; something I would rarely want."
 
 (ad-activate 'load-theme)
 
+;; my packages
+;; mode-on-region  ~/.emacs.d/notElpaYolo/mor/
+;; rsvp ~/.emacs.d/notElpaYolo/rapid-serial-visual-presentation/
+;; gitFetchHelper ~/.emacs.d/notElpaYolo/gitFetchHelper/
+;; my-go-doc ~/.emacs.d/notElpa/mine/my-go-doc.el
+;; my-go-helpers ~/.emacs.d/notElpa/mine/my-go-helpers.el
+;; dbQueryHelper ~/.emacs.d/notElpaYolo/dbQueryHelper/
+;; my-sql-comp ~/.emacs.d/notElpa/mine/my-sql-comp.el
 
 ;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
 ;;   "Themes I created.")

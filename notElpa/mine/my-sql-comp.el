@@ -9,7 +9,11 @@
 (defvar my-sql-views '())
 (defvar my-sql-tables-and-views '())
 (defvar my-sql-cols '())
-
+(defvar my-sql-conn-str) ; set in `my-sql-conn-str-external-file'
+(defvar my-sql-conn-str-external-file "~/my-sql-conn-str.el"
+  "Store the conn string in an external location, out of this git repo.
+containing code like:
+  (setq my-sql-conn-str \"sqlserver://username:passw@localhost/MSSQLSERVER01?database=dbName\")")
 
 (defun my-sql-clear-shcema-data ()
   "Clear the stored schema data."
@@ -37,17 +41,25 @@
   (ordinal-position nil) ; int
   )
 
+
+;;;###autoload
+(defun my-sql-set-conn-str ()
+  "Set the conn str. Load from external source"
+  (load my-sql-conn-str-external-file)
+  my-sql-conn-str)
+
 ;;;###autoload
 (defun my-sql-fill-completion-data ()
   "Fill the sql shema data for completion.
 Overwrite any existing data."
   (interactive)
   (message "Filling sql completion data. Wait a bit...")
+  (my-sql-set-conn-str) ;; set connStr
   (let* ((prog (expand-file-name "~/.emacs.d/notElpaYolo/dbQueryHelper/dbQueryHelper"))
-         (cmd-schemas (concat prog " schemas"))
-         (cmd-tables (concat prog " tables"))
-         (cmd-views (concat prog " views"))
-         (cmd-cols (concat prog " cols"))
+         (cmd-schemas (concat prog " schemas \"" my-sql-conn-str "\""))
+         (cmd-tables (concat prog " tables \"" my-sql-conn-str "\""))
+         (cmd-views (concat prog " views \"" my-sql-conn-str "\""))
+         (cmd-cols (concat prog " cols \"" my-sql-conn-str "\""))
 
          ;; csv: schema|...
          (csv-schemas (shell-command-to-string cmd-schemas))
@@ -310,7 +322,7 @@ Nil if not found."
            (schema-p (member-ignore-case txt-before-dot my-sql-schemas)))
       (if schema-p
           ;; table/view completion
-          (my-sql-compelete-table-or-view txt-before-dot txt)
+          (my-sql-complete-table-or-view txt-before-dot txt)
         ;; else, maybe a table alias.
         (let* ((info (my-sql-alias-def-info txt-before-dot)))
           (when (null info)

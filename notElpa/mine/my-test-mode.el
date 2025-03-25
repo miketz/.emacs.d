@@ -10,6 +10,15 @@
 (defvar my-sql-tables-and-views '())
 (defvar my-sql-cols '())
 
+(defun my-sql-clear-shcema-data ()
+  "Clear the stored schema data."
+  (interactive)
+  (setq my-sql-schemas '())
+  (setq my-sql-tables '())
+  (setq my-sql-views '())
+  (setq my-sql-tables-and-views '())
+  (setq my-sql-cols '()))
+
 ;; will reuse this struct for views too
 (cl-defstruct my-sql-table
   "Struct to hold info about a table meta data."
@@ -53,11 +62,13 @@ Overwrite any existing data."
          (view-recs (string-split csv-views csv-sep-outer))
          (col-recs (string-split csv-cols csv-sep-outer)))
 
+    ;; clear all the stored data. 1 global set.
+    (my-sql-clear-shcema-data)
+
     ;; schemas
     (setq my-sql-schemas (string-split csv-schemas csv-sep))
 
     ;; tables
-    (setq my-sql-tables '()) ; reset
     (cl-loop for csv in table-recs
              do
              (let* ((parts (string-split csv csv-sep))
@@ -66,7 +77,6 @@ Overwrite any existing data."
                (push tab my-sql-tables)))
 
     ;; views. made with same struct as tables above.
-    (setq my-sql-views '()) ; reset
     (cl-loop for csv in view-recs
              do
              (let* ((parts (string-split csv csv-sep))
@@ -78,7 +88,6 @@ Overwrite any existing data."
     (setq my-sql-tables-and-views (append my-sql-tables
                                           my-sql-views))
     ;; cols
-    (setq my-sql-cols '()) ; reset
     (cl-loop for csv in col-recs
              do
              (let* ((parts (string-split csv csv-sep))

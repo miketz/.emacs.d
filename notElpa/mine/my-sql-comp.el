@@ -298,7 +298,8 @@ Nil if not found."
     (thing-at-point 'symbol 'no-properties)))
 
 ;; TODO: implmeent more advanced detection of "current statement" to bound the alias search.
-;;       the search can escape to a different query and get the wrong alias.
+;;       the search can escape to a different query and get the wrong alias. also find the bounds of
+;;       various sql statements: select, update, insert, delete, createTab, etc.
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
     ;; TODO: search forward too to handle clase of alias in select statement

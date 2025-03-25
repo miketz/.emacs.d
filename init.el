@@ -2166,13 +2166,13 @@ This prevents overlapping themes; something I would rarely want."
    default-frame-alist))
 
  ((eq my-curr-computer 'work-laptop-2019)
-  ;; (load-theme 'charcoal t)
-  (load-theme 'ultimate t)
+  (load-theme 'charcoal t)
+  ;; (load-theme 'ultimate t)
   ;; (set-background-color "#E5E1C3")
-  (custom-theme-set-faces
-   'ultimate
-   `(default ((t :background "white"))))
-  (my-rainbow-parens-light-bg3)
+  ;; (custom-theme-set-faces
+  ;;  'ultimate
+  ;;  `(default ((t :background "white"))))
+  ;; (my-rainbow-parens-light-bg3)
   (when my-graphic-p
     (push
      '(font

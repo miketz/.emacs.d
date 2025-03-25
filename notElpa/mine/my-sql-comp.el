@@ -265,19 +265,6 @@ Overwrite any existing data."
 
 
 
-(defun my-sql-get-dot-loc (bounds)
-  "Return location of previous dot (.) relative to the thing at point.
-Searches exactly 1 character before thing at point.  No big search backwards as
-that can find the wrong dot, not related to thing at point.
-BOUNDS represents thing at point.
-Return nil if dot is not found at previous character."
-  (let* ((start (car bounds))
-         (prev (1- start))
-         (prev-char (buffer-substring-no-properties prev start)))
-    (if (string-equal prev-char ".")
-        prev
-      nil)))
-
 (defun my-sql-guess-select-bounds ()
   "Get start and end locations of current select query.
 Imperfect guess, assumes certain formatting."

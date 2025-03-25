@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name : map get
+# key: mapg
+# --
+${1:val}, ${2:ok} := ${3:mapName}[${4:key}]

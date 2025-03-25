@@ -1,5 +1,4 @@
-;;; my-test-mode.el --- testing minor mode -*- lexical-binding: t -*-
-;;; temporary scratch pad while i figure out how to do sql server completion
+;;; my-sql-comp.el --- sql completion -*- lexical-binding: t -*-
 
 (require 'ivy)
 (require 'cl-lib)
@@ -289,4 +288,4 @@ Nil if not found."
                                        txt)))))))
 
 
-;;; my-test-mode.el ends here
+;;; my-sql-comp.el ends here

@@ -3,6 +3,7 @@
 (require 'ivy)
 (require 'cl-lib)
 
+;; single global store of schema data.
 (defvar my-sql-schemas '())
 (defvar my-sql-tables '())
 (defvar my-sql-views '())

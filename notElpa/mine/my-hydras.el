@@ -366,7 +366,7 @@ _q_, _C-g_: quit"
   ("q" nil))
 
 
-(load "my-test-mode") ;; TODO: move this into a proper mode file
+(require 'my-sql-comp)
 (defhydra my-sql-comp-hydra (:color blue :hint nil) ;;(:color blue)
   "
 _i_: init schema data
@@ -378,7 +378,7 @@ _c_: col
 _q_, _C-g_: quit"
   ("i" my-sql-fill-completion-data)
   ("s" my-sql-complete-schema)
-  ("a" my-sql-compelete-table-or-view)
+  ("a" my-sql-complete-table-or-view)
   ("t" my-sql-complete-table)
   ("v" my-sql-complete-view)
   ("c" my-sql-complete-col)

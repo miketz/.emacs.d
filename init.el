@@ -10340,8 +10340,16 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 
 ;;;----------------------------------------------------------------------------
-;;; my sql completion. MS Sql Server only for now.
+;;; my-sql-comp. MS Sql Server only for now.
 ;;;----------------------------------------------------------------------------
+;; at ~/.emacs.d/notElpa/mine/my-sql-comp.el
+(autoload #'my-sql-fill-completion-data "my-sql-comp" nil t)
+(autoload #'my-sql-complete-schema "my-sql-comp" nil t)
+(autoload #'my-sql-complete-table "my-sql-comp" nil t)
+(autoload #'my-sql-complete-view "my-sql-comp" nil t)
+(autoload #'my-sql-complete-table-or-view "my-sql-comp" nil t)
+(autoload #'my-sql-complete-col "my-sql-comp" nil t)
+(autoload #'my-sql-complete-guess-work "my-sql-comp" nil t)
 ;; hydra
 (autoload #'my-sql-comp-hydra/body "my-hydras" nil t)
 

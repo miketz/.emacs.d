@@ -9,6 +9,7 @@
 (defvar my-sql-tables-and-views '())
 (defvar my-sql-cols '())
 
+
 (defun my-sql-clear-shcema-data ()
   "Clear the stored schema data."
   (interactive)
@@ -35,6 +36,7 @@
   (ordinal-position nil) ; int
   )
 
+;;;###autoload
 (defun my-sql-fill-completion-data ()
   "Fill the sql shema data for completion.
 Overwrite any existing data."
@@ -101,6 +103,7 @@ Overwrite any existing data."
   (message "Sql completion data is ready!"))
 
 
+;;;###autoload
 (defun my-sql-complete-schema (&optional schema-prefix)
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
@@ -113,6 +116,7 @@ Overwrite any existing data."
                              nil nil
                              (or schema-prefix "")))))
 
+;;;###autoload
 (defun my-sql-complete-table (&optional schema tab-prefix)
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
@@ -137,6 +141,7 @@ Overwrite any existing data."
                                (or tab-prefix ""))))))
 
 
+;;;###autoload
 (defun my-sql-complete-view (&optional schema view-prefix)
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
@@ -160,7 +165,8 @@ Overwrite any existing data."
                                nil nil
                                (or view-prefix ""))))))
 
-(defun my-sql-compelete-table-or-view (&optional schema tab-prefix)
+;;;###autoload
+(defun my-sql-complete-table-or-view (&optional schema tab-prefix)
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
         ;; dynamically shadow ivy completion style to ignore order.
@@ -184,6 +190,7 @@ Overwrite any existing data."
                                (or tab-prefix ""))))))
 
 
+;;;###autoload
 (defun my-sql-complete-col (&optional schema table-or-view col-prefix)
   (interactive)
   (let ((completing-read-function #'ivy-completing-read)
@@ -263,6 +270,7 @@ Nil if not found."
         (let ((schema (thing-at-point 'symbol 'no-properties)))
           `(:schema ,schema :table ,table))))))
 
+;;;###autoload
 (cl-defun my-sql-complete-guess-work ()
   (interactive)
   (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))
@@ -287,5 +295,7 @@ Nil if not found."
                                        (cl-getf info :table)
                                        txt)))))))
 
+
+(provide 'my-sql-comp)
 
 ;;; my-sql-comp.el ends here

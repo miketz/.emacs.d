@@ -360,9 +360,8 @@ Nil if not found."
                           all-bounds)))
     (cl-getf winner :bounds)))
 
-;; TODO: implement more advanced detection of "current statement" to bound the alias search.
-;;       the search can escape to a different query and get the wrong alias. also find the bounds of
-;;       various sql statements: select, update, insert, delete, createTab, etc.
+;; TODO: the search can escape to a different query and get the wrong alias.
+;;       need to fix alias-def finding for some cases.
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
     (let* (;; calculate the innermost bounds (point) is in

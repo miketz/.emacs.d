@@ -122,25 +122,30 @@ Overwrite any existing data."
 
 
 ;;;###autoload
-(cl-defun my-sql-complete-schema (&optional schema-prefix)
+(cl-defun my-sql-complete-schema (&optional schema-prefix tap-bounds)
   (interactive)
   (when (null my-sql-schemas) ;; GUARD: ensure there is data to complete against.
     (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-schema))
 
-  (let ((completing-read-function #'ivy-completing-read)
-        (ivy-case-fold-search-default t) ; case insensitive
-        ;; dynamically shadow ivy completion style to ignore order.
-        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
-        ;; taller ivy window
-        (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
+  (let* ((completing-read-function #'ivy-completing-read)
+         (ivy-case-fold-search-default t) ; case insensitive
+         ;; dynamically shadow ivy completion style to ignore order.
+         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+         ;; taller ivy window
+         (ivy-height (- (window-height) 4)) ; -4 is important so scrolling
                                         ; doesn't go off screen.
-    (insert (completing-read "schema: " my-sql-schemas
-                             nil nil
-                             (or schema-prefix "")))))
+         (chosen (completing-read "schema: " my-sql-schemas
+                                  nil nil
+                                  (or schema-prefix ""))))
+    (when tap-bounds
+      ;; delete current text so the completion insertion does not dupe the text they alreay typed
+      (delete-region (car tap-bounds)
+                     (cdr tap-bounds)))
+    (insert chosen)))
 
 ;;;###autoload
-(cl-defun my-sql-complete-table (&optional schema tab-prefix)
+(cl-defun my-sql-complete-table (&optional schema tab-prefix tap-bounds)
   (interactive)
   (when (null my-sql-tables) ;; GUARD: ensure there is data to complete against.
     (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
@@ -163,14 +168,19 @@ Overwrite any existing data."
                                              my-sql-tables))
            (tab-names-in-schema (mapcar (lambda (tab) ; just the string name field
                                           (my-sql-table-name tab))
-                                        tabs-in-schema)))
-      (insert (completing-read "table: " tab-names-in-schema
-                               nil nil
-                               (or tab-prefix ""))))))
+                                        tabs-in-schema))
+           (chosen (completing-read "table: " tab-names-in-schema
+                                    nil nil
+                                    (or tab-prefix ""))))
+      (when tap-bounds
+        ;; delete current text so the completion insertion does not dupe the text they alreay typed
+        (delete-region (car tap-bounds)
+                       (cdr tap-bounds)))
+      (insert chosen))))
 
 
 ;;;###autoload
-(cl-defun my-sql-complete-view (&optional schema view-prefix)
+(cl-defun my-sql-complete-view (&optional schema view-prefix tap-bounds)
   (interactive)
   (when (null my-sql-views) ;; GUARD: ensure there is data to complete against.
     (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
@@ -193,13 +203,18 @@ Overwrite any existing data."
                                               my-sql-views))
            (view-names-in-schema (mapcar (lambda (view) ; just the string name field
                                            (my-sql-table-name view))
-                                         views-in-schema)))
-      (insert (completing-read "view: " view-names-in-schema
+                                         views-in-schema))
+           (chosen (completing-read "view: " view-names-in-schema
                                nil nil
-                               (or view-prefix ""))))))
+                               (or view-prefix ""))))
+      (when tap-bounds
+        ;; delete current text so the completion insertion does not dupe the text they alreay typed
+        (delete-region (car tap-bounds)
+                       (cdr tap-bounds)))
+      (insert chosen))))
 
 ;;;###autoload
-(cl-defun my-sql-complete-table-or-view (&optional schema tab-prefix)
+(cl-defun my-sql-complete-table-or-view (&optional schema tab-prefix tap-bounds)
   (interactive)
   (when (null my-sql-tables-and-views) ;; GUARD: ensure there is data to complete against.
     (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
@@ -222,10 +237,15 @@ Overwrite any existing data."
                                              my-sql-tables-and-views))
            (tab-names-in-schema (mapcar (lambda (tab) ; just the string name field
                                           (my-sql-table-name tab))
-                                        tabs-in-schema)))
-      (insert (completing-read "table: " tab-names-in-schema
-                               nil nil
-                               (or tab-prefix ""))))))
+                                        tabs-in-schema))
+           (chosen (completing-read "table: " tab-names-in-schema
+                                    nil nil
+                                    (or tab-prefix ""))))
+      (when tap-bounds
+        ;; delete current text so the completion insertion does not dupe the text they alreay typed
+        (delete-region (car tap-bounds)
+                       (cdr tap-bounds)))
+      (insert chosen))))
 
 
 ;;;###autoload
@@ -338,14 +358,14 @@ Nil if not found."
     ;; no dot "." found
     (when (null dot-loc)
       ;; TODO: append to schema text already typed.
-      (my-sql-complete-schema txt)
+      (my-sql-complete-schema txt tap-bounds)
       (cl-return-from my-sql-complete-guess-work))
 
     (let* ((txt-before-dot (my-sql-txt-before-dot dot-loc))
            (schema-p (member-ignore-case txt-before-dot my-sql-schemas)))
       (if schema-p
           ;; table/view completion
-          (my-sql-complete-table-or-view txt-before-dot txt)
+          (my-sql-complete-table-or-view txt-before-dot txt tap-bounds)
         ;; else, maybe a table alias.
         (let* ((info (my-sql-alias-def-info txt-before-dot)))
           (when (null info)

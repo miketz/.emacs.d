@@ -294,7 +294,6 @@ Nil if not found."
 ;;       various sql statements: select, update, insert, delete, createTab, etc.
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
-    ;; TODO: search forward too to handle clase of alias in select statement
     (let ((select-bounds (my-sql-guess-select-bounds)))
       (let* ((alias-def-backward (or (re-search-backward (concat " " alias " ") (car select-bounds) t)
                                      (re-search-backward (concat " " alias "\n") (car select-bounds) t)))

@@ -89,6 +89,7 @@ Overwrite any existing data."
                     (tab (make-my-sql-table :schema (nth 0 parts)
                                             :name (nth 1 parts))))
                (push tab my-sql-tables)))
+    (setq my-sql-tables (nreverse my-sql-tables)) ; restore order as push stacks at the front.
 
     ;; views. made with same struct as tables above.
     (cl-loop for csv in view-recs
@@ -97,6 +98,7 @@ Overwrite any existing data."
                     (view (make-my-sql-table :schema (nth 0 parts)
                                              :name (nth 1 parts))))
                (push view my-sql-views)))
+    (setq my-sql-views (nreverse my-sql-views)) ; restore order as push stacks at the front.
 
     ;; tables and views. useful for col completion later
     (setq my-sql-tables-and-views (append my-sql-tables
@@ -112,7 +114,9 @@ Overwrite any existing data."
                                                :character-max-len (nth 4 parts)
                                                :ordinal-position (nth 5 parts))))
 
-               (push col my-sql-cols))))
+               (push col my-sql-cols)))
+    (setq my-sql-cols (nreverse my-sql-cols)) ; restore order as push stacks at the front.
+    )
   (message "Sql completion data is ready!"))
 
 

@@ -340,19 +340,40 @@ Nil if not found."
     (goto-char dot-loc)
     (thing-at-point 'symbol 'no-properties)))
 
+(defun my-sql-get-closest-statement-bounds ()
+  (let* ((select-bounds (my-sql-guess-select-bounds))
+         (update-bounds (my-sql-guess-update-bounds))
+         (delete-bounds (my-sql-guess-delete-bounds))
+         ;; :name is not used but useful for testing/debugging
+         (all-bounds (list `(:name select :bounds ,select-bounds
+                                     :dist ,(- (point)
+                                               (or (car select-bounds) -999999999)))
+                           `(:name update :bounds ,update-bounds
+                                     :dist ,(- (point)
+                                               (or (car update-bounds) -999999999)))
+                           `(:name delete :bounds ,delete-bounds
+                                     :dist ,(- (point)
+                                               (or (car delete-bounds) -999999999)))))
+         (winner (-min-by (lambda (a b)
+                            (> (cl-getf a :dist)
+                               (cl-getf b :dist)))
+                          all-bounds)))
+    (cl-getf winner :bounds)))
+
 ;; TODO: implement more advanced detection of "current statement" to bound the alias search.
 ;;       the search can escape to a different query and get the wrong alias. also find the bounds of
 ;;       various sql statements: select, update, insert, delete, createTab, etc.
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
-    (let ((select-bounds (my-sql-guess-select-bounds)))
+    (let* (;; calculate the innermost bounds (point) is in
+           (winner-bounds (my-sql-get-closest-statement-bounds)))
       (let* ((alias1 (concat " " alias " "))
              (alias2 (concat " " alias "\n"))
-             (alias-def-backward (or (re-search-backward alias1 (car select-bounds) t)
-                                     (re-search-backward alias2 (car select-bounds) t)))
+             (alias-def-backward (or (re-search-backward alias1 (car winner-bounds) t)
+                                     (re-search-backward alias2 (car winner-bounds) t)))
              (alias-def-forward (and (null alias-def-backward) ; not found backward
-                                     (or (re-search-forward alias1 (cdr select-bounds) t)
-                                         (re-search-forward alias2 (cdr select-bounds) t)))))
+                                     (or (re-search-forward alias1 (cdr winner-bounds) t)
+                                         (re-search-forward alias2 (cdr winner-bounds) t)))))
         (when (and (null alias-def-forward)
                    (null alias-def-backward))
           (cl-return-from my-sql-alias-def-info nil))

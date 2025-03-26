@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # -*- delete the call to raiserror if you want to swallow the exception.
-#     NOTE: as of this writing, a finally block is not supported by SQL Server so
-#     you must duplicate any resource clean up *-*
+# -*- NOTE: as of this writing, a finally block is not supported by SQL Server so
+# -*- you must duplicate any resource clean up *-*
 # name: try
 # key: try
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))

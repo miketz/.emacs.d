@@ -129,6 +129,7 @@ Overwrite any existing data."
     (cl-return-from my-sql-complete-schema))
 
   (let ((completing-read-function #'ivy-completing-read)
+        (ivy-case-fold-search-default t) ; case insensitive
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
@@ -146,6 +147,7 @@ Overwrite any existing data."
     (cl-return-from my-sql-complete-table))
 
   (let ((completing-read-function #'ivy-completing-read)
+        (ivy-case-fold-search-default t) ; case insensitive
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
@@ -175,6 +177,7 @@ Overwrite any existing data."
     (cl-return-from my-sql-complete-view))
 
   (let ((completing-read-function #'ivy-completing-read)
+        (ivy-case-fold-search-default t) ; case insensitive
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
@@ -203,6 +206,7 @@ Overwrite any existing data."
     (cl-return-from my-sql-complete-table-or-view))
 
   (let ((completing-read-function #'ivy-completing-read)
+        (ivy-case-fold-search-default t) ; case insensitive
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
@@ -232,6 +236,7 @@ Overwrite any existing data."
     (cl-return-from my-sql-complete-col))
 
   (let ((completing-read-function #'ivy-completing-read)
+        (ivy-case-fold-search-default t) ; case insensitive
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window

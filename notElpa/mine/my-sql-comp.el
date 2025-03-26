@@ -69,12 +69,15 @@ Until I figure out how to connect to a db with elisp.")
   (interactive (if (use-region-p)
                    ;; use selected region for `start' and `end'
                    (list (region-beginning) (region-end))
-                 ;; else no region set
-                 (list nil nil)))
+                 ;; else use entire buffer
+                 (list (point-min) (point-max))
+                 ;; ;; else no region set
+                 ;; (list nil nil)
+                 ))
 
-  (when (or (null start) (null end)) ;; GUARD: must select region
-    (cl-return-from my-sql-run-query
-      (message "Highlight the query text you want to run. ie select region.")))
+  ;; (when (or (null start) (null end)) ;; GUARD: must select region
+  ;;   (cl-return-from my-sql-run-query
+  ;;     (message "Highlight the query text you want to run. ie select region.")))
 
   (let* ((connstr (my-sql-set-conn-str))
          (query (buffer-substring-no-properties start end))

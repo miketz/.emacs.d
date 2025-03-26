@@ -1991,6 +1991,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; my packages
 ;; mode-on-region  ~/.emacs.d/notElpaYolo/mor/
 ;; rsvp ~/.emacs.d/notElpaYolo/rapid-serial-visual-presentation/
+;; fugitive ~/.emacs.d/notElpa/mine/fugitive.el
 ;; gitFetchHelper ~/.emacs.d/notElpaYolo/gitFetchHelper/
 ;; my-go-doc ~/.emacs.d/notElpa/mine/my-go-doc.el
 ;; my-go-helpers ~/.emacs.d/notElpa/mine/my-go-helpers.el

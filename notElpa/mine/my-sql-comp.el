@@ -303,9 +303,19 @@ Overwrite any existing data."
 (defun my-sql-guess-select-bounds ()
   "Get start and end locations of current select query.
 Imperfect guess, assumes certain formatting."
+  (my-sql-guess-bounds-of-thing "select" "\n\n"))
+
+(defun my-sql-guess-update-bounds ()
+  "Get start and end locations of current select query.
+Imperfect guess, assumes certain formatting."
+  (my-sql-guess-bounds-of-thing "update" "\n\n"))
+
+(defun my-sql-guess-bounds-of-thing (start-txt end-txt)
+  "Get start and end locations of current sql statement.
+Imperfect guess, assumes certain formatting."
   (save-excursion
-    (let ((start (re-search-backward "select" nil t))
-          (end (re-search-forward "\n\n" nil t)))
+    (let ((start (re-search-backward start-txt nil t))
+          (end (re-search-forward end-txt nil t)))
       `(,start . ,end))))
 
 (defun my-sql-dot-loc ()

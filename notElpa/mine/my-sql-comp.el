@@ -17,6 +17,10 @@
 containing code like:
   (setq my-sql-conn-str \"sqlserver://username:passw@localhost/MSSQLSERVER01?database=dbName\")")
 
+(defvar my-sql-golang-prog (expand-file-name "~/.emacs.d/notElpaYolo/dbQueryHelper/dbQueryHelper")
+  "Golang prog used to interact with the DB.
+Until I figure out how to connect to a db with elisp.")
+
 (defun my-sql-clear-shcema-data ()
   "Clear the stored schema data."
   (interactive)
@@ -51,6 +55,28 @@ containing code like:
   my-sql-conn-str)
 
 ;;;###autoload
+(cl-defun my-sql-run-query (&optional start end)
+  ;; NOTE: avoiding (interactive "r"). It breaks in the case where Emacs has
+  ;; just started up with no mark set yet.
+  (interactive (if (use-region-p)
+                   ;; use selected region for `start' and `end'
+                   (list (region-beginning) (region-end))
+                 ;; else no region set
+                 (list nil nil)))
+
+  (print `(:start ,start
+                  :end ,end))
+
+  (when (or (null start) (null end)) ;; GUARD: must select region
+    (cl-return-from my-sql-run-query
+      (message "Highlight the query text you want to run. ie select region.")))
+
+  (let* ((connstr (my-sql-set-conn-str))
+         (query (buffer-substring-no-properties start end))
+         (cmd (concat my-sql-golang-prog " query \"" connstr "\" \"" query "\"")))
+    (shell-command cmd)))
+
+;;;###autoload
 (defun my-sql-fill-completion-data ()
   "Fill the sql schema data for completion.
 Overwrite any existing data."
@@ -58,10 +84,10 @@ Overwrite any existing data."
   (message "Filling sql completion data. Wait a bit...")
   (my-sql-set-conn-str) ;; set connStr
   (let* ((prog (expand-file-name "~/.emacs.d/notElpaYolo/dbQueryHelper/dbQueryHelper"))
-         (cmd-schemas (concat prog " schemas \"" my-sql-conn-str "\""))
-         (cmd-tables (concat prog " tables \"" my-sql-conn-str "\""))
-         (cmd-views (concat prog " views \"" my-sql-conn-str "\""))
-         (cmd-cols (concat prog " cols \"" my-sql-conn-str "\""))
+         (cmd-schemas (concat my-sql-golang-prog " schemas \"" my-sql-conn-str "\""))
+         (cmd-tables (concat my-sql-golang-prog " tables \"" my-sql-conn-str "\""))
+         (cmd-views (concat my-sql-golang-prog " views \"" my-sql-conn-str "\""))
+         (cmd-cols (concat my-sql-golang-prog " cols \"" my-sql-conn-str "\""))
 
          ;; csv: schema|...
          (csv-schemas (shell-command-to-string cmd-schemas))

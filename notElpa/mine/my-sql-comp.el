@@ -346,11 +346,13 @@ Nil if not found."
 (cl-defun my-sql-alias-def-info (alias)
   (save-excursion
     (let ((select-bounds (my-sql-guess-select-bounds)))
-      (let* ((alias-def-backward (or (re-search-backward (concat " " alias " ") (car select-bounds) t)
-                                     (re-search-backward (concat " " alias "\n") (car select-bounds) t)))
+      (let* ((alias1 (concat " " alias " "))
+             (alias2 (concat " " alias "\n"))
+             (alias-def-backward (or (re-search-backward alias1 (car select-bounds) t)
+                                     (re-search-backward alias2 (car select-bounds) t)))
              (alias-def-forward (and (null alias-def-backward) ; not found backward
-                                     (or (re-search-forward (concat " " alias " ") (cdr select-bounds) t)
-                                         (re-search-forward (concat " " alias "\n") (cdr select-bounds) t)))))
+                                     (or (re-search-forward alias1 (cdr select-bounds) t)
+                                         (re-search-forward alias2 (cdr select-bounds) t)))))
         (when (and (null alias-def-forward)
                    (null alias-def-backward))
           (cl-return-from my-sql-alias-def-info nil))

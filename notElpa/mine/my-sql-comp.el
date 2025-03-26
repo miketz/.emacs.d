@@ -229,7 +229,7 @@ Overwrite any existing data."
 
 
 ;;;###autoload
-(cl-defun my-sql-complete-col (&optional schema table-or-view col-prefix)
+(cl-defun my-sql-complete-col (&optional schema table-or-view col-prefix tap-bounds)
   (interactive)
   (when (null my-sql-cols) ;; GUARD: ensure there is data to complete against.
     (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
@@ -268,10 +268,15 @@ Overwrite any existing data."
                                             cols-in-schema))
            (col-names (mapcar (lambda (col)
                                 (my-sql-col-data-col-name col))
-                              cols-in-table)))
-      (insert (completing-read "col: " col-names
-                               nil nil
-                               (or col-prefix ""))))))
+                              cols-in-table))
+           (chosen (completing-read "col: " col-names
+                                    nil nil
+                                    (or col-prefix ""))))
+      (when tap-bounds
+        ;; delete current text so the completion insertion does not dupe the text they alreay typed
+        (delete-region (car tap-bounds)
+                       (cdr tap-bounds)))
+      (insert chosen))))
 
 
 
@@ -327,6 +332,8 @@ Nil if not found."
     (cl-return-from my-sql-complete-guess-work))
 
   (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))
+         ;; bounds of txt their cursor is currently trailing.
+         (tap-bounds (bounds-of-thing-at-point 'symbol))
          (dot-loc (my-sql-dot-loc)))
     ;; no dot "." found
     (when (null dot-loc)
@@ -344,9 +351,10 @@ Nil if not found."
           (when (null info)
             (cl-return-from my-sql-complete-guess-work))
           ;; TODO: fill in only the remaining chars of col excluding prefix.
-          (insert (my-sql-complete-col (cl-getf info :schema)
-                                       (cl-getf info :table)
-                                       txt)))))))
+          (my-sql-complete-col (cl-getf info :schema)
+                               (cl-getf info :table)
+                               txt
+                               tap-bounds))))))
 
 
 (provide 'my-sql-comp)

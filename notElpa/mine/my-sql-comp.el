@@ -310,6 +310,17 @@ Imperfect guess, assumes certain formatting."
 Imperfect guess, assumes certain formatting."
   (my-sql-guess-bounds-of-thing "update" "\n\n"))
 
+(defun my-sql-guess-delete-bounds ()
+  "Get start and end locations of current select query.
+Imperfect guess, assumes certain formatting."
+  (my-sql-guess-bounds-of-thing "delete" "\n\n"))
+
+;; this one not currently used.
+(defun my-sql-guess-create-table-bounds ()
+  "Get start and end locations of current select query.
+Imperfect guess, assumes certain formatting."
+  (my-sql-guess-bounds-of-thing "create table" ";"))
+
 (defun my-sql-guess-bounds-of-thing (start-txt end-txt)
   "Get start and end locations of current sql statement.
 Imperfect guess, assumes certain formatting."

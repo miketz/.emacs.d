@@ -54,6 +54,14 @@ Until I figure out how to connect to a db with elisp.")
   (load my-sql-conn-str-external-file)
   my-sql-conn-str)
 
+(defun my-sql-output-buffer ()
+  (let ((buff (get-buffer-create "*sql output*")))
+    (with-current-buffer buff
+      ;; turn off word wrap
+      (unless truncate-lines
+        (toggle-truncate-lines)))
+    buff))
+
 ;;;###autoload
 (cl-defun my-sql-run-query (&optional start end)
   ;; NOTE: avoiding (interactive "r"). It breaks in the case where Emacs has
@@ -64,9 +72,6 @@ Until I figure out how to connect to a db with elisp.")
                  ;; else no region set
                  (list nil nil)))
 
-  (print `(:start ,start
-                  :end ,end))
-
   (when (or (null start) (null end)) ;; GUARD: must select region
     (cl-return-from my-sql-run-query
       (message "Highlight the query text you want to run. ie select region.")))
@@ -74,7 +79,8 @@ Until I figure out how to connect to a db with elisp.")
   (let* ((connstr (my-sql-set-conn-str))
          (query (buffer-substring-no-properties start end))
          (cmd (concat my-sql-golang-prog " query \"" connstr "\" \"" query "\"")))
-    (shell-command cmd)))
+    (shell-command cmd
+                   (my-sql-output-buffer))))
 
 ;;;###autoload
 (defun my-sql-fill-completion-data ()

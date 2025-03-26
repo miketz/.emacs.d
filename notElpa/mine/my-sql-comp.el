@@ -125,7 +125,7 @@ Overwrite any existing data."
 (cl-defun my-sql-complete-schema (&optional schema-prefix)
   (interactive)
   (when (null my-sql-schemas) ;; GUARD: ensure there is data to complete against.
-    (message "No schema data found. Try populated via M-x my-sql-fill-completion-data.")
+    (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-schema))
 
   (let ((completing-read-function #'ivy-completing-read)
@@ -142,7 +142,7 @@ Overwrite any existing data."
 (cl-defun my-sql-complete-table (&optional schema tab-prefix)
   (interactive)
   (when (null my-sql-tables) ;; GUARD: ensure there is data to complete against.
-    (message "No schema data found. Try populated via M-x my-sql-fill-completion-data.")
+    (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-table))
 
   (let ((completing-read-function #'ivy-completing-read)
@@ -171,7 +171,7 @@ Overwrite any existing data."
 (cl-defun my-sql-complete-view (&optional schema view-prefix)
   (interactive)
   (when (null my-sql-views) ;; GUARD: ensure there is data to complete against.
-    (message "No schema data found. Try populated via M-x my-sql-fill-completion-data.")
+    (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-view))
 
   (let ((completing-read-function #'ivy-completing-read)
@@ -199,7 +199,7 @@ Overwrite any existing data."
 (cl-defun my-sql-complete-table-or-view (&optional schema tab-prefix)
   (interactive)
   (when (null my-sql-tables-and-views) ;; GUARD: ensure there is data to complete against.
-    (message "No schema data found. Try populated via M-x my-sql-fill-completion-data.")
+    (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-table-or-view))
 
   (let ((completing-read-function #'ivy-completing-read)
@@ -228,7 +228,7 @@ Overwrite any existing data."
 (cl-defun my-sql-complete-col (&optional schema table-or-view col-prefix)
   (interactive)
   (when (null my-sql-cols) ;; GUARD: ensure there is data to complete against.
-    (message "No schema data found. Try populated via M-x my-sql-fill-completion-data.")
+    (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-col))
 
   (let ((completing-read-function #'ivy-completing-read)
@@ -318,7 +318,7 @@ Nil if not found."
 (cl-defun my-sql-complete-guess-work ()
   (interactive)
   (when (null my-sql-schemas) ;; GUARD: ensure there is data to complete against.
-    (message "No schema data found. Try populated via M-x my-sql-fill-completion-data.")
+    (message "No schema data found. Try populating via M-x my-sql-fill-completion-data.")
     (cl-return-from my-sql-complete-guess-work))
 
   (let* ((txt (or (thing-at-point 'symbol 'no-properties) ""))

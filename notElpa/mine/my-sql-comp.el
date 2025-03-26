@@ -79,9 +79,12 @@ Until I figure out how to connect to a db with elisp.")
   (let* ((connstr (my-sql-set-conn-str))
          (query (buffer-substring-no-properties start end))
          ;; TODO: handle case where windows does not like % charcager in query through command line
-         (cmd (concat my-sql-golang-prog " query \"" connstr "\" \"" query "\"")))
-    (shell-command cmd
-                   (my-sql-output-buffer))))
+         (cmd (concat my-sql-golang-prog " query \"" connstr "\" \"" query "\""))
+         (buff (my-sql-output-buffer))
+         ;; shadow var to prevent output in mini buffer
+         (max-mini-window-height 0))
+    (shell-command cmd buff)
+    (display-buffer buff)))
 
 ;;;###autoload
 (defun my-sql-fill-completion-data ()

@@ -4447,11 +4447,6 @@ and indent."
 ;;         (cl-loop repeat reps do
 ;;                  (my-kbd-sql-fix-col-n)))))
 
-  ;; sql completion
-  (when my-use-evil-p
-    (evil-leader/set-key-for-mode 'sql-mode "s" #'my-sql-comp-hydra/body))
-  ;; issues overriding comapny C-o keybind. use alteratnive for now
-  (define-key sql-mode-map (kbd "C-i") #'my-sql-complete-guess-work)
 
 
   (defun my-setup-sql ()
@@ -4467,7 +4462,9 @@ and indent."
     ;; (sqlind-minor-mode 1)
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 100)
-      (display-fill-column-indicator-mode 1)))
+      (display-fill-column-indicator-mode 1))
+    ;; mode for sql completion and query run.
+    (my-sql-comp-mode 1))
 
   (add-hook 'sql-mode-hook #'my-setup-sql)
 
@@ -10352,6 +10349,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;; my-sql-comp. MS Sql Server only for now.
 ;;;----------------------------------------------------------------------------
 ;; at ~/.emacs.d/notElpa/mine/my-sql-comp.el
+(autoload #'my-sql-comp-mode "my-sql-comp" nil t)
 (autoload #'my-sql-fill-completion-data "my-sql-comp" nil t)
 (autoload #'my-sql-complete-schema "my-sql-comp" nil t)
 (autoload #'my-sql-complete-table "my-sql-comp" nil t)
@@ -10361,6 +10359,13 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'my-sql-complete-guess-work "my-sql-comp" nil t)
 ;; hydra
 (autoload #'my-sql-comp-hydra/body "my-hydras" nil t)
+
+(with-eval-after-load 'my-sql-comp
+  (define-key my-sql-comp-mode-map (kbd "C-c r") #'my-sql-run-query)
+  (when my-use-evil-p
+    (evil-leader/set-key-for-mode 'my-sql-comp-mode "s" #'my-sql-comp-hydra/body))
+  ;; issues overriding comapny C-o keybind. use alteratnive for now
+  (define-key my-sql-comp-mode-map (kbd "C-i") #'my-sql-complete-guess-work))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

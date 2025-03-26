@@ -2,6 +2,7 @@
 
 (require 'ivy)
 (require 'cl-lib)
+(require 'dash)
 
 ;; single global store of schema data.
 (defvar my-sql-schemas '())

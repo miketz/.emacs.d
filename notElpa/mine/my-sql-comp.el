@@ -9,6 +9,7 @@
 (defvar my-sql-views '())
 (defvar my-sql-tables-and-views '())
 (defvar my-sql-cols '())
+
 (defvar my-sql-conn-str) ; set in `my-sql-conn-str-external-file'
 (defvar my-sql-conn-str-external-file "~/my-sql-conn-str.el"
   "Store the conn string in an external location, out of this git repo.

@@ -357,7 +357,6 @@ Nil if not found."
          (dot-loc (my-sql-dot-loc)))
     ;; no dot "." found
     (when (null dot-loc)
-      ;; TODO: append to schema text already typed.
       (my-sql-complete-schema txt tap-bounds)
       (cl-return-from my-sql-complete-guess-work))
 
@@ -370,7 +369,6 @@ Nil if not found."
         (let* ((info (my-sql-alias-def-info txt-before-dot)))
           (when (null info)
             (cl-return-from my-sql-complete-guess-work))
-          ;; TODO: fill in only the remaining chars of col excluding prefix.
           (my-sql-complete-col (cl-getf info :schema)
                                (cl-getf info :table)
                                txt

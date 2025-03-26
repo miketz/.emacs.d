@@ -51,7 +51,7 @@ containing code like:
 
 ;;;###autoload
 (defun my-sql-fill-completion-data ()
-  "Fill the sql shema data for completion.
+  "Fill the sql schema data for completion.
 Overwrite any existing data."
   (interactive)
   (message "Filling sql completion data. Wait a bit...")
@@ -133,7 +133,7 @@ Overwrite any existing data."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
-                                        ; doens't go off screen.
+                                        ; doesn't go off screen.
     (insert (completing-read "schema: " my-sql-schemas
                              nil nil
                              (or schema-prefix "")))))
@@ -150,7 +150,7 @@ Overwrite any existing data."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
-                                        ; doens't go off screen.
+                                        ; doesn't go off screen.
     ;; prepare schema filter
     (when (null schema)
       (setq schema (completing-read "schema: " my-sql-schemas)))
@@ -179,7 +179,7 @@ Overwrite any existing data."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
-                                        ; doens't go off screen.
+                                        ; doesn't go off screen.
     ;; prepare schema filter
     (when (null schema)
       (setq schema (completing-read "schema: " my-sql-schemas)))
@@ -207,7 +207,7 @@ Overwrite any existing data."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
-                                        ; doens't go off screen.
+                                        ; doesn't go off screen.
     ;; prepare schema filter
     (when (null schema)
       (setq schema (completing-read "schema: " my-sql-schemas)))
@@ -236,7 +236,7 @@ Overwrite any existing data."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
-                                        ; doens't go off screen.
+                                        ; doesn't go off screen.
 
     ;; prepare schema filter
     (when (null schema)
@@ -279,7 +279,7 @@ Imperfect guess, assumes certain formatting."
       `(,start . ,end))))
 
 (defun my-sql-dot-loc ()
-  "Location of dot . on currnet line.
+  "Location of dot . on current line.
 Nil if not found."
   (save-excursion
     (re-search-backward "\\." (line-beginning-position) t)))
@@ -289,7 +289,7 @@ Nil if not found."
     (goto-char dot-loc)
     (thing-at-point 'symbol 'no-properties)))
 
-;; TODO: implmeent more advanced detection of "current statement" to bound the alias search.
+;; TODO: implement more advanced detection of "current statement" to bound the alias search.
 ;;       the search can escape to a different query and get the wrong alias. also find the bounds of
 ;;       various sql statements: select, update, insert, delete, createTab, etc.
 (cl-defun my-sql-alias-def-info (alias)
@@ -325,7 +325,7 @@ Nil if not found."
          (dot-loc (my-sql-dot-loc)))
     ;; no dot "." found
     (when (null dot-loc)
-      ;; TODO: append to shcema text already typed.
+      ;; TODO: append to schema text already typed.
       (my-sql-complete-schema txt)
       (cl-return-from my-sql-complete-guess-work))
 

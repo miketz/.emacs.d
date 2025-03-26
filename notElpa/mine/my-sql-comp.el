@@ -450,6 +450,13 @@ Nil if not found."
                                txt
                                tap-bounds))))))
 
+(define-minor-mode my-sql-comp-mode
+  "Minor mode for sql completion and query rune.
+Mode is mostly just for keybind stuff."
+  :lighter " sql-comp"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-r") #'my-sql-run-query)
+            map))
 
 (provide 'my-sql-comp)
 

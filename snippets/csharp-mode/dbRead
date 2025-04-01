@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: dbRead
+# key: dbRead
+# --
+using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["${1:key}"].ConnectionString))
+{
+    using (var cmd = conn.CreateCommand())
+    {
+        cmd.CommandType = CommandType.Text;
+        cmd.CommandText = "$0";
+        cmd.Parameters.Add(new SqlParameter("@foo", fooVar));
+        conn.Open(); //open late
+        using (var dtr = cmd.ExecuteReader())
+        {
+            ${2:while} (dtr.Read())
+            {
+                if (dtr[0] != DBNull.Value) someVar = Convert.ToBoolean(dtr[0]);
+            }
+        }
+    }
+}

@@ -10361,7 +10361,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (when my-use-evil-p
     (evil-leader/set-key-for-mode 'my-sql-comp-mode "s" #'my-sql-comp-hydra/body))
   ;; issues overriding comapny C-o keybind. use alteratnive for now
-  (define-key my-sql-comp-mode-map (kbd "C-i") #'my-sql-complete-guess-work))
+  ;; issues with C-i as it shadows TAB and disrupts yasnippet!
+  (define-key my-sql-comp-mode-map (kbd "C-j") #'my-sql-complete-guess-work))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

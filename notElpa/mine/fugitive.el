@@ -170,51 +170,49 @@ rapid fire commands like `fugitive-quick-commit'."
     ;; make cmd-complete-fn a closure to capture variables: log-p, diff-p, blame-p
     (let ((cmd-complete-fn (lambda (p msg)
                              ;; GUARD
-                             (unless (memq (process-status p) '(exit signal))
-                               (cl-return-from fugitive--cmd-complete))
+                             (when (memq (process-status p) '(exit signal))
+                               ;;(message (concat (process-name p) " - " msg))
+                               (let ((buff (process-buffer p)))
+                                 (with-current-buffer buff
+                                   ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p))
 
-                             ;;(message (concat (process-name p) " - " msg))
-                             (let ((buff (process-buffer p)))
-                               (with-current-buffer buff
-                                 ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p))
+                                   ;; alwyas call (xterm-color-colorize-buffer) now that i'm using the process sentinel more commands
+                                   ;; seem to have speical colors, and diff is using git-delta colors!
+                                   ;; (xterm-color-colorize-buffer)
+                                   ;; TURN on a specialized mode for specific output types
+                                   (cond (log-p
+                                          ;; turn on this first before buffer becomes read-only via fugitive-log-mode
+                                          (when fugitive-colorize-buffer-p
+                                            (xterm-color-colorize-buffer))
+                                          (fugitive-log-mode) ; mode tailored for logs
+                                          ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
+                                          (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
+                                          ;; (log-view-mode) ; TODO: fix. doesn't work right.
+                                          ;; (vc-git-log-view-mode)
+                                          )
+                                         (diff-p (when fugitive-turn-on-diff-mode-p
+                                                   (diff-mode))
+                                                 ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
+                                                 (when fugitive-colorize-buffer-p
+                                                   (xterm-color-colorize-buffer)))
+                                         (blame-p (when fugitive-colorize-buffer-p
+                                                    (xterm-color-colorize-buffer))))
 
-                                 ;; alwyas call (xterm-color-colorize-buffer) now that i'm using the process sentinel more commands
-                                 ;; seem to have speical colors, and diff is using git-delta colors!
-                                 ;; (xterm-color-colorize-buffer)
-                                 ;; TURN on a specialized mode for specific output types
-                                 (cond (log-p
-                                        ;; turn on this first before buffer becomes read-only via fugitive-log-mode
-                                        (when fugitive-colorize-buffer-p
-                                          (xterm-color-colorize-buffer))
-                                        (fugitive-log-mode) ; mode tailored for logs
-                                        ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
-                                        (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
-                                        ;; (log-view-mode) ; TODO: fix. doesn't work right.
-                                        ;; (vc-git-log-view-mode)
-                                        )
-                                       (diff-p (when fugitive-turn-on-diff-mode-p
-                                                 (diff-mode))
-                                               ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
-                                               (when fugitive-colorize-buffer-p
-                                                 (xterm-color-colorize-buffer)))
-                                       (blame-p (when fugitive-colorize-buffer-p
-                                                  (xterm-color-colorize-buffer))))
+                                   ;; disable native line numbers.
+                                   ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
+                                   ;; major modes wipe out buffer local vars.
+                                   (setq display-line-numbers nil))
 
-                                 ;; disable native line numbers.
-                                 ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
-                                 ;; major modes wipe out buffer local vars.
-                                 (setq display-line-numbers nil))
+                                 ;; show output
+                                 (unless hide-output-p
+                                   (display-buffer buff))
 
-                               ;; show output
-                               (unless hide-output-p
-                                 (display-buffer buff))
-
-                               ;; (goto-char (point-max)) ;; end of buffer
-                               ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
-                               ;; don't message complete for now. it wipes out command output
-                               ;; (message "cmd complete")
-                               ;; return otuput buffer
-                               buff))))
+                                 ;; (goto-char (point-max)) ;; end of buffer
+                                 ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+                                 ;; don't message complete for now. it wipes out command output
+                                 ;; (message "cmd complete")
+                                 ;; return otuput buffer
+                                 buff)))))
      (set-process-sentinel (start-process-shell-command "fugitive-proc" buff cmd)
                            cmd-complete-fn))
 
@@ -239,8 +237,7 @@ rapid fire commands like `fugitive-quick-commit'."
     ;; return output buffer. Likely nil due to the new async stuff. Must sleep if you
     ;; want to capture this. TODO: look into hwo to wait (ie WaitGroups) in the calling
     ;; code in elisp.
-    buff
-    ))
+    buff))
 
 ;;;###autoload
 (defun fugitive-find-local-only-branches-ediff ()

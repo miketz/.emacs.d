@@ -168,7 +168,10 @@ rapid fire commands like `fugitive-quick-commit'."
 
     ;; run cmd. use process to avoid freezing emacs.
     ;; make cmd-complete-fn a closure to capture variables: log-p, diff-p, blame-p
-    (let ((cmd-complete-fn (lambda (p msg)
+    (let (;; setting process-connection-type to nil avoids a "hang" on macOS
+          ;; see https://www.reddit.com/r/emacs/comments/17wklf7/how_do_i_speed_up_output_from_an/?rdt=58905
+          (process-connection-type nil)
+          (cmd-complete-fn (lambda (p msg)
                              ;; GUARD
                              (when (memq (process-status p) '(exit signal))
                                ;;(message (concat (process-name p) " - " msg))

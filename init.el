@@ -8196,7 +8196,11 @@ vanilla javascript buffers."
           ;; Disable variable highlight as it seems overkill to constantly send
           ;; messages to a server for that.
           ;; TODO: use a tree-sitter imp for variable highlight.
-          :documentHighlightProvider))
+          :documentHighlightProvider
+
+          ;; disable type annotations. too much text on the screen.
+          :inlayHintProvider
+          ))
 
   (defun my-eglot-toggle-eldoc ()
     (interactive)

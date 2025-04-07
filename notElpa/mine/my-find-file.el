@@ -35,7 +35,7 @@ Fall back to `counsel-file-jump' if on GNU/linux."
       (let ((fn (cond
                  (my-fd-installed-p #'counsel-fd-file-jump)
                  ((eq system-type 'windows-nt) #'my-find-file-by-name-windows)
-                 ((eq system-type 'gnu/linux) #'counsel-file-jump
+                 (t #'counsel-file-jump
                   ;; (lambda ()
                   ;;   (interactive)
                   ;;   (call-interactively #'find-name-dired))

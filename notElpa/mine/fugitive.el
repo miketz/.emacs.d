@@ -171,6 +171,9 @@ rapid fire commands like `fugitive-quick-commit'."
     (let (;; setting process-connection-type to nil avoids a "hang" on macOS
           ;; see https://www.reddit.com/r/emacs/comments/17wklf7/how_do_i_speed_up_output_from_an/?rdt=58905
           (process-connection-type nil)
+          ;; TODO: look into the below 2 settings for possible improved performance
+          ;; (read-process-output-max (* 4 1024 1024))
+          ;; (process-adaptive-read-buffering nil)
           (cmd-complete-fn (lambda (p msg)
                              ;; GUARD
                              (when (memq (process-status p) '(exit signal))

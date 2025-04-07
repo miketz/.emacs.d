@@ -5016,6 +5016,12 @@ and indent."
     (autoload #'my-proj-ydnjs lisp-file nil t)
     (autoload #'my-proj-paip lisp-file nil t)))
 
+(when (eq my-curr-computer 'work-laptop-mac)
+  (defun my-open-dev-folder ()
+    (interactive)
+    (dired "~/proj/wirs/WIRS_iOS/WIRS/WIRS/"))
+  (evil-leader/set-key "4" #'my-open-dev-folder))
+
 (when (memq my-curr-computer '(work-laptop-2019 work-laptop))
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'my-proj-safetyweb lisp-file nil t)

@@ -195,14 +195,21 @@ rapid fire commands like `fugitive-quick-commit'."
                                           (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
                                           ;; (log-view-mode) ; TODO: fix. doesn't work right.
                                           ;; (vc-git-log-view-mode)
-                                          )
+
+                                          ;; turn off word wrap
+                                          (unless truncate-lines
+                                            (toggle-truncate-lines)))
+
                                          (diff-p (when fugitive-turn-on-diff-mode-p
                                                    (diff-mode))
                                                  ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
                                                  (when fugitive-colorize-buffer-p
                                                    (xterm-color-colorize-buffer)))
                                          (blame-p (when fugitive-colorize-buffer-p
-                                                    (xterm-color-colorize-buffer))))
+                                                    (xterm-color-colorize-buffer))
+                                                  ;; turn off word wrap
+                                                  (unless truncate-lines
+                                                    (toggle-truncate-lines))))
 
                                    ;; disable native line numbers.
                                    ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as

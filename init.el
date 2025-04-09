@@ -240,24 +240,25 @@
 
 ;;; Code:
 
-(progn ;; JUMPrestore
-  ;; tricks to improve startup time.
-  ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_st
-  ;; eps_to_speed_up_emacs_start/
-  ;; on mac-mini-m1-2021 this improves start up from 1.3s to 0.62s
+;; moved to early-init.el
+;; (progn ;; JUMPrestore
+;;   ;; tricks to improve startup time.
+;;   ;; from https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_st
+;;   ;; eps_to_speed_up_emacs_start/
+;;   ;; on mac-mini-m1-2021 this improves start up from 1.3s to 0.62s
 
-  (defvar gc-cons-threshold-backup gc-cons-threshold)
-  (setq gc-cons-threshold (if (version< emacs-version "24.4")
-                              200000000
-                            2000000000))
+;;   (defvar gc-cons-threshold-backup gc-cons-threshold)
+;;   (setq gc-cons-threshold (if (version< emacs-version "24.4")
+;;                               200000000
+;;                             2000000000))
 
-  (defvar file-name-handler-alist-backup file-name-handler-alist)
-  (setq file-name-handler-alist nil)
+;;   (defvar file-name-handler-alist-backup file-name-handler-alist)
+;;   (setq file-name-handler-alist nil)
 
-  ;; restore original values at end of init.el.
-  ;; sort of like my own dynamic binding. I don't want to wrap the entire
-  ;; config in a giant let.
-  )
+;;   ;; restore original values at end of init.el.
+;;   ;; sort of like my own dynamic binding. I don't want to wrap the entire
+;;   ;; config in a giant let.
+;;   )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
 (when (version< emacs-version "27.0") ; in early-init.el for emacs 27+
@@ -296,9 +297,10 @@ in case that file does not provide any feature."
 ;;;----------------------------------------------------------------------------
 ;;; bidi stuff for performance
 ;;;----------------------------------------------------------------------------
-;; sacrifice proper display of right-to-left languages for performance.
-(setq-default bidi-paragraph-direction 'left-to-right)
-(setq bidi-inhibit-bpa t)
+;; moved to early-init.el
+;; ;; sacrifice proper display of right-to-left languages for performance.
+;; (setq-default bidi-paragraph-direction 'left-to-right)
+;; (setq bidi-inhibit-bpa t)
 
 ;;;----------------------------------------------------------------------------
 ;;; defvars
@@ -1174,23 +1176,24 @@ in case that file does not provide any feature."
   "The computers I use Emacs on.
 Specific configurations may be made for some computers.")
 
-;; currently used computer. (manually set)
-;; Used to conditionally set computer specific options, and paths.
-;; NOTE: When setting up emacs on a new computer create file
-;; ~/.emacs.d/my-curr-computer.txt
-;; Then type the name of the symbol (see `my-computers') in the text file.
-;; The file should contain 1 line and no whitespace. The text will be converted
-;; to a symbol.
-(defconst my-curr-computer
-  (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
-    (ignore-errors
-      (when (file-exists-p curr-comp-file)
-        (intern (with-temp-buffer
-                  (insert-file-contents curr-comp-file)
-                  (buffer-string))))))
-  "The computer running this Emacs.  Identified by a flag file.
-nil if computer is unknown.
-Specific configs may be made based on the computer.")
+;; moved to early-init.el
+;; ;; currently used computer. (manually set)
+;; ;; Used to conditionally set computer specific options, and paths.
+;; ;; NOTE: When setting up emacs on a new computer create file
+;; ;; ~/.emacs.d/my-curr-computer.txt
+;; ;; Then type the name of the symbol (see `my-computers') in the text file.
+;; ;; The file should contain 1 line and no whitespace. The text will be converted
+;; ;; to a symbol.
+;; (defconst my-curr-computer
+;;   (let ((curr-comp-file "~/.emacs.d/my-curr-computer.txt"))
+;;     (ignore-errors
+;;       (when (file-exists-p curr-comp-file)
+;;         (intern (with-temp-buffer
+;;                   (insert-file-contents curr-comp-file)
+;;                   (buffer-string))))))
+;;   "The computer running this Emacs.  Identified by a flag file.
+;; nil if computer is unknown.
+;; Specific configs may be made based on the computer.")
 
 (when (memq my-curr-computer '(mac-mini-m1-2021
                                work-laptop-mac))
@@ -1333,11 +1336,16 @@ In master branch now. Was on git branch: feature/native-comp.")
 (push "~/.emacs.d/notElpa/" load-path) ; stores elisp files that are
                                        ; not "packages".
 (push "~/.emacs.d/notElpa/mine/" load-path)
-(setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
-;; some themes require helper files so add themes dir to load-path.
-(push custom-theme-directory load-path)
 
-(push "~/.emacs.d/notElpa/themes/replace-colorthemes/" custom-theme-load-path)
+;; moved to early-init.el
+;; (setq custom-theme-directory "~/.emacs.d/notElpa/themes/") ;color themes.
+
+;; moved to early-init.el
+;; ;; some themes require helper files so add themes dir to load-path.
+;; (push custom-theme-directory load-path)
+
+;; moved to early-init.el
+;; (push "~/.emacs.d/notElpa/themes/replace-colorthemes/" custom-theme-load-path)
 
 ;; (setq package-quickstart t) ; pre-generates a giant autoloads file
 
@@ -2106,109 +2114,112 @@ This prevents overlapping themes; something I would rarely want."
 ;;; theme of the week and corresponding settings. This may change often.
 ;;;----------------------------------------------------------------------------
 
+;; moved to early-init.el
 ;; Avoid resizing the GUI frame when font changes.
 ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn
 ;; _fast/
-(setq frame-inhibit-implied-resize t)
+;;(setq frame-inhibit-implied-resize t)
 
 ;; (when my-graphic-p ;; this isn't true for emacs daemon!
 ;;   (my-color-zenburn))
-(cond
- ((eq my-curr-computer 'work-laptop-mac)
-  (load-theme 'charcoal t)
-  (push
-   '(font . "-*-Menlo-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-   default-frame-alist))
 
- ((eq my-curr-computer 'mac-mini-m1-2021)
-  (load-theme 'charcoal t)
-  ;; transparent bg on mac, iterm2. see the picture set as bg image in iterm2.
-  ;; (when (not my-graphic-p)
-  ;;   (my-color-transparent-bg))
+;; moved to early-init.el
+;; (cond
+;;  ((eq my-curr-computer 'work-laptop-mac)
+;;   (load-theme 'charcoal t)
+;;   (push
+;;    '(font . "-*-Menlo-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+;;    default-frame-alist))
 
-  ;; (custom-theme-set-faces
-  ;;  'ultimate
-  ;;  `(default ((t :background "ivory3"))))
-  (push
-   ;; '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
-   '(font . "Ubuntu Mono-19:antialias=false:hinting=false")
-   ;; '(font . "Ubuntu Mono-19:antialias=false:hinting=false:weight=bold")
-   ;; '(font . "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-Iosevka-light-normal-normal-*-16-*-*-*-m-0-iso10646-1")
-   ;; '(font . "-*-Unifont-normal-normal-normal-*-19-*-*-*-p-0-iso10646-1")
-   ;; '(font . "-*-Unifont-bold-normal-normal-*-19-*-*-*-p-0-iso10646-1")
-   default-frame-alist))
+;;  ((eq my-curr-computer 'mac-mini-m1-2021)
+;;   (load-theme 'charcoal t)
+;;   ;; transparent bg on mac, iterm2. see the picture set as bg image in iterm2.
+;;   ;; (when (not my-graphic-p)
+;;   ;;   (my-color-transparent-bg))
 
- ((eq my-curr-computer 'wild-dog)
-  (load-theme 'charcoal t)
+;;   ;; (custom-theme-set-faces
+;;   ;;  'ultimate
+;;   ;;  `(default ((t :background "ivory3"))))
+;;   (push
+;;    ;; '(font . "-*-Menlo-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+;;    ;; '(font . "-*-JetBrains Mono NL-light-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+;;    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+;;    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;;    ;; '(font . "-*-Ubuntu Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1")
+;;    '(font . "Ubuntu Mono-19:antialias=false:hinting=false")
+;;    ;; '(font . "Ubuntu Mono-19:antialias=false:hinting=false:weight=bold")
+;;    ;; '(font . "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1")
+;;    ;; '(font . "-*-Iosevka-light-normal-normal-*-16-*-*-*-m-0-iso10646-1")
+;;    ;; '(font . "-*-Unifont-normal-normal-normal-*-19-*-*-*-p-0-iso10646-1")
+;;    ;; '(font . "-*-Unifont-bold-normal-normal-*-19-*-*-*-p-0-iso10646-1")
+;;    default-frame-alist))
 
-  ;; faster than `set-frame-font' for setting the font?
-  ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_da
-  ;; mn_fast/
-  (push
-   '(font . "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
-   default-frame-alist))
+;;  ((eq my-curr-computer 'wild-dog)
+;;   (load-theme 'charcoal t)
 
- ((eq my-curr-computer 'work-laptop-2019)
-  (load-theme 'charcoal t)
-  ;; (load-theme 'ultimate t)
-  ;; (set-background-color "#E5E1C3")
-  ;; (custom-theme-set-faces
-  ;;  'ultimate
-  ;;  `(default ((t :background "white"))))
-  ;; (my-rainbow-parens-light-bg3)
-  (when my-graphic-p
-    (push
-     '(font
-       .
-       ;; "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
-       ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
-       ;; "-raster-Terminus-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-       ;; "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
-       ;; "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
-       "-raster-Terminus-bold-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
-       ;; "-outline-Iosevka Medium-medium-normal-normal-mono-14-*-*-*-c-*-iso10646-1"
-       ;; "-outline-Iosevka Medium-medium-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
-       ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
-       ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
-       ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-15-*-*-*-c-*-iso10646-1"
-       ;; "-outline-Ubuntu Mono-normal-normal-normal-mono-14-*-*-*-c-*-iso10646-1"
-       ;; "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
-       ;; "-outline-JetBrains Mono NL-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
-       )
-     default-frame-alist)
-    ;; (set-frame-font
-    ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
-    ))
+;;   ;; faster than `set-frame-font' for setting the font?
+;;   ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_da
+;;   ;; mn_fast/
+;;   (push
+;;    '(font . "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-9")
+;;    default-frame-alist))
 
- ((eq my-curr-computer 'leyna-laptop)
-  (load-theme 'charcoal t)
-  (set-frame-font
-   "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
+;;  ((eq my-curr-computer 'work-laptop-2019)
+;;   (load-theme 'charcoal t)
+;;   ;; (load-theme 'ultimate t)
+;;   ;; (set-background-color "#E5E1C3")
+;;   ;; (custom-theme-set-faces
+;;   ;;  'ultimate
+;;   ;;  `(default ((t :background "white"))))
+;;   ;; (my-rainbow-parens-light-bg3)
+;;   (when my-graphic-p
+;;     (push
+;;      '(font
+;;        .
+;;        ;; "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+;;        ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+;;        ;; "-raster-Terminus-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+;;        ;; "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+;;        ;; "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+;;        "-raster-Terminus-bold-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
+;;        ;; "-outline-Iosevka Medium-medium-normal-normal-mono-14-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-Iosevka Medium-medium-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-15-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-Ubuntu Mono-normal-normal-normal-mono-14-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+;;        ;; "-outline-JetBrains Mono NL-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+;;        )
+;;      default-frame-alist)
+;;     ;; (set-frame-font
+;;     ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
+;;     ))
 
- ((eq my-curr-computer 'a-laptop-old)
-  (load-theme 'charcoal t)
-  (set-frame-font
-   "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
+;;  ((eq my-curr-computer 'leyna-laptop)
+;;   (load-theme 'charcoal t)
+;;   (set-frame-font
+;;    "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"))
 
- ((eq my-curr-computer 'hp-tower-2009)
-  (load-theme 'charcoal t))
+;;  ((eq my-curr-computer 'a-laptop-old)
+;;   (load-theme 'charcoal t)
+;;   (set-frame-font
+;;    "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"))
 
- ((eq my-curr-computer 'a-laptop-faster)
-  (load-theme 'charcoal t)
-  (set-frame-font
-   "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
+;;  ((eq my-curr-computer 'hp-tower-2009)
+;;   (load-theme 'charcoal t))
 
- ;; unknown windows computer.
- ((and (null my-curr-computer)
-       (eq system-type 'windows-nt))
-  (load-theme 'charcoal t)
-  (set-frame-font
-   "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
+;;  ((eq my-curr-computer 'a-laptop-faster)
+;;   (load-theme 'charcoal t)
+;;   (set-frame-font
+;;    "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
+
+;;  ;; unknown windows computer.
+;;  ((and (null my-curr-computer)
+;;        (eq system-type 'windows-nt))
+;;   (load-theme 'charcoal t)
+;;   (set-frame-font
+;;    "-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1")))
 
 ;; now that this is auto detect bg the keybind doesn't need to be set
 ;; after theme load. But do it after anyway in case i use a shade

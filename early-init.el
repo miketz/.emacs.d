@@ -1,12 +1,17 @@
-(when (fboundp 'menu-bar-mode) (menu-bar-mode 0))
+;; (when (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 ;; (when (fboundp 'tool-bar-mode) (tool-bar-mode 0))
-;; supposedly this is faster than (tool-bar-mode 0)
+;; (when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
+;; (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode 0))
+
+;; supposedly default-frame-alist is faster than (tool-bar-mode 0), etc
+(push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
-(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode 0))
+(push '(vertical-scroll-bars) default-frame-alist)
+
 
 ;; remove title bar. to fit more lines of code on the screen
-(add-to-list 'default-frame-alist '(undecorated . t))
+(unless (eq system-type 'windows-nt) ;; locks window on Windows!
+  (add-to-list 'default-frame-alist '(undecorated . t)))
 
 ;; on mac thius makes the window a fixed size!!! Rectangle plugin can't resize emacs.
 ;; (progn

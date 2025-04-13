@@ -1814,13 +1814,10 @@ Historical preservation."
 (defun my-color-ef-autumn ()
   (interactive)
   (load-theme 'ef-autumn t)
+  ;;(my-rainbow-parens-dark-bg)
+  ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
-  (custom-theme-set-faces
-   'ef-autumn
-   ;; ido
-   `(ido-first-match ((t (:foreground "yellow" :background "#000000"))))
-   `(ido-only-match ((t (:foreground "green" :background "#000000"))))
-   `(ido-subdir ((t (:foreground "purple" :background "#000000"))))))
+  (my-ido-dark-bg))
 
 (defun my-color-ample-flat ()
   "A good 256 color theme."

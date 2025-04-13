@@ -1647,6 +1647,14 @@ Historical preservation."
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'
    `(fill-column-indicator ((t (:foreground "#303030"))))))
 
+(defun my-color-ef-melissa-dark ()
+  (interactive)
+  (load-theme 'ef-melissa-dark t)
+  ;;(my-rainbow-parens-dark-bg)
+  ;;(my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg))
+
 (defun my-color-app-monochrome-themes-dark-theme ()
   (interactive)
   (load-theme 'app-monochrome-themes-dark-theme t)

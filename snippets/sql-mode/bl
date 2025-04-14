@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: block, to limit txt range for autocompletion
+# key: bl
+# --
+--block:start$0
+--block:end

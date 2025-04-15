@@ -4,7 +4,7 @@
 (sqlite-available-p)
 
 ;;; open db. create if missing
-(defvar *db* (sqlite-open "cars.db"))
+(defvar *db* (sqlite-open (expand-file-name "~/cars.db")))
 
 ;;; testing
 (sqlitep *db*)

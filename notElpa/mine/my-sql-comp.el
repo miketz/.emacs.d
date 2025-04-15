@@ -2,7 +2,8 @@
 
 (require 'ivy)
 (require 'cl-lib)
-(require 'dash)
+(require 'dash) ; for `-min-by'
+(require 'f) ; for writng sql text to file. via `f-write-text'
 
 ;; single global store of schema data.
 (defvar my-sql-schemas '())
@@ -16,10 +17,16 @@
   "Store the conn string in an external location, out of this git repo.
 containing code like:
   (setq my-sql-conn-str \"sqlserver://username:passw@localhost/MSSQLSERVER01?database=dbName\")")
+(defvar my-sql-comp-file "~/my-sql-comp-tmp.sql"
+  "File to store the sql to give to the Go (lang) program.
+Sending the sql as a command line argument has many escaping issues on MS-windows.
+Using a text file as an alterantive to bypass those issues.")
 
 (defvar my-sql-golang-prog (expand-file-name "~/.emacs.d/notElpaYolo/dbQueryHelper/dbQueryHelper")
   "Golang prog used to interact with the DB.
 Until I figure out how to connect to a db with elisp.")
+
+
 
 (defun my-sql-clear-shcema-data ()
   "Clear the stored schema data."
@@ -81,11 +88,14 @@ Until I figure out how to connect to a db with elisp.")
 
   (let* ((connstr (my-sql-set-conn-str))
          (query (buffer-substring-no-properties start end))
-         ;; TODO: handle case where windows does not like % charcager in query through command line
-         (cmd (concat my-sql-golang-prog " query \"" connstr "\" \"" query "\""))
+         (query-file (expand-file-name my-sql-comp-file))
+         (cmd (concat my-sql-golang-prog " query \"" connstr "\" \"" query-file "\""))
          (buff (my-sql-output-buffer))
          ;; shadow var to prevent output in mini buffer
          (max-mini-window-height 0))
+    ;; Write query text to file instead of passing via commnad line arg.
+    ;; Too many issues escaping special chars on MS-windows. the like wildcard % has issues.
+    (f-write-text query 'utf-8 (expand-file-name my-sql-comp-file))
     (shell-command cmd buff)
     (display-buffer buff)))
 

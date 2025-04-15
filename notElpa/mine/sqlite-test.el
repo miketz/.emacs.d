@@ -15,12 +15,35 @@
     Name string,
     Age int
 );")
-
 ;;; data
 (sqlite-execute *db* "insert into Emp values ('joe',20)")
 (sqlite-execute *db* "insert into Emp values ('bob',25)")
 (sqlite-execute *db* "insert into Emp values (?,?)" ["mike" 4900543])
 (sqlite-execute *db* "insert into Emp values (?,?)" ["mike2" 30])
+
+;;; table
+(sqlite-execute *db* "create table Question (
+    ID integer primary key autoincrement,
+    ParentId int
+);")
+;;; data
+(sqlite-execute *db* "insert into Question values (1,null)")
+(sqlite-execute *db* "insert into Question values (2,null)")
+(sqlite-execute *db* "insert into Question values (3,null)")
+  (sqlite-execute *db* "insert into Question values (4,3)")
+  (sqlite-execute *db* "insert into Question values (5,3)")
+    (sqlite-execute *db* "insert into Question values (6,5)")
+    (sqlite-execute *db* "insert into Question values (7,5)")
+      (sqlite-execute *db* "insert into Question values (8,7)")
+      (sqlite-execute *db* "insert into Question values (9,7)")
+    (sqlite-execute *db* "insert into Question values (10,5)")
+  (sqlite-execute *db* "insert into Question values (11,3)")
+(sqlite-execute *db* "insert into Question values (12,null)")
+(sqlite-execute *db* "insert into Question values (13,null)")
+(sqlite-execute *db* "insert into Question values (14,null)")
+
+;; (sqlite-execute *db* "delete from Question")
+;; (sqlite-select *db* "select * from Question")
 
 ;;; query 1
 (sqlite-select *db* "select * from Emp")

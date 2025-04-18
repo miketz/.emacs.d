@@ -6120,11 +6120,13 @@ TODO: call this function when it works."
 
 (when my-use-ivy-p
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'ivy-switch-buffer))
+    (evil-leader/set-key "b" #'counsel-switch-buffer ;#'ivy-switch-buffer
+      ))
 
   (when (eq my-ui-type 'emacs)
     (global-set-key (kbd "C-c C-s") #'swiper-isearch)
-    (global-set-key (kbd "C-c C-b") #'ivy-switch-buffer))
+    (global-set-key (kbd "C-c C-b") #'counsel-switch-buffer ;#'ivy-switch-buffer
+                    ))
 
   (progn ;; counsel completion augmentation
 

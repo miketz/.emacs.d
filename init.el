@@ -6242,7 +6242,11 @@ TODO: call this function when it works."
   ;; (global-set-key (kbd "<f7>") #'my-cycle-ivy-match-style)
 
   ;; use fancy highlights in the popup window
-  (setq ivy-display-style 'fancy))
+  (setq ivy-display-style 'fancy)
+
+  ;; part of the "vertico suite" but works with ivy too.
+  (marginalia-mode)
+  )
 
 ;; (with-eval-after-load "swiper"
 ;;   ;; overwrite `swiper--re-builder' to use out-of-order matching.

@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # -*- cursor. Assumes 1 fetch variable, since I don't understand snippets enough to
-#     have it fill up properly on multiple variables.
-#     NOTE: consider a set-based operation instead of a cursor *-*
+# -*- have it fill up properly on multiple variables.
+# -*- NOTE: consider a set-based operation instead of a cursor *-*
 # name: cursor
 # key: cur
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))

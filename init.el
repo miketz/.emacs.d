@@ -1234,7 +1234,7 @@ To show reccomended max line length.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
-        ((eq my-curr-computer 'mac-mini-m1-2021) 'ivy)
+        ((eq my-curr-computer 'mac-mini-m1-2021) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-mac) 'bare-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.

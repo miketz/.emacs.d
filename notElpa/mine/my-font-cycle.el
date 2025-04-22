@@ -67,6 +67,7 @@
           "-Bits-Bitstream Vera Sans Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"])
        ((memq my-curr-computer '(work-laptop-2019 work-laptop))
         '["-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+          "-raster-ProggySquare-normal-normal-normal-mono-11-*-*-*-c-*-iso8859-1"
 
           "-raster-Terminus-normal-normal-normal-mono-6-*-*-*-c-*-iso8859-1"
 
@@ -105,7 +106,6 @@
           "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-bold-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           ;; "-raster-peep-normal-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin"
-          "-raster-ProggySquare-normal-normal-normal-mono-11-*-*-*-c-*-iso8859-1"
           "-outline-Ubuntu Mono-normal-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
           "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
           "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"

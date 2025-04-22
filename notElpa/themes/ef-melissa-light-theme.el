@@ -52,7 +52,7 @@
       (bg-dim      "#f5e9cb")
       (fg-dim      "#68708a")
       (bg-alt      "#e7d7c6")
-      (fg-alt      "#66713a")
+      (fg-alt      "#80431a")
 
       (bg-active   "#c7b7a6")
       (bg-inactive "#f9efd4")
@@ -60,17 +60,17 @@
 ;;; Basic hues for foreground values
 
       (red             "#ba2d2f")
-      (red-warmer      "#b21f00")
-      (red-cooler      "#c03f3f")
+      (red-warmer      "#c74400")
+      (red-cooler      "#c02945")
       (red-faint       "#b05350")
       (green           "#007a0a")
       (green-warmer    "#5a7400")
       (green-cooler    "#008250")
       (green-faint     "#61756c")
-      (yellow          "#a46110")
+      (yellow          "#a26310")
       (yellow-warmer   "#ba5205")
       (yellow-cooler   "#946830")
-      (yellow-faint    "#92616a")
+      (yellow-faint    "#7f6f1a")
       (blue            "#375cc6")
       (blue-warmer     "#5f5fdf")
       (blue-cooler     "#265fbf")
@@ -93,12 +93,12 @@
       (bg-magenta-intense "#df9fff")
       (bg-cyan-intense    "#88cfd0")
 
-      (bg-red-subtle      "#ffc6bf")
-      (bg-green-subtle    "#c4f2af")
-      (bg-yellow-subtle   "#f0f07f")
-      (bg-blue-subtle     "#ccdfff")
-      (bg-magenta-subtle  "#fad3ff")
-      (bg-cyan-subtle     "#bfefff")
+      (bg-red-subtle      "#ffceb0")
+      (bg-green-subtle    "#cbf09f")
+      (bg-yellow-subtle   "#f4ed7e")
+      (bg-blue-subtle     "#cce4f2")
+      (bg-magenta-subtle  "#fad6ef")
+      (bg-cyan-subtle     "#bfefef")
 
 ;;; Diffs
 
@@ -121,12 +121,12 @@
 
       (bg-graph-red-0     "#ef7969")
       (bg-graph-red-1     "#ffaab4")
-      (bg-graph-green-0   "#2fe029")
+      (bg-graph-green-0   "#45c050")
       (bg-graph-green-1   "#75ef30")
       (bg-graph-yellow-0  "#ffcf00")
       (bg-graph-yellow-1  "#f9ff00")
       (bg-graph-blue-0    "#7f90ff")
-      (bg-graph-blue-1    "#9fc6ff")
+      (bg-graph-blue-1    "#a6c0ff")
       (bg-graph-magenta-0 "#e07fff")
       (bg-graph-magenta-1 "#fad0ff")
       (bg-graph-cyan-0    "#70d3f0")
@@ -208,11 +208,13 @@
 
       (date-common green-warmer)
       (date-deadline red)
+      (date-deadline-subtle red-faint)
       (date-event fg-alt)
       (date-holiday magenta-warmer)
       (date-now fg-main)
       (date-range fg-alt)
       (date-scheduled yellow)
+      (date-scheduled-subtle yellow-faint)
       (date-weekday green-warmer)
       (date-weekend red-faint)
 
@@ -242,6 +244,7 @@
 
 ;;;; Search mappings
 
+      (bg-search-match bg-warning)
       (bg-search-current bg-yellow-intense)
       (bg-search-lazy bg-blue-intense)
       (bg-search-replace bg-red-intense)
@@ -262,6 +265,48 @@
       (bg-tab-bar      bg-alt)
       (bg-tab-current  bg-main)
       (bg-tab-other    bg-active)
+
+;;;; Terminal mappings
+
+      (bg-term-black           "black")
+      (fg-term-black           "black")
+      (bg-term-black-bright    "gray35")
+      (fg-term-black-bright    "gray35")
+
+      (bg-term-red             red)
+      (fg-term-red             red)
+      (bg-term-red-bright      red-warmer)
+      (fg-term-red-bright      red-warmer)
+
+      (bg-term-green           green)
+      (fg-term-green           green)
+      (bg-term-green-bright    green-warmer)
+      (fg-term-green-bright    green-warmer)
+
+      (bg-term-yellow          yellow)
+      (fg-term-yellow          yellow)
+      (bg-term-yellow-bright   yellow-warmer)
+      (fg-term-yellow-bright   yellow-warmer)
+
+      (bg-term-blue            blue)
+      (fg-term-blue            blue)
+      (bg-term-blue-bright     blue-warmer)
+      (fg-term-blue-bright     blue-warmer)
+
+      (bg-term-magenta         magenta)
+      (fg-term-magenta         magenta)
+      (bg-term-magenta-bright  magenta-cooler)
+      (fg-term-magenta-bright  magenta-cooler)
+
+      (bg-term-cyan            cyan)
+      (fg-term-cyan            cyan)
+      (bg-term-cyan-bright     cyan-cooler)
+      (fg-term-cyan-bright     cyan-cooler)
+
+      (bg-term-white           "gray65")
+      (fg-term-white           "gray65")
+      (bg-term-white-bright    "white")
+      (fg-term-white-bright    "white")
 
 ;;;; Rainbow mappings
 

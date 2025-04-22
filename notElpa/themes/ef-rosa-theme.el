@@ -39,7 +39,7 @@
 ;;;###theme-autoload
   (deftheme ef-rosa
     "Legible dark theme with magenta and green colors."
-    :background-mode 'light
+    :background-mode 'dark
     :kind 'color-scheme
     :family 'ef)
 
@@ -63,7 +63,7 @@
       (red-warmer      "#ff7f5f")
       (red-cooler      "#f0888f")
       (red-faint       "#e89f84")
-      (green           "#55cb56")
+      (green           "#5fbb5f")
       (green-warmer    "#8ad05a")
       (green-cooler    "#49d081")
       (green-faint     "#9aba8b")
@@ -93,12 +93,12 @@
       (bg-magenta-intense "#905fdf")
       (bg-cyan-intense    "#028099")
 
-      (bg-red-subtle      "#6a102a")
-      (bg-green-subtle    "#00522a")
-      (bg-yellow-subtle   "#5a4000")
-      (bg-blue-subtle     "#243788")
-      (bg-magenta-subtle  "#422e6b")
-      (bg-cyan-subtle     "#005065")
+      (bg-red-subtle      "#772c2a")
+      (bg-green-subtle    "#38512f")
+      (bg-yellow-subtle   "#634627")
+      (bg-blue-subtle     "#424075")
+      (bg-magenta-subtle  "#6b3c52")
+      (bg-cyan-subtle     "#3f4e72")
 
 ;;; Diffs
 
@@ -172,7 +172,7 @@
       (warning yellow-warmer)
       (info green)
 
-      (link green)
+      (link green-cooler)
       (link-alt magenta-cooler)
       (name magenta-warmer)
       (keybind magenta-warmer)
@@ -185,7 +185,7 @@
 ;;;; Code mappings
 
       (builtin magenta-cooler)
-      (comment fg-dim)
+      (comment green-faint)
       (constant green-cooler)
       (fnname magenta-warmer)
       (keyword magenta)
@@ -208,11 +208,13 @@
 
       (date-common magenta-cooler)
       (date-deadline magenta)
+      (date-deadline-subtle red-faint)
       (date-event fg-alt)
       (date-holiday green)
       (date-now fg-main)
       (date-range fg-alt)
       (date-scheduled yellow-cooler)
+      (date-scheduled-subtle yellow-faint)
       (date-weekday magenta-cooler)
       (date-weekend red-cooler)
 
@@ -237,11 +239,12 @@
       (mail-cite-3 yellow-cooler)
       (mail-part magenta-cooler)
       (mail-recipient magenta)
-      (mail-subject green-cooler)
+      (mail-subject green)
       (mail-other magenta-warmer)
 
 ;;;; Search mappings
 
+      (bg-search-match bg-warning)
       (bg-search-current bg-yellow-intense)
       (bg-search-lazy bg-blue-intense)
       (bg-search-replace bg-red-intense)
@@ -262,6 +265,48 @@
       (bg-tab-bar      bg-alt)
       (bg-tab-current  bg-main)
       (bg-tab-other    bg-active)
+
+;;;; Terminal mappings
+
+      (bg-term-black           "black")
+      (fg-term-black           "black")
+      (bg-term-black-bright    "gray35")
+      (fg-term-black-bright    "gray35")
+
+      (bg-term-red             red)
+      (fg-term-red             red)
+      (bg-term-red-bright      red-warmer)
+      (fg-term-red-bright      red-warmer)
+
+      (bg-term-green           green)
+      (fg-term-green           green)
+      (bg-term-green-bright    green-warmer)
+      (fg-term-green-bright    green-warmer)
+
+      (bg-term-yellow          yellow)
+      (fg-term-yellow          yellow)
+      (bg-term-yellow-bright   yellow-warmer)
+      (fg-term-yellow-bright   yellow-warmer)
+
+      (bg-term-blue            blue)
+      (fg-term-blue            blue)
+      (bg-term-blue-bright     blue-warmer)
+      (fg-term-blue-bright     blue-warmer)
+
+      (bg-term-magenta         magenta)
+      (fg-term-magenta         magenta)
+      (bg-term-magenta-bright  magenta-cooler)
+      (fg-term-magenta-bright  magenta-cooler)
+
+      (bg-term-cyan            cyan)
+      (fg-term-cyan            cyan)
+      (bg-term-cyan-bright     cyan-cooler)
+      (fg-term-cyan-bright     cyan-cooler)
+
+      (bg-term-white           "gray65")
+      (fg-term-white           "gray65")
+      (bg-term-white-bright    "white")
+      (fg-term-white-bright    "white")
 
 ;;;; Rainbow mappings
 

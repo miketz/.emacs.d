@@ -50,9 +50,9 @@
       (bg-main     "#ffffff")
       (fg-main     "#202020")
       (bg-dim      "#efefef")
-      (fg-dim      "#70627f")
+      (fg-dim      "#68759f")
       (bg-alt      "#dbdbdb")
-      (fg-alt      "#196f70")
+      (fg-alt      "#397a70")
 
       (bg-active   "#b3b3b3")
       (bg-inactive "#f9f9f9")
@@ -61,7 +61,7 @@
 
       (red             "#d3303a")
       (red-warmer      "#e00033")
-      (red-cooler      "#d50f7f")
+      (red-cooler      "#d51272")
       (red-faint       "#c24552")
       (green           "#217a3c")
       (green-warmer    "#4a7d00")
@@ -71,10 +71,10 @@
       (yellow-warmer   "#b6532f")
       (yellow-cooler   "#b65050")
       (yellow-faint    "#a65f6a")
-      (blue            "#375cd8")
+      (blue            "#3740cf")
       (blue-warmer     "#4250ef")
       (blue-cooler     "#065fff")
-      (blue-faint      "#6060d0")
+      (blue-faint      "#4f54aa")
       (magenta         "#ba35af")
       (magenta-warmer  "#cf25aa")
       (magenta-cooler  "#6052cf")
@@ -102,9 +102,9 @@
 
 ;;; Diffs
 
-      (bg-added          "#d5f8d5")
+      (bg-added          "#d0f0d0")
       (bg-added-faint    "#e5ffe5")
-      (bg-added-refine   "#c6e8c6")
+      (bg-added-refine   "#b2e8be")
       (fg-added          "#005000")
 
       (bg-changed        "#f4e8bd")
@@ -121,12 +121,12 @@
 
       (bg-graph-red-0     "#ef7969")
       (bg-graph-red-1     "#ffaab4")
-      (bg-graph-green-0   "#2fe029")
+      (bg-graph-green-0   "#45c050")
       (bg-graph-green-1   "#75ef30")
       (bg-graph-yellow-0  "#ffcf00")
       (bg-graph-yellow-1  "#f9ff00")
       (bg-graph-blue-0    "#7f90ff")
-      (bg-graph-blue-1    "#9fc6ff")
+      (bg-graph-blue-1    "#a6c0ff")
       (bg-graph-magenta-0 "#e07fff")
       (bg-graph-magenta-1 "#fad0ff")
       (bg-graph-cyan-0    "#70d3f0")
@@ -172,7 +172,7 @@
       (warning yellow-warmer)
       (info green)
 
-      (link blue)
+      (link blue-warmer)
       (link-alt magenta)
       (name magenta-cooler)
       (keybind blue-cooler)
@@ -189,7 +189,7 @@
       (constant blue-cooler)
       (fnname magenta-warmer)
       (keyword magenta-cooler)
-      (preprocessor red-warmer)
+      (preprocessor red)
       (docstring cyan-faint)
       (string blue-warmer)
       (type green-cooler)
@@ -208,11 +208,13 @@
 
       (date-common cyan-cooler)
       (date-deadline red)
+      (date-deadline-subtle red-cooler)
       (date-event fg-alt)
       (date-holiday magenta-warmer)
       (date-now fg-main)
       (date-range fg-alt)
       (date-scheduled yellow)
+      (date-scheduled-subtle yellow-faint)
       (date-weekday cyan)
       (date-weekend red-faint)
 
@@ -242,6 +244,7 @@
 
 ;;;; Search mappings
 
+      (bg-search-match bg-warning)
       (bg-search-current bg-yellow-intense)
       (bg-search-lazy bg-blue-intense)
       (bg-search-replace bg-red-intense)
@@ -263,11 +266,53 @@
       (bg-tab-current  bg-main)
       (bg-tab-other    bg-active)
 
+;;;; Terminal mappings
+
+      (bg-term-black           "black")
+      (fg-term-black           "black")
+      (bg-term-black-bright    "gray35")
+      (fg-term-black-bright    "gray35")
+
+      (bg-term-red             red-cooler)
+      (fg-term-red             red-cooler)
+      (bg-term-red-bright      red-warmer)
+      (fg-term-red-bright      red-warmer)
+
+      (bg-term-green           green)
+      (fg-term-green           green)
+      (bg-term-green-bright    green-warmer)
+      (fg-term-green-bright    green-warmer)
+
+      (bg-term-yellow          yellow)
+      (fg-term-yellow          yellow)
+      (bg-term-yellow-bright   yellow-cooler)
+      (fg-term-yellow-bright   yellow-cooler)
+
+      (bg-term-blue            blue-warmer)
+      (fg-term-blue            blue-warmer)
+      (bg-term-blue-bright     blue-cooler)
+      (fg-term-blue-bright     blue-cooler)
+
+      (bg-term-magenta         magenta)
+      (fg-term-magenta         magenta)
+      (bg-term-magenta-bright  magenta-cooler)
+      (fg-term-magenta-bright  magenta-cooler)
+
+      (bg-term-cyan            cyan)
+      (fg-term-cyan            cyan)
+      (bg-term-cyan-bright     cyan-cooler)
+      (fg-term-cyan-bright     cyan-cooler)
+
+      (bg-term-white           "gray65")
+      (fg-term-white           "gray65")
+      (bg-term-white-bright    "white")
+      (fg-term-white-bright    "white")
+
 ;;;; Rainbow mappings
 
       (rainbow-0 green-cooler)
-      (rainbow-1 blue)
-      (rainbow-2 magenta-warmer)
+      (rainbow-1 blue-faint)
+      (rainbow-2 magenta)
       (rainbow-3 cyan-cooler)
       (rainbow-4 yellow-cooler)
       (rainbow-5 magenta-cooler)

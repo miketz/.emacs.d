@@ -65,7 +65,7 @@
       (red             "#d3303a")
       (red-warmer      "#e00033")
       (red-cooler      "#d50f7f")
-      (red-faint       "#c24552")
+      (red-faint       "#a04852")
       (green           "#217a3c")
       (green-warmer    "#4a7d00")
       (green-cooler    "#008058")
@@ -73,7 +73,7 @@
       (yellow          "#805d00")
       (yellow-warmer   "#965000")
       (yellow-cooler   "#765040")
-      (yellow-faint    "#776d6a")
+      (yellow-faint    "#77604a")
       (blue            "#375cd8")
       (blue-warmer     "#4250ef")
       (blue-cooler     "#065fff")
@@ -84,7 +84,7 @@
       (magenta-faint   "#9f5080")
       (cyan            "#1f6fbf")
       (cyan-warmer     "#3f6faf")
-      (cyan-cooler     "#1f77bb")
+      (cyan-cooler     "#1477b2")
       (cyan-faint      "#506fa0")
 
 ;;; Basic hues for background values
@@ -96,12 +96,12 @@
       (bg-magenta-intense "#3fbfff")
       (bg-cyan-intense    "#98e8ff")
 
-      (bg-red-subtle      "#ffcfbf")
-      (bg-green-subtle    "#afffbf")
-      (bg-yellow-subtle   "#fff576")
-      (bg-blue-subtle     "#ccdfff")
-      (bg-magenta-subtle  "#ffddff")
-      (bg-cyan-subtle     "#bfefff")
+      (bg-red-subtle      "#ead270")
+      (bg-green-subtle    "#bae0a0")
+      (bg-yellow-subtle   "#e6f270")
+      (bg-blue-subtle     "#c0dfff")
+      (bg-magenta-subtle  "#ccc8ff")
+      (bg-cyan-subtle     "#afecf0")
 
 ;;; Diffs
 
@@ -124,12 +124,12 @@
 
       (bg-graph-red-0     "#d0b029")
       (bg-graph-red-1     "#e0cab4")
-      (bg-graph-green-0   "#8ad080")
+      (bg-graph-green-0   "#8ac050")
       (bg-graph-green-1   "#afdfa5")
       (bg-graph-yellow-0  "#ffcf00")
       (bg-graph-yellow-1  "#f9ff00")
       (bg-graph-blue-0    "#7f9fff")
-      (bg-graph-blue-1    "#9fc6ff")
+      (bg-graph-blue-1    "#afd0ff")
       (bg-graph-magenta-0 "#b0b0d0")
       (bg-graph-magenta-1 "#d0dfdf")
       (bg-graph-cyan-0    "#6faad9")
@@ -211,11 +211,13 @@
 
       (date-common yellow-cooler)
       (date-deadline yellow-warmer)
+      (date-deadline-subtle red-faint)
       (date-event fg-alt)
       (date-holiday cyan)
       (date-now fg-main)
       (date-range fg-alt)
       (date-scheduled yellow-cooler)
+      (date-scheduled-subtle yellow-faint)
       (date-weekday cyan)
       (date-weekend magenta-faint)
 
@@ -251,6 +253,7 @@
 
 ;;;; Search mappings
 
+      (bg-search-match bg-warning)
       (bg-search-current bg-yellow-intense)
       (bg-search-lazy bg-blue-intense)
       (bg-search-replace bg-magenta-intense)
@@ -265,6 +268,48 @@
       (bg-tab-bar      bg-alt)
       (bg-tab-current  bg-main)
       (bg-tab-other    bg-active)
+
+;;;; Terminal mappings
+
+      (bg-term-black           "black")
+      (fg-term-black           "black")
+      (bg-term-black-bright    "gray35")
+      (fg-term-black-bright    "gray35")
+
+      (bg-term-red             red-cooler)
+      (fg-term-red             red-cooler)
+      (bg-term-red-bright      red-warmer)
+      (fg-term-red-bright      red-warmer)
+
+      (bg-term-green           green)
+      (fg-term-green           green)
+      (bg-term-green-bright    green-warmer)
+      (fg-term-green-bright    green-warmer)
+
+      (bg-term-yellow          yellow)
+      (fg-term-yellow          yellow)
+      (bg-term-yellow-bright   yellow-warmer)
+      (fg-term-yellow-bright   yellow-warmer)
+
+      (bg-term-blue            blue-warmer)
+      (fg-term-blue            blue-warmer)
+      (bg-term-blue-bright     blue-cooler)
+      (fg-term-blue-bright     blue-cooler)
+
+      (bg-term-magenta         magenta)
+      (fg-term-magenta         magenta)
+      (bg-term-magenta-bright  magenta-cooler)
+      (fg-term-magenta-bright  magenta-cooler)
+
+      (bg-term-cyan            cyan)
+      (fg-term-cyan            cyan)
+      (bg-term-cyan-bright     cyan-cooler)
+      (fg-term-cyan-bright     cyan-cooler)
+
+      (bg-term-white           "gray65")
+      (fg-term-white           "gray65")
+      (bg-term-white-bright    "white")
+      (fg-term-white-bright    "white")
 
 ;;;; Rainbow mappings
 

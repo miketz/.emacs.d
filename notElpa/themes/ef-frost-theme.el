@@ -70,7 +70,7 @@
       (yellow          "#aa6100")
       (yellow-warmer   "#b6532f")
       (yellow-cooler   "#996c4f")
-      (yellow-faint    "#804f4f")
+      (yellow-faint    "#7a5f2f")
       (blue            "#004fc0")
       (blue-warmer     "#4244ef")
       (blue-cooler     "#065fff")
@@ -93,12 +93,12 @@
       (bg-magenta-intense "#df8fff")
       (bg-cyan-intense    "#88c8ff")
 
-      (bg-red-subtle      "#ffcfbf")
-      (bg-green-subtle    "#b3fabf")
-      (bg-yellow-subtle   "#fff576")
-      (bg-blue-subtle     "#ccdfff")
-      (bg-magenta-subtle  "#ffddff")
-      (bg-cyan-subtle     "#bfefff")
+      (bg-red-subtle      "#ffcbdf")
+      (bg-green-subtle    "#b3f6d0")
+      (bg-yellow-subtle   "#f0f48f")
+      (bg-blue-subtle     "#baeeff")
+      (bg-magenta-subtle  "#f0ddff")
+      (bg-cyan-subtle     "#c2eff2")
 
 ;;; Diffs
 
@@ -121,12 +121,12 @@
 
       (bg-graph-red-0     "#ef7969")
       (bg-graph-red-1     "#ffaab4")
-      (bg-graph-green-0   "#2fe029")
+      (bg-graph-green-0   "#45c050")
       (bg-graph-green-1   "#75ef30")
       (bg-graph-yellow-0  "#ffcf00")
       (bg-graph-yellow-1  "#f9ff00")
       (bg-graph-blue-0    "#7f90ff")
-      (bg-graph-blue-1    "#9fc6ff")
+      (bg-graph-blue-1    "#a6c0ff")
       (bg-graph-magenta-0 "#e07fff")
       (bg-graph-magenta-1 "#fad0ff")
       (bg-graph-cyan-0    "#70d3f0")
@@ -208,11 +208,13 @@
 
       (date-common cyan-cooler)
       (date-deadline red)
+      (date-deadline-subtle red-faint)
       (date-event fg-alt)
       (date-holiday magenta-warmer)
       (date-now fg-main)
       (date-range fg-alt)
       (date-scheduled yellow-cooler)
+      (date-scheduled-subtle yellow-faint)
       (date-weekday cyan)
       (date-weekend red-faint)
 
@@ -242,6 +244,7 @@
 
 ;;;; Search mappings
 
+      (bg-search-match bg-warning)
       (bg-search-current bg-yellow-intense)
       (bg-search-lazy bg-blue-intense)
       (bg-search-replace bg-red-intense)
@@ -262,6 +265,48 @@
       (bg-tab-bar      bg-alt)
       (bg-tab-current  bg-main)
       (bg-tab-other    bg-active)
+
+;;;; Terminal mappings
+
+      (bg-term-black           "black")
+      (fg-term-black           "black")
+      (bg-term-black-bright    "gray35")
+      (fg-term-black-bright    "gray35")
+
+      (bg-term-red             red)
+      (fg-term-red             red)
+      (bg-term-red-bright      red-cooler)
+      (fg-term-red-bright      red-cooler)
+
+      (bg-term-green           green)
+      (fg-term-green           green)
+      (bg-term-green-bright    green-cooler)
+      (fg-term-green-bright    green-cooler)
+
+      (bg-term-yellow          yellow)
+      (fg-term-yellow          yellow)
+      (bg-term-yellow-bright   yellow-cooler)
+      (fg-term-yellow-bright   yellow-cooler)
+
+      (bg-term-blue            blue-warmer)
+      (fg-term-blue            blue-warmer)
+      (bg-term-blue-bright     blue-cooler)
+      (fg-term-blue-bright     blue-cooler)
+
+      (bg-term-magenta         magenta)
+      (fg-term-magenta         magenta)
+      (bg-term-magenta-bright  magenta-cooler)
+      (fg-term-magenta-bright  magenta-cooler)
+
+      (bg-term-cyan            cyan-warmer)
+      (fg-term-cyan            cyan-warmer)
+      (bg-term-cyan-bright     cyan)
+      (fg-term-cyan-bright     cyan)
+
+      (bg-term-white           "gray65")
+      (fg-term-white           "gray65")
+      (bg-term-white-bright    "white")
+      (fg-term-white-bright    "white")
 
 ;;;; Rainbow mappings
 

@@ -1661,8 +1661,7 @@ Historical preservation."
   ;;(my-rainbow-parens-dark-bg)
   ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
-  ;;(my-ido-dark-bg)
-  )
+  (my-ido-dark-bg))
 
 (defun my-color-app-monochrome-themes-dark-theme ()
   (interactive)

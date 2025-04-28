@@ -10475,8 +10475,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'my-list-holidays "my-misc" nil t)
 
 (autoload #'my-find-file-omni "my-find-file" nil t)
+(autoload #'my-find-file-fd "my-find-file" nil t)
 (when my-use-evil-p
-  (evil-leader/set-key "h" #'my-find-file-omni))
+  (evil-leader/set-key "h" #'my-find-file-fd)
+  ;; (evil-leader/set-key "h" #'my-find-file-omni)
+  )
 
 
 (autoload #'my-indent-defun "my-misc" nil t)

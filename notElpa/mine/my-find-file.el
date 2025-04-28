@@ -1,5 +1,8 @@
 ;;; my-find-file.el --- find file by name in dir -*- lexical-binding: t -*-
 
+(require 'ivy)
+(require 'counsel)
+
 (defvar my-fd-installed-p (executable-find "fd"))
 
 ;; MS windows specific command. Doesn't seem to work well.
@@ -41,6 +44,16 @@ Fall back to `counsel-file-jump' if on GNU/linux."
                   ;;   (call-interactively #'find-name-dired))
                   ))))
         (funcall fn)))))
+
+(defun my-find-file-fd ()
+  "Find files by name. Using fd and emacs wrapper fn `counsel-fd-file-jump'."
+  (interactive)
+  (let ((completing-read-function #'ivy-completing-read)
+        ;; dynamically shadow ivy completion style to ignore order.
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window
+        (ivy-height (- (window-height) 4)))
+    (counsel-fd-file-jump)))
 
 
 (provide 'my-find-file)

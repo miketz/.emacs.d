@@ -2,6 +2,7 @@
 
 (require 'ivy)
 (require 'counsel)
+(require 'my-select-folder)
 
 (defvar my-fd-installed-p (executable-find "fd"))
 
@@ -53,7 +54,7 @@ Fall back to `counsel-file-jump' if on GNU/linux."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4)))
-    (counsel-fd-file-jump)))
+    (counsel-fd-file-jump nil (my-select-folder))))
 
 
 (provide 'my-find-file)

@@ -19,7 +19,14 @@
         ;; taller ivy window
         (ivy-height (- (window-height) 4))) ; -4 is important so scrolling
                                             ; doens't go off screen.
-    (call-interactively #'set-frame-font)))
+
+    ;; `set-frame-font' does not list raster/bitmap fonts. so don't use it for selection.
+    ;; (call-interactively #'set-frame-font)
+
+    ;; `font-family-list' does include raster/bitmap fonts.
+    ;; TODO: inclue bold, itallic, etc in the list.
+    (let ((font (ivy-completing-read "font: " (delete-dups (font-family-list)))))
+      (set-frame-font font))))
 
 
 

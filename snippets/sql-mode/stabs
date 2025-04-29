@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: schema query: tables views
+# key: stabs
+# --
+select t.TABLE_SCHEMA [Schema], t.TABLE_NAME [Table], t.TABLE_TYPE [Type]
+from INFORMATION_SCHEMA.TABLES t
+where t.TABLE_SCHEMA='${1:dbo}'
+order by t.TABLE_SCHEMA, t.TABLE_TYPE, t.TABLE_NAME

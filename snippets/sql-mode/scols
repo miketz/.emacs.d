@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: schema query: cols
+# key: scols
+# --
+select c.COLUMN_NAME [ColName], c.DATA_TYPE [Type], c.CHARACTER_MAXIMUM_LENGTH [Len], c.IS_NULLABLE [Null], c.ORDINAL_POSITION [OrdPos]
+from INFORMATION_SCHEMA.COLUMNS c
+where c.TABLE_SCHEMA='${1:dbo}'
+and c.TABLE_NAME='${2:tabName}'

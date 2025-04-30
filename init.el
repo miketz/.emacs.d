@@ -4383,6 +4383,12 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; sql-indent
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/emacs-sql-indent" load-path)
+(autoload #'sqlind-minor-mode "sql-indent" nil t)
+(autoload #'sqlind-setup-style-left "sql-indent-left" nil t)
+(autoload #'sqlind-setup-style-right "sql-indent-left" nil t)
+(autoload #'sqlind-setup-style-default "sql-indent-left" nil t)
+
 (with-eval-after-load 'sql-indent
   (setq-default sqlind-basic-offset 4)
   (setq-default sqlind-indentation-offsets-alist
@@ -4449,7 +4455,7 @@ and indent."
     ;; turn off indent when you press "o" in evil. Buffer local
     (when my-use-evil-p
       (setq evil-auto-indent nil))
-    ;; (sqlind-minor-mode 1)
+    (sqlind-minor-mode 1)
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 100)
       (display-fill-column-indicator-mode 1))

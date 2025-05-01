@@ -6358,7 +6358,9 @@ TODO: call this function when it works."
     (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
     (face-remap-add-relative 'font-lock-function-name-face '((:slant italic)))
     (face-remap-add-relative 'font-lock-string-face '((:slant italic)))
-    (face-remap-add-relative 'font-lock-constant-face '((:weight bold))))
+    (face-remap-add-relative 'font-lock-constant-face '((:weight bold)))
+
+    (rainbow-delimiters-mode-disable))
 
   ;; call `my-color-identifiers-mode-disable-other-faces' manually for now
   ;; (add-hook 'color-identifiers-mode-hook 'my-color-identifiers-mode-disable-other-faces)

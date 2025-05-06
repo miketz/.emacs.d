@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: StringBuilder
+# key: sb
+# --
+var ${1:sb} = new StringBuilder(${2:1024}$0); // allocate enough space up front

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : do { ... } while (...)
+# key: do
+# --
+do {
+} while ($0);

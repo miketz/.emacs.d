@@ -2,7 +2,6 @@
 # name: main2
 # key: main2
 # --
-static void Main()
+static ${1:void} Main($0)
 {
-    $0
 }

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: short attribute
+# key: at
+# --
+public ${1:int} ${2:Name} { get; set; }

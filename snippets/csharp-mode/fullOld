@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: fullOld
+# key: fullOld
+# --
+namespace ${1:foo}
+{
+    internal class ${2:Program}
+    {
+        static void Main()
+        {
+            Console.WriteLine("hi");$0
+        }
+
+
+    } // class
+} // namespace

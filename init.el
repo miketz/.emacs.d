@@ -6358,11 +6358,13 @@ TODO: call this function when it works."
   (defun my-color-identifiers-mode-disable-other-faces ()
     "Adjust other faces to be less prominent. So variable colors stand out more."
     (interactive)
-    (let ((faces '(font-lock-comment-face font-lock-comment-delimiter-face font-lock-constant-face font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-string-face font-lock-builtin-face font-lock-preprocessor-face font-lock-warning-face font-lock-doc-face font-lock-negation-char-face font-lock-regexp-grouping-construct font-lock-regexp-grouping-backslash)))
+    (let ((faces '(;; font-lock-comment-face
+                   ;; font-lock-comment-delimiter-face
+                   font-lock-constant-face font-lock-type-face font-lock-function-name-face font-lock-variable-name-face font-lock-keyword-face font-lock-string-face font-lock-builtin-face font-lock-preprocessor-face font-lock-warning-face font-lock-doc-face font-lock-negation-char-face font-lock-regexp-grouping-construct font-lock-regexp-grouping-backslash)))
       (dolist (face faces)
         (face-remap-add-relative face '(:inherit default))))
     (face-remap-add-relative 'font-lock-keyword-face '((:weight bold)))
-    (face-remap-add-relative 'font-lock-comment-face '((:slant italic)))
+    ;; (face-remap-add-relative 'font-lock-comment-face '((:slant italic)))
     (face-remap-add-relative 'font-lock-builtin-face '((:weight bold)))
     (face-remap-add-relative 'font-lock-preprocessor-face '((:weight bold)))
     (face-remap-add-relative 'font-lock-function-name-face '((:slant italic)))

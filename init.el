@@ -10474,10 +10474,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (when (or (memq my-curr-computer '(;; mac-mini-m1-2021
                                    wild-dog
                                    ;; work-laptop-2019
-                                   work-laptop-mac))
-          ;; on mac-mini load everything when GUI mode.
+                                   ;; work-laptop-mac
+                                   ))
+          ;; on mac load everything when GUI mode.
           ;; but not in terminal. I usually want a faster init there.
-          (and (eq my-curr-computer 'mac-mini-m1-2021)
+          (and (eq system-type 'darwin)
                my-graphic-p))
   (my-load-common))
 

@@ -3005,6 +3005,15 @@ Inserts a new line and the beginning and end with text values:
   ;; keybinds
   (define-key csharp-mode-map (kbd "C-c C-c") #'compile)
 
+  (defun my-csharp-new-proj ()
+    "Initialize a new C# project in a folder.
+Assumes dotnet core."
+    (interactive)
+    (let* ((folder-name (car (nreverse (string-split (directory-file-name default-directory) "/"))))
+           (cmd (format "dotnet new console -lang \"C#\" --name %s" folder-name)))
+      (setq cmd (read-shell-command "cmd: " cmd))
+      (shell-command cmd)))
+
   ;; hook
   (defun my-setup-csharp-mode ()
     ;; set compile-command. Assumes dotnet core

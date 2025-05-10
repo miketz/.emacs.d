@@ -9898,6 +9898,8 @@ Values: lsp, citre, nil")
 ;; https://github.com/8dcc/plumber.el
 ;; binky
 ;; hl-printf. highlight format specifiers (ie %d) like vim does
+;; dap-mode. debugger mode
+;; dape. debugger mode, but no external dependencies?
 
 
 ;;;----------------------------------------------------------------------------

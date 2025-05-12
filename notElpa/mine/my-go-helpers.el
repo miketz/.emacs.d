@@ -15,6 +15,13 @@
 (require 'hideshow)
 
 
+(defun my-go-new-proj ()
+    "Initialize a new Go project in a folder."
+    (interactive)
+    (let* ((folder-name (car (nreverse (string-split (directory-file-name default-directory) "/"))))
+           (cmd (format "go mod init %s" folder-name)))
+      (setq cmd (read-shell-command "cmd: " cmd))
+      (shell-command cmd)))
 
 ;;;----------------------------------------------------------------------------
 ;;; lint and compile stuff

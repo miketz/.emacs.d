@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name : struct
+# key: struct
+# --
+${1:public} struct ${2:Name}
+{
+    public $2($0)
+    {
+    }
+
+} // struct $2

@@ -3,10 +3,10 @@
 #name : class ... { ... }
 # key: class
 # --
-${4:public} class ${1:Name}
+${1:public} class ${2:Name}
 {
-    public $1($2)
+    public $2($0)
     {
     }
 
-} // class $1$0
+} // class $2

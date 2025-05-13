@@ -32,6 +32,7 @@ For now assumes you are in project root folder."
     "Initialize a new Go project in a folder."
     (interactive)
 
+    ;; GUARD
     (unless (yes-or-no-p "You should be in an empty project folder. git init will be run!
 Proceed?")
       (cl-return-from my-go-new-proj))

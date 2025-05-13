@@ -15,6 +15,17 @@
 (require 'hideshow)
 
 
+(defun my-go-scrape-module-name ()
+  "Extract the module name from the go.mod file.
+For now assumes you are in project root folder."
+  (interactive)
+  (with-temp-buffer
+    (let ((filepath "go.mod"))
+      ;; read first 100 bytes of file. should be enough to capture module name.
+      (insert-file-contents-literally filepath nil 0 100)
+      (cl-second (string-split (buffer-string))))))
+
+
 (defun my-go-new-proj ()
     "Initialize a new Go project in a folder."
     (interactive)

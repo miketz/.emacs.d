@@ -28,13 +28,92 @@ For now assumes you are in project root folder."
                        :mod-name-suffix ,mod-name-suffix))))
 
 
-(defun my-go-new-proj ()
+(cl-defun my-go-new-proj ()
     "Initialize a new Go project in a folder."
     (interactive)
+
+    (unless (yes-or-no-p "You should be in an empty project folder. git init will be run!
+Proceed?")
+      (cl-return-from my-go-new-proj))
+
     (let* ((folder-name (car (nreverse (string-split (directory-file-name default-directory) "/"))))
            (cmd (format "go mod init %s" folder-name)))
       (setq cmd (read-shell-command "cmd: " cmd))
-      (shell-command cmd)))
+      (shell-command cmd)
+      (let* ((mod-names (my-go-scrape-module-name))
+             (mod-name-full (cl-getf mod-names :mod-name-full))
+             (mod-name-suff (cl-getf mod-names :mod-name-suffix))
+             (exe-suffix (if (eq system-type 'windows-nt) ".exe" ""))
+             (exe-filename (concat mod-name-suff exe-suffix)))
+        ;; common folders
+        (make-directory "internal")
+        (make-directory "cmd")
+
+        ;; .gitignore
+        (make-empty-file ".gitignore")
+        (let ((buff (find-file-literally ".gitignore")))
+          (insert (format "/%s
+a.out
+*.exe
+.ctags.d/
+tags
+TAGS
+"
+                          mod-name-suff))
+          (save-buffer)
+          (kill-buffer buff))
+
+        ;; Makefile
+        (make-empty-file "Makefile")
+        (let ((buff (find-file-literally "Makefile")))
+          (insert (format ".DEFAULT_GOAL := build
+
+.PHONY: fmt
+fmt:
+	go fmt ./...
+
+.PHONY: lint
+lint: fmt
+	golint ./...
+
+.PHONY: vet
+vet: fmt
+	go vet ./...
+
+.PHONY: build
+build: vet
+	go build -o %s ./cmd/...
+
+# use -ldflags to omit symbol table, debug info, and dwarf symbol table. (smaller binary).
+# use -trimpath to remove filepaths. (smaller binary).
+# use -gcflags=-B to eliminate bounds checks
+.PHONY: buildProd
+buildProd: vet
+	go build -o %s -ldflags=\"-s -w\" -trimpath ./cmd/...
+"
+                          exe-filename
+                          exe-filename))
+          (save-buffer)
+          (kill-buffer buff)))
+
+      ;; main.go
+      (let ((default-directory (concat default-directory "cmd/")))
+        (make-empty-file "main.go")
+        (let ((buff (find-file-literally "main.go")))
+          (insert "package main
+
+import (
+	\"fmt\"
+)
+
+func main() {
+	fmt.Printf(\"hi\\n\")
+}")
+          (save-buffer)
+          (kill-buffer buff)))
+
+      ;; git init
+      (shell-command "git init")))
 
 ;;;----------------------------------------------------------------------------
 ;;; lint and compile stuff

@@ -20,10 +20,12 @@
 For now assumes you are in project root folder."
   (interactive)
   (with-temp-buffer
-    (let ((filepath "go.mod"))
-      ;; read first 100 bytes of file. should be enough to capture module name.
-      (insert-file-contents-literally filepath nil 0 100)
-      (cl-second (string-split (buffer-string))))))
+    ;; read first 100 bytes of file. should be enough to capture module name.
+    (insert-file-contents-literally "go.mod" nil 0 100)
+    (let* ((mod-name-full (cl-second (string-split (buffer-string))))
+           (mod-name-suffix (car (nreverse (string-split mod-name-full "/")))))
+      `(:mod-name-full ,mod-name-full
+                       :mod-name-suffix ,mod-name-suffix))))
 
 
 (defun my-go-new-proj ()

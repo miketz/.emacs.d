@@ -91,7 +91,14 @@ build: vet
 .PHONY: buildProd
 buildProd: vet
 	go build -o %s -ldflags=\"-s -w\" -trimpath ./cmd/...
+
+
+# disable optimizations to help Delve debugger.
+.PHONY: buildDebug
+buildDebug: vet
+	go build -o %s -gcflags=\"all=-N -l\" ./cmd/...
 "
+                          exe-filename
                           exe-filename
                           exe-filename))
           (save-buffer)

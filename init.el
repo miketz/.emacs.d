@@ -1592,8 +1592,14 @@ In master branch now. Was on git branch: feature/native-comp.")
     (defun my-w32-get-action (code)
       "Get the action symbol from the numeric code."
       (car (cl-rassoc code my-w32-actions)))
-    (defun my-w32-run (action)
+    (defun my-w32-run (&optional action)
       "Executes a w32 action."
+      (interactive)
+      (when (null action)
+        (setq action (intern
+                      (completing-read "action: "
+                                       (mapcar #'car my-w32-actions)
+                                       nil t))))
       (let ((code (my-w32-get-code action)))
         (w32-send-sys-command code)))))
 

@@ -9561,6 +9561,7 @@ And turns off `indent-tabs-mode'."
 ;;; my-go-helpers. helper fns for go
 ;;;----------------------------------------------------------------------------
 ;; fns not quite big enough to justify their own dedicated package.
+(autoload #'my-go-scrape-module-name "my-go-helpers" nil t)
 (autoload #'my-go-new-proj "my-go-helpers" nil t)
 (autoload #'my-go-errcheck "my-go-helpers" nil t)
 (autoload #'my-go-ineffassign "my-go-helpers" nil t)

@@ -97,10 +97,16 @@ buildProd: vet
 .PHONY: buildDebug
 buildDebug: vet
 	go build -o %s -gcflags=\"all=-N -l\" ./cmd/...
+
+.PHONY: run
+run:
+	./%s
+
+# use favored build method of the moment. likely debug.
+.PHONY: buildandrun
+buildandrun: buildDebug run
 "
-                          exe-filename
-                          exe-filename
-                          exe-filename))
+                          exe-filename exe-filename exe-filename exe-filename))
           (save-buffer)
           (kill-buffer buff)))
 

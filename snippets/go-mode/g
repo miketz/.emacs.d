@@ -2,8 +2,7 @@
 # name : guard, simulate swift's guard
 # key: g
 # --
-${1:shouldBe} := ${2:true}$0
-if !$1 { // GUARD
+if ${1:shouldBe} := ${2:true}$0; !$1 { // GUARD
 	// handle case not met
 	return
 }

@@ -2897,7 +2897,7 @@ In that case, insert the number."
     (message "Opening main todo...")
     (find-file-existing my-main-todo))
   (when my-use-evil-p
-    (evil-leader/set-key "t" #'my-open-main-todo)
+    ;; (evil-leader/set-key "t" #'my-open-main-todo)
     (evil-leader/set-key "a" #'org-agenda-list)))
 
 (with-eval-after-load 'org
@@ -10418,6 +10418,14 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+
+(when my-use-evil-p
+  ;; NOTE: explicty set a jump point via: C-<SPC> C-<SPC>
+  ;;       then leader "t" to jump back there.
+  (evil-leader/set-key "t" (lambda ()
+                             (interactive)
+                             (let ((current-prefix-arg '(4)))
+                               (call-interactively #'set-mark-command)))))
 
 ;; set to 1 so comments on the same line are kept close to the code
 (setq-default comment-column 1) ;; buffer local

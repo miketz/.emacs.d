@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: for infinite
+# key: fori
+# --
+for $0 {
+}

@@ -316,6 +316,7 @@
 _f_: shell-command (most used)
 _l_: log graph
 _;_: log between revs
+_n_: list files modified between revs
 _'_: fetch, then log delta
 _a_: quick-commit
 _b_: blame
@@ -329,6 +330,7 @@ _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
   ("l" fugitive-log-graph)
   (";" fugitive-log-between)
+  ("n" fugitive-list-files)
   ("'" fugitive-fetch-n-log)
   ("a" fugitive-quick-commit)
   ("b" fugitive-blame)

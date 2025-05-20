@@ -527,6 +527,27 @@ Use the default fn configured in `fugitive-log-graph-fn'."
   ;; run command
   (fugitive-shell-command (format "git diff %s %s" rev1 rev2) nil t))
 
+;;;###autoload
+(cl-defun fugitive-list-files (&optional rev1 rev2)
+  "Show files modified in a commit range."
+  (interactive)
+  ;; get rev1, rev2 from user if needed
+  (when (or (null rev1) (null rev2))
+    (let ((revs (fugitive-get-branches-and-tags)))
+      (push "HEAD" revs) ;; TODO: look into this
+      (when (null rev1)
+        (setq rev1 (completing-read "rev1: " revs nil nil)))
+      (when (null rev2)
+        (setq rev2 (completing-read "rev2: " revs nil nil)))))
+  ;; GUARD: return early if user failed to supply rev1 or rev2
+  (when (or (null rev1) (null rev2)
+            (string-equal rev1 "")
+            (string-equal rev2 ""))
+    (message "rev1 and rev2 are required.")
+    (cl-return-from fugitive-list-files))
+  ;; run command
+  (fugitive-shell-command (format "git diff --name-only %s %s" rev1 rev2) nil t))
+
 
 (defun fugitive-cmd-to-list (cmd)
   "Run a git command which returns a string list as output.

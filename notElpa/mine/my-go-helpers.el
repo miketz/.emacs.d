@@ -28,6 +28,35 @@ For now assumes you are in project root folder."
                        :mod-name-suffix ,mod-name-suffix))))
 
 
+(cl-defun my-go-new-proj-simple ()
+  "Initialize a new Go project in a folder."
+  (interactive)
+
+  ;; GUARD
+  (unless (yes-or-no-p "You should be in an empty project folder. Proceed?")
+    (cl-return-from my-go-new-proj-simple))
+
+  (let* ((folder-name (car (nreverse (string-split (directory-file-name default-directory) "/"))))
+         (cmd (format "go mod init %s" folder-name)))
+    (setq cmd (read-shell-command "cmd: " cmd))
+    (shell-command cmd)
+
+    ;; main.go
+    (make-empty-file "main.go")
+    (let ((buff (find-file-literally "main.go")))
+      (insert "package main
+
+import (
+	\"fmt\"
+)
+
+func main() {
+	fmt.Printf(\"hi\\n\")
+}")
+      (save-buffer)
+      (kill-buffer buff))))
+
+
 (cl-defun my-go-new-proj ()
     "Initialize a new Go project in a folder."
     (interactive)

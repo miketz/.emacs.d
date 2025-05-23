@@ -104,8 +104,10 @@
                                            :inherit 'unspecified))))
    ))
 
-(global-hl-line-mode +1)
-(setq-default cursor-type '(bar . 3))
+;;; comment this stuff. too intrusive enabling modes, etc
+;; (global-hl-line-mode +1)
+;; (setq-default cursor-type '(bar . 3))
+
 (provide-theme 'fleury)
 
 

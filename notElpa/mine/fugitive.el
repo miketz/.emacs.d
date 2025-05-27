@@ -220,6 +220,12 @@ rapid fire commands like `fugitive-quick-commit'."
                                  (unless hide-output-p
                                    (display-buffer buff))
 
+                                 (when (and (boundp 'evil-mode) evil-mode)
+                                   ;; When using evil-mode and emacs 30+ the cursor becomes a bar | even when the buffer is in normal mode.
+                                   ;; Switching to the buffer and calling (redisplay t) fixes it but is slow. evil-refresh-cursor is faster.
+                                   (with-current-buffer buff
+                                     (evil-refresh-cursor)))
+
                                  ;; (goto-char (point-max)) ;; end of buffer
                                  ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
                                  ;; don't message complete for now. it wipes out command output

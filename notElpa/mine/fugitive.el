@@ -353,7 +353,7 @@ Then show a delta log between current local branch..remote/branch. "
     ;; fetch. not async as we need this to complete before proceeding.
     (shell-command "git fetch" buff)
     ;; show delta log. branch..remote/branch
-    (let* ((curr-branch (fugitive-get-curr-branch))
+    (let* ((curr-branch (fugitive-get-curr-branch-str))
            ;; git config branch.<name>.remote
            (remote (fugitive-get-remote-for-branch curr-branch)))
 
@@ -377,6 +377,13 @@ Then show a delta log between current local branch..remote/branch. "
               "git blame --color-lines --color-by-age -- "
               (fugitive-curr-filename))))
     (fugitive-shell-command cmd nil t)))
+
+
+;;;###autoload
+(defun fugitive-curr-branch ()
+  "Get the current branch"
+  (interactive)
+  (fugitive-shell-command "git rev-parse --abbrev-ref HEAD"))
 
 
 ;;;###autoload
@@ -580,10 +587,9 @@ Convert the string-list to an elisp list."
   "Return a list of branches."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/heads/ refs/remotes/"))
 
-(defun fugitive-get-curr-branch ()
+(defun fugitive-get-curr-branch-str ()
   "Return the currently checked out branch name.
 Returns \"HEAD\" if in a detached HEAD state."
-  (interactive)
   (string-trim-right
    (shell-command-to-string "git rev-parse --abbrev-ref HEAD"))
   ;; for git ver 2.22+. Will return "" instead of "HEAD" on detatched head state.

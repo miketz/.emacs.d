@@ -10269,6 +10269,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-find-local-only-branches-direct "fugitive" nil t)
 (autoload #'fugitive-quick-commit "fugitive" nil t)
 (autoload #'fugitive-blame "fugitive" nil t)
+(autoload #'fugitive-curr-branch "fugitive" nil t)
 (autoload #'fugitive-log-fast "fugitive" nil t)
 (autoload #'fugitive-log-faster "fugitive" nil t)
 (autoload #'fugitive-log-first-parent "fugitive" nil t)

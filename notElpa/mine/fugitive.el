@@ -412,6 +412,14 @@ But likely still slower than normal logs with no --graph or --first-parent."
   (interactive)
   (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t))
 
+;;;###autoload
+(defun fugitive-log-first-parent-no-color ()
+  "Like `fugitive-log-first-parent' but also disable colorization for even more speed."
+  (interactive)
+  (let ((fugitive-auto-inject-color-flag nil)
+        (fugitive-colorize-buffer-p nil))
+   (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t)))
+
 
 ;;;###autoload
 (defun fugitive-log-file ()

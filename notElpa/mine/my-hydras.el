@@ -348,6 +348,7 @@ _q_, _C-g_: quit"
   "
 _f_: single file
 _p_: first parent commits only
+_P_: first parent commits only, faster no colors
 _c_: graph compact
 _m_: graph medium
 _l_: graph long
@@ -357,6 +358,7 @@ _;_: log between revs
 _q_, _C-g_: quit"
   ("f" fugitive-log-file)
   ("p" fugitive-log-first-parent)
+  ("P" fugitive-log-first-parent-no-color)
   ("c" fugitive-log-graph-compact)
   ("m" fugitive-log-graph-medium)
   ("l" fugitive-log-graph-long)

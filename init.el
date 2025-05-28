@@ -10273,6 +10273,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-log-fast "fugitive" nil t)
 (autoload #'fugitive-log-faster "fugitive" nil t)
 (autoload #'fugitive-log-first-parent "fugitive" nil t)
+(autoload #'fugitive-log-first-parent-no-color "fugitive" nil t)
 (autoload #'fugitive-log-file "fugitive" nil t)
 (autoload #'fugitive-log-graph-compact "fugitive" nil t)
 (autoload #'fugitive-log-graph-medium "fugitive" nil t)

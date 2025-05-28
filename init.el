@@ -10419,6 +10419,40 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (define-key my-sql-comp-mode-map (kbd "C-j") #'my-sql-complete-guess-work))
 
 ;;;----------------------------------------------------------------------------
+;;; git-timemachine
+;;;----------------------------------------------------------------------------
+(autoload #'git-timemachine-toggle "git-timemachine" nil t)
+(autoload #'git-timemachine "git-timemachine" nil t)
+(autoload #'git-timemachine-switch-branch "git-timemachine" nil t)
+;; ## Usage
+
+;; Visit a git-controlled file and issue `M-x git-timemachine` (or bind
+;; it to a keybinding of your choice). If you just need to toggle the
+;; time machine you can use `M-x git-timemachine-toggle`.
+
+;; Use the following keys to navigate historic version of the file
+;;  - `p` Visit previous historic version
+;;  - `n` Visit next historic version
+;;  - `w` Copy the abbreviated hash of the current historic version
+;;  - `W` Copy the full hash of the current historic version
+;;  - `g` Goto nth revision
+;;  - `t` Goto revision by selected commit message
+;;  - `i` Show revision introducing text
+;;  - `q` Exit the time machine.
+;;  - `b` Run `magit-blame` on the currently visited revision (if magit available).
+;;  - `c` Show current commit using magit (if magit available).
+
+;; ## Customize
+
+;; Set `git-timemachine-abbreviation-length` (default 12) to your
+;; preferred length for abbreviated commit hashes.
+
+;; Set `git-timemachine-show-minibuffer-details` (default t) to control
+;; whether details of the commit are shown in the minibuffer.
+
+;; Also `M-x customize [git-timemachine]`.
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

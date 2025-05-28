@@ -471,7 +471,7 @@ Uses the file of the current buffer."
                        "--date=short"
                      ;; TODO: find a date format that works in windwos
                      "--date=format:\"%-Y-%-m-%d %I:%M%p\""))
-         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%an%x09%ad%d%x09%s\" " date-arg " ")))
+         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%ad%x09%an%d%x09%s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
 

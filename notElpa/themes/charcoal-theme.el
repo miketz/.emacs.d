@@ -139,7 +139,8 @@ Example:
 
    `(fci-rule-color ,faint)
 
-   `(evil-emacs-state-cursor    '(bar "cyan"))
+   `(evil-emacs-state-cursor    '(bar "red" ;"cyan"
+                                  ))
    `(evil-normal-state-cursor   '(hollow "spring green"))
    `(evil-insert-state-cursor   '(bar "spring green"))
    `(evil-visual-state-cursor   '(hollow "orange"))

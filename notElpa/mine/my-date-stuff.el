@@ -26,11 +26,10 @@
          )
     (insert
      (format-time-string
-      (concat "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %-e, %Y%n%-I:%M%#p "
-              offset-symbol
-              (number-to-string time-zone-offset-hr)
-              " " time-zone-abbr
-              "%n" utc-time "%nsecond: %S.%3N")
+      (concat "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %-e, %Y%n"
+              utc-time
+              "%n%-I:%M%#p " offset-symbol (number-to-string time-zone-offset-hr) " " time-zone-abbr
+              "%nsecond: %S.%3N")
       ;; "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N"
       now))))
 

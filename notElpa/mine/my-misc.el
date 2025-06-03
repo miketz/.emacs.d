@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
 (require 'cl-lib)
+(require 'my-date-stuff)
 
 (defmacro do-n-times (n &rest body)
   "Just like `dotimes', but without specifying the current index variable.
@@ -359,10 +360,24 @@ on the first call."
                       (/ (+ (/ total 2) (* 100 (1- pos))) (max total 1))))
            (line (my-what-line))
            (col (+ 1 (current-column))))
-      (message "%s  %d%% %s C%d     %s"
-               (buffer-name)
-               percent line col
-               (format-time-string "%-m-%-d-%Y %a %-I:%M%#p"))))
+      (if current-prefix-arg
+          ;; big output if C-u prefix used.
+          (let ((curr-buff (current-buffer))
+                (tmp-buff (get-buffer-create "*Space and Time*")))
+            (unless (eq tmp-buff (current-buffer))
+              (switch-to-buffer-other-window tmp-buff))
+            (with-current-buffer tmp-buff
+              (goto-char (point-max)) ;; end of buffer
+              (insert "\n\n\n")
+              (insert (format "%s  %d%% %s C%d\n\n"
+                              (buffer-name curr-buff)
+                              percent line col))
+              (my-insert-date-big)))
+          ;; else small output in mini buffer
+          (message "%s  %d%% %s C%d     %s"
+                   (buffer-name)
+                   percent line col
+                   (format-time-string "%-m-%-d-%Y %a %-I:%M%#p")))))
   (defalias 'my-what-time #'my-what-position))
 
 

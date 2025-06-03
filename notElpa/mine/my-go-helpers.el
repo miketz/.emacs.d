@@ -489,15 +489,20 @@ Returns nil if not found.
 Mostly intened for yasnippet expansions."
   (interactive)
   (save-excursion
-    (let ((found-p (re-search-backward "^func"
-                                       nil ; no bounds on search
-                                       t ; do not trigger an error if no search match
-                                       )))
-      (when found-p
-        (forward-word)
-        (forward-word)
-        (backward-word)
-        (thing-at-point 'symbol 'no-properties)))))
+    (let ((fn-point (re-search-backward "^func"
+                                        nil ; no bounds on search
+                                        t ; do not trigger an error if no search match
+                                        )))
+      (when fn-point ; found func keyword
+        (let* ((method-paren-point (re-search-forward "("
+                                                      (+ fn-point 6)
+                                                      t))
+               ;; if method go forward a bit more to get name
+               (forward-cnt (if method-paren-point 3 2)))
+          (cl-loop repeat forward-cnt do
+                   (forward-word))
+          (backward-word)
+          (thing-at-point 'symbol 'no-properties))))))
 
 ;;;----------------------------------------------------------------------------
 ;;; hydra. List several go helper functions.

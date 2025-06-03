@@ -17,11 +17,20 @@
   "Insert a date string.  Everything you need to know about the date and time."
   (interactive)
   (let* ((now (current-time))
+         (time-zone (current-time-zone))
+         (time-zone-offset-hr (truncate ; convert from decimal to int via truncate
+                               (/ (car time-zone) 60.0 60.0)))
+         (offset-symbol (if (> time-zone-offset-hr 0) "+" "")) ; empty string for negative as - is already part of the printed negative number string.
+         (time-zone-abbr (cadr time-zone))
          (utc-time (format-time-string "%-I:%M%#p UTC" now t)) ; t = UTC
          )
     (insert
      (format-time-string
-      (concat "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %-e, %Y%n%-I:%M%#p%n" utc-time "%nsecond: %S.%3N")
+      (concat "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %-e, %Y%n%-I:%M%#p "
+              offset-symbol
+              (number-to-string time-zone-offset-hr)
+              " " time-zone-abbr
+              "%n" utc-time "%nsecond: %S.%3N")
       ;; "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N"
       now))))
 

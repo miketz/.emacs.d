@@ -605,6 +605,10 @@ Example:
    ;; hl-line. normally inheris highlight face, but override.
    `(hl-line ((,class :background ,fainter)))
 
+   ;; diff
+   `(diff-indicator-removed ((,class (:foreground "black" :background "#FF8888"))))
+   `(diff-indicator-added ((,class (:foreground "black" :background "#AAFFAA"))))
+
    ;; ediff. temporarily borrowing from zenburn.
    ;; TODO: customize colors for charcoal
    `(ediff-current-diff-A ((,class (:foreground ,zenburn-fg :background ,zenburn-red-4))))

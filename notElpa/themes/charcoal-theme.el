@@ -606,8 +606,8 @@ Example:
    `(hl-line ((,class :background ,fainter)))
 
    ;; diff
-   `(diff-indicator-removed ((,class (:foreground "black" :background "#FF8888"))))
-   `(diff-indicator-added ((,class (:foreground "black" :background "#AAFFAA"))))
+   `(diff-indicator-removed ((,class (:foreground "black" :background "#FF8888" :weight bold))))
+   `(diff-indicator-added ((,class (:foreground "black" :background "#AAFFAA" :weight bold))))
 
    ;; ediff. temporarily borrowing from zenburn.
    ;; TODO: customize colors for charcoal

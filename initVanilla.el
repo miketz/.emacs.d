@@ -312,5 +312,24 @@ This prevents overlapping themes; something I would rarely want."
 (electric-pair-mode 1) ; global
 
 ;;;----------------------------------------------------------------------------
+;;; markdown-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/markdown-mode" load-path)
+(autoload #'markdown-mode "markdown-mode" nil t)
+(autoload #'gfm-mode "markdown-mode" nil t)
+(autoload #'markdown-view-mode "markdown-mode" nil t)
+(autoload #'gfm-view-mode "markdown-mode" nil t)
+(autoload #'markdown-live-preview-mode "markdown-mode" nil t)
+(push
+ '("\\.\\(?:md\\|markdown\\|mkd\\|mdown\\|mkdn\\|mdwn\\)\\'" . markdown-mode)
+ auto-mode-alist)
+
+(with-eval-after-load 'markdown-mode
+  (defun my-setup-markdown-mode ()
+    ;; usually for reading books, so use word wrap.
+    (visual-line-mode))
+  (add-hook 'markdown-mode-hook #'my-setup-markdown-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; misc
 ;;;----------------------------------------------------------------------------

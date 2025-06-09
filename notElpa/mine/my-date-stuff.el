@@ -22,12 +22,13 @@
                                (/ (car time-zone) 60.0 60.0)))
          (offset-symbol (if (> time-zone-offset-hr 0) "+" "")) ; empty string for negative as - is already part of the printed negative number string.
          (time-zone-abbr (cadr time-zone))
-         (utc-time (format-time-string "%-I:%M%#p UTC" now t)) ; t = UTC
+         (utc-time (format-time-string "%-k:%M UTC" now t)) ; t = UTC
+         (utc-time-ampm (format-time-string "%-I:%M%#p UTC" now t)) ; t = UTC. am/pm should not be used with UTC formats but it helps me understand the time more intuitively.
          )
     (insert
      (format-time-string
       (concat "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %-e, %Y%n"
-              utc-time
+              utc-time "  ->  " utc-time-ampm
               "%n%-I:%M%#p " offset-symbol (number-to-string time-zone-offset-hr) " " time-zone-abbr
               "%nsecond: %S.%3N")
       ;; "%Y-%m-%d (Numerical)%n%m-%d-%Y (USA)%n%A %B %e, %Y%n%I:%M%P%nsecond: %S.%3N"

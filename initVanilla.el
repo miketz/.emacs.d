@@ -43,6 +43,61 @@ This prevents overlapping themes; something I would rarely want."
 
 (ad-activate 'load-theme)
 
+
+;;;----------------------------------------------------------------------------
+;;; compat
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/compat.el" load-path)
+
+
+;;;----------------------------------------------------------------------------
+;;; async
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/emacs-async" load-path)
+(autoload #'async-start-process "async" nil t)
+(autoload #'async-start "async" nil t)
+(autoload #'dired-async-mode "dired-async" nil t)
+(autoload #'dired-async-do-copy "dired-async" nil t)
+(autoload #'dired-async-do-symlink "dired-async" nil t)
+(autoload #'dired-async-do-hardlink "dired-async" nil t)
+(autoload #'dired-async-do-rename "dired-async" nil t)
+(autoload #'async-byte-recompile-directory "async-bytecomp" nil t)
+(autoload #'async-bytecomp-package-mode "async-bytecomp" nil t)
+(autoload #'async-byte-compile-file "async-bytecomp" nil t)
+
+
+;;;----------------------------------------------------------------------------
+;;; dash
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/dash.el" load-path)
+;; NOTE: contains dash-functional.el which is a separate pacakge on melpa.
+
+;;;----------------------------------------------------------------------------
+;; bug-hunter
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/elisp-bug-hunter" load-path)
+(autoload #'bug-hunter-file "bug-hunter" nil t)
+(autoload #'bug-hunter-init-file "bug-hunter" nil t)
+
+;;;----------------------------------------------------------------------------
+;;; s
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/s.el" load-path)
+(autoload #'s-split "s" nil nil)
+(autoload #'s-trim "s" nil nil)
+
+;;;----------------------------------------------------------------------------
+;;; f
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/f.el" load-path)
+
+;;;----------------------------------------------------------------------------
+;;; num3-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/num3-mode" load-path)
+(autoload #'num3-mode "num3-mode" nil t)
+(autoload #'global-num3-mode "num3-mode" nil t)
+
 ;;;----------------------------------------------------------------------------
 ;;; cursor
 ;;;----------------------------------------------------------------------------
@@ -330,6 +385,25 @@ This prevents overlapping themes; something I would rarely want."
     (visual-line-mode))
   (add-hook 'markdown-mode-hook #'my-setup-markdown-mode))
 
+
+;;;----------------------------------------------------------------------------
+;;; hydra
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/hydra" load-path)
+(autoload #'defhydra "hydra" nil t)
+
+(autoload #'my-choose-hydra "my-hydras" nil t)
+(autoload #'hydra-easyscroll/body "my-hydras" nil t)
+(autoload #'my-hydra-smerge/body "my-hydras" nil t)
+
+(with-eval-after-load 'hydra
+  (setq hydra-is-helpful t)
+  ;; don't use window for hints. It seems to lock things up.
+  ;; And window switcher mode really gets messed up.
+  (setq hydra-hint-display-type 'message) ;; (setq hydra-lv nil)
+  )
+
+
 ;;;----------------------------------------------------------------------------
 ;;; expand-region
 ;;; https://github.com/magnars/expand-region.el
@@ -339,6 +413,139 @@ This prevents overlapping themes; something I would rarely want."
 (autoload #'er/contract-region "expand-region-core" nil t)
 (global-set-key (kbd "C-=") #'er/expand-region)
 (global-set-key (kbd "C--") #'er/contract-region)
+
+(autoload #'hydra-expand-region/body "my-hydras" nil t)
+(global-set-key (kbd "C-c k") #'hydra-expand-region/body)
+
+
+;;;----------------------------------------------------------------------------
+;;; swiper. ivy is (or at least was) bundled with swiper. git submodule
+;;; ivy
+;;; counsel -> provides extra features for completing some things.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/swiper" load-path)
+(autoload #'swiper-isearch "swiper" nil t)
+(autoload #'swiper-avy "swiper" nil t)
+(autoload #'ivy-switch-buffer "ivy" nil t)
+(autoload #'ivy-completing-read "ivy" nil nil)
+(autoload #'counsel-find-file "counsel" nil t)
+(autoload #'counsel-switch-buffer "counsel" nil t)
+(autoload #'counsel-load-theme "counsel" nil t)
+(autoload #'counsel-M-x "counsel" nil t)
+(autoload #'counsel-tmm "counsel" nil t)
+(autoload #'counsel-describe-function "counsel" nil t)
+(autoload #'counsel-describe-variable "counsel" nil t)
+(autoload #'counsel-yank-pop "counsel" nil t)
+(autoload #'counsel-git "counsel" nil t)
+(autoload #'counsel-file-jump "counsel" nil t)
+(autoload #'counsel-file-register "counsel" nil t)
+
+;; TODO: set up more autoloads
+
+(global-set-key (kbd "C-c C-s") #'swiper-isearch)
+
+
+(with-eval-after-load 'swiper
+  ;; performance tweak to avoid visual-line-mode
+  (setq swiper-use-visual-line-p #'ignore)
+
+  (setq swiper-isearch-highlight-delay '(2 0.8))
+  (define-key swiper-map (kbd "C-SPC") #'swiper-avy)
+  (define-key swiper-all-map (kbd "C-SPC") #'swiper-avy))
+
+(with-eval-after-load 'ivy
+  (setq ivy-height 35)
+
+  (when nil
+    ;; an optional 3rd party sorting/filtering for ivy.
+    ;; will remember remember past selections during find-file, etc.
+    (ivy-prescient-mode 1)
+    (prescient-persist-mode))
+
+  (define-key ivy-occur-mode-map (kbd "n") #'ivy-occur-next-line)
+  (define-key ivy-occur-mode-map (kbd "p") #'ivy-occur-previous-line)
+
+  ;; redefine `ivy-help' to use outline mode. To avoid a long wait loading org.
+  (defun ivy-help ()
+    "Help for `ivy'."
+    (interactive)
+    (let ((buf (get-buffer "*Ivy Help*")))
+      (unless buf
+        (setq buf (get-buffer-create "*Ivy Help*"))
+        (with-current-buffer buf
+          (insert-file-contents ivy-help-file)
+          (if (memq 'org features)
+              (org-mode)
+            (outline-mode))
+          (view-mode)
+          (goto-char (point-min))))
+      (if (eq this-command 'ivy-help)
+          (switch-to-buffer buf)
+        (with-ivy-window
+          (pop-to-buffer buf)))
+      (view-mode)
+      (goto-char (point-min))))
+
+  ;; TODO: fix keybind to `ivy-avy'. It seems to be triggering outside of
+  ;;       ivy-mode-map. Commenting keybind for now.
+  ;; (define-key ivy-mode-map (kbd "C-SPC") #'ivy-avy)
+
+  ;; remove the default ^ prefix used by `counsel-M-x' and a few others.
+  (cl-loop for pair in ivy-initial-inputs-alist
+           do
+           (setcdr pair ""))
+  ;; NOTE: no longer using `set-alist' to disable the ^ prefix. Because it
+  ;;       pulled in a new package dependency `apel'. And maybe `flim'?
+  ;; (set-alist 'ivy-initial-inputs-alist 'counsel-M-x "")
+
+
+  ;; ;; allow out of order matching.
+  ;; (setq ivy-re-builders-alist
+  ;;       '((t . ivy--regex-ignore-order)))
+
+  ;; helper function to cycle the ivy matching styles.
+  ;; NOTE: periodically look for new supported styles in ivy and add them to
+  ;;       the local styles to cycle.
+  (let ((styles '(ivy--regex-plus
+                  ivy--regex-ignore-order
+                  ivy--regex-fuzzy
+                  ivy--regex
+                  regexp-quote))
+        (curr 'ivy--regex-plus))
+    (defun my-cycle-ivy-match-style ()
+      (interactive)
+      (setq curr (car (or (cdr (memq curr styles))
+                          styles)))
+      (setq ivy-re-builders-alist `((t . ,curr)))
+      (message "swiper match style: %s" (symbol-name curr))))
+
+  ;; (global-set-key (kbd "<f7>") #'my-cycle-ivy-match-style)
+
+  ;; use fancy highlights in the popup window
+  (setq ivy-display-style 'fancy)
+
+  ;; part of the "vertico suite" but works with ivy too.
+  ;; (marginalia-mode)
+  )
+
+
+(with-eval-after-load 'counsel
+  ;; (setq counsel-grep-base-command
+  ;;       "rg -i -M 120 --no-heading --line-number --color never %s %s")
+
+  ;; redefine `counsel--load-theme-action' to not require confirmation
+  ;; TODO: find an alternative to redefine so I don't have to manually
+  ;;       merge with the latest version of `counsel--load-theme-action'
+  ;;       on package updates.
+  (defun counsel--load-theme-action (x)
+    "Disable current themes and load theme X."
+    (condition-case nil
+        (progn
+          (mapc #'disable-theme custom-enabled-themes)
+          (load-theme (intern x) t)
+          (when (fboundp 'powerline-reset)
+            (powerline-reset)))
+      (error "Problem loading theme %s" x))))
 
 
 ;;;----------------------------------------------------------------------------

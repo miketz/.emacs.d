@@ -331,5 +331,16 @@ This prevents overlapping themes; something I would rarely want."
   (add-hook 'markdown-mode-hook #'my-setup-markdown-mode))
 
 ;;;----------------------------------------------------------------------------
+;;; expand-region
+;;; https://github.com/magnars/expand-region.el
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/expand-region.el" load-path)
+(autoload #'er/expand-region "expand-region" nil t)
+(autoload #'er/contract-region "expand-region-core" nil t)
+(global-set-key (kbd "C-=") #'er/expand-region)
+(global-set-key (kbd "C--") #'er/contract-region)
+
+
+;;;----------------------------------------------------------------------------
 ;;; misc
 ;;;----------------------------------------------------------------------------

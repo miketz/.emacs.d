@@ -532,6 +532,13 @@ Example use:
 
 
 
+(defun my-letter-to-hex (letter)
+  (format "%X" (string-to-char letter)))
+
+(defun my-hex-to-letter (hex)
+  (char-to-string (string-to-number hex 16)))
+
+
 ;; code sample from:
 ;; https://old.reddit.com/r/emacs/comments/1v0jl1/convert_string_to_ascii_code_sequence/
 ;;;###autoload

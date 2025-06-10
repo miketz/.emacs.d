@@ -549,5 +549,98 @@ This prevents overlapping themes; something I would rarely want."
 
 
 ;;;----------------------------------------------------------------------------
+;;; indent-bars
+;;;----------------------------------------------------------------------------
+;; NOTE: if bars are messed up in a "tab indent" file, make sure
+;; `indent-tabs-mode' is on.
+;; NOTE: if bars are messed up in a space-indented file make sure the mode's
+;; ident-level var is set to match the number of spaces in that file.
+;; (ie lua-indent-level, ruby-indent-level, etc)
+(push "~/.emacs.d/notElpaYolo/indent-bars" load-path)
+(autoload #'indent-bars-mode "indent-bars" nil t)
+(autoload #'indent-bars--ts-mode "indent-bars-ts" nil t)
+(with-eval-after-load 'indent-bars
+  ;; ;; stipples dont' work on emacs-plus in GUI mode?
+  ;; (when (or (and my-graphic-p (eq my-curr-computer 'mac-mini-m1-2021))
+  ;;           (eq my-curr-computer 'work-laptop-2019)
+  ;;           (not my-graphic-p))
+  ;;   (setq indent-bars-prefer-character "|")
+  ;;   )
+
+  ;; for now just always use a pipe char as stipples are not supported in most
+  ;; emacs versions i use at the moment. I will do the reverse and add checks
+  ;; for when i *can* use stipples instead of checking for when I can't.
+  (setq indent-bars-prefer-character ?|)
+
+  ;; don't highlight current depth
+  (setq indent-bars-highlight-current-depth nil)
+  ;; but if we do highlight curr depth, delay the calculation a bit
+  (setq indent-bars-depth-update-delay 0.1)
+
+  ;; (setq indent-bars-no-stipple-char ?│) ; unicode 9474 (string-to-char "│")
+  (setq indent-bars-no-stipple-char ?|) ; unicode 124 (string-to-char "|")
+  (setq indent-bars-starting-column nil) ; default
+  (setq indent-bars-no-descend-lists t) ; author reccomends setting this nil for lisps
+
+  ;; `indent-bars-color-by-depth' moved to charcoal-theme.el.
+  ;; TODO: configure it for each theme I use in the my-color-* functions.
+  ;; (setq indent-bars-color-by-depth
+  ;;       ;; match with `rainbow-delimiters' faces.
+  ;;       '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
+  ;;                   "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
+  ;;                   "#FF4500" ; red last to match rainbow-delimiters after wrap around
+  ;;                   )
+  ;;                  :blend 0.8))
+
+
+  (cl-defun my-indent-bars-set-blend (blend)
+    "Set the :blend value for indent-bars to BLEND.
+A bit tricky as :blend is configured in 1 of 2 variables!
+Also one of the vars is not a proper plist, only the tail cdr is."
+    (interactive "nblend [0-1]: ")
+
+    ;; GUARD: blend in range of 0 to 1.0
+    (when (or (> blend 1) (< blend 0))
+      (message "blend must be between 0 and 1.0")
+      (cl-return-from my-indent-bars-set-blend))
+
+    ;; GUARD: abort if both config vars are null.
+    (when (and (null indent-bars-color-by-depth)
+               (null indent-bars-color))
+      (message "both vars were null and can't be set via plist methods. aborting")
+      (cl-return-from my-indent-bars-set-blend))
+
+    ;; set blend. there are 2 vars that store :blend, which may be null.
+    ;; so check null before setting
+    (if indent-bars-color-by-depth ; not null
+        (setf (cl-getf indent-bars-color-by-depth :blend) blend)
+      ;; else. set the other variable `indent-bars-color'.
+      (when indent-bars-color ; not null
+        ;; cdr on `indent-bars-color' becuase the first ele is not a key/val pair?
+        ;; TODO: confirm if this is always the case, otherwise cdr may sometimes be a bug
+        (setf (cl-getf (cdr indent-bars-color) :blend) blend)))
+
+    ;; make colors take effect
+    (indent-bars-reset))
+
+  (defun my-indent-bars-1-color ()
+    (interactive)
+    (setq indent-bars-color-by-depth nil)
+    (setq indent-bars-color '("gray" :blend 0.2))
+    (indent-bars-reset))
+
+  (defun my-indent-bars-multi-color ()
+    (interactive)
+    (setq indent-bars-color-by-depth
+          ;; match with `rainbow-delimiters' faces.
+          '(:palette ("#00FFFF" ; 2nd color first as first level is 0 and not drawn.
+                      "#FFFF00" "#DDA0DD" "#7CFC00" "#FFA500" "#FFFFFF" "#FF69B4" "#CDAA7D"
+                      "#FF4500" ; red last to match rainbow-delimiters after wrap around
+                      )
+                     :blend 0.3))
+    (indent-bars-reset)))
+
+
+;;;----------------------------------------------------------------------------
 ;;; misc
 ;;;----------------------------------------------------------------------------

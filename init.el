@@ -5293,9 +5293,15 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; html-mode
 ;;;----------------------------------------------------------------------------
-(with-eval-after-load 'html-mode
+;; NOTE: html-mode is defined in feature sgml-mode so eval after load on that.
+(with-eval-after-load 'sgml-mode ;; 'html-mode
+
+  (define-key html-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup-browser)
+  (define-key html-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup-browser)
+
   (defun my-setup-html-mode ()
-    (yas-minor-mode 1))
+    (yas-minor-mode 1)
+    (setq-local devdocs-current-docs '("html")))
   (add-hook 'html-mode-hook #'my-setup-html-mode))
 
 ;;;----------------------------------------------------------------------------

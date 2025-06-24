@@ -3,5 +3,5 @@
 # key: object
 # --
 <object data="${1:file.jpg}" width="${2:300}" height="${3:200}">
-  <param name="autoplay"> value="false">
+  <param name="autoplay" value="false">
 </object>

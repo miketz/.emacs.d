@@ -1,5 +1,5 @@
-# -*- mode: snippet -*-
+    # -*- mode: snippet -*-
 # name: param
 # key: param
 # --
-<param name="${1:autoplay}"> value="${2:false}">
+<param name="${1:autoplay}" value="${2:false}">

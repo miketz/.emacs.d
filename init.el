@@ -5054,6 +5054,7 @@ and indent."
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'my-proj-safetyweb lisp-file nil t)
     (autoload #'my-proj-safetyweb-ects lisp-file nil t)
+    (autoload #'my-proj-safetyweb-wirs lisp-file nil t)
     (autoload #'my-proj-rsims lisp-file nil t)
     (autoload #'my-proj-daily-diff lisp-file nil t)
     (autoload #'my-proj-db-safety lisp-file nil t)

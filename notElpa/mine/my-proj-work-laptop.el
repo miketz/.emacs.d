@@ -61,6 +61,26 @@
     ;;(my-start-omnisharp-server sln)
     ))
 
+(defun my-proj-safetyweb-wirs ()
+  "Open the safetywebsite project with WIRS files."
+  (interactive)
+  (dired "c:/Users/mtz/proj/safety/SafetyWebsite")
+
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/DbScripts/WIRS/Patch_0003/0010_QuestionTreeByChecklist.sql")
+
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.Domain.WIRS/CustomModels/QuestionNode.cs")
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.Domain.WIRS/Concrete/Repositories/QuestionTreeRepository.cs")
+
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Controllers/InspectController.cs")
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Helpers/QuestionTreeBuilderNoEF.cs")
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Models/ChecklistViewModel2.cs")
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Views/Inspect/TakeChecklistQuestions.cshtml")
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Scripts/WIRS/TakeInspection.js")
+
+  ;; local url to test:
+  ;; https://localhost:44300/WIRS/Inspect/TakeChecklistQuestions/228
+  )
+
 (defun my-proj-safetyweb-ects ()
   "Open the ECTS project."
   (interactive)

@@ -640,6 +640,40 @@ Also one of the vars is not a proper plist, only the tail cdr is."
                      :blend 0.3))
     (indent-bars-reset)))
 
+;;;----------------------------------------------------------------------------
+;;; ibuffer
+;;;----------------------------------------------------------------------------
+(global-set-key (kbd "C-x C-b") #'ibuffer) ; the way C-x C-b should be.
+
+(with-eval-after-load 'ibuffer
+  (setq ibuffer-expert t)
+  (setq ibuffer-show-empty-filter-groups nil) ; hide headers on empty groups
+  (setq ibuffer-saved-filter-groups
+        '(("lots" ; lots of groups
+           ("Source control" (or (name . "^\*magit")
+                                 (name . "^\magit") ; stars removed recently?
+                                 (name . "^\*vc")))
+           ("Emacs-conifg" (or (filename . ".emacs.d")
+                               (filename . "init.el")))
+           ("Web Dev" (or (mode . web-mode)
+                          (mode . html-mode)
+                          (mode . js2-mode)
+                          (mode . css-mode)))
+           ("ERC" (mode . erc-mode))
+           ("Help" (or (name . "\*Help\*")
+                       (name . "\*Apropos\*")
+                       (name . "\*info\*")))
+           ("Special" (name . "^\*")))
+
+          ("less" ; fewer groups
+           ("Special" (or (name . "^\*")
+                          (name . "^\magit")))
+           ("ERC" (mode . erc-mode)))))
+
+  (defun my-setup-ibuffer-mode ()
+    (ibuffer-switch-to-saved-filter-groups "less"))
+  (add-hook 'ibuffer-mode-hook #'my-setup-ibuffer-mode))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; misc

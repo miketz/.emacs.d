@@ -7279,7 +7279,7 @@ Closure over `preceding-sexp-fn'."
           ;; (top-level)
           ))))
 
-  (defvar my-js2-highlight-var-delay 0.0)
+  (defvar my-js2-highlight-var-delay 0.2)
   ;; redefine `js2-highlight-vars-post-command-hook' to replace a hard coded
   ;; value 0.5 with a variable.
   ;; TODO: contribute upstream so I don't have to redefine the function.

@@ -4340,6 +4340,8 @@ and indent."
   (define-key dired-mode-map (kbd "C-o") #'dired-up-directory)
   (when my-use-evil-p
     ;; vimify the keybinds.
+    (define-key dired-mode-map (kbd "v") #'evil-visual-char)
+    (define-key dired-mode-map (kbd "V") #'evil-visual-line)
     (define-key dired-mode-map (kbd "j") #'dired-next-line)
     (define-key dired-mode-map (kbd "k") #'dired-previous-line)
     (define-key dired-mode-map (kbd "w") #'evil-forward-word-begin)
@@ -4354,6 +4356,8 @@ and indent."
     (define-key dired-mode-map (kbd "G") #'evil-goto-line)
 
     ;; re-bind the default bindings we clobbered.
+    (define-key dired-mode-map (kbd "C-c v") #'dired-view-file)
+    (define-key dired-mode-map (kbd "C-c V") #'dired-do-run-mail)
     (define-key dired-mode-map (kbd "C-c w") #'dired-copy-filename-as-kill)
     (define-key dired-mode-map (kbd "C-c e") #'dired-find-file)
     (define-key dired-mode-map (kbd "C-c N") #'dired-man)

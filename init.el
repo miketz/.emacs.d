@@ -1296,9 +1296,14 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "Function for searching with an overview.
 Choices: helm-swoop helm-occur swiper swiper-isearch ido-occur sallet-occur
 icicle-occur occur my-occur-wild-spaces")
-(when my-use-evil-p
-  (with-eval-after-load 'evil
-    (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
+
+;; (when my-use-evil-p
+;;   (with-eval-after-load 'evil
+;;     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
+
+;; reserving evil normal state "s" keybind for evil-snipe.
+(global-set-key (kbd "C-c C-s") my-swoop-fn)
+(global-set-key (kbd "C-c s") my-swoop-fn)
 
 (defvar my-use-lispy-p (memq my-curr-computer '(wild-dog
                                                 work-laptop-2019
@@ -1930,6 +1935,8 @@ Minus the newline char."
                :bind ((evil-snipe-scope 'buffer)
                       (evil-snipe-enable-highlight)
                       (evil-snipe-enable-incremental-highlight)))))
+
+(my-turn-on-evil-snipe)
 
 ;;;----------------------------------------------------------------------------
 ;;; evil-god-state
@@ -6606,8 +6613,9 @@ isearch-mode so you can <C-s> or <C-r> to navigate through the matches."
 ;;; my-window-search.  Limit isearch to the visible buffer.
 ;;;----------------------------------------------------------------------------
 (autoload #'my-window-search "my-window-search" nil t)
-(global-set-key (kbd "C-c s") #'my-window-search)
-(global-set-key (kbd "C-c C-s") #'my-window-search)
+;; for now don't bind this to a key. using this binding for swiper-isearch.
+;; (global-set-key (kbd "C-c s") #'my-window-search)
+;; (global-set-key (kbd "C-c C-s") #'my-window-search)
 
 ;; using this binding for swiper when `my-ui-type' is 'emacs
 ;; (global-set-key (kbd "C-c C-s") #'my-window-search)

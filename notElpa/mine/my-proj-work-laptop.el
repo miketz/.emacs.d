@@ -74,6 +74,8 @@
   (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Controllers/InspectController.cs")
   (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Helpers/QuestionTreeBuilderNoEF.cs")
   (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Models/ChecklistViewModel2.cs")
+
+  (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Content/Core/TreelistQuestAnswer.css")
   (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Areas/WIRS/Views/Inspect/TakeChecklistQuestions.cshtml")
   (find-file "c:/Users/mtz/proj/safety/SafetyWebsite/Safety.WebUI/Scripts/WIRS/TakeInspection.js")
 

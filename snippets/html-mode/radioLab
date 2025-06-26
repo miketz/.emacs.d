@@ -1,8 +1,9 @@
 # -*- mode: snippet -*-
 # name: radio embedded in a label
 # key: radioLab
-# comment: when rad and label are separate, there is an unclickable space between them.
-#          embedding rad inside the label eliminates the unclickable space.
+#
+# when rad and label are separate, there is an unclickable space between them.
+# embedding rad inside the label eliminates the unclickable space.
 # --
 <label>
   <input id="${1:id}" type="radio" name="${2:sharedGroupName}" value="${3:1}" ${4:checked}>

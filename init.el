@@ -3160,6 +3160,7 @@ LINTER values: :jslint :jshint :eslint"
 (with-eval-after-load 'js2-mode
   (define-key js2-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
   (define-key js2-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+  (define-key js2-mode-map (kbd "M-.") #'js2-jump-to-definition)
 
   (setq-default
    js2-global-externs

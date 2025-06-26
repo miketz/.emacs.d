@@ -1920,6 +1920,7 @@ Minus the newline char."
   (evil-snipe-override-mode 1)
 
   (setq evil-snipe-enable-highlight t)
+  (setq evil-snipe-smart-case t)
   ;; avoid tmp highlight when only 1 search char entered
   (setq evil-snipe-enable-incremental-highlight nil)
   (setq evil-snipe-scope 'whole-visible) ; highlight in both directions

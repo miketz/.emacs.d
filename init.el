@@ -1272,6 +1272,10 @@ Just a convenience to avoid checks against `my-narrow-type'.")
   "If I'm using combination of several narrowing packages.
 Just a convenience to avoid checks against `my-narrow-type'.")
 
+(defvar my-use-evil-snipe nil
+  "If I'm using evil snipe at the moment.
+Change up a few keybinds as snipe really wants the s/S keys and is tricky to reconfigure the bindings.")
+
 (defvar my-swoop-fn (cond
                      ;; NOTE: fido breaks swiper. Keep this at the top
                      ((eq my-narrow-type 'fido) #'my-occur-wild-spaces)
@@ -1297,13 +1301,16 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 Choices: helm-swoop helm-occur swiper swiper-isearch ido-occur sallet-occur
 icicle-occur occur my-occur-wild-spaces")
 
-;; (when my-use-evil-p
-;;   (with-eval-after-load 'evil
-;;     (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
+(if (not my-use-evil-snipe)
+    (when my-use-evil-p
+      (with-eval-after-load 'evil
+        (define-key evil-normal-state-map (kbd "s") my-swoop-fn)))
+  ;; else, using snipe
+  (progn
+    ;; reserving evil normal state "s" keybind for evil-snipe.
+    (global-set-key (kbd "C-c C-s") my-swoop-fn)
+    (global-set-key (kbd "C-c s") my-swoop-fn)))
 
-;; reserving evil normal state "s" keybind for evil-snipe.
-(global-set-key (kbd "C-c C-s") my-swoop-fn)
-(global-set-key (kbd "C-c s") my-swoop-fn)
 
 (defvar my-use-lispy-p (memq my-curr-computer '(wild-dog
                                                 work-laptop-2019
@@ -1937,7 +1944,8 @@ Minus the newline char."
                       (evil-snipe-enable-highlight)
                       (evil-snipe-enable-incremental-highlight)))))
 
-(my-turn-on-evil-snipe)
+(when my-use-evil-snipe
+  (my-turn-on-evil-snipe))
 
 ;;;----------------------------------------------------------------------------
 ;;; evil-god-state
@@ -6614,9 +6622,10 @@ isearch-mode so you can <C-s> or <C-r> to navigate through the matches."
 ;;; my-window-search.  Limit isearch to the visible buffer.
 ;;;----------------------------------------------------------------------------
 (autoload #'my-window-search "my-window-search" nil t)
-;; for now don't bind this to a key. using this binding for swiper-isearch.
-;; (global-set-key (kbd "C-c s") #'my-window-search)
-;; (global-set-key (kbd "C-c C-s") #'my-window-search)
+(when (not my-use-evil-snipe)
+  ;; need these binding for swiper-isearch. as snip stole "s".
+  (global-set-key (kbd "C-c s") #'my-window-search)
+  (global-set-key (kbd "C-c C-s") #'my-window-search))
 
 ;; using this binding for swiper when `my-ui-type' is 'emacs
 ;; (global-set-key (kbd "C-c C-s") #'my-window-search)

@@ -505,7 +505,7 @@ Commit hashes are prefixed by a star, wild card range, then the hash (no commit 
   \"*.+ \
 ")
 
-(defvar fugitive-log-graph-fn #'fugitive-log-graph-compact
+(defvar fugitive-log-graph-fn #'fugitive-log-graph-long
   "Default fn to use for graph in my hydra.")
 
 ;;;###autoload

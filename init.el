@@ -10333,7 +10333,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
             ;; TODO: figure out why git-delta colors not showing up on `work-laptop-mac'
             (eq my-curr-computer 'work-laptop-mac)))
   (setq fugitive-auto-jump-to-first-parent nil)
-  (setq fugitive-log-graph-fn #'fugitive-log-graph-compact)
+  (setq fugitive-log-graph-fn #'fugitive-log-graph-long)
   (setq fugitive-warn-quick-commit-p t) ; warn
   ;; keybinds
   (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to-first)

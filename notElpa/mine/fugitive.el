@@ -385,6 +385,15 @@ Then show a delta log between current local branch..remote/branch. "
   (interactive)
   (fugitive-shell-command "git rev-parse --abbrev-ref HEAD"))
 
+;;;###autoload
+(defun fugitive-select-branch-or-tag ()
+  "Select a branch or tag via completing read.
+Use curr branch as the initial input."
+  (interactive)
+  (let ((curr-branch (string-trim-right
+                      (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))
+        (all-revs (fugitive-get-branches-and-tags)))
+    (completing-read "rev: " all-revs nil nil curr-branch)))
 
 ;;;###autoload
 (defun fugitive-log-fast ()

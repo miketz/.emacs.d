@@ -452,7 +452,7 @@ Uses the file of the current buffer."
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%h%x09%an%d%x09%s\" " nil t))
+  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%C(auto)%h%x09%an%d%x09%s\" " nil t))
 
 ;; just documenting some possible date formats.
 (defvar fugitive-date-formats
@@ -469,6 +469,7 @@ Uses the file of the current buffer."
 
   ;; format output to include author, date/time.
   ;; git log --pretty=format:"%h%x09%an%x09%ad%x09%s" --graph --date=format:"%-m-%-d-%Y %-I:%M%p"
+  ;; %C(auto) = turns color back on. can also do somehting like C(red) to flip color from that point onwards.
   ;; %h = abbreviated commit hash
   ;; %x09 = tab (character for code 9)
   ;; %an = author name
@@ -479,7 +480,7 @@ Uses the file of the current buffer."
   (let* ((date-arg (if (eq system-type 'windows-nt)
                        "--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
                      "--date=format:\"%-y-%-m-%d %i:%m%p\""))
-         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h %ad %an%d  %s\" " date-arg " ")))
+         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %an%d  %s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
 

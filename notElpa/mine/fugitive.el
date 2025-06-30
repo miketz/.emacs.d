@@ -477,10 +477,9 @@ Uses the file of the current buffer."
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
   (let* ((date-arg (if (eq system-type 'windows-nt)
-                       "--date=short"
-                     ;; TODO: find a date format that works in windwos
-                     "--date=format:\"%-Y-%-m-%d %I:%M%p\""))
-         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h%x09%ad%x09%an%d%x09%s\" " date-arg " ")))
+                       "--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
+                     "--date=format:\"%-y-%-m-%d %i:%m%p\""))
+         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%h %ad %an%d  %s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
 

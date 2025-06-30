@@ -452,7 +452,7 @@ Uses the file of the current buffer."
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%C(auto)%h%x09%an%d%x09%s\" " nil t))
+  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %an%d  %s\" " nil t))
 
 ;; just documenting some possible date formats.
 (defvar fugitive-date-formats

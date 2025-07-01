@@ -180,7 +180,7 @@ rapid fire commands like `fugitive-quick-commit'."
                                ;;(message (concat (process-name p) " - " msg))
                                (let ((buff (process-buffer p)))
                                  (with-current-buffer buff
-                                   ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p))
+                                   ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p :buffer-name ,(buffer-name buff)))
 
                                    ;; alwyas call (xterm-color-colorize-buffer) now that i'm using the process sentinel more commands
                                    ;; seem to have speical colors, and diff is using git-delta colors!

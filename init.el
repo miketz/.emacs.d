@@ -10328,10 +10328,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'fugitive
   ;; config vars
   ;; git delta output not captured on windows, so turn on diff-mode
-  (setq fugitive-turn-on-diff-mode-p
-        (or (eq system-type 'windows-nt)
-            ;; TODO: figure out why git-delta colors not showing up on `work-laptop-mac'
-            (eq my-curr-computer 'work-laptop-mac)))
+  (setq fugitive-turn-on-diff-mode-p t
+        ;; (or (eq system-type 'windows-nt)
+        ;;     ;; TODO: figure out why git-delta colors not showing up on `work-laptop-mac'
+        ;;     (eq my-curr-computer 'work-laptop-mac))
+        )
   (setq fugitive-auto-jump-to-first-parent nil)
   (setq fugitive-log-graph-fn #'fugitive-log-graph-long)
   (setq fugitive-warn-quick-commit-p t) ; warn

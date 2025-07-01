@@ -455,11 +455,33 @@ Uses the file of the current buffer."
   (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " nil t))
 
 ;; just documenting some possible date formats.
+;; "--date=short"
+;; "--date=format:\"%-Y-%-m-%d\""
+;; "--date=format:\"%-m-%-d-%Y %I:%M%p\""
+;; "--date=format:\"%-Y-%-m-%d %I:%M%p\""
+
+
+;; formats used for hte --date format in git log.
+;; powered by strftime and OS specific which flags are supported.
+;; TODO: verify darwin format works for all other emacs supported OS systems.
+;; %y = 2 digit year. good for reducing width of the log output.
+;; %_H = 24 hour clock, space padded single digit hour
+;; %p = am/pm in the date-format
 (defvar fugitive-date-formats
-  '("--date=short"
-    "--date=format:\"%-Y-%-m-%d\""
-    "--date=format:\"%-m-%-d-%Y %I:%M%p\""
-    "--date=format:\"%-Y-%-m-%d %I:%M%p\""))
+  '((windows-nt . "--date=format:\"%y%m%d %H:%M%z\"") ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
+    (darwin .     "--date=format:\"%-y%m%d %_H:%m%z\""))) ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
+
+
+(defun fugitive-get-date-format-for-os ()
+  "Get the date format to use based on OS."
+  (let ((format (cdr (assoc system-type fugitive-date-formats))))
+    (when (null format)
+      ;; default to darwin format
+      (setq format (cdr (assoc 'darwin fugitive-date-formats))))
+    format))
+
+;; the date format to use.
+(defvar fugitive-date-format (fugitive-get-date-format-for-os))
 
 ;;;###autoload
 (defun fugitive-log-graph-long ()
@@ -476,14 +498,8 @@ Uses the file of the current buffer."
   ;; %ad = author date (format respects --date= option)
   ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
-  ;; %_H = 24 hour clock, space padded single digit hour
-  ;; %p = am/pm in the date-format
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
-  (let* ((date-arg (if (eq system-type 'windows-nt)
-                       "--date=format:\"%y%m%d %H:%M%z\"" ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
-                     "--date=format:\"%-y%m%d %_H:%m%z\"" ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
-                     ))
-         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " date-arg " ")))
+  (let* ((cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " fugitive-date-format " ")))
     (fugitive-shell-command cmd nil t)))
 
 

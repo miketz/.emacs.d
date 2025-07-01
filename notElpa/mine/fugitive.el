@@ -482,7 +482,7 @@ Uses the file of the current buffer."
                        "--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
                      "--date=format:\"%-y%m%d %_H:%m%z\"" ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
                      ))
-         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(reset)%d %s\" " date-arg " ")))
+         (cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 
 

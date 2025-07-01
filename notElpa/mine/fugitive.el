@@ -461,7 +461,7 @@ Uses the file of the current buffer."
 ;; "--date=format:\"%-Y-%-m-%d %I:%M%p\""
 
 
-;; formats used for hte --date format in git log.
+;; formats used for the --date format in git log.
 ;; powered by strftime and OS specific which flags are supported.
 ;; TODO: verify darwin format works for all other emacs supported OS systems.
 ;; %y = 2 digit year. good for reducing width of the log output.

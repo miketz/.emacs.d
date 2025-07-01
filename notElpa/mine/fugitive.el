@@ -479,7 +479,7 @@ Uses the file of the current buffer."
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
   (let* ((date-arg (if (eq system-type 'windows-nt)
                        "--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
-                     "--date=format:\"%-y-%-m-%d %i:%m%p\""))
+                     "--date=format:\"%-y-%-m-%d %I:%m%p\""))
          (cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(reset)%d %s\" " date-arg " ")))
     (fugitive-shell-command cmd nil t)))
 

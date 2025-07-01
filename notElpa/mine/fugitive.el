@@ -452,7 +452,7 @@ Uses the file of the current buffer."
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " nil t))
+  (fugitive-shell-command "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %C(cyan)%an%C(auto)%d %s\" " nil t))
 
 ;; just documenting some possible date formats.
 ;; "--date=short"
@@ -499,7 +499,8 @@ Uses the file of the current buffer."
   ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
-  (let* ((cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " fugitive-date-format " ")))
+  (let* ((cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " ")))
+                   ;; "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 
 

@@ -477,9 +477,10 @@ Uses the file of the current buffer."
   ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
   ;; %_H = 24 hour clock, space padded single digit hour
+  ;; %p = am/pm in the date-format
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
   (let* ((date-arg (if (eq system-type 'windows-nt)
-                       "--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
+                       "--date=format:\"%y%m%d %H:%M%z\"" ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
                      "--date=format:\"%-y%m%d %_H:%m%z\"" ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
                      ))
          (cmd (concat "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\" " date-arg " ")))

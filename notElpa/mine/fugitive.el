@@ -63,6 +63,8 @@ Used in conjection with `fugitive-juggle-home-env-var-p'.")
   "Value to use for environment variable HOME that allows git settings to be found.
 Used in conjection with `fugitive-juggle-home-env-var-p'.")
 
+(defvar fugitive-home-env-var-str nil)
+
 
 
 
@@ -139,151 +141,156 @@ HIDE-OUTPUT-P will avoid popping up the output buffer BUFF. Useful for quick
 rapid fire commands like `fugitive-quick-commit'."
   (interactive)
 
-  (when fugitive-juggle-home-env-var-p
-    (setenv "HOME" fugitive-home))
+  (let ((process-environment (if fugitive-juggle-home-env-var-p
+                                 (cons fugitive-home-env-var-str process-environment)
+                               ;; else just use process-environment as-is
+                               process-environment)))
 
-  (when (or (null cmd) force-read-p)
-    ;; read-shell-command supports command line completion
-    (setq cmd (read-shell-command "cmd: " (or cmd "git ")))
-    ;; (setq cmd (read-string "cmd: " "git "))
-    )
+    ;; (when fugitive-juggle-home-env-var-p
+    ;;   (setenv "HOME" fugitive-home))
 
-  (let* ((buff (or buff ; buff passed in
-                   (fugitive-new-output-buffer)))
-         ;; shadow var to prevent mini buffer display
-         (max-mini-window-height 0)
-         (log-p (fugitive-str-starts-with-p cmd "git log"))
-         (diff-p (and (not log-p)
-                      (or (fugitive-str-starts-with-p cmd "git diff")
-                          (fugitive-str-starts-with-p cmd "git show"))))
-         (blame-p (and (not diff-p)
-                       (fugitive-str-starts-with-p cmd "git blame"))))
-    ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors
-    (when (and fugitive-auto-inject-color-flag
-               log-p)
-      ;; inject --color immediately after "git log"
-      (let* ((i (length "git log")))
-        (setq str (concat (substring-no-properties cmd 0 i)
-                          " --color "
-                          (substring-no-properties cmd i nil)))
-        (setq cmd str)))
+    (when (or (null cmd) force-read-p)
+      ;; read-shell-command supports command line completion
+      (setq cmd (read-shell-command "cmd: " (or cmd "git ")))
+      ;; (setq cmd (read-string "cmd: " "git "))
+      )
 
-    ;; inject limit to # of logs returned. Emacs chokes on massive graph logs.
-    (when (and log-p
-               fugitive-auto-inject-n-log-limit
-               ;; only inject if -n filter was not already supplied
-               (null (string-search "-n" cmd)))
-      ;; inject -n 4000 immediately after "git log"
-      (let* ((i (length "git log")))
-        (setq str (concat (substring-no-properties cmd 0 i)
-                          " -n "
-                          (int-to-string fugitive-auto-inject-n-log-limit)
-                          " "
-                          (substring-no-properties cmd i nil)))
-        (setq cmd str)))
+    (let* ((buff (or buff ; buff passed in
+                     (fugitive-new-output-buffer)))
+           ;; shadow var to prevent mini buffer display
+           (max-mini-window-height 0)
+           (log-p (fugitive-str-starts-with-p cmd "git log"))
+           (diff-p (and (not log-p)
+                        (or (fugitive-str-starts-with-p cmd "git diff")
+                            (fugitive-str-starts-with-p cmd "git show"))))
+           (blame-p (and (not diff-p)
+                         (fugitive-str-starts-with-p cmd "git blame"))))
+      ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors
+      (when (and fugitive-auto-inject-color-flag
+                 log-p)
+        ;; inject --color immediately after "git log"
+        (let* ((i (length "git log")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            " --color "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
+
+      ;; inject limit to # of logs returned. Emacs chokes on massive graph logs.
+      (when (and log-p
+                 fugitive-auto-inject-n-log-limit
+                 ;; only inject if -n filter was not already supplied
+                 (null (string-search "-n" cmd)))
+        ;; inject -n 4000 immediately after "git log"
+        (let* ((i (length "git log")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            " -n "
+                            (int-to-string fugitive-auto-inject-n-log-limit)
+                            " "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
 
 
 
-    ;; ;; run command
-    ;; (shell-command cmd buff)
+      ;; ;; run command
+      ;; (shell-command cmd buff)
 
-    ;; run cmd. use process to avoid freezing emacs.
-    ;; make cmd-complete-fn a closure to capture variables: log-p, diff-p, blame-p
-    (let (;; setting process-connection-type to nil avoids a "hang" on macOS
-          ;; see https://www.reddit.com/r/emacs/comments/17wklf7/how_do_i_speed_up_output_from_an/?rdt=58905
-          (process-connection-type nil)
-          ;; TODO: look into the below 2 settings for possible improved performance
-          (read-process-output-max 4194304) ;(* 4 1024 1024)
-          (process-adaptive-read-buffering nil)
-          (cmd-complete-fn (lambda (p msg)
-                             ;; GUARD
-                             (when (memq (process-status p) '(exit signal))
-                               ;;(message (concat (process-name p) " - " msg))
-                               (let ((buff (process-buffer p)))
-                                 (with-current-buffer buff
-                                   ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p :buffer-name ,(buffer-name buff)))
-
-                                   ;; alwyas call (xterm-color-colorize-buffer) now that i'm using the process sentinel more commands
-                                   ;; seem to have speical colors, and diff is using git-delta colors!
-                                   ;; (xterm-color-colorize-buffer)
-                                   ;; TURN on a specialized mode for specific output types
-                                   (cond (log-p
-                                          ;; turn on this first before buffer becomes read-only via fugitive-log-mode
-                                          (when fugitive-colorize-buffer-p
-                                            (xterm-color-colorize-buffer))
-                                          (fugitive-log-mode) ; mode tailored for logs
-                                          ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
-                                          (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
-                                          ;; (log-view-mode) ; TODO: fix. doesn't work right.
-                                          ;; (vc-git-log-view-mode)
-
-                                          ;; turn off word wrap
-                                          (unless truncate-lines
-                                            (toggle-truncate-lines)))
-
-                                         (diff-p (when fugitive-turn-on-diff-mode-p
-                                                   (diff-mode))
-                                                 ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
-                                                 (when fugitive-colorize-buffer-p
-                                                   (xterm-color-colorize-buffer)))
-                                         (blame-p (when fugitive-colorize-buffer-p
-                                                    (xterm-color-colorize-buffer))
-                                                  ;; turn off word wrap
-                                                  (unless truncate-lines
-                                                    (toggle-truncate-lines))))
-
-                                   ;; disable native line numbers.
-                                   ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
-                                   ;; major modes wipe out buffer local vars.
-                                   (setq display-line-numbers nil))
-
-                                 ;; show output
-                                 (unless hide-output-p
-                                   (display-buffer buff))
-
-                                 (when (and (boundp 'evil-mode) evil-mode)
-                                   ;; When using evil-mode and emacs 30+ the cursor becomes a bar | even when the buffer is in normal mode.
-                                   ;; Switching to the buffer and calling (redisplay t) fixes it but is slow. evil-refresh-cursor is faster.
+      ;; run cmd. use process to avoid freezing emacs.
+      ;; make cmd-complete-fn a closure to capture variables: log-p, diff-p, blame-p
+      (let (;; setting process-connection-type to nil avoids a "hang" on macOS
+            ;; see https://www.reddit.com/r/emacs/comments/17wklf7/how_do_i_speed_up_output_from_an/?rdt=58905
+            (process-connection-type nil)
+            ;; TODO: look into the below 2 settings for possible improved performance
+            (read-process-output-max 4194304) ;(* 4 1024 1024)
+            (process-adaptive-read-buffering nil)
+            (cmd-complete-fn (lambda (p msg)
+                               ;; GUARD
+                               (when (memq (process-status p) '(exit signal))
+                                 ;;(message (concat (process-name p) " - " msg))
+                                 (let ((buff (process-buffer p)))
                                    (with-current-buffer buff
-                                     (evil-refresh-cursor)))
+                                     ;; (print `(:log-p ,log-p :diff-p ,diff-p :blame-p ,blame-p :buffer-name ,(buffer-name buff)))
 
-                                 ;; (goto-char (point-max)) ;; end of buffer
-                                 ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
-                                 ;; don't message complete for now. it wipes out command output
-                                 ;; (message "cmd complete")
+                                     ;; alwyas call (xterm-color-colorize-buffer) now that i'm using the process sentinel more commands
+                                     ;; seem to have speical colors, and diff is using git-delta colors!
+                                     ;; (xterm-color-colorize-buffer)
+                                     ;; TURN on a specialized mode for specific output types
+                                     (cond (log-p
+                                            ;; turn on this first before buffer becomes read-only via fugitive-log-mode
+                                            (when fugitive-colorize-buffer-p
+                                              (xterm-color-colorize-buffer))
+                                            (fugitive-log-mode) ; mode tailored for logs
+                                            ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
+                                            (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
+                                            ;; (log-view-mode) ; TODO: fix. doesn't work right.
+                                            ;; (vc-git-log-view-mode)
 
-                                 (when fugitive-juggle-home-env-var-p
-                                   ;; TODO: handle case where git command hangs and never completes, thus never rolling back the HOME env var.
-                                   ;;       for example git commit currenlty doesn't work as the editor is never accessed and forever hangs.
-                                   (setenv "HOME" fugitive-home-bak))
+                                            ;; turn off word wrap
+                                            (unless truncate-lines
+                                              (toggle-truncate-lines)))
 
-                                 ;; return otuput buffer
-                                 buff)))))
-     (set-process-sentinel (start-process-shell-command "fugitive-proc" buff cmd)
-                           cmd-complete-fn))
+                                           (diff-p (when fugitive-turn-on-diff-mode-p
+                                                     (diff-mode))
+                                                   ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
+                                                   (when fugitive-colorize-buffer-p
+                                                     (xterm-color-colorize-buffer)))
+                                           (blame-p (when fugitive-colorize-buffer-p
+                                                      (xterm-color-colorize-buffer))
+                                                    ;; turn off word wrap
+                                                    (unless truncate-lines
+                                                      (toggle-truncate-lines))))
 
-    ;; escape % characters as `message' thinks they are message params!!!
-    (message (string-replace "%" "%%" cmd)) ; echo final cmd actually run. may have --color injected.
-    ;; show output
-    ;; (display-buffer buff)
-    ;; (switch-to-buffer-other-window buff)
+                                     ;; disable native line numbers.
+                                     ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
+                                     ;; major modes wipe out buffer local vars.
+                                     (setq display-line-numbers nil))
 
-    ;; (with-current-buffer buff
-    ;;   ;; TURN on a specialized mode for specific output types
-    ;;   (cond (log-p
-    ;;          ;; turn on this first before buffer becomes read-only via fugitive-log-mode
-    ;;          (xterm-color-colorize-buffer)
-    ;;          (fugitive-log-mode) ; mode tailored for logs
-    ;;          ;; (log-view-mode) ; TODO: fix. doesn't work right.
-    ;;          ;; (vc-git-log-view-mode)
-    ;;          )
-    ;;         (diff-p (diff-mode))
-    ;;         (blame-p (xterm-color-colorize-buffer))))
+                                   ;; show output
+                                   (unless hide-output-p
+                                     (display-buffer buff))
 
-    ;; return output buffer. Likely nil due to the new async stuff. Must sleep if you
-    ;; want to capture this. TODO: look into hwo to wait (ie WaitGroups) in the calling
-    ;; code in elisp.
-    buff))
+                                   (when (and (boundp 'evil-mode) evil-mode)
+                                     ;; When using evil-mode and emacs 30+ the cursor becomes a bar | even when the buffer is in normal mode.
+                                     ;; Switching to the buffer and calling (redisplay t) fixes it but is slow. evil-refresh-cursor is faster.
+                                     (with-current-buffer buff
+                                       (evil-refresh-cursor)))
+
+                                   ;; (goto-char (point-max)) ;; end of buffer
+                                   ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
+                                   ;; don't message complete for now. it wipes out command output
+                                   ;; (message "cmd complete")
+
+                                   ;; (when fugitive-juggle-home-env-var-p
+                                   ;;   ;; TODO: handle case where git command hangs and never completes, thus never rolling back the HOME env var.
+                                   ;;   ;;       for example git commit currenlty doesn't work as the editor is never accessed and forever hangs.
+                                   ;;   (setenv "HOME" fugitive-home-bak))
+
+                                   ;; return otuput buffer
+                                   buff)))))
+        (set-process-sentinel (start-process-shell-command "fugitive-proc" buff cmd)
+                              cmd-complete-fn))
+
+      ;; escape % characters as `message' thinks they are message params!!!
+      (message (string-replace "%" "%%" cmd)) ; echo final cmd actually run. may have --color injected.
+      ;; show output
+      ;; (display-buffer buff)
+      ;; (switch-to-buffer-other-window buff)
+
+      ;; (with-current-buffer buff
+      ;;   ;; TURN on a specialized mode for specific output types
+      ;;   (cond (log-p
+      ;;          ;; turn on this first before buffer becomes read-only via fugitive-log-mode
+      ;;          (xterm-color-colorize-buffer)
+      ;;          (fugitive-log-mode) ; mode tailored for logs
+      ;;          ;; (log-view-mode) ; TODO: fix. doesn't work right.
+      ;;          ;; (vc-git-log-view-mode)
+      ;;          )
+      ;;         (diff-p (diff-mode))
+      ;;         (blame-p (xterm-color-colorize-buffer))))
+
+      ;; return output buffer. Likely nil due to the new async stuff. Must sleep if you
+      ;; want to capture this. TODO: look into hwo to wait (ie WaitGroups) in the calling
+      ;; code in elisp.
+      buff)))
 
 ;;;###autoload
 (defun fugitive-find-local-only-branches-ediff ()

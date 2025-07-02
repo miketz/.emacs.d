@@ -49,6 +49,23 @@ When nil allow the user to select a parent via `completing-read'.")
 Prompt user before proceeding.")
 
 
+
+(defcustom fugitive-juggle-home-env-var-p nil
+  "When t set the environment var HOME to `fugitive-home' for the duration of a call to `fugitive-shell-command'.
+Roll back HOME to `fugitive-home-bak' afterwards.
+Useful on Windows where you want HOME to be C:/Users/Username rather than C:/Users/Username/AppData/Roaming so permissions work right.")
+
+(defvar fugitive-home-bak nil
+  "Backup of the current value of environment variable HOME.
+Used in conjection with `fugitive-juggle-home-env-var-p'.")
+
+(defvar fugitive-home nil
+  "Value to use for environment variable HOME that allows git settings to be found.
+Used in conjection with `fugitive-juggle-home-env-var-p'.")
+
+
+
+
 (defvar fugitive-buff-name "*fugitive*")
 
 (defun fugitive-str-starts-with-p (string prefix)
@@ -121,6 +138,10 @@ edit/supply it, even if cmd has a value.
 HIDE-OUTPUT-P will avoid popping up the output buffer BUFF. Useful for quick
 rapid fire commands like `fugitive-quick-commit'."
   (interactive)
+
+  (when fugitive-juggle-home-env-var-p
+    (setenv "HOME" fugitive-home))
+
   (when (or (null cmd) force-read-p)
     ;; read-shell-command supports command line completion
     (setq cmd (read-shell-command "cmd: " (or cmd "git ")))
@@ -230,6 +251,12 @@ rapid fire commands like `fugitive-quick-commit'."
                                  ;; (insert output-str) ;; this is done already by `start-process-shell-command'.
                                  ;; don't message complete for now. it wipes out command output
                                  ;; (message "cmd complete")
+
+                                 (when fugitive-juggle-home-env-var-p
+                                   ;; TODO: handle case where git command hangs and never completes, thus never rolling back the HOME env var.
+                                   ;;       for example git commit currenlty doesn't work as the editor is never accessed and forever hangs.
+                                   (setenv "HOME" fugitive-home-bak))
+
                                  ;; return otuput buffer
                                  buff)))))
      (set-process-sentinel (start-process-shell-command "fugitive-proc" buff cmd)

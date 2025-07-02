@@ -10336,6 +10336,16 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (setq fugitive-auto-jump-to-first-parent nil)
   (setq fugitive-log-graph-fn #'fugitive-log-graph-long)
   (setq fugitive-warn-quick-commit-p t) ; warn
+
+  (when (eq system-type 'windows-nt)
+    (setq fugitive-juggle-home-env-var-p t)
+    ;; backup the current HOME
+    (setq fugitive-home-bak (getenv "HOME"))
+    ;; set desired home to C:/Users/Username/
+    ;; taking the firs 3 dir parts of the default C:/Users/Username/AppData/Roaming
+    (let* ((parts (string-split (directory-file-name fugitive-home-bak) "/")))
+      (setq fugitive-home (concat (string-join (cl-subseq parts 0 3) "/") "/"))))
+
   ;; keybinds
   (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to-first)
   (define-key fugitive-log-mode-map (kbd "C-c n") #'fugitive-parent-commits-jump-to-first)

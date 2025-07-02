@@ -51,19 +51,22 @@ Prompt user before proceeding.")
 
 
 (defcustom fugitive-juggle-home-env-var-p nil
-  "When t set the environment var HOME to `fugitive-home' for the duration of a call to `fugitive-shell-command'.
-Roll back HOME to `fugitive-home-bak' afterwards.
-Useful on Windows where you want HOME to be C:/Users/Username rather than C:/Users/Username/AppData/Roaming so permissions work right.")
+  "When t set the environment var HOME to `fugitive-home-env-var' for the duration of a call to `fugitive-shell-command'.
+Useful on Windows where you want HOME to be C:/Users/Username/ rather than C:/Users/Username/AppData/Roaming/ so permissions work right.")
 
-(defvar fugitive-home-bak nil
-  "Backup of the current value of environment variable HOME.
-Used in conjection with `fugitive-juggle-home-env-var-p'.")
+;; (defvar fugitive-home-bak nil
+;;   "Backup of the current value of environment variable HOME.
+;; Used in conjection with `fugitive-juggle-home-env-var-p'.")
 
-(defvar fugitive-home nil
-  "Value to use for environment variable HOME that allows git settings to be found.
-Used in conjection with `fugitive-juggle-home-env-var-p'.")
+;; (defvar fugitive-home nil
+;;   "Value to use for environment variable HOME that allows git settings to be found.
+;; Used in conjection with `fugitive-juggle-home-env-var-p'.")
 
-(defvar fugitive-home-env-var-str nil)
+(defvar fugitive-home-env-var (if (eq system-type 'windows-nt)
+                                  (concat "HOME=C:/Users/" (user-login-name) "/")
+                                nil)
+  "Environment variable HOME string that allows git settings to be found.
+On Windows you may want HOME=C:/Users/Username/")
 
 
 
@@ -142,7 +145,7 @@ rapid fire commands like `fugitive-quick-commit'."
   (interactive)
 
   (let ((process-environment (if fugitive-juggle-home-env-var-p
-                                 (cons fugitive-home-env-var-str process-environment)
+                                 (cons fugitive-home-env-var process-environment)
                                ;; else just use process-environment as-is
                                process-environment)))
 

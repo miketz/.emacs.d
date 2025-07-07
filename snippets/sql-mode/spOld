@@ -1,12 +1,16 @@
 # -*- mode: snippet -*-
 # -*- stored proc -*-
-# name: sp
-# key: sp
+# name: spOld
+# key: spOld
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-create or alter procedure ${1:dbo}.${2:/*ProcName*/} (
+if object_id('$1.$2', 'P') is null
+    exec('create procedure $1.$2 as select 0');
+GO
+alter procedure ${1:dbo}.${2:/*ProcName*/} (
     @${3:/*param1Name*/} ${4:/*type*/}
 )
 as
+
     $0
 GO

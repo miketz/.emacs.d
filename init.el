@@ -10495,6 +10495,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'malyon
   (setq malyon-stories-directory "~/.emacs.d/notElpa/malyon-files/"))
 
+;; # set up
+;; (kaesar-file-decrypt "~/.emacs.d/notElpa/malyon-files/files.7z")
+;; 7zipProg x files.7z
+;; git restore .
+
 ;;;----------------------------------------------------------------------------
 ;;; kaesar. AES library
 ;;;----------------------------------------------------------------------------

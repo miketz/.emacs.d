@@ -52,3 +52,4 @@ network-security.data
 /elpaca/
 # git clone projects. not tracking commit id via git submodules
 /notElpaYolo/
+/notElpa/malyon-files/*.z*

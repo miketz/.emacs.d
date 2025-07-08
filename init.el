@@ -10487,6 +10487,23 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; Also `M-x customize [git-timemachine]`.
 
 ;;;----------------------------------------------------------------------------
+;;; malyon
+;;;----------------------------------------------------------------------------
+(autoload #'malyon "malyon" nil t)
+(autoload #'malyon-mode "malyon-mode" nil nil)
+
+(with-eval-after-load 'malyon
+  (setq malyon-stories-directory "~/.emacs.d/notElpa/malyon-files/"))
+
+;;;----------------------------------------------------------------------------
+;;; kaesar. AES library
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/Emacs-kaesar" load-path)
+(autoload #'kaesar-file-encrypt "kaesar-file" nil nil)
+(autoload #'kaesar-file-decrypt "kaesar-file" nil nil)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

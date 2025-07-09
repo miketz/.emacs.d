@@ -114,6 +114,14 @@ On Windows you may want HOME=C:/Users/Username/")
              do
              (when (and (not (eq curr-buff b))
                         (fugitive-str-starts-with-p (buffer-name b) "*fugitive-"))
+               (let ((win-to-close (get-buffer-window-list b))) ; cdr to skip current window
+                 (cl-loop for w in win-to-close
+                          do
+                          ;; (delete-window w)
+                          ;; (select-window w) ; no need to select window, just as an arg to #'quit-window
+                          ;; quit-window is nice becuase it closes window only if it was newly created, not if the split was there beforehand.
+                          ;; FYI: (quit-window t w) would not kill the buffer if win was not visible
+                          (quit-window nil w)))
                (kill-buffer b)
                (cl-incf del-cnt))
              finally

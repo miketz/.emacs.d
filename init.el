@@ -10495,10 +10495,21 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'malyon
   (setq malyon-stories-directory "~/.emacs.d/notElpa/malyon-files/"))
 
+;; # 7zip on mac. how to.
+;; # install command line tool for 7zip
+;; brew install p7zip
+;; # compress files in a folder. Also combines them in an archive.
+;; 7z a files.7z ~/.emacs.d/notElpa/malyon-files
+;; # fyi: how to uncompress
+;; 7z x files.7z
+;; # last
+;; (kaesar-file-encrypt "~/.emacs.d/notElpa/malyon-files/files.7z")
+
+
 ;; # set up
 ;; (kaesar-file-decrypt "~/.emacs.d/notElpa/malyon-files/files.7z")
-;; 7zipProg x files.7z
-;; git restore .
+;; 7z x files.7z
+;; git restore files.7z
 
 ;;;----------------------------------------------------------------------------
 ;;; kaesar. AES library

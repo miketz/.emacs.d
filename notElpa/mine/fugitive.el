@@ -310,16 +310,25 @@ rapid fire commands like `fugitive-quick-commit'."
 (defun fugitive-find-local-only-branches-ediff ()
   "Use an ediff session to help find branches without a remote tracking branch."
   (interactive)
-  (let ((buff-local (fugitive-shell-command "git branch"))
-        (buff-remote (fugitive-shell-command "git branch -r")))
-    ;; now that fugitive-shell-command works in an aync way it's returning buff
-    ;; before the cmd is complete! For now just sleep as a ham-fisted way to make
-    ;; it work. Branch commands should complete within a fraction of a second for sure.
-    (let ((duration (if (eq system-type 'windows-nt)
-                        1.0 ; TODO: test to find out how much time windows needs.
-                      0.2)))
-      (sleep-for duration))
-    (ediff-buffers buff-local buff-remote)))
+  (let ((buff-local (fugitive-new-output-buffer))
+        (buff-remote (fugitive-new-output-buffer)))
+    ;; use synchronous shell-command to simplify things. just wait for everything to complete before ocmparing.
+    ;; TODO: go back to async again. But use a waitGroup technique instead of sleep
+    (shell-command "git branch" buff-local)
+    (shell-command "git branch -r" buff-remote)
+    (ediff-buffers buff-local buff-remote))
+
+  ;; (let ((buff-local (fugitive-shell-command "git branch"))
+  ;;       (buff-remote (fugitive-shell-command "git branch -r")))
+  ;;   ;; now that fugitive-shell-command works in an aync way it's returning buff
+  ;;   ;; before the cmd is complete! For now just sleep as a ham-fisted way to make
+  ;;   ;; it work. Branch commands should complete within a fraction of a second for sure.
+  ;;   (let ((duration (if (eq system-type 'windows-nt)
+  ;;                       0.2;1.0 ; TODO: test to find out how much time windows needs.
+  ;;                     0.2)))
+  ;;     (sleep-for duration))
+  ;;   (ediff-buffers buff-local buff-remote))
+  )
 
 ;;;###autoload
 (defun fugitive-find-local-only-branches-direct ()

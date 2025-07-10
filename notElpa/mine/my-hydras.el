@@ -347,6 +347,7 @@ _q_, _C-g_: quit"
 (defhydra my-fugitive-log-hydra (:color blue :hint nil) ;;(:color blue)
   "
 _f_: single file
+_F_: folder
 _p_: first parent commits only
 _P_: first parent commits only, faster no colors
 _c_: graph compact
@@ -357,6 +358,7 @@ _a_: normal, one line, faster no colors
 _;_: log between revs
 _q_, _C-g_: quit"
   ("f" fugitive-log-file)
+  ("F" fugitive-log-folder)
   ("p" fugitive-log-first-parent)
   ("P" fugitive-log-first-parent-no-color)
   ("c" fugitive-log-graph-compact)

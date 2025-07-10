@@ -509,6 +509,13 @@ Uses the file of the current buffer."
                           nil t))
 
 ;;;###autoload
+(defun fugitive-log-folder ()
+  "Prepare the git command with for a log of a single folder."
+  (interactive)
+  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (read-directory-name "dir: " nil nil t))
+                          nil t))
+
+;;;###autoload
 (defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."
   (interactive)

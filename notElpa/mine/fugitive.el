@@ -504,7 +504,7 @@ This is the fastest log."
   "Prepare the git command with for a log of a single file.
 Uses the file of the current buffer."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline  --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (fugitive-curr-filename))
+  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (fugitive-curr-filename))
                           ;; (concat "git log --oneline --decorate=short -n 1000 -- " (fugitive-curr-filename))
                           nil t))
 

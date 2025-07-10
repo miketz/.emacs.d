@@ -352,8 +352,8 @@ _P_: first parent commits only, faster no colors
 _c_: graph compact
 _m_: graph medium
 _l_: graph long
-_s_: fast
-_a_: faster, no colors
+_s_: normal, one line
+_a_: normal, one line, faster no colors
 _;_: log between revs
 _q_, _C-g_: quit"
   ("f" fugitive-log-file)
@@ -362,8 +362,8 @@ _q_, _C-g_: quit"
   ("c" fugitive-log-graph-compact)
   ("m" fugitive-log-graph-medium)
   ("l" fugitive-log-graph-long)
-  ("s" fugitive-log-fast)
-  ("a" fugitive-log-faster)
+  ("s" fugitive-log)
+  ("a" fugitive-log-no-color)
   (";" fugitive-log-between)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)

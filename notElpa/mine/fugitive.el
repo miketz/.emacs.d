@@ -453,16 +453,15 @@ Use curr branch as the initial input."
     (completing-read "rev: " all-revs nil nil curr-branch)))
 
 ;;;###autoload
-(defun fugitive-log-fast ()
-  "Prepare the git log command with common options for speed.
-A normal log with no --graph or --first-parent.
-It should finsih relatively quickly even for larger logs."
+(defun fugitive-log ()
+  "Typical one line log.
+It should be relatively quick even for larger logs."
   (interactive)
   (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t))
 
 
 ;;;###autoload
-(defun fugitive-log-faster ()
+(defun fugitive-log-no-color ()
   "Like `fugitive-log-fast' but also disable colorization for even more speed."
   (interactive)
   (let ((fugitive-auto-inject-color-flag nil)

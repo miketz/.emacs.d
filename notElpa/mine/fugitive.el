@@ -579,6 +579,14 @@ Uses the file of the current buffer."
                    ;; "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 
+(defun fugitive-log-graph-long-expiri ()
+  "Using colors intead of spaces to reduce horizontal space used.
+Trying to find a way to get rid of ellipsees (..) on truncate as that hides needed info."
+  (interactive)
+  ;; trick to get around color limitation on date parts: display date twice, then show substirngs (via truncate) in different colors.
+  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %<(6,trunc)%ad%C(#F0A0A0)%<(5,ltrunc)%ad%C(auto)%C(cyan)%an%C(auto)%d%s\" " fugitive-date-format " -n 500 ")))
+    (fugitive-shell-command cmd nil t)))
+
 
 (defvar-local fugitive-log-type nil
   "Buffer local in git log output buffers.

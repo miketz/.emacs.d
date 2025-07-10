@@ -457,33 +457,46 @@ Use curr branch as the initial input."
   "Typical one line log.
 It should be relatively quick even for larger logs."
   (interactive)
-  (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t))
+  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
+    (fugitive-shell-command cmd nil t))
+  ;; (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t)
+  )
 
 
 ;;;###autoload
 (defun fugitive-log-no-color ()
-  "Like `fugitive-log-fast' but also disable colorization for even more speed."
+  "Like `fugitive-log' but also disable colorization for even more speed."
   (interactive)
   (let ((fugitive-auto-inject-color-flag nil)
-        (fugitive-colorize-buffer-p nil))
-    (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t)))
+        (fugitive-colorize-buffer-p nil)
+        (cmd (concat "git log --oneline --pretty=format:\"%h %ad %an%d %s\" " fugitive-date-format " -n 1000 ")))
+    (fugitive-shell-command cmd nil t)
+    ;; (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t)
+    ))
 
 ;;;###autoload
 (defun fugitive-log-first-parent ()
   "Prepare the git command with common options for a first-parent log.
 This might be a bit faster than --graph logs as it doesn't need to render branches
 as they are collapsed under the parent merge commit.
-But likely still slower than normal logs with no --graph or --first-parent."
+Also seems faster than normal logs with no --graph or --first-parent."
   (interactive)
-  (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t))
+  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " --first-parent -n 1000 ")))
+    (fugitive-shell-command cmd nil t))
+  ;; (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t)
+  )
 
 ;;;###autoload
 (defun fugitive-log-first-parent-no-color ()
-  "Like `fugitive-log-first-parent' but also disable colorization for even more speed."
+  "Like `fugitive-log-first-parent' but also disable colorization for even more speed.
+This is the fastest log."
   (interactive)
   (let ((fugitive-auto-inject-color-flag nil)
-        (fugitive-colorize-buffer-p nil))
-   (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t)))
+        (fugitive-colorize-buffer-p nil)
+        (cmd (concat "git log --oneline --pretty=format:\"%h %ad %an%d %s\" " fugitive-date-format " --first-parent -n 1000 ")))
+    (fugitive-shell-command cmd nil t)
+   ;; (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t)
+   ))
 
 
 ;;;###autoload
@@ -491,7 +504,7 @@ But likely still slower than normal logs with no --graph or --first-parent."
   "Prepare the git command with for a log of a single file.
 Uses the file of the current buffer."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -- " (fugitive-curr-filename))
+  (fugitive-shell-command (concat "git log --oneline  --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (fugitive-curr-filename))
                           ;; (concat "git log --oneline --decorate=short -n 1000 -- " (fugitive-curr-filename))
                           nil t))
 

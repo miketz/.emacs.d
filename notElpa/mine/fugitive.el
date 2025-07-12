@@ -543,9 +543,14 @@ Uses the file of the current buffer."
 ;; %y = 2 digit year. good for reducing width of the log output.
 ;; %_H = 24 hour clock, space padded single digit hour
 ;; %p = am/pm in the date-format
+;; %z utc offset
+;; format: = use commiters time zone. requires utc offset to properly interpret.
+;; format-local: = translate dates to current user's timezone. can skip utc offset, saving space
+;;                 Caveat: it still uses daylight savings hours which require an offset to interpret correctly.
+;;                 But if you assume everything from the perspective of the local user that may be OK.
 (defvar fugitive-date-formats
-  '((windows-nt . "--date=format:\"%y%m%d %H:%M%z\"") ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
-    (darwin .     "--date=format:\"%-y%m%d %_H:%m%z\""))) ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
+  '((windows-nt . "--date=format-local:\"%y%m%d %H:%M\"") ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
+    (darwin .     "--date=format-local:\"%-y%m%d %_H:%m\""))) ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
 
 
 (defun fugitive-get-date-format-for-os ()

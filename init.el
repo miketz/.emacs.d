@@ -10338,11 +10338,9 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (setq fugitive-log-graph-fn #'fugitive-log-graph-long)
   (setq fugitive-warn-quick-commit-p t) ; warn
   (setq fugitive-juggle-home-env-var-p (eq system-type 'windows-nt))
-  ;; for now, don't show the UTC offset %z. usually i'm working with people in
-  ;; the same time zone, or a solo project. saves horizontal space.
-  (let ((fugitive-date-formats '((windows-nt . "--date=format:\"%y%m%d %H:%M\"")
-                                 (darwin . "--date=format:\"%-y%m%d %_H:%m\""))))
-    (setq fugitive-date-format (fugitive-get-date-format-for-os)))
+  ;; (let ((fugitive-date-formats '((windows-nt . "--date=format:\"%y%m%d %H:%M\"")
+  ;;                                (darwin . "--date=format:\"%-y%m%d %_H:%m\""))))
+  ;;   (setq fugitive-date-format (fugitive-get-date-format-for-os)))
 
   ;; keybinds
   (define-key fugitive-log-mode-map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to-first)

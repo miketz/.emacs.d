@@ -601,7 +601,7 @@ Uses the file of the current buffer."
   ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
-  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %ad%C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
+  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %ad% C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
                    ;; "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 

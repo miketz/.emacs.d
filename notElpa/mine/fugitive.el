@@ -675,7 +675,8 @@ Use the default fn configured in `fugitive-log-graph-fn'."
     (message "rev1 and rev2 are required.")
     (cl-return-from fugitive-log-between))
   ;; run command
-  (fugitive-shell-command (format "git log %s..%s" rev1 rev2) buff t))
+  (let ((cmd (concat "git log " rev1 ".." rev2 " --graph --pretty=format:\"%C(auto)%h %ad%C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 2000 ")))
+    (fugitive-shell-command cmd buff t)))
 
 ;;;###autoload
 (cl-defun fugitive-diff-between (&optional rev1 rev2)

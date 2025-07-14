@@ -409,8 +409,12 @@ Then show a delta log between selected branch..remote/branch. "
                                         (if (= (length remotes) 1)
                                             (car remotes) ; 1 remote, pre-select it.
                                           nil))))
-    ;; fetch. not async as we need this to complete before proceeding.
-    (shell-command (concat "git fetch " remote-fetch) buff)
+    (let ((process-environment (if fugitive-juggle-home-env-var-p
+                                   (cons fugitive-home-env-var process-environment)
+                                 ;; else just use process-environment as-is
+                                 process-environment)))
+     ;; fetch. not async as we need this to complete before proceeding.
+     (shell-command (concat "git fetch " remote-fetch) buff))
     ;; show delta log. branch..remote/branch
     (let* ((local-branches (fugitive-get-branches-local))
            (curr-branch (fugitive-get-curr-branch-str))

@@ -413,10 +413,14 @@ Then show a delta log between selected branch..remote/branch. "
     (shell-command (concat "git fetch " remote-fetch) buff)
     ;; show delta log. branch..remote/branch
     (let* ((local-branches (fugitive-get-branches-local))
+           (curr-branch (fugitive-get-curr-branch-str))
            (branch (completing-read "branch: " local-branches nil t
-                                    (if (= (length local-branches) 1)
-                                        (car local-branches) ; 1 branch, pre-select it.
-                                      nil)))
+                                    (cond ((= (length local-branches) 1)
+                                           (car local-branches)) ; 1 branch, pre-select it.
+                                          ((and (not (null curr-branch))
+                                                (not (string-equal "" curr-branch)))
+                                           curr-branch)
+                                          (t nil))))
            ;; git config branch.<name>.remote
            ;; (remote (fugitive-get-remote-for-branch branch))
            )

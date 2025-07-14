@@ -607,6 +607,16 @@ Trying to find a way to get rid of ellipsees (..) on truncate as that hides need
   (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %<(6,trunc)%ad%C(#F0A0A0)%<(5,ltrunc)%ad%C(auto)%C(cyan)%an%C(auto)%d%s\" " fugitive-date-format " -n 500 ")))
     (fugitive-shell-command cmd nil t)))
 
+(defun fugitive-log-graph-long-expiri2 ()
+  "Using colors intead of spaces to reduce horizontal space used. Exprimental.
+Truncate, but show 2 extra chars to account for ellipses. Wastes space, but achieves different color for date ane time."
+  (interactive)
+  ;; trick to get around color limitation on date parts: display date twice, then show substirngs (via truncate) in different colors.
+  (let* ((fugitive-date-format "--date=format-local:\"%y%m%d %H%M\"")
+         (cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %<(8,trunc)%ad%<(7,ltrunc)%C(#F0A0A0)%ad%C(cyan)%an%C(auto)%d%s\" "
+                      fugitive-date-format
+                      " -n 500 ")))
+    (fugitive-shell-command cmd nil t)))
 
 (defvar-local fugitive-log-type nil
   "Buffer local in git log output buffers.

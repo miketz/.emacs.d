@@ -458,8 +458,7 @@ Then show a delta log between selected branch..remote/branch. "
   "Select a branch or tag via completing read.
 Use curr branch as the initial input."
   (interactive)
-  (let ((curr-branch (string-trim-right
-                      (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))
+  (let ((curr-branch (fugitive-get-curr-branch-str))
         (all-revs (fugitive-get-branches-and-tags)))
     (completing-read "rev: " all-revs nil nil curr-branch)))
 

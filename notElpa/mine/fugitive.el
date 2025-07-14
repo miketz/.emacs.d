@@ -398,31 +398,38 @@ Proceed?")
     (fugitive-shell-command (concat "git commit -m \"WIP: " filename "\"")
                             buff nil t)))
 
-;;; TODO: make this fn more general. with prefix arg allow user to
-;;;       choose branch other than current and remote other than default
-;;;       to fetch and log against.
 ;;;###autoload
 (cl-defun fugitive-fetch-n-log ()
-  "Fetch from default remote.
-Then show a delta log between current local branch..remote/branch. "
+  "Fetch from selected remote.
+Then show a delta log between selected branch..remote/branch. "
   (interactive)
-  (let ((buff (fugitive-new-output-buffer)))
+  (let* ((buff (fugitive-new-output-buffer))
+         (remotes (fugitive-get-remote-aliases))
+         (remote-fetch (completing-read "remote to fetch: " remotes nil t
+                                        (if (= (length remotes) 1)
+                                            (car remotes) ; 1 remote, pre-select it.
+                                          nil))))
     ;; fetch. not async as we need this to complete before proceeding.
-    (shell-command "git fetch" buff)
+    (shell-command (concat "git fetch " remote-fetch) buff)
     ;; show delta log. branch..remote/branch
-    (let* ((curr-branch (fugitive-get-curr-branch-str))
+    (let* ((local-branches (fugitive-get-branches-local))
+           (branch (completing-read "branch: " local-branches nil t
+                                    (if (= (length local-branches) 1)
+                                        (car local-branches) ; 1 branch, pre-select it.
+                                      nil)))
            ;; git config branch.<name>.remote
-           (remote (fugitive-get-remote-for-branch curr-branch)))
+           ;; (remote (fugitive-get-remote-for-branch branch))
+           )
 
-      ;; GUARD: can't delta curr branch if it's a local only brnach (ie no remote)
-      (when (string-equal remote "")
-        (message "No corresponding remote branch for %s. Abort delta log."
-                 curr-branch)
-        (cl-return-from fugitive-fetch-n-log))
+      ;; GUARD: can't delta curr branch if it's a local only branch (ie no remote)
+      ;; (when (string-equal remote "")
+      ;;   (message "No corresponding remote branch for %s. Abort delta log."
+      ;;            branch)
+      ;;   (cl-return-from fugitive-fetch-n-log))
 
       ;; delta log. branch..remote/branch
-      (fugitive-log-between curr-branch
-                            (concat remote "/" curr-branch)
+      (fugitive-log-between branch
+                            (concat remote-fetch "/" branch)
                             buff))))
 
 ;;;###autoload
@@ -451,6 +458,7 @@ Use curr branch as the initial input."
                       (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))
         (all-revs (fugitive-get-branches-and-tags)))
     (completing-read "rev: " all-revs nil nil curr-branch)))
+
 
 ;;;###autoload
 (defun fugitive-log ()
@@ -712,6 +720,10 @@ Convert the string-list to an elisp list."
 (defun fugitive-get-branches ()
   "Return a list of branches."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/heads/ refs/remotes/"))
+
+(defun fugitive-get-branches-local ()
+  "Return a list of local branches."
+  (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/heads/"))
 
 (defun fugitive-get-curr-branch-str ()
   "Return the currently checked out branch name.

@@ -565,8 +565,8 @@ Uses the file of the current buffer."
 ;;                 But if you assume everything from the perspective of the local user that may be OK.
 ;; see ANSI escape codes for advaned coloring: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#colors--graphics-mode
 (defvar fugitive-date-formats
-  '((windows-nt . "--date=format-local:\"[48;5;000m[38;5;245m%y[m[38;5;250m%m[38;5;255m%d[38;5;201m%H[38;5;120m%M[m\"")
-    (darwin .     "--date=format-local:\"[48;5;000m[38;5;245m%-y[m[38;5;250m%m[38;5;255m%d[38;5;201m%_H[38;5;120m%m[m\"")))
+  '((windows-nt . "--date=format-local:\"[48;5;000m[38;5;245m%y[m[38;5;250m%m[38;5;255m%d[38;5;120m%H[48;5;000m[38;5;34m%M[m\"")
+    (darwin .     "--date=format-local:\"[48;5;000m[38;5;245m%-y[m[38;5;250m%m[38;5;255m%d[38;5;120m%_H[48;5;000m[38;5;34m%m[m\"")))
 ;; (defvar fugitive-date-formats
 ;;   '((windows-nt . "--date=format-local:\"%y%m%d %H%M\"") ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
 ;;     (darwin .     "--date=format-local:\"%-y%m%d %_H%m\""))) ;"--date=format:\"%-y-%-m-%d %I:%m%p\""

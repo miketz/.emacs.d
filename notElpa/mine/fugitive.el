@@ -472,7 +472,7 @@ Use curr branch as the initial input."
   "Typical one line log.
 It should be relatively quick even for larger logs."
   (interactive)
-  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
+  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
     (fugitive-shell-command cmd nil t))
   ;; (fugitive-shell-command "git log --oneline --decorate=short -n 1000 " nil t)
   )
@@ -496,7 +496,7 @@ This might be a bit faster than --graph logs as it doesn't need to render branch
 as they are collapsed under the parent merge commit.
 Also seems faster than normal logs with no --graph or --first-parent."
   (interactive)
-  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " --first-parent -n 1000 ")))
+  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " --first-parent -n 1000 ")))
     (fugitive-shell-command cmd nil t))
   ;; (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 1000 " nil t)
   )
@@ -519,7 +519,7 @@ This is the fastest log."
   "Prepare the git command with for a log of a single file.
 Uses the file of the current buffer."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (fugitive-curr-filename))
+  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (fugitive-curr-filename))
                           ;; (concat "git log --oneline --decorate=short -n 1000 -- " (fugitive-curr-filename))
                           nil t))
 
@@ -527,7 +527,7 @@ Uses the file of the current buffer."
 (defun fugitive-log-folder ()
   "Prepare the git command with for a log of a single folder."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (read-directory-name "dir: " nil nil t))
+  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 -- " (read-directory-name "dir: " nil nil t))
                           nil t))
 
 ;;;###autoload
@@ -543,7 +543,7 @@ Uses the file of the current buffer."
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph --pretty=format:\"%C(auto)%h %C(cyan)%an%C(auto)%d %s\" -n 1000 " nil t))
+  (fugitive-shell-command "git log --graph --pretty=format:\"%C(auto)%h [38;5;74m%an%C(auto)%d %s\" -n 1000 " nil t))
 
 ;; just documenting some possible date formats.
 ;; "--date=short"
@@ -601,7 +601,7 @@ Uses the file of the current buffer."
   ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
-  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %ad% C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
+  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 1000 ")))
                    ;; "git log --graph -n 1000 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 
@@ -658,7 +658,7 @@ Use the default fn configured in `fugitive-log-graph-fn'."
     (message "rev1 and rev2 are required.")
     (cl-return-from fugitive-log-between))
   ;; run command
-  (let ((cmd (concat "git log " rev1 ".." rev2 " --graph --pretty=format:\"%C(auto)%h %ad%C(cyan)%an%C(auto)%d %s\" " fugitive-date-format " -n 2000 ")))
+  (let ((cmd (concat "git log " rev1 ".." rev2 " --graph --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 2000 ")))
     (fugitive-shell-command cmd buff t)))
 
 ;;;###autoload

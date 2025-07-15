@@ -590,7 +590,9 @@ Uses the file of the current buffer."
     format))
 
 ;; the date format to use.
-(defvar fugitive-date-format (fugitive-date-format-for-os-bg))
+(defcustom fugitive-date-format (fugitive-date-format-for-os-bg)
+  "Date format to use in git log.
+Starting with --date=.")
 
 ;;;###autoload
 (defun fugitive-log-graph-long ()

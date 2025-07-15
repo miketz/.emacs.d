@@ -552,6 +552,44 @@ Uses the file of the current buffer."
 ;; "--date=format:\"%-Y-%-m-%d %I:%M%p\""
 
 
+;;; special "256 color" codes for terminal. numbers from 0-255.
+(defvar fugitive-color-year)
+(defvar fugitive-color-year-bg)
+(defvar fugitive-color-month)
+(defvar fugitive-color-day)
+(defvar fugitive-color-hour)
+(defvar fugitive-color-minute)
+(defvar fugitive-color-minute-bg)
+
+(defun fugitive-refresh-date-colors ()
+  "Date colors are not normal faces.
+Must manually refresh as theme changes between light and dark."
+  (interactive)
+  (if (eq (frame-parameter nil 'background-mode) 'dark)
+      (progn
+        (setq fugitive-color-year 245) ; very dim
+        (setq fugitive-color-year-bg 0) ; black
+        (setq fugitive-color-month 255) ; bright
+        (setq fugitive-color-day 250) ; mild dim
+        (setq fugitive-color-hour 120) ; bright green
+        (setq fugitive-color-minute 34) ; mild dim green
+        (setq fugitive-color-minute-bg 0) ; black
+        )
+    ;; else light
+    (progn
+      (setq fugitive-color-year 250) ; very dim
+      (setq fugitive-color-year-bg 255) ; white
+      (setq fugitive-color-month 0) ; bright
+      (setq fugitive-color-day 1) ; mild dim
+      (setq fugitive-color-hour 0) ; bright
+      (setq fugitive-color-minute 21) ; mild dim
+      (setq fugitive-color-minute-bg 255) ; white
+      )))
+
+(fugitive-refresh-date-colors) ; set colors on initial load
+
+
+
 ;; formats used for the --date format in git log.
 ;; powered by strftime and OS specific which flags are supported.
 ;; TODO: verify darwin format works for all other emacs supported OS systems.
@@ -565,8 +603,11 @@ Uses the file of the current buffer."
 ;;                 But if you assume everything from the perspective of the local user that may be OK.
 ;; see ANSI escape codes for advaned coloring: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#colors--graphics-mode
 (defvar fugitive-date-formats
-  '((windows-nt . "--date=format-local:\"[48;5;000m[38;5;245m%y[m[38;5;255m%m[38;5;250m%d[38;5;120m%H[48;5;000m[38;5;34m%M[m\"")
-    (darwin .     "--date=format-local:\"[48;5;000m[38;5;245m%-y[m[38;5;255m%m[38;5;250m%d[38;5;120m%_H[48;5;000m[38;5;34m%m[m\"")))
+  '((windows-nt . "--date=format-local:\"[48;5;%dm[38;5;%dm%%y[m[38;5;%dm%%m[38;5;%dm%%d[38;5;%dm%%H[48;5;%dm[38;5;%dm%%M[m\"")
+    (darwin .     "--date=format-local:\"[48;5;%dm[38;5;%dm%%-y[m[38;5;%dm%%m[38;5;%dm%%d[38;5;%dm%%_H[48;5;%dm[38;5;%dm%%m[m\"")))
+;; (defvar fugitive-date-formats
+;;   '((windows-nt . "--date=format-local:\"[48;5;000m[38;5;245m%y[m[38;5;255m%m[38;5;250m%d[38;5;120m%H[48;5;000m[38;5;34m%M[m\"")
+;;     (darwin .     "--date=format-local:\"[48;5;000m[38;5;245m%-y[m[38;5;255m%m[38;5;250m%d[38;5;120m%_H[48;5;000m[38;5;34m%m[m\"")))
 ;; (defvar fugitive-date-formats
 ;;   '((windows-nt . "--date=format-local:\"%y%m%d %H%M\"") ;"--date=format:\"%Y%m%d %I:%M%p%z\"" ;"--date=short"
 ;;     (darwin .     "--date=format-local:\"%-y%m%d %_H%m\""))) ;"--date=format:\"%-y-%-m-%d %I:%m%p\""
@@ -580,7 +621,17 @@ Uses the file of the current buffer."
     (when (null format)
       ;; default to darwin format
       (setq format (cdr (assoc 'darwin fugitive-date-formats))))
-    format))
+    ;; refresh colors. in case theme changed between light/dark.
+    (fugitive-refresh-date-colors)
+    ;; plugin the date colors
+    (format format
+            fugitive-color-year-bg
+            fugitive-color-year
+            fugitive-color-month
+            fugitive-color-day
+            fugitive-color-hour
+            fugitive-color-minute-bg
+            fugitive-color-minute)))
 
 ;; the date format to use.
 (defvar fugitive-date-format (fugitive-get-date-format-for-os))

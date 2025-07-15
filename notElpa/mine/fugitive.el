@@ -314,8 +314,10 @@ rapid fire commands like `fugitive-quick-commit'."
         (buff-remote (fugitive-new-output-buffer)))
     ;; use synchronous shell-command to simplify things. just wait for everything to complete before ocmparing.
     ;; TODO: go back to async again. But use a waitGroup technique instead of sleep
-    (shell-command "git branch" buff-local)
-    (shell-command "git branch -r" buff-remote)
+    (shell-command "git for-each-ref --format=%(refname:short) refs/heads/" buff-local)
+    (shell-command "git for-each-ref --format=%(refname:short) refs/remotes/" buff-remote)
+    ;; (shell-command "git branch" buff-local)
+    ;; (shell-command "git branch -r" buff-remote)
     (ediff-buffers buff-local buff-remote))
 
   ;; (let ((buff-local (fugitive-shell-command "git branch"))

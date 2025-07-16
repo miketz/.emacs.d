@@ -314,8 +314,10 @@ rapid fire commands like `fugitive-quick-commit'."
         (buff-remote (fugitive-new-output-buffer)))
     ;; use synchronous shell-command to simplify things. just wait for everything to complete before ocmparing.
     ;; TODO: go back to async again. But use a waitGroup technique instead of sleep
-    (shell-command "git for-each-ref --format='%(refname:short)' refs/heads/" buff-local)
-    (shell-command "git for-each-ref --format='%(refname:short)' refs/remotes/" buff-remote)
+    ;; NOTE: windows literally displays the quote '. but the quote is needed on mac!
+    (let ((quote (if (eq system-type 'windows-nt) "" "'")))
+      (shell-command (format "git for-each-ref --format=%s%%(refname:short)%s refs/heads/" quote quote) buff-local)
+      (shell-command (format "git for-each-ref --format=%s%%(refname:short)%s refs/remotes/" quote quote) buff-remote))
     ;; (shell-command "git branch" buff-local)
     ;; (shell-command "git branch -r" buff-remote)
     (ediff-buffers buff-local buff-remote))

@@ -541,7 +541,7 @@ Uses the file of the current buffer."
   (fugitive-shell-command "git log --oneline --decorate=short --graph -n 1000 " nil t))
 
 
-;; TODO: look into why medium and long graph logs don't colorize the hash.
+;; NOTE: medium and long graph logs don't colorize the hash until %C(auto) turns it back on
 
 ;;;###autoload
 (defun fugitive-log-graph-medium ()

@@ -938,6 +938,10 @@ If no hash found return nil."
                                                    line-end
                                                    t ; don't error on no match
                                                    )
+                                   (re-search-forward "\*-" ; occurs in octupus merges
+                                                   line-end
+                                                   t ; don't error on no match
+                                                   )
                                    ))
            ;; assumes hash is the first thing after the star "*" or "commit"
            (found-hash-p (re-search-forward "[0-9a-fA-F]+"

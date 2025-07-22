@@ -260,11 +260,17 @@
   )
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-(when (version< emacs-version "27.0") ; in early-init.el for emacs 27+
-  (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-  (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-  (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1)))
+;; Although this is duped in early-init.el when emacs is spawned via git-bash
+;; on windwos it skips the early-init so this check is needed.
+(when menu-bar-mode (menu-bar-mode -1))
+(when tool-bar-mode (tool-bar-mode -1))
+(when scroll-bar-mode (scroll-bar-mode -1))
+(when horizontal-scroll-bar-mode (horizontal-scroll-bar-mode -1))
+;; (when (version< emacs-version "27.0") ; in early-init.el for emacs 27+
+;;   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;;   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;;   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;;   (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1)))
 
 
 

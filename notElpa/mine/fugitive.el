@@ -993,14 +993,24 @@ But if no hash found on current line, goto `next-line' as a side effect."
     (define-key map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to)
     map))
 
-(define-derived-mode fugitive-log-mode special-mode "fugitive-log"
+;; (define-derived-mode fugitive-log-mode special-mode "fugitive-log"
+;;   "Mode for the log results buffer.
+;; Mostly just to support key binds."
+;;   :lighter " fugi-log"
+;;   :keymap (let ((map (make-sparse-keymap)))
+;;             ;; No default bindings for now. User will choose them.
+;;             map)
+;;   ;; (read-only-mode 1) ; inherit this from special-mode
+;;   )
+
+(define-minor-mode fugitive-log-mode
   "Mode for the log results buffer.
 Mostly just to support key binds."
   :lighter " fugi-log"
   :keymap (let ((map (make-sparse-keymap)))
             ;; No default bindings for now. User will choose them.
             map)
-  ;; (read-only-mode 1) ; inherit this from special-mode
+  ;; (read-only-mode 1)
   )
 
 

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: indFullSample
+# key: indFullSample
+# --
+create unique nonclustered index IX_TableName_Col1_Col2 on dbo.TableName(Col1, Col2) include(Col3) where IsActive=1;

@@ -92,6 +92,12 @@ On Windows you may want HOME=C:/Users/Username/")
 Useful to create a more REPL/terminal like experience."
   (get-buffer-create "*fugitive-pinned*"))
 
+(defcustom fugitive-use-pinned-buffer nil
+  "When t use the same buffer for fugitive output.
+This creates a more terminal-like experience.
+
+WARNING: Expirimental. Destroys colors from previous commands. Destroys
+keybinds from previous log commands.")
 
 (defun fugitive-delete-buffers ()
   "Delete fugitive related buffers."
@@ -174,7 +180,9 @@ rapid fire commands like `fugitive-quick-commit'."
       )
 
     (let* ((buff (or buff ; buff passed in
-                     (fugitive-new-output-buffer)))
+                     (if fugitive-use-pinned-buffer
+                         (fugitive-pinned-buffer)
+                       (fugitive-new-output-buffer))))
            ;; shadow var to prevent mini buffer display
            (max-mini-window-height 0)
            (log-p (fugitive-str-starts-with-p cmd "git log"))
@@ -257,6 +265,12 @@ rapid fire commands like `fugitive-quick-commit'."
                                                     (unless truncate-lines
                                                       (toggle-truncate-lines))))
 
+                                     (when fugitive-use-pinned-buffer
+                                       ;; pinned buffers are more like a REPL.
+                                       ;; take user to the end of the buffer and add newline for visual separation.
+                                       (goto-char (point-max))
+                                       (insert "\n"))
+
                                      ;; disable native line numbers.
                                      ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as
                                      ;; major modes wipe out buffer local vars.
@@ -264,7 +278,10 @@ rapid fire commands like `fugitive-quick-commit'."
 
                                    ;; show output
                                    (unless hide-output-p
-                                     (display-buffer buff))
+                                     (display-buffer buff)
+                                     (when fugitive-use-pinned-buffer
+                                       ;; more repl-like experience.
+                                       (switch-to-buffer buff)))
 
                                    (when (and (boundp 'evil-mode) evil-mode)
                                      ;; When using evil-mode and emacs 30+ the cursor becomes a bar | even when the buffer is in normal mode.

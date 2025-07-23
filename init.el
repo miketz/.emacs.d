@@ -10528,6 +10528,17 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'kaesar-file-encrypt "kaesar-file" nil nil)
 (autoload #'kaesar-file-decrypt "kaesar-file" nil nil)
 
+;;;----------------------------------------------------------------------------
+;;; god-mode
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/god-mode" load-path)
+(autoload #'god-local-mode "god-mode" nil t)
+(autoload #'god-mode "god-mode" nil t)
+(autoload #'god-mode-all "god-mode" nil t)
+(autoload #'god-mode-maybe-activate "god-mode" nil nil)
+(autoload #'god-execute-with-current-bindings "god-mode" nil t)
+
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

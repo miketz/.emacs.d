@@ -88,12 +88,10 @@ On Windows you may want HOME=C:/Users/Username/")
                                (int-to-string seq)
                                "*"))))
 
-(let ((pinned-buff nil)) ; private var. requires lexical binding
-  (defun fugitive-pinned-buffer ()
-    "Return the same buffer each time.
+(defun fugitive-pinned-buffer ()
+  "Return the same buffer each time.
 Useful to create a more REPL/terminal like experience."
-    (or pinned-buff
-        (get-buffer-create "*fugitive-pinned*"))))
+  (get-buffer-create "*fugitive-pinned*"))
 
 
 (defun fugitive-delete-buffers ()

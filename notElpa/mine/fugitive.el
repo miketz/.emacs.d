@@ -71,7 +71,6 @@ On Windows you may want HOME=C:/Users/Username/")
 
 
 
-(defvar fugitive-buff-name "*fugitive*")
 
 (defun fugitive-str-starts-with-p (string prefix)
   "Return t if STRING begins with PREFIX."
@@ -350,7 +349,7 @@ Flawed implementation:
   ;; this command works on mac. maybe not windows
   ;; { git branch -vv | grep -v origin & git branch -vv | grep ": gone]"; }
   (fugitive-shell-command "{ git branch -vv | grep -v origin & git branch -vv | grep \": gone]\"; }"
-                          (get-buffer-create fugitive-buff-name)))
+                          (get-buffer-create (fugitive-new-output-buffer))))
 
 (defun fugitive-curr-filename ()
   "Get file name of current buffer.

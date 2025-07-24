@@ -145,6 +145,9 @@ keybinds from previous log commands.")
                           "s" "")))))
 
 
+;; only used when `fugitive-use-pinned-buffer' is t.
+(defvar fugitive--pos-before-insert 0)
+
 ;;;###autoload
 (defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p)
   "Run a git command.
@@ -282,7 +285,11 @@ rapid fire commands like `fugitive-quick-commit'."
                                      (when fugitive-use-pinned-buffer
                                        ;; more repl-like experience.
                                        (select-window (get-buffer-window buff))
-                                       (goto-char (point-max))))
+                                       ;; goto top of the newly inserted text, not the literal end of the buffer. more useful for logs.
+                                       (goto-char fugitive--pos-before-insert)
+                                       ;; remember current end of buffer as it will be the "top" after the next commmand
+                                       (setq fugitive--pos-before-insert (point-max))
+                                       (recenter-top-bottom)))
 
                                    (when (and (boundp 'evil-mode) evil-mode)
                                      ;; When using evil-mode and emacs 30+ the cursor becomes a bar | even when the buffer is in normal mode.

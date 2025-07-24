@@ -97,7 +97,9 @@ Useful to create a more REPL/terminal like experience."
 This creates a more terminal-like experience.
 
 WARNING: Expirimental. Destroys colors from previous commands. Destroys
-keybinds from previous log commands.")
+keybinds from previous log commands. If you switch git repos the `default-directory'
+of the pinned buffer does not change, making things like git show HASH fail due to
+acting against the wrong folder/repo!")
 
 (defun fugitive-delete-buffers ()
   "Delete fugitive related buffers."

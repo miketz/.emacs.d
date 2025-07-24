@@ -8150,6 +8150,7 @@ vanilla javascript buffers."
            ("Special" (name . "^\*")))
 
           ("less" ; fewer groups
+           ("Fugitive" (name . "^\*fugitive"))
            ("Special" (or (name . "^\*")
                           (name . "^\magit")))
            ("ERC" (mode . erc-mode)))))

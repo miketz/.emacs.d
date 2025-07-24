@@ -269,7 +269,7 @@ rapid fire commands like `fugitive-quick-commit'."
                                        ;; pinned buffers are more like a REPL.
                                        ;; take user to the end of the buffer and add newline for visual separation.
                                        (goto-char (point-max))
-                                       (insert "\n"))
+                                       (insert "\n\n"))
 
                                      ;; disable native line numbers.
                                      ;; NOTE: must set this AFTER any major modes like `fugitive-log-mode' are turned on as

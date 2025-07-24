@@ -281,7 +281,7 @@ rapid fire commands like `fugitive-quick-commit'."
                                      (display-buffer buff)
                                      (when fugitive-use-pinned-buffer
                                        ;; more repl-like experience.
-                                       (switch-to-buffer buff)))
+                                       (select-window (get-buffer-window buff))))
 
                                    (when (and (boundp 'evil-mode) evil-mode)
                                      ;; When using evil-mode and emacs 30+ the cursor becomes a bar | even when the buffer is in normal mode.

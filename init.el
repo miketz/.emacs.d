@@ -3034,6 +3034,7 @@ Inserts a new line and the beginning and end with text values:
 
   ;; keybinds
   (define-key csharp-mode-map (kbd "C-c C-c") #'compile)
+  (define-key csharp-mode-map (kbd "C-c .") #'dumb-jump-go)
 
   (defun my-csharp-new-proj ()
     "Initialize a new C# project in a folder.
@@ -3099,6 +3100,8 @@ Assumes dotnet core."
 
   (define-key js-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
   (define-key js-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
+  (define-key js-mode-map (kbd "C-c .") #'dumb-jump-go)
 
   (progn ;; Add parsing of jshint output in compilation mode
     (require 'compile)
@@ -3169,6 +3172,7 @@ LINTER values: :jslint :jshint :eslint"
   (define-key js2-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
   (define-key js2-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
   (define-key js2-mode-map (kbd "M-.") #'js2-jump-to-definition)
+  (define-key js2-mode-map (kbd "C-c .") #'dumb-jump-go)
 
   (setq-default
    js2-global-externs
@@ -3358,6 +3362,7 @@ LINTER values: :jslint :jshint :eslint"
 ;;   (add-to-list 'major-mode-remap-alist '(java-mode . java-ts-mode)))
 
 (with-eval-after-load 'js ; js-ts-mode is stored in the "js" feature file
+  (define-key js-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
   (defun my-setup-js-ts-mode ()
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ; buffer local
@@ -4232,6 +4237,8 @@ and indent."
   (define-key c-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
   (define-key c-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
 
+  (define-key c-mode-map (kbd "C-c .") #'dumb-jump-go)
+
   (defun my-setup-c-mode ()
     (setq-local devdocs-current-docs '("c"))
     ;; (when my-graphic-p
@@ -4318,6 +4325,8 @@ and indent."
 
   (define-key c-ts-mode-map (kbd "C-c C-d d") #'my-devdocs-lookup)
   (define-key c-ts-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
+
+  (define-key c-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
 
   (defun my-setup-c-ts-mode ()
     (setq-local devdocs-current-docs '("c"))
@@ -7943,6 +7952,8 @@ Closure over `preceding-sexp-fn'."
   (put 'typescript-indent-level 'safe-local-variable #'integerp)
   (setq typescript-indent-level my-indent-width)
 
+  (define-key typescript-mode-map (kbd "C-c .") #'dumb-jump-go)
+
   (defun my-setup-typescript-mode ()
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
@@ -8760,6 +8771,8 @@ Explicit language selection not supported?"
 (push '("\\.php$" . php-mode) auto-mode-alist)
 
 (with-eval-after-load 'php-mode
+  (define-key php-mode-map (kbd "C-c .") #'dumb-jump-go)
+
   (defun my-setup-php-mode ()
     (my-turn-on-electric-pair-local-mode)
     (rainbow-delimiters-mode-enable)
@@ -9582,6 +9595,8 @@ And turns off `indent-tabs-mode'."
   (add-to-list 'major-mode-remap-alist '(java-mode . java-ts-mode)))
 
 (with-eval-after-load 'java-ts-mode
+  (define-key java-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+
   (defun my-setup-java-ts-mode ()
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ; buffer local
@@ -9671,6 +9686,8 @@ Values: lsp, citre, nil")
   (define-key go-ts-mode-map (kbd "C-c g") #'my-go-commands-hydra/body)
   (define-key go-ts-mode-map (kbd "C-c C-g") #'my-go-commands-hydra/body)
 
+  (define-key go-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
   (defun my-setup-go-ts-mode ()
@@ -9756,6 +9773,8 @@ Values: lsp, citre, nil")
 
   (define-key go-mode-map (kbd "C-c g") #'my-go-commands-hydra/body)
   (define-key go-mode-map (kbd "C-c C-g") #'my-go-commands-hydra/body)
+
+  (define-key go-mode-map (kbd "C-c .") #'dumb-jump-go)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 

@@ -10100,11 +10100,22 @@ Values: lsp, citre, nil")
   (interactive)
   ;; TODO: install this without package.el to avoid `package-initialize'
   (package-initialize)
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+  (require 'dumb-jump)
+
+  ;; NOTE: the reccomendation to use xref doesn't seem to work for me.
+  ;; For now just use the "obsolete" fn `dumb-jump-go'.
+  ;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+
+  ;; obsolete way actually works, so use it.
+  ;; TODO: set up mode-map keybinds for `dumb-jump-mode'
+  ;; (global-set-key (kbd "C-c .") #'dumb-jump-go)
+  ;; (define-key c-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+  )
 
 (with-eval-after-load 'dumb-jump
   (setq dumb-jump-prefer-searcher 'rg)
-  (setq dumb-jump-force-searcher 'rg))
+  (setq dumb-jump-force-searcher 'rg)
+  (setq dumb-jump-selector 'ivy))
 
 
 ;;;----------------------------------------------------------------------------

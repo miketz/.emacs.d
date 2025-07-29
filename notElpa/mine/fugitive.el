@@ -834,10 +834,11 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
                     (car parents) ; skip completion
                   (completing-read "parent: " completion-table nil t)))
            ;; some log outputs only show 7 chars of the hash. which would mess up
-           ;; searching on the complete hash.
-           ;; TODO: hash display length appears to be dynamic. someitmes 8 or 9. will break
-           ;;       if 7. handle this.
-           (par-short (substring-no-properties par 0 7))
+           ;; searching on the complete hash. So substring search pattern to 7 chars.
+           ;; TODO: 7 char search breaks if searching even shorter hases. 4 seems to be the minimum git log ever displays even if --abbrev=N is set lower.
+           ;;       For now just keep searching the first 7 characters as it's a good trade off to mostly avoid false hash matches and most logs will display at least 7 chars anyway.
+           (par-short (substring-no-properties par 0 7
+                                               ))
            (found-p (re-search-forward par-short
                                        nil ; no bounds on search
                                        t ; do not trigger an error if no search match

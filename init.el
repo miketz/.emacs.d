@@ -10094,23 +10094,24 @@ Values: lsp, citre, nil")
 
 
 ;;;----------------------------------------------------------------------------
+;;; popup. dependency of dumb-jump
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/popup-el" load-path)
+
+;;;----------------------------------------------------------------------------
 ;;; dumb-jump
 ;;;----------------------------------------------------------------------------
-(defun my-dumb-jump-enable ()
-  (interactive)
-  ;; TODO: install this without package.el to avoid `package-initialize'
-  (package-initialize)
-  (require 'dumb-jump)
+(push "~/.emacs.d/notElpaYolo/dumb-jump" load-path)
+(autoload #'dumb-jump-go "dumb-jump" nil t)
 
-  ;; NOTE: the reccomendation to use xref doesn't seem to work for me.
-  ;; For now just use the "obsolete" fn `dumb-jump-go'.
-  ;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+;; NOTE: the reccomendation to use xref doesn't seem to work for me.
+;; For now just use the "obsolete" fn `dumb-jump-go'.
+;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
-  ;; obsolete way actually works, so use it.
-  ;; TODO: set up mode-map keybinds for `dumb-jump-mode'
-  ;; (global-set-key (kbd "C-c .") #'dumb-jump-go)
-  ;; (define-key c-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
-  )
+;; obsolete way actually works, so use it.
+;; TODO: set up mode-map keybinds for `dumb-jump-mode'
+;; (global-set-key (kbd "C-c .") #'dumb-jump-go)
+;; (define-key c-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
 
 (with-eval-after-load 'dumb-jump
   (setq dumb-jump-prefer-searcher 'rg)

@@ -6460,8 +6460,8 @@ TODO: call this function when it works."
                                           :strike-through t))))
 ;; Recommended key binds for vanilla Emacs.  Press "C-c m" with text
 ;; highlighted.
-(global-set-key (kbd "C-c m") #'mor-mode-on-region)
-(global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
+;; (global-set-key (kbd "C-c m") #'mor-mode-on-region)
+;; (global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
 ;; (global-set-key (kbd "C-c r") #'mor-curr-mode-on-region)
 (with-eval-after-load 'evil
   ;; Recommended key binds for evil users.  Press "m" in visual mode.

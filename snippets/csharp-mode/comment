@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 #contributor : Alejandro Espinoza Esparza <aespinoza@structum.com.mx>
 #name : /// <summary> ... </summary>
-# key: comment
+# key: com
 # --
 /// <summary>
 /// $0

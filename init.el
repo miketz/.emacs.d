@@ -6814,6 +6814,7 @@ When ARG isn't nil, try to pretty print the sexp."
 
 (autoload #'my-eval-region "my-misc" nil t)
 (define-key lisp-mode-shared-map (kbd "C-c C-r") #'my-eval-region)
+(define-key lisp-mode-shared-map (kbd "C-c .") #'dumb-jump-go)
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:

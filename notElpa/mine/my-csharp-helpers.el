@@ -22,6 +22,7 @@
         (rg-read-files)
         (read-directory-name "dir: " nil nil t))))
 
+;;;###autoload
 (defun my-cs-find-interface-implementor ()
   "Find class implementing an interface."
   (interactive)

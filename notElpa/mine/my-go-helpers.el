@@ -516,24 +516,7 @@ More general, but may be slower and find more false matches."
         (rg-read-files)
         (read-directory-name "dir: " nil nil t))))
 
-(defun my-go-find-function-or-method ()
-  "Find function or method definition.
-More general, but may be slower and find more false matches."
-  (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (fn-name (completing-read "fn: " '() nil nil
-                                  ;; default to text under cursor
-                                  cursor-txt))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^(func " fn-name "\\(|func \\(.+\\) " fn-name "\\()")))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+
 
 ;;;###autoload
 (defun my-go-find-function-refs ()

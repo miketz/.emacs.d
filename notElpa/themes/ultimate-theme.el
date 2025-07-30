@@ -135,7 +135,8 @@
    `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class :foreground "dark green"
-                                 :background ,faint-less)))
+                                 :background "#DDDDDD";;,faint-less
+                                 )))
    `(font-lock-function-name-face ((,class :foreground "black"
                                            :background "lightsteelblue1"
 										   ;; :weight normal

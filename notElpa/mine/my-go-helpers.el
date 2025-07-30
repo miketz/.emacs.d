@@ -13,6 +13,8 @@
 (require 'my-git-helpers)
 (require 's)
 (require 'hideshow)
+(require 'thingatpt)
+(require 'rg)
 
 
 (defun my-go-scrape-module-name ()
@@ -409,20 +411,17 @@ func TestFoo(t *testing.T) {
 Ignoring test files.
 This is more a documentation of how to ignore files in rg."
   (interactive)
-  (require 'rg)
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let ((rg-command-line-flags rg-command-line-flags))
-    ;; ignore test files
-    (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
     (call-interactively #'rg)))
 
 
 ;;;###autoload
-(defun my-go-find-methods ()
+(defun my-go-find-methods-of-struct ()
   "Find methods of a struct."
   (interactive)
-  (require 'thingatpt)
-  (require 'rg)
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
@@ -431,12 +430,73 @@ This is more a documentation of how to ignore files in rg."
                                   cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
          (regex (concat "^func \\(.+" struct "\\)")))
-    ;; ignore test files
-    (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
     ;; run search
     (rg regex
         (rg-read-files)
         (read-directory-name "dir: " nil nil t))))
+
+
+;;;###autoload
+(defun my-go-find-struct ()
+  "Find struct definition."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
+         (struct (completing-read "struct: " '() nil nil
+                                  ;; default to text under cursor
+                                  cursor-txt))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat "^type " struct " struct")))
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
+;;;###autoload
+(defun my-go-find-function ()
+  "Find function definition."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
+         (fn-name (completing-read "fn: " '() nil nil
+                                  ;; default to text under cursor
+                                  cursor-txt))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat "^func.+" fn-name "\\(")))
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
+;;;###autoload
+(defun my-go-find-function-refs ()
+  "Find refs/calls of function.
+Flawed, does not find functions stored as variables due to use of opening ( in search.
+But using this regex anyway for performance and fewer false positive matches."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
+         (fn-name (completing-read "fn: " '() nil nil
+                                  ;; default to text under cursor
+                                  cursor-txt))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat fn-name "\\(")))
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
 
 
 
@@ -507,7 +567,7 @@ Mostly intened for yasnippet expansions."
 ;;;----------------------------------------------------------------------------
 ;;; hydra. List several go helper functions.
 ;;;----------------------------------------------------------------------------
-(defhydra my-go-commands-hydra (:color blue :hint nil) ;;(:color blue)
+(defhydra my-go-commands-hydra (:color blue :hint nil)
   "
 _l_: golangci-lint
 _c_: compile
@@ -518,6 +578,7 @@ _t_: types
 _f_: built-in funcs
 _d_: doc
 _s_: toggle err handling visibility
+_r_: ripgrep custom searches
 _q_, _C-g_: quit"
 
   ("c" my-go-compile)
@@ -528,6 +589,7 @@ _q_, _C-g_: quit"
   ("f" my-go-insert-builtin-func)
   ("d" my-go-doc-local)
   ("l" my-go-lint)
+  ("r" my-go-rg-hydra/body)
   ("s" my-go-toggle-err-handling)
 
   ;; don't use the hint text as it makes (:hint nil) not work?
@@ -538,6 +600,20 @@ _q_, _C-g_: quit"
   ;; ("t" my-go-insert-type "types")
   ;; ("d" my-go-doc-local "doc")
 
+  ("C-g" nil nil)
+  ("q" nil))
+
+(defhydra my-go-rg-hydra (:color blue :hint nil)
+  "
+_m_: methods of struct
+_s_: struct
+_f_: function
+_r_: functions references (flawed misses fn vars)
+_q_, _C-g_: quit"
+  ("m" my-go-find-methods-of-struct)
+  ("s" my-go-find-struct)
+  ("f" my-go-find-function)
+  ("r" my-go-find-function-refs)
   ("C-g" nil nil)
   ("q" nil))
 

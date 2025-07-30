@@ -9638,6 +9638,7 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-install-lib "my-go-helpers" nil t)
 (autoload #'my-go-rg "my-go-helpers" nil t)
 (autoload #'my-go-commands-hydra/body "my-go-helpers" nil t)
+(autoload #'my-go-rg-hydra/body "my-go-helpers" nil t)
 (autoload #'my-go-compile "my-go-helpers" nil t)
 (autoload #'my-go-run-benchmarks "my-go-helpers" nil t)
 (autoload #'my-go-run-tests "my-go-helpers" nil t)
@@ -9645,7 +9646,10 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-hide-err-handling "my-go-helpers" nil t)
 (autoload #'my-go-show-err-handling "my-go-helpers" nil t)
 (autoload #'my-go-toggle-err-handling "my-go-helpers" nil t)
-(autoload #'my-go-find-methods "my-go-helpers" nil t)
+(autoload #'my-go-find-methods-of-struct "my-go-helpers" nil t)
+(autoload #'my-go-find-struct "my-go-helpers" nil t)
+(autoload #'my-go-find-function "my-go-helpers" nil t)
+(autoload #'my-go-find-function-refs "my-go-helpers" nil t)
 (autoload #'my-go-curr-fn-name "my-go-helpers" nil t)
 
 

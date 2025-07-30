@@ -7465,6 +7465,9 @@ Closure over `preceding-sexp-fn'."
   ;; occur at different tab widths.
   (define-key python-mode-map (kbd "M-;") #'my-comment-dwim-align-with-spaces)
 
+  (define-key python-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key python-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+
 
   (defun my-setup-python-smart-tabs-mode ()
     ;; keeps comments closer to the code. buffer local

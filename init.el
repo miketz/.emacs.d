@@ -7164,6 +7164,7 @@ Closure over `preceding-sexp-fn'."
                   space-before-tab::tab)))
 
 (with-eval-after-load 'prog-mode
+  (define-key prog-mode-map (kbd "C-c .") #'dumb-jump-go)
   (defun my-setup-prog-mode ()
     (whitespace-mode 1))
   (add-hook 'prog-mode-hook #'my-setup-prog-mode))

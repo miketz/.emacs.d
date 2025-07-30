@@ -3018,6 +3018,15 @@ Inserts a new line and the beginning and end with text values:
 
 
 ;;;----------------------------------------------------------------------------
+;;; my-csharp-helpers. helper fns for C#
+;;;----------------------------------------------------------------------------
+;; fns not quite big enough to justify their own dedicated package.
+(autoload #'my-cs-find-class "my-csharp-helpers" nil t)
+(autoload #'my-cs-find-interface-implementor "my-csharp-helpers" nil t)
+(autoload #'my-cs-find-method "my-csharp-helpers" nil t)
+(autoload #'my-cs-find-method-refs "my-csharp-helpers" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; csharp-mode. C#
 ;;;----------------------------------------------------------------------------
 (unless (fboundp #'csharp-mode)

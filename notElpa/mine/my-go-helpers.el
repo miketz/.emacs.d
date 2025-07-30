@@ -457,6 +457,7 @@ This is more a documentation of how to ignore files in rg."
         (rg-read-files)
         (read-directory-name "dir: " nil nil t))))
 
+
 ;;;###autoload
 (defun my-go-find-function ()
   "Find function definition."
@@ -465,10 +466,68 @@ This is more a documentation of how to ignore files in rg."
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
          (fn-name (completing-read "fn: " '() nil nil
+                                   ;; default to text under cursor
+                                   cursor-txt))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat "^func " fn-name "\\(")))
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
+;;;###autoload
+(defun my-go-find-method ()
+  "Find method definition."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
+         (fn-name (completing-read "fn: " '() nil nil
+                                   ;; default to text under cursor
+                                   cursor-txt))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat "^func \\(.+\\) " fn-name "\\(")))
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
+;;;###autoload
+(defun my-go-find-function-or-method ()
+  "Find function or method definition.
+More general, but may be slower and find more false matches."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
+         (fn-name (completing-read "fn: " '() nil nil
                                   ;; default to text under cursor
                                   cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^func.+" fn-name "\\(")))
+         (regex (concat "^(func " fn-name "\\(|func \\(.+\\) " fn-name "\\()")))
+    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
+    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    ;; run search
+    (rg regex
+        (rg-read-files)
+        (read-directory-name "dir: " nil nil t))))
+
+(defun my-go-find-function-or-method ()
+  "Find function or method definition.
+More general, but may be slower and find more false matches."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement.
+  (let* ((rg-command-line-flags rg-command-line-flags)
+         (cursor-txt (thing-at-point 'symbol 'no-properties))
+         (fn-name (completing-read "fn: " '() nil nil
+                                  ;; default to text under cursor
+                                  cursor-txt))
+         ;; acutally a single \. double \\ is for the elisp string escape.
+         (regex (concat "^(func " fn-name "\\(|func \\(.+\\) " fn-name "\\()")))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search
@@ -605,14 +664,18 @@ _q_, _C-g_: quit"
 
 (defhydra my-go-rg-hydra (:color blue :hint nil)
   "
-_m_: methods of struct
 _s_: struct
+_M_: all methods of struct
 _f_: function
-_r_: functions references (flawed misses fn vars)
+_m_: method
+_F_: function or method. (more general but more false matches)
+_r_: functions references (flawed, misses fn vars)
 _q_, _C-g_: quit"
-  ("m" my-go-find-methods-of-struct)
   ("s" my-go-find-struct)
+  ("M" my-go-find-methods-of-struct)
   ("f" my-go-find-function)
+  ("m" my-go-find-method)
+  ("F" my-go-find-function-or-method)
   ("r" my-go-find-function-refs)
   ("C-g" nil nil)
   ("q" nil))

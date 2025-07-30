@@ -9646,9 +9646,11 @@ And turns off `indent-tabs-mode'."
 (autoload #'my-go-hide-err-handling "my-go-helpers" nil t)
 (autoload #'my-go-show-err-handling "my-go-helpers" nil t)
 (autoload #'my-go-toggle-err-handling "my-go-helpers" nil t)
-(autoload #'my-go-find-methods-of-struct "my-go-helpers" nil t)
 (autoload #'my-go-find-struct "my-go-helpers" nil t)
+(autoload #'my-go-find-methods-of-struct "my-go-helpers" nil t)
 (autoload #'my-go-find-function "my-go-helpers" nil t)
+(autoload #'my-go-find-method "my-go-helpers" nil t)
+(autoload #'my-go-find-function-or-method "my-go-helpers" nil t)
 (autoload #'my-go-find-function-refs "my-go-helpers" nil t)
 (autoload #'my-go-curr-fn-name "my-go-helpers" nil t)
 

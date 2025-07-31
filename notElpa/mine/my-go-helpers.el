@@ -531,7 +531,7 @@ But using this regex anyway for performance and fewer false positive matches."
                                   ;; default to text under cursor
                                   cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat fn-name "\\(")))
+         (regex (concat "(	| |\\.)" fn-name "\\(")))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search

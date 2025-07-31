@@ -48,11 +48,12 @@
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (fn (completing-read "method: " '() nil nil
-                                  ;; default to text under cursor
-                                  cursor-txt))
+         ;; (fn (completing-read "method: " '() nil nil
+         ;;                          ;; default to text under cursor
+         ;;                          cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat " p.+ " fn)))
+         ;; (regex (concat " p.+ " fn))
+         (regex (read-string "regex: " (concat " p.+ " cursor-txt "\\("))))
     ;; TODO: look into extra ignore options.
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search

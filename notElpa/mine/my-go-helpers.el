@@ -531,9 +531,10 @@ But using this regex anyway for performance and fewer false positive matches."
                                   ;; default to text under cursor
                                   cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "(	| |\\.)" fn-name "\\(")))
+         (regex (concat "^(?!func ).*[\\t \\.]" fn-name "\\(")))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+    (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
     ;; run search
     (rg regex
         (rg-read-files)

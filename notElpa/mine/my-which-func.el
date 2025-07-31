@@ -53,16 +53,16 @@ If a prefix arg is found it will insert the text into the buffer."
                ;; fn defintions are split across lines such as in the GNU C style. But
                ;; should work OK most of the time.
                (beginning-of-defun)
-               (buffer-substring (line-beginning-position)
-                                 (line-end-position)))))
+               (buffer-substring-no-properties (line-beginning-position)
+                                               (line-end-position)))))
+    ;; always display in echo area. even if popups are enabled.
+    (message txt)
     ;; extra sugar popup display. Could use one of several popup implmenetations.
     (cond ((and my-which-func-use-postip
                 (fboundp #'pos-tip-show)
                 ;; pos-tip breaks in terminal on mac. maybe breaks on other terms too?
                 (display-graphic-p))
            (pos-tip-show txt)))
-    ;; always display in echo area. even if popups are enabled.
-    (message txt)
     ;; if fn invoked with C-u prefix insert text. Like in emacs-lisp-mode.
     (when current-prefix-arg
       (move-end-of-line 1)

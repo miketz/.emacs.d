@@ -425,11 +425,8 @@ This is more a documentation of how to ignore files in rg."
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (struct (completing-read "struct: " '() nil nil
-                                  ;; default to text under cursor
-                                  cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^func \\(.+" struct "\\)")))
+         (regex (read-string "regex: " (concat "^func \\(.+" cursor-txt "\\)"))))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
     ;; run search
@@ -445,11 +442,8 @@ This is more a documentation of how to ignore files in rg."
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (struct (completing-read "struct: " '() nil nil
-                                  ;; default to text under cursor
-                                  cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^type " struct " struct")))
+         (regex (read-string "regex: " (concat "^type " cursor-txt " struct"))))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search
@@ -465,11 +459,8 @@ This is more a documentation of how to ignore files in rg."
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (fn-name (completing-read "fn: " '() nil nil
-                                   ;; default to text under cursor
-                                   cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^func " fn-name "\\(")))
+         (regex (read-string "regex: " (concat "^func " cursor-txt "\\("))))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search
@@ -484,11 +475,8 @@ This is more a documentation of how to ignore files in rg."
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (fn-name (completing-read "fn: " '() nil nil
-                                   ;; default to text under cursor
-                                   cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^func \\(.+\\) " fn-name "\\(")))
+         (regex (read-string "regex: " (concat "^func \\(.+\\) " cursor-txt "\\("))))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search
@@ -504,11 +492,8 @@ More general, but may be slower and find more false matches."
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (fn-name (completing-read "fn: " '() nil nil
-                                  ;; default to text under cursor
-                                  cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^(func " fn-name "\\(|func \\(.+\\) " fn-name "\\()")))
+         (regex (read-string "regex: " (concat "^(func " cursor-txt "\\(|func \\(.+\\) " cursor-txt "\\()"))))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     ;; run search
@@ -527,11 +512,8 @@ But using this regex anyway for performance and fewer false positive matches."
   ;; shadow `rg-command-line-flags' for duration this let statement.
   (let* ((rg-command-line-flags rg-command-line-flags)
          (cursor-txt (thing-at-point 'symbol 'no-properties))
-         (fn-name (completing-read "fn: " '() nil nil
-                                  ;; default to text under cursor
-                                  cursor-txt))
          ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (concat "^(?!func ).*[\\t \\.]" fn-name "\\(")))
+         (regex (read-string "regex: " (concat "^(?!func ).*[\\t \\.]" cursor-txt "\\("))))
     ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
     ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.

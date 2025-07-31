@@ -38,7 +38,11 @@
 ;;; Code:
 (require 'pos-tip "pos-tip" 'noerror) ; optional dependency for popup
 
-(defvar my-which-func-use-postip (featurep 'pos-tip)
+(defvar my-which-func-use-postip
+  (and (or (featurep 'pos-tip)
+           (fboundp #'pos-tip-show))
+       ;; pos-tip breaks in terminal on mac. maybe breaks on other terms too?
+       (display-graphic-p))
   "When t use pos-tip to display text in a popup.
 A popup is nice becuase your
 eyes don't have to travel to a different location on the screen.")
@@ -58,11 +62,8 @@ If a prefix arg is found it will insert the text into the buffer."
     ;; always display in echo area. even if popups are enabled.
     (message txt)
     ;; extra sugar popup display. Could use one of several popup implmenetations.
-    (cond ((and my-which-func-use-postip
-                (fboundp #'pos-tip-show)
-                ;; pos-tip breaks in terminal on mac. maybe breaks on other terms too?
-                (display-graphic-p))
-           (pos-tip-show txt)))
+    (when my-which-func-use-postip
+      (pos-tip-show txt))
     ;; if fn invoked with C-u prefix insert text. Like in emacs-lisp-mode.
     (when current-prefix-arg
       (move-end-of-line 1)

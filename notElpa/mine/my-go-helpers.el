@@ -15,6 +15,7 @@
 (require 'hideshow)
 (require 'thingatpt)
 (require 'rg)
+(require 'my-jump)
 
 
 (defun my-go-scrape-module-name ()
@@ -432,7 +433,7 @@ This is more a documentation of how to ignore files in rg."
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 
 ;;;###autoload
@@ -449,7 +450,7 @@ This is more a documentation of how to ignore files in rg."
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 
 ;;;###autoload
@@ -466,7 +467,7 @@ This is more a documentation of how to ignore files in rg."
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 ;;;###autoload
 (defun my-go-find-method ()
@@ -482,7 +483,7 @@ This is more a documentation of how to ignore files in rg."
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 ;;;###autoload
 (defun my-go-find-function-or-method ()
@@ -499,7 +500,7 @@ More general, but may be slower and find more false matches."
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 
 
@@ -520,7 +521,7 @@ But using this regex anyway for performance and fewer false positive matches."
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 
 

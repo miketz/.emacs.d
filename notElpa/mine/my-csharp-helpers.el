@@ -2,6 +2,7 @@
 
 (require 'thingatpt)
 (require 'rg)
+(require 'my-jump)
 
 ;;;###autoload
 (defun my-cs-find-class ()
@@ -17,7 +18,7 @@
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 ;;;###autoload
 (defun my-cs-find-interface-implementor ()
@@ -33,7 +34,7 @@
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 ;;;###autoload
 (defun my-cs-find-method ()
@@ -53,7 +54,7 @@
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 ;;;###autoload
 (defun my-cs-find-method-refs ()
@@ -69,6 +70,6 @@
     ;; run search
     (rg regex
         (rg-read-files)
-        (read-directory-name "dir: " nil nil t))))
+        (my-jump-read-search-dir))))
 
 ;;; my-csharp-helpers.el ends here

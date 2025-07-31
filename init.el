@@ -7172,12 +7172,20 @@ Closure over `preceding-sexp-fn'."
                   ;; if they don't overflow the tab-stop.
                   space-before-tab::tab)))
 
+;;(global-whitespace-mode 1)
+;; will turn on in prog-mode-hook instead of globally
+
+;;;----------------------------------------------------------------------------
+;;; prog-mode. most programming modes inherit.
+;;;----------------------------------------------------------------------------
 (with-eval-after-load 'prog-mode
+  ;; key binds for most/all programming modes
   (define-key prog-mode-map (kbd "C-c .") #'dumb-jump-go)
+
+  ;; setup hook. actions to run when programming modes are enabled.
   (defun my-setup-prog-mode ()
     (whitespace-mode 1))
   (add-hook 'prog-mode-hook #'my-setup-prog-mode))
-;;(global-whitespace-mode 1)
 
 ;;;----------------------------------------------------------------------------
 ;;; ov

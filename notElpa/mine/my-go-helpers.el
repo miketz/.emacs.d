@@ -477,6 +477,11 @@ More general, but may be slower and find more false matches."
 
 (defun my-go-find-function-refs-regex (txt)
   ;; acutally a single \. double \\ is for the elisp string escape.
+  ;; requipres --pcre2 flag passed to ripgrep
+
+  ;; ^(?!func ) = does *not* start with func.
+  ;; .* = any match after the not-func check.
+  ;; [\\t \\.] = tab, space, dot before txt(
   (concat "^(?!func ).*[\\t \\.]" txt "\\("))
 
 ;;;###autoload

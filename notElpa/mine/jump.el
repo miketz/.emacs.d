@@ -62,6 +62,7 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
         (reg2 (concat "var.+, " txt))
         (reg3 (concat txt ".+:=")))
     (concat "(" reg1 "|" reg2 "|" reg3 ")")))
+(defun jump-go-find-global-var-regex (txt) (concat "(^var " txt "|^\t" txt " )"))
 
 ;;;----------------------------------------------------------------------------
 ;;; Go UI
@@ -107,6 +108,12 @@ But using this regex anyway for performance and fewer false positive matches."
   (interactive)
   (jump #'jump-go-find-var-regex))
 
+(defun jump-go-find-global-var ()
+  "Find global var definition."
+  (interactive)
+  (jump #'jump-go-find-global-var-regex))
+
+
 
 ;;;###autoload
 (defhydra jump-go-hydra (:color blue :hint nil)
@@ -126,6 +133,7 @@ _q_, _C-g_: quit"
   ("F" jump-go-find-function-or-method)
   ("r" jump-go-find-function-refs)
   ("v" jump-go-find-var)
+  ("V" jump-go-find-global-var)
   ("C-g" nil nil)
   ("q" nil))
 

@@ -1529,6 +1529,13 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; 4. byte compile folder
 ;;   (my-byte-compile-dir)
 
+
+;;;----------------------------------------------------------------------------
+;;; jump. language speciifc regexes to assist in rg (ripgrep) searches
+;;;----------------------------------------------------------------------------
+(autoload #'jump-go-hydra/body "jump" nil t)
+(autoload #'jump-cs-hydra/body "jump" nil t)
+
 ;;;----------------------------------------------------------------------------
 ;;; compat
 ;;;----------------------------------------------------------------------------
@@ -3021,10 +3028,6 @@ Inserts a new line and the beginning and end with text values:
 ;;; my-csharp-helpers. helper fns for C#
 ;;;----------------------------------------------------------------------------
 ;; fns not quite big enough to justify their own dedicated package.
-(autoload #'my-cs-find-class "my-csharp-helpers" nil t)
-(autoload #'my-cs-find-interface-implementor "my-csharp-helpers" nil t)
-(autoload #'my-cs-find-method "my-csharp-helpers" nil t)
-(autoload #'my-cs-find-method-refs "my-csharp-helpers" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; csharp-mode. C#
@@ -3044,6 +3047,7 @@ Inserts a new line and the beginning and end with text values:
   ;; keybinds
   (define-key csharp-mode-map (kbd "C-c C-c") #'compile)
   (define-key csharp-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key csharp-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
 
   (defun my-csharp-new-proj ()
     "Initialize a new C# project in a folder.
@@ -9715,6 +9719,7 @@ Values: lsp, citre, nil")
   (define-key go-ts-mode-map (kbd "C-c C-g") #'my-go-commands-hydra/body)
 
   (define-key go-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key go-ts-mode-map (kbd "C-c j") #'jump-go-hydra/body)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
@@ -9803,6 +9808,7 @@ Values: lsp, citre, nil")
   (define-key go-mode-map (kbd "C-c C-g") #'my-go-commands-hydra/body)
 
   (define-key go-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key go-mode-map (kbd "C-c j") #'jump-go-hydra/body)
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
@@ -10457,6 +10463,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; my-go-helpers ~/.emacs.d/notElpa/mine/my-go-helpers.el
 ;; dbQueryHelper ~/.emacs.d/notElpaYolo/dbQueryHelper/
 ;; my-sql-comp ~/.emacs.d/notElpa/mine/my-sql-comp.el
+;; jump ~/.emacs.d/notElpa/jump.el
 
 ;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
 ;;   "Themes I created.")
@@ -10599,6 +10606,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'god-mode-all "god-mode" nil t)
 (autoload #'god-mode-maybe-activate "god-mode" nil nil)
 (autoload #'god-execute-with-current-bindings "god-mode" nil t)
+
+
 
 
 

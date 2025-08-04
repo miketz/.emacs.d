@@ -15,7 +15,7 @@
 (require 'hideshow)
 (require 'thingatpt)
 (require 'rg)
-(require 'my-jump)
+(require 'jump) ; ~/.emacs.d/notElpa/mine/jump.el
 
 
 (defun my-go-scrape-module-name ()
@@ -419,81 +419,6 @@ This is more a documentation of how to ignore files in rg."
     (call-interactively #'rg)))
 
 
-(defun my-go-find-methods-of-struct-regex (txt)
-  ;; acutally a single \. double \\ is for the elisp string escape.
-  (concat "^func \\(.+" txt "\\)"))
-
-;;;###autoload
-(defun my-go-find-methods-of-struct ()
-  "Find methods of a struct."
-  (interactive)
-  (my-jump #'my-go-find-methods-of-struct-regex))
-
-
-(defun my-go-find-struct-regex (txt)
-  ;; acutally a single \. double \\ is for the elisp string escape.
-  (concat "^type " txt " struct"))
-
-;;;###autoload
-(defun my-go-find-struct ()
-  "Find struct definition."
-  (interactive)
-  (my-jump #'my-go-find-struct-regex))
-
-
-(defun my-go-find-function-regex (txt)
-  ;; acutally a single \. double \\ is for the elisp string escape.
-  (concat "^func " txt "\\("))
-
-;;;###autoload
-(defun my-go-find-function ()
-  "Find function definition."
-  (interactive)
-  (my-jump #'my-go-find-function-regex))
-
-
-(defun my-go-find-method-regex (txt)
-  ;; acutally a single \. double \\ is for the elisp string escape.
-  (concat "^func \\(.+\\) " txt "\\("))
-
-;;;###autoload
-(defun my-go-find-method ()
-  "Find method definition."
-  (interactive)
-  (my-jump #'my-go-find-method-regex))
-
-
-(defun my-go-find-function-or-method-regex (txt)
-  ;; acutally a single \. double \\ is for the elisp string escape.
-  (concat "^(func " txt "\\(|func \\(.+\\) " txt "\\()"))
-
-;;;###autoload
-(defun my-go-find-function-or-method ()
-  "Find function or method definition.
-More general, but may be slower and find more false matches."
-  (interactive)
-  (my-jump #'my-go-find-function-or-method-regex))
-
-
-(defun my-go-find-function-refs-regex (txt)
-  ;; acutally a single \. double \\ is for the elisp string escape.
-  ;; requipres --pcre2 flag passed to ripgrep
-
-  ;; ^(?!func ) = does *not* start with func.
-  ;; .* = any match after the not-func check.
-  ;; [\\t \\.] = tab, space, dot before txt(
-  (concat "^(?!func ).*[\\t \\.]" txt "\\("))
-
-;;;###autoload
-(defun my-go-find-function-refs ()
-  "Find refs/calls of function.
-Flawed, does not find functions stored as variables due to use of opening ( in search.
-But using this regex anyway for performance and fewer false positive matches."
-  (interactive)
-  (let* ((rg-command-line-flags rg-command-line-flags))
-    (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
-    (my-jump #'my-go-find-function-refs-regex)))
-
 
 
 
@@ -586,7 +511,7 @@ _q_, _C-g_: quit"
   ("f" my-go-insert-builtin-func)
   ("d" my-go-doc-local)
   ("l" my-go-lint)
-  ("r" my-go-rg-hydra/body)
+  ("r" jump-go-hydra/body)
   ("s" my-go-toggle-err-handling)
 
   ;; don't use the hint text as it makes (:hint nil) not work?
@@ -600,22 +525,5 @@ _q_, _C-g_: quit"
   ("C-g" nil nil)
   ("q" nil))
 
-(defhydra my-go-rg-hydra (:color blue :hint nil)
-  "
-_s_: struct
-_M_: all methods of struct
-_f_: function
-_m_: method
-_F_: function or method. (more general but more false matches)
-_r_: functions references (flawed, misses fn vars)
-_q_, _C-g_: quit"
-  ("s" my-go-find-struct)
-  ("M" my-go-find-methods-of-struct)
-  ("f" my-go-find-function)
-  ("m" my-go-find-method)
-  ("F" my-go-find-function-or-method)
-  ("r" my-go-find-function-refs)
-  ("C-g" nil nil)
-  ("q" nil))
 
 ;;; my-go-helpers.el ends here

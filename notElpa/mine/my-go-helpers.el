@@ -419,90 +419,65 @@ This is more a documentation of how to ignore files in rg."
     (call-interactively #'rg)))
 
 
+(defun my-go-find-methods-of-struct-regex (txt)
+  ;; acutally a single \. double \\ is for the elisp string escape.
+  (concat "^func \\(.+" txt "\\)"))
+
 ;;;###autoload
 (defun my-go-find-methods-of-struct ()
   "Find methods of a struct."
   (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (read-string "regex: " (concat "^func \\(.+" cursor-txt "\\)"))))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "-g '!*_test.go'")
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+  (my-jump #'my-go-find-methods-of-struct-regex))
 
+
+(defun my-go-find-struct-regex (txt)
+  ;; acutally a single \. double \\ is for the elisp string escape.
+  (concat "^type " txt " struct"))
 
 ;;;###autoload
 (defun my-go-find-struct ()
   "Find struct definition."
   (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (read-string "regex: " (concat "^type " cursor-txt " struct"))))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+  (my-jump #'my-go-find-struct-regex))
 
+
+(defun my-go-find-function-regex (txt)
+  ;; acutally a single \. double \\ is for the elisp string escape.
+  (concat "^func " txt "\\("))
 
 ;;;###autoload
 (defun my-go-find-function ()
   "Find function definition."
   (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (read-string "regex: " (concat "^func " cursor-txt "\\("))))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+  (my-jump #'my-go-find-function-regex))
+
+
+(defun my-go-find-method-regex (txt)
+  ;; acutally a single \. double \\ is for the elisp string escape.
+  (concat "^func \\(.+\\) " txt "\\("))
 
 ;;;###autoload
 (defun my-go-find-method ()
   "Find method definition."
   (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (read-string "regex: " (concat "^func \\(.+\\) " cursor-txt "\\("))))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+  (my-jump #'my-go-find-method-regex))
+
+
+(defun my-go-find-function-or-method-regex (txt)
+  ;; acutally a single \. double \\ is for the elisp string escape.
+  (concat "^(func " txt "\\(|func \\(.+\\) " txt "\\()"))
 
 ;;;###autoload
 (defun my-go-find-function-or-method ()
   "Find function or method definition.
 More general, but may be slower and find more false matches."
   (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (read-string "regex: " (concat "^(func " cursor-txt "\\(|func \\(.+\\) " cursor-txt "\\()"))))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+  (my-jump #'my-go-find-function-or-method-regex))
 
 
+(defun my-go-find-function-refs-regex (txt)
+  ;; acutally a single \. double \\ is for the elisp string escape.
+  (concat "^(?!func ).*[\\t \\.]" txt "\\("))
 
 ;;;###autoload
 (defun my-go-find-function-refs ()
@@ -510,18 +485,9 @@ More general, but may be slower and find more false matches."
 Flawed, does not find functions stored as variables due to use of opening ( in search.
 But using this regex anyway for performance and fewer false positive matches."
   (interactive)
-  ;; shadow `rg-command-line-flags' for duration this let statement.
-  (let* ((rg-command-line-flags rg-command-line-flags)
-         (cursor-txt (thing-at-point 'symbol 'no-properties))
-         ;; acutally a single \. double \\ is for the elisp string escape.
-         (regex (read-string "regex: " (concat "^(?!func ).*[\\t \\.]" cursor-txt "\\("))))
-    ;; ignore test files. this is breaking search with rg 14.1.1. comment for now
-    ;; (add-to-list 'rg-command-line-flags "--glob '!*_test.go'")
+  (let* ((rg-command-line-flags rg-command-line-flags))
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
-    ;; run search
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+    (my-jump #'my-go-find-function-refs-regex)))
 
 
 

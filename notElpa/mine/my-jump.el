@@ -13,11 +13,12 @@
 (require 'rg)
 (require 'hydra)
 
-;; TODO: look into `my-select-folder'. maybe handle git submodule issue?
+
+;; TODO: in git submodule project, verify this stops at top of submodule, not top of outer containing project.
 (defun my-jump-read-search-dir ()
   "Select the dir to search.
 Attempt to use project root as default selection.
-If no project detected current dir will be the default selection."
+If no project detected, current dir will be the default selection."
   (let* ((proj (project-current nil))
          (in-proj? (not (null proj)))
          (starting-dir (if in-proj?

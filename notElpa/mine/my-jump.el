@@ -33,10 +33,9 @@ If no project detected, current dir will be the default selection."
 Using REGEX-FN to construct the regex with the thing-at-point text."
   (let* ((cursor-txt (thing-at-point 'symbol 'no-properties))
          (default-regex (funcall regex-fn cursor-txt))
-         (regex (read-string "regex: " default-regex)))
-    (rg regex
-        (rg-read-files)
-        (my-jump-read-search-dir))))
+         (regex (read-string "regex: " default-regex))
+         (dir (my-jump-read-search-dir)))
+    (rg regex (rg-read-files) dir)))
 
 
 (provide 'my-jump)

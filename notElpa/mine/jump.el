@@ -57,6 +57,11 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
   ;; .* = any match after the not-func check.
   ;; [\\t \\.] = tab, space, dot before txt(
   (concat "^(?!func ).*[\\t \\.]" txt "\\("))
+(defun jump-go-find-var-regex (txt)
+  (let ((reg1 (concat "var " txt))
+        (reg2 (concat "var.+, " txt))
+        (reg3 (concat txt ".+:=")))
+    (concat "(" reg1 "|" reg2 "|" reg3 ")")))
 
 ;;;----------------------------------------------------------------------------
 ;;; Go UI
@@ -97,6 +102,12 @@ But using this regex anyway for performance and fewer false positive matches."
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
     (jump #'jump-go-find-function-refs-regex)))
 
+(defun jump-go-find-var ()
+  "Find var definition."
+  (interactive)
+  (jump #'jump-go-find-var-regex))
+
+
 ;;;###autoload
 (defhydra jump-go-hydra (:color blue :hint nil)
   "
@@ -106,6 +117,7 @@ _f_: function
 _m_: method
 _F_: function or method. (more general but more false matches)
 _r_: functions references (flawed, misses fn vars)
+_v_: var
 _q_, _C-g_: quit"
   ("s" jump-go-find-struct)
   ("M" jump-go-find-methods-of-struct)
@@ -113,6 +125,7 @@ _q_, _C-g_: quit"
   ("m" jump-go-find-method)
   ("F" jump-go-find-function-or-method)
   ("r" jump-go-find-function-refs)
+  ("v" jump-go-find-var)
   ("C-g" nil nil)
   ("q" nil))
 

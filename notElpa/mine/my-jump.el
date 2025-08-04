@@ -26,7 +26,15 @@ If no project detected current dir will be the default selection."
     (read-directory-name "dir: " starting-dir nil t)))
 
 
-;; TODO: implement features
+(defun my-jump (regex-fn)
+  "Run ripgrep search for thing at point.
+Using REGEX-FN to construct the regex with the thing-at-point text."
+  (let* ((cursor-txt (thing-at-point 'symbol 'no-properties))
+         (default-regex (funcall regex-fn cursor-txt))
+         (regex (read-string "regex: " default-regex)))
+    (rg regex
+        (rg-read-files)
+        (my-jump-read-search-dir))))
 
 
 (provide 'my-jump)

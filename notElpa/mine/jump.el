@@ -49,54 +49,54 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
 ;;;----------------------------------------------------------------------------
 ;;; Go regexes
 ;;;----------------------------------------------------------------------------
-(defun jump-go-find-methods-of-struct-regex (txt) (concat "^func \\(.+" txt "\\)"))
-(defun jump-go-find-struct-regex (txt) (concat "^type " txt " struct"))
-(defun jump-go-find-function-regex (txt) (concat "^func " txt "\\("))
-(defun jump-go-find-method-regex (txt) (concat "^func \\(.+\\) " txt "\\("))
-(defun jump-go-find-function-or-method-regex (txt) (concat "^(func " txt "\\(|func \\(.+\\) " txt "\\()"))
-(defun jump-go-find-function-refs-regex (txt)
+(defun jump-go-methods-of-struct-regex (txt) (concat "^func \\(.+" txt "\\)"))
+(defun jump-go-struct-regex (txt) (concat "^type " txt " struct"))
+(defun jump-go-function-regex (txt) (concat "^func " txt "\\("))
+(defun jump-go-method-regex (txt) (concat "^func \\(.+\\) " txt "\\("))
+(defun jump-go-function-or-method-regex (txt) (concat "^(func " txt "\\(|func \\(.+\\) " txt "\\()"))
+(defun jump-go-function-refs-regex (txt)
   ;; requires --pcre2 flag passed to ripgrep
   ;; ^(?!func ) = does *not* start with func.
   ;; .* = any match after the not-func check.
   ;; [\\t \\.] = tab, space, dot before txt(
   (concat "^(?!func ).*[\\t \\.]" txt "\\("))
-(defun jump-go-find-var-regex (txt)
+(defun jump-go-var-regex (txt)
   (let ((reg1 (concat "var " txt))
         (reg2 (concat "var.+, " txt))
         (reg3 (concat txt ".+:=")))
     (concat "(" reg1 "|" reg2 "|" reg3 ")")))
-(defun jump-go-find-global-var-regex (txt) (concat "(^var " txt "|^\t" txt " )"))
+(defun jump-go-global-var-regex (txt) (concat "(^var " txt "|^\t" txt " )"))
 
 ;;;----------------------------------------------------------------------------
 ;;; Go UI
 ;;;----------------------------------------------------------------------------
-(defun jump-go-find-methods-of-struct ()
+(defun jump-go-methods-of-struct ()
   "Find methods of a struct."
   (interactive)
-  (jump #'jump-go-find-methods-of-struct-regex))
+  (jump #'jump-go-methods-of-struct-regex))
 
-(defun jump-go-find-struct ()
+(defun jump-go-struct ()
   "Find struct definition."
   (interactive)
-  (jump #'jump-go-find-struct-regex))
+  (jump #'jump-go-struct-regex))
 
-(defun jump-go-find-function ()
+(defun jump-go-function ()
   "Find function definition."
   (interactive)
-  (jump #'jump-go-find-function-regex))
+  (jump #'jump-go-function-regex))
 
-(defun jump-go-find-method ()
+(defun jump-go-method ()
   "Find method definition."
   (interactive)
-  (jump #'jump-go-find-method-regex))
+  (jump #'jump-go-method-regex))
 
-(defun jump-go-find-function-or-method ()
+(defun jump-go-function-or-method ()
   "Find function or method definition.
 More general, but may be slower and find more false matches."
   (interactive)
-  (jump #'jump-go-find-function-or-method-regex))
+  (jump #'jump-go-function-or-method-regex))
 
-(defun jump-go-find-function-refs ()
+(defun jump-go-function-refs ()
   "Find refs/calls of function.
 Flawed, does not find functions stored as variables due to use of opening ( in search.
 But using this regex anyway for performance and fewer false positive matches."
@@ -104,17 +104,17 @@ But using this regex anyway for performance and fewer false positive matches."
   ;; shadow `rg-command-line-flags' for duration this let statement to avoid permanently adding --pcre2 flag
   (let* ((rg-command-line-flags rg-command-line-flags))
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
-    (jump #'jump-go-find-function-refs-regex)))
+    (jump #'jump-go-function-refs-regex)))
 
-(defun jump-go-find-var ()
+(defun jump-go-var ()
   "Find var definition."
   (interactive)
-  (jump #'jump-go-find-var-regex))
+  (jump #'jump-go-var-regex))
 
-(defun jump-go-find-global-var ()
+(defun jump-go-global-var ()
   "Find global var definition."
   (interactive)
-  (jump #'jump-go-find-global-var-regex))
+  (jump #'jump-go-global-var-regex))
 
 
 
@@ -129,14 +129,14 @@ _F_: function or method. (more general but more false matches)
 _r_: functions references (flawed, misses fn vars)
 _v_: var
 _q_, _C-g_: quit"
-  ("s" jump-go-find-struct)
-  ("M" jump-go-find-methods-of-struct)
-  ("f" jump-go-find-function)
-  ("m" jump-go-find-method)
-  ("F" jump-go-find-function-or-method)
-  ("r" jump-go-find-function-refs)
-  ("v" jump-go-find-var)
-  ("V" jump-go-find-global-var)
+  ("s" jump-go-struct)
+  ("M" jump-go-methods-of-struct)
+  ("f" jump-go-function)
+  ("m" jump-go-method)
+  ("F" jump-go-function-or-method)
+  ("r" jump-go-function-refs)
+  ("v" jump-go-var)
+  ("V" jump-go-global-var)
   ("C-g" nil nil)
   ("q" nil))
 
@@ -144,35 +144,35 @@ _q_, _C-g_: quit"
 ;;;----------------------------------------------------------------------------
 ;;; C# regexes
 ;;;----------------------------------------------------------------------------
-(defun jump-cs-find-class-regex (txt) (concat "(class|struct) " txt))
-(defun jump-cs-find-interface-implementor-regex (txt) (concat "class.+:.+" txt))
-(defun jump-cs-find-method-regex (txt)
+(defun jump-cs-class-regex (txt) (concat "(class|struct) " txt))
+(defun jump-cs-interface-implementor-regex (txt) (concat "class.+:.+" txt))
+(defun jump-cs-method-regex (txt)
   ;; p = for public/private/protected. filters out interface methods which i find useless for jumping to.
   (concat " p.+ " txt "\\("))
-(defun jump-cs-find-method-refs-regex (txt) (concat "\\." txt "\\("))
+(defun jump-cs-method-refs-regex (txt) (concat "\\." txt "\\("))
 
 ;;;----------------------------------------------------------------------------
 ;;; C# UI
 ;;;----------------------------------------------------------------------------
-(defun jump-cs-find-class ()
+(defun jump-cs-class ()
   "Find class/struct definition."
   (interactive)
-  (jump #'jump-cs-find-class-regex))
+  (jump #'jump-cs-class-regex))
 
-(defun jump-cs-find-interface-implementor ()
+(defun jump-cs-interface-implementor ()
   "Find class implementing an interface."
   (interactive)
-  (jump #'jump-cs-find-interface-implementor-regex))
+  (jump #'jump-cs-interface-implementor-regex))
 
-(defun jump-cs-find-method ()
+(defun jump-cs-method ()
   "Find method definition."
   (interactive)
-  (jump #'jump-cs-find-method-regex))
+  (jump #'jump-cs-method-regex))
 
-(defun jump-cs-find-method-refs ()
+(defun jump-cs-method-refs ()
   "Find refs/calls of function."
   (interactive)
-  (jump #'jump-cs-find-method-refs-regex))
+  (jump #'jump-cs-method-refs-regex))
 
 ;;;###autoload
 (defhydra jump-cs-hydra (:color blue :hint nil)
@@ -182,10 +182,39 @@ _i_: implemenators of interface
 _m_: method
 _r_: method references
 _q_, _C-g_: quit"
-  ("c" jump-cs-find-class)
-  ("i" jump-cs-find-interface-implementor)
-  ("m" jump-cs-find-method)
-  ("r" jump-cs-find-method-refs)
+  ("c" jump-cs-class)
+  ("i" jump-cs-interface-implementor)
+  ("m" jump-cs-method)
+  ("r" jump-cs-method-refs)
+  ("C-g" nil nil)
+  ("q" nil))
+
+
+;;;----------------------------------------------------------------------------
+;;; javascript regexes
+;;;----------------------------------------------------------------------------
+(defun jump-js-function-regex (txt)
+  (let ((reg1 (concat "function " txt))
+        ;; starts with whitepsace to avoid substring fn name matches.
+        ;; assuming txt and : have no whitespace between them
+        (reg2 (concat "^[\\t ].*" txt ": function")))
+    (concat "(" reg1 "|" reg2 ")")))
+
+;;;----------------------------------------------------------------------------
+;;; javascript UI
+;;;----------------------------------------------------------------------------
+(defun jump-js-function ()
+  "Find function definition"
+  (interactive)
+  (jump #'jump-js-function-regex))
+
+
+;;;###autoload
+(defhydra jump-js-hydra (:color blue :hint nil)
+  "
+_f_: function
+_q_, _C-g_: quit"
+  ("f" jump-js-function)
   ("C-g" nil nil)
   ("q" nil))
 

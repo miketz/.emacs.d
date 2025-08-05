@@ -1535,6 +1535,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 (autoload #'jump-go-hydra/body "jump" nil t)
 (autoload #'jump-cs-hydra/body "jump" nil t)
+(autoload #'jump-js-hydra/body "jump" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; compat
@@ -3115,6 +3116,7 @@ Assumes dotnet core."
   (define-key js-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
 
   (define-key js-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key js-mode-map (kbd "C-c j") #'jump-js-hydra/body)
 
   (progn ;; Add parsing of jshint output in compilation mode
     (require 'compile)
@@ -3186,6 +3188,7 @@ LINTER values: :jslint :jshint :eslint"
   (define-key js2-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
   (define-key js2-mode-map (kbd "M-.") #'js2-jump-to-definition)
   (define-key js2-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key js2-mode-map (kbd "C-c j") #'jump-js-hydra/body)
 
   (setq-default
    js2-global-externs

@@ -34,14 +34,12 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
   (let* ((cursor-txt (thing-at-point 'symbol 'no-properties))
          (default-regex (funcall regex-fn cursor-txt))
          (regex (read-string "regex: " default-regex))
-         (dir (jump-read-search-dir)))
-    (let ((rg-ignore-case nil) ; ignore case to reduce false hits
-          ;; command line flag -s to ignore case doesn't work with rg.el
-          ;; (rg-command-line-flags rg-command-line-flags)
-          )
-      ;; command line flag -s to ignore case doesn't work with rg.el
-      ;; (add-to-list 'rg-command-line-flags "-s")
-      (rg regex (rg-read-files) dir))))
+         (dir (jump-read-search-dir))
+         (rg-ignore-case nil) ; ignore case to reduce false hits
+         ;; (rg-command-line-flags rg-command-line-flags) ; command line flag -s to ignore case doesn't work with rg.el
+         )
+    ;; (add-to-list 'rg-command-line-flags "-s") ; command line flag -s to ignore case doesn't work with rg.el
+    (rg regex (rg-read-files) dir)))
 
 
 

@@ -143,7 +143,9 @@ _q_, _C-g_: quit"
 ;;;----------------------------------------------------------------------------
 (defun jump-cs-find-class-regex (txt) (concat "(class|struct) " txt))
 (defun jump-cs-find-interface-implementor-regex (txt) (concat "class.+:.+" txt))
-(defun jump-cs-find-method-regex (txt) (concat " p.+ " txt "\\("))
+(defun jump-cs-find-method-regex (txt)
+  ;; p = for public/private/protected. filters out interface noise
+  (concat " p.+ " txt "\\("))
 (defun jump-cs-find-method-refs-regex (txt) (concat "\\." txt "\\("))
 
 ;;;----------------------------------------------------------------------------

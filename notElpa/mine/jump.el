@@ -35,7 +35,10 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
          (default-regex (funcall regex-fn cursor-txt))
          (regex (read-string "regex: " default-regex))
          (dir (jump-read-search-dir)))
-    (rg regex (rg-read-files) dir)))
+    (let ((rg-command-line-flags rg-command-line-flags))
+      ;; TODO: find out why search is case INsenstivie even when command line flags for senstivie are provided.
+      (add-to-list 'rg-command-line-flags "-s") ; case sensitive to reduce false hits
+      (rg regex (rg-read-files) dir))))
 
 
 

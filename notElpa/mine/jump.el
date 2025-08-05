@@ -103,7 +103,7 @@ Flawed, does not find functions stored as variables due to use of opening ( in s
 But using this regex anyway for performance and fewer false positive matches."
   (interactive)
   ;; shadow `rg-command-line-flags' for duration this let statement to avoid permanently adding --pcre2 flag
-  (let* ((rg-command-line-flags rg-command-line-flags))
+  (let ((rg-command-line-flags rg-command-line-flags))
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
     (jump #'jump-go-function-refs-regex)))
 

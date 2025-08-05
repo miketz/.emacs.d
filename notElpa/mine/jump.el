@@ -61,12 +61,16 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
   ;; .* = any match after the not-func check.
   ;; [\\t \\.] = tab, space, dot before txt(
   (concat "^(?!func ).*[\\t \\.]" txt "\\("))
-(defun jump-go-var-regex (txt)
-  (let ((reg1 (concat "var " txt))
-        (reg2 (concat "var.+, " txt))
-        (reg3 (concat txt ".+:=")))
-    (concat "(" reg1 "|" reg2 "|" reg3 ")")))
-(defun jump-go-global-var-regex (txt) (concat "(^var " txt "|^\t" txt " )"))
+
+;; too many false hits on short var names. use editor buffer search for local vars.
+;; (defun jump-go-var-regex (txt)
+;;   (let ((reg1 (concat "var " txt))
+;;         (reg2 (concat "const " txt))
+;;         (reg3 (concat "var.+, " txt))
+;;         (reg4 (concat txt ".+:=")))
+;;     (concat "(" reg1 "|" reg2 "|" reg3 "|" reg4 ")")))
+
+(defun jump-go-global-var-regex (txt) (concat "(^var " txt "|^const " txt "|^\t" txt ".* =)"))
 
 ;;;----------------------------------------------------------------------------
 ;;; Go UI
@@ -107,10 +111,11 @@ But using this regex anyway for performance and fewer false positive matches."
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
     (jump #'jump-go-function-refs-regex)))
 
-(defun jump-go-var ()
-  "Find var definition."
-  (interactive)
-  (jump #'jump-go-var-regex))
+;; too many false hits on short var names. use editor buffer search for local vars.
+;; (defun jump-go-var ()
+;;   "Find var definition."
+;;   (interactive)
+;;   (jump #'jump-go-var-regex))
 
 (defun jump-go-global-var ()
   "Find global var definition."
@@ -128,7 +133,7 @@ _f_: function
 _m_: method
 _F_: function or method. (more general but more false matches)
 _r_: functions references (flawed, misses fn vars)
-_v_: var
+_V_: global var
 _q_, _C-g_: quit"
   ("s" jump-go-struct)
   ("M" jump-go-methods-of-struct)
@@ -136,7 +141,7 @@ _q_, _C-g_: quit"
   ("m" jump-go-method)
   ("F" jump-go-function-or-method)
   ("r" jump-go-function-refs)
-  ("v" jump-go-var)
+  ;; ("v" jump-go-var)
   ("V" jump-go-global-var)
   ("C-g" nil nil)
   ("q" nil))

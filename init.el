@@ -8102,10 +8102,10 @@ vanilla javascript buffers."
 ;; (with-eval-after-load 'prog-mode
 ;;   (add-hook 'prog-mode-hook #'my-line-numbers-relative-on))
 
-(progn ;; turn on line nums globally
-  ;; non-buffer-local version of `display-line-numbers'
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode))
+;; (progn ;; turn on line nums globally
+;;   ;; non-buffer-local version of `display-line-numbers'
+;;   (setq display-line-numbers-type 'relative)
+;;   (global-display-line-numbers-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; powershell

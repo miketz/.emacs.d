@@ -8106,13 +8106,10 @@ vanilla javascript buffers."
   ;; (with-eval-after-load 'prog-mode
   ;;   (add-hook 'prog-mode-hook #'my-line-numbers-relative-on))
 
-  ;; (let ((mac-terminal-p (and (eq system-type 'darwin)
-  ;;                            (not my-graphic-p))))
-  ;;   ;; line numbers helps to find the cursor in the mac terminal
-  ;;   (when mac-terminal-p
-  ;;     (setq display-line-numbers-type 'relative)
-  ;;     (global-display-line-numbers-mode)))
-  )
+  (progn ;; turn on line nums globally
+    ;; non-buffer-local version of `display-line-numbers'
+    (setq display-line-numbers-type 'relative)
+    (global-display-line-numbers-mode)))
 
 ;;;----------------------------------------------------------------------------
 ;;; powershell

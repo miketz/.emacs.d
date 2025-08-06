@@ -27,7 +27,9 @@ git-delta or other git output modifiers.")
 
 (defcustom fugitive-auto-inject-color-flag t
   "If t, inject --color flag to some git commands.
-Just logs for now.")
+Just logs for now.
+Inject '-c color.ui=always' for git status.
+   (git is inconsistent with how to force colors)")
 
 (defcustom fugitive-colorize-buffer-p t
   "If t, colorize the buffer via `xterm-color-colorize-buffer'.")
@@ -194,7 +196,9 @@ rapid fire commands like `fugitive-quick-commit'."
            (diff-p (and (not log-p)
                         (or (fugitive-str-starts-with-p cmd "git diff")
                             (fugitive-str-starts-with-p cmd "git show"))))
-           (blame-p (and (not diff-p)
+           (status-p (and (not diff-p)
+                          (fugitive-str-starts-with-p cmd "git status")))
+           (blame-p (and (not status-p)
                          (fugitive-str-starts-with-p cmd "git blame"))))
       ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors
       (when (and fugitive-auto-inject-color-flag
@@ -217,6 +221,15 @@ rapid fire commands like `fugitive-quick-commit'."
                             " -n "
                             (int-to-string fugitive-auto-inject-n-log-limit)
                             " "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
+
+      (when (and fugitive-auto-inject-color-flag
+                 status-p)
+        ;; inject Inject "-c color.ui=always" immediately after "git "
+        (let* ((i (length "git ")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            "-c color.ui=always "
                             (substring-no-properties cmd i nil)))
           (setq cmd str)))
 
@@ -264,6 +277,8 @@ rapid fire commands like `fugitive-quick-commit'."
                                                    ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
                                                    (when fugitive-colorize-buffer-p
                                                      (xterm-color-colorize-buffer)))
+                                           (status-p (when fugitive-colorize-buffer-p
+                                                       (xterm-color-colorize-buffer)))
                                            (blame-p (when fugitive-colorize-buffer-p
                                                       (xterm-color-colorize-buffer))
                                                     ;; turn off word wrap

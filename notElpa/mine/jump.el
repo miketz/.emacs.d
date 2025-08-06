@@ -207,6 +207,12 @@ _q_, _C-g_: quit"
         (reg2 (concat "^[\\t ].*" txt ": function")))
     (concat "(" reg1 "|" reg2 ")")))
 
+(defun jump-js-function-refs-regex (txt)
+  ;; requires --pcre2 flag passed to ripgrep
+  ;; ^(?!\\s*function ) = does *not* start with whitespace->function.
+  ;; .* = any match after the not-func check.
+  (concat "^(?!\\s*function ).*" txt "\\("))
+
 ;;;----------------------------------------------------------------------------
 ;;; javascript UI
 ;;;----------------------------------------------------------------------------
@@ -215,13 +221,25 @@ _q_, _C-g_: quit"
   (interactive)
   (jump #'jump-js-function-regex))
 
+(defun jump-js-function-refs ()
+  "Find refs/calls of function.
+Flawed, does not find functions stored as variables due to use of opening ( in search.
+But using this regex anyway for performance and fewer false positive matches."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement to avoid permanently adding --pcre2 flag
+  (let ((rg-command-line-flags rg-command-line-flags))
+    (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
+    (jump #'jump-js-function-refs-regex)))
+
 
 ;;;###autoload
 (defhydra jump-js-hydra (:color blue :hint nil)
   "
 _f_: function
+_r_: functions references (flawed, misses fn vars)
 _q_, _C-g_: quit"
   ("f" jump-js-function)
+  ("r" jump-js-function-refs)
   ("C-g" nil nil)
   ("q" nil))
 

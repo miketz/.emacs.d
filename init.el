@@ -1364,9 +1364,6 @@ In master branch now. Was on git branch: feature/native-comp.")
                               module-file-suffix)      ; should be non-nil
   "Non-nil if Emacs supports dynamic modules.")
 
-(defvar native-line-numbers-p (boundp 'display-line-numbers)
-  "Non-nil if Emacs supports native line number display.")
-
 
 ;; (defvar has-nodejs-p
 ;;   (memq my-curr-computer '(wild-dog)))
@@ -8073,43 +8070,42 @@ vanilla javascript buffers."
 ;;;----------------------------------------------------------------------------
 ;;; display-line-numbers. Native implementation.
 ;;;----------------------------------------------------------------------------
-(when native-line-numbers-p
-  ;; (custom-theme-set-faces
-  ;;  'zenburn
-  ;;  `(line-number ((t (:background "#151515" ;;"#4F4F4F"
-  ;;                                 :foreground "gray50"))))
-  ;;  ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
-  ;;  )
+;; (custom-theme-set-faces
+;;  'zenburn
+;;  `(line-number ((t (:background "#151515" ;;"#4F4F4F"
+;;                                 :foreground "gray50"))))
+;;  ;; `(line-number-current-line ((t :foreground "gray50" :height 1.7)))
+;;  )
 
-  (setq display-line-numbers-width 1) ; 1 seemed to behave like 2.
-  ;; show 0 for current line with relative numbers. Minimizes the horizontal
-  ;; space needed by the line number bar. Usually no more than 2 digits on
-  ;; normal sized monitors.
-  (setq display-line-numbers-current-absolute nil)
+(setq display-line-numbers-width 1) ; 1 seemed to behave like 2.
+;; show 0 for current line with relative numbers. Minimizes the horizontal
+;; space needed by the line number bar. Usually no more than 2 digits on
+;; normal sized monitors.
+(setq display-line-numbers-current-absolute nil)
 
-  ;; (setq display-line-numbers-minor-tick 10)
+;; (setq display-line-numbers-minor-tick 10)
 
-  ;; ;; non buffer-local (global) way to set line number type
-  ;; (setq display-line-numbers-type 'relative)
-  ;; ;; enable globally
-  ;; (global-display-line-numbers-mode)
+;; ;; non buffer-local (global) way to set line number type
+;; (setq display-line-numbers-type 'relative)
+;; ;; enable globally
+;; (global-display-line-numbers-mode)
 
 
-  ;; buffer-local cycle of line number types
-  (autoload #'my-line-numbers-on "my-line-nums" nil t)
-  (autoload #'my-line-numbers-relative-on "my-line-nums" nil t)
-  (autoload #'my-line-numbers-off "my-line-nums" nil t)
-  (autoload #'my-line-numbers-cycle "my-line-nums" nil t)
-  (global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
+;; buffer-local cycle of line number types
+(autoload #'my-line-numbers-on "my-line-nums" nil t)
+(autoload #'my-line-numbers-relative-on "my-line-nums" nil t)
+(autoload #'my-line-numbers-off "my-line-nums" nil t)
+(autoload #'my-line-numbers-cycle "my-line-nums" nil t)
+(global-set-key (kbd "<f6>") #'my-line-numbers-cycle)
 
-  ;; ;; enable for all programming modes
-  ;; (with-eval-after-load 'prog-mode
-  ;;   (add-hook 'prog-mode-hook #'my-line-numbers-relative-on))
+;; ;; enable for all programming modes
+;; (with-eval-after-load 'prog-mode
+;;   (add-hook 'prog-mode-hook #'my-line-numbers-relative-on))
 
-  (progn ;; turn on line nums globally
-    ;; non-buffer-local version of `display-line-numbers'
-    (setq display-line-numbers-type 'relative)
-    (global-display-line-numbers-mode)))
+(progn ;; turn on line nums globally
+  ;; non-buffer-local version of `display-line-numbers'
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; powershell

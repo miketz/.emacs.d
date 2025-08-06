@@ -154,7 +154,8 @@ _q_, _C-g_: quit"
 (defun jump-cs-interface-implementor-regex (txt) (concat "class.+:.+" txt))
 (defun jump-cs-method-regex (txt)
   ;; p = for public/private/protected. filters out interface methods which i find useless for jumping to.
-  (concat " p.+ " txt "\\("))
+  ;; txt( or txt< to find definition.
+  (concat " p.+ " txt "[\\(<]"))
 (defun jump-cs-method-refs-regex (txt) (concat "\\." txt "\\("))
 
 ;;;----------------------------------------------------------------------------

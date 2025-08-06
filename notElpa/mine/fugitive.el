@@ -1031,6 +1031,21 @@ But if no hash found on current line, goto `next-line' as a side effect."
 
 
 
+(defcustom fugitive-external-terminal-executable
+  (cond ((eq system-type 'windows-nt) "C:/Program Files/Git/git-bash.exe")
+        ((eq system-type 'gnu/linux) "x-terminal-emulator --working-directory=.") ; TODO: test this
+        ((eq system-type 'darwin) "terminal") ; TODO: test this
+        (t nil))
+  "External terminal program. Useful for cases where git requires interaction.")
+
+(defun fugitive-open-external-terminal ()
+  (interactive)
+  (start-process "fugitive-extern-term"
+                 (fugitive-new-output-buffer)
+                 fugitive-external-terminal-executable))
+
+
+
 (defvar fugitive-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to)

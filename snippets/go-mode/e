@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : error guard
+# name: error guard
 # key: e
 # --
 if ${1:err} != nil {

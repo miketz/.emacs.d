@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : else if
+# name: else if
 # key: ei
 # --
 elsif ${1:cond}

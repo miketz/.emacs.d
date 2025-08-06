@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : object variable
+#name: object variable
 # --
 var ${1:objName} = {
     $0

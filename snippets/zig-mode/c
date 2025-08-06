@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : short const
+# name: short const
 # key: c
 # --
 const ${1:name} = $0;

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : switch
+# name: switch
 # key: switch
 # --
 switch (${1:theVar}) {

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : sub object
+#name: sub object
 # --
 ${1:propName}: {
     $0

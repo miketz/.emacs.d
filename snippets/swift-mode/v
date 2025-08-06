@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : short var
+# name: short var
 # key: v
 # --
 ${1:let} ${2:name} = $0

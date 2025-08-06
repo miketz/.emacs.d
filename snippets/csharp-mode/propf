@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : prop full
+#name: prop full
 # key: propf
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --

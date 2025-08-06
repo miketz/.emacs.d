@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : defer
+# name: defer
 # key: defer
 # --
 defer func() {

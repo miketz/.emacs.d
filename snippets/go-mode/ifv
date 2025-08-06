@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : if with local var
+# name: if with local var
 # key: ifv
 # --
 if ${1:varName} := ${2:true}$0; $1 {

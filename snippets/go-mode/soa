@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : struct of array table
+#name: struct of array table
 # key: soa
 # --
 type ${1:FooTable} struct {

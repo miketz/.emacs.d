@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : struct
+# name: struct
 # key: struct
 # --
 ${1:public} struct ${2:Name}

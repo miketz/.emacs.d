@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : const
+# name: const
 # key: c
 # --
 const ${1:int} ${2:name} = ${3:val};

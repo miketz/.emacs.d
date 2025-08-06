@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : guard, simulate swift's guard
+# name: guard, simulate swift's guard
 # key: g
 # --
 bool ${1:shouldBe} = ${2:true}$0;

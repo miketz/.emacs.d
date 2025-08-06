@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : eli { ... }
+# name: eli { ... }
 # key: eli
 # --
 elseif (${1:cond}) {

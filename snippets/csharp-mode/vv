@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : long var
+# name: long var
 # key: vv
 # --
 ${1:int} ${2:name} = $0;

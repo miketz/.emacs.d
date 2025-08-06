@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : mapInit
+# name: mapInit
 # key: mapInit
 # --
 ${1:name} := map[${2:int}]${3:int}{

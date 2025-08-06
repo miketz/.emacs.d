@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 #contributor : Alejandro Espinoza Esparza <aespinoza@structum.com.mx>
-#name : class ... { ... }
+#name: class ... { ... }
 # key: class
 # --
 class ${1:Name}

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : type
+#name: type
 # key: type
 # --
 type ${1:Name} ${2:int}

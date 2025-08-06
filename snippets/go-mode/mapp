@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : map put
+# name: map put
 # key: mapp
 # --
 ${1:mapName}[${2:key}] = ${3:val}

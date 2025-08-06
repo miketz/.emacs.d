@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : class
+#name: class
 # key: class
 # --
 public class ${1:Name}$0

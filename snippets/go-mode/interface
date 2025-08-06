@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : interface
+#name: interface
 # key: interface
 # --
 type ${1:Name}$0 interface {

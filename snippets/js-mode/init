@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : Constructor
+#name: Constructor
 # --
 initialize: function($1) {
     $0

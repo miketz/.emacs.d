@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-#name : struct ... { ... }
+#name: struct ... { ... }
 # key: struct
 # --
 typedef struct $1 $1;

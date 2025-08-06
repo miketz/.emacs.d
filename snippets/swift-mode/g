@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name : guard
+# name: guard
 # key: g
 # --
 guard ${1:shouldBe} else {

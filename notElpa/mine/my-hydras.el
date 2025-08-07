@@ -326,6 +326,7 @@ _s_: show commit at point
 _p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
 _L_: enter log Hydra
+_t_: external terminal. for interactive commands emacs does not handle well.
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
   ("l" fugitive-log-graph)
@@ -340,6 +341,7 @@ _q_, _C-g_: quit"
   ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers-except-current)
   ("L" my-fugitive-log-hydra/body)
+  ("t" fugitive-open-external-terminal)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

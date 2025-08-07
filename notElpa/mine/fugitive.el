@@ -19,6 +19,7 @@
 (require 'xterm-color)
 (require 'thingatpt)
 (require 'xref) ; for `xref-pulse-momentarily'
+(require 'project)
 
 (defcustom fugitive-turn-on-diff-mode-p t
   "When t, turn on `diff-mode' for git diff/show commands.
@@ -1028,6 +1029,44 @@ But if no hash found on current line, goto `next-line' as a side effect."
     (when (null hash)
       (next-line))
     hash))
+
+
+
+(defcustom fugitive-external-terminal-executable
+  (cond ((eq system-type 'windows-nt) "C:/Program Files/Git/git-bash.exe")
+        ((eq system-type 'gnu/linux) "x-terminal-emulator --working-directory=.") ; TODO: test this
+        ((eq system-type 'darwin) "terminal") ; TODO: test this
+        (t nil))
+  "External terminal program. Useful for cases where git requires interaction.")
+
+
+(defun fugitive-open-external-terminal ()
+  "Open extern terminal program.
+Useful for cases where git requires interaction.
+For example: git commit, git app -p, git add -i, etc."
+  (interactive)
+  ;; shadow `process-environment' so persmissions, .bashrc, etc work on MS-windows.
+  (let* ((process-environment (if fugitive-juggle-home-env-var-p
+                                  (cons fugitive-home-env-var process-environment)
+                                ;; else just use process-environment as-is
+                                process-environment))
+         ;; git window will open to `default-directory'. shadow it with proj root for now.
+         (default-directory (fugitive-proj-root-or-current-dir)))
+    (start-process "fugitive-extern-term"
+                   nil ;;(fugitive-new-output-buffer)
+                   fugitive-external-terminal-executable)))
+
+
+(defun fugitive-proj-root-or-current-dir ()
+  "Return the project root directory.
+If project not detected return current dir."
+  (let* ((proj (project-current nil))
+         (in-proj? (not (null proj)))
+         (dir (if in-proj?
+                  (project-root proj)
+                default-directory)))
+    dir))
+
 
 
 

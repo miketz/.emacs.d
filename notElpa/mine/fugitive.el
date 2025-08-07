@@ -1036,7 +1036,8 @@ But if no hash found on current line, goto `next-line' as a side effect."
         ((eq system-type 'gnu/linux) "x-terminal-emulator --working-directory=.") ; TODO: test this
         ((eq system-type 'darwin) "terminal") ; TODO: test this
         (t nil))
-  "External terminal program. Useful for cases where git requires interaction.")
+  "External terminal program. Useful for cases where git requires interaction.
+For example git commit, git app -p, git add -i, etc.")
 
 (defun fugitive-open-external-terminal ()
   (interactive)

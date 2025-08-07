@@ -1210,8 +1210,8 @@ Specific configs may be made based on the computer.")
   "An omni-variable serving 3 related purposes.
 Because I want them to have same value.
 -Preferred indent width for C-like langs.  `c-basic-offset' `js2-basic-offset'
--Number of spaces for a tab.
--How many columns to show for a 'real' tab.  `tab-width'")
+-Number of spaces a tab key press injects.
+-How many columns to show for a real tab.  `tab-width'")
 
 (defvar my-graphic-p (display-graphic-p)
   "Caching the result of `display-graphic-p'.

@@ -8439,7 +8439,7 @@ vanilla javascript buffers."
     ;;                                        exec-suffixes
     ;;                                        'file-executable-p))
     (setq ispell-program-name
-          "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin/hunspell.exe")))
+          "C:/progs/hunspell-1.3.2-3-w32-bin/bin/hunspell.exe")))
 
 
 ;;;----------------------------------------------------------------------------

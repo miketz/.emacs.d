@@ -1040,6 +1040,7 @@ But if no hash found on current line, goto `next-line' as a side effect."
   "External terminal program. Useful for cases where git requires interaction.")
 
 
+;;;###autoload
 (defun fugitive-open-external-terminal ()
   "Open extern terminal program.
 Useful for cases where git requires interaction.

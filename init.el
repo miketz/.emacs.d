@@ -1280,7 +1280,8 @@ Just a convenience to avoid checks against `my-narrow-type'.")
 
 (defvar my-use-evil-snipe nil
   "If I'm using evil snipe at the moment.
-Change up a few keybinds as snipe really wants the s/S keys and is tricky to reconfigure the bindings.")
+Change up a few keybinds as snipe really wants the s/S keys and is tricky to
+reconfigure the bindings.")
 
 (defvar my-swoop-fn (cond
                      ;; NOTE: fido breaks swiper. Keep this at the top
@@ -1291,18 +1292,19 @@ Change up a few keybinds as snipe really wants the s/S keys and is tricky to rec
                      ;; for now prefer #'swiper-isearch. keeping old logic
                      ;; below just for informational purposes.
                      (t #'swiper-isearch)
-                     ;; per completion type
-                     (my-use-ivy-p #'swiper-isearch)
-                     ;; `ido-occur' is fast but does not split inputs on
-                     ;; spaces. use swiper with ido for now.
-                     (my-use-fancy-ido-p #'swiper-isearch)
-                     (my-use-grid-ido-p #'swiper-isearch)
-                     (my-use-bare-ido-p #'my-occur-wild-spaces)
-                     (my-use-helm-p #'helm-occur)
-                     (my-use-mish-mash-p #'swiper-isearch)
-                     ;; `sallet-occur' is unusably slow. Don't use it.
-                     ;; `icicle-occur' is unusably slow. Don't use it.
-                     (t #'my-occur-wild-spaces))
+                     ;; ;; per completion type
+                     ;; (my-use-ivy-p #'swiper-isearch)
+                     ;; ;; `ido-occur' is fast but does not split inputs on
+                     ;; ;; spaces. use swiper with ido for now.
+                     ;; (my-use-fancy-ido-p #'swiper-isearch)
+                     ;; (my-use-grid-ido-p #'swiper-isearch)
+                     ;; (my-use-bare-ido-p #'my-occur-wild-spaces)
+                     ;; (my-use-helm-p #'helm-occur)
+                     ;; (my-use-mish-mash-p #'swiper-isearch)
+                     ;; ;; `sallet-occur' is unusably slow. Don't use it.
+                     ;; ;; `icicle-occur' is unusably slow. Don't use it.
+                     ;; (t #'my-occur-wild-spaces)
+                     )
   "Function for searching with an overview.
 Choices: helm-swoop helm-occur swiper swiper-isearch ido-occur sallet-occur
 icicle-occur occur my-occur-wild-spaces")

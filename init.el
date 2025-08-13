@@ -4847,7 +4847,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;; sixcolors-mode. based on nyan-mode
 ;;;----------------------------------------------------------------------------
-(autoload #'sixcolors-mode "sixcolors-mode" nil t) ; in notElpa/
+;; (autoload #'sixcolors-mode "sixcolors-mode" nil t) ; in notElpa/
 
 ;; NOTE: need to set `sixcolors-colors' before loading. too late after.
 ;; but for now do not set as i'm not using it

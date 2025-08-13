@@ -2435,10 +2435,10 @@ with duplicate bundled libs in Sly and SLIME.")
     (setq slime-default-lisp 'ccl)
     (setq slime-lisp-implementations
           '((ccl
-             ("C:/Users/mtz/programs/ccl-1.11.5-windowsx86/ccl/wx86cl64"))
+             ("C:/progs/ccl-1.11.5-windowsx86/ccl/wx86cl64"))
             (sbcl
              ("C:/Program Files/Steel Bank Common Lisp/1.2.15/sbcl.exe"))
-            (ecl ("C:/Users/mtz/programs/ecl/ecl.exe"))
+            (ecl ("C:/progs/ecl/ecl.exe"))
             ;; clisp is just a fake example for now.
             (clisp ("~/path/to/clisp-2.49/clisp" "-modern")))))
 
@@ -2446,7 +2446,7 @@ with duplicate bundled libs in Sly and SLIME.")
     (setq slime-default-lisp 'sbcl)
     (setq slime-lisp-implementations
           '((ccl
-             ("c:/Users/mtz/programs/ccl-1.12.1-windowsx86/ccl/wx86cl64.exe"))
+             ("c:/progs/ccl-1.12.1-windowsx86/ccl/wx86cl64.exe"))
             (sbcl ("sbcl")))))
 
 
@@ -4126,7 +4126,7 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
     (split-window-sensibly)
     (eww-open-file
      (concat
-      "C:/Users/mtz/programs/libc-html_node/libc/"
+      "C:/progs/libc-html_node/libc/"
       "Function-Index.html#Function-Index"))))
 
 (with-eval-after-load 'cc-mode
@@ -4799,10 +4799,10 @@ and indent."
     (setq omnisharp-auto-complete-want-documentation nil)
 
     (setq omnisharp--curl-executable-path
-          "C:/Users/mtz/programs/curl-7.37.0-win64/bin/curl.exe")
+          "C:/progs/curl-7.37.0-win64/bin/curl.exe")
     (setq
      omnisharp-server-executable-path
-     "C:/Users/mtz/programs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
+     "C:/progs/OmniSharpServer/OmniSharp/bin/Debug/OmniSharp.exe")
     ;; windows doesn't like the C:\ root folder
     (setq omnisharp--windows-curl-tmp-file-path
           "C:/Users/mtz/omnisharp-curl-tmp.cs")
@@ -5023,7 +5023,7 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;; rarely use `clang-format', so commenting it out for now.
 ;; (when (eq my-curr-computer 'work-laptop)
-;;   (load "C:/Users/mtz/programs/LLVM/share/clang/clang-format.el")
+;;   (load "C:/progs/LLVM/share/clang/clang-format.el")
 ;;   ;;(global-set-key [C-M-tab] 'clang-format-region)
 ;;   (global-set-key (kbd "C-c f") 'clang-format-region)
 ;;   (global-set-key (kbd "C-c b") 'clang-format-buffer))
@@ -5048,7 +5048,7 @@ and indent."
 
   (when (eq my-curr-computer 'work-laptop)
     ;;directory to libclang.dll
-    (push "C:/Users/mtz/programs/LLVM/bin" exec-path))
+    (push "C:/progs/LLVM/bin" exec-path))
 
   ;; (irony-cdb-autosetup-compile-options) ;should be in the hook
   )
@@ -7605,7 +7605,7 @@ Closure over `preceding-sexp-fn'."
 
   (cond ((eq my-curr-computer 'work-laptop-2019)
          (setq lua-default-application
-               "C:/Users/mtz/programs/lua-5.3.6_Win32_bin/lua53.exe"))
+               "C:/progs/lua-5.3.6_Win32_bin/lua53.exe"))
         ((eq my-curr-computer 'work-laptop-mac)
          (setq lua-default-application "/opt/homebrew/bin/lua"))
         ((eq my-curr-computer 'wild-dog)
@@ -7691,11 +7691,11 @@ Closure over `preceding-sexp-fn'."
 
   (cond
    ((eq my-curr-computer 'work-laptop-2019)
-    (setq ggtags-executable-directory "C:/Users/mtz/programs/glo663wb/bin")))
+    (setq ggtags-executable-directory "C:/progs/glo663wb/bin")))
 
   ;; doesn't work, added to windows path instead.
   ;; (when (eq my-curr-computer 'work-laptop)
-  ;;   (add-to-list 'exec-path "C:/Users/mtz/programs/glo653wb/bin"))
+  ;;   (add-to-list 'exec-path "C:/progs/glo653wb/bin"))
 
   (define-key ggtags-mode-map (kbd "C-c C-d d") #'ggtags-show-definition)
   (define-key ggtags-mode-map (kbd "C-c C-d C-d") #'ggtags-show-definition)
@@ -7763,7 +7763,7 @@ Closure over `preceding-sexp-fn'."
   (when (eq my-curr-computer 'work-laptop)
     (push "C:/Users/mtz/.lein/bin" exec-path)
     ;; 7zip so source lookup will work
-    ;; (add-to-list 'exec-path "C:/Users/mtz/programs/7zip")
+    ;; (add-to-list 'exec-path "C:/progs/7zip")
     ))
 
 ;; (with-eval-after-load "cider-interaction"
@@ -7890,7 +7890,7 @@ Closure over `preceding-sexp-fn'."
   (when (eq my-curr-computer 'work-laptop)
     (setq geiser-default-implementation 'racket
           geiser-active-implementations '(racket))
-    (push "C:/Users/mtz/programs/Racket" exec-path)))
+    (push "C:/progs/Racket" exec-path)))
 
 (with-eval-after-load 'geiser-repl
   (defun my-setup-geiser-repl ()
@@ -8432,7 +8432,7 @@ vanilla javascript buffers."
   ;; NOTE: instructions to set up hunspell on windows:
   ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2014-04/msg00030.html
   (when (memq my-curr-computer '(work-laptop-2019))
-    ;; (push "C:/Users/mtz/programs/hunspell-1.3.2-3-w32-bin/bin"
+    ;; (push "C:/progs/hunspell-1.3.2-3-w32-bin/bin"
     ;;       exec-path)
     ;; (setq ispell-program-name (locate-file "hunspell"
     ;;                                        exec-path
@@ -8745,7 +8745,7 @@ Explicit language selection not supported?"
 
   (when (eq my-curr-computer 'work-laptop-2019)
     (setq nov-unzip-program
-          "C:/Users/mtz/programs/unzip-5.51-1-bin/bin/unzip.exe"))
+          "C:/progs/unzip-5.51-1-bin/bin/unzip.exe"))
 
   ;; TODO: this keybind isn't working. fix it.
   (define-key nov-mode-map (kbd "C-o") #'nov-goto-toc))

@@ -4843,6 +4843,33 @@ and indent."
 ;;;----------------------------------------------------------------------------
 ;;(add-hook 'eshell-load-hook 'nyan-prompt-enable)
 
+
+;;;----------------------------------------------------------------------------
+;;; sixcolors-mode. based on nyan-mode
+;;;----------------------------------------------------------------------------
+(autoload #'sixcolors-mode "sixcolors-mode" nil t) ; in notElpa/
+
+;; NOTE: need to set `sixcolors-colors' before loading. too late after.
+;; but for now do not set as i'm not using it
+;; (with-eval-after-load 'sixcolors-mode
+;;   ;; apple style
+;;   ;; (setq sixcolors-colors
+;;   ;;       '("#61BB46" "#FDB827" "#F5821F" "#E03A3E" "#963D97" "#009DDC"))
+
+;;   ;; italy flag
+;;   ;; (setq sixcolors-colors
+;;   ;;       '("#009246" "#009246" "#FFFFFF" "#FFFFFF" "#CE2B37" "#CE2B37"))
+
+;;   ;; us flag
+;;   (setq sixcolors-colors
+;;         '("#002868" "#002868" "#FFFFFF" "#BF0A30" "#FFFFFF" "#BF0A30"))
+
+;;   ;; spectrum style
+;;   ;; (setq sixcolors-colors
+;;   ;;       '("#FF0002" "#FDFF00" "#00FF03" "01FFFE"))
+;;   )
+
+
 ;;;----------------------------------------------------------------------------
 ;;; powerline  NOTE: powerline has an error on start up in emacs 24.4.50.1,
 ;;; even when all code is commented out. Deleting the elpa folder for now.

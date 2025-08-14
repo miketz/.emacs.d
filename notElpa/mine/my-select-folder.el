@@ -23,14 +23,14 @@
                                    (my-is-in-git-submodule))))
     ;; custom is a special flag which means user will need to manually input a folder
     (push "CUSTOM" folders)
+    ;; current folder
+    (push default-directory folders)
     ;; project root folder. (ie git projects)
     (when in-non-submodule-proj-p
       (push (project-root proj) folders))
     (when in-submodule-proj-p
       ;; `projectile-acquire-root' gets the root of the submodule project, not the parent container project
       (push (projectile-acquire-root) folders))
-    ;; current folder
-    (push default-directory folders)
     folders))
 
 
@@ -75,6 +75,7 @@ linter."
 (cl-defun my-select-folder2 ()
   "Faser select folder.
 `my-select-folder' is doing git submodule checks which are pretty slow on MS-Windows."
+  (interactive)
   (let ((completing-read-function #'ivy-completing-read)
         ;; dynamically shadow ivy completion style to ignore order.
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))

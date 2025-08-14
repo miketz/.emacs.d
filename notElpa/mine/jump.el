@@ -12,6 +12,7 @@
 (require 'project)
 (require 'rg)
 (require 'hydra)
+(require 'xref)
 
 
 ;; TODO: in git submodule project, verify this stops at top of submodule, not top of outer containing project.
@@ -39,7 +40,9 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
          ;; (rg-command-line-flags rg-command-line-flags) ; command line flag -s to ignore case doesn't work with rg.el
          )
     ;; (add-to-list 'rg-command-line-flags "-s") ; command line flag -s to ignore case doesn't work with rg.el
-    (rg regex (rg-read-files) dir)))
+    (rg regex (rg-read-files) dir)
+    (xref-push-marker-stack) ; so M-, works to go back
+    ))
 
 
 

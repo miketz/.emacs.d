@@ -56,6 +56,39 @@ linter."
 
 
 
+(defun my-common-folders-list2 ()
+  "Faser select folder.
+`my-common-folders-list' is doing git submodule checks which are pretty slow on MS-Windows."
+  (let* ((folders '())
+         (proj (project-current nil))
+         (in-proj? (not (null proj))))
+    ;; custom is a special flag which means user will need to manually input a folder
+    (push "CUSTOM" folders)
+    ;; current folder
+    (push default-directory folders)
+    ;; project root folder. (ie git projects)
+    (when (and in-proj? (not (string-equal default-directory (project-root proj))))
+      (push (project-root proj) folders))
+    folders))
+
+;;;###autoload
+(cl-defun my-select-folder2 ()
+  "Faser select folder.
+`my-select-folder' is doing git submodule checks which are pretty slow on MS-Windows."
+  (let ((completing-read-function #'ivy-completing-read)
+        ;; dynamically shadow ivy completion style to ignore order.
+        (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+        ;; taller ivy window. -4 so scrolling doesn't go off screen.
+        ;; (ivy-height (- (window-height) 4))
+        )
+    (let ((folder (completing-read "dir: " (my-common-folders-list2) nil t)))
+      (unless (string-equal folder "CUSTOM")
+        (cl-return-from my-select-folder2 folder))
+      ;; they chose custom
+      (read-directory-name "dir: " nil nil t))))
+
+
+
 (provide 'my-select-folder)
 
 ;;; my-select-folder.el ends here

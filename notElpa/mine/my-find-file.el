@@ -46,6 +46,8 @@ Fall back to `counsel-file-jump' if on GNU/linux."
                   ))))
         (funcall fn)))))
 
+
+;;;###autoload
 (defun my-find-file-fd ()
   "Find files by name. Using fd and emacs wrapper fn `counsel-fd-file-jump'."
   (interactive)
@@ -54,7 +56,7 @@ Fall back to `counsel-file-jump' if on GNU/linux."
         (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
         ;; taller ivy window
         (ivy-height (- (window-height) 4)))
-    (counsel-fd-file-jump nil (my-select-folder))))
+    (counsel-fd-file-jump nil (my-select-folder2))))
 
 
 (provide 'my-find-file)

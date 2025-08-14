@@ -9999,6 +9999,7 @@ Values: lsp, citre, nil")
 ;;; my-select-folder
 ;;;----------------------------------------------------------------------------
 (autoload #'my-select-folder "my-select-folder" nil t)
+(autoload #'my-select-folder2 "my-select-folder" nil t)
 
 
 ;;;----------------------------------------------------------------------------

@@ -1535,6 +1535,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 (autoload #'jump-go-hydra/body "jump" nil t)
 (autoload #'jump-cs-hydra/body "jump" nil t)
 (autoload #'jump-js-hydra/body "jump" nil t)
+(autoload #'jump-c-hydra/body "jump" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; compat
@@ -4253,6 +4254,7 @@ and indent."
   (define-key c-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
 
   (define-key c-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key c-mode-map (kbd "C-c j") #'jump-c-hydra/body)
 
   (defun my-setup-c-mode ()
     (setq-local devdocs-current-docs '("c"))
@@ -4342,6 +4344,7 @@ and indent."
   (define-key c-ts-mode-map (kbd "C-c C-d C-d") #'my-devdocs-lookup)
 
   (define-key c-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key c-ts-mode-map (kbd "C-c j") #'jump-c-hydra/body)
 
   (defun my-setup-c-ts-mode ()
     (setq-local devdocs-current-docs '("c"))

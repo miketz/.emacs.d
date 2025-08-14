@@ -248,6 +248,40 @@ _q_, _C-g_: quit"
   ("q" nil))
 
 
+;;;----------------------------------------------------------------------------
+;;; C regexes
+;;;----------------------------------------------------------------------------
+;; Assuming GNU formated code.
+(defun jump-c-function-gnu-regex (txt) (concat "^" txt " \\("))
+(defun jump-c-function-refs-gnu-regex (txt) (concat "[\\t ]" txt " \\("))
+
+;;;----------------------------------------------------------------------------
+;;; C UI
+;;;----------------------------------------------------------------------------
+(defun jump-c-function-gnu ()
+  "Find fn definition. Assuming GNU formatted code."
+  (interactive)
+  (jump #'jump-c-function-gnu-regex))
+
+(defun jump-c-function-refs-gnu ()
+  "Find refs/calls of fn. Assuming GNU formatted code."
+  (interactive)
+  (jump #'jump-c-function-refs-gnu-regex))
+
+
+
+;;;###autoload
+(defhydra jump-c-hydra (:color blue :hint nil)
+  "
+_f_: function GNU style
+_r_: function refs GNU style
+_q_, _C-g_: quit"
+  ("f" jump-c-function-gnu)
+  ("r" jump-c-function-refs-gnu)
+  ("C-g" nil nil)
+  ("q" nil))
+
+
 (provide 'jump)
 
 ;;; jump.el ends here

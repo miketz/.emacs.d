@@ -41,7 +41,8 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
          )
     ;; (add-to-list 'rg-command-line-flags "-s") ; command line flag -s to ignore case doesn't work with rg.el
     (rg regex (rg-read-files) dir)
-    (xref-push-marker-stack) ; so M-, works to go back
+    ;; TODO: messes up if you jump to mulitple results from the *rg* buffer. look into more complete xref integration.
+    (xref-push-marker-stack) ; so M-, works to go back.
     ))
 
 

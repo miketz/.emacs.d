@@ -26,7 +26,9 @@
              (with-current-buffer (window-buffer w)
                (setq-local mode-line-format mlf)))
     ;; minibuffer sometimes leaves behind a phantom mode line when ido content does not fit on screen horizontally.
-    (redraw-display)))
+    ;; no longer need this now that new hook avoids temporarly modeline popup on minibuffer use.
+    ;; (redraw-display)
+    ))
 
 
 

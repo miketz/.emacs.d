@@ -62,14 +62,15 @@ linter."
 `my-common-folders-list' is doing git submodule checks which are pretty slow on MS-Windows."
   (let* ((folders '())
          (proj (project-current nil))
-         (in-proj? (not (null proj))))
+         (in-proj? (not (null proj)))
+         (proj-root (and in-proj? (project-root proj))))
     ;; custom is a special flag which means user will need to manually input a folder
     (push "CUSTOM" folders)
     ;; current folder
     (push default-directory folders)
     ;; project root folder. (ie git projects)
-    (when (and in-proj? (not (string-equal default-directory (project-root proj))))
-      (push (project-root proj) folders))
+    (when (and in-proj? (not (string-equal default-directory proj-root)))
+      (push proj-root folders))
     folders))
 
 ;;;###autoload

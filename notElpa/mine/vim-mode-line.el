@@ -24,7 +24,9 @@
     (cl-loop for w in (window-list)
              do
              (with-current-buffer (window-buffer w)
-               (setq-local mode-line-format mlf)))))
+               (setq-local mode-line-format mlf)))
+    ;; minibuffer sometimes leaves behind a phantom mode line when ido content does not fit on screen horizontally.
+    (redraw-display)))
 
 
 
@@ -37,8 +39,10 @@
   ;; (add-hook 'buffer-list-update-hook #'vim-mode-line-hide-when-single-buffer)
   ;; (add-hook 'buffer-switch-hook #'vim-mode-line-hide-when-single-buffer)
   (add-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
+
   ;; (add-hook 'minibuffer-exit-hook #'vim-mode-line-hide-when-single-buffer)
-  (add-hook 'minibuffer-inactive-mode-hook #'vim-mode-line-hide-when-single-buffer)
+  ;; (add-hook 'minibuffer-inactive-mode-hook #'vim-mode-line-hide-when-single-buffer)
+
   ;; TODO: see NEWS.27 for Window change function info. use a finer grained hook(s) if possible to reduce
   ;; uneccesary runs.
   )
@@ -49,7 +53,7 @@ Also restore the mode line in all buffers."
   (interactive)
   (remove-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
   ;; (remove-hook 'minibuffer-exit-hook #'vim-mode-line-hide-when-single-buffer)
-  (remove-hook 'minibuffer-inactive-mode-hook #'vim-mode-line-hide-when-single-buffer)
+  ;; (remove-hook 'minibuffer-inactive-mode-hook #'vim-mode-line-hide-when-single-buffer)
   (cl-loop for b in (buffer-list)
            do
            (with-current-buffer b

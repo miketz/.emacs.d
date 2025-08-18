@@ -10496,6 +10496,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; dbQueryHelper ~/.emacs.d/notElpaYolo/dbQueryHelper/
 ;; my-sql-comp ~/.emacs.d/notElpa/mine/my-sql-comp.el
 ;; jump ~/.emacs.d/notElpa/jump.el
+;; vim-mode-line.el ~/.emacs.d/notElpa/vim-mode-line.el
 
 ;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
 ;;   "Themes I created.")
@@ -10641,6 +10642,12 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 
 
+;;;----------------------------------------------------------------------------
+;;; vim-mode-line. hide mode line when 1 window, like in Vim.
+;;;----------------------------------------------------------------------------
+(autoload #'vim-mode-line-enable "vim-mode-line" nil t)
+
+(vim-mode-line-enable)
 
 
 ;;;----------------------------------------------------------------------------

@@ -35,13 +35,8 @@
 (defun vim-mode-line-enable ()
   "Add hooks to hide/show the mode line."
   (interactive)
-  ;; (add-hook 'window-setup-hook #'vim-mode-line-hide-when-single-buffer)
-  ;; (add-hook 'buffer-list-update-hook #'vim-mode-line-hide-when-single-buffer)
-  ;; (add-hook 'buffer-switch-hook #'vim-mode-line-hide-when-single-buffer)
-  (add-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
-
-  ;; (add-hook 'minibuffer-exit-hook #'vim-mode-line-hide-when-single-buffer)
-  ;; (add-hook 'minibuffer-inactive-mode-hook #'vim-mode-line-hide-when-single-buffer)
+  ;; (add-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
+  (add-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)
 
   ;; TODO: see NEWS.27 for Window change function info. use a finer grained hook(s) if possible to reduce
   ;; uneccesary runs.
@@ -51,9 +46,9 @@
   "Remove the hook(s) which hide/show the mode line.
 Also restore the mode line in all buffers."
   (interactive)
-  (remove-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
-  ;; (remove-hook 'minibuffer-exit-hook #'vim-mode-line-hide-when-single-buffer)
-  ;; (remove-hook 'minibuffer-inactive-mode-hook #'vim-mode-line-hide-when-single-buffer)
+  ;; (remove-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
+  (remote-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)
+
   (cl-loop for b in (buffer-list)
            do
            (with-current-buffer b

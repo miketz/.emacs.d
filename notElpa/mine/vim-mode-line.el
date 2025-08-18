@@ -47,7 +47,7 @@
 Also restore the mode line in all buffers."
   (interactive)
   ;; (remove-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
-  (remote-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)
+  (remove-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)
 
   (cl-loop for b in (buffer-list)
            do

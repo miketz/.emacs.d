@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# -*- pagination for sql server 2012+ *-*
+# name: page keyset or seek
+# key: pageKeySet
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+-- fastest way to page, but cannot jump to arbitrary pages. only the "next" page.
+declare @LastIdFromPrevPage int = 0; --initial val 0 assumign ID's start at 1. increases each page forward
+declare @PageSize int = ${1:20};
+select *
+from ${2:/*Table*/} ${3:t}
+where $3.${4:id} > @LastIdFromPrevPage
+order by $3.$4
+offset 0 rows fetch next @PageSize rows only;$0

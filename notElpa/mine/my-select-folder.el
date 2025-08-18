@@ -16,11 +16,12 @@
 3. Custom manually chosen folder."
   (let* ((folders '())
          (proj (project-current nil))
-         (in-non-submodule-proj-p (and (not (null proj))
-                                       ;; if in a submodule `project' gets the root dir of parent proejct!
-                                       (not (my-is-in-git-submodule))))
-         (in-submodule-proj-p (and (not (null proj))
-                                   (my-is-in-git-submodule))))
+         (in-proj-p (not (null proj)))
+         ;; if in a submodule `project' gets the root dir of parent proejct!
+         (in-submodule-p (and in-proj-p (my-is-in-git-submodule)))
+         (in-non-submodule-proj-p (and in-proj-p
+                                       (not in-submodule-p)))
+         )
     ;; custom is a special flag which means user will need to manually input a folder
     (push "CUSTOM" folders)
     ;; current folder
@@ -28,7 +29,7 @@
     ;; project root folder. (ie git projects)
     (when in-non-submodule-proj-p
       (push (project-root proj) folders))
-    (when in-submodule-proj-p
+    (when in-submodule-p
       ;; `projectile-acquire-root' gets the root of the submodule project, not the parent container project
       (push (projectile-acquire-root) folders))
     folders))

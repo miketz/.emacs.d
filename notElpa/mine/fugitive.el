@@ -1044,7 +1044,7 @@ But if no hash found on current line, goto `next-line' as a side effect."
 (defun fugitive-open-external-terminal ()
   "Open extern terminal program.
 Useful for cases where git requires interaction.
-For example: git commit, git app -p, git add -i, etc."
+For example: git commit, git add -p, git add -i, etc."
   (interactive)
   ;; shadow `process-environment' so persmissions, .bashrc, etc work on MS-windows.
   (let* ((process-environment (if fugitive-juggle-home-env-var-p

@@ -33,10 +33,8 @@
 
 
 
-;;;###autoload
 (defun vim-mode-line-enable ()
   "Add hook(s) to hide/show the mode line."
-  (interactive)
   ;; (add-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
   (add-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)
 
@@ -47,7 +45,6 @@
 (defun vim-mode-line-disable ()
   "Remove the hook(s) which hide/show the mode line.
 Also restore the mode line in all buffers."
-  (interactive)
   ;; (remove-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
   (remove-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)
 
@@ -56,6 +53,19 @@ Also restore the mode line in all buffers."
            (with-current-buffer b
              (setq mode-line-format vim-mode-line-original-format))))
 
+
+;;;###autoload
+(define-minor-mode vim-mode-line-mode
+  "Hide mode line when 1 window, like in Vim."
+  :require 'vim-mode-line
+  ;; global mode. it acts on visible window buffers not just current buffer. It also needs to consider all buffers
+  ;; when disabling the mode so there are no stray buffers left behind without their mode line restored.
+  :global t
+  ;; this mode hides mode lines, so for now just use empty string. C-h m would be a better way to observe modes.
+  :lighter ""
+  (if vim-mode-line-mode ; on?
+      (vim-mode-line-enable)
+    (vim-mode-line-disable)))
 
 (provide 'vim-mode-line)
 

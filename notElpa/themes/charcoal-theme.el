@@ -74,6 +74,7 @@ Example:
        (linenum-bg   (aref `["#231808" "#000000" ,todo--bg ,todo--bg] i))
        (linenumcur-fg (aref `["#77AA55" "#77AA55" ,todo--fg ,todo--fg] i))
        (linenumcur-bg (aref `["#231808" "#000000" ,todo--bg ,todo--bg] i))
+       (divider-line (aref `["darkgray" "darkgray" ,todo--fg ,todo--fg] i))
        (rain-1       (aref `["#FF4500" "#FF0000" "#FF0000" "#FF0000"] i))
        (rain-1-bg    (aref `[,bg       ,bg       ,bg       ,bg      ] i))
        (rain-2       (aref `["#00FFFF" "#00FFFF" "#00FFFF" "#00FFFF"] i))
@@ -210,9 +211,9 @@ Example:
                                        ))))
 
    ;; line that separates vertically split windows.
-   `(vertical-border ((,class (:foreground ,(if (display-graphic-p)
-                                               "gray25"
-                                             "gray30")))))
+   `(vertical-border ((,class (:foreground ,(if (eq fringe-mode 0)
+                                                divider-line ; match window-divider face
+                                              (if (display-graphic-p) "gray25" "gray30"))))))
 
 
    `(mode-line
@@ -250,7 +251,7 @@ Example:
    `(fringe ((,class (:background "black"))))
 
    ;; window-divider. built-in mode. useful when modeline is disabled
-   `(window-divider ((,class (:foreground "darkgray"))))
+   `(window-divider ((,class (:foreground ,divider-line))))
    `(window-divider-first-pixel ((,class (:inherit window-divider))))
    `(window-divider-last-pixel ((,class (:inherit window-divider))))
 

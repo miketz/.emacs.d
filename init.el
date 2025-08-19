@@ -10497,6 +10497,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; my-sql-comp ~/.emacs.d/notElpa/mine/my-sql-comp.el
 ;; jump ~/.emacs.d/notElpa/jump.el
 ;; vim-mode-line.el ~/.emacs.d/notElpa/vim-mode-line.el
+;; no-mode-line.el ~/.emacs.d/notElpa/no-mode-line.el
+
 
 ;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey)
 ;;   "Themes I created.")

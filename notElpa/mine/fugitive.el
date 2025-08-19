@@ -920,7 +920,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
           ;; show output tailored for "merge" commit
           (fugitive-show-merge-commit commit)
         ;; else, normal show
-        (fugitive-shell-command (format "git show %s" commit))))))
+        (fugitive-shell-command (format "git show --format=fuller %s" commit))))))
 
 (defun fugitive-show-merge-commit (&optional commit)
   "Like `fugitive-show', but tailor output for merge commits.
@@ -929,7 +929,7 @@ Inlcude affected files, no diffs."
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))
     (when (not (null commit))
-      (fugitive-shell-command (format "git show %s -m --name-only" commit)))))
+      (fugitive-shell-command (format "git show --format=fuller %s -m --name-only" commit)))))
 
 (defun fugitive-merge-commit-p (commit)
   "Return t if commit is a merge commit. ie has multiple parents."

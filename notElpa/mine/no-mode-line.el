@@ -11,7 +11,6 @@
 ;;; Use window-divider-mode so window edges can still be seen when there are mutliple windows.
 ;;; Like feebleline but no attempt to reproduce modeline in echo area.
 
-;;; TODO: make this a minor mode, rather than just a pair of enable/disable functions.
 
 ;;; Code:
 (require 'cl-lib)

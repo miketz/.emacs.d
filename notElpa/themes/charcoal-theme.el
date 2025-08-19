@@ -434,8 +434,9 @@ Example:
    ;; ace-window
    `(aw-leading-char-face ; ace-window character.
      ((,class (:foreground ,fg-green
-						   ;; :background "black"
-						   :height 300)))) ; big font
+						   :background "black"
+						   ;; :height 300 ; big font
+                           ))))
    `(aw-background-face ((,class (:foreground ,faint-less))))
 
    ;; ido

@@ -35,7 +35,7 @@
 
 ;;;###autoload
 (defun vim-mode-line-enable ()
-  "Add hooks to hide/show the mode line."
+  "Add hook(s) to hide/show the mode line."
   (interactive)
   ;; (add-hook 'window-state-change-hook #'vim-mode-line-hide-when-single-buffer)
   (add-hook 'window-configuration-change-hook #'vim-mode-line-hide-when-single-buffer)

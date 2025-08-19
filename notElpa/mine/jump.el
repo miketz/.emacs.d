@@ -55,7 +55,7 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
 ;;; Go regexes
 ;;;----------------------------------------------------------------------------
 (defun jump-go-methods-of-struct-regex (txt) (concat "^func \\(.+" txt "\\)"))
-(defun jump-go-struct-regex (txt) (concat "^type " txt " struct"))
+(defun jump-go-struct-regex (txt) (concat "^type " txt " (struct|interface)"))
 (defun jump-go-function-regex (txt) (concat "^func " txt "\\("))
 (defun jump-go-method-regex (txt) (concat "^func \\(.+\\) " txt "\\("))
 (defun jump-go-function-or-method-regex (txt) (concat "^(func " txt "\\(|func \\(.+\\) " txt "\\()"))

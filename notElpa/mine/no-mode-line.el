@@ -20,10 +20,8 @@
   "Stores the original mode line format.")
 
 
-;;;###autoload
 (defun no-mode-line-enable ()
   "Hide mode line. Turn on `window-divider-mode'."
-  (interactive)
 
   ;; hide mode line
   (setq-default mode-line-format nil)
@@ -43,7 +41,6 @@
 
 (defun no-mode-line-disable ()
   "Restore the mode line. Turn off `window-divider-mode'."
-  (interactive)
 
   ;; restore mode line
   (setq-default mode-line-format no-mode-line-original-format)
@@ -54,9 +51,22 @@
            (with-current-buffer b
              (setq mode-line-format no-mode-line-original-format)))
 
-  ;; turn off window-divider-mode. the mode line itself funcitons as a horizontal divider between windows.
+  ;; turn off window-divider-mode. the mode line itself functions as a horizontal divider between windows.
   (when (display-graphic-p) ;; TODO: figure something out for terminal display
     (window-divider-mode 0)))
+
+;;;###autoload
+(define-minor-mode no-mode-line-mode
+  "Hide mode line. And try to solve the horizontal split blending issue with window-divider-mode."
+  :require 'no-mode-line
+  ;; global mode. Currently it needs to consider all existing buffers when disabling/enablling the mode to
+  ;; properly apply the `mode-line-format'.
+  :global t
+  ;; this mode hides mode lines, so for now just use empty string. C-h m would be a better way to observe modes.
+  :lighter ""
+  (if no-mode-line-mode ; turn on?
+      (no-mode-line-enable)
+    (no-mode-line-disable)))
 
 
 (provide 'no-mode-line)

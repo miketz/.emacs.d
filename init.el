@@ -10654,9 +10654,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; no-mode-line
 ;;;----------------------------------------------------------------------------
-(autoload #'no-mode-line-enable "no-mode-line" nil t)
-;; (no-mode-line-enable)
-
+(autoload #'no-mode-line-mode "no-mode-line" nil t)
+;; (no-mode-line-mode 1)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

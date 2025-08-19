@@ -10646,16 +10646,15 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;; vim-mode-line. hide mode line when 1 window, like in Vim.
 ;;;----------------------------------------------------------------------------
 (autoload #'vim-mode-line-enable "vim-mode-line" nil t)
-
-(vim-mode-line-enable)
+;; (vim-mode-line-enable)
 
 
 ;;;----------------------------------------------------------------------------
 ;;; no-mode-line
 ;;;----------------------------------------------------------------------------
 (autoload #'no-mode-line-enable "no-mode-line" nil t)
-
 ;; (no-mode-line-enable)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

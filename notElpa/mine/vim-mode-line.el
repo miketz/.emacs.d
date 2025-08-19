@@ -63,7 +63,7 @@ Also restore the mode line in all buffers."
   :global t
   ;; this mode hides mode lines, so for now just use empty string. C-h m would be a better way to observe modes.
   :lighter ""
-  (if vim-mode-line-mode ; on?
+  (if vim-mode-line-mode ; turn on?
       (vim-mode-line-enable)
     (vim-mode-line-disable)))
 

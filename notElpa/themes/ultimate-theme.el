@@ -128,6 +128,11 @@
 
    `(fringe ((,class (:background "#959173"))))
 
+   ;; window-divider. built-in mode. useful when modeline is disabled
+   `(window-divider ((,class (:foreground "black"))))
+   `(window-divider-first-pixel ((,class (:inherit window-divider))))
+   `(window-divider-last-pixel ((,class (:inherit window-divider))))
+
    ;; TODO font lock
    `(font-lock-builtin-face ((,class :foreground "dodgerblue4"
                                      :weight bold)))

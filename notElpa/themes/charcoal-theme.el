@@ -249,6 +249,11 @@ Example:
    ;; TODO
    `(fringe ((,class (:background "black"))))
 
+   ;; window-divider. built-in mode. useful when modeline is disabled
+   `(window-divider ((,class (:foreground "darkgray"))))
+   `(window-divider-first-pixel ((,class (:inherit window-divider))))
+   `(window-divider-last-pixel ((,class (:inherit window-divider))))
+
    ;; TODO font lock
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
    `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))

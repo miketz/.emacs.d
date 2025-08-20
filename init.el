@@ -1796,6 +1796,10 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;; evil! So no longer a need to push /evil/lib/
 ;; (push "~/.emacs.d/notElpa/evil/lib/" load-path)
 
+;; just trying to get Emacs 31 working on mac.
+(when my-use-evil-p
+  (require 'evil))
+
 (autoload #'evil-mode "evil-core" nil t)
 (autoload #'evil-define-key "evil-core" nil t)
 

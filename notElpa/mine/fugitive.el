@@ -936,6 +936,11 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 ;;         ;; else, normal show
 ;;         (fugitive-shell-command (format "git show --format=fuller %s" commit))))))
 
+
+(defcustom fugitive-speical-merge-commit-output-p nil
+  "When t show merge commits in a special format.
+A little slower as a separate git command needs to run to determine if it's a merge commit.")
+
 ;;;###autoload
 (defun fugitive-show (&optional commit)
   "Show the specified COMMIT.
@@ -944,10 +949,12 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))
     (when (not (null commit))
-      (if (fugitive-merge-commit-p commit)
+      (if (and fugitive-speical-merge-commit-output-p
+               (fugitive-merge-commit-p commit))
           ;; show output tailored for "merge" commit
           (fugitive-show-merge-commit commit)
         ;; else, normal show
+        ;; TODO: include summary of files changed like in tig. and the ++++/---- stuff.
         (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso " commit))))))
 
 
@@ -963,6 +970,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 ;;     (when (not (null commit))
 ;;       (fugitive-shell-command (format "git show --format=fuller %s -m --name-only" commit)))))
 
+;; TODO: look into why this shows multiple merge commts
 (defun fugitive-show-merge-commit (&optional commit)
   "Like `fugitive-show', but tailor output for merge commits.
 Inlcude affected files, no diffs."

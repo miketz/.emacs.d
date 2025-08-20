@@ -196,16 +196,28 @@ rapid fire commands like `fugitive-quick-commit'."
            (log-p (fugitive-str-starts-with-p cmd "git log"))
            (diff-p (and (not log-p)
                         (or (fugitive-str-starts-with-p cmd "git diff")
-                            (fugitive-str-starts-with-p cmd "git show"))))
+                            ;; (fugitive-str-starts-with-p cmd "git show")
+                            )))
            (status-p (and (not diff-p)
                           (fugitive-str-starts-with-p cmd "git status")))
-           (blame-p (and (not status-p)
+           (show-p (and (not status-p)
+                        (fugitive-str-starts-with-p cmd "git show")))
+           (blame-p (and (not show-p)
                          (fugitive-str-starts-with-p cmd "git blame"))))
       ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors
       (when (and fugitive-auto-inject-color-flag
                  log-p)
         ;; inject --color immediately after "git log"
         (let* ((i (length "git log")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            " --color "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
+
+      (when (and fugitive-auto-inject-color-flag
+                 show-p)
+        ;; inject --color immediately after "git show"
+        (let* ((i (length "git show")))
           (setq str (concat (substring-no-properties cmd 0 i)
                             " --color "
                             (substring-no-properties cmd i nil)))
@@ -280,6 +292,8 @@ rapid fire commands like `fugitive-quick-commit'."
                                                      (xterm-color-colorize-buffer)))
                                            (status-p (when fugitive-colorize-buffer-p
                                                        (xterm-color-colorize-buffer)))
+                                           (show-p (when fugitive-colorize-buffer-p
+                                                     (xterm-color-colorize-buffer)))
                                            (blame-p (when fugitive-colorize-buffer-p
                                                       (xterm-color-colorize-buffer))
                                                     ;; turn off word wrap
@@ -906,21 +920,48 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 
 
 ;;;###autoload
+;; (defun fugitive-show (&optional commit)
+;;   "Show the specified COMMIT.
+;; You may want to call this fn while in a log buffer, with point on a commit hash."
+;;   (interactive)
+;;   (let ((commit (or commit
+;;                     (fugitive-hash-or-next-line)))
+;;         ;; (cmd (read-shell-command "cmd: " (format "git show %s" commit)))
+;;         ;; (cmd (format "git show %s" commit))
+;;         )
+;;     (when (not (null commit))
+;;       (if (fugitive-merge-commit-p commit)
+;;           ;; show output tailored for "merge" commit
+;;           (fugitive-show-merge-commit commit)
+;;         ;; else, normal show
+;;         (fugitive-shell-command (format "git show --format=fuller %s" commit))))))
+
+;;;###autoload
 (defun fugitive-show (&optional commit)
   "Show the specified COMMIT.
 You may want to call this fn while in a log buffer, with point on a commit hash."
   (interactive)
   (let ((commit (or commit
-                    (fugitive-hash-or-next-line)))
-        ;; (cmd (read-shell-command "cmd: " (format "git show %s" commit)))
-        ;; (cmd (format "git show %s" commit))
-        )
+                    (fugitive-hash-or-next-line))))
     (when (not (null commit))
       (if (fugitive-merge-commit-p commit)
           ;; show output tailored for "merge" commit
           (fugitive-show-merge-commit commit)
         ;; else, normal show
-        (fugitive-shell-command (format "git show --format=fuller %s" commit))))))
+        (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso " commit))))))
+
+
+;; git show --pretty=format:"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B%n" --date=iso bbd0a345
+
+
+;; (defun fugitive-show-merge-commit (&optional commit)
+;;   "Like `fugitive-show', but tailor output for merge commits.
+;; Inlcude affected files, no diffs."
+;;   (interactive)
+;;   (let ((commit (or commit
+;;                     (fugitive-hash-or-next-line))))
+;;     (when (not (null commit))
+;;       (fugitive-shell-command (format "git show --format=fuller %s -m --name-only" commit)))))
 
 (defun fugitive-show-merge-commit (&optional commit)
   "Like `fugitive-show', but tailor output for merge commits.
@@ -929,7 +970,7 @@ Inlcude affected files, no diffs."
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))
     (when (not (null commit))
-      (fugitive-shell-command (format "git show --format=fuller %s -m --name-only" commit)))))
+      (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso " commit " -m --name-only")))))
 
 (defun fugitive-merge-commit-p (commit)
   "Return t if commit is a merge commit. ie has multiple parents."

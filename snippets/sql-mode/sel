@@ -4,6 +4,5 @@
 # key: sel
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-select $3.*
-from ${1:dbo}.${2:/*Tab*/} ${3:/*Alias*/}
-where ${4:0=0}$0
+select *
+from $0

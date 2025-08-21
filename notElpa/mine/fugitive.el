@@ -970,6 +970,10 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
         ;; TODO: include summary of files changed like in tig. and the ++++/---- stuff.
         (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso " commit))))))
 
+;; sample commit in Emacs repo to show colors for *moved* text to a different part of the file
+;; git gives moved text special colors
+;; git show 72022459a90
+
 ;; more refined diff. makes diffs very clear in some situations, but othertimes looks garbled
 ;; --word-diff=color --word-diff-regex=.
 

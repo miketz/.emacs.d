@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# -*- json child record sample for SqlServer 2016+ *-*
+# name: child records as json
+# key: childRecsAsJson
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+select p.Col1, p.Col2
+    (select c.*
+     from dbo.ChildTable c
+     where c.ParentId = p.ID
+     for json path) as Children
+from dbo.Parent p
+where p.SomeVal = 1111
+--for json path; --if you want the entire query result to be json use path here too.

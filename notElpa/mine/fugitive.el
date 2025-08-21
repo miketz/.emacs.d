@@ -633,8 +633,8 @@ Uses the file of the current buffer."
 (defvar fugitive-date-formats
   '((windows-nt dark  "--date=format-local:\"[48;5;0m[38;5;245m%y[m[38;5;255m%m[38;5;250m%d[38;5;120m%H[48;5;0m[38;5;34m%M[m\"")
     (windows-nt light "--date=format-local:\"[48;5;255m[38;5;250m%y[m[38;5;0m%m[38;5;1m%d[38;5;0m%H[48;5;255m[38;5;21m%M[m\"")
-    (darwin dark      "--date=format-local:\"[48;5;0m[38;5;245m%-y[m[38;5;255m%m[38;5;250m%d[38;5;120m%_H[48;5;0m[38;5;34m%m[m\"")
-    (darwin light     "--date=format-local:\"[48;5;255m[38;5;250m%-y[m[38;5;0m%m[38;5;1m%d[38;5;0m%_H[48;5;255m[38;5;21m%m[m\"")))
+    (darwin dark      "--date=format-local:\"[48;5;0m[38;5;245m%-y[m[38;5;255m%m[38;5;250m%d[38;5;120m%_H[48;5;0m[38;5;34m%M[m\"")
+    (darwin light     "--date=format-local:\"[48;5;255m[38;5;250m%-y[m[38;5;0m%m[38;5;1m%d[38;5;0m%_H[48;5;255m[38;5;21m%M[m\"")))
 ;; (defvar fugitive-date-formats
 ;;   '((windows-nt . "--date=format-local:\"%y%m%d %H%M\"")
 ;;     (darwin .     "--date=format-local:\"%-y%m%d %_H%m\"")))

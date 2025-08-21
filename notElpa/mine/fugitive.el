@@ -21,14 +21,16 @@
 (require 'xref) ; for `xref-pulse-momentarily'
 (require 'project)
 
-(defcustom fugitive-turn-on-diff-mode-p t
+(defcustom fugitive-turn-on-diff-mode-p nil
   "When t, turn on `diff-mode' for git diff/show commands.
 You may want to configure this to nil if you already have diff coloring from
-git-delta or other git output modifiers.")
+git-delta or other git output modifiers.
+Also `diff-mode' has performance issues on MS windows, scrolling is slow too.
+You can always manually invoke M-x diff-mode.")
 
 (defcustom fugitive-auto-inject-color-flag t
   "If t, inject --color flag to some git commands.
-Just logs for now.
+git log, git diff.
 Inject '-c color.ui=always' for git status.
    (git is inconsistent with how to force colors)")
 
@@ -215,6 +217,15 @@ rapid fire commands like `fugitive-quick-commit'."
           (setq cmd str)))
 
       (when (and fugitive-auto-inject-color-flag
+                 diff-p)
+        ;; inject --color immediately after "git diff"
+        (let* ((i (length "git diff")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            " --color "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
+
+      (when (and fugitive-auto-inject-color-flag
                  show-p)
         ;; inject --color immediately after "git show"
         (let* ((i (length "git show")))
@@ -292,7 +303,9 @@ rapid fire commands like `fugitive-quick-commit'."
                                                      (xterm-color-colorize-buffer)))
                                            (status-p (when fugitive-colorize-buffer-p
                                                        (xterm-color-colorize-buffer)))
-                                           (show-p (when fugitive-colorize-buffer-p
+                                           (show-p (when fugitive-turn-on-diff-mode-p
+                                                     (diff-mode))
+                                                   (when fugitive-colorize-buffer-p
                                                      (xterm-color-colorize-buffer)))
                                            (blame-p (when fugitive-colorize-buffer-p
                                                       (xterm-color-colorize-buffer))
@@ -955,7 +968,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
           (fugitive-show-merge-commit commit)
         ;; else, normal show
         ;; TODO: include summary of files changed like in tig. and the ++++/---- stuff.
-        (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso " commit))))))
+        (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso --word-diff=color --word-diff-regex=. " commit))))))
 
 
 ;; git show --pretty=format:"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B%n" --date=iso bbd0a345

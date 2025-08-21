@@ -968,8 +968,10 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
           (fugitive-show-merge-commit commit)
         ;; else, normal show
         ;; TODO: include summary of files changed like in tig. and the ++++/---- stuff.
-        (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso --word-diff=color --word-diff-regex=. " commit))))))
+        (fugitive-shell-command (concat "git show --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B\" --date=iso " commit))))))
 
+;; more refined diff. makes diffs very clear in some situations, but othertimes looks garbled
+;; --word-diff=color --word-diff-regex=.
 
 ;; git show --pretty=format:"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B%n" --date=iso bbd0a345
 

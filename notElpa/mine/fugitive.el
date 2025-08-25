@@ -55,7 +55,7 @@ Prompt user before proceeding.")
 
 
 
-(defcustom fugitive-juggle-home-env-var-p nil
+(defcustom fugitive-juggle-home-env-var-p (eq system-type 'windows-nt)
   "When t set the environment var HOME to `fugitive-home-env-var' for the duration of a call to `fugitive-shell-command'.
 Useful on Windows where you want HOME to be C:/Users/Username/ rather than C:/Users/Username/AppData/Roaming/ so permissions work right.")
 

@@ -941,6 +941,12 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))
     (when (not (null commit))
+      ;; --stat. show the modified file summary with ++++/----
+      ;; -m. show full merge commit diffs. not used for now, causes performance issue with huge diff content!
+      ;; --first-parent means show diff between commit M to M~1 in merge commit. (probably what we always want).
+      ;; -p forces diff output, even for merge commits? TODO: confirm this comment is correct.
+      ;; --historgram. use the good diff algorithm.
+      ;; --color-moved=zebra. special colors for moved text.
       (fugitive-shell-command (concat "git show --stat --first-parent -p --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso " commit)))))
 
 

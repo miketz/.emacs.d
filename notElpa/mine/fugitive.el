@@ -948,7 +948,7 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
       ;; -p forces diff output, even for merge commits? TODO: confirm this comment is correct.
       ;; --historgram. use the good diff algorithm.
       ;; --color-moved=zebra. special colors for moved text.
-      (fugitive-shell-command (concat "git show --stat --first-parent -p --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%nParent(s): %p%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso " commit)))))
+      (fugitive-shell-command (concat "git show --stat --first-parent -p --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%nParent(s): %p%nRefs: %d%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso " commit)))))
 
 
 ;; sample commit in Emacs repo to show colors for *moved* text to a different part of the file

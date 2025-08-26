@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: checkbox embedded in a label
+# key: cbLab
+#
+# when cb and label are separate, there is an unclickable space between them.
+# embedding cb inside the label eliminates the unclickable space.
+# --
+<label>
+  <input id="${1:id}" name="$1" type="checkbox" value="${2:1}" ${3:checked}>
+  ${5:label}
+</label><br>

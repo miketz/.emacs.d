@@ -37,13 +37,16 @@ Inject '-c color.ui=always' for git status.
 (defcustom fugitive-colorize-buffer-p t
   "If t, colorize the buffer via `xterm-color-colorize-buffer'.")
 
-(defcustom fugitive-auto-inject-n-log-limit 500
-  "Integer for auto inection of -n NUM to git log commands.
-Nil for no injection.
 
+(defcustom fugitive-auto-inject-n-log-limit-p t
+  "When t, auto inect -n NUM to git log commands with `fugitive-default-n-log-limit'.
 Needed because paging is not used with `shell-commmand'.
 Large --graph logs can crash Emacs.
 Or large logs can just be slow and you typically only need recent logs.")
+
+(defcustom fugitive-default-n-log-limit 500
+  "Integer for inection of -n NUM to git log commands.")
+
 
 (defcustom fugitive-auto-jump-to-first-parent t
   "When t auto jump the the first parent.
@@ -236,14 +239,14 @@ rapid fire commands like `fugitive-quick-commit'."
 
       ;; inject limit to # of logs returned. Emacs chokes on massive graph logs.
       (when (and log-p
-                 fugitive-auto-inject-n-log-limit
+                 fugitive-auto-inject-n-log-limit-p
                  ;; only inject if -n filter was not already supplied
                  (null (string-search "-n" cmd)))
         ;; inject -n 4000 immediately after "git log"
         (let* ((i (length "git log")))
           (setq str (concat (substring-no-properties cmd 0 i)
                             " -n "
-                            (int-to-string fugitive-auto-inject-n-log-limit)
+                            (int-to-string fugitive-default-n-log-limit)
                             " "
                             (substring-no-properties cmd i nil)))
           (setq cmd str)))

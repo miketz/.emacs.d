@@ -305,6 +305,9 @@ in case that file does not provide any feature."
 ;; sacrifice proper display of right-to-left languages for performance.
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
+;; usuported nil per docs. expirimenting with setting nil for performance.
+;; (setq-default bidi-display-reordering t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; defvars
@@ -10799,6 +10802,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 ;; prevents warnings where you must select encoding (like in `list-packages')
 (prefer-coding-system 'utf-8)
+;; (set-default-coding-systems 'utf-8) ; perf
 
 
 (autoload #'what-face "my-misc" nil t)

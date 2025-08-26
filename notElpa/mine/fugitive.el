@@ -939,7 +939,11 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 (defun fugitive-show (&optional commit)
   "Show the specified COMMIT.
 You may want to call this fn while in a log buffer, with point on a commit hash.
-Give a C-u prefix arg for a more focused word based diff. Good for visuallizing certain kinds of diffs."
+
+Give a C-u prefix arg for a more focused word based diff. Good for visuallizing certain kinds of diffs
+where a small change is hard to see from an entire line.
+
+Does not include diffs for merge commits as they tend to have large output, freezing/crashing Emacs."
   (interactive)
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))
@@ -976,6 +980,22 @@ Give a C-u prefix arg for a more focused word based diff. Good for visuallizing 
                     (fugitive-hash-or-next-line))))
     (when (not (null commit))
       (fugitive-shell-command (concat "git show --stat --pretty=format:\"%C(auto)%H%nParents: %p%nRefs: %D%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso " commit)))))
+
+(defun fugitive-show-merge-commit-long (&optional commit)
+  "Like `fugitive-show-merge-commit' but include diff.
+Often diff output size is reasonable and won't freeze/crash Emacs.
+
+Give a C-u prefix arg for a more focused word based diff. Good for visuallizing certain kinds of diffs
+where a small change is hard to see from an entire line."
+  (interactive)
+  (let ((commit (or commit
+                    (fugitive-hash-or-next-line))))
+    (when (not (null commit))
+      (fugitive-shell-command (concat "git show --stat -p --diff-merges=first-parent --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%nParents: %p%nRefs: %D%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso "
+                                      (if current-prefix-arg ; fn called with C-u prefix
+                                          "--word-diff=color --word-diff-regex=. "
+                                        "")
+                                      commit)))))
 
 
 ;; unused at the moment

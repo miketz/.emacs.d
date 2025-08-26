@@ -933,10 +933,13 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
 
 
 
+(defvar fugigtive-core-git-show-cmd "git show --stat -p --diff-merges=off --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%nParents: %p%nRefs: %D%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso ")
+
 ;;;###autoload
 (defun fugitive-show (&optional commit)
   "Show the specified COMMIT.
-You may want to call this fn while in a log buffer, with point on a commit hash."
+You may want to call this fn while in a log buffer, with point on a commit hash.
+Give a C-u prefix arg for a more focused word based diff. Good for visuallizing certain kinds of diffs."
   (interactive)
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))
@@ -948,7 +951,13 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
       ;; -p forces diff output, even for merge commits? TODO: confirm this comment is correct.
       ;; --historgram. use the good diff algorithm.
       ;; --color-moved=zebra. special colors for moved text.
-      (fugitive-shell-command (concat "git show --stat -p --diff-merges=off --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%nParents: %p%nRefs: %D%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso " commit)))))
+      (fugitive-shell-command (concat fugigtive-core-git-show-cmd
+                                      (if current-prefix-arg ; fn called with C-u prefix
+                                          "--word-diff=color --word-diff-regex=. "
+                                        "")
+                                      commit)))))
+
+
 
 
 ;; sample commit in Emacs repo to show colors for *moved* text to a different part of the file

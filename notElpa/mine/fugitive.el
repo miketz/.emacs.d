@@ -44,8 +44,8 @@ Needed because paging is not used with `shell-commmand'.
 Large --graph logs can crash Emacs.
 Or large logs can just be slow and you typically only need recent logs.")
 
-(defcustom fugitive-default-n-log-limit 500
-  "Integer for inection of -n NUM to git log commands.")
+(defcustom fugitive-default-n-log-limit "512"
+  "Integer (in string form) for inection of -n NUM to git log commands.")
 
 
 (defcustom fugitive-auto-jump-to-first-parent t
@@ -246,7 +246,7 @@ rapid fire commands like `fugitive-quick-commit'."
         (let* ((i (length "git log")))
           (setq str (concat (substring-no-properties cmd 0 i)
                             " -n "
-                            (int-to-string fugitive-default-n-log-limit)
+                            fugitive-default-n-log-limit ; (int-to-string fugitive-default-n-log-limit)
                             " "
                             (substring-no-properties cmd i nil)))
           (setq cmd str)))
@@ -553,7 +553,8 @@ Use curr branch as the initial input."
   "Typical one line log.
 It should be relatively quick even for larger logs."
   (interactive)
-  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 500 ")))
+  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format
+                     " -n "  fugitive-default-n-log-limit " ")))
     (fugitive-shell-command cmd nil t))
   ;; (fugitive-shell-command "git log --oneline --decorate=short -n 500 " nil t)
   )
@@ -565,7 +566,8 @@ It should be relatively quick even for larger logs."
   (interactive)
   (let ((fugitive-auto-inject-color-flag nil)
         (fugitive-colorize-buffer-p nil)
-        (cmd (concat "git log --oneline --pretty=format:\"%h %ad %an%d %s\" " fugitive-date-format " -n 500 ")))
+        (cmd (concat "git log --oneline --pretty=format:\"%h %ad %an%d %s\" " fugitive-date-format
+                     " -n " fugitive-default-n-log-limit " " )))
     (fugitive-shell-command cmd nil t)
     ;; (fugitive-shell-command "git log --oneline --decorate=short -n 500 " nil t)
     ))
@@ -577,7 +579,7 @@ This might be a bit faster than --graph logs as it doesn't need to render branch
 as they are collapsed under the parent merge commit.
 Also seems faster than normal logs with no --graph or --first-parent."
   (interactive)
-  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " --first-parent -n 500 ")))
+  (let ((cmd (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " --first-parent -n " fugitive-default-n-log-limit " ")))
     (fugitive-shell-command cmd nil t))
   ;; (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 500 " nil t)
   )
@@ -589,7 +591,7 @@ This is the fastest log."
   (interactive)
   (let ((fugitive-auto-inject-color-flag nil)
         (fugitive-colorize-buffer-p nil)
-        (cmd (concat "git log --oneline --pretty=format:\"%h %ad %an%d %s\" " fugitive-date-format " --first-parent -n 500 ")))
+        (cmd (concat "git log --oneline --pretty=format:\"%h %ad %an%d %s\" " fugitive-date-format " --first-parent -n " fugitive-default-n-log-limit " ")))
     (fugitive-shell-command cmd nil t)
    ;; (fugitive-shell-command "git log --oneline --decorate=short --first-parent -n 500 " nil t)
    ))
@@ -600,7 +602,7 @@ This is the fastest log."
   "Prepare the git command with for a log of a single file.
 Uses the file of the current buffer."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 500 -- " (fugitive-curr-filename))
+  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit  " -- " (fugitive-curr-filename))
                           ;; (concat "git log --oneline --decorate=short -n 500 -- " (fugitive-curr-filename))
                           nil t))
 
@@ -608,14 +610,16 @@ Uses the file of the current buffer."
 (defun fugitive-log-folder ()
   "Prepare the git command with for a log of a single folder."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 500 -- " (read-directory-name "dir: " nil nil t))
+  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " -- " (read-directory-name "dir: " nil nil t))
                           nil t))
 
 ;;;###autoload
 (defun fugitive-log-graph-compact ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --oneline --decorate=short --graph -n 500 " nil t))
+  (fugitive-shell-command (concat "git log --oneline --decorate=short --graph -n "
+                                  fugitive-default-n-log-limit " ")
+                          nil t))
 
 
 ;; NOTE: medium and long graph logs don't colorize the hash until %C(auto) turns it back on
@@ -624,7 +628,9 @@ Uses the file of the current buffer."
 (defun fugitive-log-graph-medium ()
   "Prepare the git command with common options for graph view."
   (interactive)
-  (fugitive-shell-command "git log --graph --pretty=format:\"%C(auto)%h [38;5;74m%an%C(auto)%d %s\" -n 500 " nil t))
+  (fugitive-shell-command (concat "git log --graph --pretty=format:\"%C(auto)%h [38;5;74m%an%C(auto)%d %s\" -n "
+                                  fugitive-default-n-log-limit " ")
+                          nil t))
 
 ;; just documenting some possible date formats.
 ;; "--date=short"
@@ -691,7 +697,7 @@ Starting with --date=.")
   ;; %d = tag name, branch name, HEAD, etc.
   ;; %s = subject
   ;; From kernel.org/pub/software/scm/git/docs/git-log.html (PRETTY FORMATS section)
-  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n 500 ")))
+  (let* ((cmd (concat "git log --graph --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " ")))
                    ;; "git log --graph -n 500 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 

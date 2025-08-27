@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: lambda
+# key: lam
+# --
+($0) => {
+}

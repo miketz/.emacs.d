@@ -949,7 +949,10 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
                     (fugitive-hash-or-next-line))))
     (when (not (null commit))
       ;; --tags is needed to consider light weight tags, not just annotaed tags.
-      (fugitive-shell-command (concat "git describe --tags " commit)))))
+      (fugitive-shell-command (concat "git describe --tags --candidates=10 " commit)
+                              nil
+                              t ; give a chance to modify command in minibuffer
+                              ))))
 
 
 (defvar fugitive-core-git-show-cmd "git show --stat -p --diff-merges=off --histogram --color-moved=zebra --pretty=format:\"%C(auto)%H%nParents: %p%nRefs: %D%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%w(0,3,3)%B\" --date=iso ")

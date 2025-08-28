@@ -21,6 +21,20 @@
 (require 'xref) ; for `xref-pulse-momentarily'
 (require 'project)
 
+
+(defcustom fugitive-max-buffers 10
+  "Maximum number of fugitive buffers to keep alive.
+Automatically delete old fugitive buffers after max is reached.
+Always avoid killing current buffer and newly-created buffer.
+Set to nil for infinite buffers.
+
+Buffer *fugitive-pinned* is never auto deleted as it is special.
+You can delete it manually or via fn `fugitive-delete-buffers'.
+
+WARNING: Don't set this to 0 or negative, as it will be incorrect.
+There is no attempt to validate!
+Also you probably want this to be 2+ as some commands create 2 buffers for ediff.")
+
 (defcustom fugitive-turn-on-diff-mode-p nil
   "When t, turn on `diff-mode' for git diff/show commands.
 You may want to configure this to nil if you already have diff coloring from
@@ -88,12 +102,45 @@ On Windows you may want HOME=C:/Users/Username/")
 
 
 (let ((seq 0)) ; private var. requires lexical binding
-  (defun fugitive-new-output-buffer ()
+  (cl-defun fugitive-new-output-buffer ()
     "Create a new output buffer with a unique name."
     (setq seq (+ 1 seq))
-    (get-buffer-create (concat "*fugitive-"
-                               (int-to-string seq)
-                               "*"))))
+    (let ((curr-buff (current-buffer))
+          (new-buff (get-buffer-create (concat "*fugitive-"
+                                               (int-to-string seq)
+                                               "*"))))
+      ;; delete old buffers over the max. "old" is last window select time, not buff creation time.
+      (when fugitive-max-buffers ; max is configured, not null.
+        (let* ((buffs (cl-remove-if-not (lambda (buff)
+                                          (and (fugitive-str-starts-with-p (buffer-name buff) "*fugitive-")
+                                               (not (string-equal (buffer-name buff) "*fugitive-pinned*"))))
+                                        (buffer-list)))
+               (cnt (length buffs))
+               (overflow (- cnt fugitive-max-buffers))
+               ;; remove new-bufff, current-buff
+               (buffs-delete-candidates (cl-remove-if (lambda (buff)
+                                                        (or (string-equal (buffer-name buff)
+                                                                          (buffer-name new-buff))
+                                                            (string-equal (buffer-name buff)
+                                                                          (buffer-name curr-buff))))
+                                                      buffs)))
+          ;; GUARD: no overflow, abort delete
+          (when (<= overflow 0)
+            (cl-return-from fugitive-new-output-buffer new-buff))
+
+          ;; typically there will only be 1 buffer to delete but handle case where overflow is multiple.
+          (cl-loop for b in buffs-delete-candidates
+                   repeat overflow ; stop loop early once overflow count reached.
+                   do
+                   ;; (let* ((win-to-close (get-buffer-window-list b)))
+                   ;;   (cl-loop for w in win-to-close
+                   ;;            do
+                   ;;            ;; FYI: (quit-window t w) would not kill the buffer if win was not visible so don't rely on it.
+                   ;;            (quit-window nil w)))
+                   (kill-buffer b))))
+      ;; return the created buffer
+      new-buff)))
+
 
 (defun fugitive-pinned-buffer ()
   "Return the same buffer each time.
@@ -153,6 +200,8 @@ acting against the wrong folder/repo!")
                       (if (or (>= del-cnt 2)
                               (= del-cnt 0))
                           "s" "")))))
+
+
 
 
 ;; only used when `fugitive-use-pinned-buffer' is t.

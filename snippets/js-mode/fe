@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# -*- for loop -*-
+# name: for each
+# key: fe
+# --
+for (const ${1:e} of $0) {
+}

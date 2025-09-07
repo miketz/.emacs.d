@@ -8503,7 +8503,12 @@ vanilla javascript buffers."
   (when my-use-evil-p
     (define-key diff-mode-map (kbd "M-h") #'evil-window-left)
     ;; rebind the keys we just clobbered
-    (define-key diff-mode-map (kbd "C-c h") #'describe-mode)))
+    (define-key diff-mode-map (kbd "C-c h") #'describe-mode))
+
+  ;; TODO: test performance of this on windows
+  ;; (when (eq system-type 'windows-nt)
+  ;;   (setq diff-font-lock-syntax nil))
+  )
 
 
 ;;;----------------------------------------------------------------------------

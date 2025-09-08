@@ -8505,7 +8505,8 @@ vanilla javascript buffers."
     ;; rebind the keys we just clobbered
     (define-key diff-mode-map (kbd "C-c h") #'describe-mode))
 
-  ;; TODO: test performance of this on windows
+  ;; Tested performance of this on windows. FAILED, diff-mode still slows down
+  ;; scrolling.
   ;; (when (eq system-type 'windows-nt)
   ;;   (setq diff-font-lock-syntax nil))
   )

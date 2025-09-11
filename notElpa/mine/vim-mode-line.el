@@ -26,6 +26,8 @@
              (with-current-buffer (window-buffer w)
                (setq-local mode-line-format mlf)))
     ;; minibuffer sometimes leaves behind a phantom mode line when ido content does not fit on screen horizontally.
+    ;; TODO: find a solution to avoid `redraw-display'. it causes screen flicker after M-x,
+    ;; then C-g to cancel.
     (redraw-display)))
 
 

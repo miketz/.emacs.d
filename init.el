@@ -1168,7 +1168,7 @@ in case that file does not provide any feature."
 (defvar my-computers
   '(work-laptop
     work-laptop-bash
-    work-laptop-2019
+    work-laptop-2019 work-laptop-2025
     work-laptop-mac
     raspberry-pi
     utilite
@@ -1243,6 +1243,7 @@ To show reccomended max line length.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
+        ((eq my-curr-computer 'work-laptop-2025) 'bare-ido)
         ((eq my-curr-computer 'mac-mini-m1-2021) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-mac) 'bare-ido)
         (t 'bare-ido))
@@ -1325,6 +1326,7 @@ icicle-occur occur my-occur-wild-spaces")
 
 (defvar my-use-lispy-p (memq my-curr-computer '(wild-dog
                                                 work-laptop-2019
+                                                work-laptop-2025
                                                 mac-mini-m1-2021
                                                 work-laptop-mac))
   "Whether to use lispy or not.
@@ -1384,6 +1386,7 @@ In master branch now. Was on git branch: feature/native-comp.")
                                    hp-tower-2009
                                    a-laptop-faster
                                    work-laptop-2019
+                                   work-laptop-2025
                                    mac-mini-m1-2021)))
 
 (defvar my-install-slime-company-p (and my-install-slime-p
@@ -1392,6 +1395,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 (defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog
                                                  work-laptop-2019
+                                                 work-laptop-2025
                                                  mac-mini-m1-2021
                                                  work-laptop-mac))
   "Non-nil if rg executable is installed.")
@@ -1443,6 +1447,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; steps to get emacs config set up on a new computer.
 ;;;----------------------------------------------------------------------------
+;; if on windows install kdiff3, add C:\Program Files\KDiff3\bin to Path env var.
 ;; git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
 ;; git pull origin master
 ;; # this step no longer needed. moved away form submodules due to performance issues on Windows
@@ -2233,6 +2238,31 @@ This prevents overlapping themes; something I would rarely want."
     ;;  "-raster-Dina-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1")
     ))
 
+ ((eq my-curr-computer 'work-laptop-2025)
+  (load-theme 'charcoal t)
+  (when my-graphic-p
+    (push
+     '(font
+       .
+       ;; "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+       ;; "-raster-Terminal-normal-normal-normal-mono-7-*-*-*-c-*-ms-oemlatin"
+       ;; "-raster-Terminal-normal-normal-normal-mono-10-*-*-*-c-*-ms-oemlatin"
+       "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+       ;; "-raster-Terminus-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+       ;; "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+       ;; "-raster-Terminus-bold-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
+       ;; "-raster-Terminus-bold-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
+       ;; "-outline-Iosevka Medium-medium-normal-normal-mono-14-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Iosevka Medium-medium-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-16-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Ubuntu Mono-bold-normal-normal-mono-15-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Ubuntu Mono-normal-normal-normal-mono-14-*-*-*-c-*-iso10646-1"
+       ;; "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+       ;; "-outline-JetBrains Mono NL-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+       )
+     default-frame-alist)))
+
  ((eq my-curr-computer 'leyna-laptop)
   (load-theme 'charcoal t)
   (set-frame-font
@@ -2923,7 +2953,8 @@ In that case, insert the number."
 (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
                             "~/todo/TODO.org")
 
-                           ((memq my-curr-computer '(work-laptop-2019))
+                           ((memq my-curr-computer '(work-laptop-2019
+                                                     work-laptop-2025))
                             "C:/Users/mtz/TODO/TODO.org")
 
                            (t nil))
@@ -5136,7 +5167,7 @@ and indent."
     (dired "~/proj/wirs/WIRS_iOS/WIRS/WIRS/"))
   (evil-leader/set-key "4" #'my-open-dev-folder))
 
-(when (memq my-curr-computer '(work-laptop-2019 work-laptop))
+(when (memq my-curr-computer '(work-laptop-2025 work-laptop-2019 work-laptop))
   (let ((lisp-file "my-proj-work-laptop" ))
     (autoload #'my-proj-safetyweb lisp-file nil t)
     (autoload #'my-proj-safetyweb-ects lisp-file nil t)
@@ -5847,7 +5878,7 @@ TODO: call this function when it works."
   (setq ediff-window-setup-function
         #'ediff-setup-windows-plain) ; 'ediff-setup-windows-multiframe
 
-  (when (memq my-curr-computer '(work-laptop-2019))
+  (when (memq my-curr-computer '(work-laptop-2025 work-laptop-2019))
     (setq ediff-diff-program "C:/Program Files/KDiff3/bin/diff.exe")
     (setq ediff-diff3-program "C:/Program Files/KDiff3/bin/diff3.exe")))
 

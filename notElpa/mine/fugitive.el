@@ -1124,7 +1124,9 @@ But if no hash found on current line, goto `next-line' as a side effect."
 
 (defcustom fugitive-external-terminal-executable
   (cond ((eq system-type 'windows-nt)
-         (concat "C:/Users/" (user-login-name) "/AppData/Local/Programs/Git/git-bash.exe"))
+         "C:/Program Files/Git/git-bash.exe"
+         ;; (concat "C:/Users/" (user-login-name) "/AppData/Local/Programs/Git/git-bash.exe")
+         )
         ((eq system-type 'gnu/linux) "x-terminal-emulator --working-directory=.") ; TODO: test this
         ((eq system-type 'darwin) "terminal") ; TODO: test this
         (t nil))

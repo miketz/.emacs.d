@@ -44,7 +44,7 @@ Needed because paging is not used with `shell-commmand'.
 Large --graph logs can crash Emacs.
 Or large logs can just be slow and you typically only need recent logs.")
 
-(defcustom fugitive-default-n-log-limit "512"
+(defcustom fugitive-default-n-log-limit "256"
   "Integer (in string form) for inection of -n NUM to git log commands.")
 
 

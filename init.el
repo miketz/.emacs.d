@@ -1399,8 +1399,6 @@ In master branch now. Was on git branch: feature/native-comp.")
                                                  mac-mini-m1-2021
                                                  work-laptop-mac))
   "Non-nil if rg executable is installed.")
-(defvar my-install-rg-p (not (version< emacs-version "24.4"))
-  "Whether to install the `rg' package from melpa.")
 
 
 ;;; add melpa.
@@ -8618,7 +8616,7 @@ vanilla javascript buffers."
     (define-key rg-mode-map (kbd "C-c S") #'rg-save-search)))
 
 (when my-use-evil-p
-  (let ((search-fn (if (and my-has-rg-exe-p my-install-rg-p)
+  (let ((search-fn (if my-has-rg-exe-p
                        #'rg
                      ;; i use git to control the emacs config so git grep is
                      ;; always available.

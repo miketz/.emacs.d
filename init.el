@@ -10996,16 +10996,23 @@ This function is meant to be added to `minibuffer-setup-hook'."
     ))
 
 
-(line-number-mode 0) ; show/hide line # in mode line. altternative `what-line'
-(column-number-mode 0) ; show/hide column # in mode line.
-;; do not display modes in the mode-line. They take up too much space.
-;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
-(setq mode-line-modes nil)
-;; hide the % of the buffer you are viewing. Used to set to nil, but that
-;; broke `nyan-mode' which manipulates this variable.
-;; TODO: look into this more to understand the format of this variable.
-(setq mode-line-position '((size-indication-mode nil)
-                           (line-number-mode nil)))
+(defvar vanilla-modeline-p nil)
+
+(unless vanilla-modeline-p
+  (line-number-mode 0) ; show/hide line # in mode line. altternative `what-line'
+  (column-number-mode 0) ; show/hide column # in mode line.
+  ;; do not display modes in the mode-line. They take up too much space.
+  ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
+  (setq mode-line-modes nil)
+
+  ;; (defvar mode-line-position-bak mode-line-position
+  ;;   "Backup `mode-line-position' before we destory it.")
+
+  ;; hide the % of the buffer you are viewing. Used to set to nil, but that
+  ;; broke `nyan-mode' which manipulates this variable.
+  ;; TODO: look into this more to understand the format of this variable.
+  (setq mode-line-position '((size-indication-mode nil)
+                             (line-number-mode nil))))
 
 
 ;; Don't suggest keybinds in minibuffer.  It messes up functions that use the
@@ -11024,18 +11031,19 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (define-key evil-normal-state-map "ga" #'my-what-position))
 
 
-(progn ;; show time in mode line
-  (with-eval-after-load 'time
-    ;; disable process average display. Not sure why this is mixed in with time
-    ;; display.
-    (setq display-time-default-load-average nil)
-    (setq display-time-load-average nil)
-    (setq display-time-load-average-threshold nil)
-    ;;(setq-default display-time-day-and-date t)
-    ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
-    ;; (setq display-time-format "%-I:%M%#p")
-    (setq display-time-format "%-m-%-d %a %-I:%M%#p"))
-  (display-time-mode 1))
+(unless vanilla-modeline-p
+  (progn ;; show time in mode line
+    (with-eval-after-load 'time
+      ;; disable process average display. Not sure why this is mixed in with time
+      ;; display.
+      (setq display-time-default-load-average nil)
+      (setq display-time-load-average nil)
+      (setq display-time-load-average-threshold nil)
+      ;;(setq-default display-time-day-and-date t)
+      ;;(setq-default display-time-format "%-m/%-d %-I:%M%#p")
+      ;; (setq display-time-format "%-I:%M%#p")
+      (setq display-time-format "%-m-%-d %a %-I:%M%#p"))
+    (display-time-mode 1)))
 
 ;; show lambdas with the Greek symbol
 ;; (when (or (> emacs-major-version 24)

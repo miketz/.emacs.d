@@ -117,6 +117,13 @@
           "-outline-JetBrains Mono NL Medium-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
           "-outline-JetBrains Mono NL-bold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
           "-outline-JetBrains Mono NL ExtraBold-extrabold-normal-normal-mono-13-*-*-*-c-*-iso10646-1"])
+       ((memq my-curr-computer '(work-laptop-2025))
+        '["-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
+          "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+          "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-outline-Consolas-bold-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
+          "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"])
        (t nil)))
      (i 0)
      (len (length my-fonts))

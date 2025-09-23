@@ -2486,6 +2486,11 @@ with duplicate bundled libs in Sly and SLIME.")
              ("c:/progs/ccl-1.12.1-windowsx86/ccl/wx86cl64.exe"))
             (sbcl ("sbcl")))))
 
+   ((eq my-curr-computer 'work-laptop-2025)
+    (setq slime-default-lisp 'sbcl)
+    (setq slime-lisp-implementations
+          '((sbcl ("sbcl")))))
+
 
    ((eq my-curr-computer 'utilite)
     (setq slime-default-lisp 'ccl

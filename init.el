@@ -7416,31 +7416,33 @@ Closure over `preceding-sexp-fn'."
           ;; (top-level)
           ))))
 
-  (defvar my-js2-highlight-var-delay 0.4)
   ;; redefine `js2-highlight-vars-post-command-hook' to replace a hard coded
   ;; value 0.5 with a variable.
   ;; TODO: contribute upstream so I don't have to redefine the function.
-  (defun js2-highlight-vars-post-command-hook ()
-    (ignore-errors
-      (let* ((overlays (overlays-at (point)))
-             (ovl (and overlays
-                       (catch 'found
-                         (dolist (ovl overlays)
-                           (when (overlay-get ovl 'js2-highlight-vars)
-                             (throw 'found ovl)))
-                         nil))))
-        (if (and ovl
-                 (string= js2--highlight-vars-current-token-name
-                          (buffer-substring (overlay-start ovl)
-                                            (overlay-end ovl))))
-            (setq js2--highlight-vars-current-token (overlay-start ovl))
-          (js2--unhighlight-vars)
-          (when js2--highlight-vars-post-command-timer
-            (cancel-timer js2--highlight-vars-post-command-timer))
-          (setq js2--highlight-vars-post-command-timer
-                (run-with-timer my-js2-highlight-var-delay
-                                nil
-                                'js2--do-highlight-vars)))))))
+  ;; NOTE: let bound `my-js2-highlight-var-delay' relies on lexical binding in my
+  ;;       personal "mine" branch.
+  (let ((my-js2-highlight-var-delay 0.4))
+    (defun js2-highlight-vars-post-command-hook ()
+      (ignore-errors
+        (let* ((overlays (overlays-at (point)))
+               (ovl (and overlays
+                         (catch 'found
+                           (dolist (ovl overlays)
+                             (when (overlay-get ovl 'js2-highlight-vars)
+                               (throw 'found ovl)))
+                           nil))))
+          (if (and ovl
+                   (string= js2--highlight-vars-current-token-name
+                            (buffer-substring (overlay-start ovl)
+                                              (overlay-end ovl))))
+              (setq js2--highlight-vars-current-token (overlay-start ovl))
+            (js2--unhighlight-vars)
+            (when js2--highlight-vars-post-command-timer
+              (cancel-timer js2--highlight-vars-post-command-timer))
+            (setq js2--highlight-vars-post-command-timer
+                  (run-with-timer my-js2-highlight-var-delay
+                                  nil
+                                  'js2--do-highlight-vars))))))))
 
 (when my-use-js2-highlight-vars-p
   (with-eval-after-load 'js2-mode

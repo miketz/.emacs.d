@@ -8800,7 +8800,6 @@ Explicit language selection not supported?"
 
   (defun my-ms-end-of-buffer ()
     (interactive)
-    (goto-char 1)
     (goto-line *minesweeper-board-height*)
     (move-end-of-line 1)
     (backward-char))

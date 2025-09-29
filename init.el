@@ -10706,6 +10706,17 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; (no-mode-line-mode 1)
 
 ;;;----------------------------------------------------------------------------
+;;; htmlize. convert emacs buffer to html doc
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/htmlize" load-path)
+(autoload #'htmlize-buffer "htmlize" nil t)
+(autoload #'htmlize-region "htmlize" nil t)
+(autoload #'htmlize-file "htmlize" nil t)
+(autoload #'htmlize-many-files "htmlize" nil t)
+(autoload #'htmlize-many-files-dired "htmlize" nil t)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

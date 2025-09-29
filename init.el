@@ -8796,7 +8796,17 @@ Explicit language selection not supported?"
 
   (setq *minesweeper-board-width* 30)
   (setq *minesweeper-board-height* 10)
-  (setq *minesweeper-mines* 75))
+  (setq *minesweeper-mines* 75)
+
+  (defun my-ms-end-of-buffer ()
+    (interactive)
+    (goto-char 1)
+    (goto-line *minesweeper-board-height*)
+    (move-end-of-line 1)
+    (backward-char))
+  (define-key minesweeper-mode-map (kbd "M->") #'my-ms-end-of-buffer)
+  (when my-use-evil-p
+    (evil-define-key 'normal minesweeper-mode-map (kbd "M->") #'my-ms-end-of-buffer)))
 
 ;;;----------------------------------------------------------------------------
 ;;; esxml. dependency of nov

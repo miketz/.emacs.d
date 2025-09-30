@@ -8808,25 +8808,35 @@ Explicit language selection not supported?"
     (evil-define-key 'normal minesweeper-mode-map (kbd "M->") #'my-ms-end-of-buffer))
 
   (defun my-ms-tag-defualts ()
-    (interactive)
-    (let ((center-row (/ *minesweeper-board-height* 2))
-          (center-col (/ *minesweeper-board-width* 2)))
-      (goto-line center-row)
-      (cl-loop repeat center-col do
-               (forward-char))
-      (minesweeper-choose))
-
-    (my-ms-end-of-buffer)
+  (interactive)
+  (let ((center-row (/ *minesweeper-board-height* 2))
+        (center-col (/ *minesweeper-board-width* 2)))
+    ;; center
+    (goto-line center-row)
+    (cl-loop repeat center-col do
+             (forward-char))
     (minesweeper-choose)
 
-    (move-beginning-of-line 1)
-    (minesweeper-choose)
-
-    (beginning-of-buffer)
-    (minesweeper-choose)
-
+    ;; center side
     (minesweeper-move-end-of-field)
-    (minesweeper-choose)))
+    (minesweeper-choose)
+
+    ;; center side
+    (move-beginning-of-line 1)
+    (minesweeper-choose))
+
+  ;; four corners
+  (my-ms-end-of-buffer)
+  (minesweeper-choose)
+
+  (move-beginning-of-line 1)
+  (minesweeper-choose)
+
+  (beginning-of-buffer)
+  (minesweeper-choose)
+
+  (minesweeper-move-end-of-field)
+  (minesweeper-choose)))
 
 ;;;----------------------------------------------------------------------------
 ;;; esxml. dependency of nov

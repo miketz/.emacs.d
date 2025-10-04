@@ -1380,18 +1380,7 @@ In master branch now. Was on git branch: feature/native-comp.")
                              '(;; wild-dog
                                hp-tower-2009)))
 
-(defvar my-install-slime-p (memq my-curr-computer
-                                 '(wild-dog
-                                   utilite
-                                   hp-tower-2009
-                                   a-laptop-faster
-                                   work-laptop-2019
-                                   work-laptop-2025
-                                   mac-mini-m1-2021)))
 
-(defvar my-install-slime-company-p (and my-install-slime-p
-                                        (not (version< emacs-version
-                                                       "24.4"))))
 
 (defvar my-has-rg-exe-p (memq my-curr-computer '(wild-dog
                                                  work-laptop-2019
@@ -2370,15 +2359,14 @@ with duplicate bundled libs in Sly and SLIME.")
   ;;   ;; C-p to work for slimes built in autocompletion.
   ;;   (add-to-list 'evil-buffer-regexps '("\\*slime-repl" . emacs)))
 
+  (require 'slime-company)
 
   (let ((lst '(slime-fancy
-               ;; slime-company
+               slime-company
                slime-banner
                slime-indentation
                ;; slime-highlight-edits
                )))
-    (when my-install-slime-company-p
-      (push 'slime-company lst))
     (slime-setup lst))
   (setq slime-complete-symbol*-fancy t)
   ;; `slime-complete-symbol-function' is obsolete. comment out and use

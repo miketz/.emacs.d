@@ -10830,7 +10830,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (my-load-common))
 
 
-(setq read-process-output-max 65536)
+(setq read-process-output-max 65536) ; perf
 
 (when (eq system-type 'windows-nt)
   ;; performance tweak for weird fonts on windows.

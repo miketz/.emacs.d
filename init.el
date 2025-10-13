@@ -10752,6 +10752,23 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; ;; Automatically enabling simpc-mode on files with extensions like .h, .c, .cpp, .hpp
 ;; (push '("\\.[hc]\\(pp\\)?\\'" . simpc-mode) auto-mode-alist)
 
+(with-eval-after-load 'simpc-mode
+  ;; keybinds
+  (define-key simpc-mode-map (kbd "C-c C-c") #'compile)
+  (define-key simpc-mode-map (kbd "C-c c") #'compile)
+  ;; hook
+  (defun my-setup-simpc-mode ()
+    (yas-minor-mode 1)
+    (my-turn-on-electric-pair-local-mode)
+    (rainbow-delimiters-mode-enable)
+    (indent-bars-mode 1)
+    ;; set to 1 so comments on the same line are kept close to the code.
+    (setq comment-column 1) ; buffer local
+    (when my-use-display-fill-column-indicator
+      (setq display-fill-column-indicator-column 79) ; buffer local
+      (display-fill-column-indicator-mode 1)))
+  (add-hook 'simpc-mode-hook #'my-setup-simpc-mode))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

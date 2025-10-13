@@ -1353,7 +1353,7 @@ In master branch now. Was on git branch: feature/native-comp.")
   ;; enable the quickstart feature. concats all the autoload.el files for
   ;; faster load.  May need to manually call `package-quickstart-refresh'
   ;; to generate the concatenated file.
-  (setq package-quickstart t))
+  (setq package-quickstart t)) ; perf
 
 (push "~/.emacs.d/notElpa/" load-path) ; stores elisp files that are
                                        ; not "packages".

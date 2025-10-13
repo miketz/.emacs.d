@@ -10743,11 +10743,19 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'htmlize-many-files "htmlize" nil t)
 (autoload #'htmlize-many-files-dired "htmlize" nil t)
 
+;;;----------------------------------------------------------------------------
+;;; simpc-mode. performance related c mode for very large C/C++ files.
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/simpc-mode" load-path)
+(autoload #'simpc-mode "simpc-mode" nil t)
+
+;; ;; Automatically enabling simpc-mode on files with extensions like .h, .c, .cpp, .hpp
+;; (push '("\\.[hc]\\(pp\\)?\\'" . simpc-mode) auto-mode-alist)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
-
 (when my-use-evil-p
   ;; NOTE: explicty set a jump point via: C-<SPC> C-<SPC>
   ;;       then leader "t" to jump back there.

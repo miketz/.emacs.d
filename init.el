@@ -10391,6 +10391,8 @@ Also one of the vars is not a proper plist, only the tail cdr is."
 (autoload #'devdocs-lookup "devdocs" nil t)
 (autoload #'devdocs-peruse "devdocs" nil t)
 (autoload #'devdocs-search "devdocs" nil t)
+(autoload #'devdocs--bookmark-handler "devdocs" nil nil)
+
 
 ;; helper fns
 (autoload #'my-devdocs-lookup "my-devdocs-helpers" nil t)

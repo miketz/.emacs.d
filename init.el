@@ -10107,6 +10107,7 @@ Values: lsp, citre, nil")
 ;; hl-printf. highlight format specifiers (ie %d) like vim does
 ;; dap-mode. debugger mode
 ;; dape. debugger mode, but no external dependencies?
+;; swift package. https://github.com/konrad1977/swift-development
 
 
 ;;;----------------------------------------------------------------------------

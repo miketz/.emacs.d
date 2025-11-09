@@ -1,4 +1,4 @@
-;;; doric-fire-theme.el --- Minimalist theme with dark background and orange hues -*- lexical-binding:t -*-
+;;; doric-pine-theme.el --- Minimalist theme with dark background and woody+earthly hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025  Free Software Foundation, Inc.
 
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-fire-palette
-    '((cursor "#ef7839")
-      (bg-main "#282420")
-      (fg-main "#f5ceb0")
-      (border "#706061")
+  (defvar doric-pine-palette
+    '((cursor "#c0a27a")
+      (bg-main "#303f2d")
+      (fg-main "#d0e2c8")
+      (border "#8c997f")
 
-      (bg-shadow-subtle "#40332b")
-      (fg-shadow-subtle "#afa497")
+      (bg-shadow-subtle "#40503d")
+      (fg-shadow-subtle "#bcbeaf")
 
-      (bg-neutral "#4f4542")
-      (fg-neutral "#d9cfbe")
+      (bg-neutral "#575f4b")
+      (fg-neutral "#cdd9be")
 
-      (bg-shadow-intense "#7c362c")
-      (fg-shadow-intense "#f3ac6f")
+      (bg-shadow-intense "#70523a")
+      (fg-shadow-intense "#c8b399")
 
-      (bg-accent "#56452f")
-      (fg-accent "#d6b577")
+      (bg-accent "#305d42")
+      (fg-accent "#b0d593")
 
-      (fg-red "#eca27f")
-      (fg-green "#b9d08a")
-      (fg-yellow "#c5ba80")
-      (fg-blue "#9fbfe7")
+      (fg-red "#e8a28f")
+      (fg-green "#a2d09a")
+      (fg-yellow "#c4b980")
+      (fg-blue "#98bae0")
       (fg-magenta "#e9acbf")
       (fg-cyan "#a0c0d0")
 
-      (bg-red "#54241f")
-      (bg-green "#2f401f")
-      (bg-yellow "#504420")
-      (bg-blue "#363457")
-      (bg-magenta "#5a2f40")
-      (bg-cyan "#2f4954"))
-  "Palette of `doric-fire' theme.")
+      (bg-red "#5b3c2b")
+      (bg-green "#385b30")
+      (bg-yellow "#595432")
+      (bg-blue "#284060")
+      (bg-magenta "#52313f")
+      (bg-cyan "#2f495f"))
+  "Palette of `doric-pine' theme.")
 
-  (doric-themes-define-theme doric-fire dark "Minimalist theme with dark background and orange hues"))
+  (doric-themes-define-theme doric-pine dark "Minimalist theme with dark background and woody+earthly hues"))
 
-(provide 'doric-fire-theme)
-;;; doric-fire-theme.el ends here
+(provide 'doric-pine-theme)
+;;; doric-pine-theme.el ends here

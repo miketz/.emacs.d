@@ -1,4 +1,4 @@
-;;; doric-marble-theme.el --- Minimalist light theme -*- lexical-binding:t -*-
+;;; doric-marble-theme.el --- Minimalist theme with light grey background and rocky hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025  Free Software Foundation, Inc.
 
@@ -51,7 +51,7 @@
       (fg-shadow-subtle "#595959")
 
       (bg-neutral "#cdcdcd")
-      (fg-neutral "#505050")
+      (fg-neutral "#4a4a4a")
 
       (bg-shadow-intense "#b0b0b0")
       (fg-shadow-intense "#404040")
@@ -59,15 +59,22 @@
       (bg-accent "#e5d7c5")
       (fg-accent "#603d3a")
 
-      (fg-faint-red "#750000")
-      (fg-faint-green "#056100")
-      (fg-faint-yellow "#5f4602")
-      (fg-faint-blue "#353362")
-      (fg-faint-magenta "#553372")
-      (fg-faint-cyan "#35485e"))
+      (fg-red "#a01010")
+      (fg-green "#106710")
+      (fg-yellow "#60400f")
+      (fg-blue "#103077")
+      (fg-magenta "#700d50")
+      (fg-cyan "#005355")
+
+      (bg-red "#eac0bf")
+      (bg-green "#bde0c2")
+      (bg-yellow "#f0f0b0")
+      (bg-blue "#c4cfe8")
+      (bg-magenta "#eec2e6")
+      (bg-cyan "#c1ebe4"))
   "Palette of `doric-marble' theme.")
 
-  (doric-themes-define-theme doric-marble light))
+  (doric-themes-define-theme doric-marble light "Minimalist theme with light grey background and rocky hues"))
 
 (provide 'doric-marble-theme)
 ;;; doric-marble-theme.el ends here

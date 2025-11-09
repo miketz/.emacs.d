@@ -1,4 +1,4 @@
-;;; doric-fire-theme.el --- Minimalist theme with dark background and orange hues -*- lexical-binding:t -*-
+;;; doric-oak-theme.el --- Minimalist theme with light background and woody+earthly hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025  Free Software Foundation, Inc.
 
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-fire-palette
-    '((cursor "#ef7839")
-      (bg-main "#282420")
-      (fg-main "#f5ceb0")
-      (border "#706061")
+  (defvar doric-oak-palette
+    '((cursor "#497020")
+      (bg-main "#e0d8c7")
+      (fg-main "#3a2018")
+      (border "#8f9373")
 
-      (bg-shadow-subtle "#40332b")
-      (fg-shadow-subtle "#afa497")
+      (bg-shadow-subtle "#d5c9b5")
+      (fg-shadow-subtle "#6b5225")
 
-      (bg-neutral "#4f4542")
-      (fg-neutral "#d9cfbe")
+      (bg-neutral "#c2b19e")
+      (fg-neutral "#53402f")
 
-      (bg-shadow-intense "#7c362c")
-      (fg-shadow-intense "#f3ac6f")
+      (bg-shadow-intense "#b1bf88")
+      (fg-shadow-intense "#3f5000")
+      
+      (bg-accent "#b7d2b7")
+      (fg-accent "#0f5420")
 
-      (bg-accent "#56452f")
-      (fg-accent "#d6b577")
+      (fg-red "#982500")
+      (fg-green "#226700")
+      (fg-yellow "#595000")
+      (fg-blue "#103077")
+      (fg-magenta "#700054")
+      (fg-cyan "#005460")
 
-      (fg-red "#eca27f")
-      (fg-green "#b9d08a")
-      (fg-yellow "#c5ba80")
-      (fg-blue "#9fbfe7")
-      (fg-magenta "#e9acbf")
-      (fg-cyan "#a0c0d0")
+      (bg-red "#e3b8a0")
+      (bg-green "#b8caa0")
+      (bg-yellow "#e2e0a8")
+      (bg-blue "#c4c8dd")
+      (bg-magenta "#d8bade")
+      (bg-cyan "#bee0db"))
+  "Palette of `doric-oak' theme.")
 
-      (bg-red "#54241f")
-      (bg-green "#2f401f")
-      (bg-yellow "#504420")
-      (bg-blue "#363457")
-      (bg-magenta "#5a2f40")
-      (bg-cyan "#2f4954"))
-  "Palette of `doric-fire' theme.")
+  (doric-themes-define-theme doric-oak light "Minimalist theme with light background and woody+earthly hues"))
 
-  (doric-themes-define-theme doric-fire dark "Minimalist theme with dark background and orange hues"))
-
-(provide 'doric-fire-theme)
-;;; doric-fire-theme.el ends here
+(provide 'doric-oak-theme)
+;;; doric-oak-theme.el ends here

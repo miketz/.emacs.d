@@ -9474,7 +9474,8 @@ TODO: delete this fn and replace with hooks, etc."
 (with-eval-after-load 'vertico-grid
   (setq vertico-grid-max-columns 12)
   ;; allows annoations next to the item to work in grid mode
-  (setq vertico-grid-annotate 20)
+  ;; for now don't use this as it limits the number of columns.
+  ;; (setq vertico-grid-annotate 20)
 
   ;; key binds
   (define-key vertico-grid-map (kbd "C-h") #'vertico-grid-left)
@@ -9488,7 +9489,8 @@ TODO: delete this fn and replace with hooks, etc."
   (vertico-mode 1)
   ;; grid seems to have issues scrolling pages of candidates and doesn't work well with marginalia
   ;; (vertico-grid-mode 1)
-  (marginalia-mode)
+  (unless (and (boundp 'vertico-grid-mode) vertico-grid-mode)
+    (marginalia-mode))
   (when my-use-evil-p
     (evil-leader/set-key "b" #'switch-to-buffer)))
 

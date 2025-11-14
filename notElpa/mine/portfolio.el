@@ -38,10 +38,10 @@ Also show percent against the original-total."
            (vbil 50)
            (schq 50))
     (stocks 90
-            (usa 90
+            (usa 85
                  (schk 95)
                  (avuv 5))
-            (intl 10
+            (intl 15
                   (schf 75)
                   (vexc 25)))))
 

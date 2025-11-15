@@ -22,13 +22,28 @@ Also show percent against the original-total."
     (cond ((leafp x) ; it's a thing to buy
            (let* ((hard-amt (* total x-percent))
                   (hard-per (* (/ hard-amt original-total) 100)))
-             (append `(,x-name
-                       ,hard-amt
-                       ,hard-per)
+             (append `((,x-name
+                        ,hard-amt
+                        ,hard-per))
                      (build-lst (cl-rest alloc) total original-total))))
           (t ; else it's a group category
            (append (build-lst (tail x) (* total x-percent) original-total)
                    (build-lst (cl-rest alloc) total original-total))))))
+
+(defun verify-allocs (allocs total)
+  "Numbers may be slightly off due to floating point arithmetic.
+sum should match (or be extremely close) to total.
+sum-percents should be 100."
+  (let* ((sum (cl-loop for x in allocs
+                       sum (cl-second x)
+                     ))
+         (diff (- total sum))
+         (sum-percents (cl-loop for x in allocs
+                                sum (cl-third x))))
+    `(:total ,total
+             :sum ,sum
+             :diff ,diff
+             :sum-percents ,sum-percents)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
@@ -45,8 +60,11 @@ Also show percent against the original-total."
                   (schf 75)
                   (vexc 25)))))
 
-(let ((total 100000.0))
-  (build-lst portfolio total total))
+(let* ((total 100000.0)
+       (allocs (build-lst portfolio total total))
+       (sanity-check (verify-allocs allocs total)))
+  `(:allocs ,allocs
+            :sanity-check ,sanity-check))
 
 
 

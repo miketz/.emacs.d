@@ -44,8 +44,8 @@ sum-percents should be 100."
     `(:correct? ,(cond ((and (= total sum)
                              (= sum-percents 100))
                         "yes")
-                       ((and (< diff 0.7)
-                             (< (- 100 sum-percents) 0.01))
+                       ((and (< (abs diff) 0.7)
+                             (< (abs (- 100 sum-percents)) 0.01))
                         "Off a slight amt due to flaoting point arithmetic.")
                        (t "NO!"))
       :total ,total

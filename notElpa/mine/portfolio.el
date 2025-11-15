@@ -37,15 +37,17 @@ Or floating point arithmetic error.
 In the case of flaoting point error sum should be very close to total.
 sum-percents should be 100."
   (let* ((sum (cl-loop for x in allocs
-                       sum (cl-second x)
-                     ))
+                       sum (cl-second x)))
          (diff (- total sum))
          (sum-percents (cl-loop for x in allocs
                                 sum (cl-third x))))
-    `(:correct? ,(if (and (= total sum)
-                          (= sum-percents 100))
-                     "yes"
-                   "NO!")
+    `(:correct? ,(cond ((and (= total sum)
+                             (= sum-percents 100))
+                        "yes")
+                       ((and (< diff 0.7)
+                             (< (- 100 sum-percents) 0.01))
+                        "Off a slight amt due to flaoting point arithmetic.")
+                       (t "NO!"))
       :total ,total
              :sum ,sum
              :diff ,diff

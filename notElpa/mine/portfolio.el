@@ -31,8 +31,10 @@ Also show percent against the original-total."
                    (build-lst (cl-rest alloc) total original-total))))))
 
 (defun verify-allocs (allocs total)
-  "Numbers may be slightly off due to floating point arithmetic.
-sum should match (or be extremely close) to total.
+  "Check if portfolio allocs are wrong.
+Maybe due to the portfolio input allocs being wrong.
+Or floating point arithmetic error.
+In the case of flaoting point error sum should be very close to total.
 sum-percents should be 100."
   (let* ((sum (cl-loop for x in allocs
                        sum (cl-second x)
@@ -40,7 +42,11 @@ sum-percents should be 100."
          (diff (- total sum))
          (sum-percents (cl-loop for x in allocs
                                 sum (cl-third x))))
-    `(:total ,total
+    `(:correct? ,(if (and (= total sum)
+                          (= sum-percents 100))
+                     "yes"
+                   "NO!")
+      :total ,total
              :sum ,sum
              :diff ,diff
              :sum-percents ,sum-percents)))

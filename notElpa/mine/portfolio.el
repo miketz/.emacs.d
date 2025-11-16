@@ -59,8 +59,8 @@ sum-percents should be 100."
 (let* ((portfolio '((bonds 10)
                     (stocks 90
                             (usa 85
-                                 (schk 97)
-                                 (avuv 3))
+                                 (schk 95)
+                                 (avuv 5))
                             (intl 15
                                   (schf 75)
                                   (vexc 25)))))

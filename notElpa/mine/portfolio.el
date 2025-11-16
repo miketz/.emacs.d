@@ -56,19 +56,15 @@ sum-percents should be 100."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar portfolio
-  '((bonds 10
-           (vbil 50)
-           (schq 50))
-    (stocks 90
-            (usa 85
-                 (schk 95)
-                 (avuv 5))
-            (intl 15
-                  (schf 75)
-                  (vexc 25)))))
-
-(let* ((total 100000.0)
+(let* ((portfolio '((bonds 10)
+                    (stocks 90
+                            (usa 85
+                                 (schk 97)
+                                 (avuv 3))
+                            (intl 15
+                                  (schf 75)
+                                  (vexc 25)))))
+       (total 100000.0)
        (allocs (build-lst portfolio total total))
        (sanity-check (verify-allocs allocs total)))
   `(:allocs ,allocs

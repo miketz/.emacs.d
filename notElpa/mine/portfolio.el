@@ -34,7 +34,7 @@ Also show percent against the original-total."
   "Check if portfolio allocs are wrong.
 Maybe due to the portfolio input allocs being wrong.
 Or floating point arithmetic error.
-In the case of flaoting point error sum should be very close to total.
+In the case of floating point error sum should be very close to total.
 sum-percents should be 100."
   (let* ((sum (cl-loop for x in allocs
                        sum (cl-second x)))
@@ -46,7 +46,7 @@ sum-percents should be 100."
                         "yes")
                        ((and (< (abs diff) 0.7)
                              (< (abs (- 100 sum-percents)) 0.01))
-                        "Off a slight amt due to flaoting point arithmetic.")
+                        "Off a slight amt due to floating point arithmetic.")
                        (t "NO!"))
       :total ,total
              :sum ,sum

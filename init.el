@@ -2359,6 +2359,10 @@ with duplicate bundled libs in Sly and SLIME.")
   ;;   ;; C-p to work for slimes built in autocompletion.
   ;;   (add-to-list 'evil-buffer-regexps '("\\*slime-repl" . emacs)))
 
+  (when my-use-evil-p
+    ;; use emacs bindings (not evil).
+    (push '("\\*Fuzzy Completions*" . emacs) evil-buffer-regexps))
+
   (require 'slime-company)
 
   (let ((lst '(slime-fancy

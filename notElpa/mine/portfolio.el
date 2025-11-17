@@ -62,8 +62,11 @@ sum-percents should be 100."
                                  (schk 95)
                                  (avuv 5))
                             (intl 15
-                                  (schf 75)
-                                  (vexc 25)))))
+                                  (devel 75
+                                         (schf 95)
+                                         (avdv 5))
+                                  (emerging 25
+                                            (vexc 100))))))
        (total 100000.0)
        (allocs (build-lst portfolio total total))
        (sanity-check (verify-allocs allocs total)))

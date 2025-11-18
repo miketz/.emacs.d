@@ -2331,6 +2331,12 @@ with duplicate bundled libs in Sly and SLIME.")
 (autoload #'macrostep-expand "macrostep" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; slime-company
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/slime-company" load-path)
+;; this is set in the slime section
+
+;;;----------------------------------------------------------------------------
 ;;; SLIME
 ;;;----------------------------------------------------------------------------
 (unless my-use-sly ; avoid conflicts with SLIME when testing out sly.
@@ -2363,15 +2369,15 @@ with duplicate bundled libs in Sly and SLIME.")
     ;; use emacs bindings (not evil).
     (push '("\\*Fuzzy Completions*" . emacs) evil-buffer-regexps))
 
-  (require 'slime-company)
+  ;; don't load `slime-company'. must let `slime-setup' do that.
+  ;; (require 'slime-company)
 
-  (let ((lst '(slime-fancy
-               slime-company
-               slime-banner
-               slime-indentation
-               ;; slime-highlight-edits
-               )))
-    (slime-setup lst))
+  (slime-setup '(slime-fancy
+                 slime-company
+                 slime-banner
+                 slime-indentation
+                 ;; slime-highlight-edits
+                 ))
   (setq slime-complete-symbol*-fancy t)
   ;; `slime-complete-symbol-function' is obsolete. comment out and use
   ;; `slime-completion-at-point-functions' instead.
@@ -2870,11 +2876,6 @@ In that case, insert the number."
 ;; (setq company-quickhelp-idle-delay 0.5)
 ;; (company-quickhelp-mode 1)
 
-;;;----------------------------------------------------------------------------
-;;; slime-company
-;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/slime-company" load-path)
-;; this is set in the slime section
 
 ;;;----------------------------------------------------------------------------
 ;;; Auto-complete

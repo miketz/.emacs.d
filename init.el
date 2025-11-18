@@ -10048,6 +10048,9 @@ Values: lsp, citre, nil")
 ;;;----------------------------------------------------------------------------
 ;;; klondike
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/Emacs-Klondike" load-path)
+(autoload #'klondike "klondike" nil t)
+
 (with-eval-after-load 'klondike
   ;; use emacs key binds
   (push '("^Klondike" . emacs) evil-buffer-regexps))
@@ -10211,12 +10214,6 @@ Values: lsp, citre, nil")
 (autoload #'visual-fill-column-mode "visual-fill-column" nil t)
 (autoload #'global-visual-fill-column-mode "visual-fill-column" nil t)
 (autoload #'visual-fill-column-split-window-sensibly "visual-fill-column" nil t)
-
-;;;----------------------------------------------------------------------------
-;;; klondike
-;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/Emacs-Klondike" load-path)
-(autoload #'klondike "klondike" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; stem-reading-mode

@@ -47,6 +47,9 @@ Or large logs can just be slow and you typically only need recent logs.")
 (defcustom fugitive-default-n-log-limit "256"
   "Integer (in string form) for inection of -n NUM to git log commands.")
 
+(defcustom fugitvie-limit-file-log-show-to-file t
+  "when t and in a log buffer filtered to 1 file, also limit the show command to the current file.")
+
 
 (defcustom fugitive-auto-jump-to-first-parent t
   "When t auto jump the the first parent.
@@ -159,7 +162,7 @@ acting against the wrong folder/repo!")
 (defvar fugitive--pos-before-insert 0)
 
 ;;;###autoload
-(defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p)
+(defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p filename)
   "Run a git command.
 Display output in an Emacs buffer.
 Attempt to detect output type: log, diff, etc.
@@ -175,7 +178,10 @@ FORCE-READ-P will delay execution of the git command and allow the user to
 edit/supply it, even if cmd has a value.
 
 HIDE-OUTPUT-P will avoid popping up the output buffer BUFF. Useful for quick
-rapid fire commands like `fugitive-quick-commit'."
+rapid fire commands like `fugitive-quick-commit'.
+
+FILENAME will become a buffer local var in the log output buffer. Used to limit the
+show command to the file."
   (interactive)
 
   (let ((process-environment (if fugitive-juggle-home-env-var-p
@@ -292,6 +298,7 @@ rapid fire commands like `fugitive-quick-commit'."
                                             (fugitive-log-mode) ; mode tailored for logs
                                             ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
                                             (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
+                                            (setq-local bl-filename filename)
                                             ;; (log-view-mode) ; TODO: fix. doesn't work right.
                                             ;; (vc-git-log-view-mode)
 
@@ -602,9 +609,10 @@ This is the fastest log."
   "Prepare the git command with for a log of a single file.
 Uses the file of the current buffer."
   (interactive)
-  (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit  " -- " (fugitive-curr-filename))
-                          ;; (concat "git log --oneline --decorate=short -n 500 -- " (fugitive-curr-filename))
-                          nil t))
+  (let ((filename (fugitive-curr-filename)))
+    (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " -- " filename)
+                            ;; (concat "git log --oneline --decorate=short -n 500 -- " (fugitive-curr-filename))
+                            nil t nil filename)))
 
 ;;;###autoload
 (defun fugitive-log-folder ()
@@ -723,6 +731,8 @@ Commit hashes are prefixed by \"*.+commit \".
 Commit hashes are prefixed by a star, wild card range, then the hash (no commit text).
   \"*.+ \
 ")
+
+(defvar-local bl-filename nil)
 
 (defvar fugitive-log-graph-fn #'fugitive-log-graph-long
   "Default fn to use for graph in my hydra.")
@@ -981,7 +991,11 @@ Does not include diffs for merge commits as they tend to have large output, free
                                       (if current-prefix-arg ; fn called with C-u prefix
                                           "--word-diff=color --word-diff-regex=. "
                                         "")
-                                      commit)))))
+                                      commit
+                                      (if (and fugitvie-limit-file-log-show-to-file
+                                               bl-filename)
+                                          (concat " -- " bl-filename)
+                                        ""))))))
 
 
 

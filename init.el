@@ -10882,7 +10882,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 
 (autoload #'my-indent-defun "my-misc" nil t)
-(define-key prog-mode-map (kbd "C-c <tab>") #'my-indent-defun)
+;; temporarily comment out this keybind. overrirdes a slime keybind
+;; (define-key prog-mode-map (kbd "C-c <tab>") #'my-indent-defun)
 
 
 (when (or (> emacs-major-version 25)

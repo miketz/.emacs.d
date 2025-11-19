@@ -1,4 +1,4 @@
-;;; zenburn-theme.el --- A low contrast color theme for Emacs.
+;;; zenburn-theme.el --- A low contrast color theme for Emacs.  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2011-2024 Bozhidar Batsov
 
@@ -410,7 +410,6 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(company-tooltip-common-selection ((t (:foreground ,zenburn-green+2))))
    `(company-scrollbar-fg ((t (:background ,zenburn-bg-1))))
    `(company-scrollbar-bg ((t (:background ,zenburn-bg+2))))
-   `(company-preview ((t (:background ,zenburn-green+2))))
    `(company-preview-common ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg-1))))
 ;;;;; corfu
    `(corfu-default ((t (:foreground ,zenburn-fg :background ,zenburn-bg+1))))
@@ -838,8 +837,8 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(helm-time-zone-current ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
    `(helm-time-zone-home ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
    `(helm-bookmark-addressbook ((t (:foreground ,zenburn-orange :background ,zenburn-bg))))
-   `(helm-bookmark-directory ((t (:foreground nil :background nil :inherit helm-ff-directory))))
-   `(helm-bookmark-file ((t (:foreground nil :background nil :inherit helm-ff-file))))
+   `(helm-bookmark-directory ((t (:foreground unspecified :background unspecified :inherit helm-ff-directory))))
+   `(helm-bookmark-file ((t (:foreground unspecified :background unspecified :inherit helm-ff-file))))
    `(helm-bookmark-gnus ((t (:foreground ,zenburn-magenta :background ,zenburn-bg))))
    `(helm-bookmark-info ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
    `(helm-bookmark-man ((t (:foreground ,zenburn-yellow :background ,zenburn-bg))))
@@ -859,7 +858,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(helm-grep-file ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
    `(helm-grep-finish ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
    `(helm-grep-lineno ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
-   `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
+   `(helm-grep-match ((t (:foreground unspecified :background unspecified :inherit helm-match))))
    `(helm-grep-running ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
    `(helm-match ((t (:foreground ,zenburn-orange :background ,zenburn-bg-1 :weight bold))))
    `(helm-moccur-buffer ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
@@ -1693,6 +1692,16 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(wl-highlight-summary-displaying-face ((t (:underline t :weight bold))))
 ;;;;; which-func-mode
    `(which-func ((t (:foreground ,zenburn-green+4))))
+;;;;; window-tool-bar-mode
+   `(window-tool-bar-button ((t (:foreground ,zenburn-fg
+                                 :background ,zenburn-bg
+                                 :box (:line-width -1 :style released-button)))))
+   `(window-tool-bar-button-hover ((t (:foreground ,zenburn-fg
+                                       :background ,zenburn-bg+1
+                                       :box (:line-width -1 :style released-button)))))
+   `(window-tool-bar-button-disabled ((t (:foreground ,zenburn-fg
+                                          :background ,zenburn-bg+3
+                                          :box (:line-width -1 :style released-button)))))
 ;;;;; xcscope
    `(cscope-file-face ((t (:foreground ,zenburn-yellow :weight bold))))
    `(cscope-function-face ((t (:foreground ,zenburn-cyan :weight bold))))

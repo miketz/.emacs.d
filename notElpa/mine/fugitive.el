@@ -995,7 +995,12 @@ Does not include diffs for merge commits as they tend to have large output, free
                                       (if (and fugitvie-limit-file-log-show-to-file
                                                bl-filename)
                                           (concat " -- " bl-filename)
-                                        ""))))))
+                                        ""))
+                              nil
+                              ;; if filtering to 1 file, give user a chance to edit
+                              (if (and fugitvie-limit-file-log-show-to-file
+                                       bl-filename)
+                                  t nil)))))
 
 
 
@@ -1031,7 +1036,16 @@ where a small change is hard to see from an entire line."
                                       (if current-prefix-arg ; fn called with C-u prefix
                                           "--word-diff=color --word-diff-regex=. "
                                         "")
-                                      commit)))))
+                                      commit
+                                      (if (and fugitvie-limit-file-log-show-to-file
+                                               bl-filename)
+                                          (concat " -- " bl-filename)
+                                        ""))
+                              nil
+                              ;; if filtering to 1 file, give user a chance to edit
+                              (if (and fugitvie-limit-file-log-show-to-file
+                                       bl-filename)
+                                  t nil)))))
 
 
 ;; unused at the moment

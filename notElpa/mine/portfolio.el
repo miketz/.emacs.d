@@ -63,8 +63,8 @@ sum-percents should be 100."
                                  (avuv 5))
                             (intl 15
                                   (devel 75
-                                         (schf 95)
-                                         (avdv 5))
+                                         (schf 90)
+                                         (avdv 10))
                                   (emerging 25
                                             (vexc 100))))))
        (total 100000.0)

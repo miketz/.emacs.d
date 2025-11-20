@@ -10776,6 +10776,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
       (display-fill-column-indicator-mode 1)))
   (add-hook 'simpc-mode-hook #'my-setup-simpc-mode))
 
+;;;----------------------------------------------------------------------------
+;;; gnugo
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'gnugo
+  (define-key gnugo-board-mode-map (kbd "z") #'gnugo-boss-is-near))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

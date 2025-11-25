@@ -62,10 +62,11 @@ sum-percents should be 100."
                                  (schk 95)
                                  (avuv 5))
                             (intl 15
-                                  (devel 75
+                                  ;; 75/25 reweight to 81/19 due to ex-C
+                                  (devel 81
                                          (schf 90)
                                          (avdv 10))
-                                  (emerging 25
+                                  (emerging 19
                                             (vexc 100))))))
        (total 100000.0)
        (allocs (build-lst portfolio total total))

@@ -53,6 +53,19 @@ sum-percents should be 100."
              :diff ,diff
              :sum-percents ,sum-percents)))
 
+
+(defun balance (des-alloc cur-alloc)
+  "DES-ALLOC is can be the output of `build-lst'
+CUR-ALLOC is list of (sym amt) pairs."
+  (let ((to-buy '()))
+    (cl-loop for x in des-alloc do
+             (let* ((sym (car x))
+                    (amt-tar (cl-second x))
+                    (curr-obj (assoc sym cur-alloc))
+                    (amt-curr (cl-second curr-obj)))
+               (push `(,sym ,(- amt-tar amt-curr)) to-buy)))
+    (reverse to-buy)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -75,6 +88,13 @@ sum-percents should be 100."
             :sanity-check ,sanity-check))
 
 
+;;; sample balance
+(balance '((baz 10000.0 10.0) ;target
+           (foo 70000 70.0)
+           (bar 20000 20.0))
+         '((baz 2.80) ; current
+           (foo 50000)
+           (bar 100000)))
 
 
 

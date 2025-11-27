@@ -69,8 +69,8 @@ CUR-ALLOC is list of (sym amt) pairs."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(let* ((portfolio '((bonds 10)
-                    (stocks 90
+(let* ((portfolio '((bond 10)
+                    (stock 90
                             (usa 85
                                  (schk 95)
                                  (avuv 5))

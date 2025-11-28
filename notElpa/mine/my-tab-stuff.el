@@ -24,6 +24,7 @@
     (python-mode python-indent-offset)
 
     (ruby-mode ruby-indent-level) (ruby-ts-mode ruby-indent-level)
+    (powershell-mode powershell-indent-level)
 
     ;; snippet-mode used tab-width alone? no separate indentation var?
     ;; (snippet-mode ???)

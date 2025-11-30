@@ -71,16 +71,16 @@ CUR-ALLOC is list of (sym amt) pairs."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (let* ((portfolio '((bond 10)
                     (stock 90
-                            (usa 85
-                                 (schk 95)
-                                 (avuv 5))
-                            (intl 15
-                                  ;; 75/25 reweight to 81/19 due to ex-C
-                                  (devel 81
-                                         (schf 90)
-                                         (avdv 10))
-                                  (emerging 19
-                                            (vexc 100))))))
+                           (usa 85
+                                (schk 95)
+                                (avuv 5))
+                           (intl 15
+                                 ;; 75/25 reweight to 81/19 due to ex-C
+                                 (devel 81
+                                        (schf 90)
+                                        (avdv 10))
+                                 (emerging 19
+                                           (vexc 100))))))
        (total 100000.0)
        (allocs (build-lst portfolio total total))
        (sanity-check (verify-allocs allocs total)))

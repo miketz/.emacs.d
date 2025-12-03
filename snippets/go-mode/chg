@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: channel get
+# key: chg
+# --
+${1:val}, ${2:ok} := <-${3:ch}

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: channel put
+# key: chp
+# --
+${1:ch} <- ${2:val}

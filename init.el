@@ -8816,6 +8816,18 @@ Explicit language selection not supported?"
 
     ;; center side
     (move-beginning-of-line 1)
+    (minesweeper-choose)
+
+    ;; center top
+    (beginning-of-buffer)
+    (cl-loop repeat center-col do
+             (forward-char))
+    (minesweeper-choose)
+
+    ;; center bot
+    (my-ms-end-of-buffer)
+    (cl-loop repeat center-col do
+             (backward-char))
     (minesweeper-choose))
 
   ;; four corners

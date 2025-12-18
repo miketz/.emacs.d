@@ -605,14 +605,35 @@ This is the fastest log."
 
 
 ;;;###autoload
-(defun fugitive-log-file ()
+(defun fugitive-log-file (&optional start end)
   "Prepare the git command with for a log of a single file.
-Uses the file of the current buffer."
-  (interactive)
-  (let ((filename (fugitive-curr-filename)))
-    (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " -- " filename)
-                            ;; (concat "git log --oneline --decorate=short -n 500 -- " (fugitive-curr-filename))
-                            nil t nil filename)))
+Uses the file of the current buffer.
+If a region is selected, filter log further down to that line number range."
+
+  ;; NOTE: avoiding (interactive "r"). It breaks in the case where Emacs has
+  ;; just started up with no mark set yet.
+  (interactive (if (use-region-p)
+                   ;; use selected region for `start' and `end'
+                   (list (region-beginning) (region-end))
+                 ;; else no start/end for region
+                 (list nil nil)))
+
+  (let* ((filename (fugitive-curr-filename))
+         (region-p (and (not (null start)) (not (null end))))
+         (line-start (if region-p (line-number-at-pos start) nil))
+         (line-end (if region-p (line-number-at-pos end) nil)))
+
+    (if region-p
+        ;; git log -L 625,630:fugitive.el
+        (fugitive-shell-command (concat "git log -L " (number-to-string line-start) "," (number-to-string line-end) ":" filename " -n " fugitive-default-n-log-limit)
+                                nil t nil filename)
+      ;; (fugitive-shell-command (concat "git log -L " (number-to-string line-start) "," (number-to-string line-end) ":" filename " --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit)
+      ;;                           nil t nil filename)
+
+      ;; else no region. normal file log
+      (fugitive-shell-command (concat "git log --oneline --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " -- " filename)
+                              ;; (concat "git log --oneline --decorate=short -n 500 -- " (fugitive-curr-filename))
+                              nil t nil filename))))
 
 ;;;###autoload
 (defun fugitive-log-folder ()

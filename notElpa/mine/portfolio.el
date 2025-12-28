@@ -66,6 +66,17 @@ CUR-ALLOC is list of (sym amt) pairs."
                (push `(,sym ,(- amt-tar amt-curr)) to-buy)))
     (reverse to-buy)))
 
+(defun weighted-er (port)
+  "Calculate the weighted expense ratio of the entire portfolio."
+  (apply #'+
+         (mapcar (lambda (x)
+                   (let ((tick (nth 0 x))
+                         ;; convert whole number percent to decimal percent. ie 1% -> 0.01
+                         (per (/ (nth 2 x) 100))
+                         (er (nth 3 x)))
+                     (* per er)))
+                 port)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

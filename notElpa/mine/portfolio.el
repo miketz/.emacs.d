@@ -83,7 +83,7 @@ CUR-ALLOC is list of (sym amt) pairs."
                                         (avdv 10))
                                  (emerging 19
                                            (vexc 100))))))
-       (total 100000.0)
+       (total 1000.0)
        (allocs (build-lst portfolio total total))
        (sanity-check (verify-allocs allocs total)))
   `(:allocs ,allocs

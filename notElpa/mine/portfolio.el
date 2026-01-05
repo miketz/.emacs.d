@@ -4,7 +4,9 @@
 (require 'cl-lib)
 
 (defun leafp (x)
-  (null (cddr x)))
+  (let ((er (cl-third x)))
+    (or (numberp er)
+        (null er))))
 
 (defun tail (x)
   (cddr x))
@@ -17,14 +19,17 @@ Also show percent against the original-total."
 
   (let* ((x (car alloc))
          (x-name (cl-first x))
-         (x-percent (* 0.01 (cl-second x))))
+         (x-percent (* 0.01 (cl-second x)))
+         ;; if er is null, default to 0
+         (x-er (or (cl-third x) 0)))
 
     (cond ((leafp x) ; it's a thing to buy
            (let* ((hard-amt (* total x-percent))
                   (hard-per (* (/ hard-amt original-total) 100)))
              (append `((,x-name
                         ,hard-amt
-                        ,hard-per))
+                        ,hard-per
+                        ,x-er))
                      (build-lst (cl-rest alloc) total original-total))))
           (t ; else it's a group category
            (append (build-lst (tail x) (* total x-percent) original-total)
@@ -80,25 +85,26 @@ CUR-ALLOC is list of (sym amt) pairs."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(let* ((portfolio '((bond 10)
+(let* ((portfolio '((bond 10  0.03)
                     (stock 90
-                           (usa 85
+                           (usa 80
                                 ;; 95/5 schk/avuv roughly cap weight
-                                (schk 95)
-                                (avuv 5))
-                           (intl 15
+                                (schk 90  0.03)
+                                (avuv 10  0.25))
+                           (intl 20
                                  ;; 75/25 reweight to 81/19 due to ex-C
-                                 (devel 81
+                                 (devel 95
                                         ;; 90/10 roughly cap weight
-                                        (schf 90)
-                                        (avdv 10))
-                                 (emerging 19
-                                           (vexc 100))))))
+                                        (schf 80  0.03)
+                                        (avdv 20  0.33))
+                                 (emerging 5
+                                           (vexc 100  0.07))))))
        (total 1000.0)
        (allocs (build-lst portfolio total total))
        (sanity-check (verify-allocs allocs total)))
   `(:allocs ,allocs
-            :sanity-check ,sanity-check))
+            :sanity-check ,sanity-check
+            :weighted-er ,(weighted-er allocs)))
 
 
 ;;; sample balance
@@ -109,6 +115,9 @@ CUR-ALLOC is list of (sym amt) pairs."
            (foo 50000)
            (bar 100000)))
 
+;;; sample weighted ER
+(weighted-er '((foo 100 50.0 0)
+               (bar 100 50.0 0.6)))
 
 
 (provide 'portfolio)

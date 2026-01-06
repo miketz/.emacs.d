@@ -101,10 +101,12 @@ CUR-ALLOC is list of (sym amt) pairs."
                                            (vexc 100  0.07))))))
        (total 1000.0)
        (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total)))
+       (sanity-check (verify-allocs allocs total))
+       (er ,(weighted-er allocs)))
   `(:allocs ,allocs
             :sanity-check ,sanity-check
-            :weighted-er ,(weighted-er allocs)))
+            :weighted-er ,er
+            :er-fee ,(* total (* er 0.01))))
 
 
 ;;; sample balance

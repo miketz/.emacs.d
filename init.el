@@ -1587,6 +1587,11 @@ In master branch now. Was on git branch: feature/native-comp.")
 (autoload #'num3-mode "num3-mode" nil t)
 (autoload #'global-num3-mode "num3-mode" nil t)
 
+(with-eval-after-load 'num3-mode
+  (defvar num3-threshold) ; surpress byte compiler warning
+  (setq num3-threshold 4) ; highlight 1000's
+  )
+
 ;;;----------------------------------------------------------------------------
 ;;; w32-send-sys codes. Operating system commands. MS Windows only.
 ;;;----------------------------------------------------------------------------

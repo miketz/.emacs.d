@@ -81,18 +81,18 @@ Also show percent against the original-total."
     (switch-to-buffer-other-window buff)))
 
 ;; test
-(build-report '((bond 10 (vbil 100 0.07))
-                (stock 90
-                       (usa 80
-                            (schk 90 0.03)
-                            (avuv 10 0.25))
-                       (intl 20
-                             (devel 95
-                                    (schf 80 0.03)
-                                    (avdv 20 0.33))
-                             (emerging 5
-                                       (vexc 100 0.07)))))
-              1000 1000)
+;; (build-report '((bond 10 (vbil 100 0.07))
+;;                 (stock 90
+;;                        (usa 80
+;;                             (schk 90 0.03)
+;;                             (avuv 10 0.25))
+;;                        (intl 20
+;;                              (devel 95
+;;                                     (schf 80 0.03)
+;;                                     (avdv 20 0.33))
+;;                              (emerging 5
+;;                                        (vexc 100 0.07)))))
+;;               1000 1000)
 
 
 (defun verify-allocs (allocs total)

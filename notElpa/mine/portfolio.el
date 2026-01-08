@@ -35,6 +35,66 @@ Also show percent against the original-total."
            (append (build-lst (tail x) (* total x-percent) original-total)
                    (build-lst (cl-rest alloc) total original-total))))))
 
+
+;;; TODO: fix this. in progress.
+(cl-defun build-report-relative (alloc total original-total)
+  "Print the relative allocs in a buffer. Tab indented."
+  (when (null alloc) ; base case
+    (cl-return-from build-report-relative '()))
+
+  (let* ((x (car alloc))
+         (x-name (cl-first x))
+         (percent-printable (cl-second x))
+         (x-percent (* 0.01 (cl-second x)))
+         ;; if er is null, default to 0
+         (x-er (or (cl-third x) 0)))
+
+    (cond ((leafp x) ; it's a thing to buy
+           (let* ((hard-amt (* total x-percent))
+                  (hard-per (* (/ hard-amt original-total) 100)))
+             (insert (format "%s %.2g %.4g %.4g%%\n" x-name hard-amt hard-per x-er))
+             (insert "\t")
+             (build-report-relative (cl-rest alloc) total original-total)))
+          (t ; else it's a group category
+           (insert (format "%s %.4g" x-name percent-printable))
+           (insert "\t")
+           (build-report-relative (tail x) (* total x-percent) original-total)
+           (build-report-relative (cl-rest alloc) total original-total)))))
+
+(cl-defun build-report (alloc total original-total)
+  (interactive)
+  (let ((buff (get-buffer-create "*alloc-report*"))
+        (absloute-allocs (build-lst alloc total total)))
+
+    (with-current-buffer buff
+      ;; print the relative allocs. tab indented
+      (build-report-relative alloc total total)
+
+      (insert "\n\n--- Absolute allocations\n")
+      ;; print the absolute-allocs
+      (cl-loop for x in absloute-allocs
+               do
+               (let ((ticker (symbol-name (cl-first x)))
+                     (percent (cl-third x)))
+                (insert (format "%s %.4g\n" ticker percent)))))
+    ;; display
+    (switch-to-buffer-other-window buff)))
+
+;; test
+(build-report '((bond 10 (vbil 100 0.07))
+                (stock 90
+                       (usa 80
+                            (schk 90 0.03)
+                            (avuv 10 0.25))
+                       (intl 20
+                             (devel 95
+                                    (schf 80 0.03)
+                                    (avdv 20 0.33))
+                             (emerging 5
+                                       (vexc 100 0.07)))))
+              1000 1000)
+
+
 (defun verify-allocs (allocs total)
   "Check if portfolio allocs are wrong.
 Maybe due to the portfolio input allocs being wrong.

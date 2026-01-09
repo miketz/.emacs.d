@@ -62,7 +62,7 @@ Also show percent against the original-total."
            (build-report-relative (tail x) (* total x-percent) original-total (concat tabs indent))
            (build-report-relative (cl-rest alloc) total original-total tabs)))))
 
-(cl-defun build-report (alloc total original-total)
+(cl-defun build-report (alloc total)
   (interactive)
   (let* ((buff (get-buffer-create "*alloc-report*"))
          (absolute-allocs (build-lst alloc total total))
@@ -72,7 +72,7 @@ Also show percent against the original-total."
     (with-current-buffer buff
       (num3-mode)
       (erase-buffer)
-      (insert "~~~~ Category allocations ~~~~\n")
+      (insert "~~~~ Categorized allocations ~~~~\n")
       ;; print the relative allocs. tab indented
       (build-report-relative alloc total total "")
 
@@ -110,7 +110,7 @@ Also show percent against the original-total."
                                         (avdv 20 0.33))
                                  (emerging 5
                                            (vexc 100 0.07)))))
-                  total total)))
+                  total)))
 
 
 (defun verify-allocs (allocs total)

@@ -87,12 +87,12 @@ Also show percent against the original-total."
                      (percent (cl-third x))
                      ;; if er is null, default to 0
                      (er (or (cl-fourth x) 0)))
-                 (insert (format "%s %.4g\t%.4g\t%.13g\n" ticker percent er amt))))
+                 (insert (format "%s %.4g\t%.4g\t$%.13g\n" ticker percent er amt))))
 
       ;; print total portfolio weighted ER and fee
       (insert "\n\n~~~~ Total portfolio weighted ER ~~~~\n")
       (insert (format "ER: %.4g\n" er-weighted))
-      (insert (format "$/yr: $%.4g\n" er-fee)))
+      (insert (format "Fee/yr on $%.13g: $%.4g\n" total er-fee)))
     ;; show report buffer
     (switch-to-buffer-other-window buff)))
 

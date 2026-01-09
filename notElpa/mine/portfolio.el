@@ -37,7 +37,7 @@ Also show percent against the original-total."
 
 
 ;;; TODO: fix this. in progress.
-(cl-defun build-report-relative (alloc total original-total)
+(cl-defun build-report-relative (alloc total original-total tabs)
   "Print the relative allocs in a buffer. Tab indented."
   (when (null alloc) ; base case
     (cl-return-from build-report-relative '()))
@@ -53,13 +53,13 @@ Also show percent against the original-total."
            (let* ((hard-amt (* total x-percent))
                   (hard-per (* (/ hard-amt original-total) 100)))
              (insert (format "%s %.2g %.4g %.4g%%\n" x-name hard-amt hard-per x-er))
-             (insert "\t")
-             (build-report-relative (cl-rest alloc) total original-total)))
+             (insert tabs)
+             (build-report-relative (cl-rest alloc) total original-total tabs)))
           (t ; else it's a group category
-           (insert (format "%s %.4g" x-name percent-printable))
-           (insert "\t")
-           (build-report-relative (tail x) (* total x-percent) original-total)
-           (build-report-relative (cl-rest alloc) total original-total)))))
+           (insert (format "%s %.4g\n" x-name percent-printable))
+           (insert tabs)
+           (build-report-relative (tail x) (* total x-percent) original-total (concat tabs "\t"))
+           (build-report-relative (cl-rest alloc) total original-total (concat tabs "\t"))))))
 
 (cl-defun build-report (alloc total original-total)
   (interactive)
@@ -67,8 +67,9 @@ Also show percent against the original-total."
         (absloute-allocs (build-lst alloc total total)))
 
     (with-current-buffer buff
+      (insert "--- Grouped allocations\n")
       ;; print the relative allocs. tab indented
-      (build-report-relative alloc total total)
+      (build-report-relative alloc total total "\t")
 
       (insert "\n\n--- Absolute allocations\n")
       ;; print the absolute-allocs

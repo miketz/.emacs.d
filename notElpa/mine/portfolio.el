@@ -36,6 +36,9 @@ Also show percent against the original-total."
                    (build-lst (cl-rest alloc) total original-total))))))
 
 
+
+(defvar indent "    ")
+
 ;;; TODO: fix this. in progress.
 (cl-defun build-report-relative (alloc total original-total tabs)
   "Print the relative allocs in a buffer. Tab indented."
@@ -52,14 +55,12 @@ Also show percent against the original-total."
     (cond ((leafp x) ; it's a thing to buy
            (let* ((hard-amt (* total x-percent))
                   (hard-per (* (/ hard-amt original-total) 100)))
-             (insert (format "%s %.2g %.4g %.4g%%\n" x-name hard-amt hard-per x-er))
-             (insert tabs)
+             (insert (format "%s%s %.5g\n" tabs x-name percent-printable))
              (build-report-relative (cl-rest alloc) total original-total tabs)))
           (t ; else it's a group category
-           (insert (format "%s %.4g\n" x-name percent-printable))
-           (insert tabs)
-           (build-report-relative (tail x) (* total x-percent) original-total (concat tabs "\t"))
-           (build-report-relative (cl-rest alloc) total original-total (concat tabs "\t"))))))
+           (insert (format "%s%s %.5g\n" tabs x-name percent-printable))
+           (build-report-relative (tail x) (* total x-percent) original-total (concat tabs indent))
+           (build-report-relative (cl-rest alloc) total original-total tabs)))))
 
 (cl-defun build-report (alloc total original-total)
   (interactive)
@@ -67,11 +68,11 @@ Also show percent against the original-total."
         (absloute-allocs (build-lst alloc total total)))
 
     (with-current-buffer buff
-      (insert "--- Grouped allocations\n")
+      (insert "---- Category allocations ----\n")
       ;; print the relative allocs. tab indented
-      (build-report-relative alloc total total "\t")
+      (build-report-relative alloc total total "")
 
-      (insert "\n\n--- Absolute allocations\n")
+      (insert "\n\n---- Absolute allocations ----\n")
       ;; print the absolute-allocs
       (cl-loop for x in absloute-allocs
                do
@@ -82,18 +83,18 @@ Also show percent against the original-total."
     (switch-to-buffer-other-window buff)))
 
 ;; test
-;; (build-report '((bond 10 (vbil 100 0.07))
-;;                 (stock 90
-;;                        (usa 80
-;;                             (schk 90 0.03)
-;;                             (avuv 10 0.25))
-;;                        (intl 20
-;;                              (devel 95
-;;                                     (schf 80 0.03)
-;;                                     (avdv 20 0.33))
-;;                              (emerging 5
-;;                                        (vexc 100 0.07)))))
-;;               1000 1000)
+(build-report '((bond 10 (vbil 100 0.07))
+                (stock 90
+                       (usa 80
+                            (schk 90 0.03)
+                            (avuv 10 0.25))
+                       (intl 20
+                             (devel 95
+                                    (schf 80 0.03)
+                                    (avdv 20 0.33))
+                             (emerging 5
+                                       (vexc 100 0.07)))))
+              1000 1000)
 
 
 (defun verify-allocs (allocs total)

@@ -64,37 +64,51 @@ Also show percent against the original-total."
 
 (cl-defun build-report (alloc total original-total)
   (interactive)
-  (let ((buff (get-buffer-create "*alloc-report*"))
-        (absloute-allocs (build-lst alloc total total)))
+  (let* ((buff (get-buffer-create "*alloc-report*"))
+         (absolute-allocs (build-lst alloc total total))
+         (er-weighted (weighted-er absolute-allocs))
+         (er-fee (* total (* er-weighted 0.01))))
 
     (with-current-buffer buff
-      (insert "---- Category allocations ----\n")
+      (num3-mode)
+      (insert "~~~~ Category allocations ~~~~\n")
       ;; print the relative allocs. tab indented
       (build-report-relative alloc total total "")
 
-      (insert "\n\n---- Absolute allocations ----\n")
+      (insert "\n\n~~~~ Absolute allocations ~~~~\n")
       ;; print the absolute-allocs
-      (cl-loop for x in absloute-allocs
+      (insert "Sym  %\t\tER\t$-Amount\n") ; col header
+      (insert "------------------------------\n")
+      (cl-loop for x in absolute-allocs
                do
                (let ((ticker (symbol-name (cl-first x)))
-                     (percent (cl-third x)))
-                (insert (format "%s %.4g\n" ticker percent)))))
-    ;; display
+                     (amt (cl-second x))
+                     (percent (cl-third x))
+                     ;; if er is null, default to 0
+                     (er (or (cl-fourth x) 0)))
+                 (insert (format "%s %.4g\t%.4g\t%.13g\n" ticker percent er amt))))
+
+      ;; print total portfolio weighted ER and fee
+      (insert "\n\n~~~~ Total portfolio weighted ER ~~~~\n")
+      (insert (format "ER: %.4g\n" er-weighted))
+      (insert (format "$/yr: $%.4g\n" er-fee)))
+    ;; show report buffer
     (switch-to-buffer-other-window buff)))
 
-;; test
-(build-report '((bond 10 (vbil 100 0.07))
-                (stock 90
-                       (usa 80
-                            (schk 90 0.03)
-                            (avuv 10 0.25))
-                       (intl 20
-                             (devel 95
-                                    (schf 80 0.03)
-                                    (avdv 20 0.33))
-                             (emerging 5
-                                       (vexc 100 0.07)))))
-              1000 1000)
+;; test report
+(let ((total 1000))
+ (build-report '((bond 10 (vbil 100 0.07))
+                 (stock 90
+                        (usa 80
+                             (schk 90 0.03)
+                             (avuv 10 0.25))
+                        (intl 20
+                              (devel 95
+                                     (schf 80 0.03)
+                                     (avdv 20 0.33))
+                              (emerging 5
+                                        (vexc 100 0.07)))))
+               total total))
 
 
 (defun verify-allocs (allocs total)

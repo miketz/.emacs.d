@@ -54,10 +54,10 @@ Also show percent against the original-total."
     (cond ((leafp x) ; it's a thing to buy
            (let* ((hard-amt (* total x-percent))
                   (hard-per (* (/ hard-amt original-total) 100)))
-             (insert (format "%s%s %.5g\n" tabs x-name percent-printable))
+             (insert (format "%s%.5g %s\n" tabs percent-printable x-name))
              (build-report-relative (cl-rest alloc) total original-total tabs)))
           (t ; else it's a group category
-           (insert (format "%s%s %.5g\n" tabs x-name percent-printable))
+           (insert (format "%s%.5g %s\n" tabs percent-printable x-name))
            (build-report-relative (tail x) (* total x-percent) original-total (concat tabs indent))
            (build-report-relative (cl-rest alloc) total original-total tabs)))))
 

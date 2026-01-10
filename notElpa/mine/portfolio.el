@@ -90,7 +90,7 @@ Also show percent against the original-total."
       ;; print total portfolio weighted ER and fee
       (insert "\n\n~~~~ Total portfolio weighted ER ~~~~\n")
       (insert (format "ER: %.4g\n" er-weighted))
-      (insert (format "Fee/yr on $%.13g: $%.4g\n" total er-fee)))
+      (insert (format "Fee/yr on $%.13g: $%.13g\n" total er-fee)))
     ;; show report buffer
     (switch-to-buffer-other-window buff)
     (text-mode)

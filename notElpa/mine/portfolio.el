@@ -76,7 +76,7 @@ Also show percent against the original-total."
 
       (insert "\n\n~~~~ Absolute allocations ~~~~\n")
       ;; print the absolute-allocs
-      (insert "Sym  %\t\tAmount-$\tER\n") ; col header
+      (insert "Sym  %\t\t$\tER\n") ; col header
       (insert "------------------------------\n")
       (cl-loop for x in absolute-allocs
                do

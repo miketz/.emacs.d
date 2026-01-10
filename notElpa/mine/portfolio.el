@@ -77,7 +77,7 @@ Also show percent against the original-total."
 
       (insert "\n\n~~~~ Absolute allocations ~~~~\n")
       ;; print the absolute-allocs
-      (insert "Sym  %\t\tER\tAmount\n") ; col header
+      (insert "Sym  %\t\tER\tAmount-$\n") ; col header
       (insert "------------------------------\n")
       (cl-loop for x in absolute-allocs
                do
@@ -86,7 +86,7 @@ Also show percent against the original-total."
                      (percent (cl-third x))
                      ;; if er is null, default to 0
                      (er (or (cl-fourth x) 0)))
-                 (insert (format "%s %.4g\t%.4g\t$%.13g\n" ticker percent er amt))))
+                 (insert (format "%s %.4g\t%.4g\t%.13g\n" ticker percent er amt))))
 
       ;; print total portfolio weighted ER and fee
       (insert "\n\n~~~~ Total portfolio weighted ER ~~~~\n")

@@ -39,7 +39,6 @@ Also show percent against the original-total."
 
 (defvar indent "    ")
 
-;;; TODO: fix this. in progress.
 (cl-defun build-report-relative (alloc total original-total tabs)
   "Print the relative allocs in a buffer. Tab indented."
   (when (null alloc) ; base case

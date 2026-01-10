@@ -69,7 +69,6 @@ Also show percent against the original-total."
          (er-fee (* total (* er-weighted 0.01))))
 
     (with-current-buffer buff
-      (num3-mode)
       (erase-buffer)
       (insert "~~~~ Categorized allocations ~~~~\n")
       ;; print the relative allocs. tab indented
@@ -93,7 +92,9 @@ Also show percent against the original-total."
       (insert (format "ER: %.4g\n" er-weighted))
       (insert (format "Fee/yr on $%.13g: $%.4g\n" total er-fee)))
     ;; show report buffer
-    (switch-to-buffer-other-window buff)))
+    (switch-to-buffer-other-window buff)
+    (text-mode)
+    (num3-mode)))
 
 ;; test report
 (when nil

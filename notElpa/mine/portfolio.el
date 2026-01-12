@@ -76,8 +76,7 @@ Also show percent against the original-total."
 
       (insert "\n\n~~~~ Absolute allocations ~~~~\n")
       ;; print the absolute-allocs
-      (insert "Sym  %\t\t$\tER\n") ; col header
-      (insert "------------------------------\n")
+      (insert "     %\t\t$\t\tER\n") ; col header
       (cl-loop for x in absolute-allocs
                do
                (let ((ticker (symbol-name (cl-first x)))

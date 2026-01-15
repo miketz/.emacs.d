@@ -179,12 +179,11 @@ CUR-ALLOC is list of (sym amt) pairs."
        (total 1000.0)
        (allocs (build-lst portfolio total total))
        (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs))
-       (er-fee (* total (* er 0.01))))
+       (er (weighted-er allocs)))
   `(:allocs ,allocs
             :sanity-check ,sanity-check
             :weighted-er ,er
-            :er-fee ,er-fee)
+            :er-fee ,(* total (* er 0.01)))
   ;; (build-report portfolio total)
   )
 

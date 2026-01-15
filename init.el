@@ -2238,10 +2238,10 @@ This prevents overlapping themes; something I would rarely want."
      '(font
        .
        ;; "-raster-Fixedsys-normal-normal-normal-mono-15-*-*-*-c-*-iso8859-1"
-       "-raster-Fixedsys-normal-normal-normal-mono-19-*-*-*-c-*-iso8859-1"
+       ;; "-raster-Fixedsys-normal-normal-normal-mono-19-*-*-*-c-*-iso8859-1"
        ;; "-raster-Terminal-normal-normal-normal-mono-7-*-*-*-c-*-ms-oemlatin"
        ;; "-raster-Terminal-normal-normal-normal-mono-10-*-*-*-c-*-ms-oemlatin"
-       ;; "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
+       "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
        ;; "-raster-Terminus-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
        ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
        )

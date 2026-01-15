@@ -170,11 +170,11 @@ CUR-ALLOC is list of (sym amt) pairs."
                                 (avuv 10  0.25))
                            (intl 20
                                  ;; 75/25 reweight to 81/19 due to ex-C
-                                 (devel 95
+                                 (devel 90
                                         ;; 90/10 roughly cap weight
-                                        (schf 80  0.03)
-                                        (avdv 20  0.33))
-                                 (emerging 5
+                                        (schf 70  0.03)
+                                        (avdv 30  0.33))
+                                 (emerging 10
                                            (vexc 100  0.07))))))
        (total 1000.0)
        (allocs (build-lst portfolio total total))

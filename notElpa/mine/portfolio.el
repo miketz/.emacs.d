@@ -162,13 +162,13 @@ CUR-ALLOC is list of (sym amt) pairs."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(let* ((portfolio '((bond 10  0.03)
+(let* ((portfolio '((bond 10  (schr 100 0.03))
                     (stock 90
-                           (usa 80
+                           (usa 70
                                 ;; 95/5 schk/avuv roughly cap weight
-                                (schk 90  0.03)
-                                (avuv 10  0.25))
-                           (intl 20
+                                (schk 85  0.03)
+                                (avuv 15  0.25))
+                           (intl 30
                                  ;; 75/25 reweight to 81/19 due to ex-C
                                  (devel 90
                                         ;; 90/10 roughly cap weight

@@ -60,7 +60,7 @@
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-string-face ((,class :foreground "chocolate4" :background "papaya whip")))
    `(font-lock-builtin-face ((,class (:foreground "dark blue" :background ,bg :weight normal))))
-   `(font-lock-constant-face ((,class :foreground "blue" :background ,bg :weight bold)))
+   `(font-lock-constant-face ((,class :foreground ,fg :background ,bg :weight bold)))
    `(font-lock-number-face ((,class :foreground "blue" :background ,bg))) ;treesit
 
 
@@ -91,48 +91,12 @@
    `(rainbow-delimiters-unmatched-face ((,class :foreground ,fg :background "red")))
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;; dim. don't dim for now actually.
+   ;; dim. don't dim for now actually as the face control is not fine grained enough.
    `(font-lock-bracket-face ((,class :foreground ,fg :background ,bg))) ;treesit
    `(font-lock-punctuation-face ((,class :foreground ,fg :background ,bg))) ;treesit
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg :background ,bg))) ;treesit
 
-
-   ;; swiper, ivy, counsel
-   `(swiper-line-face ((,class (:background "#FFA366" ;,bg-highlight ;"gray30"
-                                ))))
-   ;; face-1 fills in the space between matches. 2-4 are for matches.
-   `(swiper-match-face-1 ((,class :foreground "white";"#F9F5D7"
-                                  :background "#A5A183";,bg-highlight
-                                  )))
-   `(swiper-match-face-2 ((,class (:foreground "black" :background "#FF4500"))))
-   ;; NOTE: face-3, 4 don't work when out-of-order matching is used.
-   ;; TODO: make bug report to swiper about face 3,4
-   `(swiper-match-face-3 ((,class (:foreground "black" :background "#00FFFF"))))
-   `(swiper-match-face-4 ((,class (:foreground "black" :background "#FFFF00"))))
-   ;; the non-selected lines in the minibuffer
-   `(swiper-background-match-face-1 ((,class :inherit swiper-match-face-1)))
-   `(swiper-background-match-face-2 ((,class :inherit swiper-match-face-2)))
-   `(swiper-background-match-face-3 ((,class :inherit swiper-match-face-3)))
-   `(swiper-background-match-face-4 ((,class :inherit swiper-match-face-4)))
-   `(ivy-action ((,class (:foreground "black"))))
-   ;; `(ivy-confirm-face ((,class (:foreground "yellow" :italic t))))
-   `(ivy-current-match ((,class (:inherit swiper-line-face))))
-   ;; `(ivy-cursor ((,class (:foreground "white"))))
-   ;; `(ivy-highlight-face ((,class (:background "white"))))
-   `(ivy-match-required-face ((,class (:foreground "#300000" :background "#FF4500"))))
-   `(ivy-minibuffer-match-face-1 ((,class (:inherit swiper-match-face-1))))
-   `(ivy-minibuffer-match-face-2 ((,class (:inherit swiper-match-face-2))))
-   `(ivy-minibuffer-match-face-3 ((,class (:inherit swiper-match-face-3))))
-   `(ivy-minibuffer-match-face-4 ((,class (:inherit swiper-match-face-4))))
-   ;; `(ivy-minibuffer-match-highlight ((,class (:background "white"))))
-   ;; `(ivy-modified-buffer ((,class (:foreground "white"))))
-   ;; `(ivy-prompt-match ((,class (:foreground "white"))))
-   ;; `(ivy-remote ((,class (:foreground "white"))))
-   ;; `(ivy-subdir ((,class (:foreground "white"))))
-   ;; `(ivy-virtual ((,class (:foreground "white" :background ,bg))))
-
-   )
-  )
+   ))
 
 (provide-theme 'focus)
 

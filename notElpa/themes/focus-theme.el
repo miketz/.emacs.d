@@ -59,9 +59,9 @@
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-string-face ((,class :foreground "chocolate4" :background "papaya whip")))
-   ;; `(font-lock-builtin-face ((,class (:foreground ,fg :background ,bg :weight bold))))
-   `(font-lock-constant-face ((,class :foreground "blue" :background ,bg)))
-   `(font-lock-number-face ((,class :inherit font-lock-constant-face))) ;treesit
+   `(font-lock-builtin-face ((,class (:foreground "dark blue" :background ,bg :weight normal))))
+   `(font-lock-constant-face ((,class :foreground "blue" :background ,bg :weight bold)))
+   `(font-lock-number-face ((,class :foreground "blue" :background ,bg))) ;treesit
 
 
 

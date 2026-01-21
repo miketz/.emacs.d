@@ -53,7 +53,7 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "blue" :background "light cyan" :weight bold)))
-   `(font-lock-variable-name-face ((,class :foreground "blue" :background "#EFEFEF")))
+   `(font-lock-variable-name-face ((,class :foreground "dark red" :background ,bg)))
 
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))

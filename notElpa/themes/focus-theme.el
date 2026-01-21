@@ -58,6 +58,7 @@
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
+   `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
    `(font-lock-string-face ((,class :foreground "chocolate4" :background "papaya whip")))
    `(font-lock-builtin-face ((,class (:foreground "dark blue" :background ,bg :weight normal))))
    `(font-lock-constant-face ((,class :foreground ,fg :background ,bg :weight bold)))

@@ -53,7 +53,6 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "blue" :background "light cyan" :weight bold)))
-   `(font-lock-function-call-face ((,class :foreground ,fg :background "lavender blush"))) ;treesit
    `(font-lock-variable-name-face ((,class :foreground "blue" :background "#EFEFEF" :weight normal)))
 
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))
@@ -70,12 +69,13 @@
    ;; disable highlights. use regular fg/bg
    `(font-lock-keyword-face ((,class :foreground ,fg :background ,bg)))
    `(font-lock-type-face ((,class :foreground ,fg :background ,bg)))
+   `(font-lock-function-call-face ((,class :foreground ,fg :background ,bg))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face))) ;treesit
    `(font-lock-property-name-face ((,class :foreground ,fg :background ,bg))) ;treesit
    `(font-lock-property-use-face ((,class :inherit font-lock-property-name-face))) ;treesit
    `(font-lock-delimiter-face ((,class :foreground ,fg :background ,bg))) ;treesit
-   `(font-lock-escape-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-escape-face ((,class :inherit font-lock-string-face :weight bold))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground ,fg :weight bold))))
 

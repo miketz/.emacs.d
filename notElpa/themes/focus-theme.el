@@ -26,7 +26,7 @@
 (let ((class t)
       (fg "#000000")
       (bg "#FFFFFF")
-      (dim-fg "#CCCCCC"))
+      (dim-fg "#888888"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Vars
@@ -91,10 +91,10 @@
    `(rainbow-delimiters-unmatched-face ((,class :foreground ,fg :background "red")))
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;; dim.
-   `(font-lock-bracket-face ((,class :foreground ,dim-fg :background ,bg))) ;treesit
-   `(font-lock-punctuation-face ((,class :foreground ,dim-fg :background ,bg))) ;treesit
-   `(font-lock-misc-punctuation-face ((,class :foreground ,dim-fg :background ,bg))) ;treesit
+   ;; dim. don't dim for now actually.
+   `(font-lock-bracket-face ((,class :foreground ,fg :background ,bg))) ;treesit
+   `(font-lock-punctuation-face ((,class :foreground ,fg :background ,bg))) ;treesit
+   `(font-lock-misc-punctuation-face ((,class :foreground ,fg :background ,bg))) ;treesit
 
 
    ;; swiper, ivy, counsel

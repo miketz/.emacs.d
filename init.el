@@ -9941,7 +9941,8 @@ Values: lsp, citre, nil")
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
-  (setq go-fontify-function-calls nil) ; reduce color noise
+  ;; it uses the same face for fn calls and defs. so less value for the color noise
+  (setq go-fontify-function-calls nil)
   (setq go-fontify-variables t)
 
   (defun my-setup-go-mode ()

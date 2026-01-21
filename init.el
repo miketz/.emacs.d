@@ -9941,6 +9941,9 @@ Values: lsp, citre, nil")
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
+  (setq go-fontify-function-calls nil) ; reduce color noise
+  (setq go-fontify-variables t)
+
   (defun my-setup-go-mode ()
     ;; (when buffer-file-name ;; if buffer has a file on disk.
     ;;   ;; wireup M-x compile. TODO: revisit this

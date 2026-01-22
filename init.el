@@ -10605,7 +10605,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; no-mode-line.el ~/.emacs.d/notElpa/no-mode-line.el
 
 
-;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey focus)
+;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey focus
+;;                              focus-dark)
 ;;   "Themes I created.")
 ;; TODO: make green/yellow, not the yellow/orange color theme
 

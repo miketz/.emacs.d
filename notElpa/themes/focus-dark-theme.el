@@ -63,6 +63,7 @@
    `(font-lock-function-name-face ((,class :foreground "#AFEEEE" :background "#000000" :weight normal)))
    `(font-lock-variable-name-face ((,class :foreground "#FF4500";"#66CDAA";"#Cb4040";"#FF4500" :background ,bg
                                            )))
+   `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
    `(font-lock-comment-face ((,class :foreground "#8FB28F" )))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))

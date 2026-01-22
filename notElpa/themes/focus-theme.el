@@ -54,6 +54,7 @@
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "blue" :background "light cyan" :weight bold)))
    `(font-lock-variable-name-face ((,class :foreground "dark red" :background ,bg)))
+   `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))

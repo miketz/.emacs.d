@@ -61,7 +61,7 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "#AFEEEE" :background "#000000" :weight normal)))
-   `(font-lock-variable-name-face ((,class "#66CDAA":foreground ;"#Cb4040";"#FF4500" :background ,bg
+   `(font-lock-variable-name-face ((,class :foreground "#FF4500";"#66CDAA";"#Cb4040";"#FF4500" :background ,bg
                                            )))
 
    `(font-lock-comment-face ((,class :foreground "#8FB28F" )))

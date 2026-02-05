@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: struct
+# key: struct
+# --
+(cl-defstruct ${1:name}
+  "doc"
+  (field1 nil))

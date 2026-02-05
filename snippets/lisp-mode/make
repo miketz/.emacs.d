@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: make-struct
+# key: make
+# --
+(make-$0
+ :field1 nil)

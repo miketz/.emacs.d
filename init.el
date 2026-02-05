@@ -6909,10 +6909,12 @@ When ARG isn't nil, try to pretty print the sexp."
 (define-key lisp-mode-shared-map (kbd "C-c C-r") #'my-eval-region)
 (define-key lisp-mode-shared-map (kbd "C-c .") #'dumb-jump-go)
 
-;;; NOTE: this is not in `with-eval-after-load' on purose. Mode is sort of preloaded?
+;; NOTE: this doesn't work inside `with-eval-after-load'.
+;;       Mode is sort of preloaded?
 (defun my-setup-emacs-lisp-mode ()
   (yas-minor-mode 1))
 (add-hook 'emacs-lisp-mode-hook #'my-setup-emacs-lisp-mode)
+
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:

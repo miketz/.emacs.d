@@ -2336,6 +2336,15 @@ with duplicate bundled libs in Sly and SLIME.")
 (autoload #'macrostep-expand "macrostep" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; lisp-mode
+;;;----------------------------------------------------------------------------
+
+(with-eval-after-load 'lisp-mode
+  (defun my-setup-lisp-mode ()
+    (yas-minor-mode 1))
+  (add-hook 'lisp-mode-hook #'my-setup-lisp-mode))
+
+;;;----------------------------------------------------------------------------
 ;;; slime-company
 ;;;----------------------------------------------------------------------------
 (push "~/.emacs.d/notElpaYolo/slime-company" load-path)
@@ -6899,6 +6908,11 @@ When ARG isn't nil, try to pretty print the sexp."
 (autoload #'my-eval-region "my-misc" nil t)
 (define-key lisp-mode-shared-map (kbd "C-c C-r") #'my-eval-region)
 (define-key lisp-mode-shared-map (kbd "C-c .") #'dumb-jump-go)
+
+;;; NOTE: this is not in `with-eval-after-load' on purose. Mode is sort of preloaded?
+(defun my-setup-emacs-lisp-mode ()
+  (yas-minor-mode 1))
+(add-hook 'emacs-lisp-mode-hook #'my-setup-emacs-lisp-mode)
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:

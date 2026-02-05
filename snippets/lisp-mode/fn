@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: fn
+# key: fn
+# --
+(defun ${1:fnName} ($0))

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: multiple-value-bind
+# key: mvb
+# --
+(multiple-value-bind ($0)
+    (fn))

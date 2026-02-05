@@ -3103,6 +3103,7 @@ Assumes dotnet core."
 
     (yas-minor-mode 1)
     (rainbow-delimiters-mode 1)
+    (citre-mode 1) ; ctags mode
 
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 110) ; long lines in C#

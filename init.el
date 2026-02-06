@@ -4311,6 +4311,7 @@ and indent."
       (setq indent-tabs-mode t))
 
     (indent-bars-mode 1)
+    (citre-mode 1) ; ctags mode
 
     (progn ;; smart-tabs-mode
       (smart-tabs-advice c-indent-line c-basic-offset)
@@ -4325,6 +4326,8 @@ and indent."
       (setq c-basic-offset my-indent-width-c)
       (setq tab-width my-indent-width-c)
       (setq indent-tabs-mode t))
+
+    (citre-mode 1) ; ctags mode
 
     (progn ;; smart-tabs-mode
       (smart-tabs-advice c-indent-line c-basic-offset)
@@ -4345,6 +4348,7 @@ and indent."
         (smart-tabs-mode-enable)))
 
     (indent-bars-mode 1)
+    (citre-mode 1) ; ctags mode
 
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 110) ; long lines in java.

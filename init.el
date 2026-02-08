@@ -6920,6 +6920,7 @@ When ARG isn't nil, try to pretty print the sexp."
 (add-hook 'emacs-lisp-mode-hook #'my-setup-emacs-lisp-mode)
 
 (autoload #'toggle-let* "toggle-let" nil t)
+(define-key lisp-mode-shared-map (kbd "C-c C-t") #'toggle-let*)
 
 (when my-use-ivy-p
   ;; two different modes (and maps) for elisp:

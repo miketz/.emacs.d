@@ -10827,6 +10827,13 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'gnugo
   (define-key gnugo-board-mode-map (kbd "z") #'gnugo-boss-is-near))
 
+
+;;;----------------------------------------------------------------------------
+;;; elcity
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/elcity" load-path)
+(autoload #'elcity-start "elcity" nil nil)
+
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------

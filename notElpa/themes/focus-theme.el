@@ -55,14 +55,15 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "blue" :background "light cyan" :weight bold)))
-   `(font-lock-variable-name-face ((,class :foreground "dark red" :background ,bg)))
+   `(font-lock-variable-name-face ((,class :foreground "blue" :weight normal)))
    `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
-   `(font-lock-string-face ((,class :foreground "chocolate4" :background "papaya whip")))
+   `(font-lock-string-face ((,class :foreground "chocolate4" :background "#fffcf2";"papaya whip";"#fffcf2"
+                                    )))
    `(font-lock-builtin-face ((,class (:foreground "dark blue" :weight normal))))
    `(font-lock-constant-face ((,class :weight bold)))
    `(font-lock-number-face ((,class :foreground "blue" :background ,bg))) ;treesit

@@ -55,7 +55,7 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "blue" :background "light cyan" :weight bold)))
-   `(font-lock-variable-name-face ((,class :foreground "blue" :weight normal)))
+   `(font-lock-variable-name-face ((,class :foreground "blue" :background "#FFF0F0")))
    `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))
@@ -83,7 +83,7 @@
    `(font-lock-delimiter-face ((,class :foreground ,fg :background ,bg))) ;treesit
    `(font-lock-escape-face ((,class :inherit font-lock-string-face :weight bold))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
-   `(font-lock-negation-char-face ((,class (:foreground ,fg :background "pink" :weight bold))))
+   `(font-lock-negation-char-face ((,class (:foreground "red" :weight bold))))
 
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

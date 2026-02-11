@@ -64,7 +64,7 @@
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
    `(font-lock-string-face ((,class :foreground "chocolate4" :background "papaya whip")))
    `(font-lock-builtin-face ((,class (:foreground "dark blue" :weight normal))))
-   `(font-lock-constant-face ((,class :foreground ,fg :background ,bg :weight bold)))
+   `(font-lock-constant-face ((,class :weight bold)))
    `(font-lock-number-face ((,class :foreground "blue" :background ,bg))) ;treesit
 
 

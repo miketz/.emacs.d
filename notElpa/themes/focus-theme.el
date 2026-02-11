@@ -26,7 +26,9 @@
 (let ((class t)
       (fg "#000000")
       (bg "#FFFFFF")
-      (dim-fg "#888888"))
+      (dim-fg "#888888")
+      (rain-bg "#D5D1B3")
+      (rain-bg-highlight "#C5C1A3"))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Vars
@@ -82,16 +84,24 @@
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground ,fg :weight bold))))
 
-   `(rainbow-delimiters-depth-1-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-2-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-3-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-4-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-5-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-6-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-7-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-8-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-depth-9-face ((,class :foreground ,fg :background ,bg)))
-   `(rainbow-delimiters-unmatched-face ((,class :foreground ,fg :background "red")))
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; rainbow-delimiters.
+   ;; In theory we don't want to highlight delimiters in this theme. But if
+   ;; you're using rainbow-delimiters mode that means you do want them highlighted.
+   ;; May as well brighten them up. Turn off rainbow-delimiters-mode to remove color.
+   `(rainbow-delimiters-depth-1-face ((,class (:foreground "black" :background ,rain-bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-2-face ((,class (:foreground "black" :background "#C0DfDf" :weight bold))))
+   `(rainbow-delimiters-depth-3-face ((,class (:foreground "red" :background ,rain-bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-4-face ((,class (:foreground "purple" :background "#DfD0D5" :weight bold))))
+   `(rainbow-delimiters-depth-5-face ((,class (:foreground "black" :background "#EfEaBd" :weight bold))))
+   `(rainbow-delimiters-depth-6-face ((,class (:foreground "magenta" :background ,rain-bg ;"#EEEEFF"
+                                                      :weight bold))))
+   `(rainbow-delimiters-depth-7-face ((,class (:foreground "gray52" :weight bold))))
+   `(rainbow-delimiters-depth-8-face ((,class (:foreground "indianred3" :background ,rain-bg-highlight :weight bold))))
+   `(rainbow-delimiters-depth-9-face ((,class (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
+   `(rainbow-delimiters-unmatched-face ((,class (:foreground "yellow" :background "black" :weight bold))))
+
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; dim. don't dim for now actually as the face control is not fine grained enough.

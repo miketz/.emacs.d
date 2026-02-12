@@ -62,7 +62,7 @@
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
-   `(font-lock-string-face ((,class :foreground "chocolate4" :background "#fffcf2";"papaya whip";"#fffcf2"
+   `(font-lock-string-face ((,class :foreground "chocolate4" :background "papaya whip";"papaya whip";"#fffcf2"
                                     )))
    `(font-lock-builtin-face ((,class (:foreground "dark blue" :weight normal))))
    `(font-lock-constant-face ((,class :weight bold)))

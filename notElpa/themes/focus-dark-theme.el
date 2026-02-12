@@ -91,21 +91,21 @@
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
    `(font-lock-string-face ((,class :foreground "LightSalmon")))
    ;; `(font-lock-builtin-face ((,class (:foreground "dark blue" :background ,bg :weight normal))))
-   `(font-lock-constant-face ((,class :foreground ,fg :background "#232319" :weight bold)))
-   `(font-lock-number-face ((,class :foreground "#50b5b5" :background ,bg))) ;treesit
+   `(font-lock-constant-face ((,class :foreground ,fg :weight bold)))
+   `(font-lock-number-face ((,class :foreground "#50b5b5"))) ;treesit
 
 
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
-   `(font-lock-keyword-face ((,class :foreground ,fg :background ,bg)))
-   `(font-lock-type-face ((,class :foreground ,fg :background ,bg)))
-   `(font-lock-function-call-face ((,class :foreground ,fg :background ,bg))) ;treesit
+   `(font-lock-keyword-face ((,class :foreground ,fg)))
+   `(font-lock-type-face ((,class :foreground ,fg)))
+   `(font-lock-function-call-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face))) ;treesit
-   `(font-lock-property-name-face ((,class :foreground ,fg :background ,bg))) ;treesit
+   `(font-lock-property-name-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-property-use-face ((,class :inherit font-lock-property-name-face))) ;treesit
-   `(font-lock-delimiter-face ((,class :foreground ,fg :background ,bg))) ;treesit
+   `(font-lock-delimiter-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-escape-face ((,class :inherit font-lock-string-face :weight bold))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground "tomato" :weight bold))))
@@ -129,9 +129,9 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; dim. don't dim for now actually as the face control is not fine grained enough.
-   `(font-lock-bracket-face ((,class :foreground ,fg :background ,bg))) ;treesit
-   `(font-lock-punctuation-face ((,class :foreground ,fg :background ,bg))) ;treesit
-   `(font-lock-misc-punctuation-face ((,class :foreground ,fg :background ,bg))) ;treesit
+   `(font-lock-bracket-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 
    ))
 

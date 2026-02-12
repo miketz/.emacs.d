@@ -108,7 +108,7 @@
    `(font-lock-delimiter-face ((,class :foreground ,fg :background ,bg))) ;treesit
    `(font-lock-escape-face ((,class :inherit font-lock-string-face :weight bold))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
-   `(font-lock-negation-char-face ((,class (:foreground ,fg :weight bold))))
+   `(font-lock-negation-char-face ((,class (:foreground "tomato" :weight bold))))
 
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

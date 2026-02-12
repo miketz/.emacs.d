@@ -55,7 +55,7 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
    `(font-lock-function-name-face ((,class :foreground "blue" :background "light cyan" :weight bold)))
-   `(font-lock-variable-name-face ((,class :foreground "blue" :background "#FFF0F0")))
+   `(font-lock-variable-name-face ((,class :foreground "dark red" :background "#FFe0e0")))
    `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
    `(font-lock-comment-face ((,class :foreground "dark green" :background "honeydew")))

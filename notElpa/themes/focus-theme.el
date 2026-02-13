@@ -110,6 +110,38 @@
    `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 
+
+   ;; erc
+   ;; `(erc-notice-face ((,class (:foreground ,faint-lesser))))
+   `(erc-input-face ((,class (:foreground "DeepSkyBlue4")))) ; my own text.
+   `(erc-timestamp-face ((,class :foreground "dark green")))
+   ;; erc-keyword-face
+   ;; erc-fool-face
+   ;; erc-pal-face
+   ;; erc-dangerous-host-face
+   `(erc-current-nick-face ((,class :foreground ,fg)))
+   ;; erc-hl-nicks-nick-base-face
+   ;; erc-button
+   ;; erc-underline-face
+   ;; erc-inverse-face
+   ;; erc-bold-face
+   `(erc-nick-msg-face ((,class :foreground "tomato" :background "#FFe0e0")))
+   `(erc-direct-msg-face ((,class :foreground "tomato" :background "#FFe0e0")))
+   ;; erc-nick-default-face
+   ;; erc-my-nick-face
+   ;; erc-error-face
+   ;; erc-action-face
+   ;; erc-command-indicator-face
+   ;; erc-prompt-face
+   ;; erc-header-line
+   ;; erc-my-nick-prefix-face
+   ;; erc-nick-prefix-face
+   ;; erc-default-face
+
+   ;; erc-hl-nicks
+   ;; erc-hl-nicks-nick-USERNAME1-face ; dynamically created faces? handle in a loop?
+   ;; erc-hl-nicks-nick-USERNAME2-face ; dynamically created faces? handle in a loop?
+
    ))
 
 (provide-theme 'focus)

@@ -35,10 +35,10 @@
                           (gFund 50 0.037) ;treasuries
                           (fFund 50 0.037)) ;aggregate bond
                     (stock 100
-                           (usa 60
+                           (usa 50
                                 (cFund 90 0.036) ;S&P 500
                                 (sFund 10 0.051));mid/small caps. non S&P 500
-                           (intl 40
+                           (intl 50
                                  (iFund 100 0.038))))) ;international
        (total 1000)
        (allocs (build-lst portfolio total total))

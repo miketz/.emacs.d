@@ -54,6 +54,29 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; f
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(let* ((portfolio '((usa 50
+                         (head 80
+                               (schk 70 0.03) ;us lcb
+                               (avlv 30 0.15)) ;us lcv
+                         (avuv 20 0.25)) ;us scv
+                    (intl 50
+                          (head 62
+                                (schf 70 0.03) ;int lcb
+                                (aviv 30 0.25)) ;int lcv
+                          (avdv 24 0.36) ;int scv
+                          (vexc 14 0.07)) ;em lcb
+                    ))
+       (total 1000)
+       (allocs (build-lst portfolio total total))
+       (sanity-check (verify-allocs allocs total))
+       (er (weighted-er allocs)))
+  `(:allocs ,allocs
+            :sanity-check ,sanity-check
+            :weighted-er ,er
+            :er-fee ,(* total (* er 0.01)))
+  ;; (build-report portfolio total)
+  )
+
 (let* ((portfolio '((bond 0 (schr 100  0.03))
                     (stock 100
                            (usa 60

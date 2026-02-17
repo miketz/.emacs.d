@@ -268,6 +268,26 @@
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Paul Merriman, WW all value
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(let* ((portfolio '((avlv 25 0.15) ;us lcv
+                    (avuv 25 0.25) ;us scv
+                    (dfiv 20 0.27) ;int lcv. or AVIV 0.25er
+                    (avdv 20 0.36) ;int scv
+                    (aves 10 0.33) ;em lcv
+                    ))
+       (total 1000)
+       (allocs (build-lst portfolio total total))
+       (sanity-check (verify-allocs allocs total))
+       (er (weighted-er allocs)))
+  `(:allocs ,allocs
+            :sanity-check ,sanity-check
+            :weighted-er ,er
+            :er-fee ,(* total (* er 0.01)))
+  ;; (build-report portfolio total)
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Paul Merriman, WW 4-fund. 50/50 us/intl
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (let* ((portfolio '((avus 25 0.15) ;us lcb

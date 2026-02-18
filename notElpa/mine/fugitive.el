@@ -705,6 +705,14 @@ If a region is selected, filter log further down to that line number range."
                                                fugitive-date-formats)))))
     format))
 
+(defun fugitive-set-colors-for-os-bg ()
+  "Re-calculate colors (based on current light or dark theme) and cache them again.
+
+INFO: Colors are cached for performance. So when you switch from light->dark theme
+or vice versa you are left with wrong colors."
+  (interactive)
+  (setq fugitive-date-format (fugitive-date-format-for-os-bg)))
+
 ;; the date format to use.
 (defcustom fugitive-date-format (fugitive-date-format-for-os-bg)
   "Date format to use in git log.

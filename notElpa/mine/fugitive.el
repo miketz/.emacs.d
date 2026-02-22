@@ -1180,12 +1180,11 @@ But if no hash found on current line, goto `next-line' as a side effect."
 
 
 (defcustom fugitive-external-terminal-executable
-  (cond ((eq system-type 'windows-nt)
-         "C:/Program Files/Git/git-bash.exe"
+  (cond ((eq system-type 'windows-nt) "C:/Program Files/Git/git-bash.exe"
          ;; (concat "C:/Users/" (user-login-name) "/AppData/Local/Programs/Git/git-bash.exe")
          )
         ((eq system-type 'gnu/linux) "x-terminal-emulator --working-directory=.") ; TODO: test this
-        ((eq system-type 'darwin) "terminal") ; TODO: test this
+        ((eq system-type 'darwin) "iTerm.app")
         (t nil))
   "External terminal program. Useful for cases where git requires interaction.")
 
@@ -1203,9 +1202,21 @@ For example: git commit, git add -p, git add -i, etc."
                                 process-environment))
          ;; git window will open to `default-directory'. shadow it with proj root for now.
          (default-directory (fugitive-proj-root-or-current-dir)))
-    (start-process "fugitive-extern-term"
-                   nil ;;(fugitive-new-output-buffer)
-                   fugitive-external-terminal-executable)))
+    (cond ((eq system-type 'windows-nt)
+           (start-process "fugitive-extern-term"
+                          nil ;;(fugitive-new-output-buffer)
+                          fugitive-external-terminal-executable))
+          ((eq system-type 'gnu/linux)
+           (start-process "fugitive-extern-term"
+                          nil ;;(fugitive-new-output-buffer)
+                          fugitive-external-terminal-executable))
+          ((eq system-type 'darwin)
+           (start-process "app-launcher" nil "open" "-a"
+                          fugitive-external-terminal-executable
+                          "." ; current dir
+                          ))
+          (t
+           (message "Terminal open not supported on your system.")))))
 
 
 (defun fugitive-proj-root-or-current-dir ()

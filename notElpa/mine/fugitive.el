@@ -1184,7 +1184,8 @@ But if no hash found on current line, goto `next-line' as a side effect."
          ;; (concat "C:/Users/" (user-login-name) "/AppData/Local/Programs/Git/git-bash.exe")
          )
         ((eq system-type 'gnu/linux) "x-terminal-emulator --working-directory=.") ; TODO: test this
-        ((eq system-type 'darwin) "iTerm.app")
+        ((eq system-type 'darwin) "iTerm.app" ;"Terminal.app"
+         )
         (t nil))
   "External terminal program. Useful for cases where git requires interaction.")
 

@@ -681,8 +681,12 @@ If a region is selected, filter log further down to that line number range."
 ;;                 But if you assume everything from the perspective of the local user that may be OK.
 ;; see ANSI escape codes for advaned coloring: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#colors--graphics-mode
 ;; NOTE: the colors escape codes are not faces as they are for the terminal, not Emacs.
+;; foreground escape: ESC[38;5;{ID}m  ;where {ID} is repalced iwth color number from 0-255
+;; background escape: ESC[48;5;{ID}m
+;; reset escape:      ESC[m           ;clear bg/fg colors going forward
 (defvar fugitive-date-formats
   '((windows-nt dark  "--date=format-local:\"[48;5;0m[38;5;245m%y[m[38;5;255m%m[38;5;250m%d[38;5;120m%H[48;5;0m[38;5;34m%M[m\"")
+    ;; (windows-nt light "--date=format-local:\"[38;5;0m%y[48;5;224m[38;5;0m%m[48;5;224m[38;5;0m%d[m[38;5;21m%H[48;5;255m[38;5;21m%M[m\"")
     (windows-nt light "--date=format-local:\"[48;5;255m[38;5;250m%y[m[38;5;0m%m[38;5;1m%d[38;5;0m%H[48;5;255m[38;5;21m%M[m\"")
     (darwin dark      "--date=format-local:\"[48;5;0m[38;5;245m%-y[m[38;5;255m%m[38;5;250m%d[38;5;120m%_H[48;5;0m[38;5;34m%M[m\"")
     (darwin light     "--date=format-local:\"[48;5;255m[38;5;250m%-y[m[38;5;0m%m[38;5;1m%d[38;5;0m%_H[48;5;255m[38;5;21m%M[m\"")))

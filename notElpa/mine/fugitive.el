@@ -1201,7 +1201,7 @@ For example: git commit, git add -p, git add -i, etc."
                                   (cons fugitive-home-env-var process-environment)
                                 ;; else just use process-environment as-is
                                 process-environment))
-         ;; git window will open to `default-directory'. shadow it with proj root for now.
+         ;; git bash for windows opens to `default-directory'. shadow it with proj root.
          (default-directory (fugitive-proj-root-or-current-dir)))
     (cond ((eq system-type 'windows-nt)
            (start-process "fugitive-extern-term"
@@ -1214,7 +1214,7 @@ For example: git commit, git add -p, git add -i, etc."
           ((eq system-type 'darwin)
            (start-process "app-launcher" nil "open" "-a"
                           fugitive-external-terminal-executable
-                          "." ; current dir
+                          "." ; current dir. `default-directory' seems to overrirde this
                           ))
           (t
            (message "Terminal open not supported on your system.")))))

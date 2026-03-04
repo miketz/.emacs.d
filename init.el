@@ -10836,6 +10836,13 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'elcity-start "elcity" nil nil)
 
 ;;;----------------------------------------------------------------------------
+;;; let-completion. in notElpa
+;;;----------------------------------------------------------------------------
+(autoload #'let-completion-mode "let-completion" nil t)
+(add-hook 'emacs-lisp-mode-hook #'let-completion-mode)
+(setq let-completion-inline-max-width 10)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 (when my-use-evil-p

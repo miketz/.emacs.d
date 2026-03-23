@@ -742,6 +742,12 @@ Starting with --date=.")
                    ;; "git log --graph -n 500 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 
+(defun fugitive-log-graph-long-all ()
+  "Same as `fugitive-log-graph-long', but with all branches."
+  (interactive)
+  (let* ((cmd (concat "git log --all --graph --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " ")))
+    (fugitive-shell-command cmd nil t)))
+
 
 
 (defvar-local fugitive-log-type nil

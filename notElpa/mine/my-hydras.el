@@ -355,6 +355,7 @@ _P_: first parent commits only, faster no colors
 _c_: graph compact
 _m_: graph medium
 _l_: graph long
+_A_: graph long, ALL branches
 _s_: normal, one line
 _a_: normal, one line, faster no colors
 _;_: log between revs
@@ -366,6 +367,7 @@ _q_, _C-g_: quit"
   ("c" fugitive-log-graph-compact)
   ("m" fugitive-log-graph-medium)
   ("l" fugitive-log-graph-long)
+  ("A" fugitive-log-graph-long-all)
   ("s" fugitive-log)
   ("a" fugitive-log-no-color)
   (";" fugitive-log-between)

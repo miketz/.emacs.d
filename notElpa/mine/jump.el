@@ -194,6 +194,20 @@ _q_, _C-g_: quit"
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
     (jump #'jump-cs-method-refs-regex)))
 
+;; TODO: use a better "var oriented" regex for isearch.
+(defun jump-cs-local-var ()
+  "Find local var definition.
+For this don't use ripgrep. Just call isearch starting from method definition.
+"
+  (interactive)
+  (xref-push-marker-stack) ; so M-, works to go back.
+  (let ((case-fold-search nil)) ; case sensitive
+    (isearch-forward-symbol-at-point))
+  (beginning-of-defun)
+  (isearch-repeat-forward)
+  ;; (isearch-exit)
+  )
+
 ;;;###autoload
 (defhydra jump-cs-hydra (:color blue :hint nil)
   "
@@ -201,11 +215,13 @@ _c_: class
 _i_: implemenators of interface
 _m_: method
 _r_: method references
+_v_: local var
 _q_, _C-g_: quit"
   ("c" jump-cs-class)
   ("i" jump-cs-interface-implementor)
   ("m" jump-cs-method)
   ("r" jump-cs-method-refs)
+  ("v" jump-cs-local-var)
   ("C-g" nil nil)
   ("q" nil))
 

@@ -1526,7 +1526,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
-;;; jump. language speciifc regexes to assist in rg (ripgrep) searches
+;;; jump. language specific regexes to assist in rg (ripgrep) searches
 ;;;----------------------------------------------------------------------------
 (autoload #'jump-go-hydra/body "jump" nil t)
 (autoload #'jump-cs-hydra/body "jump" nil t)

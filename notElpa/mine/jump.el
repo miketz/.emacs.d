@@ -154,7 +154,7 @@ _q_, _C-g_: quit"
 ;;;----------------------------------------------------------------------------
 ;;; C# regexes
 ;;;----------------------------------------------------------------------------
-(defun jump-cs-class-regex (txt) (concat "(class|struct) " txt))
+(defun jump-cs-class-regex (txt) (concat "(class|struct) " txt "\\b"))
 (defun jump-cs-interface-implementor-regex (txt) (concat "class.+:.+" txt))
 (defun jump-cs-method-regex (txt)
   ;; p = for public/private/protected. filters out interface methods which i find useless for jumping to.

@@ -4335,6 +4335,7 @@ and indent."
       (smart-tabs-mode-enable)))
   (add-hook 'c++-mode-hook #'my-setup-c++-mode)
 
+  (define-key java-mode-map (kbd "C-c j") #'jump-java-hydra/body)
   (defvar my-use-tabs-java-p nil)
   (defun my-setup-java-mode ()
     (progn ;; tab/indent stuff
@@ -9774,6 +9775,7 @@ And turns off `indent-tabs-mode'."
 
 (with-eval-after-load 'java-ts-mode
   (define-key java-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key java-ts-mode-map (kbd "C-c j") #'jump-java-hydra/body)
 
   (defun my-setup-java-ts-mode ()
     ;; set to 1 so comments on the same line are kept close to the code

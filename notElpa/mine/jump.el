@@ -231,6 +231,70 @@ _q_, _C-g_: quit"
   ("C-g" nil nil)
   ("q" nil))
 
+;;;----------------------------------------------------------------------------
+;;; Java regexes
+;;;----------------------------------------------------------------------------
+;; TODO: for java handle the fact that public/private/protected is optional.
+(defun jump-java-class-regex (txt) (concat "class " txt "\\b"))
+(defun jump-java-interface-implementor-regex (txt) (concat "class.+implements.+" txt))
+(defun jump-java-method-regex (txt)
+  ;; p = for public/private/protected. filters out interface methods which i find useless for jumping to.
+  ;; txt( to find definition.
+  (concat " p.+ " txt "\\("))
+;; (defun jump-java-method-refs-regex (txt) (concat "\\." txt "\\("))
+(defun jump-java-method-refs-regex (txt)
+  ;; requires --pcre2 flag passed to ripgrep
+  ;; ^(?!.*(private|public|protected)) = does *not* start with public/private/protected.
+  ;; .* = any match after the not public/private/protected. check.
+  ;; [\\t \\.] = tab, space, dot before txt(
+  (concat "^(?!.*(private|public|protected)).*[\\t \\.]" txt "\\("))
+
+;;;----------------------------------------------------------------------------
+;;; Java UI
+;;;----------------------------------------------------------------------------
+(defun jump-java-class ()
+  "Find class/struct definition."
+  (interactive)
+  (jump #'jump-java-class-regex))
+
+(defun jump-java-interface-implementor ()
+  "Find class implementing an interface."
+  (interactive)
+  (jump #'jump-java-interface-implementor-regex))
+
+(defun jump-java-method ()
+  "Find method definition."
+  (interactive)
+  (jump #'jump-java-method-regex))
+
+(defun jump-java-method-refs ()
+  "Find refs/calls of function."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement to avoid permanently adding --pcre2 flag
+  (let ((rg-command-line-flags rg-command-line-flags))
+    (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
+    (jump #'jump-java-method-refs-regex)))
+
+
+
+;;;###autoload
+(defhydra jump-java-hydra (:color blue :hint nil)
+  "
+_c_: class
+_i_: implemenators of interface
+_m_: method
+_r_: method references
+_v_: local var
+_q_, _C-g_: quit"
+  ("c" jump-java-class)
+  ("i" jump-java-interface-implementor)
+  ("m" jump-java-method)
+  ("r" jump-java-method-refs)
+  ("v" jump-local-var)
+  ("C-g" nil nil)
+  ("q" nil))
+
+
 
 ;;;----------------------------------------------------------------------------
 ;;; javascript regexes

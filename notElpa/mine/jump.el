@@ -160,7 +160,13 @@ _q_, _C-g_: quit"
   ;; p = for public/private/protected. filters out interface methods which i find useless for jumping to.
   ;; txt( or txt< to find definition.
   (concat " p.+ " txt "[\\(<]"))
-(defun jump-cs-method-refs-regex (txt) (concat "\\." txt "\\("))
+;; (defun jump-cs-method-refs-regex (txt) (concat "\\." txt "\\("))
+(defun jump-cs-method-refs-regex (txt)
+  ;; requires --pcre2 flag passed to ripgrep
+  ;; ^(?!.*(private|public|protected)) = does *not* start with public/private/protected.
+  ;; .* = any match after the not public/private/protected. check.
+  ;; [\\t \\.] = tab, space, dot before txt(
+  (concat "^(?!.*(private|public|protected)).*[\\t \\.]" txt "\\("))
 
 ;;;----------------------------------------------------------------------------
 ;;; C# UI
@@ -183,7 +189,10 @@ _q_, _C-g_: quit"
 (defun jump-cs-method-refs ()
   "Find refs/calls of function."
   (interactive)
-  (jump #'jump-cs-method-refs-regex))
+  ;; shadow `rg-command-line-flags' for duration this let statement to avoid permanently adding --pcre2 flag
+  (let ((rg-command-line-flags rg-command-line-flags))
+    (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
+    (jump #'jump-cs-method-refs-regex)))
 
 ;;;###autoload
 (defhydra jump-cs-hydra (:color blue :hint nil)

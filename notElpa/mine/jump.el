@@ -46,6 +46,22 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
     ))
 
 
+(defun jump-local-var ()
+  "Find local var definition. Language agnostic.
+For this don't use ripgrep. Just call isearch starting from method definition."
+  (interactive)
+  (xref-push-marker-stack) ; so M-, works to go back.
+  (let ((case-fold-search nil)) ; case sensitive
+    (isearch-forward-symbol-at-point))
+  (beginning-of-defun)
+  (isearch-repeat-forward)
+  (isearch-exit)
+  (backward-word)
+  (let ((pulse-flag nil) ; keep the highlight there so we have time to see it.
+        ;; but if we do pulse, slow down so we have time to see it.
+        (pulse-iterations 20)
+        (pulse-delay 0.1))
+    (xref-pulse-momentarily)))
 
 
 ;;; NOTE: in regex fn's, double \\ is actually a single \. Doubled up for the
@@ -137,6 +153,7 @@ _f_: function
 _m_: method
 _F_: function or method. (more general but more false matches)
 _r_: functions references (flawed, misses fn vars)
+_v_: local var
 _V_: global var
 _q_, _C-g_: quit"
   ("s" jump-go-struct)
@@ -146,6 +163,7 @@ _q_, _C-g_: quit"
   ("F" jump-go-function-or-method)
   ("r" jump-go-function-refs)
   ;; ("v" jump-go-var)
+  ("v" jump-local-var)
   ("V" jump-go-global-var)
   ("C-g" nil nil)
   ("q" nil))
@@ -194,19 +212,7 @@ _q_, _C-g_: quit"
     (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
     (jump #'jump-cs-method-refs-regex)))
 
-;; TODO: use a better "var oriented" regex for isearch.
-(defun jump-cs-local-var ()
-  "Find local var definition.
-For this don't use ripgrep. Just call isearch starting from method definition.
-"
-  (interactive)
-  (xref-push-marker-stack) ; so M-, works to go back.
-  (let ((case-fold-search nil)) ; case sensitive
-    (isearch-forward-symbol-at-point))
-  (beginning-of-defun)
-  (isearch-repeat-forward)
-  ;; (isearch-exit)
-  )
+
 
 ;;;###autoload
 (defhydra jump-cs-hydra (:color blue :hint nil)
@@ -221,7 +227,7 @@ _q_, _C-g_: quit"
   ("i" jump-cs-interface-implementor)
   ("m" jump-cs-method)
   ("r" jump-cs-method-refs)
-  ("v" jump-cs-local-var)
+  ("v" jump-local-var)
   ("C-g" nil nil)
   ("q" nil))
 
@@ -266,9 +272,11 @@ But using this regex anyway for performance and fewer false positive matches."
   "
 _f_: function
 _r_: functions references (flawed, misses fn vars)
+_v_: local var
 _q_, _C-g_: quit"
   ("f" jump-js-function)
   ("r" jump-js-function-refs)
+  ("v" jump-local-var)
   ("C-g" nil nil)
   ("q" nil))
 
@@ -300,9 +308,11 @@ _q_, _C-g_: quit"
   "
 _f_: function GNU style
 _r_: function refs GNU style
+_v_: local var
 _q_, _C-g_: quit"
   ("f" jump-c-function-gnu)
   ("r" jump-c-function-refs-gnu)
+  ("v" jump-local-var)
   ("C-g" nil nil)
   ("q" nil))
 

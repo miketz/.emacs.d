@@ -1530,6 +1530,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 (autoload #'jump-go-hydra/body "jump" nil t)
 (autoload #'jump-cs-hydra/body "jump" nil t)
+(autoload #'jump-java-hydra/body "jump" nil t)
 (autoload #'jump-js-hydra/body "jump" nil t)
 (autoload #'jump-c-hydra/body "jump" nil t)
 

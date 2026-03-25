@@ -10835,7 +10835,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; elcity
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/elcity" load-path)
+(push "~/.emacs.d/notElpaYolo/elcity/lisp" load-path)
 (autoload #'elcity-start "elcity" nil nil)
 
 ;;;----------------------------------------------------------------------------

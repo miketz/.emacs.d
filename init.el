@@ -10848,7 +10848,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; agent-shell
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/agent-shell" load-path)
+;; (push "~/.emacs.d/notElpaYolo/agent-shell" load-path)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

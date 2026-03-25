@@ -236,7 +236,7 @@ _q_, _C-g_: quit"
 ;;;----------------------------------------------------------------------------
 ;; TODO: for java handle the fact that public/private/protected is optional.
 (defun jump-java-class-regex (txt) (concat "class " txt "\\b"))
-(defun jump-java-interface-implementor-regex (txt) (concat "class.+implements.+" txt))
+(defun jump-java-interface-implementor-regex (txt) (concat "class.+(implements|extends).+" txt))
 (defun jump-java-method-regex (txt)
   ;; p = for public/private/protected. filters out interface methods which i find useless for jumping to.
   ;; txt( to find definition.

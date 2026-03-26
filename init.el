@@ -1532,6 +1532,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 (autoload #'jump-cs-hydra/body "jump" nil t)
 (autoload #'jump-java-hydra/body "jump" nil t)
 (autoload #'jump-js-hydra/body "jump" nil t)
+(autoload #'jump-swift-hydra/body "jump" nil t)
 (autoload #'jump-c-hydra/body "jump" nil t)
 
 ;;;----------------------------------------------------------------------------
@@ -7747,6 +7748,8 @@ Closure over `preceding-sexp-fn'."
 
   (define-key swift-mode-map (kbd "C-c g") #'my-swift-commands-hydra/body)
   (define-key swift-mode-map (kbd "C-c C-g") #'my-swift-commands-hydra/body)
+
+  (define-key swift-mode-map (kbd "C-c j") #'jump-swift-hydra/body)
 
   (defun my-setup-swift-mode ()
     (yas-minor-mode 1)

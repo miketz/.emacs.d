@@ -346,6 +346,63 @@ _q_, _C-g_: quit"
 
 
 ;;;----------------------------------------------------------------------------
+;;; Swift regexes
+;;;----------------------------------------------------------------------------
+(defun jump-swift-class-regex (txt) (concat "(class|struct) " txt "\\b"))
+(defun jump-swift-interface-implementor-regex (txt) (concat "class.+:.+" txt))
+(defun jump-swift-function-regex (txt) (concat ".*func " txt "[\\(<]"))
+(defun jump-swift-function-refs-regex (txt)
+  ;; requires --pcre2 flag passed to ripgrep
+  ;; ^(?!.*func ) = does *not* start with .*func.
+  ;; .* = any match after the not-func check.
+  ;; [\\t \\.] = tab, space, dot before txt(
+  (concat "^(?!.*func ).*[\\t \\.]" txt "[\\(<]"))
+
+;;;----------------------------------------------------------------------------
+;;; Swift UI
+;;;----------------------------------------------------------------------------
+(defun jump-swift-class ()
+  "Find class/struct definition."
+  (interactive)
+  (jump #'jump-swift-class-regex))
+
+(defun jump-swift-interface-implementor ()
+  "Find class implementing an interface."
+  (interactive)
+  (jump #'jump-swift-interface-implementor-regex))
+
+(defun jump-swift-function ()
+  "Find function definition."
+  (interactive)
+  (jump #'jump-swift-function-regex))
+
+(defun jump-swift-function-refs ()
+  "Find refs/calls of function."
+  (interactive)
+  ;; shadow `rg-command-line-flags' for duration this let statement to avoid permanently adding --pcre2 flag
+  (let ((rg-command-line-flags rg-command-line-flags))
+    (add-to-list 'rg-command-line-flags "--pcre2") ; supports the "not start with func" search.
+    (jump #'jump-swift-function-refs-regex)))
+
+
+;;;###autoload
+(defhydra jump-swift-hydra (:color blue :hint nil)
+  "
+_c_: class, struct
+_i_: implemenators of interface
+_f_: function definition
+_r_: function references
+_v_: local var
+_q_, _C-g_: quit"
+  ("c" jump-swift-class)
+  ("i" jump-swift-interface-implementor)
+  ("f" jump-swift-function)
+  ("r" jump-swift-function-refs)
+  ("v" jump-local-var)
+  ("C-g" nil nil)
+  ("q" nil))
+
+;;;----------------------------------------------------------------------------
 ;;; C regexes
 ;;;----------------------------------------------------------------------------
 ;; Assuming GNU formated code.

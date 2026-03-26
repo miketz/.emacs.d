@@ -184,7 +184,7 @@ _q_, _C-g_: quit"
   ;; ^(?!.*(private|public|protected)) = does *not* start with public/private/protected.
   ;; .* = any match after the not public/private/protected. check.
   ;; [\\t \\.] = tab, space, dot before txt(
-  (concat "^(?!.*(private|public|protected)).*[\\t \\.]" txt "\\("))
+  (concat "^(?!.*(private|public|protected)).*[\\t \\.]" txt "[\\(<]"))
 
 ;;;----------------------------------------------------------------------------
 ;;; C# UI

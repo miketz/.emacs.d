@@ -406,12 +406,18 @@ _q_, _C-g_: quit"
 ;;; C regexes
 ;;;----------------------------------------------------------------------------
 ;; Assuming GNU formated code.
+(defun jump-c-struct-regex (txt) (concat "typedef struct " txt "\\b"))
 (defun jump-c-function-gnu-regex (txt) (concat "^" txt " \\("))
 (defun jump-c-function-refs-gnu-regex (txt) (concat "[\\t ]" txt " \\("))
 
 ;;;----------------------------------------------------------------------------
 ;;; C UI
 ;;;----------------------------------------------------------------------------
+(defun jump-c-struct ()
+  "Find struct definition."
+  (interactive)
+  (jump #'jump-c-struct-regex))
+
 (defun jump-c-function-gnu ()
   "Find fn definition. Assuming GNU formatted code."
   (interactive)
@@ -427,10 +433,12 @@ _q_, _C-g_: quit"
 ;;;###autoload
 (defhydra jump-c-hydra (:color blue :hint nil)
   "
+_s_: struct
 _f_: function GNU style
 _r_: function refs GNU style
 _v_: local var
 _q_, _C-g_: quit"
+  ("s" jump-c-struct)
   ("f" jump-c-function-gnu)
   ("r" jump-c-function-refs-gnu)
   ("v" jump-local-var)

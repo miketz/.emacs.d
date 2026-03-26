@@ -356,7 +356,7 @@ _q_, _C-g_: quit"
   ;; ^(?!.*func ) = does *not* start with .*func.
   ;; .* = any match after the not-func check.
   ;; [\\t \\.] = tab, space, dot before txt(
-  (concat "^(?!.*func ).*[\\t \\.]" txt "[\\(<]"))
+  (concat "^(?!.*func ).*[\\t \\.\\(]" txt "[\\(<]"))
 
 ;;;----------------------------------------------------------------------------
 ;;; Swift UI

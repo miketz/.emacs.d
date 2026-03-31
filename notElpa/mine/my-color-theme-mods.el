@@ -1663,6 +1663,14 @@ Historical preservation."
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg))
 
+(defun my-color-ancient ()
+  (interactive)
+  (load-theme 'ancient t)
+  ;;(my-rainbow-parens-dark-bg)
+  ;;(my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg))
+
 (defun my-color-app-monochrome-themes-dark-theme ()
   (interactive)
   (load-theme 'app-monochrome-themes-dark-theme t)

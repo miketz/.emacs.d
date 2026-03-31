@@ -57,11 +57,12 @@ For this don't use ripgrep. Just call isearch starting from method definition."
   (isearch-repeat-forward)
   (isearch-exit)
   (backward-word)
-  (let ((pulse-flag t) ; nil to keep the highlight there so we have time to see it.
-        ;; but if we do pulse, slow down so we have time to see it.
-        (pulse-iterations 10)
-        (pulse-delay 0.3))
-    (xref-pulse-momentarily)))
+  ;; (let ((pulse-flag nil) ; nil to keep the highlight there so we have time to see it.
+  ;;       ;; but if we do pulse, slow down so we have time to see it.
+  ;;       (pulse-iterations 10)
+  ;;       (pulse-delay 0.3))
+  ;;   (xref-pulse-momentarily))
+  (xref-pulse-momentarily))
 
 
 ;;; NOTE: in regex fn's, double \\ is actually a single \. Doubled up for the

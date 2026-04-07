@@ -1243,7 +1243,7 @@ To show reccomended max line length.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
-        ((eq my-curr-computer 'work-laptop-2025) 'bare-ido)
+        ((eq my-curr-computer 'work-laptop-2025) 'lusty-explorer)
         ((eq my-curr-computer 'mac-mini-m1-2021) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-mac) 'bare-ido)
         (t 'bare-ido))
@@ -1252,7 +1252,7 @@ Use nil for the Emacs default.
 Use bare-ido for ido without the extra ido packages.
 `selectrum' has been removed as an option as it is relaced by vertico.
 Choices: ivy fancy-ido grid-ido bare-ido helm icicles sallet fido
-icomplete mish-mash vertico nil")
+icomplete lusty-explorer mish-mash vertico nil")
 
 ;;TODO: make ivy pop-up it's window on the Linux tty.
 (defvar my-use-ivy-p (eq my-narrow-type 'ivy)
@@ -10854,6 +10854,19 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;; agent-shell
 ;;;----------------------------------------------------------------------------
 ;; (push "~/.emacs.d/notElpaYolo/agent-shell" load-path)
+
+;;;----------------------------------------------------------------------------
+;;; lusty-explorer. in notElpa
+;;;----------------------------------------------------------------------------
+(autoload #'lusty-file-explorer "lusty-explorer" nil t)
+(autoload #'lusty-buffer-explorer "lusty-explorer" nil t)
+
+(when (eq my-narrow-type 'lusty-explorer)
+  (global-set-key (kbd "C-x C-f") #'lusty-file-explorer)
+  (global-set-key (kbd "C-x b") #'lusty-buffer-explorer)
+  (when my-use-evil-p
+    (evil-leader/set-key "b" #'lusty-buffer-explorer)))
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

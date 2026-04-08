@@ -10891,7 +10891,10 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; exclude special buffers.
 (setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
 ;; but include special buffer *scratch*. exception to the rule.
-(setq nswbuff-include-buffer-regexps '("*scratch*"))
+;; (setq nswbuff-include-buffer-regexps '("*scratch*"))
+
+;; limit to buffers of current project
+;; (setq nswbuff-buffer-list-function 'nswbuff-project-buffer-list)
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

@@ -309,7 +309,7 @@ in case that file does not provide any feature."
 ;; (setq-default bidi-display-reordering t)
 
 (setq redisplay-skip-fontification-on-input t)
-
+(setq highlight-nonselected-windows nil)
 
 ;;;----------------------------------------------------------------------------
 ;;; defvars

@@ -20,6 +20,10 @@
 (setq-default bidi-paragraph-direction 'left-to-right)
 (setq bidi-inhibit-bpa t)
 
+;; helps performance?
+(setq redisplay-skip-fontification-on-input t)
+(setq highlight-nonselected-windows nil)
+
 ;; Avoid resizing the GUI frame when font changes.
 ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn
 ;; _fast/

@@ -10901,6 +10901,12 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+;; copy text in clipboard (outside emacs) into kill ring when you delete text
+;; in emacs
+(setq save-interprogram-paste-before-kill t)
+(setq kill-do-not-save-duplicates t)
+
+
 (when my-use-evil-p
   ;; NOTE: explicty set a jump point via: C-<SPC> C-<SPC>
   ;;       then leader "t" to jump back there.

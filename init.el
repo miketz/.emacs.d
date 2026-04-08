@@ -308,6 +308,8 @@ in case that file does not provide any feature."
 ;; usuported nil per docs. expirimenting with setting nil for performance.
 ;; (setq-default bidi-display-reordering t)
 
+(setq redisplay-skip-fontification-on-input t)
+
 
 ;;;----------------------------------------------------------------------------
 ;;; defvars

@@ -10867,6 +10867,31 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (when my-use-evil-p
     (evil-leader/set-key "b" #'lusty-buffer-explorer)))
 
+;;;----------------------------------------------------------------------------
+;;; nswbuff. buffer cycling. in notElpa
+;;;----------------------------------------------------------------------------
+;; Cycling buffs can be very fast if you're switching between a small number of
+;; recent buffs or a small filtered pool of buffs. Possibly faster than
+;; traditional buffer switching where you type the buffer name.
+(autoload #'nswbuff-switch-to-previous-buffer "nswbuff" nil t)
+(autoload #'nswbuff-switch-to-next-buffer "nswbuff" nil t)
+
+(global-set-key (kbd "C-<tab>") #'nswbuff-switch-to-next-buffer)
+(global-set-key (kbd "S-C-<tab>") #'nswbuff-switch-to-previous-buffer)
+
+;; this in effect causes a real switch. not just a preview, making it faster
+;; by removing one step (the return key to select or wait timeout).
+(setq nswbuff-display-intermediate-buffers t)
+;; with above setting causing a real buff switch, there's no hurry to have a
+;; short timeout on the menu. it will clear on our first action in the target
+;; buff anyway.
+(setq nswbuff-clear-delay 15)
+;; default, but set anyway. sort by recency rather than fixed list.
+(setq nswbuff-recent-buffers-first t)
+;; exclude special buffers.
+(setq nswbuff-exclude-buffer-regexps '("^ .*" "^\\*.*\\*"))
+;; but include special buffer *scratch*. exception to the rule.
+(setq nswbuff-include-buffer-regexps '("*scratch*"))
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

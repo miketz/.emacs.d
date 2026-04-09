@@ -34,12 +34,35 @@ The counterpart to `pop-global-mark' for going back."
                  (buffer-name buffer))))
     (goto-char position)
     (switch-to-buffer buffer)
-    ))
+    )
+  (nav-draw-ring))
 
 (defun nav-back ()
   (interactive)
   (let ((current-prefix-arg '(4)))
-    (call-interactively #'set-mark-command)))
+    (call-interactively #'set-mark-command))
+  (nav-draw-ring))
+
+(defun nav-draw-ring ()
+  (interactive)
+  (let ((curr-b (current-buffer))
+        (output "")
+        (output-b (get-buffer-create "*mark-ring*")))
+    (with-current-buffer curr-b
+      (cl-loop for m in mark-ring
+               do
+               (if (and (not (null m))
+                        (not (null (marker-position m))))
+                   (let ((str (concat (buffer-name (marker-buffer m)) " "
+                                      (number-to-string (marker-position m)) "\n")))
+                     (setq output (concat output str)))
+                 ;; else bad marker in ring? in theory will never happen.
+                 (setq output (concat output "bad marker\n")))))
+    (with-current-buffer output-b
+      (erase-buffer)
+      (insert output))
+    (display-buffer output-b)))
+
 
 
 ;;;----------------------------------------------------------------------------
@@ -61,5 +84,7 @@ _q_, _C-g_: quit"
 (global-set-key (kbd "C-c n") #'nav-hydra/body)
 ;; (global-set-key (kbd "C-M-j") #'nav-back)
 ;; (global-set-key (kbd "C-M-k") #'nav-forward)
+
+(provide 'nav)
 
 ;;; nav.el ends here

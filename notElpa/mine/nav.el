@@ -14,8 +14,9 @@
 ;;; Installation:
 
 ;;; Code:
+(require 'hydra)
 
-(defun nav-forward-global-mark ()
+(defun nav-forward ()
   "Go forward through global-mark-ring.
 The counterpart to `pop-global-mark' for going back."
   (interactive)
@@ -35,10 +36,30 @@ The counterpart to `pop-global-mark' for going back."
     (switch-to-buffer buffer)
     ))
 
-(global-set-key (kbd "C-M-j") (lambda ()
-                                (interactive)
-                                (let ((current-prefix-arg '(4)))
-                                  (call-interactively #'set-mark-command))))
-(global-set-key (kbd "C-M-k") #'nav-forward-global-mark)
+(defun nav-back ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively #'set-mark-command)))
+
+
+;;;----------------------------------------------------------------------------
+;;; UI
+;;;----------------------------------------------------------------------------
+;;;###autoload
+(defhydra nav-hydra (:color amaranth :hint nil)
+  "
+_j_, _h_: back
+_k_, _l_: forward
+_q_, _C-g_: quit"
+  ("j" nav-back)
+  ("h" nav-back)
+  ("k" nav-forward)
+  ("l" nav-forward)
+  ("C-g" nil nil)
+  ("q" nil))
+
+(global-set-key (kbd "C-c n") #'nav-hydra/body)
+;; (global-set-key (kbd "C-M-j") #'nav-back)
+;; (global-set-key (kbd "C-M-k") #'nav-forward)
 
 ;;; nav.el ends here

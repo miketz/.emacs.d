@@ -15,6 +15,9 @@
 
 ;;; Code:
 (require 'hydra)
+(require 'cl-lib)
+
+(setq mark-ring-max 4) ; small for testing purposes.
 
 (defun nav-forward ()
   "Go forward through global-mark-ring.
@@ -33,15 +36,34 @@ The counterpart to `pop-global-mark' for going back."
           (error "Global mark position is outside accessible part of buffer %s"
                  (buffer-name buffer))))
     (goto-char position)
-    (switch-to-buffer buffer)
-    )
+    (switch-to-buffer buffer))
   (nav-draw-ring))
 
+;; (defun nav-back ()
+;;   (interactive)
+;;   (let ((current-prefix-arg '(4)))
+;;     (call-interactively #'set-mark-command))
+;;   (nav-draw-ring))
+
 (defun nav-back ()
+  "Implemented by scraping logic from `pop-global-mark'."
   (interactive)
-  (let ((current-prefix-arg '(4)))
-    (call-interactively #'set-mark-command))
+  (let* ((m (car (last mark-ring)))
+         (buffer (marker-buffer m))
+         (position (marker-position m)))
+    (setq mark-ring (nconc (cdr mark-ring)
+				           (list (car mark-ring))))
+    (set-buffer buffer)
+    (or (and (>= position (point-min))
+             (<= position (point-max)))
+        (if widen-automatically
+            (widen)
+          (error "Global mark position is outside accessible part of buffer %s"
+                 (buffer-name buffer))))
+    (goto-char position)
+    (switch-to-buffer buffer))
   (nav-draw-ring))
+
 
 (defun nav-draw-ring ()
   (interactive)

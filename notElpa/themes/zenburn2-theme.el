@@ -1,5 +1,14 @@
 ;;; zenburn2-theme.el --- Strip out the extra stuff.  -*- lexical-binding: t -*-
 
+;;; License: GPL version 3 or later. Same as zenburn-theme.el.
+
+;;; Commentary:
+;; Straight copy of Bozhidar Batsov's zenburn-theme.el.
+;; https://github.com/bbatsov/zenburn-emacs
+;;
+;; But removing macros, functions, dynamic variables, file-local variables,
+;; and advice-add. A pure data theme. Does not create extra artifacts.
+
 (deftheme zenburn2 "The Zenburn2 color theme.")
 
 ;;; Color Palette

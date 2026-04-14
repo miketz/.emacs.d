@@ -1663,6 +1663,17 @@ Historical preservation."
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg))
 
+(defun my-color-batppuccin-mocha ()
+  (interactive)
+  (load-theme 'batppuccin-mocha t)
+  ;;(my-rainbow-parens-dark-bg)
+  ;;(my-treesit-faces-dark-bg)
+  (my-disable-var-use-face-treesit)
+  (my-ido-dark-bg)
+  (custom-theme-set-faces
+   'batppuccin-mocha
+   `(fringe ((t :background "#000000")))))
+
 (defun my-color-ancient ()
   (interactive)
   (load-theme 'ancient t)

@@ -3,6 +3,8 @@
 (deftheme zenburn2 "The Zenburn2 color theme.")
 
 ;;; Color Palette
+;; `+N' suffixes indicate a color is lighter.
+;; `-N' suffixes indicate a color is darker.
 (let ((zenburn-fg-1     "#656555")
       (zenburn-fg-05    "#989890")
       (zenburn-fg       "#DCDCCC")

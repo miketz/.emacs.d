@@ -2250,6 +2250,7 @@ This prevents overlapping themes; something I would rarely want."
        "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
        ;; "-raster-Terminus-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
        ;; "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1"
+       ;; "-outline-Monaspace Krypton Frozen-regular-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
        )
      default-frame-alist)))
 

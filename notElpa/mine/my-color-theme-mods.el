@@ -1373,7 +1373,7 @@ Historical preservation."
 (defun my-color-zenburn ()
   "Load the zenburn theme created by Bozhidar Batsov.  Make a few extra mods too."
   (interactive)
-  (load-theme 'zenburn t)
+  (load-theme 'zenburn2 t)
 
   (my-disable-var-use-face-treesit)
 
@@ -1381,7 +1381,7 @@ Historical preservation."
   ;; will allow them to be rolled back automatically when the theme is later
   ;; disabled.
   (custom-theme-set-variables
-   'zenburn
+   'zenburn2
    `(fci-rule-color "#4d4d4d")
 
    `(evil-emacs-state-cursor    '(bar "cyan"))
@@ -1400,7 +1400,7 @@ Historical preservation."
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
-   'zenburn
+   'zenburn2
    ;;from VIM charcoal: hi Normal guifg=#ADC299 guibg=#35352B "*
    ;;`(default ((t (:foreground "#CFC5A9" :background "#35352B"))))
    ;;`(default ((t (:foreground "#CCCCBC" :background "#35352B"))))

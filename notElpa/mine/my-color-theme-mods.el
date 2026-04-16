@@ -1508,8 +1508,8 @@ Historical preservation."
    ;; `(font-lock-doc-face ((t (:inherit font-lock-keyword-face :weight normal))))
    ;; `(font-lock-doc-face ((t (:foreground "moccasin"))))
 
-   `(font-lock-comment-face
-     ((t (:foreground "#8FB28F" :slant italic))))
+   ;; `(font-lock-comment-face
+   ;;   ((t (:foreground "#8FB28F" :slant italic))))
    `(font-lock-comment-delimiter-face
      ((t (:foreground "darkolivegreen3"))))
 

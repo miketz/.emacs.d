@@ -10868,6 +10868,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (when (eq my-narrow-type 'lusty-explorer)
   (global-set-key (kbd "C-x C-f") #'lusty-file-explorer)
   (global-set-key (kbd "C-x b") #'lusty-buffer-explorer)
+
+  ;; NOTE: this doesn't work as keymap is regenerated every run! setting in
+  ;; fn `lusty--define-mode-map' instead.
+  ;; (define-key lusty-mode-map (kbd "C-d") #'lusty-launch-dired)
+
   (when my-use-evil-p
     (evil-leader/set-key "b" #'lusty-buffer-explorer)))
 

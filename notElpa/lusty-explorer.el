@@ -1087,6 +1087,7 @@ level."
     (define-key map (kbd "<up>") #'lusty-highlight-previous)
     (define-key map (kbd "<down>") #'lusty-highlight-next)
     (define-key map (kbd "C-x d") #'lusty-launch-dired)
+    (define-key map (kbd "C-d") #'lusty-launch-dired)
     (define-key map (kbd "C-x e") #'lusty-select-current-name)
     ;; Special overrides.
     (define-key map [remap yank] #'lusty-yank)

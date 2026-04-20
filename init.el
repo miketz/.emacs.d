@@ -6418,7 +6418,8 @@ TODO: call this function when it works."
   ;; don't want all the extra tweaks to apply for those 1-off cases.
   (when my-use-ivy-p
     ;; part of the "vertico suite" but works with ivy too.
-    (marginalia-mode)))
+    ;; (marginalia-mode)
+    ))
 
 ;; (with-eval-after-load "swiper"
 ;;   ;; overwrite `swiper--re-builder' to use out-of-order matching.

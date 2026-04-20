@@ -10906,6 +10906,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;; (setq nswbuff-buffer-list-function 'nswbuff-project-buffer-list)
 
 ;;;----------------------------------------------------------------------------
+;;; comet-trail
+;;;----------------------------------------------------------------------------
+(autoload 'comet-trail-mode "comet-trail" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 ;; copy text in clipboard (outside emacs) into kill ring when you delete text

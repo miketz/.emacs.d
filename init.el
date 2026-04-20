@@ -9520,6 +9520,9 @@ TODO: delete this fn and replace with hooks, etc."
   (define-key vertico-map (kbd "C-j") #'vertico-next)
   (define-key vertico-map (kbd "C-k") #'vertico-previous)
 
+  ;; avoid `consult-buffer' untul 2 issues are solved
+  ;; 1. searches from the front only. have to type *scratch, not just scratch.
+  ;; 2. doens't respect <SPC> to dash - keybind on `vertico-map'
   ;; (when my-use-evil-p
   ;;   (evil-leader/set-key "b" #'consult-buffer))
 

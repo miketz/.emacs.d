@@ -14,7 +14,7 @@
 
     (js2-mode js-indent-level) (js-mode js-indent-level)
     (js-ts-mode js-indent-level)
-    (jsonian-mode jsonian-indentation)
+    (jsonian-mode jsonian-indentation) (jsonian-c-mode jsonian-indentation)
     (json-mode js-indent-level)
     (java-ts-mode java-ts-mode-indent-offset)
 

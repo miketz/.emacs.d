@@ -11,6 +11,12 @@
 (defun tail (x)
   (cddr x))
 
+(defun round-to (num prec)
+  "NUM decimal number.
+PREC deciaml precision to round to."
+  (let ((divisor (expt 10 prec)))
+    (/ (round (* num divisor)) (float divisor))))
+
 (cl-defun build-lst (alloc total original-total)
   "Convert a portfolio of percentages to hard allocation numbers.
 Also show percent against the original-total."
@@ -24,8 +30,9 @@ Also show percent against the original-total."
          (x-er (or (cl-third x) 0)))
 
     (cond ((leafp x) ; it's a thing to buy
-           (let* ((hard-amt (* total x-percent))
-                  (hard-per (* (/ hard-amt original-total) 100)))
+           ;; NOTE: `round-to' may cause a failure in `verify-allocs' later but keep for now.
+           (let* ((hard-amt (round-to (* total x-percent) 4))
+                  (hard-per (round-to (* (/ hard-amt original-total) 100) 4)))
              (append `((,x-name
                         ,hard-amt
                         ,hard-per
@@ -150,14 +157,19 @@ CUR-ALLOC is list of (sym amt) pairs."
 
 (defun weighted-er (port)
   "Calculate the weighted expense ratio of the entire portfolio."
-  (apply #'+
-         (mapcar (lambda (x)
-                   (let ((tick (nth 0 x))
-                         ;; convert whole number percent to decimal percent. ie 1% -> 0.01
-                         (per (/ (nth 2 x) 100))
-                         (er (nth 3 x)))
-                     (* per er)))
-                 port)))
+  (round-to (apply #'+
+                   (mapcar (lambda (x)
+                             (let ((tick (nth 0 x))
+                                   ;; convert whole number percent to decimal percent. ie 1% -> 0.01
+                                   (per (/ (nth 2 x) 100))
+                                   (er (nth 3 x)))
+                               (* per er)))
+                           port))
+            10))
+
+(defun er-fee (total weighted-er)
+  (round-to (* total (* weighted-er 0.01))
+            2))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sample portfolio

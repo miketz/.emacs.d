@@ -1,5 +1,7 @@
 ;;; yotsuba-theme.el --- A color theme inspired by the 4chan aesthetic
 
+;;; URL: https://github.com/Senka07/yotsuba-emacs-theme
+
 ;;; If you don't like something, feel free to modify it.
 ;;; I hope the way I structured the file makes modification easy.
 

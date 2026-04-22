@@ -53,32 +53,19 @@
                           (head 62
                                 (schf 70 0.03) ;int lcb
                                 (aviv 30 0.25)) ;int lcv
-                          (avdv 24 0.36) ;int scv
-                          (vexc 14 0.07)) ;em lcb
+                          (avdv 22 0.36) ;int scv
+                          (FLKR  8 0.09)
+                          (vexc  8 0.07)) ;em lcb
                     ))
        (total 1000))
   (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
 
-(let* ((portfolio '((bond 0 (schr 100  0.03))
-                    (stock 100
-                           (usa 60
-                                ;; 95/5 schk/avuv roughly cap weight. Or prodcues a simliar 9 square style box.
-                                (schk 85  0.03)
-                                (avuv 15  0.25)) ;3x SCV style box
-                           (intl 40
-                                 ;; 75/25 reweight to 81/19 due to ex-C. further underweight emerging
-                                 (devel 90
-                                        ;; 90/10 roughly cap weight
-                                        (schf 70  0.03)
-                                        (avdv 30  0.36)) ;3x SCV style box
-                                 (emerging 10
-                                           (vexc 100  0.07))))))
-       (total 1000))
-  (build-report-list portfolio total)
-  ;; (build-report portfolio total)
-  )
+
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

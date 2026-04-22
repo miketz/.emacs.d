@@ -17,16 +17,11 @@
                                         (avdv 30  0.36)) ;3x SCV style box
                                  (emerging 10
                                            (vexc 100  0.07))))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;;(build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; TSP. L target date funds do 65/35 us/intl, 80/20 cFund/sFund split in the stock sleeve.
@@ -40,16 +35,11 @@
                                 (sFund 10 0.051));mid/small caps. non S&P 500
                            (intl 50
                                  (iFund 100 0.038))))) ;international
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; f
@@ -66,14 +56,8 @@
                           (avdv 24 0.36) ;int scv
                           (vexc 14 0.07)) ;em lcb
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
 
@@ -91,16 +75,11 @@
                                         (avdv 30  0.36)) ;3x SCV style box
                                  (emerging 10
                                            (vexc 100  0.07))))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; default. roughly cap weighted, except for US bias.
@@ -125,24 +104,20 @@
                                         (avdv 10))
                                  (emerging 19
                                            (vexc 100))))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check))
+       (total 1000))
+  (build-report-list portfolio total))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; buffet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (let* ((portfolio '((scho 10)
                     (voo 90)))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check)
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ben felix small cap overweight.
@@ -154,13 +129,11 @@
                             (vexc 12)
                             (avuv 14)
                             (avdv 8))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check)
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ginger ale. https://www.optimizedportfolio.com/ginger-ale-portfolio/
@@ -173,11 +146,9 @@
                     (DGS 10) ;eme smallcap val
                     (EDV 10) ;extended duration treasury
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check))
+       (total 1000))
+  (build-report-list portfolio total))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dragonfly
@@ -186,11 +157,8 @@
                     (avuv 15)
                     (vxus 15)
                     (avdv 15)))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check))
+       (total 1000))
+  (build-report-list portfolio total))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -205,14 +173,9 @@
                                  (avdv 55.5556 0.36))
                           (emerging 10
                                     (vexc 100 0.07)))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01))))
+       (total 1000))
+  (build-report-list portfolio total))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; influenced by dragonfly. reduce SCV tilts and 60/40 us/intl
@@ -226,16 +189,11 @@
                                  (avdv 40 0.36)) ;4x scv style box
                           (emerging 10
                                     (avxc 100 0.33)))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -252,16 +210,11 @@
                     (avdv 10 0.36) ;int scv
                     (avem 10 0.33) ;em lcb
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 ;; :weighted-er 0.242
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -279,16 +232,11 @@
                           (avdv 24 0.36) ;int scv
                           (vexc 14 0.07)) ;em lcb
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Paul Merriman, WW all value
@@ -299,16 +247,11 @@
                     (avdv 20 0.36) ;int scv
                     (aves 10 0.33) ;em lcv
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Paul Merriman, WW 4-fund. 50/50 us/intl
@@ -318,16 +261,11 @@
                     (dfiv 25 0.27) ;int lcv. or AVIV 0.25er
                     (avds 25 0.30) ;int scb
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 ;; :weighted-er 0.2425
 
 
@@ -339,14 +277,8 @@
                     (schf 25 0.03) ;replacing value with blend
                     (avds 25 0.30) ;int scb
                     ))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
 ;; :weighted-er 0.1525
@@ -373,16 +305,11 @@
                                  (avdv 30 0.36)) ;3x SCV style box
                           (emerging 10
                                     (vexc 100 0.07)))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; 60/40 us/intl. value tilt on entire core portfolio with AVGV
@@ -398,16 +325,11 @@
                                        (avdv 30 0.36)) ;3x SCV style box
                                 (emerging 10
                                           (vexc 100 0.07))))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01)))
+       (total 1000))
+  (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
 
 
 
@@ -418,12 +340,7 @@
                     (core 80
                           (fzrox 60 0)
                           (fzilx 40 0))))
-       (total 1000)
-       (allocs (build-lst portfolio total total))
-       (sanity-check (verify-allocs allocs total))
-       (er (weighted-er allocs)))
-  `(:allocs ,allocs
-            :sanity-check ,sanity-check
-            :weighted-er ,er
-            :er-fee ,(* total (* er 0.01))))
+       (total 1000))
+  (build-report-list portfolio total))
+
 

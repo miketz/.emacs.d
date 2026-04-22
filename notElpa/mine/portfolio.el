@@ -43,6 +43,19 @@ Also show percent against the original-total."
                    (build-lst (cl-rest alloc) total original-total))))))
 
 
+(defun build-report-list (portfolio total)
+  "Build a report. Output as a lisp list."
+  (let* ((allocs (build-lst portfolio total total))
+         (sanity-check (verify-allocs allocs total))
+         (weighted-er (weighted-er allocs))
+         (er-fee (er-fee total weighted-er)))
+    `(:allocs ,allocs
+              :sanity-check ,sanity-check
+              :weighted-er ,weighted-er
+              :er-fee ,er-fee)))
+
+
+
 
 (defvar indent "    ")
 
@@ -69,6 +82,7 @@ Also show percent against the original-total."
            (build-report-relative (cl-rest alloc) total original-total tabs)))))
 
 (cl-defun build-report (alloc total)
+  "Build a report. Output in a buffer."
   (interactive)
   (let* ((buff (get-buffer-create "*alloc-report*"))
          (absolute-allocs (build-lst alloc total total))

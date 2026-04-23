@@ -3040,6 +3040,19 @@ so I track this in `my-modules'."
     (set-process-sentinel (start-process-shell-command "gitFetchHelper" buff cmd)
                           #'my--list-merges-complete)))
 
+(defun my-push-all-notElpaYolo ()
+  "Run git push on each repo in notElpaYolo.
+Useful if I forgot to push on a few odd repos, but not sure which ones.
+TODO: avoid push to upstream repo (ie i haven't forked it yet)."
+  (let* ((all-files (directory-files-and-attributes "~/.emacs.d/notElpaYolo"
+                                                    t "^[^.]" t))
+         (folders (mapcar #'car (cl-remove-if-not (lambda (f)
+                                                    (my-folder-p f))
+                                                  all-files))))
+    (cl-loop for f in folders
+             collect (let ((default-directory f))
+                       (shell-command-to-string "git push")))))
+
 ;; (defun my-list-modules-with-upstream-code-to-merge ()
 ;;   "List modules with new upstream code not yet merged into the local branch.
 ;; This does not actually fetch, only looks at the local contents on on the disk.

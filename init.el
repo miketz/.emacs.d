@@ -10889,8 +10889,22 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'nswbuff-switch-to-previous-buffer "nswbuff" nil t)
 (autoload #'nswbuff-switch-to-next-buffer "nswbuff" nil t)
 
-(global-set-key (kbd "C-<tab>") #'nswbuff-switch-to-next-buffer)
-(global-set-key (kbd "S-C-<tab>") #'nswbuff-switch-to-previous-buffer)
+;; (global-set-key (kbd "C-<tab>") #'nswbuff-switch-to-next-buffer)
+;; (global-set-key (kbd "S-C-<tab>") #'nswbuff-switch-to-previous-buffer)
+
+(defun my-nswbuff ()
+  "Switch to previous buffer.
+Prefers the most recent non-visible buffer.
+
+Inspired by package nswbuff. It cycles through the buffer list, rather than
+using the traditional method of typing the buffer name. Cycling can be faster
+with a small buffer pool. If the pool is exactly 1 buffer (as it is in this
+function), then cycling is always faster. As the buff can be auto selected
+and switched to with no user input required."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer))))
+
+(global-set-key (kbd "C-<tab>") #'my-nswbuff)
 
 ;; this in effect causes a real switch. not just a preview, making it faster
 ;; by removing one step (the return key to select or wait timeout).

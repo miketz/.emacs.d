@@ -10931,6 +10931,16 @@ and switched to with no user input required."
   (global-set-key (kbd "C-S-<tab>") #'tab-line-switch-to-prev-tab))
 
 (global-tab-line-mode)
+
+;;;----------------------------------------------------------------------------
+;;; tab-bar
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'tab-bar
+  (global-set-key (kbd "M-<tab>") #'tab-bar-switch-to-next-tab)
+  (global-set-key (kbd "M-S-<tab>") #'tab-bar-switch-to-prev-tab))
+
+;; (tab-bar-mode)
+
 ;;;----------------------------------------------------------------------------
 ;;; comet-trail
 ;;;----------------------------------------------------------------------------

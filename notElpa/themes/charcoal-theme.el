@@ -737,6 +737,18 @@ Example:
                                                       "blue"
                                                     fainter))))
 
+   ;; tab-line
+   `(tab-line-tab ((,class :inherit tab-line :foreground "white" :background "#705050")))
+   `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010")))
+   `(tab-line-tab-inactive ((,class :inherit tab-line-tab)))
+   ;; tab-line-tab-inactive-alternate
+   `(tab-line-tab-modified ((,class :foreground "red" )))
+   `(tab-line-highlight ((,class :foreground "yellowgreen")))
+   ;; tab-line-close-highlight
+   ;; tab-line-tab-special
+   ;; tab-line-tab-group
+
+
    ;; swift-mode
    `(swift-mode:function-call-face ((,class :foreground ,fn-call-fg
                                             :background ,fn-call-bg)))

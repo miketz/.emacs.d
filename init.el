@@ -10904,7 +10904,7 @@ and switched to with no user input required."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer))))
 
-(global-set-key (kbd "C-<tab>") #'my-nswbuff)
+;; (global-set-key (kbd "C-<tab>") #'my-nswbuff)
 
 ;; this in effect causes a real switch. not just a preview, making it faster
 ;; by removing one step (the return key to select or wait timeout).
@@ -10930,6 +10930,7 @@ and switched to with no user input required."
   (global-set-key (kbd "C-<tab>") #'tab-line-switch-to-next-tab)
   (global-set-key (kbd "C-S-<tab>") #'tab-line-switch-to-prev-tab))
 
+(global-tab-line-mode)
 ;;;----------------------------------------------------------------------------
 ;;; comet-trail
 ;;;----------------------------------------------------------------------------

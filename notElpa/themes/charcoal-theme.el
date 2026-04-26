@@ -750,6 +750,14 @@ Example:
    ;; tab-line-tab-group
 
 
+   ;; tab-bar.  tabs for window configurations.
+   `(tab-bar-tab ((,class :inherit tab-bar :foreground "white" :background "#202020")))
+   `(tab-bar-tab-inactive ((,class :inherit tab-bar :foreground "white" :background "#606060")))
+   ;; tab-bar-tab-group-current
+   ;; tab-bar-tab-group-inactive
+   ;; tab-bar-tab-ungrouped
+
+
    ;; swift-mode
    `(swift-mode:function-call-face ((,class :foreground ,fn-call-fg
                                             :background ,fn-call-bg)))

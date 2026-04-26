@@ -737,7 +737,8 @@ Example:
                                                       "blue"
                                                     fainter))))
 
-   ;; tab-line
+
+   ;; tab-line.  like web browser tabs.
    `(tab-line-tab ((,class :inherit tab-line :foreground "white" :background "#705050")))
    `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010")))
    `(tab-line-tab-inactive ((,class :inherit tab-line-tab)))

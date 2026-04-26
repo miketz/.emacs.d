@@ -10924,6 +10924,13 @@ and switched to with no user input required."
 ;; (setq nswbuff-buffer-list-function 'nswbuff-project-buffer-list)
 
 ;;;----------------------------------------------------------------------------
+;;; tab-line
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'tab-line
+  (global-set-key (kbd "C-<tab>") #'tab-line-switch-to-next-tab)
+  (global-set-key (kbd "C-S-<tab>") #'tab-line-switch-to-prev-tab))
+
+;;;----------------------------------------------------------------------------
 ;;; comet-trail
 ;;;----------------------------------------------------------------------------
 (autoload 'comet-trail-mode "comet-trail" nil t)

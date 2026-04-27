@@ -10936,8 +10936,8 @@ and switched to with no user input required."
 ;;; tab-bar
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'tab-bar
-  (global-set-key (kbd "M-<tab>") #'tab-bar-switch-to-next-tab)
-  (global-set-key (kbd "M-S-<tab>") #'tab-bar-switch-to-prev-tab))
+  (global-set-key (kbd "C->") #'tab-bar-switch-to-next-tab)
+  (global-set-key (kbd "C-<") #'tab-bar-switch-to-prev-tab))
 
 ;; (tab-bar-mode)
 

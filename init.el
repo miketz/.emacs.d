@@ -10945,7 +10945,7 @@ and switched to with no user input required."
   (global-set-key (kbd "C->") #'tab-bar-switch-to-next-tab)
   (global-set-key (kbd "C-<") #'tab-bar-switch-to-prev-tab)
 
-  (global-set-key (kbd "C-c b") #'my-tab-bar-hydra/body))
+  (global-set-key (kbd "C-c T") #'my-tab-bar-hydra/body))
 
 ;; (tab-bar-mode)
 

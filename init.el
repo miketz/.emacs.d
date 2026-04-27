@@ -10926,9 +10926,13 @@ and switched to with no user input required."
 ;;;----------------------------------------------------------------------------
 ;;; tab-line
 ;;;----------------------------------------------------------------------------
+(autoload #'my-tab-line-hydra/body "my-tab-line" nil t)
+
 (with-eval-after-load 'tab-line
   (global-set-key (kbd "C-<tab>") #'tab-line-switch-to-next-tab)
-  (global-set-key (kbd "C-S-<tab>") #'tab-line-switch-to-prev-tab))
+  (global-set-key (kbd "C-S-<tab>") #'tab-line-switch-to-prev-tab)
+
+  (global-set-key (kbd "C-c t") #'my-tab-line-hydra/body))
 
 (global-tab-line-mode)
 

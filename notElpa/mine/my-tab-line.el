@@ -4,12 +4,17 @@
 
 ;; TODO: add a fn for the "+" button
 
+(defun my-tab-line-switch-to-buffer ()
+  (interactive)
+  (call-interactively #'switch-to-buffer))
+
 ;;;###autoload
 (defhydra my-tab-line-hydra (:color amaranth :hint nil)
   "
 _n_, _j_: next
 _p_, _k_: previous
 _x_: [X] button. bury buffer.
+_+_: [+] button. select buffer
 _q_, _C-g_: quit"
 
   ("n" tab-line-switch-to-next-tab)
@@ -17,6 +22,7 @@ _q_, _C-g_: quit"
   ("j" tab-line-switch-to-next-tab)
   ("k" tab-line-switch-to-prev-tab)
   ("x" bury-buffer)
+  ("+" my-tab-line-switch-to-buffer)
 
   ("<RET>" nil)
   ("C-g" nil nil)

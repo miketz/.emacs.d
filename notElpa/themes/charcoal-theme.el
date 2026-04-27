@@ -742,7 +742,8 @@ Example:
    `(tab-line ((,class ;:inherit variable-pitch
                        :background "#103535")))
    `(tab-line-tab ((,class :inherit tab-line :foreground "white" :background "#705050")))
-   `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010")))
+   `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010"
+                                   :foreground "dark orange")))
    `(tab-line-tab-inactive ((,class :inherit tab-line-tab)))
    ;; tab-line-tab-inactive-alternate
    `(tab-line-tab-modified ((,class :foreground "red" )))

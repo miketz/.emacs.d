@@ -15,6 +15,7 @@ _n_, _j_: next
 _p_, _k_: previous
 _x_: [X] button. bury buffer.
 _+_: [+] button. select buffer
+_t_: toggle mode on/off
 _q_, _C-g_: quit"
 
   ("n" tab-line-switch-to-next-tab)
@@ -23,6 +24,7 @@ _q_, _C-g_: quit"
   ("k" tab-line-switch-to-prev-tab)
   ("x" bury-buffer)
   ("+" my-tab-line-switch-to-buffer)
+  ("t" tab-line-mode)
 
   ("<RET>" nil)
   ("C-g" nil nil)
@@ -39,6 +41,7 @@ _1_: close other tabs
 _c_: clone tab, dupe
 _r_: rename
 _u_: undo
+_t_: toggle mode on/off
 _q_, _C-g_: quit"
 
   ("n" tab-bar-switch-to-next-tab)
@@ -51,6 +54,7 @@ _q_, _C-g_: quit"
   ("c" tab-bar-duplicate-tab)
   ("r" tab-bar-rename-tab)
   ("u" tab-bar-undo-close-tab)
+  ("t" tab-bar-mode)
 
   ("<RET>" nil)
   ("C-g" nil nil)

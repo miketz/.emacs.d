@@ -753,6 +753,8 @@ Example:
 
 
    ;; tab-bar.  tabs for window configurations.
+   `(tab-bar ((,class ;:inherit variable-pitch
+               :background "#103535")))
    `(tab-bar-tab ((,class :inherit tab-bar :foreground "white" :background "#202020")))
    `(tab-bar-tab-inactive ((,class :inherit tab-bar :foreground "white" :background "#606060")))
    ;; tab-bar-tab-group-current

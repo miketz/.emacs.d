@@ -761,6 +761,7 @@ Example:
    ;; tab-bar-tab-group-current
    ;; tab-bar-tab-group-inactive
    ;; tab-bar-tab-ungrouped
+   ;; tab-bar-tab-highlight
 
 
    ;; swift-mode

@@ -127,7 +127,17 @@
 
           "-outline-Consolas-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-outline-Consolas-bold-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
-          "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"])
+          "-outline-Lucida Console-normal-normal-normal-mono-*-*-*-*-c-*-tis620-2533"
+
+          "-outline-Iosevka Term Thin-thin-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term Extralight-ultralight-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term Light-light-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term-regular-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term Medium-medium-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term Semibold-semibold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term Extrabold-extrabold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
+          "-outline-Iosevka Term Heavy-black-normal-normal-mono-*-*-*-*-c-*-iso10646-1"])
        (t nil)))
      (i 0)
      (len (length my-fonts))

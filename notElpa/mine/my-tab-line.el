@@ -27,3 +27,31 @@ _q_, _C-g_: quit"
   ("<RET>" nil)
   ("C-g" nil nil)
   ("q" nil))
+
+;;;###autoload
+(defhydra my-tab-bar-hydra (:color amaranth :hint nil)
+  "
+_n_, _j_: next
+_p_, _k_: previous
+_x_: [X] button. close tab
+_+_: [+] button. new tab
+_1_: close other tabs
+_c_: clone tab, dupe
+_r_: rename
+_u_: undo
+_q_, _C-g_: quit"
+
+  ("n" tab-bar-switch-to-next-tab)
+  ("p" tab-bar-switch-to-prev-tab)
+  ("j" tab-bar-switch-to-next-tab)
+  ("k" tab-bar-switch-to-prev-tab)
+  ("x" tab-bar-close-tab)
+  ("+" tab-bar-new-tab)
+  ("1" tab-bar-close-other-tabs)
+  ("c" tab-bar-duplicate-tab)
+  ("r" tab-bar-rename-tab)
+  ("u" tab-bar-undo-close-tab)
+
+  ("<RET>" nil)
+  ("C-g" nil nil)
+  ("q" nil))

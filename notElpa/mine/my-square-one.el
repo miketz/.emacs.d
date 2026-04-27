@@ -19,9 +19,10 @@
 (let ((keep-buffers
        '("*scratch*" "*Messages*"
          ;; "*Compile-Log*"
-         "*Minibuf-1*"
-         "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
-         "*Echo Area 1*" "*helm mini*"))
+         ;; "*Minibuf-1*"
+         ;; "*Minibuf-0*" "*code-conversion-work*" "*Echo Area 0*"
+         ;; "*Echo Area 1*" "*helm mini*" "*tab-line-hscroll*" "*string-pixel-width*"
+         ))
       (keep-modes '(erc-mode)))
 
   (defun my-square-one ()
@@ -51,13 +52,16 @@ edge cases not covered by buffer killing."
 
     (cl-loop for b in (buffer-list)
              do
-             (let* ((keep? (member (buffer-name b) keep-buffers))
+             (let* ((name (buffer-name b))
+                    (keep? (member name keep-buffers))
                     (mode? (and (not keep?)
                                 ;; C-u bypasses mode white list.
                                 (and (not current-prefix-arg)
                                      (memq (my-buffer-mode b) keep-modes))))
-                    (mini? (and (not keep?) (minibufferp b))))
-               (unless (or keep? mode? mini?)
+                    (mini? (and (not keep?) (minibufferp b)))
+                    (dead? (not (buffer-live-p b)) )
+                    (hidden? (string-prefix-p " " name)))
+               (unless (or keep? mode? mini? dead? hidden?)
                  (ignore-errors
                    (kill-buffer b)))))))
 

@@ -1,20 +1,51 @@
 ;;; my-tab-line.el --- helper funcs for tab-line -*- lexical-binding: t -*-
 
 (require 'hydra)
+(require 'ivy)
 
 ;; TODO: add a fn for the "+" button
 
+;; (call-interactively #'switch-to-buffer)
+
 (defun my-tab-line-switch-to-buffer ()
+  "Switch to a buffer in the tab-line."
   (interactive)
-  (call-interactively #'switch-to-buffer))
+  (switch-to-buffer
+   (ivy-completing-read "buff: "
+                        (mapcar #'buffer-name (tab-line-tabs-window-buffers)))))
+
+(defun my-tab-line--buffers-for-add ()
+  "Return a list of buffers not currently in the tab-line."
+  (cl-remove-if (lambda (b)
+                  (or
+                   ;; hidden
+                   (string-prefix-p " " (buffer-name b))
+                   ;; dead
+                   (not (buffer-live-p b))
+                   ;; minibuffer
+                   (minibufferp b)
+                   ;; already in tab line
+                   (memq b (tab-line-tabs-window-buffers))))
+                (buffer-list)))
+
+(defun my-tab-line-add-buff-to-tab-line ()
+  "Add a buffer to the tab-line.
+Buffers already in the tab-line are excluded from the buffer seleciton list."
+  (interactive)
+  (switch-to-buffer
+   (ivy-completing-read "buff: "
+                        (mapcar #'buffer-name (my-tab-line--buffers-for-add)))))
+
+
 
 ;;;###autoload
 (defhydra my-tab-line-hydra (:color amaranth :hint nil)
   "
 _n_, _j_: next
 _p_, _k_: previous
+_b_: switch to buffer in tab-line
 _x_: [X] button. bury buffer.
-_+_: [+] button. select buffer
+_+_: [+] button. add buffer
 _t_: toggle mode on/off
 _T_: toggle global mode on/off
 _q_, _C-g_: quit"
@@ -23,8 +54,9 @@ _q_, _C-g_: quit"
   ("p" tab-line-switch-to-prev-tab)
   ("j" tab-line-switch-to-next-tab)
   ("k" tab-line-switch-to-prev-tab)
+  ("b" my-tab-line-switch-to-buffer)
   ("x" bury-buffer)
-  ("+" my-tab-line-switch-to-buffer)
+  ("+" my-tab-line-add-buff-to-tab-line :color blue) ; exits hydra
   ("t" tab-line-mode)
   ("T" global-tab-line-mode)
 

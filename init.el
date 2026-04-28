@@ -6331,6 +6331,7 @@ TODO: call this function when it works."
   (define-key swiper-all-map (kbd "C-SPC") #'swiper-avy))
 
 (with-eval-after-load 'ivy
+  (require 'ivy-avy) ; for C-' keybind to jump to selection with avy.
   (setq ivy-height 35)
 
   (when my-use-ivy-explorer

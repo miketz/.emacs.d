@@ -16,6 +16,7 @@ _p_, _k_: previous
 _x_: [X] button. bury buffer.
 _+_: [+] button. select buffer
 _t_: toggle mode on/off
+_T_: toggle global mode on/off
 _q_, _C-g_: quit"
 
   ("n" tab-line-switch-to-next-tab)
@@ -25,6 +26,7 @@ _q_, _C-g_: quit"
   ("x" bury-buffer)
   ("+" my-tab-line-switch-to-buffer)
   ("t" tab-line-mode)
+  ("T" global-tab-line-mode)
 
   ("<RET>" nil)
   ("C-g" nil nil)

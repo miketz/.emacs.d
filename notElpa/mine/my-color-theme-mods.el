@@ -74,6 +74,44 @@ New treesit face."
      ;; `(ido-grid-match-3 ((t :foreground "black" :background "white")))
      )))
 
+(defun my-tab-line-bar-dark ()
+  "Colors for `tab-line-mode' and `tab-bar-mode'.
+
+Intended for dark themes but works for light themes too. The tab area is
+separate from the buffer text so it won't conflict. And may actually pair well
+with the contrast."
+  (interactive)
+  (custom-theme-set-faces
+   (my-get-theme)
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; tab-line.  like web browser tabs.
+   `(tab-line ((t ;:inherit variable-pitch
+                       :background "#305555")))
+   `(tab-line-tab ((t :inherit tab-line :foreground "white" :background "#705050")))
+   `(tab-line-tab-current ((t :inherit tab-line-tab :background "#301010"
+                                   :foreground "dark orange")))
+   `(tab-line-tab-inactive ((t :inherit tab-line-tab)))
+   ;; tab-line-tab-inactive-alternate
+   `(tab-line-tab-modified ((t :foreground "red" )))
+   `(tab-line-highlight ((t :foreground "yellowgreen")))
+   ;; tab-line-close-highlight
+   ;; tab-line-tab-special
+   ;; tab-line-tab-group
+
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; tab-bar.  tabs for window configurations.
+   `(tab-bar ((t ;:inherit variable-pitch
+               :background "#103535")))
+   `(tab-bar-tab ((t :inherit tab-bar :foreground "dark orange" :background "#202020")))
+   `(tab-bar-tab-inactive ((t :inherit tab-bar :foreground "white" :background "#606060")))
+   ;; tab-bar-tab-group-current
+   ;; tab-bar-tab-group-inactive
+   ;; tab-bar-tab-ungrouped
+   ;; tab-bar-tab-highlight
+   ))
+
 (defun my-rainbow-parens-dark-bg ()
   "Colors for parens that are easy to distinguish from each other when against a dark bg."
   (interactive)
@@ -305,6 +343,7 @@ Historical preservation."
   (interactive)
   (load-theme 'badger t)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
   (custom-theme-set-faces
    'badger
    ;; separates windows.
@@ -483,6 +522,7 @@ Historical preservation."
 
   (my-rainbow-parens-light-bg2)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'dichromacy
@@ -517,6 +557,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'firebelly
@@ -578,6 +619,7 @@ Historical preservation."
 
   (my-rainbow-parens-light-bg2)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'gandalf
@@ -624,6 +666,7 @@ Historical preservation."
 
   (my-rainbow-parens-light-bg2)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'github
@@ -671,6 +714,7 @@ Historical preservation."
   (interactive)
   (load-theme 'grandshell t)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'grandshell
@@ -709,6 +753,7 @@ Historical preservation."
   (interactive)
   (load-theme 'gruvbox-dark t)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-variables
    'gruvbox-dark
@@ -737,6 +782,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'gruvbox
@@ -759,6 +805,7 @@ Historical preservation."
   (my-rainbow-parens-dark-bg)
   ;; has no effect in kosmos but call anyway for intent.
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (let (;; (kosmos-fg "#bdbdbd")
         ;; (kosmos-bg "#000000")
@@ -808,6 +855,7 @@ Historical preservation."
 
 
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-variables
    'leuven
@@ -931,6 +979,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -1047,6 +1096,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'molokai
@@ -1110,6 +1160,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'monokai
@@ -1171,6 +1222,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (let ((class '((class color) (min-colors 89)))
         ;; (background "#303030")
@@ -1243,6 +1295,7 @@ Historical preservation."
 
   (my-rainbow-parens-light-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'spacemacs-light
@@ -1281,6 +1334,7 @@ Historical preservation."
   (load-theme 'sunburn t)
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-variables
    'sunburn
@@ -1309,6 +1363,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   ;;wrap mods in `custom-theme-set-faces' so they can be rolled back with `disable-theme'
   (custom-theme-set-faces
@@ -1341,6 +1396,7 @@ Historical preservation."
 
   (my-rainbow-parens-light-bg2)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'tommyh
@@ -1362,6 +1418,7 @@ Historical preservation."
   (load-theme 'overcast t)
   (my-rainbow-parens-dark-bg-bold)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
   (custom-theme-set-faces
    'overcast
 
@@ -1376,6 +1433,7 @@ Historical preservation."
   (load-theme 'zenburn2 t)
 
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   ;; set variables (that are not faces) using `custom-theme-set-variables'. It
   ;; will allow them to be rolled back automatically when the theme is later
@@ -1617,6 +1675,7 @@ Historical preservation."
   (my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'tao-yin
@@ -1653,7 +1712,8 @@ Historical preservation."
   ;;(my-rainbow-parens-dark-bg)
   ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
-  (my-ido-dark-bg))
+  (my-ido-dark-bg)
+  (my-tab-line-bar-dark))
 
 (defun my-color-ef-dream ()
   (interactive)
@@ -1661,7 +1721,8 @@ Historical preservation."
   ;;(my-rainbow-parens-dark-bg)
   ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
-  (my-ido-dark-bg))
+  (my-ido-dark-bg)
+  (my-tab-line-bar-dark))
 
 (defun my-color-batppuccin-mocha ()
   (interactive)
@@ -1670,6 +1731,7 @@ Historical preservation."
   ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg)
+  (my-tab-line-bar-dark)
   (custom-theme-set-faces
    'batppuccin-mocha
    `(fringe ((t :background "#000000")))))
@@ -1680,7 +1742,8 @@ Historical preservation."
   ;;(my-rainbow-parens-dark-bg)
   ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
-  (my-ido-dark-bg))
+  (my-ido-dark-bg)
+  (my-tab-line-bar-dark))
 
 (defun my-color-app-monochrome-themes-dark-theme ()
   (interactive)
@@ -1690,6 +1753,8 @@ Historical preservation."
   (my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg)
+  (my-tab-line-bar-dark)
+
 
   ;; (custom-theme-set-faces
   ;;  'app-monochrome-themes-dark-theme
@@ -1706,6 +1771,7 @@ Historical preservation."
   (my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'birds-of-paradise-plus
@@ -1722,6 +1788,7 @@ Historical preservation."
   ;; (my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
   (my-ido-dark-bg)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'miasma
@@ -1734,6 +1801,7 @@ Historical preservation."
   (my-cursor-dark-bg)
   (my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'warm-night
@@ -1764,6 +1832,7 @@ Historical preservation."
   (load-theme 'avk-daylight t)
   (my-rainbow-parens-light-bg3)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
   (custom-theme-set-faces
    'avk-daylight
 
@@ -1784,6 +1853,7 @@ Historical preservation."
   (interactive)
   (load-theme 'doom-outrun-electric t)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
   (custom-theme-set-faces
    'doom-outrun-electric
 
@@ -1801,6 +1871,7 @@ Historical preservation."
 
   (my-rainbow-parens-dark-bg)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'base16-decaf
@@ -1825,6 +1896,7 @@ Historical preservation."
 
   (my-disable-var-use-face-treesit)
   (my-rainbow-parens-light-bg5-old-ultimate)
+  (my-tab-line-bar-dark)
 
   (custom-theme-set-faces
    'wildcharm-light
@@ -1836,7 +1908,8 @@ Historical preservation."
   (interactive)
   (load-theme 'wildcharm t)
   (my-disable-var-use-face-treesit)
-  (my-ido-dark-bg))
+  (my-ido-dark-bg)
+  (my-tab-line-bar-dark))
 
 (defun my-color-ef-autumn ()
   (interactive)
@@ -1844,18 +1917,21 @@ Historical preservation."
   ;;(my-rainbow-parens-dark-bg)
   ;;(my-treesit-faces-dark-bg)
   (my-disable-var-use-face-treesit)
-  (my-ido-dark-bg))
+  (my-ido-dark-bg)
+  (my-tab-line-bar-dark))
 
 (defun my-color-ample-flat ()
   "A good 256 color theme."
   (interactive)
   (load-theme 'ample-flat t)
-  (my-disable-var-use-face-treesit))
+  (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark))
 
 (defun my-color-moe-light ()
   (interactive)
   (load-theme 'moe-light t)
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
   (custom-theme-set-faces
    'moe-light
 
@@ -1870,6 +1946,7 @@ Historical preservation."
   (load-theme 'moe-dark t)
 
   (my-disable-var-use-face-treesit)
+  (my-tab-line-bar-dark)
 
   ;; copy the color vars of moe-dark
   (let ((class '((class color) (min-colors 89)))

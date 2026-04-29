@@ -750,6 +750,7 @@ Example:
    `(tab-line-tab-modified ((,class :foreground "red" )))
    `(tab-line-highlight ((,class :foreground "yellowgreen")))
    ;; tab-line-close-highlight
+   ;; TODO: figure out a way to *not* override :foreground of tab-line-tab-current
    `(tab-line-tab-special ((,class :foreground "#BDBDFD" :slant italic)))
    ;; tab-line-tab-group
 

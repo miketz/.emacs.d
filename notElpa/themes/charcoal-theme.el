@@ -745,7 +745,8 @@ Example:
    `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010"
                                    :foreground "dark orange")))
    `(tab-line-tab-inactive ((,class :inherit tab-line-tab)))
-   ;; tab-line-tab-inactive-alternate
+   ;; TODO: set a better alternating face.
+   `(tab-line-tab-inactive-alternate ((,class :inherit tab-line-tab-inactive :foreground "cyan")))
    `(tab-line-tab-modified ((,class :foreground "red" )))
    `(tab-line-highlight ((,class :foreground "yellowgreen")))
    ;; tab-line-close-highlight

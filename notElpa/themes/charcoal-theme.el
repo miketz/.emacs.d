@@ -739,7 +739,7 @@ Example:
 
 
    ;; tab-line.  like web browser tabs.
-   `(tab-line ((,class ;:inherit variable-pitch
+   `(tab-line ((,class ;:inherit variable-pitch :height 0.9
                        :background "#305555")))
    `(tab-line-tab ((,class :inherit tab-line :foreground "white" :background "#705050")))
    `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010"
@@ -754,7 +754,7 @@ Example:
 
 
    ;; tab-bar.  tabs for window configurations.
-   `(tab-bar ((,class ;:inherit variable-pitch
+   `(tab-bar ((,class ;:inherit variable-pitch :height 0.9
                :background "#103535")))
    `(tab-bar-tab ((,class :inherit tab-bar :foreground "dark orange" :background "#202020")))
    `(tab-bar-tab-inactive ((,class :inherit tab-bar :foreground "white" :background "#606060")))

@@ -96,7 +96,7 @@ with the contrast."
    `(tab-line-tab-modified ((t :foreground "red" )))
    `(tab-line-highlight ((t :foreground "yellowgreen")))
    ;; tab-line-close-highlight
-   ;; tab-line-tab-special
+   `(tab-line-tab-special ((t :foreground "#BDBDFD" :slant italic)))
    ;; tab-line-tab-group
 
 

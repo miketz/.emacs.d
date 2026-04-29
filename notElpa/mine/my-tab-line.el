@@ -2,6 +2,7 @@
 
 (require 'hydra)
 (require 'ivy)
+(require 'cl-lib)
 
 ;; TODO: add a fn for the "+" button
 
@@ -12,7 +13,11 @@
   (interactive)
   (switch-to-buffer
    (ivy-completing-read "buff: "
-                        (mapcar #'buffer-name (tab-line-tabs-window-buffers)))))
+                        (mapcar #'buffer-name
+                                (cl-remove-if ; remove current buffer.
+                                 (lambda (b)
+                                   (eq b (current-buffer)))
+                                 (tab-line-tabs-window-buffers))))))
 
 (defun my-tab-line--buffers-for-add ()
   "Return a list of buffers not currently in the tab-line."

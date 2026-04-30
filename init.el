@@ -10945,7 +10945,27 @@ and switched to with no user input required."
   (global-set-key (kbd "C->") #'tab-bar-switch-to-next-tab)
   (global-set-key (kbd "C-<") #'tab-bar-switch-to-prev-tab)
 
-  (global-set-key (kbd "C-c T") #'my-tab-bar-hydra/body))
+  (global-set-key (kbd "C-c T") #'my-tab-bar-hydra/body)
+
+  (defun tab1 () (interactive) (tab-select 1))
+  (defun tab2 () (interactive) (tab-select 2))
+  (defun tab3 () (interactive) (tab-select 3))
+  (defun tab4 () (interactive) (tab-select 4))
+  (defun tab5 () (interactive) (tab-select 5))
+  (defun tab6 () (interactive) (tab-select 6))
+  (defun tab7 () (interactive) (tab-select 7))
+  (defun tab8 () (interactive) (tab-select 8))
+  (defun tab9 () (interactive) (tab-select 9))
+  ;; TODO: use differnet keybinds. M-<num> keys are reserved for prefix args.
+  (global-set-key (kbd "M-1") #'tab1)
+  (global-set-key (kbd "M-2") #'tab2)
+  (global-set-key (kbd "M-3") #'tab3)
+  (global-set-key (kbd "M-4") #'tab4)
+  (global-set-key (kbd "M-5") #'tab5)
+  (global-set-key (kbd "M-6") #'tab6)
+  (global-set-key (kbd "M-7") #'tab7)
+  (global-set-key (kbd "M-8") #'tab8)
+  (global-set-key (kbd "M-9") #'tab9))
 
 ;; (tab-bar-mode)
 

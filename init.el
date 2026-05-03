@@ -9504,6 +9504,16 @@ TODO: delete this fn and replace with hooks, etc."
 (with-eval-after-load 'marginalia
   (define-key minibuffer-local-map (kbd "M-A") #'marginalia-cycle))
 
+;;;----------------------------------------------------------------------------
+;;; orderless
+;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/orderless" load-path)
+(autoload #'orderless-all-completions "orderless" nil nil)
+(autoload #'orderless-try-completion "orderless" nil nil)
+(autoload #'orderless-ivy-re-builder "orderless" nil nil)
+(autoload #'orderless-kwd-dispatch "orderless-kwd" nil nil)
+
+
 
 ;;;----------------------------------------------------------------------------
 ;;; vertico

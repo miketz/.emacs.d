@@ -1246,7 +1246,7 @@ To show reccomended max line length.")
   (cond ((eq my-curr-computer 'wild-dog) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-2025) 'bare-ido)
-        ((eq my-curr-computer 'mac-mini-m1-2021) 'bare-ido)
+        ((eq my-curr-computer 'mac-mini-m1-2021) 'vertico)
         ((eq my-curr-computer 'work-laptop-mac) 'bare-ido)
         (t 'bare-ido))
   "The package I'm currently using for narrowing completions.
@@ -1314,6 +1314,9 @@ reconfigure the bindings.")
   "Function for searching with an overview.
 Choices: helm-swoop helm-occur swiper swiper-isearch ido-occur sallet-occur
 icicle-occur occur my-occur-wild-spaces")
+
+(defvar my-use-orderless-p t
+  "When t wire up `orderless' in config sections.")
 
 (if (not my-use-evil-snipe)
     (when my-use-evil-p
@@ -9524,19 +9527,15 @@ TODO: delete this fn and replace with hooks, etc."
 (autoload #'vertico-grid-mode "vertico-grid" nil t)
 
 (with-eval-after-load 'vertico
-  ;; insert a hyphen - on space like in vanilla M-x
-  (define-key vertico-map (kbd "<SPC>") (lambda ()
-                                          (interactive)
-                                          (insert ?-)))
+  ;; `orderless' uses spaces as wildcards so don't do this if using it.
+  (unless my-use-orderless-p
+    ;; insert a hyphen - on space like in vanilla M-x
+    (define-key vertico-map (kbd "<SPC>") (lambda ()
+                                            (interactive)
+                                            (insert ?-))))
 
   (define-key vertico-map (kbd "C-j") #'vertico-next)
   (define-key vertico-map (kbd "C-k") #'vertico-previous)
-
-  ;; avoid `consult-buffer' untul 2 issues are solved
-  ;; 1. searches from the front only. have to type *scratch, not just scratch.
-  ;; 2. doens't respect <SPC> to dash - keybind on `vertico-map'
-  ;; (when my-use-evil-p
-  ;;   (evil-leader/set-key "b" #'consult-buffer))
 
   ;; set max window height for vertico buffer.
   (setq vertico-count 40))
@@ -9561,8 +9560,23 @@ TODO: delete this fn and replace with hooks, etc."
   ;; (vertico-grid-mode 1)
   (unless (and (boundp 'vertico-grid-mode) vertico-grid-mode)
     (marginalia-mode))
-  (when my-use-evil-p
-    (evil-leader/set-key "b" #'switch-to-buffer)))
+
+  ;; avoid `consult-buffer' untul 2 issues are solved
+  ;; 1. searches from the front only. have to type *scratch, not just scratch.
+  ;; 2. doens't respect <SPC> to dash - keybind on `vertico-map'
+  ;; NOTE: `orderless' package solves the above 2 issues so use if using orderless
+  (if (and my-use-evil-p my-use-orderless-p)
+      (evil-leader/set-key "b" #'consult-buffer)
+    ;; else
+    (evil-leader/set-key "b" #'switch-to-buffer))
+
+  (when my-use-orderless-p
+    (require 'orderless)
+    (setq completion-styles '(orderless basic))
+    (setq completion-category-overrides '((file (styles partial-completion))))
+    (setq completion-category-defaults nil) ;; Disable defaults, use our settings
+    (setq completion-pcm-leading-wildcard t) ;; Emacs 31: partial-completion behaves like substring
+    ))
 
 
 ;;;----------------------------------------------------------------------------

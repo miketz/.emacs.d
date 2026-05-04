@@ -9534,8 +9534,8 @@ TODO: delete this fn and replace with hooks, etc."
                                             (interactive)
                                             (insert ?-))))
 
-  (define-key vertico-map (kbd "C-j") #'vertico-next)
-  (define-key vertico-map (kbd "C-k") #'vertico-previous)
+  ;; (define-key vertico-map (kbd "C-j") #'vertico-next)
+  ;; (define-key vertico-map (kbd "C-k") #'vertico-previous)
 
   ;; set max window height for vertico buffer.
   (setq vertico-count 40))

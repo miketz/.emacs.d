@@ -9565,10 +9565,11 @@ TODO: delete this fn and replace with hooks, etc."
   ;; 1. searches from the front only. have to type *scratch, not just scratch.
   ;; 2. doens't respect <SPC> to dash - keybind on `vertico-map'
   ;; NOTE: `orderless' package solves the above 2 issues so use if using orderless
-  (if (and my-use-evil-p my-use-orderless-p)
-      (evil-leader/set-key "b" #'consult-buffer)
-    ;; else
-    (evil-leader/set-key "b" #'switch-to-buffer))
+  (when my-use-evil-p
+    (let ((fn (if my-use-orderless-p
+                  #'consult-buffer
+                #'switch-to-buffer)))
+      (evil-leader/set-key "b" fn)))
 
   (when my-use-orderless-p
     (require 'orderless)

@@ -9571,6 +9571,15 @@ TODO: delete this fn and replace with hooks, etc."
                 #'switch-to-buffer)))
       (evil-leader/set-key "b" fn)))
 
+  (require 'vertico-sort)
+  ;; this is default, but is nil'd out for some reason. maybe some weird code.
+  (setq vertico-sort-function 'vertico-sort-history-length-alpha)
+  ;; turn on savehist-mode to save minibuffer history accross emacs sessions.
+  ;; results in faster selections by spamming TAB
+  (savehist-mode 1)
+  ;; TODO: look into enabling savehist-mode even if not using vertico.
+  ;;       but not if using ido as it has it's own history?
+
   (when my-use-orderless-p
     (require 'orderless)
     (setq completion-styles '(orderless basic))

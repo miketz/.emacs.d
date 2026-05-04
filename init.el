@@ -1245,7 +1245,7 @@ To show reccomended max line length.")
 (defvar my-narrow-type
   (cond ((eq my-curr-computer 'wild-dog) 'bare-ido)
         ((eq my-curr-computer 'work-laptop-2019) 'bare-ido)
-        ((eq my-curr-computer 'work-laptop-2025) 'bare-ido)
+        ((eq my-curr-computer 'work-laptop-2025) 'vertico)
         ((eq my-curr-computer 'mac-mini-m1-2021) 'vertico)
         ((eq my-curr-computer 'work-laptop-mac) 'bare-ido)
         (t 'bare-ido))
@@ -1313,7 +1313,7 @@ reconfigure the bindings.")
                      )
   "Function for searching with an overview.
 Choices: helm-swoop helm-occur swiper swiper-isearch ido-occur sallet-occur
-icicle-occur occur my-occur-wild-spaces")
+icicle-occur occur my-occur-wild-spaces consult-line")
 
 (defvar my-use-orderless-p t
   "When t wire up `orderless' in config sections.")

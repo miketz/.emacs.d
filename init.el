@@ -9580,6 +9580,14 @@ TODO: delete this fn and replace with hooks, etc."
   ;; TODO: look into enabling savehist-mode even if not using vertico.
   ;;       but not if using ido as it has it's own history?
 
+  ;; simlilar to avy. jump to candidate from list
+  (require 'vertico-quick)
+  (keymap-set vertico-map "C-o" #'vertico-quick-insert)
+  (keymap-set vertico-map "C-'" #'vertico-quick-insert) ; swiper convention
+  ;; (keymap-set vertico-map "C-q" #'vertico-quick-exit)
+
+
+
   (when my-use-orderless-p
     (require 'orderless)
     (setq completion-styles '(orderless basic))

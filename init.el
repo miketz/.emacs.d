@@ -9590,8 +9590,14 @@ TODO: delete this fn and replace with hooks, etc."
 
   (when my-use-orderless-p
     (require 'orderless)
+    ;; NOTE: overwritting `completion-styles' breaks elisp completion with company-mode.
     (setq completion-styles '(orderless basic))
-    (setq completion-category-overrides '((file (styles partial-completion))))
+    (setq completion-category-overrides
+          '((file (styles partial-completion))
+            ;; FAILED attempt to fix company completion for elisp.
+            ;; from overwriting `completion-styles' above.
+            (elisp-symbol (styles basic partial-completion emacs22))
+            (elisp-variable (styles basic partial-completion emacs22))))
     (setq completion-category-defaults nil) ;; Disable defaults, use our settings
     (setq completion-pcm-leading-wildcard t) ;; Emacs 31: partial-completion behaves like substring
     ))

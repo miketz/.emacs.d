@@ -855,6 +855,78 @@ Use the default fn configured in `fugitive-log-graph-fn'."
   (fugitive-shell-command (format "git diff --name-only %s %s" rev1 rev2) nil t))
 
 
+(defun fugitive-diff-file-unstaged ()
+  "Diff an ustaged file.
+Use completing read to select the file."
+  (interactive)
+  (let* ((files (fugitive-get-files-unstaged))
+         ;; if only 1 staged file, pre select it
+         (initial-input (if (= 1 (length files))
+                            (car files)
+                          nil))
+         (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
+         ;; shadow default-directory to root so filenames work without ../../
+         (default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-shell-command (concat "git diff -- " file))))
+
+(defun fugitive-diff-file-staged ()
+  "Diff a staged file.
+Use completing read to select the file."
+  (interactive)
+  (let* ((files (fugitive-get-files-staged))
+         ;; if only 1 staged file, pre select it
+         (initial-input (if (= 1 (length files))
+                            (car files)
+                          nil))
+         (file (completing-read "file: " files nil nil initial-input))
+         ;; shadow default-directory to root so filenames work without ../../
+         (default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-shell-command (concat "git diff --cached -- " file))))
+
+(defun fugitive-file-stage ()
+  "Stage an ustaged file.
+Use completing read to select the file."
+  (interactive)
+  (let* ((files (fugitive-get-files-unstaged))
+         ;; if only 1 staged file, pre select it
+         (initial-input (if (= 1 (length files))
+                            (car files)
+                          nil))
+         (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
+         ;; shadow default-directory to root so filenames work without ../../
+         (default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-shell-command (concat "git add " file))))
+
+(defun fugitive-file-restore ()
+  "Restore an ustaged file.
+Use completing read to select the file."
+  (interactive)
+  (let* ((files (fugitive-get-files-unstaged))
+         ;; if only 1 staged file, pre select it
+         (initial-input (if (= 1 (length files))
+                            (car files)
+                          nil))
+         (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
+         ;; shadow default-directory to root so filenames work without ../../
+         (default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-shell-command (concat "git restore " file))))
+
+(defun fugitive-file-unstage ()
+  "Unstage a staged file.
+Use completing read to select the file."
+  (interactive)
+  (let* ((files (fugitive-get-files-staged))
+         ;; if only 1 staged file, pre select it
+         (initial-input (if (= 1 (length files))
+                            (car files)
+                          nil))
+         (file (completing-read "file: " files nil nil initial-input))
+         ;; shadow default-directory to root so filenames work without ../../
+         (default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-shell-command (concat "git restore --staged " file))))
+
+
+
 (defun fugitive-cmd-to-list (cmd)
   "Run a git command which returns a string list as output.
 Convert the string-list to an elisp list."
@@ -867,6 +939,14 @@ Convert the string-list to an elisp list."
     (cl-delete-if (lambda (str)
                     (string-equal str ""))
                   lst)))
+
+(defun fugitive-get-files-unstaged ()
+  "Return a list of unstaged, modifed files."
+  (fugitive-cmd-to-list "git diff --name-only"))
+
+(defun fugitive-get-files-staged ()
+  "Return a list of staged files."
+  (fugitive-cmd-to-list "git diff --name-only --cached"))
 
 (defun fugitive-get-remote-aliases ()
   "Return a list of remote alias names."

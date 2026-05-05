@@ -323,6 +323,7 @@ _b_: blame
 _d_: diff between revs
 _e_: find local-only branches you may want to delete
 _s_: quick status
+_S_: enter stauts Hydra
 _p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
 _L_: enter log Hydra
@@ -339,6 +340,7 @@ _q_, _C-g_: quit"
   ("e" fugitive-find-local-only-branches-ediff)
   ;; ("s" fugitive-show) ; show commit at point in a log buffer
   ("s" fugitive-quick-status)
+  ("S" my-fugitive-status-hydra/body)
   ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers-except-current)
   ("L" my-fugitive-log-hydra/body)
@@ -372,6 +374,27 @@ _q_, _C-g_: quit"
   ("s" fugitive-log)
   ("a" fugitive-log-no-color)
   (";" fugitive-log-between)
+  ;; don't use the hint text as it makes (:hint nil) not work?
+  ("C-g" nil nil)
+  ("q" nil))
+
+(defhydra my-fugitive-status-hydra (:color amaranth :hint nil) ;;(:color blue)
+  "
+_f_: shell-command (general git commands)
+_s_: quick status
+_d_: diff unstaged file
+_D_: diff staged file
+_u_: stage file
+_U_: unstage file
+_r_: restore unstaged file
+_q_, _C-g_: quit"
+  ("f" fugitive-shell-command)
+  ("s" fugitive-quick-status)
+  ("d" fugitive-diff-file-unstaged)
+  ("D" fugitive-diff-file-staged)
+  ("u" fugitive-file-stage)
+  ("U" fugitive-file-unstage)
+  ("r" fugitive-file-restore)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

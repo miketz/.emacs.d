@@ -895,7 +895,10 @@ Use completing read to select the file."
          (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
          ;; shadow default-directory to root so filenames work without ../../
          (default-directory (fugitive-proj-root-or-current-dir)))
-    (fugitive-shell-command (concat "git add " file))))
+    ;; use synchronous shell-command so it finishes before we update status UI
+    (shell-command (concat "git add " file)))
+  ;; refresh hydra status UI
+  (fugitive-quick-status))
 
 (defun fugitive-file-restore ()
   "Restore an ustaged file.
@@ -909,7 +912,10 @@ Use completing read to select the file."
          (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
          ;; shadow default-directory to root so filenames work without ../../
          (default-directory (fugitive-proj-root-or-current-dir)))
-    (fugitive-shell-command (concat "git restore " file))))
+    ;; use synchronous shell-command so it finishes before we update status UI
+    (shell-command (concat "git restore " file)))
+  ;; refresh hydra status UI
+  (fugitive-quick-status))
 
 (defun fugitive-file-unstage ()
   "Unstage a staged file.
@@ -923,7 +929,10 @@ Use completing read to select the file."
          (file (completing-read "file: " files nil nil initial-input))
          ;; shadow default-directory to root so filenames work without ../../
          (default-directory (fugitive-proj-root-or-current-dir)))
-    (fugitive-shell-command (concat "git restore --staged " file))))
+    ;; use synchronous shell-command so it finishes before we update status UI
+    (shell-command (concat "git restore --staged " file)))
+  ;; refresh hydra status UI
+  (fugitive-quick-status))
 
 
 

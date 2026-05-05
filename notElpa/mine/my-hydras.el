@@ -331,7 +331,7 @@ _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
   ("l" fugitive-log-graph)
   (";" fugitive-log-between)
-  ("n" fugitive-list-files)
+  ("n" fugitive-list-files-between)
   ("'" fugitive-fetch-n-log)
   ("a" fugitive-quick-commit)
   ("b" fugitive-blame)

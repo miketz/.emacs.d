@@ -834,7 +834,7 @@ Use the default fn configured in `fugitive-log-graph-fn'."
   (fugitive-shell-command (format "git diff %s %s" rev1 rev2) nil t))
 
 ;;;###autoload
-(cl-defun fugitive-list-files (&optional rev1 rev2)
+(cl-defun fugitive-list-files-between (&optional rev1 rev2)
   "Show files modified in a commit range."
   (interactive)
   ;; get rev1, rev2 from user if needed
@@ -850,7 +850,7 @@ Use the default fn configured in `fugitive-log-graph-fn'."
             (string-equal rev1 "")
             (string-equal rev2 ""))
     (message "rev1 and rev2 are required.")
-    (cl-return-from fugitive-list-files))
+    (cl-return-from fugitive-list-files-between))
   ;; run command
   (fugitive-shell-command (format "git diff --name-only %s %s" rev1 rev2) nil t))
 

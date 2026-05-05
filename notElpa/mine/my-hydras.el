@@ -322,7 +322,7 @@ _a_: quick-commit
 _b_: blame
 _d_: diff between revs
 _e_: find local-only branches you may want to delete
-_s_: show commit at point
+_s_: quick status
 _p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
 _L_: enter log Hydra
@@ -337,7 +337,8 @@ _q_, _C-g_: quit"
   ("b" fugitive-blame)
   ("d" fugitive-diff-between)
   ("e" fugitive-find-local-only-branches-ediff)
-  ("s" fugitive-show)
+  ;; ("s" fugitive-show) ; show commit at point in a log buffer
+  ("s" fugitive-quick-status)
   ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers-except-current)
   ("L" my-fugitive-log-hydra/body)

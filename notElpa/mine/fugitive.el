@@ -556,6 +556,13 @@ Use curr branch as the initial input."
 
 
 ;;;###autoload
+(defun fugitive-quick-status ()
+  "Run git status -sb"
+  (interactive)
+  (fugitive-shell-command "git status -sb"))
+
+
+;;;###autoload
 (defun fugitive-log ()
   "Typical one line log.
 It should be relatively quick even for larger logs."

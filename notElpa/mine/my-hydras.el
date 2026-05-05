@@ -340,7 +340,10 @@ _q_, _C-g_: quit"
   ("e" fugitive-find-local-only-branches-ediff)
   ;; ("s" fugitive-show) ; show commit at point in a log buffer
   ("s" fugitive-quick-status)
-  ("S" my-fugitive-status-hydra/body)
+  ("S" (lambda ()
+         (interactive)
+         (fugitive-quick-status)
+         (my-fugitive-status-hydra/body)))
   ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers-except-current)
   ("L" my-fugitive-log-hydra/body)

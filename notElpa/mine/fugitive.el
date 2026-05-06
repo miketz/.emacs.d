@@ -559,7 +559,11 @@ Use curr branch as the initial input."
 (defun fugitive-quick-status ()
   "Run git status -sb"
   (interactive)
-  (fugitive-shell-command "git status -sb"))
+  ;; shadow default-directory to see full file path, avoiding "../../.."
+  (let ((default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-shell-command "git status -sb"))
+  ;; (fugitive-shell-command "git status -sb")
+  )
 
 
 ;;;###autoload

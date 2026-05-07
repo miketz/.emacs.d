@@ -953,13 +953,21 @@ Convert the string-list to an elisp list."
                     (string-equal str ""))
                   lst)))
 
+(defun fugitive-remove-warnings (lst)
+  "Remove warnings git injects to command output."
+  (cl-remove-if (lambda (str)
+                  (fugitive-str-starts-with-p str "warning: in the working copy of"))
+                lst))
+
 (defun fugitive-get-files-unstaged ()
   "Return a list of unstaged, modifed files."
-  (fugitive-cmd-to-list "git diff --name-only"))
+  (fugitive-remove-warnings
+   (fugitive-cmd-to-list "git diff --name-only")))
 
 (defun fugitive-get-files-staged ()
   "Return a list of staged files."
-  (fugitive-cmd-to-list "git diff --name-only --cached"))
+  (fugitive-remove-warnings
+   (fugitive-cmd-to-list "git diff --name-only --cached")))
 
 (defun fugitive-get-remote-aliases ()
   "Return a list of remote alias names."

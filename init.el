@@ -10622,6 +10622,8 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'my-fugitive-status-hydra/body "my-hydras" nil t)
 
 (when my-use-evil-p
+  ;; expand minibuffer height to show all hyra options
+  (setq max-mini-window-height 1.0)
   (evil-leader/set-key "f" #'fugitive-shell-command)
   (evil-leader/set-key "l" #'my-fugitive-hydra/body))
 

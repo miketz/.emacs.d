@@ -2384,6 +2384,23 @@ with duplicate bundled libs in Sly and SLIME.")
 ;; (require 'slime-autoloads)
 (with-eval-after-load 'slime
 
+  (defun my-slime-repl-clear-buffer ()
+    "Same as `slime-repl-clear-buffer'.
+But works when current-buffer is not the slime REPL."
+    (interactive)
+    (let ((buff (current-buffer))
+          (repl (slime-output-buffer)))
+      (if (eq buff repl)
+          (slime-repl-clear-buffer)
+        ;; else
+        (progn
+          ;; NOTE: (with-current-buffer) has a warning msg on recenter, so switch instead.
+          (switch-to-buffer repl)
+          (slime-repl-clear-buffer)
+          (switch-to-buffer buff)))))
+
+  (define-key slime-mode-map (kbd "C-c M-o") #'my-slime-repl-clear-buffer)
+
   ;; (when my-use-evil-p
   ;;   ;; use emacs bindings in the repl. It's the only way i can get C-n and
   ;;   ;; C-p to work for slimes built in autocompletion.

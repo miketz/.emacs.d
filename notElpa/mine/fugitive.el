@@ -864,11 +864,11 @@ Use the default fn configured in `fugitive-log-graph-fn'."
 Use completing read to select the file."
   (interactive)
   (let* ((files (fugitive-get-files-unstaged))
-         ;; if only 1 staged file, pre select it
+         ;; if only 1 file, pre select it
          (initial-input (if (= 1 (length files))
                             (car files)
                           nil))
-         (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
+         (file (completing-read "file: " files nil nil initial-input))
          ;; shadow default-directory to root so filenames work without ../../
          (default-directory (fugitive-proj-root-or-current-dir)))
     (fugitive-shell-command (concat "git diff -- " file))))
@@ -878,7 +878,7 @@ Use completing read to select the file."
 Use completing read to select the file."
   (interactive)
   (let* ((files (fugitive-get-files-staged))
-         ;; if only 1 staged file, pre select it
+         ;; if only 1 file, pre select it
          (initial-input (if (= 1 (length files))
                             (car files)
                           nil))
@@ -891,12 +891,13 @@ Use completing read to select the file."
   "Stage an ustaged file.
 Use completing read to select the file."
   (interactive)
-  (let* ((files (fugitive-get-files-unstaged))
-         ;; if only 1 staged file, pre select it
+  (let* ((files (append (fugitive-get-files-unstaged)
+                        (fugitive-get-files-untracked)))
+         ;; if only 1 file, pre select it
          (initial-input (if (= 1 (length files))
                             (car files)
                           nil))
-         (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
+         (file (completing-read "file: " files nil nil initial-input))
          ;; shadow default-directory to root so filenames work without ../../
          (default-directory (fugitive-proj-root-or-current-dir)))
     ;; use synchronous shell-command so it finishes before we update status UI
@@ -909,11 +910,11 @@ Use completing read to select the file."
 Use completing read to select the file."
   (interactive)
   (let* ((files (fugitive-get-files-unstaged))
-         ;; if only 1 staged file, pre select it
+         ;; if only 1 file, pre select it
          (initial-input (if (= 1 (length files))
                             (car files)
                           nil))
-         (file (completing-read "file: " (fugitive-get-files-unstaged) nil nil initial-input))
+         (file (completing-read "file: " files nil nil initial-input))
          ;; shadow default-directory to root so filenames work without ../../
          (default-directory (fugitive-proj-root-or-current-dir)))
     ;; use synchronous shell-command so it finishes before we update status UI
@@ -926,7 +927,7 @@ Use completing read to select the file."
 Use completing read to select the file."
   (interactive)
   (let* ((files (fugitive-get-files-staged))
-         ;; if only 1 staged file, pre select it
+         ;; if only 1 file, pre select it
          (initial-input (if (= 1 (length files))
                             (car files)
                           nil))
@@ -963,6 +964,14 @@ Convert the string-list to an elisp list."
   "Return a list of unstaged, modifed files."
   (fugitive-remove-warnings
    (fugitive-cmd-to-list "git diff --name-only")))
+
+(defun fugitive-get-files-untracked ()
+  "Return a list of untracked files."
+  ;; must shadow `default-directory'. listing untracked files is very senstive to
+  ;; current dir and will not list files if they are not in or under the current dir.
+  (let ((default-directory (fugitive-proj-root-or-current-dir)))
+    (fugitive-remove-warnings
+     (fugitive-cmd-to-list "git ls-files --others --exclude-standard"))))
 
 (defun fugitive-get-files-staged ()
   "Return a list of staged files."

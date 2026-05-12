@@ -8851,6 +8851,10 @@ Explicit language selection not supported?"
   (setq *minesweeper-board-height* 10)
   (setq *minesweeper-mines* 75)
 
+  (defun my-setup-ms ()
+    (buffer-disable-undo "minesweeper"))
+  (add-hook 'minesweeper-mode-hook #'my-setup-ms)
+
   (defun my-ms-end-of-buffer ()
     (interactive)
     (goto-line *minesweeper-board-height*)

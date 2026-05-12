@@ -8861,47 +8861,53 @@ Explicit language selection not supported?"
     (evil-define-key 'normal minesweeper-mode-map (kbd "M->") #'my-ms-end-of-buffer))
 
   (defun my-ms-tag-defualts ()
-  (interactive)
-  (let ((center-row (/ *minesweeper-board-height* 2))
-        (center-col (/ *minesweeper-board-width* 2)))
-    ;; center
-    (goto-line center-row)
-    (cl-loop repeat center-col do
-             (forward-char))
+    (interactive)
+    (let ((center-row (/ *minesweeper-board-height* 2))
+          (center-col (/ *minesweeper-board-width* 2)))
+      ;; center
+      (goto-line center-row)
+      (cl-loop repeat center-col do
+               (forward-char))
+      (minesweeper-choose)
+
+      ;; center side
+      (minesweeper-move-end-of-field)
+      (minesweeper-choose)
+
+      ;; center side
+      (move-beginning-of-line 1)
+      (minesweeper-choose)
+
+      ;; center top
+      (beginning-of-buffer)
+      (cl-loop repeat center-col do
+               (forward-char))
+      (minesweeper-choose)
+
+      ;; center bot
+      (my-ms-end-of-buffer)
+      (cl-loop repeat center-col do
+               (backward-char))
+      (minesweeper-choose))
+
+    ;; four corners
+    (my-ms-end-of-buffer)
     (minesweeper-choose)
 
-    ;; center side
-    (minesweeper-move-end-of-field)
-    (minesweeper-choose)
-
-    ;; center side
     (move-beginning-of-line 1)
     (minesweeper-choose)
 
-    ;; center top
     (beginning-of-buffer)
-    (cl-loop repeat center-col do
-             (forward-char))
     (minesweeper-choose)
 
-    ;; center bot
-    (my-ms-end-of-buffer)
-    (cl-loop repeat center-col do
-             (backward-char))
+    (minesweeper-move-end-of-field)
     (minesweeper-choose))
 
-  ;; four corners
-  (my-ms-end-of-buffer)
-  (minesweeper-choose)
-
-  (move-beginning-of-line 1)
-  (minesweeper-choose)
-
-  (beginning-of-buffer)
-  (minesweeper-choose)
-
-  (minesweeper-move-end-of-field)
-  (minesweeper-choose)))
+  (defun foo ()
+    (interactive)
+    (cl-loop repeat (if current-prefix-arg current-prefix-arg 10)
+             do
+             (my-ms-tag-defualts))))
 
 ;;;----------------------------------------------------------------------------
 ;;; esxml. dependency of nov

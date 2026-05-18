@@ -133,6 +133,20 @@
    `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 
+
+   ;; mode line
+   `(mode-line
+     ((,class (:foreground "#8FB28F"
+                           :background "#2B2B2B"
+                           :box (:line-width -1 :style released-button)))
+      (t :inverse-video t)))
+   `(mode-line-buffer-id ((,class (:foreground "#F0DFAF"
+                                               :weight bold))))
+   `(mode-line-inactive
+     ((,class (:foreground "#5F7F5F"
+                           :background "#383838"
+                           :box (:line-width -1 :style released-button)))))
+
    ))
 
 (provide-theme 'focus-dark)

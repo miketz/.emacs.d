@@ -487,6 +487,41 @@ Proceed?")
                             buff nil t)))
 
 ;;;###autoload
+(cl-defun fugitive-fetch ()
+  "Fetch from selected remote."
+  (interactive)
+  (let* ((remotes (fugitive-get-remote-aliases))
+         (remote-fetch (completing-read "remote to fetch: " remotes nil t
+                                        (if (= (length remotes) 1)
+                                            (car remotes) ; 1 remote, pre-select it.
+                                          nil))))
+    (let ((process-environment (if fugitive-juggle-home-env-var-p
+                                   (cons fugitive-home-env-var process-environment)
+                                 ;; else just use process-environment as-is
+                                 process-environment)))
+     ;; fetch. async.
+     (fugitive-shell-command (concat "git fetch " remote-fetch)))))
+
+
+;;;###autoload
+(cl-defun fugitive-fetch-sync ()
+  "Fetch from selected remote synchronously.
+Useful in a chain of commands where we must wait for the fetch to finish."
+  (interactive)
+  (let* ((buff (fugitive-new-output-buffer))
+         (remotes (fugitive-get-remote-aliases))
+         (remote-fetch (completing-read "remote to fetch: " remotes nil t
+                                        (if (= (length remotes) 1)
+                                            (car remotes) ; 1 remote, pre-select it.
+                                          nil))))
+    (let ((process-environment (if fugitive-juggle-home-env-var-p
+                                   (cons fugitive-home-env-var process-environment)
+                                 ;; else just use process-environment as-is
+                                 process-environment)))
+     ;; fetch. not async as we need this to complete before proceeding.
+     (shell-command (concat "git fetch " remote-fetch) buff))))
+
+;;;###autoload
 (cl-defun fugitive-fetch-n-log ()
   "Fetch from selected remote.
 Then show a delta log between selected branch..remote/branch. "

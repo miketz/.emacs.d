@@ -383,7 +383,8 @@ _q_, _C-g_: quit"
 
 (defhydra my-fugitive-status-hydra (:color amaranth :hint nil) ;;(:color blue)
   "
-_f_: shell-command (general git commands)
+_c_: shell-command (general git commands)
+_f_: fetch
 _s_: quick status
 _d_: diff unstaged file
 _D_: diff staged file
@@ -391,7 +392,11 @@ _u_: stage file
 _U_: unstage file
 _r_: restore unstaged file
 _q_, _C-g_: quit"
-  ("f" fugitive-shell-command)
+  ("c" fugitive-shell-command)
+  ("f" (lambda ()
+         (interactive)
+         (fugitive-fetch-sync)
+         (fugitive-quick-status)))
   ("s" fugitive-quick-status)
   ("d" fugitive-diff-file-unstaged)
   ("D" fugitive-diff-file-staged)

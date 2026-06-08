@@ -147,6 +147,12 @@
                            :background "#383838"
                            :box (:line-width -1 :style released-button)))))
 
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; misc. correct things that don't look right
+   ;; num3
+   `(num3-face-even ((,class (:background "#000000" :foreground "#98FB98"))))
+
    ))
 
 (provide-theme 'focus-dark)

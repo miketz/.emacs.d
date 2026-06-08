@@ -159,6 +159,14 @@
    ;; num3
    `(num3-face-even ((,class (:background "#000000" :foreground "#98FB98"))))
 
+   ;; display-line-numbers. native implementation
+   `(line-number ((,class (:background "#231808" :foreground "#595959"))))
+   `(line-number-current-line ((,class (:inherit line-number
+                                                 :foreground "#77AA55"
+                                                 :background "#231808"))))
+   `(line-number-major-tick ((,class :foreground "#595959" :background "#3b0000")))
+   `(line-number-minor-tick ((,class :foreground "#595959" :background "black")))
+
    ))
 
 (provide-theme 'focus-dark)

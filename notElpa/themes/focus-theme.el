@@ -72,7 +72,7 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
-   `(font-lock-keyword-face ((,class :foreground ,fg)))
+   `(font-lock-keyword-face ((,class :foreground ,dim-fg)))
    `(font-lock-type-face ((,class :foreground ,fg)))
    `(font-lock-function-call-face ((,class :foreground ,fg ;:background "MistyRose1"
                                            ))) ;treesit
@@ -106,7 +106,7 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; dim. don't dim for now actually as the face control is not fine grained enough.
-   `(font-lock-bracket-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-bracket-face ((,class :foreground ,dim-fg))) ;treesit
    `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 

@@ -26,6 +26,11 @@
 (let* ((class t)
        (fg "#EEEED1")
        (bg "#35352B")
+       (dim+1 "#9E9E81")
+       (dim "#8E8E71")
+       (dim-1 "#7E7E61")
+       (dim-2 "#6E6E51")
+       (dim-3 "#5E5E41")
        (rain-1 "#FF4500")
        (rain-1-bg bg)
        (rain-2 "#00FFFF")
@@ -98,7 +103,7 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
-   `(font-lock-keyword-face ((,class :foreground ,fg)))
+   `(font-lock-keyword-face ((,class :foreground ,dim)))
    `(font-lock-type-face ((,class :foreground ,fg)))
    `(font-lock-function-call-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
@@ -129,7 +134,7 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; dim. don't dim for now actually as the face control is not fine grained enough.
-   `(font-lock-bracket-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit
    `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 

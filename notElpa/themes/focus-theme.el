@@ -117,6 +117,12 @@
    ;; num3
    `(num3-face-even ((,class (:background "#d3d3d3" :foreground "black"))))
 
+   ;; display-line-numbers. native implementation
+   ;; `(line-number ((,class :background "#656143" :foreground "#AAAAAA")))
+   ;; `(line-number-current-line ((,class :inherit line-number :foreground "#d0c66c")))
+   `(line-number ((,class :background "light gray" :foreground "#707070")))
+   `(line-number-current-line ((,class :inherit line-number :foreground "#30A030")))
+
    ;; erc
    ;; `(erc-notice-face ((,class (:foreground ,faint-lesser))))
    `(erc-input-face ((,class (:foreground "DeepSkyBlue4")))) ; my own text.

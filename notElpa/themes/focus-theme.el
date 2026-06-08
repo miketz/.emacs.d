@@ -73,7 +73,7 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
    `(font-lock-keyword-face ((,class :foreground ,dim-fg)))
-   `(font-lock-type-face ((,class :foreground ,fg)))
+   `(font-lock-type-face ((,class :foreground ,dim-fg)))
    `(font-lock-function-call-face ((,class :foreground ,fg ;:background "MistyRose1"
                                            ))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit

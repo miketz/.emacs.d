@@ -104,7 +104,7 @@
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
    `(font-lock-keyword-face ((,class :foreground ,dim)))
-   `(font-lock-type-face ((,class :foreground ,fg)))
+   `(font-lock-type-face ((,class :foreground ,dim)))
    `(font-lock-function-call-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face))) ;treesit

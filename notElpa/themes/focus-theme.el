@@ -111,6 +111,12 @@
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 
 
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; misc. correct things that don't look right
+   ;; num3
+   `(num3-face-even ((,class (:background "#d3d3d3" :foreground "black"))))
+
    ;; erc
    ;; `(erc-notice-face ((,class (:foreground ,faint-lesser))))
    `(erc-input-face ((,class (:foreground "DeepSkyBlue4")))) ; my own text.

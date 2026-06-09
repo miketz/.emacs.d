@@ -124,6 +124,31 @@
                                        :weight bold
                                        :strike-through t))))
 
+   ;; tab-line.  like web browser tabs.
+   `(tab-line ((,class ;:inherit variable-pitch
+                       :background "#305555")))
+   `(tab-line-tab ((,class :inherit tab-line :foreground "white" :background "#705050")))
+   `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010"
+                                   :foreground "dark orange")))
+   `(tab-line-tab-inactive ((,class :inherit tab-line-tab)))
+   ;; tab-line-tab-inactive-alternate
+   `(tab-line-tab-modified ((,class :foreground "red" )))
+   `(tab-line-highlight ((,class :foreground "yellowgreen")))
+   ;; tab-line-close-highlight
+   `(tab-line-tab-special ((,class :foreground "#BDBDFD" :slant italic)))
+   ;; tab-line-tab-group
+
+
+   ;; tab-bar.  tabs for window configurations.
+   `(tab-bar ((,class ;:inherit variable-pitch
+               :background "#103535")))
+   `(tab-bar-tab ((,class :inherit tab-bar :foreground "dark orange" :background "#202020")))
+   `(tab-bar-tab-inactive ((,class :inherit tab-bar :foreground "white" :background "#606060")))
+   ;; tab-bar-tab-group-current
+   ;; tab-bar-tab-group-inactive
+   ;; tab-bar-tab-ungrouped
+   ;; tab-bar-tab-highlight
+
    ;; erc
    ;; `(erc-notice-face ((,class (:foreground ,faint-lesser))))
    `(erc-input-face ((,class (:foreground "DeepSkyBlue4")))) ; my own text.

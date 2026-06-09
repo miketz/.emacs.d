@@ -68,8 +68,6 @@
    `(font-lock-constant-face ((,class :weight bold)))
    `(font-lock-number-face ((,class :foreground "blue"))) ;treesit
 
-
-
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
    `(font-lock-keyword-face ((,class :foreground ,dim-fg)))
@@ -85,8 +83,17 @@
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground "red" :weight bold))))
 
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; dim. don't dim for now actually as the face control is not fine grained enough.
+   `(font-lock-bracket-face ((,class :foreground ,dim-fg))) ;treesit
+   `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
+
+
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; misc. correct things that don't look right
+
    ;; rainbow-delimiters.
    ;; In theory we don't want to highlight delimiters in this theme. But if
    ;; you're using rainbow-delimiters mode that means you do want them highlighted.
@@ -103,17 +110,6 @@
    `(rainbow-delimiters-depth-9-face ((,class (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
    `(rainbow-delimiters-unmatched-face ((,class (:foreground "yellow" :background "black" :weight bold))))
 
-
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;; dim. don't dim for now actually as the face control is not fine grained enough.
-   `(font-lock-bracket-face ((,class :foreground ,dim-fg))) ;treesit
-   `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
-   `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
-
-
-
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;; misc. correct things that don't look right
    ;; num3
    `(num3-face-even ((,class (:background "#d3d3d3" :foreground "black"))))
 

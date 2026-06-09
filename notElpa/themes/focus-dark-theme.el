@@ -103,8 +103,6 @@
    `(font-lock-constant-face ((,class :foreground ,fg :weight bold)))
    `(font-lock-number-face ((,class :foreground "#50b5b5"))) ;treesit
 
-
-
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
    `(font-lock-keyword-face ((,class :foreground ,dim)))
@@ -119,8 +117,17 @@
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground "tomato" :weight bold))))
 
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; dim. don't dim for now actually as the face control is not fine grained enough.
+   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit
+   `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
+
+
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   ;; misc. correct things that don't look right
+
    ;; rainbow-delimiters.
    ;; In theory we don't want to highlight delimiters in this theme. But if
    ;; you're using rainbow-delimiters mode that means you do want them highlighted.
@@ -135,17 +142,6 @@
    `(rainbow-delimiters-depth-8-face ((,class :foreground ,rain-8 :background ,rain-8-bg)))
    `(rainbow-delimiters-depth-9-face ((,class :foreground ,rain-9)))
    `(rainbow-delimiters-unmatched-face ((,class :foreground ,rain-fg-u :background ,rain-bg-u)))
-
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;; dim. don't dim for now actually as the face control is not fine grained enough.
-   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit
-   `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
-   `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
-
-
-
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-   ;; misc. correct things that don't look right
 
    ;; mode line
    `(mode-line

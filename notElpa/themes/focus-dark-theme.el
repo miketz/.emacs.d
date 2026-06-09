@@ -26,11 +26,15 @@
 (let* ((class t)
        (fg "#EEEED1")
        (bg "#35352B")
+       (dim+4 "#CECEB1")
+       (dim+3 "#BEBEA1")
+       (dim+2 "#AEAE91")
        (dim+1 "#9E9E81")
        (dim "#8E8E71")
        (dim-1 "#7E7E61")
        (dim-2 "#6E6E51")
        (dim-3 "#5E5E41")
+       (dim-4 "#4E4E31")
        (rain-1 "#FF4500")
        (rain-1-bg bg)
        (rain-2 "#00FFFF")
@@ -107,10 +111,10 @@
    `(font-lock-type-face ((,class :foreground ,dim)))
    `(font-lock-function-call-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
-   `(font-lock-operator-face ((,class :inherit font-lock-keyword-face))) ;treesit
+   `(font-lock-operator-face ((,class :inherit font-lock-keyword-face :foreground ,dim+4))) ;treesit
    `(font-lock-property-name-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-property-use-face ((,class :inherit font-lock-property-name-face))) ;treesit
-   `(font-lock-delimiter-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit
    `(font-lock-escape-face ((,class :inherit font-lock-string-face :weight bold))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground "tomato" :weight bold))))

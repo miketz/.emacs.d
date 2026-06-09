@@ -119,6 +119,11 @@
    `(line-number ((,class :background "light gray" :foreground "#707070")))
    `(line-number-current-line ((,class :inherit line-number :foreground "#30A030")))
 
+   ;; faces.el
+   `(show-paren-match ((,class (:slant italic
+                                       :weight bold
+                                       :strike-through t))))
+
    ;; erc
    ;; `(erc-notice-face ((,class (:foreground ,faint-lesser))))
    `(erc-input-face ((,class (:foreground "DeepSkyBlue4")))) ; my own text.

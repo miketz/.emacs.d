@@ -205,7 +205,7 @@ Example:
    `(cursor ((,class (:background "spring green"))))
 
    `(show-paren-match ((,class (:slant italic
-                                       :bold t
+                                       :weight bold ; :bold t
                                        :strike-through t
                                        ;; :background nil
                                        ))))

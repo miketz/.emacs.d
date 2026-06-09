@@ -168,6 +168,11 @@
    `(line-number-major-tick ((,class :foreground "#595959" :background "#3b0000")))
    `(line-number-minor-tick ((,class :foreground "#595959" :background "black")))
 
+   ;; faces.el
+   `(show-paren-match ((,class (:slant italic
+                                       :weight bold
+                                       :strike-through t))))
+
    ))
 
 (provide-theme 'focus-dark)

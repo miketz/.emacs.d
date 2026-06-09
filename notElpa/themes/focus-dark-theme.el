@@ -101,13 +101,13 @@
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
    `(font-lock-string-face ((,class :foreground "LightSalmon" :background "#45453B")))
    ;; `(font-lock-builtin-face ((,class (:foreground "dark blue" :background ,bg :weight normal))))
-   `(font-lock-constant-face ((,class :foreground ,fg :weight bold)))
+   `(font-lock-constant-face ((,class :foreground ,fg :weight normal)))
    `(font-lock-number-face ((,class :foreground "#50b5b5"))) ;treesit
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
-   `(font-lock-keyword-face ((,class :foreground ,dim)))
-   `(font-lock-type-face ((,class :foreground ,dim)))
+   `(font-lock-keyword-face ((,class :foreground ,dim-2)))
+   `(font-lock-type-face ((,class :foreground ,dim+2)))
    `(font-lock-function-call-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face :foreground ,dim+4))) ;treesit

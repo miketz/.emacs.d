@@ -94,7 +94,8 @@
                                            )))
    `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
-   `(font-lock-comment-face ((,class :foreground "#8FB28F" )))
+   ;; `(font-lock-comment-face ((,class :foreground "#8FB28F" )))
+   `(font-lock-comment-face ((,class :foreground "#6FAB6F" :background "#393f2f" )))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))

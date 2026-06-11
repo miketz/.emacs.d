@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 ;; (when (fboundp 'menu-bar-mode) (menu-bar-mode 0))
 ;; (when (fboundp 'tool-bar-mode) (tool-bar-mode 0))
 ;; (when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
@@ -20,3 +22,20 @@
 ;;   (add-to-list 'default-frame-alist '(height . 1.0)))
 
 (setq package-enable-at-startup nil)
+
+;; avoid redundant native compiliation every run of Emacs on windows.
+;; this snippet of code combined with the new --init-directory flag passed to emacs
+;; solves the redundant native compilations.
+(when (eq system-type 'windows-nt)
+
+  ;; this used to be in ~/AppData/Roaming/.emacs.d/init.el. Doing it here to support
+  ;; the new --init-directory flag passed to emacs. in theory this should not be
+  ;; needed but just making things work for now.
+  (when t ;; (memq my-curr-computer '(work-laptop-2025))
+
+    (let ((dir (concat "C:/Users/" (user-login-name))))
+      (setq user-init-file (concat dir "/AppData/Local/.emacs.d/init") ; no .el
+            user-emacs-directory (concat dir "/AppData/Local/.emacs.d/")
+            default-directory dir)
+      (setenv "HOME" (concat dir "/AppData/Local/"))) ; so ~ expands correctly
+    ))

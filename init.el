@@ -204,6 +204,7 @@
 
 ;; # 2. install libgccjit from within the msys2 command prompt
 ;; pacman -S mingw-w64-x86_64-libgccjit
+;; OR maybe: pacman -S ucrt64/mingw-w64-ucrt-x86_64-libgccjit 16.1.0-5
 
 ;; # 3. find real windows path to libccjit
 ;; which gcc # just finding any binary
@@ -215,8 +216,9 @@
 ;; # 4. add real path to windows PATH
 ;; # open start menu, type "env", click button in the GUI
 ;; # add to path: C:\Users\mtz\programs\msys64\mingw64\bin
+;; #                                   \msys64\usr\bin   # for make, treesit?
 
-;; # 5. restart Eamcs.
+;; # 5. restart Emacs.
 ;; # (native-comp-available-p) should return true
 ;; # elc files should automatically trigger eln compilation when first loaded.
 
@@ -225,6 +227,20 @@
 ;;                         "~/.emacs.d/notElpaYolo/")
 ;;                       t ; compile files in  all sub dirs
 ;;                       )
+
+
+;;;----------------------------------------------------------------------------
+;;; enable treesit on windows
+;;;----------------------------------------------------------------------------
+;; 1. download pre-built windows dlls from:
+;; https://github.com/emacs-tree-sitter/tree-sitter-langs
+
+;; 2. copy dlls to ~/.emacs.d/tree-sitter
+
+;; 3. rename dlls to have prefix "libtree-sitter-".
+;;    ie go.dll -> libtree-sitter-go.dll
+
+;; 4. verify: (treesit-ready-p 'go)
 
 
 ;;;----------------------------------------------------------------------------

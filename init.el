@@ -1457,8 +1457,11 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;; if on windows install kdiff3, add C:\Program Files\KDiff3\bin to Path env var.
 ;; install fd, add to path if on windows.
-;; git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
-;; git pull origin master
+;; clone to AppData/Local/ folder, not Roaming:
+;;     cd C:/Users/USERNAME/AppData/Local/
+;;     git clone --recurse-submodules https://github.com/miketz/.emacs.d.git
+;;     git pull origin master
+;;     emacss 29+: make a shortcut like: runemacs.exe --init-directory="C:/Users/USERNAME/AppData/Local/.emacs.d"
 ;; # this step no longer needed. moved away form submodules due to performance issues on Windows
 ;;     # git submodule update --init --recursive
 ;; create file: ~/.emacs.d/my-curr-computer.txt

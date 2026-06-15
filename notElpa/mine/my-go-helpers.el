@@ -498,6 +498,7 @@ _a_: ineffassign
 _h_: heap
 _t_: types
 _f_: built-in funcs
+_F_: fix syntax highlighitng
 _d_: doc
 _s_: toggle err handling visibility
 _r_: ripgrep custom searches
@@ -509,6 +510,7 @@ _q_, _C-g_: quit"
   ("h" my-go-heap-escape)
   ("t" my-go-insert-type)
   ("f" my-go-insert-builtin-func)
+  ("F" font-lock-fontify-buffer)
   ("d" my-go-doc-local)
   ("l" my-go-lint)
   ("r" jump-go-hydra/body)

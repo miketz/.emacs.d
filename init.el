@@ -10022,7 +10022,7 @@ Values: lsp, citre, nil")
       (citre-mode 1))
     (hs-minor-mode 1) ;; collapse/show sections of code
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode)
+    ;; (rainbow-delimiters-mode)
     (indent-bars-mode 1)
     (setq-local devdocs-current-docs '("go"))
     ;; (when my-graphic-p ; relies on posframe which is gui only
@@ -10109,7 +10109,7 @@ Values: lsp, citre, nil")
       (citre-mode 1))
     (hs-minor-mode 1) ;; collapse/show sections of code
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode)
+    ;; (rainbow-delimiters-mode)
     (indent-bars-mode 1)
     (setq-local devdocs-current-docs '("go")))
   (add-hook 'go-mode-hook #'my-setup-go-mode))

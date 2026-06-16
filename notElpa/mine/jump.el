@@ -36,7 +36,7 @@ Using REGEX-FN to construct the regex with the thing-at-point text."
          (default-regex (funcall regex-fn cursor-txt))
          (regex (read-string "regex: " default-regex))
          (dir (jump-read-search-dir))
-         (rg-ignore-case nil) ; ignore case to reduce false hits
+         (rg-ignore-case nil) ; case-sensitive to reduce false hits
          ;; (rg-command-line-flags rg-command-line-flags) ; command line flag -s to ignore case doesn't work with rg.el
          )
     ;; (add-to-list 'rg-command-line-flags "-s") ; command line flag -s to ignore case doesn't work with rg.el

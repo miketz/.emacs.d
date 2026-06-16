@@ -349,8 +349,8 @@ _q_, _C-g_: quit"
 ;;;----------------------------------------------------------------------------
 ;;; Swift regexes
 ;;;----------------------------------------------------------------------------
-(defun jump-swift-class-regex (txt) (concat "(class|struct) " txt "\\b"))
-(defun jump-swift-interface-implementor-regex (txt) (concat "class.+:.+" txt))
+(defun jump-swift-class-regex (txt) (concat "(class|struct|protocol) " txt "\\b"))
+(defun jump-swift-interface-implementor-regex (txt) (concat "(class|struct|protocol).+:.+" txt))
 (defun jump-swift-function-regex (txt) (concat ".*func " txt "[\\(<]"))
 (defun jump-swift-function-refs-regex (txt)
   ;; requires --pcre2 flag passed to ripgrep
@@ -389,7 +389,7 @@ _q_, _C-g_: quit"
 ;;;###autoload
 (defhydra jump-swift-hydra (:color blue :hint nil)
   "
-_c_: class, struct
+_c_: class, struct, protocol
 _i_: implemenators of interface
 _f_: function definition
 _r_: function references

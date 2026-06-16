@@ -1925,12 +1925,21 @@ In master branch now. Was on git branch: feature/native-comp.")
   ;; (evil-define-key 'visual global-map (kbd "C-n") #'evil-exit-visual-state)
 
 
-  (defadvice evil-end-of-line (after do-not-highlight-newline)
+;;   (defadvice evil-end-of-line (after do-not-highlight-newline)
+;;     "When in visual mode, press $ to go to the end of the line.
+;; Minus the newline char."
+;;     (when (evil-visual-state-p)
+;;       (evil-backward-char)))
+;;   (ad-activate 'evil-end-of-line)
+
+  (defun evil-end-of-line--do-not-highlight-newline (&rest _args)
     "When in visual mode, press $ to go to the end of the line.
 Minus the newline char."
     (when (evil-visual-state-p)
       (evil-backward-char)))
-  (ad-activate 'evil-end-of-line)
+  (advice-add 'evil-end-of-line
+              :after
+              #'evil-end-of-line--do-not-highlight-newline)
 
 
 )
@@ -2037,15 +2046,19 @@ Minus the newline char."
 ;;TODO: implement a way to undo color settings made outside the theme
 ;;      definition. Use custom-theme-set-faces to set the colors/styles so they
 ;;      are rolled back when switching/disabling themes.
-(defadvice load-theme (before disable-before-load)
+;; (defadvice load-theme (before disable-before-load)
+;;   "Disable any loaded themes before enabling a new theme.
+;; This prevents overlapping themes; something I would rarely want."
+;;   (dolist (theme custom-enabled-themes)
+;;     (disable-theme theme)))
+;; (ad-activate 'load-theme)
+
+(defun load-theme--disable-before-load (&rest _args)
   "Disable any loaded themes before enabling a new theme.
 This prevents overlapping themes; something I would rarely want."
   (dolist (theme custom-enabled-themes)
     (disable-theme theme)))
-
-;; (defadvice load-theme (before capture-theme)
-;;   "Capture the theme in a global var."
-;;   (setq my-curr-theme theme))
+(advice-add 'load-theme :before #'load-theme--disable-before-load)
 
 (setq custom-safe-themes t) ;; Disable the confirmation to load themes.
 ;; (defadvice load-theme (around disable-security)
@@ -2053,7 +2066,6 @@ This prevents overlapping themes; something I would rarely want."
 ;;     (let ((no-confirm t))
 ;;       ad-do-it))
 
-(ad-activate 'load-theme)
 
 
 ;; (defvar my-themes-shortlist
@@ -3931,14 +3943,33 @@ To make it human readable."
             my-use-grid-ido-p
             my-use-bare-ido-p)
     ;; insert a hyphen - on space like in normal M-x
-    (defadvice smex (around space-inserts-hyphen activate compile)
-      (let ((ido-cannot-complete-command
-             `(lambda ()
-                (interactive)
-                (if (string= " " (this-command-keys))
-                    (insert ?-)
-                  (funcall ,ido-cannot-complete-command)))))
-        ad-do-it))))
+    ;; (defadvice smex (around space-inserts-hyphen activate compile)
+    ;;   (let ((ido-cannot-complete-command
+    ;;          `(lambda ()
+    ;;             (interactive)
+    ;;             (if (string= " " (this-command-keys))
+    ;;                 (insert ?-)
+    ;;               (funcall ,ido-cannot-complete-command)))))
+    ;;     ad-do-it))
+
+    ;; (defun smex--space-inserts-hyphen (orig-fun &rest args)
+    ;;   (let ((ido-cannot-complete-command
+    ;;          (lambda ()
+    ;;            (interactive)
+    ;;            (if (string= " " (this-command-keys))
+    ;;                (insert ?-)
+    ;;              (funcall ,ido-cannot-complete-command)))))
+    ;;     (apply orig-fun args)))
+
+    (let ((my-ido-cannot-complete-command (lambda ()
+                                            (interactive)
+                                            (if (string= " " (this-command-keys))
+                                                (insert ?-)
+                                              (funcall ,ido-cannot-complete-command)))))
+     (defun smex--space-inserts-hyphen (orig-fun &rest args)
+       (let ((ido-cannot-complete-command my-ido-cannot-complete-command))
+         (apply orig-fun args))))
+    (advice-add 'smex :around #'smex--space-inserts-hyphen)))
 
 ;;;----------------------------------------------------------------------------
 ;;; flx
@@ -4035,14 +4066,26 @@ completions from folders other than the current one."
     (define-key ido-file-dir-completion-map (kbd "M-k") #'evil-window-up))
 
   ;; insert a hyphen - on space like in normal M-x
-  (defadvice ido-switch-buffer (around space-inserts-hyphen activate compile)
-    (let ((ido-cannot-complete-command
-           `(lambda ()
-              (interactive)
-              (if (string= " " (this-command-keys))
-                  (insert ?-)
-                (funcall ,ido-cannot-complete-command)))))
-      ad-do-it)))
+  ;; (defadvice ido-switch-buffer (around space-inserts-hyphen activate compile)
+  ;;   (let ((ido-cannot-complete-command
+  ;;          `(lambda ()
+  ;;             (interactive)
+  ;;             (if (string= " " (this-command-keys))
+  ;;                 (insert ?-)
+  ;;               (funcall ,ido-cannot-complete-command)))))
+  ;;     ad-do-it))
+
+  (let ((my-ido-cannot-complete-command
+         (lambda ()
+           (interactive)
+           (if (string= " " (this-command-keys))
+               (insert ?-)
+             (funcall ,ido-cannot-complete-command)))))
+    (defun ido-switch-buffer--space-inserts-hyphen (orig-fun &rest args)
+      (let ((ido-cannot-complete-command my-ido-cannot-complete-command))
+        (apply orig-fun args))))
+  (advice-add 'ido-switch-buffer :around
+              #'ido-switch-buffer--space-inserts-hyphen))
 
 (with-eval-after-load 'flx-ido
   ;; disable ido faces to see flx highlights.

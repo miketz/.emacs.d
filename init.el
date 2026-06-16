@@ -4149,15 +4149,27 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
 
 
   ;; insert a hyphen - on space like in normal M-x
-  (defadvice ido-grid--completions (around space-inserts-hyphen activate compile)
-    (let ((ido-cannot-complete-command
-           `(lambda ()
-              (interactive)
-              (if (string= " " (this-command-keys))
-                  (insert ?-)
-                (funcall ,ido-cannot-complete-command)))))
-      ad-do-it))
-  (ad-activate 'ido-grid--completions))
+  ;; (defadvice ido-grid--completions (around space-inserts-hyphen activate compile)
+  ;;   (let ((ido-cannot-complete-command
+  ;;          `(lambda ()
+  ;;             (interactive)
+  ;;             (if (string= " " (this-command-keys))
+  ;;                 (insert ?-)
+  ;;               (funcall ,ido-cannot-complete-command)))))
+  ;;     ad-do-it))
+  ;; (ad-activate 'ido-grid--completions)
+
+  (let ((my-ido-cannot-complete-command
+         (lambda ()
+           (interactive)
+           (if (string= " " (this-command-keys))
+               (insert ?-)
+             (funcall ,ido-cannot-complete-command)))))
+    (defun ido-grid--completions--space-inserts-hyphen (orig-fun &rest args)
+      (let ((ido-cannot-complete-command my-ido-cannot-complete-command))
+        (apply orig-fun args))))
+  (advice-add 'ido-grid--completions :around
+              #'ido-grid--completions--space-inserts-hyphen))
 
 (when my-use-grid-ido-p
   (ido-grid-enable))
@@ -5763,10 +5775,11 @@ and indent."
         (while (re-search-forward "" nil t)
           (replace-match ""))))
 
-    (defadvice eww-render (after ad-clear-weird-m)
-      "Clear the weird ^M character that shows in some eww buffers."
-      (my-clear-weird-m))
-    (ad-activate 'eww-render))
+    ;; (defadvice eww-render (after ad-clear-weird-m)
+    ;;   "Clear the weird ^M character that shows in some eww buffers."
+    ;;   (my-clear-weird-m))
+    ;; (ad-activate 'eww-render)
+    )
 
   (defun my-setup-eww ()
     (setq show-trailing-whitespace nil))
@@ -7223,18 +7236,18 @@ Closure over `preceding-sexp-fn'."
 
   ;; TODO: this is not removing the 100 max limit. make it work.
   ;; using 'around' advice on `sx-tab-newest'
-  (defadvice sx-tab-newest (around no-helm-limit)
-    ;; temporarily remove the helm candidate limit. (via dynamic binding).
-    (let ((helm-candidate-number-limit nil))
-      ad-do-it))
-  (ad-activate 'sx-tab-newest)
+  ;; (defadvice sx-tab-newest (around no-helm-limit)
+  ;;   ;; temporarily remove the helm candidate limit. (via dynamic binding).
+  ;;   (let ((helm-candidate-number-limit nil))
+  ;;     ad-do-it))
+  ;; (ad-activate 'sx-tab-newest)
 
   ;; turn off ido completion for sx. Prefer the many columns of the default
   ;; emacs completion so I can see more options.
-  (defadvice sx-completing-read (around no-ido)
-    (let ((ido-mode nil))
-      ad-do-it))
-  (ad-activate 'sx-completing-read)
+  ;; (defadvice sx-completing-read (around no-ido)
+  ;;   (let ((ido-mode nil))
+  ;;     ad-do-it))
+  ;; (ad-activate 'sx-completing-read)
 
   (when my-use-evil-p
     ;; use emacs bindings (not evil).
@@ -10191,21 +10204,22 @@ Values: lsp, citre, nil")
   (browse-kill-ring-default-keybindings)
 
   ;; apply the same key bind advice to evil-paste-pop (kbd "M-y")
-  (when my-use-evil-p
-    (defadvice evil-paste-pop (around kill-ring-browse-maybe (arg))
-      "If last action was not a yank, run `browse-kill-ring' instead."
-      ;; evil-paste-pop has an (interactive "*p") form which does not allow
-      ;; it to run in a read-only buffer.  We want browse-kill-ring to
-      ;; be allowed to run in a read only buffer, so we change the
-      ;; interactive form here.  In that case, we need to
-      ;; barf-if-buffer-read-only if we're going to call evil-paste-pop with
-      ;; ad-do-it
-      (interactive "p")
-      (if (not (eq last-command 'yank))
-          (browse-kill-ring)
-        (barf-if-buffer-read-only)
-        ad-do-it))
-    (ad-activate 'evil-paste-pop)))
+  ;; (when my-use-evil-p
+  ;;   (defadvice evil-paste-pop (around kill-ring-browse-maybe (arg))
+  ;;     "If last action was not a yank, run `browse-kill-ring' instead."
+  ;;     ;; evil-paste-pop has an (interactive "*p") form which does not allow
+  ;;     ;; it to run in a read-only buffer.  We want browse-kill-ring to
+  ;;     ;; be allowed to run in a read only buffer, so we change the
+  ;;     ;; interactive form here.  In that case, we need to
+  ;;     ;; barf-if-buffer-read-only if we're going to call evil-paste-pop with
+  ;;     ;; ad-do-it
+  ;;     (interactive "p")
+  ;;     (if (not (eq last-command 'yank))
+  ;;         (browse-kill-ring)
+  ;;       (barf-if-buffer-read-only)
+  ;;       ad-do-it))
+  ;;   (ad-activate 'evil-paste-pop))
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; perl-mode

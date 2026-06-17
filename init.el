@@ -2272,7 +2272,7 @@ This prevents overlapping themes; something I would rarely want."
     ))
 
  ((eq my-curr-computer 'work-laptop-2025)
-  (load-theme 'focus-dark t)
+  (load-theme 'charcoal t)
   (when my-graphic-p
     (push
      '(font

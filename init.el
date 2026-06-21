@@ -4254,6 +4254,11 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
 (autoload #'my-add-newline-automatically-p "my-auto-newline" nil t)
 
 ;;;----------------------------------------------------------------------------
+;;; my-c-helpers. helper fns for C
+;;;----------------------------------------------------------------------------
+(autoload #'my-c-commands-hydra/body "my-c-helpers" nil t)
+
+;;;----------------------------------------------------------------------------
 ;;; cc-mode
 ;;;----------------------------------------------------------------------------
 ;; TODO: wire up static analyzer and ASAN, UBSAN, TSAN
@@ -4271,6 +4276,10 @@ But ido-grid is weird and only lets you set keybinds on the fly?"
      (concat
       "C:/progs/libc-html_node/libc/"
       "Function-Index.html#Function-Index"))))
+
+(with-eval-after-load 'c-mode
+  (define-key c-mode-map (kbd "C-c g") #'my-c-commands-hydra/body)
+  (define-key c-mode-map (kbd "C-c C-g") #'my-c-commands-hydra/body))
 
 (with-eval-after-load 'cc-mode
   ;; (assoc "cc-mode" c-style-alist)
@@ -4492,6 +4501,9 @@ and indent."
 
   (define-key c-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
   (define-key c-ts-mode-map (kbd "C-c j") #'jump-c-hydra/body)
+
+  (define-key c-ts-mode-map (kbd "C-c g") #'my-c-commands-hydra/body)
+  (define-key c-ts-mode-map (kbd "C-c C-g") #'my-c-commands-hydra/body)
 
   (defun my-setup-c-ts-mode ()
     (setq-local devdocs-current-docs '("c"))

@@ -73,6 +73,7 @@ For this don't use ripgrep. Just call isearch starting from method definition."
 ;;;----------------------------------------------------------------------------
 (defun jump-go-methods-of-struct-regex (txt) (concat "^func \\(.+" txt "\\)"))
 (defun jump-go-struct-regex (txt) (concat "^type " txt " (struct|interface)"))
+(defun jump-go-type-regex (txt) (concat "^type " txt))
 (defun jump-go-function-regex (txt) (concat "^func " txt "\\("))
 (defun jump-go-method-regex (txt) (concat "^func \\(.+\\) " txt "\\("))
 (defun jump-go-function-or-method-regex (txt) (concat "^(func " txt "\\(|func \\(.+\\) " txt "\\()"))
@@ -105,6 +106,12 @@ For this don't use ripgrep. Just call isearch starting from method definition."
   "Find struct definition."
   (interactive)
   (jump #'jump-go-struct-regex))
+
+(defun jump-go-type ()
+  "Find type definition.
+Similar to `jump-go-struct' but includes all type definitions, not only struct/interface."
+  (interactive)
+  (jump #'jump-go-type-regex))
 
 (defun jump-go-function ()
   "Find function definition."
@@ -150,6 +157,7 @@ But using this regex anyway for performance and fewer false positive matches."
   "
 _s_: struct
 _M_: all methods of struct
+_t_: type defintion
 _f_: function
 _m_: method
 _F_: function or method. (more general but more false matches)
@@ -159,6 +167,7 @@ _V_: global var
 _q_, _C-g_: quit"
   ("s" jump-go-struct)
   ("M" jump-go-methods-of-struct)
+  ("t" jump-go-type)
   ("f" jump-go-function)
   ("m" jump-go-method)
   ("F" jump-go-function-or-method)

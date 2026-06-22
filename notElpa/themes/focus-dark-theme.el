@@ -114,7 +114,7 @@
    `(font-lock-property-name-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-property-use-face ((,class :inherit font-lock-property-name-face))) ;treesit
    `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit
-   `(font-lock-escape-face ((,class :inherit font-lock-string-face :weight bold))) ;treesit
+   `(font-lock-escape-face ((,class :inherit font-lock-string-face :foreground "#FF6F00"))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-negation-char-face ((,class (:foreground "tomato" :weight bold))))
 

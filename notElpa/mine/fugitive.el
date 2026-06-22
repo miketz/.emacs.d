@@ -1395,6 +1395,8 @@ If project not detected return current dir."
 
 
 
+
+
 (defvar fugitive-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-n") #'fugitive-parent-commits-jump-to)
@@ -1419,6 +1421,46 @@ Mostly just to support key binds."
             map)
   ;; (read-only-mode 1)
   )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; worktrees. assoicates each worktree folder with a branch.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar fugitive-worktree-style 'worktree-dir
+  "How to organize work tree folders.
+`worktree-dir': worktree created in projName_worktrees/branchName.
+`sibling-folder' worktree created as a silbing to root project. projName_branchName")
+
+(cl-defun fugitive-worktree-create ()
+  "Create a new worktree from a branch."
+  (interactive)
+  ;; keep it simple, only list local branches. Can prepare a branch as a
+  ;; pre-step if needed.
+  (let* ((local-branches (fugitive-get-branches-local))
+         (branch (completing-read "branch: " local-branches nil nil))
+         (exists-p (member-ignore-case branch local-branches))
+         (exist-branch (car exists-p))
+         (case-match-p (string-equal branch exist-branch)))
+    ;; GUARD: no empty string for branch name.
+    (when (string-empty-p (string-trim branch))
+      (print "Abort. Branch name required.")
+      (cl-return-from fugitive-worktree-create))
+    ;; GUARD: if existing branch, ensure upper/lower case matches.
+    (when (and exists-p (not case-match-p))
+      ;; `message' does not work with cl-return-from. use print for now.
+      (print (format "Abort. case mismatch: %s %s."
+                     branch exist-branch))
+      (cl-return-from fugitive-worktree-create))
+
+    (let* ((proj (project-current nil))
+           (in-proj? (not (null proj)))
+           (root-dir (when in-proj? (project-root proj))))
+      ;; GUARD: must be inside a git repo
+      (when (not in-proj?)
+        (print "Abort. Not in a git repo.")
+        (cl-return-from fugitive-worktree-create))
+      ;; TODO: create worktree.
+      (print root-dir))))
 
 
 ;; ;; test

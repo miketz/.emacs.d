@@ -108,7 +108,9 @@
    ;; disable highlights. use regular fg/bg
    `(font-lock-keyword-face ((,class :foreground ,dim-2)))
    `(font-lock-type-face ((,class :foreground ,dim+2)))
-   `(font-lock-function-call-face ((,class :foreground ,fg))) ;treesit
+   `(font-lock-function-call-face ((,class :foreground "#DF9c9c";,fg
+                                           ;; :background "#303030"
+                                           ))) ;treesit
    `(font-lock-variable-use-face ((,class :inherit default))) ;treesit
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face :foreground ,dim+4))) ;treesit
    `(font-lock-property-name-face ((,class :foreground ,fg))) ;treesit

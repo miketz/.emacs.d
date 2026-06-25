@@ -3129,6 +3129,16 @@ Inserts a new line and the beginning and end with text values:
 ;; fns not quite big enough to justify their own dedicated package.
 
 ;;;----------------------------------------------------------------------------
+;;; csharp-ts-mode
+;;;----------------------------------------------------------------------------
+;; new mode. bundled in the same file csharp-mode.el. respects the fn call face
+;; TODO: set it up.
+
+;; ;; prefer csharp-ts-mode for ".cs" files. But only if it's available.
+;; (when (treesit-language-available-p 'c-sharp)
+;;   (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode)))
+
+;;;----------------------------------------------------------------------------
 ;;; csharp-mode. C#
 ;;;----------------------------------------------------------------------------
 (unless (fboundp #'csharp-mode)

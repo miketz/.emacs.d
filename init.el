@@ -9162,6 +9162,7 @@ Explicit language selection not supported?"
           (css "https://github.com/tree-sitter/tree-sitter-css")
           (elisp "https://github.com/Wilfred/tree-sitter-elisp")
           (go "https://github.com/tree-sitter/tree-sitter-go")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (java "https://github.com/tree-sitter/tree-sitter-java")
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript"

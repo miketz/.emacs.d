@@ -32,14 +32,15 @@
     ((my-fonts
       (cond
        ((eq my-curr-computer 'mac-mini-m1-2021)
-        ["-*-Iosevka-thin-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         "-*-Iosevka-light-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         "-*-Iosevka-regular-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         "-*-Iosevka-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         "-*-Iosevka-semibold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         "-*-Iosevka-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         "-*-Iosevka-ultraheavy-normal-normal-*-*-*-*-*-m-0-iso10646-1"
-         ;; "-*-Iosevka-regular-normal-normal-*-17-*-*-*-m-0-iso10646-1"
+        ["-*-Iosevka Fixed-thin-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-ultralight-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-light-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-regular-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-medium-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-semibold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-extrabold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+         "-*-Iosevka Fixed-black-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-Ubuntu Mono-bold-normal-normal-*-*-*-*-*-m-0-iso10646-1"
          "-*-JetBrains Mono NL-thin-normal-normal-*-*-*-*-*-m-0-iso10646-1"

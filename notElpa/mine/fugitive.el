@@ -1455,7 +1455,9 @@ Mostly just to support key binds."
     (let* ((proj (project-current nil))
            (in-proj? (not (null proj)))
            (root-dir (when in-proj? (project-root proj))))
-      ;; GUARD: must be inside a git repo
+      ;; GUARD: must be inside a git repo. NOTE: this is an imperfect guard.
+      ;; it's not checking if in a git repo, just project.el's concpet of proj.
+      ;; TODO: Maybe add a real git repo guard later.
       (when (not in-proj?)
         (print "Abort. Not in a git repo.")
         (cl-return-from fugitive-worktree-create))

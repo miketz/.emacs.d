@@ -1461,8 +1461,19 @@ Mostly just to support key binds."
       (when (not in-proj?)
         (print "Abort. Not in a git repo.")
         (cl-return-from fugitive-worktree-create))
-      ;; TODO: create worktree.
-      (print root-dir))))
+      ;; determine folder name for the worktree.
+      (let* ((parent-dir (expand-file-name "../" root-dir)) ; up 1 level.
+             (folder-name (car (nreverse (string-split (directory-file-name root-dir) "/"))))
+             ;; choose between the 2 styles of worktree folder organization.
+             (new-folder-name (if (eq fugitive-worktree-style 'worktree-dir)
+                                  (concat parent-dir folder-name "_worktrees/" branch)
+                                ;; else sibling-folder style
+                                (concat parent-dir folder-name "_" branch)))
+             ;; different git command for exsiting branch or new branch
+             (cmd (if exists-p
+                      (concat "git worktree add " new-folder-name " " branch)
+                    (concat "git worktree add -b " branch " " new-folder-name))))
+        (fugitive-shell-command cmd nil t)))))
 
 
 ;; ;; test

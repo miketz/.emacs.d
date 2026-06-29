@@ -1426,7 +1426,7 @@ Mostly just to support key binds."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; worktrees. associates each worktree folder with a branch.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar fugitive-worktree-style 'worktree-dir
+(defcustom fugitive-worktree-style 'worktree-dir
   "How to organize work tree folders.
 `worktree-dir': worktree created in projName_worktrees/branchName.
 `sibling-folder' worktree created as a silbing to root project. projName_branchName")

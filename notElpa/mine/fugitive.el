@@ -1488,6 +1488,11 @@ Mostly just to support key binds."
          (cmd (concat "git worktree remove " folder)))
     (fugitive-shell-command cmd nil t)))
 
+(defun fugitive-worktree-list ()
+  "List git worktrees."
+  (interactive)
+  (fugitive-shell-command "git worktree list"))
+
 ;; ;; test
 ;; (let* ((default-directory "~/.emacs.d/notElpaYolo/magit"))
 ;;   (fugitive-get-branches))

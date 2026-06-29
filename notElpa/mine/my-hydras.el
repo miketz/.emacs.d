@@ -386,9 +386,11 @@ _q_, _C-g_: quit"
 (defhydra my-fugitive-worktree-hydra (:color blue :hint nil)
   "
 _a_: add worktree
+_l_: list worktrees
 _d_: remove worktree
 _q_, _C-g_: quit"
   ("a" fugitive-worktree-create)
+  ("l" fugitive-worktree-list)
   ("d" fugitive-worktree-remove)
   ("C-g" nil nil)
   ("q" nil))

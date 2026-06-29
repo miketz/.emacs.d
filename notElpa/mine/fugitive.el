@@ -1424,7 +1424,7 @@ Mostly just to support key binds."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; worktrees. assoicates each worktree folder with a branch.
+;;; worktrees. associates each worktree folder with a branch.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar fugitive-worktree-style 'worktree-dir
   "How to organize work tree folders.

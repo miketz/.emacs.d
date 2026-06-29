@@ -327,6 +327,7 @@ _S_: enter stauts Hydra
 _p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
 _L_: enter log Hydra
+_W_: enter worktree hydra
 _t_: external terminal. for interactive commands emacs does not handle well.
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
@@ -347,6 +348,7 @@ _q_, _C-g_: quit"
   ("p" fugitive-parent-commits-jump-to)
   ("c" fugitive-delete-buffers-except-current)
   ("L" my-fugitive-log-hydra/body)
+  ("W" my-fugitive-worktree-hydra/body)
   ("t" fugitive-open-external-terminal)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
@@ -378,6 +380,16 @@ _q_, _C-g_: quit"
   ("a" fugitive-log-no-color)
   (";" fugitive-log-between)
   ;; don't use the hint text as it makes (:hint nil) not work?
+  ("C-g" nil nil)
+  ("q" nil))
+
+(defhydra my-fugitive-worktree-hydra (:color blue :hint nil)
+  "
+_a_: add worktree
+_d_: remove worktree
+_q_, _C-g_: quit"
+  ("a" fugitive-worktree-create)
+  ("d" fugitive-worktree-remove)
   ("C-g" nil nil)
   ("q" nil))
 

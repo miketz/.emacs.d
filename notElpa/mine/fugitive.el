@@ -1424,6 +1424,22 @@ Mostly just to support key binds."
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; hash completion helpers.
+;;; not used. exists for documentation purposes for now.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun fugitive-get-hashes ()
+  (fugitive-cmd-to-list (concat "git log --format=\"%h\" -n " fugitive-default-n-log-limit)))
+
+(defun fugitive-select-hash ()
+  (interactive)
+  ;; don't sort hashes during completion. already sorted by graph chain recency.
+  (let* ((completions-sort nil)
+         (hashes (fugitive-get-hashes)))
+    (completing-read "rev: " hashes nil t)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; worktrees. associates each worktree folder with a branch.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defcustom fugitive-worktree-style 'worktree-dir

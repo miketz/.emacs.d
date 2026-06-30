@@ -25,7 +25,9 @@
 (deftheme focus-dark-256 "focus-dark-256 color theme")
 
 
-(let* ((black "#000000")
+(let* (;; 256 color pallete
+       ;; 0-15 ANSI colors and bright variants
+       (black "#000000")
        (red "#cd0000")
        (green "#00cd00")
        (yellow "#cdcd00")
@@ -41,6 +43,7 @@
        (brightmagenta "#ff00ff")
        (brightcyan "#00ffff")
        (brightwhite "#ffffff")
+       ;; 16-231 6x6x6 rgb color cube
        (color-16 "#000000")
        (color-17 "#00005f")
        (color-18 "#000087")
@@ -257,6 +260,7 @@
        (color-229 "#ffffaf")
        (color-230 "#ffffd7")
        (color-231 "#ffffff")
+       ;; 232-255 grayscale ramp
        (color-232 "#080808")
        (color-233 "#121212")
        (color-234 "#1c1c1c")
@@ -281,10 +285,14 @@
        (color-253 "#dadada")
        (color-254 "#e4e4e4")
        (color-255 "#eeeeee")
-
+       ;; vars for this theme. use the 256 color pallete
        (class t)
        (fg color-254);"#EEEED1"
+       (bg-2 color-234)
+       (bg-1 color-235)
        (bg color-236) ;"#35352B"
+       (bg+1 color-237)
+       (bg+2 color-238)
        (dim+4 color-251) ;"#CECEB1"
        (dim+3 color-250) ;"#BEBEA1"
        (dim+2 color-248) ;"#AEAE91"
@@ -352,14 +360,19 @@
                                            )))
    `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
 
-   `(font-lock-comment-face ((,class :foreground "#6FAB6F" :background "#393f2f" )))
+   `(font-lock-comment-face ((,class :foreground ,color-71;"#6FAB6F"
+                                     :background ,bg+1;"#393f2f"
+                                     )))
    `(font-lock-comment-delimiter-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-face ((,class :inherit font-lock-comment-face)))
    `(font-lock-doc-markup-face ((,class :inherit font-lock-doc-face :weight bold)))
-   `(font-lock-string-face ((,class :foreground "LightSalmon" :background "#45453B")))
+   `(font-lock-string-face ((,class :foreground ,color-216;"#ffa07a"
+                                    :background ,bg+1;"#45453B"
+                                    )))
    ;; `(font-lock-builtin-face ((,class (:foreground "dark blue" :background ,bg :weight normal))))
    `(font-lock-constant-face ((,class :foreground ,fg :weight normal)))
-   `(font-lock-number-face ((,class :foreground "#50b5b5"))) ;treesit
+   `(font-lock-number-face ((,class :foreground ,color-73;"#50b5b5"
+                                    ))) ;treesit
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; disable highlights. use regular fg/bg
@@ -371,9 +384,12 @@
    `(font-lock-property-name-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-property-use-face ((,class :inherit font-lock-property-name-face))) ;treesit
    `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit
-   `(font-lock-escape-face ((,class :inherit font-lock-string-face :foreground "#FF6F00"))) ;treesit
+   `(font-lock-escape-face ((,class :inherit font-lock-string-face
+                                    :foreground ,color-202;"#FF6F00"
+                                    ))) ;treesit
    `(font-lock-regexp-face ((,class :foreground ,fg))) ;treesit
-   `(font-lock-negation-char-face ((,class (:foreground "tomato" :weight bold))))
+   `(font-lock-negation-char-face ((,class (:foreground ,color-203;"#ff6347"
+                                                        :weight bold))))
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; dim. don't dim for now actually as the face control is not fine grained enough.

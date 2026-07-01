@@ -206,6 +206,9 @@
 ;; pacman -S mingw-w64-x86_64-libgccjit
 ;; OR maybe: pacman -S ucrt64/mingw-w64-ucrt-x86_64-libgccjit 16.1.0-5
 
+;; Optional: install extra C toolchain stuff while we are here
+;; pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+
 ;; # 3. find real windows path to libccjit
 ;; which gcc # just finding any binary
 ;; #/mingw64/bin

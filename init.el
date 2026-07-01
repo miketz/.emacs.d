@@ -2717,10 +2717,17 @@ But works when current-buffer is not the slime REPL."
     ;; TODO: find alternative to fn `evil-leader/set-key-for-mode' or
     ;;       even an alternative to `evil-leader' itself.
     ;; (evil-leader/set-key-for-mode 'slime-mode "e" eval-fn)
-    ;;### (evil-leader/set-key-for-mode 'lisp-mode "e"
+
+    ;; set up a leader for a mode(s) only
+    (define-prefix-command 'my-leader-map-common-lisp)
+    (evil-define-key 'normal lisp-mode-map (kbd ",") my-leader-map-common-lisp)
+    (evil-define-key 'normal slime-repl-mode-map (kbd ",") my-leader-map-common-lisp)
+
+    (define-key my-leader-map-common-lisp (kbd "e") #'slime-eval-last-expression-eros)
+    ;; ~~~ (evil-leader/set-key-for-mode 'lisp-mode "e"
     ;;   ;#'my-slime-eval-last-sexp-display
     ;;   #'slime-eval-last-expression-eros)
-    ;;### (evil-leader/set-key-for-mode 'slime-repl-mode "e"
+    ;;~~~ (evil-leader/set-key-for-mode 'slime-repl-mode "e"
     ;;   ;#'my-slime-eval-last-sexp-display
     ;;   #'slime-eval-last-expression-eros)
     )
@@ -7196,9 +7203,16 @@ Closure over `preceding-sexp-fn'."
   ;; evaluate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
 
-  ;;### (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
+
+  ;; set up a leader map for a specific mode(s)
+  (define-prefix-command 'my-leader-map-elisp)
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd ",") my-leader-map-elisp)
+  (evil-define-key 'normal lisp-interaction-mode-map (kbd ",") my-leader-map-elisp)
+
+  (define-key my-leader-map-elisp (kbd "e") #'my-eval-last-sexp-display)
+  ;;~~~ (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
   ;;   #'my-eval-last-sexp-display)
-  ;;### (evil-leader/set-key-for-mode 'lisp-interaction-mode "e"
+  ;;~~~ (evil-leader/set-key-for-mode 'lisp-interaction-mode "e"
   ;;   #'my-eval-last-sexp-display)
   )
 
@@ -10963,7 +10977,12 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'my-sql-comp
   (define-key my-sql-comp-mode-map (kbd "C-c r") #'my-sql-run-query)
   (when my-use-evil-p
-    ;;### (evil-leader/set-key-for-mode 'my-sql-comp-mode "s" #'my-sql-comp-hydra/body)
+    ;; set up a leader map for this mode only
+    (define-prefix-command 'my-leader-map-my-sql-comp)
+    (evil-define-key 'normal my-sql-comp-mode-map (kbd ",") my-leader-map-my-sql-comp)
+
+    (define-key my-leader-map-my-sql-comp (kbd "s") #'my-sql-comp-hydra/body)
+    ;;~~~ (evil-leader/set-key-for-mode 'my-sql-comp-mode "s" #'my-sql-comp-hydra/body)
     )
   ;; issues overriding comapny C-o keybind. use alteratnive for now
   ;; issues with C-i as it shadows TAB and disrupts yasnippet!

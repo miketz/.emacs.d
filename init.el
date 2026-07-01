@@ -827,7 +827,7 @@ in case that file does not provide any feature."
 (declare-function evil-exit-visual-state "evil-states")
 (declare-function evil-next-visual-line "evil-commands")
 (declare-function evil-previous-visual-line "evil-commands")
-(declare-function evil-leader/set-leader "evil-leader")
+;; (declare-function evil-leader/set-leader "evil-leader")
 (declare-function my-quit-window "my-window-stuff")
 (declare-function my-shrink-window-horizontally "my-window-stuff")
 (declare-function my-enlarge-window-horizontally "my-window-stuff")
@@ -1771,45 +1771,45 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; evil-leader
 ;;;----------------------------------------------------------------------------
-(push "~/.emacs.d/notElpaYolo/evil-leader" load-path)
-;; evil-leader needs to be able to to find evil. So add to load-path now.
+;; (push "~/.emacs.d/notElpaYolo/evil-leader" load-path)
+;; ;; evil-leader needs to be able to to find evil. So add to load-path now.
 (push "~/.emacs.d/notElpaYolo/evil" load-path)
-(autoload #'global-evil-leader-mode "evil-leader" nil t)
-(autoload #'evil-leader-mode "evil-leader" nil t)
-(autoload #'evil-leader/set-key "evil-leader" nil t)
-(autoload #'evil-leader/set-key-for-mode "evil-leader" nil t)
+;; (autoload #'global-evil-leader-mode "evil-leader" nil t)
+;; (autoload #'evil-leader-mode "evil-leader" nil t)
+;; (autoload #'evil-leader/set-key "evil-leader" nil t)
+;; (autoload #'evil-leader/set-key-for-mode "evil-leader" nil t)
 
-;; TODO: look into replacing evil-leader with 1 of the following:
-;;       https://github.com/justbur/emacs-bind-map
-;;       https://github.com/noctuid/general.el
-(when my-use-evil-p
-  ;; NOTE: per docs, evil-leader must be enabled before evil mode.
-  (require 'evil-leader)
-  (global-evil-leader-mode)
+;; ;; TODO: look into replacing evil-leader with 1 of the following:
+;; ;;       https://github.com/justbur/emacs-bind-map
+;; ;;       https://github.com/noctuid/general.el
+;; (when my-use-evil-p
+;;   ;; NOTE: per docs, evil-leader must be enabled before evil mode.
+;;   (require 'evil-leader)
+;;   (global-evil-leader-mode)
 
-  ;;leader keys
-  (evil-leader/set-leader ",")
-  ;; (evil-leader/set-key "w" #'other-window)
-  (evil-leader/set-key "q" #'balance-windows)
-  (evil-leader/set-key "x" #'maximize-window)
-  (evil-leader/set-key "," #'delete-other-windows)
-  (evil-leader/set-key "d" #'delete-window)
-  (evil-leader/set-key "k" #'my-quit-window) ;; #'kill-this-buffer
-  (evil-leader/set-key "c" #'quit-window) ; buffer left alive
-  (evil-leader/set-key "<" #'my-shrink-window-horizontally)
-  (evil-leader/set-key ">" #'my-enlarge-window-horizontally)
-  (evil-leader/set-key "v" #'evil-visual-block)
-  ;; (evil-leader/set-key "j" (lambda ()
-  ;;                            (interactive)
-  ;;                            (shrink-window 10)))
-  ;; (evil-leader/set-key "k" (lambda ()
-  ;;                            (interactive)
-  ;;                            (enlarge-window 10)))
+;;   ;;leader keys
+;;   (evil-leader/set-leader ",")
+;;   ;; (evil-leader/set-key "w" #'other-window)
+;;   (evil-leader/set-key "q" #'balance-windows)
+;;   (evil-leader/set-key "x" #'maximize-window)
+;;   (evil-leader/set-key "," #'delete-other-windows)
+;;   (evil-leader/set-key "d" #'delete-window)
+;;   (evil-leader/set-key "k" #'my-quit-window) ;; #'kill-this-buffer
+;;   (evil-leader/set-key "c" #'quit-window) ; buffer left alive
+;;   (evil-leader/set-key "<" #'my-shrink-window-horizontally)
+;;   (evil-leader/set-key ">" #'my-enlarge-window-horizontally)
+;;   (evil-leader/set-key "v" #'evil-visual-block)
+;;   ;; (evil-leader/set-key "j" (lambda ()
+;;   ;;                            (interactive)
+;;   ;;                            (shrink-window 10)))
+;;   ;; (evil-leader/set-key "k" (lambda ()
+;;   ;;                            (interactive)
+;;   ;;                            (enlarge-window 10)))
 
-  ;;TODO: look into equivalent resizing for non-Windows machines.
-  ;; (when (eq system-type 'windows-nt)
-  ;;   (evil-leader/set-key "f" #'my-toggle-frame-max))
-  )
+;;   ;;TODO: look into equivalent resizing for non-Windows machines.
+;;   ;; (when (eq system-type 'windows-nt)
+;;   ;;   (evil-leader/set-key "f" #'my-toggle-frame-max))
+;;   )
 
 ;;;----------------------------------------------------------------------------
 ;;; goto-chg. dependency of evil.
@@ -1817,6 +1817,29 @@ In master branch now. Was on git branch: feature/native-comp.")
 (push "~/.emacs.d/notElpaYolo/goto-chg" load-path)
 (autoload #'goto-last-change "goto-chg" nil t)
 (autoload #'goto-last-change-reverse "goto-chg" nil t)
+
+
+
+
+;;;----------------------------------------------------------------------------
+;;; sample. how to mimic Vim's leader key using emacs prefix keys
+;;;----------------------------------------------------------------------------
+(when nil ; sample code
+  ;; set up a leader for a global-map
+  ;; assuming we want the leader prefix in normal mode only, not insert
+  (define-prefix-command 'my-leader-map-global)
+  (evil-define-key 'normal global-map (kbd ",") my-leader-map-global)
+  (define-key my-leader-map-global (kbd "f") (lambda ()
+                                               (interactive)
+                                               (print "global")))
+
+  ;; set up a leader for a specific mode only
+  ;; assuming we want the leader prefix in normal mode only, not insert
+  (define-prefix-command 'my-leader-map-elisp)
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd ",") my-leader-map-elisp)
+  (define-key my-leader-map-elisp (kbd "e") (lambda ()
+                                              (interactive)
+                                              (print "mode-specific"))))
 
 ;;;----------------------------------------------------------------------------
 ;;; evil
@@ -1837,6 +1860,21 @@ In master branch now. Was on git branch: feature/native-comp.")
   ;; dependency on undo-tree was removed recently from evil. do not require.
   ;; (require 'undo-tree) ; stored in /notElpa/evil/lib
 
+  ;; set up a global prefix map to simulate Vim's leader key
+  (define-prefix-command 'my-leader-map-global)
+  (evil-define-key 'normal global-map (kbd ",") my-leader-map-global)
+
+  ;; some inital leader keybinds
+  ;; (define-key my-leader-map-global (kbd "w") #'other-window)
+  (define-key my-leader-map-global (kbd "q") #'balance-windows)
+  (define-key my-leader-map-global (kbd "x") #'maximize-window)
+  (define-key my-leader-map-global (kbd ",") #'delete-other-windows)
+  (define-key my-leader-map-global (kbd "d") #'delete-window)
+  (define-key my-leader-map-global (kbd "k") #'my-quit-window) ; #'kill-this-buffer
+  (define-key my-leader-map-global (kbd "c") #'quit-window) ; buffer left alive
+  (define-key my-leader-map-global (kbd "<") #'my-shrink-window-horizontally)
+  (define-key my-leader-map-global (kbd ">") #'my-enlarge-window-horizontally)
+  (define-key my-leader-map-global (kbd "v") #'evil-visual-block)
 
   (declare-function undo-redo 'suppress) ; silence byte-compiler on emacs<28
   (when (fboundp #'undo-redo) ; emacs 28+
@@ -2690,12 +2728,20 @@ But works when current-buffer is not the slime REPL."
     ;; TODO: find alternative to fn `evil-leader/set-key-for-mode' or
     ;;       even an alternative to `evil-leader' itself.
     ;; (evil-leader/set-key-for-mode 'slime-mode "e" eval-fn)
-    (evil-leader/set-key-for-mode 'lisp-mode "e"
-      ;#'my-slime-eval-last-sexp-display
-      #'slime-eval-last-expression-eros)
-    (evil-leader/set-key-for-mode 'slime-repl-mode "e"
-      ;#'my-slime-eval-last-sexp-display
-      #'slime-eval-last-expression-eros))
+
+    ;; set up a leader for a mode(s) only
+    (define-prefix-command 'my-leader-map-common-lisp)
+    (evil-define-key 'normal lisp-mode-map (kbd ",") my-leader-map-common-lisp)
+    (evil-define-key 'normal slime-repl-mode-map (kbd ",") my-leader-map-common-lisp)
+
+    (define-key my-leader-map-common-lisp (kbd "e") #'slime-eval-last-expression-eros)
+    ;; ~~~ (evil-leader/set-key-for-mode 'lisp-mode "e"
+    ;;   ;#'my-slime-eval-last-sexp-display
+    ;;   #'slime-eval-last-expression-eros)
+    ;;~~~ (evil-leader/set-key-for-mode 'slime-repl-mode "e"
+    ;;   ;#'my-slime-eval-last-sexp-display
+    ;;   #'slime-eval-last-expression-eros)
+    )
 
   ;; set link to common lisp hyperspec.
   (setq common-lisp-hyperspec-root
@@ -3031,7 +3077,9 @@ In that case, insert the number."
     (find-file-existing my-main-todo))
   (when my-use-evil-p
     ;; (evil-leader/set-key "t" #'my-open-main-todo)
-    (evil-leader/set-key "a" #'org-agenda-list)))
+    (define-key my-leader-map-global (kbd "a") #'org-agenda-list)
+    ;;~~~ (evil-leader/set-key "a" #'org-agenda-list)
+    ))
 
 (with-eval-after-load 'org
   (when my-use-evil-p
@@ -3646,7 +3694,9 @@ To make it human readable."
 
   (progn ;;functions in key maps are auto-loaded.
     (when my-use-evil-p
-     (evil-leader/set-key "b" #'helm-buffers-list))
+      (define-key my-leader-map-global (kbd "b") #'helm-buffers-list)
+      ;;~~~ (evil-leader/set-key "b" #'helm-buffers-list)
+      )
     (global-set-key (kbd "C-x b") #'helm-buffers-list)
     ;;(evil-leader/set-key "b" #'helm-mini) ;;use helm instead of bs-show
     ;;(global-set-key (kbd "C-x b")   #'helm-mini)
@@ -3657,7 +3707,9 @@ To make it human readable."
     ;; (global-set-key (kbd "C-x r l") #'helm-filtered-bookmarks)
     (global-set-key (kbd "M-y") #'helm-show-kill-ring)
     (when my-use-evil-p
-      (evil-leader/set-key "i" #'helm-imenu))
+      (define-key my-leader-map-global (kbd "i") #'helm-imenu)
+      ;;~~~ (evil-leader/set-key "i" #'helm-imenu)
+      )
     ;; TODO: use `helm-dabbrev', once i figure out what's preventing it from
     ;;       finding candidates. The standard emacs `dabbrev-expand' works
     ;;       fine. `hippie-expand' works too.
@@ -3915,13 +3967,17 @@ To make it human readable."
 (when (eq my-narrow-type 'icomplete)
   (icomplete-mode 1)
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'switch-to-buffer)))
+    (define-key my-leader-map-global (kbd "b") #'switch-to-buffer)
+    ;;~~~ (evil-leader/set-key "b" #'switch-to-buffer)
+    ))
 
 ;; Fido is just icomplete, but configured to work similar to ido.
 (when (eq my-narrow-type 'fido)
   (fido-mode 1)
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'switch-to-buffer)))
+    (define-key my-leader-map-global (kbd "b") #'switch-to-buffer)
+    ;;~~~ (evil-leader/set-key "b" #'switch-to-buffer)
+    ))
 
 (with-eval-after-load 'icomplete
   ;; redefine the set up fn to avoid flex matching
@@ -4013,7 +4069,9 @@ To make it human readable."
   (ido-mode 1) ;;autoloaded function. turn on ido.
 
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'ido-switch-buffer))
+    (define-key my-leader-map-global (kbd "b") #'ido-switch-buffer)
+    ;;~~~ (evil-leader/set-key "b" #'ido-switch-buffer)
+    )
 
   ;; (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
   ;;                   ; when Smex is auto-initialized on its first run.
@@ -5085,7 +5143,10 @@ and indent."
   ;; (define-key evil-normal-state-map (kbd "<SPC>") #'avy-goto-word-1)
   ;; (define-key evil-motion-state-map (kbd "<SPC>") #'avy-goto-word-1)
   (evil-define-key '(normal motion) global-map (kbd "<SPC>") #'avy-goto-word-1)
-  (evil-leader/set-key "s" #'avy-goto-char-timer))
+
+  (define-key my-leader-map-global (kbd "s") #'avy-goto-char-timer)
+  ;;~~~ (evil-leader/set-key "s" #'avy-goto-char-timer)
+  )
 
 (with-eval-after-load 'avy
   (setq my-avy-keys-long (nconc (cl-loop for i from ?A to ?Z collect i)
@@ -5299,7 +5360,10 @@ and indent."
   (defun my-open-dev-folder ()
     (interactive)
     (dired "~/proj/wirs/WIRS_iOS/WIRS/WIRS/"))
-  (evil-leader/set-key "4" #'my-open-dev-folder))
+
+  (define-key my-leader-map-global (kbd "4") #'my-open-dev-folder)
+  ;;~~~ (evil-leader/set-key "4" #'my-open-dev-folder)
+  )
 
 (when (memq my-curr-computer '(work-laptop-2025 work-laptop-2019 work-laptop))
   (let ((lisp-file "my-proj-work-laptop" ))
@@ -5332,7 +5396,8 @@ and indent."
     (defun my-open-user-folder ()
       (interactive)
       (dired "C:/Users/mtz"))
-    (evil-leader/set-key "1" #'my-open-user-folder)
+    (define-key my-leader-map-global (kbd "1") #'my-open-user-folder)
+    ;;~~~ (evil-leader/set-key "1" #'my-open-user-folder)
 
     ;;quick load of c:\users\mtz\proj\ecp\dev\db
     ;; (evil-leader/set-key "2" (lambda ()
@@ -5350,7 +5415,9 @@ and indent."
       (interactive)
       ;; (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")
       (dired "c:/Users/mtz/proj/safety/SafetyWebsite"))
-    (evil-leader/set-key "4" #'my-open-dev-folder)))
+    (define-key my-leader-map-global (kbd "4") #'my-open-dev-folder)
+    ;;~~~ (evil-leader/set-key "4" #'my-open-dev-folder)
+    ))
 
 
 (when (or (eq system-type 'gnu/linux)
@@ -5359,16 +5426,21 @@ and indent."
     (defun my-open-user-folder ()
       (interactive)
       (dired "~"))
-    (evil-leader/set-key "1" #'my-open-user-folder)))
+    (define-key my-leader-map-global (kbd "1") #'my-open-user-folder)
+    ;;~~~ (evil-leader/set-key "1" #'my-open-user-folder)
+    ))
 
 
 ;;; quick open of the .emacs (or init.el) file.
 (autoload #'my-open-init "my-misc" nil t)
 
 (when my-use-evil-p
-  (evil-leader/set-key "`" #'my-open-init)
+  (define-key my-leader-map-global (kbd "`") #'my-open-init)
+  ;;~~~ (evil-leader/set-key "`" #'my-open-init)
   ;; the above key is hard to type on a 60% poker so making an alternative.
-  (evil-leader/set-key "8" #'my-open-init))
+  (define-key my-leader-map-global (kbd "8") #'my-open-init)
+  ;;~~~ (evil-leader/set-key "8" #'my-open-init)
+  )
 
 
 ;;;----------------------------------------------------------------------------
@@ -5937,7 +6009,9 @@ and indent."
 ;; (setq magit-last-seen-setup-instructions "1.4.0")
 
 (when my-use-evil-p
-  (evil-leader/set-key "m" #'magit-status)) ; autoloaded
+  (define-key my-leader-map-global (kbd "m") #'magit-status)
+  ;;~~~ (evil-leader/set-key "m" #'magit-status)
+  ) ; autoloaded
 
 (with-eval-after-load 'magit
   ;; magit-delta seems to break commit and collapse behavior in magit
@@ -6410,8 +6484,10 @@ TODO: call this function when it works."
 
 (when my-use-ivy-p
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'counsel-switch-buffer ;#'ivy-switch-buffer
-      ))
+    (define-key my-leader-map-global (kbd "b") #'counsel-switch-buffer) ;#'ivy-switch-buffer
+    ;;~~~ (evil-leader/set-key "b" #'counsel-switch-buffer ;#'ivy-switch-buffer
+    ;;   )
+    )
 
   (when (eq my-ui-type 'emacs)
     (global-set-key (kbd "C-c C-s") #'swiper-isearch)
@@ -6438,7 +6514,8 @@ TODO: call this function when it works."
     ;; ;; replace keybind for `bookmark-bmenu-list'
     ;; (global-set-key (kbd "C-x r l") #'counsel-bookmark)
     (when my-use-evil-p
-      (evil-leader/set-key "w" #'counsel-yank-pop)
+      (define-key my-leader-map-global (kbd "w") #'counsel-yank-pop)
+      ;;~~~ (evil-leader/set-key "w" #'counsel-yank-pop)
       ;; (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
       )))
 
@@ -6558,7 +6635,7 @@ TODO: call this function when it works."
 ;;                 ".")
 ;;                ((string-match "^\\^" str)
 ;;                 (setq ivy--old-re "")
-;;                 (let ((re (ivy--regex-ignore-order (substring str 1))) ;;###
+;;                 (let ((re (ivy--regex-ignore-order (substring str 1))) ;;~~~
 ;;                       ;; (re (ivy--regex-plus (substring str 1)))
 ;;                       )
 ;;                   (if (zerop ivy--subexps)
@@ -6566,7 +6643,7 @@ TODO: call this function when it works."
 ;;                         (setq ivy--subexps 1))
 ;;                     (format "^ %s" re))))
 ;;                (t
-;;                 (ivy--regex-ignore-order str) ;;### I changed this line
+;;                 (ivy--regex-ignore-order str) ;;~~~ I changed this line
 ;;                 ;; (ivy--regex-plus str)
 ;;                 ))))
 ;;       (cond ((stringp re)
@@ -6605,8 +6682,10 @@ TODO: call this function when it works."
   ;; Avoid turning on `ivy-mode' because it replaces the `completing-read' fn
   ;; which i want sometimes for the column-style display.
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'switch-to-buffer)
-    (evil-leader/set-key "w" #'counsel-yank-pop)
+    (define-key my-leader-map-global (kbd "b") #'switch-to-buffer)
+    ;;~~~ (evil-leader/set-key "b" #'switch-to-buffer)
+    (define-key my-leader-map-global (kbd "w") #'counsel-yank-pop)
+    ;;~~~ (evil-leader/set-key "w" #'counsel-yank-pop)
     ;; (evil-leader/set-key "h" #'counsel-git) ; safe on ms-windows
     )
   (global-set-key (kbd "C-h v") #'counsel-describe-variable)
@@ -7134,10 +7213,19 @@ Closure over `preceding-sexp-fn'."
 (when my-use-evil-p
   ;; evaluate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
-  (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
-    #'my-eval-last-sexp-display)
-  (evil-leader/set-key-for-mode 'lisp-interaction-mode "e"
-    #'my-eval-last-sexp-display))
+
+
+  ;; set up a leader map for a specific mode(s)
+  (define-prefix-command 'my-leader-map-elisp)
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd ",") my-leader-map-elisp)
+  (evil-define-key 'normal lisp-interaction-mode-map (kbd ",") my-leader-map-elisp)
+
+  (define-key my-leader-map-elisp (kbd "e") #'my-eval-last-sexp-display)
+  ;;~~~ (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
+  ;;   #'my-eval-last-sexp-display)
+  ;;~~~ (evil-leader/set-key-for-mode 'lisp-interaction-mode "e"
+  ;;   #'my-eval-last-sexp-display)
+  )
 
 ;;;----------------------------------------------------------------------------
 ;;; elisp-slime-nav
@@ -7447,7 +7535,9 @@ Closure over `preceding-sexp-fn'."
 
   ;; keybinds
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'sallet-buffer)))
+    (define-key my-leader-map-global (kbd "b") #'sallet-buffer)
+    ;;~~~ (evil-leader/set-key "b" #'sallet-buffer)
+    ))
 
 
 ;;;----------------------------------------------------------------------------
@@ -8772,7 +8862,9 @@ vanilla javascript buffers."
                      ;; i use git to control the emacs config so git grep is
                      ;; always available.
                      #'my-grep-dwim)))
-    (evil-leader/set-key "g" search-fn)))
+    (define-key my-leader-map-global (kbd "g") search-fn)
+    ;;~~~ (evil-leader/set-key "g" search-fn)
+    ))
 
 
 ;; INFO: alterantive using ripgrep with built-in emacs commands
@@ -9697,7 +9789,9 @@ TODO: delete this fn and replace with hooks, etc."
     (let ((fn (if my-use-orderless-p
                   #'consult-buffer
                 #'switch-to-buffer)))
-      (evil-leader/set-key "b" fn)))
+      (define-key my-leader-map-global (kbd "b") fn)
+      ;;~~~ (evil-leader/set-key "b" fn)
+      ))
 
   (require 'vertico-sort)
   ;; this is default, but is nil'd out for some reason. maybe some weird code.
@@ -10757,8 +10851,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (when my-use-evil-p
   ;; expand minibuffer height to show all hyra options
   (setq max-mini-window-height 1.0)
-  (evil-leader/set-key "f" #'fugitive-shell-command)
-  (evil-leader/set-key "l" #'my-fugitive-hydra/body))
+  (define-key my-leader-map-global (kbd "f") #'fugitive-shell-command)
+  ;;~~~ (evil-leader/set-key "f" #'fugitive-shell-command)
+  (define-key my-leader-map-global (kbd "l") #'my-fugitive-hydra/body)
+  ;;~~~ (evil-leader/set-key "l" #'my-fugitive-hydra/body)
+  )
 
 (with-eval-after-load 'fugitive
   ;; config vars
@@ -10891,7 +10988,13 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'my-sql-comp
   (define-key my-sql-comp-mode-map (kbd "C-c r") #'my-sql-run-query)
   (when my-use-evil-p
-    (evil-leader/set-key-for-mode 'my-sql-comp-mode "s" #'my-sql-comp-hydra/body))
+    ;; set up a leader map for this mode only
+    (define-prefix-command 'my-leader-map-my-sql-comp)
+    (evil-define-key 'normal my-sql-comp-mode-map (kbd ",") my-leader-map-my-sql-comp)
+
+    (define-key my-leader-map-my-sql-comp (kbd "s") #'my-sql-comp-hydra/body)
+    ;;~~~ (evil-leader/set-key-for-mode 'my-sql-comp-mode "s" #'my-sql-comp-hydra/body)
+    )
   ;; issues overriding comapny C-o keybind. use alteratnive for now
   ;; issues with C-i as it shadows TAB and disrupts yasnippet!
   (define-key my-sql-comp-mode-map (kbd "C-j") #'my-sql-complete-guess-work))
@@ -11063,7 +11166,9 @@ This function is meant to be added to `minibuffer-setup-hook'."
   ;; (define-key lusty-mode-map (kbd "C-d") #'lusty-launch-dired)
 
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'lusty-buffer-explorer)))
+    (define-key my-leader-map-global (kbd "b") #'lusty-buffer-explorer)
+    ;;~~~ (evil-leader/set-key "b" #'lusty-buffer-explorer)
+    ))
 
 ;;;----------------------------------------------------------------------------
 ;;; nswbuff. buffer cycling. in notElpa
@@ -11171,10 +11276,15 @@ and switched to with no user input required."
 (when my-use-evil-p
   ;; NOTE: explicty set a jump point via: C-<SPC> C-<SPC>
   ;;       then leader "t" to jump back there.
-  (evil-leader/set-key "t" (lambda ()
-                             (interactive)
-                             (let ((current-prefix-arg '(4)))
-                               (call-interactively #'set-mark-command)))))
+  (define-key my-leader-map-global (kbd "t") (lambda ()
+                                               (interactive)
+                                               (let ((current-prefix-arg '(4)))
+                                                 (call-interactively #'set-mark-command))))
+  ;; ~~~ (evil-leader/set-key "t" (lambda ()
+  ;;                            (interactive)
+  ;;                            (let ((current-prefix-arg '(4)))
+  ;;                              (call-interactively #'set-mark-command))))
+  )
 
 ;; set to 1 so comments on the same line are kept close to the code
 (setq-default comment-column 1) ;; buffer local
@@ -11264,7 +11374,8 @@ and switched to with no user input required."
 (autoload #'my-find-file-omni "my-find-file" nil t)
 (autoload #'my-find-file-fd "my-find-file" nil t)
 (when my-use-evil-p
-  (evil-leader/set-key "h" #'my-find-file-fd)
+  (define-key my-leader-map-global (kbd "h") #'my-find-file-fd)
+  ;;~~~ (evil-leader/set-key "h" #'my-find-file-fd)
   ;; (evil-leader/set-key "h" #'my-find-file-omni)
   )
 
@@ -11356,8 +11467,10 @@ and switched to with no user input required."
 
 (progn ;;window navigation.
   (when my-use-evil-p
-    (evil-leader/set-key "2" #'split-window-below)
-    (evil-leader/set-key "3" #'split-window-right)
+    (define-key my-leader-map-global (kbd "2") #'split-window-below)
+    ;;~~~ (evil-leader/set-key "2" #'split-window-below)
+    (define-key my-leader-map-global (kbd "3") #'split-window-right)
+    ;;~~~ (evil-leader/set-key "3" #'split-window-right)
     (global-set-key (kbd "M-h") #'evil-window-left)
     (global-set-key (kbd "M-j") #'evil-window-down)
     (global-set-key (kbd "M-k") #'evil-window-up)
@@ -11445,7 +11558,8 @@ and switched to with no user input required."
           (eq my-narrow-type 'icicles)
           (null my-narrow-type))
   (when my-use-evil-p
-    (evil-leader/set-key "b" #'switch-to-buffer)
+    (define-key my-leader-map-global (kbd "b") #'switch-to-buffer)
+    ;;~~~ (evil-leader/set-key "b" #'switch-to-buffer)
     ;;(evil-leader/set-key "b" #'ibuffer)
     ))
 
@@ -11606,7 +11720,9 @@ and switched to with no user input required."
 ;;;----------------------------------------------------------------------------
 (autoload #'my-square-one "my-square-one" nil t)
 (when my-use-evil-p
-  (evil-leader/set-key "0" #'my-square-one))
+  (define-key my-leader-map-global (kbd "0") #'my-square-one)
+  ;;~~~ (evil-leader/set-key "0" #'my-square-one)
+  )
 
 
 

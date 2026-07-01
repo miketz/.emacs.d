@@ -1864,6 +1864,17 @@ In master branch now. Was on git branch: feature/native-comp.")
   (define-prefix-command 'my-leader-map-global)
   (evil-define-key 'normal global-map (kbd ",") my-leader-map-global)
 
+  ;; some inital leader keybinds
+  ;; (define-key my-leader-map-global (kbd "w") #'other-window)
+  (define-key my-leader-map-global (kbd "q") #'balance-windows)
+  (define-key my-leader-map-global (kbd "x") #'maximize-window)
+  (define-key my-leader-map-global (kbd ",") #'delete-other-windows)
+  (define-key my-leader-map-global (kbd "d") #'delete-window)
+  (define-key my-leader-map-global (kbd "k") #'my-quit-window) ; #'kill-this-buffer
+  (define-key my-leader-map-global (kbd "c") #'quit-window) ; buffer left alive
+  (define-key my-leader-map-global (kbd "<") #'my-shrink-window-horizontally)
+  (define-key my-leader-map-global (kbd ">") #'my-enlarge-window-horizontally)
+  (define-key my-leader-map-global (kbd "v") #'evil-visual-block)
 
   (declare-function undo-redo 'suppress) ; silence byte-compiler on emacs<28
   (when (fboundp #'undo-redo) ; emacs 28+

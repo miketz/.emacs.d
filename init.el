@@ -1818,6 +1818,27 @@ In master branch now. Was on git branch: feature/native-comp.")
 (autoload #'goto-last-change "goto-chg" nil t)
 (autoload #'goto-last-change-reverse "goto-chg" nil t)
 
+
+
+
+;;;----------------------------------------------------------------------------
+;;; sample. how to mimic Vim's leader key using emacs prefix keys
+;;;----------------------------------------------------------------------------
+(when nil ; sample code
+  ;; set up a leader for a global-map
+  (define-prefix-command 'my-leader-map-global)
+  (evil-define-key 'normal global-map (kbd ",") my-leader-map-global)
+  (define-key my-leader-map-global (kbd "f") (lambda ()
+                                               (interactive)
+                                               (print "global")))
+
+  ;; set up a leader for a specific mode only
+  (define-prefix-command 'my-leader-map-elisp)
+  (evil-define-key 'normal emacs-lisp-mode-map (kbd ",") my-leader-map-elisp)
+  (define-key my-leader-map-elisp (kbd "e") (lambda ()
+                                              (interactive)
+                                              (print "mode-specific"))))
+
 ;;;----------------------------------------------------------------------------
 ;;; evil
 ;;;----------------------------------------------------------------------------

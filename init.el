@@ -1859,13 +1859,6 @@ In master branch now. Was on git branch: feature/native-comp.")
   ;; (require 'undo-tree) ; stored in /notElpa/evil/lib
 
 
-  ;; leader keys built-in to evil now. replaces evil-leader package
-  (evil-set-leader 'motion (kbd ","))
-  (evil-set-leader 'normal (kbd ","))
-  ;; then define a leader keybind with;
-  ;; (evil-define-key 'normal 'global-map (kbd "<leader>e") #'my-foo)
-
-
   (declare-function undo-redo 'suppress) ; silence byte-compiler on emacs<28
   (when (fboundp #'undo-redo) ; emacs 28+
     ;; (setq evil-undo-system 'undo-redo)
@@ -7176,9 +7169,6 @@ Closure over `preceding-sexp-fn'."
 (when my-use-evil-p
   ;; evaluate lisp expression. Insert result on a new line.
   ;;(evil-leader/set-key "l" "a\C-j\C-u\C-x\C-e")
-
-  (evil-define-key 'normal 'emacs-lisp-mode-map "<leader>e" #'my-eval-last-sexp-display)
-  (evil-define-key 'normal 'lisp-interaction-mode-map "<leader>e" #'my-eval-last-sexp-display)
 
   ;;### (evil-leader/set-key-for-mode 'emacs-lisp-mode "e"
   ;;   #'my-eval-last-sexp-display)

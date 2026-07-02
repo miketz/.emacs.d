@@ -1773,7 +1773,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;; (push "~/.emacs.d/notElpaYolo/evil-leader" load-path)
 ;; ;; evil-leader needs to be able to to find evil. So add to load-path now.
-(push "~/.emacs.d/notElpaYolo/evil" load-path)
+;; (push "~/.emacs.d/notElpaYolo/evil" load-path)
 ;; (autoload #'global-evil-leader-mode "evil-leader" nil t)
 ;; (autoload #'evil-leader-mode "evil-leader" nil t)
 ;; (autoload #'evil-leader/set-key "evil-leader" nil t)
@@ -1844,6 +1844,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 ;;; evil
 ;;;----------------------------------------------------------------------------
+(push "~/.emacs.d/notElpaYolo/evil" load-path)
 ;; NOTE: goto-chg and undo-tree are under /evil/lib/. They are separate
 ;; packages in melpa. UPDATE: goto-chg and undo-tree are no longer bundled with
 ;; evil! So no longer a need to push /evil/lib/

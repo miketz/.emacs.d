@@ -1826,9 +1826,9 @@ In master branch now. Was on git branch: feature/native-comp.")
 ;;;----------------------------------------------------------------------------
 (when nil ; sample code
   ;; set up a leader for a global-map
-  ;; assuming we want the leader prefix in normal mode only, not insert
+  ;; assuming we want the leader prefix in normal/motion mode only, not insert
   (define-prefix-command 'my-leader-map-global)
-  (evil-define-key 'normal global-map (kbd ",") my-leader-map-global)
+  (evil-define-key '(normal motion) global-map (kbd ",") my-leader-map-global)
   (define-key my-leader-map-global (kbd "f") (lambda ()
                                                (interactive)
                                                (print "global")))
@@ -1863,7 +1863,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
   ;; set up a global prefix map to simulate Vim's leader key
   (define-prefix-command 'my-leader-map-global)
-  (evil-define-key 'normal global-map (kbd ",") my-leader-map-global)
+  (evil-define-key '(normal motion) global-map (kbd ",") my-leader-map-global)
 
   ;; some inital leader keybinds
   ;; (define-key my-leader-map-global (kbd "w") #'other-window)

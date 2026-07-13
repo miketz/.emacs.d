@@ -419,15 +419,15 @@
 
    ;; mode line
    `(mode-line
-     ((,class (:foreground "#8FB28F"
-                           :background "#2B2B2B"
+     ((,class (:foreground ,color-108 ;"#8FB28F"
+                           :background ,color-235 ;"#2B2B2B"
                            :box (:line-width -1 :style released-button)))
       (t :inverse-video t)))
-   `(mode-line-buffer-id ((,class (:foreground "#F0DFAF"
+   `(mode-line-buffer-id ((,class (:foreground ,color-223 ;"#F0DFAF"
                                                :weight bold))))
    `(mode-line-inactive
-     ((,class (:foreground "#5F7F5F"
-                           :background "#383838"
+     ((,class (:foreground ,color-65 ;"#5F7F5F"
+                           :background ,color-237 ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
    ;; num3

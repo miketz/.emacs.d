@@ -974,6 +974,26 @@ Use completing read to select the file."
   ;; refresh hydra status UI
   (fugitive-quick-status))
 
+(cl-defun fugitive-amend-last-commit-msg ()
+  "Amend the last commit message."
+  (interactive)
+  ;; GUARD
+  (unless (y-or-n-p "WARNING: If the last commit was pushed to a public remote you should abort this operation. To avoid incompatible history.
+If you can force push without stepping on others toes, go ahead.
+If you have not pushed the last commit yet, go ahead.
+Proceed?")
+    (cl-return-from fugitive-amend-last-commit-msg))
+
+  ;; TODO: find a way to avoid 2 shell calls. 1 to get old msg, 1 to save new msg.
+  (let* ((old-msg (string-trim-right (shell-command-to-string "git log -1 --pretty=%B")))
+         (new-msg (read-string-from-buffer "new commit message:" old-msg)))
+    ;; GUARD: read-string-from-buffer returns old-msg even if they abort via C-c C-k
+    (when (string-equal new-msg old-msg)
+      (message "Abort amend. Message not changed.")
+      (cl-return-from fugitive-amend-last-commit-msg))
+    ;; finally amend the commit message
+    (fugitive-shell-command (concat "git commit --amend -m \"" new-msg "\""))))
+
 
 
 (defun fugitive-cmd-to-list (cmd)

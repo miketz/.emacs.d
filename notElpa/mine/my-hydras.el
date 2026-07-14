@@ -319,6 +319,7 @@ _;_: log between revs
 _n_: list files modified between revs
 _'_: fetch, then log delta
 _a_: quick-commit
+_A_: amend last commit msg
 _b_: blame
 _d_: diff between revs
 _e_: find local-only branches you may want to delete
@@ -336,6 +337,7 @@ _q_, _C-g_: quit"
   ("n" fugitive-list-files-between)
   ("'" fugitive-fetch-n-log)
   ("a" fugitive-quick-commit)
+  ("A" fugitive-amend-last-commit-msg)
   ("b" fugitive-blame)
   ("d" fugitive-diff-between)
   ("e" fugitive-find-local-only-branches-ediff)

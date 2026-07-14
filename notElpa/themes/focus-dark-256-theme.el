@@ -454,26 +454,40 @@
 
    ;; tab-line.  like web browser tabs.
    `(tab-line ((,class ;:inherit variable-pitch :height 0.9
-                       :background "#305555")))
-   `(tab-line-tab ((,class :inherit tab-line :foreground "white" :background "#705050")))
-   `(tab-line-tab-current ((,class :inherit tab-line-tab :background "#301010"
-                                   :foreground "dark orange")))
+                       :background ,color-23;"#305555"
+                       )))
+   `(tab-line-tab ((,class :inherit tab-line :foreground ,brightwhite
+                           :background ,color-95 ;"#705050"
+                           )))
+   `(tab-line-tab-current ((,class :inherit tab-line-tab
+                                   ;; 52
+                                   :background ,color-52 ;"#301010"
+                                   :foreground ,color-208 ;"#ff8c00"
+                                   )))
    `(tab-line-tab-inactive ((,class :inherit tab-line-tab)))
    ;; TODO: set a better alternating face.
-   `(tab-line-tab-inactive-alternate ((,class :inherit tab-line-tab-inactive :foreground "cyan")))
-   `(tab-line-tab-modified ((,class :foreground "red" )))
-   `(tab-line-highlight ((,class :foreground "yellowgreen")))
+   `(tab-line-tab-inactive-alternate ((,class :inherit tab-line-tab-inactive :foreground ,brightcyan
+                                              )))
+   `(tab-line-tab-modified ((,class :foreground ,brightred)))
+   `(tab-line-highlight ((,class :foreground ,color-148 ;#9acd32 "yellowgreen"
+                                 )))
    ;; tab-line-close-highlight
    ;; TODO: figure out a way to *not* override :foreground of tab-line-tab-current
-   `(tab-line-tab-special ((,class :foreground "#BDBDFD" :slant italic)))
+   `(tab-line-tab-special ((,class :foreground ,color-147 ;"#BDBDFD"
+                                   :slant italic)))
    ;; tab-line-tab-group
 
 
    ;; tab-bar.  tabs for window configurations.
    `(tab-bar ((,class ;:inherit variable-pitch :height 0.9
-               :background "#103535")))
-   `(tab-bar-tab ((,class :inherit tab-bar :foreground "dark orange" :background "#202020")))
-   `(tab-bar-tab-inactive ((,class :inherit tab-bar :foreground "white" :background "#606060")))
+               :background ,color-17 ;"#103535"
+               )))
+   `(tab-bar-tab ((,class :inherit tab-bar :foreground ,color-208;"dark orange"
+                          :background ,color-234 ;"#202020"
+                          )))
+   `(tab-bar-tab-inactive ((,class :inherit tab-bar :foreground ,brightwhite
+                                   :background ,color-59 ;"#606060"
+                                   )))
    ;; tab-bar-tab-group-current
    ;; tab-bar-tab-group-inactive
    ;; tab-bar-tab-ungrouped

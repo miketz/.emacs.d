@@ -435,12 +435,17 @@
                                           ))))
 
    ;; display-line-numbers. native implementation
-   `(line-number ((,class (:background "#231808" :foreground "#595959"))))
+   `(line-number ((,class (:background ,black ;"#231808"
+                                       :foreground ,color-240 ;"#595959"
+                                       ))))
    `(line-number-current-line ((,class (:inherit line-number
-                                                 :foreground "#77AA55"
-                                                 :background "#231808"))))
-   `(line-number-major-tick ((,class :foreground "#595959" :background "#3b0000")))
-   `(line-number-minor-tick ((,class :foreground "#595959" :background "black")))
+                                                 ;; 107, 71
+                                                 :foreground ,color-107 ;"#77AA55"
+                                                 ))))
+   `(line-number-major-tick ((,class :foreground ,color-240 ;"#595959"
+                                     :background ,color-52 ;"#3b0000"
+                                     )))
+   `(line-number-minor-tick ((,class :foreground ,color-240 :background ,black)))
 
    ;; faces.el
    `(show-paren-match ((,class (:slant italic

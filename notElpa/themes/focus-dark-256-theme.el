@@ -431,7 +431,8 @@
                            :box (:line-width -1 :style released-button)))))
 
    ;; num3
-   `(num3-face-even ((,class (:background "#000000" :foreground "#98FB98"))))
+   `(num3-face-even ((,class (:background ,black :foreground ,color-120 ;,color-156 ;"#98FB98"
+                                          ))))
 
    ;; display-line-numbers. native implementation
    `(line-number ((,class (:background "#231808" :foreground "#595959"))))

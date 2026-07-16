@@ -1456,7 +1456,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
-;;; steps to get emacs config set up on a new computer.
+;;; how2: steps to get emacs config set up on a new computer.
 ;;;----------------------------------------------------------------------------
 ;; if on windows install kdiff3, add C:\Program Files\KDiff3\bin to Path env var.
 ;; install fd, add to path if on windows.
@@ -1493,7 +1493,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
-;;; steps to get latest on yolo packages after git pull on .emacs.d/
+;;; how2: steps to get latest on yolo packages after git pull on .emacs.d/
 ;;; (ie not upstream package code)
 ;;;----------------------------------------------------------------------------
 ;; now that i've moved away from git submodules a git pull on .emacs.d/ no
@@ -1534,7 +1534,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
-;;; steps to get latest upstream code for packages
+;;; how2: steps to get latest upstream code for packages
 ;;;----------------------------------------------------------------------------
 ;; 1. fetch
 ;;   (my-fetch-all-upstream-remotes-golang)

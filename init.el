@@ -10453,7 +10453,7 @@ Values: lsp, citre, nil")
 
 
 ;;;----------------------------------------------------------------------------
-;;; find/replace with search/grep
+;;; how2: find/replace with search/grep
 ;;;----------------------------------------------------------------------------
 ;; see: https://ict4g.net/adolfo/notes/emacs/multi-file-search-and-replace.html
 ;; 1. Get a Dired-like listing of the files to perform the search on, using one of these commands:
@@ -10492,11 +10492,26 @@ Values: lsp, citre, nil")
 ;; New command in emacs 30.1 'replace-regexp-as-diff'.
 
 
+;;;----------------------------------------------------------------------------
+;;; how2: rectangle region
+;;;----------------------------------------------------------------------------
+;; 1. switch to Emacs mode, C-z
+;;    this is needed to move the cursor past end of line in a "virtual white space" area.
+;;    evil does not work, stopping at the real end of line, making it impossible to
+;;    highlight some rectrangles.
+;; 2. M-x rectangle-mark-mode. C-x <SPC>
+;; 3. highlight the rectangle. use C-x C-x to switch corners.
+;; 4-a. copy-rectangle-as-kill. C-x r M-w
+;; 4-b. string-rectangle, string-insert-rectangle. to replace liens with text.
+;; 5. yank-rectangle. C-x r y
+;;    NOTE: the "virtual white space" areas will have real spaces injected on paste.
+
+
 
 
 
 ;;;----------------------------------------------------------------------------
-;;; word wrap. toggle-truncate-lines, visual-line-mode
+;;; how2: word wrap. toggle-truncate-lines, visual-line-mode
 ;;;----------------------------------------------------------------------------
 ;; just documenting how to turn on the various wrapping styles.
 ;; for an overview of options see: https://www.emacswiki.org/emacs/LineWrap

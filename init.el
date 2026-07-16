@@ -166,7 +166,7 @@
 ;;;     git checkout master
 
 ;;;----------------------------------------------------------------------------
-;;; how to clone a git repo into notElpaYolo. (quick, no personal fork)
+;;; how2: clone a git repo into notElpaYolo. (quick, no personal fork)
 ;;;----------------------------------------------------------------------------
 ;; using the binky package as an example
 ;; 1. download package
@@ -189,7 +189,7 @@
 ;;   ;; (require 'binky-autoloads) ; this may be a bit slower as it must search load-path
 
 ;;;----------------------------------------------------------------------------
-;;; how to clone a git repo into notElpaYolo. (alternative)
+;;; how2: clone a git repo into notElpaYolo. (alternative)
 ;;;----------------------------------------------------------------------------
 ;; or you can
 ;; 1. configure the new repo in ~/.emacs.d/notElpaYolo/gitFetchHelper/repos.jsonc
@@ -198,7 +198,7 @@
 
 
 ;;;----------------------------------------------------------------------------
-;;; enable native comp on windows
+;;; how2: enable native comp on windows
 ;;;----------------------------------------------------------------------------
 ;; # 1. install msys2 (64 bit)
 
@@ -233,7 +233,7 @@
 
 
 ;;;----------------------------------------------------------------------------
-;;; enable treesit on windows
+;;; how2: enable treesit on windows
 ;;;----------------------------------------------------------------------------
 ;; 1. download pre-built windows dlls from:
 ;; https://github.com/emacs-tree-sitter/tree-sitter-langs
@@ -247,7 +247,7 @@
 
 
 ;;;----------------------------------------------------------------------------
-;;; To keep init files in Local instead of Roaming on ms-windows.
+;;; how2: To keep init files in Local instead of Roaming on ms-windows.
 ;;;----------------------------------------------------------------------------
 ;;; Create a "stub" init file at C:/Users/???/AppData/Roaming/.emacs.d/init.el
 ;;; put the follwing code in init.el:
@@ -1822,7 +1822,7 @@ In master branch now. Was on git branch: feature/native-comp.")
 
 
 ;;;----------------------------------------------------------------------------
-;;; sample. how to mimic Vim's leader key using emacs prefix keys
+;;; how2: mimic Vim's leader key using emacs prefix keys
 ;;;----------------------------------------------------------------------------
 (when nil ; sample code
   ;; set up a leader for a global-map
@@ -11059,6 +11059,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (with-eval-after-load 'malyon
   (setq malyon-stories-directory "~/.emacs.d/notElpa/malyon-files/"))
 
+;; how2: 7zip
 ;; # 7zip on mac. how to.
 ;; # install command line tool for 7zip
 ;; brew install p7zip

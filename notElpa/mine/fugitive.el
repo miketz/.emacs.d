@@ -1442,6 +1442,18 @@ Mostly just to support key binds."
   ;; (read-only-mode 1)
   )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; tag stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun fugitive-tag-delete-local ()
+  "Delete a tag."
+  (interactive)
+  (let* ((tags (fugitive-get-tags))
+         (tag (completing-read "tag: " tags nil t)))
+    (fugitive-shell-command (concat "git tag -d " tag)
+                            nil
+                            t ;give user a chance to edit
+                            )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; hash completion helpers.

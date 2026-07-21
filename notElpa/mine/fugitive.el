@@ -1445,6 +1445,35 @@ Mostly just to support key binds."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tag stuff
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; NOTE: for tag create, use the commmand line.
+
+(defun fugitive-tag-list ()
+  "List tags. Sort version nums as if they are numbers not strings."
+  (interactive)
+  ;; sample: "--sort=-v:refname" for descending.
+  ;; (fugitive-shell-command "git tag -l --sort=-v:refname" nil t)
+  (fugitive-shell-command "git tag -l --sort=v:refname" nil t))
+
+(cl-defun fugitive-tag-push ()
+  "Push tag to a remote."
+  (interactive)
+  (let ((remotes (fugitive-get-remote-aliases)))
+    ;; GUARD. must have a remote.
+    (when (length= remotes 0)
+      (message "No remote configured. Abort.")
+      (cl-return-from fugitive-tag-push))
+    ;; select remote
+    (let* ((remote (completing-read "remote: " remotes nil t
+                                    (if (= (length remotes) 1)
+                                        (car remotes) ; 1 remote, pre-select it.
+                                      nil)))
+           (tags (fugitive-get-tags))
+           (tag (completing-read "tag: " tags nil t)))
+      (fugitive-shell-command (concat "git push " remote " " tag)
+                              nil
+                              t ;give user a chance to edit
+                              ))))
+
 (defun fugitive-tag-delete-local ()
   "Delete a tag."
   (interactive)
@@ -1454,6 +1483,27 @@ Mostly just to support key binds."
                             nil
                             t ;give user a chance to edit
                             )))
+
+(cl-defun fugitive-tag-delete-remote ()
+  "Delete a tag on the remote.
+For performance, do not attempt to list remote tags as that's a network op."
+  (interactive)
+  (let ((remotes (fugitive-get-remote-aliases)))
+    ;; GUARD. must have a remote.
+    (when (length= remotes 0)
+      (message "No remote configured. Abort.")
+      (cl-return-from fugitive-tag-delete-remote))
+    ;; select remote
+    (let ((remote (completing-read "remote: " remotes nil t
+                                   (if (= (length remotes) 1)
+                                       (car remotes) ; 1 remote, pre-select it.
+                                     nil)))
+          ;; performance: Avoid network trip to list remote tags.
+          (tag (read-string "tag: ")))
+      (fugitive-shell-command (concat "git push --delete " remote " " tag)
+                              nil
+                              t ;give user a chance to edit
+                              ))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; hash completion helpers.

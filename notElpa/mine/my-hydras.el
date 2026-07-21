@@ -329,6 +329,7 @@ _p_: jump to parent commit in log buffer
 _c_: delete fugitive buffers
 _L_: enter log Hydra
 _W_: enter worktree hydra
+_T_: enter tag hydra
 _t_: external terminal. for interactive commands emacs does not handle well.
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
@@ -351,6 +352,7 @@ _q_, _C-g_: quit"
   ("c" fugitive-delete-buffers-except-current)
   ("L" my-fugitive-log-hydra/body)
   ("W" my-fugitive-worktree-hydra/body)
+  ("T" my-fugitive-tag-hydra/body)
   ("t" fugitive-open-external-terminal)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
@@ -394,6 +396,20 @@ _q_, _C-g_: quit"
   ("a" fugitive-worktree-create)
   ("l" fugitive-worktree-list)
   ("d" fugitive-worktree-remove)
+  ("C-g" nil nil)
+  ("q" nil))
+
+(defhydra my-fugitive-tag-hydra (:color blue :hint nil)
+  "
+_l_: list tags. numeric version num sort.
+_p_: push tag to remote
+_d_: delete tag locally
+_D_: delete tag on remote
+_q_, _C-g_: quit"
+  ("l" fugitive-tag-list)
+  ("p" fugitive-tag-push)
+  ("d" fugitive-tag-delete-local)
+  ("D" fugitive-tag-delete-remote)
   ("C-g" nil nil)
   ("q" nil))
 

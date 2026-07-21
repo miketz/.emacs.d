@@ -10864,6 +10864,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'my-fugitive-log-hydra/body "my-hydras" nil t)
 (autoload #'my-fugitive-status-hydra/body "my-hydras" nil t)
 (autoload #'my-fugitive-worktree-hydra/body "my-hydras" nil t)
+(autoload #'my-fugitive-tag-hydra/body "my-hydras" nil t)
 
 (when my-use-evil-p
   ;; expand minibuffer height to show all hyra options

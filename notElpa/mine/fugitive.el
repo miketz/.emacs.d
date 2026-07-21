@@ -1069,7 +1069,7 @@ Returns emtpy string if no remote (ie local only branch)."
 
 (defun fugitive-get-tags ()
   "Return a list of tags."
-  (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/tags/"))
+  (fugitive-cmd-to-list "git for-each-ref --format=\"%(refname:short)\" refs/tags/"))
 
 (defun fugitive-get-parent-commits-list (commit)
   "Return a list of parent commit hashes for COMMIT."

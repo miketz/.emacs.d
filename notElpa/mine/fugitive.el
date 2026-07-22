@@ -1498,12 +1498,16 @@ For performance, do not attempt to list remote tags as that's a network op."
       (message "No remote configured. Abort.")
       (cl-return-from fugitive-tag-delete-remote))
     ;; select remote
-    (let ((remote (completing-read "remote: " remotes nil t
-                                   (if (= (length remotes) 1)
-                                       (car remotes) ; 1 remote, pre-select it.
-                                     nil)))
-          ;; performance: Avoid network trip to list remote tags.
-          (tag (read-string "tag: ")))
+    (let* ((remote (completing-read "remote: " remotes nil t
+                                    (if (= (length remotes) 1)
+                                        (car remotes) ; 1 remote, pre-select it.
+                                      nil)))
+           ;; performance: Avoid network trip to list remote tags.
+           ;; (tag (read-string "tag: "))
+           (tags (fugitive-get-tags))
+           (tag (completing-read "tag: " tags nil
+                                 nil ;don't require match as tag may have been deleted locally already
+                                 )))
       (fugitive-shell-command (concat "git push --delete " remote " " tag)
                               nil
                               t ;give user a chance to edit

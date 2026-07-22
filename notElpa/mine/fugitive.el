@@ -212,7 +212,11 @@ show command to the file."
            (status-p (and (not diff-p)
                           (fugitive-str-starts-with-p cmd "git status")))
            (show-p (and (not status-p)
-                        (fugitive-str-starts-with-p cmd "git show")))
+                        (fugitive-str-starts-with-p cmd "git show")
+                        ;; exclude other command starting with "show"
+                        (not (fugitive-str-starts-with-p cmd "git show-ref"))
+                        (not (fugitive-str-starts-with-p cmd "git show-index"))
+                        (not (fugitive-str-starts-with-p cmd "git show-branch"))))
            (blame-p (and (not show-p)
                          (fugitive-str-starts-with-p cmd "git blame"))))
       ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors

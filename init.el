@@ -10859,6 +10859,11 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-worktree-remove "fugitive" nil t)
 (autoload #'fugitive-worktree-list "fugitive" nil t)
 (autoload #'fugitive-amend-last-commit-msg "fugitive" nil t)
+(autoload #'fugitive-tag-list "fugitive" nil t)
+(autoload #'fugitive-tag-push "fugitive" nil t)
+(autoload #'fugitive-tag-delete-local "fugitive" nil t)
+(autoload #'fugitive-tag-delete-remote "fugitive" nil t)
+
 ;; hydra
 (autoload #'my-fugitive-hydra/body "my-hydras" nil t)
 (autoload #'my-fugitive-log-hydra/body "my-hydras" nil t)

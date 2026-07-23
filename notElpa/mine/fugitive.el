@@ -1609,7 +1609,7 @@ For performance, do not attempt to list remote tags as that's a network op."
   ;; don't sort hashes during completion. already sorted by graph chain recency.
   (let* ((completions-sort nil)
          (hashes (fugitive-get-hashes)))
-    (completing-read "rev: " hashes nil t)))
+    (completing-read "rev: " hashes nil nil)))
 
 
 (defvar fugitive-zero-width-space (string 65279)

@@ -1049,6 +1049,10 @@ Convert the string-list to an elisp list."
   "Return a list of branches."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/heads/ refs/remotes/"))
 
+(defun fugitive-get-branches-remote ()
+  "Return a list of branches."
+  (fugitive-cmd-to-list "git for-each-ref --format=%(refname:short) refs/remotes/"))
+
 (defun fugitive-get-branches-local ()
   "Return a list of local branches."
   (fugitive-cmd-to-list "git for-each-ref --format='%(refname:short)' refs/heads/"))
@@ -1445,6 +1449,85 @@ Mostly just to support key binds."
             map)
   ;; (read-only-mode 1)
   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; branch stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun fugitive-trim-remote (long-branch-name)
+  "Helper fn.  Trim origin/ prefix from a full remote branch name."
+  (string-join (cdr (string-split long-branch-name "/")) "/"))
+
+(cl-defun fugitive-branch-push-new ()
+  "Push a new local only branch to the remote."
+  (interactive)
+  (let ((remotes (fugitive-get-remote-aliases)))
+    ;; GUARD. must have a remote.
+    (when (length= remotes 0)
+      (message "No remote configured. Abort.")
+      (cl-return-from fugitive-branch-push-new))
+    ;; select remote
+    (let* ((remote (completing-read "remote: " remotes nil t
+                                    (if (= (length remotes) 1)
+                                        (car remotes) ; 1 remote, pre-select it.
+                                      nil)))
+           (branches-local (fugitive-get-branches-local))
+           (branches-remote (mapcar #'fugitive-trim-remote
+                                    (fugitive-cmd-to-list (concat "git for-each-ref --format=%(refname:short) refs/remotes/" remote))))
+           (branches-local-only (cl-set-difference branches-local
+                                                   branches-remote
+                                                   :test #'string-equal)))
+      ;; GUARD. there must be a branch that does not exist on the remote yet.
+      (when (length= branches-local-only 0)
+        (message "All branches have a correspoding remote branch. Abort.")
+        (cl-return-from fugitive-branch-push-new))
+      ;; select branch
+      (let* ((branch (completing-read "branch: " branches-local-only nil t))
+             (cmd (concat "git push -u " remote " " branch)))
+        (fugitive-shell-command cmd nil t)))))
+
+;; delete branch from remote
+(cl-defun fugitive-branch-delete-on-remote ()
+  "Delete a branch from a remote."
+  (interactive)
+  (let ((remotes (fugitive-get-remote-aliases)))
+    ;; GUARD. must have a remote.
+    (when (length= remotes 0)
+      (message "No remote configured. Abort.")
+      (cl-return-from fugitive-branch-delete-on-remote))
+    ;; select remote
+    (let* ((remote (completing-read "remote: " remotes nil t
+                                    (if (= (length remotes) 1)
+                                        (car remotes) ; 1 remote, pre-select it.
+                                      nil)))
+           (branches (fugitive-cmd-to-list (concat "git for-each-ref --format=%(refname:short) refs/remotes/" remote)))
+           (long-branch (completing-read "branch: " branches nil t))
+           ;; strip "remote/" prefix off long-branch
+           (branch (string-join (cdr (string-split long-branch "/")) "/"))
+           (cmd (concat "git push " remote " --delete " branch)))
+      (fugitive-shell-command cmd nil t))))
+
+;; delete stale remote tracking branches not on server. Occurs when
+;; someone else deletes a branch on the remote.
+(cl-defun fugitive-branch-delete-remote-tracking ()
+  "Delete remote tracking branches that do not exist on the remote server.
+
+Remote tracking branches are safe to auto-delete. Because if a branch was
+deleted on the server it no longer makes sense to have a remote tracking
+branch. Ideally run a git fetch first."
+  (interactive)
+  (let ((remotes (fugitive-get-remote-aliases)))
+    ;; GUARD. must have a remote.
+    (when (length= remotes 0)
+      (message "No remote configured. Abort.")
+      (cl-return-from fugitive-branch-delete-remote-tracking))
+    (let* ((remote (completing-read "remote: " remotes nil t
+                                    (if (= (length remotes) 1)
+                                        (car remotes) ; 1 remote, pre-select it.
+                                      nil)))
+           (cmd (concat "git remote prune " remote)))
+      (fugitive-shell-command cmd nil t))))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tag stuff

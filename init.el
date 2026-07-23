@@ -10863,6 +10863,9 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-tag-push "fugitive" nil t)
 (autoload #'fugitive-tag-delete-local "fugitive" nil t)
 (autoload #'fugitive-tag-delete-remote "fugitive" nil t)
+(autoload #'fugitive-branch-push-new "fugitive" nil t)
+(autoload #'fugitive-branch-delete-on-remote "fugitive" nil t)
+(autoload #'fugitive-branch-delete-remote-tracking "fugitive" nil t)
 
 ;; hydra
 (autoload #'my-fugitive-hydra/body "my-hydras" nil t)
@@ -10870,6 +10873,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'my-fugitive-status-hydra/body "my-hydras" nil t)
 (autoload #'my-fugitive-worktree-hydra/body "my-hydras" nil t)
 (autoload #'my-fugitive-tag-hydra/body "my-hydras" nil t)
+(autoload #'my-fugitive-branch-hydra/body "my-hydras" nil t)
 
 (when my-use-evil-p
   ;; expand minibuffer height to show all hyra options

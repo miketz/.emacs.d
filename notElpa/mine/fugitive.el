@@ -1601,7 +1601,8 @@ For performance, do not attempt to list remote tags as that's a network op."
 ;;; not used. exists for documentation purposes for now.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun fugitive-get-hashes ()
-  (fugitive-cmd-to-list (concat "git log --format=\"%h\" -n " fugitive-default-n-log-limit)))
+  ;; --all flag to get hashes not in current branch. useful for cherry-pick or diff
+  (fugitive-cmd-to-list (concat "git log --all --format=\"%h\" -n " fugitive-default-n-log-limit)))
 
 (defun fugitive-select-hash ()
   (interactive)
@@ -1609,6 +1610,16 @@ For performance, do not attempt to list remote tags as that's a network op."
   (let* ((completions-sort nil)
          (hashes (fugitive-get-hashes)))
     (completing-read "rev: " hashes nil t)))
+
+(defun fugitive-file-ediff ()
+  "Compare working file (current-buffer) to hash version."
+  (interactive)
+  (let ((buff-working (current-buffer))
+        (buff-hash (fugitive-new-output-buffer))
+        (filename (fugitive-curr-filename))
+        (hash (fugitive-select-hash)))
+    (shell-command (concat "git show " hash ":./" filename) buff-hash)
+    (ediff-buffers buff-working buff-hash)))
 
 
 

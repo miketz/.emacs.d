@@ -1611,6 +1611,11 @@ For performance, do not attempt to list remote tags as that's a network op."
          (hashes (fugitive-get-hashes)))
     (completing-read "rev: " hashes nil t)))
 
+
+(defvar fugitive-zero-width-space (string 65279)
+  "Git output (at least on windows) injects this hidden char when dumping file contents.
+Will trim it off.")
+
 (defun fugitive-file-ediff ()
   "Compare working file (current-buffer) to hash version."
   (interactive)
@@ -1619,6 +1624,10 @@ For performance, do not attempt to list remote tags as that's a network op."
         (filename (fugitive-curr-filename))
         (hash (fugitive-select-hash)))
     (shell-command (concat "git show " hash ":./" filename) buff-hash)
+    ;; git file dump output (at least on windows) injects an invisible char at
+    ;; the start. trim it off as it ediff dectects it.
+    (with-current-buffer buff-hash
+      (replace-string fugitive-zero-width-space "" nil 1 2))
     (ediff-buffers buff-working buff-hash)))
 
 

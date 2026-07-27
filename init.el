@@ -10191,6 +10191,14 @@ Values: lsp, citre, nil")
 
   (defvar my-gofmt-installed-p (executable-find "gofmt"))
 
+  (progn ;; TODO: remove this when go-ts-mode is added to color-indentifiers-mode
+    (require 'color-identifiers-mode)
+    (add-to-list
+     'color-identifiers:modes-alist
+     `(go-ts-mode . (,color-identifiers:re-not-inside-class-access
+                     "\\_<\\([a-zA-Z_$]\\(?:\\s_\\|\\sw\\)*\\)"
+                     (nil font-lock-variable-name-face tree-sitter-hl-face:variable)))))
+
   (defun my-setup-go-ts-mode ()
     ;; (when buffer-file-name ;; if buffer has a file on disk.
     ;;   ;; wireup M-x compile. TODO: revisit this

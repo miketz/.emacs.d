@@ -67,7 +67,8 @@
    ;; feature toggle (ie non-nil), color settings, and blend.
    ;; since this is my personal theme, just do it how i want it.
    `(indent-bars-color-by-depth nil)
-   `(indent-bars-color '("#FFFFFF" :face-bg nil :blend 0.075))
+   ;; `(indent-bars-color '("#FFFFFF" :face-bg nil :blend 0.075))
+   `(indent-bars-color '(,dim-4 :face-bg nil :blend 0.4))
 
    `(evil-emacs-state-cursor    '(bar "red" ;"cyan"
                                   ))

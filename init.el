@@ -3184,11 +3184,41 @@ Inserts a new line and the beginning and end with text values:
 ;;; csharp-ts-mode
 ;;;----------------------------------------------------------------------------
 ;; new mode. bundled in the same file csharp-mode.el. respects the fn call face
-;; TODO: set it up.
 
-;; ;; prefer csharp-ts-mode for ".cs" files. But only if it's available.
-;; (when (treesit-language-available-p 'c-sharp)
-;;   (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode)))
+;; prefer csharp-ts-mode for ".cs" files. But only if it's available.
+(when (treesit-language-available-p 'c-sharp)
+  (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode)))
+
+(with-eval-after-load 'csharp-ts-mode
+
+  ;; keybinds
+  (define-key csharp-ts-mode-map (kbd "C-c C-c") #'compile)
+  (define-key csharp-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key csharp-ts-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
+
+  ;; TODO: fn my-csharp-new-proj. mabye move to separate file, add autoload
+
+  ;; hook
+  (defun my-setup-csharp-ts-mode ()
+    ;; set compile-command. Assumes dotnet core
+    (let* ((dotnet (cond ((eq system-type 'darwin)
+                          "/usr/local/bin/dotnet")
+                         ((eq system-type 'windows-nt)
+                          "\"C:\\Program Files\\dotnet\\dotnet\"")))
+           (cmd (concat dotnet " build")))
+      (set (make-local-variable 'compile-command)
+           cmd))
+
+    (yas-minor-mode 1)
+    ;; (rainbow-delimiters-mode 1)
+    (citre-mode 1) ; ctags mode
+
+    (when my-use-display-fill-column-indicator
+      (setq display-fill-column-indicator-column 110) ; long lines in C#
+      (display-fill-column-indicator-mode 1))
+
+    (my-turn-on-electric-pair-local-mode))
+  (add-hook #'csharp-ts-mode-hook #'my-setup-csharp-ts-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; csharp-mode. C#

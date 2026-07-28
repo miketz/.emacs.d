@@ -26,6 +26,10 @@
 (let* ((class t)
        (fg "#EEEED1")
        (bg "#35352B")
+       (bg-1 "#303016")
+       (bg-2 "#282814")
+       (bg-3 "#252511")
+       (bg-4 "#202006")
        (dim+4 "#CECEB1")
        (dim+3 "#BEBEA1")
        (dim+2 "#AEAE91")
@@ -90,7 +94,7 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; highlights
-   `(font-lock-function-name-face ((,class :foreground "#AFEEEE" :background "#000000" :weight normal)))
+   `(font-lock-function-name-face ((,class :foreground "#AFEEEE" :background ,bg-4 :weight normal)))
    `(font-lock-variable-name-face ((,class :foreground "#66CDAA";"#66CDAA";"#Cb4040";"#FF4500" :background ,bg
                                            )))
    `(js2-function-param ((,class :inherit font-lock-variable-name-face)))
@@ -110,7 +114,7 @@
    `(font-lock-keyword-face ((,class :foreground ,dim-2)))
    `(font-lock-type-face ((,class :foreground ,dim+2)))
    `(font-lock-function-call-face ((,class :foreground "#E0C5C5";"#E0C5C5";"#DF9c9c";,fg
-                                           ;; :background "#303030"
+                                           :background ,bg-2
                                     ;; :strike-through t
                                     ;; :slant italic
                                            ))) ;treesit

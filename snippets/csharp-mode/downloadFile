@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: downloadFile
+# key: downloadFile
+# --
+public async Task<FileStreamResult> DownloadFileTest(int id)
+{
+    // no using blocks as they auto-close. must keep open to allow stream to occur.
+    var conn = new SqlConnection(Config.ConnStr);
+    HttpContext.DisposeOnPipelineCompleted(conn); // clean up. or HttpContext.Response.RegisterForDispose(o) in core.
+
+    var cmd = new SqlCommand("select top 1 id, Photo from SomeTable where i.id=@id", conn);
+    HttpContext.DisposeOnPipelineCompleted(cmd); // clean up
+
+    cmd.Parameters.AddWithValue("@id", id);
+
+    await conn.OpenAsync();
+    SqlDataReader dtr = await cmd.ExecuteReaderAsync(CommandBehavior.SequentialAccess);
+    HttpContext.DisposeOnPipelineCompleted(dtr); // clean up
+
+    if (await dtr.ReadAsync()) {
+        if (!(await dtr.IsDBNullAsync(1))) {
+            Stream stream = dtr.GetStream(1);
+            Response.AppendHeader("Content-Disposition", "inline; filename=test.jpg"); //inline; or attachment;
+            var result = new FileStreamResult(stream, "image/jpeg");
+            // result.FileDownloadName = "test.jpg";
+            return result;
+        }
+    }
+    // file not found.
+    Response.StatusCode = 404;
+    return null;
+}

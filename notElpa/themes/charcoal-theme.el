@@ -38,6 +38,10 @@ Example:
        (todo--bg     "#000000") ; temp color where I haven't decided yet
        ;; Color Palette       full      256       16        8
        (bg           (aref `["#35352B" "#262626" "#000000" "#000000"] i))
+       (bg-1 (aref `["#303016" ,todo--bg ,todo--bg ,todo--bg] i))
+       (bg-2 (aref `["#282814" ,todo--bg ,todo--bg ,todo--bg] i))
+       (bg-3 (aref `["#252511" ,todo--bg ,todo--bg ,todo--bg] i))
+       (bg-4 (aref `["#202006" ,todo--bg ,todo--bg ,todo--bg] i) )
        (fg           (aref `["#EEEED1" "#FFFFD7" "#BEBEBE" "#FFFFFF"] i))
        (bg-purple    (aref `["#440033" "#5F005F" "#8B008B" "#000000"] i))
        (fg-purple    (aref `["#FFC0CB" "#FFAFD7" "#FF00FF" "#FF00FF"] i))
@@ -52,6 +56,16 @@ Example:
        (faint        (aref `["#4D4D3D" "#303030" "#666666" "#0000FF"] i))
        (fainter      (aref `["#3F3F35" ,todo--fg "#0000CD" ,todo--fg] i))
        (faint-less   (aref `["#8D8D8D" "#6C6C6C" "#666666" "#0000FF"] i))
+       ;; dim is the same thing as faint, but copying from focus-dark-theme
+       (dim+4 "#CECEB1")
+       (dim+3 "#BEBEA1")
+       (dim+2 "#AEAE91")
+       (dim+1 "#9E9E81")
+       (dim "#8E8E71")
+       (dim-1 "#7E7E61")
+       (dim-2 "#6E6E51")
+       (dim-3 "#5E5E41")
+       (dim-4 "#4E4E31")
        (keyword      (aref `["#EEDD82" "#FFAFFF" "#FFFFFF" "#FFFFFF"] i))
        (var          (aref `["#66CDAA" "#D75FAF" "#00CED1" "#00FFFF"] i))
        (highlight    (aref `["#8B5742" "#4E4E4E" "#228B22" "#FF00FF"] i))
@@ -285,11 +299,11 @@ Example:
                                    :inherit font-lock-property-name-face
                                    ;; :slant italic
                                    )))
-   ;; `(font-lock-punctuation-face ((,class nil)))
-   ;; `(font-lock-bracket-face)
-   ;; `(font-lock-delimiter-face)
+   ;; `(font-lock-punctuation-face ((,class nil))) ;treesit
+   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit, focus-dark
+   `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit, focus-dark
    `(font-lock-escape-face ((,class :foreground "hot pink")))
-   ;; `(font-lock-misc-punctuation-face)
+   ;; `(font-lock-misc-punctuation-face) ;treesit
    `(font-lock-number-face ((,class :foreground "#50b5b5" ;"#BEBEA1"
                                     ;; :background ,fn-def-bg
                                     )))
@@ -297,7 +311,8 @@ Example:
    ;; ~ END treesit faces
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
+   ;; `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
+   `(font-lock-keyword-face ((,class (:foreground ,dim+1)))) ;focus-dark
    `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))

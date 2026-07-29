@@ -373,6 +373,7 @@ _A_: graph long, ALL branches
 _s_: normal, one line
 _a_: normal, one line, faster no colors
 _;_: log between revs
+_o_: outgoing commits, to be pushed to remote branch
 _q_, _C-g_: quit"
   ("f" fugitive-log-file)
   ("F" fugitive-log-folder)
@@ -385,6 +386,7 @@ _q_, _C-g_: quit"
   ("s" fugitive-log)
   ("a" fugitive-log-no-color)
   (";" fugitive-log-between)
+  ("o" fugitive-log-outgoing)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

@@ -271,7 +271,7 @@ Example:
 
    ;; TODO font lock
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
-   `(font-lock-comment-face ((,class (:foreground "#8FB28F"))))
+   `(font-lock-comment-face ((,class (:foreground "#8FB28F" :background "#393f2f"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
    `(font-lock-constant-face ((,class :foreground ,fg
               :background "#232319"
@@ -317,7 +317,7 @@ Example:
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
-   `(font-lock-string-face ((,class (:foreground "LightSalmon"))))
+   `(font-lock-string-face ((,class (:foreground "LightSalmon" :background "#45453B"))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
    `(font-lock-variable-name-face ((,class (:foreground
                                             ;; ,fg

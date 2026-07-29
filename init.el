@@ -10883,8 +10883,10 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-log-graph-medium "fugitive" nil t)
 (autoload #'fugitive-log-graph-long "fugitive" nil t)
 (autoload #'fugitive-log-graph-long-all "fugitive" nil t)
+(autoload #'fugitive-log-outgoing "fugitive" nil t)
 (autoload #'fugitive-log-graph "fugitive" nil t)
 (autoload #'fugitive-log-between "fugitive" nil t)
+
 (autoload #'fugitive-diff-between "fugitive" nil t)
 (autoload #'fugitive-list-files-between "fugitive" nil t)
 (autoload #'fugitive-parent-commits-jump-to "fugitive" nil t)

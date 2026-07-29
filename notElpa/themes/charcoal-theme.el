@@ -312,13 +312,16 @@ Example:
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ;; `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
-   `(font-lock-keyword-face ((,class (:foreground ,dim+1)))) ;focus-dark
+   `(font-lock-keyword-face ((,class (:foreground ,dim-1)))) ;focus-dark
    `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
    `(font-lock-string-face ((,class (:foreground "LightSalmon" :background "#45453B"))))
    ;; `(font-lock-type-face ((,class (:foreground ,zenburn-blue-1))))
+   ;; `(font-lock-type-face ((,class (:foreground "PaleGreen")))) ;default
+   `(font-lock-type-face ((,class (:foreground ,dim+2)))) ;focus-dark
+
    `(font-lock-variable-name-face ((,class (:foreground
                                             ;; ,fg
                                             ;; ,fn-def-fg

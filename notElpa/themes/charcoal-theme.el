@@ -272,11 +272,12 @@ Example:
    ;; TODO font lock
    ;; `(font-lock-builtin-face ((,class (:foreground ,zenburn-fg :weight bold))))
    `(font-lock-comment-face ((,class (:foreground "#8FB28F" :background "#393f2f"))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground "medium spring green"))))
+   `(font-lock-comment-delimiter-face ((,class (:inherit font-lock-comment-face
+                                                         :foreground "medium spring green"))))
    `(font-lock-constant-face ((,class :foreground ,fg
               :background "#232319"
               :weight bold)))
-   `(font-lock-doc-face ((,class (:foreground "darkolivegreen3"))))
+   `(font-lock-doc-face ((,class (:foreground "darkolivegreen3" :background "#393f2f"))))
    `(font-lock-function-name-face ((,class :foreground ,fn-def-fg ;;"pale turquoise"
                                            :background ,fn-def-bg ;;"black"
 										   :weight normal

@@ -10992,7 +10992,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 
 
 ;; (defvar my-themes '(charcoal dark-bright cmd ultimate bluey focus
-;;                              focus-dark)
+;;                              focus-dark focus-dark-256 warm-brown)
 ;;   "Themes I created.")
 ;; TODO: make green/yellow, not the yellow/orange color theme
 

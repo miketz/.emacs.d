@@ -792,6 +792,16 @@ Starting with --date=.")
                    ;; "git log --graph -n 500 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
     (fugitive-shell-command cmd nil t)))
 
+;;;###autoload
+(defun fugitive-log-outgoing ()
+  "Show outgoing commits that will be pushed to the remote."
+  (interactive)
+  ;; @{u} is the configured remote branch
+  (let* ((cmd (concat "git log @{u}..HEAD --graph --pretty=format:\"%C(auto)%h %ad [38;5;74m%an%C(auto)%d %s\" " fugitive-date-format " -n " fugitive-default-n-log-limit " ")))
+                   ;; "git log --graph -n 500 --pretty=format:\"%C(auto)%h %ad %C(cyan)%an%C(#90ee90)%d%C(reset) %s\"
+    (fugitive-shell-command cmd nil t)))
+
+;;;###autoload
 (defun fugitive-log-graph-long-all ()
   "Same as `fugitive-log-graph-long', but with all branches."
   (interactive)

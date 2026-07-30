@@ -789,6 +789,11 @@ Example:
    ;; tab-bar-tab-ungrouped
    ;; tab-bar-tab-highlight
 
+   ;; nswbuff
+   `(nswbuff-default-face ((,class :inherit default)))
+   `(nswbuff-current-buffer-face ((,class :foreground ,fg-green :background ,bg-green)))
+   `(nswbuff-separator-face ((,class :foreground ,dim-2)))
+   `(nswbuff-special-buffers-face ((,class :foreground "#BDBDFD")))
 
    ;; swift-mode
    `(swift-mode:function-call-face ((,class :foreground ,fn-call-fg

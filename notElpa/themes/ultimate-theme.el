@@ -564,6 +564,12 @@
    ;; tab-bar-tab-ungrouped
    ;; tab-bar-tab-highlight
 
+   ;; nswbuff
+   `(nswbuff-default-face ((,class :inherit default)))
+   `(nswbuff-current-buffer-face ((,class :foreground ,fg-green :background ,bg-green)))
+   `(nswbuff-separator-face ((,class :foreground ,faint-less)))
+   `(nswbuff-special-buffers-face ((,class :foreground ,fg-purple :background ,bg-purple)))
+
 
    `(rainbow-delimiters-depth-1-face ((t (:foreground ,fg :background "#FF6520" :weight bold))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground ,fg :background "#75FFFF" :weight bold))))

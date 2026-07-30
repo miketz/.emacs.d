@@ -1875,7 +1875,7 @@ In master branch now. Was on git branch: feature/native-comp.")
   (define-key my-leader-map-global (kbd "c") #'quit-window) ; buffer left alive
   (define-key my-leader-map-global (kbd "<") #'my-shrink-window-horizontally)
   (define-key my-leader-map-global (kbd ">") #'my-enlarge-window-horizontally)
-  (define-key my-leader-map-global (kbd "v") #'evil-visual-block)
+  ;; (define-key my-leader-map-global (kbd "v") #'evil-visual-block)
 
   (declare-function undo-redo 'suppress) ; silence byte-compiler on emacs<28
   (when (fboundp #'undo-redo) ; emacs 28+
@@ -11285,6 +11285,7 @@ and switched to with no user input required."
   (switch-to-buffer (other-buffer (current-buffer))))
 
 (global-set-key (kbd "C-<tab>") #'my-nswbuff)
+(define-key my-leader-map-global (kbd "v") #'my-nswbuff)
 
 ;;;----------------------------------------------------------------------------
 ;;; tab-line

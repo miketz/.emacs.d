@@ -11247,8 +11247,9 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'nswbuff-switch-to-previous-buffer "nswbuff" nil t)
 (autoload #'nswbuff-switch-to-next-buffer "nswbuff" nil t)
 
-;; (global-set-key (kbd "C-<tab>") #'nswbuff-switch-to-next-buffer)
-;; (global-set-key (kbd "S-C-<tab>") #'nswbuff-switch-to-previous-buffer)
+;; TODO: this will interfere with tab-line keybinds. resolve it later
+(global-set-key (kbd "C-<tab>") #'nswbuff-switch-to-next-buffer)
+(global-set-key (kbd "S-C-<tab>") #'nswbuff-switch-to-previous-buffer)
 
 (defun my-nswbuff ()
   "Switch to previous buffer.
@@ -11287,6 +11288,7 @@ and switched to with no user input required."
 (autoload #'my-tab-line-hydra/body "my-tab-line" nil t)
 
 (with-eval-after-load 'tab-line
+  ;; TODO: this will interfere with nswbuff keybinds. resolve it later
   (global-set-key (kbd "C-<tab>") #'tab-line-switch-to-next-tab)
   (global-set-key (kbd "C-S-<tab>") #'tab-line-switch-to-prev-tab)
 

@@ -236,9 +236,7 @@
   (split-window-horizontally)
   (shrink-window-horizontally 24)
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
-  (eww-open-file "c:/Users/mtz/AppData/Local/books/PracticalCommonLisp_ePub/html/index.html")
-  ;; (eww-open-file "c:/Users/mtz/books/PracticalCommonLisp_ePub/html/index.html")
-  )
+  (eww-open-file "c:/Users/mtz/AppData/Local/books/lisp_books/PracticalCommonLisp_ePub/html/index.html"))
 
 (defun my-proj-ticpp ()
   "Open the Thinking in C++ ebook."

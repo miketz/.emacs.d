@@ -42,7 +42,8 @@ Example:
        (bg-2 (aref `["#282814" ,todo--bg ,todo--bg ,todo--bg] i))
        (bg-3 (aref `["#252511" ,todo--bg ,todo--bg ,todo--bg] i))
        (bg-4 (aref `["#202006" ,todo--bg ,todo--bg ,todo--bg] i) )
-       (fg           (aref `["#f0d5a6" "#FFFFD7" "#BEBEBE" "#FFFFFF"] i))
+                           ;;"#f0d5a6"
+       (fg           (aref `["#e4d4c4" "#FFFFD7" "#BEBEBE" "#FFFFFF"] i))
        (bg-purple    (aref `["#440033" "#5F005F" "#8B008B" "#000000"] i))
        (fg-purple    (aref `["#FFC0CB" "#FFAFD7" "#FF00FF" "#FF00FF"] i))
        (bg-green     (aref `["#004400" "#005F00" "#228B22" "#000000"] i))
@@ -287,8 +288,8 @@ Example:
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    ;; ~ START faces supported with treesit
    ;; ~ Maybe not intended to be treesit only, but it seems that way.
-   `(font-lock-function-call-face ((,class :foreground ,fn-call-fg
-                                           :background ,fn-call-bg)))
+   `(font-lock-function-call-face ((,class :foreground "#bdA6bd";"#bf0580"
+                                           :background ,bg)))
    `(font-lock-variable-use-face ((,class :inherit default)))
    `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
                                       :weight normal)))

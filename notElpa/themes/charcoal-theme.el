@@ -233,8 +233,9 @@ Example:
    `(mode-line
      ((,class (:foreground ,mode-line-fg ;"#8FB28F"
                            :background ,mode-line-bg ;"#2B2B2B"
-                           :box (:line-width -1 :style released-button)))
-      (t :inverse-video t)))
+                           :box (:line-width -1 :style released-button)
+                           ;:inverse-video t
+                           ))))
    `(mode-line-buffer-id ((,class (:foreground ,ml-bufferid ;"#F0DFAF"
                                                :weight bold))))
    `(mode-line-inactive

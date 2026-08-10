@@ -289,8 +289,8 @@ Example:
    `(font-lock-function-call-face ((,class :foreground ,fn-call-fg
                                            :background ,fn-call-bg)))
    `(font-lock-variable-use-face ((,class :inherit default)))
-   `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
-                                      :weight normal)))
+   `(font-lock-operator-face ((,class ;:inherit font-lock-keyword-face
+                               :foreground ,dim+3)))
    `(font-lock-property-name-face ((,class
                                     ;; :inherit font-lock-variable-name-face
                                     :foreground "burlywood3"
@@ -301,7 +301,7 @@ Example:
                                    ;; :slant italic
                                    )))
    ;; `(font-lock-punctuation-face ((,class nil))) ;treesit
-   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit, focus-dark
+   `(font-lock-bracket-face ((,class :foreground ,dim-2))) ;treesit, focus-dark
    `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit, focus-dark
    `(font-lock-escape-face ((,class :foreground "hot pink")))
    ;; `(font-lock-misc-punctuation-face) ;treesit
@@ -313,7 +313,7 @@ Example:
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    ;; `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
-   `(font-lock-keyword-face ((,class (:foreground ,dim-1)))) ;focus-dark
+   `(font-lock-keyword-face ((,class (:foreground ,dim)))) ;focus-dark
    `(font-lock-negation-char-face ((,class (:foreground "hot pink" :weight bold))))
    ;; `(font-lock-preprocessor-face ((,class (:foreground ,zenburn-blue+1))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
@@ -564,8 +564,8 @@ Example:
 
    ;; compile
    `(compilation-info ((,class (:foreground ,fg-green :underline t))))
-   `(compilation-line-number ((,class (:inherit font-lock-keyword-face
-                                                :weight normal))))
+   ;; `(compilation-line-number ((,class (:inherit font-lock-keyword-face
+   ;;                                              :weight normal))))
 
    ;; deadgrep
    `(deadgrep-meta-face ((,class (:foreground "gray"))))
@@ -744,9 +744,9 @@ Example:
    `(tree-sitter-hl-face:function.call
      ((,class :foreground ,fn-call-fg
               :background ,fn-call-bg)))
-   `(tree-sitter-hl-face:operator
-     ((,class :inherit font-lock-keyword-face
-              :weight normal)))
+   ;; `(tree-sitter-hl-face:operator
+   ;;   ((,class :inherit font-lock-keyword-face
+   ;;            :weight normal)))
    `(tree-sitter-hl-face:label
      ((,class :foreground ,fg
               :background "#232319"

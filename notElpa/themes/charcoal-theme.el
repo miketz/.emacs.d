@@ -535,6 +535,7 @@ Example:
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
    `(web-mode-function-call-face ((,class :foreground ,fn-call-fg
                                           :background ,fn-call-bg)))
+   `(web-mode-html-tag-bracket-face ((,class :inherit font-lock-bracket-face)))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))

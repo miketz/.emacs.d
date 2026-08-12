@@ -11342,6 +11342,19 @@ and switched to with no user input required."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+(defun my-fix-ediff-emacs-31 ()
+  "Attempt to fix broken ediff on emacs 31 alpha release for Windows."
+  (interactive)
+  (let* ((folder (file-name-parent-directory (locate-library "ediff")))
+         (el-files (mapcar #'car (directory-files-and-attributes folder t "ediff.*el$" t)))
+         (elc-files (mapcar #'car (directory-files-and-attributes folder t "ediff.*elc$" t))))
+    ;; delete ediff*.elc files
+    (cl-loop for f in elc-files do
+             (delete-file f))
+    ;; load ediff*.el files
+    (cl-loop for f in el-files do
+             (load f))))
+
 ;; copy text in clipboard (outside emacs) into kill ring when you delete text
 ;; in emacs
 (setq save-interprogram-paste-before-kill t)

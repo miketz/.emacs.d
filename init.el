@@ -10915,6 +10915,9 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-branch-push-new "fugitive" nil t)
 (autoload #'fugitive-branch-delete-on-remote "fugitive" nil t)
 (autoload #'fugitive-branch-delete-remote-tracking "fugitive" nil t)
+(autoload #'fugitive-file-ediff "fugitive" nil t)
+(autoload #'fugitive-pop-last-n-commits-as-unstaged "fugitive" nil t)
+
 
 ;; hydra
 (autoload #'my-fugitive-hydra/body "my-hydras" nil t)

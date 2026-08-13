@@ -5507,6 +5507,30 @@ and indent."
   (remove-hook hook fn))
 
 (with-eval-after-load 'vc
+  (progn ;; shadow process-environment so it can find git configuration.
+         ;; neccesary to find credentials, etc on ms-windows.
+    (require 'fugitive)
+    ;; TODO: figure out how to solve the issue of name in log only showing
+    ;; last name on commits made via vc-next-action. shadowing process-environment
+    ;; doesn't seem to fix.
+    (defun my-vc-shadow-env-advice (orig-fun &rest args)
+      "Shadow process-environment so it can find git configuration."
+      (let ((process-environment (if fugitive-juggle-home-env-var-p
+                                     (cons fugitive-home-env-var process-environment)
+                                   ;; else just use process-environment as-is
+                                   process-environment)))
+        ;; (print (expand-file-name "~/.gitconfig"))
+        ;; exec original function: vc-next-action
+        (apply orig-fun args)))
+    ;; Attach advice
+    (advice-add 'vc-next-action :around #'my-vc-shadow-env-advice)
+    ;; redundant advice if vc-checkin called from vc-next-action.
+    ;; (advice-add 'vc-checkin :around #'my-vc-shadow-env-advice)
+    (advice-add 'vc-pull :around #'my-vc-shadow-env-advice)
+    (advice-add 'vc-push :around #'my-vc-shadow-env-advice)
+    (advice-add 'vc-pull-and-push :around #'my-vc-shadow-env-advice))
+
+
   ;; avoid creating junk file when using `vc-revision-other-window'. C-x v ~
   (setopt vc-find-revision-no-save t)
 

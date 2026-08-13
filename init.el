@@ -3189,36 +3189,38 @@ Inserts a new line and the beginning and end with text values:
 (when (treesit-language-available-p 'c-sharp)
   (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode)))
 
-(with-eval-after-load 'csharp-ts-mode
+;; NOTE: csharp-ts-mode lives in the same file/feature as regular csharp-mode
+;; It doesn't have it's own feature symbol
+;; (with-eval-after-load 'csharp-ts-mode
 
-  ;; keybinds
-  (define-key csharp-ts-mode-map (kbd "C-c C-c") #'compile)
-  (define-key csharp-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
-  (define-key csharp-ts-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
+;;   ;; keybinds
+;;   (define-key csharp-ts-mode-map (kbd "C-c C-c") #'compile)
+;;   (define-key csharp-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+;;   (define-key csharp-ts-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
 
-  ;; TODO: fn my-csharp-new-proj. mabye move to separate file, add autoload
+;;   ;; TODO: fn my-csharp-new-proj. mabye move to separate file, add autoload
 
-  ;; hook
-  (defun my-setup-csharp-ts-mode ()
-    ;; set compile-command. Assumes dotnet core
-    (let* ((dotnet (cond ((eq system-type 'darwin)
-                          "/usr/local/bin/dotnet")
-                         ((eq system-type 'windows-nt)
-                          "\"C:\\Program Files\\dotnet\\dotnet\"")))
-           (cmd (concat dotnet " build")))
-      (set (make-local-variable 'compile-command)
-           cmd))
+;;   ;; hook
+;;   (defun my-setup-csharp-ts-mode ()
+;;     ;; set compile-command. Assumes dotnet core
+;;     (let* ((dotnet (cond ((eq system-type 'darwin)
+;;                           "/usr/local/bin/dotnet")
+;;                          ((eq system-type 'windows-nt)
+;;                           "\"C:\\Program Files\\dotnet\\dotnet\"")))
+;;            (cmd (concat dotnet " build")))
+;;       (set (make-local-variable 'compile-command)
+;;            cmd))
 
-    (yas-minor-mode 1)
-    ;; (rainbow-delimiters-mode 1)
-    (citre-mode 1) ; ctags mode
+;;     (yas-minor-mode 1)
+;;     ;; (rainbow-delimiters-mode 1)
+;;     (citre-mode 1) ; ctags mode
 
-    (when my-use-display-fill-column-indicator
-      (setq display-fill-column-indicator-column 110) ; long lines in C#
-      (display-fill-column-indicator-mode 1))
+;;     (when my-use-display-fill-column-indicator
+;;       (setq display-fill-column-indicator-column 110) ; long lines in C#
+;;       (display-fill-column-indicator-mode 1))
 
-    (my-turn-on-electric-pair-local-mode))
-  (add-hook #'csharp-ts-mode-hook #'my-setup-csharp-ts-mode))
+;;     (my-turn-on-electric-pair-local-mode))
+;;   (add-hook #'csharp-ts-mode-hook #'my-setup-csharp-ts-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; csharp-mode. C#
@@ -3239,6 +3241,12 @@ Inserts a new line and the beginning and end with text values:
   (define-key csharp-mode-map (kbd "C-c C-c") #'compile)
   (define-key csharp-mode-map (kbd "C-c .") #'dumb-jump-go)
   (define-key csharp-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
+
+  ;; NOTE: csharp-ts-mode lives in the same file/feature as regular csharp-mode
+  ;; so must setting it up under the `csharp-mode' feature.
+  (define-key csharp-ts-mode-map (kbd "C-c C-c") #'compile)
+  (define-key csharp-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
+  (define-key csharp-ts-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
 
   (defun my-csharp-new-proj ()
     "Initialize a new C# project in a folder.
@@ -3269,7 +3277,8 @@ Assumes dotnet core."
       (display-fill-column-indicator-mode 1))
 
     (my-turn-on-electric-pair-local-mode))
-  (add-hook #'csharp-mode-hook #'my-setup-csharp-mode))
+  (add-hook #'csharp-mode-hook #'my-setup-csharp-mode)
+  (add-hook #'csharp-ts-mode-hook #'my-setup-csharp-mode))
 
 
 ;;;----------------------------------------------------------------------------

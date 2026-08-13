@@ -3269,7 +3269,7 @@ Assumes dotnet core."
            cmd))
 
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (citre-mode 1) ; ctags mode
 
     (when my-use-display-fill-column-indicator

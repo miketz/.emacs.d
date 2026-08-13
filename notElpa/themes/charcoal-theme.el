@@ -287,7 +287,8 @@ Example:
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    ;; ~ START faces supported with treesit
    ;; ~ Maybe not intended to be treesit only, but it seems that way.
-   `(font-lock-function-call-face ((,class :foreground "#Bb4010" :background ,bg)))
+   `(font-lock-function-call-face ((,class :foreground "#Ebb0b0";"#Bb4010"
+                                           :background ,bg)))
    ;; `(font-lock-function-call-face ((,class :foreground ,fn-call-fg :background ,fn-call-bg)))
    `(font-lock-variable-use-face ((,class :inherit default)))
    `(font-lock-operator-face ((,class ;:inherit font-lock-keyword-face

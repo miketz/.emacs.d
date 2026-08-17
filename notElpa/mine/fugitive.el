@@ -1755,7 +1755,7 @@ commited message.")
 ;; TODO: highlight line 2 in red.
 ;; TODO: make git respect the scissors with -m flag. right now cutting it off myself.
 ;; TODO: try avoiding the -m flag, run git commit with running femacs as $editor. maybe
-;;       it will resolve the scissor issue. and also avoid issues wher econfigured
+;;       it will resolve the scissor issue. and also avoid issues where configured
 ;;       comment is not "#".
 (defun fugitive-commit ()
   "Commit."
@@ -1764,13 +1764,13 @@ commited message.")
     (switch-to-buffer-other-window b)
 
     (progn ; inject diff results then comment them with #
-      (insert "\n")
+      (insert "\n\n")
       (insert fugitive-commit-scissors)
       (insert "\n")
       (shell-command "git diff --cached --color" b)
       (xterm-color-colorize-buffer)
       ;; give the scissors a comment face. must be run after xterm-color-colorize-buffer.
-      (goto-line 2)
+      (goto-line 3)
       (let* ((ov (make-overlay (pos-bol) (pos-eol) b t t)))
         (overlay-put ov 'face 'font-lock-comment-face))
       ;; put cursor at beggining of buffer
@@ -1785,16 +1785,27 @@ commited message.")
           (format
            "[commit]: \\[exit-recursive-edit]  [Abort]: \\[kill-buffer]")))
 
-    ;; User types text, then calls exit-recursive-edit
-    (recursive-edit)
+    (cl-tagbody
+     :start-edit
+     ;; User types text, then calls exit-recursive-edit
+     (recursive-edit)
+     ;; once recursive edit ends, grab text and commit
 
-    ;; once recursive edit ends, grab text and commit
-    (let ((msg (with-current-buffer b
-                 (buffer-substring-no-properties (point-min) (point-max)))))
-      (setq msg (substring-no-properties msg
-                                         0
-                                         (string-search fugitive-commit-scissors msg)))
-      (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\"")))
+     ;; GUARD: suggest a blank line 2
+     (with-current-buffer b
+       (goto-line 2)
+       (let ((line2-blank-p (= (line-beginning-position) (line-end-position))))
+         (unless line2-blank-p
+           (unless (y-or-n-p "Line 2 is not blank. Proceed anyway?")
+             (go :start-edit)))))
+
+     ;; grab text and commit
+     (let ((msg (with-current-buffer b
+                  (buffer-substring-no-properties (point-min) (point-max)))))
+       (setq msg (substring-no-properties msg
+                                          0
+                                          (string-search fugitive-commit-scissors msg)))
+       (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\""))))
 
     (kill-buffer b)))
 

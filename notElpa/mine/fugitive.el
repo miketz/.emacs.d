@@ -1745,14 +1745,33 @@ Mostly just to support key binds."
             (define-key map (kbd "C-c C-c") #'exit-recursive-edit)
             map)
   ;; (read-only-mode 1)
-  )
+  (setq-local show-trailing-whitespace t))
 
-;; TODO: add a mode for keybinds, header bar, highlight line 2 in red.
+
+(defvar fugitive-commit-scissors "# ------------------------ >8 ------------------------"
+  "Special flag in a git commit message to truncate/ignore everything below it from the
+commited message.")
+
+;; TODO: highlight line 2 in red.
+;; TODO: make git respect the scissors with -m flag. right now cutting it off myself.
 (defun fugitive-commit ()
   "Commit."
   (interactive)
   (let ((b (fugitive-new-output-buffer)))
     (switch-to-buffer-other-window b)
+
+    (progn ; inject diff results then comment them with #
+      (insert "\n")
+      (insert fugitive-commit-scissors)
+      (insert "\n")
+      (shell-command "git diff --cached --color" b)
+      (xterm-color-colorize-buffer)
+      ;; give the scissors a comment face. must be run after xterm-color-colorize-buffer.
+      (goto-line 2)
+      (let* ((ov (make-overlay (pos-bol) (pos-eol) b t t)))
+        (overlay-put ov 'face 'font-lock-comment-face))
+      ;; put cursor at beggining of buffer
+      (goto-char (point-min)))
 
     (fugitive-commit-msg-mode) ; for key binds
 
@@ -1769,7 +1788,10 @@ Mostly just to support key binds."
     ;; once recursive edit ends, grab text and commit
     (let ((msg (with-current-buffer b
                  (buffer-substring-no-properties (point-min) (point-max)))))
-      (fugitive-shell-command (concat "git commit -m \"" msg "\"")))
+      (setq msg (substring-no-properties msg
+                                         0
+                                         (string-search fugitive-commit-scissors msg)))
+      (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\"")))
 
     (kill-buffer b)))
 

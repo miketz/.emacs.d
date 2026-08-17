@@ -1660,6 +1660,21 @@ Proceed?")
                           t ;give user a chance to edit
                           ))
 
+;; TODO: add a mode for keybinds, header bar, highlight line 2 in red.
+(defun fugitive-commit ()
+  "Commit."
+  (interactive)
+  (let ((b (fugitive-new-output-buffer)))
+    (switch-to-buffer-other-window b)
+    ;; User types text, then calls exit-recursive-edit
+    (recursive-edit)
+    (let ((msg (with-current-buffer b
+                 (buffer-substring-no-properties (point-min) (point-max)))))
+      ;; (print msg)
+      (fugitive-shell-command (concat "git commit -m \"" msg "\""))
+      (kill-buffer b))))
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

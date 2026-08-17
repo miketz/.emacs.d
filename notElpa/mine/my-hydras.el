@@ -441,6 +441,7 @@ _D_: diff staged file
 _u_: stage file
 _U_: unstage file
 _r_: restore unstaged file
+_C_: commit
 _q_, _C-g_: quit"
   ("c" fugitive-shell-command)
   ("f" (lambda ()
@@ -453,6 +454,7 @@ _q_, _C-g_: quit"
   ("u" fugitive-file-stage)
   ("U" fugitive-file-unstage)
   ("r" fugitive-file-restore)
+  ("C" fugitive-commit)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
   ("q" nil))

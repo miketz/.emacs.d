@@ -1754,6 +1754,9 @@ commited message.")
 
 ;; TODO: highlight line 2 in red.
 ;; TODO: make git respect the scissors with -m flag. right now cutting it off myself.
+;; TODO: try avoiding the -m flag, run git commit with running femacs as $editor. maybe
+;;       it will resolve the scissor issue. and also avoid issues wher econfigured
+;;       comment is not "#".
 (defun fugitive-commit ()
   "Commit."
   (interactive)

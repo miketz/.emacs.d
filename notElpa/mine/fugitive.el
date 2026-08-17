@@ -1660,22 +1660,6 @@ Proceed?")
                           t ;give user a chance to edit
                           ))
 
-;; TODO: add a mode for keybinds, header bar, highlight line 2 in red.
-(defun fugitive-commit ()
-  "Commit."
-  (interactive)
-  (let ((b (fugitive-new-output-buffer)))
-    (switch-to-buffer-other-window b)
-    ;; User types text, then calls exit-recursive-edit
-    (recursive-edit)
-    (let ((msg (with-current-buffer b
-                 (buffer-substring-no-properties (point-min) (point-max)))))
-      ;; (print msg)
-      (fugitive-shell-command (concat "git commit -m \"" msg "\""))
-      (kill-buffer b))))
-
-
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; worktrees. associates each worktree folder with a branch.
@@ -1746,6 +1730,50 @@ Proceed?")
   "List git worktrees."
   (interactive)
   (fugitive-shell-command "git worktree list"))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; commit
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-minor-mode fugitive-commit-msg-mode
+  "Mode for entering commit message text.
+Mostly just to support key binds."
+  :lighter " fugi-commit"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c C-c") #'exit-recursive-edit)
+            map)
+  ;; (read-only-mode 1)
+  )
+
+;; TODO: add a mode for keybinds, header bar, highlight line 2 in red.
+(defun fugitive-commit ()
+  "Commit."
+  (interactive)
+  (let ((b (fugitive-new-output-buffer)))
+    (switch-to-buffer-other-window b)
+
+    (fugitive-commit-msg-mode) ; for key binds
+
+    ;; Show a header with useful key bind info. Like `org-src-mode' does.
+    ;; Also show info about the mode itself in the header.
+    (set (make-local-variable 'header-line-format)
+         (substitute-command-keys
+          (format
+           "[commit]: \\[exit-recursive-edit]  [Abort]: \\[kill-buffer]")))
+
+    ;; User types text, then calls exit-recursive-edit
+    (recursive-edit)
+
+    ;; once recursive edit ends, grab text and commit
+    (let ((msg (with-current-buffer b
+                 (buffer-substring-no-properties (point-min) (point-max)))))
+      (fugitive-shell-command (concat "git commit -m \"" msg "\"")))
+
+    (kill-buffer b)))
+
+
 
 ;; ;; test
 ;; (let* ((default-directory "~/.emacs.d/notElpaYolo/magit"))

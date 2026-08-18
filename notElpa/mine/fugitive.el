@@ -162,7 +162,7 @@ acting against the wrong folder/repo!")
 (defvar fugitive--pos-before-insert 0)
 
 ;;;###autoload
-(defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p filename)
+(defun fugitive-shell-command (&optional cmd buff force-read-p hide-output-p filename stop-echo)
   "Run a git command.
 Display output in an Emacs buffer.
 Attempt to detect output type: log, diff, etc.
@@ -181,7 +181,9 @@ HIDE-OUTPUT-P will avoid popping up the output buffer BUFF. Useful for quick
 rapid fire commands like `fugitive-quick-commit'.
 
 FILENAME will become a buffer local var in the log output buffer. Used to limit the
-show command to the file."
+show command to the file.
+
+STOP-ECHO will prevent echoing cmd in the minibuffer when t."
   (interactive)
 
   (let ((process-environment (if fugitive-juggle-home-env-var-p
@@ -372,7 +374,8 @@ show command to the file."
                               cmd-complete-fn))
 
       ;; escape % characters as `message' thinks they are message params!!!
-      (message (string-replace "%" "%%" cmd)) ; echo final cmd actually run. may have --color injected.
+      (unless stop-echo
+        (message (string-replace "%" "%%" cmd))) ; echo final cmd actually run. may have --color injected.
       ;; show output
       ;; (display-buffer buff)
       ;; (switch-to-buffer-other-window buff)
@@ -1816,7 +1819,11 @@ commited message.")
        (setq msg (substring-no-properties msg
                                           0
                                           (string-search fugitive-commit-scissors msg)))
-       (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\""))))
+       (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\"")
+                               nil nil nil nil
+                               t ; no echo. uses -m flag so long commit messages are
+                                 ; a part of the command itself, too big to echo.
+                               )))
 
     (quit-window t) ;(kill-buffer b)
     ))

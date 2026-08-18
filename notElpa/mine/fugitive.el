@@ -1750,16 +1750,18 @@ Mostly just to support key binds."
   ;; (read-only-mode 1)
   (setq-local show-trailing-whitespace t))
 
-
+;; TODO: handle git's configured msg comment. just hardcoding the default # for now.
 (defvar fugitive-commit-scissors "# ------------------------ >8 ------------------------"
   "Special flag in a git commit message to truncate/ignore everything below it from the
 commited message.")
 
-;; TODO: highlight line 2 in red.
+;; TODO: highlight line 2 in red. to discourage entering content there.
 ;; TODO: make git respect the scissors with -m flag. right now cutting it off myself.
-;; TODO: try avoiding the -m flag, run git commit with running femacs as $editor. maybe
-;;       it will resolve the scissor issue. and also avoid issues where configured
+;; TODO: try avoiding the -m flag, run git commit with running emacs as $editor. maybe
+;;       it will resolve the scissor issue. may also avoid issues where configured
 ;;       comment is not "#".
+;;       look into package with-editor, but trying to avoid reliance on emacsclient
+;;       and with-editor may require it's use.
 (cl-defun fugitive-commit ()
   "Commit."
   (interactive)

@@ -1009,7 +1009,11 @@ Proceed?")
       (message "Abort amend. Message not changed.")
       (cl-return-from fugitive-amend-last-commit-msg))
     ;; finally amend the commit message
-    (fugitive-shell-command (concat "git commit --amend -m \"" new-msg "\""))))
+    (fugitive-shell-command (concat "git commit --amend -m \"" new-msg "\"")
+                            nil nil nil nil
+                            t ; no echo. uses -m flag so long commit messages are
+                              ; a part of the command itself, too big to echo.
+                            )))
 
 
 

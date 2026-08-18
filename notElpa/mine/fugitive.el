@@ -1757,17 +1757,28 @@ commited message.")
 ;; TODO: try avoiding the -m flag, run git commit with running femacs as $editor. maybe
 ;;       it will resolve the scissor issue. and also avoid issues where configured
 ;;       comment is not "#".
-(defun fugitive-commit ()
+(cl-defun fugitive-commit ()
   "Commit."
   (interactive)
   (let ((b (fugitive-new-output-buffer)))
     (switch-to-buffer-other-window b)
 
-    (progn ; inject diff results then comment them with #
+    ;; get staged diff text
+    (shell-command "git diff --cached --color" b)
+    (let ((diff-txt (with-current-buffer b
+                      (buffer-substring-no-properties (point-min) (point-max)))))
+      ;; GUARD: there must be changes to commit
+      (when (length= diff-txt 0)
+        (message "No changes to commit.")
+        (quit-window t) ; (kill-buffer b)
+        (cl-return-from fugitive-commit))
+
+      (goto-char (point-min)) ; beggining
       (insert "\n\n")
       (insert fugitive-commit-scissors)
       (insert "\n")
-      (shell-command "git diff --cached --color" b)
+      ;; (shell-command "git diff --cached --color" b)
+
       (xterm-color-colorize-buffer)
       ;; give the scissors a comment face. must be run after xterm-color-colorize-buffer.
       (goto-line 3)
@@ -1807,7 +1818,8 @@ commited message.")
                                           (string-search fugitive-commit-scissors msg)))
        (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\""))))
 
-    (kill-buffer b)))
+    (quit-window t) ;(kill-buffer b)
+    ))
 
 
 

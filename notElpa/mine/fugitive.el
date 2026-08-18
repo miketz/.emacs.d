@@ -1750,6 +1750,16 @@ We don't just want to kill the buffer, but restore window locations too."
   (interactive)
   (quit-window t))
 
+(defun fugitive-diff-staged ()
+  "Show diff of staged files to be commited."
+  (interactive)
+  (fugitive-shell-command "git diff --cached --color"))
+
+(defun fugitive-diff-staged-char-based ()
+  "Show diff of staged files to be commited."
+  (interactive)
+  (fugitive-shell-command "git diff --word-diff=color --word-diff-regex=. --cached --color"))
+
 (define-minor-mode fugitive-commit-msg-mode
   "Mode for entering commit message text.
 Mostly just to support key binds."
@@ -1757,6 +1767,8 @@ Mostly just to support key binds."
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c C-c") #'exit-recursive-edit)
             (define-key map (kbd "C-c C-k") #'fugitive-kill-buffer)
+            (define-key map (kbd "C-c d") #'fugitive-diff-staged)
+            (define-key map (kbd "C-c e") #'fugitive-diff-staged-char-based)
             map)
   ;; (read-only-mode 1)
   (setq-local show-trailing-whitespace t))
@@ -1809,7 +1821,7 @@ commited message.")
     (set (make-local-variable 'header-line-format)
          (substitute-command-keys
           (format
-           "[commit]: \\[exit-recursive-edit]  [Abort]: \\[fugitive-kill-buffer]")))
+           "Commit: \\[exit-recursive-edit]  Abort: \\[fugitive-kill-buffer]  Diff: \\[fugitive-diff-staged]  DiffChar: \\[fugitive-diff-staged-char-based]")))
 
     (cl-tagbody
      :start-edit

@@ -1806,7 +1806,6 @@ commited message.")
     (fugitive-commit-msg-mode) ; for key binds
 
     ;; Show a header with useful key bind info. Like `org-src-mode' does.
-    ;; Also show info about the mode itself in the header.
     (set (make-local-variable 'header-line-format)
          (substitute-command-keys
           (format

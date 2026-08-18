@@ -1740,12 +1740,19 @@ Proceed?")
 ;;; commit
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun fugitive-kill-buffer ()
+  "Tailored for killing junk output buffers.
+We don't just want to kill the buffer, but restore window locations too."
+  (interactive)
+  (quit-window t))
+
 (define-minor-mode fugitive-commit-msg-mode
   "Mode for entering commit message text.
 Mostly just to support key binds."
   :lighter " fugi-commit"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c C-c") #'exit-recursive-edit)
+            (define-key map (kbd "C-c C-k") #'fugitive-kill-buffer)
             map)
   ;; (read-only-mode 1)
   (setq-local show-trailing-whitespace t))
@@ -1799,7 +1806,7 @@ commited message.")
     (set (make-local-variable 'header-line-format)
          (substitute-command-keys
           (format
-           "[commit]: \\[exit-recursive-edit]  [Abort]: \\[kill-buffer]")))
+           "[commit]: \\[exit-recursive-edit]  [Abort]: \\[fugitive-kill-buffer]")))
 
     (cl-tagbody
      :start-edit

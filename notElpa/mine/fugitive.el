@@ -1785,7 +1785,7 @@ commited message.")
                       (buffer-substring-no-properties (point-min) (point-max)))))
       ;; GUARD: there must be changes to commit
       (when (length= diff-txt 0)
-        (message "No changes to commit.")
+        (message "No staged changes to commit.")
         (quit-window t) ; (kill-buffer b)
         (cl-return-from fugitive-commit))
 

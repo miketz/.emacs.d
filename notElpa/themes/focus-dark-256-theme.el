@@ -393,7 +393,7 @@
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; dim. don't dim for now actually as the face control is not fine grained enough.
-   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit
+   `(font-lock-bracket-face ((,class :foreground ,dim-2))) ;treesit
    `(font-lock-punctuation-face ((,class :foreground ,fg))) ;treesit
    `(font-lock-misc-punctuation-face ((,class :foreground ,fg))) ;treesit
 

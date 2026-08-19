@@ -1769,6 +1769,7 @@ Mostly just to support key binds."
             (define-key map (kbd "C-c C-k") #'fugitive-kill-buffer)
             (define-key map (kbd "C-c d") #'fugitive-diff-staged)
             (define-key map (kbd "C-c e") #'fugitive-diff-staged-char-based)
+            (define-key map (kbd "C-c t") #'auto-fill-mode)
             map)
   ;; enable useful settings for writing a commit message
   (setq-local show-trailing-whitespace t)
@@ -1830,7 +1831,7 @@ commited message.")
     (set (make-local-variable 'header-line-format)
          (substitute-command-keys
           (format
-           "Commit: \\[exit-recursive-edit]  Abort: \\[fugitive-kill-buffer]  Diff: \\[fugitive-diff-staged]  DiffChar: \\[fugitive-diff-staged-char-based]")))
+           "Commit: \\[exit-recursive-edit]  Abort: \\[fugitive-kill-buffer]  Diff: \\[fugitive-diff-staged]  DiffChar: \\[fugitive-diff-staged-char-based] ToggleAutoFill: \\[auto-fill-mode]")))
 
     (cl-tagbody
      :start-edit

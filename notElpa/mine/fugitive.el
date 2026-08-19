@@ -1770,8 +1770,17 @@ Mostly just to support key binds."
             (define-key map (kbd "C-c d") #'fugitive-diff-staged)
             (define-key map (kbd "C-c e") #'fugitive-diff-staged-char-based)
             map)
-  ;; (read-only-mode 1)
-  (setq-local show-trailing-whitespace t))
+  ;; enable useful settings for writing a commit message
+  (setq-local show-trailing-whitespace t)
+  (progn ; automatically inject newlines in commit message
+    (setq-local fill-column 72)
+    (auto-fill-mode 1))
+  (progn ; avoid auto indent when newline is injected
+    (electric-indent-mode 0)
+    (setq-local adaptive-fill-mode nil
+                fill-prefix "") ; must be empty string, not nil
+    ;; prevent evil's "o" key from indenting when injeting newline.
+    (setq-local evil-auto-indent nil)))
 
 ;; TODO: handle git's configured msg comment. just hardcoding the default # for now.
 (defvar fugitive-commit-scissors "# ------------------------ >8 ------------------------"

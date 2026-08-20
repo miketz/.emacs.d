@@ -1765,7 +1765,7 @@ We don't just want to kill the buffer, but restore window locations too."
 Mostly just to support key binds."
   :lighter " fugi-commit"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c C-c") #'exit-recursive-edit)
+            (define-key map (kbd "C-c C-c") #'fugitive-commit-buffer-msg)
             (define-key map (kbd "C-c C-k") #'fugitive-kill-buffer)
             (define-key map (kbd "C-c d") #'fugitive-diff-staged)
             (define-key map (kbd "C-c e") #'fugitive-diff-staged-char-based)
@@ -1796,7 +1796,7 @@ commited message.")
 ;;       look into package with-editor, but trying to avoid reliance on emacsclient
 ;;       and with-editor may require it's use.
 (cl-defun fugitive-commit ()
-  "Commit."
+  "Commit workflow. Spawn a buffer to enter commit message."
   (interactive)
   (let ((b (fugitive-new-output-buffer)))
     (switch-to-buffer-other-window b)
@@ -1831,36 +1831,33 @@ commited message.")
     (set (make-local-variable 'header-line-format)
          (substitute-command-keys
           (format
-           "Commit: \\[exit-recursive-edit]  Abort: \\[fugitive-kill-buffer]  Diff: \\[fugitive-diff-staged]  DiffChar: \\[fugitive-diff-staged-char-based] ToggleAutoFill: \\[auto-fill-mode]")))
+           "Commit: \\[fugitive-commit-buffer-msg]  Abort: \\[fugitive-kill-buffer]  Diff: \\[fugitive-diff-staged]  DiffChar: \\[fugitive-diff-staged-char-based] ToggleAutoFill: \\[auto-fill-mode]")))))
 
-    (cl-tagbody
-     :start-edit
-     ;; User types text, then calls exit-recursive-edit
-     (recursive-edit)
-     ;; once recursive edit ends, grab text and commit
-
-     ;; GUARD: suggest a blank line 2
-     (with-current-buffer b
-       (goto-line 2)
-       (let ((line2-blank-p (= (line-beginning-position) (line-end-position))))
-         (unless line2-blank-p
-           (unless (y-or-n-p "Line 2 is not blank. Proceed anyway?")
-             (go :start-edit)))))
-
-     ;; grab text and commit
-     (let ((msg (with-current-buffer b
-                  (buffer-substring-no-properties (point-min) (point-max)))))
-       (setq msg (substring-no-properties msg
-                                          0
-                                          (string-search fugitive-commit-scissors msg)))
-       (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\"")
-                               nil nil nil nil
-                               t ; no echo. uses -m flag so long commit messages are
-                                 ; a part of the command itself, too big to echo.
-                               )))
-
-    (quit-window t) ;(kill-buffer b)
-    ))
+(cl-defun fugitive-commit-buffer-msg ()
+  "Run git commit using text in buffer.
+Only call from buffer of mode `fugitive-commit-msg-mode' spawned by `fugitive-commit'."
+  (interactive)
+  (let ((b (current-buffer)))
+    ;; TODO: guard for mode fugitive-commit-msg-mode
+    ;; GUARD: suggest a blank line 2
+    (with-current-buffer b
+      (goto-line 2)
+      (let ((line2-blank-p (= (line-beginning-position) (line-end-position))))
+        (unless line2-blank-p
+          (unless (y-or-n-p "Line 2 is not blank. Proceed anyway?")
+            (cl-return-from fugitive-commit-buffer-msg)))))
+    ;; grab text and commit
+    (let ((msg (with-current-buffer b
+                 (buffer-substring-no-properties (point-min) (point-max)))))
+      (setq msg (substring-no-properties msg
+                                         0
+                                         (string-search fugitive-commit-scissors msg)))
+      (fugitive-shell-command (concat "git commit --cleanup=scissors -m \"" msg "\"")
+                              nil nil nil nil
+                              t ; no echo. uses -m flag so long commit messages are
+                                        ; a part of the command itself, too big to echo.
+                              )
+      (quit-window t (get-buffer-window b)))))
 
 
 

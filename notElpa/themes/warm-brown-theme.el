@@ -234,8 +234,9 @@ Example:
    `(mode-line
      ((,class (:foreground ,mode-line-fg ;"#8FB28F"
                            :background ,mode-line-bg ;"#2B2B2B"
-                           :box (:line-width -1 :style released-button)))
-      (t :inverse-video t)))
+                           :box (:line-width -1 :style released-button)
+                           ;:inverse-video t
+                           ))))
    `(mode-line-buffer-id ((,class (:foreground ,ml-bufferid ;"#F0DFAF"
                                                :weight bold))))
    `(mode-line-inactive
@@ -536,6 +537,7 @@ Example:
    `(web-mode-current-column-highlight-face ((,class (:background ,faint))))
    `(web-mode-function-call-face ((,class :foreground ,fn-call-fg
                                           :background ,fn-call-bg)))
+   `(web-mode-html-tag-bracket-face ((,class :inherit font-lock-bracket-face)))
 
    ;; company
    `(company-tooltip ((,class (:background ,popup-bg :foreground ,fg))))
@@ -663,53 +665,53 @@ Example:
 
    ;; helm. temporarily borrowing from zenburn.
    `(helm-header
-     ((t (:foreground ,zenburn-green
+     ((,class (:foreground ,zenburn-green
                       :background ,zenburn-bg
                       :underline nil
                       :box nil
                       :extend t))))
    `(helm-source-header
-     ((t (:foreground ,zenburn-yellow
+     ((,class (:foreground ,zenburn-yellow
                       :background ,zenburn-bg-1
                       :underline nil
                       :weight bold
                       :box (:line-width -1 :style released-button)
                       :extend t))))
-   `(helm-selection ((t (:background ,zenburn-bg+1 :underline nil))))
-   `(helm-selection-line ((t (:background ,zenburn-bg+1))))
-   `(helm-visible-mark ((t (:foreground ,zenburn-bg :background ,zenburn-yellow-2))))
-   `(helm-candidate-number ((t (:foreground ,zenburn-green+4 :background ,zenburn-bg-1))))
-   `(helm-separator ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
-   `(helm-time-zone-current ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
-   `(helm-time-zone-home ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
-   `(helm-bookmark-addressbook ((t (:foreground ,zenburn-orange :background ,zenburn-bg))))
-   `(helm-bookmark-directory ((t (:foreground nil :background nil :inherit helm-ff-directory))))
-   `(helm-bookmark-file ((t (:foreground nil :background nil :inherit helm-ff-file))))
-   `(helm-bookmark-gnus ((t (:foreground ,zenburn-magenta :background ,zenburn-bg))))
-   `(helm-bookmark-info ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
-   `(helm-bookmark-man ((t (:foreground ,zenburn-yellow :background ,zenburn-bg))))
-   `(helm-bookmark-w3m ((t (:foreground ,zenburn-magenta :background ,zenburn-bg))))
-   `(helm-buffer-not-saved ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
-   `(helm-buffer-process ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
-   `(helm-buffer-saved-out ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
-   `(helm-buffer-size ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
-   `(helm-ff-directory ((t (:foreground ,zenburn-cyan :background ,zenburn-bg :weight bold))))
-   `(helm-ff-file ((t (:foreground ,zenburn-fg :background ,zenburn-bg :weight normal))))
-   `(helm-ff-file-extension ((t (:foreground ,zenburn-fg :background ,zenburn-bg :weight normal))))
-   `(helm-ff-executable ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg :weight normal))))
-   `(helm-ff-invalid-symlink ((t (:foreground ,zenburn-red :background ,zenburn-bg :weight bold))))
-   `(helm-ff-symlink ((t (:foreground ,zenburn-yellow :background ,zenburn-bg :weight bold))))
-   `(helm-ff-prefix ((t (:foreground ,zenburn-bg :background ,zenburn-yellow :weight normal))))
-   `(helm-grep-cmd-line ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
-   `(helm-grep-file ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
-   `(helm-grep-finish ((t (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
-   `(helm-grep-lineno ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
-   `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
-   `(helm-grep-running ((t (:foreground ,zenburn-red :background ,zenburn-bg))))
-   `(helm-match ((t (:foreground ,zenburn-orange :background ,zenburn-bg-1 :weight bold))))
-   `(helm-moccur-buffer ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
-   `(helm-mu-contacts-address-face ((t (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
-   `(helm-mu-contacts-name-face ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
+   `(helm-selection ((,class (:background ,zenburn-bg+1 :underline nil))))
+   `(helm-selection-line ((,class (:background ,zenburn-bg+1))))
+   `(helm-visible-mark ((,class (:foreground ,zenburn-bg :background ,zenburn-yellow-2))))
+   `(helm-candidate-number ((,class (:foreground ,zenburn-green+4 :background ,zenburn-bg-1))))
+   `(helm-separator ((,class (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-time-zone-current ((,class (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
+   `(helm-time-zone-home ((,class (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-bookmark-addressbook ((,class (:foreground ,zenburn-orange :background ,zenburn-bg))))
+   `(helm-bookmark-directory ((,class (:foreground nil :background nil :inherit helm-ff-directory))))
+   `(helm-bookmark-file ((,class (:foreground nil :background nil :inherit helm-ff-file))))
+   `(helm-bookmark-gnus ((,class (:foreground ,zenburn-magenta :background ,zenburn-bg))))
+   `(helm-bookmark-info ((,class (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
+   `(helm-bookmark-man ((,class (:foreground ,zenburn-yellow :background ,zenburn-bg))))
+   `(helm-bookmark-w3m ((,class (:foreground ,zenburn-magenta :background ,zenburn-bg))))
+   `(helm-buffer-not-saved ((,class (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-buffer-process ((,class (:foreground ,zenburn-cyan :background ,zenburn-bg))))
+   `(helm-buffer-saved-out ((,class (:foreground ,zenburn-fg :background ,zenburn-bg))))
+   `(helm-buffer-size ((,class (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
+   `(helm-ff-directory ((,class (:foreground ,zenburn-cyan :background ,zenburn-bg :weight bold))))
+   `(helm-ff-file ((,class (:foreground ,zenburn-fg :background ,zenburn-bg :weight normal))))
+   `(helm-ff-file-extension ((,class (:foreground ,zenburn-fg :background ,zenburn-bg :weight normal))))
+   `(helm-ff-executable ((,class (:foreground ,zenburn-green+2 :background ,zenburn-bg :weight normal))))
+   `(helm-ff-invalid-symlink ((,class (:foreground ,zenburn-red :background ,zenburn-bg :weight bold))))
+   `(helm-ff-symlink ((,class (:foreground ,zenburn-yellow :background ,zenburn-bg :weight bold))))
+   `(helm-ff-prefix ((,class (:foreground ,zenburn-bg :background ,zenburn-yellow :weight normal))))
+   `(helm-grep-cmd-line ((,class (:foreground ,zenburn-cyan :background ,zenburn-bg))))
+   `(helm-grep-file ((,class (:foreground ,zenburn-fg :background ,zenburn-bg))))
+   `(helm-grep-finish ((,class (:foreground ,zenburn-green+2 :background ,zenburn-bg))))
+   `(helm-grep-lineno ((,class (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
+   `(helm-grep-match ((,class (:foreground nil :background nil :inherit helm-match))))
+   `(helm-grep-running ((,class (:foreground ,zenburn-red :background ,zenburn-bg))))
+   `(helm-match ((,class (:foreground ,zenburn-orange :background ,zenburn-bg-1 :weight bold))))
+   `(helm-moccur-buffer ((,class (:foreground ,zenburn-cyan :background ,zenburn-bg))))
+   `(helm-mu-contacts-address-face ((,class (:foreground ,zenburn-fg-1 :background ,zenburn-bg))))
+   `(helm-mu-contacts-name-face ((,class (:foreground ,zenburn-fg :background ,zenburn-bg))))
 
 
    ;; smerge-mode
@@ -719,9 +721,9 @@ Example:
    `(markdown-code-face ((,class (:inherit font-lock-constant-face)))) ; avoid font change.
 
    ;; used in adoc-mode
-   '(markup-meta-face ((t (:foreground "yellow green"))))
-   '(markup-internal-reference-face ((t (:inherit markup-reference-face))))
-   '(markup-meta-hide-face ((t (:foreground "powder blue"))))
+   '(markup-meta-face ((,class (:foreground "yellow green"))))
+   '(markup-internal-reference-face ((,class (:inherit markup-reference-face))))
+   '(markup-meta-hide-face ((,class (:foreground "powder blue"))))
 
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
@@ -735,7 +737,7 @@ Example:
    `(ert-test-result-unexpected ((,class :foreground ,fg-red :background ,bg-red)))
 
    ;; leerzeichen
-   `(leerzeichen ((t (:foreground ,faint-less)))) ;;"yellow4" ;"#A8A800"
+   `(leerzeichen ((,class (:foreground ,faint-less)))) ;;"yellow4" ;"#A8A800"
 
    ;; package
    `(package-status-new ((,class :weight bold

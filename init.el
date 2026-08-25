@@ -3057,6 +3057,11 @@ In that case, insert the number."
 ;;;----------------------------------------------------------------------------
 ;;; Org mode
 ;;;----------------------------------------------------------------------------
+(when (eq system-type 'windows-nt)
+  ;; On windows use outline-mode. Org is slow to load the first time.
+  ;; Can explicitly call `org-mode' to turn it as needed.
+  (add-to-list 'major-mode-remap-alist '(org-mode . outline-mode)))
+
 (push '("\\.org\\'" . org-mode) auto-mode-alist)
 
 
@@ -3075,7 +3080,11 @@ In that case, insert the number."
   (defun my-open-main-todo ()
     (interactive)
     (message "Opening main todo...")
-    (find-file-existing my-main-todo))
+    (find-file-existing my-main-todo)
+    (when (eq system-type 'windows-nt)
+      ;; explitcitly turn on org mode if MS-windows were I remap to outline mode
+      ;; by default.
+      (org-mode)))
   (when my-use-evil-p
     ;; (evil-leader/set-key "t" #'my-open-main-todo)
     (define-key my-leader-map-global (kbd "a") #'org-agenda-list)

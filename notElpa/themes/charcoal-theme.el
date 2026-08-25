@@ -736,6 +736,8 @@ Example:
 
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
+   ;; keep * header text unchanged regardless of done status
+   `(org-headline-done ((,class)))
 
    ;; Emacs built-in display-fill-column-indicator.
    ;; replaces `fci-mode' and it's color variable `fci-rule-color'

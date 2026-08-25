@@ -724,6 +724,16 @@ Example:
    '(markup-internal-reference-face ((,class (:inherit markup-reference-face))))
    '(markup-meta-hide-face ((,class (:foreground "powder blue"))))
 
+   ;; outline (org inherits these faces)
+   `(outline-1 ((,class :foreground "#cF3500" :background "black")))
+   `(outline-2 ((,class :foreground "#00cFcF" :background "black")))
+   `(outline-3 ((,class :foreground "#cFcF00" :background "black")))
+   `(outline-4 ((,class :inherit rainbow-delimiters-depth-4-face :background "black")))
+   `(outline-5 ((,class :inherit rainbow-delimiters-depth-5-face :background "black")))
+   `(outline-6 ((,class :inherit rainbow-delimiters-depth-6-face :background "black")))
+   `(outline-7 ((,class :inherit rainbow-delimiters-depth-7-face :background "black")))
+   `(outline-8 ((,class :inherit rainbow-delimiters-depth-8-face :background "black")))
+
    ;; org
    `(org-hide ((,class (:foreground ,faint))))
 

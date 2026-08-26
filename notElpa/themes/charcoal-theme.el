@@ -824,7 +824,7 @@ Example:
    `(klondike-stack-numbering ((,class :foreground "green")))
    `(klondike-stack-selecting ((,class :foreground "red" :background "black")))
 
-   `(link ((,class :foreground "#20e5c0")))
+   `(link ((,class :foreground "#20e5c0" :background ,bg-red)))
 
    ;; rainbow-delimiters
    `(rainbow-delimiters-depth-1-face

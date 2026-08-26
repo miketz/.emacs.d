@@ -3057,7 +3057,8 @@ In that case, insert the number."
 ;;;----------------------------------------------------------------------------
 ;;; Org mode
 ;;;----------------------------------------------------------------------------
-(when (eq system-type 'windows-nt)
+(when (or t ; even mac is a little slow now! default to outline-mode
+          (eq system-type 'windows-nt))
   ;; On windows use outline-mode. Org is slow to load the first time.
   ;; Can explicitly call `org-mode' to turn it as needed.
   (add-to-list 'major-mode-remap-alist '(org-mode . outline-mode)))

@@ -1753,12 +1753,12 @@ We don't just want to kill the buffer, but restore window locations too."
 (defun fugitive-diff-staged ()
   "Show diff of staged files to be commited."
   (interactive)
-  (fugitive-shell-command "git diff --cached --color"))
+  (fugitive-shell-command "git diff --cached --patch-with-stat --color"))
 
 (defun fugitive-diff-staged-char-based ()
   "Show diff of staged files to be commited."
   (interactive)
-  (fugitive-shell-command "git diff --word-diff=color --word-diff-regex=. --cached --color"))
+  (fugitive-shell-command "git diff --word-diff=color --word-diff-regex=. --cached --patch-with-stat --color"))
 
 (define-minor-mode fugitive-commit-msg-mode
   "Mode for entering commit message text.
@@ -1802,7 +1802,7 @@ commited message.")
     (switch-to-buffer-other-window b)
 
     ;; get staged diff text
-    (shell-command "git diff --cached --color" b)
+    (shell-command "git diff --cached --patch-with-stat --color" b)
     (let ((diff-txt (with-current-buffer b
                       (buffer-substring-no-properties (point-min) (point-max)))))
       ;; GUARD: there must be changes to commit

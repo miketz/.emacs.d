@@ -10959,6 +10959,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 (autoload #'fugitive-file-ediff "fugitive" nil t)
 (autoload #'fugitive-pop-last-n-commits-as-unstaged "fugitive" nil t)
 (autoload #'fugitive-commit "fugitive" nil t)
+(autoload #'fugitive-commit-all "fugitive" nil t)
 
 
 ;; hydra

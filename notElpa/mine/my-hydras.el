@@ -328,6 +328,7 @@ _S_: enter stauts Hydra
 _p_: jump to parent commit in log buffer
 _z_: delete fugitive buffers
 _c_: commit
+_C_: stage all, commit (heavy handed)
 _L_: enter log Hydra
 _W_: enter worktree hydra
 _T_: enter tag hydra
@@ -353,6 +354,7 @@ _q_, _C-g_: quit"
   ("p" fugitive-parent-commits-jump-to)
   ("z" fugitive-delete-buffers-except-current)
   ("c" fugitive-commit)
+  ("C" fugitive-commit-all)
   ("L" my-fugitive-log-hydra/body)
   ("W" my-fugitive-worktree-hydra/body)
   ("T" my-fugitive-tag-hydra/body)

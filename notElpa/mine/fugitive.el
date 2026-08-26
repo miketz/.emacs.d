@@ -1654,7 +1654,7 @@ But keep the changes as unstaged in the working directory.
 
 Careful if you pop merge commits the separate commits within it are lost and
 will only exist as unstaged mods in the working dir! The N goes back
-irst-parent-style, so if a merge commit had 100 commits, they would all
+first-parent-style, so if a merge commit had 100 commits, they would all
 fall under that 1 step back."
   (interactive)
   ;; GUARD
@@ -1858,6 +1858,29 @@ Only call from buffer of mode `fugitive-commit-msg-mode' spawned by `fugitive-co
                                         ; a part of the command itself, too big to echo.
                               )
       (quit-window t (get-buffer-window b)))))
+
+
+
+(defcustom fugitive-warn-stage-all-commit-p t
+  "When t warn about the dangers of `fugitive-commit-all'.
+Prompt user before proceeding.")
+
+(cl-defun fugitive-commit-all ()
+  "Same as `fugitive commit', but stage everything first.
+Careful, it's usually best to carefully stage/craft your a commit. But when you
+want this you want it."
+  (interactive)
+  ;; GUARD: warn user staging all then commit is a heavy handed operation.
+  (when fugitive-warn-stage-all-commit-p
+    (if (y-or-n-p "WARNING: Really stage all and commit?")
+        ;; avoid subsequent warning prompts after user confirms.
+        (setq fugitive-warn-stage-all-commit-p nil)
+      ;; else abort
+      (cl-return-from fugitive-commit-all)))
+
+  (shell-command "git add .")
+  (fugitive-commit))
+
 
 
 

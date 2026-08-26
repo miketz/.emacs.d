@@ -3054,6 +3054,13 @@ In that case, insert the number."
 ;; don't need this anymore. Using a mode hint comment in .stumpwmrc instead.
 ;; (add-to-list 'auto-mode-alist '("\\.stumpwmrc\\'" . lisp-mode))
 
+
+;;;----------------------------------------------------------------------------
+;;; outline
+;;;----------------------------------------------------------------------------
+(with-eval-after-load 'outline
+  (define-key outline-mode-map (kbd "<tab>") #'outline-cycle))
+
 ;;;----------------------------------------------------------------------------
 ;;; Org mode
 ;;;----------------------------------------------------------------------------

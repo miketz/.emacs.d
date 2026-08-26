@@ -3105,7 +3105,7 @@ In that case, insert the number."
     ;; (evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
     (define-key org-mode-map (kbd "<tab>") #'org-cycle))
 
-  (setq org-startup-indented t)
+  (setq org-startup-indented nil) ; nil in an attempt to improve load time
   ;; show the leading stars. But it's set to t again by `org-indent-mode'?
   ;; TODO: try setting in a hook.
   (setq org-hide-leading-stars nil)

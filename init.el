@@ -3089,7 +3089,7 @@ In that case, insert the number."
     (interactive)
     (message "Opening main todo...")
     (find-file-existing my-main-todo)
-    (when (eq system-type 'windows-nt)
+    (unless (eq major-mode 'org-mode)
       ;; explitcitly turn on org mode if MS-windows were I remap to outline mode
       ;; by default.
       (org-mode)))

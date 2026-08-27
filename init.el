@@ -3072,6 +3072,70 @@ In that case, insert the number."
 
 (push '("\\.org\\'" . org-mode) auto-mode-alist)
 
+;; (defun my-org-fast-load ()
+;;   "Attempt to quicken the load of org.
+;; Escpecially on MS-windwos where load is very slow.
+;; Loads explict file paths rather than using `require' which must search the load-path
+;; for files to load.
+
+;; Tested on Emacs 31, Org 9.8.7."
+;;   (interactive)
+;;   (let* ((dir-lisp (concat (file-name-parent-directory data-directory) "lisp/"))
+;;          (dir-org (concat dir-lisp "org/"))
+;;          ;; shadow default-directory
+;;          ;; (default-directory org-dir)
+;;          )
+;;     (unless (featurep 'seq) (load-file (concat dir-lisp "/emacs-lisp/seq.elc")))
+;;     (unless (featurep 'macroexp) (load-file (concat dir-lisp "/emacs-lisp/macroexp.elc")))
+;;     (unless (featurep 'cl-loaddefs) (load-file (concat dir-lisp "/emacs-lisp/cl-loaddefs.elc")))
+;;     (unless (featurep 'cl-lib) (load-file (concat dir-lisp "/emacs-lisp/cl-lib.elc")))
+;;     (unless (featurep 'executable) (load-file (concat dir-lisp "/progmodes/executable.elc")))
+;;     (unless (featurep 'treesit) (load-file (concat dir-lisp "treesit.elc")))
+
+;;     ;; keep this one first
+;;     (unless (featurep 'org-macs) (load-file (concat dir-org "org-macs.elc")))
+;;     (unless (featurep 'org-faces) (load-file (concat dir-org "org-faces.elc")))
+;;     (unless (featurep 'org-entities) (load-file (concat dir-org "org-entities.elc")))
+;;     (unless (featurep 'org-compat) (load-file (concat dir-org "org-compat.elc")))
+;;     (unless (featurep 'org-fold-core) (load-file (concat dir-org "org-fold-core.elc")))
+;;     (unless (featurep 'org-fold) (load-file (concat dir-org "org-fold.elc")))
+;;     (unless (featurep 'org-footnote) (load-file (concat dir-org "org-footnote.elc")))
+
+;;     (unless (featurep 'org-list) (load-file (concat dir-org "org-list.elc")))
+
+;;     (unless (featurep 'pcomplete) (load-file (concat dir-lisp "pcomplete.elc")))
+;;     (unless (featurep 'org-pcomplete) (load-file (concat dir-org "org-pcomplete.elc")))
+
+;;     (unless (featurep 'org-cycle) (load-file (concat dir-org "org-cycle.elc")))
+
+;;     (unless (featurep 'ob-core) (load-file (concat dir-org "ob-core.elc")))
+;;     (unless (featurep 'ob-comint) (load-file (concat dir-org "ob-comint.elc")))
+;;     (unless (featurep 'ob-eval) (load-file (concat dir-org "ob-eval.elc")))
+;;     (unless (featurep 'ob-exp) (load-file (concat dir-org "ob-exp.elc")))
+;;     (unless (featurep 'ob-table) (load-file (concat dir-org "ob-table.elc")))
+;;     (unless (featurep 'ob-lob) (load-file (concat dir-org "ob-lob.elc")))
+;;     (unless (featurep 'ob-ref) (load-file (concat dir-org "ob-ref.elc")))
+;;     (unless (featurep 'ob-tangle) (load-file (concat dir-org "ob-tangle.elc")))
+
+;;     (unless (featurep 'ob) (load-file (concat dir-org "ob.elc")))
+;;     (unless (featurep 'oc) (load-file (concat dir-org "oc.elc")))
+;;     (unless (featurep 'sh-script) (load-file (concat dir-org "progmodes/sh-script.elc")))
+;;     (unless (featurep 'org-keys) (load-file (concat dir-org "org-keys.elc")))
+;;     (unless (featurep 'org-src) (load-file (concat dir-org "org-src.elc")))
+
+;;     (unless (featurep 'ol) (load-file (concat dir-org "ol.elc")))
+;;     (unless (featurep 'org-table) (load-file (concat dir-org "org-table.elc")))
+;;     (unless (featurep 'outline) (load-file (concat dir-lisp "outline.elc")))
+;;     (unless (featurep 'org-entities) (load-file (concat dir-org "org-entities.elc")))
+;;     ;; ##
+;;     (unless (featurep 'org-macro) (load-file (concat dir-org "org-macro.elc")))
+
+
+;;     (unless (featurep 'org-loaddefs) (load-file (concat dir-org "org-loaddefs.elc")))
+;;     (unless (featurep 'calendar) (load-file (concat dir-lisp "calendar/calendar.elc")))
+;;     (unless (featurep 'format-spec) (load-file (concat dir-lisp "format-spec.elc")))
+;;     (unless (featurep 'org) (load-file (concat dir-org "org.elc")))))
+
 
 (defvar my-main-todo (cond ((eq my-curr-computer 'wild-dog)
                             "~/todo/TODO.org")
@@ -3088,6 +3152,7 @@ In that case, insert the number."
   (defun my-open-main-todo ()
     (interactive)
     (message "Opening main todo...")
+    ;; (my-org-fast-load) ; hopefully a faster first load.
     (find-file-existing my-main-todo)
     (unless (eq major-mode 'org-mode)
       ;; explitcitly turn on org mode if MS-windows were I remap to outline mode

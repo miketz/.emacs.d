@@ -3059,7 +3059,21 @@ In that case, insert the number."
 ;;; outline
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'outline
-  (define-key outline-mode-map (kbd "<tab>") #'outline-cycle))
+  (define-key outline-mode-map (kbd "<tab>") #'outline-cycle)
+
+  (font-lock-add-keywords
+   'outline-mode
+   '(;; highlight # comments with face
+     ("#.+" 0 'font-lock-comment-face)))
+
+  (defun my-setup-outline-mode ()
+    ;; set up comments
+    (setq-local comment-start "# ")
+    (setq-local comment-end "")
+    (setq-local comment-start-skip "#+ *")
+    ;; recognize hyperlinks
+    (goto-address-mode 1))
+  (add-hook 'outline-mode-hook #'my-setup-outline-mode))
 
 ;;;----------------------------------------------------------------------------
 ;;; Org mode
@@ -3154,10 +3168,11 @@ In that case, insert the number."
     (message "Opening main todo...")
     ;; (my-org-fast-load) ; hopefully a faster first load.
     (find-file-existing my-main-todo)
-    (unless (eq major-mode 'org-mode)
-      ;; explitcitly turn on org mode if MS-windows were I remap to outline mode
-      ;; by default.
-      (org-mode)))
+    ;; (unless (eq major-mode 'org-mode)
+    ;;   ;; explitcitly turn on org mode if MS-windows were I remap to outline mode
+    ;;   ;; by default.
+    ;;   (org-mode))
+    )
   (when my-use-evil-p
     ;; (evil-leader/set-key "t" #'my-open-main-todo)
     (define-key my-leader-map-global (kbd "a") #'org-agenda-list)

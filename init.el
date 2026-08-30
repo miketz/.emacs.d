@@ -6713,20 +6713,28 @@ TODO: call this function when it works."
   (defun ivy-help ()
     "Help for `ivy'."
     (interactive)
-    (let ((buf (get-buffer "*Ivy Help*")))
+    (let ((buf (get-buffer "*Ivy Help*"))
+          (inhibit-read-only t))
       (unless buf
         (setq buf (get-buffer-create "*Ivy Help*"))
+        (cl-letf (((symbol-function #'help-buffer) (lambda () buf)))
+          (describe-mode))
         (with-current-buffer buf
+          (goto-char (point-min))
+          (insert "* describe-mode\n")
+          (goto-char (point-min))
           (insert-file-contents ivy-help-file)
-          (if (memq 'org features)
-              (org-mode)
-            (outline-mode))
+          (outline-mode) ;### (org-mode)
+          ;;### (setq-local org-hide-emphasis-markers t)
           (view-mode)
-          (goto-char (point-min))))
-      (if (eq this-command 'ivy-help)
-          (switch-to-buffer buf)
-        (with-ivy-window
-          (pop-to-buffer buf)))
+          (goto-char (point-min))
+          ;;### (let ((inhibit-message t))
+          ;;   (org-cycle '(64)))
+          ))
+      (switch-to-buffer-other-window buf) ;;### (if (eq this-command 'ivy-help)
+      ;;     (switch-to-buffer buf)
+      ;;   (with-ivy-window
+      ;;     (pop-to-buffer buf)))
       (view-mode)
       (goto-char (point-min))))
 

@@ -3086,6 +3086,11 @@ In that case, insert the number."
 
 (push '("\\.org\\'" . org-mode) auto-mode-alist)
 
+
+;; (with-temp-buffer ; pay price of slow first load during startup
+;;   (org-mode))
+
+
 ;; (defun my-org-fast-load ()
 ;;   "Attempt to quicken the load of org.
 ;; Escpecially on MS-windwos where load is very slow.

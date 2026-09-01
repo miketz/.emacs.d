@@ -3350,6 +3350,16 @@ Inserts a new line and the beginning and end with text values:
   (define-key csharp-ts-mode-map (kbd "C-c .") #'dumb-jump-go)
   (define-key csharp-ts-mode-map (kbd "C-c j") #'jump-cs-hydra/body)
 
+  (progn ; custom faces for some keywords
+    (font-lock-add-keywords
+     'csharp-mode
+     '(("\\<\\(return\\|break\\|continue\\|goto\\)\\>"
+        1 'my-jump-face prepend)))
+    (font-lock-add-keywords
+     'csharp-ts-mode
+     '(("\\<\\(return\\|break\\|continue\\|goto\\)\\>"
+        1 'my-jump-face prepend))))
+
   (defun my-csharp-new-proj ()
     "Initialize a new C# project in a folder.
 Assumes dotnet core."

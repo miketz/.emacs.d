@@ -10398,6 +10398,59 @@ Values: lsp, citre, nil")
     (rainbow-delimiters-mode))
   (add-hook 'go-mod-ts-mode-hook #'my-setup-go-mod-ts-mode))
 
+
+;;;----------------------------------------------------------------------------
+;;; custom highlighting for go-ts-mode
+;;;----------------------------------------------------------------------------
+(when nil ; doesn't work so don't do it for now.
+  (with-eval-after-load 'go-ts-mode
+    (defvar my-go-ts-font-stuff (treesit-font-lock-rules
+                                 :language 'go
+                                 :feature 'keyword
+                                 :override t
+                                 '((["fmt" "sync" "time" "bar"]
+                                    @font-lock-keyword-face))))
+
+    (add-hook 'go-ts-mode-hook
+              (lambda ()
+                (setq-local treesit-font-lock-settings
+                            (append treesit-font-lock-settings
+                                    my-go-ts-font-stuff))))))
+
+
+;;;----------------------------------------------------------------------------
+;; another custom highlight attempt, traditional way. Works!
+;;;----------------------------------------------------------------------------
+(defface my-package-face
+  '((((class color) (background light))
+     :foreground "#888888")
+    (((class color) (background dark))
+     :foreground "#6E6E51"))
+  "Face for packages.")
+
+(defface my-jump-face
+  '((((class color) (background light))
+     :foreground "#C84040")
+    (((class color) (background dark))
+     :foreground "#C84040"))
+  "Face jumping keywords. break, continue, goto, etc..")
+
+
+(with-eval-after-load 'go-ts-mode
+  (font-lock-add-keywords
+   'go-ts-mode
+   '(("\\<\\(|tar\\|zip\\|bufio\\|bytes\\|cmp\\|bzip2\\|flate\\|gzip\\|lzw\\|zlib\\|heap\\|list\\|ring\\|context\\|crypto\\|aes\\|cipher\\|des\\|dsa\\|ecdh\\|ecdsa\\|ed25519\\|elliptic\\|fips140\\|hkdf\\|hmac\\|hpke\\|boring\\|bbig\\|bcache\\|sig\\|constanttime\\|cryptotest\\|entropy\\|fips140\\|aes\\|gcm\\|alias\\|bigmod\\|check\\|checktest\\|drbg\\|ecdh\\|ecdsa\\|ed25519\\|edwards25519\\|field\\|hkdf\\|hmac\\|mldsa\\|mlkem\\|nistec\\|fiat\\|pbkdf2\\|rsa\\|sha256\\|sha3\\|sha512\\|ssh\\|subtle\\|tls12\\|tls13\\|fips140cache\\|fips140deps\\|byteorder\\|cpu\\|godebug\\|time\\|fips140hash\\|fips140only\\|fips140test\\|impl\\|rand\\|randutil\\|sysrand\\|seccomp\\|md5\\|mlkem\\|mlkemtest\\|pbkdf2\\|rand\\|rc4\\|rsa\\|sha1\\|sha256\\|sha3\\|sha512\\|subtle\\|tls\\|fips140tls\\|x509\\|pkix\\|sql\\|driver\\|buildinfo\\|dwarf\\|elf\\|gosym\\|macho\\|pe\\|plan9obj\\|embed\\|embedtest\\|encoding\\|ascii85\\|asn1\\|base32\\|base64\\|binary\\|csv\\|gob\\|hex\\|json\\|pem\\|xml\\|errors\\|expvar\\|flag\\|fmt\\|ast\\|build\\|constraint\\|constant\\|doc\\|comment\\|format\\|importer\\|gccgoimporter\\|gcimporter\\|scannerhooks\\|srcimporter\\|parser\\|printer\\|scanner\\|token\\|types\\|version\\|hash\\|adler32\\|crc32\\|crc64\\|fnv\\|maphash\\|html\\|template\\|image\\|color\\|palette\\|draw\\|gif\\|imageutil\\|jpeg\\|png\\|suffixarray\\|abi\\|asan\\|bisect\\|buildcfg\\|bytealg\\|byteorder\\|cfg\\|chacha8rand\\|copyright\\|coverage\\|calloc\\|cfile\\|cformat\\|cmerge\\|decodecounter\\|decodemeta\\|encodecounter\\|encodemeta\\|pods\\|rtcov\\|slicereader\\|slicewriter\\|stringtab\\|test\\|uleb128\\|cpu\\|dag\\|diff\\|exportdata\\|filepathlite\\|fmtsort\\|fuzz\\|goarch\\|godebug\\|godebugs\\|goexperiment\\|goos\\|goroot\\|gover\\|goversion\\|lazyregexp\\|lazytemplate\\|msan\\|nettrace\\|obscuretestdata\\|oserror\\|pkgbits\\|platform\\|poll\\|profile\\|profilerecord\\|race\\|reflectlite\\|atomic\\|cgobench\\|cgroup\\|exithook\\|gc\\|gen\\|scan\\|maps\\|math\\|label\\|startlinetest\\|sys\\|windows\\|wasitest\\|saferio\\|singleflight\\|strconv\\|stringslite\\|sync\\|synctest\\|execenv\\|unix\\|windows\\|registry\\|sysdll\\|sysinfo\\|syslist\\|testenv\\|testhash\\|testlog\\|testpty\\|trace\\|testgen\\|tracev1\\|raw\\|testtrace\\|tracev2\\|traceviewer\\|format\\|version\\|txtar\\|errors\\|unsafeheader\\|xcoff\\|zstd\\|io\\|fs\\|ioutil\\|iter\\|log\\|internal\\|slog\\|internal\\|benchmarks\\|buffer\\|syslog\\|maps\\|math\\|big\\|asmgen\\|bits\\|cmplx\\|rand\\|v2\\|mime\\|multipart\\|quotedprintable\\|net\\|http\\|cgi\\|cookiejar\\|fcgi\\|httptest\\|httptrace\\|httputil\\|internal\\|ascii\\|httpcommon\\|testcert\\|pprof\\|cgotest\\|socktest\\|mail\\|netip\\|rpc\\|jsonrpc\\|smtp\\|textproto\\|url\\|os\\|exec\\|fdtest\\|signal\\|user\\|path\\|filepath\\|plugin\\|reflect\\|example1\\|example2\\|regexp\\|syntax\\|runtime\\|cgo\\|coverage\\|debug\\|metrics\\|pprof\\|race\\|amd64v1\\|trace\\|slices\\|sort\\|strconv\\|strings\\|structs\\|sync\\|atomic\\|syscall\\|testing\\|cryptotest\\|fstest\\|testdeps\\|iotest\\|quick\\|slogtest\\|synctest\\|scanner\\|tabwriter\\|template\\|parse\\|time\\|tzdata\\|unicode\\|utf16\\|utf8\\|unique\\|unsafe\\|chacha20\\|chacha20poly1305\\|cryptobyte\\|asn1\\|alias\\|poly1305\\|dnsmessage\\|httpguts\\|httpproxy\\|hpack\\|idna\\|nettest\\|cpu\\|bidirule\\|transform\\|bidi\\|norm\\|weak\\)\\>"
+      1 'my-package-face prepend)))
+
+
+  (font-lock-add-keywords
+   'go-ts-mode
+   '(("\\<\\(return\\|break\\|continue\\|goto\\)\\>"
+      1 'my-jump-face prepend))))
+
+
+
+
 ;;;----------------------------------------------------------------------------
 ;;; go-mode
 ;;;----------------------------------------------------------------------------

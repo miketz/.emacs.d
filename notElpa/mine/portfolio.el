@@ -199,7 +199,8 @@ If AMT negative the sells will be exactly AMT, not more."
                                    (b-val (nth 3 b)))
                                (> a-val b-val)))))
     bal
-    ;; TODO: implement fully.
+    ;; TODO: implement fully. For now can use the sorted bal as a guide
+    ;; on which stock gets prio for sell/buy (ie most over/under weight).
     ))
 
 (defun weighted-er (port)

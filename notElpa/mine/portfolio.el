@@ -169,6 +169,22 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                (push `(,sym ,(- amt-tar amt-curr)) to-buy)))
     (reverse to-buy)))
 
+(defun buy-or-sell (des-alloc cur-alloc amt)
+  "Calculate how much of each ticker to buy sell.
+Postive AMT means buy. Negative means you are selling.
+Attempts to spread the AMT among tickers to bring them closr to target allocs.
+
+Used in a simlar way to the `balance' fn above, but within the context of an AMT, not full rebalance.
+
+Taxable account friendly. Avoids suggesting full rebalance to target allocs. The realloc
+is contained within the AMT value. Does not sell at all if AMT is positive.
+If AMT negative the sells will be exactly AMT, not more."
+
+  ;; first calculate the a full rebalance via `balance'.
+  (let* ((bal (balance des-alloc cur-alloc)))
+    ;; TODO: implement
+    ))
+
 (defun weighted-er (port)
   "Calculate the weighted expense ratio of the entire portfolio."
   (round-to (apply #'+

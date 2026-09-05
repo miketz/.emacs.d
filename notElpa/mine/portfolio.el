@@ -158,15 +158,23 @@ sum-percents should be 100."
 
 
 (defun balance (des-alloc cur-alloc)
-  "DES-ALLOC is can be the output of `build-lst'
+  "DES-ALLOC is the output of `build-lst'
 CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amounts."
-  (let ((to-buy '()))
+  (let ((to-buy '())
+        (total (apply #'+ (mapcar #'cl-second cur-alloc))))
     (cl-loop for x in des-alloc do
              (let* ((sym (car x))
                     (amt-tar (cl-second x))
+                    (per-tar (cl-third x))
                     (curr-obj (assoc sym cur-alloc))
-                    (amt-curr (cl-second curr-obj)))
-               (push `(,sym ,(- amt-tar amt-curr)) to-buy)))
+                    (amt-curr (cl-second curr-obj))
+                    (per-curr (* 100 (/ (* 1.0 amt-curr) total))))
+               (push `(,sym
+                       ,(- amt-tar amt-curr) ; to-buy amount. positive is buy. neg is sell.
+                       ,(- per-tar per-curr) ; percent off. informational purposes.
+                       ,per-curr ; percent current. informational purposes.
+                       )
+                     to-buy)))
     (reverse to-buy)))
 
 (defun buy-or-sell (des-alloc cur-alloc amt)

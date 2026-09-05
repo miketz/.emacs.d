@@ -159,7 +159,7 @@ sum-percents should be 100."
 
 (defun balance (des-alloc cur-alloc)
   "DES-ALLOC is can be the output of `build-lst'
-CUR-ALLOC is list of (sym amt) pairs."
+CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amounts."
   (let ((to-buy '()))
     (cl-loop for x in des-alloc do
              (let* ((sym (car x))

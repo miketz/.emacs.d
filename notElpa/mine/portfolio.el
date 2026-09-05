@@ -171,7 +171,8 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                     (per-curr (* 100 (/ (* 1.0 amt-curr) total))))
                (push `(,sym
                        ,(- amt-tar amt-curr) ; to-buy amount. positive is buy. neg is sell.
-                       ,(- per-tar per-curr) ; percent off. informational purposes.
+                       ,(- per-tar per-curr) ; percent off diff. informational purposes.
+                       ,(/ per-curr per-tar) ; percent off relative. 1.0 is on target. 1+ overweight. 1- underweight
                        ,per-curr ; percent current. informational purposes.
                        )
                      to-buy)))
@@ -189,16 +190,16 @@ Taxable account friendly. Avoids suggesting full rebalance to target allocs. The
 is contained within the AMT value. Does not sell at all if AMT is positive.
 If AMT negative the sells will be exactly AMT, not more."
 
-  (let* (;; 1. calculate a full rebalance via `balance'.
-         (bal (balance des-alloc cur-alloc))
-         ;; 2. get negatives from balance. they represent "to sell towards target alloc".
-         ;; first prio if AMT is negative (selling stock)
-         (negs '())
-         ;; 2. get positives from balance. they represent "to buy towards target alloc".
-         ;; first prio if AMT is postivie (buying in)
-         (pos '())
-         )
-    ;; TODO: implement
+  ;; 1. calculate a full rebalance via `balance'.
+  (let* ((bal (balance des-alloc cur-alloc)))
+    ;; 2. sort bal by relative overweightness. most overweight fund will be first.
+    ;; ie first in line for selling
+    (setq bal (cl-sort bal (lambda (a b)
+                             (let ((a-val (nth 3 a))
+                                   (b-val (nth 3 b)))
+                               (> a-val b-val)))))
+    bal
+    ;; TODO: implement fully.
     ))
 
 (defun weighted-er (port)

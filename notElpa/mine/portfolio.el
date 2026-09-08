@@ -168,10 +168,9 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                     (per-tar (cl-third x))
                     (curr-obj (assoc sym cur-alloc))
                     (amt-curr (cl-second curr-obj))
-                    (per-curr (* 100 (/ (* 1.0 amt-curr) total))))
+                    (per-curr (/ (* 1.0 amt-curr) total)))
                (push `(,sym
                        ,(- amt-tar amt-curr) ; to-buy amount. positive is buy. neg is sell.
-                       ,(- per-tar per-curr) ; percent off diff. informational purposes.
                        ,(/ amt-curr amt-tar) ; percent off relative. 1.0 is on target. 1+ overweight. 1- underweight
                        ,per-curr ; percent current. informational purposes.
                        )

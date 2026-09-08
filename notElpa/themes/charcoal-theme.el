@@ -291,8 +291,7 @@ Example:
                                            :background ,bg)))
    ;; `(font-lock-function-call-face ((,class :foreground ,fn-call-fg :background ,fn-call-bg)))
    `(font-lock-variable-use-face ((,class :inherit default)))
-   `(font-lock-operator-face ((,class ;:inherit font-lock-keyword-face
-                               :foreground ,dim+3)))
+   `(font-lock-operator-face ((,class :inherit default)))
    `(font-lock-property-name-face ((,class
                                     ;; :inherit font-lock-variable-name-face
                                     :foreground "burlywood3"

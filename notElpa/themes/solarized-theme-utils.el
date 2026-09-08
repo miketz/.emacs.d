@@ -1,4 +1,4 @@
-;;; solarized-theme-utils.el --- Utilities for solarized theme development
+;;; solarized-theme-utils.el --- Utilities for solarized theme development  -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2012 Thomas Frössman
 
@@ -28,8 +28,8 @@
 (require 'solarized)
 
 (defun solarized-import-faces (&optional regexp already-defined)
-  "Imports current effective face definitions by regular expression
-in the format of solarized-theme.el."
+  "Import current effective face definitions by regular expression.
+The output is in the format of solarized-theme.el."
   (interactive (list (read-regexp "List faces matching regexp")))
   (let*
       ((all-faces (zerop (length regexp)))
@@ -65,9 +65,11 @@ in the format of solarized-theme.el."
                          "")))))
           faces)))
 
+(provide 'solarized-theme-utils)
+
 ;; Local Variables:
 ;; byte-compile-warnings: (not cl-functions)
 ;; indent-tabs-mode: nil
 ;; End:
-(provide 'solarized-theme-utils)
+
 ;;; solarized-theme-utils.el ends here

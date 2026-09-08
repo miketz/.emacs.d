@@ -1,6 +1,6 @@
-;;; solarized-light-theme.el --- Solarized Light Theme for Emacs  -*- lexical-binding: t -*-
+;;; solarized-gruvbox-light-theme.el --- Solarized Theme  -*- lexical-binding: t -*-
 
-;; Copyright (C) 2011-2025 Bozhidar Batsov
+;; Copyright (C) 2019 Thomas Frössman
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 ;;; Commentary:
 ;;
-;; The light variant of the solarized theme.
+;; The light variant of the solarized theme with gruvbox color palette
 ;;
 ;;; Code:
 
@@ -25,17 +25,18 @@
 (eval-when-compile
   (require 'solarized-palettes))
 
-(deftheme solarized-light "The light variant of the Solarized colour theme")
+(deftheme solarized-gruvbox-light
+  "The light variant of the Solarized colour theme with gruvbox color palette")
 
-(solarized-with-color-variables 'light 'solarized-light
-  solarized-light-color-palette-alist)
+(solarized-with-color-variables 'light 'solarized-gruvbox-light
+  solarized-gruvbox-light-color-palette-alist)
 
-(provide-theme 'solarized-light)
+(provide-theme 'solarized-gruvbox-light)
 
-(provide 'solarized-light-theme)
+(provide 'solarized-gruvbox-light-theme)
 
 ;; Local Variables:
 ;; indent-tabs-mode: nil
 ;; End:
 
-;;; solarized-light-theme.el ends here
+;;; solarized-gruvbox-light-theme.el ends here

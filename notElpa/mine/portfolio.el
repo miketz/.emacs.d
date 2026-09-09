@@ -194,8 +194,8 @@ If AMT negative the sells will be exactly AMT, not more."
     ;; 2. sort bal by relative overweightness. most overweight fund will be first.
     ;; ie first in line for selling
     (setq bal (cl-sort bal (lambda (a b)
-                             (let ((a-val (nth 3 a))
-                                   (b-val (nth 3 b)))
+                             (let ((a-val (nth 2 a))
+                                   (b-val (nth 2 b)))
                                (> a-val b-val)))))
     bal
     ;; TODO: implement fully. For now can use the sorted bal as a guide

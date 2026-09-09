@@ -1882,6 +1882,12 @@ want this you want it."
   (fugitive-commit))
 
 
+(defun fugitive-force-push ()
+  "Force push with all the safety options."
+  (interactive)
+  (fugitive-shell-command "git push --force-with-lease --force-if-includes" nil t))
+
+
 
 
 ;; ;; test

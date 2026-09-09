@@ -200,6 +200,21 @@ If AMT negative the sells will be exactly AMT, not more."
     bal
     ;; TODO: implement fully. For now can use the sorted bal as a guide
     ;; on which stock gets prio for sell/buy (ie most over/under weight).
+    ;; (let ((to-buy '())
+    ;;       (amt-rem amt))
+    ;;   (cl-loop for x in bal do
+    ;;            (let ((tick (nth 0 x))
+    ;;                  (to-sell (nth 1 x)))
+    ;;              (if (< amt-rem to-sell)
+    ;;                  (progn
+    ;;                    (push `(,tick ,to-sell) to-buy)
+    ;;                    (cl-incf amt-rem to-sell))
+    ;;                (progn ;; else
+    ;;                  (push `(,tick ,amt-rem) to-buy)
+    ;;                  (cl-incf amt-rem amt-rem)))))
+    ;;   ;; final output
+    ;;   `(:full-rebalance ,bal
+    ;;                     :to-buy ,to-buy))
     ))
 
 (defun weighted-er (port)

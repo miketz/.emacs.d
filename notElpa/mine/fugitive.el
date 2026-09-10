@@ -1888,6 +1888,14 @@ want this you want it."
   (fugitive-shell-command "git push --force-with-lease --force-if-includes" nil t))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Sample commmands. May convert to a helper fn later
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; # search log message for 2 words. OR style
+;; git log --grep="word1" --grep="word2"
+
+;; # search log message for 2 words. AND style
+;; git log --grep="word1" --grep="word2" --all-match
 
 
 ;; ;; test

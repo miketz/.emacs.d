@@ -1,10 +1,10 @@
 ;;; doric-marble-theme.el --- Minimalist theme with light grey background and rocky hues -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025  Free Software Foundation, Inc.
+;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
-;; URL: https://github.com/protesilaos/ef-themes
+;; Author: Protesilaos <info@protesilaos.com>
+;; Maintainer: Protesilaos <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/doric-themes
 ;; Keywords: faces, theme, accessibility
 
 ;; This file is NOT part of GNU Emacs.
@@ -68,7 +68,7 @@
 
       (bg-red "#eac0bf")
       (bg-green "#bde0c2")
-      (bg-yellow "#f0f0b0")
+      (bg-yellow "#e9e0a0")
       (bg-blue "#c4cfe8")
       (bg-magenta "#eec2e6")
       (bg-cyan "#c1ebe4"))

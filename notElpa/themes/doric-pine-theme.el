@@ -1,10 +1,10 @@
 ;;; doric-pine-theme.el --- Minimalist theme with dark background and woody+earthly hues -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025  Free Software Foundation, Inc.
+;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
-;; URL: https://github.com/protesilaos/ef-themes
+;; Author: Protesilaos <info@protesilaos.com>
+;; Maintainer: Protesilaos <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/doric-themes
 ;; Keywords: faces, theme, accessibility
 
 ;; This file is NOT part of GNU Emacs.
@@ -60,15 +60,15 @@
       (fg-accent "#b0d593")
 
       (fg-red "#e8a28f")
-      (fg-green "#a2d09a")
+      (fg-green "#82cc9f")
       (fg-yellow "#c4b980")
-      (fg-blue "#98bae0")
+      (fg-blue "#8fbae5")
       (fg-magenta "#e9acbf")
       (fg-cyan "#a0c0d0")
 
       (bg-red "#5b3c2b")
       (bg-green "#385b30")
-      (bg-yellow "#595432")
+      (bg-yellow "#5e5732")
       (bg-blue "#284060")
       (bg-magenta "#52313f")
       (bg-cyan "#2f495f"))

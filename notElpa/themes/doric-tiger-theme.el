@@ -1,6 +1,6 @@
-;;; doric-oak-theme.el --- Minimalist theme with light background and woody+earthly hues -*- lexical-binding:t -*-
+;;; doric-tiger-theme.el --- Minimalist theme with light background and warm colours -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
+;; Copyright (C) 2026  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos <info@protesilaos.com>
 ;; Maintainer: Protesilaos <info@protesilaos.com>
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-oak-palette
-    '((cursor "#497020")
-      (bg-main "#e0d8c7")
-      (fg-main "#3a2018")
-      (border "#8f9373")
+  (defvar doric-tiger-palette
+    '((cursor "#000000")
+      (bg-main "#f0deab")
+      (fg-main "#402f3e")
+      (border "#a29986")
 
-      (bg-shadow-subtle "#d5c9b5")
-      (fg-shadow-subtle "#6b5225")
+      (bg-shadow-subtle "#dfce9f")
+      (fg-shadow-subtle "#485027")
 
-      (bg-neutral "#c2b19e")
-      (fg-neutral "#53402f")
+      (bg-neutral "#d2b78f")
+      (fg-neutral "#5a483a")
 
-      (bg-shadow-intense "#b1bf88")
-      (fg-shadow-intense "#3f5000")
-      
-      (bg-accent "#b7d2b7")
-      (fg-accent "#0f5420")
+      (bg-shadow-intense "#d69f60")
+      (fg-shadow-intense "#90300f")
 
-      (fg-red "#982500")
-      (fg-green "#226700")
-      (fg-yellow "#595000")
-      (fg-blue "#103077")
-      (fg-magenta "#700054")
-      (fg-cyan "#005460")
+      (bg-accent "#dec780")
+      (fg-accent "#7e4e0a")
 
-      (bg-red "#e3b8a0")
-      (bg-green "#b8caa0")
-      (bg-yellow "#dfc085")
-      (bg-blue "#c4c8dd")
-      (bg-magenta "#d8bade")
-      (bg-cyan "#bee0db"))
-  "Palette of `doric-oak' theme.")
+      (fg-red "#a02600")
+      (fg-green "#406900")
+      (fg-yellow "#783400")
+      (fg-blue "#183172")
+      (fg-magenta "#820145")
+      (fg-cyan "#025763")
 
-  (doric-themes-define-theme doric-oak light "Minimalist theme with light background and woody+earthly hues"))
+      (bg-red "#ffbc87")
+      (bg-green "#b2d078")
+      (bg-yellow "#e6c264")
+      (bg-blue "#aac0df")
+      (bg-magenta "#d2c3d0")
+      (bg-cyan "#b5e0c3"))
+    "Palette of `doric-tiger' theme.")
 
-(provide 'doric-oak-theme)
-;;; doric-oak-theme.el ends here
+  (doric-themes-define-theme doric-tiger light "Minimalist theme with light background and warm colours"))
+
+(provide 'doric-tiger-theme)
+;;; doric-tiger-theme.el ends here

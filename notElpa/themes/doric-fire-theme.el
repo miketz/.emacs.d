@@ -1,10 +1,10 @@
 ;;; doric-fire-theme.el --- Minimalist theme with dark background and orange hues -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025  Free Software Foundation, Inc.
+;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
-;; URL: https://github.com/protesilaos/ef-themes
+;; Author: Protesilaos <info@protesilaos.com>
+;; Maintainer: Protesilaos <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/doric-themes
 ;; Keywords: faces, theme, accessibility
 
 ;; This file is NOT part of GNU Emacs.
@@ -61,10 +61,10 @@
 
       (fg-red "#eca27f")
       (fg-green "#b9d08a")
-      (fg-yellow "#c5ba80")
-      (fg-blue "#9fbfe7")
+      (fg-yellow "#ceba80")
+      (fg-blue "#a6b9e7")
       (fg-magenta "#e9acbf")
-      (fg-cyan "#a0c0d0")
+      (fg-cyan "#a0c0c0")
 
       (bg-red "#54241f")
       (bg-green "#2f401f")

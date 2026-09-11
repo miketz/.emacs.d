@@ -1,4 +1,4 @@
-;;; doric-oak-theme.el --- Minimalist theme with light background and woody+earthly hues -*- lexical-binding:t -*-
+;;; doric-jade-theme.el --- Minimalist theme with light background and green hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-oak-palette
-    '((cursor "#497020")
-      (bg-main "#e0d8c7")
-      (fg-main "#3a2018")
-      (border "#8f9373")
+  (defvar doric-jade-palette
+    '((cursor "#00a093")
+      (bg-main "#e2f0c9")
+      (fg-main "#25311f")
+      (border "#98a09a")
 
-      (bg-shadow-subtle "#d5c9b5")
-      (fg-shadow-subtle "#6b5225")
+      (bg-shadow-subtle "#d5e1c0")
+      (fg-shadow-subtle "#6b5a77")
 
-      (bg-neutral "#c2b19e")
-      (fg-neutral "#53402f")
+      (bg-neutral "#c2ceb9")
+      (fg-neutral "#605258")
 
-      (bg-shadow-intense "#b1bf88")
-      (fg-shadow-intense "#3f5000")
-      
-      (bg-accent "#b7d2b7")
-      (fg-accent "#0f5420")
+      (bg-shadow-intense "#74d98f")
+      (fg-shadow-intense "#006000")
 
-      (fg-red "#982500")
-      (fg-green "#226700")
-      (fg-yellow "#595000")
-      (fg-blue "#103077")
-      (fg-magenta "#700054")
-      (fg-cyan "#005460")
+      (bg-accent "#cfe2d4")
+      (fg-accent "#106870")
 
-      (bg-red "#e3b8a0")
-      (bg-green "#b8caa0")
-      (bg-yellow "#dfc085")
-      (bg-blue "#c4c8dd")
-      (bg-magenta "#d8bade")
-      (bg-cyan "#bee0db"))
-  "Palette of `doric-oak' theme.")
+      (fg-red "#990020")
+      (fg-green "#006710")
+      (fg-yellow "#706000")
+      (fg-blue "#003370")
+      (fg-magenta "#782050")
+      (fg-cyan "#006070")
 
-  (doric-themes-define-theme doric-oak light "Minimalist theme with light background and woody+earthly hues"))
+      (bg-red "#e4c297")
+      (bg-green "#aed2a8")
+      (bg-yellow "#e0d790")
+      (bg-blue "#b9cce0")
+      (bg-magenta "#ddc5da")
+      (bg-cyan "#a4dfdc"))
+    "Palette of `doric-jade' theme.")
 
-(provide 'doric-oak-theme)
-;;; doric-oak-theme.el ends here
+  (doric-themes-define-theme doric-jade light "Minimalist theme with light background and green hues"))
+
+(provide 'doric-jade-theme)
+;;; doric-jade-theme.el ends here

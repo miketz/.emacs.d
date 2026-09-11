@@ -1,10 +1,10 @@
 ;;; doric-cherry-theme.el --- Minimalist theme with light background and pink+purple hues -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025  Free Software Foundation, Inc.
+;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
-;; URL: https://github.com/protesilaos/ef-themes
+;; Author: Protesilaos <info@protesilaos.com>
+;; Maintainer: Protesilaos <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/doric-themes
 ;; Keywords: faces, theme, accessibility
 
 ;; This file is NOT part of GNU Emacs.
@@ -68,7 +68,7 @@
 
       (bg-red "#f2c0c5")
       (bg-green "#b9e2d0")
-      (bg-yellow "#e9e6b0")
+      (bg-yellow "#e0d9b0")
       (bg-blue "#bbcce8")
       (bg-magenta "#e0c0e7")
       (bg-cyan "#c2ebe8"))

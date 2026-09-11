@@ -1,4 +1,4 @@
-;;; doric-oak-theme.el --- Minimalist theme with light background and woody+earthly hues -*- lexical-binding:t -*-
+;;; doric-siren-theme.el --- Minimalist theme with light blue-grey background and marine hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-oak-palette
-    '((cursor "#497020")
-      (bg-main "#e0d8c7")
-      (fg-main "#3a2018")
-      (border "#8f9373")
+  (defvar doric-siren-palette
+    '((cursor "#2040a0")
+      (bg-main "#d9e0ed")
+      (fg-main "#001020")
+      (border "#9a9aba")
 
-      (bg-shadow-subtle "#d5c9b5")
-      (fg-shadow-subtle "#6b5225")
+      (bg-shadow-subtle "#c2d1df")
+      (fg-shadow-subtle "#3f5569")
 
-      (bg-neutral "#c2b19e")
-      (fg-neutral "#53402f")
+      (bg-neutral "#b0c0cd")
+      (fg-neutral "#3a434a")
 
-      (bg-shadow-intense "#b1bf88")
-      (fg-shadow-intense "#3f5000")
-      
-      (bg-accent "#b7d2b7")
-      (fg-accent "#0f5420")
+      (bg-shadow-intense "#90b0e0")
+      (fg-shadow-intense "#00498b")
 
-      (fg-red "#982500")
-      (fg-green "#226700")
-      (fg-yellow "#595000")
+      (bg-accent "#dfc1d2")
+      (fg-accent "#68203b")
+
+      (fg-red "#a01010")
+      (fg-green "#106710")
+      (fg-yellow "#60400f")
       (fg-blue "#103077")
-      (fg-magenta "#700054")
-      (fg-cyan "#005460")
+      (fg-magenta "#700d50")
+      (fg-cyan "#005355")
 
-      (bg-red "#e3b8a0")
-      (bg-green "#b8caa0")
-      (bg-yellow "#dfc085")
-      (bg-blue "#c4c8dd")
-      (bg-magenta "#d8bade")
-      (bg-cyan "#bee0db"))
-  "Palette of `doric-oak' theme.")
+      (bg-red "#e0c0c4")
+      (bg-green "#aadecb")
+      (bg-yellow "#deccac")
+      (bg-blue "#bcd0ef")
+      (bg-magenta "#dfc2e9")
+      (bg-cyan "#b2d7e0"))
+  "Palette of `doric-siren' theme.")
 
-  (doric-themes-define-theme doric-oak light "Minimalist theme with light background and woody+earthly hues"))
+  (doric-themes-define-theme doric-siren light "Minimalist theme with light blue-grey background and marine hues"))
 
-(provide 'doric-oak-theme)
-;;; doric-oak-theme.el ends here
+(provide 'doric-siren-theme)
+;;; doric-siren-theme.el ends here

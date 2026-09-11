@@ -1,10 +1,10 @@
 ;;; doric-earth-theme.el --- Minimalist theme with light background and brown hues -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025  Free Software Foundation, Inc.
+;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
-;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
-;; URL: https://github.com/protesilaos/ef-themes
+;; Author: Protesilaos <info@protesilaos.com>
+;; Maintainer: Protesilaos <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/doric-themes
 ;; Keywords: faces, theme, accessibility
 
 ;; This file is NOT part of GNU Emacs.
@@ -68,7 +68,7 @@
 
       (bg-red "#f0c8b5")
       (bg-green "#c2e3b0")
-      (bg-yellow "#efe4b0")
+      (bg-yellow "#e2d8a0")
       (bg-blue "#bac9e5")
       (bg-magenta "#e7bfd7")
       (bg-cyan "#c9e6e0"))

@@ -1,6 +1,6 @@
-;;; doric-oak-theme.el --- Minimalist theme with light background and woody+earthly hues -*- lexical-binding:t -*-
+;;; doric-copper-theme.el --- Minimalist theme with dark background and orange hues -*- lexical-binding:t -*-
 
-;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
+;; Copyright (C) 2026  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos <info@protesilaos.com>
 ;; Maintainer: Protesilaos <info@protesilaos.com>
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-oak-palette
-    '((cursor "#497020")
-      (bg-main "#e0d8c7")
-      (fg-main "#3a2018")
-      (border "#8f9373")
+  (defvar doric-copper-palette
+    '((cursor "#74e0ab")
+      (bg-main "#44312e")
+      (fg-main "#e7d0bf")
+      (border "#85787f")
 
-      (bg-shadow-subtle "#d5c9b5")
-      (fg-shadow-subtle "#6b5225")
+      (bg-shadow-subtle "#584040")
+      (fg-shadow-subtle "#9aa3af")
 
-      (bg-neutral "#c2b19e")
-      (fg-neutral "#53402f")
+      (bg-neutral "#654f52")
+      (fg-neutral "#d0cfc8")
 
-      (bg-shadow-intense "#b1bf88")
-      (fg-shadow-intense "#3f5000")
-      
-      (bg-accent "#b7d2b7")
-      (fg-accent "#0f5420")
+      (bg-shadow-intense "#7e462c")
+      (fg-shadow-intense "#e2a077")
 
-      (fg-red "#982500")
-      (fg-green "#226700")
-      (fg-yellow "#595000")
-      (fg-blue "#103077")
-      (fg-magenta "#700054")
-      (fg-cyan "#005460")
+      (bg-accent "#634047")
+      (fg-accent "#d29cb7")
 
-      (bg-red "#e3b8a0")
-      (bg-green "#b8caa0")
-      (bg-yellow "#dfc085")
-      (bg-blue "#c4c8dd")
-      (bg-magenta "#d8bade")
-      (bg-cyan "#bee0db"))
-  "Palette of `doric-oak' theme.")
+      (fg-red "#eca28f")
+      (fg-green "#b9d0aa")
+      (fg-yellow "#c0b060")
+      (fg-blue "#9fbfe7")
+      (fg-magenta "#e9acbf")
+      (fg-cyan "#a0c0d0")
 
-  (doric-themes-define-theme doric-oak light "Minimalist theme with light background and woody+earthly hues"))
+      (bg-red "#6e2e27")
+      (bg-green "#355029")
+      (bg-yellow "#624e2f")
+      (bg-blue "#304061")
+      (bg-magenta "#643870")
+      (bg-cyan "#35526f"))
+  "Palette of `doric-copper' theme.")
 
-(provide 'doric-oak-theme)
-;;; doric-oak-theme.el ends here
+  (doric-themes-define-theme doric-copper dark "Minimalist theme with dark background and orange hues"))
+
+(provide 'doric-copper-theme)
+;;; doric-copper-theme.el ends here

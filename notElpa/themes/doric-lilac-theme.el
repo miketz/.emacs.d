@@ -1,4 +1,4 @@
-;;; doric-oak-theme.el --- Minimalist theme with light background and woody+earthly hues -*- lexical-binding:t -*-
+;;; doric-lilac-theme.el --- Minimalist theme with light background and green+purple hues -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2025-2026  Free Software Foundation, Inc.
 
@@ -41,40 +41,40 @@
                (require-theme 'doric-themes t))
     (require 'doric-themes))
 
-  (defvar doric-oak-palette
-    '((cursor "#497020")
-      (bg-main "#e0d8c7")
-      (fg-main "#3a2018")
+  (defvar doric-lilac-palette
+    '((cursor "#906f20")
+      (bg-main "#f2f0e7")
+      (fg-main "#1a3530")
       (border "#8f9373")
 
-      (bg-shadow-subtle "#d5c9b5")
-      (fg-shadow-subtle "#6b5225")
+      (bg-shadow-subtle "#e7e2d7")
+      (fg-shadow-subtle "#6e522a")
 
-      (bg-neutral "#c2b19e")
+      (bg-neutral "#d5cbc7")
       (fg-neutral "#53402f")
 
-      (bg-shadow-intense "#b1bf88")
-      (fg-shadow-intense "#3f5000")
-      
-      (bg-accent "#b7d2b7")
-      (fg-accent "#0f5420")
+      (bg-shadow-intense "#c7c0e4")
+      (fg-shadow-intense "#5b4295")
+
+      (bg-accent "#cfe4c7")
+      (fg-accent "#435a00")
 
       (fg-red "#982500")
-      (fg-green "#226700")
+      (fg-green "#005700")
       (fg-yellow "#595000")
       (fg-blue "#103077")
       (fg-magenta "#700054")
       (fg-cyan "#005460")
 
-      (bg-red "#e3b8a0")
+      (bg-red "#e3b2af")
       (bg-green "#b8caa0")
-      (bg-yellow "#dfc085")
+      (bg-yellow "#d0c685")
       (bg-blue "#c4c8dd")
       (bg-magenta "#d8bade")
       (bg-cyan "#bee0db"))
-  "Palette of `doric-oak' theme.")
+  "Palette of `doric-lilac' theme.")
 
-  (doric-themes-define-theme doric-oak light "Minimalist theme with light background and woody+earthly hues"))
+  (doric-themes-define-theme doric-lilac light "Minimalist theme with light background and green+purple hues"))
 
-(provide 'doric-oak-theme)
-;;; doric-oak-theme.el ends here
+(provide 'doric-lilac-theme)
+;;; doric-lilac-theme.el ends here

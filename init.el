@@ -3473,7 +3473,7 @@ LINTER values: :jslint :jshint :eslint"
     (my-turn-on-electric-pair-local-mode)
     (yas-minor-mode 1)
     (indent-bars-mode 1)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     ;; (electric-spacing-mode 1)
     (my-js-set-compile-command :jshint)
     (setq-local devdocs-current-docs '("javascript")))
@@ -3696,7 +3696,8 @@ LINTER values: :jslint :jshint :eslint"
     (setq comment-column 1) ; buffer local
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode))
+    ;; (rainbow-delimiters-mode)
+    )
   (add-hook 'js-ts-mode-hook #'my-setup-js-ts-mode))
 
 ;;;----------------------------------------------------------------------------
@@ -3734,7 +3735,7 @@ LINTER values: :jslint :jshint :eslint"
       ;; not buffer local! Make sure `js-indent-level' set in hooks
       ;; for javascript-mode and/or js2-mode.
       (setq js-indent-level my-indent-width))
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (my-turn-on-electric-pair-local-mode))
 
   (add-hook 'json-mode-hook #'my-setup-json-mode))
@@ -4736,7 +4737,7 @@ and indent."
     (setq tab-width 4) ;; buffer local
     (indent-tabs-mode 1)
     (indent-bars-mode 1)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (citre-mode 1) ; ctags mode
     (when nil ;; don't use smart-tab-mode until it's working
       (progn  ;; smart-tabs-mode
@@ -4955,8 +4956,8 @@ and indent."
 ;;           #'rainbow-delimiters-mode-enable)
 
 ;; (add-hook 'scheme-mode-hook #'rainbow-delimiters-mode-enable)
-(add-hook 'sql-mode-hook #'rainbow-delimiters-mode-enable)
-(add-hook 'c-mode-common-hook #'rainbow-delimiters-mode-enable)
+;; (add-hook 'sql-mode-hook #'rainbow-delimiters-mode-enable)
+;; (add-hook 'c-mode-common-hook #'rainbow-delimiters-mode-enable)
 ;; (add-hook 'sly-mrepl-mode-hook #'rainbow-delimiters-mode-enable)
 ;;(add-hook 'prog-mode-hook 'rainbow-delimiters-mode-enable)
 ;;(global-rainbow-delimiters-mode)
@@ -7977,7 +7978,7 @@ Closure over `preceding-sexp-fn'."
 
   (defun my-setup-inferior-python-mode ()
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'inferior-python-mode-hook #'my-setup-inferior-python-mode)
 
@@ -8020,7 +8021,7 @@ Closure over `preceding-sexp-fn'."
     (setq indent-tabs-mode my-use-tabs-python-p) ; buffer local
 
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (my-turn-on-electric-pair-local-mode)
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; PEP 8
@@ -8123,7 +8124,7 @@ Closure over `preceding-sexp-fn'."
       (display-fill-column-indicator-mode 1))
 
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     ;; (electric-spacing-mode 1)
     (my-turn-on-electric-pair-local-mode)
     (setq-local devdocs-current-docs '("lua~5.4")))
@@ -8154,7 +8155,7 @@ Closure over `preceding-sexp-fn'."
 
   (defun my-setup-swift-mode ()
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'swift-mode-hook #'my-setup-swift-mode))
@@ -8483,7 +8484,7 @@ Closure over `preceding-sexp-fn'."
 
   (defun my-setup-typescript-mode ()
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'typescript-mode-hook #'my-setup-typescript-mode))
@@ -8656,7 +8657,7 @@ vanilla javascript buffers."
 
   (defun my-setup-css-mode ()
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (setq-local devdocs-current-docs '("css")))
   (add-hook 'css-mode-hook #'my-setup-css-mode))
 
@@ -9368,7 +9369,7 @@ Explicit language selection not supported?"
 
   (defun my-setup-php-mode ()
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (indent-bars-mode 1)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
@@ -9561,7 +9562,7 @@ TODO: delete this fn and replace with hooks, etc."
     (setq compile-command "cargo check")
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (indent-bars-mode 1)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
@@ -9673,7 +9674,7 @@ TODO: delete this fn and replace with hooks, etc."
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'ruby-ts-mode-hook #'my-setup-ruby-ts-mode))
@@ -9691,7 +9692,7 @@ TODO: delete this fn and replace with hooks, etc."
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
     (yas-minor-mode 1)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode))
   (add-hook 'ruby-mode-hook #'my-setup-ruby-mode))
@@ -10082,7 +10083,7 @@ TODO: delete this fn and replace with hooks, etc."
 
   (defun my-setup-jsonian ()
     (setq tab-width jsonian-indentation)
-    (rainbow-delimiters-mode 1)
+    ;; (rainbow-delimiters-mode 1)
     (my-turn-on-electric-pair-local-mode))
 
   (add-hook 'jsonian-mode-hook #'my-setup-jsonian))
@@ -10204,7 +10205,7 @@ And turns off `indent-tabs-mode'."
     (indent-tabs-mode -1) ;; turn off tab indent
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (indent-bars-mode 1)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local
@@ -10251,7 +10252,8 @@ And turns off `indent-tabs-mode'."
     (citre-mode 1) ; ctags mode
     (indent-bars-mode 1)
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode))
+    ;; (rainbow-delimiters-mode)
+    )
   (add-hook 'java-ts-mode-hook #'my-setup-java-ts-mode))
 
 ;;;----------------------------------------------------------------------------
@@ -10405,7 +10407,8 @@ Values: lsp, citre, nil")
           go-ts-mode-indent-offset 3)
     (indent-tabs-mode 1)
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode))
+    ;; (rainbow-delimiters-mode)
+    )
   (add-hook 'go-mod-ts-mode-hook #'my-setup-go-mod-ts-mode))
 
 
@@ -10608,7 +10611,7 @@ Values: lsp, citre, nil")
   (defun my-setup-perl-mode ()
     (my-turn-on-electric-pair-local-mode)
     (indent-bars-mode 1)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (yas-minor-mode 1)
     (setq-local devdocs-current-docs '("perl~5.38")))
   (add-hook 'perl-mode-hook #'my-setup-perl-mode))
@@ -11407,7 +11410,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
   (defun my-setup-simpc-mode ()
     (yas-minor-mode 1)
     (my-turn-on-electric-pair-local-mode)
-    (rainbow-delimiters-mode-enable)
+    ;; (rainbow-delimiters-mode-enable)
     (indent-bars-mode 1)
     ;; set to 1 so comments on the same line are kept close to the code.
     (setq comment-column 1) ; buffer local

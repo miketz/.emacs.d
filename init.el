@@ -11877,7 +11877,7 @@ and switched to with no user input required."
     ))
 
 
-(defvar vanilla-modeline-p nil)
+(defvar vanilla-modeline-p t)
 
 (unless vanilla-modeline-p
   (line-number-mode 0) ; show/hide line # in mode line. altternative `what-line'

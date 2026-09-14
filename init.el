@@ -11499,7 +11499,7 @@ This function is meant to be added to `minibuffer-setup-hook'."
 ;;;----------------------------------------------------------------------------
 (defun my-nswbuff ()
   "Switch to previous buffer.
-Prefers the most recent non-visible buffer.
+Prefers the most recent non-visible buffer. Skips *Ibuffer*.
 
 Inspired by package nswbuff. It cycles through the buffer list, rather than
 using the traditional method of typing the buffer name. Cycling can be faster
@@ -11507,7 +11507,7 @@ with a small buffer pool. If the pool is exactly 1 buffer (as it is in this
 function), then cycling is always faster. As the buff can be auto selected
 and switched to with no user input required."
   (interactive)
-  (switch-to-buffer (other-buffer (current-buffer))))
+  (switch-to-buffer (other-buffer (get-buffer "*Ibuffer*"))))
 
 (global-set-key (kbd "C-<tab>") #'my-nswbuff)
 (define-key my-leader-map-global (kbd "v") #'my-nswbuff)

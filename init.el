@@ -11892,8 +11892,9 @@ and switched to with no user input required."
   ;; hide the % of the buffer you are viewing. Used to set to nil, but that
   ;; broke `nyan-mode' which manipulates this variable.
   ;; TODO: look into this more to understand the format of this variable.
-  (setq mode-line-position '((size-indication-mode nil)
-                             (line-number-mode nil))))
+  ;; (setq mode-line-position '((size-indication-mode nil)
+  ;;                            (line-number-mode nil)))
+  (setq mode-line-percent-position nil))
 
 
 ;; Don't suggest keybinds in minibuffer.  It messes up functions that use the

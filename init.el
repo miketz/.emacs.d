@@ -11877,7 +11877,7 @@ and switched to with no user input required."
     ))
 
 
-(defvar vanilla-modeline-p t)
+(defvar vanilla-modeline-p nil)
 
 (unless vanilla-modeline-p
   (line-number-mode 0) ; show/hide line # in mode line. altternative `what-line'
@@ -11914,7 +11914,7 @@ and switched to with no user input required."
 
 
 (unless vanilla-modeline-p
-  (progn ;; show time in mode line
+  (when nil ;; show time in mode line
     (with-eval-after-load 'time
       ;; disable process average display. Not sure why this is mixed in with time
       ;; display.

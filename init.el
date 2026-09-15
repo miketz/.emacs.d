@@ -3281,6 +3281,7 @@ Inserts a new line and the beginning and end with text values:
 ;;; my-csharp-helpers. helper fns for C#
 ;;;----------------------------------------------------------------------------
 ;; fns not quite big enough to justify their own dedicated package.
+(autoload #'my-csharp-delete-region-tags "my-csharp-helpers" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; csharp-ts-mode

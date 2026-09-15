@@ -6963,15 +6963,16 @@ TODO: call this function when it works."
 ;; (global-set-key (kbd "C-c m") #'mor-mode-on-region)
 ;; (global-set-key (kbd "C-c .") #'mor-prev-mode-on-region)
 ;; (global-set-key (kbd "C-c r") #'mor-curr-mode-on-region)
-(with-eval-after-load 'evil
-  ;; Recommended key binds for evil users.  Press "m" in visual mode.
-  (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
-  (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)
-  (define-key evil-visual-state-map (kbd "r") #'mor-curr-mode-on-region))
-(with-eval-after-load 'mode-on-region
-  ;; Recommended key binds for the tmp buffer.  Both Vanilla and Evil.
-  (define-key mor-tmp-buffer-mode-map (kbd "C-c b") #'mor-copy-back)
-  (define-key mor-tmp-buffer-mode-map (kbd "C-c c") #'mor-close-tmp-buffer))
+(when nil
+  (with-eval-after-load 'evil
+    ;; Recommended key binds for evil users.  Press "m" in visual mode.
+    (define-key evil-visual-state-map (kbd "m") #'mor-mode-on-region)
+    (define-key evil-visual-state-map (kbd ".") #'mor-prev-mode-on-region)
+    (define-key evil-visual-state-map (kbd "r") #'mor-curr-mode-on-region))
+  (with-eval-after-load 'mode-on-region
+    ;; Recommended key binds for the tmp buffer.  Both Vanilla and Evil.
+    (define-key mor-tmp-buffer-mode-map (kbd "C-c b") #'mor-copy-back)
+    (define-key mor-tmp-buffer-mode-map (kbd "C-c c") #'mor-close-tmp-buffer)))
 
 ;;;----------------------------------------------------------------------------
 ;;; Focus javascript

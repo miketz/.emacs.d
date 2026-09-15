@@ -1867,7 +1867,7 @@ Prompt user before proceeding.")
 
 (cl-defun fugitive-commit-all ()
   "Same as `fugitive commit', but stage everything first.
-Careful, it's usually best to carefully stage/craft your a commit. But when you
+Careful, it's usually best to carefully stage/craft your commit. But when you
 want this you want it."
   (interactive)
   ;; GUARD: warn user staging all then commit is a heavy handed operation.

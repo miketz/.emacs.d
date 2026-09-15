@@ -1784,7 +1784,7 @@ Mostly just to support key binds."
     (setq-local evil-auto-indent nil)))
 
 ;; TODO: handle git's configured msg comment. just hardcoding the default # for now.
-(defvar fugitive-commit-scissors "# ------------------------ >8 ------------------------"
+(defconst fugitive-commit-scissors "# ------------------------ >8 ------------------------"
   "Special flag in a git commit message to truncate/ignore everything below it from the
 commited message.")
 

@@ -39,3 +39,13 @@
             default-directory dir)
       (setenv "HOME" (concat dir "/AppData/Local/"))) ; so ~ expands correctly
     ))
+
+
+;; simlified mode line
+(line-number-mode 0) ; show/hide line # in mode line. altternative `what-line'
+(column-number-mode 0) ; show/hide column # in mode line.
+;; do not display modes in the mode-line. They take up too much space.
+;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
+(setq mode-line-modes nil)
+;; hide the % of the buffer you are viewing. Used to set to nil, but that
+(setq mode-line-percent-position nil)

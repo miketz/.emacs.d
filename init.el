@@ -231,6 +231,12 @@
 ;;                       t ; compile files in  all sub dirs
 ;;                       )
 
+;; 7. if you're init folder is in ~/AppData/Local/.emacs.d instead of the
+;; default ~/AppData/Roaming/.emacs.d the native comp may duplicate every time
+;; you start emacs. prevent it with the new --init-directior option
+;; Make a windows shortcut to runemacs.exe
+;; [Target] will be something like this:
+;; C:\emacs\bin\runemacs.exe --init-directory="C:/Users/USERNAME/AppData/Local/.emacs.d"
 
 ;;;----------------------------------------------------------------------------
 ;;; how2: enable treesit on windows

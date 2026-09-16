@@ -47,5 +47,5 @@
 ;; do not display modes in the mode-line. They take up too much space.
 ;; Function `describe-mode' (kbd "C-h m") is better to see active modes anyway.
 (setq mode-line-modes nil)
-;; hide the % of the buffer you are viewing. Used to set to nil, but that
+;; hide the % of the buffer you are viewing.
 (setq mode-line-percent-position nil)

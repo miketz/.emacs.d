@@ -4590,6 +4590,16 @@ and indent."
     ;; by default, not a list. So doing a heavy handed overwrite for now.
     (setq c-hanging-semi&comma-criteria '(my-add-newline-automatically-p)))
 
+  (progn ; custom face for "jump" keywords
+    (font-lock-add-keywords
+     'c-mode
+     '(("\\<\\(return\\|break\\|continue\\|goto\\)\\>"
+        1 'my-jump-face prepend)))
+    (font-lock-add-keywords
+     'c-ts-mode
+     '(("\\<\\(return\\|break\\|continue\\|goto\\)\\>"
+        1 'my-jump-face prepend))))
+
   (defun my-setup-c-mode-common ()
     ;; highlight escape characters in strings
     ;; see https://emacs.stackexchange.com/questions/2508/highlight-n-and-s-ins

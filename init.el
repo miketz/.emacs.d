@@ -11596,10 +11596,10 @@ and switched to with no user input required."
 (autoload #'jai-mode "jai-mode" nil t)
 (autoload #'jai-ts-mode "jai-ts-mode" nil t)
 
-(let ((fn (if (treesit-ready-p 'jai)
-              #'jai-ts-mode
-            #'jai-mode)))
-  (add-to-list 'auto-mode-alist '("\\.jai\\'" . fn)))
+(push '("\\.jai\\'" . jai-mode) auto-mode-alist)
+;; prefer jai-ts-mode for ".jai" files. But only if it's available.
+(when (treesit-language-available-p 'jai)
+  (add-to-list 'major-mode-remap-alist '(jai-mode . jai-ts-mode)))
 
 
 

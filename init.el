@@ -9475,7 +9475,8 @@ Explicit language selection not supported?"
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript"
                       "master" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-          (gomod "https://github.com/camdencheek/tree-sitter-go-mod"))))
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (jai "https://github.com/constantitus/tree-sitter-jai"))))
 
 ;;;----------------------------------------------------------------------------
 ;;; tree-sitter, tree-sitter-langs. 3rd party package. works for pre-Emacs 29
@@ -11587,6 +11588,21 @@ and switched to with no user input required."
 ;;;----------------------------------------------------------------------------
 (with-eval-after-load 'time
   (setq world-clock-time-format "%a %b %d %l:%M%#p %Z"))
+
+
+;;;----------------------------------------------------------------------------
+;;; jai-mode, jai-ts-mode. in notElpa/
+;;;----------------------------------------------------------------------------
+(autoload #'jai-mode "jai-mode" nil t)
+(autoload #'jai-ts-mode "jai-ts-mode" nil t)
+
+(let ((fn (if (treesit-ready-p 'jai)
+              #'jai-ts-mode
+            #'jai-mode)))
+  (add-to-list 'auto-mode-alist '("\\.jai\\'" . fn)))
+
+
+
 
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.

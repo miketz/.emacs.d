@@ -2241,7 +2241,7 @@ This prevents overlapping themes; something I would rarely want."
 ;; Avoid resizing the GUI frame when font changes.
 ;; see https://old.reddit.com/r/emacs/comments/f3ed3r/how_is_doom_emacs_so_damn
 ;; _fast/
-(setq frame-inhibit-implied-resize t)
+(setq frame-inhibit-implied-resize t) ; perf
 
 ;; (when my-graphic-p ;; this isn't true for emacs daemon!
 ;;   (my-color-zenburn))

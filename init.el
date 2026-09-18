@@ -11980,7 +11980,7 @@ and switched to with no user input required."
 
 (progn
   ;; turn off start up screen
-  (setq inhibit-startup-message t)
+  (setq inhibit-startup-screen t)
 
   ;; don't display info in the modeline on start up.
   ;; Need to override this method to do nothing as it looks at the current

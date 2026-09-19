@@ -177,6 +177,27 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                      to-buy)))
     (reverse to-buy)))
 
+;; from https://www.reddit.com/r/portfolios/comments/1pu3uwo/how_do_you_optimally_rebalance_a_portfolio_when/
+;; 1. The V = Σ cvᵢ is your current total portfolio value. The T = V + extra_cash is the total after adding new money.
+
+;; 2. For each asset i:
+
+;;     current value: cvᵢ
+
+;;     target weight: wᵢ
+
+;;     desired value after deposit: desiredᵢ = wᵢ × T
+
+;; 3. If you can only buy (no selling):
+
+;;     neededᵢ = max(0, desiredᵢ − cvᵢ) (overweight assets get 0)
+
+;; 4. If Σ neededᵢ ≤ extra_cash, you can rebalance perfectly. If Σ neededᵢ > extra_cash, scale the buys:
+
+;;     buyᵢ = neededᵢ × (extra_cash / Σ neededᵢ) This gives the closest possible allocation with the cash you have.
+
+;; 5. Extra insight: the minimum cash needed to perfectly rebalance without selling is max(cvᵢ / wᵢ) − V. Below that amount, perfect buy-only rebalancing is mathematically impossible.
+
 (defun buy-or-sell (des-alloc cur-alloc amt)
   "Calculate how much of each ticker to buy sell.
 Postive AMT means buy. Negative AMT means sell.

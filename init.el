@@ -5587,6 +5587,11 @@ and indent."
       (dired "c:/Users/mtz/proj/safety/SafetyWebsite"))
     (define-key my-leader-map-global (kbd "4") #'my-open-dev-folder)
     ;;~~~ (evil-leader/set-key "4" #'my-open-dev-folder)
+    (defun my-open-dev-folder2 ()
+      (interactive)
+      ;; (dired "C:/Users/mtz/proj/TFS/SafetyWebsite/OSHE/Development")
+      (dired "c:/Users/mtz/proj/safety/safetywebsite_worktrees/upgrade-to-NET10"))
+    (define-key my-leader-map-global (kbd "5") #'my-open-dev-folder2)
     ))
 
 

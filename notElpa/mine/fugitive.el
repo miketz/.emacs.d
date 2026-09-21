@@ -305,6 +305,7 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
                                             ;; log outputtype is useful so `fugitive-hash' can correctly search for the commit hash on current line.
                                             (setq-local fugitive-log-type (fugitive-guess-log-output-type cmd))
                                             (setq-local bl-filename filename)
+                                            (setq-local fugitive-jump-stack '())
                                             ;; (log-view-mode) ; TODO: fix. doesn't work right.
                                             ;; (vc-git-log-view-mode)
 
@@ -836,6 +837,10 @@ Commit hashes are prefixed by a star, wild card range, then the hash (no commit 
 
 (defvar-local bl-filename nil)
 
+(defvar-local fugitive-jump-stack '()
+  "List of jump points in a log buffer.
+Pushed and popped via funcs `fugitive-parent-commits-jump-to', `fugitive-jump-back'.")
+
 (defvar fugitive-log-graph-fn #'fugitive-log-graph-long
   "Default fn to use for graph in my hydra.")
 
@@ -1117,6 +1122,9 @@ You may want to call this fn while in a log buffer, with point on a commit hash.
     (when (null commit)
       (cl-return-from fugitive-parent-commits-jump-to))
 
+    ;; so `fugitive-jump-back' (kbd C-c p) works to jump back.
+    (push (point) fugitive-jump-stack)
+
     (let* ((parents (fugitive-get-parent-commits-list commit))
            ;; stop completing-read from sorting hashes.
            ;; from stack overflow post: https://emacs.stackexchange.com/questions/41801/how-to-stop-completing-read-ivy-completing-read-from-sorting
@@ -1161,6 +1169,20 @@ regardless of config var `fugitive-auto-jump-to-first-parent'."
   ;; shadow var to t.
   (let ((fugitive-auto-jump-to-first-parent t))
     (fugitive-parent-commits-jump-to commit)))
+
+(defun fugitive-jump-back ()
+  "Jump back to previous position.
+
+Intended to be used in a log buffer after jumping to a parent commit. To go back to previous position.
+
+Git is not used to go navigate back to child commit. Instead a simple list of points
+is pushed/popped before/after jumping."
+  (interactive)
+  (let ((p (pop fugitive-jump-stack)))
+    (if (not (null p))
+        (goto-char p)
+      ;; else
+      (message "No more jump backs."))))
 
 
 ;;;###autoload

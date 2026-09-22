@@ -1180,7 +1180,9 @@ is pushed/popped before/after jumping."
   (interactive)
   (let ((p (pop fugitive-jump-stack)))
     (if (not (null p))
-        (goto-char p)
+        (progn
+          (goto-char p)
+          (xref-pulse-momentarily))
       ;; else
       (message "No more jump backs."))))
 

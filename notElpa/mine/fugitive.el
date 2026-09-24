@@ -1652,18 +1652,24 @@ For performance, do not attempt to list remote tags as that's a network op."
          (hashes (fugitive-get-hashes)))
     (completing-read "rev: " hashes nil nil)))
 
-(defun fugitive-select-rev (&optional prompt)
+(defun fugitive-get-all-revs ()
+  "Get recent hashes, tags, branches. And HEAD.
+Intended for user interaciton with `completing-read'."
+  (let ((hashes (fugitive-get-hashes))
+        (branches-n-tags (fugitive-get-branches-and-tags)))
+    (cons "HEAD" (append branches-n-tags hashes))))
+
+(defun fugitive-select-rev (&optional prompt all-revs)
   "Select from recent hashes, tags, branches.
 Free form input accepted too for hashes not in recent list."
   (interactive)
   ;; don't sort hashes during completion. already sorted by graph chain recency.
-  (let* ((completions-sort nil)
-         (hashes (fugitive-get-hashes))
-         (branches-n-tags (fugitive-get-branches-and-tags))
-         (all (cons "HEAD" (append branches-n-tags hashes))))
+  (let* ((completions-sort nil))
     (when (null prompt)
       (setq prompt "rev: "))
-    (completing-read prompt all nil nil)))
+    (when (null all-revs)
+      (setq all-revs (fugitive-get-all-revs)))
+    (completing-read prompt all-revs nil nil)))
 
 
 (defvar fugitive-zero-width-space (string 65279)
@@ -1692,8 +1698,9 @@ Will trim it off.")
          (filename (fugitive-select-file))
          (buff-rev1 (fugitive-new-output-buffer))
          (buff-rev2 (fugitive-new-output-buffer))
-         (rev1 (fugitive-select-rev "rev1: "))
-         (rev2 (fugitive-select-rev "rev2: ")))
+         (all-revs (fugitive-get-all-revs)) ; for completing-read selection
+         (rev1 (fugitive-select-rev "rev1: " all-revs))
+         (rev2 (fugitive-select-rev "rev2: " all-revs)))
     (shell-command (concat "git show " rev1 ":./" filename) buff-rev1)
     (shell-command (concat "git show " rev2 ":./" filename) buff-rev2)
     ;; git file dump output (at least on windows) injects an invisible char at

@@ -16,7 +16,7 @@
 
 ;;; Code:
 (require 'cl-lib)
-(require 'xterm-color)
+(require 'xterm-color) ; external dependency
 (require 'thingatpt)
 (require 'xref) ; for `xref-pulse-momentarily'
 (require 'project)
@@ -1669,7 +1669,7 @@ Will trim it off.")
     ;; the start. trim it off as it ediff dectects it.
     (with-current-buffer buff-hash
       (replace-string fugitive-zero-width-space "" nil 1 2))
-    (ediff-buffers buff-working buff-hash)))
+    (ediff-buffers buff-hash buff-working)))
 
 
 (cl-defun fugitive-pop-last-n-commits-as-unstaged ()

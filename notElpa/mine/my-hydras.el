@@ -324,8 +324,9 @@ _b_: blame
 _d_: diff between revs
 _e_: find local-only branches you may want to delete
 _E_: ediff current file to hash version
+_r_: ediff selected file to hash version
 _s_: quick status
-_S_: enter stauts Hydra
+_S_: enter status Hydra
 _p_: jump to parent commit in log buffer
 _z_: delete fugitive buffers
 _c_: commit
@@ -347,6 +348,7 @@ _q_, _C-g_: quit"
   ("d" fugitive-diff-between)
   ("e" fugitive-find-local-only-branches-ediff)
   ("E" fugitive-file-ediff)
+  ("r" fugitive-file-ediff-any)
   ;; ("s" fugitive-show) ; show commit at point in a log buffer
   ("s" fugitive-quick-status)
   ("S" (lambda ()

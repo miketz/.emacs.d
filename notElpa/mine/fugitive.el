@@ -1652,7 +1652,7 @@ For performance, do not attempt to list remote tags as that's a network op."
          (hashes (fugitive-get-hashes)))
     (completing-read "rev: " hashes nil nil)))
 
-(defun fugitive-select-rev ()
+(defun fugitive-select-rev (&optional prompt)
   "Select from recent hashes, tags, branches.
 Free form input accepted too for hashes not in recent list."
   (interactive)
@@ -1661,7 +1661,9 @@ Free form input accepted too for hashes not in recent list."
          (hashes (fugitive-get-hashes))
          (branches-n-tags (fugitive-get-branches-and-tags))
          (all (cons "HEAD" (append branches-n-tags hashes))))
-    (completing-read "rev: " all nil nil)))
+    (when (null prompt)
+      (setq prompt "rev: "))
+    (completing-read prompt all nil nil)))
 
 
 (defvar fugitive-zero-width-space (string 65279)
@@ -1681,6 +1683,46 @@ Will trim it off.")
     (with-current-buffer buff-hash
       (replace-string fugitive-zero-width-space "" nil 1 2))
     (ediff-buffers buff-hash buff-working)))
+
+(defun fugitive-file-ediff-any ()
+  "Compare a file (manually selected) between 2 versions."
+  (interactive)
+  (let* (;; shadow default-directory so file paths work
+         (default-directory (fugitive-proj-root-or-current-dir))
+         (filename (fugitive-select-file))
+         (buff-rev1 (fugitive-new-output-buffer))
+         (buff-rev2 (fugitive-new-output-buffer))
+         (rev1 (fugitive-select-rev "rev1: "))
+         (rev2 (fugitive-select-rev "rev2: ")))
+    (shell-command (concat "git show " rev1 ":./" filename) buff-rev1)
+    (shell-command (concat "git show " rev2 ":./" filename) buff-rev2)
+    ;; git file dump output (at least on windows) injects an invisible char at
+    ;; the start. trim it off as it ediff dectects it.
+    (with-current-buffer buff-rev1
+      (replace-string fugitive-zero-width-space "" nil 1 2))
+    (with-current-buffer buff-rev2
+      (replace-string fugitive-zero-width-space "" nil 1 2))
+    (ediff-buffers buff-rev1 buff-rev2)))
+
+;; "git ls-files --full-name --exclude-standard --"
+(defun fugitive-select-file ()
+  "Select a file from the git repo.
+Suggest current buffer file for faster selection."
+  (interactive)
+  ;; (fugitive-curr-filename)
+  (let* (;; shadow default-directory to root so all filenames are included
+         (default-directory (fugitive-proj-root-or-current-dir))
+         ;; (curr-filename (buffer-file-name))
+         (files (fugitive-cmd-to-list "git ls-files --full-name --exclude-standard")))
+    ;; (push curr-filename files)
+    ;; select file
+    (let ((completing-read-function #'ivy-completing-read)
+          ;; dynamically shadow ivy completion style to ignore order.
+          (ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+          ;; taller ivy window. -4 so scrolling doesn't go off screen.
+          ;; (ivy-height (- (window-height) 4))
+          )
+      (completing-read "file: " files nil t))))
 
 
 (cl-defun fugitive-pop-last-n-commits-as-unstaged ()

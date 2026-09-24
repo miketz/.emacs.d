@@ -1660,7 +1660,7 @@ Free form input accepted too for hashes not in recent list."
   (let* ((completions-sort nil)
          (hashes (fugitive-get-hashes))
          (branches-n-tags (fugitive-get-branches-and-tags))
-         (all (append branches-n-tags hashes)))
+         (all (cons "HEAD" (append branches-n-tags hashes))))
     (completing-read "rev: " all nil nil)))
 
 

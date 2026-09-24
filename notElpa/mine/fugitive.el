@@ -1652,6 +1652,17 @@ For performance, do not attempt to list remote tags as that's a network op."
          (hashes (fugitive-get-hashes)))
     (completing-read "rev: " hashes nil nil)))
 
+(defun fugitive-select-rev ()
+  "Select from recent hashes, tags, branches.
+Free form input accepted too for hashes not in recent list."
+  (interactive)
+  ;; don't sort hashes during completion. already sorted by graph chain recency.
+  (let* ((completions-sort nil)
+         (hashes (fugitive-get-hashes))
+         (branches-n-tags (fugitive-get-branches-and-tags))
+         (all (append branches-n-tags hashes)))
+    (completing-read "rev: " all nil nil)))
+
 
 (defvar fugitive-zero-width-space (string 65279)
   "Git output (at least on windows) injects this hidden char when dumping file contents.
@@ -1663,7 +1674,7 @@ Will trim it off.")
   (let ((buff-working (current-buffer))
         (buff-hash (fugitive-new-output-buffer))
         (filename (fugitive-curr-filename))
-        (hash (fugitive-select-hash)))
+        (hash (fugitive-select-rev)))
     (shell-command (concat "git show " hash ":./" filename) buff-hash)
     ;; git file dump output (at least on windows) injects an invisible char at
     ;; the start. trim it off as it ediff dectects it.

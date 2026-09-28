@@ -122,9 +122,10 @@
         '["-raster-Fixedsys-normal-normal-normal-mono-17-*-*-*-c-*-iso8859-1"
           "-raster-Fixedsys-normal-normal-normal-mono-18-*-*-*-c-*-iso8859-1"
 
-          "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
-          "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
           "-raster-Terminal-normal-normal-normal-mono-7-*-*-*-c-*-ms-oemlatin"
+          "-raster-Terminal-normal-normal-normal-mono-12-*-*-*-c-*-ms-oemlatin"
+          "-raster-Terminal-regular-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin" ;wide/short
+          "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
 
           "-outline-Ubuntu Mono-regular-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
           "-outline-Ubuntu Mono-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"

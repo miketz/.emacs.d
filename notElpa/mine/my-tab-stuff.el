@@ -11,7 +11,8 @@
     (idl-mode c-basic-offset) (pike-mode c-basic-offset)
     (awk-mode c-basic-offset) (csharp-mode c-basic-offset)
     ;; there's an obsolete var csharp-ts-mode-indent-offset but don't use it.
-    (csharp-ts-mode c-basic-offset)
+    (csharp-ts-mode csharp-ts-indent-offset) ;c-basic-offset
+
     (php-mode c-basic-offset)
 
     (js2-mode js-indent-level) (js-mode js-indent-level)

@@ -10732,6 +10732,7 @@ Values: lsp, citre, nil")
 ;; dape. debugger mode, but no external dependencies?
 ;; swift package. https://github.com/konrad1977/swift-development
 ;; tbindent. work in buffer with tabs, but file keeps spaces
+;; preview-tab. like VS special buffer as you jump around, avoids buffer spam
 
 
 ;;;----------------------------------------------------------------------------

@@ -127,6 +127,11 @@
           "-raster-Terminal-regular-normal-normal-mono-16-*-*-*-c-*-ms-oemlatin" ;wide/short
           "-raster-Terminal-normal-normal-normal-mono-18-*-*-*-c-*-ms-oemlatin"
 
+          "-raster-ProggyTiny-regular-normal-normal-mono-10-*-*-*-c-*-iso8859-1"
+          "-raster-ProggySmall-regular-normal-normal-mono-10-*-*-*-c-*-iso8859-1"
+          "-raster-ProggySquare-regular-normal-normal-mono-11-*-*-*-c-*-iso8859-1"
+          "-raster-ProggyClean-regular-normal-normal-mono-13-*-*-*-c-*-iso8859-1"
+
           "-outline-Ubuntu Mono-regular-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
           "-outline-Ubuntu Mono-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
 

@@ -8,12 +8,16 @@
 (defun my-scroll-left ()
   "Scroll left."
   (interactive)
-  (my-scroll-horizontal-4 #'scroll-left))
+  (scroll-left 4
+               t ;lock position so it doesn't reset left as you scroll
+               ))
 
 (defun my-scroll-right ()
   "Scroll right."
   (interactive)
-  (my-scroll-horizontal-4 #'scroll-right))
+  (scroll-right 4
+                t ;lock position so it doesn't reset left as you scroll
+                ))
 
 (defun my-scroll-horizontal (scroll-fn)
   "Scroll 25% of the window width.

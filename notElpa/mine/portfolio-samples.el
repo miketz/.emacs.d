@@ -3,8 +3,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; standard
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(let* ((portfolio '((bond 10 (vbil 100  0.07))
-                    (stock 90
+(let* ((portfolio '((bond 0 (vbil 100  0.07))
+                    (stock 100
                            (usa 70
                                 ;; 95/5 schk/avuv roughly cap weight. Or prodcues a simliar 9 square style box.
                                 (schk 85  0.03)
@@ -21,6 +21,9 @@
   (build-report-list portfolio total)
   ;;(build-report portfolio total)
   )
+
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -41,9 +44,11 @@
   )
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; f
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 2. mer
 (let* ((portfolio '((usa 50
                          (head 80
                                (schk 70 0.03) ;us lcb
@@ -61,6 +66,26 @@
   (build-report-list portfolio total)
   ;; (build-report portfolio total)
   )
+
+
+;; 1. simpler
+(let* ((portfolio '((usa 70
+                         (schk 85 0.03)
+                         (avuv 15 0.25))
+                    (intl 30
+                          (schf 65 0.03)
+                          (avdv 15 0.36)
+                          (FLKR 10 0.09)
+                          (vexc 10 0.07))))
+       (total 1000))
+  (build-report-list portfolio total)
+  ;; (build-report portfolio total)
+  )
+
+
+
+
+
 
 
 

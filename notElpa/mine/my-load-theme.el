@@ -53,6 +53,7 @@ I want it to be considered light."
                  ("#D5D1B3" . "my-ultimate2")
                  ("#E5E1C3" . "my-ultimate3")
                  ("#F5F1D3" . "my-ultimate4")
+                 ("#FFFBDB" . "my-ultimate5")
                  ("ivory" . "ivory")
                  ("ivory2" . "ivory2")
                  ("ivory3" . "ivory3")     ; #cdcdc1

@@ -190,10 +190,13 @@
    `(font-lock-variable-use-face ((,class :inherit default)))
    ;; `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
    ;;                                    :weight normal)))
-   `(font-lock-property-name-face ((,class :inherit font-lock-variable-name-face
-                                   :background "lightsteelblue1")))
+   ;; `(font-lock-property-name-face ((,class :inherit font-lock-variable-name-face
+   ;;                                 :background "lightsteelblue1")))
+   `(font-lock-property-name-face ((,class :foreground "chocolate4"
+                                           ;; :background "#fff7ca"
+                                   )))
 
-   ;; font-lock-property-use-face
+   `(font-lock-property-use-face ((,class :inherit font-lock-property-name-face)))
    ;; `(font-lock-punctuation-face ((,class nil)))
    `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit, focus
    `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit, focus

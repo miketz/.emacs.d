@@ -145,7 +145,7 @@
    ;; TODO font lock
    `(font-lock-builtin-face ((,class :foreground "dodgerblue4"
                                      :weight bold)))
-   `(font-lock-comment-face ((,class (:foreground "dark green"))))
+   `(font-lock-comment-face ((,class (:foreground "dark green" :background "#f1fff1"))))
    `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class :foreground "dark green"
@@ -165,7 +165,8 @@
    `(font-lock-preprocessor-face ((,class (:foreground "#5b1503"))))
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
-   `(font-lock-string-face ((,class (:foreground "dark red"))))
+   ;; `(font-lock-string-face ((,class (:foreground "dark red"))))
+   `(font-lock-string-face ((,class (:foreground "orangered" :background "#ffdfc5" ))))
    ;; `(font-lock-type-face ((,class (:foreground "blue" :background ,bg-highlight))))
    `(font-lock-type-face ((,class (:foreground ,dim+4)))) ;focus
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
@@ -177,7 +178,8 @@
    ;; ~ Maybe not intended to be treesit only, but it seems that way.
    `(font-lock-function-call-face ((,class :inherit font-lock-function-name-face
                                            :foreground "black"
-                                           :background "#ffd7e2")))
+                                           :background "#ffe7f2" ;"#ffd7e2"
+                                           )))
    `(font-lock-variable-use-face ((,class :inherit default)))
    ;; `(font-lock-operator-face ((,class :inherit font-lock-keyword-face
    ;;                                    :weight normal)))
@@ -188,8 +190,10 @@
    ;; `(font-lock-punctuation-face ((,class nil)))
    `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit, focus
    `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit, focus
-   `(font-lock-escape-face ((t :foreground "black"
-                               :background "lightsteelblue1")))
+   `(font-lock-escape-face ((t :foreground "#CF6262"
+                               :background "#ffdfc5" ;"lightsteelblue1"
+                               :weight bold
+                               )))
 
    ;; `(font-lock-misc-punctuation-face)
    ;; `(font-lock-number-face ((,class :foreground "#50b5b5" ;"#BEBEA1"

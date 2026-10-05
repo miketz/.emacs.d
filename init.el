@@ -7967,10 +7967,8 @@ Closure over `preceding-sexp-fn'."
 ;;;----------------------------------------------------------------------------
 ;;; python-ts-mdoe
 ;;;----------------------------------------------------------------------------
-;; temporarily use the original python-mode as indent-bars breaks with python-ts-mode
-(when nil
-  (when (treesit-language-available-p 'python)
-    (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))))
+(when (treesit-language-available-p 'python)
+  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode)))
 
 ;; python-ts-mode lives in the same file as python-mode. So it may not need
 ;; to duplicate every part of the old python config below. just set the hook
@@ -7987,7 +7985,7 @@ Closure over `preceding-sexp-fn'."
     (when my-use-display-fill-column-indicator
       (setq display-fill-column-indicator-column 79) ; PEP 8
       (display-fill-column-indicator-mode 1))
-    ;; (indent-bars-mode 1) ; breaks with python-ts-mode. TODO: look into a fix
+    (indent-bars-mode 1) ; works now, but monitor this for pythonts-mode
 
     ;; lsp stuff
     ;; (require 'lsp-python-ms)

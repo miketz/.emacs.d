@@ -90,11 +90,18 @@
    `(evil-replace-state-cursor  '(hbar "orange red"))
    `(evil-motion-state-cursor   '(box "black"))
 
-
    ;; ibuffer
    `(ibuffer-filter-group-name-face '((,class :weight bold
                                               :foreground ,fg
                                               :background "gray")))
+
+   ;; indent-bars
+   ;; This is hard to configure in a considerate way in a theme. Becuase
+   ;; `indent-bars-color-by-depth' mixes several things in 1 var. A boolean
+   ;; feature toggle (ie non-nil), color settings, and blend.
+   ;; since this is my personal theme, just do it how i want it.
+   `(indent-bars-color-by-depth nil)
+   `(indent-bars-color '("black" :face-bg nil :blend 0.07))
 
    ;; pos-tip. Helper package for tooltip
    `(pos-tip-foreground-color ,fg-green)

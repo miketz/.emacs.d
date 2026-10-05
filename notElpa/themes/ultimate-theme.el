@@ -146,7 +146,7 @@
    `(font-lock-builtin-face ((,class :foreground "dodgerblue4"
                                      :weight bold)))
    `(font-lock-comment-face ((,class (:foreground "dark green" :background "#f1fff1"))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground "dark green"))))
+   `(font-lock-comment-delimiter-face ((,class (:inherit font-lock-comment-face))))
    ;; `(font-lock-constant-face ((,class (:foreground ,zenburn-green+4))))
    `(font-lock-doc-face ((,class :foreground "dark green"
                                  :background "#DDDDDD";;,faint-less

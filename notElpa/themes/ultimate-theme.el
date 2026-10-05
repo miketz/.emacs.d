@@ -13,8 +13,17 @@
        (todo--bg "white")
        (i 0)
        ;; Color Palette
-       (bg           "#D5D1B3")
+       (bg           "#F5F1D3") ;"#D5D1B3" "#E5E1C3" "#F5F1D3"
        (fg           "#000000")
+       (dim+4        "#505050")
+       (dim+3        "#606060")
+       (dim+2        "#707070")
+       (dim+1        "#808080") ; +N are less dim, more visibile
+       (dim          "#909090") ; standard dim
+       (dim-1        "#A0A0A0") ; -N are dimmer, more hidden
+       (dim-2        "#B0B0B0")
+       (dim-3        "#C0C0C0")
+       (dim-4        "#D0D0D0")
        (bg-highlight "#C5C1A3")
        (bg-purple    "#FFC0CB")
        (fg-purple    "#440033")
@@ -147,7 +156,8 @@
 										   ;; :weight normal
 										   ;; :box (:line-width -1 :color ,faint-less)
                                            )))
-   `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
+   ;; `(font-lock-keyword-face ((,class (:foreground ,keyword :weight bold))))
+   `(font-lock-keyword-face ((,class (:foreground ,dim)))) ;focus
    `(font-lock-negation-char-face ((,class :foreground "#Ae0000"
                                            :background "#ffe0eb"
                                            ;; :box (:line-width -1 :style pressed-button)
@@ -156,7 +166,8 @@
    ;; `(font-lock-regexp-grouping-construct ((,class (:foreground ,zenburn-yellow :weight bold))))
    ;; `(font-lock-regexp-grouping-backslash ((,class (:foreground ,zenburn-green :weight bold))))
    `(font-lock-string-face ((,class (:foreground "dark red"))))
-   `(font-lock-type-face ((,class (:foreground "blue" :background ,bg-highlight))))
+   ;; `(font-lock-type-face ((,class (:foreground "blue" :background ,bg-highlight))))
+   `(font-lock-type-face ((,class (:foreground ,dim+4)))) ;focus
    `(font-lock-variable-name-face ((,class (:foreground ,var))))
    ;; `(font-lock-warning-face ((,class (:foreground ,zenburn-yellow-2 :weight bold))))
 
@@ -175,8 +186,8 @@
 
    ;; font-lock-property-use-face
    ;; `(font-lock-punctuation-face ((,class nil)))
-   ;; `(font-lock-bracket-face)
-   ;; `(font-lock-delimiter-face)
+   `(font-lock-bracket-face ((,class :foreground ,dim))) ;treesit, focus
+   `(font-lock-delimiter-face ((,class :foreground ,dim+1))) ;treesit, focus
    `(font-lock-escape-face ((t :foreground "black"
                                :background "lightsteelblue1")))
 
@@ -571,16 +582,30 @@
    `(nswbuff-special-buffers-face ((,class :foreground ,fg-purple :background ,bg-purple)))
 
 
-   `(rainbow-delimiters-depth-1-face ((t (:foreground ,fg :background "#FF6520" :weight bold))))
-   `(rainbow-delimiters-depth-2-face ((t (:foreground ,fg :background "#75FFFF" :weight bold))))
-   `(rainbow-delimiters-depth-3-face ((t (:foreground ,fg :background "yellow" :weight bold))))
-   `(rainbow-delimiters-depth-4-face ((t (:foreground ,fg :background "MediumPurple1" :weight bold))))
-   `(rainbow-delimiters-depth-5-face ((t (:foreground ,fg :background "#7CFC00" :weight bold))))
-   `(rainbow-delimiters-depth-6-face ((t (:foreground ,fg :background "orange" :weight bold))))
-   `(rainbow-delimiters-depth-7-face ((t (:foreground ,fg :background "pink" :weight bold))))
-   `(rainbow-delimiters-depth-8-face ((t (:foreground ,fg :background "dodger blue" :weight bold))))
-   `(rainbow-delimiters-depth-9-face ((t (:foreground ,fg :background "#CDAA7D" :weight bold))))
-   `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))
+   ;; rainbow-delimiters.
+   `(rainbow-delimiters-depth-1-face ((,class (:foreground "black" :background "#C5C1A3" :weight bold))))
+   `(rainbow-delimiters-depth-2-face ((,class (:foreground "black" :background "#C0DfDf" :weight bold))))
+   `(rainbow-delimiters-depth-3-face ((,class (:foreground "red" :background "#C5C1A3" :weight bold))))
+   `(rainbow-delimiters-depth-4-face ((,class (:foreground "purple" :background "#DfD0D5" :weight bold))))
+   `(rainbow-delimiters-depth-5-face ((,class (:foreground "black" :background "#EfEaBd" :weight bold))))
+   `(rainbow-delimiters-depth-6-face ((,class (:foreground "magenta" :background "#D5D1B3" ;"#EEEEFF"
+                                                      :weight bold))))
+   `(rainbow-delimiters-depth-7-face ((,class (:foreground "gray52" :weight bold))))
+   `(rainbow-delimiters-depth-8-face ((,class (:foreground "indianred3" :background "#C5C1A3" :weight bold))))
+   `(rainbow-delimiters-depth-9-face ((,class (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
+   `(rainbow-delimiters-unmatched-face ((,class (:foreground "yellow" :background "black" :weight bold))))
+
+   ;; fruit salad colors for rainbow-delimiters
+   ;; `(rainbow-delimiters-depth-1-face ((t (:foreground ,fg :background "#FF6520" :weight bold))))
+   ;; `(rainbow-delimiters-depth-2-face ((t (:foreground ,fg :background "#75FFFF" :weight bold))))
+   ;; `(rainbow-delimiters-depth-3-face ((t (:foreground ,fg :background "yellow" :weight bold))))
+   ;; `(rainbow-delimiters-depth-4-face ((t (:foreground ,fg :background "MediumPurple1" :weight bold))))
+   ;; `(rainbow-delimiters-depth-5-face ((t (:foreground ,fg :background "#7CFC00" :weight bold))))
+   ;; `(rainbow-delimiters-depth-6-face ((t (:foreground ,fg :background "orange" :weight bold))))
+   ;; `(rainbow-delimiters-depth-7-face ((t (:foreground ,fg :background "pink" :weight bold))))
+   ;; `(rainbow-delimiters-depth-8-face ((t (:foreground ,fg :background "dodger blue" :weight bold))))
+   ;; `(rainbow-delimiters-depth-9-face ((t (:foreground ,fg :background "#CDAA7D" :weight bold))))
+   ;; `(rainbow-delimiters-unmatched-face ((t (:foreground "yellow" :background "black" :weight bold))))
 
    ;; custom faces for my config
    `(my-tilde-face ((,class :foreground "blue"

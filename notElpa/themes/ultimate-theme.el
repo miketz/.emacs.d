@@ -192,7 +192,7 @@
    ;;                                    :weight normal)))
    ;; `(font-lock-property-name-face ((,class :inherit font-lock-variable-name-face
    ;;                                 :background "lightsteelblue1")))
-   `(font-lock-property-name-face ((,class :foreground "chocolate4"
+   `(font-lock-property-name-face ((,class :foreground ,fg ;"chocolate4"
                                            ;; :background "#fff7ca"
                                    )))
 

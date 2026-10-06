@@ -11616,6 +11616,14 @@ and switched to with no user input required."
 ;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
+
+
+(when (eq system-type 'windows-nt)
+  ;; decrease file io workload. TODO: verify dired, etc still work ok.
+  (setq w32-get-true-file-attributes nil) ; perf
+  (setq w32-pipe-buffer-size (* 64 1024)) ; perf
+  )
+
 (defun my-fix-ediff-emacs-31 ()
   "Attempt to fix broken ediff on emacs 31 alpha release for Windows."
   (interactive)

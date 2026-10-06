@@ -123,15 +123,15 @@
    `(vertical-border ((,class (:foreground "gray25"))))
 
    `(mode-line
-     ((,class (:foreground ,mode-line-fg ;"#8FB28F"
-                           :background ,mode-line-bg ;"#2B2B2B"
+     ((,class (:foreground "#8DEECD" ;"#8FB28F"
+                           :background "#000000" ;"#2B2B2B"
                            :box (:line-width -1 :style released-button)))
       (t :inverse-video t)))
-   `(mode-line-buffer-id ((,class (:foreground ,ml-bufferid ;"#F0DFAF"
+   `(mode-line-buffer-id ((,class (:foreground "#F0DFAF" ;"#F0DFAF"
                                                :weight bold))))
    `(mode-line-inactive
-     ((,class (:foreground ,ml-inact-fg ;"#5F7F5F"
-                           :background ,ml-inact-bg ;"#383838"
+     ((,class (:foreground "gray" ;"#5F7F5F"
+                           :background "gray45" ;"#383838"
                            :box (:line-width -1 :style released-button)))))
 
    `(line-number ((,class :background "#656143"

@@ -12039,9 +12039,9 @@ and switched to with no user input required."
 (setq ring-bell-function 'ignore)
 
 (progn ;; paren match highlight
-  (setq show-paren-delay 0)
+  (setq show-paren-delay 0.125) ; perf
+  ;; (show-paren-mode 1) ; perf by not turning on mode!
   (show-paren-mode 1))
-
 
 (progn ;; tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.

@@ -328,13 +328,13 @@ in case that file does not provide any feature."
 ;;; bidi stuff for performance
 ;;;----------------------------------------------------------------------------
 ;; sacrifice proper display of right-to-left languages for performance.
-(setq-default bidi-paragraph-direction 'left-to-right)
-(setq bidi-inhibit-bpa t)
+(setq-default bidi-paragraph-direction 'left-to-right) ; perf
+(setq bidi-inhibit-bpa t) ; perf
 ;; usuported nil per docs. expirimenting with setting nil for performance.
 ;; (setq-default bidi-display-reordering t)
 
-(setq redisplay-skip-fontification-on-input t)
-(setq highlight-nonselected-windows nil)
+(setq redisplay-skip-fontification-on-input t) ; perf
+(setq highlight-nonselected-windows nil) ; perf
 
 ;;;----------------------------------------------------------------------------
 ;;; defvars

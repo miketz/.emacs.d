@@ -11727,7 +11727,8 @@ and switched to with no user input required."
 (when (eq system-type 'windows-nt)
   ;; performance tweak for weird fonts on windows.
   ;; see https://github.com/sabof/org-bullets/issues/11
-  (setq inhibit-compacting-font-caches t))
+  (setq inhibit-compacting-font-caches t) ; perf
+  )
 
 (autoload #'my-inject-newlines "my-misc" nil t)
 (autoload #'my-delete-brackets "my-misc" nil t)

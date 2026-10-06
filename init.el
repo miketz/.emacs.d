@@ -12048,7 +12048,10 @@ and switched to with no user input required."
   (setq show-paren-delay 0.125) ; perf
   (when show-paren-mode ; enabled by defaul in Emacs 28+
     (show-paren-mode 0) ; perf
-    )
+    ;; perf. shutdown the timer
+    (when show-paren--idle-timer
+      (cancel-timer show-paren--idle-timer)
+      (setq show-paren--idle-timer nil)))
   ;; (show-paren-mode 1) ; no longer needed in Emacs 28+. on by default.
   )
 

@@ -11817,7 +11817,7 @@ and switched to with no user input required."
 ;;;----------------------------------------------------------------------------
 ;;; scrolling
 ;;;----------------------------------------------------------------------------
-(setq fast-but-imprecise-scrolling t)
+(setq fast-but-imprecise-scrolling t) ; perf
 ;; scroll like vim when moving 1 line off screen with j/k.
 ;; has some weird rules about re-centering, but >=101 is supposed to
 ;; not recenter. I had an issue with value 1 where if i held down

@@ -12046,8 +12046,11 @@ and switched to with no user input required."
 
 (progn ;; paren match highlight
   (setq show-paren-delay 0.125) ; perf
-  ;; (show-paren-mode 1) ; perf by not turning on mode!
-  (show-paren-mode 1))
+  (when show-paren-mode ; enabled by defaul in Emacs 28+
+    (show-paren-mode 0) ; perf
+    )
+  ;; (show-paren-mode 1) ; no longer needed in Emacs 28+. on by default.
+  )
 
 (progn ;; tab handling
   (setq-default indent-tabs-mode nil) ;;Use only spaces, no tabs.

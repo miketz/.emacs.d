@@ -597,17 +597,26 @@
 
 
    ;; rainbow-delimiters.
-   `(rainbow-delimiters-depth-1-face ((,class (:foreground "black" :background "#C5C1A3" :weight bold))))
-   `(rainbow-delimiters-depth-2-face ((,class (:foreground "black" :background "#C0DfDf" :weight bold))))
-   `(rainbow-delimiters-depth-3-face ((,class (:foreground "red" :background "#C5C1A3" :weight bold))))
-   `(rainbow-delimiters-depth-4-face ((,class (:foreground "purple" :background "#DfD0D5" :weight bold))))
-   `(rainbow-delimiters-depth-5-face ((,class (:foreground "black" :background "#EfEaBd" :weight bold))))
+   `(rainbow-delimiters-depth-1-face ((,class (:foreground "black" :background "#C5C1A3" ;:weight bold
+                                                           ))))
+   `(rainbow-delimiters-depth-2-face ((,class (:foreground "black" :background "#C0DfDf" ;:weight bold
+                                                           ))))
+   `(rainbow-delimiters-depth-3-face ((,class (:foreground "red" :background "#C5C1A3" ;:weight bold
+                                                           ))))
+   `(rainbow-delimiters-depth-4-face ((,class (:foreground "purple" :background "#DfD0D5" ;:weight bold
+                                                           ))))
+   `(rainbow-delimiters-depth-5-face ((,class (:foreground "black" :background "#EfEaBd" ;:weight bold
+                                                           ))))
    `(rainbow-delimiters-depth-6-face ((,class (:foreground "magenta" :background "#D5D1B3" ;"#EEEEFF"
-                                                      :weight bold))))
-   `(rainbow-delimiters-depth-7-face ((,class (:foreground "gray52" :weight bold))))
-   `(rainbow-delimiters-depth-8-face ((,class (:foreground "indianred3" :background "#C5C1A3" :weight bold))))
+                                                      ;:weight bold
+                                                           ))))
+   `(rainbow-delimiters-depth-7-face ((,class (:foreground "gray52" ;:weight bold
+                                                           ))))
+   `(rainbow-delimiters-depth-8-face ((,class (:foreground "indianred3" :background "#C5C1A3" ;:weight bold
+                                                           ))))
    `(rainbow-delimiters-depth-9-face ((,class (:foreground "orange" :background "gray50")))) ;:background "#fff7ca"
-   `(rainbow-delimiters-unmatched-face ((,class (:foreground "yellow" :background "black" :weight bold))))
+   `(rainbow-delimiters-unmatched-face ((,class (:foreground "yellow" :background "black" ;:weight bold
+                                                             ))))
 
    ;; fruit salad colors for rainbow-delimiters
    ;; `(rainbow-delimiters-depth-1-face ((t (:foreground ,fg :background "#FF6520" :weight bold))))

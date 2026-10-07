@@ -8133,9 +8133,13 @@ Closure over `preceding-sexp-fn'."
       (setq indent-tabs-mode t)
       ;; NOTE: `tab-width' and `lua-indent-level' must be the same.
       (setq tab-width lua-indent-level)
-      (progn ;; smart-tabs-mode
-        (smart-tabs-advice lua-indent-line lua-indent-level)
-        (smart-tabs-mode-enable)))
+      ;; comment out smart-tabs-mode because it triggers a warning.
+      ;;   Warning: ‘defadvice’ is an obsolete macro (as of 30.1)
+      ;; I'm not currently using lua so just comment it out for now.
+      ;; (progn ;; smart-tabs-mode
+      ;;   (smart-tabs-advice lua-indent-line lua-indent-level)
+      ;;   (smart-tabs-mode-enable))
+      )
 
     ;; set to 1 so comments on the same line are kept close to the code
     (setq comment-column 1) ;; buffer local
@@ -10179,9 +10183,13 @@ allows spaces. But this way you can temporarily view things with tabs, then
 have the autoformater revert things back to spaces when you save."
     (interactive)
     (indent-tabs-mode 1)
-    (progn ;; smart-tabs-mode
-      (smart-tabs-advice zig-mode-indent-line zig-indent-offset) ;; 4
-      (smart-tabs-mode-enable))
+
+    ;; comment out smart-tabs-mode because it triggers a warning.
+    ;;   Warning: ‘defadvice’ is an obsolete macro (as of 30.1)
+    ;; (progn ;; smart-tabs-mode
+    ;;   (smart-tabs-advice zig-mode-indent-line zig-indent-offset) ;; 4
+    ;;   (smart-tabs-mode-enable))
+
     (tabify (point-min) (point-max))
     ;; assumes smart-tabs-mode is configured for current mode. If not this may
     ;; inject tabs to handle alignments *after* the indentation level is reached

@@ -21,4 +21,21 @@
         (setq cnt (+ cnt 1)))
       (message "Deleted %d region tags." cnt))))
 
+;;;###autoload
+(defun my-csharp-comment-region-tags ()
+  "Comment out #region and #endregion tags in buffer."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min)) ;; goto beginning of buffer
+    (let ((cnt 0))
+      (while (re-search-forward "#.*region"
+                                nil ;; no bounds on search
+                                t ;; do not trigger an error if no search match
+                                )
+        (beginning-of-line)
+        (insert "// ")
+        (end-of-line) ; so next search doesn't hit hte same region
+        (setq cnt (+ cnt 1)))
+      (message "Commented %d region tags." cnt))))
+
 ;;; my-csharp-helpers.el ends here

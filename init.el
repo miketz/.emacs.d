@@ -3288,6 +3288,7 @@ Inserts a new line and the beginning and end with text values:
 ;;;----------------------------------------------------------------------------
 ;; fns not quite big enough to justify their own dedicated package.
 (autoload #'my-csharp-delete-region-tags "my-csharp-helpers" nil t)
+(autoload #'my-csharp-comment-region-tags "my-csharp-helpers" nil t)
 
 ;;;----------------------------------------------------------------------------
 ;;; csharp-ts-mode

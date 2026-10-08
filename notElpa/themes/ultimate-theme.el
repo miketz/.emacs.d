@@ -13,7 +13,7 @@
        (todo--bg "white")
        (i 0)
        ;; Color Palette
-       (bg           "ivory2") ;"#D5D1B3" "#E5E1C3" "#F5F1D3"
+       (bg           "#F3F1DE") ;"#D5D1B3" "#E5E1C3" "#F5F1D3"
        (fg           "#000000")
        (dim+4        "#505050")
        (dim+3        "#606060")

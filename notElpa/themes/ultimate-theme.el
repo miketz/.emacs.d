@@ -13,7 +13,7 @@
        (todo--bg "white")
        (i 0)
        ;; Color Palette
-       (bg           "#F5F1D3") ;"#D5D1B3" "#E5E1C3" "#F5F1D3"
+       (bg           "ivory2") ;"#D5D1B3" "#E5E1C3" "#F5F1D3"
        (fg           "#000000")
        (dim+4        "#505050")
        (dim+3        "#606060")
@@ -183,9 +183,9 @@
    ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    ;; ~ START faces supported with treesit
    ;; ~ Maybe not intended to be treesit only, but it seems that way.
-   `(font-lock-function-call-face ((,class :inherit font-lock-function-name-face
-                                           :foreground "black"
-                                           :background "#ffe7f2" ;"#ffd7e2"
+   `(font-lock-function-call-face ((,class ;:inherit font-lock-function-name-face
+                                           :foreground "#7b0000";"black"
+                                           ;:background "#ffe7f2" ;"#ffd7e2"
                                            )))
    `(font-lock-variable-use-face ((,class :inherit default)))
    ;; `(font-lock-operator-face ((,class :inherit font-lock-keyword-face

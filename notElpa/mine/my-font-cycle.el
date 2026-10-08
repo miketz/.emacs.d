@@ -132,6 +132,9 @@
           "-raster-ProggySquare-regular-normal-normal-mono-11-*-*-*-c-*-iso8859-1"
           "-raster-ProggyClean-regular-normal-normal-mono-13-*-*-*-c-*-iso8859-1"
 
+          "-raster-Terminus-normal-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
+          "-raster-Terminus-bold-normal-normal-mono-14-*-*-*-c-*-iso8859-1"
+
           "-outline-Ubuntu Mono-regular-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
           "-outline-Ubuntu Mono-bold-normal-normal-mono-*-*-*-*-c-*-iso10646-1"
 

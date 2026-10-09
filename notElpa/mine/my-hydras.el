@@ -335,6 +335,7 @@ _L_: enter log Hydra
 _W_: enter worktree hydra
 _T_: enter tag hydra
 _B_: enter branch hydra
+_D_: enter file diff hyrdra
 _t_: external terminal. for interactive commands emacs does not handle well.
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
@@ -363,6 +364,7 @@ _q_, _C-g_: quit"
   ("W" my-fugitive-worktree-hydra/body)
   ("T" my-fugitive-tag-hydra/body)
   ("B" my-fugitive-branch-hydra/body)
+  ("D" my-fugitive-diff-hydra/body)
   ("t" fugitive-open-external-terminal)
   ;; don't use the hint text as it makes (:hint nil) not work?
   ("C-g" nil nil)
@@ -434,6 +436,24 @@ _q_, _C-g_: quit"
   ("p" fugitive-branch-push-new)
   ("d" fugitive-branch-delete-on-remote)
   ("r" fugitive-branch-delete-remote-tracking)
+  ("C-g" nil nil)
+  ("q" nil))
+
+(defhydra my-fugitive-diff-hydra (:color blue :hint nil)
+  "
+_d_: diff current file to HEAD
+_D_: diff all files to HEAD
+_e_: ediff current file to <selected rev>
+_E_: ediff <selected-file> to <selected rev>
+_q_, _C-g_: quit"
+  ("d" (lambda ()
+         (interactive)
+         (fugitive-shell-command (concat "git diff -- " (fugitive-curr-filename)))))
+  ("D" (lambda ()
+         (interactive)
+         (fugitive-shell-command "git diff")))
+  ("e" fugitive-file-ediff)
+  ("E" fugitive-file-ediff-any)
   ("C-g" nil nil)
   ("q" nil))
 

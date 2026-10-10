@@ -1879,6 +1879,7 @@ commited message.")
 ;;       comment is not "#".
 ;;       look into package with-editor, but trying to avoid reliance on emacsclient
 ;;       and with-editor may require it's use.
+;; TODO: bug. commit sometimes fails. maybe becuase not in the root folder?
 (cl-defun fugitive-commit ()
   "Commit workflow. Spawn a buffer to enter commit message."
   (interactive)

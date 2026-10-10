@@ -321,7 +321,6 @@ _'_: fetch, then log delta
 _a_: quick-commit
 _A_: amend last commit msg
 _b_: blame
-_d_: diff between revs
 _e_: find local-only branches you may want to delete
 _E_: ediff current file to hash version
 _r_: ediff selected file to hash version
@@ -335,7 +334,7 @@ _L_: enter log Hydra
 _W_: enter worktree hydra
 _T_: enter tag hydra
 _B_: enter branch hydra
-_D_: enter file diff hyrdra
+_D_: enter diff hyrdra
 _t_: external terminal. for interactive commands emacs does not handle well.
 _q_, _C-g_: quit"
   ("f" fugitive-shell-command)
@@ -346,7 +345,6 @@ _q_, _C-g_: quit"
   ("a" fugitive-quick-commit)
   ("A" fugitive-amend-last-commit-msg)
   ("b" fugitive-blame)
-  ("d" fugitive-diff-between)
   ("e" fugitive-find-local-only-branches-ediff)
   ("E" fugitive-file-ediff)
   ("r" fugitive-file-ediff-any)
@@ -441,10 +439,11 @@ _q_, _C-g_: quit"
 
 (defhydra my-fugitive-diff-hydra (:color blue :hint nil)
   "
-_d_: diff current file to HEAD
-_D_: diff all files to HEAD
-_e_: ediff current file to <selected rev>
-_E_: ediff <selected-file> to <selected rev>
+_d_: diff current FILE to HEAD
+_D_: diff all to HEAD
+_e_: ediff current FILE to <selected rev>
+_E_: ediff <selected-FILE> to <selected rev>
+_r_: diff between revs
 _q_, _C-g_: quit"
   ("d" (lambda ()
          (interactive)
@@ -454,6 +453,7 @@ _q_, _C-g_: quit"
          (fugitive-shell-command "git diff")))
   ("e" fugitive-file-ediff)
   ("E" fugitive-file-ediff-any)
+  ("r" fugitive-diff-between)
   ("C-g" nil nil)
   ("q" nil))
 

@@ -207,6 +207,7 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
            ;; shadow var to prevent mini buffer display
            (max-mini-window-height 0)
            (log-p (fugitive-str-starts-with-p cmd "git log"))
+           (branch-p (fugitive-str-starts-with-p cmd "git branch"))
            (diff-p (and (not log-p)
                         (or (fugitive-str-starts-with-p cmd "git diff")
                             ;; (fugitive-str-starts-with-p cmd "git show")
@@ -226,6 +227,15 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
                  log-p)
         ;; inject --color immediately after "git log"
         (let* ((i (length "git log")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            " --color "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
+
+      (when (and fugitive-auto-inject-color-flag
+                 branch-p)
+        ;; inject --color immediately after "git branch"
+        (let* ((i (length "git branch")))
           (setq str (concat (substring-no-properties cmd 0 i)
                             " --color "
                             (substring-no-properties cmd i nil)))
@@ -313,6 +323,9 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
                                             (unless truncate-lines
                                               (toggle-truncate-lines)))
 
+                                           (branch-p (when fugitive-colorize-buffer-p
+                                                       (xterm-color-colorize-buffer)))
+
                                            (diff-p (when fugitive-turn-on-diff-mode-p
                                                      (diff-mode))
                                                    ;; turn on colors *after* diff mode or it doesnt' work right with git-delta colors
@@ -328,7 +341,10 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
                                                       (xterm-color-colorize-buffer))
                                                     ;; turn off word wrap
                                                     (unless truncate-lines
-                                                      (toggle-truncate-lines))))
+                                                      (toggle-truncate-lines)))
+                                           ;; TODO: verify colorization as a fallback doesn't mess anything up.
+                                           (t (when fugitive-colorize-buffer-p
+                                                (xterm-color-colorize-buffer))))
 
                                      (when fugitive-use-pinned-buffer
                                        ;; pinned buffers are more like a REPL.

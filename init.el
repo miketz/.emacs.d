@@ -12059,6 +12059,7 @@ and switched to with no user input required."
 (progn ;; paren match highlight
   (setq show-paren-delay 0.125) ; perf
 
+  ;; ;; disable show-paren-mode. and clean up timer too
   ;; (when show-paren-mode ; enabled by defaul in Emacs 28+
   ;;   (show-paren-mode 0) ; perf
   ;;   ;; perf. shutdown the timer

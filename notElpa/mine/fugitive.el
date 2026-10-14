@@ -221,7 +221,8 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
                         (not (fugitive-str-starts-with-p cmd "git show-index"))
                         (not (fugitive-str-starts-with-p cmd "git show-branch"))))
            (blame-p (and (not show-p)
-                         (fugitive-str-starts-with-p cmd "git blame"))))
+                         (fugitive-str-starts-with-p cmd "git blame")))
+           (grep-p (fugitive-str-starts-with-p cmd "git grep")))
       ;; inject --color flag for logs. For diffs, diff-mode does a good job with colors
       (when (and fugitive-auto-inject-color-flag
                  log-p)
@@ -236,6 +237,15 @@ STOP-ECHO will prevent echoing cmd in the minibuffer when t."
                  branch-p)
         ;; inject --color immediately after "git branch"
         (let* ((i (length "git branch")))
+          (setq str (concat (substring-no-properties cmd 0 i)
+                            " --color "
+                            (substring-no-properties cmd i nil)))
+          (setq cmd str)))
+
+      (when (and fugitive-auto-inject-color-flag
+                 grep-p)
+        ;; inject --color immediately after "git grep"
+        (let* ((i (length "git grep")))
           (setq str (concat (substring-no-properties cmd 0 i)
                             " --color "
                             (substring-no-properties cmd i nil)))

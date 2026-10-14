@@ -322,8 +322,6 @@ _a_: quick-commit
 _A_: amend last commit msg
 _b_: blame
 _e_: find local-only branches you may want to delete
-_E_: ediff current file to hash version
-_r_: ediff selected file to hash version
 _s_: quick status
 _S_: enter status Hydra
 _p_: jump to parent commit in log buffer
@@ -346,8 +344,6 @@ _q_, _C-g_: quit"
   ("A" fugitive-amend-last-commit-msg)
   ("b" fugitive-blame)
   ("e" fugitive-find-local-only-branches-ediff)
-  ("E" fugitive-file-ediff)
-  ("r" fugitive-file-ediff-any)
   ;; ("s" fugitive-show) ; show commit at point in a log buffer
   ("s" fugitive-quick-status)
   ("S" (lambda ()

@@ -11623,6 +11623,19 @@ and switched to with no user input required."
 
 
 ;;;----------------------------------------------------------------------------
+;;; javelin. in notElpa/
+;;;----------------------------------------------------------------------------
+;; M-1 to M-9	Jump to buffer (or assign if empty)
+;; C-u M-1 ...	Assign current buffer to position
+;; M-0 1 to M-0 9	Delete position
+;; M--	Quick menu to select from all javelined buffers
+(autoload #'javelin-minor-mode "javelin" nil t)
+(autoload #'global-javelin-minor-mode "javelin" nil t)
+
+;; (global-javelin-minor-mode)
+
+
+;;;----------------------------------------------------------------------------
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 

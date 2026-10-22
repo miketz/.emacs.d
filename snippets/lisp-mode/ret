@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ret
+# key: ret
+# --
+(sb-ext:exit :code 0$0 :abort nil)

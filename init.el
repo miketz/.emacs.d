@@ -9315,7 +9315,26 @@ Explicit language selection not supported?"
     (interactive)
     (cl-loop repeat (if current-prefix-arg current-prefix-arg 10)
              do
-             (my-ms-tag-defualts))))
+             (my-ms-tag-defualts)))
+
+  (defun my-ms-tag-line ()
+    (interactive)
+    (let ((center-col (/ *minesweeper-board-width* 2)))
+      ;; go to center top
+      (beginning-of-buffer)
+      (cl-loop repeat (1- center-col) do
+               (forward-char))
+
+      ;; tag vertical line
+      (cl-loop repeat *minesweeper-board-height* do
+               (minesweeper-choose)
+               (minesweeper-next-line))))
+
+  (defun foo2 ()
+    (interactive)
+    (cl-loop repeat (if current-prefix-arg current-prefix-arg 10)
+             do
+             (my-ms-tag-line))))
 
 ;;;----------------------------------------------------------------------------
 ;;; esxml. dependency of nov

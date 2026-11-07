@@ -1,0 +1,95 @@
+;;; modus-vague.el --- Emacs port of the popular vague theme -*- lexical-binding:t -*-
+
+;; Copyright (C) 2026 Free Software Foundation, Inc.
+
+;; Author: Ashish Panigrahi <public@ashishpanigrahi.com>
+;; Maintainer: Ashish Panigrahi <public@ashishpanigrahi.com>
+;; URL: https://github.com/paniash/modus-vague
+;; Version: 0.2.4
+;; Package-Requires: ((emacs "30.1") (modus-themes "5.3.0"))
+;; Keywords: faces, theme
+
+;; This file is NOT part of GNU Emacs.
+
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; GNU Emacs is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This is the Emacs port of the popular vague theme from neovim.
+;; It is built on top of Modus themes, thus providing excellent
+;; support for most major and minor modes.
+
+;;; Code:
+
+
+(require 'modus-themes)
+(eval-when-compile (require 'subr-x))
+
+;;;; Basics for building on top of Modus
+
+(defgroup modus-vague ()
+  "The vague theme ported to Emacs.
+A cool, dark, low contrast colorscheme. Pastel yet vivid, like a
+fleeting memory..."
+  :group 'faces
+  :group 'modus-themes
+  :link '(info-link "(modus-themes) Top")
+  :link '(url-link "https://github.com/vague-theme/vague")
+  :prefix "modus-vague-"
+  :tag "Modus Vague Theme")
+
+(defconst modus-vague-themes
+  '(modus-vague)
+  "List of symbols with the Modus vague theme.")
+
+(defconst modus-vague-items
+  (append modus-vague-themes)
+  "Symbols of the Modus vague theme.")
+
+;;;; Limit the Modus themes to only Modus vague theme
+
+;;;###autoload
+(define-minor-mode modus-vague-take-over-modus-themes-mode
+  "When enabled, Modus themes commands consider only Modus vague theme.
+Alternatively, use the commands `modus-vague-list-colors',
+`modus-vague-list-colors-current'.  They are all designed to only
+consider the Modus vague theme."
+  :global t)
+
+(cl-defmethod modus-themes-get-themes (&context (modus-vague-take-over-modus-themes-mode (eql t)))
+  "Return list of Modus vague theme, per `MODUS-VAGUE-TAKE-OVER-MODUS-THEMES-MODE'."
+  (if-let* ((themes (modus-themes-get-all-known-themes 'modus-vague))
+            (sorted-a-z (sort themes #'string-lessp))
+            (sorted-light-dark (modus-themes-sort sorted-a-z 'dark)))
+      sorted-light-dark
+    modus-vague-items))
+
+;;;; Convenience commands
+
+;;;###autoload (autoload 'modus-vague-list-colors "modus-vague")
+(modus-themes-define-derivative-command modus-vague list-colors)
+
+;;;###autoload (autoload 'modus-vague-list-colors-current "modus-vague")
+(modus-themes-define-derivative-command modus-vague list-colors-current)
+
+;;;; Add themes from this package to the `custom-theme-load-path'
+
+;;;###autoload
+(when load-file-name
+  (let ((dir (file-name-directory load-file-name)))
+    (add-to-list 'custom-theme-load-path dir)))
+
+(provide 'modus-vague)
+
+;;; modus-vague.el ends here

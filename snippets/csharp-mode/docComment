@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# -*- function -*-
+# name: docComment
+# key: ///
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+/// <summary>
+/// $0
+/// </summary>

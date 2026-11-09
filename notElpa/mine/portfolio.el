@@ -168,7 +168,9 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                     (per-tar (cl-third x))
                     (curr-obj (assoc sym cur-alloc))
                     (amt-curr (cl-second curr-obj))
-                    (per-curr (/ (* 1.0 amt-curr) total)))
+                    (per-curr (* (/ (* 1.0 amt-curr) total)
+                                 100) ;x100 to make it like the other percents in des-alloc
+                              ))
                (push `(,sym
                        ,(- amt-tar amt-curr) ; to-buy amount. positive is buy. neg is sell.
                        ;; percent off relative. 1.0 is on target. 1+ overweight. 1- underweight
@@ -176,8 +178,12 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                        ,(if (not (= amt-tar 0))
                             (/ amt-curr amt-tar)
                           ;; else avoid divide by 0.
+                          (/ amt-curr 0.1) ; divide by small amount instead of 0.
+                          ;; else avoid divide by 0.
                           ;; Since amt-tar is 0 we can tranlate per-curr to the 1.0-style weight directly
-                          (+ 1 (/ per-curr 100)))
+                          ;; actually this is not quite right, as percent relative to toal is not the same as percent relative to target.
+                          ;; (+ 1 (/ per-curr 100))
+                          )
                        ,per-curr ; percent current. informational purposes.
                        )
                      to-buy)))

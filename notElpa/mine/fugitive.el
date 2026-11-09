@@ -1301,7 +1301,8 @@ Does not include diffs for merge commits as they tend to have large output, free
 ;; git show --pretty=format:"%C(auto)%H%n[38;5;74mAuthor:%C(auto) %an <%ae>%n        %C(auto)%ad%n[38;5;74mCommit:%C(auto) %cn <%ce>%n        %cd %n%n%B%n" --date=iso bbd0a345
 
 (defun fugitive-show-merge-commit (&optional commit)
-  "Like `fugitive-show' but output options tailored for merge commits."
+  "Like `fugitive-show' but output options tailored for merge commits.
+Includes file list, but no diff."
   (interactive)
   (let ((commit (or commit
                     (fugitive-hash-or-next-line))))

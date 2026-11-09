@@ -9046,6 +9046,13 @@ vanilla javascript buffers."
                "-g \"!.git/\""
              "-g '!.git/'")))
 
+  (defun my-rg-include-ingored-files ()
+    "Run `rg' but include ignored files."
+    (interactive)
+    (let ((rg-command-line-flags (append '("--no-ignore")
+                                         rg-command-line-flags)))
+      (call-interactively #'rg)))
+
   (when my-use-evil-p
     ;; use emacs bindings (not evil) in *rg* results buffer
     (push '("\\*rg*" . emacs) evil-buffer-regexps))

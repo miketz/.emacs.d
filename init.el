@@ -11669,6 +11669,9 @@ and switched to with no user input required."
 ;;; MISC options.
 ;;;----------------------------------------------------------------------------
 
+;; let over lambda online book. local html for eww
+;; wget -p -k -r --mirror --no-parent --page-requisites https://letoverlambda.com/textmode.cl/guest/toc
+
 
 (when (eq system-type 'windows-nt)
   ;; decrease file io workload. TODO: verify dired, etc still work ok.

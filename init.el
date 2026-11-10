@@ -3833,7 +3833,10 @@ To make it human readable."
         (while (not (null pos))
           (setq pos (search-forward "&#xD;&#xA;" nil t))
           (unless (null pos)
-            (newline)))))))
+            (newline)))))
+    ;; Add a newline before "<" xml tags. makes it much more readable.
+    ;; `my-inject-newlines' already handles save-excursion and begginging of buffer
+    (my-inject-newlines nil "<")))
 
 ;;;----------------------------------------------------------------------------
 ;;; Helm

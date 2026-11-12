@@ -238,6 +238,18 @@
   ;; NOTE: cloned from https://github.com/akosma/PracticalCommonLisp_ePub
   (eww-open-file "c:/Users/mtz/AppData/Local/books/lisp_books/PracticalCommonLisp_ePub/html/index.html"))
 
+(defun my-proj-letoverlambda ()
+  "Open the Let over Lambda ebook."
+  (interactive)
+  (delete-other-windows)
+  (switch-to-buffer "letOverLambda-test")
+  (common-lisp-mode)
+  (split-window-horizontally)
+  (shrink-window-horizontally 24)
+  ;; NOTE: html website downloaded via:
+  ;; wget -p -k -r --mirror --no-parent --page-requisites https://letoverlambda.com/textmode.cl/guest/toc
+  (eww-open-file "c:/Users/mtz/AppData/Local/books/lisp_books/letOverLambda_html/letoverlambda.com/textmode.cl/guest/toc.html"))
+
 (defun my-proj-ticpp ()
   "Open the Thinking in C++ ebook."
   (interactive)

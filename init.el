@@ -5554,6 +5554,7 @@ and indent."
     (autoload #'my-proj-imgtag lisp-file nil t)
     (autoload #'my-proj-cpp lisp-file nil t)
     (autoload #'my-proj-pcl lisp-file nil t)
+    (autoload #'my-proj-letoverlambda lisp-file nil t)
     (autoload #'my-proj-tcpl lisp-file nil t)
     (autoload #'my-proj-dive-python lisp-file nil t)
     (autoload #'my-proj-progit2 lisp-file nil t)

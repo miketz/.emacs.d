@@ -189,6 +189,15 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                      to-buy)))
     (reverse to-buy)))
 
+(defun sum-of-squares (balance-output)
+  "Sqaure the diffs then sum."
+  (apply #'+
+         (mapcar (lambda (x)
+                   (let ((diff (cl-second x)))
+                     (* diff diff)))
+                 balance-output)))
+
+
 ;; from https://www.reddit.com/r/portfolios/comments/1pu3uwo/how_do_you_optimally_rebalance_a_portfolio_when/
 ;; 1. The V = Σ cvᵢ is your current total portfolio value. The T = V + extra_cash is the total after adding new money.
 

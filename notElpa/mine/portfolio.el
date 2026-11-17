@@ -176,7 +176,7 @@ CUR-ALLOC is list of (sym amt) pairs; you must manully populate the currrent amo
                        ;; percent off relative. 1.0 is on target. 1+ overweight. 1- underweight
                        ;; TODO: confirm correctness with testing.
                        ,(if (not (= amt-tar 0))
-                            (/ amt-curr amt-tar)
+                            (/ amt-curr (* 1.0 amt-tar)) ; force decimal
                           ;; else avoid divide by 0.
                           (/ amt-curr 0.1) ; divide by small amount instead of 0.
                           ;; else avoid divide by 0.

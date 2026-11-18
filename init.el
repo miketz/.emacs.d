@@ -3817,6 +3817,8 @@ LINTER values: :jslint :jshint :eslint"
 ;;;----------------------------------------------------------------------------
 ;;; nxml
 ;;;----------------------------------------------------------------------------
+(push '("\\.csproj$" . nxml-mode) auto-mode-alist)
+
 (with-eval-after-load 'nxml-mode
   (setq nxml-slash-auto-complete-flag t) ;auto-insert when typing </
   (when my-use-evil-p
